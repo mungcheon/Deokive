@@ -464,6 +464,10 @@ class PublicCatalogReportTests(unittest.TestCase):
             4,
         )
         self.assertEqual(
+            quality["source_discovery_next_focus_detail_candidates"]["metadata_enrichment_template_rows"],
+            4,
+        )
+        self.assertEqual(
             quality["source_discovery_next_focus_detail_candidates"]["exact_candidate_confirmation_ready_items"],
             0,
         )
@@ -1579,6 +1583,10 @@ class PublicCatalogReportTests(unittest.TestCase):
             reports.SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE
         )
         source_next_focus_fallback_summary = source_next_focus_fallback.get("summary", {})
+        source_next_focus_detail = reports.load_json(
+            reports.SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES
+        )
+        source_next_focus_detail_summary = source_next_focus_detail.get("summary", {})
         fallback_agent_batch = next(
             batch
             for batch in batches
@@ -1615,6 +1623,29 @@ class PublicCatalogReportTests(unittest.TestCase):
             all(
                 item.get("identity_review_status") == "exact_page_match_review_ready"
                 for item in fallback_ready_agent_batch.get("sample_items", [])
+                if isinstance(item, dict)
+            )
+        )
+        variant_metadata_agent_batch = next(
+            batch
+            for batch in batches
+            if batch.get("workstream") == "source_discovery_next_focus_detail_candidates"
+            and batch.get("review_summary", {}).get("metadata_enrichment_template_rows")
+        )
+        self.assertEqual(
+            variant_metadata_agent_batch.get("rows"),
+            source_next_focus_detail_summary.get("metadata_enrichment_template_rows"),
+        )
+        self.assertEqual(
+            variant_metadata_agent_batch.get("review_summary", {}).get(
+                "variant_detail_required_rows"
+            ),
+            source_next_focus_detail_summary.get("variant_detail_required_rows"),
+        )
+        self.assertTrue(
+            all(
+                item.get("candidate_options")
+                for item in variant_metadata_agent_batch.get("sample_items", [])
                 if isinstance(item, dict)
             )
         )
@@ -2515,8 +2546,20 @@ class PublicCatalogReportTests(unittest.TestCase):
             source_next_focus_detail_summary.get("next_action_lanes"),
         )
         self.assertEqual(
+            execution_plan["summary"].get(
+                "source_next_focus_detail_metadata_enrichment_template_rows"
+            ),
+            source_next_focus_detail_summary.get("metadata_enrichment_template_rows"),
+        )
+        self.assertEqual(
             source_next_focus_detail_execution_action.get("rows"),
             source_next_focus_detail_summary.get("pack_items"),
+        )
+        self.assertEqual(
+            source_next_focus_detail_execution_action["evidence"].get(
+                "metadata_enrichment_template_rows"
+            ),
+            source_next_focus_detail_summary.get("metadata_enrichment_template_rows"),
         )
         self.assertEqual(
             source_next_focus_detail_execution_action["evidence"].get("next_action_lanes"),
@@ -2527,8 +2570,16 @@ class PublicCatalogReportTests(unittest.TestCase):
             source_next_focus_detail_summary.get("next_action_lanes"),
         )
         self.assertEqual(
+            source_next_focus_detail_scorecard.get("metadata_enrichment_template_rows"),
+            source_next_focus_detail_summary.get("metadata_enrichment_template_rows"),
+        )
+        self.assertEqual(
             source_next_focus_detail_next_action.get("next_action_lanes"),
             source_next_focus_detail_summary.get("next_action_lanes"),
+        )
+        self.assertEqual(
+            source_next_focus_detail_next_action.get("metadata_enrichment_template_rows"),
+            source_next_focus_detail_summary.get("metadata_enrichment_template_rows"),
         )
         self.assertEqual(
             source_next_focus_detail_scorecard.get("open_rows"),

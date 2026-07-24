@@ -2966,6 +2966,10 @@ def build_operations_public(
             "pack_items": source_next_focus_detail_candidates_summary.get("pack_items", 0),
             "items_with_candidates": source_next_focus_detail_candidates_summary.get("items_with_candidates", 0),
             "candidate_rows": source_next_focus_detail_candidates_summary.get("candidate_rows", 0),
+            "metadata_enrichment_template_rows": source_next_focus_detail_candidates_summary.get(
+                "metadata_enrichment_template_rows",
+                0,
+            ),
             "next_action_lane_count": source_next_focus_detail_candidates_summary.get("next_action_lane_count", 0),
             "next_action_lanes": source_next_focus_detail_candidates_summary.get("next_action_lanes", []),
             "completion_readiness_status": source_next_focus_detail_candidates_summary.get(
@@ -3576,6 +3580,10 @@ def build_operations_public(
             "focus_pack_id": source_next_focus_detail_candidates_summary.get("focus_pack_id"),
             "items_with_candidates": source_next_focus_detail_candidates_summary.get("items_with_candidates", 0),
             "candidate_rows": source_next_focus_detail_candidates_summary.get("candidate_rows", 0),
+            "metadata_enrichment_template_rows": source_next_focus_detail_candidates_summary.get(
+                "metadata_enrichment_template_rows",
+                0,
+            ),
             "next_action_lane_count": source_next_focus_detail_candidates_summary.get("next_action_lane_count", 0),
             "next_action_lanes": source_next_focus_detail_candidates_summary.get("next_action_lanes", []),
             "completion_readiness_status": source_next_focus_detail_candidates_summary.get(
@@ -4460,6 +4468,7 @@ def build_agent_work_queue_public(
     animation_split_review_override: dict[str, Any] | None = None,
     animation_unmatched_keyword_review_override: dict[str, Any] | None = None,
     source_next_focus_pack_override: dict[str, Any] | None = None,
+    source_next_focus_detail_candidates_override: dict[str, Any] | None = None,
     source_next_focus_fallback_queue_override: dict[str, Any] | None = None,
     source_discovery_starter_queue_override: dict[str, Any] | None = None,
     requested_focus_action_queue_override: dict[str, Any] | None = None,
@@ -4499,6 +4508,13 @@ def build_agent_work_queue_public(
         if source_next_focus_pack_override is not None
         else load_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK, {})
         if SOURCE_DISCOVERY_NEXT_FOCUS_PACK.exists()
+        else {}
+    )
+    source_next_focus_detail_candidates = (
+        source_next_focus_detail_candidates_override
+        if source_next_focus_detail_candidates_override is not None
+        else load_json(SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES, {})
+        if SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES.exists()
         else {}
     )
     source_next_focus_fallback_queue = (
@@ -5051,6 +5067,40 @@ def build_agent_work_queue_public(
                     "first_domain_limited_web_search_url"
                 ),
                 "work_order_lanes": fallback_summary.get("work_order_lanes", []),
+            },
+        )
+
+    source_detail_summary = source_next_focus_detail_candidates.get("summary", {})
+    metadata_enrichment_rows = [
+        row
+        for row in source_next_focus_detail_candidates.get("metadata_enrichment_template", [])
+        if isinstance(row, dict)
+    ]
+    if metadata_enrichment_rows:
+        add_batch(
+            agent_id="agent-source-detail-candidate",
+            workstream="source_discovery_next_focus_detail_candidates",
+            priority=20,
+            title="현재 source focus pack variant 메타데이터 보강",
+            public_report=SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES,
+            rows=len(metadata_enrichment_rows),
+            recommended_action=(
+                "Confirm exact character, variant, sub_series, and source/image identity before any source_url or image_url import."
+            ),
+            acceptance_criteria=[
+                "Do not attach candidate images to broad catalog rows until the exact variant is identified.",
+                "Fill suggested_name_ja, suggested_sub_series, and suggested_character_name only from official product evidence.",
+                "Use candidate_options as review evidence; auto-apply remains disabled.",
+            ],
+            samples=metadata_enrichment_rows[:8],
+            review_summary={
+                "focus_pack_id": source_detail_summary.get("focus_pack_id"),
+                "metadata_enrichment_template_rows": len(metadata_enrichment_rows),
+                "variant_detail_required_rows": int(
+                    source_detail_summary.get("variant_detail_required_rows") or 0
+                ),
+                "candidate_rows": int(source_detail_summary.get("candidate_rows") or 0),
+                "next_action_lanes": source_detail_summary.get("next_action_lanes", []),
             },
         )
 
@@ -8104,6 +8154,7 @@ def validate_report_consistency(
         f"data/{SOURCE_DISCOVERY_REVIEW_BATCHES.name}",
         f"data/{SOURCE_DISCOVERY_STARTER_QUEUE.name}",
         f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_PACK.name}",
+        f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES.name}",
         f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}",
         f"data/{METADATA_BACKLOG.name}",
         f"data/{METADATA_REVIEW_BATCHES.name}",
@@ -8670,6 +8721,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         animation_split_review,
         animation_unmatched_keyword_review,
         source_discovery_next_focus_pack,
+        source_discovery_next_focus_detail_candidates,
         source_discovery_next_focus_fallback_queue,
         source_discovery_starter_queue,
         requested_focus_action_queue,
@@ -8856,10 +8908,11 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["source_discovery_next_focus_pack_fetch_audit"] = copy_report_summary(
                 SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT, "source_discovery_next_focus_pack_fetch_audit"
             )
-        if SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES.exists():
-            target["source_discovery_next_focus_detail_candidates"] = copy_report_summary(
-                SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES, "source_discovery_next_focus_detail_candidates"
-            )
+        if source_discovery_next_focus_detail_candidates.get("summary"):
+            target["source_discovery_next_focus_detail_candidates"] = {
+                "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES.name}",
+                **source_discovery_next_focus_detail_candidates["summary"],
+            }
         target["source_discovery_next_focus_fallback_queue"] = {
             "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}",
             **source_discovery_next_focus_fallback_queue["summary"],
