@@ -232,6 +232,8 @@ def _template_item(
         **source_template,
         "manual_confirmed": False,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "candidate_source_url": prefilled_candidate.get("source_url") or "",
         "candidate_image_url": prefilled_candidate.get("image_url") or "",
         "candidate_title": prefilled_candidate.get("title") or "",
@@ -262,7 +264,7 @@ def _template_item(
         "batch_id": batch.get("batch_id"),
         "required_before_image_import": item.get("required_before_image_import") or [],
         "blocked_until": "exact_product_source_url_confirmed",
-        "next_after_confirmed_source_url": "extract_or_confirm_product_page_image_url",
+        "next_after_confirmed_source_url": "import_confirmed_source_url_then_attach_manual_image_url_or_extract_product_image",
         "auto_apply_enabled": False,
     }
 
@@ -321,6 +323,7 @@ def _manual_confirmation_requirements() -> list[str]:
         "Open candidate_source_url or manually found source URL.",
         "Confirm it is a product/detail page, not a storefront, search page, or collection page.",
         "Confirm title, character, product type, variant, and release context match the catalog row.",
+        "Optional: fill manual_image_url only when the product image is visible on the confirmed source page or official product CDN.",
         "Only then copy the exact product URL into manual_value and set manual_confirmed=true.",
     ]
 

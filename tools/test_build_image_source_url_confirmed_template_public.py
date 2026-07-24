@@ -118,6 +118,8 @@ class BuildImageSourceUrlConfirmedTemplatePublicTest(unittest.TestCase):
         self.assertEqual(item["field"], "source_url")
         self.assertEqual(item["row_index"], 10)
         self.assertEqual(item["manual_value"], "")
+        self.assertEqual(item["manual_image_url"], "")
+        self.assertEqual(item["manual_image_note"], "")
         self.assertEqual(item["candidate_source_url"], "")
         self.assertEqual(item["candidate_image_url"], "")
         self.assertEqual(item["candidate_title"], "")
@@ -133,6 +135,7 @@ class BuildImageSourceUrlConfirmedTemplatePublicTest(unittest.TestCase):
         )
         self.assertEqual(item["source_url_review_lane"], "weak_candidate_review")
         self.assertIn("weak_candidate_only", item["source_url_review_blockers"])
+        self.assertIn("manual_image_url", item["manual_confirmation_requirements"][-2])
         self.assertIn("manual_confirmed=true", item["manual_confirmation_requirements"][-1])
         self.assertEqual(item["candidate_options"][0]["product_no"], 100)
         self.assertEqual(item["current_source_url"], "https://fanding.kr/@stellive/shop")
@@ -141,7 +144,10 @@ class BuildImageSourceUrlConfirmedTemplatePublicTest(unittest.TestCase):
             "https://fanding.kr/@stellive/shop?keyword=Badge",
         )
         self.assertEqual(item["store_search_hints"]["site_query"], "site:fanding.kr/@stellive/shop")
-        self.assertEqual(item["next_after_confirmed_source_url"], "extract_or_confirm_product_page_image_url")
+        self.assertEqual(
+            item["next_after_confirmed_source_url"],
+            "import_confirmed_source_url_then_attach_manual_image_url_or_extract_product_image",
+        )
         self.assertFalse(item["auto_apply_enabled"])
 
         missing_provider_item = report["items"][1]
