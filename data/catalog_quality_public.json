@@ -3533,9 +3533,9 @@
   },
   "agent_work_queue": {
     "public_report": "data/catalog_agent_work_queue_public.json",
-    "batch_count": 157,
+    "batch_count": 159,
     "max_published_batches": 160,
-    "summed_batch_rows": 20540,
+    "summed_batch_rows": 20593,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -3631,6 +3631,14 @@
         1
       ],
       [
+        "source_discovery_next_focus_fallback_queue",
+        1
+      ],
+      [
+        "animation_category_action_queue",
+        1
+      ],
+      [
         "ichiban_kuji_metadata",
         1
       ]
@@ -3722,6 +3730,14 @@
       ],
       [
         "agent-source-focus-pack",
+        1
+      ],
+      [
+        "agent-source-fallback",
+        1
+      ],
+      [
+        "agent-animation-category-action",
         1
       ]
     ],
@@ -4728,11 +4744,11 @@
   },
   "execution_plan": {
     "public_report": "data/catalog_execution_plan_public.json",
-    "action_count": 22,
+    "action_count": 23,
     "blocked_action_count": 1,
-    "manual_review_action_count": 19,
+    "manual_review_action_count": 20,
     "pending_import_action_count": 0,
-    "total_action_rows": 32615,
+    "total_action_rows": 32635,
     "open_review_queues": {
       "source_discovery_rows": 637,
       "image_missing_rows": 710,
@@ -4873,6 +4889,22 @@
     "source_focus_template_rows": 417,
     "source_focus_template_work_order_pack_count": 23,
     "source_focus_template_next_pack_rows": 20,
+    "source_next_focus_detail_pack_items": 20,
+    "source_next_focus_detail_action_lane_count": 3,
+    "source_next_focus_detail_action_lanes": [
+      [
+        "fallback_source_search",
+        13
+      ],
+      [
+        "catalog_variant_metadata_enrichment",
+        4
+      ],
+      [
+        "manual_candidate_identity_review",
+        3
+      ]
+    ],
     "source_next_focus_fallback_rows": 17,
     "source_next_focus_fallback_manual_confirmed_rows": 0,
     "source_discovery_starter_queue_rows": 637,
@@ -4993,6 +5025,17 @@
       [
         "official_japanese_name_confirmed",
         1
+      ]
+    ],
+    "review_url_rows": 600,
+    "primary_review_url_kind_counts": [
+      [
+        "existing_source_url",
+        498
+      ],
+      [
+        "domain_limited_web_search",
+        102
       ]
     ],
     "barcode_template_rows_excluded_blocked_reason": "barcode_research_deferred_from_requested_focus_action_queue",
@@ -5121,6 +5164,10 @@
     "ichiban_reissue_decision_template_rows": 20,
     "ichiban_reissue_campaign_work_order_rows": 4,
     "ichiban_reissue_campaign_decision_template_rows": 4,
+    "ichiban_reissue_work_orders_with_evidence_urls": 20,
+    "ichiban_reissue_campaign_work_orders_with_evidence_urls": 4,
+    "ichiban_reissue_first_evidence_url": "https://1kuji.com/products/haikyu4",
+    "ichiban_reissue_first_campaign_evidence_url": "https://1kuji.com/products/onep6",
     "ichiban_reissue_manual_confirmed_rows": 0,
     "ichiban_reissue_protected_groups": 0,
     "ichiban_reissue_protected_rows": 0,
@@ -5177,6 +5224,21 @@
     "source_url_update_fallback_web_search_rows": 5,
     "source_url_update_any_search_hint_rows": 50,
     "source_url_update_missing_any_search_hint_rows": 0,
+    "primary_review_url_rows": 73,
+    "primary_review_url_kind_counts": [
+      [
+        "source_search_url",
+        45
+      ],
+      [
+        "current_source_url",
+        23
+      ],
+      [
+        "fallback_web_search",
+        5
+      ]
+    ],
     "representative_image_review_required_rows": 23,
     "image_url_ready_rows": 0,
     "workstream_count": 4,
@@ -6485,7 +6547,7 @@
     "queued_categories": 0,
     "actionable_catalog_rows": 0,
     "queued_catalog_rows": 0,
-    "action_batch_count": 0,
+    "action_batch_count": 1,
     "batch_size": 6,
     "max_categories": 24,
     "by_suggested_family": [],
@@ -6495,14 +6557,28 @@
     "by_blocked_until": [],
     "split_review_categories": 0,
     "direct_mapping_categories": 0,
+    "normalization_review_categories": 4,
+    "normalization_review_rows": 36,
+    "normalization_review_target_categories": [
+      [
+        "문구",
+        3
+      ],
+      [
+        "가방",
+        1
+      ]
+    ],
     "app_folder_color_count": 188,
     "app_folder_icon_option_count": 211,
     "app_folder_icon_group_count": 9,
     "app_folder_palette_section_count": 8,
     "app_folder_palette_sorted_by_family": true,
     "app_animation_visuals_covered": true,
-    "work_order_steps": 0,
-    "work_order_lanes": [],
+    "work_order_steps": 1,
+    "work_order_lanes": [
+      "canonical_category_normalization_review"
+    ],
     "split_first_blocked_categories": [],
     "unmatched_keyword_review_rows": 0,
     "unmatched_keyword_candidate_count": 0,
@@ -6830,12 +6906,43 @@
     "source_discovery_focus_template_confirmed_rows": 0,
     "source_discovery_next_focus_pack_id": "source-discovery-focus-001",
     "source_discovery_next_focus_pack_rows": 20,
+    "source_discovery_next_focus_action_lane_count": 3,
+    "source_discovery_next_focus_action_lanes": [
+      [
+        "fallback_source_search",
+        13
+      ],
+      [
+        "catalog_variant_metadata_enrichment",
+        4
+      ],
+      [
+        "manual_candidate_identity_review",
+        3
+      ]
+    ],
     "source_discovery_focus_template_dry_run_updated_rows": 0,
     "source_discovery_focus_template_dry_run_skipped_rows": 417,
     "source_discovery_focus_coverage": 0.6598,
     "source_discovery_non_focus_rows": 215,
     "action_queue_rows": 73,
     "direct_image_action_queue_rows": 73,
+    "direct_image_action_primary_review_url_rows": 73,
+    "direct_image_action_primary_review_url_kind_counts": [
+      [
+        "source_search_url",
+        45
+      ],
+      [
+        "current_source_url",
+        23
+      ],
+      [
+        "fallback_web_search",
+        5
+      ]
+    ],
+    "direct_image_action_workflows_with_review_start": 2,
     "image_attachment_template_rows": 73,
     "image_attachment_template_confirmed_rows": 0,
     "image_attachment_template_source_update_required_rows": 50,
@@ -6936,7 +7043,54 @@
               "recommended_next_step": "replace_generic_source_url_then_extract_image"
             }
           ],
-          "current_focus_pack": {}
+          "current_focus_pack": {},
+          "review_start": {
+            "workflow": "replace_generic_source_then_extract_image",
+            "batch_id": "image-attachment-action-001",
+            "source_store": "Stellive Store",
+            "row_count": 20,
+            "primary_review_url_rows": 20,
+            "first_primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+            "first_primary_review_url_kind": "source_search_url",
+            "sample_items_with_primary_review_url": 20,
+            "sample_primary_review_items": [
+              {
+                "catalog_index": 2325,
+                "name_ko": "스텔라이브 1주년 뱃지 세트",
+                "name_ja": null,
+                "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+                "primary_review_url_kind": "source_search_url"
+              },
+              {
+                "catalog_index": 2352,
+                "name_ko": "강지 마스코트 인형",
+                "name_ja": null,
+                "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+                "primary_review_url_kind": "source_search_url"
+              },
+              {
+                "catalog_index": 2355,
+                "name_ko": "아이리 칸나 생일 기념 굿즈 박스",
+                "name_ja": null,
+                "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+                "primary_review_url_kind": "source_search_url"
+              },
+              {
+                "catalog_index": 2356,
+                "name_ko": "아이리 칸나 마스코트 인형",
+                "name_ja": null,
+                "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+                "primary_review_url_kind": "source_search_url"
+              },
+              {
+                "catalog_index": 2357,
+                "name_ko": "아이리 칸나 키링 세트",
+                "name_ja": null,
+                "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%ED%82%A4%EB%A7%81%20%EC%84%B8%ED%8A%B8",
+                "primary_review_url_kind": "source_search_url"
+              }
+            ]
+          }
         },
         {
           "rank": 4,
@@ -7026,6 +7180,21 @@
               "candidate_rows": 50,
               "manual_candidate_review_rows": 50,
               "no_candidate_items": 13,
+              "next_action_lane_count": 3,
+              "next_action_lanes": [
+                [
+                  "fallback_source_search",
+                  13
+                ],
+                [
+                  "catalog_variant_metadata_enrichment",
+                  4
+                ],
+                [
+                  "manual_candidate_identity_review",
+                  3
+                ]
+              ],
               "official_search_has_results": 3,
               "official_search_no_results": 17,
               "fallback_search_needed_items": 17
@@ -7169,7 +7338,8 @@
                 "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E8%99%8E%E6%9D%96%29"
               }
             ]
-          }
+          },
+          "review_start": {}
         },
         {
           "rank": 5,
@@ -7185,7 +7355,54 @@
             "manual_note_for_representative_image_choice"
           ],
           "top_source_stores": [],
-          "current_focus_pack": {}
+          "current_focus_pack": {},
+          "review_start": {
+            "workflow": "review_gotouchi_official_candidates",
+            "batch_id": "image-attachment-action-006",
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "row_count": 20,
+            "primary_review_url_rows": 20,
+            "first_primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+            "first_primary_review_url_kind": "current_source_url",
+            "sample_items_with_primary_review_url": 20,
+            "sample_primary_review_items": [
+              {
+                "catalog_index": 936,
+                "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
+                "name_ja": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
+                "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+                "primary_review_url_kind": "current_source_url"
+              },
+              {
+                "catalog_index": 937,
+                "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
+                "name_ja": "うさぎ ご当地マスコット (浅草)",
+                "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+                "primary_review_url_kind": "current_source_url"
+              },
+              {
+                "catalog_index": 938,
+                "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
+                "name_ja": "ちいかわ ご当地ミニタオル (東京)",
+                "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+                "primary_review_url_kind": "current_source_url"
+              },
+              {
+                "catalog_index": 941,
+                "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
+                "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
+                "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+                "primary_review_url_kind": "current_source_url"
+              },
+              {
+                "catalog_index": 942,
+                "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
+                "name_ja": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
+                "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+                "primary_review_url_kind": "current_source_url"
+              }
+            ]
+          }
         },
         {
           "rank": 6,
@@ -7201,7 +7418,8 @@
             "manual_note_explaining_keep_or_reject_decision"
           ],
           "top_source_stores": [],
-          "current_focus_pack": {}
+          "current_focus_pack": {},
+          "review_start": {}
         },
         {
           "rank": 7,
@@ -7217,7 +7435,8 @@
             "manual_note_for_nonstandard_source"
           ],
           "top_source_stores": [],
-          "current_focus_pack": {}
+          "current_focus_pack": {},
+          "review_start": {}
         }
       ],
       "blocked_summary": {
@@ -7257,7 +7476,54 @@
           "exact_product_source_url",
           "existing_generic_source_url_replaced_or_preserved_with_reason",
           "image_url_from_exact_source_after_replacement"
-        ]
+        ],
+        "review_start": {
+          "workflow": "replace_generic_source_then_extract_image",
+          "batch_id": "image-attachment-action-001",
+          "source_store": "Stellive Store",
+          "row_count": 20,
+          "primary_review_url_rows": 20,
+          "first_primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+          "first_primary_review_url_kind": "source_search_url",
+          "sample_items_with_primary_review_url": 20,
+          "sample_primary_review_items": [
+            {
+              "catalog_index": 2325,
+              "name_ko": "스텔라이브 1주년 뱃지 세트",
+              "name_ja": null,
+              "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+              "primary_review_url_kind": "source_search_url"
+            },
+            {
+              "catalog_index": 2352,
+              "name_ko": "강지 마스코트 인형",
+              "name_ja": null,
+              "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+              "primary_review_url_kind": "source_search_url"
+            },
+            {
+              "catalog_index": 2355,
+              "name_ko": "아이리 칸나 생일 기념 굿즈 박스",
+              "name_ja": null,
+              "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+              "primary_review_url_kind": "source_search_url"
+            },
+            {
+              "catalog_index": 2356,
+              "name_ko": "아이리 칸나 마스코트 인형",
+              "name_ja": null,
+              "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+              "primary_review_url_kind": "source_search_url"
+            },
+            {
+              "catalog_index": 2357,
+              "name_ko": "아이리 칸나 키링 세트",
+              "name_ja": null,
+              "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%ED%82%A4%EB%A7%81%20%EC%84%B8%ED%8A%B8",
+              "primary_review_url_kind": "source_search_url"
+            }
+          ]
+        }
       },
       "queues": [
         {
@@ -7275,7 +7541,54 @@
             "exact_product_source_url",
             "existing_generic_source_url_replaced_or_preserved_with_reason",
             "image_url_from_exact_source_after_replacement"
-          ]
+          ],
+          "review_start": {
+            "workflow": "replace_generic_source_then_extract_image",
+            "batch_id": "image-attachment-action-001",
+            "source_store": "Stellive Store",
+            "row_count": 20,
+            "primary_review_url_rows": 20,
+            "first_primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+            "first_primary_review_url_kind": "source_search_url",
+            "sample_items_with_primary_review_url": 20,
+            "sample_primary_review_items": [
+              {
+                "catalog_index": 2325,
+                "name_ko": "스텔라이브 1주년 뱃지 세트",
+                "name_ja": null,
+                "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+                "primary_review_url_kind": "source_search_url"
+              },
+              {
+                "catalog_index": 2352,
+                "name_ko": "강지 마스코트 인형",
+                "name_ja": null,
+                "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+                "primary_review_url_kind": "source_search_url"
+              },
+              {
+                "catalog_index": 2355,
+                "name_ko": "아이리 칸나 생일 기념 굿즈 박스",
+                "name_ja": null,
+                "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+                "primary_review_url_kind": "source_search_url"
+              },
+              {
+                "catalog_index": 2356,
+                "name_ko": "아이리 칸나 마스코트 인형",
+                "name_ja": null,
+                "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+                "primary_review_url_kind": "source_search_url"
+              },
+              {
+                "catalog_index": 2357,
+                "name_ko": "아이리 칸나 키링 세트",
+                "name_ja": null,
+                "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%ED%82%A4%EB%A7%81%20%EC%84%B8%ED%8A%B8",
+                "primary_review_url_kind": "source_search_url"
+              }
+            ]
+          }
         },
         {
           "rank": 4,
@@ -7292,7 +7605,8 @@
             "official_or_trusted_product_detail_source_url",
             "title_character_variant_type_match",
             "image_url_from_confirmed_source_or_trusted_official_cdn"
-          ]
+          ],
+          "review_start": {}
         },
         {
           "rank": 5,
@@ -7309,7 +7623,54 @@
             "official_source_matches_exact_product_type",
             "representative_image_is_not_wrong_variant_or_lineup_only",
             "manual_note_for_representative_image_choice"
-          ]
+          ],
+          "review_start": {
+            "workflow": "review_gotouchi_official_candidates",
+            "batch_id": "image-attachment-action-006",
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "row_count": 20,
+            "primary_review_url_rows": 20,
+            "first_primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+            "first_primary_review_url_kind": "current_source_url",
+            "sample_items_with_primary_review_url": 20,
+            "sample_primary_review_items": [
+              {
+                "catalog_index": 936,
+                "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
+                "name_ja": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
+                "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+                "primary_review_url_kind": "current_source_url"
+              },
+              {
+                "catalog_index": 937,
+                "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
+                "name_ja": "うさぎ ご当地マスコット (浅草)",
+                "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+                "primary_review_url_kind": "current_source_url"
+              },
+              {
+                "catalog_index": 938,
+                "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
+                "name_ja": "ちいかわ ご当地ミニタオル (東京)",
+                "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+                "primary_review_url_kind": "current_source_url"
+              },
+              {
+                "catalog_index": 941,
+                "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
+                "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
+                "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+                "primary_review_url_kind": "current_source_url"
+              },
+              {
+                "catalog_index": 942,
+                "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
+                "name_ja": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
+                "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+                "primary_review_url_kind": "current_source_url"
+              }
+            ]
+          }
         },
         {
           "rank": 6,
@@ -7326,7 +7687,8 @@
             "candidate_identity_flags_resolved",
             "replacement_candidate_source_url_if_current_candidate_is_wrong",
             "manual_note_explaining_keep_or_reject_decision"
-          ]
+          ],
+          "review_start": {}
         },
         {
           "rank": 7,
@@ -7343,7 +7705,8 @@
             "trusted_source_url_or_manual_evidence_url",
             "image_url_source_explained",
             "manual_note_for_nonstandard_source"
-          ]
+          ],
+          "review_start": {}
         }
       ],
       "phase_queue_breakdown": [
@@ -8158,6 +8521,8 @@
     ],
     "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22",
     "first_fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29",
+    "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22",
+    "first_primary_review_url_kind": "domain_limited_web_search",
     "auto_apply_enabled": false,
     "recommended_next_action": "review_fallback_queue_and_fill_exact_manual_confirmed_source_urls"
   },
@@ -8266,6 +8631,21 @@
       [
         "candidate_title_does_not_preserve_catalog_variant_terms",
         2
+      ]
+    ],
+    "next_action_lane_count": 3,
+    "next_action_lanes": [
+      [
+        "fallback_source_search",
+        13
+      ],
+      [
+        "catalog_variant_metadata_enrichment",
+        4
+      ],
+      [
+        "manual_candidate_identity_review",
+        3
       ]
     ],
     "fallback_bridge_rows": 13,
@@ -9075,6 +9455,15 @@
         15
       ]
     ],
+    "primary_review_url_rows": 15,
+    "primary_review_url_kind_counts": [
+      [
+        "domain_limited_web_search",
+        15
+      ]
+    ],
+    "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22",
+    "first_primary_review_url_kind": "domain_limited_web_search",
     "auto_apply_enabled": false,
     "blocked_identity_rows": 2,
     "recommended_next_action": "confirm exact product detail source URLs for these rows before image attachment"
@@ -9101,6 +9490,15 @@
         2
       ]
     ],
+    "primary_review_url_rows": 2,
+    "primary_review_url_kind_counts": [
+      [
+        "domain_limited_web_search",
+        2
+      ]
+    ],
+    "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%22",
+    "first_primary_review_url_kind": "domain_limited_web_search",
     "auto_apply_enabled": false,
     "exact_url_review_ready_rows": 15,
     "metadata_backfill_required_rows": 2,
@@ -9191,6 +9589,10 @@
     "campaign_covered_item_template_rows": 20,
     "standalone_item_template_rows": 0,
     "campaign_item_decision_preview_rows": 20,
+    "item_templates_with_evidence_urls": 20,
+    "campaign_templates_with_evidence_urls": 4,
+    "first_item_evidence_url": "https://1kuji.com/products/haikyu4",
+    "first_campaign_evidence_url": "https://1kuji.com/products/onep6",
     "auto_merge_enabled": false,
     "auto_delete_enabled": false,
     "manual_review_required_before_mutation": true,

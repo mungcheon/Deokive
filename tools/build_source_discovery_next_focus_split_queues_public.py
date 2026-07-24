@@ -36,17 +36,47 @@ def _base_summary(items: list[dict[str, Any]]) -> dict[str, Any]:
     by_store = Counter(str(item.get("source_store") or "") for item in items)
     by_category = Counter(str(item.get("category") or "") for item in items)
     by_status = Counter(str(item.get("identity_review_status") or "unknown") for item in items)
+    by_review_url_kind = Counter(
+        str(item.get("primary_review_url_kind") or "")
+        for item in items
+        if str(item.get("primary_review_url") or "")
+    )
     return {
         "queue_rows": len(items),
         "manual_confirmed_rows": sum(1 for item in items if item.get("manual_confirmed") is True),
         "by_source_store": by_store.most_common(),
         "by_category": by_category.most_common(),
         "by_identity_review_status": by_status.most_common(),
+        "primary_review_url_rows": sum(1 for item in items if str(item.get("primary_review_url") or "")),
+        "primary_review_url_kind_counts": by_review_url_kind.most_common(),
+        "first_primary_review_url": next(
+            (str(item.get("primary_review_url") or "") for item in items if str(item.get("primary_review_url") or "")),
+            "",
+        ),
+        "first_primary_review_url_kind": next(
+            (
+                str(item.get("primary_review_url_kind") or "")
+                for item in items
+                if str(item.get("primary_review_url") or "")
+            ),
+            "",
+        ),
         "auto_apply_enabled": False,
     }
 
 
+def _primary_review_url(row: dict[str, Any]) -> tuple[Any, str]:
+    if row.get("primary_review_url"):
+        return row.get("primary_review_url"), str(row.get("primary_review_url_kind") or "review_url")
+    if row.get("first_domain_limited_web_search_url"):
+        return row.get("first_domain_limited_web_search_url"), "domain_limited_web_search"
+    if row.get("fallback_store_search_url"):
+        return row.get("fallback_store_search_url"), "fallback_store_search"
+    return "", ""
+
+
 def _exact_item(row: dict[str, Any]) -> dict[str, Any]:
+    primary_review_url, primary_review_url_kind = _primary_review_url(row)
     return {
         "catalog_index": row.get("catalog_index"),
         "focus_pack_id": row.get("focus_pack_id"),
@@ -55,6 +85,8 @@ def _exact_item(row: dict[str, Any]) -> dict[str, Any]:
         "name_ko": row.get("name_ko"),
         "name_ja": row.get("name_ja"),
         "search_term": row.get("search_term"),
+        "primary_review_url": primary_review_url,
+        "primary_review_url_kind": primary_review_url_kind,
         "first_domain_limited_web_search_url": row.get("first_domain_limited_web_search_url"),
         "fallback_store_search_url": row.get("fallback_store_search_url"),
         "manual_confirmed": False,
@@ -71,6 +103,7 @@ def _exact_item(row: dict[str, Any]) -> dict[str, Any]:
 
 
 def _identity_item(row: dict[str, Any]) -> dict[str, Any]:
+    primary_review_url, primary_review_url_kind = _primary_review_url(row)
     return {
         "catalog_index": row.get("catalog_index"),
         "focus_pack_id": row.get("focus_pack_id"),
@@ -79,6 +112,8 @@ def _identity_item(row: dict[str, Any]) -> dict[str, Any]:
         "name_ko": row.get("name_ko"),
         "name_ja": row.get("name_ja"),
         "search_term": row.get("search_term"),
+        "primary_review_url": primary_review_url,
+        "primary_review_url_kind": primary_review_url_kind,
         "first_domain_limited_web_search_url": row.get("first_domain_limited_web_search_url"),
         "fallback_store_search_url": row.get("fallback_store_search_url"),
         "manual_confirmed": False,

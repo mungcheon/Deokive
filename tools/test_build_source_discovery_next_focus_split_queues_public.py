@@ -20,6 +20,8 @@ class SourceDiscoveryNextFocusSplitQueuesPublicTest(unittest.TestCase):
                     "name_ko": "ready item",
                     "identity_review_status": "exact_page_match_review_ready",
                     "can_confirm_source_url_after_page_match": True,
+                    "first_domain_limited_web_search_url": "https://www.google.com/search?q=ready",
+                    "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=ready",
                 },
                 {
                     "catalog_index": 2,
@@ -30,6 +32,7 @@ class SourceDiscoveryNextFocusSplitQueuesPublicTest(unittest.TestCase):
                     "identity_blockers": ["missing_name_ja", "variant_or_character_not_explicit"],
                     "requires_metadata_backfill": True,
                     "requires_variant_disambiguation": True,
+                    "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=blocked",
                 },
             ]
         }
@@ -38,14 +41,25 @@ class SourceDiscoveryNextFocusSplitQueuesPublicTest(unittest.TestCase):
 
         self.assertEqual(exact["summary"]["queue_rows"], 1)
         self.assertEqual(exact["summary"]["blocked_identity_rows"], 1)
+        self.assertEqual(exact["summary"]["primary_review_url_rows"], 1)
+        self.assertEqual(exact["summary"]["first_primary_review_url"], "https://www.google.com/search?q=ready")
+        self.assertEqual(exact["summary"]["first_primary_review_url_kind"], "domain_limited_web_search")
         self.assertEqual(exact["items"][0]["next_action"], "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url")
+        self.assertEqual(exact["items"][0]["primary_review_url"], "https://www.google.com/search?q=ready")
+        self.assertEqual(exact["items"][0]["primary_review_url_kind"], "domain_limited_web_search")
         self.assertFalse(exact["automation_policy"]["auto_apply_source_url"])
 
         self.assertEqual(identity["summary"]["queue_rows"], 1)
         self.assertEqual(identity["summary"]["exact_url_review_ready_rows"], 1)
         self.assertEqual(identity["summary"]["metadata_backfill_required_rows"], 1)
         self.assertEqual(identity["summary"]["variant_disambiguation_required_rows"], 1)
+        self.assertEqual(identity["summary"]["primary_review_url_rows"], 1)
+        self.assertEqual(identity["summary"]["first_primary_review_url_kind"], "fallback_store_search")
         self.assertEqual(identity["items"][0]["identity_blockers"], ["missing_name_ja", "variant_or_character_not_explicit"])
+        self.assertEqual(
+            identity["items"][0]["primary_review_url"],
+            "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=blocked",
+        )
         self.assertFalse(identity["automation_policy"]["auto_apply_metadata"])
 
 
