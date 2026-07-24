@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -11,6 +12,22 @@ from build_metadata_action_queue_public import build_report as build_metadata_ac
 
 
 class PublicCatalogReportTests(unittest.TestCase):
+    def test_write_json_skips_identical_payloads(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir) / "report.json"
+            payload = {"schema_version": 1, "items": [1, 2, 3]}
+            reports.write_json(path, payload)
+            first_mtime = path.stat().st_mtime_ns
+
+            reports.write_json(path, payload)
+
+            self.assertEqual(path.stat().st_mtime_ns, first_mtime)
+
+            timestamp_only = {"generated_at": "later", **payload}
+            reports.write_json(path, timestamp_only)
+
+            self.assertEqual(path.stat().st_mtime_ns, first_mtime)
+
     def test_public_report_generation_keeps_site_data_safe_and_consistent(self):
         result = reports.update_reports(write=False)
 

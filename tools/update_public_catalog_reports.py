@@ -468,7 +468,25 @@ def app_folder_visual_catalog_summary() -> dict[str, Any]:
 
 
 def write_json(path: Path, data: Any) -> None:
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    serialized = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
+    if path.exists():
+        existing_text = path.read_text(encoding="utf-8-sig")
+        if existing_text == serialized:
+            return
+        try:
+            existing_data = json.loads(existing_text)
+        except json.JSONDecodeError:
+            existing_data = None
+        if isinstance(existing_data, dict) and isinstance(data, dict):
+            existing_without_generated_at = {
+                key: value for key, value in existing_data.items() if key != "generated_at"
+            }
+            data_without_generated_at = {
+                key: value for key, value in data.items() if key != "generated_at"
+            }
+            if existing_without_generated_at == data_without_generated_at:
+                return
+    path.write_text(serialized, encoding="utf-8")
 
 
 def now_utc() -> str:
