@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T07:28:32Z",
+  "generated_at": "2026-07-24T07:31:02Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 23,
@@ -2132,6 +2132,43 @@
         "repeated_name_different_source_review_batch_count": 4,
         "repeated_name_different_source_review_catalog_item_rows": 92,
         "probable_reissue_review_groups": 20,
+        "issue_queue_rows": 20,
+        "open_issue_rows": 40,
+        "manual_review_rows": 40,
+        "manual_confirmed_rows": 0,
+        "auto_apply_ready_rows": 0,
+        "protected_unnumbered_multi_item_prize_groups": 6,
+        "protected_unnumbered_multi_item_prize_rows": 12,
+        "completion_readiness_status": "ichiban_reissue_review_required",
+        "completion_readiness": {
+          "status": "ichiban_reissue_review_required",
+          "zero_price_policy_ready": true,
+          "numbered_variant_policy_ready": true,
+          "same_rank_unnumbered_policy_ready": true,
+          "reissue_identity_policy_ready": false,
+          "issue_rows": 20,
+          "open_issue_rows": 40,
+          "manual_review_rows": 40,
+          "auto_apply_ready_rows": 0,
+          "zero_price_violation_rows": 0,
+          "unnumbered_multi_item_prize_review_groups": 0,
+          "unnumbered_multi_item_prize_review_rows": 0,
+          "protected_unnumbered_multi_item_prize_groups": 6,
+          "protected_unnumbered_multi_item_prize_rows": 12,
+          "probable_reissue_work_order_rows": 20,
+          "probable_reissue_review_groups": 20,
+          "repeated_name_different_source_groups": 46,
+          "blocked_reasons": [
+            "same_name_across_campaign_urls_requires_keep_or_merge_decision"
+          ],
+          "next_safe_phase": "verify_ichiban_campaign_pages_before_dedupe",
+          "auto_apply_enabled": false,
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false,
+          "safety_note": "Last One and Double Chance zero-price rows are policy exceptions; same-name Ichiban Kuji rows across campaign URLs must not be merged until official campaign evidence confirms the identity decision."
+        },
+        "auto_merge_enabled": false,
+        "auto_delete_enabled": false,
         "prize_policy_review_batch_count": 5
       }
     }

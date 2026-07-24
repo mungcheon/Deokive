@@ -377,6 +377,26 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "prize_policy_review_batch_count": 2,
                 }
             },
+            "ichiban_kuji_prize_policy_issue_queue_public.json": {
+                "summary": {
+                    "issue_rows": 2,
+                    "open_issue_rows": 4,
+                    "manual_review_rows": 4,
+                    "manual_confirmed_rows": 0,
+                    "auto_apply_ready_rows": 0,
+                    "protected_unnumbered_multi_item_prize_groups": 1,
+                    "protected_unnumbered_multi_item_prize_rows": 2,
+                    "completion_readiness_status": "ichiban_reissue_review_required",
+                    "auto_merge_enabled": False,
+                    "auto_delete_enabled": False,
+                },
+                "completion_readiness": {
+                    "status": "ichiban_reissue_review_required",
+                    "zero_price_policy_ready": True,
+                    "numbered_variant_policy_ready": True,
+                    "reissue_review_ready": False,
+                },
+            },
             "animation_category_review_batches_public.json": {
                 "summary": {"source_rows": 0}
             },
@@ -760,6 +780,19 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(kuji_policy["evidence"]["multi_item_prize_label_groups"], 4)
         self.assertEqual(kuji_policy["evidence"]["multi_item_prize_label_review_batch_count"], 1)
         self.assertEqual(kuji_policy["evidence"]["repeated_name_different_source_review_batch_count"], 1)
+        self.assertEqual(kuji_policy["evidence"]["issue_queue_rows"], 2)
+        self.assertEqual(kuji_policy["evidence"]["open_issue_rows"], 4)
+        self.assertEqual(kuji_policy["evidence"]["manual_review_rows"], 4)
+        self.assertEqual(kuji_policy["evidence"]["manual_confirmed_rows"], 0)
+        self.assertEqual(kuji_policy["evidence"]["auto_apply_ready_rows"], 0)
+        self.assertEqual(kuji_policy["evidence"]["protected_unnumbered_multi_item_prize_groups"], 1)
+        self.assertEqual(
+            kuji_policy["evidence"]["completion_readiness_status"],
+            "ichiban_reissue_review_required",
+        )
+        self.assertTrue(kuji_policy["evidence"]["completion_readiness"]["zero_price_policy_ready"])
+        self.assertFalse(kuji_policy["evidence"]["auto_merge_enabled"])
+        self.assertFalse(kuji_policy["evidence"]["auto_delete_enabled"])
         self.assertEqual(kuji_policy["evidence"]["prize_policy_review_batch_count"], 2)
         self.assertEqual(report["summary"]["ichiban_multi_item_prize_label_groups"], 4)
         self.assertEqual(report["summary"]["ichiban_numbered_variant_created_rows"], 12)

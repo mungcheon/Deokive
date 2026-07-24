@@ -135,6 +135,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     kuji_batches = load_report("ichiban_kuji_metadata_review_batches_public.json")
     kuji_action_queue = load_report("ichiban_kuji_metadata_action_queue_public.json")
     kuji_policy = load_report("ichiban_kuji_prize_policy_audit_public.json")
+    kuji_policy_issue_queue = load_report("ichiban_kuji_prize_policy_issue_queue_public.json")
     kuji_name_image = load_report("ichiban_kuji_prize_name_image_review_public.json")
     kuji_name_image_patch = load_report("ichiban_kuji_prize_name_image_patch_candidates_public.json")
     animation_goods_categories = load_report("animation_goods_categories_public.json")
@@ -177,6 +178,7 @@ def _build_plan(load_report) -> dict[str, Any]:
     kuji_summary = _summary(kuji_batches)
     kuji_action_summary = _summary(kuji_action_queue)
     kuji_policy_summary = _summary(kuji_policy)
+    kuji_policy_issue_summary = _summary(kuji_policy_issue_queue)
     kuji_name_image_summary = _summary(kuji_name_image)
     kuji_name_image_patch_summary = _summary(kuji_name_image_patch)
     animation_goods_summary = _summary(animation_goods_categories)
@@ -1100,6 +1102,25 @@ def _build_plan(load_report) -> dict[str, Any]:
                         kuji_policy_summary, "repeated_name_different_source_review_catalog_item_rows"
                     ),
                     "probable_reissue_review_groups": kuji_probable_reissue_review_rows,
+                    "issue_queue_rows": _count(kuji_policy_issue_summary, "issue_rows"),
+                    "open_issue_rows": _count(kuji_policy_issue_summary, "open_issue_rows"),
+                    "manual_review_rows": _count(kuji_policy_issue_summary, "manual_review_rows"),
+                    "manual_confirmed_rows": _count(kuji_policy_issue_summary, "manual_confirmed_rows"),
+                    "auto_apply_ready_rows": _count(kuji_policy_issue_summary, "auto_apply_ready_rows"),
+                    "protected_unnumbered_multi_item_prize_groups": _count(
+                        kuji_policy_issue_summary,
+                        "protected_unnumbered_multi_item_prize_groups",
+                    ),
+                    "protected_unnumbered_multi_item_prize_rows": _count(
+                        kuji_policy_issue_summary,
+                        "protected_unnumbered_multi_item_prize_rows",
+                    ),
+                    "completion_readiness_status": kuji_policy_issue_summary.get(
+                        "completion_readiness_status"
+                    ),
+                    "completion_readiness": kuji_policy_issue_queue.get("completion_readiness", {}),
+                    "auto_merge_enabled": bool(kuji_policy_issue_summary.get("auto_merge_enabled", False)),
+                    "auto_delete_enabled": bool(kuji_policy_issue_summary.get("auto_delete_enabled", False)),
                     "prize_policy_review_batch_count": _count(
                         kuji_policy_summary, "prize_policy_review_batch_count"
                     ),
