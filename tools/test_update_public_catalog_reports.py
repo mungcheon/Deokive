@@ -4564,6 +4564,16 @@ class PublicCatalogReportTests(unittest.TestCase):
             open_queues.get("animation_category_action_rows"),
             animation_action_summary.get("queued_catalog_rows"),
         )
+        self.assertEqual(animation_action_summary.get("queued_catalog_rows"), 36)
+        self.assertEqual(animation_action_summary.get("queued_categories"), 4)
+        self.assertEqual(
+            animation_action_summary.get("normalization_review_queued_catalog_rows"),
+            36,
+        )
+        self.assertEqual(
+            animation_action_summary.get("normalization_review_queued_categories"),
+            4,
+        )
         self.assertEqual(
             open_queues.get("animation_category_split_review_categories"),
             animation_action_summary.get("split_review_categories"),

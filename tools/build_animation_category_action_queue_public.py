@@ -714,11 +714,23 @@ def build_queue(
     work_order = _work_order(queued, unmatched_keyword_review, normalization_rows)
     target_visual_summary = _visual_review_summary(queued + normalization_rows)
     next_normalization_review_batch = _next_normalization_review_batch(normalization_rows)
+    normalization_batch_rows = sum(
+        int(row.get("affected_catalog_rows") or 0) for row in next_normalization_review_batch
+    )
+    normalization_batch_target_categories = Counter(
+        str(row.get("target_category") or "") for row in next_normalization_review_batch
+    ).most_common()
+    queued_review_categories = len(queued) + len(next_normalization_review_batch)
+    queued_review_catalog_rows = queued_rows + normalization_batch_rows
     summary = {
         "actionable_categories": len(rows),
-        "queued_categories": len(queued),
+        "queued_categories": queued_review_categories,
         "actionable_catalog_rows": all_rows,
-        "queued_catalog_rows": queued_rows,
+        "queued_catalog_rows": queued_review_catalog_rows,
+        "direct_mapping_queued_categories": len(queued),
+        "direct_mapping_queued_catalog_rows": queued_rows,
+        "normalization_review_queued_categories": len(next_normalization_review_batch),
+        "normalization_review_queued_catalog_rows": normalization_batch_rows,
         "action_batch_count": len(batches),
         "batch_size": batch_size,
         "max_categories": max_categories,
@@ -735,12 +747,8 @@ def build_queue(
             str(row.get("suggested_category") or "") for row in normalization_rows
         ).most_common(),
         "next_normalization_review_batch_rows": len(next_normalization_review_batch),
-        "next_normalization_review_batch_catalog_rows": sum(
-            int(row.get("affected_catalog_rows") or 0) for row in next_normalization_review_batch
-        ),
-        "next_normalization_review_batch_target_categories": Counter(
-            str(row.get("target_category") or "") for row in next_normalization_review_batch
-        ).most_common(),
+        "next_normalization_review_batch_catalog_rows": normalization_batch_rows,
+        "next_normalization_review_batch_target_categories": normalization_batch_target_categories,
         "next_normalization_review_batch_preserve_sub_series_rows": sum(
             1
             for row in next_normalization_review_batch

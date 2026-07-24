@@ -899,6 +899,13 @@ def copy_report_summary(path: Path, key: str) -> dict[str, Any]:
     return {"public_report": f"data/{path.name}", **summary}
 
 
+def report_summary(report: dict[str, Any], path: Path) -> dict[str, Any]:
+    summary = report.get("summary") if isinstance(report, dict) else None
+    if not isinstance(summary, dict):
+        summary = {}
+    return {"public_report": f"data/{path.name}", **summary}
+
+
 def normalize_ichiban_prize_patch_candidate_summary(report: dict[str, Any]) -> dict[str, Any]:
     summary = report.get("summary")
     if not isinstance(summary, dict):
@@ -10694,10 +10701,9 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["animation_category_review_batches"] = copy_report_summary(
                 ANIMATION_CATEGORY_REVIEW_BATCHES, "animation_category_review_batches"
             )
-        if ANIMATION_CATEGORY_ACTION_QUEUE.exists():
-            target["animation_category_action_queue"] = copy_report_summary(
-                ANIMATION_CATEGORY_ACTION_QUEUE, "animation_category_action_queue"
-            )
+        target["animation_category_action_queue"] = report_summary(
+            animation_action_queue, ANIMATION_CATEGORY_ACTION_QUEUE
+        )
         if ANIMATION_CATEGORY_SPLIT_REVIEW.exists():
             target["animation_category_split_review"] = copy_report_summary(
                 ANIMATION_CATEGORY_SPLIT_REVIEW, "animation_category_split_review"
