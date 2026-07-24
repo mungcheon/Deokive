@@ -589,10 +589,10 @@ class _CatalogAddButton extends StatelessWidget {
       duration: const Duration(milliseconds: 140),
       height: 40,
       constraints: BoxConstraints(
-        minWidth: expanded ? 0 : 112,
-        maxWidth: expanded ? double.infinity : 124,
+        minWidth: expanded ? 0 : 118,
+        maxWidth: expanded ? double.infinity : 136,
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 13),
+      padding: const EdgeInsets.symmetric(horizontal: 14),
       decoration: BoxDecoration(
         color: background,
         borderRadius: BorderRadius.circular(999),
@@ -607,31 +607,36 @@ class _CatalogAddButton extends StatelessWidget {
               ],
       ),
       child: Center(
-        child: FittedBox(
-          fit: BoxFit.scaleDown,
-          child: DefaultTextStyle.merge(
-            style: TextStyle(
-              color: foreground,
-              fontSize: 13,
-              fontWeight: FontWeight.w900,
-              height: 1,
-            ),
-            child: IconTheme.merge(
-              data: IconThemeData(color: foreground, size: 17),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(icon, color: foreground),
-                  const SizedBox(width: 5),
-                  Text(
+        child: DefaultTextStyle.merge(
+          style: TextStyle(
+            color: foreground,
+            fontSize: 13,
+            fontWeight: FontWeight.w900,
+            height: 1,
+          ),
+          child: IconTheme.merge(
+            data: IconThemeData(color: foreground, size: 17),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(icon, color: foreground),
+                const SizedBox(width: 5),
+                Flexible(
+                  child: Text(
                     label,
                     maxLines: 1,
                     softWrap: false,
-                    overflow: TextOverflow.visible,
-                    style: TextStyle(color: foreground),
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: foreground,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w900,
+                      height: 1,
+                    ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
