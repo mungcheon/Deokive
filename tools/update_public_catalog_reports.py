@@ -7772,6 +7772,7 @@ def update_reports(write: bool) -> dict[str, Any]:
     )
     animation_action_queue = build_animation_category_action_queue_public.build_queue(
         animation_review_batches,
+        normalization_review=animation_categories,
     )
     animation_split_review = build_animation_category_split_review_public.build_report(
         animation_action_queue,
@@ -7786,6 +7787,7 @@ def update_reports(write: bool) -> dict[str, Any]:
     animation_action_queue = build_animation_category_action_queue_public.build_queue(
         animation_review_batches,
         unmatched_keyword_review=animation_unmatched_keyword_review,
+        normalization_review=animation_categories,
     )
     ichiban_kuji_history = build_ichiban_kuji_history_public(items)
     ichiban_metadata_action_queue = (

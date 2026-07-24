@@ -2757,7 +2757,7 @@ class PublicCatalogReportTests(unittest.TestCase):
             animation_keyword_summary.get("product_type_candidate_count"),
         )
         self.assertFalse(animation_keyword_summary.get("auto_apply_enabled"))
-        if animation_action_summary.get("queued_catalog_rows"):
+        if animation_action_summary.get("queued_catalog_rows") or animation_action_summary.get("normalization_review_rows"):
             self.assertGreater(len(animation_agent_batches), 0)
         else:
             self.assertEqual(len(animation_agent_batches), 0)

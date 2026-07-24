@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T23:25:06Z",
+  "generated_at": "2026-07-24T05:13:04Z",
   "scope": "animation_category_action_queue",
   "summary": {
     "actionable_categories": 0,
     "queued_categories": 0,
     "actionable_catalog_rows": 0,
     "queued_catalog_rows": 0,
-    "action_batch_count": 0,
+    "action_batch_count": 1,
     "batch_size": 6,
     "max_categories": 24,
     "by_suggested_family": [],
@@ -17,14 +17,28 @@
     "by_blocked_until": [],
     "split_review_categories": 0,
     "direct_mapping_categories": 0,
+    "normalization_review_categories": 4,
+    "normalization_review_rows": 36,
+    "normalization_review_target_categories": [
+      [
+        "문구",
+        3
+      ],
+      [
+        "가방",
+        1
+      ]
+    ],
     "app_folder_color_count": 188,
     "app_folder_icon_option_count": 211,
     "app_folder_icon_group_count": 9,
     "app_folder_palette_section_count": 8,
     "app_folder_palette_sorted_by_family": true,
     "app_animation_visuals_covered": true,
-    "work_order_steps": 0,
-    "work_order_lanes": [],
+    "work_order_steps": 1,
+    "work_order_lanes": [
+      "canonical_category_normalization_review"
+    ],
     "split_first_blocked_categories": [],
     "unmatched_keyword_review_rows": 0,
     "unmatched_keyword_candidate_count": 0,
@@ -2811,8 +2825,319 @@
     "duplicate_icon_keys": [],
     "duplicate_colors": []
   },
-  "work_order": [],
-  "batches": [],
+  "work_order": [
+    {
+      "rank": 3,
+      "lane": "canonical_category_normalization_review",
+      "source": "animation_goods_categories_public.json",
+      "category_count": 4,
+      "affected_catalog_rows": 36,
+      "next_step": "confirm_canonical_animation_category_normalization",
+      "template": "server/animation_category_confirmed_rows.template.json",
+      "categories": [
+        "클리어파일",
+        "카드",
+        "스티커",
+        "파우치"
+      ],
+      "target_categories": [
+        "가방",
+        "문구"
+      ],
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false,
+      "blocked_until": "canonical_category_normalization_manually_confirmed",
+      "blocked_reason": "subtype_category_may_need_sub_series_preservation",
+      "required_evidence": [
+        "sample_names_match_suggested_broader_category",
+        "source_category_should_be_preserved_as_sub_series_or_note",
+        "folder_color_and_icon_exist_in_app_catalog",
+        "manual_note_for_category_semantics"
+      ],
+      "notes": [
+        "Normalize subtype-like source categories only after confirming sample names.",
+        "Preserve the original source category as sub_series or a note when it helps user search."
+      ]
+    }
+  ],
+  "batches": [
+    {
+      "batch_id": "animation-category-normalization-001",
+      "priority": 701,
+      "category_count": 4,
+      "affected_catalog_rows": 36,
+      "target_category_counts": [
+        [
+          "문구",
+          3
+        ],
+        [
+          "가방",
+          1
+        ]
+      ],
+      "review_state": "manual_canonical_category_normalization_required",
+      "next_machine_step": "confirm_canonical_animation_category_normalization",
+      "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
+      "confirmed_queue": "server/animation_category_confirmed_rows.json",
+      "import_tool": "tools/import_confirmed_animation_category_rows.py",
+      "unblocks_when": "canonical_category_normalization_manually_confirmed",
+      "categories": [
+        {
+          "review_id": "animation-category-normalization-001",
+          "category": "클리어파일",
+          "rows": 8,
+          "review_priority": 701,
+          "mapping_mode": "canonical_category_normalization_review",
+          "requires_name_level_split_review": false,
+          "suggested_family": "문구",
+          "suggested_category": "문구",
+          "suggested_color_group": null,
+          "suggested_color_hint": null,
+          "suggested_primary_icon_key": null,
+          "review_reason": "Subtype-like category may work better as sub_series while using a broader app category.",
+          "review_summary": {
+            "affected_catalog_rows": 8,
+            "mapping_mode": "canonical_category_normalization_review",
+            "requires_name_level_split_review": false,
+            "sample_name_count": 8,
+            "name_split_hint_count": 0,
+            "name_split_hints": [],
+            "recommended_review_path": "confirm_canonical_category_normalization",
+            "preserve_source_category_as_sub_series": true
+          },
+          "name_split_hints": [],
+          "sample_names": [
+            "一番くじ 呪術廻戦 懐玉・玉折 ～弐～ - F賞 クリアファイル2枚セット",
+            "一番くじ 劇場版 呪術廻戦 0 ～宣戦布告～ - J賞 クリアファイル2枚セット",
+            "一番くじ 劇場版 呪術廻戦 0 - I賞 クリアファイルセット",
+            "一番くじ 呪術廻戦 ～弐～ - F賞 クリアファイルセット",
+            "一番くじ 僕のヒーローアカデミア －二人のあこがれ－ - G賞 クリアファイルセット",
+            "一番くじ 僕のヒーローアカデミア ー意志ー - G賞 クリアファイルセット",
+            "一番くじ 僕のヒーローアカデミア FIGHTING HEROES feat. One's Justice - OJコラボ賞② クリアファイルセット feat. One's Justice",
+            "一番くじ 僕のヒーローアカデミア FIGHTING HEROES feat. SMASH RISING - E賞 クリアファイルセット feat. SMASH RISING"
+          ],
+          "category_mapping_template": {
+            "manual_confirmed": false,
+            "mapping_mode": "canonical_category_normalization_review",
+            "source_category": "클리어파일",
+            "target_category": "문구",
+            "preserve_source_category_as_sub_series": true,
+            "affected_catalog_rows": 8,
+            "manual_note": "",
+            "blocked_until": "canonical_category_normalization_manually_confirmed",
+            "blocked_reason": "subtype_category_may_need_sub_series_preservation",
+            "required_evidence": [
+              "sample_names_match_suggested_broader_category",
+              "source_category_should_be_preserved_as_sub_series_or_note",
+              "folder_color_and_icon_exist_in_app_catalog",
+              "manual_note_for_category_semantics"
+            ]
+          },
+          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
+          "confirmed_queue": "server/animation_category_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_animation_category_rows.py",
+          "unblocks_when": "canonical_category_normalization_manually_confirmed",
+          "manual_confirmation_required": true,
+          "auto_apply_enabled": false,
+          "blocked_until": "canonical_category_normalization_manually_confirmed",
+          "blocked_reason": "subtype_category_may_need_sub_series_preservation",
+          "required_evidence": [
+            "sample_names_match_suggested_broader_category",
+            "source_category_should_be_preserved_as_sub_series_or_note",
+            "folder_color_and_icon_exist_in_app_catalog",
+            "manual_note_for_category_semantics"
+          ]
+        },
+        {
+          "review_id": "animation-category-normalization-002",
+          "category": "카드",
+          "rows": 3,
+          "review_priority": 702,
+          "mapping_mode": "canonical_category_normalization_review",
+          "requires_name_level_split_review": false,
+          "suggested_family": "문구",
+          "suggested_category": "문구",
+          "suggested_color_group": null,
+          "suggested_color_hint": null,
+          "suggested_primary_icon_key": null,
+          "review_reason": "Subtype-like category may work better as sub_series while using a broader app category.",
+          "review_summary": {
+            "affected_catalog_rows": 3,
+            "mapping_mode": "canonical_category_normalization_review",
+            "requires_name_level_split_review": false,
+            "sample_name_count": 3,
+            "name_split_hint_count": 0,
+            "name_split_hints": [],
+            "recommended_review_path": "confirm_canonical_category_normalization",
+            "preserve_source_category_as_sub_series": true
+          },
+          "name_split_hints": [],
+          "sample_names": [
+            "一番くじ 葬送のフリーレン - H賞 繋がるポストカード",
+            "一番くじ 僕のヒーローアカデミア -更に向こうへ- - K賞 カードホルダー",
+            "一番くじ 僕のヒーローアカデミア 開催文化祭!! - I賞 カードホルダー"
+          ],
+          "category_mapping_template": {
+            "manual_confirmed": false,
+            "mapping_mode": "canonical_category_normalization_review",
+            "source_category": "카드",
+            "target_category": "문구",
+            "preserve_source_category_as_sub_series": true,
+            "affected_catalog_rows": 3,
+            "manual_note": "",
+            "blocked_until": "canonical_category_normalization_manually_confirmed",
+            "blocked_reason": "subtype_category_may_need_sub_series_preservation",
+            "required_evidence": [
+              "sample_names_match_suggested_broader_category",
+              "source_category_should_be_preserved_as_sub_series_or_note",
+              "folder_color_and_icon_exist_in_app_catalog",
+              "manual_note_for_category_semantics"
+            ]
+          },
+          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
+          "confirmed_queue": "server/animation_category_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_animation_category_rows.py",
+          "unblocks_when": "canonical_category_normalization_manually_confirmed",
+          "manual_confirmation_required": true,
+          "auto_apply_enabled": false,
+          "blocked_until": "canonical_category_normalization_manually_confirmed",
+          "blocked_reason": "subtype_category_may_need_sub_series_preservation",
+          "required_evidence": [
+            "sample_names_match_suggested_broader_category",
+            "source_category_should_be_preserved_as_sub_series_or_note",
+            "folder_color_and_icon_exist_in_app_catalog",
+            "manual_note_for_category_semantics"
+          ]
+        },
+        {
+          "review_id": "animation-category-normalization-003",
+          "category": "스티커",
+          "rows": 24,
+          "review_priority": 703,
+          "mapping_mode": "canonical_category_normalization_review",
+          "requires_name_level_split_review": false,
+          "suggested_family": "문구",
+          "suggested_category": "문구",
+          "suggested_color_group": null,
+          "suggested_color_hint": null,
+          "suggested_primary_icon_key": null,
+          "review_reason": "Subtype-like category may work better as sub_series while using a broader app category.",
+          "review_summary": {
+            "affected_catalog_rows": 24,
+            "mapping_mode": "canonical_category_normalization_review",
+            "requires_name_level_split_review": false,
+            "sample_name_count": 8,
+            "name_split_hint_count": 0,
+            "name_split_hints": [],
+            "recommended_review_path": "confirm_canonical_category_normalization",
+            "preserve_source_category_as_sub_series": true
+          },
+          "name_split_hints": [],
+          "sample_names": [
+            "一番くじ 呪術廻戦 死滅回游 ～弐～ - M賞 マグネット＆ステッカーセット",
+            "一番くじ 呪術廻戦 死滅回游 ～壱～ - N賞 ステッカーセット",
+            "一番くじ ヴィジランテ -僕のヒーローアカデミア ILLEGALS- - H賞 ジッパーバッグ＆ステッカーセット",
+            "一番くじ 劇場版 呪術廻戦 ０ ー1224ー - E賞 クリアファイル・ステッカーセット",
+            "一番くじ 呪術廻戦 5th anniversary - K賞 クリアファイル・ステッカーセット",
+            "一番くじ 呪術廻戦 渋谷事変 ～参～ - D賞 クリアファイル・ステッカーセット",
+            "一番くじ 呪術廻戦 渋谷事変 ～弐～ - N賞 クリアファイル・ステッカーセット",
+            "一番くじ 僕のヒーローアカデミア -更に向こうへ- - L賞 ステッカーセット"
+          ],
+          "category_mapping_template": {
+            "manual_confirmed": false,
+            "mapping_mode": "canonical_category_normalization_review",
+            "source_category": "스티커",
+            "target_category": "문구",
+            "preserve_source_category_as_sub_series": true,
+            "affected_catalog_rows": 24,
+            "manual_note": "",
+            "blocked_until": "canonical_category_normalization_manually_confirmed",
+            "blocked_reason": "subtype_category_may_need_sub_series_preservation",
+            "required_evidence": [
+              "sample_names_match_suggested_broader_category",
+              "source_category_should_be_preserved_as_sub_series_or_note",
+              "folder_color_and_icon_exist_in_app_catalog",
+              "manual_note_for_category_semantics"
+            ]
+          },
+          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
+          "confirmed_queue": "server/animation_category_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_animation_category_rows.py",
+          "unblocks_when": "canonical_category_normalization_manually_confirmed",
+          "manual_confirmation_required": true,
+          "auto_apply_enabled": false,
+          "blocked_until": "canonical_category_normalization_manually_confirmed",
+          "blocked_reason": "subtype_category_may_need_sub_series_preservation",
+          "required_evidence": [
+            "sample_names_match_suggested_broader_category",
+            "source_category_should_be_preserved_as_sub_series_or_note",
+            "folder_color_and_icon_exist_in_app_catalog",
+            "manual_note_for_category_semantics"
+          ]
+        },
+        {
+          "review_id": "animation-category-normalization-004",
+          "category": "파우치",
+          "rows": 1,
+          "review_priority": 704,
+          "mapping_mode": "canonical_category_normalization_review",
+          "requires_name_level_split_review": false,
+          "suggested_family": "가방",
+          "suggested_category": "가방",
+          "suggested_color_group": null,
+          "suggested_color_hint": null,
+          "suggested_primary_icon_key": null,
+          "review_reason": "Subtype-like category may work better as sub_series while using a broader app category.",
+          "review_summary": {
+            "affected_catalog_rows": 1,
+            "mapping_mode": "canonical_category_normalization_review",
+            "requires_name_level_split_review": false,
+            "sample_name_count": 1,
+            "name_split_hint_count": 0,
+            "name_split_hints": [],
+            "recommended_review_path": "confirm_canonical_category_normalization",
+            "preserve_source_category_as_sub_series": true
+          },
+          "name_split_hints": [],
+          "sample_names": [
+            "一番くじ 僕のヒーローアカデミア～休み時間！～ - E賞 1-A教室ポーチ"
+          ],
+          "category_mapping_template": {
+            "manual_confirmed": false,
+            "mapping_mode": "canonical_category_normalization_review",
+            "source_category": "파우치",
+            "target_category": "가방",
+            "preserve_source_category_as_sub_series": true,
+            "affected_catalog_rows": 1,
+            "manual_note": "",
+            "blocked_until": "canonical_category_normalization_manually_confirmed",
+            "blocked_reason": "subtype_category_may_need_sub_series_preservation",
+            "required_evidence": [
+              "sample_names_match_suggested_broader_category",
+              "source_category_should_be_preserved_as_sub_series_or_note",
+              "folder_color_and_icon_exist_in_app_catalog",
+              "manual_note_for_category_semantics"
+            ]
+          },
+          "manual_confirmation_template": "server/animation_category_confirmed_rows.template.json",
+          "confirmed_queue": "server/animation_category_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_animation_category_rows.py",
+          "unblocks_when": "canonical_category_normalization_manually_confirmed",
+          "manual_confirmation_required": true,
+          "auto_apply_enabled": false,
+          "blocked_until": "canonical_category_normalization_manually_confirmed",
+          "blocked_reason": "subtype_category_may_need_sub_series_preservation",
+          "required_evidence": [
+            "sample_names_match_suggested_broader_category",
+            "source_category_should_be_preserved_as_sub_series_or_note",
+            "folder_color_and_icon_exist_in_app_catalog",
+            "manual_note_for_category_semantics"
+          ]
+        }
+      ]
+    }
+  ],
   "automation_policy": {
     "auto_apply_category_changes": false,
     "auto_create_folders": false,

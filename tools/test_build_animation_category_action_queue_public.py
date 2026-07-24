@@ -83,6 +83,26 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
             max_categories=1,
             batch_size=1,
             unmatched_keyword_review=unmatched_keyword_review,
+            normalization_review={
+                "normalization_review_queue": [
+                    {
+                        "review_id": "animation-category-normalization-001",
+                        "category": "Clear File",
+                        "suggested_category": "Stationery",
+                        "affected_catalog_rows": 8,
+                        "review_reason": "Subtype-like category may work better as sub_series.",
+                        "sample_names": ["Prize F clear file set"],
+                        "category_mapping_template": {
+                            "manual_confirmed": False,
+                            "source_category": "Clear File",
+                            "target_category": "Stationery",
+                            "preserve_source_category_as_sub_series": True,
+                            "affected_catalog_rows": 8,
+                            "manual_note": "",
+                        },
+                    }
+                ]
+            },
         )
 
         self.assertEqual(report["summary"]["actionable_categories"], 2)
@@ -90,15 +110,22 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["queued_catalog_rows"], 97)
         self.assertEqual(report["summary"]["split_review_categories"], 1)
         self.assertEqual(report["summary"]["direct_mapping_categories"], 1)
-        self.assertEqual(report["summary"]["work_order_steps"], 2)
+        self.assertEqual(report["summary"]["work_order_steps"], 3)
         self.assertEqual(
             report["summary"]["work_order_lanes"],
-            ["name_level_split_review", "unmatched_keyword_review"],
+            [
+                "name_level_split_review",
+                "canonical_category_normalization_review",
+                "unmatched_keyword_review",
+            ],
         )
         self.assertEqual(report["summary"]["split_first_blocked_categories"], ["Acrylic"])
         self.assertEqual(report["summary"]["unmatched_keyword_review_rows"], 42)
         self.assertEqual(report["summary"]["unmatched_keyword_candidate_count"], 7)
         self.assertEqual(report["summary"]["unmatched_keyword_product_type_candidate_count"], 2)
+        self.assertEqual(report["summary"]["normalization_review_categories"], 1)
+        self.assertEqual(report["summary"]["normalization_review_rows"], 8)
+        self.assertEqual(report["summary"]["normalization_review_target_categories"], [("Stationery", 1)])
         self.assertEqual(report["summary"]["app_folder_color_count"], 188)
         self.assertEqual(report["summary"]["app_folder_icon_option_count"], 211)
         self.assertTrue(report["summary"]["app_folder_palette_sorted_by_family"])
@@ -126,7 +153,7 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
             "broad_categories_split_before_mapping",
             report["automation_policy"]["required_evidence"],
         )
-        self.assertEqual(len(report["work_order"]), 2)
+        self.assertEqual(len(report["work_order"]), 3)
         self.assertEqual(report["work_order"][0]["lane"], "name_level_split_review")
         self.assertEqual(report["work_order"][0]["category_count"], 1)
         self.assertEqual(report["work_order"][0]["affected_catalog_rows"], 97)
@@ -148,20 +175,28 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
             "confirmed_split_target_category_for_each_rule",
             report["work_order"][0]["required_evidence"],
         )
-        self.assertEqual(report["work_order"][1]["lane"], "unmatched_keyword_review")
-        self.assertEqual(report["work_order"][1]["affected_catalog_rows"], 42)
-        self.assertEqual(report["work_order"][1]["token_candidate_count"], 7)
-        self.assertEqual(report["work_order"][1]["product_type_candidate_count"], 2)
-        self.assertEqual(report["work_order"][1]["top_product_type_candidate_count"], 1)
-        self.assertEqual(report["work_order"][1]["top_product_type_candidates"][0]["token"], "stand")
-        self.assertEqual(
-            report["work_order"][1]["next_step"],
-            "review_unmatched_animation_keyword_candidates",
-        )
-        self.assertTrue(report["work_order"][1]["manual_confirmation_required"])
-        self.assertFalse(report["work_order"][1]["auto_apply_enabled"])
+        self.assertEqual(report["work_order"][1]["lane"], "canonical_category_normalization_review")
+        self.assertEqual(report["work_order"][1]["affected_catalog_rows"], 8)
+        self.assertEqual(report["work_order"][1]["categories"], ["Clear File"])
+        self.assertEqual(report["work_order"][1]["target_categories"], ["Stationery"])
         self.assertEqual(
             report["work_order"][1]["blocked_reason"],
+            "subtype_category_may_need_sub_series_preservation",
+        )
+        self.assertEqual(report["work_order"][2]["lane"], "unmatched_keyword_review")
+        self.assertEqual(report["work_order"][2]["affected_catalog_rows"], 42)
+        self.assertEqual(report["work_order"][2]["token_candidate_count"], 7)
+        self.assertEqual(report["work_order"][2]["product_type_candidate_count"], 2)
+        self.assertEqual(report["work_order"][2]["top_product_type_candidate_count"], 1)
+        self.assertEqual(report["work_order"][2]["top_product_type_candidates"][0]["token"], "stand")
+        self.assertEqual(
+            report["work_order"][2]["next_step"],
+            "review_unmatched_animation_keyword_candidates",
+        )
+        self.assertTrue(report["work_order"][2]["manual_confirmation_required"])
+        self.assertFalse(report["work_order"][2]["auto_apply_enabled"])
+        self.assertEqual(
+            report["work_order"][2]["blocked_reason"],
             "unmatched_product_type_keywords_need_review",
         )
         batch = report["batches"][0]

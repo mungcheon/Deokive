@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_INPUT = ROOT / "data" / "animation_category_review_batches_public.json"
 DEFAULT_OUTPUT = ROOT / "data" / "animation_category_action_queue_public.json"
 DEFAULT_UNMATCHED_KEYWORD_REVIEW = ROOT / "data" / "animation_category_unmatched_keyword_review_public.json"
+DEFAULT_NORMALIZATION_INPUT = ROOT / "data" / "animation_goods_categories_public.json"
 CONFIRMED_TEMPLATE = "server/animation_category_confirmed_rows.template.json"
 CONFIRMED_QUEUE = "server/animation_category_confirmed_rows.json"
 IMPORT_TOOL = "tools/import_confirmed_animation_category_rows.py"
@@ -43,6 +44,16 @@ MODE_BLOCKERS = {
             "product_type_like_tokens_confirmed_with_samples",
             "series_source_store_noise_tokens_rejected",
             "new_split_rules_recorded_only_for_consistent_goods_types",
+        ],
+    },
+    "canonical_category_normalization_review": {
+        "blocked_until": "canonical_category_normalization_manually_confirmed",
+        "blocked_reason": "subtype_category_may_need_sub_series_preservation",
+        "required_evidence": [
+            "sample_names_match_suggested_broader_category",
+            "source_category_should_be_preserved_as_sub_series_or_note",
+            "folder_color_and_icon_exist_in_app_catalog",
+            "manual_note_for_category_semantics",
         ],
     },
 }
@@ -93,6 +104,16 @@ def _categories(payload: dict[str, Any]) -> list[dict[str, Any]]:
             if isinstance(row, dict):
                 rows.append(row)
     return rows
+
+
+def _normalization_categories(payload: dict[str, Any] | None) -> list[dict[str, Any]]:
+    if not isinstance(payload, dict):
+        return []
+    return [
+        row
+        for row in payload.get("normalization_review_queue", [])
+        if isinstance(row, dict)
+    ]
 
 
 def _mapping_mode(row: dict[str, Any]) -> str:
@@ -210,6 +231,61 @@ def _compact(row: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _compact_normalization(row: dict[str, Any], review_priority: int) -> dict[str, Any]:
+    mapping_mode = "canonical_category_normalization_review"
+    rows = int(row.get("affected_catalog_rows") or row.get("rows") or 0)
+    sample_names = _sample_names(row)
+    template = row.get("category_mapping_template") if isinstance(row.get("category_mapping_template"), dict) else {}
+    blocker = _mode_blocker(mapping_mode)
+    return {
+        "review_id": row.get("review_id"),
+        "category": row.get("category"),
+        "rows": rows,
+        "review_priority": review_priority,
+        "mapping_mode": mapping_mode,
+        "requires_name_level_split_review": False,
+        "suggested_family": row.get("suggested_family") or row.get("suggested_category"),
+        "suggested_category": row.get("suggested_category"),
+        "suggested_color_group": row.get("suggested_color_group"),
+        "suggested_color_hint": row.get("suggested_color_hint"),
+        "suggested_primary_icon_key": row.get("suggested_primary_icon_key"),
+        "review_reason": row.get("review_reason"),
+        "review_summary": {
+            "affected_catalog_rows": rows,
+            "mapping_mode": mapping_mode,
+            "requires_name_level_split_review": False,
+            "sample_name_count": len(sample_names),
+            "name_split_hint_count": 0,
+            "name_split_hints": [],
+            "recommended_review_path": "confirm_canonical_category_normalization",
+            "preserve_source_category_as_sub_series": bool(
+                template.get("preserve_source_category_as_sub_series")
+            ),
+        },
+        "name_split_hints": [],
+        "sample_names": sample_names,
+        "category_mapping_template": {
+            "manual_confirmed": bool(template.get("manual_confirmed")),
+            "mapping_mode": mapping_mode,
+            "source_category": template.get("source_category") or row.get("category"),
+            "target_category": template.get("target_category") or row.get("suggested_category"),
+            "preserve_source_category_as_sub_series": bool(
+                template.get("preserve_source_category_as_sub_series")
+            ),
+            "affected_catalog_rows": rows,
+            "manual_note": template.get("manual_note") or "",
+            **blocker,
+        },
+        "manual_confirmation_template": CONFIRMED_TEMPLATE,
+        "confirmed_queue": CONFIRMED_QUEUE,
+        "import_tool": IMPORT_TOOL,
+        "unblocks_when": "canonical_category_normalization_manually_confirmed",
+        "manual_confirmation_required": True,
+        "auto_apply_enabled": False,
+        **blocker,
+    }
+
+
 def _is_noop_direct_mapping(row: dict[str, Any]) -> bool:
     if row.get("mapping_mode") != "direct_category_mapping_review":
         return False
@@ -218,7 +294,11 @@ def _is_noop_direct_mapping(row: dict[str, Any]) -> bool:
     return bool(source) and source == target
 
 
-def _work_order(rows: list[dict[str, Any]], unmatched_keyword_review: dict[str, Any] | None = None) -> list[dict[str, Any]]:
+def _work_order(
+    rows: list[dict[str, Any]],
+    unmatched_keyword_review: dict[str, Any] | None = None,
+    normalization_rows: list[dict[str, Any]] | None = None,
+) -> list[dict[str, Any]]:
     split_rows = [row for row in rows if row.get("requires_name_level_split_review")]
     direct_rows = [row for row in rows if not row.get("requires_name_level_split_review")]
     unmatched_summary = (
@@ -280,10 +360,39 @@ def _work_order(rows: list[dict[str, Any]], unmatched_keyword_review: dict[str, 
             }
         )
 
-    if unmatched_rows or token_candidates:
+    normalization_rows = normalization_rows or []
+    if normalization_rows:
         orders.append(
             {
                 "rank": 3,
+                "lane": "canonical_category_normalization_review",
+                "source": "animation_goods_categories_public.json",
+                "category_count": len(normalization_rows),
+                "affected_catalog_rows": sum(int(row.get("rows") or 0) for row in normalization_rows),
+                "next_step": "confirm_canonical_animation_category_normalization",
+                "template": CONFIRMED_TEMPLATE,
+                "categories": [row.get("category") for row in normalization_rows],
+                "target_categories": sorted(
+                    {
+                        str(row.get("suggested_category") or "")
+                        for row in normalization_rows
+                        if str(row.get("suggested_category") or "")
+                    }
+                ),
+                "manual_confirmation_required": True,
+                "auto_apply_enabled": False,
+                **_mode_blocker("canonical_category_normalization_review"),
+                "notes": [
+                    "Normalize subtype-like source categories only after confirming sample names.",
+                    "Preserve the original source category as sub_series or a note when it helps user search.",
+                ],
+            }
+        )
+
+    if unmatched_rows or token_candidates:
+        orders.append(
+            {
+                "rank": 4,
                 "lane": "unmatched_keyword_review",
                 "source": "animation_category_unmatched_keyword_review_public.json",
                 "affected_catalog_rows": unmatched_rows,
@@ -312,6 +421,7 @@ def build_queue(
     max_categories: int = 24,
     batch_size: int = 6,
     unmatched_keyword_review: dict[str, Any] | None = None,
+    normalization_review: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     rows = [
         row
@@ -320,9 +430,18 @@ def build_queue(
     ]
     rows.sort(key=lambda row: (int(row.get("review_priority") or 999), str(row.get("category") or "")))
     queued = rows[:max_categories]
+    normalization_rows = [
+        _compact_normalization(row, 700 + index)
+        for index, row in enumerate(_normalization_categories(normalization_review), start=1)
+    ]
+    normalization_rows.sort(key=lambda row: (int(row.get("review_priority") or 999), str(row.get("category") or "")))
     app_visual_catalog = payload.get("app_folder_visual_catalog") or {}
     if not isinstance(app_visual_catalog, dict):
         app_visual_catalog = {}
+    if not app_visual_catalog and isinstance(normalization_review, dict):
+        app_visual_catalog = normalization_review.get("app_folder_visual_catalog") or {}
+        if not isinstance(app_visual_catalog, dict):
+            app_visual_catalog = {}
 
     batches: list[dict[str, Any]] = []
     for offset in range(0, len(queued), batch_size):
@@ -346,6 +465,25 @@ def build_queue(
                 "categories": chunk,
             }
         )
+    for offset in range(0, len(normalization_rows), batch_size):
+        chunk = normalization_rows[offset : offset + batch_size]
+        target_counts = Counter(str(row.get("suggested_category") or "") for row in chunk)
+        batches.append(
+            {
+                "batch_id": f"animation-category-normalization-{(offset // batch_size) + 1:03d}",
+                "priority": min(int(row.get("review_priority") or 999) for row in chunk),
+                "category_count": len(chunk),
+                "affected_catalog_rows": sum(int(row.get("rows") or 0) for row in chunk),
+                "target_category_counts": target_counts.most_common(),
+                "review_state": "manual_canonical_category_normalization_required",
+                "next_machine_step": "confirm_canonical_animation_category_normalization",
+                "manual_confirmation_template": CONFIRMED_TEMPLATE,
+                "confirmed_queue": CONFIRMED_QUEUE,
+                "import_tool": IMPORT_TOOL,
+                "unblocks_when": "canonical_category_normalization_manually_confirmed",
+                "categories": chunk,
+            }
+        )
 
     all_rows = sum(int(row.get("rows") or 0) for row in rows)
     queued_rows = sum(int(row.get("rows") or 0) for row in queued)
@@ -360,7 +498,7 @@ def build_queue(
         and isinstance(unmatched_keyword_review.get("summary"), dict)
         else {}
     )
-    work_order = _work_order(queued, unmatched_keyword_review)
+    work_order = _work_order(queued, unmatched_keyword_review, normalization_rows)
     summary = {
         "actionable_categories": len(rows),
         "queued_categories": len(queued),
@@ -376,6 +514,11 @@ def build_queue(
         "by_blocked_until": blocked_until_counts.most_common(),
         "split_review_categories": sum(1 for row in rows if _requires_split_review(row)),
         "direct_mapping_categories": sum(1 for row in rows if not _requires_split_review(row)),
+        "normalization_review_categories": len(normalization_rows),
+        "normalization_review_rows": sum(int(row.get("rows") or 0) for row in normalization_rows),
+        "normalization_review_target_categories": Counter(
+            str(row.get("suggested_category") or "") for row in normalization_rows
+        ).most_common(),
         "app_folder_color_count": int(app_visual_catalog.get("color_count") or 0),
         "app_folder_icon_option_count": int(app_visual_catalog.get("icon_count") or 0),
         "app_folder_icon_group_count": int(app_visual_catalog.get("icon_group_count") or 0),
@@ -439,6 +582,7 @@ def main() -> int:
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--unmatched-keyword-review", type=Path, default=DEFAULT_UNMATCHED_KEYWORD_REVIEW)
+    parser.add_argument("--normalization-input", type=Path, default=DEFAULT_NORMALIZATION_INPUT)
     parser.add_argument("--max-categories", type=int, default=24)
     parser.add_argument("--batch-size", type=int, default=6)
     args = parser.parse_args()
@@ -453,6 +597,7 @@ def main() -> int:
         max_categories=args.max_categories,
         batch_size=args.batch_size,
         unmatched_keyword_review=unmatched_keyword_review,
+        normalization_review=_load(args.normalization_input) if args.normalization_input.exists() else None,
     )
     args.output.write_text(json.dumps(queue, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(queue["summary"], ensure_ascii=False, indent=2))
