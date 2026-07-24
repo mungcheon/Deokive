@@ -1,0 +1,311 @@
+{
+  "workflows": [
+    {
+      "name": "official_detail",
+      "description": "official detail source/image candidates",
+      "confirmed_file": "server/official_detail_match_confirmed_rows.json",
+      "confirmed_file_exists": true,
+      "template_file": "server/official_detail_match_confirmed_rows.template.json",
+      "template_file_exists": true,
+      "review_artifact": "server/official_detail_match_review.html",
+      "confirmed_items": 0,
+      "manual_confirmed_true": 0,
+      "template_items": 0,
+      "template_manual_confirmed_true": 0,
+      "import_report": {
+        "exists": true,
+        "write": false,
+        "queue": "server/official_detail_match_confirmed_rows.json",
+        "updated_rows": 0,
+        "skipped_rows": 0,
+        "duplicates": 0,
+        "created_rows": null,
+        "note": null,
+        "skip_reason_counts": []
+      },
+      "status": "confirmed_file_has_no_confirmed_rows",
+      "dry_run_command": "python tools/import_confirmed_official_detail_matches.py --queue server/official_detail_match_confirmed_rows.json --report server/official_detail_match_import_report.json",
+      "write_command": "python tools/import_confirmed_official_detail_matches.py --queue server/official_detail_match_confirmed_rows.json --report server/official_detail_match_import_report.json --write",
+      "next_action": "Open the confirmed file and mark only exact verified rows manual_confirmed=true, or replace it from the current template."
+    },
+    {
+      "name": "storefront",
+      "description": "storefront/Fanding source and image candidates",
+      "confirmed_file": "server/storefront_match_confirmed_rows.json",
+      "confirmed_file_exists": false,
+      "template_file": "server/storefront_match_confirmed_rows.template.json",
+      "template_file_exists": true,
+      "review_artifact": "server/storefront_match_review.html",
+      "confirmed_items": 0,
+      "manual_confirmed_true": 0,
+      "template_items": 0,
+      "template_manual_confirmed_true": 0,
+      "import_report": {
+        "exists": true,
+        "write": false,
+        "queue": "server/storefront_match_confirmed_rows.json",
+        "updated_rows": 0,
+        "skipped_rows": 0,
+        "duplicates": 0,
+        "created_rows": null,
+        "note": "No confirmed queue found. Copy storefront_match_confirmed_rows.template.json to storefront_match_confirmed_rows.json after manual review.",
+        "skip_reason_counts": []
+      },
+      "status": "needs_manual_review",
+      "dry_run_command": "python tools/import_confirmed_storefront_matches.py --queue server/storefront_match_confirmed_rows.json --report server/storefront_match_import_report.json",
+      "write_command": "python tools/import_confirmed_storefront_matches.py --queue server/storefront_match_confirmed_rows.json --report server/storefront_match_import_report.json --write",
+      "next_action": "No current storefront candidates were found."
+    },
+    {
+      "name": "catalog_field",
+      "description": "manual field values such as barcode/date/price",
+      "confirmed_file": "server/catalog_field_confirmed_rows.json",
+      "confirmed_file_exists": false,
+      "template_file": "server/catalog_field_confirmed_rows.template.json",
+      "template_file_exists": true,
+      "review_artifact": "server/catalog_field_enrichment_review.html",
+      "confirmed_items": 0,
+      "manual_confirmed_true": 0,
+      "template_items": 500,
+      "template_manual_confirmed_true": 0,
+      "import_report": {
+        "exists": true,
+        "write": false,
+        "queue": "data/source_discovery_next_focus_detail_candidates_public.json",
+        "updated_rows": 0,
+        "skipped_rows": 12,
+        "duplicates": 0,
+        "created_rows": null,
+        "note": null,
+        "skip_reason_counts": [
+          [
+            "manual_confirmed_false",
+            12
+          ]
+        ]
+      },
+      "status": "template_ready_no_confirmed_file",
+      "dry_run_command": "python tools/import_confirmed_metadata_rows.py --queue server/catalog_field_confirmed_rows.json --report server/catalog_field_confirmed_import_report.json",
+      "write_command": "python tools/import_confirmed_metadata_rows.py --queue server/catalog_field_confirmed_rows.json --report server/catalog_field_confirmed_import_report.json --write",
+      "next_action": "Copy the template to the confirmed_rows JSON, mark exact rows manual_confirmed=true, dry-run first, then run: python tools/import_confirmed_metadata_rows.py --queue server/catalog_field_confirmed_rows.json --report server/catalog_field_confirmed_import_report.json --write"
+    },
+    {
+      "name": "source_discovery",
+      "description": "manual confirmed exact official/source URLs",
+      "confirmed_file": "server/source_discovery_confirmed_rows.json",
+      "confirmed_file_exists": false,
+      "template_file": "server/source_discovery_confirmed_rows.template.json",
+      "template_file_exists": true,
+      "review_artifact": "server/source_discovery_review_batches_public.html",
+      "confirmed_items": 0,
+      "manual_confirmed_true": 0,
+      "template_items": 641,
+      "template_manual_confirmed_true": 0,
+      "import_report": {
+        "exists": false
+      },
+      "status": "template_ready_no_confirmed_file",
+      "dry_run_command": "python tools/import_confirmed_source_discovery_rows.py --queue server/source_discovery_confirmed_rows.json --report server/source_discovery_confirmed_import_report.json",
+      "write_command": "python tools/import_confirmed_source_discovery_rows.py --queue server/source_discovery_confirmed_rows.json --report server/source_discovery_confirmed_import_report.json --write",
+      "next_action": "Copy the template to the confirmed_rows JSON, mark exact rows manual_confirmed=true, dry-run first, then run: python tools/import_confirmed_source_discovery_rows.py --queue server/source_discovery_confirmed_rows.json --report server/source_discovery_confirmed_import_report.json --write"
+    },
+    {
+      "name": "catalog_image",
+      "description": "manual confirmed exact image URLs from official/detail evidence",
+      "confirmed_file": "server/catalog_image_attachment_confirmed_rows.json",
+      "confirmed_file_exists": false,
+      "template_file": "server/catalog_image_attachment_confirmed_rows.template.json",
+      "template_file_exists": false,
+      "review_artifact": "server/catalog_image_review_batches.html",
+      "confirmed_items": 0,
+      "manual_confirmed_true": 0,
+      "template_items": 0,
+      "template_manual_confirmed_true": 0,
+      "import_report": {
+        "exists": false
+      },
+      "status": "needs_manual_review",
+      "dry_run_command": "python tools/import_confirmed_image_attachment_rows.py --queue server/catalog_image_attachment_confirmed_rows.json --report server/catalog_image_attachment_confirmed_import_report.json",
+      "write_command": "python tools/import_confirmed_image_attachment_rows.py --queue server/catalog_image_attachment_confirmed_rows.json --report server/catalog_image_attachment_confirmed_import_report.json --write",
+      "next_action": "No current catalog_image candidates were found."
+    },
+    {
+      "name": "focus_image",
+      "description": "manual confirmed exact image URLs for requested/focus series rows",
+      "confirmed_file": "server/requested_focus_confirmed_rows.json",
+      "confirmed_file_exists": false,
+      "template_file": "server/requested_focus_confirmed_rows.template.json",
+      "template_file_exists": false,
+      "review_artifact": "server/focus_missing_image_queue_current.html",
+      "confirmed_items": 0,
+      "manual_confirmed_true": 0,
+      "template_items": 0,
+      "template_manual_confirmed_true": 0,
+      "import_report": {
+        "exists": false
+      },
+      "status": "needs_manual_review",
+      "dry_run_command": "python tools/import_confirmed_requested_focus_rows.py --queue server/requested_focus_confirmed_rows.json --report server/requested_focus_confirmed_import_report.json",
+      "write_command": "python tools/import_confirmed_requested_focus_rows.py --queue server/requested_focus_confirmed_rows.json --report server/requested_focus_confirmed_import_report.json --write",
+      "next_action": "No current focus_image candidates were found."
+    },
+    {
+      "name": "variant_metadata",
+      "description": "manual confirmed exact variant metadata for risky source candidates",
+      "confirmed_file": "data/source_discovery_next_focus_variant_metadata_confirmed_rows.template.json",
+      "confirmed_file_exists": true,
+      "template_file": "data/source_discovery_next_focus_variant_metadata_confirmed_rows.template.json",
+      "template_file_exists": true,
+      "review_artifact": "data/source_discovery_next_focus_variant_metadata_confirmed_rows.template.json",
+      "confirmed_items": 2,
+      "manual_confirmed_true": 0,
+      "template_items": 2,
+      "template_manual_confirmed_true": 0,
+      "import_report": {
+        "exists": true,
+        "write": false,
+        "queue": "data/source_discovery_next_focus_variant_metadata_confirmed_rows.template.json",
+        "updated_rows": 0,
+        "skipped_rows": 2,
+        "duplicates": 0,
+        "created_rows": null,
+        "note": null,
+        "skip_reason_counts": [
+          [
+            "manual_confirmed_false",
+            2
+          ]
+        ]
+      },
+      "status": "confirmed_file_has_no_confirmed_rows",
+      "dry_run_command": "python tools/import_confirmed_variant_metadata_backfill_rows.py",
+      "write_command": "python tools/import_confirmed_variant_metadata_backfill_rows.py --write",
+      "next_action": "Open the confirmed file and mark only exact verified rows manual_confirmed=true, or replace it from the current template."
+    },
+    {
+      "name": "ichiban_ocr",
+      "description": "Ichiban Kuji OCR/manual prize rows",
+      "confirmed_file": "server/ichiban_kuji_ocr_confirmed_rows.json",
+      "confirmed_file_exists": true,
+      "template_file": "server/ichiban_kuji_ocr_confirmed_rows.template.json",
+      "template_file_exists": true,
+      "review_artifact": "server/ichiban_kuji_ocr_review.html",
+      "confirmed_items": 0,
+      "manual_confirmed_true": 0,
+      "template_items": 0,
+      "template_manual_confirmed_true": 0,
+      "import_report": {
+        "exists": true,
+        "write": false,
+        "queue": "server/ichiban_kuji_ocr_confirmed_rows.json",
+        "updated_rows": 0,
+        "skipped_rows": 0,
+        "duplicates": 0,
+        "created_rows": 0,
+        "note": null,
+        "skip_reason_counts": []
+      },
+      "status": "confirmed_file_has_no_confirmed_rows",
+      "dry_run_command": "python tools/import_confirmed_ichiban_ocr_rows.py --queue server/ichiban_kuji_ocr_confirmed_rows.json --report server/ichiban_kuji_ocr_import_report.json",
+      "write_command": "python tools/import_confirmed_ichiban_ocr_rows.py --queue server/ichiban_kuji_ocr_confirmed_rows.json --report server/ichiban_kuji_ocr_import_report.json --write",
+      "next_action": "Open the confirmed file and mark only exact verified rows manual_confirmed=true, or replace it from the current template."
+    },
+    {
+      "name": "ichiban_sub_series",
+      "description": "manual confirmed Ichiban Kuji prize tier/sub-series values",
+      "confirmed_file": "server/ichiban_kuji_sub_series_confirmed_rows.json",
+      "confirmed_file_exists": false,
+      "template_file": "server/ichiban_kuji_sub_series_confirmed_rows.template.json",
+      "template_file_exists": true,
+      "review_artifact": "server/ichiban_kuji_sub_series_review_batches.html",
+      "confirmed_items": 0,
+      "manual_confirmed_true": 0,
+      "template_items": 0,
+      "template_manual_confirmed_true": 0,
+      "import_report": {
+        "exists": true,
+        "write": false,
+        "queue": "server/ichiban_kuji_sub_series_confirmed_rows.json",
+        "updated_rows": 0,
+        "skipped_rows": 0,
+        "duplicates": 0,
+        "created_rows": null,
+        "note": "No confirmed queue found. Copy ichiban_kuji_sub_series_confirmed_rows.template.json to ichiban_kuji_sub_series_confirmed_rows.json after manual review.",
+        "skip_reason_counts": []
+      },
+      "status": "needs_manual_review",
+      "dry_run_command": "python tools/import_confirmed_catalog_field_rows.py --queue server/ichiban_kuji_sub_series_confirmed_rows.json --report server/ichiban_kuji_sub_series_confirmed_import_report.json",
+      "write_command": "python tools/import_confirmed_catalog_field_rows.py --queue server/ichiban_kuji_sub_series_confirmed_rows.json --report server/ichiban_kuji_sub_series_confirmed_import_report.json --write",
+      "next_action": "No current ichiban_sub_series candidates were found."
+    },
+    {
+      "name": "ichiban_metadata",
+      "description": "manual confirmed Ichiban Kuji campaign release/price/source metadata",
+      "confirmed_file": "server/ichiban_kuji_metadata_confirmed_rows.json",
+      "confirmed_file_exists": false,
+      "template_file": "server/ichiban_kuji_metadata_confirmed_rows.template.json",
+      "template_file_exists": false,
+      "review_artifact": "server/ichiban_kuji_metadata_review_batches_public.html",
+      "confirmed_items": 0,
+      "manual_confirmed_true": 0,
+      "template_items": 0,
+      "template_manual_confirmed_true": 0,
+      "import_report": {
+        "exists": false
+      },
+      "status": "needs_manual_review",
+      "dry_run_command": "python tools/import_confirmed_ichiban_metadata_rows.py --queue server/ichiban_kuji_metadata_confirmed_rows.json --report server/ichiban_kuji_metadata_confirmed_import_report.json",
+      "write_command": "python tools/import_confirmed_ichiban_metadata_rows.py --queue server/ichiban_kuji_metadata_confirmed_rows.json --report server/ichiban_kuji_metadata_confirmed_import_report.json --write",
+      "next_action": "No current ichiban_metadata candidates were found."
+    },
+    {
+      "name": "animation_category",
+      "description": "manual confirmed animation goods category/folder mappings",
+      "confirmed_file": "server/animation_category_confirmed_rows.json",
+      "confirmed_file_exists": false,
+      "template_file": "server/animation_category_confirmed_rows.template.json",
+      "template_file_exists": false,
+      "review_artifact": "server/animation_category_review_batches_public.html",
+      "confirmed_items": 0,
+      "manual_confirmed_true": 0,
+      "template_items": 0,
+      "template_manual_confirmed_true": 0,
+      "import_report": {
+        "exists": false
+      },
+      "status": "needs_manual_review",
+      "dry_run_command": "python tools/import_confirmed_animation_category_rows.py --queue server/animation_category_confirmed_rows.json --report server/animation_category_confirmed_import_report.json",
+      "write_command": "python tools/import_confirmed_animation_category_rows.py --queue server/animation_category_confirmed_rows.json --report server/animation_category_confirmed_import_report.json --write",
+      "next_action": "No current animation_category candidates were found."
+    },
+    {
+      "name": "deduplication",
+      "description": "manual confirmed duplicate catalog merge/remove decisions",
+      "confirmed_file": "server/catalog_dedupe_confirmed_decisions.json",
+      "confirmed_file_exists": false,
+      "template_file": "server/catalog_dedupe_confirmed_decisions.template.json",
+      "template_file_exists": false,
+      "review_artifact": "server/catalog_deduplication_review_batches_public.html",
+      "confirmed_items": 0,
+      "manual_confirmed_true": 0,
+      "template_items": 0,
+      "template_manual_confirmed_true": 0,
+      "import_report": {
+        "exists": false
+      },
+      "status": "needs_manual_review",
+      "dry_run_command": "python tools/import_confirmed_dedupe_decisions.py --queue server/catalog_dedupe_confirmed_decisions.json --report server/catalog_dedupe_confirmed_import_report.json",
+      "write_command": "python tools/import_confirmed_dedupe_decisions.py --queue server/catalog_dedupe_confirmed_decisions.json --report server/catalog_dedupe_confirmed_import_report.json --write",
+      "next_action": "No current deduplication candidates were found."
+    }
+  ],
+  "summary": {
+    "workflow_count": 12,
+    "confirmed_files": 3,
+    "manual_confirmed_true": 0,
+    "template_items": 1143,
+    "updated_rows": 0,
+    "skipped_rows": 14,
+    "duplicates": 0
+  }
+}
