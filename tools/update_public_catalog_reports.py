@@ -2166,6 +2166,7 @@ def build_operations_public(
     ichiban_prize_name_image_review_override: dict[str, Any] | None = None,
     ichiban_prize_name_image_patch_candidates_override: dict[str, Any] | None = None,
     source_next_focus_pack_override: dict[str, Any] | None = None,
+    source_next_focus_detail_candidates_override: dict[str, Any] | None = None,
     source_next_focus_fallback_queue_override: dict[str, Any] | None = None,
     deduplication_template_import_dry_run_override: dict[str, Any] | None = None,
     animation_review_batches_override: dict[str, Any] | None = None,
@@ -2220,6 +2221,14 @@ def build_operations_public(
         else {}
     )
     source_next_focus_pack_summary = source_next_focus_pack.get("summary", {})
+    source_next_focus_detail_candidates = (
+        source_next_focus_detail_candidates_override
+        if source_next_focus_detail_candidates_override is not None
+        else load_json(SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES, {})
+        if SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES.exists()
+        else {}
+    )
+    source_next_focus_detail_candidates_summary = source_next_focus_detail_candidates.get("summary", {})
     source_next_focus_fallback_queue = (
         source_next_focus_fallback_queue_override
         if source_next_focus_fallback_queue_override is not None
@@ -2786,6 +2795,23 @@ def build_operations_public(
         } if source_next_focus_fetch_audit_summary else None,
         {
             "priority": 20,
+            "workstream": "source_discovery_next_focus_detail_candidates",
+            "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES.name}",
+            "focus_pack_id": source_next_focus_detail_candidates_summary.get("focus_pack_id"),
+            "pack_items": source_next_focus_detail_candidates_summary.get("pack_items", 0),
+            "items_with_candidates": source_next_focus_detail_candidates_summary.get("items_with_candidates", 0),
+            "candidate_rows": source_next_focus_detail_candidates_summary.get("candidate_rows", 0),
+            "next_action_lane_count": source_next_focus_detail_candidates_summary.get("next_action_lane_count", 0),
+            "next_action_lanes": source_next_focus_detail_candidates_summary.get("next_action_lanes", []),
+            "completion_readiness_status": source_next_focus_detail_candidates_summary.get(
+                "completion_readiness_status"
+            ),
+            "auto_apply_ready_rows": source_next_focus_detail_candidates_summary.get("auto_apply_ready_rows", 0),
+            "auto_apply_enabled": source_next_focus_detail_candidates_summary.get("auto_apply_enabled", False),
+            "recommended_next_action": "Work the current focus pack by lane: fallback search, variant metadata, then identity review.",
+        } if source_next_focus_detail_candidates_summary else None,
+        {
+            "priority": 20,
             "workstream": "source_discovery_next_focus_fallback_queue",
             "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}",
             "focus_pack_id": source_next_focus_fallback_queue_summary.get("focus_pack_id"),
@@ -3331,6 +3357,26 @@ def build_operations_public(
             "next_step": "resolve_unavailable_official_search_urls_before_source_import",
             "auto_apply_enabled": source_next_focus_fetch_audit_summary.get("auto_apply_enabled", False),
         } if source_next_focus_fetch_audit_summary else None,
+        {
+            "workstream": "source_discovery_next_focus_detail_candidates",
+            "status": (
+                "manual_review"
+                if source_next_focus_detail_candidates_summary.get("next_action_lane_count", 0)
+                else "clear"
+            ),
+            "open_rows": source_next_focus_detail_candidates_summary.get("pack_items", 0),
+            "focus_pack_id": source_next_focus_detail_candidates_summary.get("focus_pack_id"),
+            "items_with_candidates": source_next_focus_detail_candidates_summary.get("items_with_candidates", 0),
+            "candidate_rows": source_next_focus_detail_candidates_summary.get("candidate_rows", 0),
+            "next_action_lane_count": source_next_focus_detail_candidates_summary.get("next_action_lane_count", 0),
+            "next_action_lanes": source_next_focus_detail_candidates_summary.get("next_action_lanes", []),
+            "completion_readiness_status": source_next_focus_detail_candidates_summary.get(
+                "completion_readiness_status"
+            ),
+            "primary_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES.name}",
+            "next_step": "resolve_current_focus_pack_lanes_before_source_import",
+            "auto_apply_enabled": source_next_focus_detail_candidates_summary.get("auto_apply_enabled", False),
+        } if source_next_focus_detail_candidates_summary else None,
         {
             "workstream": "source_discovery_next_focus_fallback_queue",
             "status": "manual_review" if source_next_focus_fallback_queue_summary.get("queue_rows", 0) else "clear",
@@ -7864,6 +7910,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         ichiban_kuji_prize_name_image_review,
         ichiban_kuji_prize_name_image_patch_candidates,
         source_discovery_next_focus_pack,
+        source_discovery_next_focus_detail_candidates,
         source_discovery_next_focus_fallback_queue,
         deduplication_template_import_dry_run,
         animation_review_batches,

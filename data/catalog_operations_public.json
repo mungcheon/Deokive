@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T03:07:00Z",
+  "generated_at": "2026-07-24T03:57:55Z",
   "summary": {
     "catalog_rows": 20347,
     "coverage": {
@@ -220,6 +220,33 @@
       ],
       "primary_report": "data/source_discovery_next_focus_pack_fetch_audit_public.json",
       "next_step": "resolve_unavailable_official_search_urls_before_source_import",
+      "auto_apply_enabled": false
+    },
+    {
+      "workstream": "source_discovery_next_focus_detail_candidates",
+      "status": "manual_review",
+      "open_rows": 20,
+      "focus_pack_id": "source-discovery-focus-001",
+      "items_with_candidates": 7,
+      "candidate_rows": 50,
+      "next_action_lane_count": 3,
+      "next_action_lanes": [
+        [
+          "fallback_source_search",
+          13
+        ],
+        [
+          "catalog_variant_metadata_enrichment",
+          4
+        ],
+        [
+          "manual_candidate_identity_review",
+          3
+        ]
+      ],
+      "completion_readiness_status": "fallback_search_required",
+      "primary_report": "data/source_discovery_next_focus_detail_candidates_public.json",
+      "next_step": "resolve_current_focus_pack_lanes_before_source_import",
       "auto_apply_enabled": false
     },
     {
@@ -2496,9 +2523,9 @@
       "priority": 6,
       "workstream": "execution_plan",
       "public_report": "data/catalog_execution_plan_public.json",
-      "action_count": 22,
+      "action_count": 23,
       "blocked_action_count": 1,
-      "manual_review_action_count": 19,
+      "manual_review_action_count": 20,
       "recommended_next_action": "Use the consolidated execution plan to choose the next safe DB cleanup step."
     },
     {
@@ -2879,6 +2906,34 @@
       "official_search_unavailable_rows": 17,
       "fallback_web_search_required": true,
       "recommended_next_action": "Use web search or store archives for the current focus pack before marking any source_url confirmed."
+    },
+    {
+      "priority": 20,
+      "workstream": "source_discovery_next_focus_detail_candidates",
+      "public_report": "data/source_discovery_next_focus_detail_candidates_public.json",
+      "focus_pack_id": "source-discovery-focus-001",
+      "pack_items": 20,
+      "items_with_candidates": 7,
+      "candidate_rows": 50,
+      "next_action_lane_count": 3,
+      "next_action_lanes": [
+        [
+          "fallback_source_search",
+          13
+        ],
+        [
+          "catalog_variant_metadata_enrichment",
+          4
+        ],
+        [
+          "manual_candidate_identity_review",
+          3
+        ]
+      ],
+      "completion_readiness_status": "fallback_search_required",
+      "auto_apply_ready_rows": 0,
+      "auto_apply_enabled": false,
+      "recommended_next_action": "Work the current focus pack by lane: fallback search, variant metadata, then identity review."
     },
     {
       "priority": 20,

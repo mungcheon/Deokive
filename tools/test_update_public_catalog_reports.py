@@ -1557,6 +1557,11 @@ class PublicCatalogReportTests(unittest.TestCase):
             for row in operations.get("workstream_scorecard", [])
             if row.get("workstream") == "source_discovery_next_focus_fallback_queue"
         )
+        source_next_focus_detail_scorecard = next(
+            row
+            for row in operations.get("workstream_scorecard", [])
+            if row.get("workstream") == "source_discovery_next_focus_detail_candidates"
+        )
         source_detail_scorecard = next(
             row
             for row in operations.get("workstream_scorecard", [])
@@ -1581,6 +1586,11 @@ class PublicCatalogReportTests(unittest.TestCase):
             row
             for row in operations.get("next_actions", [])
             if row.get("workstream") == "source_discovery_next_focus_fallback_queue"
+        )
+        source_next_focus_detail_next_action = next(
+            row
+            for row in operations.get("next_actions", [])
+            if row.get("workstream") == "source_discovery_next_focus_detail_candidates"
         )
         ensky_cache_next_action = next(
             row
@@ -2144,6 +2154,18 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             source_next_focus_detail_execution_action["evidence"].get("next_action_lanes"),
             source_next_focus_detail_summary.get("next_action_lanes"),
+        )
+        self.assertEqual(
+            source_next_focus_detail_scorecard.get("next_action_lanes"),
+            source_next_focus_detail_summary.get("next_action_lanes"),
+        )
+        self.assertEqual(
+            source_next_focus_detail_next_action.get("next_action_lanes"),
+            source_next_focus_detail_summary.get("next_action_lanes"),
+        )
+        self.assertEqual(
+            source_next_focus_detail_scorecard.get("open_rows"),
+            source_next_focus_detail_summary.get("pack_items"),
         )
         self.assertEqual(
             quality["source_discovery_action_queue"].get("top_source_store_workstreams"),
