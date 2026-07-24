@@ -137,20 +137,15 @@ def _metadata_field_template_rows(
         ],
     }
     rows: list[dict[str, Any]] = []
+    supported_fields = {"sub_series", "name_ja", "character_name"}
     for field in ("sub_series", "name_ja", "character_name"):
         row = {
             **base,
             "field": field,
-            "import_tool": (
-                "tools/import_confirmed_catalog_field_rows.py"
-                if field == "sub_series"
-                else ""
-            ),
-            "import_supported": field == "sub_series",
+            "import_tool": "tools/import_confirmed_catalog_field_rows.py",
+            "import_supported": field in supported_fields,
             "review_note": (
                 "Copy confirmed rows to server/catalog_field_confirmed_rows.json; existing importer supports this field."
-                if field == "sub_series"
-                else "Review-only until the catalog metadata importer supports this field."
             ),
         }
         rows.append(row)
@@ -806,7 +801,7 @@ def build_report(
             "Review each candidate_source_url as an exact product/detail page before confirmation.",
             "Only fill manual_confirmed_source_url and manual_confirmed_image_url after title, variant, category, and image identity match.",
             "This report is candidate-only; it never mutates catalog data.",
-            "For catalog_variant_metadata_enrichment rows, confirm variant metadata first; only sub_series currently has a supported catalog field importer.",
+            "For catalog_variant_metadata_enrichment rows, confirm variant metadata first; sub_series, name_ja, and character_name have a supported catalog field importer.",
         ],
         "items": items,
         "candidate_review_work_order": review_work_order_items,
@@ -822,7 +817,7 @@ def build_report(
             "requires_manual_review": True,
             "candidate_confirmation_template": "candidate_confirmation_template",
             "metadata_field_import_template": "metadata_field_import_template",
-            "metadata_field_import_supported_fields": ["sub_series"],
+            "metadata_field_import_supported_fields": ["sub_series", "name_ja", "character_name"],
             "confirmed_template": "data/source_discovery_focus_confirmed_template_public.json",
             "import_tool": "tools/import_confirmed_source_discovery_rows.py",
             "metadata_field_import_tool": "tools/import_confirmed_catalog_field_rows.py",

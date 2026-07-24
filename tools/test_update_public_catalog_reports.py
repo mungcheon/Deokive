@@ -473,7 +473,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             quality["source_discovery_next_focus_detail_candidates"]["metadata_field_import_supported_rows"],
-            4,
+            12,
         )
         self.assertEqual(
             quality["source_discovery_next_focus_detail_candidates"]["exact_candidate_confirmation_ready_items"],

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T11:04:59Z",
+  "generated_at": "2026-07-24T11:11:21Z",
   "scope": "source_discovery_next_focus_detail_candidates",
   "source_report": "data/source_discovery_next_focus_pack_public.json",
   "summary": {
@@ -23,7 +23,7 @@
     "candidate_confirmation_manual_confirmed_rows": 0,
     "metadata_enrichment_template_rows": 4,
     "metadata_field_import_template_rows": 12,
-    "metadata_field_import_supported_rows": 4,
+    "metadata_field_import_supported_rows": 12,
     "candidate_blocker_counts": [
       [
         "rank_not_first",
@@ -170,7 +170,7 @@
     "Review each candidate_source_url as an exact product/detail page before confirmation.",
     "Only fill manual_confirmed_source_url and manual_confirmed_image_url after title, variant, category, and image identity match.",
     "This report is candidate-only; it never mutates catalog data.",
-    "For catalog_variant_metadata_enrichment rows, confirm variant metadata first; only sub_series currently has a supported catalog field importer."
+    "For catalog_variant_metadata_enrichment rows, confirm variant metadata first; sub_series, name_ja, and character_name have a supported catalog field importer."
   ],
   "items": [
     {
@@ -4327,9 +4327,9 @@
         "field_value_appears_on_or_is_directly_implied_by_evidence_url"
       ],
       "field": "name_ja",
-      "import_tool": "",
-      "import_supported": false,
-      "review_note": "Review-only until the catalog metadata importer supports this field."
+      "import_tool": "tools/import_confirmed_catalog_field_rows.py",
+      "import_supported": true,
+      "review_note": "Copy confirmed rows to server/catalog_field_confirmed_rows.json; existing importer supports this field."
     },
     {
       "manual_confirmed": false,
@@ -4355,9 +4355,9 @@
         "field_value_appears_on_or_is_directly_implied_by_evidence_url"
       ],
       "field": "character_name",
-      "import_tool": "",
-      "import_supported": false,
-      "review_note": "Review-only until the catalog metadata importer supports this field."
+      "import_tool": "tools/import_confirmed_catalog_field_rows.py",
+      "import_supported": true,
+      "review_note": "Copy confirmed rows to server/catalog_field_confirmed_rows.json; existing importer supports this field."
     },
     {
       "manual_confirmed": false,
@@ -4411,9 +4411,9 @@
         "field_value_appears_on_or_is_directly_implied_by_evidence_url"
       ],
       "field": "name_ja",
-      "import_tool": "",
-      "import_supported": false,
-      "review_note": "Review-only until the catalog metadata importer supports this field."
+      "import_tool": "tools/import_confirmed_catalog_field_rows.py",
+      "import_supported": true,
+      "review_note": "Copy confirmed rows to server/catalog_field_confirmed_rows.json; existing importer supports this field."
     },
     {
       "manual_confirmed": false,
@@ -4439,9 +4439,9 @@
         "field_value_appears_on_or_is_directly_implied_by_evidence_url"
       ],
       "field": "character_name",
-      "import_tool": "",
-      "import_supported": false,
-      "review_note": "Review-only until the catalog metadata importer supports this field."
+      "import_tool": "tools/import_confirmed_catalog_field_rows.py",
+      "import_supported": true,
+      "review_note": "Copy confirmed rows to server/catalog_field_confirmed_rows.json; existing importer supports this field."
     },
     {
       "manual_confirmed": false,
@@ -4495,9 +4495,9 @@
         "field_value_appears_on_or_is_directly_implied_by_evidence_url"
       ],
       "field": "name_ja",
-      "import_tool": "",
-      "import_supported": false,
-      "review_note": "Review-only until the catalog metadata importer supports this field."
+      "import_tool": "tools/import_confirmed_catalog_field_rows.py",
+      "import_supported": true,
+      "review_note": "Copy confirmed rows to server/catalog_field_confirmed_rows.json; existing importer supports this field."
     },
     {
       "manual_confirmed": false,
@@ -4523,9 +4523,9 @@
         "field_value_appears_on_or_is_directly_implied_by_evidence_url"
       ],
       "field": "character_name",
-      "import_tool": "",
-      "import_supported": false,
-      "review_note": "Review-only until the catalog metadata importer supports this field."
+      "import_tool": "tools/import_confirmed_catalog_field_rows.py",
+      "import_supported": true,
+      "review_note": "Copy confirmed rows to server/catalog_field_confirmed_rows.json; existing importer supports this field."
     },
     {
       "manual_confirmed": false,
@@ -4579,9 +4579,9 @@
         "field_value_appears_on_or_is_directly_implied_by_evidence_url"
       ],
       "field": "name_ja",
-      "import_tool": "",
-      "import_supported": false,
-      "review_note": "Review-only until the catalog metadata importer supports this field."
+      "import_tool": "tools/import_confirmed_catalog_field_rows.py",
+      "import_supported": true,
+      "review_note": "Copy confirmed rows to server/catalog_field_confirmed_rows.json; existing importer supports this field."
     },
     {
       "manual_confirmed": false,
@@ -4607,9 +4607,9 @@
         "field_value_appears_on_or_is_directly_implied_by_evidence_url"
       ],
       "field": "character_name",
-      "import_tool": "",
-      "import_supported": false,
-      "review_note": "Review-only until the catalog metadata importer supports this field."
+      "import_tool": "tools/import_confirmed_catalog_field_rows.py",
+      "import_supported": true,
+      "review_note": "Copy confirmed rows to server/catalog_field_confirmed_rows.json; existing importer supports this field."
     }
   ],
   "exact_candidate_confirmation_shortlist": [],
@@ -5772,7 +5772,9 @@
     "candidate_confirmation_template": "candidate_confirmation_template",
     "metadata_field_import_template": "metadata_field_import_template",
     "metadata_field_import_supported_fields": [
-      "sub_series"
+      "sub_series",
+      "name_ja",
+      "character_name"
     ],
     "confirmed_template": "data/source_discovery_focus_confirmed_template_public.json",
     "import_tool": "tools/import_confirmed_source_discovery_rows.py",

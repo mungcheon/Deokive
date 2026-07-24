@@ -302,7 +302,7 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
         self.assertEqual(report["summary"]["variant_detail_required_rows"], 1)
         self.assertEqual(report["summary"]["metadata_enrichment_template_rows"], 1)
         self.assertEqual(report["summary"]["metadata_field_import_template_rows"], 3)
-        self.assertEqual(report["summary"]["metadata_field_import_supported_rows"], 1)
+        self.assertEqual(report["summary"]["metadata_field_import_supported_rows"], 3)
         self.assertEqual(report["summary"]["next_action_lanes"], [["catalog_variant_metadata_enrichment", 1]])
         self.assertEqual(report["summary"]["completion_readiness_status"], "variant_detail_required")
         self.assertEqual(report["summary"]["exact_candidate_confirmation_ready_items"], 0)
@@ -337,15 +337,19 @@ class BuildSourceDiscoveryNextFocusDetailCandidatesPublicTest(unittest.TestCase)
             field_rows[0]["import_tool"],
             "tools/import_confirmed_catalog_field_rows.py",
         )
-        self.assertFalse(field_rows[1]["import_supported"])
-        self.assertEqual(field_rows[1]["import_tool"], "")
+        self.assertTrue(field_rows[1]["import_supported"])
+        self.assertEqual(
+            field_rows[1]["import_tool"],
+            "tools/import_confirmed_catalog_field_rows.py",
+        )
+        self.assertTrue(field_rows[2]["import_supported"])
         self.assertIn(
             "metadata_field_import_template",
             report["automation_policy"],
         )
         self.assertEqual(
             report["automation_policy"]["metadata_field_import_supported_fields"],
-            ["sub_series"],
+            ["sub_series", "name_ja", "character_name"],
         )
 
     def test_build_report_uses_localized_animate_query_for_korean_only_rows(self) -> None:
