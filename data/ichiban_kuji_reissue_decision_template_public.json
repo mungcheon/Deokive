@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T21:55:56Z",
+  "generated_at": "2026-07-24T22:26:34Z",
   "scope": "ichiban_kuji_reissue_decision_template",
   "source_report": "data/catalog_deduplication_action_queue_public.json",
   "summary": {
@@ -49,6 +49,9 @@
     "campaign_templates_with_evidence_urls": 4,
     "campaign_templates_with_identity_fields": 4,
     "campaign_review_batch_rows": 4,
+    "campaign_review_readiness_status": "campaign_review_ready_manual_only",
+    "campaign_review_readiness_price_policy_blocked_campaign_rows": 1,
+    "campaign_review_readiness_campaigns_missing_evidence_urls": 0,
     "campaign_review_batch_item_work_order_rows": 20,
     "campaign_review_batch_catalog_index_rows": 40,
     "campaign_review_batch_zero_price_exception_sample_rows": 2,
@@ -2238,6 +2241,30 @@
       "item_decision_application_preview_rows": 2
     }
   ],
+  "campaign_review_readiness": {
+    "status": "campaign_review_ready_manual_only",
+    "campaign_rows": 4,
+    "item_work_order_rows": 20,
+    "catalog_index_rows": 40,
+    "campaigns_with_evidence_urls": 4,
+    "campaigns_missing_evidence_urls": 0,
+    "likely_same_campaign_family_reissue_rows": 4,
+    "price_policy_blocked_campaign_rows": 1,
+    "non_exception_missing_price_sample_rows": 8,
+    "zero_price_exception_sample_rows": 2,
+    "first_campaign_evidence_url": "https://1kuji.com/products/onep6",
+    "recommended_next_action": "review_campaign_pages_first_then_apply_campaign_decision_to_item_previews",
+    "decision_order": [
+      "Open first_evidence_url and every campaign source_url.",
+      "Decide whether the campaign pair is a reissue/campaign wave or a duplicate campaign.",
+      "If it is a reissue/campaign wave, mark affected item work orders keep-separate.",
+      "If it is a duplicate campaign, review each item preview before keep/drop.",
+      "Resolve price policy blockers before keep/drop mutation."
+    ],
+    "manual_review_required_before_mutation": true,
+    "auto_merge_enabled": false,
+    "auto_delete_enabled": false
+  },
   "next_campaign_review_batch": [
     {
       "campaign_work_order_id": "ichiban-reissue-campaign-001",

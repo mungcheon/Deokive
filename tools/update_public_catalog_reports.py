@@ -6129,6 +6129,21 @@ def build_agent_work_queue_public(
             ],
             samples=reissue_campaign_review_batch,
             review_summary={
+                "campaign_review_readiness_status": reissue_decision_summary.get(
+                    "campaign_review_readiness_status"
+                ),
+                "campaign_review_readiness_price_policy_blocked_campaign_rows": int(
+                    reissue_decision_summary.get(
+                        "campaign_review_readiness_price_policy_blocked_campaign_rows"
+                    )
+                    or 0
+                ),
+                "campaign_review_readiness_campaigns_missing_evidence_urls": int(
+                    reissue_decision_summary.get(
+                        "campaign_review_readiness_campaigns_missing_evidence_urls"
+                    )
+                    or 0
+                ),
                 "campaign_review_batch_rows": len(reissue_campaign_review_batch),
                 "campaign_review_batch_item_work_order_rows": int(
                     reissue_decision_summary.get(

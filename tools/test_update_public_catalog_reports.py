@@ -1068,6 +1068,22 @@ class PublicCatalogReportTests(unittest.TestCase):
             reissue_decision_template["campaign_template_price_policy_blocked_rows"],
             1,
         )
+        self.assertEqual(
+            reissue_decision_template["campaign_review_readiness_status"],
+            "campaign_review_ready_manual_only",
+        )
+        self.assertEqual(
+            reissue_decision_template[
+                "campaign_review_readiness_price_policy_blocked_campaign_rows"
+            ],
+            1,
+        )
+        self.assertEqual(
+            reissue_decision_template[
+                "campaign_review_readiness_campaigns_missing_evidence_urls"
+            ],
+            0,
+        )
         self.assertFalse(reissue_decision_template["auto_merge_enabled"])
         self.assertFalse(reissue_decision_template["auto_delete_enabled"])
         self.assertTrue(
@@ -4480,6 +4496,28 @@ class PublicCatalogReportTests(unittest.TestCase):
                 "campaign_review_batch_item_work_order_rows"
             ),
             reissue_decision_summary.get("campaign_review_batch_item_work_order_rows"),
+        )
+        self.assertEqual(
+            ichiban_reissue_campaign_first_batch.get("review_summary", {}).get(
+                "campaign_review_readiness_status"
+            ),
+            reissue_decision_summary.get("campaign_review_readiness_status"),
+        )
+        self.assertEqual(
+            ichiban_reissue_campaign_first_batch.get("review_summary", {}).get(
+                "campaign_review_readiness_price_policy_blocked_campaign_rows"
+            ),
+            reissue_decision_summary.get(
+                "campaign_review_readiness_price_policy_blocked_campaign_rows"
+            ),
+        )
+        self.assertEqual(
+            ichiban_reissue_campaign_first_batch.get("review_summary", {}).get(
+                "campaign_review_readiness_campaigns_missing_evidence_urls"
+            ),
+            reissue_decision_summary.get(
+                "campaign_review_readiness_campaigns_missing_evidence_urls"
+            ),
         )
         self.assertEqual(
             ichiban_reissue_campaign_first_batch.get("review_summary", {}).get(

@@ -101,6 +101,22 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
         self.assertEqual(report["summary"]["standalone_item_template_rows"], 0)
         self.assertEqual(report["summary"]["campaign_item_decision_preview_rows"], 2)
         self.assertEqual(report["summary"]["campaign_review_batch_rows"], 1)
+        self.assertEqual(
+            report["summary"]["campaign_review_readiness_status"],
+            "campaign_review_ready_manual_only",
+        )
+        self.assertEqual(
+            report["summary"][
+                "campaign_review_readiness_price_policy_blocked_campaign_rows"
+            ],
+            1,
+        )
+        self.assertEqual(
+            report["summary"][
+                "campaign_review_readiness_campaigns_missing_evidence_urls"
+            ],
+            0,
+        )
         self.assertEqual(report["summary"]["campaign_review_batch_item_work_order_rows"], 2)
         self.assertEqual(report["summary"]["campaign_review_batch_catalog_index_rows"], 0)
         self.assertEqual(
@@ -259,6 +275,44 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
                 "recommended_first_decision"
             ],
             "campaign_pair_reissue_keep_all_separate",
+        )
+        self.assertEqual(
+            report["campaign_review_readiness"]["status"],
+            "campaign_review_ready_manual_only",
+        )
+        self.assertEqual(report["campaign_review_readiness"]["campaign_rows"], 1)
+        self.assertEqual(report["campaign_review_readiness"]["item_work_order_rows"], 2)
+        self.assertEqual(report["campaign_review_readiness"]["catalog_index_rows"], 0)
+        self.assertEqual(report["campaign_review_readiness"]["campaigns_with_evidence_urls"], 1)
+        self.assertEqual(report["campaign_review_readiness"]["campaigns_missing_evidence_urls"], 0)
+        self.assertEqual(
+            report["campaign_review_readiness"][
+                "likely_same_campaign_family_reissue_rows"
+            ],
+            1,
+        )
+        self.assertEqual(
+            report["campaign_review_readiness"]["price_policy_blocked_campaign_rows"],
+            1,
+        )
+        self.assertEqual(
+            report["campaign_review_readiness"][
+                "non_exception_missing_price_sample_rows"
+            ],
+            1,
+        )
+        self.assertEqual(
+            report["campaign_review_readiness"]["first_campaign_evidence_url"],
+            "https://1kuji.com/products/a",
+        )
+        self.assertEqual(
+            report["campaign_review_readiness"]["recommended_next_action"],
+            "review_campaign_pages_first_then_apply_campaign_decision_to_item_previews",
+        )
+        self.assertTrue(
+            report["campaign_review_readiness"][
+                "manual_review_required_before_mutation"
+            ]
         )
         self.assertEqual(
             report["next_campaign_review_batch"][0]["item_review_preview"][0]["sample_name_ko"],

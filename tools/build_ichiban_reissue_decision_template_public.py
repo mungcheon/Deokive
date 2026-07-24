@@ -408,6 +408,92 @@ def _next_campaign_review_batch(
     return batch
 
 
+def _campaign_review_readiness(
+    campaign_templates: list[dict[str, Any]],
+    next_campaign_review_batch: list[dict[str, Any]],
+) -> dict[str, Any]:
+    batch_ids = {
+        row.get("campaign_work_order_id")
+        for row in next_campaign_review_batch
+        if row.get("campaign_work_order_id")
+    }
+    batch_templates = [
+        campaign
+        for campaign in campaign_templates
+        if campaign.get("campaign_work_order_id") in batch_ids
+    ]
+    price_blocked = [
+        campaign
+        for campaign in batch_templates
+        if (campaign.get("price_policy_review") or {}).get("blocks_keep_drop_decision")
+    ]
+    likely_reissue = [
+        campaign
+        for campaign in batch_templates
+        if (campaign.get("campaign_url_comparison") or {}).get(
+            "likely_same_campaign_family_reissue"
+        )
+    ]
+    return {
+        "status": "campaign_review_ready_manual_only"
+        if next_campaign_review_batch
+        else "no_campaign_review_batch",
+        "campaign_rows": len(next_campaign_review_batch),
+        "item_work_order_rows": sum(
+            int(campaign.get("item_work_order_count") or 0)
+            for campaign in next_campaign_review_batch
+        ),
+        "catalog_index_rows": sum(
+            int(campaign.get("catalog_index_count") or 0)
+            for campaign in next_campaign_review_batch
+        ),
+        "campaigns_with_evidence_urls": sum(
+            1 for campaign in next_campaign_review_batch if campaign.get("first_evidence_url")
+        ),
+        "campaigns_missing_evidence_urls": sum(
+            1 for campaign in next_campaign_review_batch if not campaign.get("first_evidence_url")
+        ),
+        "likely_same_campaign_family_reissue_rows": len(likely_reissue),
+        "price_policy_blocked_campaign_rows": len(price_blocked),
+        "non_exception_missing_price_sample_rows": sum(
+            int(
+                (campaign.get("price_policy_review") or {}).get(
+                    "non_exception_missing_price_sample_rows"
+                )
+                or 0
+            )
+            for campaign in batch_templates
+        ),
+        "zero_price_exception_sample_rows": sum(
+            int(
+                (campaign.get("price_policy_review") or {}).get(
+                    "zero_price_exception_sample_rows"
+                )
+                or 0
+            )
+            for campaign in batch_templates
+        ),
+        "first_campaign_evidence_url": _first_url(
+            [campaign.get("first_evidence_url") for campaign in next_campaign_review_batch]
+        ),
+        "recommended_next_action": (
+            "review_campaign_pages_first_then_apply_campaign_decision_to_item_previews"
+            if next_campaign_review_batch
+            else "no_campaign_review_needed"
+        ),
+        "decision_order": [
+            "Open first_evidence_url and every campaign source_url.",
+            "Decide whether the campaign pair is a reissue/campaign wave or a duplicate campaign.",
+            "If it is a reissue/campaign wave, mark affected item work orders keep-separate.",
+            "If it is a duplicate campaign, review each item preview before keep/drop.",
+            "Resolve price policy blockers before keep/drop mutation.",
+        ],
+        "manual_review_required_before_mutation": True,
+        "auto_merge_enabled": False,
+        "auto_delete_enabled": False,
+    }
+
+
 def build_report(action_queue: dict[str, Any], *, generated_at: str | None = None) -> dict[str, Any]:
     item_templates = [_item_template(row) for row in _safe_list(action_queue.get("ichiban_reissue_work_order"))]
     campaign_templates = [
@@ -427,6 +513,10 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
             campaign["item_decision_application_preview"]
         )
     next_campaign_review_batch = _next_campaign_review_batch(campaign_templates, item_templates_by_id)
+    campaign_review_readiness = _campaign_review_readiness(
+        campaign_templates,
+        next_campaign_review_batch,
+    )
 
     item_decisions = Counter(item["decision"] or "unconfirmed" for item in item_templates)
     campaign_decisions = Counter(item["decision"] or "unconfirmed" for item in campaign_templates)
@@ -533,6 +623,13 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
             1 for campaign in campaign_templates if int(campaign.get("sample_rows_with_identity_fields") or 0) > 0
         ),
         "campaign_review_batch_rows": len(next_campaign_review_batch),
+        "campaign_review_readiness_status": campaign_review_readiness["status"],
+        "campaign_review_readiness_price_policy_blocked_campaign_rows": campaign_review_readiness[
+            "price_policy_blocked_campaign_rows"
+        ],
+        "campaign_review_readiness_campaigns_missing_evidence_urls": campaign_review_readiness[
+            "campaigns_missing_evidence_urls"
+        ],
         "campaign_review_batch_item_work_order_rows": sum(
             int(campaign.get("item_work_order_count") or 0)
             for campaign in next_campaign_review_batch
@@ -616,6 +713,7 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
             "manual_review_required_before_mutation": True,
         },
         "campaign_templates": campaign_templates,
+        "campaign_review_readiness": campaign_review_readiness,
         "next_campaign_review_batch": next_campaign_review_batch,
         "item_templates": item_templates,
     }
