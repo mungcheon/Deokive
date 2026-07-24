@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T06:36:19Z",
+  "generated_at": "2026-07-24T07:10:08Z",
   "summary": {
     "catalog_rows": 20347,
     "coverage": {
@@ -1169,6 +1169,7 @@
       "source_url_update_search_hint_rows": 45,
       "source_url_update_missing_search_hint_rows": 5,
       "primary_review_url_rows": 73,
+      "primary_review_url_missing_rows": 0,
       "primary_review_url_kind_counts": [
         [
           "source_search_url",
@@ -1217,6 +1218,8 @@
       ],
       "suggested_local_image_path_rows": 73,
       "local_image_download_instruction_ready_rows": 73,
+      "blocked_before_image_import_rows": 73,
+      "download_ready_after_manual_image_url_rows": 73,
       "by_workflow": [
         [
           "replace_generic_source_then_extract_image",
@@ -1388,6 +1391,35 @@
           5
         ]
       ],
+      "attachment_readiness": {
+        "row_count": 73,
+        "local_image_download_instruction_ready_rows": 73,
+        "suggested_local_image_path_rows": 73,
+        "primary_review_url_rows": 73,
+        "primary_review_url_missing_rows": 0,
+        "blocked_by_source_url_rows": 50,
+        "blocked_by_representative_review_rows": 23,
+        "image_url_review_ready_rows": 0,
+        "blocked_before_image_import_rows": 73,
+        "can_import_image_urls_now_rows": 0,
+        "download_ready_after_manual_image_url_rows": 73,
+        "readiness_lane_counts": [
+          [
+            "source_url_replacement_first",
+            50
+          ],
+          [
+            "representative_image_candidate_review",
+            23
+          ],
+          [
+            "image_url_review_ready",
+            0
+          ]
+        ],
+        "manual_confirmation_required": true,
+        "auto_apply_enabled": false
+      },
       "primary_report": "data/catalog_image_attachment_action_queue_public.json",
       "next_step": "confirm_source_then_fill_image_url_templates",
       "auto_apply_enabled": false
@@ -2761,6 +2793,7 @@
       "source_url_update_search_hint_rows": 45,
       "source_url_update_missing_search_hint_rows": 5,
       "primary_review_url_rows": 73,
+      "primary_review_url_missing_rows": 0,
       "primary_review_url_kind_counts": [
         [
           "source_search_url",
@@ -2809,6 +2842,8 @@
       ],
       "suggested_local_image_path_rows": 73,
       "local_image_download_instruction_ready_rows": 73,
+      "blocked_before_image_import_rows": 73,
+      "download_ready_after_manual_image_url_rows": 73,
       "workstream_count": 4,
       "source_url_update_workstream_count": 3,
       "representative_image_review_workstream_count": 1,
@@ -2983,7 +3018,36 @@
           5
         ]
       ],
-      "recommended_next_action": "Work top image attachment workstreams by exact product URL replacement first, then representative image review."
+      "attachment_readiness": {
+        "row_count": 73,
+        "local_image_download_instruction_ready_rows": 73,
+        "suggested_local_image_path_rows": 73,
+        "primary_review_url_rows": 73,
+        "primary_review_url_missing_rows": 0,
+        "blocked_by_source_url_rows": 50,
+        "blocked_by_representative_review_rows": 23,
+        "image_url_review_ready_rows": 0,
+        "blocked_before_image_import_rows": 73,
+        "can_import_image_urls_now_rows": 0,
+        "download_ready_after_manual_image_url_rows": 73,
+        "readiness_lane_counts": [
+          [
+            "source_url_replacement_first",
+            50
+          ],
+          [
+            "representative_image_candidate_review",
+            23
+          ],
+          [
+            "image_url_review_ready",
+            0
+          ]
+        ],
+        "manual_confirmation_required": true,
+        "auto_apply_enabled": false
+      },
+      "recommended_next_action": "Work source-url-blocked image rows first; local image paths are prepared but image_url import waits for exact product evidence."
     },
     {
       "priority": 19,

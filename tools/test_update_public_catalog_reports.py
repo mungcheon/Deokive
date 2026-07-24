@@ -1624,6 +1624,18 @@ class PublicCatalogReportTests(unittest.TestCase):
             first_image_action_batch.get("review_summary", {}).get("suggested_local_image_path_rows"),
             first_image_action_batch.get("rows"),
         )
+        self.assertEqual(
+            first_image_action_batch.get("review_summary", {}).get("blocked_before_image_import_rows"),
+            first_image_action_batch.get("review_summary", {})
+            .get("attachment_readiness", {})
+            .get("blocked_before_image_import_rows"),
+        )
+        self.assertEqual(
+            first_image_action_batch.get("review_summary", {}).get("can_import_image_urls_now_rows"),
+            first_image_action_batch.get("review_summary", {})
+            .get("attachment_readiness", {})
+            .get("can_import_image_urls_now_rows"),
+        )
         self.assertTrue(
             first_image_action_batch.get("review_summary", {}).get("image_import_blocker_counts")
         )
@@ -2529,6 +2541,10 @@ class PublicCatalogReportTests(unittest.TestCase):
             image_action_summary.get("primary_review_url_rows"),
         )
         self.assertEqual(
+            image_scorecard.get("primary_review_url_missing_rows"),
+            image_action_summary.get("primary_review_url_missing_rows"),
+        )
+        self.assertEqual(
             image_scorecard.get("by_review_lane"),
             image_action_summary.get("by_review_lane"),
         )
@@ -2539,6 +2555,18 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             image_scorecard.get("local_image_download_instruction_ready_rows"),
             image_action_summary.get("local_image_download_instruction_ready_rows"),
+        )
+        self.assertEqual(
+            image_scorecard.get("blocked_before_image_import_rows"),
+            image_action_summary.get("blocked_before_image_import_rows"),
+        )
+        self.assertEqual(
+            image_scorecard.get("download_ready_after_manual_image_url_rows"),
+            image_action_summary.get("download_ready_after_manual_image_url_rows"),
+        )
+        self.assertEqual(
+            image_scorecard.get("attachment_readiness"),
+            image_action.get("attachment_readiness"),
         )
         self.assertEqual(
             image_next_action.get("primary_review_url_rows"),

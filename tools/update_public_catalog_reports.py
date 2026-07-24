@@ -2733,6 +2733,9 @@ def build_operations_public(
                 0,
             ),
             "primary_review_url_rows": image_action_queue_summary.get("primary_review_url_rows", 0),
+            "primary_review_url_missing_rows": image_action_queue_summary.get(
+                "primary_review_url_missing_rows", 0
+            ),
             "primary_review_url_kind_counts": image_action_queue_summary.get(
                 "primary_review_url_kind_counts", []
             ),
@@ -2746,6 +2749,12 @@ def build_operations_public(
             "local_image_download_instruction_ready_rows": image_action_queue_summary.get(
                 "local_image_download_instruction_ready_rows", 0
             ),
+            "blocked_before_image_import_rows": image_action_queue_summary.get(
+                "blocked_before_image_import_rows", 0
+            ),
+            "download_ready_after_manual_image_url_rows": image_action_queue_summary.get(
+                "download_ready_after_manual_image_url_rows", 0
+            ),
             "workstream_count": image_action_queue_summary.get("workstream_count", 0),
             "source_url_update_workstream_count": image_action_queue_summary.get(
                 "source_url_update_workstream_count", 0
@@ -2757,7 +2766,10 @@ def build_operations_public(
             "by_source_store": image_action_queue_summary.get("by_source_store", []),
             "top_image_attachment_workstreams": image_action_workstreams,
             "excluded_workflow_rows": image_action_queue_summary.get("excluded_workflow_rows", []),
-            "recommended_next_action": "Work top image attachment workstreams by exact product URL replacement first, then representative image review.",
+            "attachment_readiness": image_action_queue.get(
+                "attachment_readiness", {}
+            ),
+            "recommended_next_action": "Work source-url-blocked image rows first; local image paths are prepared but image_url import waits for exact product evidence.",
         } if image_action_queue_summary else None,
         {
             "priority": 19,
@@ -3624,6 +3636,9 @@ def build_operations_public(
                 0,
             ),
             "primary_review_url_rows": image_action_queue_summary.get("primary_review_url_rows", 0),
+            "primary_review_url_missing_rows": image_action_queue_summary.get(
+                "primary_review_url_missing_rows", 0
+            ),
             "primary_review_url_kind_counts": image_action_queue_summary.get(
                 "primary_review_url_kind_counts", []
             ),
@@ -3637,10 +3652,17 @@ def build_operations_public(
             "local_image_download_instruction_ready_rows": image_action_queue_summary.get(
                 "local_image_download_instruction_ready_rows", 0
             ),
+            "blocked_before_image_import_rows": image_action_queue_summary.get(
+                "blocked_before_image_import_rows", 0
+            ),
+            "download_ready_after_manual_image_url_rows": image_action_queue_summary.get(
+                "download_ready_after_manual_image_url_rows", 0
+            ),
             "by_workflow": image_action_queue_summary.get("by_workflow", []),
             "by_source_store": image_action_queue_summary.get("by_source_store", []),
             "top_image_attachment_workstreams": image_action_workstreams,
             "excluded_workflow_rows": image_action_queue_summary.get("excluded_workflow_rows", []),
+            "attachment_readiness": image_action_queue.get("attachment_readiness", {}),
             "primary_report": f"data/{IMAGE_ATTACHMENT_ACTION_QUEUE.name}",
             "next_step": "confirm_source_then_fill_image_url_templates",
             "auto_apply_enabled": image_action_queue_summary.get("auto_apply_enabled", False),
@@ -4698,6 +4720,19 @@ def build_agent_work_queue_public(
                     "local_image_download_instruction_ready_rows": int(
                         action_batch.get("local_image_download_instruction_ready_rows") or 0
                     ),
+                    "blocked_before_image_import_rows": int(
+                        (action_batch.get("attachment_readiness") or {}).get(
+                            "blocked_before_image_import_rows"
+                        )
+                        or 0
+                    ),
+                    "can_import_image_urls_now_rows": int(
+                        (action_batch.get("attachment_readiness") or {}).get(
+                            "can_import_image_urls_now_rows"
+                        )
+                        or 0
+                    ),
+                    "attachment_readiness": action_batch.get("attachment_readiness") or {},
                     "workflow": action_batch.get("workflow"),
                     "source_store": action_batch.get("source_store"),
                 },
@@ -8748,6 +8783,15 @@ def update_reports(write: bool) -> dict[str, Any]:
                 "image_url_ready_rows": image_attachment_action_summary.get(
                     "image_url_ready_rows", 0
                 ),
+                "primary_review_url_missing_rows": image_attachment_action_summary.get(
+                    "primary_review_url_missing_rows", 0
+                ),
+                "blocked_before_image_import_rows": image_attachment_action_summary.get(
+                    "blocked_before_image_import_rows", 0
+                ),
+                "download_ready_after_manual_image_url_rows": image_attachment_action_summary.get(
+                    "download_ready_after_manual_image_url_rows", 0
+                ),
                 "template_rows": image_attachment_template_import_dry_run["summary"].get(
                     "template_items", 0
                 ),
@@ -8762,6 +8806,9 @@ def update_reports(write: bool) -> dict[str, Any]:
                 ].get("skipped_rows", 0),
                 "sample_queue_coverage": image_attachment_action_summary.get(
                     "sample_queue_coverage", 0
+                ),
+                "attachment_readiness": image_attachment_action_queue.get(
+                    "attachment_readiness", {}
                 ),
                 "next_step": "confirm_source_url_updates_before_representative_image_reviews",
                 "blocked_reason": "image_attachment_requires_source_or_representative_image_confirmation",
