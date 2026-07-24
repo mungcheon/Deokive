@@ -142,6 +142,76 @@ def _fallback_work_order(queue_items: list[dict[str, Any]]) -> list[dict[str, An
     ]
 
 
+def _first_value(values: list[Any] | None) -> str:
+    if not values:
+        return ""
+    first = values[0]
+    return first if isinstance(first, str) else ""
+
+
+def _review_table(queue_items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for item in queue_items:
+        field_template = item.get("catalog_field_import_template")
+        if not isinstance(field_template, dict):
+            field_template = {}
+        rows.append(
+            {
+                "catalog_index": item.get("catalog_index"),
+                "focus_pack_id": item.get("focus_pack_id"),
+                "source_store": item.get("source_store"),
+                "category": item.get("category"),
+                "name_ko": item.get("name_ko"),
+                "name_ja": item.get("name_ja"),
+                "search_term": _first_value(item.get("fallback_search_terms")),
+                "first_domain_limited_web_search_url": _first_value(
+                    item.get("domain_limited_web_search_urls")
+                ),
+                "fallback_store_search_url": item.get("fallback_store_search_url") or "",
+                "manual_confirmed": False,
+                "manual_confirmed_source_url": "",
+                "manual_confirmed_image_url": "",
+                "manual_evidence_url": "",
+                "manual_note": "",
+                "import_field": field_template.get("field") or "source_url",
+                "blocked_until": "exact_product_detail_source_url_confirmed",
+                "acceptance_rule": item.get("acceptance_rule"),
+            }
+        )
+    return rows
+
+
+def _manual_entry_template(queue_items: list[dict[str, Any]]) -> dict[str, Any]:
+    return {
+        "target_file": "server/source_discovery_confirmed_rows.json",
+        "copy_from": "review_table",
+        "required_fields": [
+            "catalog_index",
+            "manual_confirmed",
+            "manual_confirmed_source_url",
+            "manual_evidence_url",
+        ],
+        "optional_fields_after_source_verification": [
+            "manual_confirmed_image_url",
+            "manual_note",
+        ],
+        "ready_condition": (
+            "manual_confirmed=true and manual_confirmed_source_url is an exact product detail URL "
+            "on an allowed source domain; manual_confirmed_image_url may be filled only after the "
+            "product image is verified on that exact page."
+        ),
+        "dry_run_command": (
+            "python -m tools.import_confirmed_source_discovery_rows "
+            "--queue server/source_discovery_confirmed_rows.json"
+        ),
+        "import_command": (
+            "python -m tools.import_confirmed_source_discovery_rows "
+            "--queue server/source_discovery_confirmed_rows.json --write"
+        ),
+        "row_count": len(queue_items),
+    }
+
+
 def build_report(
     next_pack: dict[str, Any],
     fetch_audit: dict[str, Any],
@@ -211,6 +281,7 @@ def build_report(
         len(item.get("domain_limited_web_search_urls") or []) for item in queue_items
     )
     work_order = _fallback_work_order(queue_items)
+    review_table = _review_table(queue_items)
     return {
         "schema_version": 1,
         "generated_at": generated_at or now_utc(),
@@ -229,6 +300,8 @@ def build_report(
             "by_category": by_category.most_common(),
             "fallback_query_count": fallback_query_count,
             "domain_limited_web_search_url_count": domain_limited_web_search_url_count,
+            "review_table_rows": len(review_table),
+            "manual_entry_template_rows": len(queue_items),
             "work_order_steps": len(work_order),
             "work_order_lanes": [step["lane"] for step in work_order],
             "first_domain_limited_web_search_url": (
@@ -249,7 +322,9 @@ def build_report(
             "import_tool": "tools/import_confirmed_source_discovery_rows.py",
             "dry_run_report": "data/source_discovery_next_focus_fallback_import_dry_run_public.json",
         },
+        "manual_entry_template": _manual_entry_template(queue_items),
         "work_order": work_order,
+        "review_table": review_table,
         "items": queue_items,
     }
 
