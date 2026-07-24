@@ -49,6 +49,7 @@ jobs:
           python tools/build_source_discovery_next_focus_variant_metadata_backfill_public.py --write
           python tools/build_source_discovery_next_focus_variant_metadata_confirmed_template_public.py --write
           python tools/import_confirmed_variant_metadata_backfill_rows.py
+          python tools/audit_confirmed_import_queues.py
           python tools/build_source_discovery_store_bottlenecks_public.py --write
           python tools/build_ensky_cache_candidate_action_queue_public.py --write
           python tools/build_source_detail_candidate_action_queue_public.py --write
@@ -190,6 +191,8 @@ jobs:
             data/requested_focus_next_work_public.json \
             data/requested_focus_source_candidates_public.json \
             data/catalog_confirmed_import_readiness_public.json \
+            server/catalog_confirmed_import_queue_audit.json \
+            server/catalog_confirmed_import_queue_audit.md \
             data/catalog_execution_plan_public.json \
             data/danganronpa_missing_media_public.json \
             data/generic_source_patch_candidates_public.json \
