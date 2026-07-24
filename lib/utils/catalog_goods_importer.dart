@@ -11,8 +11,8 @@ import '../state/app_state.dart';
 import '../widgets/goods_name_search_field.dart';
 import 'catalog_asset_urls.dart';
 
-const _catalogImportButtonBackground = Color(0xFFFFD84D);
-const _catalogImportButtonForeground = Color(0xFF161A22);
+const _catalogImportButtonBackground = Color(0xFF252938);
+const _catalogImportButtonForeground = Color(0xFFFFFFFF);
 const _catalogImportButtonDisabledBackground = Color(0xFFE7E9EE);
 const _catalogImportButtonDisabledForeground = Color(0xFF5D6575);
 

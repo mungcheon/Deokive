@@ -8,8 +8,8 @@ import '../theme/deokive_palette.dart';
 import '../utils/catalog_goods_importer.dart';
 import '../widgets/catalog_entry_image.dart';
 
-const _catalogAddButtonBackground = Color(0xFFFFD84D);
-const _catalogAddButtonForeground = Color(0xFF161A22);
+const _catalogAddButtonBackground = Color(0xFF252938);
+const _catalogAddButtonForeground = Color(0xFFFFFFFF);
 const _catalogAddButtonDisabledBackground = Color(0xFFDDE1E8);
 const _catalogAddButtonDisabledForeground = Color(0xFF596070);
 
