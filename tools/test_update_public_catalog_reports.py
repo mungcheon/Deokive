@@ -1157,7 +1157,16 @@ class PublicCatalogReportTests(unittest.TestCase):
             source_discovery_action_queue={
                 "summary": {
                     "queued_source_rows": 8,
-                }
+                },
+                "source_store_workstreams": [
+                    {
+                        "source_store": "스토어A",
+                        "first_primary_review_url": "https://example.com/action-search",
+                        "first_primary_review_url_kind": "official_search_url",
+                        "official_search_url_count": 5,
+                        "fallback_web_search_url_count": 0,
+                    }
+                ],
             },
             source_discovery_store_bottlenecks={
                 "summary": {
@@ -1203,6 +1212,8 @@ class PublicCatalogReportTests(unittest.TestCase):
                 "summary": {
                     "queue_rows": 2,
                     "first_fallback_store_search_url": "https://example.com/search",
+                    "first_primary_review_url": "https://google.example/fallback",
+                    "first_primary_review_url_kind": "domain_limited_web_search",
                 }
             },
             manual_source_url_search_queue={"summary": {"manual_search_required_rows": 3}},
@@ -1221,6 +1232,27 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(summary["focus_coverage"], 0.625)
         self.assertEqual(summary["top_10_store_coverage"], 0.75)
         self.assertEqual(summary["generic_source_replacement_rows"], 6)
+        self.assertEqual(
+            roadmap["top_store_steps"][0]["first_primary_review_url"],
+            "https://example.com/action-search",
+        )
+        self.assertEqual(
+            roadmap["top_store_steps"][0]["first_primary_review_url_kind"],
+            "official_search_url",
+        )
+        self.assertEqual(roadmap["top_store_steps"][0]["official_search_url_count"], 5)
+        self.assertEqual(
+            roadmap["current_focus_pack"]["first_primary_review_url"],
+            "https://google.example/fallback",
+        )
+        self.assertEqual(
+            roadmap["completion_readiness"]["next_queue"]["first_primary_review_url"],
+            "https://google.example/fallback",
+        )
+        self.assertEqual(
+            roadmap["completion_readiness"]["next_queue"]["first_primary_review_url_kind"],
+            "domain_limited_web_search",
+        )
         self.assertEqual(roadmap["phases"][3]["rows"], 6)
         self.assertIs(summary["auto_apply_enabled"], False)
 

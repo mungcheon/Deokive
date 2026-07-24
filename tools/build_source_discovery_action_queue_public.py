@@ -62,6 +62,9 @@ def _source_store_workstreams(batches: list[dict[str, Any]]) -> list[dict[str, A
                 "batch_ids": [],
                 "allowed_source_domains": set(),
                 "official_search_url_count": 0,
+                "fallback_web_search_url_count": 0,
+                "first_primary_review_url": "",
+                "first_primary_review_url_kind": "",
                 "workflow_rows": Counter(),
                 "review_state_rows": Counter(),
                 "category_rows": Counter(),
@@ -86,6 +89,14 @@ def _source_store_workstreams(batches: list[dict[str, Any]]) -> list[dict[str, A
                     bucket["allowed_source_domains"].add(domain)
             if item.get("official_search_url"):
                 bucket["official_search_url_count"] += 1
+                if not bucket["first_primary_review_url"]:
+                    bucket["first_primary_review_url"] = item.get("official_search_url")
+                    bucket["first_primary_review_url_kind"] = "official_search_url"
+            elif item.get("web_search_url"):
+                bucket["fallback_web_search_url_count"] += 1
+                if not bucket["first_primary_review_url"]:
+                    bucket["first_primary_review_url"] = item.get("web_search_url")
+                    bucket["first_primary_review_url_kind"] = "fallback_web_search_url"
             if len(bucket["sample_items"]) < 8:
                 bucket["sample_items"].append(
                     {
@@ -94,6 +105,16 @@ def _source_store_workstreams(batches: list[dict[str, Any]]) -> list[dict[str, A
                         "name_ja": item.get("name_ja"),
                         "category": item.get("category"),
                         "official_search_url": item.get("official_search_url"),
+                        "web_search_url": item.get("web_search_url"),
+                        "primary_review_url": item.get("official_search_url")
+                        or item.get("web_search_url"),
+                        "primary_review_url_kind": (
+                            "official_search_url"
+                            if item.get("official_search_url")
+                            else "fallback_web_search_url"
+                            if item.get("web_search_url")
+                            else ""
+                        ),
                         "allowed_source_domains": item.get("allowed_source_domains") or [],
                     }
                 )
@@ -110,6 +131,9 @@ def _source_store_workstreams(batches: list[dict[str, Any]]) -> list[dict[str, A
                 "batch_ids": [batch_id for batch_id in bucket["batch_ids"] if batch_id],
                 "allowed_source_domains": sorted(bucket["allowed_source_domains"]),
                 "official_search_url_count": bucket["official_search_url_count"],
+                "fallback_web_search_url_count": bucket["fallback_web_search_url_count"],
+                "first_primary_review_url": bucket["first_primary_review_url"],
+                "first_primary_review_url_kind": bucket["first_primary_review_url_kind"],
                 "workflow_rows": [[key, value] for key, value in bucket["workflow_rows"].most_common() if key],
                 "review_state_rows": [[key, value] for key, value in bucket["review_state_rows"].most_common() if key],
                 "category_rows": [[key, value] for key, value in bucket["category_rows"].most_common(12) if key],
@@ -144,6 +168,17 @@ def _source_discovery_templates(items: list[dict[str, Any]]) -> list[dict[str, A
                 "sub_series": item.get("sub_series"),
                 "official_search_url": item.get("official_search_url"),
                 "web_search_url": item.get("web_search_url"),
+                "primary_review_url": item.get("primary_review_url")
+                or item.get("official_search_url")
+                or item.get("web_search_url"),
+                "primary_review_url_kind": item.get("primary_review_url_kind")
+                or (
+                    "official_search_url"
+                    if item.get("official_search_url")
+                    else "fallback_web_search_url"
+                    if item.get("web_search_url")
+                    else ""
+                ),
                 "allowed_source_domains": item.get("allowed_source_domains") or [],
                 "acceptance_rule": item.get("acceptance_rule"),
                 "source_patch_template": source_patch,
@@ -222,6 +257,14 @@ def _compact_item(batch: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
         "name_ja": item.get("name_ja"),
         "official_search_url": item.get("official_search_url"),
         "web_search_url": item.get("web_search_url"),
+        "primary_review_url": item.get("official_search_url") or item.get("web_search_url"),
+        "primary_review_url_kind": (
+            "official_search_url"
+            if item.get("official_search_url")
+            else "fallback_web_search_url"
+            if item.get("web_search_url")
+            else ""
+        ),
         "allowed_source_domains": item.get("allowed_source_domains") or batch.get("allowed_source_domains") or [],
         "acceptance_rule": item.get("acceptance_rule") or batch.get("acceptance_rule"),
         "source_patch_template": source_template,
@@ -350,6 +393,10 @@ def build_report(review_batches: dict[str, Any], *, max_rows: int = 1000, batch_
     ):
         for offset in range(0, len(rows), batch_size):
             chunk = rows[offset : offset + batch_size]
+            first_primary_review_item = next(
+                (row for row in chunk if row.get("primary_review_url")),
+                {},
+            )
             batches.append(
                 {
                     "batch_id": f"source-discovery-action-{len(batches) + 1:03d}",
@@ -362,6 +409,15 @@ def build_report(review_batches: dict[str, Any], *, max_rows: int = 1000, batch_
                     "next_machine_step": "confirm_exact_source_url_then_fill_source_templates",
                     "recommended_action": "Open official search candidates, confirm exact product detail URLs, then fill source_url templates.",
                     "category_counts": _counter_pairs(chunk, "category"),
+                    "primary_review_url_rows": sum(
+                        1 for row in chunk if row.get("primary_review_url")
+                    ),
+                    "first_primary_review_url": first_primary_review_item.get(
+                        "primary_review_url", ""
+                    ),
+                    "first_primary_review_url_kind": first_primary_review_item.get(
+                        "primary_review_url_kind", ""
+                    ),
                     "items": chunk,
                     "auto_apply_enabled": False,
                 }
@@ -394,6 +450,29 @@ def build_report(review_batches: dict[str, Any], *, max_rows: int = 1000, batch_
             "by_review_state": _counter_pairs(action_items, "review_state"),
             "by_workflow": _counter_pairs(action_items, "workflow"),
             "by_source_store": _counter_pairs(action_items, "source_store")[:40],
+            "primary_review_url_rows": sum(
+                1 for item in published if item.get("primary_review_url")
+            ),
+            "primary_review_url_kind_counts": _counter_pairs(
+                published,
+                "primary_review_url_kind",
+            ),
+            "first_primary_review_url": next(
+                (
+                    item.get("primary_review_url")
+                    for item in published
+                    if item.get("primary_review_url")
+                ),
+                "",
+            ),
+            "first_primary_review_url_kind": next(
+                (
+                    item.get("primary_review_url_kind")
+                    for item in published
+                    if item.get("primary_review_url")
+                ),
+                "",
+            ),
             "excluded_review_state_rows": [[key, value] for key, value in excluded_review_states.most_common()],
             "manual_research_backlog_rows": len(manual_research_items),
             "manual_research_backlog_by_source_store": _counter_pairs(manual_research_items, "source_store"),

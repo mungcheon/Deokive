@@ -768,6 +768,11 @@ def build_source_discovery_completion_roadmap_public(
         for row in source_discovery_focus_packs.get("focus_packs", [])
         if isinstance(row, dict)
     ]
+    workstreams_by_store = {
+        str(row.get("source_store") or ""): row
+        for row in source_discovery_action_queue.get("source_store_workstreams", [])
+        if isinstance(row, dict)
+    }
 
     top_store_steps = []
     for rank, store in enumerate(stores[:10], start=1):
@@ -777,6 +782,7 @@ def build_source_discovery_completion_roadmap_public(
             for pack in focus_packs
             if str(pack.get("source_store") or "") == str(store.get("source_store") or "")
         )
+        workstream = workstreams_by_store.get(str(store.get("source_store") or ""), {})
         top_store_steps.append(
             {
                 "rank": rank,
@@ -787,6 +793,19 @@ def build_source_discovery_completion_roadmap_public(
                 "top_category": store.get("top_category"),
                 "top_allowed_source_domain": store.get("top_allowed_source_domain"),
                 "first_batch_id": store.get("first_batch_id"),
+                "first_primary_review_url": workstream.get("first_primary_review_url")
+                or store.get("first_official_search_url"),
+                "first_primary_review_url_kind": workstream.get("first_primary_review_url_kind")
+                or (
+                    "official_search_url"
+                    if store.get("first_official_search_url")
+                    else ""
+                ),
+                "official_search_url_count": workstream.get("official_search_url_count", 0),
+                "fallback_web_search_url_count": workstream.get(
+                    "fallback_web_search_url_count",
+                    0,
+                ),
                 "next_step": store.get("next_step")
                 or "open_official_search_and_confirm_exact_product_source_url",
                 "auto_apply_enabled": False,
@@ -802,6 +821,14 @@ def build_source_discovery_completion_roadmap_public(
         "blocked_rows": next_focus_summary.get("blocked_rows", 0),
         "fallback_queue_rows": fallback_summary.get("queue_rows", 0),
         "first_official_search_url": next_focus_summary.get("first_official_search_url"),
+        "first_primary_review_url": fallback_summary.get("first_primary_review_url")
+        or next_focus_summary.get("first_official_search_url"),
+        "first_primary_review_url_kind": fallback_summary.get("first_primary_review_url_kind")
+        or (
+            "official_search_url"
+            if next_focus_summary.get("first_official_search_url")
+            else ""
+        ),
         "first_fallback_store_search_url": fallback_summary.get("first_fallback_store_search_url"),
         "recommended_action": "confirm current focus pack source URLs before image attachment",
     }
@@ -840,6 +867,10 @@ def build_source_discovery_completion_roadmap_public(
             "source": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}",
             "queue_rows": int(fallback_summary.get("queue_rows") or 0),
             "fallback_reason": fallback_summary.get("fallback_reason"),
+            "first_primary_review_url": fallback_summary.get("first_primary_review_url"),
+            "first_primary_review_url_kind": fallback_summary.get(
+                "first_primary_review_url_kind"
+            ),
             "first_domain_limited_web_search_url": fallback_summary.get(
                 "first_domain_limited_web_search_url"
             ),
@@ -853,6 +884,12 @@ def build_source_discovery_completion_roadmap_public(
             "queue_rows": int(next_focus_summary.get("remaining_review_rows") or 0),
             "focus_pack_id": next_focus_summary.get("focus_pack_id"),
             "first_official_search_url": next_focus_summary.get("first_official_search_url"),
+            "first_primary_review_url": next_focus_summary.get("first_official_search_url"),
+            "first_primary_review_url_kind": (
+                "official_search_url"
+                if next_focus_summary.get("first_official_search_url")
+                else ""
+            ),
         },
         "blocked_until": "exact_product_detail_source_url_confirmed",
         "blocked_reasons": [
