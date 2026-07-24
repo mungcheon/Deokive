@@ -24,6 +24,7 @@ DEFAULT_INPUT = ROOT / "data" / "requested_focus_next_work_public.json"
 DEFAULT_OUTPUT = ROOT / "data" / "requested_focus_source_candidates_public.json"
 ANIMATE_STORE = "\uc560\ub2c8\uba54\uc774\ud2b8"
 ANIMATE_SEARCH_URL = "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt={query}"
+WEB_SEARCH_URL = "https://www.google.com/search?q={query}"
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
@@ -61,6 +62,69 @@ def _tokens(value: Any) -> list[str]:
 
 def _search_url(query: str) -> str:
     return ANIMATE_SEARCH_URL.format(query=urllib.parse.quote(query))
+
+
+def _web_search_url(query: str) -> str:
+    return WEB_SEARCH_URL.format(query=urllib.parse.quote(query))
+
+
+def _fallback_query(item: dict[str, Any]) -> str:
+    parts: list[str] = []
+    for value in [
+        item.get("name_ja"),
+        item.get("name_ko"),
+        item.get("category"),
+    ]:
+        for token in _tokens(value):
+            if token not in parts:
+                parts.append(token)
+            if len(parts) >= 5:
+                break
+        if len(parts) >= 5:
+            break
+    return " ".join(parts) or str(item.get("name_ja") or item.get("name_ko") or "").strip()
+
+
+def _fallback_review_urls(item: dict[str, Any], *, include_secondary: bool = True) -> list[dict[str, Any]]:
+    exact_query = str(item.get("name_ja") or item.get("name_ko") or "").strip()
+    broad_query = _fallback_query(item)
+    urls: list[dict[str, Any]] = []
+    if broad_query:
+        urls.append(
+            {
+                "kind": "animate_broad_search",
+                "url": _search_url(broad_query),
+                "acceptable_for_source_url": False,
+                "review_use": "Official Animate search fallback; open matching product pages and use only exact /pn/.../pd/<id>/ product URLs.",
+            }
+        )
+        urls.append(
+            {
+                "kind": "domain_limited_web_search",
+                "url": _web_search_url(f'site:www.animate-onlineshop.jp/pn/ "{broad_query}"'),
+                "acceptable_for_source_url": False,
+                "review_use": "Find cached/indexed official Animate product pages; only the final official product page can be imported.",
+            }
+        )
+    if exact_query:
+        urls.append(
+            {
+                "kind": "trusted_web_search",
+                "url": _web_search_url(f'"{exact_query}" 공식 グッズ'),
+                "acceptable_for_source_url": False,
+                "review_use": "Look for official manufacturer, licensor, or store product pages when Animate no longer lists the item.",
+            }
+        )
+        if include_secondary:
+            urls.append(
+                {
+                    "kind": "secondary_identity_reference",
+                    "url": _web_search_url(f'"{exact_query}" 駿河屋 OR mercari OR らしんばん'),
+                    "acceptable_for_source_url": False,
+                    "review_use": "Secondary marketplace/reference identity check only; do not import as source_url without official/trusted confirmation.",
+                }
+            )
+    return urls
 
 
 def _fetch(url: str) -> str:
@@ -142,6 +206,7 @@ def build_report(
     rows: list[dict[str, Any]] = []
     status_counts: Counter[str] = Counter()
     candidate_counts: Counter[str] = Counter()
+    fallback_kind_counts: Counter[str] = Counter()
 
     for item in items:
         query = str(item.get("name_ja") or item.get("name_ko") or "").strip()
@@ -165,6 +230,13 @@ def build_report(
         status_counts[status] += 1
         for candidate in candidates:
             candidate_counts[str(candidate.get("candidate_confidence") or "none")] += 1
+        fallback_urls = (
+            _fallback_review_urls(item)
+            if status in {"manual_search_required", "no_official_search_candidates", "fetch_error"}
+            else []
+        )
+        for fallback_url in fallback_urls:
+            fallback_kind_counts[str(fallback_url.get("kind") or "unknown")] += 1
         rows.append(
             {
                 "catalog_index": item.get("catalog_index"),
@@ -180,6 +252,20 @@ def build_report(
                 "candidate_count": len(candidates),
                 "exact_title_candidate_count": len(strong),
                 "top_candidates": candidates[:5],
+                "fallback_review_urls": fallback_urls,
+                "fallback_review_policy": {
+                    "acceptable_source_url_kinds": [
+                        "Official Animate product detail page whose title, character, variant, and goods type exactly match.",
+                        "Official manufacturer, licensor, or event/store product detail page when Animate detail is unavailable.",
+                    ],
+                    "not_acceptable_as_source_url_without_confirmation": [
+                        "Search result pages",
+                        "Marketplace listings",
+                        "Image-only pages",
+                        "Pages with matching series but different character, variant, or goods type",
+                    ],
+                    "manual_confirmation_required": True,
+                },
                 "confirmed_rows_template_patch": {
                     "manual_confirmed": False,
                     "field": item.get("missing_field"),
@@ -216,14 +302,18 @@ def build_report(
                 1 for row in rows if row.get("candidate_status") in {"manual_search_required", "no_official_search_candidates"}
             ),
             "fetch_error_rows": sum(1 for row in rows if row.get("candidate_status") == "fetch_error"),
+            "fallback_review_rows": sum(1 for row in rows if row.get("fallback_review_urls")),
+            "fallback_review_url_rows": sum(len(row.get("fallback_review_urls") or []) for row in rows),
             "status_counts": [[key, value] for key, value in status_counts.most_common()],
             "candidate_confidence_counts": [[key, value] for key, value in candidate_counts.most_common()],
+            "fallback_kind_counts": [[key, value] for key, value in fallback_kind_counts.most_common()],
             "auto_apply_enabled": False,
         },
         "instructions": [
             "Use only official animate-onlineshop product pages whose title, character, variant, and goods type match the catalog row.",
             "Do not set manual_confirmed=true from this report automatically; top candidates are review hints.",
             "If candidate_status is no_official_search_candidates, use the official_search_url plus broader trusted sources manually.",
+            "fallback_review_urls are review aids only; never paste search-result or marketplace URLs into source_url.",
         ],
         "items": rows,
         "automation_policy": {

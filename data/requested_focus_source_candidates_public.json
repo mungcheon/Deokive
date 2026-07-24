@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T08:32:40Z",
+  "generated_at": "2026-07-24T08:45:37Z",
   "scope": "requested_focus_source_candidates",
   "summary": {
     "source_report": "data/requested_focus_next_work_public.json",
@@ -12,6 +12,8 @@
     "single_exact_candidate_rows": 0,
     "manual_search_required_rows": 9,
     "fetch_error_rows": 0,
+    "fallback_review_rows": 9,
+    "fallback_review_url_rows": 36,
     "status_counts": [
       [
         "no_official_search_candidates",
@@ -19,12 +21,31 @@
       ]
     ],
     "candidate_confidence_counts": [],
+    "fallback_kind_counts": [
+      [
+        "animate_broad_search",
+        9
+      ],
+      [
+        "domain_limited_web_search",
+        9
+      ],
+      [
+        "trusted_web_search",
+        9
+      ],
+      [
+        "secondary_identity_reference",
+        9
+      ]
+    ],
     "auto_apply_enabled": false
   },
   "instructions": [
     "Use only official animate-onlineshop product pages whose title, character, variant, and goods type match the catalog row.",
     "Do not set manual_confirmed=true from this report automatically; top candidates are review hints.",
-    "If candidate_status is no_official_search_candidates, use the official_search_url plus broader trusted sources manually."
+    "If candidate_status is no_official_search_candidates, use the official_search_url plus broader trusted sources manually.",
+    "fallback_review_urls are review aids only; never paste search-result or marketplace URLs into source_url."
   ],
   "items": [
     {
@@ -41,6 +62,45 @@
       "candidate_count": 0,
       "exact_title_candidate_count": 0,
       "top_candidates": [],
+      "fallback_review_urls": [
+        {
+          "kind": "animate_broad_search",
+          "url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%BB%E3%83%83%E3%83%88%20%E5%B8%8C%E6%9C%9B%E3%83%B6%E5%B3%B0%E5%AD%A6%E5%9C%92",
+          "acceptable_for_source_url": false,
+          "review_use": "Official Animate search fallback; open matching product pages and use only exact /pn/.../pd/<id>/ product URLs."
+        },
+        {
+          "kind": "domain_limited_web_search",
+          "url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp/pn/%20%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%BB%E3%83%83%E3%83%88%20%E5%B8%8C%E6%9C%9B%E3%83%B6%E5%B3%B0%E5%AD%A6%E5%9C%92%22",
+          "acceptable_for_source_url": false,
+          "review_use": "Find cached/indexed official Animate product pages; only the final official product page can be imported."
+        },
+        {
+          "kind": "trusted_web_search",
+          "url": "https://www.google.com/search?q=%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%BB%E3%83%83%E3%83%88%20%E5%B8%8C%E6%9C%9B%E3%83%B6%E5%B3%B0%E5%AD%A6%E5%9C%92%22%20%EA%B3%B5%EC%8B%9D%20%E3%82%B0%E3%83%83%E3%82%BA",
+          "acceptable_for_source_url": false,
+          "review_use": "Look for official manufacturer, licensor, or store product pages when Animate no longer lists the item."
+        },
+        {
+          "kind": "secondary_identity_reference",
+          "url": "https://www.google.com/search?q=%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%BB%E3%83%83%E3%83%88%20%E5%B8%8C%E6%9C%9B%E3%83%B6%E5%B3%B0%E5%AD%A6%E5%9C%92%22%20%E9%A7%BF%E6%B2%B3%E5%B1%8B%20OR%20mercari%20OR%20%E3%82%89%E3%81%97%E3%82%93%E3%81%B0%E3%82%93",
+          "acceptable_for_source_url": false,
+          "review_use": "Secondary marketplace/reference identity check only; do not import as source_url without official/trusted confirmation."
+        }
+      ],
+      "fallback_review_policy": {
+        "acceptable_source_url_kinds": [
+          "Official Animate product detail page whose title, character, variant, and goods type exactly match.",
+          "Official manufacturer, licensor, or event/store product detail page when Animate detail is unavailable."
+        ],
+        "not_acceptable_as_source_url_without_confirmation": [
+          "Search result pages",
+          "Marketplace listings",
+          "Image-only pages",
+          "Pages with matching series but different character, variant, or goods type"
+        ],
+        "manual_confirmation_required": true
+      },
       "confirmed_rows_template_patch": {
         "manual_confirmed": false,
         "field": "source_url",
@@ -71,6 +131,45 @@
       "candidate_count": 0,
       "exact_title_candidate_count": 0,
       "top_candidates": [],
+      "fallback_review_urls": [
+        {
+          "kind": "animate_broad_search",
+          "url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E6%97%A5%E5%90%91%E5%89%B5%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%9C%E3%83%88%E3%83%AB",
+          "acceptable_for_source_url": false,
+          "review_use": "Official Animate search fallback; open matching product pages and use only exact /pn/.../pd/<id>/ product URLs."
+        },
+        {
+          "kind": "domain_limited_web_search",
+          "url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp/pn/%20%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E6%97%A5%E5%90%91%E5%89%B5%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%9C%E3%83%88%E3%83%AB%22",
+          "acceptable_for_source_url": false,
+          "review_use": "Find cached/indexed official Animate product pages; only the final official product page can be imported."
+        },
+        {
+          "kind": "trusted_web_search",
+          "url": "https://www.google.com/search?q=%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E6%97%A5%E5%90%91%E5%89%B5%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%9C%E3%83%88%E3%83%AB%22%20%EA%B3%B5%EC%8B%9D%20%E3%82%B0%E3%83%83%E3%82%BA",
+          "acceptable_for_source_url": false,
+          "review_use": "Look for official manufacturer, licensor, or store product pages when Animate no longer lists the item."
+        },
+        {
+          "kind": "secondary_identity_reference",
+          "url": "https://www.google.com/search?q=%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E6%97%A5%E5%90%91%E5%89%B5%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%9C%E3%83%88%E3%83%AB%22%20%E9%A7%BF%E6%B2%B3%E5%B1%8B%20OR%20mercari%20OR%20%E3%82%89%E3%81%97%E3%82%93%E3%81%B0%E3%82%93",
+          "acceptable_for_source_url": false,
+          "review_use": "Secondary marketplace/reference identity check only; do not import as source_url without official/trusted confirmation."
+        }
+      ],
+      "fallback_review_policy": {
+        "acceptable_source_url_kinds": [
+          "Official Animate product detail page whose title, character, variant, and goods type exactly match.",
+          "Official manufacturer, licensor, or event/store product detail page when Animate detail is unavailable."
+        ],
+        "not_acceptable_as_source_url_without_confirmation": [
+          "Search result pages",
+          "Marketplace listings",
+          "Image-only pages",
+          "Pages with matching series but different character, variant, or goods type"
+        ],
+        "manual_confirmation_required": true
+      },
       "confirmed_rows_template_patch": {
         "manual_confirmed": false,
         "field": "source_url",
@@ -101,6 +200,45 @@
       "candidate_count": 0,
       "exact_title_candidate_count": 0,
       "top_candidates": [],
+      "fallback_review_urls": [
+        {
+          "kind": "animate_broad_search",
+          "url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+          "acceptable_for_source_url": false,
+          "review_use": "Official Animate search fallback; open matching product pages and use only exact /pn/.../pd/<id>/ product URLs."
+        },
+        {
+          "kind": "domain_limited_web_search",
+          "url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp/pn/%20%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%22",
+          "acceptable_for_source_url": false,
+          "review_use": "Find cached/indexed official Animate product pages; only the final official product page can be imported."
+        },
+        {
+          "kind": "trusted_web_search",
+          "url": "https://www.google.com/search?q=%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29%22%20%EA%B3%B5%EC%8B%9D%20%E3%82%B0%E3%83%83%E3%82%BA",
+          "acceptable_for_source_url": false,
+          "review_use": "Look for official manufacturer, licensor, or store product pages when Animate no longer lists the item."
+        },
+        {
+          "kind": "secondary_identity_reference",
+          "url": "https://www.google.com/search?q=%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29%22%20%E9%A7%BF%E6%B2%B3%E5%B1%8B%20OR%20mercari%20OR%20%E3%82%89%E3%81%97%E3%82%93%E3%81%B0%E3%82%93",
+          "acceptable_for_source_url": false,
+          "review_use": "Secondary marketplace/reference identity check only; do not import as source_url without official/trusted confirmation."
+        }
+      ],
+      "fallback_review_policy": {
+        "acceptable_source_url_kinds": [
+          "Official Animate product detail page whose title, character, variant, and goods type exactly match.",
+          "Official manufacturer, licensor, or event/store product detail page when Animate detail is unavailable."
+        ],
+        "not_acceptable_as_source_url_without_confirmation": [
+          "Search result pages",
+          "Marketplace listings",
+          "Image-only pages",
+          "Pages with matching series but different character, variant, or goods type"
+        ],
+        "manual_confirmation_required": true
+      },
       "confirmed_rows_template_patch": {
         "manual_confirmed": false,
         "field": "source_url",
@@ -131,6 +269,45 @@
       "candidate_count": 0,
       "exact_title_candidate_count": 0,
       "top_candidates": [],
+      "fallback_review_urls": [
+        {
+          "kind": "animate_broad_search",
+          "url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%E7%8B%9B%E6%9E%9D",
+          "acceptable_for_source_url": false,
+          "review_use": "Official Animate search fallback; open matching product pages and use only exact /pn/.../pd/<id>/ product URLs."
+        },
+        {
+          "kind": "domain_limited_web_search",
+          "url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp/pn/%20%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%E7%8B%9B%E6%9E%9D%22",
+          "acceptable_for_source_url": false,
+          "review_use": "Find cached/indexed official Animate product pages; only the final official product page can be imported."
+        },
+        {
+          "kind": "trusted_web_search",
+          "url": "https://www.google.com/search?q=%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E7%8B%9B%E6%9E%9D%29%22%20%EA%B3%B5%EC%8B%9D%20%E3%82%B0%E3%83%83%E3%82%BA",
+          "acceptable_for_source_url": false,
+          "review_use": "Look for official manufacturer, licensor, or store product pages when Animate no longer lists the item."
+        },
+        {
+          "kind": "secondary_identity_reference",
+          "url": "https://www.google.com/search?q=%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E7%8B%9B%E6%9E%9D%29%22%20%E9%A7%BF%E6%B2%B3%E5%B1%8B%20OR%20mercari%20OR%20%E3%82%89%E3%81%97%E3%82%93%E3%81%B0%E3%82%93",
+          "acceptable_for_source_url": false,
+          "review_use": "Secondary marketplace/reference identity check only; do not import as source_url without official/trusted confirmation."
+        }
+      ],
+      "fallback_review_policy": {
+        "acceptable_source_url_kinds": [
+          "Official Animate product detail page whose title, character, variant, and goods type exactly match.",
+          "Official manufacturer, licensor, or event/store product detail page when Animate detail is unavailable."
+        ],
+        "not_acceptable_as_source_url_without_confirmation": [
+          "Search result pages",
+          "Marketplace listings",
+          "Image-only pages",
+          "Pages with matching series but different character, variant, or goods type"
+        ],
+        "manual_confirmation_required": true
+      },
       "confirmed_rows_template_patch": {
         "manual_confirmed": false,
         "field": "source_url",
@@ -161,6 +338,45 @@
       "candidate_count": 0,
       "exact_title_candidate_count": 0,
       "top_candidates": [],
+      "fallback_review_urls": [
+        {
+          "kind": "animate_broad_search",
+          "url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%20v3%E3%82%AD%E3%83%A3%E3%82%B9%E3%83%88%20v3",
+          "acceptable_for_source_url": false,
+          "review_use": "Official Animate search fallback; open matching product pages and use only exact /pn/.../pd/<id>/ product URLs."
+        },
+        {
+          "kind": "domain_limited_web_search",
+          "url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp/pn/%20%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%20v3%E3%82%AD%E3%83%A3%E3%82%B9%E3%83%88%20v3%22",
+          "acceptable_for_source_url": false,
+          "review_use": "Find cached/indexed official Animate product pages; only the final official product page can be imported."
+        },
+        {
+          "kind": "trusted_web_search",
+          "url": "https://www.google.com/search?q=%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%20%28V3%E3%82%AD%E3%83%A3%E3%82%B9%E3%83%88%29%22%20%EA%B3%B5%EC%8B%9D%20%E3%82%B0%E3%83%83%E3%82%BA",
+          "acceptable_for_source_url": false,
+          "review_use": "Look for official manufacturer, licensor, or store product pages when Animate no longer lists the item."
+        },
+        {
+          "kind": "secondary_identity_reference",
+          "url": "https://www.google.com/search?q=%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%20%28V3%E3%82%AD%E3%83%A3%E3%82%B9%E3%83%88%29%22%20%E9%A7%BF%E6%B2%B3%E5%B1%8B%20OR%20mercari%20OR%20%E3%82%89%E3%81%97%E3%82%93%E3%81%B0%E3%82%93",
+          "acceptable_for_source_url": false,
+          "review_use": "Secondary marketplace/reference identity check only; do not import as source_url without official/trusted confirmation."
+        }
+      ],
+      "fallback_review_policy": {
+        "acceptable_source_url_kinds": [
+          "Official Animate product detail page whose title, character, variant, and goods type exactly match.",
+          "Official manufacturer, licensor, or event/store product detail page when Animate detail is unavailable."
+        ],
+        "not_acceptable_as_source_url_without_confirmation": [
+          "Search result pages",
+          "Marketplace listings",
+          "Image-only pages",
+          "Pages with matching series but different character, variant, or goods type"
+        ],
+        "manual_confirmation_required": true
+      },
       "confirmed_rows_template_patch": {
         "manual_confirmed": false,
         "field": "source_url",
@@ -191,6 +407,45 @@
       "candidate_count": 0,
       "exact_title_candidate_count": 0,
       "top_candidates": [],
+      "fallback_review_urls": [
+        {
+          "kind": "animate_broad_search",
+          "url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+          "acceptable_for_source_url": false,
+          "review_use": "Official Animate search fallback; open matching product pages and use only exact /pn/.../pd/<id>/ product URLs."
+        },
+        {
+          "kind": "domain_limited_web_search",
+          "url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp/pn/%20%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%22",
+          "acceptable_for_source_url": false,
+          "review_use": "Find cached/indexed official Animate product pages; only the final official product page can be imported."
+        },
+        {
+          "kind": "trusted_web_search",
+          "url": "https://www.google.com/search?q=%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29%22%20%EA%B3%B5%EC%8B%9D%20%E3%82%B0%E3%83%83%E3%82%BA",
+          "acceptable_for_source_url": false,
+          "review_use": "Look for official manufacturer, licensor, or store product pages when Animate no longer lists the item."
+        },
+        {
+          "kind": "secondary_identity_reference",
+          "url": "https://www.google.com/search?q=%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29%22%20%E9%A7%BF%E6%B2%B3%E5%B1%8B%20OR%20mercari%20OR%20%E3%82%89%E3%81%97%E3%82%93%E3%81%B0%E3%82%93",
+          "acceptable_for_source_url": false,
+          "review_use": "Secondary marketplace/reference identity check only; do not import as source_url without official/trusted confirmation."
+        }
+      ],
+      "fallback_review_policy": {
+        "acceptable_source_url_kinds": [
+          "Official Animate product detail page whose title, character, variant, and goods type exactly match.",
+          "Official manufacturer, licensor, or event/store product detail page when Animate detail is unavailable."
+        ],
+        "not_acceptable_as_source_url_without_confirmation": [
+          "Search result pages",
+          "Marketplace listings",
+          "Image-only pages",
+          "Pages with matching series but different character, variant, or goods type"
+        ],
+        "manual_confirmation_required": true
+      },
       "confirmed_rows_template_patch": {
         "manual_confirmed": false,
         "field": "source_url",
@@ -221,6 +476,45 @@
       "candidate_count": 0,
       "exact_title_candidate_count": 0,
       "top_candidates": [],
+      "fallback_review_urls": [
+        {
+          "kind": "animate_broad_search",
+          "url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+          "acceptable_for_source_url": false,
+          "review_use": "Official Animate search fallback; open matching product pages and use only exact /pn/.../pd/<id>/ product URLs."
+        },
+        {
+          "kind": "domain_limited_web_search",
+          "url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp/pn/%20%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%22",
+          "acceptable_for_source_url": false,
+          "review_use": "Find cached/indexed official Animate product pages; only the final official product page can be imported."
+        },
+        {
+          "kind": "trusted_web_search",
+          "url": "https://www.google.com/search?q=%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29%22%20%EA%B3%B5%EC%8B%9D%20%E3%82%B0%E3%83%83%E3%82%BA",
+          "acceptable_for_source_url": false,
+          "review_use": "Look for official manufacturer, licensor, or store product pages when Animate no longer lists the item."
+        },
+        {
+          "kind": "secondary_identity_reference",
+          "url": "https://www.google.com/search?q=%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29%22%20%E9%A7%BF%E6%B2%B3%E5%B1%8B%20OR%20mercari%20OR%20%E3%82%89%E3%81%97%E3%82%93%E3%81%B0%E3%82%93",
+          "acceptable_for_source_url": false,
+          "review_use": "Secondary marketplace/reference identity check only; do not import as source_url without official/trusted confirmation."
+        }
+      ],
+      "fallback_review_policy": {
+        "acceptable_source_url_kinds": [
+          "Official Animate product detail page whose title, character, variant, and goods type exactly match.",
+          "Official manufacturer, licensor, or event/store product detail page when Animate detail is unavailable."
+        ],
+        "not_acceptable_as_source_url_without_confirmation": [
+          "Search result pages",
+          "Marketplace listings",
+          "Image-only pages",
+          "Pages with matching series but different character, variant, or goods type"
+        ],
+        "manual_confirmation_required": true
+      },
       "confirmed_rows_template_patch": {
         "manual_confirmed": false,
         "field": "source_url",
@@ -251,6 +545,45 @@
       "candidate_count": 0,
       "exact_title_candidate_count": 0,
       "top_candidates": [],
+      "fallback_review_urls": [
+        {
+          "kind": "animate_broad_search",
+          "url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E7%8B%9B%E6%9E%9D",
+          "acceptable_for_source_url": false,
+          "review_use": "Official Animate search fallback; open matching product pages and use only exact /pn/.../pd/<id>/ product URLs."
+        },
+        {
+          "kind": "domain_limited_web_search",
+          "url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp/pn/%20%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E7%8B%9B%E6%9E%9D%22",
+          "acceptable_for_source_url": false,
+          "review_use": "Find cached/indexed official Animate product pages; only the final official product page can be imported."
+        },
+        {
+          "kind": "trusted_web_search",
+          "url": "https://www.google.com/search?q=%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%28%E7%8B%9B%E6%9E%9D%29%22%20%EA%B3%B5%EC%8B%9D%20%E3%82%B0%E3%83%83%E3%82%BA",
+          "acceptable_for_source_url": false,
+          "review_use": "Look for official manufacturer, licensor, or store product pages when Animate no longer lists the item."
+        },
+        {
+          "kind": "secondary_identity_reference",
+          "url": "https://www.google.com/search?q=%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%28%E7%8B%9B%E6%9E%9D%29%22%20%E9%A7%BF%E6%B2%B3%E5%B1%8B%20OR%20mercari%20OR%20%E3%82%89%E3%81%97%E3%82%93%E3%81%B0%E3%82%93",
+          "acceptable_for_source_url": false,
+          "review_use": "Secondary marketplace/reference identity check only; do not import as source_url without official/trusted confirmation."
+        }
+      ],
+      "fallback_review_policy": {
+        "acceptable_source_url_kinds": [
+          "Official Animate product detail page whose title, character, variant, and goods type exactly match.",
+          "Official manufacturer, licensor, or event/store product detail page when Animate detail is unavailable."
+        ],
+        "not_acceptable_as_source_url_without_confirmation": [
+          "Search result pages",
+          "Marketplace listings",
+          "Image-only pages",
+          "Pages with matching series but different character, variant, or goods type"
+        ],
+        "manual_confirmation_required": true
+      },
       "confirmed_rows_template_patch": {
         "manual_confirmed": false,
         "field": "source_url",
@@ -281,6 +614,45 @@
       "candidate_count": 0,
       "exact_title_candidate_count": 0,
       "top_candidates": [],
+      "fallback_review_urls": [
+        {
+          "kind": "animate_broad_search",
+          "url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%BF%E3%83%9A%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+          "acceptable_for_source_url": false,
+          "review_use": "Official Animate search fallback; open matching product pages and use only exact /pn/.../pd/<id>/ product URLs."
+        },
+        {
+          "kind": "domain_limited_web_search",
+          "url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp/pn/%20%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%BF%E3%83%9A%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%22",
+          "acceptable_for_source_url": false,
+          "review_use": "Find cached/indexed official Animate product pages; only the final official product page can be imported."
+        },
+        {
+          "kind": "trusted_web_search",
+          "url": "https://www.google.com/search?q=%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%BF%E3%83%9A%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29%22%20%EA%B3%B5%EC%8B%9D%20%E3%82%B0%E3%83%83%E3%82%BA",
+          "acceptable_for_source_url": false,
+          "review_use": "Look for official manufacturer, licensor, or store product pages when Animate no longer lists the item."
+        },
+        {
+          "kind": "secondary_identity_reference",
+          "url": "https://www.google.com/search?q=%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%BF%E3%83%9A%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29%22%20%E9%A7%BF%E6%B2%B3%E5%B1%8B%20OR%20mercari%20OR%20%E3%82%89%E3%81%97%E3%82%93%E3%81%B0%E3%82%93",
+          "acceptable_for_source_url": false,
+          "review_use": "Secondary marketplace/reference identity check only; do not import as source_url without official/trusted confirmation."
+        }
+      ],
+      "fallback_review_policy": {
+        "acceptable_source_url_kinds": [
+          "Official Animate product detail page whose title, character, variant, and goods type exactly match.",
+          "Official manufacturer, licensor, or event/store product detail page when Animate detail is unavailable."
+        ],
+        "not_acceptable_as_source_url_without_confirmation": [
+          "Search result pages",
+          "Marketplace listings",
+          "Image-only pages",
+          "Pages with matching series but different character, variant, or goods type"
+        ],
+        "manual_confirmation_required": true
+      },
       "confirmed_rows_template_patch": {
         "manual_confirmed": false,
         "field": "source_url",

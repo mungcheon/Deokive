@@ -57,7 +57,15 @@ class BuildRequestedFocusSourceCandidatesPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["target_rows"], 1)
         self.assertEqual(report["summary"]["candidate_rows"], 1)
         self.assertEqual(report["summary"]["rows_with_candidates"], 0)
+        self.assertEqual(report["summary"]["fallback_review_rows"], 1)
+        self.assertGreaterEqual(report["summary"]["fallback_review_url_rows"], 3)
         self.assertEqual(report["items"][0]["candidate_status"], "no_official_search_candidates")
+        fallback_kinds = {row["kind"] for row in report["items"][0]["fallback_review_urls"]}
+        self.assertIn("animate_broad_search", fallback_kinds)
+        self.assertIn("domain_limited_web_search", fallback_kinds)
+        self.assertIn("trusted_web_search", fallback_kinds)
+        self.assertTrue(report["items"][0]["fallback_review_policy"]["manual_confirmation_required"])
+        self.assertFalse(any(row["acceptable_for_source_url"] for row in report["items"][0]["fallback_review_urls"]))
         patch = report["items"][0]["confirmed_rows_template_patch"]
         self.assertFalse(patch["manual_confirmed"])
         self.assertEqual(patch["field"], "source_url")
