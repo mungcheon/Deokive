@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T05:18:36Z",
+  "generated_at": "2026-07-24T13:03:17Z",
   "scope": "source_discovery_next_focus_exact_url_review_queue",
   "source_report": "data/source_discovery_next_focus_fallback_queue_public.json",
   "summary": {
@@ -62,6 +62,24 @@
       "manual_note": "",
       "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.animate-onlineshop.jp/pn/.../pd/...",
+          "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Animate products/list.php search pages",
+          "Animate sphone/products/list.php search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+      },
       "identity_review_status": "exact_page_match_review_ready",
       "identity_blockers": [],
       "auto_apply_enabled": false
@@ -85,6 +103,24 @@
       "manual_note": "",
       "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.animate-onlineshop.jp/pn/.../pd/...",
+          "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Animate products/list.php search pages",
+          "Animate sphone/products/list.php search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+      },
       "identity_review_status": "exact_page_match_review_ready",
       "identity_blockers": [],
       "auto_apply_enabled": false
@@ -108,6 +144,24 @@
       "manual_note": "",
       "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.animate-onlineshop.jp/pn/.../pd/...",
+          "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Animate products/list.php search pages",
+          "Animate sphone/products/list.php search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+      },
       "identity_review_status": "exact_page_match_review_ready",
       "identity_blockers": [
         "missing_name_ja"
@@ -133,6 +187,24 @@
       "manual_note": "",
       "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.animate-onlineshop.jp/pn/.../pd/...",
+          "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Animate products/list.php search pages",
+          "Animate sphone/products/list.php search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+      },
       "identity_review_status": "exact_page_match_review_ready",
       "identity_blockers": [
         "missing_name_ja"
@@ -158,6 +230,24 @@
       "manual_note": "",
       "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.animate-onlineshop.jp/pn/.../pd/...",
+          "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Animate products/list.php search pages",
+          "Animate sphone/products/list.php search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+      },
       "identity_review_status": "exact_page_match_review_ready",
       "identity_blockers": [
         "missing_name_ja"
@@ -183,6 +273,24 @@
       "manual_note": "",
       "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.animate-onlineshop.jp/pn/.../pd/...",
+          "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Animate products/list.php search pages",
+          "Animate sphone/products/list.php search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+      },
       "identity_review_status": "exact_page_match_review_ready",
       "identity_blockers": [],
       "auto_apply_enabled": false
@@ -206,6 +314,24 @@
       "manual_note": "",
       "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.animate-onlineshop.jp/pn/.../pd/...",
+          "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Animate products/list.php search pages",
+          "Animate sphone/products/list.php search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+      },
       "identity_review_status": "exact_page_match_review_ready",
       "identity_blockers": [],
       "auto_apply_enabled": false
@@ -229,6 +355,24 @@
       "manual_note": "",
       "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.animate-onlineshop.jp/pn/.../pd/...",
+          "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Animate products/list.php search pages",
+          "Animate sphone/products/list.php search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+      },
       "identity_review_status": "exact_page_match_review_ready",
       "identity_blockers": [],
       "auto_apply_enabled": false
@@ -252,6 +396,24 @@
       "manual_note": "",
       "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.animate-onlineshop.jp/pn/.../pd/...",
+          "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Animate products/list.php search pages",
+          "Animate sphone/products/list.php search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+      },
       "identity_review_status": "exact_page_match_review_ready",
       "identity_blockers": [],
       "auto_apply_enabled": false
@@ -275,6 +437,24 @@
       "manual_note": "",
       "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.animate-onlineshop.jp/pn/.../pd/...",
+          "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Animate products/list.php search pages",
+          "Animate sphone/products/list.php search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+      },
       "identity_review_status": "exact_page_match_review_ready",
       "identity_blockers": [],
       "auto_apply_enabled": false
@@ -298,6 +478,24 @@
       "manual_note": "",
       "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.animate-onlineshop.jp/pn/.../pd/...",
+          "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Animate products/list.php search pages",
+          "Animate sphone/products/list.php search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+      },
       "identity_review_status": "exact_page_match_review_ready",
       "identity_blockers": [],
       "auto_apply_enabled": false
@@ -321,6 +519,24 @@
       "manual_note": "",
       "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.animate-onlineshop.jp/pn/.../pd/...",
+          "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Animate products/list.php search pages",
+          "Animate sphone/products/list.php search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+      },
       "identity_review_status": "exact_page_match_review_ready",
       "identity_blockers": [],
       "auto_apply_enabled": false
@@ -344,6 +560,24 @@
       "manual_note": "",
       "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.animate-onlineshop.jp/pn/.../pd/...",
+          "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Animate products/list.php search pages",
+          "Animate sphone/products/list.php search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+      },
       "identity_review_status": "exact_page_match_review_ready",
       "identity_blockers": [],
       "auto_apply_enabled": false
@@ -367,6 +601,24 @@
       "manual_note": "",
       "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.animate-onlineshop.jp/pn/.../pd/...",
+          "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Animate products/list.php search pages",
+          "Animate sphone/products/list.php search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+      },
       "identity_review_status": "exact_page_match_review_ready",
       "identity_blockers": [],
       "auto_apply_enabled": false
@@ -390,6 +642,24 @@
       "manual_note": "",
       "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_url_review_guidance": {
+        "accepted_source_url_patterns": [
+          "https://www.animate-onlineshop.jp/pn/.../pd/...",
+          "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
+        ],
+        "rejected_source_url_patterns": [
+          "Google search result URLs",
+          "Animate products/list.php search pages",
+          "Animate sphone/products/list.php search pages",
+          "category, ranking, cart, favorite, or account pages"
+        ],
+        "confirmation_checks": [
+          "catalog row title or Japanese name matches the product detail page title",
+          "character, variant, size, and goods type match the catalog row",
+          "product image on the page depicts the same exact item or explicitly confirmed variant"
+        ],
+        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
+      },
       "identity_review_status": "exact_page_match_review_ready",
       "identity_blockers": [],
       "auto_apply_enabled": false

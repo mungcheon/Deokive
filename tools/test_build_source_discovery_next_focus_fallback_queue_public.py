@@ -149,6 +149,16 @@ class SourceDiscoveryNextFocusFallbackQueuePublicTest(unittest.TestCase):
         self.assertEqual(review_row["review_priority"], 1)
         self.assertEqual(review_row["primary_review_url"], item["primary_review_url"])
         self.assertEqual(review_row["primary_review_url_kind"], "domain_limited_web_search")
+        self.assertIn(
+            "Google search result URLs",
+            review_row["source_url_review_guidance"]["rejected_source_url_patterns"],
+        )
+        self.assertIn(
+            "https://www.animate-onlineshop.jp/pn/.../pd/...",
+            report["manual_entry_template"]["source_url_review_guidance"][
+                "accepted_source_url_patterns"
+            ],
+        )
 
     def test_fallback_terms_prefer_localized_animate_query(self) -> None:
         next_pack = {

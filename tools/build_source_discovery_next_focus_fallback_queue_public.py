@@ -18,6 +18,29 @@ FETCH_AUDIT = DATA / "source_discovery_next_focus_pack_fetch_audit_public.json"
 REPORT = DATA / "source_discovery_next_focus_fallback_queue_public.json"
 
 
+SOURCE_URL_REVIEW_GUIDANCE = {
+    "accepted_source_url_patterns": [
+        "https://www.animate-onlineshop.jp/pn/.../pd/...",
+        "https://www.animate-onlineshop.jp/products/detail.php?product_id=...",
+    ],
+    "rejected_source_url_patterns": [
+        "Google search result URLs",
+        "Animate products/list.php search pages",
+        "Animate sphone/products/list.php search pages",
+        "category, ranking, cart, favorite, or account pages",
+    ],
+    "confirmation_checks": [
+        "catalog row title or Japanese name matches the product detail page title",
+        "character, variant, size, and goods type match the catalog row",
+        "product image on the page depicts the same exact item or explicitly confirmed variant",
+    ],
+    "image_url_rule": (
+        "manual_confirmed_image_url may be filled only from the confirmed product detail page "
+        "or its directly referenced product image asset."
+    ),
+}
+
+
 def now_utc() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
@@ -217,6 +240,7 @@ def _review_table(queue_items: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "import_field": field_template.get("field") or "source_url",
                 "blocked_until": "exact_product_detail_source_url_confirmed",
                 "acceptance_rule": item.get("acceptance_rule"),
+                "source_url_review_guidance": SOURCE_URL_REVIEW_GUIDANCE,
                 **identity_review,
             }
         )
@@ -243,6 +267,7 @@ def _manual_entry_template(queue_items: list[dict[str, Any]]) -> dict[str, Any]:
             "on an allowed source domain; manual_confirmed_image_url may be filled only after the "
             "product image is verified on that exact page."
         ),
+        "source_url_review_guidance": SOURCE_URL_REVIEW_GUIDANCE,
         "dry_run_command": (
             "python -m tools.import_confirmed_source_discovery_rows "
             "--queue server/source_discovery_confirmed_rows.json"
@@ -310,6 +335,7 @@ def build_report(
                     "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. "
                     "Only fill manual_confirmed_source_url when title, product type, and character/variant match."
                 ),
+                "source_url_review_guidance": SOURCE_URL_REVIEW_GUIDANCE,
                 "source_patch_template": item.get("source_patch_template") or {},
                 "catalog_field_import_template": item.get("catalog_field_import_template") or {},
                 "auto_apply_enabled": False,
