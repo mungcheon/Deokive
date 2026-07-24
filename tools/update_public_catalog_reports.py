@@ -35,6 +35,7 @@ import build_missing_image_report_coverage_public
 import build_missing_image_priority_public
 import build_provider_missing_source_url_queue_public
 import build_requested_focus_action_queue_public
+import build_requested_focus_next_work_public
 import build_source_discovery_next_focus_detail_candidates_public
 import build_source_discovery_next_focus_fallback_queue_public
 import build_source_discovery_next_focus_identity_candidate_review_public
@@ -101,6 +102,7 @@ REQUESTED = DATA / "requested_special_goods_public.json"
 REQUESTED_FOCUS = DATA / "requested_focus_enrichment_public.json"
 REQUESTED_FOCUS_REVIEW_BATCHES = DATA / "requested_focus_review_batches_public.json"
 REQUESTED_FOCUS_ACTION_QUEUE = DATA / "requested_focus_action_queue_public.json"
+REQUESTED_FOCUS_NEXT_WORK = DATA / "requested_focus_next_work_public.json"
 DANGANRONPA_MISSING_MEDIA = DATA / "danganronpa_missing_media_public.json"
 DANGANRONPA_PATCH_TEMPLATE_DRY_RUN = DATA / "danganronpa_patch_template_dry_run_public.json"
 DANGANRONPA_GOODSMILE_PROBE = DATA / "danganronpa_goodsmile_probe_public.json"
@@ -2220,6 +2222,7 @@ def build_operations_public(
     image_attachment_action_queue_override: dict[str, Any] | None = None,
     ensky_cache_candidate_action_queue_override: dict[str, Any] | None = None,
     requested_focus_action_queue_override: dict[str, Any] | None = None,
+    requested_focus_next_work_override: dict[str, Any] | None = None,
     deduplication_action_queue_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     source_summary = source_discovery["summary"]
@@ -2490,6 +2493,12 @@ def build_operations_public(
         else load_json(REQUESTED_FOCUS_ACTION_QUEUE, {}) if REQUESTED_FOCUS_ACTION_QUEUE.exists() else {}
     )
     requested_focus_action_queue_summary = requested_focus_action_queue.get("summary", {})
+    requested_focus_next_work = (
+        requested_focus_next_work_override
+        if requested_focus_next_work_override is not None
+        else load_json(REQUESTED_FOCUS_NEXT_WORK, {}) if REQUESTED_FOCUS_NEXT_WORK.exists() else {}
+    )
+    requested_focus_next_work_summary = requested_focus_next_work.get("summary", {})
     danganronpa_media_summary = danganronpa_missing_media["summary"]
     danganronpa_dry_run_summary = danganronpa_patch_template_dry_run["summary"]
     danganronpa_goodsmile_probe = (
@@ -2651,6 +2660,19 @@ def build_operations_public(
             "action_batch_count": requested_focus_action_queue_summary.get("action_batch_count", 0),
             "recommended_next_action": "Work queued non-barcode requested-focus rows, then expand remaining actionable rows before barcode research.",
         } if requested_focus_action_queue_summary else None,
+        {
+            "priority": 13,
+            "workstream": "requested_focus_next_work",
+            "public_report": f"data/{REQUESTED_FOCUS_NEXT_WORK.name}",
+            "next_batch_id": requested_focus_next_work_summary.get("next_batch_id", ""),
+            "next_topic_id": requested_focus_next_work_summary.get("next_topic_id", ""),
+            "next_missing_field": requested_focus_next_work_summary.get("next_missing_field", ""),
+            "next_source_store": requested_focus_next_work_summary.get("next_source_store", ""),
+            "next_row_count": requested_focus_next_work_summary.get("next_row_count", 0),
+            "preview_row_count": requested_focus_next_work_summary.get("preview_row_count", 0),
+            "next_review_url": requested_focus_next_work_summary.get("next_review_url", ""),
+            "recommended_next_action": "Open the next-work report first; confirm this small requested-focus batch before moving through the full queue.",
+        } if requested_focus_next_work_summary else None,
         {
             "priority": 15,
             "workstream": "danganronpa_missing_media",
@@ -8054,6 +8076,10 @@ def update_reports(write: bool) -> dict[str, Any]:
         requested_focus_review_batches,
         generated_at=generated_at,
     )
+    requested_focus_next_work = build_requested_focus_next_work_public.build_report(
+        requested_focus_action_queue,
+        generated_at=generated_at,
+    )
     danganronpa_missing_media = build_danganronpa_missing_media_public(items, generated_at)
     danganronpa_patch_template_dry_run = build_danganronpa_patch_template_dry_run_public(
         danganronpa_missing_media,
@@ -8310,6 +8336,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         image_attachment_action_queue,
         ensky_cache_candidate_action_queue,
         requested_focus_action_queue,
+        requested_focus_next_work,
         deduplication_action_queue,
     )
     agent_work_queue = build_agent_work_queue_public(
@@ -8786,6 +8813,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             target["requested_focus_action_queue"] = copy_report_summary(
                 REQUESTED_FOCUS_ACTION_QUEUE, "requested_focus_action_queue"
             )
+        target["requested_focus_next_work"] = {
+            "public_report": f"data/{REQUESTED_FOCUS_NEXT_WORK.name}",
+            **requested_focus_next_work["summary"],
+        }
         if IMAGE_ATTACHMENT_ACTION_QUEUE.exists():
             image_attachment_action_summary = image_attachment_action_queue.get("summary", {})
             target["image_attachment_action_queue"] = copy_report_summary(
@@ -9277,6 +9308,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(GENERIC_SOURCE_PATCH_CANDIDATES, generic_source_patch_candidates)
         write_json(REQUESTED_FOCUS, requested_focus)
         write_json(REQUESTED_FOCUS_ACTION_QUEUE, requested_focus_action_queue)
+        write_json(REQUESTED_FOCUS_NEXT_WORK, requested_focus_next_work)
         write_json(DANGANRONPA_MISSING_MEDIA, danganronpa_missing_media)
         write_json(DANGANRONPA_PATCH_TEMPLATE_DRY_RUN, danganronpa_patch_template_dry_run)
         write_json(DEDUPLICATION_TEMPLATE_IMPORT_DRY_RUN, deduplication_template_import_dry_run)
@@ -9328,6 +9360,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(REQUESTED_FOCUS.relative_to(ROOT)),
             str(REQUESTED_FOCUS_REVIEW_BATCHES.relative_to(ROOT)),
             str(REQUESTED_FOCUS_ACTION_QUEUE.relative_to(ROOT)),
+            str(REQUESTED_FOCUS_NEXT_WORK.relative_to(ROOT)),
             str(DANGANRONPA_MISSING_MEDIA.relative_to(ROOT)),
             str(DANGANRONPA_PATCH_TEMPLATE_DRY_RUN.relative_to(ROOT)),
             str(SOURCE_DETAIL.relative_to(ROOT)),

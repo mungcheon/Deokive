@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T07:20:23Z",
+  "generated_at": "2026-07-24T08:22:18Z",
   "summary": {
     "catalog_rows": 20347,
     "coverage": {
@@ -2684,9 +2684,9 @@
       "priority": 6,
       "workstream": "execution_plan",
       "public_report": "data/catalog_execution_plan_public.json",
-      "action_count": 23,
+      "action_count": 25,
       "blocked_action_count": 1,
-      "manual_review_action_count": 20,
+      "manual_review_action_count": 22,
       "recommended_next_action": "Use the consolidated execution plan to choose the next safe DB cleanup step."
     },
     {
@@ -2728,6 +2728,19 @@
       ],
       "action_batch_count": 86,
       "recommended_next_action": "Work queued non-barcode requested-focus rows, then expand remaining actionable rows before barcode research."
+    },
+    {
+      "priority": 13,
+      "workstream": "requested_focus_next_work",
+      "public_report": "data/requested_focus_next_work_public.json",
+      "next_batch_id": "requested-focus-action-001",
+      "next_topic_id": "danganronpa",
+      "next_missing_field": "source_url",
+      "next_source_store": "애니메이트",
+      "next_row_count": 9,
+      "preview_row_count": 31,
+      "next_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%20%22%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%BB%E3%83%83%E3%83%88%20%E5%B8%8C%E6%9C%9B%E3%83%B6%E5%B3%B0%E5%AD%A6%E5%9C%92%20%EB%8B%A8%EA%B0%84%EB%A1%A0%ED%8C%8C%20%EA%B5%BF%EC%A6%88%20%EB%AC%B8%EA%B5%AC%22",
+      "recommended_next_action": "Open the next-work report first; confirm this small requested-focus batch before moving through the full queue."
     },
     {
       "priority": 15,
