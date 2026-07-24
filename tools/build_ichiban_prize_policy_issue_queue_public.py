@@ -463,6 +463,48 @@ def _campaign_first_review_plan(dedupe_action_queue: dict[str, Any]) -> list[dic
     return plan
 
 
+def _campaign_first_review_summary(plan: list[dict[str, Any]]) -> dict[str, Any]:
+    slug_family_counts = Counter()
+    evidence_url_counts = Counter()
+    likely_same_family_rows = 0
+    item_work_order_rows = 0
+    affected_catalog_indexes: set[int] = set()
+    for row in plan:
+        comparison = row.get("campaign_url_comparison")
+        comparison = comparison if isinstance(comparison, dict) else {}
+        for family in comparison.get("campaign_slug_families") or []:
+            slug_family_counts[str(family)] += 1
+        evidence_url_count = int(row.get("evidence_url_count") or 0)
+        evidence_url_counts[str(evidence_url_count)] += 1
+        if comparison.get("likely_same_campaign_family_reissue"):
+            likely_same_family_rows += 1
+        item_work_order_rows += int(row.get("item_work_order_count") or 0)
+        for catalog_index in row.get("catalog_indexes") or []:
+            if isinstance(catalog_index, int) and not isinstance(catalog_index, bool):
+                affected_catalog_indexes.add(catalog_index)
+
+    return {
+        "campaign_pair_rows": len(plan),
+        "item_work_order_rows_blocked_by_campaign_decision": item_work_order_rows,
+        "affected_catalog_item_rows": len(affected_catalog_indexes),
+        "plans_with_evidence_urls": sum(1 for row in plan if row.get("first_evidence_url")),
+        "first_evidence_url": _first_url([row.get("first_evidence_url") for row in plan]),
+        "likely_same_campaign_family_reissue_rows": likely_same_family_rows,
+        "campaign_slug_family_counts": [
+            [family, count] for family, count in slug_family_counts.most_common()
+        ],
+        "evidence_url_count_distribution": [
+            [count, rows] for count, rows in evidence_url_counts.most_common()
+        ],
+        "recommended_first_decision": (
+            "campaign_pair_reissue_keep_all_separate_or_duplicate_review_each_item"
+            if plan
+            else "none"
+        ),
+        "blocked_until": "campaign_pair_reissue_or_duplicate_decision_confirmed",
+    }
+
+
 def _completion_readiness(
     *,
     issue_count: int,
@@ -634,6 +676,7 @@ def build_queue(
         row for row in dedupe_action_queue.get("ichiban_reissue_work_order") or [] if isinstance(row, dict)
     ]
     campaign_first_review_plan = _campaign_first_review_plan(dedupe_action_queue)
+    campaign_first_summary = _campaign_first_review_summary(campaign_first_review_plan)
     for rank, row in enumerate(reissue_work_orders, start=1):
         issues.append(_reissue_work_order(row, rank))
 
@@ -709,6 +752,12 @@ def build_queue(
             ],
             "probable_reissue_work_order_rows": probable_reissue_work_order_rows,
             "campaign_first_review_plan_rows": campaign_first_review_plan_rows,
+            "campaign_first_review_item_work_order_rows_blocked": campaign_first_summary[
+                "item_work_order_rows_blocked_by_campaign_decision"
+            ],
+            "campaign_first_review_likely_same_family_rows": campaign_first_summary[
+                "likely_same_campaign_family_reissue_rows"
+            ],
             "campaign_first_review_item_work_order_rows": sum(
                 int(row.get("item_work_order_count") or 0)
                 for row in campaign_first_review_plan
@@ -749,6 +798,7 @@ def build_queue(
             "probable_reissues": "manual_review" if reissue_work_orders else "clear",
             "unnumbered_multi_item_prizes": "manual_review" if unnumbered_multi else "clear",
         },
+        "campaign_first_review_summary": campaign_first_summary,
         "completion_readiness": completion_readiness,
         "protected_unnumbered_multi_item_prize_groups": protected_groups,
         "campaign_first_review_plan": campaign_first_review_plan,

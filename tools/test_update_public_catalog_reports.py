@@ -1794,6 +1794,8 @@ class PublicCatalogReportTests(unittest.TestCase):
         ichiban_action_summary = ichiban_action.get("summary", {})
         ichiban_prize_audit = reports.load_json(reports.ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT)
         ichiban_prize_audit_summary = ichiban_prize_audit.get("summary", {})
+        ichiban_prize_issue = reports.load_json(reports.ICHIIBAN_KUJI_PRIZE_POLICY_ISSUE_QUEUE)
+        ichiban_prize_issue_summary = ichiban_prize_issue.get("summary", {})
         ichiban_prize_name_image = reports.load_json(reports.ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW)
         ichiban_prize_name_image_summary = ichiban_prize_name_image.get("summary", {})
         ichiban_prize_name_image_patch = reports.load_json(reports.ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES)
@@ -1894,6 +1896,11 @@ class PublicCatalogReportTests(unittest.TestCase):
             for batch in agent_queue.get("batches", [])
             if batch.get("workstream") == "ichiban_kuji_prize_policy_audit"
         ]
+        ichiban_campaign_first_agent_batches = [
+            batch
+            for batch in agent_queue.get("batches", [])
+            if batch.get("workstream") == "ichiban_kuji_campaign_first_reissue_review"
+        ]
         ichiban_prize_name_image_agent_batches = [
             batch
             for batch in agent_queue.get("batches", [])
@@ -1974,6 +1981,28 @@ class PublicCatalogReportTests(unittest.TestCase):
             {"confirm_manual_keep_drop_dedupe_decisions"},
         )
         self.assertGreater(len(ichiban_prize_policy_agent_batches), 0)
+        self.assertEqual(
+            ichiban_prize_issue_summary["campaign_first_review_item_work_order_rows_blocked"],
+            ichiban_prize_issue["campaign_first_review_summary"][
+                "item_work_order_rows_blocked_by_campaign_decision"
+            ],
+        )
+        self.assertEqual(
+            ichiban_prize_issue_summary["campaign_first_review_likely_same_family_rows"],
+            ichiban_prize_issue["campaign_first_review_summary"][
+                "likely_same_campaign_family_reissue_rows"
+            ],
+        )
+        self.assertEqual(
+            len(ichiban_campaign_first_agent_batches),
+            ichiban_prize_issue_summary["campaign_first_review_plan_rows"],
+        )
+        self.assertTrue(
+            all(
+                batch.get("review_summary", {}).get("first_evidence_url")
+                for batch in ichiban_campaign_first_agent_batches
+            )
+        )
         if open_queues.get("ichiban_prize_name_image_review_rows", 0):
             self.assertGreater(len(ichiban_prize_name_image_agent_batches), 0)
         else:

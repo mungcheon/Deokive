@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T06:15:51Z",
+  "generated_at": "2026-07-24T06:36:19Z",
   "scope": "public_catalog_ichiban_kuji_prize_policy",
   "summary": {
     "issue_rows": 20,
@@ -36,6 +36,8 @@
     ],
     "probable_reissue_work_order_rows": 20,
     "campaign_first_review_plan_rows": 4,
+    "campaign_first_review_item_work_order_rows_blocked": 20,
+    "campaign_first_review_likely_same_family_rows": 4,
     "campaign_first_review_item_work_order_rows": 20,
     "campaign_first_review_plans_with_evidence_urls": 4,
     "campaign_first_review_first_evidence_url": "https://1kuji.com/products/onep6",
@@ -73,6 +75,40 @@
     "numbered_variants": "pass",
     "probable_reissues": "manual_review",
     "unnumbered_multi_item_prizes": "clear"
+  },
+  "campaign_first_review_summary": {
+    "campaign_pair_rows": 4,
+    "item_work_order_rows_blocked_by_campaign_decision": 20,
+    "affected_catalog_item_rows": 40,
+    "plans_with_evidence_urls": 4,
+    "first_evidence_url": "https://1kuji.com/products/onep6",
+    "likely_same_campaign_family_reissue_rows": 4,
+    "campaign_slug_family_counts": [
+      [
+        "onep",
+        1
+      ],
+      [
+        "kimetsu",
+        1
+      ],
+      [
+        "naruto_wcf",
+        1
+      ],
+      [
+        "haikyu",
+        1
+      ]
+    ],
+    "evidence_url_count_distribution": [
+      [
+        "2",
+        4
+      ]
+    ],
+    "recommended_first_decision": "campaign_pair_reissue_keep_all_separate_or_duplicate_review_each_item",
+    "blocked_until": "campaign_pair_reissue_or_duplicate_decision_confirmed"
   },
   "completion_readiness": {
     "status": "ichiban_reissue_review_required",

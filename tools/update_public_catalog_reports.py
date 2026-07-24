@@ -4228,6 +4228,7 @@ def build_operations_public(
             {"key": "ichiban_kuji_prize_name_image_review", "public_report": f"data/{ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW.name}"},
             {"key": "ichiban_kuji_prize_name_image_patch_candidates", "public_report": f"data/{ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES.name}"},
             {"key": "ichiban_kuji_prize_policy_audit", "public_report": f"data/{ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.name}"},
+            {"key": "ichiban_kuji_prize_policy_issue_queue", "public_report": f"data/{ICHIIBAN_KUJI_PRIZE_POLICY_ISSUE_QUEUE.name}"},
             {"key": "agent_work_queue", "public_report": f"data/{AGENT_WORK_QUEUE.name}"},
         ],
         "next_actions": next_actions,
@@ -4287,6 +4288,7 @@ def build_agent_work_queue_public(
     requested_focus_action_queue_override: dict[str, Any] | None = None,
     image_attachment_action_queue_override: dict[str, Any] | None = None,
     deduplication_action_queue_override: dict[str, Any] | None = None,
+    ichiban_prize_policy_issue_queue_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     batches: list[dict[str, Any]] = []
     generic_source_report = load_json(GENERIC_SOURCE, {}) if GENERIC_SOURCE.exists() else {}
@@ -4377,6 +4379,13 @@ def build_agent_work_queue_public(
     ichiban_prize_policy_audit = (
         load_json(ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT, {})
         if ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.exists()
+        else {}
+    )
+    ichiban_prize_policy_issue_queue = (
+        ichiban_prize_policy_issue_queue_override
+        if ichiban_prize_policy_issue_queue_override is not None
+        else load_json(ICHIIBAN_KUJI_PRIZE_POLICY_ISSUE_QUEUE, {})
+        if ICHIIBAN_KUJI_PRIZE_POLICY_ISSUE_QUEUE.exists()
         else {}
     )
     ichiban_prize_name_image_review = (
@@ -5039,6 +5048,53 @@ def build_agent_work_queue_public(
                 ),
                 "has_reissue_signal": bool(lane.get("has_reissue_signal")),
                 "reissue_signal_reasons": lane.get("reissue_signal_reasons") or [],
+            },
+        )
+    campaign_first_review_plan = [
+        row
+        for row in ichiban_prize_policy_issue_queue.get("campaign_first_review_plan", [])
+        if isinstance(row, dict)
+    ]
+    for plan_index, plan_row in enumerate(campaign_first_review_plan[:6], start=1):
+        add_batch(
+            agent_id="agent-ichiban-campaign-first",
+            workstream="ichiban_kuji_campaign_first_reissue_review",
+            priority=50 + plan_index,
+            title=f"Ichiban Kuji campaign-pair review {plan_row.get('campaign_work_order_id')}",
+            public_report=ICHIIBAN_KUJI_PRIZE_POLICY_ISSUE_QUEUE,
+            rows=int(plan_row.get("item_work_order_count") or 0),
+            recommended_action=str(
+                plan_row.get("recommended_action")
+                or "Compare both official campaign pages before item-level keep/drop decisions."
+            ),
+            acceptance_criteria=[
+                "Open every source_url in the campaign pair before judging item-level duplicates.",
+                "If pages are separate releases, reruns, or campaign waves, keep affected rows separate.",
+                "Only move to item-level keep/drop when the campaign pair is confirmed as an exact duplicate context.",
+                "Auto-merge and auto-delete remain disabled.",
+            ],
+            samples=[
+                {
+                    "campaign_work_order_id": plan_row.get("campaign_work_order_id"),
+                    "source_urls": plan_row.get("source_urls") or [],
+                    "first_evidence_url": plan_row.get("first_evidence_url"),
+                    "catalog_indexes": plan_row.get("catalog_indexes") or [],
+                    "prize_labels": plan_row.get("prize_labels") or [],
+                    "affected_item_work_order_ids": plan_row.get("affected_item_work_order_ids") or [],
+                    "campaign_url_comparison": plan_row.get("campaign_url_comparison") or {},
+                }
+            ],
+            review_summary={
+                "campaign_work_order_id": plan_row.get("campaign_work_order_id"),
+                "item_work_order_count": int(plan_row.get("item_work_order_count") or 0),
+                "evidence_url_count": int(plan_row.get("evidence_url_count") or 0),
+                "first_evidence_url": plan_row.get("first_evidence_url"),
+                "likely_same_campaign_family_reissue": (
+                    (plan_row.get("campaign_url_comparison") or {}).get(
+                        "likely_same_campaign_family_reissue"
+                    )
+                ),
+                "affected_item_work_order_ids": plan_row.get("affected_item_work_order_ids") or [],
             },
         )
     for action_batch in dedupe_action_batches[:6]:
@@ -7667,6 +7723,7 @@ def validate_report_consistency(
         f"data/{ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES.name}",
         f"data/{ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.name}",
         f"data/{ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.name}",
+        f"data/{ICHIIBAN_KUJI_PRIZE_POLICY_ISSUE_QUEUE.name}",
         f"data/{ICHIIBAN_KUJI_REISSUE_DECISION_TEMPLATE.name}",
         f"data/{ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW.name}",
         f"data/{ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES.name}",
@@ -8205,6 +8262,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         requested_focus_action_queue,
         image_attachment_action_queue,
         deduplication_action_queue,
+        ichiban_kuji_prize_policy_issue_queue,
     )
     from build_catalog_execution_plan_public import build_plan_from_reports
 
