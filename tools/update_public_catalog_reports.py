@@ -496,6 +496,16 @@ def write_json(path: Path, data: Any) -> None:
     path.write_text(serialized, encoding="utf-8")
 
 
+def _dict_delta(actual: dict[str, Any], expected: dict[str, Any], limit: int = 12) -> dict[str, dict[str, Any]]:
+    delta: dict[str, dict[str, Any]] = {}
+    for key in sorted(set(actual) | set(expected)):
+        if actual.get(key) != expected.get(key):
+            delta[key] = {"actual": actual.get(key), "expected": expected.get(key)}
+            if len(delta) >= limit:
+                break
+    return delta
+
+
 def enrich_image_action_queue_source_url_review(
     image_action_queue: dict[str, Any],
     source_url_template: dict[str, Any],
@@ -2536,6 +2546,9 @@ def build_operations_public(
     source_next_focus_detail_candidates_override: dict[str, Any] | None = None,
     source_next_focus_metadata_field_import_override: dict[str, Any] | None = None,
     source_next_focus_fallback_queue_override: dict[str, Any] | None = None,
+    source_discovery_action_queue_override: dict[str, Any] | None = None,
+    source_discovery_focus_template_override: dict[str, Any] | None = None,
+    source_discovery_focus_template_import_override: dict[str, Any] | None = None,
     deduplication_template_import_dry_run_override: dict[str, Any] | None = None,
     animation_review_batches_override: dict[str, Any] | None = None,
     animation_action_queue_override: dict[str, Any] | None = None,
@@ -2555,7 +2568,9 @@ def build_operations_public(
     )
     source_review_batches_summary = source_review_batches.get("summary", {})
     source_action_queue = (
-        load_json(SOURCE_DISCOVERY_ACTION_QUEUE, {}) if SOURCE_DISCOVERY_ACTION_QUEUE.exists() else {}
+        source_discovery_action_queue_override
+        if source_discovery_action_queue_override is not None
+        else load_json(SOURCE_DISCOVERY_ACTION_QUEUE, {}) if SOURCE_DISCOVERY_ACTION_QUEUE.exists() else {}
     )
     source_detail_candidate_action_queue = (
         load_json(SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE, {})
@@ -2571,11 +2586,15 @@ def build_operations_public(
     official_detail_review_batches_summary = official_detail_review_batches.get("summary", {})
     source_action_queue_summary = source_action_queue.get("summary", {})
     source_focus_template = (
-        load_json(SOURCE_DISCOVERY_FOCUS_TEMPLATE, {}) if SOURCE_DISCOVERY_FOCUS_TEMPLATE.exists() else {}
+        source_discovery_focus_template_override
+        if source_discovery_focus_template_override is not None
+        else load_json(SOURCE_DISCOVERY_FOCUS_TEMPLATE, {}) if SOURCE_DISCOVERY_FOCUS_TEMPLATE.exists() else {}
     )
     source_focus_template_summary = source_focus_template.get("summary", {})
     source_focus_template_import = (
-        load_json(SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT, {})
+        source_discovery_focus_template_import_override
+        if source_discovery_focus_template_import_override is not None
+        else load_json(SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT, {})
         if SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT.exists()
         else {}
     )
@@ -7996,6 +8015,10 @@ def validate_report_consistency(
     animation_unmatched_keyword_review_override: dict[str, Any] | None = None,
     source_next_focus_fallback_queue_override: dict[str, Any] | None = None,
     source_discovery_starter_queue_override: dict[str, Any] | None = None,
+    source_discovery_action_queue_override: dict[str, Any] | None = None,
+    source_discovery_focus_template_override: dict[str, Any] | None = None,
+    source_discovery_focus_template_import_override: dict[str, Any] | None = None,
+    source_discovery_next_focus_pack_override: dict[str, Any] | None = None,
     image_attachment_action_queue_override: dict[str, Any] | None = None,
 ) -> list[str]:
     findings: list[str] = []
@@ -8249,7 +8272,9 @@ def validate_report_consistency(
             requested_focus_action_summary.get("barcode_template_rows_excluded", 0)
         )
     source_action_queue = (
-        load_json(SOURCE_DISCOVERY_ACTION_QUEUE, {}) if SOURCE_DISCOVERY_ACTION_QUEUE.exists() else {}
+        source_discovery_action_queue_override
+        if source_discovery_action_queue_override is not None
+        else load_json(SOURCE_DISCOVERY_ACTION_QUEUE, {}) if SOURCE_DISCOVERY_ACTION_QUEUE.exists() else {}
     )
     source_action_summary = source_action_queue.get("summary", {})
     if source_action_summary:
@@ -8270,11 +8295,15 @@ def validate_report_consistency(
             source_action_summary.get("manual_research_official_lookup_rows", 0)
         )
     source_focus_template = (
-        load_json(SOURCE_DISCOVERY_FOCUS_TEMPLATE, {}) if SOURCE_DISCOVERY_FOCUS_TEMPLATE.exists() else {}
+        source_discovery_focus_template_override
+        if source_discovery_focus_template_override is not None
+        else load_json(SOURCE_DISCOVERY_FOCUS_TEMPLATE, {}) if SOURCE_DISCOVERY_FOCUS_TEMPLATE.exists() else {}
     )
     source_focus_template_summary = source_focus_template.get("summary", {})
     source_focus_template_import = (
-        load_json(SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT, {})
+        source_discovery_focus_template_import_override
+        if source_discovery_focus_template_import_override is not None
+        else load_json(SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT, {})
         if SOURCE_DISCOVERY_FOCUS_TEMPLATE_IMPORT.exists()
         else {}
     )
@@ -8289,7 +8318,9 @@ def validate_report_consistency(
             source_focus_template_import.get("skipped_rows", 0)
         )
     source_next_focus_pack = (
-        load_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK, {})
+        source_discovery_next_focus_pack_override
+        if source_discovery_next_focus_pack_override is not None
+        else load_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK, {})
         if SOURCE_DISCOVERY_NEXT_FOCUS_PACK.exists()
         else {}
     )
@@ -8562,7 +8593,10 @@ def validate_report_consistency(
             animation_unmatched_keyword_summary.get("product_type_candidate_count", 0)
         )
     if open_queues != expected_open_queues:
-        findings.append("operations.open_review_queues does not match source report summaries")
+        findings.append(
+            "operations.open_review_queues does not match source report summaries: "
+            + json.dumps(_dict_delta(open_queues, expected_open_queues), ensure_ascii=False, sort_keys=True)
+        )
     taxonomy_review_queue = animation_categories.get("taxonomy_review_queue", [])
     unknown_categories = animation_categories.get("unknown_categories", [])
     if taxonomy_review_queue != unknown_categories:
@@ -8646,7 +8680,14 @@ def validate_report_consistency(
             findings.append("operations.top_store_priority_score does not match first store priority")
 
     if agent_summary.get("open_review_queues") != expected_open_queues:
-        findings.append("agent_work_queue.open_review_queues does not match source report summaries")
+        findings.append(
+            "agent_work_queue.open_review_queues does not match source report summaries: "
+            + json.dumps(
+                _dict_delta(agent_summary.get("open_review_queues") or {}, expected_open_queues),
+                ensure_ascii=False,
+                sort_keys=True,
+            )
+        )
     if agent_summary.get("batch_count") != len(batches):
         findings.append("agent_work_queue.batch_count does not match published batches")
     if agent_summary.get("top_next_batch_count") != len(top_next_batches):
@@ -9257,26 +9298,29 @@ def update_reports(write: bool) -> dict[str, Any]:
         danganronpa_missing_media,
         danganronpa_patch_template_dry_run,
         image_asset_audit,
-        metadata_review_batches,
-        metadata_action_queue,
-        ichiban_kuji_prize_name_image_review,
-        ichiban_kuji_prize_name_image_patch_candidates,
-        source_discovery_next_focus_pack,
-        source_discovery_next_focus_detail_candidates,
-        source_discovery_next_focus_metadata_field_import,
-        source_discovery_next_focus_fallback_queue,
-        deduplication_template_import_dry_run,
-        animation_review_batches,
-        animation_action_queue,
-        animation_split_review,
-        animation_unmatched_keyword_review,
-        ichiban_kuji_reissue_decision_template,
-        source_discovery_starter_queue,
-        image_attachment_action_queue,
-        ensky_cache_candidate_action_queue,
-        requested_focus_action_queue,
-        requested_focus_next_work,
-        deduplication_action_queue,
+        metadata_review_batches_override=metadata_review_batches,
+        metadata_action_queue_override=metadata_action_queue,
+        ichiban_prize_name_image_review_override=ichiban_kuji_prize_name_image_review,
+        ichiban_prize_name_image_patch_candidates_override=ichiban_kuji_prize_name_image_patch_candidates,
+        source_next_focus_pack_override=source_discovery_next_focus_pack,
+        source_next_focus_detail_candidates_override=source_discovery_next_focus_detail_candidates,
+        source_next_focus_metadata_field_import_override=source_discovery_next_focus_metadata_field_import,
+        source_next_focus_fallback_queue_override=source_discovery_next_focus_fallback_queue,
+        source_discovery_action_queue_override=source_discovery_action_queue,
+        source_discovery_focus_template_override=source_discovery_focus_template,
+        source_discovery_focus_template_import_override=source_discovery_focus_template_import,
+        deduplication_template_import_dry_run_override=deduplication_template_import_dry_run,
+        animation_review_batches_override=animation_review_batches,
+        animation_action_queue_override=animation_action_queue,
+        animation_split_review_override=animation_split_review,
+        animation_unmatched_keyword_review_override=animation_unmatched_keyword_review,
+        ichiban_reissue_decision_template_override=ichiban_kuji_reissue_decision_template,
+        source_discovery_starter_queue_override=source_discovery_starter_queue,
+        image_attachment_action_queue_override=image_attachment_action_queue,
+        ensky_cache_candidate_action_queue_override=ensky_cache_candidate_action_queue,
+        requested_focus_action_queue_override=requested_focus_action_queue,
+        requested_focus_next_work_override=requested_focus_next_work,
+        deduplication_action_queue_override=deduplication_action_queue,
     )
     agent_work_queue = build_agent_work_queue_public(
         generated_at,
@@ -10175,6 +10219,10 @@ def update_reports(write: bool) -> dict[str, Any]:
         animation_unmatched_keyword_review,
         source_discovery_next_focus_fallback_queue,
         source_discovery_starter_queue,
+        source_discovery_action_queue_override=source_discovery_action_queue,
+        source_discovery_focus_template_override=source_discovery_focus_template,
+        source_discovery_focus_template_import_override=source_discovery_focus_template_import,
+        source_discovery_next_focus_pack_override=source_discovery_next_focus_pack,
         image_attachment_action_queue_override=image_attachment_action_queue,
     )
     if consistency_findings:

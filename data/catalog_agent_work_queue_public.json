@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T16:07:12Z",
+  "generated_at": "2026-07-24T16:22:12Z",
   "summary": {
     "batch_count": 160,
     "max_published_batches": 160,
-    "summed_batch_rows": 20145,
+    "summed_batch_rows": 20254,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -52,12 +52,12 @@
         8
       ],
       [
-        "ichiban_kuji_metadata_action_queue",
-        7
+        "deduplication_review",
+        8
       ],
       [
-        "deduplication_review",
-        6
+        "ichiban_kuji_metadata_action_queue",
+        7
       ],
       [
         "ichiban_kuji_prize_policy_audit",
@@ -78,10 +78,6 @@
       [
         "generic_source_url_cleanup",
         3
-      ],
-      [
-        "source_discovery_next_focus_fallback_queue",
-        2
       ],
       [
         "ichiban_kuji_metadata_action_work_order",
@@ -171,7 +167,7 @@
       ],
       [
         "agent-dedupe",
-        6
+        8
       ],
       [
         "agent-ichiban-prize-policy",
@@ -198,10 +194,6 @@
         3
       ],
       [
-        "agent-source-fallback",
-        2
-      ],
-      [
         "agent-gotouchi-review",
         1
       ],
@@ -219,8 +211,8 @@
       ]
     ],
     "open_review_queues": {
-      "source_discovery_rows": 637,
-      "image_missing_rows": 710,
+      "source_discovery_rows": 672,
+      "image_missing_rows": 745,
       "dedupe_groups": 61,
       "animation_unknown_categories": 0,
       "ichiban_missing_release_date_rows": 8,
@@ -244,21 +236,21 @@
       "requested_focus_actionable_rows": 600,
       "requested_focus_unqueued_actionable_rows": 0,
       "requested_focus_barcode_template_rows_excluded": 5674,
-      "source_discovery_action_rows": 632,
-      "source_discovery_actionable_rows": 632,
+      "source_discovery_action_rows": 667,
+      "source_discovery_actionable_rows": 667,
       "source_discovery_unqueued_actionable_rows": 0,
       "source_discovery_manual_research_backlog_rows": 5,
       "source_discovery_manual_identity_backfill_required_rows": 3,
       "source_discovery_manual_official_lookup_rows": 2,
-      "source_discovery_focus_template_rows": 417,
-      "source_discovery_focus_template_work_order_packs": 23,
-      "source_discovery_focus_template_dry_run_skipped_rows": 417,
+      "source_discovery_focus_template_rows": 452,
+      "source_discovery_focus_template_work_order_packs": 25,
+      "source_discovery_focus_template_dry_run_skipped_rows": 452,
       "source_discovery_next_focus_pack_rows": 20,
-      "source_discovery_focus_pack_progress_queues": 23,
-      "source_discovery_focus_pack_progress_remaining_rows": 417,
-      "source_discovery_starter_queue_rows": 637,
-      "source_discovery_starter_queue_groups": 339,
-      "source_discovery_next_focus_fallback_rows": 17,
+      "source_discovery_focus_pack_progress_queues": 25,
+      "source_discovery_focus_pack_progress_remaining_rows": 452,
+      "source_discovery_starter_queue_rows": 672,
+      "source_discovery_starter_queue_groups": 353,
+      "source_discovery_next_focus_fallback_rows": 0,
       "source_discovery_next_focus_fallback_manual_confirmed_rows": 0,
       "source_detail_candidate_action_rows": 15,
       "source_detail_candidate_manual_confirmed_rows": 0,
@@ -321,15 +313,15 @@
     "confirmed_import_top_work_order_lane": "confirm_template_rows",
     "confirmed_import_top_work_order_workflow": "source_discovery",
     "confirmed_import_top_work_order_row_count": 641,
-    "image_rows_still_requiring_url_evidence": 710,
+    "image_rows_still_requiring_url_evidence": 745,
     "image_missing_evidence_top_source_stores": [
+      [
+        "엔스카이",
+        172
+      ],
       [
         "애니메이트",
         144
-      ],
-      [
-        "엔스카이",
-        137
       ],
       [
         "굿스마일컴퍼니",
@@ -367,27 +359,27 @@
       ],
       [
         "캔뱃지",
-        90
+        95
       ],
       [
         "인형",
-        77
+        83
       ],
       [
         "키링",
-        65
+        77
       ],
       [
         "마스코트",
-        62
+        63
       ],
       [
         "문구",
-        49
+        53
       ],
       [
         "머그컵",
-        23
+        28
       ]
     ],
     "source_discovery_starter_next_review_batch_rows": 20,
@@ -3581,7 +3573,7 @@
       "next_machine_step": "confirm_exact_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-55",
+      "batch_id": "015-agent-generic-source-cleanup-53",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -3687,7 +3679,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-56",
+      "batch_id": "015-agent-generic-source-cleanup-54",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -3743,7 +3735,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-57",
+      "batch_id": "015-agent-generic-source-cleanup-55",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -3816,7 +3808,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "018-agent-gotouchi-review-58",
+      "batch_id": "018-agent-gotouchi-review-56",
       "agent_id": "agent-gotouchi-review",
       "workstream": "gotouchi_official_candidate_review",
       "priority": 18,
@@ -4976,7 +4968,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "018-agent-ichiban-action-139",
+      "batch_id": "018-agent-ichiban-action-137",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 18,
@@ -5928,7 +5920,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "019-agent-confirmed-import-54",
+      "batch_id": "019-agent-confirmed-import-52",
       "agent_id": "agent-confirmed-import",
       "workstream": "confirmed_import_readiness",
       "priority": 19,
@@ -6144,400 +6136,6 @@
       ],
       "review_state": "manual_review_required",
       "next_machine_step": "manual_review"
-    },
-    {
-      "batch_id": "019-agent-source-fallback-51",
-      "agent_id": "agent-source-fallback",
-      "workstream": "source_discovery_next_focus_fallback_queue",
-      "priority": 19,
-      "title": "포커스팩 exact source 후보 15개 확인",
-      "public_report": "data/source_discovery_next_focus_fallback_queue_public.json",
-      "rows": 15,
-      "recommended_action": "Open domain-limited primary_review_url values first, then confirm exact product detail source URLs.",
-      "acceptance_criteria": [
-        "Accepted manual_confirmed_source_url must be an exact product/detail page, not a search page.",
-        "Product title, image, character, and variant must match the catalog row.",
-        "manual_confirmed_image_url is optional and only allowed after the exact page image is verified.",
-        "Keep auto-apply disabled and run the dry-run importer before any write import."
-      ],
-      "sample_items": [
-        {
-          "review_priority": 1,
-          "catalog_index": 1072,
-          "focus_pack_id": "source-discovery-focus-001",
-          "source_store": "애니메이트",
-          "category": "아크릴 스탠드",
-          "name_ko": "최애의 아이 아크릴 스탠드 (호시노 아이)",
-          "name_ja": "推しの子 アクリルスタンド (星野アイ)",
-          "search_term": "推しの子 アクリルスタンド (星野アイ)",
-          "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22",
-          "primary_review_url_kind": "domain_limited_web_search",
-          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22",
-          "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29",
-          "manual_confirmed": false,
-          "manual_confirmed_source_url": "",
-          "manual_confirmed_image_url": "",
-          "manual_evidence_url": "",
-          "manual_note": "",
-          "import_field": "source_url",
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_url_review_guidance": {
-            "accepted_source_url_patterns": [
-              "https://www.animate-onlineshop.jp/pn/.../pd/...",
-              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
-            ],
-            "rejected_source_url_patterns": [
-              "Google search result URLs",
-              "Animate products/list.php search pages",
-              "Animate sphone/products/list.php search pages",
-              "category, ranking, cart, favorite, or account pages"
-            ],
-            "confirmation_checks": [
-              "catalog row title or Japanese name matches the product detail page title",
-              "character, variant, size, and goods type match the catalog row",
-              "product image on the page depicts the same exact item or explicitly confirmed variant"
-            ],
-            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
-          },
-          "identity_review_status": "exact_page_match_review_ready",
-          "identity_blockers": [],
-          "requires_metadata_backfill": false,
-          "requires_variant_disambiguation": false,
-          "can_confirm_source_url_after_page_match": true
-        },
-        {
-          "review_priority": 3,
-          "catalog_index": 1083,
-          "focus_pack_id": "source-discovery-focus-001",
-          "source_store": "애니메이트",
-          "category": "아크릴 스탠드",
-          "name_ko": "슬램덩크 아크릴 스탠드 (강백호)",
-          "name_ja": "SLAM DUNK アクリルスタンド (桜木花道)",
-          "search_term": "SLAM DUNK アクリルスタンド (桜木花道)",
-          "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%A1%9C%E6%9C%A8%E8%8A%B1%E9%81%93%29%22",
-          "primary_review_url_kind": "domain_limited_web_search",
-          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%A1%9C%E6%9C%A8%E8%8A%B1%E9%81%93%29%22",
-          "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%A1%9C%E6%9C%A8%E8%8A%B1%E9%81%93%29",
-          "manual_confirmed": false,
-          "manual_confirmed_source_url": "",
-          "manual_confirmed_image_url": "",
-          "manual_evidence_url": "",
-          "manual_note": "",
-          "import_field": "source_url",
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_url_review_guidance": {
-            "accepted_source_url_patterns": [
-              "https://www.animate-onlineshop.jp/pn/.../pd/...",
-              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
-            ],
-            "rejected_source_url_patterns": [
-              "Google search result URLs",
-              "Animate products/list.php search pages",
-              "Animate sphone/products/list.php search pages",
-              "category, ranking, cart, favorite, or account pages"
-            ],
-            "confirmation_checks": [
-              "catalog row title or Japanese name matches the product detail page title",
-              "character, variant, size, and goods type match the catalog row",
-              "product image on the page depicts the same exact item or explicitly confirmed variant"
-            ],
-            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
-          },
-          "identity_review_status": "exact_page_match_review_ready",
-          "identity_blockers": [],
-          "requires_metadata_backfill": false,
-          "requires_variant_disambiguation": false,
-          "can_confirm_source_url_after_page_match": true
-        },
-        {
-          "review_priority": 4,
-          "catalog_index": 1084,
-          "focus_pack_id": "source-discovery-focus-001",
-          "source_store": "애니메이트",
-          "category": "아크릴 스탠드",
-          "name_ko": "슬램덩크 아크릴 스탠드 (서태웅)",
-          "name_ja": null,
-          "search_term": "SLAM DUNK アクリルスタンド 流川楓",
-          "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%B5%81%E5%B7%9D%E6%A5%93%22",
-          "primary_review_url_kind": "domain_limited_web_search",
-          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%B5%81%E5%B7%9D%E6%A5%93%22",
-          "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%B5%81%E5%B7%9D%E6%A5%93",
-          "manual_confirmed": false,
-          "manual_confirmed_source_url": "",
-          "manual_confirmed_image_url": "",
-          "manual_evidence_url": "",
-          "manual_note": "",
-          "import_field": "source_url",
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_url_review_guidance": {
-            "accepted_source_url_patterns": [
-              "https://www.animate-onlineshop.jp/pn/.../pd/...",
-              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
-            ],
-            "rejected_source_url_patterns": [
-              "Google search result URLs",
-              "Animate products/list.php search pages",
-              "Animate sphone/products/list.php search pages",
-              "category, ranking, cart, favorite, or account pages"
-            ],
-            "confirmation_checks": [
-              "catalog row title or Japanese name matches the product detail page title",
-              "character, variant, size, and goods type match the catalog row",
-              "product image on the page depicts the same exact item or explicitly confirmed variant"
-            ],
-            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
-          },
-          "identity_review_status": "exact_page_match_review_ready",
-          "identity_blockers": [
-            "missing_name_ja"
-          ],
-          "requires_metadata_backfill": true,
-          "requires_variant_disambiguation": false,
-          "can_confirm_source_url_after_page_match": true
-        },
-        {
-          "review_priority": 5,
-          "catalog_index": 1117,
-          "focus_pack_id": "source-discovery-focus-001",
-          "source_store": "애니메이트",
-          "category": "아크릴 스탠드",
-          "name_ko": "카드캡터 체리 아크릴 스탠드 (사쿠라)",
-          "name_ja": null,
-          "search_term": "カードキャプターさくら アクリルスタンド 木之本桜",
-          "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%AB%E3%83%BC%E3%83%89%E3%82%AD%E3%83%A3%E3%83%97%E3%82%BF%E3%83%BC%E3%81%95%E3%81%8F%E3%82%89+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%9C%A8%E4%B9%8B%E6%9C%AC%E6%A1%9C%22",
-          "primary_review_url_kind": "domain_limited_web_search",
-          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%AB%E3%83%BC%E3%83%89%E3%82%AD%E3%83%A3%E3%83%97%E3%82%BF%E3%83%BC%E3%81%95%E3%81%8F%E3%82%89+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%9C%A8%E4%B9%8B%E6%9C%AC%E6%A1%9C%22",
-          "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E3%82%AB%E3%83%BC%E3%83%89%E3%82%AD%E3%83%A3%E3%83%97%E3%82%BF%E3%83%BC%E3%81%95%E3%81%8F%E3%82%89+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%9C%A8%E4%B9%8B%E6%9C%AC%E6%A1%9C",
-          "manual_confirmed": false,
-          "manual_confirmed_source_url": "",
-          "manual_confirmed_image_url": "",
-          "manual_evidence_url": "",
-          "manual_note": "",
-          "import_field": "source_url",
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_url_review_guidance": {
-            "accepted_source_url_patterns": [
-              "https://www.animate-onlineshop.jp/pn/.../pd/...",
-              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
-            ],
-            "rejected_source_url_patterns": [
-              "Google search result URLs",
-              "Animate products/list.php search pages",
-              "Animate sphone/products/list.php search pages",
-              "category, ranking, cart, favorite, or account pages"
-            ],
-            "confirmation_checks": [
-              "catalog row title or Japanese name matches the product detail page title",
-              "character, variant, size, and goods type match the catalog row",
-              "product image on the page depicts the same exact item or explicitly confirmed variant"
-            ],
-            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
-          },
-          "identity_review_status": "exact_page_match_review_ready",
-          "identity_blockers": [
-            "missing_name_ja"
-          ],
-          "requires_metadata_backfill": true,
-          "requires_variant_disambiguation": false,
-          "can_confirm_source_url_after_page_match": true
-        },
-        {
-          "review_priority": 6,
-          "catalog_index": 1119,
-          "focus_pack_id": "source-discovery-focus-001",
-          "source_store": "애니메이트",
-          "category": "아크릴 스탠드",
-          "name_ko": "세일러문 아크릴 스탠드 (세일러문)",
-          "name_ja": null,
-          "search_term": "セーラームーン アクリルスタンド セーラームーン",
-          "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3%22",
-          "primary_review_url_kind": "domain_limited_web_search",
-          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3%22",
-          "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3",
-          "manual_confirmed": false,
-          "manual_confirmed_source_url": "",
-          "manual_confirmed_image_url": "",
-          "manual_evidence_url": "",
-          "manual_note": "",
-          "import_field": "source_url",
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_url_review_guidance": {
-            "accepted_source_url_patterns": [
-              "https://www.animate-onlineshop.jp/pn/.../pd/...",
-              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
-            ],
-            "rejected_source_url_patterns": [
-              "Google search result URLs",
-              "Animate products/list.php search pages",
-              "Animate sphone/products/list.php search pages",
-              "category, ranking, cart, favorite, or account pages"
-            ],
-            "confirmation_checks": [
-              "catalog row title or Japanese name matches the product detail page title",
-              "character, variant, size, and goods type match the catalog row",
-              "product image on the page depicts the same exact item or explicitly confirmed variant"
-            ],
-            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
-          },
-          "identity_review_status": "exact_page_match_review_ready",
-          "identity_blockers": [
-            "missing_name_ja"
-          ],
-          "requires_metadata_backfill": true,
-          "requires_variant_disambiguation": false,
-          "can_confirm_source_url_after_page_match": true
-        },
-        {
-          "review_priority": 8,
-          "catalog_index": 1632,
-          "focus_pack_id": "source-discovery-focus-001",
-          "source_store": "애니메이트",
-          "category": "아크릴 스탠드",
-          "name_ko": "주술회전 학원 시리즈 아크릴 스탠드 (이타도리)",
-          "name_ja": "呪術廻戦 学園シリーズ アクリルスタンド (虎杖)",
-          "search_term": "呪術廻戦 学園シリーズ アクリルスタンド (虎杖)",
-          "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E8%99%8E%E6%9D%96%29%22",
-          "primary_review_url_kind": "domain_limited_web_search",
-          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E8%99%8E%E6%9D%96%29%22",
-          "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E8%99%8E%E6%9D%96%29",
-          "manual_confirmed": false,
-          "manual_confirmed_source_url": "",
-          "manual_confirmed_image_url": "",
-          "manual_evidence_url": "",
-          "manual_note": "",
-          "import_field": "source_url",
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_url_review_guidance": {
-            "accepted_source_url_patterns": [
-              "https://www.animate-onlineshop.jp/pn/.../pd/...",
-              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
-            ],
-            "rejected_source_url_patterns": [
-              "Google search result URLs",
-              "Animate products/list.php search pages",
-              "Animate sphone/products/list.php search pages",
-              "category, ranking, cart, favorite, or account pages"
-            ],
-            "confirmation_checks": [
-              "catalog row title or Japanese name matches the product detail page title",
-              "character, variant, size, and goods type match the catalog row",
-              "product image on the page depicts the same exact item or explicitly confirmed variant"
-            ],
-            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
-          },
-          "identity_review_status": "exact_page_match_review_ready",
-          "identity_blockers": [],
-          "requires_metadata_backfill": false,
-          "requires_variant_disambiguation": false,
-          "can_confirm_source_url_after_page_match": true
-        },
-        {
-          "review_priority": 9,
-          "catalog_index": 2037,
-          "focus_pack_id": "source-discovery-focus-001",
-          "source_store": "애니메이트",
-          "category": "아크릴 스탠드",
-          "name_ko": "리제로 트레이딩 아크릴 (렘 의상시리즈)",
-          "name_ja": "Re:ゼロ トレーディングアクリル (レム衣装)",
-          "search_term": "Re:ゼロ トレーディングアクリル (レム衣装)",
-          "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22Re%3A%E3%82%BC%E3%83%AD+%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB+%28%E3%83%AC%E3%83%A0%E8%A1%A3%E8%A3%85%29%22",
-          "primary_review_url_kind": "domain_limited_web_search",
-          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22Re%3A%E3%82%BC%E3%83%AD+%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB+%28%E3%83%AC%E3%83%A0%E8%A1%A3%E8%A3%85%29%22",
-          "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=Re%3A%E3%82%BC%E3%83%AD+%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB+%28%E3%83%AC%E3%83%A0%E8%A1%A3%E8%A3%85%29",
-          "manual_confirmed": false,
-          "manual_confirmed_source_url": "",
-          "manual_confirmed_image_url": "",
-          "manual_evidence_url": "",
-          "manual_note": "",
-          "import_field": "source_url",
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_url_review_guidance": {
-            "accepted_source_url_patterns": [
-              "https://www.animate-onlineshop.jp/pn/.../pd/...",
-              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
-            ],
-            "rejected_source_url_patterns": [
-              "Google search result URLs",
-              "Animate products/list.php search pages",
-              "Animate sphone/products/list.php search pages",
-              "category, ranking, cart, favorite, or account pages"
-            ],
-            "confirmation_checks": [
-              "catalog row title or Japanese name matches the product detail page title",
-              "character, variant, size, and goods type match the catalog row",
-              "product image on the page depicts the same exact item or explicitly confirmed variant"
-            ],
-            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
-          },
-          "identity_review_status": "exact_page_match_review_ready",
-          "identity_blockers": [],
-          "requires_metadata_backfill": false,
-          "requires_variant_disambiguation": false,
-          "can_confirm_source_url_after_page_match": true
-        },
-        {
-          "review_priority": 10,
-          "catalog_index": 2066,
-          "focus_pack_id": "source-discovery-focus-001",
-          "source_store": "애니메이트",
-          "category": "아크릴 스탠드",
-          "name_ko": "전생슬 아크릴 스탠드 (베니마루)",
-          "name_ja": "転スラ アクリルスタンド (紅丸)",
-          "search_term": "転スラ アクリルスタンド (紅丸)",
-          "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E8%BB%A2%E3%82%B9%E3%83%A9+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E7%B4%85%E4%B8%B8%29%22",
-          "primary_review_url_kind": "domain_limited_web_search",
-          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E8%BB%A2%E3%82%B9%E3%83%A9+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E7%B4%85%E4%B8%B8%29%22",
-          "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E8%BB%A2%E3%82%B9%E3%83%A9+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E7%B4%85%E4%B8%B8%29",
-          "manual_confirmed": false,
-          "manual_confirmed_source_url": "",
-          "manual_confirmed_image_url": "",
-          "manual_evidence_url": "",
-          "manual_note": "",
-          "import_field": "source_url",
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_url_review_guidance": {
-            "accepted_source_url_patterns": [
-              "https://www.animate-onlineshop.jp/pn/.../pd/...",
-              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
-            ],
-            "rejected_source_url_patterns": [
-              "Google search result URLs",
-              "Animate products/list.php search pages",
-              "Animate sphone/products/list.php search pages",
-              "category, ranking, cart, favorite, or account pages"
-            ],
-            "confirmation_checks": [
-              "catalog row title or Japanese name matches the product detail page title",
-              "character, variant, size, and goods type match the catalog row",
-              "product image on the page depicts the same exact item or explicitly confirmed variant"
-            ],
-            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
-          },
-          "identity_review_status": "exact_page_match_review_ready",
-          "identity_blockers": [],
-          "requires_metadata_backfill": false,
-          "requires_variant_disambiguation": false,
-          "can_confirm_source_url_after_page_match": true
-        }
-      ],
-      "review_summary": {
-        "source_confirmation_ready_rows": 15,
-        "queue_rows": 17,
-        "manual_entry_template_rows": 17,
-        "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22",
-        "first_primary_review_url_kind": "domain_limited_web_search",
-        "dry_run_command": "python -m tools.import_confirmed_source_discovery_rows --queue server/source_discovery_confirmed_rows.json"
-      },
-      "review_state": "exact_source_discovery_required",
-      "next_machine_step": "find_exact_official_product_source_url"
     },
     {
       "batch_id": "019-agent-image-action-42",
@@ -7753,7 +7351,7 @@
       "priority": 20,
       "title": "현재 출처 탐색 포커스팩 진행",
       "public_report": "data/source_discovery_next_focus_pack_public.json",
-      "rows": 417,
+      "rows": 452,
       "recommended_action": "Start with the current focus pack and confirm exact source URLs before image import.",
       "acceptance_criteria": [
         "Each accepted source_url must be an exact product/detail page.",
@@ -7765,112 +7363,7 @@
           "priority": 1,
           "focus_pack_id": "source-discovery-focus-001",
           "is_current_pack": true,
-          "source_store": "애니메이트",
-          "target_category": "아크릴 스탠드",
-          "row_count": 20,
-          "confirmed_source_rows": 0,
-          "remaining_review_rows": 20,
-          "blocked_rows": 20,
-          "blocked_reason": "exact_product_detail_source_url_not_confirmed",
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "required_evidence": [
-            "exact_product_detail_url_on_allowed_domain",
-            "page_is_not_search_or_category_result",
-            "product_title_series_character_variant_category_match",
-            "source_page_has_verifiable_product_image_before_image_url_import"
-          ],
-          "review_status": "not_started",
-          "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29"
-        },
-        {
-          "priority": 2,
-          "focus_pack_id": "source-discovery-focus-002",
-          "is_current_pack": false,
-          "source_store": "애니메이트",
-          "target_category": "아크릴 스탠드",
-          "row_count": 20,
-          "confirmed_source_rows": 0,
-          "remaining_review_rows": 20,
-          "blocked_rows": 20,
-          "blocked_reason": "exact_product_detail_source_url_not_confirmed",
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "required_evidence": [
-            "exact_product_detail_url_on_allowed_domain",
-            "page_is_not_search_or_category_result",
-            "product_title_series_character_variant_category_match",
-            "source_page_has_verifiable_product_image_before_image_url_import"
-          ],
-          "review_status": "not_started",
-          "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E9%AD%94%E5%85%A5%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F%EF%BC%81%E5%85%A5%E9%96%93%E3%81%8F%E3%82%93%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%82%AF%E3%83%A9%E3%83%A9%E3%83%BB%E3%83%90%E3%83%A9%E3%83%83%E3%82%AF%29"
-        },
-        {
-          "priority": 3,
-          "focus_pack_id": "source-discovery-focus-003",
-          "is_current_pack": false,
-          "source_store": "애니메이트",
-          "target_category": "문구",
-          "row_count": 20,
-          "confirmed_source_rows": 0,
-          "remaining_review_rows": 20,
-          "blocked_rows": 20,
-          "blocked_reason": "exact_product_detail_source_url_not_confirmed",
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "required_evidence": [
-            "exact_product_detail_url_on_allowed_domain",
-            "page_is_not_search_or_category_result",
-            "product_title_series_character_variant_category_match",
-            "source_page_has_verifiable_product_image_before_image_url_import"
-          ],
-          "review_status": "not_started",
-          "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%BB%E3%83%83%E3%83%88%20%E5%8B%87%E8%80%85%E4%B8%80%E8%A1%8C"
-        },
-        {
-          "priority": 4,
-          "focus_pack_id": "source-discovery-focus-004",
-          "is_current_pack": false,
-          "source_store": "애니메이트",
-          "target_category": "캔뱃지",
-          "row_count": 20,
-          "confirmed_source_rows": 0,
-          "remaining_review_rows": 20,
-          "blocked_rows": 20,
-          "blocked_reason": "exact_product_detail_source_url_not_confirmed",
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "required_evidence": [
-            "exact_product_detail_url_on_allowed_domain",
-            "page_is_not_search_or_category_result",
-            "product_title_series_character_variant_category_match",
-            "source_page_has_verifiable_product_image_before_image_url_import"
-          ],
-          "review_status": "not_started",
-          "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%A7%84%EA%B2%A9%EC%9D%98%20%EA%B1%B0%EC%9D%B8%20%EC%BA%94%EB%B1%83%EC%A7%80%20%28%EB%9E%9C%EB%8D%A4%29"
-        },
-        {
-          "priority": 5,
-          "focus_pack_id": "source-discovery-focus-005",
-          "is_current_pack": false,
-          "source_store": "애니메이트",
-          "target_category": "인형",
-          "row_count": 20,
-          "confirmed_source_rows": 0,
-          "remaining_review_rows": 20,
-          "blocked_rows": 20,
-          "blocked_reason": "exact_product_detail_source_url_not_confirmed",
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "required_evidence": [
-            "exact_product_detail_url_on_allowed_domain",
-            "page_is_not_search_or_category_result",
-            "product_title_series_character_variant_category_match",
-            "source_page_has_verifiable_product_image_before_image_url_import"
-          ],
-          "review_status": "not_started",
-          "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%9B%90%ED%94%BC%EC%8A%A4%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%ED%86%A0%EB%8B%88%ED%86%A0%EB%8B%88%20%EC%B5%B8%ED%8C%8C%29"
-        },
-        {
-          "priority": 6,
-          "focus_pack_id": "source-discovery-focus-006",
-          "is_current_pack": false,
-          "source_store": "애니메이트",
+          "source_store": "엔스카이",
           "target_category": "키링",
           "row_count": 20,
           "confirmed_source_rows": 0,
@@ -7885,14 +7378,14 @@
             "source_page_has_verifiable_product_image_before_image_url_import"
           ],
           "review_status": "not_started",
-          "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E3%81%BE%E3%82%86%E3%81%97%E3%81%83%29"
+          "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29"
         },
         {
-          "priority": 7,
-          "focus_pack_id": "source-discovery-focus-007",
+          "priority": 2,
+          "focus_pack_id": "source-discovery-focus-002",
           "is_current_pack": false,
-          "source_store": "애니메이트",
-          "target_category": "머그컵",
+          "source_store": "엔스카이",
+          "target_category": "키링",
           "row_count": 20,
           "confirmed_source_rows": 0,
           "remaining_review_rows": 20,
@@ -7906,18 +7399,18 @@
             "source_page_has_verifiable_product_image_before_image_url_import"
           ],
           "review_status": "not_started",
-          "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%83%A9%E3%83%90%E3%83%BC%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88"
+          "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
         },
         {
-          "priority": 8,
-          "focus_pack_id": "source-discovery-focus-008",
+          "priority": 3,
+          "focus_pack_id": "source-discovery-focus-003",
           "is_current_pack": false,
-          "source_store": "애니메이트",
-          "target_category": "피규어",
-          "row_count": 4,
+          "source_store": "엔스카이",
+          "target_category": "키링",
+          "row_count": 20,
           "confirmed_source_rows": 0,
-          "remaining_review_rows": 4,
-          "blocked_rows": 4,
+          "remaining_review_rows": 20,
+          "blocked_rows": 20,
           "blocked_reason": "exact_product_detail_source_url_not_confirmed",
           "blocked_until": "exact_product_detail_source_url_confirmed",
           "required_evidence": [
@@ -7927,18 +7420,222 @@
             "source_page_has_verifiable_product_image_before_image_url_import"
           ],
           "review_status": "not_started",
-          "first_official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%82%BF%E3%83%9A%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29"
+          "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%B8%E3%83%B3%E3%83%99%E3%82%A8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+        },
+        {
+          "priority": 4,
+          "focus_pack_id": "source-discovery-focus-004",
+          "is_current_pack": false,
+          "source_store": "엔스카이",
+          "target_category": "인형",
+          "row_count": 20,
+          "confirmed_source_rows": 0,
+          "remaining_review_rows": 20,
+          "blocked_rows": 20,
+          "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "required_evidence": [
+            "exact_product_detail_url_on_allowed_domain",
+            "page_is_not_search_or_category_result",
+            "product_title_series_character_variant_category_match",
+            "source_page_has_verifiable_product_image_before_image_url_import"
+          ],
+          "review_status": "not_started",
+          "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%82%AD%E3%83%AB%E3%82%A2%EF%BC%9D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF"
+        },
+        {
+          "priority": 5,
+          "focus_pack_id": "source-discovery-focus-005",
+          "is_current_pack": false,
+          "source_store": "엔스카이",
+          "target_category": "아크릴 스탠드",
+          "row_count": 20,
+          "confirmed_source_rows": 0,
+          "remaining_review_rows": 20,
+          "blocked_rows": 20,
+          "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "required_evidence": [
+            "exact_product_detail_url_on_allowed_domain",
+            "page_is_not_search_or_category_result",
+            "product_title_series_character_variant_category_match",
+            "source_page_has_verifiable_product_image_before_image_url_import"
+          ],
+          "review_status": "not_started",
+          "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%9F%E3%81%B4%E3%81%AC%E3%81%84%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3"
+        },
+        {
+          "priority": 6,
+          "focus_pack_id": "source-discovery-focus-006",
+          "is_current_pack": false,
+          "source_store": "엔스카이",
+          "target_category": "아크릴 스탠드",
+          "row_count": 20,
+          "confirmed_source_rows": 0,
+          "remaining_review_rows": 20,
+          "blocked_rows": 20,
+          "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "required_evidence": [
+            "exact_product_detail_url_on_allowed_domain",
+            "page_is_not_search_or_category_result",
+            "product_title_series_character_variant_category_match",
+            "source_page_has_verifiable_product_image_before_image_url_import"
+          ],
+          "review_status": "not_started",
+          "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%29"
+        },
+        {
+          "priority": 7,
+          "focus_pack_id": "source-discovery-focus-007",
+          "is_current_pack": false,
+          "source_store": "엔스카이",
+          "target_category": "마스코트",
+          "row_count": 20,
+          "confirmed_source_rows": 0,
+          "remaining_review_rows": 20,
+          "blocked_rows": 20,
+          "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "required_evidence": [
+            "exact_product_detail_url_on_allowed_domain",
+            "page_is_not_search_or_category_result",
+            "product_title_series_character_variant_category_match",
+            "source_page_has_verifiable_product_image_before_image_url_import"
+          ],
+          "review_status": "not_started",
+          "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%9F%E3%81%B4%E3%81%AC%E3%81%84%20%E3%82%AD%E3%83%AB%E3%82%A2%EF%BC%9D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF"
+        },
+        {
+          "priority": 8,
+          "focus_pack_id": "source-discovery-focus-008",
+          "is_current_pack": false,
+          "source_store": "엔스카이",
+          "target_category": "캔뱃지",
+          "row_count": 20,
+          "confirmed_source_rows": 0,
+          "remaining_review_rows": 20,
+          "blocked_rows": 20,
+          "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "required_evidence": [
+            "exact_product_detail_url_on_allowed_domain",
+            "page_is_not_search_or_category_result",
+            "product_title_series_character_variant_category_match",
+            "source_page_has_verifiable_product_image_before_image_url_import"
+          ],
+          "review_status": "not_started",
+          "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1"
         }
       ],
       "review_summary": {
-        "focus_pack_progress_queue_count": 23,
-        "focus_pack_progress_remaining_rows": 417
+        "focus_pack_progress_queue_count": 25,
+        "focus_pack_progress_remaining_rows": 452
       },
       "review_state": "manual_review_required",
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-source-image-59",
+      "batch_id": "020-agent-source-image-57",
+      "agent_id": "agent-source-image",
+      "workstream": "image_url_attachment",
+      "priority": 20,
+      "title": "엔스카이 이미지 보강 (find_source_then_extract_image)",
+      "public_report": "data/catalog_image_enrichment_batches_public.json",
+      "rows": 172,
+      "recommended_action": "find exact official product page, then attach source_url and image_url",
+      "acceptance_criteria": [
+        "Exact product identity is verified before importing image_url.",
+        "Rows without source_url must receive an exact source_url before image_url is accepted.",
+        "No marketplace or unrelated stock image is imported without matching product evidence."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 922,
+          "name_ko": "치이카와 러버 스트랩 (우사기)",
+          "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
+          "series_name": null,
+          "category": "키링",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29"
+        },
+        {
+          "catalog_index": 923,
+          "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
+          "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+          "series_name": null,
+          "category": "키링",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29"
+        },
+        {
+          "catalog_index": 924,
+          "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
+          "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+          "series_name": null,
+          "category": "키링",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29"
+        },
+        {
+          "catalog_index": 925,
+          "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
+          "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+          "series_name": null,
+          "category": "키링",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29"
+        },
+        {
+          "catalog_index": 926,
+          "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
+          "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
+          "series_name": null,
+          "category": "키링",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29"
+        },
+        {
+          "catalog_index": 928,
+          "name_ko": "치이카와 아크릴 스탠드 (하치와레)",
+          "name_ja": "ちいかわ アクリルスタンド (ハチワレ)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29"
+        },
+        {
+          "catalog_index": 929,
+          "name_ko": "치이카와 아크릴 스탠드 (우사기)",
+          "name_ja": "ちいかわ アクリルスタンド (うさぎ)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%86%E3%81%95%E3%81%8E%29"
+        },
+        {
+          "catalog_index": 930,
+          "name_ko": "치이카와 빅 아크릴 스탠드 (치이카와)",
+          "name_ja": "ちいかわ ビッグアクリルスタンド (ちいかわ)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29"
+        }
+      ],
+      "review_state": "source_discovery_then_image_attachment",
+      "next_machine_step": "find_source_url_before_image_import"
+    },
+    {
+      "batch_id": "020-agent-source-image-58",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -8031,105 +7728,6 @@
           "source_store": null,
           "source_url": null,
           "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%B2%B4%EC%9D%B8%EC%86%8C%EB%A7%A8%20%EC%BA%94%EB%B1%83%EC%A7%80%20%28%EB%9E%9C%EB%8D%A4%29"
-        }
-      ],
-      "review_state": "source_discovery_then_image_attachment",
-      "next_machine_step": "find_source_url_before_image_import"
-    },
-    {
-      "batch_id": "020-agent-source-image-60",
-      "agent_id": "agent-source-image",
-      "workstream": "image_url_attachment",
-      "priority": 20,
-      "title": "엔스카이 이미지 보강 (find_source_then_extract_image)",
-      "public_report": "data/catalog_image_enrichment_batches_public.json",
-      "rows": 137,
-      "recommended_action": "find exact official product page, then attach source_url and image_url",
-      "acceptance_criteria": [
-        "Exact product identity is verified before importing image_url.",
-        "Rows without source_url must receive an exact source_url before image_url is accepted.",
-        "No marketplace or unrelated stock image is imported without matching product evidence."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 922,
-          "name_ko": "치이카와 러버 스트랩 (우사기)",
-          "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
-          "series_name": null,
-          "category": "키링",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29"
-        },
-        {
-          "catalog_index": 923,
-          "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
-          "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
-          "series_name": null,
-          "category": "키링",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29"
-        },
-        {
-          "catalog_index": 924,
-          "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
-          "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
-          "series_name": null,
-          "category": "키링",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29"
-        },
-        {
-          "catalog_index": 925,
-          "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
-          "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
-          "series_name": null,
-          "category": "키링",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29"
-        },
-        {
-          "catalog_index": 926,
-          "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
-          "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
-          "series_name": null,
-          "category": "키링",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29"
-        },
-        {
-          "catalog_index": 928,
-          "name_ko": "치이카와 아크릴 스탠드 (하치와레)",
-          "name_ja": "ちいかわ アクリルスタンド (ハチワレ)",
-          "series_name": null,
-          "category": "아크릴 스탠드",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29"
-        },
-        {
-          "catalog_index": 929,
-          "name_ko": "치이카와 아크릴 스탠드 (우사기)",
-          "name_ja": "ちいかわ アクリルスタンド (うさぎ)",
-          "series_name": null,
-          "category": "아크릴 스탠드",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%86%E3%81%95%E3%81%8E%29"
-        },
-        {
-          "catalog_index": 930,
-          "name_ko": "치이카와 빅 아크릴 스탠드 (치이카와)",
-          "name_ja": "ちいかわ ビッグアクリルスタンド (ちいかわ)",
-          "series_name": null,
-          "category": "아크릴 스탠드",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29"
         }
       ],
       "review_state": "source_discovery_then_image_attachment",
@@ -8235,7 +7833,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-source-image-61",
+      "batch_id": "020-agent-source-image-59",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -8334,7 +7932,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-62",
+      "batch_id": "020-agent-source-image-60",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -8433,7 +8031,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-63",
+      "batch_id": "020-agent-source-image-61",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -8532,7 +8130,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-64",
+      "batch_id": "020-agent-source-image-62",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -8631,7 +8229,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-65",
+      "batch_id": "020-agent-source-image-63",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -12153,7 +11751,7 @@
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "020-agent-source-starter-160",
+      "batch_id": "020-agent-source-starter-158",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_next_review_batch",
       "priority": 20,
@@ -12758,413 +12356,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-source-fallback-52",
-      "agent_id": "agent-source-fallback",
-      "workstream": "source_discovery_next_focus_fallback_queue",
-      "priority": 20,
-      "title": "현재 포커스팩 fallback 소스 확인",
-      "public_report": "data/source_discovery_next_focus_fallback_queue_public.json",
-      "rows": 17,
-      "recommended_action": "Open primary_review_url values and fill manual_confirmed_source_url only for exact product pages.",
-      "acceptance_criteria": [
-        "primary_review_url is only a review starting point; accepted source_url must be an exact product/detail page.",
-        "Rows with variant or metadata blockers stay blocked until identity is disambiguated.",
-        "Keep auto-apply disabled and prepare manual confirmed source templates only."
-      ],
-      "sample_items": [
-        {
-          "review_priority": 1,
-          "catalog_index": 1072,
-          "focus_pack_id": "source-discovery-focus-001",
-          "source_store": "애니메이트",
-          "category": "아크릴 스탠드",
-          "name_ko": "최애의 아이 아크릴 스탠드 (호시노 아이)",
-          "name_ja": "推しの子 アクリルスタンド (星野アイ)",
-          "search_term": "推しの子 アクリルスタンド (星野アイ)",
-          "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22",
-          "primary_review_url_kind": "domain_limited_web_search",
-          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22",
-          "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29",
-          "manual_confirmed": false,
-          "manual_confirmed_source_url": "",
-          "manual_confirmed_image_url": "",
-          "manual_evidence_url": "",
-          "manual_note": "",
-          "import_field": "source_url",
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_url_review_guidance": {
-            "accepted_source_url_patterns": [
-              "https://www.animate-onlineshop.jp/pn/.../pd/...",
-              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
-            ],
-            "rejected_source_url_patterns": [
-              "Google search result URLs",
-              "Animate products/list.php search pages",
-              "Animate sphone/products/list.php search pages",
-              "category, ranking, cart, favorite, or account pages"
-            ],
-            "confirmation_checks": [
-              "catalog row title or Japanese name matches the product detail page title",
-              "character, variant, size, and goods type match the catalog row",
-              "product image on the page depicts the same exact item or explicitly confirmed variant"
-            ],
-            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
-          },
-          "identity_review_status": "exact_page_match_review_ready",
-          "identity_blockers": [],
-          "requires_metadata_backfill": false,
-          "requires_variant_disambiguation": false,
-          "can_confirm_source_url_after_page_match": true
-        },
-        {
-          "review_priority": 2,
-          "catalog_index": 1082,
-          "focus_pack_id": "source-discovery-focus-001",
-          "source_store": "애니메이트",
-          "category": "아크릴 스탠드",
-          "name_ko": "죠죠의 기묘한 모험 아크릴 스탠드",
-          "name_ja": null,
-          "search_term": "ジョジョの奇妙な冒険 アクリルスタンド",
-          "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%22",
-          "primary_review_url_kind": "domain_limited_web_search",
-          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%22",
-          "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89",
-          "manual_confirmed": false,
-          "manual_confirmed_source_url": "",
-          "manual_confirmed_image_url": "",
-          "manual_evidence_url": "",
-          "manual_note": "",
-          "import_field": "source_url",
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_url_review_guidance": {
-            "accepted_source_url_patterns": [
-              "https://www.animate-onlineshop.jp/pn/.../pd/...",
-              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
-            ],
-            "rejected_source_url_patterns": [
-              "Google search result URLs",
-              "Animate products/list.php search pages",
-              "Animate sphone/products/list.php search pages",
-              "category, ranking, cart, favorite, or account pages"
-            ],
-            "confirmation_checks": [
-              "catalog row title or Japanese name matches the product detail page title",
-              "character, variant, size, and goods type match the catalog row",
-              "product image on the page depicts the same exact item or explicitly confirmed variant"
-            ],
-            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
-          },
-          "identity_review_status": "variant_disambiguation_required",
-          "identity_blockers": [
-            "missing_name_ja",
-            "variant_or_character_not_explicit"
-          ],
-          "requires_metadata_backfill": true,
-          "requires_variant_disambiguation": true,
-          "can_confirm_source_url_after_page_match": false
-        },
-        {
-          "review_priority": 3,
-          "catalog_index": 1083,
-          "focus_pack_id": "source-discovery-focus-001",
-          "source_store": "애니메이트",
-          "category": "아크릴 스탠드",
-          "name_ko": "슬램덩크 아크릴 스탠드 (강백호)",
-          "name_ja": "SLAM DUNK アクリルスタンド (桜木花道)",
-          "search_term": "SLAM DUNK アクリルスタンド (桜木花道)",
-          "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%A1%9C%E6%9C%A8%E8%8A%B1%E9%81%93%29%22",
-          "primary_review_url_kind": "domain_limited_web_search",
-          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%A1%9C%E6%9C%A8%E8%8A%B1%E9%81%93%29%22",
-          "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%A1%9C%E6%9C%A8%E8%8A%B1%E9%81%93%29",
-          "manual_confirmed": false,
-          "manual_confirmed_source_url": "",
-          "manual_confirmed_image_url": "",
-          "manual_evidence_url": "",
-          "manual_note": "",
-          "import_field": "source_url",
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_url_review_guidance": {
-            "accepted_source_url_patterns": [
-              "https://www.animate-onlineshop.jp/pn/.../pd/...",
-              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
-            ],
-            "rejected_source_url_patterns": [
-              "Google search result URLs",
-              "Animate products/list.php search pages",
-              "Animate sphone/products/list.php search pages",
-              "category, ranking, cart, favorite, or account pages"
-            ],
-            "confirmation_checks": [
-              "catalog row title or Japanese name matches the product detail page title",
-              "character, variant, size, and goods type match the catalog row",
-              "product image on the page depicts the same exact item or explicitly confirmed variant"
-            ],
-            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
-          },
-          "identity_review_status": "exact_page_match_review_ready",
-          "identity_blockers": [],
-          "requires_metadata_backfill": false,
-          "requires_variant_disambiguation": false,
-          "can_confirm_source_url_after_page_match": true
-        },
-        {
-          "review_priority": 4,
-          "catalog_index": 1084,
-          "focus_pack_id": "source-discovery-focus-001",
-          "source_store": "애니메이트",
-          "category": "아크릴 스탠드",
-          "name_ko": "슬램덩크 아크릴 스탠드 (서태웅)",
-          "name_ja": null,
-          "search_term": "SLAM DUNK アクリルスタンド 流川楓",
-          "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%B5%81%E5%B7%9D%E6%A5%93%22",
-          "primary_review_url_kind": "domain_limited_web_search",
-          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%B5%81%E5%B7%9D%E6%A5%93%22",
-          "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%B5%81%E5%B7%9D%E6%A5%93",
-          "manual_confirmed": false,
-          "manual_confirmed_source_url": "",
-          "manual_confirmed_image_url": "",
-          "manual_evidence_url": "",
-          "manual_note": "",
-          "import_field": "source_url",
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_url_review_guidance": {
-            "accepted_source_url_patterns": [
-              "https://www.animate-onlineshop.jp/pn/.../pd/...",
-              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
-            ],
-            "rejected_source_url_patterns": [
-              "Google search result URLs",
-              "Animate products/list.php search pages",
-              "Animate sphone/products/list.php search pages",
-              "category, ranking, cart, favorite, or account pages"
-            ],
-            "confirmation_checks": [
-              "catalog row title or Japanese name matches the product detail page title",
-              "character, variant, size, and goods type match the catalog row",
-              "product image on the page depicts the same exact item or explicitly confirmed variant"
-            ],
-            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
-          },
-          "identity_review_status": "exact_page_match_review_ready",
-          "identity_blockers": [
-            "missing_name_ja"
-          ],
-          "requires_metadata_backfill": true,
-          "requires_variant_disambiguation": false,
-          "can_confirm_source_url_after_page_match": true
-        },
-        {
-          "review_priority": 5,
-          "catalog_index": 1117,
-          "focus_pack_id": "source-discovery-focus-001",
-          "source_store": "애니메이트",
-          "category": "아크릴 스탠드",
-          "name_ko": "카드캡터 체리 아크릴 스탠드 (사쿠라)",
-          "name_ja": null,
-          "search_term": "カードキャプターさくら アクリルスタンド 木之本桜",
-          "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%AB%E3%83%BC%E3%83%89%E3%82%AD%E3%83%A3%E3%83%97%E3%82%BF%E3%83%BC%E3%81%95%E3%81%8F%E3%82%89+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%9C%A8%E4%B9%8B%E6%9C%AC%E6%A1%9C%22",
-          "primary_review_url_kind": "domain_limited_web_search",
-          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%AB%E3%83%BC%E3%83%89%E3%82%AD%E3%83%A3%E3%83%97%E3%82%BF%E3%83%BC%E3%81%95%E3%81%8F%E3%82%89+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%9C%A8%E4%B9%8B%E6%9C%AC%E6%A1%9C%22",
-          "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E3%82%AB%E3%83%BC%E3%83%89%E3%82%AD%E3%83%A3%E3%83%97%E3%82%BF%E3%83%BC%E3%81%95%E3%81%8F%E3%82%89+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%9C%A8%E4%B9%8B%E6%9C%AC%E6%A1%9C",
-          "manual_confirmed": false,
-          "manual_confirmed_source_url": "",
-          "manual_confirmed_image_url": "",
-          "manual_evidence_url": "",
-          "manual_note": "",
-          "import_field": "source_url",
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_url_review_guidance": {
-            "accepted_source_url_patterns": [
-              "https://www.animate-onlineshop.jp/pn/.../pd/...",
-              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
-            ],
-            "rejected_source_url_patterns": [
-              "Google search result URLs",
-              "Animate products/list.php search pages",
-              "Animate sphone/products/list.php search pages",
-              "category, ranking, cart, favorite, or account pages"
-            ],
-            "confirmation_checks": [
-              "catalog row title or Japanese name matches the product detail page title",
-              "character, variant, size, and goods type match the catalog row",
-              "product image on the page depicts the same exact item or explicitly confirmed variant"
-            ],
-            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
-          },
-          "identity_review_status": "exact_page_match_review_ready",
-          "identity_blockers": [
-            "missing_name_ja"
-          ],
-          "requires_metadata_backfill": true,
-          "requires_variant_disambiguation": false,
-          "can_confirm_source_url_after_page_match": true
-        },
-        {
-          "review_priority": 6,
-          "catalog_index": 1119,
-          "focus_pack_id": "source-discovery-focus-001",
-          "source_store": "애니메이트",
-          "category": "아크릴 스탠드",
-          "name_ko": "세일러문 아크릴 스탠드 (세일러문)",
-          "name_ja": null,
-          "search_term": "セーラームーン アクリルスタンド セーラームーン",
-          "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3%22",
-          "primary_review_url_kind": "domain_limited_web_search",
-          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3%22",
-          "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3",
-          "manual_confirmed": false,
-          "manual_confirmed_source_url": "",
-          "manual_confirmed_image_url": "",
-          "manual_evidence_url": "",
-          "manual_note": "",
-          "import_field": "source_url",
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_url_review_guidance": {
-            "accepted_source_url_patterns": [
-              "https://www.animate-onlineshop.jp/pn/.../pd/...",
-              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
-            ],
-            "rejected_source_url_patterns": [
-              "Google search result URLs",
-              "Animate products/list.php search pages",
-              "Animate sphone/products/list.php search pages",
-              "category, ranking, cart, favorite, or account pages"
-            ],
-            "confirmation_checks": [
-              "catalog row title or Japanese name matches the product detail page title",
-              "character, variant, size, and goods type match the catalog row",
-              "product image on the page depicts the same exact item or explicitly confirmed variant"
-            ],
-            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
-          },
-          "identity_review_status": "exact_page_match_review_ready",
-          "identity_blockers": [
-            "missing_name_ja"
-          ],
-          "requires_metadata_backfill": true,
-          "requires_variant_disambiguation": false,
-          "can_confirm_source_url_after_page_match": true
-        },
-        {
-          "review_priority": 7,
-          "catalog_index": 1123,
-          "focus_pack_id": "source-discovery-focus-001",
-          "source_store": "애니메이트",
-          "category": "아크릴 스탠드",
-          "name_ko": "신세기 에반게리온 아크릴 스탠드",
-          "name_ja": null,
-          "search_term": "新世紀エヴァンゲリオン アクリルスタンド",
-          "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%96%B0%E4%B8%96%E7%B4%80%E3%82%A8%E3%83%B4%E3%82%A1%E3%83%B3%E3%82%B2%E3%83%AA%E3%82%AA%E3%83%B3+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%22",
-          "primary_review_url_kind": "domain_limited_web_search",
-          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%96%B0%E4%B8%96%E7%B4%80%E3%82%A8%E3%83%B4%E3%82%A1%E3%83%B3%E3%82%B2%E3%83%AA%E3%82%AA%E3%83%B3+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%22",
-          "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E6%96%B0%E4%B8%96%E7%B4%80%E3%82%A8%E3%83%B4%E3%82%A1%E3%83%B3%E3%82%B2%E3%83%AA%E3%82%AA%E3%83%B3+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89",
-          "manual_confirmed": false,
-          "manual_confirmed_source_url": "",
-          "manual_confirmed_image_url": "",
-          "manual_evidence_url": "",
-          "manual_note": "",
-          "import_field": "source_url",
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_url_review_guidance": {
-            "accepted_source_url_patterns": [
-              "https://www.animate-onlineshop.jp/pn/.../pd/...",
-              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
-            ],
-            "rejected_source_url_patterns": [
-              "Google search result URLs",
-              "Animate products/list.php search pages",
-              "Animate sphone/products/list.php search pages",
-              "category, ranking, cart, favorite, or account pages"
-            ],
-            "confirmation_checks": [
-              "catalog row title or Japanese name matches the product detail page title",
-              "character, variant, size, and goods type match the catalog row",
-              "product image on the page depicts the same exact item or explicitly confirmed variant"
-            ],
-            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
-          },
-          "identity_review_status": "variant_disambiguation_required",
-          "identity_blockers": [
-            "missing_name_ja",
-            "variant_or_character_not_explicit"
-          ],
-          "requires_metadata_backfill": true,
-          "requires_variant_disambiguation": true,
-          "can_confirm_source_url_after_page_match": false
-        },
-        {
-          "review_priority": 8,
-          "catalog_index": 1632,
-          "focus_pack_id": "source-discovery-focus-001",
-          "source_store": "애니메이트",
-          "category": "아크릴 스탠드",
-          "name_ko": "주술회전 학원 시리즈 아크릴 스탠드 (이타도리)",
-          "name_ja": "呪術廻戦 学園シリーズ アクリルスタンド (虎杖)",
-          "search_term": "呪術廻戦 学園シリーズ アクリルスタンド (虎杖)",
-          "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E8%99%8E%E6%9D%96%29%22",
-          "primary_review_url_kind": "domain_limited_web_search",
-          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E8%99%8E%E6%9D%96%29%22",
-          "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E8%99%8E%E6%9D%96%29",
-          "manual_confirmed": false,
-          "manual_confirmed_source_url": "",
-          "manual_confirmed_image_url": "",
-          "manual_evidence_url": "",
-          "manual_note": "",
-          "import_field": "source_url",
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_url_review_guidance": {
-            "accepted_source_url_patterns": [
-              "https://www.animate-onlineshop.jp/pn/.../pd/...",
-              "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
-            ],
-            "rejected_source_url_patterns": [
-              "Google search result URLs",
-              "Animate products/list.php search pages",
-              "Animate sphone/products/list.php search pages",
-              "category, ranking, cart, favorite, or account pages"
-            ],
-            "confirmation_checks": [
-              "catalog row title or Japanese name matches the product detail page title",
-              "character, variant, size, and goods type match the catalog row",
-              "product image on the page depicts the same exact item or explicitly confirmed variant"
-            ],
-            "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
-          },
-          "identity_review_status": "exact_page_match_review_ready",
-          "identity_blockers": [],
-          "requires_metadata_backfill": false,
-          "requires_variant_disambiguation": false,
-          "can_confirm_source_url_after_page_match": true
-        }
-      ],
-      "review_summary": {
-        "queue_rows": 17,
-        "review_table_rows": 17,
-        "source_confirmation_ready_rows": 15,
-        "metadata_backfill_required_rows": 5,
-        "variant_disambiguation_required_rows": 2,
-        "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22",
-        "first_primary_review_url_kind": "domain_limited_web_search",
-        "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22",
-        "work_order_lanes": [
-          "domain_limited_exact_title_search",
-          "legacy_mobile_store_search",
-          "evidence_fill_and_dry_run"
-        ]
-      },
-      "review_state": "exact_source_discovery_required",
-      "next_machine_step": "find_exact_official_product_source_url"
-    },
-    {
-      "batch_id": "020-agent-source-image-66",
+      "batch_id": "020-agent-source-image-64",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -15328,390 +14520,6 @@
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "020-agent-source-detail-candidate-53",
-      "agent_id": "agent-source-detail-candidate",
-      "workstream": "source_discovery_next_focus_detail_candidates",
-      "priority": 20,
-      "title": "현재 source focus pack variant 메타데이터 보강",
-      "public_report": "data/source_discovery_next_focus_detail_candidates_public.json",
-      "rows": 4,
-      "recommended_action": "Confirm exact character, variant, sub_series, and source/image identity before any source_url or image_url import.",
-      "acceptance_criteria": [
-        "Do not attach candidate images to broad catalog rows until the exact variant is identified.",
-        "Fill suggested_name_ja, suggested_sub_series, and suggested_character_name only from official product evidence.",
-        "Use candidate_options as review evidence; auto-apply remains disabled."
-      ],
-      "sample_items": [
-        {
-          "manual_confirmed": false,
-          "manual_review_status": "not_started",
-          "manual_note": "",
-          "focus_pack_id": "source-discovery-focus-001",
-          "catalog_index": 1082,
-          "source_store": "애니메이트",
-          "category": "아크릴 스탠드",
-          "current_name_ko": "죠죠의 기묘한 모험 아크릴 스탠드",
-          "current_name_ja": null,
-          "search_query": "ジョジョの奇妙な冒険 アクリルスタンド",
-          "top_candidate_title": "【グッズ-スタンドポップ】ジョジョの奇妙な冒険 オラオラオーバードライブ アクリルスタンド　イギー",
-          "top_candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%AA%E3%83%A9%E3%82%AA%E3%83%A9%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%80%80%E3%82%A4%E3%82%AE%E3%83%BC/pd/3505033/",
-          "top_candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4595433158276_1_1781003119.jpg&width=400&height=400&square=1",
-          "candidate_options": [
-            {
-              "rank": 1,
-              "candidate_title": "【グッズ-スタンドポップ】ジョジョの奇妙な冒険 オラオラオーバードライブ アクリルスタンド　イギー",
-              "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%AA%E3%83%A9%E3%82%AA%E3%83%A9%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%80%80%E3%82%A4%E3%82%AE%E3%83%BC/pd/3505033/",
-              "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4595433158276_1_1781003119.jpg&width=400&height=400&square=1",
-              "exact_candidate_blockers": [
-                "broad_query_without_variant"
-              ]
-            },
-            {
-              "rank": 2,
-              "candidate_title": "【グッズ-スタンドポップ】ジョジョの奇妙な冒険 オラオラオーバードライブ アクリルスタンド　空条 承太郎",
-              "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%AA%E3%83%A9%E3%82%AA%E3%83%A9%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%80%80%E7%A9%BA%E6%9D%A1+%E6%89%BF%E5%A4%AA%E9%83%8E/pd/3505031/",
-              "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4595433158252_1_1781003118.jpg&width=400&height=400&square=1",
-              "exact_candidate_blockers": [
-                "rank_not_first",
-                "broad_query_without_variant"
-              ]
-            },
-            {
-              "rank": 3,
-              "candidate_title": "【グッズ-スタンドポップ】ジョジョの奇妙な冒険 オラオラオーバードライブ アクリルスタンド　花京院 典明",
-              "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%AA%E3%83%A9%E3%82%AA%E3%83%A9%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%80%80%E8%8A%B1%E4%BA%AC%E9%99%A2+%E5%85%B8%E6%98%8E/pd/3505034/",
-              "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4595433158283_1_1781003107.jpg&width=400&height=400&square=1",
-              "exact_candidate_blockers": [
-                "rank_not_first",
-                "broad_query_without_variant"
-              ]
-            },
-            {
-              "rank": 4,
-              "candidate_title": "【グッズ-スタンドポップ】ジョジョの奇妙な冒険 オラオラオーバードライブ アクリルスタンド　シーザー・A・ツェペリ",
-              "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%AA%E3%83%A9%E3%82%AA%E3%83%A9%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%80%80%E3%82%B7%E3%83%BC%E3%82%B6%E3%83%BC%E3%83%BBA%E3%83%BB%E3%83%84%E3%82%A7%E3%83%9A%E3%83%AA/pd/3505028/",
-              "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4595433158221_1_1781003121.jpg&width=400&height=400&square=1",
-              "exact_candidate_blockers": [
-                "rank_not_first",
-                "broad_query_without_variant"
-              ]
-            },
-            {
-              "rank": 5,
-              "candidate_title": "【グッズ-スタンドポップ】ジョジョの奇妙な冒険 オラオラオーバードライブ アクリルスタンド　DIO",
-              "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%AA%E3%83%A9%E3%82%AA%E3%83%A9%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%80%80DIO/pd/3505032/",
-              "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4595433158269_1_1781003116.jpg&width=400&height=400&square=1",
-              "exact_candidate_blockers": [
-                "rank_not_first",
-                "broad_query_without_variant"
-              ]
-            }
-          ],
-          "suggested_name_ja": "",
-          "suggested_series_name": "",
-          "suggested_sub_series": "",
-          "suggested_character_name": "",
-          "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%AA%E3%83%A9%E3%82%AA%E3%83%A9%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%83%89%E3%83%A9%E3%82%A4%E3%83%96+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%80%80%E3%82%A4%E3%82%AE%E3%83%BC/pd/3505033/",
-          "blocked_until": "exact_catalog_variant_identity_confirmed",
-          "required_evidence": [
-            "exact_variant_or_character_name",
-            "official_product_title",
-            "official_product_detail_url",
-            "image_identity_matches_selected_variant_before_import"
-          ]
-        },
-        {
-          "manual_confirmed": false,
-          "manual_review_status": "not_started",
-          "manual_note": "",
-          "focus_pack_id": "source-discovery-focus-001",
-          "catalog_index": 1123,
-          "source_store": "애니메이트",
-          "category": "아크릴 스탠드",
-          "current_name_ko": "신세기 에반게리온 아크릴 스탠드",
-          "current_name_ja": null,
-          "search_query": "新世紀エヴァンゲリオン アクリルスタンド",
-          "top_candidate_title": "【グッズ-スタンドポップ】新世紀エヴァンゲリオン 少年エース30周年 BIGアクリルスタンド 新世紀エヴァンゲリオン",
-          "top_candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E6%96%B0%E4%B8%96%E7%B4%80%E3%82%A8%E3%83%B4%E3%82%A1%E3%83%B3%E3%82%B2%E3%83%AA%E3%82%AA%E3%83%B3+%E5%B0%91%E5%B9%B4%E3%82%A8%E3%83%BC%E3%82%B930%E5%91%A8%E5%B9%B4+BIG%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%96%B0%E4%B8%96%E7%B4%80%E3%82%A8%E3%83%B4%E3%82%A1%E3%83%B3%E3%82%B2%E3%83%AA%E3%82%AA%E3%83%B3/pd/3078170/",
-          "top_candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4942330338407_1_1741579667.jpg&width=400&height=400&square=1",
-          "candidate_options": [
-            {
-              "rank": 1,
-              "candidate_title": "【グッズ-スタンドポップ】新世紀エヴァンゲリオン 少年エース30周年 BIGアクリルスタンド 新世紀エヴァンゲリオン",
-              "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E6%96%B0%E4%B8%96%E7%B4%80%E3%82%A8%E3%83%B4%E3%82%A1%E3%83%B3%E3%82%B2%E3%83%AA%E3%82%AA%E3%83%B3+%E5%B0%91%E5%B9%B4%E3%82%A8%E3%83%BC%E3%82%B930%E5%91%A8%E5%B9%B4+BIG%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%96%B0%E4%B8%96%E7%B4%80%E3%82%A8%E3%83%B4%E3%82%A1%E3%83%B3%E3%82%B2%E3%83%AA%E3%82%AA%E3%83%B3/pd/3078170/",
-              "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4942330338407_1_1741579667.jpg&width=400&height=400&square=1",
-              "exact_candidate_blockers": [
-                "token_overlap_below_2",
-                "broad_query_without_variant"
-              ]
-            },
-            {
-              "rank": 2,
-              "candidate_title": "【グッズ-スタンドポップ】新世紀エヴァンゲリオン アクリルスタンド/B ゆるパレット",
-              "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E6%96%B0%E4%B8%96%E7%B4%80%E3%82%A8%E3%83%B4%E3%82%A1%E3%83%B3%E3%82%B2%E3%83%AA%E3%82%AA%E3%83%B3+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89/B+%E3%82%86%E3%82%8B%E3%83%91%E3%83%AC%E3%83%83%E3%83%88/pd/2197634/",
-              "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4549743816067_1.jpg&width=400&height=400&square=1",
-              "exact_candidate_blockers": [
-                "rank_not_first",
-                "broad_query_without_variant"
-              ]
-            },
-            {
-              "rank": 3,
-              "candidate_title": "【グッズ-スタンドポップ】新世紀エヴァンゲリオン アクリルスタンド/A ゆるパレット",
-              "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E6%96%B0%E4%B8%96%E7%B4%80%E3%82%A8%E3%83%B4%E3%82%A1%E3%83%B3%E3%82%B2%E3%83%AA%E3%82%AA%E3%83%B3+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89/A+%E3%82%86%E3%82%8B%E3%83%91%E3%83%AC%E3%83%83%E3%83%88/pd/2197633/",
-              "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4549743816050_1.jpg&width=400&height=400&square=1",
-              "exact_candidate_blockers": [
-                "rank_not_first",
-                "broad_query_without_variant"
-              ]
-            },
-            {
-              "rank": 4,
-              "candidate_title": "【グッズ-ボード】エヴァンゲリオン アクリルパネル／ポスタービジュアル、ゴジラ対エヴァンゲリオン セカンドインパクトG",
-              "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%9C%E3%83%BC%E3%83%89%E3%80%91%E3%82%A8%E3%83%B4%E3%82%A1%E3%83%B3%E3%82%B2%E3%83%AA%E3%82%AA%E3%83%B3+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%91%E3%83%8D%E3%83%AB%EF%BC%8F%E3%83%9D%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%93%E3%82%B8%E3%83%A5%E3%82%A2%E3%83%AB%E3%80%81%E3%82%B4%E3%82%B8%E3%83%A9%E5%AF%BE%E3%82%A8%E3%83%B4%E3%82%A1%E3%83%B3%E3%82%B2%E3%83%AA%E3%82%AA%E3%83%B3+%E3%82%BB%E3%82%AB%E3%83%B3%E3%83%89%E3%82%A4%E3%83%B3%E3%83%91%E3%82%AF%E3%83%88G/pd/3115968/",
-              "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4550621315459_1_1744895106.jpg&width=400&height=400&square=1",
-              "exact_candidate_blockers": [
-                "rank_not_first",
-                "token_overlap_below_2",
-                "goods_type_mismatch",
-                "distinctive_tokens_missing",
-                "broad_query_without_variant"
-              ]
-            },
-            {
-              "rank": 5,
-              "candidate_title": "【グッズ-ボード】エヴァンゲリオン アクリルパネル／第13号機リーチ、ぱちんこシン・エヴァンゲリオン",
-              "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%9C%E3%83%BC%E3%83%89%E3%80%91%E3%82%A8%E3%83%B4%E3%82%A1%E3%83%B3%E3%82%B2%E3%83%AA%E3%82%AA%E3%83%B3+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%91%E3%83%8D%E3%83%AB%EF%BC%8F%E7%AC%AC13%E5%8F%B7%E6%A9%9F%E3%83%AA%E3%83%BC%E3%83%81%E3%80%81%E3%81%B1%E3%81%A1%E3%82%93%E3%81%93%E3%82%B7%E3%83%B3%E3%83%BB%E3%82%A8%E3%83%B4%E3%82%A1%E3%83%B3%E3%82%B2%E3%83%AA%E3%82%AA%E3%83%B3/pd/3115967/",
-              "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4550621280290_1_1744895104.jpg&width=400&height=400&square=1",
-              "exact_candidate_blockers": [
-                "rank_not_first",
-                "token_overlap_below_2",
-                "goods_type_mismatch",
-                "distinctive_tokens_missing",
-                "broad_query_without_variant"
-              ]
-            }
-          ],
-          "suggested_name_ja": "",
-          "suggested_series_name": "",
-          "suggested_sub_series": "",
-          "suggested_character_name": "",
-          "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E6%96%B0%E4%B8%96%E7%B4%80%E3%82%A8%E3%83%B4%E3%82%A1%E3%83%B3%E3%82%B2%E3%83%AA%E3%82%AA%E3%83%B3+%E5%B0%91%E5%B9%B4%E3%82%A8%E3%83%BC%E3%82%B930%E5%91%A8%E5%B9%B4+BIG%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%96%B0%E4%B8%96%E7%B4%80%E3%82%A8%E3%83%B4%E3%82%A1%E3%83%B3%E3%82%B2%E3%83%AA%E3%82%AA%E3%83%B3/pd/3078170/",
-          "blocked_until": "exact_catalog_variant_identity_confirmed",
-          "required_evidence": [
-            "exact_variant_or_character_name",
-            "official_product_title",
-            "official_product_detail_url",
-            "image_identity_matches_selected_variant_before_import"
-          ]
-        },
-        {
-          "manual_confirmed": false,
-          "manual_review_status": "not_started",
-          "manual_note": "",
-          "focus_pack_id": "source-discovery-focus-001",
-          "catalog_index": 1991,
-          "source_store": "애니메이트",
-          "category": "아크릴 스탠드",
-          "current_name_ko": "최애의 아이 아크릴 스탠드 (카나)",
-          "current_name_ja": "推しの子 アクリルスタンド (かな)",
-          "search_query": "推しの子 アクリルスタンド (かな) 有馬かな",
-          "top_candidate_title": "【グッズ-スタンドポップ】【推しの子】 アクリルスタンド／Balletcore style　有馬かな",
-          "top_candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%EF%BC%8FBalletcore+style%E3%80%80%E6%9C%89%E9%A6%AC%E3%81%8B%E3%81%AA/pd/3418822/",
-          "top_candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4550621595370_1_1772769907.jpg&width=400&height=400&square=1",
-          "candidate_options": [
-            {
-              "rank": 1,
-              "candidate_title": "【グッズ-スタンドポップ】【推しの子】 アクリルスタンド／Balletcore style　有馬かな",
-              "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%EF%BC%8FBalletcore+style%E3%80%80%E6%9C%89%E9%A6%AC%E3%81%8B%E3%81%AA/pd/3418822/",
-              "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4550621595370_1_1772769907.jpg&width=400&height=400&square=1",
-              "exact_candidate_blockers": [
-                "distinctive_tokens_missing",
-                "parenthetical_terms_missing"
-              ]
-            },
-            {
-              "rank": 2,
-              "candidate_title": "【グッズ-スタンドポップ】【推しの子】 てくトコミニスタンド 有馬かな",
-              "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91+%E3%81%A6%E3%81%8F%E3%83%88%E3%82%B3%E3%83%9F%E3%83%8B%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%9C%89%E9%A6%AC%E3%81%8B%E3%81%AA/pd/3442909/",
-              "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4522776659948_1_1775016304.jpg&width=400&height=400&square=1",
-              "exact_candidate_blockers": [
-                "rank_not_first",
-                "goods_type_mismatch",
-                "distinctive_tokens_missing",
-                "parenthetical_terms_missing"
-              ]
-            },
-            {
-              "rank": 3,
-              "candidate_title": "【グッズ-スタンドポップ】TVアニメ【推しの子】 ホログラムBIGスタンド Vol.4 4.有馬かな",
-              "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91TV%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91+%E3%83%9B%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0BIG%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+Vol.4+4.%E6%9C%89%E9%A6%AC%E3%81%8B%E3%81%AA/pd/3419189/",
-              "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4902273246016_1_1772769911.jpg&width=400&height=400&square=1",
-              "exact_candidate_blockers": [
-                "rank_not_first",
-                "token_overlap_below_2",
-                "goods_type_mismatch",
-                "distinctive_tokens_missing",
-                "parenthetical_terms_missing"
-              ]
-            },
-            {
-              "rank": 4,
-              "candidate_title": "【グッズ-スタンドポップ】TVアニメ『【推しの子】』 れとぽぷ 第2弾 アクリルスタンド(全8種)有馬かな",
-              "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91TV%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8E%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91%E3%80%8F+%E3%82%8C%E3%81%A8%E3%81%BD%E3%81%B7+%E7%AC%AC2%E5%BC%BE+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%28%E5%85%A88%E7%A8%AE%29%E6%9C%89%E9%A6%AC%E3%81%8B%E3%81%AA/pd/3415375/",
-              "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4580878435846_1_1772449518.jpg&width=400&height=400&square=1",
-              "exact_candidate_blockers": [
-                "rank_not_first",
-                "distinctive_tokens_missing",
-                "parenthetical_terms_missing"
-              ]
-            },
-            {
-              "rank": 5,
-              "candidate_title": "【グッズ-スタンドポップ】ぷよぷよ！！クエスト×【推しの子】 アクリルスタンド メイリィ ver.有馬かな",
-              "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%81%B7%E3%82%88%E3%81%B7%E3%82%88%EF%BC%81%EF%BC%81%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%C3%97%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E3%83%A1%E3%82%A4%E3%83%AA%E3%82%A3+ver.%E6%9C%89%E9%A6%AC%E3%81%8B%E3%81%AA/pd/3308928/",
-              "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4570179802133_1_1763006719.jpg&width=400&height=400&square=1",
-              "exact_candidate_blockers": [
-                "rank_not_first",
-                "distinctive_tokens_missing",
-                "parenthetical_terms_missing"
-              ]
-            }
-          ],
-          "suggested_name_ja": "",
-          "suggested_series_name": "",
-          "suggested_sub_series": "",
-          "suggested_character_name": "",
-          "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%EF%BC%8FBalletcore+style%E3%80%80%E6%9C%89%E9%A6%AC%E3%81%8B%E3%81%AA/pd/3418822/",
-          "blocked_until": "exact_catalog_variant_identity_confirmed",
-          "required_evidence": [
-            "exact_variant_or_character_name",
-            "official_product_title",
-            "official_product_detail_url",
-            "image_identity_matches_selected_variant_before_import"
-          ]
-        },
-        {
-          "manual_confirmed": false,
-          "manual_review_status": "not_started",
-          "manual_note": "",
-          "focus_pack_id": "source-discovery-focus-001",
-          "catalog_index": 1992,
-          "source_store": "애니메이트",
-          "category": "아크릴 스탠드",
-          "current_name_ko": "최애의 아이 아크릴 스탠드 (아카네)",
-          "current_name_ja": "推しの子 アクリルスタンド (あかね)",
-          "search_query": "推しの子 アクリルスタンド (あかね) 黒川あかね",
-          "top_candidate_title": "【グッズ-スタンドポップ】【推しの子】喫茶 vol.2 等身アクリルスタンド　黒川あかね【NATSLIVEコラボ】",
-          "top_candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91%E5%96%AB%E8%8C%B6+vol.2+%E7%AD%89%E8%BA%AB%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%80%80%E9%BB%92%E5%B7%9D%E3%81%82%E3%81%8B%E3%81%AD%E3%80%90NATSLIVE%E3%82%B3%E3%83%A9%E3%83%9C%E3%80%91/pd/3490149/",
-          "top_candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=11030204_1_1779447917.jpg&width=400&height=400&square=1",
-          "candidate_options": [
-            {
-              "rank": 1,
-              "candidate_title": "【グッズ-スタンドポップ】【推しの子】喫茶 vol.2 等身アクリルスタンド　黒川あかね【NATSLIVEコラボ】",
-              "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91%E5%96%AB%E8%8C%B6+vol.2+%E7%AD%89%E8%BA%AB%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%80%80%E9%BB%92%E5%B7%9D%E3%81%82%E3%81%8B%E3%81%AD%E3%80%90NATSLIVE%E3%82%B3%E3%83%A9%E3%83%9C%E3%80%91/pd/3490149/",
-              "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=11030204_1_1779447917.jpg&width=400&height=400&square=1",
-              "exact_candidate_blockers": [
-                "distinctive_tokens_missing",
-                "parenthetical_terms_missing"
-              ]
-            },
-            {
-              "rank": 2,
-              "candidate_title": "【グッズ-スタンドポップ】【推しの子】喫茶 vol.2 デフォルメアクリルスタンド　黒川あかね【NATSLIVEコラボ】",
-              "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91%E5%96%AB%E8%8C%B6+vol.2+%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%80%80%E9%BB%92%E5%B7%9D%E3%81%82%E3%81%8B%E3%81%AD%E3%80%90NATSLIVE%E3%82%B3%E3%83%A9%E3%83%9C%E3%80%91/pd/3490154/",
-              "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=11030209_1_1779447908.jpg&width=400&height=400&square=1",
-              "exact_candidate_blockers": [
-                "rank_not_first",
-                "distinctive_tokens_missing",
-                "parenthetical_terms_missing"
-              ]
-            },
-            {
-              "rank": 3,
-              "candidate_title": "【ムック】spoon.2Di vol.132",
-              "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%83%A0%E3%83%83%E3%82%AF%E3%80%91spoon.2Di+vol.132/pd/3438351/",
-              "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=JPRO_9784048985437.jpg&width=400&height=400&square=1",
-              "exact_candidate_blockers": [
-                "rank_not_first",
-                "token_overlap_below_2",
-                "similarity_below_0_62",
-                "goods_type_mismatch",
-                "distinctive_tokens_missing",
-                "parenthetical_terms_missing"
-              ]
-            },
-            {
-              "rank": 4,
-              "candidate_title": "【グッズ-スタンドポップ】【推しの子】 アクリルスタンドフィギュア 黒川あかね Dreamy Hospital ver.",
-              "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2+%E9%BB%92%E5%B7%9D%E3%81%82%E3%81%8B%E3%81%AD+Dreamy+Hospital+ver./pd/3465994/",
-              "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4550687052664_1_1776769504.jpg&width=400&height=400&square=1",
-              "exact_candidate_blockers": [
-                "rank_not_first",
-                "distinctive_tokens_missing",
-                "parenthetical_terms_missing"
-              ]
-            },
-            {
-              "rank": 5,
-              "candidate_title": "【グッズ-スタンドポップ】【推しの子】 描き下ろし 黒川あかね 星空メイドver. BIGアクリルスタンド",
-              "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91+%E6%8F%8F%E3%81%8D%E4%B8%8B%E3%82%8D%E3%81%97+%E9%BB%92%E5%B7%9D%E3%81%82%E3%81%8B%E3%81%AD+%E6%98%9F%E7%A9%BA%E3%83%A1%E3%82%A4%E3%83%89ver.+BIG%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89/pd/3401347/",
-              "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4573643172275_2_1770955512.jpg&width=400&height=400&square=1",
-              "exact_candidate_blockers": [
-                "rank_not_first",
-                "distinctive_tokens_missing",
-                "parenthetical_terms_missing"
-              ]
-            }
-          ],
-          "suggested_name_ja": "",
-          "suggested_series_name": "",
-          "suggested_sub_series": "",
-          "suggested_character_name": "",
-          "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91%E5%96%AB%E8%8C%B6+vol.2+%E7%AD%89%E8%BA%AB%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%80%80%E9%BB%92%E5%B7%9D%E3%81%82%E3%81%8B%E3%81%AD%E3%80%90NATSLIVE%E3%82%B3%E3%83%A9%E3%83%9C%E3%80%91/pd/3490149/",
-          "blocked_until": "exact_catalog_variant_identity_confirmed",
-          "required_evidence": [
-            "exact_variant_or_character_name",
-            "official_product_title",
-            "official_product_detail_url",
-            "image_identity_matches_selected_variant_before_import"
-          ]
-        }
-      ],
-      "review_summary": {
-        "focus_pack_id": "source-discovery-focus-001",
-        "metadata_enrichment_template_rows": 4,
-        "metadata_field_import_template_rows": 12,
-        "metadata_field_import_supported_rows": 12,
-        "metadata_field_import_dry_run_updated_rows": 0,
-        "metadata_field_import_dry_run_skipped_rows": 12,
-        "metadata_field_import_dry_run_skip_reason_counts": [
-          [
-            "manual_confirmed_false",
-            12
-          ]
-        ],
-        "variant_detail_required_rows": 4,
-        "candidate_rows": 50,
-        "next_action_lanes": [
-          [
-            "fallback_source_search",
-            13
-          ],
-          [
-            "catalog_variant_metadata_enrichment",
-            4
-          ],
-          [
-            "manual_candidate_identity_review",
-            3
-          ]
-        ]
-      },
-      "review_state": "manual_review_required",
-      "next_machine_step": "manual_review"
-    },
-    {
       "batch_id": "020-agent-image-action-46",
       "agent_id": "agent-image-action",
       "workstream": "image_attachment_action_queue",
@@ -16506,7 +15314,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-ichiban-action-140",
+      "batch_id": "020-agent-ichiban-action-138",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_work_order",
       "priority": 20,
@@ -16994,7 +15802,91 @@
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "022-agent-animation-category-action-159",
+      "batch_id": "020-agent-source-detail-candidate-51",
+      "agent_id": "agent-source-detail-candidate",
+      "workstream": "source_discovery_next_focus_detail_candidates",
+      "priority": 20,
+      "title": "현재 source focus pack variant 메타데이터 보강",
+      "public_report": "data/source_discovery_next_focus_detail_candidates_public.json",
+      "rows": 1,
+      "recommended_action": "Confirm exact character, variant, sub_series, and source/image identity before any source_url or image_url import.",
+      "acceptance_criteria": [
+        "Do not attach candidate images to broad catalog rows until the exact variant is identified.",
+        "Fill suggested_name_ja, suggested_sub_series, and suggested_character_name only from official product evidence.",
+        "Use candidate_options as review evidence; auto-apply remains disabled."
+      ],
+      "sample_items": [
+        {
+          "manual_confirmed": false,
+          "manual_review_status": "not_started",
+          "manual_note": "",
+          "focus_pack_id": "source-discovery-focus-001",
+          "catalog_index": 1539,
+          "source_store": "엔스카이",
+          "category": "키링",
+          "current_name_ko": "토도로키 쇼토 러버 스트랩",
+          "current_name_ja": "轟焦凍 ラバーストラップ",
+          "search_query": "轟焦凍 ラバーストラップ",
+          "top_candidate_title": "【グッズ-ストラップ】僕のヒーローアカデミア でかラバーストラップ 05 轟焦凍",
+          "top_candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2+%E3%81%A7%E3%81%8B%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+05+%E8%BD%9F%E7%84%A6%E5%87%8D/pd/2144946/",
+          "top_candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4562480354173_1.jpg&width=400&height=400&square=1",
+          "candidate_options": [
+            {
+              "rank": 1,
+              "candidate_title": "【グッズ-ストラップ】僕のヒーローアカデミア でかラバーストラップ 05 轟焦凍",
+              "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2+%E3%81%A7%E3%81%8B%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+05+%E8%BD%9F%E7%84%A6%E5%87%8D/pd/2144946/",
+              "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4562480354173_1.jpg&width=400&height=400&square=1",
+              "exact_candidate_blockers": [
+                "token_overlap_below_2",
+                "broad_query_without_variant"
+              ]
+            }
+          ],
+          "suggested_name_ja": "",
+          "suggested_series_name": "",
+          "suggested_sub_series": "",
+          "suggested_character_name": "",
+          "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2+%E3%81%A7%E3%81%8B%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+05+%E8%BD%9F%E7%84%A6%E5%87%8D/pd/2144946/",
+          "blocked_until": "exact_catalog_variant_identity_confirmed",
+          "required_evidence": [
+            "exact_variant_or_character_name",
+            "official_product_title",
+            "official_product_detail_url",
+            "image_identity_matches_selected_variant_before_import"
+          ]
+        }
+      ],
+      "review_summary": {
+        "focus_pack_id": "source-discovery-focus-001",
+        "metadata_enrichment_template_rows": 1,
+        "metadata_field_import_template_rows": 3,
+        "metadata_field_import_supported_rows": 3,
+        "metadata_field_import_dry_run_updated_rows": 0,
+        "metadata_field_import_dry_run_skipped_rows": 3,
+        "metadata_field_import_dry_run_skip_reason_counts": [
+          [
+            "manual_confirmed_false",
+            3
+          ]
+        ],
+        "variant_detail_required_rows": 1,
+        "candidate_rows": 1,
+        "next_action_lanes": [
+          [
+            "catalog_variant_metadata_enrichment",
+            1
+          ],
+          [
+            "manual_source_research",
+            19
+          ]
+        ]
+      },
+      "review_state": "manual_review_required",
+      "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "022-agent-animation-category-action-157",
       "agent_id": "agent-animation-category-action",
       "workstream": "animation_category_action_queue",
       "priority": 22,
@@ -17538,7 +16430,7 @@
       "next_machine_step": "fill_confirmed_animation_category_mapping_templates"
     },
     {
-      "batch_id": "022-agent-source-detail-candidate-77",
+      "batch_id": "022-agent-source-detail-candidate-75",
       "agent_id": "agent-source-detail-candidate",
       "workstream": "source_detail_candidate_action_queue",
       "priority": 22,
@@ -18136,7 +17028,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "028-agent-source-action-67",
+      "batch_id": "028-agent-source-action-65",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -18507,7 +17399,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-68",
+      "batch_id": "028-agent-source-action-66",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -18878,7 +17770,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-69",
+      "batch_id": "028-agent-source-action-67",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -19249,7 +18141,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-70",
+      "batch_id": "028-agent-source-action-68",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -19620,7 +18512,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-71",
+      "batch_id": "028-agent-source-action-69",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -19991,7 +18883,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-72",
+      "batch_id": "028-agent-source-action-70",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -20362,7 +19254,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-73",
+      "batch_id": "028-agent-source-action-71",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -20733,7 +19625,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-75",
+      "batch_id": "028-agent-source-action-73",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -21104,7 +19996,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-76",
+      "batch_id": "028-agent-source-action-74",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -21475,7 +20367,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-74",
+      "batch_id": "028-agent-source-action-72",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -21769,7 +20661,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "030-agent-ichiban-action-141",
+      "batch_id": "030-agent-ichiban-action-139",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_work_order",
       "priority": 30,
@@ -21828,7 +20720,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "030-agent-source-discovery-79",
+      "batch_id": "030-agent-source-discovery-77",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -21927,7 +20819,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-80",
+      "batch_id": "030-agent-source-discovery-78",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -22026,7 +20918,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-81",
+      "batch_id": "030-agent-source-discovery-79",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -22125,7 +21017,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-82",
+      "batch_id": "030-agent-source-discovery-80",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -22224,7 +21116,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-83",
+      "batch_id": "030-agent-source-discovery-81",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -22323,7 +21215,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-85",
+      "batch_id": "030-agent-source-discovery-83",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -22422,7 +21314,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-86",
+      "batch_id": "030-agent-source-discovery-84",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -22521,7 +21413,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-87",
+      "batch_id": "030-agent-source-discovery-85",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -22620,7 +21512,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-88",
+      "batch_id": "030-agent-source-discovery-86",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -22719,7 +21611,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-89",
+      "batch_id": "030-agent-source-discovery-87",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -23999,7 +22891,7 @@
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "030-agent-source-discovery-84",
+      "batch_id": "030-agent-source-discovery-82",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -24098,7 +22990,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-90",
+      "batch_id": "030-agent-source-discovery-88",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -25701,7 +24593,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "031-agent-source-starter-161",
+      "batch_id": "031-agent-source-starter-159",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -25810,7 +24702,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-162",
+      "batch_id": "031-agent-source-starter-160",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -25919,7 +24811,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-163",
+      "batch_id": "031-agent-source-starter-161",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -26028,7 +24920,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-164",
+      "batch_id": "031-agent-source-starter-162",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -26137,7 +25029,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-165",
+      "batch_id": "031-agent-source-starter-163",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -26246,7 +25138,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-166",
+      "batch_id": "031-agent-source-starter-164",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -26355,7 +25247,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-167",
+      "batch_id": "031-agent-source-starter-165",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -26464,7 +25356,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-168",
+      "batch_id": "031-agent-source-starter-166",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -26573,7 +25465,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-169",
+      "batch_id": "031-agent-source-starter-167",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -26682,7 +25574,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-170",
+      "batch_id": "031-agent-source-starter-168",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -26791,7 +25683,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "032-agent-source-detail-candidate-78",
+      "batch_id": "032-agent-source-detail-candidate-76",
       "agent_id": "agent-source-detail-candidate",
       "workstream": "source_detail_candidate_action_queue",
       "priority": 32,
@@ -27171,7 +26063,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "038-agent-ichiban-action-142",
+      "batch_id": "038-agent-ichiban-action-140",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 38,
@@ -29182,7 +28074,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "045-agent-metadata-action-91",
+      "batch_id": "045-agent-metadata-action-89",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -29298,7 +28190,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-97",
+      "batch_id": "045-agent-metadata-action-95",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -29414,7 +28306,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-92",
+      "batch_id": "045-agent-metadata-action-90",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -29530,7 +28422,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-93",
+      "batch_id": "045-agent-metadata-action-91",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -29646,7 +28538,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-94",
+      "batch_id": "045-agent-metadata-action-92",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -29762,7 +28654,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-95",
+      "batch_id": "045-agent-metadata-action-93",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -29878,7 +28770,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-96",
+      "batch_id": "045-agent-metadata-action-94",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -29994,7 +28886,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-143",
+      "batch_id": "048-agent-ichiban-action-141",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -30946,7 +29838,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-144",
+      "batch_id": "048-agent-ichiban-action-142",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -31916,7 +30808,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-145",
+      "batch_id": "048-agent-ichiban-action-143",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -32892,7 +31784,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-146",
+      "batch_id": "048-agent-ichiban-action-144",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -33868,7 +32760,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-147",
+      "batch_id": "048-agent-ichiban-action-145",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -34367,13 +33259,13 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "050-agent-metadata-99",
+      "batch_id": "050-agent-metadata-97",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
       "title": "메타데이터 검수: metadata-review-001",
       "public_report": "data/catalog_metadata_review_batches_public.json",
-      "rows": 531,
+      "rows": 566,
       "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
       "acceptance_criteria": [
         "Dates, prices, names, barcodes, source URLs, and images are copied only from official or trusted evidence.",
@@ -34382,81 +33274,81 @@
       ],
       "sample_items": [
         {
-          "catalog_index": 1031,
-          "name_ko": "원피스 봉제 인형 (토니토니 쵸파)",
-          "name_ja": null,
+          "catalog_index": 922,
+          "name_ko": "치이카와 러버 스트랩 (우사기)",
+          "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
           "series_name": null,
-          "category": "인형",
+          "category": "키링",
           "source_store": null,
           "source_url": null,
           "official_search_url": ""
         },
         {
-          "catalog_index": 1033,
-          "name_ko": "원피스 클리어 파일 (밀짚모자 일당)",
-          "name_ja": null,
+          "catalog_index": 923,
+          "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
+          "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
           "series_name": null,
-          "category": "문구",
+          "category": "키링",
           "source_store": null,
           "source_url": null,
           "official_search_url": ""
         },
         {
-          "catalog_index": 1034,
-          "name_ko": "원피스 캔뱃지 (랜덤 1팩)",
-          "name_ja": null,
+          "catalog_index": 924,
+          "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
+          "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
           "series_name": null,
-          "category": "캔뱃지",
+          "category": "키링",
           "source_store": null,
           "source_url": null,
           "official_search_url": ""
         },
         {
-          "catalog_index": 1037,
-          "name_ko": "주술회전 캔뱃지 (랜덤)",
-          "name_ja": null,
+          "catalog_index": 925,
+          "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
+          "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
           "series_name": null,
-          "category": "캔뱃지",
+          "category": "키링",
           "source_store": null,
           "source_url": null,
           "official_search_url": ""
         },
         {
-          "catalog_index": 1038,
-          "name_ko": "주술회전 클리어 파일 (메인 비주얼)",
-          "name_ja": null,
+          "catalog_index": 926,
+          "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
+          "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
           "series_name": null,
-          "category": "문구",
+          "category": "키링",
           "source_store": null,
           "source_url": null,
           "official_search_url": ""
         },
         {
-          "catalog_index": 1039,
-          "name_ko": "주술회전 머그컵",
-          "name_ja": null,
+          "catalog_index": 928,
+          "name_ko": "치이카와 아크릴 스탠드 (하치와레)",
+          "name_ja": "ちいかわ アクリルスタンド (ハチワレ)",
           "series_name": null,
-          "category": "머그컵",
+          "category": "아크릴 스탠드",
           "source_store": null,
           "source_url": null,
           "official_search_url": ""
         },
         {
-          "catalog_index": 1043,
-          "name_ko": "체인소맨 봉제 인형 (포치타)",
-          "name_ja": null,
+          "catalog_index": 929,
+          "name_ko": "치이카와 아크릴 스탠드 (우사기)",
+          "name_ja": "ちいかわ アクリルスタンド (うさぎ)",
           "series_name": null,
-          "category": "인형",
+          "category": "아크릴 스탠드",
           "source_store": null,
           "source_url": null,
           "official_search_url": ""
         },
         {
-          "catalog_index": 1044,
-          "name_ko": "체인소맨 캔뱃지 (랜덤)",
-          "name_ja": null,
+          "catalog_index": 930,
+          "name_ko": "치이카와 빅 아크릴 스탠드 (치이카와)",
+          "name_ja": "ちいかわ ビッグアクリルスタンド (ちいかわ)",
           "series_name": null,
-          "category": "캔뱃지",
+          "category": "아크릴 스탠드",
           "source_store": null,
           "source_url": null,
           "official_search_url": ""
@@ -34466,13 +33358,13 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "050-agent-metadata-102",
+      "batch_id": "050-agent-metadata-100",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
       "title": "메타데이터 검수: metadata-review-004",
       "public_report": "data/catalog_metadata_review_batches_public.json",
-      "rows": 468,
+      "rows": 503,
       "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
       "acceptance_criteria": [
         "Dates, prices, names, barcodes, source URLs, and images are copied only from official or trusted evidence.",
@@ -34541,21 +33433,21 @@
           "official_search_url": ""
         },
         {
-          "catalog_index": 1031,
-          "name_ko": "원피스 봉제 인형 (토니토니 쵸파)",
-          "name_ja": null,
+          "catalog_index": 922,
+          "name_ko": "치이카와 러버 스트랩 (우사기)",
+          "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
           "series_name": null,
-          "category": "인형",
+          "category": "키링",
           "source_store": null,
           "source_url": null,
           "official_search_url": ""
         },
         {
-          "catalog_index": 1033,
-          "name_ko": "원피스 클리어 파일 (밀짚모자 일당)",
-          "name_ja": null,
+          "catalog_index": 923,
+          "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
+          "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
           "series_name": null,
-          "category": "문구",
+          "category": "키링",
           "source_store": null,
           "source_url": null,
           "official_search_url": ""
@@ -34565,7 +33457,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "050-agent-metadata-100",
+      "batch_id": "050-agent-metadata-98",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -34763,7 +33655,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "050-agent-metadata-101",
+      "batch_id": "050-agent-metadata-99",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -34862,7 +33754,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "051-agent-ichiban-campaign-first-120",
+      "batch_id": "051-agent-ichiban-campaign-first-118",
       "agent_id": "agent-ichiban-campaign-first",
       "workstream": "ichiban_kuji_campaign_first_reissue_review",
       "priority": 51,
@@ -34963,7 +33855,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "052-agent-ichiban-campaign-first-121",
+      "batch_id": "052-agent-ichiban-campaign-first-119",
       "agent_id": "agent-ichiban-campaign-first",
       "workstream": "ichiban_kuji_campaign_first_reissue_review",
       "priority": 52,
@@ -35058,7 +33950,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "053-agent-ichiban-campaign-first-122",
+      "batch_id": "053-agent-ichiban-campaign-first-120",
       "agent_id": "agent-ichiban-campaign-first",
       "workstream": "ichiban_kuji_campaign_first_reissue_review",
       "priority": 53,
@@ -35133,7 +34025,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "054-agent-ichiban-reissue-dedupe-111",
+      "batch_id": "054-agent-ichiban-reissue-dedupe-109",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 54,
@@ -36210,7 +35102,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "054-agent-ichiban-campaign-first-123",
+      "batch_id": "054-agent-ichiban-campaign-first-121",
       "agent_id": "agent-ichiban-campaign-first",
       "workstream": "ichiban_kuji_campaign_first_reissue_review",
       "priority": 54,
@@ -36281,7 +35173,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "055-agent-metadata-action-98",
+      "batch_id": "055-agent-metadata-action-96",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 55,
@@ -36397,7 +35289,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "056-agent-ichiban-reissue-dedupe-112",
+      "batch_id": "056-agent-ichiban-reissue-dedupe-110",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 56,
@@ -36447,7 +35339,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "057-agent-ichiban-reissue-dedupe-113",
+      "batch_id": "057-agent-ichiban-reissue-dedupe-111",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 57,
@@ -36497,7 +35389,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "058-agent-ichiban-reissue-dedupe-114",
+      "batch_id": "058-agent-ichiban-reissue-dedupe-112",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 58,
@@ -36547,7 +35439,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "059-agent-ichiban-reissue-dedupe-115",
+      "batch_id": "059-agent-ichiban-reissue-dedupe-113",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 59,
@@ -36597,7 +35489,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "060-agent-metadata-106",
+      "batch_id": "060-agent-metadata-104",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -36696,7 +35588,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-103",
+      "batch_id": "060-agent-metadata-101",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -36795,7 +35687,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-104",
+      "batch_id": "060-agent-metadata-102",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -36894,7 +35786,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-105",
+      "batch_id": "060-agent-metadata-103",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -36993,7 +35885,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-ichiban-reissue-dedupe-116",
+      "batch_id": "060-agent-ichiban-reissue-dedupe-114",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 60,
@@ -37043,7 +35935,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "061-agent-ichiban-reissue-dedupe-117",
+      "batch_id": "061-agent-ichiban-reissue-dedupe-115",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 61,
@@ -37093,7 +35985,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "062-agent-ichiban-reissue-dedupe-118",
+      "batch_id": "062-agent-ichiban-reissue-dedupe-116",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 62,
@@ -37143,7 +36035,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "063-agent-ichiban-reissue-dedupe-119",
+      "batch_id": "063-agent-ichiban-reissue-dedupe-117",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 63,
@@ -37193,7 +36085,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "070-agent-metadata-107",
+      "batch_id": "070-agent-metadata-105",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -37292,7 +36184,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "070-agent-metadata-108",
+      "batch_id": "070-agent-metadata-106",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -37391,7 +36283,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "070-agent-metadata-109",
+      "batch_id": "070-agent-metadata-107",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -37490,7 +36382,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "070-agent-metadata-110",
+      "batch_id": "070-agent-metadata-108",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -37589,7 +36481,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "085-agent-ichiban-prize-policy-155",
+      "batch_id": "085-agent-ichiban-prize-policy-153",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 85,
@@ -37906,7 +36798,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "085-agent-ichiban-prize-policy-154",
+      "batch_id": "085-agent-ichiban-prize-policy-152",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 85,
@@ -38128,7 +37020,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "085-agent-dedupe-action-124",
+      "batch_id": "085-agent-dedupe-action-122",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -39151,7 +38043,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-125",
+      "batch_id": "085-agent-dedupe-action-123",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -40172,7 +39064,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-126",
+      "batch_id": "085-agent-dedupe-action-124",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -41195,7 +40087,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-127",
+      "batch_id": "085-agent-dedupe-action-125",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -42210,7 +41102,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-128",
+      "batch_id": "085-agent-dedupe-action-126",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -43178,7 +42070,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "086-agent-ichiban-prize-policy-156",
+      "batch_id": "086-agent-ichiban-prize-policy-154",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 86,
@@ -43490,7 +42382,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "087-agent-ichiban-prize-policy-157",
+      "batch_id": "087-agent-ichiban-prize-policy-155",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 87,
@@ -43810,7 +42702,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "088-agent-ichiban-prize-policy-158",
+      "batch_id": "088-agent-ichiban-prize-policy-156",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 88,
@@ -44125,7 +43017,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "090-agent-dedupe-129",
+      "batch_id": "090-agent-dedupe-127",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -44164,7 +43056,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-130",
+      "batch_id": "090-agent-dedupe-128",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -44203,7 +43095,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-131",
+      "batch_id": "090-agent-dedupe-129",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -44242,7 +43134,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-132",
+      "batch_id": "090-agent-dedupe-130",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -44281,7 +43173,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-133",
+      "batch_id": "090-agent-dedupe-131",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -44320,7 +43212,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-134",
+      "batch_id": "090-agent-dedupe-132",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -44352,6 +43244,84 @@
           "category": "의류",
           "source_store": "치이카와 마켓",
           "source_url": "https://chiikawamarket.jp/ko/products/4570189201551",
+          "official_search_url": ""
+        }
+      ],
+      "review_state": "manual_dedupe_review_required",
+      "next_machine_step": "compare_duplicate_group_evidence"
+    },
+    {
+      "batch_id": "090-agent-dedupe-133",
+      "agent_id": "agent-dedupe",
+      "workstream": "deduplication_review",
+      "priority": 90,
+      "title": "중복 후보 검토: barcode",
+      "public_report": "data/catalog_deduplication_public.json",
+      "rows": 2,
+      "recommended_action": "Review keep/drop suggestions and prepare a manual-only dedupe decision.",
+      "acceptance_criteria": [
+        "Variants, alternate prizes, and campaign-specific rows are preserved.",
+        "Only evidence-backed exact duplicates are proposed for merge/delete.",
+        "Auto-delete remains disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 582,
+          "name_ko": "치이카와 파크 푸와코로 인형 S (하치와레)",
+          "name_ja": "ちいかわパーク ふわころ人形 S (ハチワレ)",
+          "series_name": null,
+          "category": "인형",
+          "source_store": "치이카와 파크",
+          "source_url": "https://chiikawamarket.jp/ko/products/4571609359081",
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 3644,
+          "name_ko": "치이카와 파크 푸와코로 인형 S (가르마)",
+          "name_ja": "ちいかわ ちいかわパーク ぷわころぬいぐるみS（ハチワレ）",
+          "series_name": null,
+          "category": "인형",
+          "source_store": "치이카와 마켓",
+          "source_url": "https://chiikawamarket.jp/ko/products/4571609359081",
+          "official_search_url": ""
+        }
+      ],
+      "review_state": "manual_dedupe_review_required",
+      "next_machine_step": "compare_duplicate_group_evidence"
+    },
+    {
+      "batch_id": "090-agent-dedupe-134",
+      "agent_id": "agent-dedupe",
+      "workstream": "deduplication_review",
+      "priority": 90,
+      "title": "중복 후보 검토: barcode",
+      "public_report": "data/catalog_deduplication_public.json",
+      "rows": 2,
+      "recommended_action": "Review keep/drop suggestions and prepare a manual-only dedupe decision.",
+      "acceptance_criteria": [
+        "Variants, alternate prizes, and campaign-specific rows are preserved.",
+        "Only evidence-backed exact duplicates are proposed for merge/delete.",
+        "Auto-delete remains disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 583,
+          "name_ko": "치이카와 파크 푸와코로 인형 S (우사기)",
+          "name_ja": "ちいかわパーク ふわころ人形 S (うさぎ)",
+          "series_name": null,
+          "category": "인형",
+          "source_store": "치이카와 파크",
+          "source_url": "https://chiikawamarket.jp/ko/products/4571609359098",
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 3643,
+          "name_ko": "치이카와 파크 푸와코로 인형 S (토끼)",
+          "name_ja": "ちいかわ ちいかわパーク ぷわころぬいぐるみS（うさぎ）",
+          "series_name": null,
+          "category": "인형",
+          "source_store": "치이카와 마켓",
+          "source_url": "https://chiikawamarket.jp/ko/products/4571609359098",
           "official_search_url": ""
         }
       ],

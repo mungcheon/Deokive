@@ -485,10 +485,16 @@ class _CatalogImportActionLabel extends StatelessWidget {
     return Text(
       label,
       style: TextStyle(
+        inherit: false,
         color: color,
         fontSize: 15,
         fontWeight: FontWeight.w900,
         height: 1,
+      ),
+      strutStyle: const StrutStyle(
+        fontSize: 15,
+        height: 1.15,
+        forceStrutHeight: true,
       ),
       maxLines: 1,
       softWrap: false,

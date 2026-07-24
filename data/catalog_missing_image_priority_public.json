@@ -1,31 +1,31 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T02:47:54Z",
+  "generated_at": "2026-07-24T16:22:12Z",
   "scope": "public_catalog_missing_image_priority",
   "summary": {
-    "missing_image_rows": 710,
+    "missing_image_rows": 745,
     "work_queue_rows": 710,
     "queue_matched_rows": 710,
     "stale_queue_index_matches": 0,
-    "unmatched_catalog_missing_rows": 0,
-    "missing_source_url_rows": 637,
+    "unmatched_catalog_missing_rows": 35,
+    "missing_source_url_rows": 672,
     "generic_source_url_rows": 50,
     "product_source_url_rows": 0,
     "high_priority_rows": 524,
     "safe_existing_image_reuse_candidate_rows": 0,
-    "source_discovery_starter_queue_groups": 339,
-    "source_discovery_starter_queue_rows": 637,
+    "source_discovery_starter_queue_groups": 353,
+    "source_discovery_starter_queue_rows": 672,
     "auto_apply_enabled": false
   },
   "breakdowns": {
     "by_source_store": [
       {
-        "source_store": "애니메이트",
-        "rows": 144
+        "source_store": "엔스카이",
+        "rows": 172
       },
       {
-        "source_store": "엔스카이",
-        "rows": 137
+        "source_store": "애니메이트",
+        "rows": 144
       },
       {
         "source_store": "굿스마일컴퍼니",
@@ -183,7 +183,7 @@
     "by_affiliation": [
       {
         "affiliation": "원피스",
-        "rows": 80
+        "rows": 82
       },
       {
         "affiliation": "치이카와",
@@ -198,16 +198,20 @@
         "rows": 50
       },
       {
+        "affiliation": "나의 히어로 아카데미아",
+        "rows": 45
+      },
+      {
+        "affiliation": "귀멸의 칼날",
+        "rows": 43
+      },
+      {
         "affiliation": "메이드 인 어비스",
         "rows": 41
       },
       {
         "affiliation": "스텔라이브",
         "rows": 41
-      },
-      {
-        "affiliation": "나의 히어로 아카데미아",
-        "rows": 36
       },
       {
         "affiliation": "하츠네 미쿠",
@@ -219,15 +223,11 @@
       },
       {
         "affiliation": "체인소 맨",
-        "rows": 32
+        "rows": 34
       },
       {
         "affiliation": "장송의 프리렌",
         "rows": 31
-      },
-      {
-        "affiliation": "귀멸의 칼날",
-        "rows": 25
       },
       {
         "affiliation": "짱구는 못말려",
@@ -258,16 +258,16 @@
         "rows": 10
       },
       {
+        "affiliation": "SPY×FAMILY",
+        "rows": 10
+      },
+      {
         "affiliation": "리제로",
         "rows": 8
       },
       {
         "affiliation": "이세계아이돌",
         "rows": 8
-      },
-      {
-        "affiliation": "SPY×FAMILY",
-        "rows": 6
       },
       {
         "affiliation": "산리오",
@@ -353,27 +353,27 @@
       },
       {
         "category": "캔뱃지",
-        "rows": 90
+        "rows": 95
       },
       {
         "category": "인형",
-        "rows": 77
+        "rows": 83
       },
       {
         "category": "키링",
-        "rows": 65
+        "rows": 77
       },
       {
         "category": "마스코트",
-        "rows": 62
+        "rows": 63
       },
       {
         "category": "문구",
-        "rows": 49
+        "rows": 53
       },
       {
         "category": "머그컵",
-        "rows": 23
+        "rows": 28
       },
       {
         "category": "포토카드",
@@ -401,7 +401,7 @@
       },
       {
         "category": "응원용품",
-        "rows": 4
+        "rows": 6
       },
       {
         "category": "응원봉",
@@ -467,7 +467,7 @@
       },
       {
         "strategy": "manual_review",
-        "rows": 112
+        "rows": 147
       },
       {
         "strategy": "manual_official_search_review",
@@ -504,6 +504,10 @@
         "rows": 50
       },
       {
+        "automation_safety": "not_in_work_queue",
+        "rows": 35
+      },
+      {
         "automation_safety": "detail_page_validation_required",
         "rows": 1
       }
@@ -511,7 +515,7 @@
     "by_source_url_state": [
       {
         "source_url_state": "missing_source_url",
-        "rows": 637
+        "rows": 672
       },
       {
         "source_url_state": "generic_source_url",
@@ -525,7 +529,7 @@
   },
   "next_action_queues": {
     "source_discovery_first": {
-      "rows": 637,
+      "rows": 672,
       "reason": "Attach exact product source URLs before image candidates can be trusted."
     },
     "replace_generic_source_then_attach_image": {
@@ -564,6 +568,12 @@
     },
     {
       "source_store": "엔스카이",
+      "affiliation": "원피스",
+      "rows": 20,
+      "recommended_workflow": "official_storefront_search_then_exact_detail_match"
+    },
+    {
+      "source_store": "엔스카이",
       "affiliation": "장송의 프리렌",
       "rows": 19,
       "recommended_workflow": "official_storefront_search_then_exact_detail_match"
@@ -576,7 +586,7 @@
     },
     {
       "source_store": "엔스카이",
-      "affiliation": "원피스",
+      "affiliation": "귀멸의 칼날",
       "rows": 18,
       "recommended_workflow": "official_storefront_search_then_exact_detail_match"
     },
@@ -590,6 +600,12 @@
       "source_store": "애니메이트",
       "affiliation": "슈타인즈게이트",
       "rows": 17,
+      "recommended_workflow": "official_storefront_search_then_exact_detail_match"
+    },
+    {
+      "source_store": "엔스카이",
+      "affiliation": "나의 히어로 아카데미아",
+      "rows": 16,
       "recommended_workflow": "official_storefront_search_then_exact_detail_match"
     },
     {
@@ -609,6 +625,12 @@
       "affiliation": "귀멸의 칼날",
       "rows": 13,
       "recommended_workflow": "manual_exact_image_research"
+    },
+    {
+      "source_store": "엔스카이",
+      "affiliation": "체인소 맨",
+      "rows": 11,
+      "recommended_workflow": "official_storefront_search_then_exact_detail_match"
     },
     {
       "source_store": "엔스카이",
@@ -653,12 +675,6 @@
       "recommended_workflow": "official_storefront_search_then_exact_detail_match"
     },
     {
-      "source_store": "엔스카이",
-      "affiliation": "체인소 맨",
-      "rows": 9,
-      "recommended_workflow": "official_storefront_search_then_exact_detail_match"
-    },
-    {
       "source_store": "점프 캐릭터즈 스토어",
       "affiliation": "체인소 맨",
       "rows": 9,
@@ -690,12 +706,6 @@
     },
     {
       "source_store": "엔스카이",
-      "affiliation": "나의 히어로 아카데미아",
-      "rows": 7,
-      "recommended_workflow": "official_storefront_search_then_exact_detail_match"
-    },
-    {
-      "source_store": "엔스카이",
       "affiliation": "봇치 더 록",
       "rows": 7,
       "recommended_workflow": "official_storefront_search_then_exact_detail_match"
@@ -709,12 +719,6 @@
     {
       "source_store": "Stellive Store",
       "affiliation": "(전) 스텔라이브",
-      "rows": 6,
-      "recommended_workflow": "manual_exact_image_research"
-    },
-    {
-      "source_store": "굿스마일컴퍼니",
-      "affiliation": "메이드 인 어비스",
       "rows": 6,
       "recommended_workflow": "manual_exact_image_research"
     }
@@ -4316,7 +4320,148 @@
     }
   ],
   "stale_queue_index_samples": [],
-  "unmatched_catalog_missing_samples": [],
+  "unmatched_catalog_missing_samples": [
+    {
+      "catalog_index": 1269,
+      "name_ko": "누이푸페 자수 데님 미도리야 이즈쿠",
+      "source_store": "엔스카이",
+      "affiliation": "나의 히어로 아카데미아",
+      "category": "인형"
+    },
+    {
+      "catalog_index": 1270,
+      "name_ko": "누이푸페 자수 데님 이이다 텐야",
+      "source_store": "엔스카이",
+      "affiliation": "나의 히어로 아카데미아",
+      "category": "인형"
+    },
+    {
+      "catalog_index": 1272,
+      "name_ko": "누이푸페 자수 데님 바쿠고 카츠키",
+      "source_store": "엔스카이",
+      "affiliation": "나의 히어로 아카데미아",
+      "category": "인형"
+    },
+    {
+      "catalog_index": 1273,
+      "name_ko": "누이푸페 자수 데님 키리시마 에이지로",
+      "source_store": "엔스카이",
+      "affiliation": "나의 히어로 아카데미아",
+      "category": "인형"
+    },
+    {
+      "catalog_index": 1573,
+      "name_ko": "카마도 탄지로 러버 스트랩",
+      "source_store": "엔스카이",
+      "affiliation": "귀멸의 칼날",
+      "category": "키링"
+    },
+    {
+      "catalog_index": 1574,
+      "name_ko": "카마도 네즈코 러버 스트랩",
+      "source_store": "엔스카이",
+      "affiliation": "귀멸의 칼날",
+      "category": "키링"
+    },
+    {
+      "catalog_index": 1575,
+      "name_ko": "아가츠마 젠이츠 러버 스트랩",
+      "source_store": "엔스카이",
+      "affiliation": "귀멸의 칼날",
+      "category": "키링"
+    },
+    {
+      "catalog_index": 1576,
+      "name_ko": "하시비라 이노스케 러버 스트랩",
+      "source_store": "엔스카이",
+      "affiliation": "귀멸의 칼날",
+      "category": "키링"
+    },
+    {
+      "catalog_index": 1577,
+      "name_ko": "토미오카 기유 러버 스트랩",
+      "source_store": "엔스카이",
+      "affiliation": "귀멸의 칼날",
+      "category": "키링"
+    },
+    {
+      "catalog_index": 1578,
+      "name_ko": "코쵸 시노부 러버 스트랩",
+      "source_store": "엔스카이",
+      "affiliation": "귀멸의 칼날",
+      "category": "키링"
+    },
+    {
+      "catalog_index": 1579,
+      "name_ko": "렌고쿠 쿄쥬로 메탈릭 러버 스트랩",
+      "source_store": "엔스카이",
+      "affiliation": "귀멸의 칼날",
+      "category": "키링"
+    },
+    {
+      "catalog_index": 1580,
+      "name_ko": "우즈이 텐겐 메탈릭 러버 스트랩",
+      "source_store": "엔스카이",
+      "affiliation": "귀멸의 칼날",
+      "category": "키링"
+    },
+    {
+      "catalog_index": 1581,
+      "name_ko": "몽키 D. 루피 러버 스트랩",
+      "source_store": "엔스카이",
+      "affiliation": "원피스",
+      "category": "키링"
+    },
+    {
+      "catalog_index": 1583,
+      "name_ko": "나미 러버 스트랩",
+      "source_store": "엔스카이",
+      "affiliation": "원피스",
+      "category": "키링"
+    },
+    {
+      "catalog_index": 1596,
+      "name_ko": "하야카와 아키 러버 스트랩",
+      "source_store": "엔스카이",
+      "affiliation": "체인소 맨",
+      "category": "키링"
+    },
+    {
+      "catalog_index": 1598,
+      "name_ko": "코베니 러버 스트랩",
+      "source_store": "엔스카이",
+      "affiliation": "체인소 맨",
+      "category": "키링"
+    },
+    {
+      "catalog_index": 1720,
+      "name_ko": "나의 히어로 아카데미아 클리어 파일 A4 1-A반",
+      "source_store": "엔스카이",
+      "affiliation": "나의 히어로 아카데미아",
+      "category": "문구"
+    },
+    {
+      "catalog_index": 1722,
+      "name_ko": "나의 히어로 아카데미아 일러스트 카드 컬렉션 데쿠",
+      "source_store": "엔스카이",
+      "affiliation": "나의 히어로 아카데미아",
+      "category": "문구"
+    },
+    {
+      "catalog_index": 1724,
+      "name_ko": "귀멸의 칼날 트레이딩 캔뱃지 카마도 탄지로",
+      "source_store": "엔스카이",
+      "affiliation": "귀멸의 칼날",
+      "category": "캔뱃지"
+    },
+    {
+      "catalog_index": 1725,
+      "name_ko": "귀멸의 칼날 트레이딩 캔뱃지 카마도 네즈코",
+      "source_store": "엔스카이",
+      "affiliation": "귀멸의 칼날",
+      "category": "캔뱃지"
+    }
+  ],
   "existing_image_reuse_candidates": [],
   "automation_policy": {
     "auto_apply_catalog_changes": false,

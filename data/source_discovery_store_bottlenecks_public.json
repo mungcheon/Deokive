@@ -1,30 +1,30 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T23:25:05Z",
+  "generated_at": "2026-07-24T16:22:12Z",
   "scope": "source_discovery_store_bottlenecks",
   "summary": {
-    "actionable_source_rows": 632,
-    "queued_source_rows": 632,
+    "actionable_source_rows": 667,
+    "queued_source_rows": 667,
     "store_count": 40,
-    "top_store_rows": 144,
-    "top_store": "애니메이트",
-    "top_5_store_rows": 417,
-    "top_5_store_coverage": 0.6598,
-    "top_10_store_rows": 506,
-    "top_10_store_coverage": 0.8006,
+    "top_store_rows": 172,
+    "top_store": "엔스카이",
+    "top_5_store_rows": 452,
+    "top_5_store_coverage": 0.6777,
+    "top_10_store_rows": 541,
+    "top_10_store_coverage": 0.8111,
     "domainless_store_rows": 0,
     "stores_without_allowed_domain": 0,
     "auto_apply_enabled": false
   },
   "stores": [
     {
-      "source_store": "애니메이트",
-      "rows": 144,
-      "impact_rank_hint": 144,
+      "source_store": "엔스카이",
+      "rows": 172,
+      "impact_rank_hint": 172,
       "first_batch_id": "source-discovery-action-001",
-      "top_category": "아크릴 스탠드",
-      "top_allowed_source_domain": "www.animate-onlineshop.jp",
-      "batch_count": 8,
+      "top_category": "키링",
+      "top_allowed_source_domain": "www.enskyshop.com",
+      "batch_count": 9,
       "batch_ids": [
         "source-discovery-action-001",
         "source-discovery-action-002",
@@ -33,7 +33,258 @@
         "source-discovery-action-005",
         "source-discovery-action-006",
         "source-discovery-action-007",
-        "source-discovery-action-008"
+        "source-discovery-action-008",
+        "source-discovery-action-009"
+      ],
+      "workflow_rows": [
+        {
+          "workflow": "official_search_url_available",
+          "rows": 172
+        }
+      ],
+      "review_state_rows": [
+        {
+          "review_state": "official_search_review_required",
+          "rows": 172
+        }
+      ],
+      "by_category": [
+        {
+          "category": "키링",
+          "rows": 52
+        },
+        {
+          "category": "인형",
+          "rows": 35
+        },
+        {
+          "category": "아크릴 스탠드",
+          "rows": 27
+        },
+        {
+          "category": "마스코트",
+          "rows": 21
+        },
+        {
+          "category": "캔뱃지",
+          "rows": 14
+        },
+        {
+          "category": "문구",
+          "rows": 9
+        },
+        {
+          "category": "머그컵",
+          "rows": 9
+        },
+        {
+          "category": "응원용품",
+          "rows": 4
+        },
+        {
+          "category": "아크릴 키링",
+          "rows": 1
+        }
+      ],
+      "allowed_source_domains": [
+        {
+          "domain": "www.enskyshop.com",
+          "rows": 172
+        }
+      ],
+      "has_allowed_source_domain": true,
+      "next_step": "open_official_search_and_confirm_exact_product_source_url",
+      "recommended_work_mode": "single_store_batch_review",
+      "recommended_batch_focus": "엔스카이 / 키링",
+      "sample_items": [
+        {
+          "catalog_index": 922,
+          "name_ko": "치이카와 러버 스트랩 (우사기)",
+          "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
+          "category": "키링",
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
+          "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "www.enskyshop.com"
+          ],
+          "source_patch_template": {
+            "catalog_index": 922,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "엔스카이",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 923,
+          "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
+          "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+          "category": "키링",
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29",
+          "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "www.enskyshop.com"
+          ],
+          "source_patch_template": {
+            "catalog_index": 923,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "엔스카이",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 924,
+          "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
+          "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+          "category": "키링",
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29",
+          "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "www.enskyshop.com"
+          ],
+          "source_patch_template": {
+            "catalog_index": 924,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "엔스카이",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 925,
+          "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
+          "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+          "category": "키링",
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
+          "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "www.enskyshop.com"
+          ],
+          "source_patch_template": {
+            "catalog_index": 925,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "엔스카이",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 926,
+          "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
+          "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
+          "category": "키링",
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29",
+          "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "www.enskyshop.com"
+          ],
+          "source_patch_template": {
+            "catalog_index": 926,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "엔스카이",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 928,
+          "name_ko": "치이카와 아크릴 스탠드 (하치와레)",
+          "name_ja": "ちいかわ アクリルスタンド (ハチワレ)",
+          "category": "아크릴 스탠드",
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29",
+          "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "www.enskyshop.com"
+          ],
+          "source_patch_template": {
+            "catalog_index": 928,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "엔스카이",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 929,
+          "name_ko": "치이카와 아크릴 스탠드 (우사기)",
+          "name_ja": "ちいかわ アクリルスタンド (うさぎ)",
+          "category": "아크릴 스탠드",
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
+          "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%86%E3%81%95%E3%81%8E%29%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "www.enskyshop.com"
+          ],
+          "source_patch_template": {
+            "catalog_index": 929,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "엔스카이",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 930,
+          "name_ko": "치이카와 빅 아크릴 스탠드 (치이카와)",
+          "name_ja": "ちいかわ ビッグアクリルスタンド (ちいかわ)",
+          "category": "아크릴 스탠드",
+          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
+          "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "www.enskyshop.com"
+          ],
+          "source_patch_template": {
+            "catalog_index": 930,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "엔스카이",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "auto_apply_enabled": false
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "source_store": "애니메이트",
+      "rows": 144,
+      "impact_rank_hint": 144,
+      "first_batch_id": "source-discovery-action-010",
+      "top_category": "아크릴 스탠드",
+      "top_allowed_source_domain": "www.animate-onlineshop.jp",
+      "batch_count": 8,
+      "batch_ids": [
+        "source-discovery-action-010",
+        "source-discovery-action-011",
+        "source-discovery-action-012",
+        "source-discovery-action-013",
+        "source-discovery-action-014",
+        "source-discovery-action-015",
+        "source-discovery-action-016",
+        "source-discovery-action-017"
       ],
       "workflow_rows": [
         {
@@ -280,266 +531,17 @@
       "auto_apply_enabled": false
     },
     {
-      "source_store": "엔스카이",
-      "rows": 137,
-      "impact_rank_hint": 137,
-      "first_batch_id": "source-discovery-action-009",
-      "top_category": "키링",
-      "top_allowed_source_domain": "www.enskyshop.com",
-      "batch_count": 7,
-      "batch_ids": [
-        "source-discovery-action-009",
-        "source-discovery-action-010",
-        "source-discovery-action-011",
-        "source-discovery-action-012",
-        "source-discovery-action-013",
-        "source-discovery-action-014",
-        "source-discovery-action-015"
-      ],
-      "workflow_rows": [
-        {
-          "workflow": "official_search_url_available",
-          "rows": 137
-        }
-      ],
-      "review_state_rows": [
-        {
-          "review_state": "official_search_review_required",
-          "rows": 137
-        }
-      ],
-      "by_category": [
-        {
-          "category": "키링",
-          "rows": 40
-        },
-        {
-          "category": "인형",
-          "rows": 29
-        },
-        {
-          "category": "아크릴 스탠드",
-          "rows": 27
-        },
-        {
-          "category": "마스코트",
-          "rows": 20
-        },
-        {
-          "category": "캔뱃지",
-          "rows": 9
-        },
-        {
-          "category": "문구",
-          "rows": 5
-        },
-        {
-          "category": "머그컵",
-          "rows": 4
-        },
-        {
-          "category": "응원용품",
-          "rows": 2
-        },
-        {
-          "category": "아크릴 키링",
-          "rows": 1
-        }
-      ],
-      "allowed_source_domains": [
-        {
-          "domain": "www.enskyshop.com",
-          "rows": 137
-        }
-      ],
-      "has_allowed_source_domain": true,
-      "next_step": "open_official_search_and_confirm_exact_product_source_url",
-      "recommended_work_mode": "single_store_batch_review",
-      "recommended_batch_focus": "엔스카이 / 키링",
-      "sample_items": [
-        {
-          "catalog_index": 922,
-          "name_ko": "치이카와 러버 스트랩 (우사기)",
-          "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
-          "category": "키링",
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
-          "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.enskyshop.com"
-          ],
-          "source_patch_template": {
-            "catalog_index": 922,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "엔스카이",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 923,
-          "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
-          "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
-          "category": "키링",
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29",
-          "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.enskyshop.com"
-          ],
-          "source_patch_template": {
-            "catalog_index": 923,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "엔스카이",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 924,
-          "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
-          "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
-          "category": "키링",
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29",
-          "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.enskyshop.com"
-          ],
-          "source_patch_template": {
-            "catalog_index": 924,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "엔스카이",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 925,
-          "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
-          "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
-          "category": "키링",
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
-          "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.enskyshop.com"
-          ],
-          "source_patch_template": {
-            "catalog_index": 925,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "엔스카이",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 926,
-          "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
-          "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
-          "category": "키링",
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29",
-          "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.enskyshop.com"
-          ],
-          "source_patch_template": {
-            "catalog_index": 926,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "엔스카이",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 928,
-          "name_ko": "치이카와 아크릴 스탠드 (하치와레)",
-          "name_ja": "ちいかわ アクリルスタンド (ハチワレ)",
-          "category": "아크릴 스탠드",
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29",
-          "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.enskyshop.com"
-          ],
-          "source_patch_template": {
-            "catalog_index": 928,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "엔스카이",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 929,
-          "name_ko": "치이카와 아크릴 스탠드 (우사기)",
-          "name_ja": "ちいかわ アクリルスタンド (うさぎ)",
-          "category": "아크릴 스탠드",
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
-          "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%86%E3%81%95%E3%81%8E%29%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.enskyshop.com"
-          ],
-          "source_patch_template": {
-            "catalog_index": 929,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "엔스카이",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 930,
-          "name_ko": "치이카와 빅 아크릴 스탠드 (치이카와)",
-          "name_ja": "ちいかわ ビッグアクリルスタンド (ちいかわ)",
-          "category": "아크릴 스탠드",
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
-          "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.enskyshop.com"
-          ],
-          "source_patch_template": {
-            "catalog_index": 930,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "엔스카이",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "auto_apply_enabled": false
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
       "source_store": "굿스마일컴퍼니",
       "rows": 56,
       "impact_rank_hint": 56,
-      "first_batch_id": "source-discovery-action-016",
+      "first_batch_id": "source-discovery-action-018",
       "top_category": "피규어",
       "top_allowed_source_domain": "www.goodsmile.info",
       "batch_count": 3,
       "batch_ids": [
-        "source-discovery-action-016",
-        "source-discovery-action-017",
-        "source-discovery-action-018"
+        "source-discovery-action-018",
+        "source-discovery-action-019",
+        "source-discovery-action-020"
       ],
       "workflow_rows": [
         {
@@ -785,14 +787,14 @@
       "source_store": "코토부키야",
       "rows": 44,
       "impact_rank_hint": 44,
-      "first_batch_id": "source-discovery-action-019",
+      "first_batch_id": "source-discovery-action-021",
       "top_category": "피규어",
       "top_allowed_source_domain": "shop.kotobukiya.co.jp",
       "batch_count": 3,
       "batch_ids": [
-        "source-discovery-action-019",
-        "source-discovery-action-020",
-        "source-discovery-action-021"
+        "source-discovery-action-021",
+        "source-discovery-action-022",
+        "source-discovery-action-023"
       ],
       "workflow_rows": [
         {
@@ -1010,13 +1012,13 @@
       "source_store": "Movic",
       "rows": 36,
       "impact_rank_hint": 36,
-      "first_batch_id": "source-discovery-action-022",
+      "first_batch_id": "source-discovery-action-024",
       "top_category": "캔뱃지",
       "top_allowed_source_domain": "www.movic.jp",
       "batch_count": 2,
       "batch_ids": [
-        "source-discovery-action-022",
-        "source-discovery-action-023"
+        "source-discovery-action-024",
+        "source-discovery-action-025"
       ],
       "workflow_rows": [
         {
@@ -1246,13 +1248,13 @@
       "source_store": "점프 캐릭터즈 스토어",
       "rows": 23,
       "impact_rank_hint": 23,
-      "first_batch_id": "source-discovery-action-024",
+      "first_batch_id": "source-discovery-action-026",
       "top_category": "캔뱃지",
       "top_allowed_source_domain": "jumpcs.shueisha.co.jp",
       "batch_count": 2,
       "batch_ids": [
-        "source-discovery-action-024",
-        "source-discovery-action-025"
+        "source-discovery-action-026",
+        "source-discovery-action-027"
       ],
       "workflow_rows": [
         {
@@ -1474,13 +1476,13 @@
       "source_store": "FuRyu",
       "rows": 21,
       "impact_rank_hint": 21,
-      "first_batch_id": "source-discovery-action-026",
+      "first_batch_id": "source-discovery-action-028",
       "top_category": "피규어",
       "top_allowed_source_domain": "furyuprize.com",
       "batch_count": 2,
       "batch_ids": [
-        "source-discovery-action-026",
-        "source-discovery-action-027"
+        "source-discovery-action-028",
+        "source-discovery-action-029"
       ],
       "workflow_rows": [
         {
@@ -1686,12 +1688,12 @@
       "source_store": "Taito",
       "rows": 15,
       "impact_rank_hint": 15,
-      "first_batch_id": "source-discovery-action-028",
+      "first_batch_id": "source-discovery-action-030",
       "top_category": "피규어",
       "top_allowed_source_domain": "www.taito.co.jp",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-028"
+        "source-discovery-action-030"
       ],
       "workflow_rows": [
         {
@@ -1901,12 +1903,12 @@
       "source_store": "무기와라스토어",
       "rows": 15,
       "impact_rank_hint": 15,
-      "first_batch_id": "source-discovery-action-029",
+      "first_batch_id": "source-discovery-action-031",
       "top_category": "아크릴 스탠드",
       "top_allowed_source_domain": "jumpcs.shueisha.co.jp",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-029"
+        "source-discovery-action-031"
       ],
       "workflow_rows": [
         {
@@ -2132,12 +2134,12 @@
       "source_store": "치이카와 중국 팝업스토어",
       "rows": 15,
       "impact_rank_hint": 15,
-      "first_batch_id": "source-discovery-action-030",
+      "first_batch_id": "source-discovery-action-032",
       "top_category": "마스코트",
       "top_allowed_source_domain": "x.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-030"
+        "source-discovery-action-032"
       ],
       "workflow_rows": [
         {
@@ -2355,12 +2357,12 @@
       "source_store": "귀멸의 칼날 공식",
       "rows": 13,
       "impact_rank_hint": 13,
-      "first_batch_id": "source-discovery-action-031",
+      "first_batch_id": "source-discovery-action-033",
       "top_category": "마스코트",
       "top_allowed_source_domain": "webshop-global.ufotable.co.jp",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-031"
+        "source-discovery-action-033"
       ],
       "workflow_rows": [
         {
@@ -2578,12 +2580,12 @@
       "source_store": "AmiAmi",
       "rows": 12,
       "impact_rank_hint": 12,
-      "first_batch_id": "source-discovery-action-060",
+      "first_batch_id": "source-discovery-action-062",
       "top_category": "문구",
       "top_allowed_source_domain": "amiami.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-060"
+        "source-discovery-action-062"
       ],
       "workflow_rows": [
         {
@@ -2817,12 +2819,12 @@
       "source_store": "Cospa",
       "rows": 11,
       "impact_rank_hint": 11,
-      "first_batch_id": "source-discovery-action-032",
+      "first_batch_id": "source-discovery-action-034",
       "top_category": "아크릴 스탠드",
       "top_allowed_source_domain": "www.cospa.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-032"
+        "source-discovery-action-034"
       ],
       "workflow_rows": [
         {
@@ -3036,12 +3038,12 @@
       "source_store": "반다이",
       "rows": 11,
       "impact_rank_hint": 11,
-      "first_batch_id": "source-discovery-action-033",
+      "first_batch_id": "source-discovery-action-035",
       "top_category": "피규어",
       "top_allowed_source_domain": "p-bandai.jp",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-033"
+        "source-discovery-action-035"
       ],
       "workflow_rows": [
         {
@@ -3251,12 +3253,12 @@
       "source_store": "메가하우스",
       "rows": 9,
       "impact_rank_hint": 9,
-      "first_batch_id": "source-discovery-action-034",
+      "first_batch_id": "source-discovery-action-036",
       "top_category": "피규어",
       "top_allowed_source_domain": "www.megahobby.jp",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-034"
+        "source-discovery-action-036"
       ],
       "workflow_rows": [
         {
@@ -3462,12 +3464,12 @@
       "source_store": "MINISO 중국",
       "rows": 7,
       "impact_rank_hint": 7,
-      "first_batch_id": "source-discovery-action-035",
+      "first_batch_id": "source-discovery-action-037",
       "top_category": "인형",
       "top_allowed_source_domain": "www.miniso.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-035"
+        "source-discovery-action-037"
       ],
       "workflow_rows": [
         {
@@ -3660,12 +3662,12 @@
       "source_store": "산리오",
       "rows": 6,
       "impact_rank_hint": 6,
-      "first_batch_id": "source-discovery-action-036",
+      "first_batch_id": "source-discovery-action-038",
       "top_category": "인형",
       "top_allowed_source_domain": "shop.sanrio.co.jp",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-036"
+        "source-discovery-action-038"
       ],
       "workflow_rows": [
         {
@@ -3833,12 +3835,12 @@
       "source_store": "JYP SHOP",
       "rows": 5,
       "impact_rank_hint": 5,
-      "first_batch_id": "source-discovery-action-037",
+      "first_batch_id": "source-discovery-action-039",
       "top_category": "포토카드",
       "top_allowed_source_domain": "en.thejypshop.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-037"
+        "source-discovery-action-039"
       ],
       "workflow_rows": [
         {
@@ -3985,12 +3987,12 @@
       "source_store": "Re-ment",
       "rows": 5,
       "impact_rank_hint": 5,
-      "first_batch_id": "source-discovery-action-038",
+      "first_batch_id": "source-discovery-action-040",
       "top_category": "피규어",
       "top_allowed_source_domain": "www.re-ment.co.jp",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-038"
+        "source-discovery-action-040"
       ],
       "workflow_rows": [
         {
@@ -4133,12 +4135,12 @@
       "source_store": "치이카와샵 용산",
       "rows": 5,
       "impact_rank_hint": 5,
-      "first_batch_id": "source-discovery-action-039",
+      "first_batch_id": "source-discovery-action-041",
       "top_category": "마스코트",
       "top_allowed_source_domain": "x.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-039"
+        "source-discovery-action-041"
       ],
       "workflow_rows": [
         {
@@ -4289,12 +4291,12 @@
       "source_store": "MINISO",
       "rows": 4,
       "impact_rank_hint": 4,
-      "first_batch_id": "source-discovery-action-040",
+      "first_batch_id": "source-discovery-action-042",
       "top_category": "쇼핑백",
       "top_allowed_source_domain": "www.miniso.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-040"
+        "source-discovery-action-042"
       ],
       "workflow_rows": [
         {
@@ -4428,12 +4430,12 @@
       "source_store": "가샤폰",
       "rows": 4,
       "impact_rank_hint": 4,
-      "first_batch_id": "source-discovery-action-041",
+      "first_batch_id": "source-discovery-action-043",
       "top_category": "캡슐토이",
       "top_allowed_source_domain": "gashapon.jp",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-041"
+        "source-discovery-action-043"
       ],
       "workflow_rows": [
         {
@@ -4559,12 +4561,12 @@
       "source_store": "디즈니 스토어",
       "rows": 4,
       "impact_rank_hint": 4,
-      "first_batch_id": "source-discovery-action-042",
+      "first_batch_id": "source-discovery-action-044",
       "top_category": "인형",
       "top_allowed_source_domain": "store.disney.co.jp",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-042"
+        "source-discovery-action-044"
       ],
       "workflow_rows": [
         {
@@ -4686,12 +4688,12 @@
       "source_store": "이세계아이돌 공식 굿즈",
       "rows": 4,
       "impact_rank_hint": 4,
-      "first_batch_id": "source-discovery-action-043",
+      "first_batch_id": "source-discovery-action-045",
       "top_category": "응원봉",
       "top_allowed_source_domain": "withmuulive.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-043"
+        "source-discovery-action-045"
       ],
       "workflow_rows": [
         {
@@ -4821,12 +4823,12 @@
       "source_store": "Bandai Premium",
       "rows": 3,
       "impact_rank_hint": 3,
-      "first_batch_id": "source-discovery-action-044",
+      "first_batch_id": "source-discovery-action-046",
       "top_category": "타월",
       "top_allowed_source_domain": "p-bandai.jp",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-044"
+        "source-discovery-action-046"
       ],
       "workflow_rows": [
         {
@@ -4935,12 +4937,12 @@
       "source_store": "SM STORE",
       "rows": 3,
       "impact_rank_hint": 3,
-      "first_batch_id": "source-discovery-action-045",
+      "first_batch_id": "source-discovery-action-047",
       "top_category": "포토카드",
       "top_allowed_source_domain": "global.shop.smtown.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-045"
+        "source-discovery-action-047"
       ],
       "workflow_rows": [
         {
@@ -5041,12 +5043,12 @@
       "source_store": "카도카와",
       "rows": 3,
       "impact_rank_hint": 3,
-      "first_batch_id": "source-discovery-action-046",
+      "first_batch_id": "source-discovery-action-048",
       "top_category": "피규어",
       "top_allowed_source_domain": "www.amiami.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-046"
+        "source-discovery-action-048"
       ],
       "workflow_rows": [
         {
@@ -5147,12 +5149,12 @@
       "source_store": "Phat! Company",
       "rows": 2,
       "impact_rank_hint": 2,
-      "first_batch_id": "source-discovery-action-047",
+      "first_batch_id": "source-discovery-action-049",
       "top_category": "피규어",
       "top_allowed_source_domain": "www.goodsmile.info",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-047"
+        "source-discovery-action-049"
       ],
       "workflow_rows": [
         {
@@ -5232,12 +5234,12 @@
       "source_store": "YG SELECT",
       "rows": 2,
       "impact_rank_hint": 2,
-      "first_batch_id": "source-discovery-action-048",
+      "first_batch_id": "source-discovery-action-050",
       "top_category": "포토카드",
       "top_allowed_source_domain": "en.ygselect.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-048"
+        "source-discovery-action-050"
       ],
       "workflow_rows": [
         {
@@ -5317,12 +5319,12 @@
       "source_store": "롯데웰푸드",
       "rows": 2,
       "impact_rank_hint": 2,
-      "first_batch_id": "source-discovery-action-049",
+      "first_batch_id": "source-discovery-action-051",
       "top_category": "과자/콜라보",
       "top_allowed_source_domain": "lottewellfood.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-049"
+        "source-discovery-action-051"
       ],
       "workflow_rows": [
         {
@@ -5406,12 +5408,12 @@
       "source_store": "이세계아이돌 팝업스토어",
       "rows": 2,
       "impact_rank_hint": 2,
-      "first_batch_id": "source-discovery-action-050",
+      "first_batch_id": "source-discovery-action-052",
       "top_category": "아크릴 스탠드",
       "top_allowed_source_domain": "withmuulive.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-050"
+        "source-discovery-action-052"
       ],
       "workflow_rows": [
         {
@@ -5491,12 +5493,12 @@
       "source_store": "ALTER",
       "rows": 1,
       "impact_rank_hint": 1,
-      "first_batch_id": "source-discovery-action-051",
+      "first_batch_id": "source-discovery-action-053",
       "top_category": "피규어",
       "top_allowed_source_domain": "alter-web.jp",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-051"
+        "source-discovery-action-053"
       ],
       "workflow_rows": [
         {
@@ -5555,12 +5557,12 @@
       "source_store": "CUBE STORE",
       "rows": 1,
       "impact_rank_hint": 1,
-      "first_batch_id": "source-discovery-action-052",
+      "first_batch_id": "source-discovery-action-054",
       "top_category": "포토카드",
       "top_allowed_source_domain": "cubee.co.kr",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-052"
+        "source-discovery-action-054"
       ],
       "workflow_rows": [
         {
@@ -5619,12 +5621,12 @@
       "source_store": "Hobby Max International",
       "rows": 1,
       "impact_rank_hint": 1,
-      "first_batch_id": "source-discovery-action-053",
+      "first_batch_id": "source-discovery-action-055",
       "top_category": "피규어",
       "top_allowed_source_domain": "www.amiami.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-053"
+        "source-discovery-action-055"
       ],
       "workflow_rows": [
         {
@@ -5683,12 +5685,12 @@
       "source_store": "Hololive Production Official Shop",
       "rows": 1,
       "impact_rank_hint": 1,
-      "first_batch_id": "source-discovery-action-054",
+      "first_batch_id": "source-discovery-action-056",
       "top_category": "아크릴 스탠드",
       "top_allowed_source_domain": "shop.hololivepro.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-054"
+        "source-discovery-action-056"
       ],
       "workflow_rows": [
         {
@@ -5747,12 +5749,12 @@
       "source_store": "IST STORE",
       "rows": 1,
       "impact_rank_hint": 1,
-      "first_batch_id": "source-discovery-action-055",
+      "first_batch_id": "source-discovery-action-057",
       "top_category": "포토카드",
       "top_allowed_source_domain": "shop.weverse.io",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-055"
+        "source-discovery-action-057"
       ],
       "workflow_rows": [
         {
@@ -5811,12 +5813,12 @@
       "source_store": "KQ FELLAZ",
       "rows": 1,
       "impact_rank_hint": 1,
-      "first_batch_id": "source-discovery-action-056",
+      "first_batch_id": "source-discovery-action-058",
       "top_category": "포토카드",
       "top_allowed_source_domain": "kqshop.kr",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-056"
+        "source-discovery-action-058"
       ],
       "workflow_rows": [
         {
@@ -5875,12 +5877,12 @@
       "source_store": "SEGA",
       "rows": 1,
       "impact_rank_hint": 1,
-      "first_batch_id": "source-discovery-action-057",
+      "first_batch_id": "source-discovery-action-059",
       "top_category": "피규어",
       "top_allowed_source_domain": "segaplaza.jp",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-057"
+        "source-discovery-action-059"
       ],
       "workflow_rows": [
         {
@@ -5939,12 +5941,12 @@
       "source_store": "STARSHIP STORE",
       "rows": 1,
       "impact_rank_hint": 1,
-      "first_batch_id": "source-discovery-action-058",
+      "first_batch_id": "source-discovery-action-060",
       "top_category": "포토카드",
       "top_allowed_source_domain": "www.starship-square.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-058"
+        "source-discovery-action-060"
       ],
       "workflow_rows": [
         {
@@ -6003,12 +6005,12 @@
       "source_store": "점프 숍",
       "rows": 1,
       "impact_rank_hint": 1,
-      "first_batch_id": "source-discovery-action-059",
+      "first_batch_id": "source-discovery-action-061",
       "top_category": "문구",
       "top_allowed_source_domain": "jumpcs.shueisha.co.jp",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-059"
+        "source-discovery-action-061"
       ],
       "workflow_rows": [
         {

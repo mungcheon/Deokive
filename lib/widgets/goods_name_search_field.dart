@@ -445,10 +445,16 @@ class _CatalogPickerActionButton extends StatelessWidget {
                       softWrap: false,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
+                        inherit: false,
                         color: _catalogPickerActionForeground,
                         fontSize: 12,
                         fontWeight: FontWeight.w900,
                         height: 1,
+                      ),
+                      strutStyle: const StrutStyle(
+                        fontSize: 12,
+                        height: 1.15,
+                        forceStrutHeight: true,
                       ),
                     ),
                   ),

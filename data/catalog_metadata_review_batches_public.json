@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T16:07:12Z",
+  "generated_at": "2026-07-24T16:22:12Z",
   "summary": {
     "catalog_rows": 20347,
     "tracked_fields": [
@@ -14,14 +14,14 @@
     "field_store_group_count": 351,
     "batch_count": 30,
     "batch_size": 12,
-    "missing_cell_count": 13870,
+    "missing_cell_count": 13940,
     "field_missing_totals": {
       "name_ja": 526,
       "release_date": 1348,
       "barcode": 10082,
       "official_price_jpy": 567,
-      "image_url": 710,
-      "source_url": 637
+      "image_url": 745,
+      "source_url": 672
     },
     "top_source_stores_with_missing_metadata": [
       [
@@ -30,7 +30,7 @@
       ],
       [
         "엔스카이",
-        722
+        792
       ],
       [
         "치이카와 온라인 쿠지",
@@ -197,7 +197,7 @@
       "batch_id": "metadata-review-001",
       "priority": 10,
       "group_count": 12,
-      "missing_cell_count": 531,
+      "missing_cell_count": 566,
       "field_counts": [
         [
           "source_url",
@@ -214,6 +214,101 @@
       "next_machine_step": "collect_official_metadata_evidence",
       "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
       "groups": [
+        {
+          "field": "source_url",
+          "source_store": "엔스카이",
+          "missing_rows": 172,
+          "priority": 10,
+          "workflow": "source_url_discovery",
+          "evidence_required": "exact official or trusted licensed product detail page",
+          "next_machine_step": "source_url_discovery",
+          "risk": "identity_mismatch",
+          "recommended_action": "Find exact official product page and attach source_url/image_url together.",
+          "sample_catalog_indexes": [
+            922,
+            923,
+            924,
+            925,
+            926,
+            928,
+            929,
+            930
+          ],
+          "sample_items": [
+            {
+              "catalog_index": 922,
+              "name_ko": "치이카와 러버 스트랩 (우사기)",
+              "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
+              "series_name": null,
+              "category": "키링",
+              "source_url": null,
+              "image_url": null
+            },
+            {
+              "catalog_index": 923,
+              "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
+              "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+              "series_name": null,
+              "category": "키링",
+              "source_url": null,
+              "image_url": null
+            },
+            {
+              "catalog_index": 924,
+              "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
+              "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+              "series_name": null,
+              "category": "키링",
+              "source_url": null,
+              "image_url": null
+            },
+            {
+              "catalog_index": 925,
+              "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
+              "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+              "series_name": null,
+              "category": "키링",
+              "source_url": null,
+              "image_url": null
+            },
+            {
+              "catalog_index": 926,
+              "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
+              "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
+              "series_name": null,
+              "category": "키링",
+              "source_url": null,
+              "image_url": null
+            },
+            {
+              "catalog_index": 928,
+              "name_ko": "치이카와 아크릴 스탠드 (하치와레)",
+              "name_ja": "ちいかわ アクリルスタンド (ハチワレ)",
+              "series_name": null,
+              "category": "아크릴 스탠드",
+              "source_url": null,
+              "image_url": null
+            },
+            {
+              "catalog_index": 929,
+              "name_ko": "치이카와 아크릴 스탠드 (우사기)",
+              "name_ja": "ちいかわ アクリルスタンド (うさぎ)",
+              "series_name": null,
+              "category": "아크릴 스탠드",
+              "source_url": null,
+              "image_url": null
+            },
+            {
+              "catalog_index": 930,
+              "name_ko": "치이카와 빅 아크릴 스탠드 (치이카와)",
+              "name_ja": "ちいかわ ビッグアクリルスタンド (ちいかわ)",
+              "series_name": null,
+              "category": "아크릴 스탠드",
+              "source_url": null,
+              "image_url": null
+            }
+          ]
+        },
         {
           "field": "source_url",
           "source_store": "애니메이트",
@@ -304,101 +399,6 @@
               "name_ja": null,
               "series_name": null,
               "category": "캔뱃지",
-              "source_url": null,
-              "image_url": null
-            }
-          ]
-        },
-        {
-          "field": "source_url",
-          "source_store": "엔스카이",
-          "missing_rows": 137,
-          "priority": 10,
-          "workflow": "source_url_discovery",
-          "evidence_required": "exact official or trusted licensed product detail page",
-          "next_machine_step": "source_url_discovery",
-          "risk": "identity_mismatch",
-          "recommended_action": "Find exact official product page and attach source_url/image_url together.",
-          "sample_catalog_indexes": [
-            922,
-            923,
-            924,
-            925,
-            926,
-            928,
-            929,
-            930
-          ],
-          "sample_items": [
-            {
-              "catalog_index": 922,
-              "name_ko": "치이카와 러버 스트랩 (우사기)",
-              "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
-              "series_name": null,
-              "category": "키링",
-              "source_url": null,
-              "image_url": null
-            },
-            {
-              "catalog_index": 923,
-              "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
-              "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
-              "series_name": null,
-              "category": "키링",
-              "source_url": null,
-              "image_url": null
-            },
-            {
-              "catalog_index": 924,
-              "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
-              "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
-              "series_name": null,
-              "category": "키링",
-              "source_url": null,
-              "image_url": null
-            },
-            {
-              "catalog_index": 925,
-              "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
-              "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
-              "series_name": null,
-              "category": "키링",
-              "source_url": null,
-              "image_url": null
-            },
-            {
-              "catalog_index": 926,
-              "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
-              "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
-              "series_name": null,
-              "category": "키링",
-              "source_url": null,
-              "image_url": null
-            },
-            {
-              "catalog_index": 928,
-              "name_ko": "치이카와 아크릴 스탠드 (하치와레)",
-              "name_ja": "ちいかわ アクリルスタンド (ハチワレ)",
-              "series_name": null,
-              "category": "아크릴 스탠드",
-              "source_url": null,
-              "image_url": null
-            },
-            {
-              "catalog_index": 929,
-              "name_ko": "치이카와 아크릴 스탠드 (우사기)",
-              "name_ja": "ちいかわ アクリルスタンド (うさぎ)",
-              "series_name": null,
-              "category": "아크릴 스탠드",
-              "source_url": null,
-              "image_url": null
-            },
-            {
-              "catalog_index": 930,
-              "name_ko": "치이카와 빅 아크릴 스탠드 (치이카와)",
-              "name_ja": "ちいかわ ビッグアクリルスタンド (ちいかわ)",
-              "series_name": null,
-              "category": "아크릴 스탠드",
               "source_url": null,
               "image_url": null
             }
@@ -2699,7 +2699,7 @@
       "batch_id": "metadata-review-004",
       "priority": 10,
       "group_count": 12,
-      "missing_cell_count": 468,
+      "missing_cell_count": 503,
       "field_counts": [
         [
           "source_url",
@@ -2876,6 +2876,101 @@
         },
         {
           "field": "image_url",
+          "source_store": "엔스카이",
+          "missing_rows": 172,
+          "priority": 20,
+          "workflow": "source_then_image_import",
+          "evidence_required": "product image from exact source_url after identity verification",
+          "next_machine_step": "source_then_image_import",
+          "risk": "wrong_product_image",
+          "recommended_action": "Find exact official product page and attach source_url/image_url together.",
+          "sample_catalog_indexes": [
+            922,
+            923,
+            924,
+            925,
+            926,
+            928,
+            929,
+            930
+          ],
+          "sample_items": [
+            {
+              "catalog_index": 922,
+              "name_ko": "치이카와 러버 스트랩 (우사기)",
+              "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
+              "series_name": null,
+              "category": "키링",
+              "source_url": null,
+              "image_url": null
+            },
+            {
+              "catalog_index": 923,
+              "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
+              "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+              "series_name": null,
+              "category": "키링",
+              "source_url": null,
+              "image_url": null
+            },
+            {
+              "catalog_index": 924,
+              "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
+              "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+              "series_name": null,
+              "category": "키링",
+              "source_url": null,
+              "image_url": null
+            },
+            {
+              "catalog_index": 925,
+              "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
+              "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+              "series_name": null,
+              "category": "키링",
+              "source_url": null,
+              "image_url": null
+            },
+            {
+              "catalog_index": 926,
+              "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
+              "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
+              "series_name": null,
+              "category": "키링",
+              "source_url": null,
+              "image_url": null
+            },
+            {
+              "catalog_index": 928,
+              "name_ko": "치이카와 아크릴 스탠드 (하치와레)",
+              "name_ja": "ちいかわ アクリルスタンド (ハチワレ)",
+              "series_name": null,
+              "category": "아크릴 스탠드",
+              "source_url": null,
+              "image_url": null
+            },
+            {
+              "catalog_index": 929,
+              "name_ko": "치이카와 아크릴 스탠드 (우사기)",
+              "name_ja": "ちいかわ アクリルスタンド (うさぎ)",
+              "series_name": null,
+              "category": "아크릴 스탠드",
+              "source_url": null,
+              "image_url": null
+            },
+            {
+              "catalog_index": 930,
+              "name_ko": "치이카와 빅 아크릴 스탠드 (치이카와)",
+              "name_ja": "ちいかわ ビッグアクリルスタンド (ちいかわ)",
+              "series_name": null,
+              "category": "아크릴 스탠드",
+              "source_url": null,
+              "image_url": null
+            }
+          ]
+        },
+        {
+          "field": "image_url",
           "source_store": "애니메이트",
           "missing_rows": 144,
           "priority": 20,
@@ -2964,101 +3059,6 @@
               "name_ja": null,
               "series_name": null,
               "category": "캔뱃지",
-              "source_url": null,
-              "image_url": null
-            }
-          ]
-        },
-        {
-          "field": "image_url",
-          "source_store": "엔스카이",
-          "missing_rows": 137,
-          "priority": 20,
-          "workflow": "source_then_image_import",
-          "evidence_required": "product image from exact source_url after identity verification",
-          "next_machine_step": "source_then_image_import",
-          "risk": "wrong_product_image",
-          "recommended_action": "Find exact official product page and attach source_url/image_url together.",
-          "sample_catalog_indexes": [
-            922,
-            923,
-            924,
-            925,
-            926,
-            928,
-            929,
-            930
-          ],
-          "sample_items": [
-            {
-              "catalog_index": 922,
-              "name_ko": "치이카와 러버 스트랩 (우사기)",
-              "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
-              "series_name": null,
-              "category": "키링",
-              "source_url": null,
-              "image_url": null
-            },
-            {
-              "catalog_index": 923,
-              "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
-              "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
-              "series_name": null,
-              "category": "키링",
-              "source_url": null,
-              "image_url": null
-            },
-            {
-              "catalog_index": 924,
-              "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
-              "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
-              "series_name": null,
-              "category": "키링",
-              "source_url": null,
-              "image_url": null
-            },
-            {
-              "catalog_index": 925,
-              "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
-              "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
-              "series_name": null,
-              "category": "키링",
-              "source_url": null,
-              "image_url": null
-            },
-            {
-              "catalog_index": 926,
-              "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
-              "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
-              "series_name": null,
-              "category": "키링",
-              "source_url": null,
-              "image_url": null
-            },
-            {
-              "catalog_index": 928,
-              "name_ko": "치이카와 아크릴 스탠드 (하치와레)",
-              "name_ja": "ちいかわ アクリルスタンド (ハチワレ)",
-              "series_name": null,
-              "category": "아크릴 스탠드",
-              "source_url": null,
-              "image_url": null
-            },
-            {
-              "catalog_index": 929,
-              "name_ko": "치이카와 아크릴 스탠드 (우사기)",
-              "name_ja": "ちいかわ アクリルスタンド (うさぎ)",
-              "series_name": null,
-              "category": "아크릴 스탠드",
-              "source_url": null,
-              "image_url": null
-            },
-            {
-              "catalog_index": 930,
-              "name_ko": "치이카와 빅 아크릴 스탠드 (치이카와)",
-              "name_ja": "ちいかわ ビッグアクリルスタンド (ちいかわ)",
-              "series_name": null,
-              "category": "아크릴 스탠드",
               "source_url": null,
               "image_url": null
             }

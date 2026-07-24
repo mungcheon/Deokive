@@ -1,42 +1,22 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T16:07:12Z",
+  "generated_at": "2026-07-24T16:22:12Z",
   "scope": "source_discovery_next_focus_identity_backfill_queue",
   "source_report": "data/source_discovery_next_focus_fallback_queue_public.json",
   "summary": {
-    "queue_rows": 2,
+    "queue_rows": 0,
     "manual_confirmed_rows": 0,
-    "by_source_store": [
-      [
-        "애니메이트",
-        2
-      ]
-    ],
-    "by_category": [
-      [
-        "아크릴 스탠드",
-        2
-      ]
-    ],
-    "by_identity_review_status": [
-      [
-        "variant_disambiguation_required",
-        2
-      ]
-    ],
-    "primary_review_url_rows": 2,
-    "primary_review_url_kind_counts": [
-      [
-        "domain_limited_web_search",
-        2
-      ]
-    ],
-    "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%22",
-    "first_primary_review_url_kind": "domain_limited_web_search",
+    "by_source_store": [],
+    "by_category": [],
+    "by_identity_review_status": [],
+    "primary_review_url_rows": 0,
+    "primary_review_url_kind_counts": [],
+    "first_primary_review_url": "",
+    "first_primary_review_url_kind": "",
     "auto_apply_enabled": false,
-    "exact_url_review_ready_rows": 15,
-    "metadata_backfill_required_rows": 2,
-    "variant_disambiguation_required_rows": 2,
+    "exact_url_review_ready_rows": 0,
+    "metadata_backfill_required_rows": 0,
+    "variant_disambiguation_required_rows": 0,
     "recommended_next_action": "fill exact variant or character identity before source URL confirmation"
   },
   "automation_policy": {
@@ -44,96 +24,5 @@
     "auto_apply_source_url": false,
     "requires_manual_review": true
   },
-  "items": [
-    {
-      "catalog_index": 1082,
-      "focus_pack_id": "source-discovery-focus-001",
-      "source_store": "애니메이트",
-      "category": "아크릴 스탠드",
-      "name_ko": "죠죠의 기묘한 모험 아크릴 스탠드",
-      "name_ja": null,
-      "search_term": "ジョジョの奇妙な冒険 アクリルスタンド",
-      "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%22",
-      "primary_review_url_kind": "domain_limited_web_search",
-      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%22",
-      "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89",
-      "manual_confirmed": false,
-      "manual_confirmed_name_ja": "",
-      "manual_confirmed_variant_or_character": "",
-      "manual_evidence_url": "",
-      "manual_note": "",
-      "next_action": "identify_exact_variant_or_character_before_source_url_confirmation",
-      "source_url_review_guidance": {
-        "accepted_source_url_patterns": [
-          "https://www.animate-onlineshop.jp/pn/.../pd/...",
-          "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
-        ],
-        "rejected_source_url_patterns": [
-          "Google search result URLs",
-          "Animate products/list.php search pages",
-          "Animate sphone/products/list.php search pages",
-          "category, ranking, cart, favorite, or account pages"
-        ],
-        "confirmation_checks": [
-          "catalog row title or Japanese name matches the product detail page title",
-          "character, variant, size, and goods type match the catalog row",
-          "product image on the page depicts the same exact item or explicitly confirmed variant"
-        ],
-        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
-      },
-      "identity_review_status": "variant_disambiguation_required",
-      "identity_blockers": [
-        "missing_name_ja",
-        "variant_or_character_not_explicit"
-      ],
-      "requires_metadata_backfill": true,
-      "requires_variant_disambiguation": true,
-      "auto_apply_enabled": false
-    },
-    {
-      "catalog_index": 1123,
-      "focus_pack_id": "source-discovery-focus-001",
-      "source_store": "애니메이트",
-      "category": "아크릴 스탠드",
-      "name_ko": "신세기 에반게리온 아크릴 스탠드",
-      "name_ja": null,
-      "search_term": "新世紀エヴァンゲリオン アクリルスタンド",
-      "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%96%B0%E4%B8%96%E7%B4%80%E3%82%A8%E3%83%B4%E3%82%A1%E3%83%B3%E3%82%B2%E3%83%AA%E3%82%AA%E3%83%B3+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%22",
-      "primary_review_url_kind": "domain_limited_web_search",
-      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%96%B0%E4%B8%96%E7%B4%80%E3%82%A8%E3%83%B4%E3%82%A1%E3%83%B3%E3%82%B2%E3%83%AA%E3%82%AA%E3%83%B3+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%22",
-      "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E6%96%B0%E4%B8%96%E7%B4%80%E3%82%A8%E3%83%B4%E3%82%A1%E3%83%B3%E3%82%B2%E3%83%AA%E3%82%AA%E3%83%B3+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89",
-      "manual_confirmed": false,
-      "manual_confirmed_name_ja": "",
-      "manual_confirmed_variant_or_character": "",
-      "manual_evidence_url": "",
-      "manual_note": "",
-      "next_action": "identify_exact_variant_or_character_before_source_url_confirmation",
-      "source_url_review_guidance": {
-        "accepted_source_url_patterns": [
-          "https://www.animate-onlineshop.jp/pn/.../pd/...",
-          "https://www.animate-onlineshop.jp/products/detail.php?product_id=..."
-        ],
-        "rejected_source_url_patterns": [
-          "Google search result URLs",
-          "Animate products/list.php search pages",
-          "Animate sphone/products/list.php search pages",
-          "category, ranking, cart, favorite, or account pages"
-        ],
-        "confirmation_checks": [
-          "catalog row title or Japanese name matches the product detail page title",
-          "character, variant, size, and goods type match the catalog row",
-          "product image on the page depicts the same exact item or explicitly confirmed variant"
-        ],
-        "image_url_rule": "manual_confirmed_image_url may be filled only from the confirmed product detail page or its directly referenced product image asset."
-      },
-      "identity_review_status": "variant_disambiguation_required",
-      "identity_blockers": [
-        "missing_name_ja",
-        "variant_or_character_not_explicit"
-      ],
-      "requires_metadata_backfill": true,
-      "requires_variant_disambiguation": true,
-      "auto_apply_enabled": false
-    }
-  ]
+  "items": []
 }
