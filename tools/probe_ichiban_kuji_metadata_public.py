@@ -38,6 +38,7 @@ PRICE_LABELS = ("■メーカー希望小売価格", "メーカー希望小売�
 DOUBLE_CHANCE = "ダブルチャンス"
 CAMPAIGN = "キャンペーン"
 UNDECIDED = "未定"
+NOISY_YEN_CONTEXT = ("円谷プロ",)
 
 
 def _now_utc() -> str:
@@ -151,12 +152,27 @@ def _after_colon(text: str) -> str:
     return text
 
 
+def _field_value_area(text: str, label_end: int, radius: int = 120) -> str:
+    value = text[label_end : label_end + radius]
+    if "■" in value:
+        value = value.split("■", 1)[0]
+    return value.strip()
+
+
+def _nearby_previous_field_name(text: str, label_start: int, radius: int = 60) -> str:
+    before = text[max(0, label_start - radius) : label_start]
+    if "■" in before:
+        before = before.rsplit("■", 1)[-1]
+    return before
+
+
 def _extract_safe_release_date(text: str) -> dict[str, Any]:
     for label_match in RELEASE_LABEL_RE.finditer(text):
         snippet = text[label_match.start() : label_match.start() + 180]
-        if DOUBLE_CHANCE in snippet or CAMPAIGN in snippet:
+        previous_field_name = _nearby_previous_field_name(text, label_match.start())
+        if DOUBLE_CHANCE in previous_field_name or CAMPAIGN in previous_field_name:
             continue
-        value_area = text[label_match.end() : label_match.end() + 100]
+        value_area = _field_value_area(text, label_match.end())
         if UNDECIDED in value_area[:20]:
             return {"value": None, "reason": "release label says undecided", "snippet": snippet, "ambiguous": True}
         match = DATE_RE.search(value_area)
@@ -180,9 +196,13 @@ def _extract_safe_price(text: str) -> dict[str, Any]:
     for label in PRICE_LABELS:
         for index in _find_all(text, label):
             snippet = text[index : index + 180]
-            if DOUBLE_CHANCE in snippet:
+            previous_field_name = _nearby_previous_field_name(text, index)
+            if DOUBLE_CHANCE in previous_field_name or CAMPAIGN in previous_field_name:
                 continue
-            match = PRICE_RE.search(_after_colon(snippet)[:90])
+            value_area = _field_value_area(_after_colon(snippet), 0)
+            if DOUBLE_CHANCE in value_area or CAMPAIGN in value_area:
+                value_area = value_area.split(DOUBLE_CHANCE, 1)[0].split(CAMPAIGN, 1)[0]
+            match = PRICE_RE.search(value_area)
             if not match:
                 continue
             value = int(match.group(1).replace(",", ""))
@@ -194,6 +214,34 @@ def _extract_safe_price(text: str) -> dict[str, Any]:
         "snippet": _first_relevant_snippet(text, PRICE_LABELS),
         "ambiguous": bool(PRICE_RE.search(text)),
     }
+
+
+def _unsafe_yen_amount_candidates(text: str, limit: int = 5) -> list[dict[str, Any]]:
+    candidates: list[dict[str, Any]] = []
+    seen: set[tuple[int, str]] = set()
+    for match in PRICE_RE.finditer(text):
+        value = int(match.group(1).replace(",", ""))
+        if not 100 <= value <= 2000:
+            continue
+        snippet = text[max(0, match.start() - 90) : match.start() + 140]
+        reason = "unlabeled_yen_amount_requires_manual_review"
+        if any(noise in snippet for noise in NOISY_YEN_CONTEXT):
+            reason = "likely_copyright_or_non_price_yen_noise"
+        key = (value, reason)
+        if key in seen:
+            continue
+        seen.add(key)
+        candidates.append(
+            {
+                "value": value,
+                "reason": reason,
+                "snippet": snippet,
+                "manual_review_required": True,
+            }
+        )
+        if len(candidates) >= limit:
+            break
+    return candidates
 
 
 def build_report(
@@ -220,6 +268,7 @@ def build_report(
             continue
         release = _extract_safe_release_date(plain)
         price = _extract_safe_price(plain)
+        unsafe_price_candidates = _unsafe_yen_amount_candidates(plain)
         all_dates = _all_dates(plain)
         double_dates = _dates_near(plain, DOUBLE_CHANCE, 220)
         group = grouped[url]
@@ -239,6 +288,8 @@ def build_report(
                 "safe_price_jpy": price.get("value"),
                 "safe_price_reason": price.get("reason"),
                 "safe_price_snippet": price.get("snippet"),
+                "unsafe_price_candidates": unsafe_price_candidates,
+                "unsafe_price_candidate_count": len(unsafe_price_candidates),
                 "all_dates": all_dates[:12],
                 "double_chance_dates": double_dates[:12],
                 "ambiguous": release.get("ambiguous", False) or price.get("ambiguous", False),
@@ -247,11 +298,14 @@ def build_report(
         )
 
     blocked_reasons = Counter()
+    unsafe_price_candidate_reasons = Counter()
     for page in pages:
         if page["missing_release_rows"] and not page["safe_release_date"]:
             blocked_reasons[str(page["safe_release_reason"])] += page["missing_release_rows"]
         if page["missing_price_rows"] and not page["safe_price_jpy"]:
             blocked_reasons[str(page["safe_price_reason"])] += page["missing_price_rows"]
+        for candidate in page.get("unsafe_price_candidates") or []:
+            unsafe_price_candidate_reasons[str(candidate.get("reason") or "")] += 1
 
     return {
         "schema_version": 1,
@@ -267,8 +321,19 @@ def build_report(
             "safe_price_url_count": sum(1 for p in pages if p["missing_price_rows"] and p["safe_price_jpy"]),
             "safe_release_row_count": sum(p["missing_release_rows"] for p in pages if p["safe_release_date"]),
             "safe_price_row_count": sum(p["missing_price_rows"] for p in pages if p["safe_price_jpy"]),
+            "unsafe_price_candidate_url_count": sum(
+                1
+                for p in pages
+                if p["missing_price_rows"] and p["unsafe_price_candidate_count"]
+            ),
+            "unsafe_price_candidate_row_count": sum(
+                p["missing_price_rows"]
+                for p in pages
+                if p["unsafe_price_candidate_count"]
+            ),
             "ambiguous_page_count": sum(1 for p in pages if p["ambiguous"]),
             "blocked_reasons": blocked_reasons.most_common(),
+            "unsafe_price_candidate_reasons": unsafe_price_candidate_reasons.most_common(),
             "auto_apply_enabled": False,
         },
         "pages": pages,
@@ -277,6 +342,7 @@ def build_report(
             "Only official 1kuji.com campaign pages are probed.",
             "release_date is safe only from a date or month immediately following a product release label such as 発売日.",
             "official_price_jpy is safe only from a labeled yen price in the product-info area.",
+            "Unlabeled yen amounts are listed only as unsafe candidates for manual review.",
             "Double-chance and campaign-period dates are explicitly ignored.",
             "This public report never applies catalog changes automatically.",
         ],
