@@ -61,6 +61,8 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/source_discovery_next_focus_pack_fetch_audit_public.json", updated_files)
         self.assertIn("data/source_discovery_next_focus_detail_candidates_public.json", updated_files)
         self.assertIn("data/source_discovery_next_focus_fallback_queue_public.json", updated_files)
+        self.assertIn("data/source_discovery_next_focus_exact_url_review_queue_public.json", updated_files)
+        self.assertIn("data/source_discovery_next_focus_identity_backfill_queue_public.json", updated_files)
         self.assertIn("data/source_discovery_next_focus_fallback_import_dry_run_public.json", updated_files)
         self.assertIn("data/source_discovery_completion_roadmap_public.json", updated_files)
         self.assertIn("data/catalog_missing_image_actionability_public.json", updated_files)
@@ -426,6 +428,16 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             quality["source_discovery_next_focus_fallback_queue"]["variant_disambiguation_required_rows"],
             2,
+        )
+        self.assertEqual(quality["source_discovery_next_focus_exact_url_review_queue"]["queue_rows"], 15)
+        self.assertEqual(
+            quality["source_discovery_next_focus_exact_url_review_queue"]["blocked_identity_rows"],
+            2,
+        )
+        self.assertEqual(quality["source_discovery_next_focus_identity_backfill_queue"]["queue_rows"], 2)
+        self.assertEqual(
+            quality["source_discovery_next_focus_identity_backfill_queue"]["exact_url_review_ready_rows"],
+            15,
         )
         self.assertIs(quality["source_discovery_next_focus_fallback_queue"]["auto_apply_enabled"], False)
         self.assertEqual(quality["source_discovery_next_focus_fallback_import_dry_run"]["updated_rows"], 0)

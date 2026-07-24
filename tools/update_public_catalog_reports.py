@@ -30,6 +30,7 @@ import build_provider_missing_source_url_queue_public
 import build_source_discovery_next_focus_detail_candidates_public
 import build_source_discovery_next_focus_fallback_queue_public
 import build_source_discovery_next_focus_pack_public
+import build_source_discovery_next_focus_split_queues_public
 import import_confirmed_deduplication_rows
 import import_confirmed_image_attachment_rows
 import import_confirmed_source_discovery_rows
@@ -110,6 +111,8 @@ SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT = DATA / "source_discovery_next_foc
 SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES = DATA / "source_discovery_next_focus_detail_candidates_public.json"
 SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE = DATA / "source_discovery_next_focus_fallback_queue_public.json"
 SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_IMPORT = DATA / "source_discovery_next_focus_fallback_import_dry_run_public.json"
+SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_QUEUE = DATA / "source_discovery_next_focus_exact_url_review_queue_public.json"
+SOURCE_DISCOVERY_NEXT_FOCUS_IDENTITY_BACKFILL_QUEUE = DATA / "source_discovery_next_focus_identity_backfill_queue_public.json"
 SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE = DATA / "source_detail_candidate_action_queue_public.json"
 OFFICIAL_DETAIL_REVIEW_BATCHES = DATA / "official_detail_review_batches_public.json"
 METADATA_BACKLOG = DATA / "catalog_metadata_backlog_public.json"
@@ -7587,6 +7590,13 @@ def update_reports(write: bool) -> dict[str, Any]:
             generated_at=generated_at,
         )
     )
+    (
+        source_discovery_next_focus_exact_url_queue,
+        source_discovery_next_focus_identity_backfill_queue,
+    ) = build_source_discovery_next_focus_split_queues_public.build_reports(
+        source_discovery_next_focus_fallback_queue,
+        generated_at=generated_at,
+    )
     source_discovery_next_focus_fallback_import = build_source_discovery_import_dry_run_public(
         source_discovery_next_focus_fallback_queue,
         items,
@@ -7844,6 +7854,14 @@ def update_reports(write: bool) -> dict[str, Any]:
         target["source_discovery_next_focus_fallback_queue"] = {
             "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}",
             **source_discovery_next_focus_fallback_queue["summary"],
+        }
+        target["source_discovery_next_focus_exact_url_review_queue"] = {
+            "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_QUEUE.name}",
+            **source_discovery_next_focus_exact_url_queue["summary"],
+        }
+        target["source_discovery_next_focus_identity_backfill_queue"] = {
+            "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_IDENTITY_BACKFILL_QUEUE.name}",
+            **source_discovery_next_focus_identity_backfill_queue["summary"],
         }
         target["source_discovery_next_focus_fallback_import_dry_run"] = {
             "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_IMPORT.name}",
@@ -8488,6 +8506,11 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_IMPORT, source_discovery_next_focus_pack_import)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES, source_discovery_next_focus_detail_candidates)
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE, source_discovery_next_focus_fallback_queue)
+        write_json(SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_QUEUE, source_discovery_next_focus_exact_url_queue)
+        write_json(
+            SOURCE_DISCOVERY_NEXT_FOCUS_IDENTITY_BACKFILL_QUEUE,
+            source_discovery_next_focus_identity_backfill_queue,
+        )
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_IMPORT, source_discovery_next_focus_fallback_import)
         write_json(MISSING_IMAGE_ACTIONABILITY, missing_image_actionability)
         write_json(GENERIC_SOURCE_PATCH_CANDIDATES, generic_source_patch_candidates)
@@ -8533,6 +8556,8 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(SOURCE_DISCOVERY_NEXT_FOCUS_PACK_FETCH_AUDIT.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_DETAIL_CANDIDATES.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.relative_to(ROOT)),
+            str(SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_QUEUE.relative_to(ROOT)),
+            str(SOURCE_DISCOVERY_NEXT_FOCUS_IDENTITY_BACKFILL_QUEUE.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_IMPORT.relative_to(ROOT)),
             str(MISSING_IMAGE_ACTIONABILITY.relative_to(ROOT)),
             str(GENERIC_SOURCE_PATCH_CANDIDATES.relative_to(ROOT)),
