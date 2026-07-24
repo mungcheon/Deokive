@@ -9,7 +9,7 @@ import '../utils/catalog_goods_importer.dart';
 import '../widgets/catalog_entry_image.dart';
 
 const _catalogAddButtonBackground = Color(0xFF1E2330);
-const _catalogAddButtonForeground = Colors.white;
+const _catalogAddButtonForeground = Color(0xFFFFFFFF);
 const _catalogAddButtonDisabledBackground = Color(0xFFDDE1E8);
 const _catalogAddButtonDisabledForeground = Color(0xFF303747);
 
@@ -548,7 +548,7 @@ class _CatalogListTile extends StatelessWidget {
             const SizedBox(width: 8),
             _CatalogAddButton(
               key: const Key('catalog-add-list-button'),
-              label: isAdding ? '추가 중' : '추가',
+              label: isAdding ? '추가 중' : '추가하기',
               icon: isAdding ? Icons.more_horiz_rounded : Icons.add_rounded,
               disabled: isAdding,
               onPressed: () async => onAdd(),
@@ -588,7 +588,7 @@ class _CatalogAddButton extends StatelessWidget {
       duration: const Duration(milliseconds: 140),
       height: 40,
       constraints: BoxConstraints(
-        minWidth: expanded ? 0 : 104,
+        minWidth: expanded ? 0 : 118,
         minHeight: 40,
         maxHeight: 40,
       ),
@@ -674,6 +674,7 @@ class _CatalogAddButtonLabel extends StatelessWidget {
       child: Text(
         label,
         style: TextStyle(
+          inherit: false,
           color: color,
           fontSize: 13,
           fontWeight: FontWeight.w900,

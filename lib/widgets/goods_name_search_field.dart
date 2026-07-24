@@ -4,7 +4,7 @@ import '../models/goods_catalog_entry.dart';
 import 'catalog_entry_image.dart';
 
 const _catalogPickerActionBackground = Color(0xFF252938);
-const _catalogPickerActionForeground = Colors.white;
+const _catalogPickerActionForeground = Color(0xFFFFFFFF);
 
 /// Goods-name input that opens a catalog picker dialog when tapped.
 /// Selecting a row fills the form from the read-only public DB.
@@ -415,32 +415,49 @@ class _CatalogPickerActionButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(999),
         onTap: onPressed,
         child: Container(
-          constraints: const BoxConstraints(minWidth: 92, minHeight: 34),
+          constraints: const BoxConstraints(minWidth: 104, minHeight: 34),
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           child: IconTheme(
             data: const IconThemeData(
               color: _catalogPickerActionForeground,
               size: 16,
             ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(Icons.add_rounded),
-                const SizedBox(width: 4),
-                Text(
-                  label,
-                  style: const TextStyle(
+            child: DefaultTextStyle.merge(
+              style: const TextStyle(
+                color: _catalogPickerActionForeground,
+                fontSize: 12,
+                fontWeight: FontWeight.w900,
+                height: 1,
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.add_rounded,
                     color: _catalogPickerActionForeground,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w900,
-                    height: 1,
                   ),
-                  maxLines: 1,
-                  softWrap: false,
-                  overflow: TextOverflow.visible,
-                ),
-              ],
+                  const SizedBox(width: 4),
+                  Flexible(
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        label,
+                        style: const TextStyle(
+                          inherit: false,
+                          color: _catalogPickerActionForeground,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w900,
+                          height: 1,
+                        ),
+                        maxLines: 1,
+                        softWrap: false,
+                        overflow: TextOverflow.visible,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

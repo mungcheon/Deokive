@@ -12,7 +12,7 @@ import '../widgets/goods_name_search_field.dart';
 import 'catalog_asset_urls.dart';
 
 const _catalogImportButtonBackground = Color(0xFF252938);
-const _catalogImportButtonForeground = Colors.white;
+const _catalogImportButtonForeground = Color(0xFFFFFFFF);
 const _catalogImportButtonDisabledBackground = Color(0xFFE7E9EE);
 const _catalogImportButtonDisabledForeground = Color(0xFF5D6575);
 
@@ -26,7 +26,7 @@ Future<bool> showCatalogGoodsImportFlow(
     context,
     catalog: appState.curatedCatalogEntries,
     ownedCountBuilder: (entry) => _ownedCountForCatalogEntry(appState, entry),
-    actionLabel: '추가',
+    actionLabel: '추가하기',
   );
   if (entry == null || !context.mounted) return false;
 
@@ -481,6 +481,7 @@ class _CatalogImportActionLabel extends StatelessWidget {
     return Text(
       label,
       style: TextStyle(
+        inherit: false,
         color: color,
         fontSize: 15,
         fontWeight: FontWeight.w900,
