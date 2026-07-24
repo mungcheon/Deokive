@@ -123,7 +123,13 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["representative_image_review_required_rows"], 0)
         self.assertEqual(report["summary"]["representative_candidate_status_counts"], [])
         self.assertEqual(report["summary"]["image_url_ready_rows"], 0)
+        self.assertEqual(report["summary"]["can_import_image_urls_now_rows"], 0)
         self.assertEqual(report["summary"]["blocked_before_image_import_rows"], 2)
+        self.assertEqual(report["summary"]["manual_confirmation_required_rows"], 2)
+        self.assertEqual(
+            report["summary"]["image_import_gate_status"],
+            "blocked_until_manual_source_or_image_confirmation",
+        )
         self.assertEqual(report["summary"]["download_ready_after_manual_image_url_rows"], 2)
         self.assertEqual(report["summary"]["suggested_local_image_path_rows"], 2)
         self.assertEqual(report["summary"]["workstream_count"], 1)
@@ -534,6 +540,12 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["action_batch_count"], 1)
         self.assertEqual(report["summary"]["workstream_count"], 1)
         self.assertEqual(report["summary"]["representative_image_review_workstream_count"], 1)
+        self.assertEqual(report["summary"]["can_import_image_urls_now_rows"], 0)
+        self.assertEqual(report["summary"]["manual_confirmation_required_rows"], 3)
+        self.assertEqual(
+            report["summary"]["image_import_gate_status"],
+            "blocked_until_manual_source_or_image_confirmation",
+        )
         self.assertEqual(
             report["execution_readiness"]["status"],
             "representative_image_review_required",

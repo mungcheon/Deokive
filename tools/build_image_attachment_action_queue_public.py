@@ -1574,9 +1574,22 @@ def build_report(
                 action_items
             ),
             "image_url_ready_rows": image_url_ready_rows,
+            "can_import_image_urls_now_rows": attachment_readiness[
+                "can_import_image_urls_now_rows"
+            ],
             "blocked_before_image_import_rows": attachment_readiness[
                 "blocked_before_image_import_rows"
             ],
+            "manual_confirmation_required_rows": attachment_readiness[
+                "blocked_before_image_import_rows"
+            ],
+            "image_import_gate_status": (
+                "ready_to_import_confirmed_image_urls"
+                if attachment_readiness["can_import_image_urls_now_rows"]
+                else "blocked_until_manual_source_or_image_confirmation"
+                if attachment_readiness["blocked_before_image_import_rows"]
+                else "no_image_attachment_rows"
+            ),
             "download_ready_after_manual_image_url_rows": attachment_readiness[
                 "download_ready_after_manual_image_url_rows"
             ],
