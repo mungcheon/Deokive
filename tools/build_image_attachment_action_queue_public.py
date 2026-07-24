@@ -19,6 +19,7 @@ except Exception:
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_INPUT = ROOT / "data" / "catalog_image_enrichment_batches_public.json"
 DEFAULT_CATALOG = ROOT / "data" / "catalog_public.json"
+DEFAULT_GOTOUCHI_CANDIDATES = ROOT / "data" / "gotouchi_chiikawa_image_candidates_public.json"
 DEFAULT_OUTPUT = ROOT / "data" / "catalog_image_attachment_action_queue_public.json"
 
 WORKFLOW_PRIORITY = {
@@ -58,6 +59,43 @@ def _catalog_image_lookup(catalog: dict[str, Any] | None) -> dict[int, bool]:
         if isinstance(catalog_index, int) and not isinstance(catalog_index, bool):
             lookup[catalog_index] = _present(item.get("local_image_path")) or _present(item.get("image_url"))
     return lookup
+
+
+def _representative_candidate_lookup(
+    candidate_report: dict[str, Any] | None,
+) -> dict[int, dict[str, Any]]:
+    if not candidate_report:
+        return {}
+    lookup: dict[int, dict[str, Any]] = {}
+    for item in candidate_report.get("items") or []:
+        if not isinstance(item, dict):
+            continue
+        catalog_index = item.get("catalog_index")
+        if isinstance(catalog_index, int) and not isinstance(catalog_index, bool):
+            lookup[catalog_index] = {
+                "candidate_status": item.get("candidate_status"),
+                "top_candidates": item.get("top_candidates") or [],
+            }
+    return lookup
+
+
+def _with_representative_candidates(
+    item: dict[str, Any],
+    candidate_lookup: dict[int, dict[str, Any]],
+) -> dict[str, Any]:
+    catalog_index = item.get("catalog_index")
+    candidate = (
+        candidate_lookup.get(catalog_index)
+        if isinstance(catalog_index, int) and not isinstance(catalog_index, bool)
+        else None
+    )
+    if not candidate:
+        return item
+    return {
+        **item,
+        "candidate_status": item.get("candidate_status") or candidate.get("candidate_status"),
+        "top_candidates": item.get("top_candidates") or candidate.get("top_candidates") or [],
+    }
 
 
 def _counter_pairs(rows: list[dict[str, Any]], key: str) -> list[list[Any]]:
@@ -181,6 +219,13 @@ def _build_workstreams(batches: list[dict[str, Any]]) -> list[dict[str, Any]]:
                         "suggested_local_image_path": item.get(
                             "suggested_local_image_path"
                         ),
+                        "representative_candidate_status": item.get(
+                            "representative_candidate_status"
+                        ),
+                        "representative_top_candidates": item.get(
+                            "representative_top_candidates"
+                        )
+                        or [],
                         "source_url_update_required": item.get("source_url_update_required"),
                         "representative_image_review_required": item.get(
                             "representative_image_review_required"
@@ -473,6 +518,13 @@ def _build_next_representative_image_review_batch(
                 "candidate_source_url": template.get("candidate_source_url")
                 or row.get("source_url")
                 or "",
+                "representative_candidate_status": row.get(
+                    "representative_candidate_status"
+                ),
+                "representative_top_candidates": row.get(
+                    "representative_top_candidates"
+                )
+                or [],
                 "suggested_local_image_path": row.get("suggested_local_image_path"),
                 "local_image_download_instruction": row.get(
                     "local_image_download_instruction"
@@ -757,6 +809,8 @@ def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
         "manual_confirmation_requirements": _manual_confirmation_requirements(workflow),
         "source_url_import_template": source_url_template,
         "catalog_field_import_template": catalog_template,
+        "representative_candidate_status": item.get("candidate_status"),
+        "representative_top_candidates": item.get("top_candidates") or [],
         "suggested_local_image_path": suggested_local_image_path,
         "local_image_download_instruction": _local_image_download_instruction(
             suggested_local_image_path
@@ -961,6 +1015,7 @@ def _source_url_import_template(item: dict[str, Any], group: dict[str, Any]) -> 
 def build_report(
     enrichment_batches: dict[str, Any],
     catalog: dict[str, Any] | None = None,
+    representative_candidates: dict[str, Any] | None = None,
     *,
     max_batches: int = 18,
     batch_size: int = 20,
@@ -970,6 +1025,9 @@ def build_report(
     actionable_group_rows = 0
     skipped_already_has_image_rows = 0
     has_image_by_index = _catalog_image_lookup(catalog)
+    representative_candidate_by_index = _representative_candidate_lookup(
+        representative_candidates
+    )
 
     for group in enrichment_batches.get("groups", []):
         if not isinstance(group, dict):
@@ -986,7 +1044,14 @@ def build_report(
                 if isinstance(catalog_index, int) and has_image_by_index.get(catalog_index):
                     skipped_already_has_image_rows += 1
                     continue
-                action_items.append(_compact_item(group, item))
+                action_items.append(
+                    _compact_item(
+                        group,
+                        _with_representative_candidates(
+                            item, representative_candidate_by_index
+                        ),
+                    )
+                )
 
     action_items.sort(
         key=lambda row: (
@@ -1408,6 +1473,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--catalog", type=Path, default=DEFAULT_CATALOG)
+    parser.add_argument("--gotouchi-candidates", type=Path, default=DEFAULT_GOTOUCHI_CANDIDATES)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--max-batches", type=int, default=18)
     parser.add_argument("--batch-size", type=int, default=20)
@@ -1416,6 +1482,7 @@ def main() -> int:
     report = build_report(
         _load(args.input),
         _load(args.catalog) if args.catalog.exists() else None,
+        _load(args.gotouchi_candidates) if args.gotouchi_candidates.exists() else None,
         max_batches=args.max_batches,
         batch_size=args.batch_size,
     )

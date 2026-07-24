@@ -8379,6 +8379,7 @@ def update_reports(write: bool) -> dict[str, Any]:
     image_attachment_action_queue = build_image_attachment_action_queue_public.build_report(
         image_enrichment_batches,
         {"items": items},
+        load_json(GOTOUCHI, {}) if GOTOUCHI.exists() else None,
     )
     image_source_url_confirmed_template = build_image_source_url_confirmed_template_public.build_template(
         image_attachment_action_queue,

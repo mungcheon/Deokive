@@ -379,8 +379,30 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
                 for index in range(3)
             ]
         }
+        representative_candidates = {
+            "items": [
+                {
+                    "catalog_index": index,
+                    "candidate_status": "motif_only_type_mismatch",
+                    "top_candidates": [
+                        {
+                            "image_url": f"https://example.com/candidate-{index}.png",
+                            "alt": f"Candidate {index}",
+                            "type": "wrong_type",
+                            "type_match": False,
+                        }
+                    ],
+                }
+                for index in range(3)
+            ]
+        }
 
-        report = queue.build_report(enrichment, max_batches=1, batch_size=1)
+        report = queue.build_report(
+            enrichment,
+            representative_candidates=representative_candidates,
+            max_batches=1,
+            batch_size=1,
+        )
 
         self.assertEqual(report["summary"]["actionable_image_rows"], 3)
         self.assertEqual(report["summary"]["queued_image_rows"], 1)
@@ -417,6 +439,14 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
             report["batches"][0]["items"][0]["review_lane"],
             "representative_image_candidate_review",
         )
+        self.assertEqual(
+            report["batches"][0]["items"][0]["representative_candidate_status"],
+            "motif_only_type_mismatch",
+        )
+        self.assertEqual(
+            report["batches"][0]["items"][0]["representative_top_candidates"][0]["alt"],
+            "Candidate 0",
+        )
         self.assertIn(
             "product_type_confirmation_required",
             report["batches"][0]["items"][0]["image_import_blockers"],
@@ -434,6 +464,14 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(
             representative_review["suggested_local_image_path"],
             "assets/catalog_images/catalog_0.webp",
+        )
+        self.assertEqual(
+            representative_review["representative_candidate_status"],
+            "motif_only_type_mismatch",
+        )
+        self.assertEqual(
+            representative_review["representative_top_candidates"][0]["image_url"],
+            "https://example.com/candidate-0.png",
         )
         self.assertEqual(representative_review["manual_image_url"], "")
         self.assertIn(
