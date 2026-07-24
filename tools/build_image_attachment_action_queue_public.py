@@ -83,6 +83,9 @@ def _build_workstreams(batches: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "source_url_update_template_rows": 0,
                 "representative_image_review_rows": 0,
                 "image_url_ready_rows": 0,
+                "primary_review_url_rows": 0,
+                "first_primary_review_url": "",
+                "first_primary_review_url_kind": "manual_lookup_required",
                 "category_rows": Counter(),
                 "sample_items": [],
             },
@@ -99,6 +102,13 @@ def _build_workstreams(batches: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 bucket["representative_image_review_rows"] += 1
             if item.get("image_url_ready"):
                 bucket["image_url_ready_rows"] += 1
+            if item.get("primary_review_url"):
+                bucket["primary_review_url_rows"] += 1
+                if not bucket["first_primary_review_url"]:
+                    bucket["first_primary_review_url"] = item.get("primary_review_url")
+                    bucket["first_primary_review_url_kind"] = item.get(
+                        "primary_review_url_kind", "manual_lookup_required"
+                    )
             category = str(item.get("category") or "")
             if category:
                 bucket["category_rows"][category] += 1
@@ -112,6 +122,8 @@ def _build_workstreams(batches: list[dict[str, Any]]) -> list[dict[str, Any]]:
                         "category": item.get("category"),
                         "source_url": item.get("source_url"),
                         "official_search_url": item.get("official_search_url"),
+                        "primary_review_url": item.get("primary_review_url"),
+                        "primary_review_url_kind": item.get("primary_review_url_kind"),
                         "first_fallback_web_search_url": item.get(
                             "first_fallback_web_search_url"
                         ),
@@ -143,6 +155,9 @@ def _build_workstreams(batches: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "source_url_update_template_rows": bucket["source_url_update_template_rows"],
                 "representative_image_review_rows": bucket["representative_image_review_rows"],
                 "image_url_ready_rows": bucket["image_url_ready_rows"],
+                "primary_review_url_rows": bucket["primary_review_url_rows"],
+                "first_primary_review_url": bucket["first_primary_review_url"],
+                "first_primary_review_url_kind": bucket["first_primary_review_url_kind"],
                 "category_rows": [
                     [category, count] for category, count in bucket["category_rows"].most_common()
                 ],
@@ -215,6 +230,8 @@ def _build_source_url_update_work_order(action_items: list[dict[str, Any]]) -> l
                 "category": row.get("category"),
                 "current_source_url": row.get("source_url"),
                 "official_search_url": row.get("official_search_url"),
+                "primary_review_url": row.get("primary_review_url"),
+                "primary_review_url_kind": row.get("primary_review_url_kind"),
                 "first_fallback_web_search_url": row.get("first_fallback_web_search_url"),
                 "fallback_web_search_urls": row.get("fallback_web_search_urls") or [],
                 "source_url_import_template": row.get("source_url_import_template"),
@@ -461,7 +478,7 @@ def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
             fallback_web_search_urls[0] if fallback_web_search_urls else ""
         )
         source_url_template["fallback_web_search_urls"] = fallback_web_search_urls
-    return {
+    compact = {
         "catalog_index": item.get("catalog_index"),
         "workflow": workflow,
         "review_lane": review_lane,
@@ -488,6 +505,53 @@ def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
         "review_state": "exact_product_image_confirmation_required",
         "auto_apply_enabled": False,
     }
+    primary_review_url, primary_review_url_kind = _primary_review_url(compact)
+    compact["primary_review_url"] = primary_review_url
+    compact["primary_review_url_kind"] = primary_review_url_kind
+    if source_url_template is not None:
+        source_url_template["primary_review_url"] = primary_review_url
+        source_url_template["primary_review_url_kind"] = primary_review_url_kind
+    return compact
+
+
+def _primary_review_url(item: dict[str, Any]) -> tuple[str, str]:
+    workflow = str(item.get("workflow") or "")
+    template = item.get("catalog_field_import_template")
+    template = template if isinstance(template, dict) else {}
+    first_fallback = str(item.get("first_fallback_web_search_url") or "").strip()
+    fallback_urls = item.get("fallback_web_search_urls")
+    if not first_fallback and isinstance(fallback_urls, list) and fallback_urls:
+        first_fallback = str(fallback_urls[0] or "").strip()
+
+    if workflow == "replace_generic_source_then_extract_image":
+        candidates = [
+            ("source_search_url", item.get("source_search_url")),
+            ("official_search_url", item.get("official_search_url")),
+            ("fallback_web_search", first_fallback),
+            ("current_source_url", item.get("source_url")),
+        ]
+    elif workflow == "review_gotouchi_official_candidates":
+        candidates = [
+            ("current_source_url", item.get("source_url")),
+            ("candidate_source_url", template.get("candidate_source_url")),
+            ("fallback_web_search", first_fallback),
+            ("source_search_url", item.get("source_search_url")),
+            ("official_search_url", item.get("official_search_url")),
+        ]
+    else:
+        candidates = [
+            ("current_source_url", item.get("source_url")),
+            ("candidate_source_url", template.get("candidate_source_url")),
+            ("source_search_url", item.get("source_search_url")),
+            ("official_search_url", item.get("official_search_url")),
+            ("fallback_web_search", first_fallback),
+        ]
+
+    for kind, value in candidates:
+        url = str(value or "").strip()
+        if url:
+            return url, kind
+    return "", "manual_lookup_required"
 
 
 def _source_search_url(item: dict[str, Any], template: dict[str, Any] | None = None) -> Any:
@@ -661,6 +725,10 @@ def build_report(
             if len(batches) >= max_batches:
                 break
             chunk = rows[offset : offset + batch_size]
+            first_primary_review_item = next(
+                (row for row in chunk if row.get("primary_review_url")),
+                {},
+            )
             batches.append(
                 {
                     "batch_id": f"image-attachment-action-{len(batches) + 1:03d}",
@@ -681,6 +749,15 @@ def build_report(
                         "review_gotouchi_official_candidates": "Confirm motif candidate matches product type before image import.",
                     }.get(workflow, "Review image evidence before import."),
                     "category_counts": _counter_pairs(chunk, "category"),
+                    "primary_review_url_rows": sum(
+                        1 for row in chunk if row.get("primary_review_url")
+                    ),
+                    "first_primary_review_url": first_primary_review_item.get(
+                        "primary_review_url", ""
+                    ),
+                    "first_primary_review_url_kind": first_primary_review_item.get(
+                        "primary_review_url_kind", "manual_lookup_required"
+                    ),
                     "items": chunk,
                     "auto_apply_enabled": False,
                 }
@@ -718,6 +795,8 @@ def build_report(
         1 for item in action_items if item.get("representative_image_review_required")
     )
     image_url_ready_rows = sum(1 for item in action_items if item.get("image_url_ready"))
+    primary_review_url_rows = sum(1 for item in action_items if item.get("primary_review_url"))
+    primary_review_url_kind_counts = _counter_pairs(action_items, "primary_review_url_kind")
     source_url_update_work_order = _build_source_url_update_work_order(action_items)
     source_url_update_template = _source_url_update_templates(action_items)
     source_url_update_template_batches = _build_source_url_update_template_batches(
@@ -768,6 +847,8 @@ def build_report(
             "source_url_update_missing_any_search_hint_rows": (
                 source_url_update_required_rows - source_url_update_any_search_hint_rows
             ),
+            "primary_review_url_rows": primary_review_url_rows,
+            "primary_review_url_kind_counts": primary_review_url_kind_counts,
             "representative_image_review_required_rows": representative_image_review_required_rows,
             "image_url_ready_rows": image_url_ready_rows,
             "workstream_count": len(workstreams),
@@ -906,6 +987,9 @@ def _workstream_review_summary(workflow: str, bucket: dict[str, Any]) -> dict[st
         "source_url_update_required_rows": bucket["source_url_update_template_rows"],
         "representative_image_review_rows": bucket["representative_image_review_rows"],
         "image_url_ready_rows": bucket["image_url_ready_rows"],
+        "primary_review_url_rows": bucket["primary_review_url_rows"],
+        "first_primary_review_url": bucket["first_primary_review_url"],
+        "first_primary_review_url_kind": bucket["first_primary_review_url_kind"],
         "primary_blockers": _image_import_blockers(workflow),
         "manual_confirmation_requirements": _manual_confirmation_requirements(workflow),
     }

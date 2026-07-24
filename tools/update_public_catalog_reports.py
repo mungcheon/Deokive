@@ -2685,6 +2685,10 @@ def build_operations_public(
                 "source_url_update_missing_search_hint_rows",
                 0,
             ),
+            "primary_review_url_rows": image_action_queue_summary.get("primary_review_url_rows", 0),
+            "primary_review_url_kind_counts": image_action_queue_summary.get(
+                "primary_review_url_kind_counts", []
+            ),
             "workstream_count": image_action_queue_summary.get("workstream_count", 0),
             "source_url_update_workstream_count": image_action_queue_summary.get(
                 "source_url_update_workstream_count", 0
@@ -3556,6 +3560,10 @@ def build_operations_public(
                 "source_url_update_missing_search_hint_rows",
                 0,
             ),
+            "primary_review_url_rows": image_action_queue_summary.get("primary_review_url_rows", 0),
+            "primary_review_url_kind_counts": image_action_queue_summary.get(
+                "primary_review_url_kind_counts", []
+            ),
             "by_workflow": image_action_queue_summary.get("by_workflow", []),
             "by_source_store": image_action_queue_summary.get("by_source_store", []),
             "top_image_attachment_workstreams": image_action_workstreams,
@@ -4192,6 +4200,7 @@ def build_agent_work_queue_public(
     source_next_focus_fallback_queue_override: dict[str, Any] | None = None,
     source_discovery_starter_queue_override: dict[str, Any] | None = None,
     requested_focus_action_queue_override: dict[str, Any] | None = None,
+    image_attachment_action_queue_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     batches: list[dict[str, Any]] = []
     generic_source_report = load_json(GENERIC_SOURCE, {}) if GENERIC_SOURCE.exists() else {}
@@ -4216,7 +4225,9 @@ def build_agent_work_queue_public(
         else load_json(REQUESTED_FOCUS_ACTION_QUEUE, {}) if REQUESTED_FOCUS_ACTION_QUEUE.exists() else {}
     )
     image_action_queue = (
-        load_json(IMAGE_ATTACHMENT_ACTION_QUEUE, {}) if IMAGE_ATTACHMENT_ACTION_QUEUE.exists() else {}
+        image_attachment_action_queue_override
+        if image_attachment_action_queue_override is not None
+        else load_json(IMAGE_ATTACHMENT_ACTION_QUEUE, {}) if IMAGE_ATTACHMENT_ACTION_QUEUE.exists() else {}
     )
     source_next_focus_pack = (
         source_next_focus_pack_override
@@ -4435,7 +4446,7 @@ def build_agent_work_queue_public(
         recommended_action: str,
         acceptance_criteria: list[str],
         samples: list[dict[str, Any]],
-        review_summary: dict[str, int] | None = None,
+        review_summary: dict[str, Any] | None = None,
     ) -> None:
         if rows <= 0:
             return
@@ -4567,6 +4578,18 @@ def build_agent_work_queue_public(
                     "Prepare reviewed image templates only; auto-apply remains disabled.",
                 ],
                 samples=[item for item in action_batch.get("items", []) if isinstance(item, dict)],
+                review_summary={
+                    "action_batch_rows": int(action_batch.get("row_count") or 0),
+                    "primary_review_url_rows": int(
+                        action_batch.get("primary_review_url_rows") or 0
+                    ),
+                    "first_primary_review_url": action_batch.get("first_primary_review_url"),
+                    "first_primary_review_url_kind": action_batch.get(
+                        "first_primary_review_url_kind"
+                    ),
+                    "workflow": action_batch.get("workflow"),
+                    "source_store": action_batch.get("source_store"),
+                },
             )
 
     focus_progress_rows = [
@@ -8044,6 +8067,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         source_discovery_next_focus_fallback_queue,
         source_discovery_starter_queue,
         requested_focus_action_queue,
+        image_attachment_action_queue,
     )
     from build_catalog_execution_plan_public import build_plan_from_reports
 

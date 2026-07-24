@@ -1566,6 +1566,30 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         image_action = reports.load_json(reports.IMAGE_ATTACHMENT_ACTION_QUEUE)
         image_action_summary = image_action.get("summary", {})
+        first_image_action_batch = next(
+            batch
+            for batch in batches
+            if batch.get("workstream") == "image_attachment_action_queue"
+        )
+        self.assertGreater(image_action_summary.get("primary_review_url_rows", 0), 0)
+        self.assertGreater(
+            first_image_action_batch.get("review_summary", {}).get("primary_review_url_rows", 0),
+            0,
+        )
+        self.assertTrue(
+            first_image_action_batch.get("review_summary", {}).get("first_primary_review_url")
+        )
+        self.assertIn(
+            first_image_action_batch.get("review_summary", {}).get("first_primary_review_url_kind"),
+            {"source_search_url", "official_search_url", "fallback_web_search", "current_source_url"},
+        )
+        self.assertTrue(
+            any(
+                item.get("primary_review_url")
+                for item in first_image_action_batch.get("sample_items", [])
+                if isinstance(item, dict)
+            )
+        )
         image_asset = reports.load_json(reports.IMAGE_ASSET_AUDIT)
         image_asset_summary = image_asset.get("summary", {})
         image_asset_gate = next(
@@ -2381,6 +2405,18 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             image_scorecard.get("source_url_update_missing_search_hint_rows"),
             image_action_summary.get("source_url_update_missing_search_hint_rows"),
+        )
+        self.assertEqual(
+            image_scorecard.get("primary_review_url_rows"),
+            image_action_summary.get("primary_review_url_rows"),
+        )
+        self.assertEqual(
+            image_next_action.get("primary_review_url_rows"),
+            image_action_summary.get("primary_review_url_rows"),
+        )
+        self.assertEqual(
+            image_next_action.get("primary_review_url_kind_counts"),
+            image_action_summary.get("primary_review_url_kind_counts"),
         )
         self.assertEqual(
             image_next_action.get("by_source_store"),

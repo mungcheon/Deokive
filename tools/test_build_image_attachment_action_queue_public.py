@@ -68,6 +68,11 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["source_url_update_fallback_web_search_rows"], 1)
         self.assertEqual(report["summary"]["source_url_update_any_search_hint_rows"], 2)
         self.assertEqual(report["summary"]["source_url_update_missing_any_search_hint_rows"], 0)
+        self.assertEqual(report["summary"]["primary_review_url_rows"], 2)
+        self.assertEqual(
+            dict(report["summary"]["primary_review_url_kind_counts"]),
+            {"source_search_url": 1, "fallback_web_search": 1},
+        )
         self.assertEqual(report["summary"]["representative_image_review_required_rows"], 0)
         self.assertEqual(report["summary"]["image_url_ready_rows"], 0)
         self.assertEqual(report["summary"]["workstream_count"], 1)
@@ -106,8 +111,25 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         )
         self.assertEqual(report["next_actions"][0]["next_batch_id"], "image-attachment-action-001")
         self.assertEqual(report["batches"][0]["workflow"], "replace_generic_source_then_extract_image")
+        self.assertEqual(report["batches"][0]["primary_review_url_rows"], 2)
+        self.assertEqual(
+            report["batches"][0]["first_primary_review_url"],
+            report["batches"][0]["items"][0]["primary_review_url"],
+        )
+        self.assertEqual(
+            report["batches"][0]["first_primary_review_url_kind"],
+            "fallback_web_search",
+        )
         self.assertEqual([item["catalog_index"] for item in report["batches"][0]["items"]], [1, 2])
         self.assertEqual(report["batches"][0]["items"][0]["review_lane"], "source_url_replacement_first")
+        self.assertEqual(
+            report["batches"][0]["items"][0]["primary_review_url"],
+            report["batches"][0]["items"][0]["first_fallback_web_search_url"],
+        )
+        self.assertEqual(
+            report["batches"][0]["items"][0]["primary_review_url_kind"],
+            "fallback_web_search",
+        )
         self.assertTrue(report["batches"][0]["items"][0]["source_url_update_required"])
         self.assertFalse(report["batches"][0]["items"][0]["image_url_ready"])
         self.assertEqual(
@@ -145,6 +167,14 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
             "https://fanding.kr/@stellive/shop?keyword=Badge",
         )
         self.assertEqual(
+            report["batches"][0]["items"][1]["primary_review_url"],
+            "https://fanding.kr/@stellive/shop?keyword=Badge",
+        )
+        self.assertEqual(
+            report["batches"][0]["items"][1]["primary_review_url_kind"],
+            "source_search_url",
+        )
+        self.assertEqual(
             report["batches"][0]["items"][1]["source_url_import_template"]["source_search_url"],
             "https://fanding.kr/@stellive/shop?keyword=Badge",
         )
@@ -172,6 +202,11 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
             "https://fanding.kr/@stellive/shop?keyword=Badge",
         )
         self.assertEqual(
+            work_order["sample_items"][0]["primary_review_url"],
+            "https://fanding.kr/@stellive/shop?keyword=Badge",
+        )
+        self.assertEqual(work_order["sample_items"][0]["primary_review_url_kind"], "source_search_url")
+        self.assertEqual(
             work_order["sample_items"][0]["source_url_import_template"]["field"],
             "source_url",
         )
@@ -196,6 +231,11 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(template_batch["official_search_url_rows"], 1)
         self.assertEqual(template_batch["fallback_web_search_url_rows"], 1)
         self.assertEqual([row["row_index"] for row in template_batch["rows"]], [2, 1])
+        self.assertEqual(
+            report["workstreams"][0]["review_summary"]["first_primary_review_url"],
+            report["batches"][0]["first_primary_review_url"],
+        )
+        self.assertEqual(report["workstreams"][0]["review_summary"]["primary_review_url_rows"], 2)
 
     def test_max_batches_caps_published_batches_not_actionable_summary(self) -> None:
         enrichment = {
