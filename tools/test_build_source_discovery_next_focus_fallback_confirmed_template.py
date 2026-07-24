@@ -24,6 +24,11 @@ class SourceDiscoveryNextFocusFallbackConfirmedTemplateTest(unittest.TestCase):
                     "first_domain_limited_web_search_url": "https://www.google.com/search?q=example",
                     "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php",
                     "acceptance_rule": "exact match required",
+                    "identity_review_status": "exact_page_match_review_ready",
+                    "identity_blockers": [],
+                    "requires_metadata_backfill": False,
+                    "requires_variant_disambiguation": False,
+                    "can_confirm_source_url_after_page_match": True,
                 },
                 {
                     "catalog_index": 1072,
@@ -38,6 +43,9 @@ class SourceDiscoveryNextFocusFallbackConfirmedTemplateTest(unittest.TestCase):
         self.assertEqual(report["summary"]["manual_confirmed_true"], 0)
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertEqual(report["summary"]["focus_pack_ids"], ["source-discovery-focus-001"])
+        self.assertEqual(report["summary"]["source_confirmation_ready_rows"], 1)
+        self.assertEqual(report["summary"]["variant_disambiguation_required_rows"], 0)
+        self.assertEqual(report["summary"]["by_identity_review_status"], [("exact_page_match_review_ready", 1)])
         self.assertEqual(report["automation_policy"]["confirmed_file"], "server/source_discovery_confirmed_rows.json")
 
         item = report["items"][0]
@@ -47,6 +55,8 @@ class SourceDiscoveryNextFocusFallbackConfirmedTemplateTest(unittest.TestCase):
         self.assertEqual(item["manual_confirmed_source_url"], "")
         self.assertEqual(item["manual_confirmed_image_url"], "")
         self.assertEqual(item["manual_evidence_url"], "https://www.google.com/search?q=example")
+        self.assertEqual(item["identity_review_status"], "exact_page_match_review_ready")
+        self.assertTrue(item["can_confirm_source_url_after_page_match"])
 
 
 if __name__ == "__main__":

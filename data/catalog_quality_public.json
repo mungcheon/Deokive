@@ -3459,8 +3459,8 @@
     "danganronpa_missing_media_rows": 34,
     "danganronpa_patch_template_pending_rows": 34,
     "danganronpa_patch_template_ready_rows": 0,
-    "confirmed_import_template_rows": 1141,
-    "confirmed_import_action_queue_rows": 4637,
+    "confirmed_import_template_rows": 1158,
+    "confirmed_import_action_queue_rows": 4252,
     "confirmed_import_pending_rows": 0,
     "dedupe_action_groups": 48,
     "dedupe_actionable_groups": 48,
@@ -3530,7 +3530,7 @@
     "public_report": "data/catalog_agent_work_queue_public.json",
     "batch_count": 147,
     "max_published_batches": 160,
-    "summed_batch_rows": 20838,
+    "summed_batch_rows": 20470,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -3724,8 +3724,8 @@
       "danganronpa_missing_media_rows": 34,
       "danganronpa_patch_template_pending_rows": 34,
       "danganronpa_patch_template_ready_rows": 0,
-      "confirmed_import_template_rows": 1141,
-      "confirmed_import_action_queue_rows": 4637,
+      "confirmed_import_template_rows": 1158,
+      "confirmed_import_action_queue_rows": 4252,
       "confirmed_import_pending_rows": 0,
       "dedupe_action_groups": 48,
       "dedupe_actionable_groups": 48,
@@ -3791,13 +3791,13 @@
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
       "ichiban_prize_name_image_patch_blocked_rows": 0
     },
-    "confirmed_import_template_rows": 1141,
-    "confirmed_import_action_queue_rows": 4637,
+    "confirmed_import_template_rows": 1158,
+    "confirmed_import_action_queue_rows": 4252,
     "confirmed_import_manual_confirmed_ready_rows": 0,
     "confirmed_import_pending_rows": 0,
     "confirmed_import_blocked_confirmed_rows": 0,
-    "confirmed_import_manual_confirmation_backlog_rows": 5778,
-    "confirmed_import_work_order_lanes": 10,
+    "confirmed_import_manual_confirmation_backlog_rows": 5410,
+    "confirmed_import_work_order_lanes": 11,
     "confirmed_import_top_work_order_lane": "confirm_template_rows",
     "confirmed_import_top_work_order_workflow": "source_discovery",
     "confirmed_import_top_work_order_row_count": 641
@@ -4672,34 +4672,34 @@
   },
   "confirmed_import_readiness": {
     "public_report": "data/catalog_confirmed_import_readiness_public.json",
-    "workflow_count": 11,
+    "workflow_count": 12,
     "confirmed_files": 2,
-    "template_items": 1141,
-    "public_action_queue_rows": 4637,
-    "public_action_queue_batches": 180,
+    "template_items": 1158,
+    "public_action_queue_rows": 4252,
+    "public_action_queue_batches": 178,
     "manual_confirmed_true": 0,
     "updated_rows": 0,
-    "skipped_rows": 0,
+    "skipped_rows": 17,
     "duplicates": 0,
     "ready_or_pending_import_rows": 0,
     "blocked_confirmed_rows": 0,
-    "manual_confirmation_backlog_rows": 5778,
-    "work_order_lanes": 10,
+    "manual_confirmation_backlog_rows": 5410,
+    "work_order_lanes": 11,
     "top_work_order_row_count": 641,
     "top_work_order_lane": "confirm_template_rows",
     "top_work_order_workflow": "source_discovery",
     "by_status": [
       [
         "public_action_queue_ready_for_confirmation",
-        6
+        5
       ],
       [
         "no_current_candidates",
-        2
+        3
       ],
       [
         "template_ready_for_manual_confirmation",
-        2
+        3
       ],
       [
         "confirmed_file_empty",
@@ -4714,7 +4714,7 @@
     "blocked_action_count": 1,
     "manual_review_action_count": 18,
     "pending_import_action_count": 0,
-    "total_action_rows": 32346,
+    "total_action_rows": 31978,
     "open_review_queues": {
       "source_discovery_rows": 637,
       "image_missing_rows": 710,
@@ -4727,8 +4727,8 @@
       "danganronpa_missing_media_rows": 34,
       "danganronpa_patch_template_pending_rows": 34,
       "danganronpa_patch_template_ready_rows": 0,
-      "confirmed_import_template_rows": 1141,
-      "confirmed_import_action_queue_rows": 4637,
+      "confirmed_import_template_rows": 1158,
+      "confirmed_import_action_queue_rows": 4252,
       "confirmed_import_pending_rows": 0,
       "dedupe_action_groups": 48,
       "dedupe_actionable_groups": 48,
@@ -4794,12 +4794,12 @@
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
       "ichiban_prize_name_image_patch_blocked_rows": 0
     },
-    "confirmed_import_template_rows": 1141,
-    "confirmed_import_action_queue_rows": 4637,
-    "confirmed_import_action_queue_batches": 180,
+    "confirmed_import_template_rows": 1158,
+    "confirmed_import_action_queue_rows": 4252,
+    "confirmed_import_action_queue_batches": 178,
     "confirmed_import_pending_rows": 0,
     "confirmed_import_manual_confirmed_ready_rows": 0,
-    "confirmed_import_manual_confirmation_backlog_rows": 5778,
+    "confirmed_import_manual_confirmation_backlog_rows": 5410,
     "confirmed_import_blocked_confirmed_rows": 0,
     "requested_focus_actionable_template_rows": 600,
     "requested_focus_barcode_template_rows": 5674,
@@ -8103,6 +8103,19 @@
     "domain_limited_web_search_url_count": 108,
     "review_table_rows": 17,
     "manual_entry_template_rows": 17,
+    "source_confirmation_ready_rows": 15,
+    "metadata_backfill_required_rows": 5,
+    "variant_disambiguation_required_rows": 2,
+    "by_identity_review_status": [
+      [
+        "exact_page_match_review_ready",
+        15
+      ],
+      [
+        "variant_disambiguation_required",
+        2
+      ]
+    ],
     "work_order_steps": 3,
     "work_order_lanes": [
       "domain_limited_exact_title_search",

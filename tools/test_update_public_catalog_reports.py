@@ -421,6 +421,12 @@ class PublicCatalogReportTests(unittest.TestCase):
             quality["source_discovery_next_focus_fallback_queue"]["manual_entry_template_rows"],
             quality["source_discovery_next_focus_fallback_queue"]["queue_rows"],
         )
+        self.assertEqual(quality["source_discovery_next_focus_fallback_queue"]["source_confirmation_ready_rows"], 15)
+        self.assertEqual(quality["source_discovery_next_focus_fallback_queue"]["metadata_backfill_required_rows"], 5)
+        self.assertEqual(
+            quality["source_discovery_next_focus_fallback_queue"]["variant_disambiguation_required_rows"],
+            2,
+        )
         self.assertIs(quality["source_discovery_next_focus_fallback_queue"]["auto_apply_enabled"], False)
         self.assertEqual(quality["source_discovery_next_focus_fallback_import_dry_run"]["updated_rows"], 0)
         self.assertEqual(

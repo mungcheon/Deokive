@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T00:33:37Z",
+  "generated_at": "2026-07-24T00:48:03Z",
   "scope": "source_discovery_next_focus_fallback_confirmed_source_url_template",
   "source_report": "data/source_discovery_next_focus_fallback_queue_public.json",
   "summary": {
@@ -19,6 +19,19 @@
       [
         "아크릴 스탠드",
         17
+      ]
+    ],
+    "source_confirmation_ready_rows": 15,
+    "metadata_backfill_required_rows": 5,
+    "variant_disambiguation_required_rows": 2,
+    "by_identity_review_status": [
+      [
+        "exact_page_match_review_ready",
+        15
+      ],
+      [
+        "variant_disambiguation_required",
+        2
       ]
     ],
     "auto_apply_enabled": false
@@ -47,6 +60,11 @@
       "search_term": "推しの子 アクリルスタンド (星野アイ)",
       "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29",
       "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "requires_metadata_backfill": false,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true,
       "blocked_until": "exact_product_detail_source_url_confirmed"
     },
     {
@@ -65,6 +83,14 @@
       "search_term": "ジョジョの奇妙な冒険 アクリルスタンド",
       "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E3%82%B8%E3%83%A7%E3%82%B8%E3%83%A7%E3%81%AE%E5%A5%87%E5%A6%99%E3%81%AA%E5%86%92%E9%99%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89",
       "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "variant_disambiguation_required",
+      "identity_blockers": [
+        "missing_name_ja",
+        "variant_or_character_not_explicit"
+      ],
+      "requires_metadata_backfill": true,
+      "requires_variant_disambiguation": true,
+      "can_confirm_source_url_after_page_match": false,
       "blocked_until": "exact_product_detail_source_url_confirmed"
     },
     {
@@ -83,6 +109,11 @@
       "search_term": "SLAM DUNK アクリルスタンド (桜木花道)",
       "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%A1%9C%E6%9C%A8%E8%8A%B1%E9%81%93%29",
       "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "requires_metadata_backfill": false,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true,
       "blocked_until": "exact_product_detail_source_url_confirmed"
     },
     {
@@ -101,6 +132,13 @@
       "search_term": "SLAM DUNK アクリルスタンド 流川楓",
       "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%B5%81%E5%B7%9D%E6%A5%93",
       "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [
+        "missing_name_ja"
+      ],
+      "requires_metadata_backfill": true,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true,
       "blocked_until": "exact_product_detail_source_url_confirmed"
     },
     {
@@ -119,6 +157,13 @@
       "search_term": "カードキャプターさくら アクリルスタンド 木之本桜",
       "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E3%82%AB%E3%83%BC%E3%83%89%E3%82%AD%E3%83%A3%E3%83%97%E3%82%BF%E3%83%BC%E3%81%95%E3%81%8F%E3%82%89+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%9C%A8%E4%B9%8B%E6%9C%AC%E6%A1%9C",
       "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [
+        "missing_name_ja"
+      ],
+      "requires_metadata_backfill": true,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true,
       "blocked_until": "exact_product_detail_source_url_confirmed"
     },
     {
@@ -137,6 +182,13 @@
       "search_term": "セーラームーン アクリルスタンド セーラームーン",
       "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3",
       "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [
+        "missing_name_ja"
+      ],
+      "requires_metadata_backfill": true,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true,
       "blocked_until": "exact_product_detail_source_url_confirmed"
     },
     {
@@ -155,6 +207,14 @@
       "search_term": "新世紀エヴァンゲリオン アクリルスタンド",
       "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E6%96%B0%E4%B8%96%E7%B4%80%E3%82%A8%E3%83%B4%E3%82%A1%E3%83%B3%E3%82%B2%E3%83%AA%E3%82%AA%E3%83%B3+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89",
       "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "variant_disambiguation_required",
+      "identity_blockers": [
+        "missing_name_ja",
+        "variant_or_character_not_explicit"
+      ],
+      "requires_metadata_backfill": true,
+      "requires_variant_disambiguation": true,
+      "can_confirm_source_url_after_page_match": false,
       "blocked_until": "exact_product_detail_source_url_confirmed"
     },
     {
@@ -173,6 +233,11 @@
       "search_term": "呪術廻戦 学園シリーズ アクリルスタンド (虎杖)",
       "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E8%99%8E%E6%9D%96%29",
       "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "requires_metadata_backfill": false,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true,
       "blocked_until": "exact_product_detail_source_url_confirmed"
     },
     {
@@ -191,6 +256,11 @@
       "search_term": "Re:ゼロ トレーディングアクリル (レム衣装)",
       "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=Re%3A%E3%82%BC%E3%83%AD+%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB+%28%E3%83%AC%E3%83%A0%E8%A1%A3%E8%A3%85%29",
       "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "requires_metadata_backfill": false,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true,
       "blocked_until": "exact_product_detail_source_url_confirmed"
     },
     {
@@ -209,6 +279,11 @@
       "search_term": "転スラ アクリルスタンド (紅丸)",
       "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E8%BB%A2%E3%82%B9%E3%83%A9+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E7%B4%85%E4%B8%B8%29",
       "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "requires_metadata_backfill": false,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true,
       "blocked_until": "exact_product_detail_source_url_confirmed"
     },
     {
@@ -227,6 +302,11 @@
       "search_term": "シュタインズ・ゲート アクリルスタンド (岡部倫太郎)",
       "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E5%B2%A1%E9%83%A8%E5%80%AB%E5%A4%AA%E9%83%8E%29",
       "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "requires_metadata_backfill": false,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true,
       "blocked_until": "exact_product_detail_source_url_confirmed"
     },
     {
@@ -245,6 +325,11 @@
       "search_term": "シュタインズ・ゲート アクリルスタンド (橋田至)",
       "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%A9%8B%E7%94%B0%E8%87%B3%29",
       "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "requires_metadata_backfill": false,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true,
       "blocked_until": "exact_product_detail_source_url_confirmed"
     },
     {
@@ -263,6 +348,11 @@
       "search_term": "シュタインズ・ゲート アクリルスタンド (フェイリス・ニャンニャン) フェイリス・ニャンニャン",
       "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E3%83%95%E3%82%A7%E3%82%A4%E3%83%AA%E3%82%B9%E3%83%BB%E3%83%8B%E3%83%A3%E3%83%B3%E3%83%8B%E3%83%A3%E3%83%B3%29+%E3%83%95%E3%82%A7%E3%82%A4%E3%83%AA%E3%82%B9%E3%83%BB%E3%83%8B%E3%83%A3%E3%83%B3%E3%83%8B%E3%83%A3%E3%83%B3",
       "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "requires_metadata_backfill": false,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true,
       "blocked_until": "exact_product_detail_source_url_confirmed"
     },
     {
@@ -281,6 +371,11 @@
       "search_term": "シュタインズ・ゲート アクリルスタンド (漆原るか)",
       "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%BC%86%E5%8E%9F%E3%82%8B%E3%81%8B%29",
       "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "requires_metadata_backfill": false,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true,
       "blocked_until": "exact_product_detail_source_url_confirmed"
     },
     {
@@ -299,6 +394,11 @@
       "search_term": "スキップとローファー アクリルスタンド (向井結月)",
       "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E3%82%B9%E3%82%AD%E3%83%83%E3%83%97%E3%81%A8%E3%83%AD%E3%83%BC%E3%83%95%E3%82%A1%E3%83%BC+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E5%90%91%E4%BA%95%E7%B5%90%E6%9C%88%29",
       "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "requires_metadata_backfill": false,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true,
       "blocked_until": "exact_product_detail_source_url_confirmed"
     },
     {
@@ -317,6 +417,11 @@
       "search_term": "スキップとローファー アクリルスタンド (柴山誠)",
       "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E3%82%B9%E3%82%AD%E3%83%83%E3%83%97%E3%81%A8%E3%83%AD%E3%83%BC%E3%83%95%E3%82%A1%E3%83%BC+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%9F%B4%E5%B1%B1%E8%AA%A0%29",
       "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "requires_metadata_backfill": false,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true,
       "blocked_until": "exact_product_detail_source_url_confirmed"
     },
     {
@@ -335,6 +440,11 @@
       "search_term": "魔入りました！入間くん アクリルスタンド (アスモデウス・アリ) アスモデウス・アリス",
       "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E9%AD%94%E5%85%A5%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F%EF%BC%81%E5%85%A5%E9%96%93%E3%81%8F%E3%82%93+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E3%82%A2%E3%82%B9%E3%83%A2%E3%83%87%E3%82%A6%E3%82%B9%E3%83%BB%E3%82%A2%E3%83%AA%29+%E3%82%A2%E3%82%B9%E3%83%A2%E3%83%87%E3%82%A6%E3%82%B9%E3%83%BB%E3%82%A2%E3%83%AA%E3%82%B9",
       "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "requires_metadata_backfill": false,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true,
       "blocked_until": "exact_product_detail_source_url_confirmed"
     }
   ],

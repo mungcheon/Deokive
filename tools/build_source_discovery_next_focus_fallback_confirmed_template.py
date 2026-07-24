@@ -63,6 +63,13 @@ def _template_items(payload: dict[str, Any]) -> list[dict[str, Any]]:
                 "search_term": row.get("search_term"),
                 "fallback_store_search_url": row.get("fallback_store_search_url") or "",
                 "acceptance_criteria": row.get("acceptance_rule"),
+                "identity_review_status": row.get("identity_review_status"),
+                "identity_blockers": row.get("identity_blockers") or [],
+                "requires_metadata_backfill": row.get("requires_metadata_backfill") is True,
+                "requires_variant_disambiguation": row.get("requires_variant_disambiguation") is True,
+                "can_confirm_source_url_after_page_match": (
+                    row.get("can_confirm_source_url_after_page_match") is True
+                ),
                 "blocked_until": "exact_product_detail_source_url_confirmed",
             }
         )
@@ -73,6 +80,7 @@ def build_template(payload: dict[str, Any], *, generated_at: str | None = None) 
     items = _template_items(payload)
     by_store = Counter(str(item.get("source_store") or "") for item in items)
     by_category = Counter(str(item.get("category") or "") for item in items)
+    by_identity_status = Counter(str(item.get("identity_review_status") or "unknown") for item in items)
     focus_pack_ids = sorted({str(item.get("focus_pack_id") or "") for item in items if item.get("focus_pack_id")})
     return {
         "schema_version": 1,
@@ -85,6 +93,16 @@ def build_template(payload: dict[str, Any], *, generated_at: str | None = None) 
             "focus_pack_ids": focus_pack_ids,
             "by_source_store": by_store.most_common(),
             "by_category": by_category.most_common(),
+            "source_confirmation_ready_rows": sum(
+                1 for item in items if item.get("can_confirm_source_url_after_page_match")
+            ),
+            "metadata_backfill_required_rows": sum(
+                1 for item in items if item.get("requires_metadata_backfill")
+            ),
+            "variant_disambiguation_required_rows": sum(
+                1 for item in items if item.get("requires_variant_disambiguation")
+            ),
+            "by_identity_review_status": by_identity_status.most_common(),
             "auto_apply_enabled": False,
         },
         "instructions": [

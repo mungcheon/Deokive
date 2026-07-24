@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T00:33:40Z",
+  "generated_at": "2026-07-24T00:47:30Z",
   "scope": "source_discovery_next_focus_fallback_queue",
   "source_reports": [
     "data/source_discovery_next_focus_pack_public.json",
@@ -33,6 +33,19 @@
     "domain_limited_web_search_url_count": 108,
     "review_table_rows": 17,
     "manual_entry_template_rows": 17,
+    "source_confirmation_ready_rows": 15,
+    "metadata_backfill_required_rows": 5,
+    "variant_disambiguation_required_rows": 2,
+    "by_identity_review_status": [
+      [
+        "exact_page_match_review_ready",
+        15
+      ],
+      [
+        "variant_disambiguation_required",
+        2
+      ]
+    ],
     "work_order_steps": 3,
     "work_order_lanes": [
       "domain_limited_exact_title_search",
@@ -125,7 +138,12 @@
       "manual_note": "",
       "import_field": "source_url",
       "blocked_until": "exact_product_detail_source_url_confirmed",
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row"
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "requires_metadata_backfill": false,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true
     },
     {
       "catalog_index": 1082,
@@ -144,7 +162,15 @@
       "manual_note": "",
       "import_field": "source_url",
       "blocked_until": "exact_product_detail_source_url_confirmed",
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row"
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "variant_disambiguation_required",
+      "identity_blockers": [
+        "missing_name_ja",
+        "variant_or_character_not_explicit"
+      ],
+      "requires_metadata_backfill": true,
+      "requires_variant_disambiguation": true,
+      "can_confirm_source_url_after_page_match": false
     },
     {
       "catalog_index": 1083,
@@ -163,7 +189,12 @@
       "manual_note": "",
       "import_field": "source_url",
       "blocked_until": "exact_product_detail_source_url_confirmed",
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row"
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "requires_metadata_backfill": false,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true
     },
     {
       "catalog_index": 1084,
@@ -182,7 +213,14 @@
       "manual_note": "",
       "import_field": "source_url",
       "blocked_until": "exact_product_detail_source_url_confirmed",
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row"
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [
+        "missing_name_ja"
+      ],
+      "requires_metadata_backfill": true,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true
     },
     {
       "catalog_index": 1117,
@@ -201,7 +239,14 @@
       "manual_note": "",
       "import_field": "source_url",
       "blocked_until": "exact_product_detail_source_url_confirmed",
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row"
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [
+        "missing_name_ja"
+      ],
+      "requires_metadata_backfill": true,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true
     },
     {
       "catalog_index": 1119,
@@ -220,7 +265,14 @@
       "manual_note": "",
       "import_field": "source_url",
       "blocked_until": "exact_product_detail_source_url_confirmed",
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row"
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [
+        "missing_name_ja"
+      ],
+      "requires_metadata_backfill": true,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true
     },
     {
       "catalog_index": 1123,
@@ -239,7 +291,15 @@
       "manual_note": "",
       "import_field": "source_url",
       "blocked_until": "exact_product_detail_source_url_confirmed",
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row"
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "variant_disambiguation_required",
+      "identity_blockers": [
+        "missing_name_ja",
+        "variant_or_character_not_explicit"
+      ],
+      "requires_metadata_backfill": true,
+      "requires_variant_disambiguation": true,
+      "can_confirm_source_url_after_page_match": false
     },
     {
       "catalog_index": 1632,
@@ -258,7 +318,12 @@
       "manual_note": "",
       "import_field": "source_url",
       "blocked_until": "exact_product_detail_source_url_confirmed",
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row"
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "requires_metadata_backfill": false,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true
     },
     {
       "catalog_index": 2037,
@@ -277,7 +342,12 @@
       "manual_note": "",
       "import_field": "source_url",
       "blocked_until": "exact_product_detail_source_url_confirmed",
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row"
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "requires_metadata_backfill": false,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true
     },
     {
       "catalog_index": 2066,
@@ -296,7 +366,12 @@
       "manual_note": "",
       "import_field": "source_url",
       "blocked_until": "exact_product_detail_source_url_confirmed",
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row"
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "requires_metadata_backfill": false,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true
     },
     {
       "catalog_index": 2088,
@@ -315,7 +390,12 @@
       "manual_note": "",
       "import_field": "source_url",
       "blocked_until": "exact_product_detail_source_url_confirmed",
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row"
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "requires_metadata_backfill": false,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true
     },
     {
       "catalog_index": 2091,
@@ -334,7 +414,12 @@
       "manual_note": "",
       "import_field": "source_url",
       "blocked_until": "exact_product_detail_source_url_confirmed",
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row"
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "requires_metadata_backfill": false,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true
     },
     {
       "catalog_index": 2092,
@@ -353,7 +438,12 @@
       "manual_note": "",
       "import_field": "source_url",
       "blocked_until": "exact_product_detail_source_url_confirmed",
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row"
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "requires_metadata_backfill": false,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true
     },
     {
       "catalog_index": 2094,
@@ -372,7 +462,12 @@
       "manual_note": "",
       "import_field": "source_url",
       "blocked_until": "exact_product_detail_source_url_confirmed",
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row"
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "requires_metadata_backfill": false,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true
     },
     {
       "catalog_index": 2176,
@@ -391,7 +486,12 @@
       "manual_note": "",
       "import_field": "source_url",
       "blocked_until": "exact_product_detail_source_url_confirmed",
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row"
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "requires_metadata_backfill": false,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true
     },
     {
       "catalog_index": 2177,
@@ -410,7 +510,12 @@
       "manual_note": "",
       "import_field": "source_url",
       "blocked_until": "exact_product_detail_source_url_confirmed",
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row"
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "requires_metadata_backfill": false,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true
     },
     {
       "catalog_index": 2190,
@@ -429,7 +534,12 @@
       "manual_note": "",
       "import_field": "source_url",
       "blocked_until": "exact_product_detail_source_url_confirmed",
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row"
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "identity_review_status": "exact_page_match_review_ready",
+      "identity_blockers": [],
+      "requires_metadata_backfill": false,
+      "requires_variant_disambiguation": false,
+      "can_confirm_source_url_after_page_match": true
     }
   ],
   "items": [

@@ -149,12 +149,43 @@ def _first_value(values: list[Any] | None) -> str:
     return first if isinstance(first, str) else ""
 
 
+def _has_variant_marker(value: Any) -> bool:
+    text = str(value or "")
+    return any(marker in text for marker in ("(", ")", "（", "）", "①", "②", "③", "④", "⑤"))
+
+
+def _identity_review(item: dict[str, Any]) -> dict[str, Any]:
+    search_term = _first_value(item.get("fallback_search_terms"))
+    blockers: list[str] = []
+    if not str(item.get("name_ja") or "").strip():
+        blockers.append("missing_name_ja")
+    if not any(
+        _has_variant_marker(value)
+        for value in (item.get("name_ko"), item.get("name_ja"), search_term)
+    ):
+        blockers.append("variant_or_character_not_explicit")
+
+    requires_variant_disambiguation = "variant_or_character_not_explicit" in blockers
+    return {
+        "identity_review_status": (
+            "variant_disambiguation_required"
+            if requires_variant_disambiguation
+            else "exact_page_match_review_ready"
+        ),
+        "identity_blockers": blockers,
+        "requires_metadata_backfill": "missing_name_ja" in blockers,
+        "requires_variant_disambiguation": requires_variant_disambiguation,
+        "can_confirm_source_url_after_page_match": not requires_variant_disambiguation,
+    }
+
+
 def _review_table(queue_items: list[dict[str, Any]]) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for item in queue_items:
         field_template = item.get("catalog_field_import_template")
         if not isinstance(field_template, dict):
             field_template = {}
+        identity_review = _identity_review(item)
         rows.append(
             {
                 "catalog_index": item.get("catalog_index"),
@@ -176,6 +207,7 @@ def _review_table(queue_items: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "import_field": field_template.get("field") or "source_url",
                 "blocked_until": "exact_product_detail_source_url_confirmed",
                 "acceptance_rule": item.get("acceptance_rule"),
+                **identity_review,
             }
         )
     return rows
@@ -283,6 +315,14 @@ def build_report(
     )
     work_order = _fallback_work_order(queue_items)
     review_table = _review_table(queue_items)
+    identity_status = Counter(str(item.get("identity_review_status") or "unknown") for item in review_table)
+    metadata_backfill_rows = sum(1 for item in review_table if item.get("requires_metadata_backfill"))
+    variant_disambiguation_rows = sum(
+        1 for item in review_table if item.get("requires_variant_disambiguation")
+    )
+    source_confirmation_ready_rows = sum(
+        1 for item in review_table if item.get("can_confirm_source_url_after_page_match")
+    )
     return {
         "schema_version": 1,
         "generated_at": generated_at or now_utc(),
@@ -303,6 +343,10 @@ def build_report(
             "domain_limited_web_search_url_count": domain_limited_web_search_url_count,
             "review_table_rows": len(review_table),
             "manual_entry_template_rows": len(queue_items),
+            "source_confirmation_ready_rows": source_confirmation_ready_rows,
+            "metadata_backfill_required_rows": metadata_backfill_rows,
+            "variant_disambiguation_required_rows": variant_disambiguation_rows,
+            "by_identity_review_status": identity_status.most_common(),
             "work_order_steps": len(work_order),
             "work_order_lanes": [step["lane"] for step in work_order],
             "first_domain_limited_web_search_url": (
