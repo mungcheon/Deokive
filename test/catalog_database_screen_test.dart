@@ -224,21 +224,22 @@ void main() {
     await tester.pumpAndSettle();
 
     final buttonFinder = find.byKey(const Key('catalog-add-list-button')).first;
-    final addText = tester.widget<Text>(
-      find.descendant(
-        of: buttonFinder,
-        matching: find.text('추가하기'),
-      ),
+    final addTextFinder = find.descendant(
+      of: buttonFinder,
+      matching: find.text('추가하기'),
     );
-    final addIcon = tester.widget<Icon>(
-      find.descendant(
-        of: buttonFinder,
-        matching: find.byIcon(Icons.add_rounded),
-      ),
+    final addIconFinder = find.descendant(
+      of: buttonFinder,
+      matching: find.byIcon(Icons.add_rounded),
     );
+    final addTextStyle = DefaultTextStyle.of(
+      tester.element(addTextFinder),
+    ).style;
+    final addIconTheme = IconTheme.of(tester.element(addIconFinder));
 
-    expect(addText.style?.color, Colors.white);
-    expect(addIcon.color, Colors.white);
+    expect(addTextStyle.color, Colors.white);
+    expect(addIconTheme.color, Colors.white);
+    expect(tester.getSize(buttonFinder).width, greaterThanOrEqualTo(118));
   });
 
   testWidgets('catalog destination add button keeps visible foreground',
@@ -288,21 +289,21 @@ void main() {
     final buttonFinder = find.byKey(
       const Key('catalog-import-destination-add-button'),
     );
-    final addText = tester.widget<Text>(
-      find.descendant(
-        of: buttonFinder,
-        matching: find.text('선택한 폴더에 추가'),
-      ),
+    final addTextFinder = find.descendant(
+      of: buttonFinder,
+      matching: find.text('선택한 폴더에 추가'),
     );
-    final addIcon = tester.widget<Icon>(
-      find.descendant(
-        of: buttonFinder,
-        matching: find.byIcon(Icons.add_rounded),
-      ),
+    final addIconFinder = find.descendant(
+      of: buttonFinder,
+      matching: find.byIcon(Icons.add_rounded),
     );
+    final addTextStyle = DefaultTextStyle.of(
+      tester.element(addTextFinder),
+    ).style;
+    final addIconTheme = IconTheme.of(tester.element(addIconFinder));
 
-    expect(addText.style?.color, Colors.white);
-    expect(addIcon.color, Colors.white);
+    expect(addTextStyle.color, Colors.white);
+    expect(addIconTheme.color, Colors.white);
   });
 
   testWidgets('catalog database can add even when saved folders are empty',

@@ -415,33 +415,37 @@ class _CatalogPickerActionButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(999),
         onTap: onPressed,
         child: Container(
-          constraints: const BoxConstraints(minWidth: 70, minHeight: 34),
+          constraints: const BoxConstraints(minWidth: 86, minHeight: 34),
           padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 8),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(
-                Icons.add_rounded,
-                size: 16,
+          child: IconTheme(
+            data: const IconThemeData(
+              color: _catalogPickerActionForeground,
+              size: 16,
+            ),
+            child: DefaultTextStyle.merge(
+              style: const TextStyle(
                 color: _catalogPickerActionForeground,
+                fontSize: 12,
+                fontWeight: FontWeight.w900,
+                height: 1,
               ),
-              const SizedBox(width: 4),
-              Flexible(
-                child: Text(
-                  label,
-                  maxLines: 1,
-                  softWrap: false,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    color: _catalogPickerActionForeground,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w900,
-                    height: 1,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.add_rounded),
+                  const SizedBox(width: 4),
+                  Flexible(
+                    child: Text(
+                      label,
+                      maxLines: 1,
+                      softWrap: false,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

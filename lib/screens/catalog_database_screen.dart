@@ -588,7 +588,7 @@ class _CatalogAddButton extends StatelessWidget {
       duration: const Duration(milliseconds: 140),
       height: 40,
       constraints: BoxConstraints.tightFor(
-        width: expanded ? null : 106,
+        width: expanded ? null : 118,
         height: 40,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -606,29 +606,34 @@ class _CatalogAddButton extends StatelessWidget {
                 ),
               ],
       ),
-      child: Center(
-        child: Row(
-          mainAxisSize: expanded ? MainAxisSize.max : MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, color: foreground, size: 17),
-            const SizedBox(width: 5),
-            Flexible(
-              child: Text(
-                label,
-                maxLines: 1,
-                softWrap: false,
-                overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: foreground,
-                  fontSize: 12.5,
-                  fontWeight: FontWeight.w900,
-                  height: 1,
+      child: IconTheme(
+        data: IconThemeData(color: foreground, size: 17),
+        child: DefaultTextStyle.merge(
+          style: TextStyle(
+            color: foreground,
+            fontSize: 12.5,
+            fontWeight: FontWeight.w900,
+            height: 1,
+          ),
+          child: Center(
+            child: Row(
+              mainAxisSize: expanded ? MainAxisSize.max : MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(icon),
+                const SizedBox(width: 5),
+                Flexible(
+                  child: Text(
+                    label,
+                    maxLines: 1,
+                    softWrap: false,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
