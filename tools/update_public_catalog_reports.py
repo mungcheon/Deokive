@@ -10772,6 +10772,43 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{AGENT_WORK_QUEUE.name}",
             **agent_work_queue["summary"],
         }
+        ichiban_roadmap_summary = target.get("ichiban_kuji_historical_roadmap", {})
+        ichiban_reissue_template_summary = target.get(
+            "ichiban_kuji_reissue_decision_template",
+            {},
+        )
+        ichiban_prize_policy_summary = target.get(
+            "ichiban_kuji_prize_policy_issue_queue",
+            {},
+        )
+        ichiban_metadata_open = int(
+            ichiban_roadmap_summary.get("metadata_actionable_campaigns") or 0
+        )
+        ichiban_metadata_queued = int(
+            ichiban_roadmap_summary.get("metadata_queued_action_campaigns") or 0
+        )
+        ichiban_reissue_open = int(
+            ichiban_roadmap_summary.get("probable_reissue_work_order_rows") or 0
+        )
+        ichiban_reissue_queued = max(
+            ichiban_reissue_open,
+            int(ichiban_reissue_template_summary.get("item_template_rows") or 0),
+            int(
+                ichiban_reissue_template_summary.get(
+                    "campaign_review_batch_item_work_order_rows"
+                )
+                or 0
+            ),
+            int(ichiban_prize_policy_summary.get("probable_reissue_work_order_rows") or 0),
+        )
+        ichiban_total_open = ichiban_metadata_open + ichiban_reissue_open
+        ichiban_total_queued = ichiban_metadata_queued + ichiban_reissue_queued
+        ichiban_total_unqueued = max(0, ichiban_total_open - ichiban_total_queued)
+        ichiban_total_queue_coverage = (
+            round(ichiban_total_queued / ichiban_total_open, 4)
+            if ichiban_total_open
+            else 1.0
+        )
         goal_pillars = [
             {
                 "pillar": "dedupe",
@@ -11370,35 +11407,12 @@ def update_reports(write: bool) -> dict[str, Any]:
                     .get("completion_readiness", {})
                     .get("status", "unknown"),
                 ),
-                "open_rows": target.get("ichiban_kuji_historical_roadmap", {}).get(
-                    "metadata_actionable_campaigns",
-                    0,
-                )
-                + target.get("ichiban_kuji_historical_roadmap", {}).get(
-                    "probable_reissue_work_order_rows",
-                    0,
-                ),
-                "manual_review_rows": target.get(
-                    "ichiban_kuji_historical_roadmap",
-                    {},
-                ).get("metadata_actionable_campaigns", 0)
-                + target.get("ichiban_kuji_historical_roadmap", {}).get(
-                    "probable_reissue_work_order_rows",
-                    0,
-                ),
+                "open_rows": ichiban_total_open,
+                "manual_review_rows": ichiban_total_open,
                 "auto_apply_ready_rows": 0,
-                "queued_rows": target.get(
-                    "ichiban_kuji_historical_roadmap",
-                    {},
-                ).get("metadata_actionable_campaigns", 0),
-                "unqueued_rows": target.get(
-                    "ichiban_kuji_historical_roadmap",
-                    {},
-                ).get("probable_reissue_work_order_rows", 0),
-                "queue_coverage": target.get(
-                    "ichiban_kuji_historical_roadmap",
-                    {},
-                ).get("metadata_action_queue_coverage", 0),
+                "queued_rows": ichiban_total_queued,
+                "unqueued_rows": ichiban_total_unqueued,
+                "queue_coverage": ichiban_total_queue_coverage,
                 "metadata_campaigns": target.get(
                     "ichiban_kuji_historical_roadmap",
                     {},
@@ -11447,6 +11461,8 @@ def update_reports(write: bool) -> dict[str, Any]:
                     "ichiban_kuji_historical_roadmap",
                     {},
                 ).get("probable_reissue_work_order_rows", 0),
+                "reissue_queued_rows": ichiban_reissue_queued,
+                "reissue_unqueued_rows": max(0, ichiban_reissue_open - ichiban_reissue_queued),
                 "reissue_campaign_review_batch_rows": target.get(
                     "ichiban_kuji_reissue_decision_template",
                     {},

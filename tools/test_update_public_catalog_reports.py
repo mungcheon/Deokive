@@ -1750,8 +1750,9 @@ class PublicCatalogReportTests(unittest.TestCase):
             pillars["animation_categories"]["app_animation_visuals_covered"]
         )
         self.assertEqual(pillars["ichiban_kuji_history"]["manual_review_rows"], 64)
-        self.assertEqual(pillars["ichiban_kuji_history"]["queued_rows"], 44)
-        self.assertEqual(pillars["ichiban_kuji_history"]["unqueued_rows"], 20)
+        self.assertEqual(pillars["ichiban_kuji_history"]["queued_rows"], 64)
+        self.assertEqual(pillars["ichiban_kuji_history"]["unqueued_rows"], 0)
+        self.assertEqual(pillars["ichiban_kuji_history"]["queue_coverage"], 1.0)
         self.assertEqual(pillars["ichiban_kuji_history"]["metadata_campaigns"], 44)
         self.assertEqual(
             pillars["ichiban_kuji_history"]["metadata_queued_campaigns"],
@@ -1794,6 +1795,14 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             pillars["ichiban_kuji_history"]["reissue_work_order_rows"],
             20,
+        )
+        self.assertEqual(
+            pillars["ichiban_kuji_history"]["reissue_queued_rows"],
+            20,
+        )
+        self.assertEqual(
+            pillars["ichiban_kuji_history"]["reissue_unqueued_rows"],
+            0,
         )
         self.assertEqual(
             pillars["ichiban_kuji_history"][
