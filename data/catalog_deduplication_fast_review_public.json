@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T06:03:23Z",
+  "generated_at": "2026-07-24T08:56:03Z",
   "scope": "catalog_deduplication_fast_review",
   "summary": {
     "fast_review_groups": 42,
@@ -12,6 +12,19 @@
     "image_delta_groups": 42,
     "variant_warning_groups": 42,
     "manual_confirmed_true": 0,
+    "next_fast_review_batch_groups": 10,
+    "next_fast_review_batch_drop_candidate_rows": 10,
+    "next_fast_review_batch_primary_review_url_groups": 10,
+    "next_fast_review_batch_warning_counts": [
+      [
+        "name_delta_requires_variant_check",
+        5
+      ],
+      [
+        "image_delta_requires_visual_check",
+        5
+      ]
+    ],
     "primary_review_url_groups": 42,
     "first_primary_review_url": "https://chiikawamarket.jp/ko/products/4570189195898",
     "auto_merge_enabled": false,
@@ -87,6 +100,753 @@
       }
     ]
   },
+  "next_fast_review_batch": [
+    {
+      "manual_confirmed": false,
+      "key_type": "barcode",
+      "key": "4570189195898",
+      "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "name_delta_requires_variant_check",
+      "keep_catalog_index": 3710,
+      "drop_catalog_indexes": [
+        367
+      ],
+      "primary_review_url": "https://chiikawamarket.jp/ko/products/4570189195898",
+      "primary_review_url_kind": "keep_source_url",
+      "review_urls": [
+        "https://chiikawamarket.jp/ko/products/4570189195898",
+        "https://chiikawamarket.jp/cdn/shop/files/4570189195898_1.jpg",
+        "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4570189195898_1.jpg?v=1776259556"
+      ],
+      "stores": [
+        "치이카와 마켓",
+        "치이카와 파크"
+      ],
+      "categories": [
+        "의류"
+      ],
+      "identity_delta": {
+        "normalized_name_count": 2,
+        "normalized_names": [
+          "치이카와파크스니커즈양말가르마라이트블루",
+          "치이카와파크스니커즈양말하치와레라이트블루"
+        ],
+        "source_url_count": 1,
+        "image_url_count": 2,
+        "store_count": 2,
+        "stores": [
+          "치이카와 마켓",
+          "치이카와 파크"
+        ],
+        "name_differs": true,
+        "source_url_differs": false,
+        "image_url_differs": true
+      },
+      "dedupe_decision_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "key_type": "barcode",
+        "key": "4570189195898",
+        "review_confidence": "high_review_confidence",
+        "keep_catalog_index": 3710,
+        "drop_catalog_indexes": [
+          367
+        ],
+        "decision": "review_required",
+        "requires_same_sellable_product": true,
+        "requires_variant_difference_disproved": false,
+        "fast_review_lane": "same_barcode_and_source_url"
+      },
+      "operator_checklist": [
+        "Open primary_review_url and compare the exact product identity.",
+        "Confirm barcode, official product title, character/variant, and image are the same sellable item.",
+        "If any variant difference remains possible, keep manual_confirmed=false.",
+        "Only set same_sellable_product_confirmed=true when the duplicate is proven."
+      ],
+      "manual_value_fields_to_fill": [
+        "manual_confirmed",
+        "same_sellable_product_confirmed",
+        "decision",
+        "keep_catalog_index",
+        "drop_catalog_indexes",
+        "evidence_url",
+        "manual_note"
+      ],
+      "blocked_until": "same_sellable_product_identity_confirmed",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "manual_confirmed": false,
+      "key_type": "barcode",
+      "key": "4570189195942",
+      "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "image_delta_requires_visual_check",
+      "keep_catalog_index": 3714,
+      "drop_catalog_indexes": [
+        366
+      ],
+      "primary_review_url": "https://chiikawamarket.jp/ko/products/4570189195942",
+      "primary_review_url_kind": "keep_source_url",
+      "review_urls": [
+        "https://chiikawamarket.jp/ko/products/4570189195942",
+        "https://chiikawamarket.jp/cdn/shop/files/4570189195942_1.jpg",
+        "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4570189195942_1.jpg?v=1776259596"
+      ],
+      "stores": [
+        "치이카와 마켓",
+        "치이카와 파크"
+      ],
+      "categories": [
+        "의류"
+      ],
+      "identity_delta": {
+        "normalized_name_count": 1,
+        "normalized_names": [
+          "치이카와파크스니커즈양말시사오렌지"
+        ],
+        "source_url_count": 1,
+        "image_url_count": 2,
+        "store_count": 2,
+        "stores": [
+          "치이카와 마켓",
+          "치이카와 파크"
+        ],
+        "name_differs": false,
+        "source_url_differs": false,
+        "image_url_differs": true
+      },
+      "dedupe_decision_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "key_type": "barcode",
+        "key": "4570189195942",
+        "review_confidence": "high_review_confidence",
+        "keep_catalog_index": 3714,
+        "drop_catalog_indexes": [
+          366
+        ],
+        "decision": "review_required",
+        "requires_same_sellable_product": true,
+        "requires_variant_difference_disproved": false,
+        "fast_review_lane": "same_barcode_and_source_url"
+      },
+      "operator_checklist": [
+        "Open primary_review_url and compare the exact product identity.",
+        "Confirm barcode, official product title, character/variant, and image are the same sellable item.",
+        "If any variant difference remains possible, keep manual_confirmed=false.",
+        "Only set same_sellable_product_confirmed=true when the duplicate is proven."
+      ],
+      "manual_value_fields_to_fill": [
+        "manual_confirmed",
+        "same_sellable_product_confirmed",
+        "decision",
+        "keep_catalog_index",
+        "drop_catalog_indexes",
+        "evidence_url",
+        "manual_note"
+      ],
+      "blocked_until": "same_sellable_product_identity_confirmed",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "manual_confirmed": false,
+      "key_type": "barcode",
+      "key": "4570189201551",
+      "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "name_delta_requires_variant_check",
+      "keep_catalog_index": 3722,
+      "drop_catalog_indexes": [
+        365
+      ],
+      "primary_review_url": "https://chiikawamarket.jp/ko/products/4570189201551",
+      "primary_review_url_kind": "keep_source_url",
+      "review_urls": [
+        "https://chiikawamarket.jp/ko/products/4570189201551",
+        "https://chiikawamarket.jp/cdn/shop/files/4570189201551_1.jpg",
+        "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4570189201551_1.jpg?v=1776257761"
+      ],
+      "stores": [
+        "치이카와 마켓",
+        "치이카와 파크"
+      ],
+      "categories": [
+        "의류"
+      ],
+      "identity_delta": {
+        "normalized_name_count": 2,
+        "normalized_names": [
+          "치이카와파크키즈t셔츠집합화이트",
+          "치이카와파크키즈t셔츠화이트"
+        ],
+        "source_url_count": 1,
+        "image_url_count": 2,
+        "store_count": 2,
+        "stores": [
+          "치이카와 마켓",
+          "치이카와 파크"
+        ],
+        "name_differs": true,
+        "source_url_differs": false,
+        "image_url_differs": true
+      },
+      "dedupe_decision_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "key_type": "barcode",
+        "key": "4570189201551",
+        "review_confidence": "high_review_confidence",
+        "keep_catalog_index": 3722,
+        "drop_catalog_indexes": [
+          365
+        ],
+        "decision": "review_required",
+        "requires_same_sellable_product": true,
+        "requires_variant_difference_disproved": false,
+        "fast_review_lane": "same_barcode_and_source_url"
+      },
+      "operator_checklist": [
+        "Open primary_review_url and compare the exact product identity.",
+        "Confirm barcode, official product title, character/variant, and image are the same sellable item.",
+        "If any variant difference remains possible, keep manual_confirmed=false.",
+        "Only set same_sellable_product_confirmed=true when the duplicate is proven."
+      ],
+      "manual_value_fields_to_fill": [
+        "manual_confirmed",
+        "same_sellable_product_confirmed",
+        "decision",
+        "keep_catalog_index",
+        "drop_catalog_indexes",
+        "evidence_url",
+        "manual_note"
+      ],
+      "blocked_until": "same_sellable_product_identity_confirmed",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "manual_confirmed": false,
+      "key_type": "barcode",
+      "key": "4571609351658",
+      "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "image_delta_requires_visual_check",
+      "keep_catalog_index": 3606,
+      "drop_catalog_indexes": [
+        171
+      ],
+      "primary_review_url": "https://chiikawamarket.jp/ko/products/4571609351658",
+      "primary_review_url_kind": "keep_source_url",
+      "review_urls": [
+        "https://chiikawamarket.jp/ko/products/4571609351658",
+        "https://chiikawamarket.jp/cdn/shop/files/4571609351658_1.jpg",
+        "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609351658_1.jpg?v=1774854223"
+      ],
+      "stores": [
+        "치이카와 마켓",
+        "치이카와 파크"
+      ],
+      "categories": [
+        "인형"
+      ],
+      "identity_delta": {
+        "normalized_name_count": 1,
+        "normalized_names": [
+          "치이카와파크인형s복어"
+        ],
+        "source_url_count": 1,
+        "image_url_count": 2,
+        "store_count": 2,
+        "stores": [
+          "치이카와 마켓",
+          "치이카와 파크"
+        ],
+        "name_differs": false,
+        "source_url_differs": false,
+        "image_url_differs": true
+      },
+      "dedupe_decision_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "key_type": "barcode",
+        "key": "4571609351658",
+        "review_confidence": "high_review_confidence",
+        "keep_catalog_index": 3606,
+        "drop_catalog_indexes": [
+          171
+        ],
+        "decision": "review_required",
+        "requires_same_sellable_product": true,
+        "requires_variant_difference_disproved": false,
+        "fast_review_lane": "same_barcode_and_source_url"
+      },
+      "operator_checklist": [
+        "Open primary_review_url and compare the exact product identity.",
+        "Confirm barcode, official product title, character/variant, and image are the same sellable item.",
+        "If any variant difference remains possible, keep manual_confirmed=false.",
+        "Only set same_sellable_product_confirmed=true when the duplicate is proven."
+      ],
+      "manual_value_fields_to_fill": [
+        "manual_confirmed",
+        "same_sellable_product_confirmed",
+        "decision",
+        "keep_catalog_index",
+        "drop_catalog_indexes",
+        "evidence_url",
+        "manual_note"
+      ],
+      "blocked_until": "same_sellable_product_identity_confirmed",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "manual_confirmed": false,
+      "key_type": "barcode",
+      "key": "4571609367710",
+      "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "image_delta_requires_visual_check",
+      "keep_catalog_index": 3443,
+      "drop_catalog_indexes": [
+        370
+      ],
+      "primary_review_url": "https://chiikawamarket.jp/ko/products/4571609367710",
+      "primary_review_url_kind": "keep_source_url",
+      "review_urls": [
+        "https://chiikawamarket.jp/ko/products/4571609367710",
+        "https://chiikawamarket.jp/cdn/shop/files/4571609367710_1.jpg",
+        "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609367710_1.jpg?v=1776303567"
+      ],
+      "stores": [
+        "치이카와 마켓",
+        "치이카와 파크"
+      ],
+      "categories": [
+        "식기"
+      ],
+      "identity_delta": {
+        "normalized_name_count": 1,
+        "normalized_names": [
+          "치이카와파크얼굴멜라민플레이트치이카와"
+        ],
+        "source_url_count": 1,
+        "image_url_count": 2,
+        "store_count": 2,
+        "stores": [
+          "치이카와 마켓",
+          "치이카와 파크"
+        ],
+        "name_differs": false,
+        "source_url_differs": false,
+        "image_url_differs": true
+      },
+      "dedupe_decision_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "key_type": "barcode",
+        "key": "4571609367710",
+        "review_confidence": "high_review_confidence",
+        "keep_catalog_index": 3443,
+        "drop_catalog_indexes": [
+          370
+        ],
+        "decision": "review_required",
+        "requires_same_sellable_product": true,
+        "requires_variant_difference_disproved": false,
+        "fast_review_lane": "same_barcode_and_source_url"
+      },
+      "operator_checklist": [
+        "Open primary_review_url and compare the exact product identity.",
+        "Confirm barcode, official product title, character/variant, and image are the same sellable item.",
+        "If any variant difference remains possible, keep manual_confirmed=false.",
+        "Only set same_sellable_product_confirmed=true when the duplicate is proven."
+      ],
+      "manual_value_fields_to_fill": [
+        "manual_confirmed",
+        "same_sellable_product_confirmed",
+        "decision",
+        "keep_catalog_index",
+        "drop_catalog_indexes",
+        "evidence_url",
+        "manual_note"
+      ],
+      "blocked_until": "same_sellable_product_identity_confirmed",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "manual_confirmed": false,
+      "key_type": "barcode",
+      "key": "4571609367727",
+      "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "name_delta_requires_variant_check",
+      "keep_catalog_index": 3445,
+      "drop_catalog_indexes": [
+        371
+      ],
+      "primary_review_url": "https://chiikawamarket.jp/ko/products/4571609367727",
+      "primary_review_url_kind": "keep_source_url",
+      "review_urls": [
+        "https://chiikawamarket.jp/ko/products/4571609367727",
+        "https://chiikawamarket.jp/cdn/shop/files/4571609367727_1.jpg",
+        "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609367727_1.jpg?v=1776303590"
+      ],
+      "stores": [
+        "치이카와 마켓",
+        "치이카와 파크"
+      ],
+      "categories": [
+        "식기"
+      ],
+      "identity_delta": {
+        "normalized_name_count": 2,
+        "normalized_names": [
+          "치이카와파크얼굴멜라민플레이트가르마",
+          "치이카와파크얼굴멜라민플레이트하치와레"
+        ],
+        "source_url_count": 1,
+        "image_url_count": 2,
+        "store_count": 2,
+        "stores": [
+          "치이카와 마켓",
+          "치이카와 파크"
+        ],
+        "name_differs": true,
+        "source_url_differs": false,
+        "image_url_differs": true
+      },
+      "dedupe_decision_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "key_type": "barcode",
+        "key": "4571609367727",
+        "review_confidence": "high_review_confidence",
+        "keep_catalog_index": 3445,
+        "drop_catalog_indexes": [
+          371
+        ],
+        "decision": "review_required",
+        "requires_same_sellable_product": true,
+        "requires_variant_difference_disproved": false,
+        "fast_review_lane": "same_barcode_and_source_url"
+      },
+      "operator_checklist": [
+        "Open primary_review_url and compare the exact product identity.",
+        "Confirm barcode, official product title, character/variant, and image are the same sellable item.",
+        "If any variant difference remains possible, keep manual_confirmed=false.",
+        "Only set same_sellable_product_confirmed=true when the duplicate is proven."
+      ],
+      "manual_value_fields_to_fill": [
+        "manual_confirmed",
+        "same_sellable_product_confirmed",
+        "decision",
+        "keep_catalog_index",
+        "drop_catalog_indexes",
+        "evidence_url",
+        "manual_note"
+      ],
+      "blocked_until": "same_sellable_product_identity_confirmed",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "manual_confirmed": false,
+      "key_type": "barcode",
+      "key": "4571609367734",
+      "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "name_delta_requires_variant_check",
+      "keep_catalog_index": 3442,
+      "drop_catalog_indexes": [
+        372
+      ],
+      "primary_review_url": "https://chiikawamarket.jp/ko/products/4571609367734",
+      "primary_review_url_kind": "keep_source_url",
+      "review_urls": [
+        "https://chiikawamarket.jp/ko/products/4571609367734",
+        "https://chiikawamarket.jp/cdn/shop/files/4571609367734_1.jpg",
+        "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609367734_1.jpg?v=1776303602"
+      ],
+      "stores": [
+        "치이카와 마켓",
+        "치이카와 파크"
+      ],
+      "categories": [
+        "식기"
+      ],
+      "identity_delta": {
+        "normalized_name_count": 2,
+        "normalized_names": [
+          "치이카와파크얼굴멜라민플레이트우사기",
+          "치이카와파크얼굴멜라민플레이트토끼"
+        ],
+        "source_url_count": 1,
+        "image_url_count": 2,
+        "store_count": 2,
+        "stores": [
+          "치이카와 마켓",
+          "치이카와 파크"
+        ],
+        "name_differs": true,
+        "source_url_differs": false,
+        "image_url_differs": true
+      },
+      "dedupe_decision_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "key_type": "barcode",
+        "key": "4571609367734",
+        "review_confidence": "high_review_confidence",
+        "keep_catalog_index": 3442,
+        "drop_catalog_indexes": [
+          372
+        ],
+        "decision": "review_required",
+        "requires_same_sellable_product": true,
+        "requires_variant_difference_disproved": false,
+        "fast_review_lane": "same_barcode_and_source_url"
+      },
+      "operator_checklist": [
+        "Open primary_review_url and compare the exact product identity.",
+        "Confirm barcode, official product title, character/variant, and image are the same sellable item.",
+        "If any variant difference remains possible, keep manual_confirmed=false.",
+        "Only set same_sellable_product_confirmed=true when the duplicate is proven."
+      ],
+      "manual_value_fields_to_fill": [
+        "manual_confirmed",
+        "same_sellable_product_confirmed",
+        "decision",
+        "keep_catalog_index",
+        "drop_catalog_indexes",
+        "evidence_url",
+        "manual_note"
+      ],
+      "blocked_until": "same_sellable_product_identity_confirmed",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "manual_confirmed": false,
+      "key_type": "barcode",
+      "key": "4571609367741",
+      "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "name_delta_requires_variant_check",
+      "keep_catalog_index": 3444,
+      "drop_catalog_indexes": [
+        373
+      ],
+      "primary_review_url": "https://chiikawamarket.jp/ko/products/4571609367741",
+      "primary_review_url_kind": "keep_source_url",
+      "review_urls": [
+        "https://chiikawamarket.jp/ko/products/4571609367741",
+        "https://chiikawamarket.jp/cdn/shop/files/4571609367741_1.jpg",
+        "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609367741_1.jpg?v=1776303614"
+      ],
+      "stores": [
+        "치이카와 마켓",
+        "치이카와 파크"
+      ],
+      "categories": [
+        "식기"
+      ],
+      "identity_delta": {
+        "normalized_name_count": 2,
+        "normalized_names": [
+          "치이카와파크얼굴멜라민플레이트모몽가",
+          "치이카와파크얼굴멜라민플레이트하늘다람쥐"
+        ],
+        "source_url_count": 1,
+        "image_url_count": 2,
+        "store_count": 2,
+        "stores": [
+          "치이카와 마켓",
+          "치이카와 파크"
+        ],
+        "name_differs": true,
+        "source_url_differs": false,
+        "image_url_differs": true
+      },
+      "dedupe_decision_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "key_type": "barcode",
+        "key": "4571609367741",
+        "review_confidence": "high_review_confidence",
+        "keep_catalog_index": 3444,
+        "drop_catalog_indexes": [
+          373
+        ],
+        "decision": "review_required",
+        "requires_same_sellable_product": true,
+        "requires_variant_difference_disproved": false,
+        "fast_review_lane": "same_barcode_and_source_url"
+      },
+      "operator_checklist": [
+        "Open primary_review_url and compare the exact product identity.",
+        "Confirm barcode, official product title, character/variant, and image are the same sellable item.",
+        "If any variant difference remains possible, keep manual_confirmed=false.",
+        "Only set same_sellable_product_confirmed=true when the duplicate is proven."
+      ],
+      "manual_value_fields_to_fill": [
+        "manual_confirmed",
+        "same_sellable_product_confirmed",
+        "decision",
+        "keep_catalog_index",
+        "drop_catalog_indexes",
+        "evidence_url",
+        "manual_note"
+      ],
+      "blocked_until": "same_sellable_product_identity_confirmed",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "manual_confirmed": false,
+      "key_type": "barcode",
+      "key": "4571609367796",
+      "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "image_delta_requires_visual_check",
+      "keep_catalog_index": 3441,
+      "drop_catalog_indexes": [
+        374
+      ],
+      "primary_review_url": "https://chiikawamarket.jp/ko/products/4571609367796",
+      "primary_review_url_kind": "keep_source_url",
+      "review_urls": [
+        "https://chiikawamarket.jp/ko/products/4571609367796",
+        "https://chiikawamarket.jp/cdn/shop/files/4571609367796_1.jpg",
+        "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609367796_1.jpg?v=1776303630"
+      ],
+      "stores": [
+        "치이카와 마켓",
+        "치이카와 파크"
+      ],
+      "categories": [
+        "식기"
+      ],
+      "identity_delta": {
+        "normalized_name_count": 1,
+        "normalized_names": [
+          "치이카와파크꼬마얼굴멜라민플레이트고블린"
+        ],
+        "source_url_count": 1,
+        "image_url_count": 2,
+        "store_count": 2,
+        "stores": [
+          "치이카와 마켓",
+          "치이카와 파크"
+        ],
+        "name_differs": false,
+        "source_url_differs": false,
+        "image_url_differs": true
+      },
+      "dedupe_decision_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "key_type": "barcode",
+        "key": "4571609367796",
+        "review_confidence": "high_review_confidence",
+        "keep_catalog_index": 3441,
+        "drop_catalog_indexes": [
+          374
+        ],
+        "decision": "review_required",
+        "requires_same_sellable_product": true,
+        "requires_variant_difference_disproved": false,
+        "fast_review_lane": "same_barcode_and_source_url"
+      },
+      "operator_checklist": [
+        "Open primary_review_url and compare the exact product identity.",
+        "Confirm barcode, official product title, character/variant, and image are the same sellable item.",
+        "If any variant difference remains possible, keep manual_confirmed=false.",
+        "Only set same_sellable_product_confirmed=true when the duplicate is proven."
+      ],
+      "manual_value_fields_to_fill": [
+        "manual_confirmed",
+        "same_sellable_product_confirmed",
+        "decision",
+        "keep_catalog_index",
+        "drop_catalog_indexes",
+        "evidence_url",
+        "manual_note"
+      ],
+      "blocked_until": "same_sellable_product_identity_confirmed",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "manual_confirmed": false,
+      "key_type": "barcode",
+      "key": "4571609385097",
+      "fast_review_lane": "same_barcode_and_source_url",
+      "fast_review_warning": "image_delta_requires_visual_check",
+      "keep_catalog_index": 3461,
+      "drop_catalog_indexes": [
+        237
+      ],
+      "primary_review_url": "https://chiikawamarket.jp/ko/products/4571609385097",
+      "primary_review_url_kind": "keep_source_url",
+      "review_urls": [
+        "https://chiikawamarket.jp/ko/products/4571609385097",
+        "https://chiikawamarket.jp/cdn/shop/files/4571609385097_1.jpg",
+        "https://cdn.shopify.com/s/files/1/0626/7142/1681/files/4571609385097_1.jpg?v=1776299053"
+      ],
+      "stores": [
+        "치이카와 마켓",
+        "치이카와 파크"
+      ],
+      "categories": [
+        "인형"
+      ],
+      "identity_delta": {
+        "normalized_name_count": 1,
+        "normalized_names": [
+          "치이카와파크리버시블폭신폭신인형베레모치이카와"
+        ],
+        "source_url_count": 1,
+        "image_url_count": 2,
+        "store_count": 2,
+        "stores": [
+          "치이카와 마켓",
+          "치이카와 파크"
+        ],
+        "name_differs": false,
+        "source_url_differs": false,
+        "image_url_differs": true
+      },
+      "dedupe_decision_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "key_type": "barcode",
+        "key": "4571609385097",
+        "review_confidence": "high_review_confidence",
+        "keep_catalog_index": 3461,
+        "drop_catalog_indexes": [
+          237
+        ],
+        "decision": "review_required",
+        "requires_same_sellable_product": true,
+        "requires_variant_difference_disproved": false,
+        "fast_review_lane": "same_barcode_and_source_url"
+      },
+      "operator_checklist": [
+        "Open primary_review_url and compare the exact product identity.",
+        "Confirm barcode, official product title, character/variant, and image are the same sellable item.",
+        "If any variant difference remains possible, keep manual_confirmed=false.",
+        "Only set same_sellable_product_confirmed=true when the duplicate is proven."
+      ],
+      "manual_value_fields_to_fill": [
+        "manual_confirmed",
+        "same_sellable_product_confirmed",
+        "decision",
+        "keep_catalog_index",
+        "drop_catalog_indexes",
+        "evidence_url",
+        "manual_note"
+      ],
+      "blocked_until": "same_sellable_product_identity_confirmed",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    }
+  ],
   "items": [
     {
       "key_type": "barcode",

@@ -72,6 +72,13 @@ class DeduplicationFastReviewTests(unittest.TestCase):
         self.assertEqual(report["summary"]["name_delta_groups"], 1)
         self.assertEqual(report["summary"]["image_delta_groups"], 1)
         self.assertEqual(report["summary"]["variant_warning_groups"], 1)
+        self.assertEqual(report["summary"]["next_fast_review_batch_groups"], 1)
+        self.assertEqual(report["summary"]["next_fast_review_batch_drop_candidate_rows"], 1)
+        self.assertEqual(report["summary"]["next_fast_review_batch_primary_review_url_groups"], 1)
+        self.assertEqual(
+            report["summary"]["next_fast_review_batch_warning_counts"],
+            [["name_delta_requires_variant_check", 1]],
+        )
         self.assertEqual(report["summary"]["primary_review_url_groups"], 1)
         self.assertEqual(report["summary"]["first_primary_review_url"], "https://example.test/item")
         self.assertIs(report["summary"]["auto_delete_enabled"], False)
@@ -101,6 +108,21 @@ class DeduplicationFastReviewTests(unittest.TestCase):
         self.assertEqual(
             report["breakdowns"]["by_primary_review_url_kind"],
             [{"primary_review_url_kind": "keep_source_url", "groups": 1}],
+        )
+        self.assertEqual(report["next_fast_review_batch"][0]["key"], "111")
+        self.assertFalse(report["next_fast_review_batch"][0]["manual_confirmed"])
+        self.assertFalse(report["next_fast_review_batch"][0]["auto_merge_enabled"])
+        self.assertEqual(
+            report["next_fast_review_batch"][0]["primary_review_url"],
+            "https://example.test/item",
+        )
+        self.assertIn(
+            "same sellable item",
+            report["next_fast_review_batch"][0]["operator_checklist"][1],
+        )
+        self.assertIn(
+            "same_sellable_product_confirmed",
+            report["next_fast_review_batch"][0]["manual_value_fields_to_fill"],
         )
         self.assertEqual(report["automation_policy"]["import_tool"], "tools/import_confirmed_dedupe_decisions.py")
 

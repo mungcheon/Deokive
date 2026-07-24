@@ -190,6 +190,48 @@ def counter_rows(counter: Counter[str], field: str) -> list[dict[str, Any]]:
     return [{field: key, "groups": value} for key, value in counter.most_common()]
 
 
+def next_fast_review_batch(items: list[dict[str, Any]], *, limit: int = 10) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for item in items[:limit]:
+        rows.append(
+            {
+                "manual_confirmed": False,
+                "key_type": item.get("key_type"),
+                "key": item.get("key"),
+                "fast_review_lane": item.get("fast_review_lane"),
+                "fast_review_warning": item.get("fast_review_warning"),
+                "keep_catalog_index": item.get("keep_catalog_index"),
+                "drop_catalog_indexes": item.get("drop_catalog_indexes") or [],
+                "primary_review_url": item.get("primary_review_url"),
+                "primary_review_url_kind": item.get("primary_review_url_kind"),
+                "review_urls": item.get("review_urls") or [],
+                "stores": item.get("stores") or [],
+                "categories": item.get("categories") or [],
+                "identity_delta": item.get("identity_delta") or {},
+                "dedupe_decision_template": item.get("dedupe_decision_template") or {},
+                "operator_checklist": [
+                    "Open primary_review_url and compare the exact product identity.",
+                    "Confirm barcode, official product title, character/variant, and image are the same sellable item.",
+                    "If any variant difference remains possible, keep manual_confirmed=false.",
+                    "Only set same_sellable_product_confirmed=true when the duplicate is proven.",
+                ],
+                "manual_value_fields_to_fill": [
+                    "manual_confirmed",
+                    "same_sellable_product_confirmed",
+                    "decision",
+                    "keep_catalog_index",
+                    "drop_catalog_indexes",
+                    "evidence_url",
+                    "manual_note",
+                ],
+                "blocked_until": "same_sellable_product_identity_confirmed",
+                "auto_merge_enabled": False,
+                "auto_delete_enabled": False,
+            }
+        )
+    return rows
+
+
 def _fast_review_lane(same_barcode: bool, same_source_url: bool, same_image_url: bool) -> str:
     if same_barcode and same_source_url and same_image_url:
         return "same_barcode_source_and_image"
@@ -240,6 +282,7 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
         blockers = group.get("merge_blockers") or ["none"]
         for blocker in blockers:
             by_blocker[str(blocker)] += 1
+    next_batch = next_fast_review_batch(fast_groups)
 
     return {
         "schema_version": 1,
@@ -257,6 +300,20 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
                 1 for group in fast_groups if group.get("fast_review_warning") != "no_identity_delta_detected"
             ),
             "manual_confirmed_true": 0,
+            "next_fast_review_batch_groups": len(next_batch),
+            "next_fast_review_batch_drop_candidate_rows": sum(
+                len(item.get("drop_catalog_indexes") or []) for item in next_batch
+            ),
+            "next_fast_review_batch_primary_review_url_groups": sum(
+                1 for item in next_batch if item.get("primary_review_url")
+            ),
+            "next_fast_review_batch_warning_counts": [
+                [key, value]
+                for key, value in Counter(
+                    str(item.get("fast_review_warning") or "unknown")
+                    for item in next_batch
+                ).most_common()
+            ],
             "primary_review_url_groups": sum(1 for group in fast_groups if group.get("primary_review_url")),
             "first_primary_review_url": next(
                 (str(group.get("primary_review_url")) for group in fast_groups if group.get("primary_review_url")),
@@ -276,6 +333,7 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
                 "primary_review_url_kind",
             ),
         },
+        "next_fast_review_batch": next_batch,
         "items": fast_groups,
         "held_for_later_summary": {
             "by_review_confidence": counter_rows(
