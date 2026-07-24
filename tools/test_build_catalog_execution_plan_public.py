@@ -174,6 +174,32 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     },
                 ],
             },
+            "ensky_cache_candidate_action_queue_public.json": {
+                "summary": {
+                    "candidate_action_rows": 5,
+                    "action_batch_count": 1,
+                    "manual_confirmed_true": 0,
+                    "candidate_source_url_ready_rows": 5,
+                    "candidate_image_url_ready_rows": 4,
+                    "safe_exact_top_candidate_rows": 0,
+                    "can_import_now_rows": 0,
+                    "blocked_manual_review_rows": 5,
+                    "by_affiliation": [["Chiikawa", 3], ["Danganronpa", 2]],
+                    "by_category": [["Acrylic stand", 3], ["Mascot", 2]],
+                    "auto_apply_enabled": False,
+                },
+                "import_readiness": {
+                    "candidate_rows": 5,
+                    "candidate_source_url_ready_rows": 5,
+                    "candidate_image_url_ready_rows": 4,
+                    "safe_exact_top_candidate_rows": 0,
+                    "identity_warning_rows": 5,
+                    "can_import_now_rows": 0,
+                    "blocked_manual_review_rows": 5,
+                    "manual_confirmation_required": True,
+                    "auto_apply_enabled": False,
+                },
+            },
             "catalog_metadata_review_batches_public.json": {
                 "summary": {"missing_cell_count": 20, "batch_count": 2, "field_missing_totals": {"barcode": 20}}
             },
@@ -554,6 +580,19 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         )
         self.assertEqual(report["summary"]["source_discovery_starter_queue_rows"], 12)
         self.assertEqual(report["summary"]["source_discovery_starter_queue_groups"], 3)
+        ensky = next(
+            action
+            for action in report["actions"]
+            if action["workstream"] == "ensky_cache_candidate_action_queue"
+        )
+        self.assertEqual(ensky["priority"], 23)
+        self.assertEqual(ensky["rows"], 5)
+        self.assertEqual(ensky["evidence"]["candidate_source_url_ready_rows"], 5)
+        self.assertEqual(ensky["evidence"]["candidate_image_url_ready_rows"], 4)
+        self.assertEqual(ensky["evidence"]["safe_exact_top_candidate_rows"], 0)
+        self.assertEqual(ensky["evidence"]["can_import_now_rows"], 0)
+        self.assertEqual(ensky["evidence"]["blocked_manual_review_rows"], 5)
+        self.assertEqual(ensky["evidence"]["import_readiness"]["identity_warning_rows"], 5)
         image = next(action for action in report["actions"] if action["workstream"] == "image_url_attachment")
         self.assertEqual(image["status"], "blocked")
         self.assertEqual(image["evidence"]["provider_candidate_items"], 7)

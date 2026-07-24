@@ -602,6 +602,27 @@ def _build_plan(load_report) -> dict[str, Any]:
                     "candidate_action_rows": _count(ensky_cache_candidate_action_summary, "candidate_action_rows"),
                     "action_batch_count": _count(ensky_cache_candidate_action_summary, "action_batch_count"),
                     "manual_confirmed_true": _count(ensky_cache_candidate_action_summary, "manual_confirmed_true"),
+                    "candidate_source_url_ready_rows": _count(
+                        ensky_cache_candidate_action_summary,
+                        "candidate_source_url_ready_rows",
+                    ),
+                    "candidate_image_url_ready_rows": _count(
+                        ensky_cache_candidate_action_summary,
+                        "candidate_image_url_ready_rows",
+                    ),
+                    "safe_exact_top_candidate_rows": _count(
+                        ensky_cache_candidate_action_summary,
+                        "safe_exact_top_candidate_rows",
+                    ),
+                    "can_import_now_rows": _count(
+                        ensky_cache_candidate_action_summary,
+                        "can_import_now_rows",
+                    ),
+                    "blocked_manual_review_rows": _count(
+                        ensky_cache_candidate_action_summary,
+                        "blocked_manual_review_rows",
+                    ),
+                    "import_readiness": ensky_cache_candidate_action_queue.get("import_readiness", {}),
                     "by_affiliation": ensky_cache_candidate_action_summary.get("by_affiliation", []),
                     "by_category": ensky_cache_candidate_action_summary.get("by_category", []),
                     "auto_apply_enabled": bool(
