@@ -317,7 +317,7 @@ class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
                         flex: 2,
                         child: _CatalogAddButton(
                           key: const Key('catalog-add-sheet-button'),
-                          label: '내 굿즈에 추가하기',
+                          label: '내 굿즈에 추가',
                           icon: Icons.add_rounded,
                           expanded: true,
                           onPressed: () async {
@@ -548,7 +548,7 @@ class _CatalogListTile extends StatelessWidget {
             const SizedBox(width: 8),
             _CatalogAddButton(
               key: const Key('catalog-add-list-button'),
-              label: isAdding ? '추가 중' : '추가하기',
+              label: isAdding ? '추가 중' : '추가',
               icon: isAdding ? Icons.more_horiz_rounded : Icons.add_rounded,
               disabled: isAdding,
               onPressed: () async => onAdd(),
@@ -588,11 +588,11 @@ class _CatalogAddButton extends StatelessWidget {
       duration: const Duration(milliseconds: 140),
       height: 40,
       constraints: BoxConstraints(
-        minWidth: expanded ? 0 : 118,
+        minWidth: expanded ? 0 : 92,
         minHeight: 40,
         maxHeight: 40,
       ),
-      padding: EdgeInsets.symmetric(horizontal: expanded ? 14 : 12),
+      padding: EdgeInsets.symmetric(horizontal: expanded ? 14 : 13),
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: background,
