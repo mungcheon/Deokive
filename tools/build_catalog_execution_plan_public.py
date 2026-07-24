@@ -536,6 +536,16 @@ def _build_plan(load_report) -> dict[str, Any]:
                 "source_discovery_template_batch_count": _count(
                     source_action_summary, "source_discovery_template_batch_count"
                 ),
+                "source_patch_template_count": _count(
+                    source_action_summary, "source_patch_template_count"
+                ),
+                "catalog_field_import_template_count": _count(
+                    source_action_summary, "catalog_field_import_template_count"
+                ),
+                "primary_review_url_rows": _count(source_action_summary, "primary_review_url_rows"),
+                "primary_review_url_kind_counts": source_action_summary.get(
+                    "primary_review_url_kind_counts", []
+                ),
                 "manual_research_backlog_rows": _count(
                     source_action_summary, "manual_research_backlog_rows"
                 ),
@@ -543,7 +553,11 @@ def _build_plan(load_report) -> dict[str, Any]:
                     "manual_research_backlog_by_source_store", []
                 ),
                 "excluded_review_state_rows": source_action_summary.get("excluded_review_state_rows", []),
+                "by_review_state": source_action_summary.get("by_review_state", []),
                 "by_workflow": source_action_summary.get("by_workflow", []),
+                "by_source_store": source_action_summary.get("by_source_store", []),
+                "first_primary_review_url": source_action_summary.get("first_primary_review_url"),
+                "first_primary_review_url_kind": source_action_summary.get("first_primary_review_url_kind"),
             },
         )
     )

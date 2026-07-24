@@ -64,8 +64,17 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "manual_research_backlog_rows": 2,
                     "source_discovery_template_rows": 4,
                     "source_discovery_template_batch_count": 1,
+                    "source_patch_template_count": 4,
+                    "catalog_field_import_template_count": 4,
+                    "primary_review_url_rows": 4,
+                    "primary_review_url_kind_counts": [["official_search_url", 4]],
                     "manual_research_backlog_by_source_store": [["Idol official", 2]],
                     "excluded_review_state_rows": [["manual_official_research_required", 2]],
+                    "by_review_state": [["official_search_review_required", 3], ["licensed_retailer_review_required", 1]],
+                    "by_workflow": [["official_search_url_available", 3], ["licensed_retailer_search_review", 1]],
+                    "by_source_store": [["Animate", 3], ["AmiAmi", 1]],
+                    "first_primary_review_url": "https://animate.example/search?q=source",
+                    "first_primary_review_url_kind": "official_search_url",
                 }
             },
             "source_discovery_focus_confirmed_template_public.json": {
@@ -495,6 +504,23 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(source_action["evidence"]["queued_source_rows"], 4)
         self.assertEqual(source_action["evidence"]["source_discovery_template_rows"], 4)
         self.assertEqual(source_action["evidence"]["source_discovery_template_batch_count"], 1)
+        self.assertEqual(source_action["evidence"]["source_patch_template_count"], 4)
+        self.assertEqual(source_action["evidence"]["catalog_field_import_template_count"], 4)
+        self.assertEqual(source_action["evidence"]["primary_review_url_rows"], 4)
+        self.assertEqual(
+            source_action["evidence"]["primary_review_url_kind_counts"],
+            [["official_search_url", 4]],
+        )
+        self.assertEqual(
+            source_action["evidence"]["by_review_state"],
+            [["official_search_review_required", 3], ["licensed_retailer_review_required", 1]],
+        )
+        self.assertEqual(source_action["evidence"]["by_source_store"], [["Animate", 3], ["AmiAmi", 1]])
+        self.assertEqual(
+            source_action["evidence"]["first_primary_review_url"],
+            "https://animate.example/search?q=source",
+        )
+        self.assertEqual(source_action["evidence"]["first_primary_review_url_kind"], "official_search_url")
         self.assertEqual(source_action["evidence"]["manual_research_backlog_rows"], 2)
         self.assertEqual(
             source_action["evidence"]["manual_research_backlog_by_source_store"],
