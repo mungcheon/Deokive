@@ -1,0 +1,2536 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-24T01:29:15Z",
+  "scope": "ichiban_kuji_reissue_decision_template",
+  "source_report": "data/catalog_deduplication_action_queue_public.json",
+  "summary": {
+    "item_template_rows": 20,
+    "campaign_template_rows": 4,
+    "manual_confirmed_item_rows": 0,
+    "manual_confirmed_campaign_rows": 0,
+    "same_sellable_product_keep_drop_ready_rows": 0,
+    "keep_separate_confirmed_rows": 0,
+    "item_decision_counts": [
+      [
+        "unconfirmed",
+        20
+      ]
+    ],
+    "campaign_decision_counts": [
+      [
+        "unconfirmed",
+        4
+      ]
+    ],
+    "auto_merge_enabled": false,
+    "auto_delete_enabled": false,
+    "manual_review_required_before_mutation": true,
+    "recommended_next_action": "fill_campaign_decisions_first_then_confirm_item_keep_drop_or_keep_separate"
+  },
+  "instructions": [
+    "Review campaign_templates first when one campaign URL pair covers many item work orders.",
+    "Set manual_confirmed=true only after checking official campaign pages and evidence_urls.",
+    "Use reissue_or_campaign_variant_keep_separate when rows are legitimate reissues or campaign waves.",
+    "Use same_sellable_product_keep_drop_confirmed only for exact duplicates, with one keep_catalog_index and explicit drop_catalog_indexes.",
+    "Do not import any merge/delete mutation from this file unless manual_confirmed=true and evidence_urls prove the decision."
+  ],
+  "automation_policy": {
+    "auto_merge_enabled": false,
+    "auto_delete_enabled": false,
+    "manual_review_required_before_mutation": true
+  },
+  "campaign_templates": [
+    {
+      "campaign_work_order_id": "ichiban-reissue-campaign-001",
+      "priority": 1,
+      "source_urls": [
+        "https://1kuji.com/products/onep6",
+        "https://1kuji.com/products/onep8"
+      ],
+      "item_work_order_count": 8,
+      "affected_item_work_order_ids": [
+        "ichiban-reissue-dedupe-006",
+        "ichiban-reissue-dedupe-007",
+        "ichiban-reissue-dedupe-008",
+        "ichiban-reissue-dedupe-009",
+        "ichiban-reissue-dedupe-010",
+        "ichiban-reissue-dedupe-011",
+        "ichiban-reissue-dedupe-012",
+        "ichiban-reissue-dedupe-013"
+      ],
+      "catalog_indexes": [
+        16103,
+        16104,
+        16105,
+        16106,
+        16107,
+        16108,
+        16109,
+        16110,
+        16141,
+        16142,
+        16143,
+        16144,
+        16145,
+        16146,
+        16147,
+        16148
+      ],
+      "prize_labels": [
+        "A賞",
+        "B賞",
+        "C賞",
+        "D賞",
+        "E賞",
+        "F賞",
+        "G賞",
+        "H賞"
+      ],
+      "campaign_url_comparison": {
+        "source_url_count": 2,
+        "campaign_slugs": [
+          "onep6",
+          "onep8"
+        ],
+        "campaign_slug_families": [
+          "onep"
+        ],
+        "campaign_slug_family_count": 1,
+        "numeric_suffixes": [
+          "6",
+          "8"
+        ],
+        "has_numbered_campaign_suffixes": true,
+        "likely_same_campaign_family_reissue": true,
+        "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+      },
+      "manual_review_checklist": [
+        "Open both campaign URLs and compare official campaign title, sale/release period, and lineup.",
+        "If the campaign pages are separate release waves or reissues, mark every item_work_order_id as reissue_or_campaign_variant_keep_separate.",
+        "If the pages are duplicate mirrors of the same campaign, review each item work order for keep/drop.",
+        "Do not delete or merge until every affected item work order has manual_confirmed=true."
+      ],
+      "sample_rows": [
+        {
+          "catalog_index": 16103,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - A賞 シャンクスフィギュア",
+          "name_ja": "A賞 シャンクスフィギュア",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "sub_series": "A賞",
+          "official_price_jpy": null,
+          "source_url": "https://1kuji.com/products/onep8"
+        },
+        {
+          "catalog_index": 16141,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - A賞 シャンクスフィギュア",
+          "name_ja": "A賞 シャンクスフィギュア",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "sub_series": "A賞",
+          "official_price_jpy": null,
+          "source_url": "https://1kuji.com/products/onep6"
+        },
+        {
+          "catalog_index": 16104,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - B賞 ミホークフィギュア",
+          "name_ja": "B賞 ミホークフィギュア",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "sub_series": "B賞",
+          "official_price_jpy": null,
+          "source_url": "https://1kuji.com/products/onep8"
+        },
+        {
+          "catalog_index": 16142,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - B賞 ミホークフィギュア",
+          "name_ja": "B賞 ミホークフィギュア",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "sub_series": "B賞",
+          "official_price_jpy": null,
+          "source_url": "https://1kuji.com/products/onep6"
+        },
+        {
+          "catalog_index": 16105,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - C賞 ルフィフィギュア",
+          "name_ja": "C賞 ルフィフィギュア",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "sub_series": "C賞",
+          "official_price_jpy": null,
+          "source_url": "https://1kuji.com/products/onep8"
+        },
+        {
+          "catalog_index": 16143,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - C賞 ルフィフィギュア",
+          "name_ja": "C賞 ルフィフィギュア",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "sub_series": "C賞",
+          "official_price_jpy": null,
+          "source_url": "https://1kuji.com/products/onep6"
+        },
+        {
+          "catalog_index": 16106,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - D賞 スポーツタオル",
+          "name_ja": "D賞 スポーツタオル",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "sub_series": "D賞",
+          "official_price_jpy": null,
+          "source_url": "https://1kuji.com/products/onep8"
+        },
+        {
+          "catalog_index": 16144,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - D賞 スポーツタオル",
+          "name_ja": "D賞 スポーツタオル",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "sub_series": "D賞",
+          "official_price_jpy": null,
+          "source_url": "https://1kuji.com/products/onep6"
+        }
+      ],
+      "decision_template": {
+        "campaign_work_order_id": "ichiban-reissue-campaign-001",
+        "manual_confirmed": false,
+        "decision": "",
+        "decision_options": [
+          "campaign_pair_reissue_keep_all_separate",
+          "campaign_pair_duplicate_review_each_item_keep_drop",
+          "needs_more_source_evidence"
+        ],
+        "affected_item_work_order_ids": [
+          "ichiban-reissue-dedupe-006",
+          "ichiban-reissue-dedupe-007",
+          "ichiban-reissue-dedupe-008",
+          "ichiban-reissue-dedupe-009",
+          "ichiban-reissue-dedupe-010",
+          "ichiban-reissue-dedupe-011",
+          "ichiban-reissue-dedupe-012",
+          "ichiban-reissue-dedupe-013"
+        ],
+        "evidence_urls": [
+          "https://1kuji.com/products/onep6",
+          "https://1kuji.com/products/onep8"
+        ],
+        "manual_note": ""
+      },
+      "manual_confirmed": false,
+      "decision": "",
+      "evidence_urls": [
+        "https://1kuji.com/products/onep6",
+        "https://1kuji.com/products/onep8"
+      ],
+      "manual_note": "",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "campaign_work_order_id": "ichiban-reissue-campaign-002",
+      "priority": 2,
+      "source_urls": [
+        "https://1kuji.com/products/kimetsu",
+        "https://1kuji.com/products/kimetsu2"
+      ],
+      "item_work_order_count": 7,
+      "affected_item_work_order_ids": [
+        "ichiban-reissue-dedupe-014",
+        "ichiban-reissue-dedupe-015",
+        "ichiban-reissue-dedupe-016",
+        "ichiban-reissue-dedupe-017",
+        "ichiban-reissue-dedupe-018",
+        "ichiban-reissue-dedupe-019",
+        "ichiban-reissue-dedupe-020"
+      ],
+      "catalog_indexes": [
+        13770,
+        13771,
+        13772,
+        13773,
+        13774,
+        13775,
+        13776,
+        13777,
+        13778,
+        13779,
+        13780,
+        13781,
+        13782,
+        13783
+      ],
+      "prize_labels": [
+        "A賞",
+        "B賞",
+        "C賞",
+        "D賞",
+        "E賞",
+        "F賞",
+        "ラストワン賞"
+      ],
+      "campaign_url_comparison": {
+        "source_url_count": 2,
+        "campaign_slugs": [
+          "kimetsu",
+          "kimetsu2"
+        ],
+        "campaign_slug_families": [
+          "kimetsu"
+        ],
+        "campaign_slug_family_count": 1,
+        "numeric_suffixes": [
+          "2"
+        ],
+        "has_numbered_campaign_suffixes": true,
+        "likely_same_campaign_family_reissue": true,
+        "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+      },
+      "manual_review_checklist": [
+        "Open both campaign URLs and compare official campaign title, sale/release period, and lineup.",
+        "If the campaign pages are separate release waves or reissues, mark every item_work_order_id as reissue_or_campaign_variant_keep_separate.",
+        "If the pages are duplicate mirrors of the same campaign, review each item work order for keep/drop.",
+        "Do not delete or merge until every affected item work order has manual_confirmed=true."
+      ],
+      "sample_rows": [
+        {
+          "catalog_index": 13770,
+          "name_ko": "一番くじ 鬼滅の刃 - A賞 竈門炭治郎 フィギュア",
+          "name_ja": "A賞 竈門炭治郎 フィギュア",
+          "series_name": "一番くじ 鬼滅の刃",
+          "sub_series": "A賞",
+          "official_price_jpy": 694,
+          "source_url": "https://1kuji.com/products/kimetsu2"
+        },
+        {
+          "catalog_index": 13777,
+          "name_ko": "一番くじ 鬼滅の刃 - A賞 竈門炭治郎 フィギュア",
+          "name_ja": "A賞 竈門炭治郎 フィギュア",
+          "series_name": "一番くじ 鬼滅の刃",
+          "sub_series": "A賞",
+          "official_price_jpy": 694,
+          "source_url": "https://1kuji.com/products/kimetsu"
+        },
+        {
+          "catalog_index": 13771,
+          "name_ko": "一番くじ 鬼滅の刃 - B賞 竈門禰豆子 フィギュア",
+          "name_ja": "B賞 竈門禰豆子 フィギュア",
+          "series_name": "一番くじ 鬼滅の刃",
+          "sub_series": "B賞",
+          "official_price_jpy": 694,
+          "source_url": "https://1kuji.com/products/kimetsu2"
+        },
+        {
+          "catalog_index": 13778,
+          "name_ko": "一番くじ 鬼滅の刃 - B賞 竈門禰豆子 フィギュア",
+          "name_ja": "B賞 竈門禰豆子 フィギュア",
+          "series_name": "一番くじ 鬼滅の刃",
+          "sub_series": "B賞",
+          "official_price_jpy": 694,
+          "source_url": "https://1kuji.com/products/kimetsu"
+        },
+        {
+          "catalog_index": 13772,
+          "name_ko": "一番くじ 鬼滅の刃 - C賞 竈門炭治郎 ちょこのっこ ぬいぐるみ",
+          "name_ja": "C賞 竈門炭治郎 ちょこのっこ ぬいぐるみ",
+          "series_name": "一番くじ 鬼滅の刃",
+          "sub_series": "C賞",
+          "official_price_jpy": 694,
+          "source_url": "https://1kuji.com/products/kimetsu2"
+        },
+        {
+          "catalog_index": 13779,
+          "name_ko": "一番くじ 鬼滅の刃 - C賞 竈門炭治郎 ちょこのっこ ぬいぐるみ",
+          "name_ja": "C賞 竈門炭治郎 ちょこのっこ ぬいぐるみ",
+          "series_name": "一番くじ 鬼滅の刃",
+          "sub_series": "C賞",
+          "official_price_jpy": 694,
+          "source_url": "https://1kuji.com/products/kimetsu"
+        },
+        {
+          "catalog_index": 13773,
+          "name_ko": "一番くじ 鬼滅の刃 - D賞 竈門禰豆子 ちょこのっこ ぬいぐるみ",
+          "name_ja": "D賞 竈門禰豆子 ちょこのっこ ぬいぐるみ",
+          "series_name": "一番くじ 鬼滅の刃",
+          "sub_series": "D賞",
+          "official_price_jpy": 694,
+          "source_url": "https://1kuji.com/products/kimetsu2"
+        },
+        {
+          "catalog_index": 13780,
+          "name_ko": "一番くじ 鬼滅の刃 - D賞 竈門禰豆子 ちょこのっこ ぬいぐるみ",
+          "name_ja": "D賞 竈門禰豆子 ちょこのっこ ぬいぐるみ",
+          "series_name": "一番くじ 鬼滅の刃",
+          "sub_series": "D賞",
+          "official_price_jpy": 694,
+          "source_url": "https://1kuji.com/products/kimetsu"
+        }
+      ],
+      "decision_template": {
+        "campaign_work_order_id": "ichiban-reissue-campaign-002",
+        "manual_confirmed": false,
+        "decision": "",
+        "decision_options": [
+          "campaign_pair_reissue_keep_all_separate",
+          "campaign_pair_duplicate_review_each_item_keep_drop",
+          "needs_more_source_evidence"
+        ],
+        "affected_item_work_order_ids": [
+          "ichiban-reissue-dedupe-014",
+          "ichiban-reissue-dedupe-015",
+          "ichiban-reissue-dedupe-016",
+          "ichiban-reissue-dedupe-017",
+          "ichiban-reissue-dedupe-018",
+          "ichiban-reissue-dedupe-019",
+          "ichiban-reissue-dedupe-020"
+        ],
+        "evidence_urls": [
+          "https://1kuji.com/products/kimetsu",
+          "https://1kuji.com/products/kimetsu2"
+        ],
+        "manual_note": ""
+      },
+      "manual_confirmed": false,
+      "decision": "",
+      "evidence_urls": [
+        "https://1kuji.com/products/kimetsu",
+        "https://1kuji.com/products/kimetsu2"
+      ],
+      "manual_note": "",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "campaign_work_order_id": "ichiban-reissue-campaign-003",
+      "priority": 3,
+      "source_urls": [
+        "https://1kuji.com/products/naruto_wcf",
+        "https://1kuji.com/products/naruto_wcf2"
+      ],
+      "item_work_order_count": 3,
+      "affected_item_work_order_ids": [
+        "ichiban-reissue-dedupe-003",
+        "ichiban-reissue-dedupe-004",
+        "ichiban-reissue-dedupe-005"
+      ],
+      "catalog_indexes": [
+        14302,
+        14303,
+        14304,
+        14305,
+        14306,
+        14307
+      ],
+      "prize_labels": [
+        "A賞",
+        "B賞",
+        "C賞"
+      ],
+      "campaign_url_comparison": {
+        "source_url_count": 2,
+        "campaign_slugs": [
+          "naruto_wcf",
+          "naruto_wcf2"
+        ],
+        "campaign_slug_families": [
+          "naruto_wcf"
+        ],
+        "campaign_slug_family_count": 1,
+        "numeric_suffixes": [
+          "2"
+        ],
+        "has_numbered_campaign_suffixes": true,
+        "likely_same_campaign_family_reissue": true,
+        "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+      },
+      "manual_review_checklist": [
+        "Open both campaign URLs and compare official campaign title, sale/release period, and lineup.",
+        "If the campaign pages are separate release waves or reissues, mark every item_work_order_id as reissue_or_campaign_variant_keep_separate.",
+        "If the pages are duplicate mirrors of the same campaign, review each item work order for keep/drop.",
+        "Do not delete or merge until every affected item work order has manual_confirmed=true."
+      ],
+      "sample_rows": [
+        {
+          "catalog_index": 14302,
+          "name_ko": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア - A賞 ナルトワールドコレクタブルフィギュア メタリックカラーver.",
+          "name_ja": "A賞 ナルトワールドコレクタブルフィギュア メタリックカラーver.",
+          "series_name": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア",
+          "sub_series": "A賞",
+          "official_price_jpy": 1000,
+          "source_url": "https://1kuji.com/products/naruto_wcf2"
+        },
+        {
+          "catalog_index": 14305,
+          "name_ko": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア - A賞 ナルトワールドコレクタブルフィギュア メタリックカラーver.",
+          "name_ja": "A賞 ナルトワールドコレクタブルフィギュア メタリックカラーver.",
+          "series_name": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア",
+          "sub_series": "A賞",
+          "official_price_jpy": 1000,
+          "source_url": "https://1kuji.com/products/naruto_wcf"
+        },
+        {
+          "catalog_index": 14303,
+          "name_ko": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア - B賞 ワールドコレクタブルフィギュア メタリックカラーver.",
+          "name_ja": "B賞 ワールドコレクタブルフィギュア メタリックカラーver.",
+          "series_name": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア",
+          "sub_series": "B賞",
+          "official_price_jpy": 1000,
+          "source_url": "https://1kuji.com/products/naruto_wcf2"
+        },
+        {
+          "catalog_index": 14306,
+          "name_ko": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア - B賞 ワールドコレクタブルフィギュア メタリックカラーver.",
+          "name_ja": "B賞 ワールドコレクタブルフィギュア メタリックカラーver.",
+          "series_name": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア",
+          "sub_series": "B賞",
+          "official_price_jpy": 1000,
+          "source_url": "https://1kuji.com/products/naruto_wcf"
+        },
+        {
+          "catalog_index": 14304,
+          "name_ko": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア - C賞 ワールドコレクタブルフィギュア",
+          "name_ja": "C賞 ワールドコレクタブルフィギュア",
+          "series_name": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア",
+          "sub_series": "C賞",
+          "official_price_jpy": 1000,
+          "source_url": "https://1kuji.com/products/naruto_wcf2"
+        },
+        {
+          "catalog_index": 14307,
+          "name_ko": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア - C賞 ワールドコレクタブルフィギュア",
+          "name_ja": "C賞 ワールドコレクタブルフィギュア",
+          "series_name": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア",
+          "sub_series": "C賞",
+          "official_price_jpy": 1000,
+          "source_url": "https://1kuji.com/products/naruto_wcf"
+        }
+      ],
+      "decision_template": {
+        "campaign_work_order_id": "ichiban-reissue-campaign-003",
+        "manual_confirmed": false,
+        "decision": "",
+        "decision_options": [
+          "campaign_pair_reissue_keep_all_separate",
+          "campaign_pair_duplicate_review_each_item_keep_drop",
+          "needs_more_source_evidence"
+        ],
+        "affected_item_work_order_ids": [
+          "ichiban-reissue-dedupe-003",
+          "ichiban-reissue-dedupe-004",
+          "ichiban-reissue-dedupe-005"
+        ],
+        "evidence_urls": [
+          "https://1kuji.com/products/naruto_wcf",
+          "https://1kuji.com/products/naruto_wcf2"
+        ],
+        "manual_note": ""
+      },
+      "manual_confirmed": false,
+      "decision": "",
+      "evidence_urls": [
+        "https://1kuji.com/products/naruto_wcf",
+        "https://1kuji.com/products/naruto_wcf2"
+      ],
+      "manual_note": "",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "campaign_work_order_id": "ichiban-reissue-campaign-004",
+      "priority": 4,
+      "source_urls": [
+        "https://1kuji.com/products/haikyu4",
+        "https://1kuji.com/products/haikyu8"
+      ],
+      "item_work_order_count": 2,
+      "affected_item_work_order_ids": [
+        "ichiban-reissue-dedupe-001",
+        "ichiban-reissue-dedupe-002"
+      ],
+      "catalog_indexes": [
+        14797,
+        14798,
+        14817,
+        14818
+      ],
+      "prize_labels": [
+        "ラストワン賞",
+        "缶バッジ"
+      ],
+      "campaign_url_comparison": {
+        "source_url_count": 2,
+        "campaign_slugs": [
+          "haikyu4",
+          "haikyu8"
+        ],
+        "campaign_slug_families": [
+          "haikyu"
+        ],
+        "campaign_slug_family_count": 1,
+        "numeric_suffixes": [
+          "4",
+          "8"
+        ],
+        "has_numbered_campaign_suffixes": true,
+        "likely_same_campaign_family_reissue": true,
+        "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+      },
+      "manual_review_checklist": [
+        "Open both campaign URLs and compare official campaign title, sale/release period, and lineup.",
+        "If the campaign pages are separate release waves or reissues, mark every item_work_order_id as reissue_or_campaign_variant_keep_separate.",
+        "If the pages are duplicate mirrors of the same campaign, review each item work order for keep/drop.",
+        "Do not delete or merge until every affected item work order has manual_confirmed=true."
+      ],
+      "sample_rows": [
+        {
+          "catalog_index": 14798,
+          "name_ko": "一番おみくじ ハイキュー!! 缶バッジ - ラストワン賞 スペシャル缶バッジ",
+          "name_ja": "ラストワン賞 スペシャル缶バッジ",
+          "series_name": "一番おみくじ ハイキュー!! 缶バッジ",
+          "sub_series": "ラストワン賞",
+          "official_price_jpy": 0,
+          "source_url": "https://1kuji.com/products/haikyu8"
+        },
+        {
+          "catalog_index": 14818,
+          "name_ko": "一番おみくじ ハイキュー!! 缶バッジ - ラストワン賞 スペシャル缶バッジ",
+          "name_ja": "ラストワン賞 スペシャル缶バッジ",
+          "series_name": "一番おみくじ ハイキュー!! 缶バッジ",
+          "sub_series": "ラストワン賞",
+          "official_price_jpy": 0,
+          "source_url": "https://1kuji.com/products/haikyu4"
+        },
+        {
+          "catalog_index": 14797,
+          "name_ko": "一番おみくじ ハイキュー!! 缶バッジ - 缶バッジ",
+          "name_ja": "缶バッジ",
+          "series_name": "一番おみくじ ハイキュー!! 缶バッジ",
+          "sub_series": "缶バッジ",
+          "official_price_jpy": 310,
+          "source_url": "https://1kuji.com/products/haikyu8"
+        },
+        {
+          "catalog_index": 14817,
+          "name_ko": "一番おみくじ ハイキュー!! 缶バッジ - 缶バッジ",
+          "name_ja": "缶バッジ",
+          "series_name": "一番おみくじ ハイキュー!! 缶バッジ",
+          "sub_series": "缶バッジ",
+          "official_price_jpy": 310,
+          "source_url": "https://1kuji.com/products/haikyu4"
+        }
+      ],
+      "decision_template": {
+        "campaign_work_order_id": "ichiban-reissue-campaign-004",
+        "manual_confirmed": false,
+        "decision": "",
+        "decision_options": [
+          "campaign_pair_reissue_keep_all_separate",
+          "campaign_pair_duplicate_review_each_item_keep_drop",
+          "needs_more_source_evidence"
+        ],
+        "affected_item_work_order_ids": [
+          "ichiban-reissue-dedupe-001",
+          "ichiban-reissue-dedupe-002"
+        ],
+        "evidence_urls": [
+          "https://1kuji.com/products/haikyu4",
+          "https://1kuji.com/products/haikyu8"
+        ],
+        "manual_note": ""
+      },
+      "manual_confirmed": false,
+      "decision": "",
+      "evidence_urls": [
+        "https://1kuji.com/products/haikyu4",
+        "https://1kuji.com/products/haikyu8"
+      ],
+      "manual_note": "",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    }
+  ],
+  "item_templates": [
+    {
+      "work_order_id": "ichiban-reissue-dedupe-001",
+      "campaign_work_order_id": null,
+      "priority": 1,
+      "normalized_name": "一番おみくじ ハイキュー!! 缶バッジ - ラストワン賞 スペシャル缶バッジ",
+      "catalog_indexes": [
+        14798,
+        14818
+      ],
+      "source_urls": [
+        "https://1kuji.com/products/haikyu4",
+        "https://1kuji.com/products/haikyu8"
+      ],
+      "campaign_slug_families": [
+        "haikyu"
+      ],
+      "campaign_url_comparison": {
+        "source_url_count": 2,
+        "campaign_slugs": [
+          "haikyu4",
+          "haikyu8"
+        ],
+        "campaign_slug_families": [
+          "haikyu"
+        ],
+        "campaign_slug_family_count": 1,
+        "numeric_suffixes": [
+          "4",
+          "8"
+        ],
+        "has_numbered_campaign_suffixes": true,
+        "likely_same_campaign_family_reissue": true,
+        "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+      },
+      "reissue_signal_reasons": [
+        "campaign_url_slug_number_suffix_family"
+      ],
+      "manual_review_checklist": [
+        "Open every source_url and compare official campaign title/release period/prize lineup.",
+        "Verify the full product identity: release/campaign name, prize rank, official prize name, and variant name when one rank has multiple kinds.",
+        "If the same prize name appears in different campaigns or release waves, mark as reissue_or_campaign_variant and keep rows separate.",
+        "If rows are the exact same sellable prize from the same campaign/source, choose one keep_catalog_index and list drop_catalog_indexes.",
+        "Confirm Last One or Double Chance prize rows keep official price 0 when applicable.",
+        "Do not import any dedupe mutation until manual_confirmed is true with evidence_urls."
+      ],
+      "sample_rows": [
+        {
+          "catalog_index": 14798,
+          "name_ko": "一番おみくじ ハイキュー!! 缶バッジ - ラストワン賞 スペシャル缶バッジ",
+          "name_ja": "ラストワン賞 スペシャル缶バッジ",
+          "series_name": "一番おみくじ ハイキュー!! 缶バッジ",
+          "sub_series": "ラストワン賞",
+          "official_price_jpy": 0,
+          "source_url": "https://1kuji.com/products/haikyu8"
+        },
+        {
+          "catalog_index": 14818,
+          "name_ko": "一番おみくじ ハイキュー!! 缶バッジ - ラストワン賞 スペシャル缶バッジ",
+          "name_ja": "ラストワン賞 スペシャル缶バッジ",
+          "series_name": "一番おみくじ ハイキュー!! 缶バッジ",
+          "sub_series": "ラストワン賞",
+          "official_price_jpy": 0,
+          "source_url": "https://1kuji.com/products/haikyu4"
+        }
+      ],
+      "decision_template": {
+        "work_order_id": "ichiban-reissue-dedupe-001",
+        "manual_confirmed": false,
+        "decision": "",
+        "decision_options": [
+          "reissue_or_campaign_variant_keep_separate",
+          "same_sellable_product_keep_drop_confirmed",
+          "needs_more_source_evidence"
+        ],
+        "keep_catalog_index": null,
+        "drop_catalog_indexes": [],
+        "evidence_urls": [
+          "https://1kuji.com/products/haikyu4",
+          "https://1kuji.com/products/haikyu8"
+        ],
+        "manual_note": "",
+        "protected_if_reissue": true
+      },
+      "manual_confirmed": false,
+      "decision": "",
+      "keep_catalog_index": null,
+      "drop_catalog_indexes": [],
+      "evidence_urls": [
+        "https://1kuji.com/products/haikyu4",
+        "https://1kuji.com/products/haikyu8"
+      ],
+      "manual_note": "",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "work_order_id": "ichiban-reissue-dedupe-002",
+      "campaign_work_order_id": null,
+      "priority": 2,
+      "normalized_name": "一番おみくじ ハイキュー!! 缶バッジ - 缶バッジ",
+      "catalog_indexes": [
+        14797,
+        14817
+      ],
+      "source_urls": [
+        "https://1kuji.com/products/haikyu4",
+        "https://1kuji.com/products/haikyu8"
+      ],
+      "campaign_slug_families": [
+        "haikyu"
+      ],
+      "campaign_url_comparison": {
+        "source_url_count": 2,
+        "campaign_slugs": [
+          "haikyu4",
+          "haikyu8"
+        ],
+        "campaign_slug_families": [
+          "haikyu"
+        ],
+        "campaign_slug_family_count": 1,
+        "numeric_suffixes": [
+          "4",
+          "8"
+        ],
+        "has_numbered_campaign_suffixes": true,
+        "likely_same_campaign_family_reissue": true,
+        "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+      },
+      "reissue_signal_reasons": [
+        "campaign_url_slug_number_suffix_family"
+      ],
+      "manual_review_checklist": [
+        "Open every source_url and compare official campaign title/release period/prize lineup.",
+        "Verify the full product identity: release/campaign name, prize rank, official prize name, and variant name when one rank has multiple kinds.",
+        "If the same prize name appears in different campaigns or release waves, mark as reissue_or_campaign_variant and keep rows separate.",
+        "If rows are the exact same sellable prize from the same campaign/source, choose one keep_catalog_index and list drop_catalog_indexes.",
+        "Confirm Last One or Double Chance prize rows keep official price 0 when applicable.",
+        "Do not import any dedupe mutation until manual_confirmed is true with evidence_urls."
+      ],
+      "sample_rows": [
+        {
+          "catalog_index": 14797,
+          "name_ko": "一番おみくじ ハイキュー!! 缶バッジ - 缶バッジ",
+          "name_ja": "缶バッジ",
+          "series_name": "一番おみくじ ハイキュー!! 缶バッジ",
+          "sub_series": "缶バッジ",
+          "official_price_jpy": 310,
+          "source_url": "https://1kuji.com/products/haikyu8"
+        },
+        {
+          "catalog_index": 14817,
+          "name_ko": "一番おみくじ ハイキュー!! 缶バッジ - 缶バッジ",
+          "name_ja": "缶バッジ",
+          "series_name": "一番おみくじ ハイキュー!! 缶バッジ",
+          "sub_series": "缶バッジ",
+          "official_price_jpy": 310,
+          "source_url": "https://1kuji.com/products/haikyu4"
+        }
+      ],
+      "decision_template": {
+        "work_order_id": "ichiban-reissue-dedupe-002",
+        "manual_confirmed": false,
+        "decision": "",
+        "decision_options": [
+          "reissue_or_campaign_variant_keep_separate",
+          "same_sellable_product_keep_drop_confirmed",
+          "needs_more_source_evidence"
+        ],
+        "keep_catalog_index": null,
+        "drop_catalog_indexes": [],
+        "evidence_urls": [
+          "https://1kuji.com/products/haikyu4",
+          "https://1kuji.com/products/haikyu8"
+        ],
+        "manual_note": "",
+        "protected_if_reissue": true
+      },
+      "manual_confirmed": false,
+      "decision": "",
+      "keep_catalog_index": null,
+      "drop_catalog_indexes": [],
+      "evidence_urls": [
+        "https://1kuji.com/products/haikyu4",
+        "https://1kuji.com/products/haikyu8"
+      ],
+      "manual_note": "",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "work_order_id": "ichiban-reissue-dedupe-003",
+      "campaign_work_order_id": null,
+      "priority": 3,
+      "normalized_name": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア - A賞 ナルトワールドコレクタブルフィギュア メタリックカラーver.",
+      "catalog_indexes": [
+        14302,
+        14305
+      ],
+      "source_urls": [
+        "https://1kuji.com/products/naruto_wcf",
+        "https://1kuji.com/products/naruto_wcf2"
+      ],
+      "campaign_slug_families": [
+        "naruto_wcf"
+      ],
+      "campaign_url_comparison": {
+        "source_url_count": 2,
+        "campaign_slugs": [
+          "naruto_wcf",
+          "naruto_wcf2"
+        ],
+        "campaign_slug_families": [
+          "naruto_wcf"
+        ],
+        "campaign_slug_family_count": 1,
+        "numeric_suffixes": [
+          "2"
+        ],
+        "has_numbered_campaign_suffixes": true,
+        "likely_same_campaign_family_reissue": true,
+        "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+      },
+      "reissue_signal_reasons": [
+        "campaign_url_slug_number_suffix_family"
+      ],
+      "manual_review_checklist": [
+        "Open every source_url and compare official campaign title/release period/prize lineup.",
+        "Verify the full product identity: release/campaign name, prize rank, official prize name, and variant name when one rank has multiple kinds.",
+        "If the same prize name appears in different campaigns or release waves, mark as reissue_or_campaign_variant and keep rows separate.",
+        "If rows are the exact same sellable prize from the same campaign/source, choose one keep_catalog_index and list drop_catalog_indexes.",
+        "Confirm Last One or Double Chance prize rows keep official price 0 when applicable.",
+        "Do not import any dedupe mutation until manual_confirmed is true with evidence_urls."
+      ],
+      "sample_rows": [
+        {
+          "catalog_index": 14302,
+          "name_ko": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア - A賞 ナルトワールドコレクタブルフィギュア メタリックカラーver.",
+          "name_ja": "A賞 ナルトワールドコレクタブルフィギュア メタリックカラーver.",
+          "series_name": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア",
+          "sub_series": "A賞",
+          "official_price_jpy": 1000,
+          "source_url": "https://1kuji.com/products/naruto_wcf2"
+        },
+        {
+          "catalog_index": 14305,
+          "name_ko": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア - A賞 ナルトワールドコレクタブルフィギュア メタリックカラーver.",
+          "name_ja": "A賞 ナルトワールドコレクタブルフィギュア メタリックカラーver.",
+          "series_name": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア",
+          "sub_series": "A賞",
+          "official_price_jpy": 1000,
+          "source_url": "https://1kuji.com/products/naruto_wcf"
+        }
+      ],
+      "decision_template": {
+        "work_order_id": "ichiban-reissue-dedupe-003",
+        "manual_confirmed": false,
+        "decision": "",
+        "decision_options": [
+          "reissue_or_campaign_variant_keep_separate",
+          "same_sellable_product_keep_drop_confirmed",
+          "needs_more_source_evidence"
+        ],
+        "keep_catalog_index": null,
+        "drop_catalog_indexes": [],
+        "evidence_urls": [
+          "https://1kuji.com/products/naruto_wcf",
+          "https://1kuji.com/products/naruto_wcf2"
+        ],
+        "manual_note": "",
+        "protected_if_reissue": true
+      },
+      "manual_confirmed": false,
+      "decision": "",
+      "keep_catalog_index": null,
+      "drop_catalog_indexes": [],
+      "evidence_urls": [
+        "https://1kuji.com/products/naruto_wcf",
+        "https://1kuji.com/products/naruto_wcf2"
+      ],
+      "manual_note": "",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "work_order_id": "ichiban-reissue-dedupe-004",
+      "campaign_work_order_id": null,
+      "priority": 4,
+      "normalized_name": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア - B賞 ワールドコレクタブルフィギュア メタリックカラーver.",
+      "catalog_indexes": [
+        14303,
+        14306
+      ],
+      "source_urls": [
+        "https://1kuji.com/products/naruto_wcf",
+        "https://1kuji.com/products/naruto_wcf2"
+      ],
+      "campaign_slug_families": [
+        "naruto_wcf"
+      ],
+      "campaign_url_comparison": {
+        "source_url_count": 2,
+        "campaign_slugs": [
+          "naruto_wcf",
+          "naruto_wcf2"
+        ],
+        "campaign_slug_families": [
+          "naruto_wcf"
+        ],
+        "campaign_slug_family_count": 1,
+        "numeric_suffixes": [
+          "2"
+        ],
+        "has_numbered_campaign_suffixes": true,
+        "likely_same_campaign_family_reissue": true,
+        "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+      },
+      "reissue_signal_reasons": [
+        "campaign_url_slug_number_suffix_family"
+      ],
+      "manual_review_checklist": [
+        "Open every source_url and compare official campaign title/release period/prize lineup.",
+        "Verify the full product identity: release/campaign name, prize rank, official prize name, and variant name when one rank has multiple kinds.",
+        "If the same prize name appears in different campaigns or release waves, mark as reissue_or_campaign_variant and keep rows separate.",
+        "If rows are the exact same sellable prize from the same campaign/source, choose one keep_catalog_index and list drop_catalog_indexes.",
+        "Confirm Last One or Double Chance prize rows keep official price 0 when applicable.",
+        "Do not import any dedupe mutation until manual_confirmed is true with evidence_urls."
+      ],
+      "sample_rows": [
+        {
+          "catalog_index": 14303,
+          "name_ko": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア - B賞 ワールドコレクタブルフィギュア メタリックカラーver.",
+          "name_ja": "B賞 ワールドコレクタブルフィギュア メタリックカラーver.",
+          "series_name": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア",
+          "sub_series": "B賞",
+          "official_price_jpy": 1000,
+          "source_url": "https://1kuji.com/products/naruto_wcf2"
+        },
+        {
+          "catalog_index": 14306,
+          "name_ko": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア - B賞 ワールドコレクタブルフィギュア メタリックカラーver.",
+          "name_ja": "B賞 ワールドコレクタブルフィギュア メタリックカラーver.",
+          "series_name": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア",
+          "sub_series": "B賞",
+          "official_price_jpy": 1000,
+          "source_url": "https://1kuji.com/products/naruto_wcf"
+        }
+      ],
+      "decision_template": {
+        "work_order_id": "ichiban-reissue-dedupe-004",
+        "manual_confirmed": false,
+        "decision": "",
+        "decision_options": [
+          "reissue_or_campaign_variant_keep_separate",
+          "same_sellable_product_keep_drop_confirmed",
+          "needs_more_source_evidence"
+        ],
+        "keep_catalog_index": null,
+        "drop_catalog_indexes": [],
+        "evidence_urls": [
+          "https://1kuji.com/products/naruto_wcf",
+          "https://1kuji.com/products/naruto_wcf2"
+        ],
+        "manual_note": "",
+        "protected_if_reissue": true
+      },
+      "manual_confirmed": false,
+      "decision": "",
+      "keep_catalog_index": null,
+      "drop_catalog_indexes": [],
+      "evidence_urls": [
+        "https://1kuji.com/products/naruto_wcf",
+        "https://1kuji.com/products/naruto_wcf2"
+      ],
+      "manual_note": "",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "work_order_id": "ichiban-reissue-dedupe-005",
+      "campaign_work_order_id": null,
+      "priority": 5,
+      "normalized_name": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア - C賞 ワールドコレクタブルフィギュア",
+      "catalog_indexes": [
+        14304,
+        14307
+      ],
+      "source_urls": [
+        "https://1kuji.com/products/naruto_wcf",
+        "https://1kuji.com/products/naruto_wcf2"
+      ],
+      "campaign_slug_families": [
+        "naruto_wcf"
+      ],
+      "campaign_url_comparison": {
+        "source_url_count": 2,
+        "campaign_slugs": [
+          "naruto_wcf",
+          "naruto_wcf2"
+        ],
+        "campaign_slug_families": [
+          "naruto_wcf"
+        ],
+        "campaign_slug_family_count": 1,
+        "numeric_suffixes": [
+          "2"
+        ],
+        "has_numbered_campaign_suffixes": true,
+        "likely_same_campaign_family_reissue": true,
+        "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+      },
+      "reissue_signal_reasons": [
+        "campaign_url_slug_number_suffix_family"
+      ],
+      "manual_review_checklist": [
+        "Open every source_url and compare official campaign title/release period/prize lineup.",
+        "Verify the full product identity: release/campaign name, prize rank, official prize name, and variant name when one rank has multiple kinds.",
+        "If the same prize name appears in different campaigns or release waves, mark as reissue_or_campaign_variant and keep rows separate.",
+        "If rows are the exact same sellable prize from the same campaign/source, choose one keep_catalog_index and list drop_catalog_indexes.",
+        "Confirm Last One or Double Chance prize rows keep official price 0 when applicable.",
+        "Do not import any dedupe mutation until manual_confirmed is true with evidence_urls."
+      ],
+      "sample_rows": [
+        {
+          "catalog_index": 14304,
+          "name_ko": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア - C賞 ワールドコレクタブルフィギュア",
+          "name_ja": "C賞 ワールドコレクタブルフィギュア",
+          "series_name": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア",
+          "sub_series": "C賞",
+          "official_price_jpy": 1000,
+          "source_url": "https://1kuji.com/products/naruto_wcf2"
+        },
+        {
+          "catalog_index": 14307,
+          "name_ko": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア - C賞 ワールドコレクタブルフィギュア",
+          "name_ja": "C賞 ワールドコレクタブルフィギュア",
+          "series_name": "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア",
+          "sub_series": "C賞",
+          "official_price_jpy": 1000,
+          "source_url": "https://1kuji.com/products/naruto_wcf"
+        }
+      ],
+      "decision_template": {
+        "work_order_id": "ichiban-reissue-dedupe-005",
+        "manual_confirmed": false,
+        "decision": "",
+        "decision_options": [
+          "reissue_or_campaign_variant_keep_separate",
+          "same_sellable_product_keep_drop_confirmed",
+          "needs_more_source_evidence"
+        ],
+        "keep_catalog_index": null,
+        "drop_catalog_indexes": [],
+        "evidence_urls": [
+          "https://1kuji.com/products/naruto_wcf",
+          "https://1kuji.com/products/naruto_wcf2"
+        ],
+        "manual_note": "",
+        "protected_if_reissue": true
+      },
+      "manual_confirmed": false,
+      "decision": "",
+      "keep_catalog_index": null,
+      "drop_catalog_indexes": [],
+      "evidence_urls": [
+        "https://1kuji.com/products/naruto_wcf",
+        "https://1kuji.com/products/naruto_wcf2"
+      ],
+      "manual_note": "",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "work_order_id": "ichiban-reissue-dedupe-006",
+      "campaign_work_order_id": null,
+      "priority": 6,
+      "normalized_name": "一番くじ ワンピース ～マリンフォード最終決戦編～ - A賞 シャンクスフィギュア",
+      "catalog_indexes": [
+        16103,
+        16141
+      ],
+      "source_urls": [
+        "https://1kuji.com/products/onep6",
+        "https://1kuji.com/products/onep8"
+      ],
+      "campaign_slug_families": [
+        "onep"
+      ],
+      "campaign_url_comparison": {
+        "source_url_count": 2,
+        "campaign_slugs": [
+          "onep6",
+          "onep8"
+        ],
+        "campaign_slug_families": [
+          "onep"
+        ],
+        "campaign_slug_family_count": 1,
+        "numeric_suffixes": [
+          "6",
+          "8"
+        ],
+        "has_numbered_campaign_suffixes": true,
+        "likely_same_campaign_family_reissue": true,
+        "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+      },
+      "reissue_signal_reasons": [
+        "campaign_url_slug_number_suffix_family"
+      ],
+      "manual_review_checklist": [
+        "Open every source_url and compare official campaign title/release period/prize lineup.",
+        "Verify the full product identity: release/campaign name, prize rank, official prize name, and variant name when one rank has multiple kinds.",
+        "If the same prize name appears in different campaigns or release waves, mark as reissue_or_campaign_variant and keep rows separate.",
+        "If rows are the exact same sellable prize from the same campaign/source, choose one keep_catalog_index and list drop_catalog_indexes.",
+        "Confirm Last One or Double Chance prize rows keep official price 0 when applicable.",
+        "Do not import any dedupe mutation until manual_confirmed is true with evidence_urls."
+      ],
+      "sample_rows": [
+        {
+          "catalog_index": 16103,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - A賞 シャンクスフィギュア",
+          "name_ja": "A賞 シャンクスフィギュア",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "sub_series": "A賞",
+          "official_price_jpy": null,
+          "source_url": "https://1kuji.com/products/onep8"
+        },
+        {
+          "catalog_index": 16141,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - A賞 シャンクスフィギュア",
+          "name_ja": "A賞 シャンクスフィギュア",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "sub_series": "A賞",
+          "official_price_jpy": null,
+          "source_url": "https://1kuji.com/products/onep6"
+        }
+      ],
+      "decision_template": {
+        "work_order_id": "ichiban-reissue-dedupe-006",
+        "manual_confirmed": false,
+        "decision": "",
+        "decision_options": [
+          "reissue_or_campaign_variant_keep_separate",
+          "same_sellable_product_keep_drop_confirmed",
+          "needs_more_source_evidence"
+        ],
+        "keep_catalog_index": null,
+        "drop_catalog_indexes": [],
+        "evidence_urls": [
+          "https://1kuji.com/products/onep6",
+          "https://1kuji.com/products/onep8"
+        ],
+        "manual_note": "",
+        "protected_if_reissue": true
+      },
+      "manual_confirmed": false,
+      "decision": "",
+      "keep_catalog_index": null,
+      "drop_catalog_indexes": [],
+      "evidence_urls": [
+        "https://1kuji.com/products/onep6",
+        "https://1kuji.com/products/onep8"
+      ],
+      "manual_note": "",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "work_order_id": "ichiban-reissue-dedupe-007",
+      "campaign_work_order_id": null,
+      "priority": 7,
+      "normalized_name": "一番くじ ワンピース ～マリンフォード最終決戦編～ - B賞 ミホークフィギュア",
+      "catalog_indexes": [
+        16104,
+        16142
+      ],
+      "source_urls": [
+        "https://1kuji.com/products/onep6",
+        "https://1kuji.com/products/onep8"
+      ],
+      "campaign_slug_families": [
+        "onep"
+      ],
+      "campaign_url_comparison": {
+        "source_url_count": 2,
+        "campaign_slugs": [
+          "onep6",
+          "onep8"
+        ],
+        "campaign_slug_families": [
+          "onep"
+        ],
+        "campaign_slug_family_count": 1,
+        "numeric_suffixes": [
+          "6",
+          "8"
+        ],
+        "has_numbered_campaign_suffixes": true,
+        "likely_same_campaign_family_reissue": true,
+        "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+      },
+      "reissue_signal_reasons": [
+        "campaign_url_slug_number_suffix_family"
+      ],
+      "manual_review_checklist": [
+        "Open every source_url and compare official campaign title/release period/prize lineup.",
+        "Verify the full product identity: release/campaign name, prize rank, official prize name, and variant name when one rank has multiple kinds.",
+        "If the same prize name appears in different campaigns or release waves, mark as reissue_or_campaign_variant and keep rows separate.",
+        "If rows are the exact same sellable prize from the same campaign/source, choose one keep_catalog_index and list drop_catalog_indexes.",
+        "Confirm Last One or Double Chance prize rows keep official price 0 when applicable.",
+        "Do not import any dedupe mutation until manual_confirmed is true with evidence_urls."
+      ],
+      "sample_rows": [
+        {
+          "catalog_index": 16104,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - B賞 ミホークフィギュア",
+          "name_ja": "B賞 ミホークフィギュア",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "sub_series": "B賞",
+          "official_price_jpy": null,
+          "source_url": "https://1kuji.com/products/onep8"
+        },
+        {
+          "catalog_index": 16142,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - B賞 ミホークフィギュア",
+          "name_ja": "B賞 ミホークフィギュア",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "sub_series": "B賞",
+          "official_price_jpy": null,
+          "source_url": "https://1kuji.com/products/onep6"
+        }
+      ],
+      "decision_template": {
+        "work_order_id": "ichiban-reissue-dedupe-007",
+        "manual_confirmed": false,
+        "decision": "",
+        "decision_options": [
+          "reissue_or_campaign_variant_keep_separate",
+          "same_sellable_product_keep_drop_confirmed",
+          "needs_more_source_evidence"
+        ],
+        "keep_catalog_index": null,
+        "drop_catalog_indexes": [],
+        "evidence_urls": [
+          "https://1kuji.com/products/onep6",
+          "https://1kuji.com/products/onep8"
+        ],
+        "manual_note": "",
+        "protected_if_reissue": true
+      },
+      "manual_confirmed": false,
+      "decision": "",
+      "keep_catalog_index": null,
+      "drop_catalog_indexes": [],
+      "evidence_urls": [
+        "https://1kuji.com/products/onep6",
+        "https://1kuji.com/products/onep8"
+      ],
+      "manual_note": "",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "work_order_id": "ichiban-reissue-dedupe-008",
+      "campaign_work_order_id": null,
+      "priority": 8,
+      "normalized_name": "一番くじ ワンピース ～マリンフォード最終決戦編～ - C賞 ルフィフィギュア",
+      "catalog_indexes": [
+        16105,
+        16143
+      ],
+      "source_urls": [
+        "https://1kuji.com/products/onep6",
+        "https://1kuji.com/products/onep8"
+      ],
+      "campaign_slug_families": [
+        "onep"
+      ],
+      "campaign_url_comparison": {
+        "source_url_count": 2,
+        "campaign_slugs": [
+          "onep6",
+          "onep8"
+        ],
+        "campaign_slug_families": [
+          "onep"
+        ],
+        "campaign_slug_family_count": 1,
+        "numeric_suffixes": [
+          "6",
+          "8"
+        ],
+        "has_numbered_campaign_suffixes": true,
+        "likely_same_campaign_family_reissue": true,
+        "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+      },
+      "reissue_signal_reasons": [
+        "campaign_url_slug_number_suffix_family"
+      ],
+      "manual_review_checklist": [
+        "Open every source_url and compare official campaign title/release period/prize lineup.",
+        "Verify the full product identity: release/campaign name, prize rank, official prize name, and variant name when one rank has multiple kinds.",
+        "If the same prize name appears in different campaigns or release waves, mark as reissue_or_campaign_variant and keep rows separate.",
+        "If rows are the exact same sellable prize from the same campaign/source, choose one keep_catalog_index and list drop_catalog_indexes.",
+        "Confirm Last One or Double Chance prize rows keep official price 0 when applicable.",
+        "Do not import any dedupe mutation until manual_confirmed is true with evidence_urls."
+      ],
+      "sample_rows": [
+        {
+          "catalog_index": 16105,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - C賞 ルフィフィギュア",
+          "name_ja": "C賞 ルフィフィギュア",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "sub_series": "C賞",
+          "official_price_jpy": null,
+          "source_url": "https://1kuji.com/products/onep8"
+        },
+        {
+          "catalog_index": 16143,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - C賞 ルフィフィギュア",
+          "name_ja": "C賞 ルフィフィギュア",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "sub_series": "C賞",
+          "official_price_jpy": null,
+          "source_url": "https://1kuji.com/products/onep6"
+        }
+      ],
+      "decision_template": {
+        "work_order_id": "ichiban-reissue-dedupe-008",
+        "manual_confirmed": false,
+        "decision": "",
+        "decision_options": [
+          "reissue_or_campaign_variant_keep_separate",
+          "same_sellable_product_keep_drop_confirmed",
+          "needs_more_source_evidence"
+        ],
+        "keep_catalog_index": null,
+        "drop_catalog_indexes": [],
+        "evidence_urls": [
+          "https://1kuji.com/products/onep6",
+          "https://1kuji.com/products/onep8"
+        ],
+        "manual_note": "",
+        "protected_if_reissue": true
+      },
+      "manual_confirmed": false,
+      "decision": "",
+      "keep_catalog_index": null,
+      "drop_catalog_indexes": [],
+      "evidence_urls": [
+        "https://1kuji.com/products/onep6",
+        "https://1kuji.com/products/onep8"
+      ],
+      "manual_note": "",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "work_order_id": "ichiban-reissue-dedupe-009",
+      "campaign_work_order_id": null,
+      "priority": 9,
+      "normalized_name": "一番くじ ワンピース ～マリンフォード最終決戦編～ - D賞 スポーツタオル",
+      "catalog_indexes": [
+        16106,
+        16144
+      ],
+      "source_urls": [
+        "https://1kuji.com/products/onep6",
+        "https://1kuji.com/products/onep8"
+      ],
+      "campaign_slug_families": [
+        "onep"
+      ],
+      "campaign_url_comparison": {
+        "source_url_count": 2,
+        "campaign_slugs": [
+          "onep6",
+          "onep8"
+        ],
+        "campaign_slug_families": [
+          "onep"
+        ],
+        "campaign_slug_family_count": 1,
+        "numeric_suffixes": [
+          "6",
+          "8"
+        ],
+        "has_numbered_campaign_suffixes": true,
+        "likely_same_campaign_family_reissue": true,
+        "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+      },
+      "reissue_signal_reasons": [
+        "campaign_url_slug_number_suffix_family"
+      ],
+      "manual_review_checklist": [
+        "Open every source_url and compare official campaign title/release period/prize lineup.",
+        "Verify the full product identity: release/campaign name, prize rank, official prize name, and variant name when one rank has multiple kinds.",
+        "If the same prize name appears in different campaigns or release waves, mark as reissue_or_campaign_variant and keep rows separate.",
+        "If rows are the exact same sellable prize from the same campaign/source, choose one keep_catalog_index and list drop_catalog_indexes.",
+        "Confirm Last One or Double Chance prize rows keep official price 0 when applicable.",
+        "Do not import any dedupe mutation until manual_confirmed is true with evidence_urls."
+      ],
+      "sample_rows": [
+        {
+          "catalog_index": 16106,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - D賞 スポーツタオル",
+          "name_ja": "D賞 スポーツタオル",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "sub_series": "D賞",
+          "official_price_jpy": null,
+          "source_url": "https://1kuji.com/products/onep8"
+        },
+        {
+          "catalog_index": 16144,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - D賞 スポーツタオル",
+          "name_ja": "D賞 スポーツタオル",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "sub_series": "D賞",
+          "official_price_jpy": null,
+          "source_url": "https://1kuji.com/products/onep6"
+        }
+      ],
+      "decision_template": {
+        "work_order_id": "ichiban-reissue-dedupe-009",
+        "manual_confirmed": false,
+        "decision": "",
+        "decision_options": [
+          "reissue_or_campaign_variant_keep_separate",
+          "same_sellable_product_keep_drop_confirmed",
+          "needs_more_source_evidence"
+        ],
+        "keep_catalog_index": null,
+        "drop_catalog_indexes": [],
+        "evidence_urls": [
+          "https://1kuji.com/products/onep6",
+          "https://1kuji.com/products/onep8"
+        ],
+        "manual_note": "",
+        "protected_if_reissue": true
+      },
+      "manual_confirmed": false,
+      "decision": "",
+      "keep_catalog_index": null,
+      "drop_catalog_indexes": [],
+      "evidence_urls": [
+        "https://1kuji.com/products/onep6",
+        "https://1kuji.com/products/onep8"
+      ],
+      "manual_note": "",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "work_order_id": "ichiban-reissue-dedupe-010",
+      "campaign_work_order_id": null,
+      "priority": 10,
+      "normalized_name": "一番くじ ワンピース ～マリンフォード最終決戦編～ - E賞 カードスタンドフィギュア",
+      "catalog_indexes": [
+        16107,
+        16145
+      ],
+      "source_urls": [
+        "https://1kuji.com/products/onep6",
+        "https://1kuji.com/products/onep8"
+      ],
+      "campaign_slug_families": [
+        "onep"
+      ],
+      "campaign_url_comparison": {
+        "source_url_count": 2,
+        "campaign_slugs": [
+          "onep6",
+          "onep8"
+        ],
+        "campaign_slug_families": [
+          "onep"
+        ],
+        "campaign_slug_family_count": 1,
+        "numeric_suffixes": [
+          "6",
+          "8"
+        ],
+        "has_numbered_campaign_suffixes": true,
+        "likely_same_campaign_family_reissue": true,
+        "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+      },
+      "reissue_signal_reasons": [
+        "campaign_url_slug_number_suffix_family"
+      ],
+      "manual_review_checklist": [
+        "Open every source_url and compare official campaign title/release period/prize lineup.",
+        "Verify the full product identity: release/campaign name, prize rank, official prize name, and variant name when one rank has multiple kinds.",
+        "If the same prize name appears in different campaigns or release waves, mark as reissue_or_campaign_variant and keep rows separate.",
+        "If rows are the exact same sellable prize from the same campaign/source, choose one keep_catalog_index and list drop_catalog_indexes.",
+        "Confirm Last One or Double Chance prize rows keep official price 0 when applicable.",
+        "Do not import any dedupe mutation until manual_confirmed is true with evidence_urls."
+      ],
+      "sample_rows": [
+        {
+          "catalog_index": 16107,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - E賞 カードスタンドフィギュア",
+          "name_ja": "E賞 カードスタンドフィギュア",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "sub_series": "E賞",
+          "official_price_jpy": null,
+          "source_url": "https://1kuji.com/products/onep8"
+        },
+        {
+          "catalog_index": 16145,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - E賞 カードスタンドフィギュア",
+          "name_ja": "E賞 カードスタンドフィギュア",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "sub_series": "E賞",
+          "official_price_jpy": null,
+          "source_url": "https://1kuji.com/products/onep6"
+        }
+      ],
+      "decision_template": {
+        "work_order_id": "ichiban-reissue-dedupe-010",
+        "manual_confirmed": false,
+        "decision": "",
+        "decision_options": [
+          "reissue_or_campaign_variant_keep_separate",
+          "same_sellable_product_keep_drop_confirmed",
+          "needs_more_source_evidence"
+        ],
+        "keep_catalog_index": null,
+        "drop_catalog_indexes": [],
+        "evidence_urls": [
+          "https://1kuji.com/products/onep6",
+          "https://1kuji.com/products/onep8"
+        ],
+        "manual_note": "",
+        "protected_if_reissue": true
+      },
+      "manual_confirmed": false,
+      "decision": "",
+      "keep_catalog_index": null,
+      "drop_catalog_indexes": [],
+      "evidence_urls": [
+        "https://1kuji.com/products/onep6",
+        "https://1kuji.com/products/onep8"
+      ],
+      "manual_note": "",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "work_order_id": "ichiban-reissue-dedupe-011",
+      "campaign_work_order_id": null,
+      "priority": 11,
+      "normalized_name": "一番くじ ワンピース ～マリンフォード最終決戦編～ - F賞 湯のみ",
+      "catalog_indexes": [
+        16108,
+        16146
+      ],
+      "source_urls": [
+        "https://1kuji.com/products/onep6",
+        "https://1kuji.com/products/onep8"
+      ],
+      "campaign_slug_families": [
+        "onep"
+      ],
+      "campaign_url_comparison": {
+        "source_url_count": 2,
+        "campaign_slugs": [
+          "onep6",
+          "onep8"
+        ],
+        "campaign_slug_families": [
+          "onep"
+        ],
+        "campaign_slug_family_count": 1,
+        "numeric_suffixes": [
+          "6",
+          "8"
+        ],
+        "has_numbered_campaign_suffixes": true,
+        "likely_same_campaign_family_reissue": true,
+        "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+      },
+      "reissue_signal_reasons": [
+        "campaign_url_slug_number_suffix_family"
+      ],
+      "manual_review_checklist": [
+        "Open every source_url and compare official campaign title/release period/prize lineup.",
+        "Verify the full product identity: release/campaign name, prize rank, official prize name, and variant name when one rank has multiple kinds.",
+        "If the same prize name appears in different campaigns or release waves, mark as reissue_or_campaign_variant and keep rows separate.",
+        "If rows are the exact same sellable prize from the same campaign/source, choose one keep_catalog_index and list drop_catalog_indexes.",
+        "Confirm Last One or Double Chance prize rows keep official price 0 when applicable.",
+        "Do not import any dedupe mutation until manual_confirmed is true with evidence_urls."
+      ],
+      "sample_rows": [
+        {
+          "catalog_index": 16108,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - F賞 湯のみ",
+          "name_ja": "F賞 湯のみ",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "sub_series": "F賞",
+          "official_price_jpy": null,
+          "source_url": "https://1kuji.com/products/onep8"
+        },
+        {
+          "catalog_index": 16146,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - F賞 湯のみ",
+          "name_ja": "F賞 湯のみ",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "sub_series": "F賞",
+          "official_price_jpy": null,
+          "source_url": "https://1kuji.com/products/onep6"
+        }
+      ],
+      "decision_template": {
+        "work_order_id": "ichiban-reissue-dedupe-011",
+        "manual_confirmed": false,
+        "decision": "",
+        "decision_options": [
+          "reissue_or_campaign_variant_keep_separate",
+          "same_sellable_product_keep_drop_confirmed",
+          "needs_more_source_evidence"
+        ],
+        "keep_catalog_index": null,
+        "drop_catalog_indexes": [],
+        "evidence_urls": [
+          "https://1kuji.com/products/onep6",
+          "https://1kuji.com/products/onep8"
+        ],
+        "manual_note": "",
+        "protected_if_reissue": true
+      },
+      "manual_confirmed": false,
+      "decision": "",
+      "keep_catalog_index": null,
+      "drop_catalog_indexes": [],
+      "evidence_urls": [
+        "https://1kuji.com/products/onep6",
+        "https://1kuji.com/products/onep8"
+      ],
+      "manual_note": "",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "work_order_id": "ichiban-reissue-dedupe-012",
+      "campaign_work_order_id": null,
+      "priority": 12,
+      "normalized_name": "一番くじ ワンピース ～マリンフォード最終決戦編～ - G賞 見開きメモ帳",
+      "catalog_indexes": [
+        16109,
+        16147
+      ],
+      "source_urls": [
+        "https://1kuji.com/products/onep6",
+        "https://1kuji.com/products/onep8"
+      ],
+      "campaign_slug_families": [
+        "onep"
+      ],
+      "campaign_url_comparison": {
+        "source_url_count": 2,
+        "campaign_slugs": [
+          "onep6",
+          "onep8"
+        ],
+        "campaign_slug_families": [
+          "onep"
+        ],
+        "campaign_slug_family_count": 1,
+        "numeric_suffixes": [
+          "6",
+          "8"
+        ],
+        "has_numbered_campaign_suffixes": true,
+        "likely_same_campaign_family_reissue": true,
+        "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+      },
+      "reissue_signal_reasons": [
+        "campaign_url_slug_number_suffix_family"
+      ],
+      "manual_review_checklist": [
+        "Open every source_url and compare official campaign title/release period/prize lineup.",
+        "Verify the full product identity: release/campaign name, prize rank, official prize name, and variant name when one rank has multiple kinds.",
+        "If the same prize name appears in different campaigns or release waves, mark as reissue_or_campaign_variant and keep rows separate.",
+        "If rows are the exact same sellable prize from the same campaign/source, choose one keep_catalog_index and list drop_catalog_indexes.",
+        "Confirm Last One or Double Chance prize rows keep official price 0 when applicable.",
+        "Do not import any dedupe mutation until manual_confirmed is true with evidence_urls."
+      ],
+      "sample_rows": [
+        {
+          "catalog_index": 16109,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - G賞 見開きメモ帳",
+          "name_ja": "G賞 見開きメモ帳",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "sub_series": "G賞",
+          "official_price_jpy": null,
+          "source_url": "https://1kuji.com/products/onep8"
+        },
+        {
+          "catalog_index": 16147,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - G賞 見開きメモ帳",
+          "name_ja": "G賞 見開きメモ帳",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "sub_series": "G賞",
+          "official_price_jpy": null,
+          "source_url": "https://1kuji.com/products/onep6"
+        }
+      ],
+      "decision_template": {
+        "work_order_id": "ichiban-reissue-dedupe-012",
+        "manual_confirmed": false,
+        "decision": "",
+        "decision_options": [
+          "reissue_or_campaign_variant_keep_separate",
+          "same_sellable_product_keep_drop_confirmed",
+          "needs_more_source_evidence"
+        ],
+        "keep_catalog_index": null,
+        "drop_catalog_indexes": [],
+        "evidence_urls": [
+          "https://1kuji.com/products/onep6",
+          "https://1kuji.com/products/onep8"
+        ],
+        "manual_note": "",
+        "protected_if_reissue": true
+      },
+      "manual_confirmed": false,
+      "decision": "",
+      "keep_catalog_index": null,
+      "drop_catalog_indexes": [],
+      "evidence_urls": [
+        "https://1kuji.com/products/onep6",
+        "https://1kuji.com/products/onep8"
+      ],
+      "manual_note": "",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "work_order_id": "ichiban-reissue-dedupe-013",
+      "campaign_work_order_id": null,
+      "priority": 13,
+      "normalized_name": "一番くじ ワンピース ～マリンフォード最終決戦編～ - H賞 デザインストラップ",
+      "catalog_indexes": [
+        16110,
+        16148
+      ],
+      "source_urls": [
+        "https://1kuji.com/products/onep6",
+        "https://1kuji.com/products/onep8"
+      ],
+      "campaign_slug_families": [
+        "onep"
+      ],
+      "campaign_url_comparison": {
+        "source_url_count": 2,
+        "campaign_slugs": [
+          "onep6",
+          "onep8"
+        ],
+        "campaign_slug_families": [
+          "onep"
+        ],
+        "campaign_slug_family_count": 1,
+        "numeric_suffixes": [
+          "6",
+          "8"
+        ],
+        "has_numbered_campaign_suffixes": true,
+        "likely_same_campaign_family_reissue": true,
+        "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+      },
+      "reissue_signal_reasons": [
+        "campaign_url_slug_number_suffix_family"
+      ],
+      "manual_review_checklist": [
+        "Open every source_url and compare official campaign title/release period/prize lineup.",
+        "Verify the full product identity: release/campaign name, prize rank, official prize name, and variant name when one rank has multiple kinds.",
+        "If the same prize name appears in different campaigns or release waves, mark as reissue_or_campaign_variant and keep rows separate.",
+        "If rows are the exact same sellable prize from the same campaign/source, choose one keep_catalog_index and list drop_catalog_indexes.",
+        "Confirm Last One or Double Chance prize rows keep official price 0 when applicable.",
+        "Do not import any dedupe mutation until manual_confirmed is true with evidence_urls."
+      ],
+      "sample_rows": [
+        {
+          "catalog_index": 16110,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - H賞 デザインストラップ",
+          "name_ja": "H賞 デザインストラップ",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "sub_series": "H賞",
+          "official_price_jpy": null,
+          "source_url": "https://1kuji.com/products/onep8"
+        },
+        {
+          "catalog_index": 16148,
+          "name_ko": "一番くじ ワンピース ～マリンフォード最終決戦編～ - H賞 デザインストラップ",
+          "name_ja": "H賞 デザインストラップ",
+          "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
+          "sub_series": "H賞",
+          "official_price_jpy": null,
+          "source_url": "https://1kuji.com/products/onep6"
+        }
+      ],
+      "decision_template": {
+        "work_order_id": "ichiban-reissue-dedupe-013",
+        "manual_confirmed": false,
+        "decision": "",
+        "decision_options": [
+          "reissue_or_campaign_variant_keep_separate",
+          "same_sellable_product_keep_drop_confirmed",
+          "needs_more_source_evidence"
+        ],
+        "keep_catalog_index": null,
+        "drop_catalog_indexes": [],
+        "evidence_urls": [
+          "https://1kuji.com/products/onep6",
+          "https://1kuji.com/products/onep8"
+        ],
+        "manual_note": "",
+        "protected_if_reissue": true
+      },
+      "manual_confirmed": false,
+      "decision": "",
+      "keep_catalog_index": null,
+      "drop_catalog_indexes": [],
+      "evidence_urls": [
+        "https://1kuji.com/products/onep6",
+        "https://1kuji.com/products/onep8"
+      ],
+      "manual_note": "",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "work_order_id": "ichiban-reissue-dedupe-014",
+      "campaign_work_order_id": null,
+      "priority": 14,
+      "normalized_name": "一番くじ 鬼滅の刃 - A賞 竈門炭治郎 フィギュア",
+      "catalog_indexes": [
+        13770,
+        13777
+      ],
+      "source_urls": [
+        "https://1kuji.com/products/kimetsu",
+        "https://1kuji.com/products/kimetsu2"
+      ],
+      "campaign_slug_families": [
+        "kimetsu"
+      ],
+      "campaign_url_comparison": {
+        "source_url_count": 2,
+        "campaign_slugs": [
+          "kimetsu",
+          "kimetsu2"
+        ],
+        "campaign_slug_families": [
+          "kimetsu"
+        ],
+        "campaign_slug_family_count": 1,
+        "numeric_suffixes": [
+          "2"
+        ],
+        "has_numbered_campaign_suffixes": true,
+        "likely_same_campaign_family_reissue": true,
+        "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+      },
+      "reissue_signal_reasons": [
+        "campaign_url_slug_number_suffix_family"
+      ],
+      "manual_review_checklist": [
+        "Open every source_url and compare official campaign title/release period/prize lineup.",
+        "Verify the full product identity: release/campaign name, prize rank, official prize name, and variant name when one rank has multiple kinds.",
+        "If the same prize name appears in different campaigns or release waves, mark as reissue_or_campaign_variant and keep rows separate.",
+        "If rows are the exact same sellable prize from the same campaign/source, choose one keep_catalog_index and list drop_catalog_indexes.",
+        "Confirm Last One or Double Chance prize rows keep official price 0 when applicable.",
+        "Do not import any dedupe mutation until manual_confirmed is true with evidence_urls."
+      ],
+      "sample_rows": [
+        {
+          "catalog_index": 13770,
+          "name_ko": "一番くじ 鬼滅の刃 - A賞 竈門炭治郎 フィギュア",
+          "name_ja": "A賞 竈門炭治郎 フィギュア",
+          "series_name": "一番くじ 鬼滅の刃",
+          "sub_series": "A賞",
+          "official_price_jpy": 694,
+          "source_url": "https://1kuji.com/products/kimetsu2"
+        },
+        {
+          "catalog_index": 13777,
+          "name_ko": "一番くじ 鬼滅の刃 - A賞 竈門炭治郎 フィギュア",
+          "name_ja": "A賞 竈門炭治郎 フィギュア",
+          "series_name": "一番くじ 鬼滅の刃",
+          "sub_series": "A賞",
+          "official_price_jpy": 694,
+          "source_url": "https://1kuji.com/products/kimetsu"
+        }
+      ],
+      "decision_template": {
+        "work_order_id": "ichiban-reissue-dedupe-014",
+        "manual_confirmed": false,
+        "decision": "",
+        "decision_options": [
+          "reissue_or_campaign_variant_keep_separate",
+          "same_sellable_product_keep_drop_confirmed",
+          "needs_more_source_evidence"
+        ],
+        "keep_catalog_index": null,
+        "drop_catalog_indexes": [],
+        "evidence_urls": [
+          "https://1kuji.com/products/kimetsu",
+          "https://1kuji.com/products/kimetsu2"
+        ],
+        "manual_note": "",
+        "protected_if_reissue": true
+      },
+      "manual_confirmed": false,
+      "decision": "",
+      "keep_catalog_index": null,
+      "drop_catalog_indexes": [],
+      "evidence_urls": [
+        "https://1kuji.com/products/kimetsu",
+        "https://1kuji.com/products/kimetsu2"
+      ],
+      "manual_note": "",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "work_order_id": "ichiban-reissue-dedupe-015",
+      "campaign_work_order_id": null,
+      "priority": 15,
+      "normalized_name": "一番くじ 鬼滅の刃 - B賞 竈門禰豆子 フィギュア",
+      "catalog_indexes": [
+        13771,
+        13778
+      ],
+      "source_urls": [
+        "https://1kuji.com/products/kimetsu",
+        "https://1kuji.com/products/kimetsu2"
+      ],
+      "campaign_slug_families": [
+        "kimetsu"
+      ],
+      "campaign_url_comparison": {
+        "source_url_count": 2,
+        "campaign_slugs": [
+          "kimetsu",
+          "kimetsu2"
+        ],
+        "campaign_slug_families": [
+          "kimetsu"
+        ],
+        "campaign_slug_family_count": 1,
+        "numeric_suffixes": [
+          "2"
+        ],
+        "has_numbered_campaign_suffixes": true,
+        "likely_same_campaign_family_reissue": true,
+        "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+      },
+      "reissue_signal_reasons": [
+        "campaign_url_slug_number_suffix_family"
+      ],
+      "manual_review_checklist": [
+        "Open every source_url and compare official campaign title/release period/prize lineup.",
+        "Verify the full product identity: release/campaign name, prize rank, official prize name, and variant name when one rank has multiple kinds.",
+        "If the same prize name appears in different campaigns or release waves, mark as reissue_or_campaign_variant and keep rows separate.",
+        "If rows are the exact same sellable prize from the same campaign/source, choose one keep_catalog_index and list drop_catalog_indexes.",
+        "Confirm Last One or Double Chance prize rows keep official price 0 when applicable.",
+        "Do not import any dedupe mutation until manual_confirmed is true with evidence_urls."
+      ],
+      "sample_rows": [
+        {
+          "catalog_index": 13771,
+          "name_ko": "一番くじ 鬼滅の刃 - B賞 竈門禰豆子 フィギュア",
+          "name_ja": "B賞 竈門禰豆子 フィギュア",
+          "series_name": "一番くじ 鬼滅の刃",
+          "sub_series": "B賞",
+          "official_price_jpy": 694,
+          "source_url": "https://1kuji.com/products/kimetsu2"
+        },
+        {
+          "catalog_index": 13778,
+          "name_ko": "一番くじ 鬼滅の刃 - B賞 竈門禰豆子 フィギュア",
+          "name_ja": "B賞 竈門禰豆子 フィギュア",
+          "series_name": "一番くじ 鬼滅の刃",
+          "sub_series": "B賞",
+          "official_price_jpy": 694,
+          "source_url": "https://1kuji.com/products/kimetsu"
+        }
+      ],
+      "decision_template": {
+        "work_order_id": "ichiban-reissue-dedupe-015",
+        "manual_confirmed": false,
+        "decision": "",
+        "decision_options": [
+          "reissue_or_campaign_variant_keep_separate",
+          "same_sellable_product_keep_drop_confirmed",
+          "needs_more_source_evidence"
+        ],
+        "keep_catalog_index": null,
+        "drop_catalog_indexes": [],
+        "evidence_urls": [
+          "https://1kuji.com/products/kimetsu",
+          "https://1kuji.com/products/kimetsu2"
+        ],
+        "manual_note": "",
+        "protected_if_reissue": true
+      },
+      "manual_confirmed": false,
+      "decision": "",
+      "keep_catalog_index": null,
+      "drop_catalog_indexes": [],
+      "evidence_urls": [
+        "https://1kuji.com/products/kimetsu",
+        "https://1kuji.com/products/kimetsu2"
+      ],
+      "manual_note": "",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "work_order_id": "ichiban-reissue-dedupe-016",
+      "campaign_work_order_id": null,
+      "priority": 16,
+      "normalized_name": "一番くじ 鬼滅の刃 - C賞 竈門炭治郎 ちょこのっこ ぬいぐるみ",
+      "catalog_indexes": [
+        13772,
+        13779
+      ],
+      "source_urls": [
+        "https://1kuji.com/products/kimetsu",
+        "https://1kuji.com/products/kimetsu2"
+      ],
+      "campaign_slug_families": [
+        "kimetsu"
+      ],
+      "campaign_url_comparison": {
+        "source_url_count": 2,
+        "campaign_slugs": [
+          "kimetsu",
+          "kimetsu2"
+        ],
+        "campaign_slug_families": [
+          "kimetsu"
+        ],
+        "campaign_slug_family_count": 1,
+        "numeric_suffixes": [
+          "2"
+        ],
+        "has_numbered_campaign_suffixes": true,
+        "likely_same_campaign_family_reissue": true,
+        "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+      },
+      "reissue_signal_reasons": [
+        "campaign_url_slug_number_suffix_family"
+      ],
+      "manual_review_checklist": [
+        "Open every source_url and compare official campaign title/release period/prize lineup.",
+        "Verify the full product identity: release/campaign name, prize rank, official prize name, and variant name when one rank has multiple kinds.",
+        "If the same prize name appears in different campaigns or release waves, mark as reissue_or_campaign_variant and keep rows separate.",
+        "If rows are the exact same sellable prize from the same campaign/source, choose one keep_catalog_index and list drop_catalog_indexes.",
+        "Confirm Last One or Double Chance prize rows keep official price 0 when applicable.",
+        "Do not import any dedupe mutation until manual_confirmed is true with evidence_urls."
+      ],
+      "sample_rows": [
+        {
+          "catalog_index": 13772,
+          "name_ko": "一番くじ 鬼滅の刃 - C賞 竈門炭治郎 ちょこのっこ ぬいぐるみ",
+          "name_ja": "C賞 竈門炭治郎 ちょこのっこ ぬいぐるみ",
+          "series_name": "一番くじ 鬼滅の刃",
+          "sub_series": "C賞",
+          "official_price_jpy": 694,
+          "source_url": "https://1kuji.com/products/kimetsu2"
+        },
+        {
+          "catalog_index": 13779,
+          "name_ko": "一番くじ 鬼滅の刃 - C賞 竈門炭治郎 ちょこのっこ ぬいぐるみ",
+          "name_ja": "C賞 竈門炭治郎 ちょこのっこ ぬいぐるみ",
+          "series_name": "一番くじ 鬼滅の刃",
+          "sub_series": "C賞",
+          "official_price_jpy": 694,
+          "source_url": "https://1kuji.com/products/kimetsu"
+        }
+      ],
+      "decision_template": {
+        "work_order_id": "ichiban-reissue-dedupe-016",
+        "manual_confirmed": false,
+        "decision": "",
+        "decision_options": [
+          "reissue_or_campaign_variant_keep_separate",
+          "same_sellable_product_keep_drop_confirmed",
+          "needs_more_source_evidence"
+        ],
+        "keep_catalog_index": null,
+        "drop_catalog_indexes": [],
+        "evidence_urls": [
+          "https://1kuji.com/products/kimetsu",
+          "https://1kuji.com/products/kimetsu2"
+        ],
+        "manual_note": "",
+        "protected_if_reissue": true
+      },
+      "manual_confirmed": false,
+      "decision": "",
+      "keep_catalog_index": null,
+      "drop_catalog_indexes": [],
+      "evidence_urls": [
+        "https://1kuji.com/products/kimetsu",
+        "https://1kuji.com/products/kimetsu2"
+      ],
+      "manual_note": "",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "work_order_id": "ichiban-reissue-dedupe-017",
+      "campaign_work_order_id": null,
+      "priority": 17,
+      "normalized_name": "一番くじ 鬼滅の刃 - D賞 竈門禰豆子 ちょこのっこ ぬいぐるみ",
+      "catalog_indexes": [
+        13773,
+        13780
+      ],
+      "source_urls": [
+        "https://1kuji.com/products/kimetsu",
+        "https://1kuji.com/products/kimetsu2"
+      ],
+      "campaign_slug_families": [
+        "kimetsu"
+      ],
+      "campaign_url_comparison": {
+        "source_url_count": 2,
+        "campaign_slugs": [
+          "kimetsu",
+          "kimetsu2"
+        ],
+        "campaign_slug_families": [
+          "kimetsu"
+        ],
+        "campaign_slug_family_count": 1,
+        "numeric_suffixes": [
+          "2"
+        ],
+        "has_numbered_campaign_suffixes": true,
+        "likely_same_campaign_family_reissue": true,
+        "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+      },
+      "reissue_signal_reasons": [
+        "campaign_url_slug_number_suffix_family"
+      ],
+      "manual_review_checklist": [
+        "Open every source_url and compare official campaign title/release period/prize lineup.",
+        "Verify the full product identity: release/campaign name, prize rank, official prize name, and variant name when one rank has multiple kinds.",
+        "If the same prize name appears in different campaigns or release waves, mark as reissue_or_campaign_variant and keep rows separate.",
+        "If rows are the exact same sellable prize from the same campaign/source, choose one keep_catalog_index and list drop_catalog_indexes.",
+        "Confirm Last One or Double Chance prize rows keep official price 0 when applicable.",
+        "Do not import any dedupe mutation until manual_confirmed is true with evidence_urls."
+      ],
+      "sample_rows": [
+        {
+          "catalog_index": 13773,
+          "name_ko": "一番くじ 鬼滅の刃 - D賞 竈門禰豆子 ちょこのっこ ぬいぐるみ",
+          "name_ja": "D賞 竈門禰豆子 ちょこのっこ ぬいぐるみ",
+          "series_name": "一番くじ 鬼滅の刃",
+          "sub_series": "D賞",
+          "official_price_jpy": 694,
+          "source_url": "https://1kuji.com/products/kimetsu2"
+        },
+        {
+          "catalog_index": 13780,
+          "name_ko": "一番くじ 鬼滅の刃 - D賞 竈門禰豆子 ちょこのっこ ぬいぐるみ",
+          "name_ja": "D賞 竈門禰豆子 ちょこのっこ ぬいぐるみ",
+          "series_name": "一番くじ 鬼滅の刃",
+          "sub_series": "D賞",
+          "official_price_jpy": 694,
+          "source_url": "https://1kuji.com/products/kimetsu"
+        }
+      ],
+      "decision_template": {
+        "work_order_id": "ichiban-reissue-dedupe-017",
+        "manual_confirmed": false,
+        "decision": "",
+        "decision_options": [
+          "reissue_or_campaign_variant_keep_separate",
+          "same_sellable_product_keep_drop_confirmed",
+          "needs_more_source_evidence"
+        ],
+        "keep_catalog_index": null,
+        "drop_catalog_indexes": [],
+        "evidence_urls": [
+          "https://1kuji.com/products/kimetsu",
+          "https://1kuji.com/products/kimetsu2"
+        ],
+        "manual_note": "",
+        "protected_if_reissue": true
+      },
+      "manual_confirmed": false,
+      "decision": "",
+      "keep_catalog_index": null,
+      "drop_catalog_indexes": [],
+      "evidence_urls": [
+        "https://1kuji.com/products/kimetsu",
+        "https://1kuji.com/products/kimetsu2"
+      ],
+      "manual_note": "",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "work_order_id": "ichiban-reissue-dedupe-018",
+      "campaign_work_order_id": null,
+      "priority": 18,
+      "normalized_name": "一番くじ 鬼滅の刃 - E賞 ミニ色紙",
+      "catalog_indexes": [
+        13774,
+        13781
+      ],
+      "source_urls": [
+        "https://1kuji.com/products/kimetsu",
+        "https://1kuji.com/products/kimetsu2"
+      ],
+      "campaign_slug_families": [
+        "kimetsu"
+      ],
+      "campaign_url_comparison": {
+        "source_url_count": 2,
+        "campaign_slugs": [
+          "kimetsu",
+          "kimetsu2"
+        ],
+        "campaign_slug_families": [
+          "kimetsu"
+        ],
+        "campaign_slug_family_count": 1,
+        "numeric_suffixes": [
+          "2"
+        ],
+        "has_numbered_campaign_suffixes": true,
+        "likely_same_campaign_family_reissue": true,
+        "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+      },
+      "reissue_signal_reasons": [
+        "campaign_url_slug_number_suffix_family"
+      ],
+      "manual_review_checklist": [
+        "Open every source_url and compare official campaign title/release period/prize lineup.",
+        "Verify the full product identity: release/campaign name, prize rank, official prize name, and variant name when one rank has multiple kinds.",
+        "If the same prize name appears in different campaigns or release waves, mark as reissue_or_campaign_variant and keep rows separate.",
+        "If rows are the exact same sellable prize from the same campaign/source, choose one keep_catalog_index and list drop_catalog_indexes.",
+        "Confirm Last One or Double Chance prize rows keep official price 0 when applicable.",
+        "Do not import any dedupe mutation until manual_confirmed is true with evidence_urls."
+      ],
+      "sample_rows": [
+        {
+          "catalog_index": 13774,
+          "name_ko": "一番くじ 鬼滅の刃 - E賞 ミニ色紙",
+          "name_ja": "E賞 ミニ色紙",
+          "series_name": "一番くじ 鬼滅の刃",
+          "sub_series": "E賞",
+          "official_price_jpy": 694,
+          "source_url": "https://1kuji.com/products/kimetsu2"
+        },
+        {
+          "catalog_index": 13781,
+          "name_ko": "一番くじ 鬼滅の刃 - E賞 ミニ色紙",
+          "name_ja": "E賞 ミニ色紙",
+          "series_name": "一番くじ 鬼滅の刃",
+          "sub_series": "E賞",
+          "official_price_jpy": 694,
+          "source_url": "https://1kuji.com/products/kimetsu"
+        }
+      ],
+      "decision_template": {
+        "work_order_id": "ichiban-reissue-dedupe-018",
+        "manual_confirmed": false,
+        "decision": "",
+        "decision_options": [
+          "reissue_or_campaign_variant_keep_separate",
+          "same_sellable_product_keep_drop_confirmed",
+          "needs_more_source_evidence"
+        ],
+        "keep_catalog_index": null,
+        "drop_catalog_indexes": [],
+        "evidence_urls": [
+          "https://1kuji.com/products/kimetsu",
+          "https://1kuji.com/products/kimetsu2"
+        ],
+        "manual_note": "",
+        "protected_if_reissue": true
+      },
+      "manual_confirmed": false,
+      "decision": "",
+      "keep_catalog_index": null,
+      "drop_catalog_indexes": [],
+      "evidence_urls": [
+        "https://1kuji.com/products/kimetsu",
+        "https://1kuji.com/products/kimetsu2"
+      ],
+      "manual_note": "",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "work_order_id": "ichiban-reissue-dedupe-019",
+      "campaign_work_order_id": null,
+      "priority": 19,
+      "normalized_name": "一番くじ 鬼滅の刃 - F賞 ラバーストラップ",
+      "catalog_indexes": [
+        13775,
+        13782
+      ],
+      "source_urls": [
+        "https://1kuji.com/products/kimetsu",
+        "https://1kuji.com/products/kimetsu2"
+      ],
+      "campaign_slug_families": [
+        "kimetsu"
+      ],
+      "campaign_url_comparison": {
+        "source_url_count": 2,
+        "campaign_slugs": [
+          "kimetsu",
+          "kimetsu2"
+        ],
+        "campaign_slug_families": [
+          "kimetsu"
+        ],
+        "campaign_slug_family_count": 1,
+        "numeric_suffixes": [
+          "2"
+        ],
+        "has_numbered_campaign_suffixes": true,
+        "likely_same_campaign_family_reissue": true,
+        "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+      },
+      "reissue_signal_reasons": [
+        "campaign_url_slug_number_suffix_family"
+      ],
+      "manual_review_checklist": [
+        "Open every source_url and compare official campaign title/release period/prize lineup.",
+        "Verify the full product identity: release/campaign name, prize rank, official prize name, and variant name when one rank has multiple kinds.",
+        "If the same prize name appears in different campaigns or release waves, mark as reissue_or_campaign_variant and keep rows separate.",
+        "If rows are the exact same sellable prize from the same campaign/source, choose one keep_catalog_index and list drop_catalog_indexes.",
+        "Confirm Last One or Double Chance prize rows keep official price 0 when applicable.",
+        "Do not import any dedupe mutation until manual_confirmed is true with evidence_urls."
+      ],
+      "sample_rows": [
+        {
+          "catalog_index": 13775,
+          "name_ko": "一番くじ 鬼滅の刃 - F賞 ラバーストラップ",
+          "name_ja": "F賞 ラバーストラップ",
+          "series_name": "一番くじ 鬼滅の刃",
+          "sub_series": "F賞",
+          "official_price_jpy": 694,
+          "source_url": "https://1kuji.com/products/kimetsu2"
+        },
+        {
+          "catalog_index": 13782,
+          "name_ko": "一番くじ 鬼滅の刃 - F賞 ラバーストラップ",
+          "name_ja": "F賞 ラバーストラップ",
+          "series_name": "一番くじ 鬼滅の刃",
+          "sub_series": "F賞",
+          "official_price_jpy": 694,
+          "source_url": "https://1kuji.com/products/kimetsu"
+        }
+      ],
+      "decision_template": {
+        "work_order_id": "ichiban-reissue-dedupe-019",
+        "manual_confirmed": false,
+        "decision": "",
+        "decision_options": [
+          "reissue_or_campaign_variant_keep_separate",
+          "same_sellable_product_keep_drop_confirmed",
+          "needs_more_source_evidence"
+        ],
+        "keep_catalog_index": null,
+        "drop_catalog_indexes": [],
+        "evidence_urls": [
+          "https://1kuji.com/products/kimetsu",
+          "https://1kuji.com/products/kimetsu2"
+        ],
+        "manual_note": "",
+        "protected_if_reissue": true
+      },
+      "manual_confirmed": false,
+      "decision": "",
+      "keep_catalog_index": null,
+      "drop_catalog_indexes": [],
+      "evidence_urls": [
+        "https://1kuji.com/products/kimetsu",
+        "https://1kuji.com/products/kimetsu2"
+      ],
+      "manual_note": "",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    },
+    {
+      "work_order_id": "ichiban-reissue-dedupe-020",
+      "campaign_work_order_id": null,
+      "priority": 20,
+      "normalized_name": "一番くじ 鬼滅の刃 - ラストワン賞 ラストワンver.竈門炭治郎 フィギュア",
+      "catalog_indexes": [
+        13776,
+        13783
+      ],
+      "source_urls": [
+        "https://1kuji.com/products/kimetsu",
+        "https://1kuji.com/products/kimetsu2"
+      ],
+      "campaign_slug_families": [
+        "kimetsu"
+      ],
+      "campaign_url_comparison": {
+        "source_url_count": 2,
+        "campaign_slugs": [
+          "kimetsu",
+          "kimetsu2"
+        ],
+        "campaign_slug_families": [
+          "kimetsu"
+        ],
+        "campaign_slug_family_count": 1,
+        "numeric_suffixes": [
+          "2"
+        ],
+        "has_numbered_campaign_suffixes": true,
+        "likely_same_campaign_family_reissue": true,
+        "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
+      },
+      "reissue_signal_reasons": [
+        "campaign_url_slug_number_suffix_family"
+      ],
+      "manual_review_checklist": [
+        "Open every source_url and compare official campaign title/release period/prize lineup.",
+        "Verify the full product identity: release/campaign name, prize rank, official prize name, and variant name when one rank has multiple kinds.",
+        "If the same prize name appears in different campaigns or release waves, mark as reissue_or_campaign_variant and keep rows separate.",
+        "If rows are the exact same sellable prize from the same campaign/source, choose one keep_catalog_index and list drop_catalog_indexes.",
+        "Confirm Last One or Double Chance prize rows keep official price 0 when applicable.",
+        "Do not import any dedupe mutation until manual_confirmed is true with evidence_urls."
+      ],
+      "sample_rows": [
+        {
+          "catalog_index": 13776,
+          "name_ko": "一番くじ 鬼滅の刃 - ラストワン賞 ラストワンver.竈門炭治郎 フィギュア",
+          "name_ja": "ラストワン賞 ラストワンver.竈門炭治郎 フィギュア",
+          "series_name": "一番くじ 鬼滅の刃",
+          "sub_series": "ラストワン賞",
+          "official_price_jpy": 0,
+          "source_url": "https://1kuji.com/products/kimetsu2"
+        },
+        {
+          "catalog_index": 13783,
+          "name_ko": "一番くじ 鬼滅の刃 - ラストワン賞 ラストワンver.竈門炭治郎 フィギュア",
+          "name_ja": "ラストワン賞 ラストワンver.竈門炭治郎 フィギュア",
+          "series_name": "一番くじ 鬼滅の刃",
+          "sub_series": "ラストワン賞",
+          "official_price_jpy": 0,
+          "source_url": "https://1kuji.com/products/kimetsu"
+        }
+      ],
+      "decision_template": {
+        "work_order_id": "ichiban-reissue-dedupe-020",
+        "manual_confirmed": false,
+        "decision": "",
+        "decision_options": [
+          "reissue_or_campaign_variant_keep_separate",
+          "same_sellable_product_keep_drop_confirmed",
+          "needs_more_source_evidence"
+        ],
+        "keep_catalog_index": null,
+        "drop_catalog_indexes": [],
+        "evidence_urls": [
+          "https://1kuji.com/products/kimetsu",
+          "https://1kuji.com/products/kimetsu2"
+        ],
+        "manual_note": "",
+        "protected_if_reissue": true
+      },
+      "manual_confirmed": false,
+      "decision": "",
+      "keep_catalog_index": null,
+      "drop_catalog_indexes": [],
+      "evidence_urls": [
+        "https://1kuji.com/products/kimetsu",
+        "https://1kuji.com/products/kimetsu2"
+      ],
+      "manual_note": "",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false
+    }
+  ]
+}

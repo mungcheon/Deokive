@@ -78,6 +78,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/ichiban_kuji_prize_name_image_patch_candidates_public.json", updated_files)
         self.assertIn("data/ichiban_kuji_historical_roadmap_public.json", updated_files)
         self.assertIn("data/ichiban_kuji_reissue_deduplication_public.json", updated_files)
+        self.assertIn("data/ichiban_kuji_reissue_decision_template_public.json", updated_files)
         self.assertIn("data/animation_category_split_review_public.json", updated_files)
         self.assertIn("data/animation_category_unmatched_keyword_review_public.json", updated_files)
         self.assertIn("data/source_detail_probe_public.json", updated_files)
@@ -478,6 +479,16 @@ class PublicCatalogReportTests(unittest.TestCase):
             reissue_deduplication["automation_policy"][
                 "manual_review_required_before_mutation"
             ]
+        )
+        reissue_decision_template = quality["ichiban_kuji_reissue_decision_template"]
+        self.assertEqual(reissue_decision_template["item_template_rows"], 20)
+        self.assertEqual(reissue_decision_template["campaign_template_rows"], 4)
+        self.assertEqual(reissue_decision_template["manual_confirmed_item_rows"], 0)
+        self.assertEqual(reissue_decision_template["manual_confirmed_campaign_rows"], 0)
+        self.assertFalse(reissue_decision_template["auto_merge_enabled"])
+        self.assertFalse(reissue_decision_template["auto_delete_enabled"])
+        self.assertTrue(
+            reissue_decision_template["manual_review_required_before_mutation"]
         )
         self.assertEqual(quality["source_discovery_completion_roadmap"]["current_focus_pack_rows"], 20)
         self.assertEqual(
