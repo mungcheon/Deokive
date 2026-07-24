@@ -495,6 +495,41 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "next_safe_phase": "verify_ichiban_campaign_pages_before_dedupe",
                 }
             },
+            "ichiban_kuji_reissue_decision_template_public.json": {
+                "summary": {
+                    "item_template_rows": 20,
+                    "campaign_template_rows": 4,
+                    "manual_confirmed_item_rows": 0,
+                    "manual_confirmed_campaign_rows": 0,
+                    "item_review_lane_counts": [
+                        ["same_campaign_family_reissue_review", 20]
+                    ],
+                    "campaign_review_lane_counts": [["campaign_pair_first", 4]],
+                    "same_campaign_family_reissue_item_rows": 20,
+                    "campaign_review_batch_rows": 4,
+                    "campaign_review_batch_item_work_order_rows": 20,
+                    "campaign_review_batch_catalog_index_rows": 40,
+                    "campaign_review_batch_visible_item_preview_rows": 17,
+                },
+                "next_campaign_review_batch": [
+                    {
+                        "campaign_work_order_id": "ichiban-reissue-campaign-001",
+                        "source_urls": [
+                            "https://1kuji.com/products/onep6",
+                            "https://1kuji.com/products/onep8",
+                        ],
+                        "item_work_order_count": 8,
+                    },
+                    {
+                        "campaign_work_order_id": "ichiban-reissue-campaign-002",
+                        "source_urls": [
+                            "https://1kuji.com/products/haikyu4",
+                            "https://1kuji.com/products/haikyu8",
+                        ],
+                        "item_work_order_count": 6,
+                    },
+                ],
+            },
             "catalog_deduplication_fast_review_public.json": {
                 "summary": {
                     "fast_review_groups": 2,
@@ -1338,6 +1373,26 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(
             ichiban_reissue_dedupe_action["evidence"]["ichiban_reissue_manual_confirmed_rows"],
             0,
+        )
+        self.assertEqual(
+            ichiban_reissue_dedupe_action["evidence"][
+                "ichiban_reissue_next_campaign_review_batch_rows"
+            ],
+            4,
+        )
+        self.assertEqual(
+            ichiban_reissue_dedupe_action["evidence"][
+                "ichiban_reissue_next_campaign_review_batch_item_work_order_rows"
+            ],
+            20,
+        )
+        self.assertEqual(
+            len(
+                ichiban_reissue_dedupe_action["evidence"][
+                    "ichiban_reissue_next_campaign_review_batch"
+                ]
+            ),
+            2,
         )
         self.assertEqual(
             ichiban_reissue_dedupe_action["next_step"],

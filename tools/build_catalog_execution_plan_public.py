@@ -1417,6 +1417,29 @@ def _build_plan(load_report) -> dict[str, Any]:
                     kuji_reissue_decision_template_summary,
                     "same_campaign_family_reissue_item_rows",
                 ),
+                "ichiban_reissue_next_campaign_review_batch_rows": _count(
+                    kuji_reissue_decision_template_summary,
+                    "campaign_review_batch_rows",
+                ),
+                "ichiban_reissue_next_campaign_review_batch_item_work_order_rows": _count(
+                    kuji_reissue_decision_template_summary,
+                    "campaign_review_batch_item_work_order_rows",
+                ),
+                "ichiban_reissue_next_campaign_review_batch_catalog_index_rows": _count(
+                    kuji_reissue_decision_template_summary,
+                    "campaign_review_batch_catalog_index_rows",
+                ),
+                "ichiban_reissue_next_campaign_review_batch_visible_item_preview_rows": _count(
+                    kuji_reissue_decision_template_summary,
+                    "campaign_review_batch_visible_item_preview_rows",
+                ),
+                "ichiban_reissue_next_campaign_review_batch": [
+                    row
+                    for row in kuji_reissue_decision_template.get(
+                        "next_campaign_review_batch", []
+                    )
+                    if isinstance(row, dict)
+                ][:4],
                 "ichiban_reissue_protected_groups": _count(
                     dedupe_action_summary, "ichiban_reissue_protected_groups"
                 ),

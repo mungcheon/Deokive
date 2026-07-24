@@ -3357,6 +3357,31 @@ def build_operations_public(
                 for row in dedupe_action_queue.get("ichiban_reissue_work_order", [])[:5]
                 if isinstance(row, dict)
             ],
+            "next_campaign_review_batch_rows": ichiban_reissue_decision_template_summary.get(
+                "campaign_review_batch_rows", 0
+            ),
+            "next_campaign_review_batch_item_work_order_rows": (
+                ichiban_reissue_decision_template_summary.get(
+                    "campaign_review_batch_item_work_order_rows", 0
+                )
+            ),
+            "next_campaign_review_batch_catalog_index_rows": (
+                ichiban_reissue_decision_template_summary.get(
+                    "campaign_review_batch_catalog_index_rows", 0
+                )
+            ),
+            "next_campaign_review_batch_visible_item_preview_rows": (
+                ichiban_reissue_decision_template_summary.get(
+                    "campaign_review_batch_visible_item_preview_rows", 0
+                )
+            ),
+            "next_campaign_review_batch": [
+                row
+                for row in ichiban_reissue_decision_template.get(
+                    "next_campaign_review_batch", []
+                )
+                if isinstance(row, dict)
+            ][:4],
             "decision_template_rows": dedupe_action_queue_summary.get(
                 "ichiban_reissue_decision_template_rows", 0
             ),

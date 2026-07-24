@@ -3218,6 +3218,28 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(ichiban_reissue_dedupe_next_action.get("item_decision_template_rows"), 20)
         self.assertEqual(ichiban_reissue_dedupe_next_action.get("campaign_decision_template_rows"), 4)
         self.assertEqual(
+            ichiban_reissue_dedupe_next_action.get("next_campaign_review_batch_rows"),
+            reissue_decision_summary.get("campaign_review_batch_rows"),
+        )
+        self.assertEqual(
+            len(ichiban_reissue_dedupe_next_action.get("next_campaign_review_batch", [])),
+            reissue_decision_summary.get("campaign_review_batch_rows"),
+        )
+        self.assertEqual(
+            ichiban_reissue_dedupe_next_action.get(
+                "next_campaign_review_batch_item_work_order_rows"
+            ),
+            reissue_decision_summary.get("campaign_review_batch_item_work_order_rows"),
+        )
+        self.assertEqual(
+            ichiban_reissue_dedupe_next_action.get(
+                "next_campaign_review_batch_visible_item_preview_rows"
+            ),
+            reissue_decision_summary.get(
+                "campaign_review_batch_visible_item_preview_rows"
+            ),
+        )
+        self.assertEqual(
             ichiban_reissue_dedupe_next_action.get("manual_confirmed_rows"),
             dedupe_action_summary.get("ichiban_reissue_manual_confirmed_rows"),
         )
@@ -3402,6 +3424,26 @@ class PublicCatalogReportTests(unittest.TestCase):
                 "ichiban_reissue_same_campaign_family_item_rows"
             ),
             reissue_decision_summary.get("same_campaign_family_reissue_item_rows"),
+        )
+        self.assertEqual(
+            ichiban_reissue_execution_action["evidence"].get(
+                "ichiban_reissue_next_campaign_review_batch_rows"
+            ),
+            reissue_decision_summary.get("campaign_review_batch_rows"),
+        )
+        self.assertEqual(
+            len(
+                ichiban_reissue_execution_action["evidence"].get(
+                    "ichiban_reissue_next_campaign_review_batch", []
+                )
+            ),
+            reissue_decision_summary.get("campaign_review_batch_rows"),
+        )
+        self.assertEqual(
+            ichiban_reissue_execution_action["evidence"].get(
+                "ichiban_reissue_next_campaign_review_batch_item_work_order_rows"
+            ),
+            reissue_decision_summary.get("campaign_review_batch_item_work_order_rows"),
         )
         self.assertEqual(
             ichiban_reissue_execution_action.get("next_step"),
