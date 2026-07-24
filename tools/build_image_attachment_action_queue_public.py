@@ -20,6 +20,8 @@ ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_INPUT = ROOT / "data" / "catalog_image_enrichment_batches_public.json"
 DEFAULT_CATALOG = ROOT / "data" / "catalog_public.json"
 DEFAULT_GOTOUCHI_CANDIDATES = ROOT / "data" / "gotouchi_chiikawa_image_candidates_public.json"
+DEFAULT_SOURCE_CANDIDATES = ROOT / "data" / "catalog_candidate_source_url_review_queue_public.json"
+DEFAULT_SOURCE_CANDIDATE_FALLBACK = ROOT / "data" / "catalog_image_attachment_confirmed_template_public.json"
 DEFAULT_OUTPUT = ROOT / "data" / "catalog_image_attachment_action_queue_public.json"
 
 WORKFLOW_PRIORITY = {
@@ -79,6 +81,53 @@ def _representative_candidate_lookup(
     return lookup
 
 
+def _source_candidate_lookup(candidate_report: dict[str, Any] | None) -> dict[int, dict[str, Any]]:
+    if not candidate_report:
+        return {}
+    lookup: dict[int, dict[str, Any]] = {}
+    for item in candidate_report.get("items") or []:
+        if not isinstance(item, dict):
+            continue
+        catalog_index = item.get("catalog_index", item.get("row_index"))
+        if isinstance(catalog_index, int) and not isinstance(catalog_index, bool):
+            row = {
+                key: item.get(key)
+                for key in (
+                    "source_url_review_lane",
+                    "candidate_status",
+                    "candidate_score",
+                    "candidate_count",
+                    "candidate_options",
+                    "source_url_review_blockers",
+                    "match_diagnostics",
+                    "fallback_search_queries",
+                    "store_search_hints",
+                    "store_search_url",
+                )
+                if key in item
+            }
+            if not row.get("candidate_status"):
+                lane = str(row.get("source_url_review_lane") or "")
+                if lane in {"manual_search_required", "candidate_provider_missing"}:
+                    row["candidate_status"] = "no_candidate"
+                elif lane == "weak_candidate_review":
+                    row["candidate_status"] = "weak_manual_review_candidate"
+            lookup[catalog_index] = row
+    return lookup
+
+
+def _merged_source_candidate_lookup(
+    primary_report: dict[str, Any] | None,
+    fallback_report: dict[str, Any] | None,
+) -> dict[int, dict[str, Any]]:
+    merged = _source_candidate_lookup(fallback_report)
+    for catalog_index, row in _source_candidate_lookup(primary_report).items():
+        base = dict(merged.get(catalog_index) or {})
+        base.update(row)
+        merged[catalog_index] = base
+    return merged
+
+
 def _with_representative_candidates(
     item: dict[str, Any],
     candidate_lookup: dict[int, dict[str, Any]],
@@ -98,10 +147,80 @@ def _with_representative_candidates(
     }
 
 
+def _with_source_candidates(
+    item: dict[str, Any],
+    candidate_lookup: dict[int, dict[str, Any]],
+) -> dict[str, Any]:
+    catalog_index = item.get("catalog_index")
+    candidate = (
+        candidate_lookup.get(catalog_index)
+        if isinstance(catalog_index, int) and not isinstance(catalog_index, bool)
+        else None
+    )
+    if not candidate:
+        return item
+    merged = dict(item)
+    for key, value in candidate.items():
+        if value not in (None, "", []):
+            merged[key] = value
+    return merged
+
+
 def _counter_pairs(rows: list[dict[str, Any]], key: str) -> list[list[Any]]:
     counts = Counter(str(row.get(key) or "") for row in rows)
     counts.pop("", None)
     return [[name, count] for name, count in counts.most_common()]
+
+
+def _source_url_review_guidance(row: dict[str, Any]) -> dict[str, Any]:
+    source_store = str(row.get("source_store") or "")
+    candidate_status = str(row.get("candidate_status") or "")
+    primary_review_url_kind = str(row.get("primary_review_url_kind") or "")
+    accepted_url_patterns = ["exact product detail URL, not a storefront/search URL"]
+    if "Stellive" in source_store:
+        accepted_url_patterns = [
+            "https://fanding.kr/@stellive/shop/{product_no}",
+            "page title/product card must preserve member, event, product type, and variant terms",
+        ]
+    elif "Weverse" in source_store:
+        accepted_url_patterns = [
+            "shop.weverse.io product detail URL for the exact artist/item",
+            "avoid collection, category, cart, search, or sold-out mirror pages unless they identify the exact product",
+        ]
+    elif "포켓몬" in source_store or "Pokemon" in source_store:
+        accepted_url_patterns = [
+            "pokemoncenter-online.com product detail URL for the exact product",
+            "confirm official product name, Pokemon/character, and goods type before using the URL",
+        ]
+    blocker_note = {
+        "low_confidence_candidate": "Candidate options are review hints only; do not copy the top candidate without exact title/member/event/type confirmation.",
+        "weak_manual_review_candidate": "Candidate score is weak; use only if the opened detail page proves the exact item identity.",
+        "no_candidate": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
+    }.get(
+        candidate_status,
+        "Manual confirmation is still required before any source_url mutation.",
+    )
+    return {
+        "source_store": source_store,
+        "primary_review_url_kind": primary_review_url_kind,
+        "candidate_status": candidate_status,
+        "accepted_url_patterns": accepted_url_patterns,
+        "required_evidence": [
+            "exact product detail page",
+            "product title preserves the catalog name or official variant wording",
+            "goods type/category matches the catalog row",
+            "product image or page context can later support image_url attachment",
+        ],
+        "manual_confirmed_allowed_when": "manual_value, evidence_url, and candidate_source_url all point to the same exact product detail page",
+        "do_not_use": [
+            "storefront root URL",
+            "search results URL",
+            "category/listing page",
+            "low-score candidate with only generic token overlap",
+        ],
+        "candidate_review_note": blocker_note,
+        "auto_apply_allowed": False,
+    }
 
 
 REPRESENTATIVE_CANDIDATE_REVIEW_GUIDANCE = {
@@ -412,6 +531,17 @@ def _build_source_url_update_work_order(action_items: list[dict[str, Any]]) -> l
                 "primary_review_url_kind": row.get("primary_review_url_kind"),
                 "first_fallback_web_search_url": row.get("first_fallback_web_search_url"),
                 "fallback_web_search_urls": row.get("fallback_web_search_urls") or [],
+                "source_url_review_lane": row.get("source_url_review_lane"),
+                "source_url_review_blockers": row.get("source_url_review_blockers") or [],
+                "candidate_status": row.get("candidate_status"),
+                "candidate_score": row.get("candidate_score"),
+                "candidate_count": row.get("candidate_count"),
+                "candidate_options": row.get("candidate_options") or [],
+                "match_diagnostics": row.get("match_diagnostics") or {},
+                "fallback_search_queries": row.get("fallback_search_queries") or [],
+                "store_search_hints": row.get("store_search_hints") or {},
+                "source_url_review_guidance": row.get("source_url_review_guidance")
+                or _source_url_review_guidance(row),
                 "suggested_local_image_path": row.get("suggested_local_image_path"),
                 "local_image_download_instruction": row.get(
                     "local_image_download_instruction"
@@ -440,9 +570,13 @@ def _build_source_url_update_work_order(action_items: list[dict[str, Any]]) -> l
                     "Open official_search_url when present.",
                     "If official_search_url is empty, open first_fallback_web_search_url as a starting point.",
                     "Confirm the exact product detail page, not a storefront/search page.",
+                    "Treat low-confidence candidate_options as hints; reject them unless title, member/event, category, and product type all match.",
                     "Fill source_url_import_template.manual_value and evidence_url.",
                     "After source_url is confirmed, run image extraction/attachment review.",
                 ],
+                "source_url_review_guidance": _source_url_review_guidance(
+                    {"source_store": bucket["source_store"]}
+                ),
                 "blocked_until": "exact_product_source_url_confirmed",
                 "sample_items": samples,
                 "auto_apply_enabled": False,
@@ -533,6 +667,18 @@ def _build_next_source_url_review_batch(
                 ),
                 "fallback_web_search_urls": row.get("fallback_web_search_urls")
                 or [],
+                "source_url_review_lane": row.get("source_url_review_lane"),
+                "source_url_review_blockers": row.get("source_url_review_blockers")
+                or [],
+                "candidate_status": row.get("candidate_status"),
+                "candidate_score": row.get("candidate_score"),
+                "candidate_count": row.get("candidate_count"),
+                "candidate_options": row.get("candidate_options") or [],
+                "match_diagnostics": row.get("match_diagnostics") or {},
+                "fallback_search_queries": row.get("fallback_search_queries") or [],
+                "store_search_hints": row.get("store_search_hints") or {},
+                "source_url_review_guidance": row.get("source_url_review_guidance")
+                or _source_url_review_guidance(row),
                 "manual_value": "",
                 "evidence_url": "",
                 "candidate_source_url": "",
@@ -541,6 +687,7 @@ def _build_next_source_url_review_batch(
                 "operator_checklist": [
                     "Open primary_review_url first.",
                     "Confirm the exact product detail page, not a storefront/search page.",
+                    "Use candidate_options only as hints when candidate_status is low-confidence or weak.",
                     "Paste the exact product detail URL into manual_value, evidence_url, and candidate_source_url.",
                     "Leave manual_confirmed=false until the source URL proves the exact item identity.",
                 ],
@@ -906,11 +1053,26 @@ def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
         "manual_confirmation_requirements": _manual_confirmation_requirements(workflow),
         "source_url_import_template": source_url_template,
         "catalog_field_import_template": catalog_template,
-        "representative_candidate_status": item.get("candidate_status"),
+        "representative_candidate_status": item.get("candidate_status")
+        if representative_image_review_required
+        else None,
         "representative_candidate_review_guidance": _representative_candidate_review_guidance(
             item.get("candidate_status")
-        ),
-        "representative_top_candidates": item.get("top_candidates") or [],
+        )
+        if representative_image_review_required
+        else {},
+        "representative_top_candidates": item.get("top_candidates") or []
+        if representative_image_review_required
+        else [],
+        "source_url_review_lane": item.get("source_url_review_lane"),
+        "source_url_review_blockers": item.get("source_url_review_blockers") or [],
+        "candidate_status": item.get("candidate_status"),
+        "candidate_score": item.get("candidate_score"),
+        "candidate_count": item.get("candidate_count"),
+        "candidate_options": item.get("candidate_options") or [],
+        "match_diagnostics": item.get("match_diagnostics") or {},
+        "fallback_search_queries": item.get("fallback_search_queries") or [],
+        "store_search_hints": item.get("store_search_hints") or {},
         "suggested_local_image_path": suggested_local_image_path,
         "local_image_download_instruction": _local_image_download_instruction(
             suggested_local_image_path
@@ -924,6 +1086,12 @@ def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
     if source_url_template is not None:
         source_url_template["primary_review_url"] = primary_review_url
         source_url_template["primary_review_url_kind"] = primary_review_url_kind
+        source_url_template["source_url_review_guidance"] = _source_url_review_guidance(
+            source_url_template
+        )
+        compact["source_url_review_guidance"] = source_url_template[
+            "source_url_review_guidance"
+        ]
     return compact
 
 
@@ -1090,7 +1258,7 @@ def _source_url_import_template(item: dict[str, Any], group: dict[str, Any]) -> 
     image_template = item.get("catalog_field_import_template")
     image_template = image_template if isinstance(image_template, dict) else {}
     source_search_url = _source_search_url(item, image_template)
-    return {
+    row = {
         "manual_confirmed": False,
         "manual_note": "",
         "row_index": item.get("catalog_index"),
@@ -1110,12 +1278,31 @@ def _source_url_import_template(item: dict[str, Any], group: dict[str, Any]) -> 
         "blocked_until": "exact_product_source_url_confirmed",
         "auto_apply_enabled": False,
     }
+    for key in (
+        "source_url_review_lane",
+        "candidate_status",
+        "candidate_score",
+        "candidate_count",
+        "candidate_options",
+        "source_url_review_blockers",
+        "match_diagnostics",
+        "fallback_search_queries",
+        "store_search_hints",
+        "store_search_url",
+    ):
+        value = item.get(key)
+        if value not in (None, "", []):
+            row[key] = value
+    row["source_url_review_guidance"] = _source_url_review_guidance(row)
+    return row
 
 
 def build_report(
     enrichment_batches: dict[str, Any],
     catalog: dict[str, Any] | None = None,
     representative_candidates: dict[str, Any] | None = None,
+    source_candidates: dict[str, Any] | None = None,
+    source_candidate_fallback: dict[str, Any] | None = None,
     *,
     max_batches: int = 18,
     batch_size: int = 20,
@@ -1127,6 +1314,10 @@ def build_report(
     has_image_by_index = _catalog_image_lookup(catalog)
     representative_candidate_by_index = _representative_candidate_lookup(
         representative_candidates
+    )
+    source_candidate_by_index = _merged_source_candidate_lookup(
+        source_candidates,
+        source_candidate_fallback,
     )
 
     for group in enrichment_batches.get("groups", []):
@@ -1144,6 +1335,7 @@ def build_report(
                 if isinstance(catalog_index, int) and has_image_by_index.get(catalog_index):
                     skipped_already_has_image_rows += 1
                     continue
+                item = _with_source_candidates(item, source_candidate_by_index)
                 action_items.append(
                     _compact_item(
                         group,
@@ -1598,6 +1790,12 @@ def main() -> int:
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--catalog", type=Path, default=DEFAULT_CATALOG)
     parser.add_argument("--gotouchi-candidates", type=Path, default=DEFAULT_GOTOUCHI_CANDIDATES)
+    parser.add_argument("--source-candidates", type=Path, default=DEFAULT_SOURCE_CANDIDATES)
+    parser.add_argument(
+        "--source-candidate-fallback",
+        type=Path,
+        default=DEFAULT_SOURCE_CANDIDATE_FALLBACK,
+    )
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--max-batches", type=int, default=18)
     parser.add_argument("--batch-size", type=int, default=20)
@@ -1607,6 +1805,10 @@ def main() -> int:
         _load(args.input),
         _load(args.catalog) if args.catalog.exists() else None,
         _load(args.gotouchi_candidates) if args.gotouchi_candidates.exists() else None,
+        _load(args.source_candidates) if args.source_candidates.exists() else None,
+        _load(args.source_candidate_fallback)
+        if args.source_candidate_fallback.exists()
+        else None,
         max_batches=args.max_batches,
         batch_size=args.batch_size,
     )

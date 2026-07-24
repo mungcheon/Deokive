@@ -53,7 +53,37 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
             ]
         }
 
-        report = queue.build_report(enrichment, max_batches=10, batch_size=20)
+        source_candidates = {
+            "items": [
+                {
+                    "catalog_index": 2,
+                    "source_url_review_lane": "low_confidence_candidate_review",
+                    "candidate_status": "low_confidence_candidate",
+                    "candidate_score": 0.25,
+                    "candidate_count": 1,
+                    "candidate_options": [
+                        {
+                            "title": "Different badge",
+                            "source_url": "https://fanding.kr/@stellive/shop/100",
+                            "score": 0.25,
+                        }
+                    ],
+                    "source_url_review_blockers": ["candidate_score_below_threshold"],
+                    "match_diagnostics": {
+                        "diagnosis": "candidate_exists_but_score_below_manual_review_threshold"
+                    },
+                    "fallback_search_queries": ["site:fanding.kr Badge"],
+                    "store_search_hints": {"store_search_url": "https://fanding.kr/@stellive/shop?keyword=Badge"},
+                }
+            ]
+        }
+
+        report = queue.build_report(
+            enrichment,
+            source_candidates=source_candidates,
+            max_batches=10,
+            batch_size=20,
+        )
 
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertEqual(report["summary"]["actionable_image_rows"], 2)
@@ -68,8 +98,14 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["source_url_update_fallback_web_search_rows"], 1)
         self.assertEqual(report["summary"]["source_url_update_any_search_hint_rows"], 2)
         self.assertEqual(report["summary"]["source_url_update_missing_any_search_hint_rows"], 0)
-        self.assertEqual(report["summary"]["source_url_candidate_status_counts"], [])
-        self.assertEqual(report["summary"]["source_url_review_lane_counts"], [])
+        self.assertEqual(
+            report["summary"]["source_url_candidate_status_counts"],
+            [["low_confidence_candidate", 1]],
+        )
+        self.assertEqual(
+            report["summary"]["source_url_review_lane_counts"],
+            [["low_confidence_candidate_review", 1]],
+        )
         self.assertEqual(report["summary"]["primary_review_url_rows"], 2)
         self.assertEqual(report["summary"]["primary_review_url_missing_rows"], 0)
         self.assertEqual(
@@ -175,8 +211,14 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
             report["next_operator_actions"][0]["status"],
             "manual_source_url_confirmation_required",
         )
-        self.assertEqual(report["next_operator_actions"][0]["candidate_status_counts"], [])
-        self.assertEqual(report["next_operator_actions"][0]["candidate_review_lane_counts"], [])
+        self.assertEqual(
+            report["next_operator_actions"][0]["candidate_status_counts"],
+            [["low_confidence_candidate", 1]],
+        )
+        self.assertEqual(
+            report["next_operator_actions"][0]["candidate_review_lane_counts"],
+            [["low_confidence_candidate_review", 1]],
+        )
         self.assertEqual(report["workstreams"][0]["source_store"], "Stellive Store")
         self.assertEqual(report["workstreams"][0]["next_batch_id"], "image-attachment-action-001")
         self.assertEqual(report["workstreams"][0]["source_url_update_template_rows"], 2)
@@ -329,6 +371,16 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
             work_order["sample_items"][0]["source_url_import_template"]["field"],
             "source_url",
         )
+        self.assertEqual(
+            work_order["sample_items"][0]["candidate_status"],
+            "low_confidence_candidate",
+        )
+        self.assertIn(
+            "review hints only",
+            work_order["sample_items"][0]["source_url_review_guidance"][
+                "candidate_review_note"
+            ],
+        )
         self.assertIn(
             "first_fallback_web_search_url",
             work_order["recommended_review_order"][1],
@@ -338,6 +390,11 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual([row["row_index"] for row in flat_template], [2, 1])
         self.assertEqual(flat_template[0]["field"], "source_url")
         self.assertEqual(flat_template[0]["manual_value"], "")
+        self.assertEqual(flat_template[0]["candidate_status"], "low_confidence_candidate")
+        self.assertEqual(
+            flat_template[0]["source_url_review_guidance"]["accepted_url_patterns"][0],
+            "https://fanding.kr/@stellive/shop/{product_no}",
+        )
         self.assertEqual(
             flat_template[0]["source_search_url"],
             "https://fanding.kr/@stellive/shop?keyword=Badge",
@@ -352,6 +409,14 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual([row["row_index"] for row in template_batch["rows"]], [2, 1])
         self.assertEqual([row["row_index"] for row in report["next_source_url_review_batch"]], [2, 1])
         self.assertFalse(report["next_source_url_review_batch"][0]["manual_confirmed"])
+        self.assertEqual(
+            report["next_source_url_review_batch"][0]["source_url_review_lane"],
+            "low_confidence_candidate_review",
+        )
+        self.assertEqual(
+            report["next_source_url_review_batch"][0]["candidate_options"][0]["source_url"],
+            "https://fanding.kr/@stellive/shop/100",
+        )
         self.assertEqual(
             report["next_source_url_review_batch"][0]["primary_review_url"],
             "https://fanding.kr/@stellive/shop?keyword=Badge",
