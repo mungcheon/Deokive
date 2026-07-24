@@ -19,6 +19,7 @@ import build_animation_category_split_review_public
 import build_animation_category_unmatched_keyword_review_public
 import build_deduplication_action_queue_public
 import build_deduplication_fast_review_public
+import build_ensky_cache_candidate_action_queue_public
 import build_gotouchi_official_candidate_review_queue_public
 import build_image_attachment_action_queue_public
 import build_image_source_url_confirmed_template_public
@@ -2217,6 +2218,7 @@ def build_operations_public(
     ichiban_reissue_decision_template_override: dict[str, Any] | None = None,
     source_discovery_starter_queue_override: dict[str, Any] | None = None,
     image_attachment_action_queue_override: dict[str, Any] | None = None,
+    ensky_cache_candidate_action_queue_override: dict[str, Any] | None = None,
     requested_focus_action_queue_override: dict[str, Any] | None = None,
     deduplication_action_queue_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
@@ -2352,7 +2354,9 @@ def build_operations_public(
         if isinstance(row, dict)
     ][:8]
     ensky_cache_candidate_action_queue = (
-        load_json(ENSKY_CACHE_CANDIDATE_ACTION_QUEUE, {})
+        ensky_cache_candidate_action_queue_override
+        if ensky_cache_candidate_action_queue_override is not None
+        else load_json(ENSKY_CACHE_CANDIDATE_ACTION_QUEUE, {})
         if ENSKY_CACHE_CANDIDATE_ACTION_QUEUE.exists()
         else {}
     )
@@ -2947,8 +2951,22 @@ def build_operations_public(
             "candidate_action_rows": ensky_cache_candidate_action_queue_summary.get("candidate_action_rows", 0),
             "action_batch_count": ensky_cache_candidate_action_queue_summary.get("action_batch_count", 0),
             "manual_confirmed_true": ensky_cache_candidate_action_queue_summary.get("manual_confirmed_true", 0),
+            "candidate_source_url_ready_rows": ensky_cache_candidate_action_queue_summary.get(
+                "candidate_source_url_ready_rows", 0
+            ),
+            "candidate_image_url_ready_rows": ensky_cache_candidate_action_queue_summary.get(
+                "candidate_image_url_ready_rows", 0
+            ),
+            "safe_exact_top_candidate_rows": ensky_cache_candidate_action_queue_summary.get(
+                "safe_exact_top_candidate_rows", 0
+            ),
+            "can_import_now_rows": ensky_cache_candidate_action_queue_summary.get("can_import_now_rows", 0),
+            "blocked_manual_review_rows": ensky_cache_candidate_action_queue_summary.get(
+                "blocked_manual_review_rows", 0
+            ),
             "by_affiliation": ensky_cache_candidate_action_queue_summary.get("by_affiliation", []),
             "by_category": ensky_cache_candidate_action_queue_summary.get("by_category", []),
+            "import_readiness": ensky_cache_candidate_action_queue.get("import_readiness", {}),
             "auto_apply_enabled": ensky_cache_candidate_action_queue_summary.get("auto_apply_enabled", False),
             "recommended_next_action": "Review broad Ensky cache candidates before filling source_url and image_url templates.",
         } if ensky_cache_candidate_action_queue_summary else None,
@@ -3583,8 +3601,22 @@ def build_operations_public(
             "open_rows": ensky_cache_candidate_action_queue_summary.get("candidate_action_rows", 0),
             "action_batch_count": ensky_cache_candidate_action_queue_summary.get("action_batch_count", 0),
             "manual_confirmed_true": ensky_cache_candidate_action_queue_summary.get("manual_confirmed_true", 0),
+            "candidate_source_url_ready_rows": ensky_cache_candidate_action_queue_summary.get(
+                "candidate_source_url_ready_rows", 0
+            ),
+            "candidate_image_url_ready_rows": ensky_cache_candidate_action_queue_summary.get(
+                "candidate_image_url_ready_rows", 0
+            ),
+            "safe_exact_top_candidate_rows": ensky_cache_candidate_action_queue_summary.get(
+                "safe_exact_top_candidate_rows", 0
+            ),
+            "can_import_now_rows": ensky_cache_candidate_action_queue_summary.get("can_import_now_rows", 0),
+            "blocked_manual_review_rows": ensky_cache_candidate_action_queue_summary.get(
+                "blocked_manual_review_rows", 0
+            ),
             "by_affiliation": ensky_cache_candidate_action_queue_summary.get("by_affiliation", []),
             "by_category": ensky_cache_candidate_action_queue_summary.get("by_category", []),
+            "import_readiness": ensky_cache_candidate_action_queue.get("import_readiness", {}),
             "primary_report": f"data/{ENSKY_CACHE_CANDIDATE_ACTION_QUEUE.name}",
             "next_step": "manual_confirm_ensky_cache_candidate_then_fill_source_and_image_templates",
             "auto_apply_enabled": ensky_cache_candidate_action_queue_summary.get("auto_apply_enabled", False),
@@ -8042,6 +8074,11 @@ def update_reports(write: bool) -> dict[str, Any]:
         load_json(DATA / "catalog_missing_image_work_queue_public.json", {"items": []}),
         generated_at=generated_at,
     )
+    ensky_cache_coverage = load_json(ENSKY_CACHE_COVERAGE, {}) if ENSKY_CACHE_COVERAGE.exists() else {}
+    ensky_cache_candidate_action_queue = build_ensky_cache_candidate_action_queue_public.build_report(
+        ensky_cache_coverage,
+        generated_at=generated_at,
+    )
     patch_candidate_items = generic_source_patch_candidates.get("items", [])
     patch_candidate_summary = generic_source_patch_candidates.get("summary", {})
     if patch_candidate_summary.get("candidate_rows") != len(patch_candidate_items):
@@ -8271,6 +8308,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         ichiban_kuji_reissue_decision_template,
         source_discovery_starter_queue,
         image_attachment_action_queue,
+        ensky_cache_candidate_action_queue,
         requested_focus_action_queue,
         deduplication_action_queue,
     )
@@ -8316,7 +8354,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             "source_discovery_next_focus_fallback_queue_public.json": source_discovery_next_focus_fallback_queue,
             "source_discovery_review_batches_public.json": source_discovery_review_batches,
             "source_discovery_action_queue_public.json": source_discovery_action_queue,
-            "ensky_cache_candidate_action_queue_public.json": load_json(ENSKY_CACHE_CANDIDATE_ACTION_QUEUE, {}),
+            "ensky_cache_candidate_action_queue_public.json": ensky_cache_candidate_action_queue,
             "catalog_metadata_review_batches_public.json": metadata_review_batches,
             "catalog_metadata_action_queue_public.json": metadata_action_queue,
             "requested_focus_review_batches_public.json": requested_focus_review_batches,
@@ -8547,10 +8585,11 @@ def update_reports(write: bool) -> dict[str, Any]:
         }
         if ENSKY_CACHE_COVERAGE.exists():
             target["ensky_cache_coverage"] = copy_report_summary(ENSKY_CACHE_COVERAGE, "ensky_cache_coverage")
-        if ENSKY_CACHE_CANDIDATE_ACTION_QUEUE.exists():
-            target["ensky_cache_candidate_action_queue"] = copy_report_summary(
-                ENSKY_CACHE_CANDIDATE_ACTION_QUEUE, "ensky_cache_candidate_action_queue"
-            )
+        target["ensky_cache_candidate_action_queue"] = {
+            "public_report": f"data/{ENSKY_CACHE_CANDIDATE_ACTION_QUEUE.name}",
+            **ensky_cache_candidate_action_queue.get("summary", {}),
+            "import_readiness": ensky_cache_candidate_action_queue.get("import_readiness", {}),
+        }
         if ENSKY_SEARCH_PAGE_PROBE.exists():
             target["ensky_search_page_probe"] = copy_report_summary(ENSKY_SEARCH_PAGE_PROBE, "ensky_search_page_probe")
         if STELLIVE_FANDING_CANDIDATES.exists():
@@ -9202,6 +9241,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(MISSING_IMAGE_PRIORITY, missing_image_priority_public)
         write_json(SOURCE_DISCOVERY_STARTER_QUEUE, source_discovery_starter_queue)
         write_json(MISSING_IMAGE_REPORT_COVERAGE, missing_image_report_coverage)
+        write_json(ENSKY_CACHE_CANDIDATE_ACTION_QUEUE, ensky_cache_candidate_action_queue)
         write_json(IMAGE_ATTACHMENT_ACTION_QUEUE, image_attachment_action_queue)
         write_json(IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE, image_source_url_confirmed_template)
         write_json(IMAGE_ATTACHMENT_TEMPLATE_IMPORT_DRY_RUN, image_attachment_template_import_dry_run)

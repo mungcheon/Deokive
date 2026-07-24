@@ -49,8 +49,17 @@ class BuildEnskyCacheCandidateActionQueuePublicTest(unittest.TestCase):
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertEqual(report["summary"]["candidate_action_rows"], 1)
         self.assertEqual(report["summary"]["manual_confirmed_true"], 0)
+        self.assertEqual(report["summary"]["candidate_source_url_ready_rows"], 1)
+        self.assertEqual(report["summary"]["candidate_image_url_ready_rows"], 1)
+        self.assertEqual(report["summary"]["can_import_now_rows"], 0)
+        self.assertEqual(report["summary"]["blocked_manual_review_rows"], 1)
+        self.assertEqual(report["import_readiness"]["candidate_rows"], 1)
+        self.assertEqual(report["import_readiness"]["can_import_now_rows"], 0)
         item = report["batches"][0]["items"][0]
         self.assertFalse(item["manual_confirmed"])
+        self.assertTrue(item["top_candidate_has_source_url"])
+        self.assertTrue(item["top_candidate_has_image_url"])
+        self.assertFalse(item["import_readiness"]["can_import_now"])
         self.assertEqual(item["source_patch_template"]["field"], "source_url")
         self.assertEqual(item["image_patch_template"]["field"], "image_url")
         self.assertFalse(item["source_patch_template"]["manual_confirmed"])
@@ -87,6 +96,9 @@ class BuildEnskyCacheCandidateActionQueuePublicTest(unittest.TestCase):
 
         item = report["batches"][0]["items"][0]
         self.assertEqual(report["summary"]["identity_warning_rows"], 1)
+        self.assertEqual(report["summary"]["safe_exact_top_candidate_rows"], 0)
+        self.assertEqual(report["batches"][0]["identity_warning_rows"], 1)
+        self.assertEqual(report["batches"][0]["can_import_now_rows"], 0)
         self.assertEqual(
             dict(report["summary"]["by_candidate_identity_flag"]),
             {
@@ -97,6 +109,10 @@ class BuildEnskyCacheCandidateActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(
             item["recommended_action"],
             "recheck_ensky_candidate_identity_before_source_or_image_patch",
+        )
+        self.assertEqual(
+            item["import_readiness"]["blocked_reason"],
+            "candidate_identity_warning_requires_review",
         )
         self.assertEqual(
             item["top_candidates"][0]["candidate_identity_flags"],

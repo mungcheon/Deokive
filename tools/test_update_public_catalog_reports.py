@@ -1707,6 +1707,11 @@ class PublicCatalogReportTests(unittest.TestCase):
             for row in operations.get("workstream_scorecard", [])
             if row.get("workstream") == "source_detail_candidate_action_queue"
         )
+        ensky_cache_scorecard = next(
+            row
+            for row in operations.get("workstream_scorecard", [])
+            if row.get("workstream") == "ensky_cache_candidate_action_queue"
+        )
         source_next_action = next(
             row
             for row in operations.get("next_actions", [])
@@ -2374,6 +2379,33 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             ensky_cache_next_action.get("candidate_action_rows"),
             ensky_cache_action_summary.get("candidate_action_rows"),
+        )
+        for field in (
+            "candidate_source_url_ready_rows",
+            "candidate_image_url_ready_rows",
+            "safe_exact_top_candidate_rows",
+            "can_import_now_rows",
+            "blocked_manual_review_rows",
+        ):
+            self.assertEqual(
+                ensky_cache_next_action.get(field),
+                ensky_cache_action_summary.get(field),
+            )
+            self.assertEqual(
+                ensky_cache_scorecard.get(field),
+                ensky_cache_action_summary.get(field),
+            )
+            self.assertEqual(
+                quality["ensky_cache_candidate_action_queue"].get(field),
+                ensky_cache_action_summary.get(field),
+            )
+        self.assertEqual(
+            ensky_cache_next_action.get("import_readiness"),
+            ensky_cache_action.get("import_readiness"),
+        )
+        self.assertEqual(
+            ensky_cache_scorecard.get("import_readiness"),
+            ensky_cache_action.get("import_readiness"),
         )
         self.assertEqual(
             quality["ensky_cache_candidate_action_queue"].get("candidate_action_rows"),

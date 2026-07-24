@@ -134,6 +134,20 @@ def compact_item(item: dict[str, Any]) -> dict[str, Any]:
         "candidate_status": item.get("status"),
         "candidate_count": item.get("candidate_count"),
         "candidate_identity_flags": identity_flags,
+        "top_candidate_has_source_url": bool(top_candidate.get("candidate_source_url")),
+        "top_candidate_has_image_url": bool(top_candidate.get("candidate_image_url")),
+        "top_candidate_safe_exact_match": top_candidate.get("safe_exact_match") is True,
+        "import_readiness": {
+            "status": "blocked_manual_identity_review",
+            "candidate_source_url_ready": bool(top_candidate.get("candidate_source_url")),
+            "candidate_image_url_ready": bool(top_candidate.get("candidate_image_url")),
+            "candidate_identity_warning": bool(identity_flags),
+            "manual_confirmed_required": True,
+            "can_import_now": False,
+            "blocked_reason": "manual_confirmed_false"
+            if not identity_flags
+            else "candidate_identity_warning_requires_review",
+        },
         "top_candidates": candidates[:5],
         "source_patch_template": {
             "manual_confirmed": False,
@@ -198,10 +212,44 @@ def build_report(cache_coverage: dict[str, Any], *, generated_at: str | None = N
                 "by_affiliation": counter_rows(chunk, "affiliation"),
                 "by_category": counter_rows(chunk, "category"),
                 "by_candidate_identity_flag": counter_list_values(chunk, "candidate_identity_flags"),
+                "candidate_source_url_ready_rows": sum(
+                    1 for item in chunk if item.get("top_candidate_has_source_url")
+                ),
+                "candidate_image_url_ready_rows": sum(
+                    1 for item in chunk if item.get("top_candidate_has_image_url")
+                ),
+                "safe_exact_top_candidate_rows": sum(
+                    1 for item in chunk if item.get("top_candidate_safe_exact_match")
+                ),
+                "identity_warning_rows": sum(
+                    1 for item in chunk if item.get("candidate_identity_flags")
+                ),
+                "can_import_now_rows": sum(
+                    1 for item in chunk if (item.get("import_readiness") or {}).get("can_import_now")
+                ),
                 "items": chunk,
                 "auto_apply_enabled": False,
             }
         )
+    import_readiness = {
+        "candidate_rows": len(items),
+        "candidate_source_url_ready_rows": sum(
+            1 for item in items if item.get("top_candidate_has_source_url")
+        ),
+        "candidate_image_url_ready_rows": sum(
+            1 for item in items if item.get("top_candidate_has_image_url")
+        ),
+        "safe_exact_top_candidate_rows": sum(
+            1 for item in items if item.get("top_candidate_safe_exact_match")
+        ),
+        "identity_warning_rows": sum(1 for item in items if item.get("candidate_identity_flags")),
+        "can_import_now_rows": sum(
+            1 for item in items if (item.get("import_readiness") or {}).get("can_import_now")
+        ),
+        "blocked_manual_review_rows": len(items),
+        "manual_confirmation_required": True,
+        "auto_apply_enabled": False,
+    }
 
     return {
         "schema_version": 1,
@@ -213,11 +261,17 @@ def build_report(cache_coverage: dict[str, Any], *, generated_at: str | None = N
             "batch_size": batch_size,
             "manual_confirmed_true": sum(1 for item in items if item.get("manual_confirmed") is True),
             "identity_warning_rows": sum(1 for item in items if item.get("candidate_identity_flags")),
+            "candidate_source_url_ready_rows": import_readiness["candidate_source_url_ready_rows"],
+            "candidate_image_url_ready_rows": import_readiness["candidate_image_url_ready_rows"],
+            "safe_exact_top_candidate_rows": import_readiness["safe_exact_top_candidate_rows"],
+            "can_import_now_rows": import_readiness["can_import_now_rows"],
+            "blocked_manual_review_rows": import_readiness["blocked_manual_review_rows"],
             "by_affiliation": counter_rows(items, "affiliation"),
             "by_category": counter_rows(items, "category"),
             "by_candidate_identity_flag": counter_list_values(items, "candidate_identity_flags"),
             "auto_apply_enabled": False,
         },
+        "import_readiness": import_readiness,
         "instructions": [
             "These are broad Ensky sitemap cache candidates, not safe automatic matches.",
             "Only exact product, character, variant, and goods-type matches may be manually confirmed.",
