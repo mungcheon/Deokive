@@ -420,8 +420,38 @@ class PublicCatalogReportTests(unittest.TestCase):
             quality["source_discovery_next_focus_fallback_queue"]["queue_rows"],
         )
         self.assertIs(quality["source_discovery_next_focus_fallback_import_dry_run"]["write"], False)
+        self.assertEqual(quality["source_discovery_focus_packs"]["focus_pack_count"], 23)
+        self.assertEqual(quality["source_discovery_focus_packs"]["remaining_focus_review_rows"], 417)
+        self.assertEqual(
+            quality["source_discovery_focus_packs"]["focus_source_rows"],
+            quality["source_discovery_completion_roadmap"]["focus_source_rows"],
+        )
         self.assertEqual(quality["source_discovery_completion_roadmap"]["queued_source_rows"], 632)
         self.assertEqual(quality["source_discovery_completion_roadmap"]["current_focus_pack_rows"], 20)
+        self.assertEqual(
+            quality["source_discovery_completion_roadmap"]["completion_readiness_status"],
+            "current_focus_fallback_review_required",
+        )
+        self.assertEqual(
+            quality["source_discovery_completion_roadmap"]["completion_readiness"]["status"],
+            "current_focus_fallback_review_required",
+        )
+        self.assertEqual(
+            quality["source_discovery_completion_roadmap"]["completion_readiness"]["current_focus_fallback_rows"],
+            quality["source_discovery_next_focus_fallback_queue"]["queue_rows"],
+        )
+        self.assertEqual(
+            quality["source_discovery_completion_roadmap"]["completion_readiness"]["next_queue"]["queue_rows"],
+            17,
+        )
+        self.assertEqual(
+            quality["source_discovery_completion_roadmap"]["completion_readiness"]["next_safe_phase"],
+            "review_fallback_queue_and_fill_exact_manual_confirmed_source_urls",
+        )
+        self.assertEqual(
+            quality["source_discovery_completion_roadmap"]["auto_apply_ready_rows"],
+            0,
+        )
         self.assertGreaterEqual(quality["source_discovery_completion_roadmap"]["top_10_store_coverage"], 0.8)
         self.assertIs(quality["source_discovery_completion_roadmap"]["auto_apply_enabled"], False)
         self.assertEqual(quality["ensky_cache_coverage"]["missing_ensky_image_rows"], 142)

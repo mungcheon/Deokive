@@ -789,6 +789,65 @@ def build_source_discovery_completion_roadmap_public(
         "first_fallback_store_search_url": fallback_summary.get("first_fallback_store_search_url"),
         "recommended_action": "confirm current focus pack source URLs before image attachment",
     }
+    completion_readiness_status = (
+        "current_focus_fallback_review_required"
+        if int(fallback_summary.get("queue_rows") or 0)
+        else "current_focus_pack_confirmation_required"
+        if int(next_focus_summary.get("remaining_review_rows") or 0)
+        else "focus_pack_rotation_required"
+        if int(focus_summary.get("remaining_focus_review_rows") or 0)
+        else "source_discovery_complete"
+    )
+    completion_readiness = {
+        "status": completion_readiness_status,
+        "auto_apply_ready_rows": 0,
+        "auto_apply_enabled": False,
+        "manual_confirmed_rows": int(fallback_summary.get("manual_confirmed_rows") or 0),
+        "queued_source_rows": int(action_summary.get("queued_source_rows") or 0),
+        "focus_source_rows": int(focus_summary.get("focus_source_rows") or 0),
+        "remaining_focus_review_rows": int(focus_summary.get("remaining_focus_review_rows") or 0),
+        "current_focus_pack_id": next_focus_summary.get("focus_pack_id"),
+        "current_focus_pack_rows": int(next_focus_summary.get("pack_items") or 0),
+        "current_focus_remaining_rows": int(next_focus_summary.get("remaining_review_rows") or 0),
+        "current_focus_fallback_rows": int(fallback_summary.get("queue_rows") or 0),
+        "next_pack_after_current": next_focus_summary.get("next_pack_after_current"),
+        "next_safe_phase": (
+            "review_fallback_queue_and_fill_exact_manual_confirmed_source_urls"
+            if int(fallback_summary.get("queue_rows") or 0)
+            else "confirm_current_focus_pack_source_urls"
+            if int(next_focus_summary.get("remaining_review_rows") or 0)
+            else "rotate_to_next_focus_pack"
+            if int(focus_summary.get("remaining_focus_review_rows") or 0)
+            else "archive_source_discovery_completion"
+        ),
+        "next_queue": {
+            "source": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}",
+            "queue_rows": int(fallback_summary.get("queue_rows") or 0),
+            "fallback_reason": fallback_summary.get("fallback_reason"),
+            "first_domain_limited_web_search_url": fallback_summary.get(
+                "first_domain_limited_web_search_url"
+            ),
+            "first_fallback_store_search_url": fallback_summary.get(
+                "first_fallback_store_search_url"
+            ),
+        }
+        if int(fallback_summary.get("queue_rows") or 0)
+        else {
+            "source": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_PACK.name}",
+            "queue_rows": int(next_focus_summary.get("remaining_review_rows") or 0),
+            "focus_pack_id": next_focus_summary.get("focus_pack_id"),
+            "first_official_search_url": next_focus_summary.get("first_official_search_url"),
+        },
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reasons": [
+            "fallback_search_required"
+            if int(fallback_summary.get("queue_rows") or 0)
+            else "exact_product_source_url_not_confirmed"
+        ],
+        "safety_note": (
+            "Source discovery queues are review-only. Confirm exact official product detail URLs before image attachment."
+        ),
+    }
 
     phases = [
         {
@@ -853,6 +912,8 @@ def build_source_discovery_completion_roadmap_public(
             "top_10_store_coverage": round(top_10_rows / source_rows, 4) if source_rows else 0,
             "current_focus_pack_rows": int(next_focus_summary.get("pack_items") or 0),
             "current_focus_fallback_rows": int(fallback_summary.get("queue_rows") or 0),
+            "completion_readiness_status": completion_readiness["status"],
+            "auto_apply_ready_rows": 0,
             "generic_source_replacement_rows": int(
                 image_action_summary.get("source_url_update_required_rows") or 0
             ),
@@ -863,6 +924,7 @@ def build_source_discovery_completion_roadmap_public(
             "roadmap_phase_count": len(phases),
             "auto_apply_enabled": False,
         },
+        "completion_readiness": completion_readiness,
         "current_focus_pack": current_pack,
         "top_store_steps": top_store_steps,
         "phases": phases,
@@ -7756,6 +7818,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{MISSING_IMAGE_PRIORITY.name}",
             **missing_image_priority["summary"],
         }
+        target["source_discovery_focus_packs"] = {
+            "public_report": f"data/{SOURCE_DISCOVERY_FOCUS_PACKS.name}",
+            **source_discovery_focus_packs["summary"],
+        }
         target["source_discovery_next_focus_pack"] = {
             "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_PACK.name}",
             **source_discovery_next_focus_pack["summary"],
@@ -7789,6 +7855,10 @@ def update_reports(write: bool) -> dict[str, Any]:
         target["source_discovery_completion_roadmap"] = {
             "public_report": f"data/{SOURCE_DISCOVERY_ROADMAP.name}",
             **source_discovery_completion_roadmap["summary"],
+            "completion_readiness": source_discovery_completion_roadmap.get(
+                "completion_readiness",
+                {},
+            ),
         }
         if ANIMATE_MISSING_IMAGE_SEARCH.exists():
             target["animate_missing_image_search"] = copy_report_summary(

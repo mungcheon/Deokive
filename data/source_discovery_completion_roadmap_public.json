@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T23:25:05Z",
+  "generated_at": "2026-07-24T00:20:44Z",
   "scope": "source_discovery_completion_roadmap",
   "summary": {
     "missing_image_rows": 710,
@@ -12,6 +12,8 @@
     "top_10_store_coverage": 0.8006,
     "current_focus_pack_rows": 20,
     "current_focus_fallback_rows": 17,
+    "completion_readiness_status": "current_focus_fallback_review_required",
+    "auto_apply_ready_rows": 0,
     "generic_source_replacement_rows": 50,
     "manual_source_search_rows": 42,
     "provider_missing_rows": 5,
@@ -19,6 +21,33 @@
     "direct_image_action_rows": 73,
     "roadmap_phase_count": 5,
     "auto_apply_enabled": false
+  },
+  "completion_readiness": {
+    "status": "current_focus_fallback_review_required",
+    "auto_apply_ready_rows": 0,
+    "auto_apply_enabled": false,
+    "manual_confirmed_rows": 0,
+    "queued_source_rows": 632,
+    "focus_source_rows": 417,
+    "remaining_focus_review_rows": 417,
+    "current_focus_pack_id": "source-discovery-focus-001",
+    "current_focus_pack_rows": 20,
+    "current_focus_remaining_rows": 20,
+    "current_focus_fallback_rows": 17,
+    "next_pack_after_current": "source-discovery-focus-002",
+    "next_safe_phase": "review_fallback_queue_and_fill_exact_manual_confirmed_source_urls",
+    "next_queue": {
+      "source": "data/source_discovery_next_focus_fallback_queue_public.json",
+      "queue_rows": 17,
+      "fallback_reason": "official_search_url_unavailable",
+      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22",
+      "first_fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29"
+    },
+    "blocked_until": "exact_product_detail_source_url_confirmed",
+    "blocked_reasons": [
+      "fallback_search_required"
+    ],
+    "safety_note": "Source discovery queues are review-only. Confirm exact official product detail URLs before image attachment."
   },
   "current_focus_pack": {
     "focus_pack_id": "source-discovery-focus-001",
