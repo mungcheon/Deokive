@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T09:41:39Z",
+  "generated_at": "2026-07-24T09:46:58Z",
   "summary": {
     "batch_count": 160,
     "max_published_batches": 160,
-    "summed_batch_rows": 20254,
+    "summed_batch_rows": 20267,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -32,11 +32,11 @@
         10
       ],
       [
-        "deduplication_review",
-        10
+        "ichiban_kuji_reissue_dedupe_review",
+        9
       ],
       [
-        "ichiban_kuji_reissue_dedupe_review",
+        "deduplication_review",
         9
       ],
       [
@@ -80,6 +80,10 @@
         3
       ],
       [
+        "source_discovery_next_focus_fallback_queue",
+        2
+      ],
+      [
         "ichiban_kuji_metadata_action_work_order",
         2
       ],
@@ -97,10 +101,6 @@
       ],
       [
         "source_discovery_next_focus_pack",
-        1
-      ],
-      [
-        "source_discovery_next_focus_fallback_queue",
         1
       ],
       [
@@ -134,15 +134,15 @@
         10
       ],
       [
-        "agent-dedupe",
-        10
-      ],
-      [
         "agent-ichiban-action",
         9
       ],
       [
         "agent-ichiban-reissue-dedupe",
+        9
+      ],
+      [
+        "agent-dedupe",
         9
       ],
       [
@@ -182,6 +182,10 @@
         3
       ],
       [
+        "agent-source-fallback",
+        2
+      ],
+      [
         "agent-source-detail-candidate",
         2
       ],
@@ -195,10 +199,6 @@
       ],
       [
         "agent-source-focus-pack",
-        1
-      ],
-      [
-        "agent-source-fallback",
         1
       ],
       [
@@ -3493,7 +3493,7 @@
       "next_machine_step": "confirm_exact_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-52",
+      "batch_id": "015-agent-generic-source-cleanup-53",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -3599,7 +3599,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-53",
+      "batch_id": "015-agent-generic-source-cleanup-54",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -3655,7 +3655,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "015-agent-generic-source-cleanup-54",
+      "batch_id": "015-agent-generic-source-cleanup-55",
       "agent_id": "agent-generic-source-cleanup",
       "workstream": "generic_source_url_cleanup",
       "priority": 15,
@@ -3728,7 +3728,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "018-agent-gotouchi-review-55",
+      "batch_id": "018-agent-gotouchi-review-56",
       "agent_id": "agent-gotouchi-review",
       "workstream": "gotouchi_official_candidate_review",
       "priority": 18,
@@ -3835,7 +3835,7 @@
       "next_machine_step": "review_official_candidates_before_import"
     },
     {
-      "batch_id": "018-agent-ichiban-action-136",
+      "batch_id": "018-agent-ichiban-action-137",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 18,
@@ -4519,7 +4519,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "019-agent-confirmed-import-51",
+      "batch_id": "019-agent-confirmed-import-52",
       "agent_id": "agent-confirmed-import",
       "workstream": "confirmed_import_readiness",
       "priority": 19,
@@ -4725,6 +4725,256 @@
       ],
       "review_state": "manual_review_required",
       "next_machine_step": "manual_review"
+    },
+    {
+      "batch_id": "019-agent-source-fallback-50",
+      "agent_id": "agent-source-fallback",
+      "workstream": "source_discovery_next_focus_fallback_queue",
+      "priority": 19,
+      "title": "포커스팩 exact source 후보 15개 확인",
+      "public_report": "data/source_discovery_next_focus_fallback_queue_public.json",
+      "rows": 15,
+      "recommended_action": "Open domain-limited primary_review_url values first, then confirm exact product detail source URLs.",
+      "acceptance_criteria": [
+        "Accepted manual_confirmed_source_url must be an exact product/detail page, not a search page.",
+        "Product title, image, character, and variant must match the catalog row.",
+        "manual_confirmed_image_url is optional and only allowed after the exact page image is verified.",
+        "Keep auto-apply disabled and run the dry-run importer before any write import."
+      ],
+      "sample_items": [
+        {
+          "review_priority": 1,
+          "catalog_index": 1072,
+          "focus_pack_id": "source-discovery-focus-001",
+          "source_store": "애니메이트",
+          "category": "아크릴 스탠드",
+          "name_ko": "최애의 아이 아크릴 스탠드 (호시노 아이)",
+          "name_ja": "推しの子 アクリルスタンド (星野アイ)",
+          "search_term": "推しの子 アクリルスタンド (星野アイ)",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22",
+          "primary_review_url_kind": "domain_limited_web_search",
+          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22",
+          "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29",
+          "manual_confirmed": false,
+          "manual_confirmed_source_url": "",
+          "manual_confirmed_image_url": "",
+          "manual_evidence_url": "",
+          "manual_note": "",
+          "import_field": "source_url",
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "identity_review_status": "exact_page_match_review_ready",
+          "identity_blockers": [],
+          "requires_metadata_backfill": false,
+          "requires_variant_disambiguation": false,
+          "can_confirm_source_url_after_page_match": true
+        },
+        {
+          "review_priority": 3,
+          "catalog_index": 1083,
+          "focus_pack_id": "source-discovery-focus-001",
+          "source_store": "애니메이트",
+          "category": "아크릴 스탠드",
+          "name_ko": "슬램덩크 아크릴 스탠드 (강백호)",
+          "name_ja": "SLAM DUNK アクリルスタンド (桜木花道)",
+          "search_term": "SLAM DUNK アクリルスタンド (桜木花道)",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%A1%9C%E6%9C%A8%E8%8A%B1%E9%81%93%29%22",
+          "primary_review_url_kind": "domain_limited_web_search",
+          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%A1%9C%E6%9C%A8%E8%8A%B1%E9%81%93%29%22",
+          "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%A1%9C%E6%9C%A8%E8%8A%B1%E9%81%93%29",
+          "manual_confirmed": false,
+          "manual_confirmed_source_url": "",
+          "manual_confirmed_image_url": "",
+          "manual_evidence_url": "",
+          "manual_note": "",
+          "import_field": "source_url",
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "identity_review_status": "exact_page_match_review_ready",
+          "identity_blockers": [],
+          "requires_metadata_backfill": false,
+          "requires_variant_disambiguation": false,
+          "can_confirm_source_url_after_page_match": true
+        },
+        {
+          "review_priority": 4,
+          "catalog_index": 1084,
+          "focus_pack_id": "source-discovery-focus-001",
+          "source_store": "애니메이트",
+          "category": "아크릴 스탠드",
+          "name_ko": "슬램덩크 아크릴 스탠드 (서태웅)",
+          "name_ja": null,
+          "search_term": "SLAM DUNK アクリルスタンド 流川楓",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%B5%81%E5%B7%9D%E6%A5%93%22",
+          "primary_review_url_kind": "domain_limited_web_search",
+          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%B5%81%E5%B7%9D%E6%A5%93%22",
+          "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=SLAM+DUNK+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%B5%81%E5%B7%9D%E6%A5%93",
+          "manual_confirmed": false,
+          "manual_confirmed_source_url": "",
+          "manual_confirmed_image_url": "",
+          "manual_evidence_url": "",
+          "manual_note": "",
+          "import_field": "source_url",
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "identity_review_status": "exact_page_match_review_ready",
+          "identity_blockers": [
+            "missing_name_ja"
+          ],
+          "requires_metadata_backfill": true,
+          "requires_variant_disambiguation": false,
+          "can_confirm_source_url_after_page_match": true
+        },
+        {
+          "review_priority": 5,
+          "catalog_index": 1117,
+          "focus_pack_id": "source-discovery-focus-001",
+          "source_store": "애니메이트",
+          "category": "아크릴 스탠드",
+          "name_ko": "카드캡터 체리 아크릴 스탠드 (사쿠라)",
+          "name_ja": null,
+          "search_term": "カードキャプターさくら アクリルスタンド 木之本桜",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%AB%E3%83%BC%E3%83%89%E3%82%AD%E3%83%A3%E3%83%97%E3%82%BF%E3%83%BC%E3%81%95%E3%81%8F%E3%82%89+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%9C%A8%E4%B9%8B%E6%9C%AC%E6%A1%9C%22",
+          "primary_review_url_kind": "domain_limited_web_search",
+          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%AB%E3%83%BC%E3%83%89%E3%82%AD%E3%83%A3%E3%83%97%E3%82%BF%E3%83%BC%E3%81%95%E3%81%8F%E3%82%89+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%9C%A8%E4%B9%8B%E6%9C%AC%E6%A1%9C%22",
+          "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E3%82%AB%E3%83%BC%E3%83%89%E3%82%AD%E3%83%A3%E3%83%97%E3%82%BF%E3%83%BC%E3%81%95%E3%81%8F%E3%82%89+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E6%9C%A8%E4%B9%8B%E6%9C%AC%E6%A1%9C",
+          "manual_confirmed": false,
+          "manual_confirmed_source_url": "",
+          "manual_confirmed_image_url": "",
+          "manual_evidence_url": "",
+          "manual_note": "",
+          "import_field": "source_url",
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "identity_review_status": "exact_page_match_review_ready",
+          "identity_blockers": [
+            "missing_name_ja"
+          ],
+          "requires_metadata_backfill": true,
+          "requires_variant_disambiguation": false,
+          "can_confirm_source_url_after_page_match": true
+        },
+        {
+          "review_priority": 6,
+          "catalog_index": 1119,
+          "focus_pack_id": "source-discovery-focus-001",
+          "source_store": "애니메이트",
+          "category": "아크릴 스탠드",
+          "name_ko": "세일러문 아크릴 스탠드 (세일러문)",
+          "name_ja": null,
+          "search_term": "セーラームーン アクリルスタンド セーラームーン",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3%22",
+          "primary_review_url_kind": "domain_limited_web_search",
+          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3%22",
+          "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3",
+          "manual_confirmed": false,
+          "manual_confirmed_source_url": "",
+          "manual_confirmed_image_url": "",
+          "manual_evidence_url": "",
+          "manual_note": "",
+          "import_field": "source_url",
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "identity_review_status": "exact_page_match_review_ready",
+          "identity_blockers": [
+            "missing_name_ja"
+          ],
+          "requires_metadata_backfill": true,
+          "requires_variant_disambiguation": false,
+          "can_confirm_source_url_after_page_match": true
+        },
+        {
+          "review_priority": 8,
+          "catalog_index": 1632,
+          "focus_pack_id": "source-discovery-focus-001",
+          "source_store": "애니메이트",
+          "category": "아크릴 스탠드",
+          "name_ko": "주술회전 학원 시리즈 아크릴 스탠드 (이타도리)",
+          "name_ja": "呪術廻戦 学園シリーズ アクリルスタンド (虎杖)",
+          "search_term": "呪術廻戦 学園シリーズ アクリルスタンド (虎杖)",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E8%99%8E%E6%9D%96%29%22",
+          "primary_review_url_kind": "domain_limited_web_search",
+          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E8%99%8E%E6%9D%96%29%22",
+          "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E8%99%8E%E6%9D%96%29",
+          "manual_confirmed": false,
+          "manual_confirmed_source_url": "",
+          "manual_confirmed_image_url": "",
+          "manual_evidence_url": "",
+          "manual_note": "",
+          "import_field": "source_url",
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "identity_review_status": "exact_page_match_review_ready",
+          "identity_blockers": [],
+          "requires_metadata_backfill": false,
+          "requires_variant_disambiguation": false,
+          "can_confirm_source_url_after_page_match": true
+        },
+        {
+          "review_priority": 9,
+          "catalog_index": 2037,
+          "focus_pack_id": "source-discovery-focus-001",
+          "source_store": "애니메이트",
+          "category": "아크릴 스탠드",
+          "name_ko": "리제로 트레이딩 아크릴 (렘 의상시리즈)",
+          "name_ja": "Re:ゼロ トレーディングアクリル (レム衣装)",
+          "search_term": "Re:ゼロ トレーディングアクリル (レム衣装)",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22Re%3A%E3%82%BC%E3%83%AD+%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB+%28%E3%83%AC%E3%83%A0%E8%A1%A3%E8%A3%85%29%22",
+          "primary_review_url_kind": "domain_limited_web_search",
+          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22Re%3A%E3%82%BC%E3%83%AD+%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB+%28%E3%83%AC%E3%83%A0%E8%A1%A3%E8%A3%85%29%22",
+          "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=Re%3A%E3%82%BC%E3%83%AD+%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB+%28%E3%83%AC%E3%83%A0%E8%A1%A3%E8%A3%85%29",
+          "manual_confirmed": false,
+          "manual_confirmed_source_url": "",
+          "manual_confirmed_image_url": "",
+          "manual_evidence_url": "",
+          "manual_note": "",
+          "import_field": "source_url",
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "identity_review_status": "exact_page_match_review_ready",
+          "identity_blockers": [],
+          "requires_metadata_backfill": false,
+          "requires_variant_disambiguation": false,
+          "can_confirm_source_url_after_page_match": true
+        },
+        {
+          "review_priority": 10,
+          "catalog_index": 2066,
+          "focus_pack_id": "source-discovery-focus-001",
+          "source_store": "애니메이트",
+          "category": "아크릴 스탠드",
+          "name_ko": "전생슬 아크릴 스탠드 (베니마루)",
+          "name_ja": "転スラ アクリルスタンド (紅丸)",
+          "search_term": "転スラ アクリルスタンド (紅丸)",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E8%BB%A2%E3%82%B9%E3%83%A9+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E7%B4%85%E4%B8%B8%29%22",
+          "primary_review_url_kind": "domain_limited_web_search",
+          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E8%BB%A2%E3%82%B9%E3%83%A9+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E7%B4%85%E4%B8%B8%29%22",
+          "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E8%BB%A2%E3%82%B9%E3%83%A9+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E7%B4%85%E4%B8%B8%29",
+          "manual_confirmed": false,
+          "manual_confirmed_source_url": "",
+          "manual_confirmed_image_url": "",
+          "manual_evidence_url": "",
+          "manual_note": "",
+          "import_field": "source_url",
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "identity_review_status": "exact_page_match_review_ready",
+          "identity_blockers": [],
+          "requires_metadata_backfill": false,
+          "requires_variant_disambiguation": false,
+          "can_confirm_source_url_after_page_match": true
+        }
+      ],
+      "review_summary": {
+        "source_confirmation_ready_rows": 15,
+        "queue_rows": 17,
+        "manual_entry_template_rows": 17,
+        "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.animate-onlineshop.jp%2Fpn%2F+%22%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E6%98%9F%E9%87%8E%E3%82%A2%E3%82%A4%29%22",
+        "first_primary_review_url_kind": "domain_limited_web_search",
+        "dry_run_command": "python -m tools.import_confirmed_source_discovery_rows --queue server/source_discovery_confirmed_rows.json"
+      },
+      "review_state": "exact_source_discovery_required",
+      "next_machine_step": "find_exact_official_product_source_url"
     },
     {
       "batch_id": "019-agent-image-action-41",
@@ -5445,7 +5695,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-source-image-56",
+      "batch_id": "020-agent-source-image-57",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -5544,7 +5794,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-57",
+      "batch_id": "020-agent-source-image-58",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -5742,7 +5992,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-source-image-58",
+      "batch_id": "020-agent-source-image-59",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -5841,7 +6091,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-59",
+      "batch_id": "020-agent-source-image-60",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -5940,7 +6190,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-60",
+      "batch_id": "020-agent-source-image-61",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -6039,7 +6289,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-61",
+      "batch_id": "020-agent-source-image-62",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -6138,7 +6388,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-62",
+      "batch_id": "020-agent-source-image-63",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -7887,7 +8137,7 @@
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "020-agent-source-fallback-50",
+      "batch_id": "020-agent-source-fallback-51",
       "agent_id": "agent-source-fallback",
       "workstream": "source_discovery_next_focus_fallback_queue",
       "priority": 20,
@@ -8149,7 +8399,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "020-agent-source-image-63",
+      "batch_id": "020-agent-source-image-64",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -10356,7 +10606,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-ichiban-action-137",
+      "batch_id": "020-agent-ichiban-action-138",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_work_order",
       "priority": 20,
@@ -10674,7 +10924,7 @@
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "022-agent-animation-category-action-156",
+      "batch_id": "022-agent-animation-category-action-157",
       "agent_id": "agent-animation-category-action",
       "workstream": "animation_category_action_queue",
       "priority": 22,
@@ -11146,7 +11396,7 @@
       "next_machine_step": "fill_confirmed_animation_category_mapping_templates"
     },
     {
-      "batch_id": "022-agent-source-detail-candidate-74",
+      "batch_id": "022-agent-source-detail-candidate-75",
       "agent_id": "agent-source-detail-candidate",
       "workstream": "source_detail_candidate_action_queue",
       "priority": 22,
@@ -11744,7 +11994,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "028-agent-source-action-64",
+      "batch_id": "028-agent-source-action-65",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -12115,7 +12365,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-65",
+      "batch_id": "028-agent-source-action-66",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -12486,7 +12736,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-66",
+      "batch_id": "028-agent-source-action-67",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -12857,7 +13107,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-67",
+      "batch_id": "028-agent-source-action-68",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -13228,7 +13478,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-68",
+      "batch_id": "028-agent-source-action-69",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -13599,7 +13849,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-69",
+      "batch_id": "028-agent-source-action-70",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -13970,7 +14220,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-70",
+      "batch_id": "028-agent-source-action-71",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -14341,7 +14591,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-72",
+      "batch_id": "028-agent-source-action-73",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -14712,7 +14962,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-73",
+      "batch_id": "028-agent-source-action-74",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -15083,7 +15333,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-71",
+      "batch_id": "028-agent-source-action-72",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -15377,7 +15627,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "030-agent-ichiban-action-138",
+      "batch_id": "030-agent-ichiban-action-139",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_work_order",
       "priority": 30,
@@ -15436,7 +15686,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "030-agent-source-discovery-76",
+      "batch_id": "030-agent-source-discovery-77",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -15535,7 +15785,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-77",
+      "batch_id": "030-agent-source-discovery-78",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -15634,7 +15884,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-78",
+      "batch_id": "030-agent-source-discovery-79",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -15733,7 +15983,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-79",
+      "batch_id": "030-agent-source-discovery-80",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -15832,7 +16082,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-80",
+      "batch_id": "030-agent-source-discovery-81",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -15931,7 +16181,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-82",
+      "batch_id": "030-agent-source-discovery-83",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -16030,7 +16280,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-83",
+      "batch_id": "030-agent-source-discovery-84",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -16129,7 +16379,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-84",
+      "batch_id": "030-agent-source-discovery-85",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -16228,7 +16478,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-85",
+      "batch_id": "030-agent-source-discovery-86",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -16327,7 +16577,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-86",
+      "batch_id": "030-agent-source-discovery-87",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -17071,7 +17321,7 @@
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "030-agent-source-discovery-81",
+      "batch_id": "030-agent-source-discovery-82",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -17170,7 +17420,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-87",
+      "batch_id": "030-agent-source-discovery-88",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -18602,7 +18852,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "031-agent-source-starter-157",
+      "batch_id": "031-agent-source-starter-158",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -18711,7 +18961,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-158",
+      "batch_id": "031-agent-source-starter-159",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -18820,7 +19070,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-159",
+      "batch_id": "031-agent-source-starter-160",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -18929,7 +19179,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-160",
+      "batch_id": "031-agent-source-starter-161",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -19038,7 +19288,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-161",
+      "batch_id": "031-agent-source-starter-162",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -19147,7 +19397,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-162",
+      "batch_id": "031-agent-source-starter-163",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -19256,7 +19506,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-163",
+      "batch_id": "031-agent-source-starter-164",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -19365,7 +19615,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-164",
+      "batch_id": "031-agent-source-starter-165",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -19474,7 +19724,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-165",
+      "batch_id": "031-agent-source-starter-166",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -19583,7 +19833,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-166",
+      "batch_id": "031-agent-source-starter-167",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -19692,7 +19942,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "032-agent-source-detail-candidate-75",
+      "batch_id": "032-agent-source-detail-candidate-76",
       "agent_id": "agent-source-detail-candidate",
       "workstream": "source_detail_candidate_action_queue",
       "priority": 32,
@@ -20072,7 +20322,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "038-agent-ichiban-action-139",
+      "batch_id": "038-agent-ichiban-action-140",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 38,
@@ -21949,7 +22199,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "045-agent-metadata-action-88",
+      "batch_id": "045-agent-metadata-action-89",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -22065,7 +22315,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-94",
+      "batch_id": "045-agent-metadata-action-95",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -22181,7 +22431,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-89",
+      "batch_id": "045-agent-metadata-action-90",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -22297,7 +22547,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-90",
+      "batch_id": "045-agent-metadata-action-91",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -22413,7 +22663,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-91",
+      "batch_id": "045-agent-metadata-action-92",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -22529,7 +22779,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-92",
+      "batch_id": "045-agent-metadata-action-93",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -22645,7 +22895,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-93",
+      "batch_id": "045-agent-metadata-action-94",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -22761,7 +23011,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-140",
+      "batch_id": "048-agent-ichiban-action-141",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -23577,7 +23827,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-141",
+      "batch_id": "048-agent-ichiban-action-142",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -24411,7 +24661,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-142",
+      "batch_id": "048-agent-ichiban-action-143",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -25251,7 +25501,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-143",
+      "batch_id": "048-agent-ichiban-action-144",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -26091,7 +26341,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-144",
+      "batch_id": "048-agent-ichiban-action-145",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -26522,7 +26772,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "050-agent-metadata-96",
+      "batch_id": "050-agent-metadata-97",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -26621,7 +26871,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "050-agent-metadata-99",
+      "batch_id": "050-agent-metadata-100",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -26720,7 +26970,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "050-agent-metadata-97",
+      "batch_id": "050-agent-metadata-98",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -26918,7 +27168,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "050-agent-metadata-98",
+      "batch_id": "050-agent-metadata-99",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -27017,7 +27267,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "051-agent-ichiban-campaign-first-117",
+      "batch_id": "051-agent-ichiban-campaign-first-118",
       "agent_id": "agent-ichiban-campaign-first",
       "workstream": "ichiban_kuji_campaign_first_reissue_review",
       "priority": 51,
@@ -27118,7 +27368,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "052-agent-ichiban-campaign-first-118",
+      "batch_id": "052-agent-ichiban-campaign-first-119",
       "agent_id": "agent-ichiban-campaign-first",
       "workstream": "ichiban_kuji_campaign_first_reissue_review",
       "priority": 52,
@@ -27213,7 +27463,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "053-agent-ichiban-campaign-first-119",
+      "batch_id": "053-agent-ichiban-campaign-first-120",
       "agent_id": "agent-ichiban-campaign-first",
       "workstream": "ichiban_kuji_campaign_first_reissue_review",
       "priority": 53,
@@ -27288,7 +27538,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "054-agent-ichiban-reissue-dedupe-108",
+      "batch_id": "054-agent-ichiban-reissue-dedupe-109",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 54,
@@ -27803,7 +28053,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "054-agent-ichiban-campaign-first-120",
+      "batch_id": "054-agent-ichiban-campaign-first-121",
       "agent_id": "agent-ichiban-campaign-first",
       "workstream": "ichiban_kuji_campaign_first_reissue_review",
       "priority": 54,
@@ -27874,7 +28124,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "055-agent-metadata-action-95",
+      "batch_id": "055-agent-metadata-action-96",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 55,
@@ -27990,7 +28240,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "056-agent-ichiban-reissue-dedupe-109",
+      "batch_id": "056-agent-ichiban-reissue-dedupe-110",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 56,
@@ -28040,7 +28290,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "057-agent-ichiban-reissue-dedupe-110",
+      "batch_id": "057-agent-ichiban-reissue-dedupe-111",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 57,
@@ -28090,7 +28340,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "058-agent-ichiban-reissue-dedupe-111",
+      "batch_id": "058-agent-ichiban-reissue-dedupe-112",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 58,
@@ -28140,7 +28390,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "059-agent-ichiban-reissue-dedupe-112",
+      "batch_id": "059-agent-ichiban-reissue-dedupe-113",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 59,
@@ -28190,7 +28440,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "060-agent-metadata-103",
+      "batch_id": "060-agent-metadata-104",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -28289,7 +28539,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-100",
+      "batch_id": "060-agent-metadata-101",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -28388,7 +28638,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-101",
+      "batch_id": "060-agent-metadata-102",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -28487,7 +28737,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-102",
+      "batch_id": "060-agent-metadata-103",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -28586,7 +28836,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-ichiban-reissue-dedupe-113",
+      "batch_id": "060-agent-ichiban-reissue-dedupe-114",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 60,
@@ -28636,7 +28886,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "061-agent-ichiban-reissue-dedupe-114",
+      "batch_id": "061-agent-ichiban-reissue-dedupe-115",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 61,
@@ -28686,7 +28936,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "062-agent-ichiban-reissue-dedupe-115",
+      "batch_id": "062-agent-ichiban-reissue-dedupe-116",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 62,
@@ -28736,7 +28986,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "063-agent-ichiban-reissue-dedupe-116",
+      "batch_id": "063-agent-ichiban-reissue-dedupe-117",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 63,
@@ -28786,7 +29036,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "070-agent-metadata-104",
+      "batch_id": "070-agent-metadata-105",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -28885,7 +29135,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "070-agent-metadata-105",
+      "batch_id": "070-agent-metadata-106",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -28984,7 +29234,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "070-agent-metadata-106",
+      "batch_id": "070-agent-metadata-107",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -29083,7 +29333,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "070-agent-metadata-107",
+      "batch_id": "070-agent-metadata-108",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
@@ -29182,7 +29432,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "085-agent-ichiban-prize-policy-152",
+      "batch_id": "085-agent-ichiban-prize-policy-153",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 85,
@@ -29499,7 +29749,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "085-agent-ichiban-prize-policy-151",
+      "batch_id": "085-agent-ichiban-prize-policy-152",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 85,
@@ -29721,7 +29971,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "085-agent-dedupe-action-121",
+      "batch_id": "085-agent-dedupe-action-122",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -30744,7 +30994,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-122",
+      "batch_id": "085-agent-dedupe-action-123",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -31765,7 +32015,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-123",
+      "batch_id": "085-agent-dedupe-action-124",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -32788,7 +33038,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-124",
+      "batch_id": "085-agent-dedupe-action-125",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -33803,7 +34053,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-125",
+      "batch_id": "085-agent-dedupe-action-126",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -34771,7 +35021,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "086-agent-ichiban-prize-policy-153",
+      "batch_id": "086-agent-ichiban-prize-policy-154",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 86,
@@ -35083,7 +35333,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "087-agent-ichiban-prize-policy-154",
+      "batch_id": "087-agent-ichiban-prize-policy-155",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 87,
@@ -35403,7 +35653,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "088-agent-ichiban-prize-policy-155",
+      "batch_id": "088-agent-ichiban-prize-policy-156",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 88,
@@ -35718,7 +35968,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "090-agent-dedupe-126",
+      "batch_id": "090-agent-dedupe-127",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -35757,7 +36007,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-127",
+      "batch_id": "090-agent-dedupe-128",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -35796,7 +36046,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-128",
+      "batch_id": "090-agent-dedupe-129",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -35835,7 +36085,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-129",
+      "batch_id": "090-agent-dedupe-130",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -35874,7 +36124,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-130",
+      "batch_id": "090-agent-dedupe-131",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -35913,7 +36163,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-131",
+      "batch_id": "090-agent-dedupe-132",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -35952,7 +36202,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-132",
+      "batch_id": "090-agent-dedupe-133",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -35991,7 +36241,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-133",
+      "batch_id": "090-agent-dedupe-134",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -36030,7 +36280,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-134",
+      "batch_id": "090-agent-dedupe-135",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -36062,45 +36312,6 @@
           "category": "인형",
           "source_store": "치이카와 마켓",
           "source_url": "https://chiikawamarket.jp/ko/products/4571609359104",
-          "official_search_url": ""
-        }
-      ],
-      "review_state": "manual_dedupe_review_required",
-      "next_machine_step": "compare_duplicate_group_evidence"
-    },
-    {
-      "batch_id": "090-agent-dedupe-135",
-      "agent_id": "agent-dedupe",
-      "workstream": "deduplication_review",
-      "priority": 90,
-      "title": "중복 후보 검토: barcode",
-      "public_report": "data/catalog_deduplication_public.json",
-      "rows": 2,
-      "recommended_action": "Review keep/drop suggestions and prepare a manual-only dedupe decision.",
-      "acceptance_criteria": [
-        "Variants, alternate prizes, and campaign-specific rows are preserved.",
-        "Only evidence-backed exact duplicates are proposed for merge/delete.",
-        "Auto-delete remains disabled."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 585,
-          "name_ko": "치이카와 파크 푸와코로 인형 S (쿠리만쥬)",
-          "name_ja": "ちいかわパーク ふわころ人形 S (くりまんじゅう)",
-          "series_name": null,
-          "category": "인형",
-          "source_store": "치이카와 파크",
-          "source_url": "https://chiikawamarket.jp/ko/products/4571609359111",
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 3641,
-          "name_ko": "치이카와 파크 푸와코로 인형 S (밤만쥬)",
-          "name_ja": "ちいかわ ちいかわパーク ぷわころぬいぐるみS（くりまんじゅう）",
-          "series_name": null,
-          "category": "인형",
-          "source_store": "치이카와 마켓",
-          "source_url": "https://chiikawamarket.jp/ko/products/4571609359111",
           "official_search_url": ""
         }
       ],

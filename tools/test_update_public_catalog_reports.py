@@ -1515,6 +1515,12 @@ class PublicCatalogReportTests(unittest.TestCase):
             batch
             for batch in batches
             if batch.get("workstream") == "source_discovery_next_focus_fallback_queue"
+            and batch.get("title") != "포커스팩 exact source 후보 15개 확인"
+        )
+        fallback_ready_agent_batch = next(
+            batch
+            for batch in batches
+            if batch.get("title") == "포커스팩 exact source 후보 15개 확인"
         )
         self.assertEqual(
             fallback_agent_batch["review_summary"]["first_primary_review_url"],
@@ -1526,6 +1532,23 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertTrue(
             any(item.get("primary_review_url") for item in fallback_agent_batch.get("sample_items", []))
+        )
+        self.assertEqual(
+            fallback_ready_agent_batch.get("rows"),
+            source_next_focus_fallback_summary.get("source_confirmation_ready_rows"),
+        )
+        self.assertEqual(
+            fallback_ready_agent_batch.get("review_summary", {}).get(
+                "manual_entry_template_rows"
+            ),
+            source_next_focus_fallback_summary.get("manual_entry_template_rows"),
+        )
+        self.assertTrue(
+            all(
+                item.get("identity_review_status") == "exact_page_match_review_ready"
+                for item in fallback_ready_agent_batch.get("sample_items", [])
+                if isinstance(item, dict)
+            )
         )
         ichiban_next_campaign_patch_batch = next(
             batch

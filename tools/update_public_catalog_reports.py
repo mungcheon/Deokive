@@ -4916,6 +4916,45 @@ def build_agent_work_queue_public(
     fallback_review_rows = [
         row for row in source_next_focus_fallback_queue.get("review_table", []) if isinstance(row, dict)
     ]
+    fallback_source_ready_rows = [
+        row
+        for row in fallback_review_rows
+        if row.get("identity_review_status") == "exact_page_match_review_ready"
+        and row.get("primary_review_url")
+    ]
+    if fallback_source_ready_rows:
+        add_batch(
+            agent_id="agent-source-fallback",
+            workstream="source_discovery_next_focus_fallback_queue",
+            priority=19,
+            title="포커스팩 exact source 후보 15개 확인",
+            public_report=SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE,
+            rows=len(fallback_source_ready_rows),
+            recommended_action=(
+                "Open domain-limited primary_review_url values first, then confirm exact product detail source URLs."
+            ),
+            acceptance_criteria=[
+                "Accepted manual_confirmed_source_url must be an exact product/detail page, not a search page.",
+                "Product title, image, character, and variant must match the catalog row.",
+                "manual_confirmed_image_url is optional and only allowed after the exact page image is verified.",
+                "Keep auto-apply disabled and run the dry-run importer before any write import.",
+            ],
+            samples=fallback_source_ready_rows,
+            review_summary={
+                "source_confirmation_ready_rows": len(fallback_source_ready_rows),
+                "queue_rows": int(fallback_summary.get("queue_rows") or len(fallback_review_rows)),
+                "manual_entry_template_rows": int(
+                    fallback_summary.get("manual_entry_template_rows") or 0
+                ),
+                "first_primary_review_url": fallback_summary.get("first_primary_review_url"),
+                "first_primary_review_url_kind": fallback_summary.get("first_primary_review_url_kind"),
+                "dry_run_command": (
+                    source_next_focus_fallback_queue.get("manual_entry_template", {}).get(
+                        "dry_run_command"
+                    )
+                ),
+            },
+        )
     if fallback_review_rows:
         add_batch(
             agent_id="agent-source-fallback",
