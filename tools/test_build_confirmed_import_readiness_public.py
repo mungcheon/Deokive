@@ -17,6 +17,7 @@ import import_confirmed_metadata_rows
 import import_confirmed_official_detail_matches
 import import_confirmed_requested_focus_rows
 import import_confirmed_source_discovery_rows
+import import_confirmed_variant_metadata_backfill_rows
 
 
 def _write_json(path: Path, payload) -> Path:
@@ -70,6 +71,16 @@ class BuildConfirmedImportReadinessPublicTest(unittest.TestCase):
         self.assertEqual(
             focused["public_action_next_step"],
             "confirm_focused_fallback_source_urls_then_run_import_confirmed_source_discovery_rows",
+        )
+
+        variant_metadata = readiness.WORKFLOWS["variant_metadata"]
+        self.assertEqual(
+            variant_metadata["public_workstream"],
+            "catalog_variant_metadata_enrichment",
+        )
+        self.assertEqual(
+            variant_metadata["public_action_next_step"],
+            "fill_variant_metadata_confirmed_rows_then_run_import_confirmed_variant_metadata_backfill_rows",
         )
 
         image = readiness.WORKFLOWS["catalog_image"]
@@ -141,6 +152,7 @@ class BuildConfirmedImportReadinessPublicTest(unittest.TestCase):
             "source_discovery": import_confirmed_source_discovery_rows,
             "catalog_image": import_confirmed_image_attachment_rows,
             "focus_image": import_confirmed_requested_focus_rows,
+            "variant_metadata": import_confirmed_variant_metadata_backfill_rows,
             "ichiban_metadata": import_confirmed_ichiban_metadata_rows,
             "animation_category": import_confirmed_animation_category_rows,
             "deduplication": import_confirmed_dedupe_decisions,

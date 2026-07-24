@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 import import_confirmed_dedupe_decisions
+import import_confirmed_variant_metadata_backfill_rows
 
 try:
     sys.stdout.reconfigure(encoding="utf-8")
@@ -65,6 +66,13 @@ WORKFLOWS = {
         "public_action_queue": DATA / "source_discovery_next_focus_fallback_queue_public.json",
         "public_action_rows_key": "queue_rows",
         "public_action_next_step": "confirm_focused_fallback_source_urls_then_run_import_confirmed_source_discovery_rows",
+    },
+    "variant_metadata": {
+        "confirmed": import_confirmed_variant_metadata_backfill_rows.DEFAULT_QUEUE,
+        "template": import_confirmed_variant_metadata_backfill_rows.DEFAULT_QUEUE,
+        "report": import_confirmed_variant_metadata_backfill_rows.DEFAULT_REPORT,
+        "public_workstream": "catalog_variant_metadata_enrichment",
+        "public_action_next_step": "fill_variant_metadata_confirmed_rows_then_run_import_confirmed_variant_metadata_backfill_rows",
     },
     "catalog_image": {
         "confirmed": SERVER / "catalog_image_attachment_confirmed_rows.json",
