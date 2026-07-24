@@ -10164,6 +10164,24 @@ def update_reports(write: bool) -> dict[str, Any]:
             "template_candidate_prefilled_rows": image_source_url_confirmed_template[
                 "summary"
             ].get("candidate_prefilled_rows", 0),
+            "manual_image_url_slot_rows": image_source_url_confirmed_template[
+                "summary"
+            ].get("manual_image_url_slot_rows", 0),
+            "manual_image_url_filled_rows": image_source_url_confirmed_template[
+                "summary"
+            ].get("manual_image_url_filled_rows", 0),
+            "candidate_image_url_hint_rows": image_source_url_confirmed_template[
+                "summary"
+            ].get("candidate_image_url_hint_rows", 0),
+            "source_and_image_manual_ready_rows": image_source_url_confirmed_template[
+                "summary"
+            ].get("source_and_image_manual_ready_rows", 0),
+            "manual_image_note_rows": image_source_url_confirmed_template[
+                "summary"
+            ].get("manual_image_note_rows", 0),
+            "manual_image_url_slot_coverage": image_source_url_confirmed_template[
+                "summary"
+            ].get("manual_image_url_slot_coverage", 0),
             "covered_rows": source_url_split["covered_rows"],
             "uncovered_rows": max(
                 0,
@@ -11114,6 +11132,30 @@ def update_reports(write: bool) -> dict[str, Any]:
                     "source_url_update_execution_gate",
                     {},
                 ).get("template_candidate_prefilled_rows", 0),
+                "manual_image_url_slot_rows": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("manual_image_url_slot_rows", 0),
+                "manual_image_url_filled_rows": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("manual_image_url_filled_rows", 0),
+                "candidate_image_url_hint_rows": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("candidate_image_url_hint_rows", 0),
+                "source_and_image_manual_ready_rows": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("source_and_image_manual_ready_rows", 0),
+                "manual_image_note_rows": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("manual_image_note_rows", 0),
+                "manual_image_url_slot_coverage": target.get(
+                    "source_url_update_execution_gate",
+                    {},
+                ).get("manual_image_url_slot_coverage", 0),
                 "manual_search_required_rows": target.get(
                     "source_url_update_execution_gate",
                     {},

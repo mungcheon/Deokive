@@ -615,6 +615,12 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(source_gate["source_url_update_required_rows"], 50)
         self.assertEqual(source_gate["template_rows"], 50)
         self.assertEqual(source_gate["template_confirmed_rows"], 0)
+        self.assertEqual(source_gate["manual_image_url_slot_rows"], 50)
+        self.assertEqual(source_gate["manual_image_url_filled_rows"], 0)
+        self.assertEqual(source_gate["candidate_image_url_hint_rows"], 0)
+        self.assertEqual(source_gate["source_and_image_manual_ready_rows"], 0)
+        self.assertEqual(source_gate["manual_image_note_rows"], 0)
+        self.assertEqual(source_gate["manual_image_url_slot_coverage"], 1.0)
         self.assertEqual(source_gate["covered_rows"], 50)
         self.assertEqual(source_gate["uncovered_rows"], 0)
         self.assertEqual(source_gate["manual_search_required_rows"], 42)
@@ -1580,6 +1586,30 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             pillars["source_url_updates"]["template_candidate_prefilled_rows"],
             0,
+        )
+        self.assertEqual(
+            pillars["source_url_updates"]["manual_image_url_slot_rows"],
+            50,
+        )
+        self.assertEqual(
+            pillars["source_url_updates"]["manual_image_url_filled_rows"],
+            0,
+        )
+        self.assertEqual(
+            pillars["source_url_updates"]["candidate_image_url_hint_rows"],
+            0,
+        )
+        self.assertEqual(
+            pillars["source_url_updates"]["source_and_image_manual_ready_rows"],
+            0,
+        )
+        self.assertEqual(
+            pillars["source_url_updates"]["manual_image_note_rows"],
+            0,
+        )
+        self.assertEqual(
+            pillars["source_url_updates"]["manual_image_url_slot_coverage"],
+            1.0,
         )
         self.assertEqual(
             pillars["source_url_updates"]["manual_search_required_rows"],

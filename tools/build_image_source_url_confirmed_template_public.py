@@ -359,6 +359,19 @@ def build_template(
             by_candidate_status[str(row.get("candidate_status") or "no_candidate_report")] += 1
             by_review_lane[str(row.get("source_url_review_lane") or "")] += 1
 
+    manual_image_url_slot_rows = sum(1 for item in items if "manual_image_url" in item)
+    manual_image_url_filled_rows = sum(1 for item in items if _compact_text(item.get("manual_image_url")))
+    candidate_image_url_hint_rows = sum(1 for item in items if _compact_text(item.get("candidate_image_url")))
+    source_and_image_manual_ready_rows = sum(
+        1
+        for item in items
+        if item.get("manual_confirmed") is True
+        and _compact_text(item.get("manual_value"))
+        and _compact_text(item.get("manual_image_url"))
+    )
+    manual_image_note_rows = sum(1 for item in items if _compact_text(item.get("manual_image_note")))
+    manual_image_url_slot_coverage = round(manual_image_url_slot_rows / len(items), 4) if items else 1.0
+
     return {
         "schema_version": 1,
         "generated_at": generated_at or now_utc(),
@@ -366,6 +379,12 @@ def build_template(
         "summary": {
             "template_items": len(items),
             "manual_confirmed_rows": 0,
+            "manual_image_url_slot_rows": manual_image_url_slot_rows,
+            "manual_image_url_filled_rows": manual_image_url_filled_rows,
+            "candidate_image_url_hint_rows": candidate_image_url_hint_rows,
+            "source_and_image_manual_ready_rows": source_and_image_manual_ready_rows,
+            "manual_image_note_rows": manual_image_note_rows,
+            "manual_image_url_slot_coverage": manual_image_url_slot_coverage,
             "batch_count": len([key for key in by_batch if key]),
             "by_batch": [[key, value] for key, value in by_batch.most_common(30) if key],
             "by_source_store": [[key, value] for key, value in by_store.most_common(20) if key],

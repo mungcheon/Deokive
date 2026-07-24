@@ -100,6 +100,12 @@ class BuildImageSourceUrlConfirmedTemplatePublicTest(unittest.TestCase):
         self.assertEqual(report["generated_at"], "2026-07-22T00:00:00Z")
         self.assertEqual(report["summary"]["template_items"], 2)
         self.assertEqual(report["summary"]["manual_confirmed_rows"], 0)
+        self.assertEqual(report["summary"]["manual_image_url_slot_rows"], 2)
+        self.assertEqual(report["summary"]["manual_image_url_filled_rows"], 0)
+        self.assertEqual(report["summary"]["candidate_image_url_hint_rows"], 0)
+        self.assertEqual(report["summary"]["source_and_image_manual_ready_rows"], 0)
+        self.assertEqual(report["summary"]["manual_image_note_rows"], 0)
+        self.assertEqual(report["summary"]["manual_image_url_slot_coverage"], 1.0)
         self.assertEqual(
             report["summary"]["by_source_store"],
             [["Stellive Store", 1], ["Weverse Shop", 1]],
