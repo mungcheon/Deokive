@@ -494,6 +494,98 @@ def _campaign_review_readiness(
     }
 
 
+def _blocking_dashboard(
+    summary: dict[str, Any],
+    *,
+    campaign_review_readiness: dict[str, Any],
+    next_campaign_review_batch: list[dict[str, Any]],
+) -> dict[str, Any]:
+    item_rows = int(summary.get("item_template_rows") or 0)
+    campaign_rows = int(summary.get("campaign_template_rows") or 0)
+    campaign_batch_rows = int(summary.get("campaign_review_batch_rows") or 0)
+    price_blocked_campaign_rows = int(
+        summary.get("campaign_review_batch_price_policy_blocked_rows") or 0
+    )
+    missing_regular_price_rows = int(
+        summary.get("campaign_review_batch_non_exception_missing_price_sample_rows") or 0
+    )
+    zero_price_exception_rows = int(
+        summary.get("campaign_review_batch_zero_price_exception_sample_rows") or 0
+    )
+    missing_evidence_campaigns = int(
+        campaign_review_readiness.get("campaigns_missing_evidence_urls") or 0
+    )
+    manual_required = bool(item_rows or campaign_rows)
+    first_campaign = next_campaign_review_batch[0] if next_campaign_review_batch else {}
+
+    if missing_evidence_campaigns:
+        status = "campaign_evidence_url_required"
+        next_safe_phase = "fill_campaign_evidence_urls_before_reissue_decisions"
+    elif price_blocked_campaign_rows:
+        status = "campaign_review_ready_price_policy_blocked"
+        next_safe_phase = "confirm_campaign_prices_then_review_reissue_identity"
+    elif campaign_batch_rows:
+        status = "campaign_review_ready_manual_only"
+        next_safe_phase = "review_campaign_pages_first_then_apply_campaign_decision"
+    else:
+        status = "no_reissue_decision_rows"
+        next_safe_phase = "no_reissue_decision_needed"
+
+    blocked_until: list[str] = []
+    if missing_evidence_campaigns:
+        blocked_until.append("official_campaign_evidence_urls_confirmed")
+    if price_blocked_campaign_rows:
+        blocked_until.append("non_exception_official_prices_confirmed")
+    if manual_required:
+        blocked_until.append("campaign_reissue_or_duplicate_decisions_manually_confirmed")
+
+    return {
+        "status": status,
+        "manual_review_required_before_mutation": manual_required,
+        "auto_merge_enabled": False,
+        "auto_delete_enabled": False,
+        "next_safe_phase": next_safe_phase,
+        "blocked_until": blocked_until,
+        "campaign_template_rows": campaign_rows,
+        "item_template_rows": item_rows,
+        "campaign_review_batch_rows": campaign_batch_rows,
+        "campaign_review_batch_item_work_order_rows": int(
+            summary.get("campaign_review_batch_item_work_order_rows") or 0
+        ),
+        "campaign_review_batch_visible_item_preview_rows": int(
+            summary.get("campaign_review_batch_visible_item_preview_rows") or 0
+        ),
+        "campaigns_with_evidence_urls": int(
+            campaign_review_readiness.get("campaigns_with_evidence_urls") or 0
+        ),
+        "campaigns_missing_evidence_urls": missing_evidence_campaigns,
+        "price_policy_blocked_campaign_rows": price_blocked_campaign_rows,
+        "non_exception_missing_price_sample_rows": missing_regular_price_rows,
+        "zero_price_exception_sample_rows": zero_price_exception_rows,
+        "last_one_double_chance_expected_price_jpy": 0,
+        "first_campaign_review": {
+            "campaign_work_order_id": first_campaign.get("campaign_work_order_id"),
+            "first_evidence_url": first_campaign.get("first_evidence_url"),
+            "item_work_order_count": int(first_campaign.get("item_work_order_count") or 0),
+            "visible_item_review_preview_rows": int(
+                first_campaign.get("visible_item_review_preview_rows") or 0
+            ),
+            "price_policy_blocks_keep_drop": bool(
+                (first_campaign.get("price_policy_review") or {}).get(
+                    "blocks_keep_drop_decision"
+                )
+            ),
+        }
+        if first_campaign
+        else {},
+        "decision_order": campaign_review_readiness.get("decision_order") or [],
+        "safety_note": (
+            "Review campaign pages first; do not merge or delete rows until official evidence "
+            "confirms whether the pair is a true reissue/campaign wave or an exact duplicate."
+        ),
+    }
+
+
 def build_report(action_queue: dict[str, Any], *, generated_at: str | None = None) -> dict[str, Any]:
     item_templates = [_item_template(row) for row in _safe_list(action_queue.get("ichiban_reissue_work_order"))]
     campaign_templates = [
@@ -693,6 +785,11 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
         "manual_review_required_before_mutation": True,
         "recommended_next_action": "fill_campaign_decisions_first_then_confirm_item_keep_drop_or_keep_separate",
     }
+    blocking_dashboard = _blocking_dashboard(
+        summary,
+        campaign_review_readiness=campaign_review_readiness,
+        next_campaign_review_batch=next_campaign_review_batch,
+    )
 
     return {
         "schema_version": 1,
@@ -700,6 +797,7 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
         "scope": "ichiban_kuji_reissue_decision_template",
         "source_report": str(DEFAULT_INPUT.relative_to(ROOT)).replace("\\", "/"),
         "summary": summary,
+        "blocking_dashboard": blocking_dashboard,
         "instructions": [
             "Review campaign_templates first when one campaign URL pair covers many item work orders.",
             "Set manual_confirmed=true only after checking official campaign pages and evidence_urls.",

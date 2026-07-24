@@ -1089,6 +1089,55 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertTrue(
             reissue_decision_template["manual_review_required_before_mutation"]
         )
+        reissue_blocking_dashboard = reissue_decision_template["blocking_dashboard"]
+        self.assertEqual(
+            reissue_blocking_dashboard["status"],
+            "campaign_review_ready_price_policy_blocked",
+        )
+        self.assertEqual(
+            reissue_blocking_dashboard["next_safe_phase"],
+            "confirm_campaign_prices_then_review_reissue_identity",
+        )
+        self.assertEqual(
+            reissue_blocking_dashboard["campaign_template_rows"],
+            reissue_decision_template["campaign_template_rows"],
+        )
+        self.assertEqual(
+            reissue_blocking_dashboard["item_template_rows"],
+            reissue_decision_template["item_template_rows"],
+        )
+        self.assertEqual(
+            reissue_blocking_dashboard["campaign_review_batch_item_work_order_rows"],
+            reissue_decision_template["campaign_review_batch_item_work_order_rows"],
+        )
+        self.assertEqual(
+            reissue_blocking_dashboard["price_policy_blocked_campaign_rows"],
+            1,
+        )
+        self.assertEqual(
+            reissue_blocking_dashboard["non_exception_missing_price_sample_rows"],
+            8,
+        )
+        self.assertEqual(
+            reissue_blocking_dashboard["zero_price_exception_sample_rows"],
+            2,
+        )
+        self.assertEqual(
+            reissue_blocking_dashboard["last_one_double_chance_expected_price_jpy"],
+            0,
+        )
+        self.assertEqual(
+            reissue_blocking_dashboard["campaigns_missing_evidence_urls"],
+            0,
+        )
+        self.assertTrue(
+            reissue_blocking_dashboard["manual_review_required_before_mutation"]
+        )
+        self.assertFalse(reissue_blocking_dashboard["auto_merge_enabled"])
+        self.assertFalse(reissue_blocking_dashboard["auto_delete_enabled"])
+        self.assertTrue(
+            reissue_blocking_dashboard["first_campaign_review"]["first_evidence_url"]
+        )
         self.assertEqual(quality["source_discovery_completion_roadmap"]["current_focus_pack_rows"], 20)
         self.assertEqual(
             quality["source_discovery_completion_roadmap"]["completion_readiness_status"],

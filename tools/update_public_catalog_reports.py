@@ -11031,6 +11031,10 @@ def update_reports(write: bool) -> dict[str, Any]:
         target["ichiban_kuji_reissue_decision_template"] = {
             "public_report": f"data/{ICHIIBAN_KUJI_REISSUE_DECISION_TEMPLATE.name}",
             **ichiban_kuji_reissue_decision_template.get("summary", {}),
+            "blocking_dashboard": ichiban_kuji_reissue_decision_template.get(
+                "blocking_dashboard",
+                {},
+            ),
         }
         target["ichiban_kuji_historical_roadmap"] = {
             "public_report": f"data/{ICHIIBAN_KUJI_HISTORICAL_ROADMAP.name}",
