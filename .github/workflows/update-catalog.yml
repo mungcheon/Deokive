@@ -28,7 +28,6 @@ jobs:
           python tools/build_animation_category_review_batches_public.py
           python tools/build_ichiban_kuji_metadata_review_batches_public.py
           python tools/build_requested_focus_review_batches_public.py
-          python tools/build_confirmed_import_readiness_public.py
           python tools/build_animate_missing_image_search_public.py --write
           python tools/build_goodsmile_missing_image_search_public.py --write
           python tools/build_kotobukiya_movic_missing_image_search_public.py --write
@@ -49,6 +48,7 @@ jobs:
           python tools/build_source_discovery_next_focus_variant_metadata_backfill_public.py --write
           python tools/build_source_discovery_next_focus_variant_metadata_confirmed_template_public.py --write
           python tools/import_confirmed_variant_metadata_backfill_rows.py
+          python tools/build_confirmed_import_readiness_public.py
           python tools/audit_confirmed_import_queues.py
           python tools/build_source_discovery_store_bottlenecks_public.py --write
           python tools/build_ensky_cache_candidate_action_queue_public.py --write
