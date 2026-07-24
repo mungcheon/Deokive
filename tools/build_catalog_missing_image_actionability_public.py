@@ -466,6 +466,7 @@ def build_work_order(
     source_store_priority: list[dict[str, Any]],
     source_discovery_work_packs: list[dict[str, Any]] | None = None,
     next_source_discovery_focus_pack: dict[str, Any] | None = None,
+    image_action_review_starts: dict[str, dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
     readiness_by_name = {str(row.get("readiness") or ""): row for row in readiness_rows}
     source_discovery_row = readiness_by_name.get("source_url_discovery_required", {})
@@ -508,6 +509,7 @@ def build_work_order(
         top_stores: list[dict[str, Any]] | None = None,
         top_work_packs: list[dict[str, Any]] | None = None,
         current_focus_pack: dict[str, Any] | None = None,
+        review_start: dict[str, Any] | None = None,
         blocked_until: str | None = None,
         blocked_reason: str | None = None,
         required_evidence: list[str] | None = None,
@@ -525,6 +527,7 @@ def build_work_order(
                 "top_source_stores": top_stores or [],
                 "top_work_packs": top_work_packs or [],
                 "current_focus_pack": current_focus_pack or {},
+                "review_start": review_start or {},
                 "manual_confirmation_required": True,
                 "auto_apply_enabled": False,
                 "blocked_until": blocked_until or "manual_confirmation_completed",
@@ -565,6 +568,9 @@ def build_work_order(
         next_step="replace_generic_source_url_then_extract_image",
         template="catalog_image_attachment_confirmed_template_public.json",
         top_stores=top_generic_source_stores,
+        review_start=(image_action_review_starts or {}).get(
+            "replace_generic_source_then_extract_image"
+        ),
         **readiness_blocker("source_url_replacement_required"),
         notes=["Rows already have generic storefront URLs; replace with exact product URLs first."],
     )
@@ -592,6 +598,9 @@ def build_work_order(
         row_count=int(summary.get("image_attachment_template_representative_review_rows") or 0),
         next_step="confirm_exact_product_type_then_attach_image",
         template="catalog_image_attachment_confirmed_template_public.json",
+        review_start=(image_action_review_starts or {}).get(
+            "review_gotouchi_official_candidates"
+        ),
         **readiness_blocker("representative_image_review_required"),
         notes=["Representative images are allowed only when the official source matches the exact product type."],
     )
@@ -624,6 +633,7 @@ def build_completion_plan(
     source_store_priority: list[dict[str, Any]],
     source_discovery_work_packs: list[dict[str, Any]] | None = None,
     next_source_discovery_focus_pack: dict[str, Any] | None = None,
+    image_action_review_starts: dict[str, dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     generic_source_rows = int(summary.get("image_attachment_template_source_update_required_rows") or 0)
     representative_rows = int(summary.get("image_attachment_template_representative_review_rows") or 0)
@@ -650,6 +660,7 @@ def build_completion_plan(
         top_source_stores: list[dict[str, Any]] | None = None,
         work_packs: list[dict[str, Any]] | None = None,
         current_batch: dict[str, Any] | None = None,
+        review_start: dict[str, Any] | None = None,
     ) -> None:
         if row_count <= 0:
             return
@@ -668,6 +679,7 @@ def build_completion_plan(
                 "top_source_stores": top_source_stores or [],
                 "work_packs": work_packs or [],
                 "current_batch": current_batch or {},
+                "review_start": review_start or {},
                 "notes": notes or [],
             }
         )
@@ -700,6 +712,9 @@ def build_completion_plan(
         template="catalog_image_attachment_confirmed_template_public.json",
         blocker="source_url_replacement_required",
         top_source_stores=generic_stores,
+        review_start=(image_action_review_starts or {}).get(
+            "replace_generic_source_then_extract_image"
+        ),
         notes=[
             "These rows already have a source_url, but it is a listing or generic storefront URL.",
             "Confirm the exact product detail page before attaching an image.",
@@ -713,6 +728,9 @@ def build_completion_plan(
         next_step="confirm_exact_product_type_then_attach_image",
         template="catalog_image_attachment_confirmed_template_public.json",
         blocker="representative_image_review_required",
+        review_start=(image_action_review_starts or {}).get(
+            "review_gotouchi_official_candidates"
+        ),
         notes=[
             "Do not use lineup or wrong-variant images as if they were exact product photos.",
         ],
@@ -803,8 +821,9 @@ def build_manual_validation_focus(
             "blocked_until": row.get("blocked_until"),
             "required_evidence": row.get("required_evidence") or [],
             "top_source_stores": row.get("top_source_stores") or [],
-            "current_focus_pack": row.get("current_focus_pack") or {},
-        }
+                "current_focus_pack": row.get("current_focus_pack") or {},
+                "review_start": row.get("review_start") or {},
+            }
         for row in sorted(
             work_order,
             key=lambda item: (int(item.get("rank") or 999), str(item.get("lane") or "")),
@@ -869,6 +888,7 @@ def build_execution_queue_summary(
                 "manual_confirmation_required": bool(row.get("manual_confirmation_required", True)),
                 "auto_apply_enabled": bool(row.get("auto_apply_enabled", False)),
                 "required_evidence": row.get("required_evidence") or [],
+                "review_start": row.get("review_start") or {},
             }
         )
 
@@ -1227,6 +1247,44 @@ def append_source_detail_readiness(
     return sorted(out, key=lambda row: (int(row["priority"]), str(row["readiness"])))
 
 
+def build_image_action_review_starts(action_queue: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    starts: dict[str, dict[str, Any]] = {}
+    for batch in action_queue.get("batches") or []:
+        if not isinstance(batch, dict):
+            continue
+        workflow = str(batch.get("workflow") or "")
+        if not workflow or workflow in starts:
+            continue
+        first_url = str(batch.get("first_primary_review_url") or "").strip()
+        first_kind = str(batch.get("first_primary_review_url_kind") or "").strip()
+        sample_items = [
+            item
+            for item in batch.get("items") or []
+            if isinstance(item, dict) and item.get("primary_review_url")
+        ]
+        starts[workflow] = {
+            "workflow": workflow,
+            "batch_id": batch.get("batch_id"),
+            "source_store": batch.get("source_store"),
+            "row_count": int(batch.get("row_count") or 0),
+            "primary_review_url_rows": int(batch.get("primary_review_url_rows") or 0),
+            "first_primary_review_url": first_url,
+            "first_primary_review_url_kind": first_kind or "manual_lookup_required",
+            "sample_items_with_primary_review_url": len(sample_items),
+            "sample_primary_review_items": [
+                {
+                    "catalog_index": item.get("catalog_index"),
+                    "name_ko": item.get("name_ko"),
+                    "name_ja": item.get("name_ja"),
+                    "primary_review_url": item.get("primary_review_url"),
+                    "primary_review_url_kind": item.get("primary_review_url_kind"),
+                }
+                for item in sample_items[:5]
+            ],
+        }
+    return starts
+
+
 def build_report(
     enrichment: dict[str, Any],
     action_queue: dict[str, Any],
@@ -1292,6 +1350,7 @@ def build_report(
     readiness_rows = append_source_detail_readiness(base_readiness_rows, source_detail_missing)
     source_store_priority = summarize_source_stores(groups)
     source_discovery_work_packs = build_source_discovery_work_packs(groups)
+    image_action_review_starts = build_image_action_review_starts(action_queue)
     next_source_discovery_focus_pack = enrich_next_focus_pack(
         next_focus_pack_from_template_summary(focus_template_summary),
         source_discovery_next_focus_detail_candidates,
@@ -1389,6 +1448,13 @@ def build_report(
         "source_discovery_non_focus_rows": int(focus_summary.get("non_focus_source_rows") or 0),
         "action_queue_rows": int(action_summary.get("queued_image_rows") or 0) + len(source_detail_ready),
         "direct_image_action_queue_rows": int(action_summary.get("queued_image_rows") or 0),
+        "direct_image_action_primary_review_url_rows": int(
+            action_summary.get("primary_review_url_rows") or 0
+        ),
+        "direct_image_action_primary_review_url_kind_counts": (
+            action_summary.get("primary_review_url_kind_counts") or []
+        ),
+        "direct_image_action_workflows_with_review_start": len(image_action_review_starts),
         "image_attachment_template_rows": int(image_attachment_template_summary.get("template_items") or 0),
         "image_attachment_template_confirmed_rows": int(
             image_attachment_template_summary.get("manual_confirmed_rows") or 0
@@ -1418,6 +1484,7 @@ def build_report(
         source_store_priority,
         source_discovery_work_packs,
         next_source_discovery_focus_pack,
+        image_action_review_starts,
     )
     manual_validation_focus = build_manual_validation_focus(summary_out, work_order)
     completion_plan = build_completion_plan(
@@ -1425,6 +1492,7 @@ def build_report(
         source_store_priority,
         source_discovery_work_packs,
         next_source_discovery_focus_pack,
+        image_action_review_starts,
     )
     execution_queue_summary = build_execution_queue_summary(
         summary_out,
@@ -1456,6 +1524,7 @@ def build_report(
         "readiness": readiness_rows,
         "source_store_priority": source_store_priority,
         "source_discovery_work_packs": source_discovery_work_packs,
+        "image_action_review_starts": image_action_review_starts,
         "next_source_discovery_focus_pack": next_source_discovery_focus_pack or {},
         "work_order": work_order,
         "manual_validation_focus": manual_validation_focus,

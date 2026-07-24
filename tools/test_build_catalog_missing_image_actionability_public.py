@@ -56,7 +56,53 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
                 },
             ],
         }
-        action_queue = {"summary": {"queued_image_rows": 2, "actionable_image_rows": 3}}
+        action_queue = {
+            "summary": {
+                "queued_image_rows": 2,
+                "actionable_image_rows": 3,
+                "primary_review_url_rows": 2,
+                "primary_review_url_kind_counts": [
+                    ["source_search_url", 1],
+                    ["current_source_url", 1],
+                ],
+            },
+            "batches": [
+                {
+                    "batch_id": "image-attachment-action-001",
+                    "workflow": "replace_generic_source_then_extract_image",
+                    "source_store": "Store B",
+                    "row_count": 1,
+                    "primary_review_url_rows": 1,
+                    "first_primary_review_url": "https://store-b.example/search?q=generic",
+                    "first_primary_review_url_kind": "source_search_url",
+                    "items": [
+                        {
+                            "catalog_index": 2,
+                            "name_ko": "Generic",
+                            "primary_review_url": "https://store-b.example/search?q=generic",
+                            "primary_review_url_kind": "source_search_url",
+                        }
+                    ],
+                },
+                {
+                    "batch_id": "image-attachment-action-002",
+                    "workflow": "review_gotouchi_official_candidates",
+                    "source_store": "Gotouchi",
+                    "row_count": 1,
+                    "primary_review_url_rows": 1,
+                    "first_primary_review_url": "https://gotouchi.example/item",
+                    "first_primary_review_url_kind": "current_source_url",
+                    "items": [
+                        {
+                            "catalog_index": 9,
+                            "name_ko": "Representative",
+                            "primary_review_url": "https://gotouchi.example/item",
+                            "primary_review_url_kind": "current_source_url",
+                        }
+                    ],
+                },
+            ],
+        }
         focus_packs = {
             "summary": {
                 "focus_source_rows": 4,
@@ -251,6 +297,12 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["source_discovery_focus_coverage"], 0.8)
         self.assertEqual(report["summary"]["source_discovery_non_focus_rows"], 1)
         self.assertEqual(report["summary"]["direct_image_action_queue_rows"], 2)
+        self.assertEqual(report["summary"]["direct_image_action_primary_review_url_rows"], 2)
+        self.assertEqual(
+            report["summary"]["direct_image_action_primary_review_url_kind_counts"],
+            [["source_search_url", 1], ["current_source_url", 1]],
+        )
+        self.assertEqual(report["summary"]["direct_image_action_workflows_with_review_start"], 2)
         self.assertEqual(report["summary"]["image_attachment_template_rows"], 2)
         self.assertEqual(report["summary"]["image_attachment_template_confirmed_rows"], 0)
         self.assertEqual(report["summary"]["image_attachment_template_source_update_required_rows"], 1)
@@ -340,6 +392,11 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(work_order[1]["row_count"], 1)
         self.assertEqual(work_order[1]["blocked_reason"], "large_candidate_set_requires_exact_identity_review")
         self.assertEqual(work_order[2]["row_count"], 1)
+        self.assertEqual(
+            work_order[2]["review_start"]["first_primary_review_url"],
+            "https://store-b.example/search?q=generic",
+        )
+        self.assertEqual(work_order[2]["review_start"]["first_primary_review_url_kind"], "source_search_url")
         self.assertEqual(work_order[3]["row_count"], 4)
         self.assertEqual(work_order[3]["blocked_reason"], "missing_exact_source_url")
         self.assertIn("title_character_variant_type_match", work_order[3]["required_evidence"])
@@ -405,6 +462,12 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         )
         self.assertFalse(work_order[0]["auto_apply_enabled"])
         self.assertTrue(work_order[0]["manual_confirmation_required"])
+        self.assertEqual(
+            report["image_action_review_starts"][
+                "review_gotouchi_official_candidates"
+            ]["first_primary_review_url_kind"],
+            "current_source_url",
+        )
         execution_queue = report["execution_queue_summary"]
         self.assertEqual(execution_queue["not_yet_queued_rows"], 0)
         self.assertEqual(execution_queue["unqueued_phase_rows_total"], 0)
@@ -424,6 +487,20 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         phase_breakdown = {
             row["phase_id"]: row for row in execution_queue["phase_queue_breakdown"]
         }
+        queue_by_lane = {row["lane"]: row for row in execution_queue["queues"]}
+        self.assertEqual(
+            queue_by_lane["replace_generic_source_urls"]["review_start"]["batch_id"],
+            "image-attachment-action-001",
+        )
+        completion_phases = {
+            row["phase_id"]: row for row in report["completion_plan"]["phases"]
+        }
+        self.assertEqual(
+            completion_phases["review_representative_images"]["review_start"][
+                "first_primary_review_url"
+            ],
+            "https://gotouchi.example/item",
+        )
         self.assertEqual(
             phase_breakdown["complete_source_discovery_focus_packs"][
                 "direct_queue_lane"

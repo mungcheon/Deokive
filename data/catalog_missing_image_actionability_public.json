@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T03:50:18Z",
+  "generated_at": "2026-07-24T04:56:43Z",
   "scope": "catalog_missing_image_actionability",
   "summary": {
     "missing_image_rows": 710,
@@ -46,6 +46,22 @@
     "source_discovery_non_focus_rows": 215,
     "action_queue_rows": 73,
     "direct_image_action_queue_rows": 73,
+    "direct_image_action_primary_review_url_rows": 73,
+    "direct_image_action_primary_review_url_kind_counts": [
+      [
+        "source_search_url",
+        45
+      ],
+      [
+        "current_source_url",
+        23
+      ],
+      [
+        "fallback_web_search",
+        5
+      ]
+    ],
+    "direct_image_action_workflows_with_review_start": 2,
     "image_attachment_template_rows": 73,
     "image_attachment_template_confirmed_rows": 0,
     "image_attachment_template_source_update_required_rows": 50,
@@ -6514,6 +6530,102 @@
       "rank": 16
     }
   ],
+  "image_action_review_starts": {
+    "replace_generic_source_then_extract_image": {
+      "workflow": "replace_generic_source_then_extract_image",
+      "batch_id": "image-attachment-action-001",
+      "source_store": "Stellive Store",
+      "row_count": 20,
+      "primary_review_url_rows": 20,
+      "first_primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+      "first_primary_review_url_kind": "source_search_url",
+      "sample_items_with_primary_review_url": 20,
+      "sample_primary_review_items": [
+        {
+          "catalog_index": 2325,
+          "name_ko": "스텔라이브 1주년 뱃지 세트",
+          "name_ja": null,
+          "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+          "primary_review_url_kind": "source_search_url"
+        },
+        {
+          "catalog_index": 2352,
+          "name_ko": "강지 마스코트 인형",
+          "name_ja": null,
+          "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "primary_review_url_kind": "source_search_url"
+        },
+        {
+          "catalog_index": 2355,
+          "name_ko": "아이리 칸나 생일 기념 굿즈 박스",
+          "name_ja": null,
+          "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+          "primary_review_url_kind": "source_search_url"
+        },
+        {
+          "catalog_index": 2356,
+          "name_ko": "아이리 칸나 마스코트 인형",
+          "name_ja": null,
+          "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "primary_review_url_kind": "source_search_url"
+        },
+        {
+          "catalog_index": 2357,
+          "name_ko": "아이리 칸나 키링 세트",
+          "name_ja": null,
+          "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%ED%82%A4%EB%A7%81%20%EC%84%B8%ED%8A%B8",
+          "primary_review_url_kind": "source_search_url"
+        }
+      ]
+    },
+    "review_gotouchi_official_candidates": {
+      "workflow": "review_gotouchi_official_candidates",
+      "batch_id": "image-attachment-action-006",
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "row_count": 20,
+      "primary_review_url_rows": 20,
+      "first_primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+      "first_primary_review_url_kind": "current_source_url",
+      "sample_items_with_primary_review_url": 20,
+      "sample_primary_review_items": [
+        {
+          "catalog_index": 936,
+          "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
+          "name_ja": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
+          "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+          "primary_review_url_kind": "current_source_url"
+        },
+        {
+          "catalog_index": 937,
+          "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
+          "name_ja": "うさぎ ご当地マスコット (浅草)",
+          "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+          "primary_review_url_kind": "current_source_url"
+        },
+        {
+          "catalog_index": 938,
+          "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
+          "name_ja": "ちいかわ ご当地ミニタオル (東京)",
+          "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+          "primary_review_url_kind": "current_source_url"
+        },
+        {
+          "catalog_index": 941,
+          "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
+          "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
+          "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+          "primary_review_url_kind": "current_source_url"
+        },
+        {
+          "catalog_index": 942,
+          "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
+          "name_ja": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
+          "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+          "primary_review_url_kind": "current_source_url"
+        }
+      ]
+    }
+  },
   "next_source_discovery_focus_pack": {
     "focus_pack_id": "source-discovery-focus-001",
     "source_store": "애니메이트",
@@ -6728,6 +6840,53 @@
       ],
       "top_work_packs": [],
       "current_focus_pack": {},
+      "review_start": {
+        "workflow": "replace_generic_source_then_extract_image",
+        "batch_id": "image-attachment-action-001",
+        "source_store": "Stellive Store",
+        "row_count": 20,
+        "primary_review_url_rows": 20,
+        "first_primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+        "first_primary_review_url_kind": "source_search_url",
+        "sample_items_with_primary_review_url": 20,
+        "sample_primary_review_items": [
+          {
+            "catalog_index": 2325,
+            "name_ko": "스텔라이브 1주년 뱃지 세트",
+            "name_ja": null,
+            "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+            "primary_review_url_kind": "source_search_url"
+          },
+          {
+            "catalog_index": 2352,
+            "name_ko": "강지 마스코트 인형",
+            "name_ja": null,
+            "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+            "primary_review_url_kind": "source_search_url"
+          },
+          {
+            "catalog_index": 2355,
+            "name_ko": "아이리 칸나 생일 기념 굿즈 박스",
+            "name_ja": null,
+            "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+            "primary_review_url_kind": "source_search_url"
+          },
+          {
+            "catalog_index": 2356,
+            "name_ko": "아이리 칸나 마스코트 인형",
+            "name_ja": null,
+            "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+            "primary_review_url_kind": "source_search_url"
+          },
+          {
+            "catalog_index": 2357,
+            "name_ko": "아이리 칸나 키링 세트",
+            "name_ja": null,
+            "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%ED%82%A4%EB%A7%81%20%EC%84%B8%ED%8A%B8",
+            "primary_review_url_kind": "source_search_url"
+          }
+        ]
+      },
       "manual_confirmation_required": true,
       "auto_apply_enabled": false,
       "blocked_until": "generic_source_url_replaced_with_exact_product_source",
@@ -8184,6 +8343,7 @@
           }
         ]
       },
+      "review_start": {},
       "manual_confirmation_required": true,
       "auto_apply_enabled": false,
       "blocked_until": "exact_product_source_url_discovered",
@@ -8209,6 +8369,53 @@
       "top_source_stores": [],
       "top_work_packs": [],
       "current_focus_pack": {},
+      "review_start": {
+        "workflow": "review_gotouchi_official_candidates",
+        "batch_id": "image-attachment-action-006",
+        "source_store": "ご当地ちいかわ 공식(API)",
+        "row_count": 20,
+        "primary_review_url_rows": 20,
+        "first_primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+        "first_primary_review_url_kind": "current_source_url",
+        "sample_items_with_primary_review_url": 20,
+        "sample_primary_review_items": [
+          {
+            "catalog_index": 936,
+            "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
+            "name_ja": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
+            "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+            "primary_review_url_kind": "current_source_url"
+          },
+          {
+            "catalog_index": 937,
+            "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
+            "name_ja": "うさぎ ご当地マスコット (浅草)",
+            "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+            "primary_review_url_kind": "current_source_url"
+          },
+          {
+            "catalog_index": 938,
+            "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
+            "name_ja": "ちいかわ ご当地ミニタオル (東京)",
+            "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+            "primary_review_url_kind": "current_source_url"
+          },
+          {
+            "catalog_index": 941,
+            "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
+            "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
+            "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+            "primary_review_url_kind": "current_source_url"
+          },
+          {
+            "catalog_index": 942,
+            "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
+            "name_ja": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
+            "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+            "primary_review_url_kind": "current_source_url"
+          }
+        ]
+      },
       "manual_confirmation_required": true,
       "auto_apply_enabled": false,
       "blocked_until": "representative_image_exact_product_type_confirmed",
@@ -8232,6 +8439,7 @@
       "top_source_stores": [],
       "top_work_packs": [],
       "current_focus_pack": {},
+      "review_start": {},
       "manual_confirmation_required": true,
       "auto_apply_enabled": false,
       "blocked_until": "candidate_identity_rechecked_or_replaced",
@@ -8255,6 +8463,7 @@
       "top_source_stores": [],
       "top_work_packs": [],
       "current_focus_pack": {},
+      "review_start": {},
       "manual_confirmation_required": true,
       "auto_apply_enabled": false,
       "blocked_until": "manual_official_source_and_image_evidence_recorded",
@@ -8309,7 +8518,54 @@
             "recommended_next_step": "replace_generic_source_url_then_extract_image"
           }
         ],
-        "current_focus_pack": {}
+        "current_focus_pack": {},
+        "review_start": {
+          "workflow": "replace_generic_source_then_extract_image",
+          "batch_id": "image-attachment-action-001",
+          "source_store": "Stellive Store",
+          "row_count": 20,
+          "primary_review_url_rows": 20,
+          "first_primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+          "first_primary_review_url_kind": "source_search_url",
+          "sample_items_with_primary_review_url": 20,
+          "sample_primary_review_items": [
+            {
+              "catalog_index": 2325,
+              "name_ko": "스텔라이브 1주년 뱃지 세트",
+              "name_ja": null,
+              "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+              "primary_review_url_kind": "source_search_url"
+            },
+            {
+              "catalog_index": 2352,
+              "name_ko": "강지 마스코트 인형",
+              "name_ja": null,
+              "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+              "primary_review_url_kind": "source_search_url"
+            },
+            {
+              "catalog_index": 2355,
+              "name_ko": "아이리 칸나 생일 기념 굿즈 박스",
+              "name_ja": null,
+              "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+              "primary_review_url_kind": "source_search_url"
+            },
+            {
+              "catalog_index": 2356,
+              "name_ko": "아이리 칸나 마스코트 인형",
+              "name_ja": null,
+              "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+              "primary_review_url_kind": "source_search_url"
+            },
+            {
+              "catalog_index": 2357,
+              "name_ko": "아이리 칸나 키링 세트",
+              "name_ja": null,
+              "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%ED%82%A4%EB%A7%81%20%EC%84%B8%ED%8A%B8",
+              "primary_review_url_kind": "source_search_url"
+            }
+          ]
+        }
       },
       {
         "rank": 4,
@@ -8557,7 +8813,8 @@
               "fallback_store_search_url": "https://www.animate-onlineshop.jp/sphone/products/list.php?mode=search&smt=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%28%E8%99%8E%E6%9D%96%29"
             }
           ]
-        }
+        },
+        "review_start": {}
       },
       {
         "rank": 5,
@@ -8573,7 +8830,54 @@
           "manual_note_for_representative_image_choice"
         ],
         "top_source_stores": [],
-        "current_focus_pack": {}
+        "current_focus_pack": {},
+        "review_start": {
+          "workflow": "review_gotouchi_official_candidates",
+          "batch_id": "image-attachment-action-006",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "row_count": 20,
+          "primary_review_url_rows": 20,
+          "first_primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+          "first_primary_review_url_kind": "current_source_url",
+          "sample_items_with_primary_review_url": 20,
+          "sample_primary_review_items": [
+            {
+              "catalog_index": 936,
+              "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
+              "name_ja": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
+              "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+              "primary_review_url_kind": "current_source_url"
+            },
+            {
+              "catalog_index": 937,
+              "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
+              "name_ja": "うさぎ ご当地マスコット (浅草)",
+              "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+              "primary_review_url_kind": "current_source_url"
+            },
+            {
+              "catalog_index": 938,
+              "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
+              "name_ja": "ちいかわ ご当地ミニタオル (東京)",
+              "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+              "primary_review_url_kind": "current_source_url"
+            },
+            {
+              "catalog_index": 941,
+              "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
+              "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
+              "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+              "primary_review_url_kind": "current_source_url"
+            },
+            {
+              "catalog_index": 942,
+              "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
+              "name_ja": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
+              "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+              "primary_review_url_kind": "current_source_url"
+            }
+          ]
+        }
       },
       {
         "rank": 6,
@@ -8589,7 +8893,8 @@
           "manual_note_explaining_keep_or_reject_decision"
         ],
         "top_source_stores": [],
-        "current_focus_pack": {}
+        "current_focus_pack": {},
+        "review_start": {}
       },
       {
         "rank": 7,
@@ -8605,7 +8910,8 @@
           "manual_note_for_nonstandard_source"
         ],
         "top_source_stores": [],
-        "current_focus_pack": {}
+        "current_focus_pack": {},
+        "review_start": {}
       }
     ],
     "blocked_summary": {
@@ -8645,7 +8951,54 @@
         "exact_product_source_url",
         "existing_generic_source_url_replaced_or_preserved_with_reason",
         "image_url_from_exact_source_after_replacement"
-      ]
+      ],
+      "review_start": {
+        "workflow": "replace_generic_source_then_extract_image",
+        "batch_id": "image-attachment-action-001",
+        "source_store": "Stellive Store",
+        "row_count": 20,
+        "primary_review_url_rows": 20,
+        "first_primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+        "first_primary_review_url_kind": "source_search_url",
+        "sample_items_with_primary_review_url": 20,
+        "sample_primary_review_items": [
+          {
+            "catalog_index": 2325,
+            "name_ko": "스텔라이브 1주년 뱃지 세트",
+            "name_ja": null,
+            "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+            "primary_review_url_kind": "source_search_url"
+          },
+          {
+            "catalog_index": 2352,
+            "name_ko": "강지 마스코트 인형",
+            "name_ja": null,
+            "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+            "primary_review_url_kind": "source_search_url"
+          },
+          {
+            "catalog_index": 2355,
+            "name_ko": "아이리 칸나 생일 기념 굿즈 박스",
+            "name_ja": null,
+            "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+            "primary_review_url_kind": "source_search_url"
+          },
+          {
+            "catalog_index": 2356,
+            "name_ko": "아이리 칸나 마스코트 인형",
+            "name_ja": null,
+            "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+            "primary_review_url_kind": "source_search_url"
+          },
+          {
+            "catalog_index": 2357,
+            "name_ko": "아이리 칸나 키링 세트",
+            "name_ja": null,
+            "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%ED%82%A4%EB%A7%81%20%EC%84%B8%ED%8A%B8",
+            "primary_review_url_kind": "source_search_url"
+          }
+        ]
+      }
     },
     "queues": [
       {
@@ -8663,7 +9016,54 @@
           "exact_product_source_url",
           "existing_generic_source_url_replaced_or_preserved_with_reason",
           "image_url_from_exact_source_after_replacement"
-        ]
+        ],
+        "review_start": {
+          "workflow": "replace_generic_source_then_extract_image",
+          "batch_id": "image-attachment-action-001",
+          "source_store": "Stellive Store",
+          "row_count": 20,
+          "primary_review_url_rows": 20,
+          "first_primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+          "first_primary_review_url_kind": "source_search_url",
+          "sample_items_with_primary_review_url": 20,
+          "sample_primary_review_items": [
+            {
+              "catalog_index": 2325,
+              "name_ko": "스텔라이브 1주년 뱃지 세트",
+              "name_ja": null,
+              "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+              "primary_review_url_kind": "source_search_url"
+            },
+            {
+              "catalog_index": 2352,
+              "name_ko": "강지 마스코트 인형",
+              "name_ja": null,
+              "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+              "primary_review_url_kind": "source_search_url"
+            },
+            {
+              "catalog_index": 2355,
+              "name_ko": "아이리 칸나 생일 기념 굿즈 박스",
+              "name_ja": null,
+              "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+              "primary_review_url_kind": "source_search_url"
+            },
+            {
+              "catalog_index": 2356,
+              "name_ko": "아이리 칸나 마스코트 인형",
+              "name_ja": null,
+              "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+              "primary_review_url_kind": "source_search_url"
+            },
+            {
+              "catalog_index": 2357,
+              "name_ko": "아이리 칸나 키링 세트",
+              "name_ja": null,
+              "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%ED%82%A4%EB%A7%81%20%EC%84%B8%ED%8A%B8",
+              "primary_review_url_kind": "source_search_url"
+            }
+          ]
+        }
       },
       {
         "rank": 4,
@@ -8680,7 +9080,8 @@
           "official_or_trusted_product_detail_source_url",
           "title_character_variant_type_match",
           "image_url_from_confirmed_source_or_trusted_official_cdn"
-        ]
+        ],
+        "review_start": {}
       },
       {
         "rank": 5,
@@ -8697,7 +9098,54 @@
           "official_source_matches_exact_product_type",
           "representative_image_is_not_wrong_variant_or_lineup_only",
           "manual_note_for_representative_image_choice"
-        ]
+        ],
+        "review_start": {
+          "workflow": "review_gotouchi_official_candidates",
+          "batch_id": "image-attachment-action-006",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "row_count": 20,
+          "primary_review_url_rows": 20,
+          "first_primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+          "first_primary_review_url_kind": "current_source_url",
+          "sample_items_with_primary_review_url": 20,
+          "sample_primary_review_items": [
+            {
+              "catalog_index": 936,
+              "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
+              "name_ja": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
+              "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+              "primary_review_url_kind": "current_source_url"
+            },
+            {
+              "catalog_index": 937,
+              "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
+              "name_ja": "うさぎ ご当地マスコット (浅草)",
+              "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+              "primary_review_url_kind": "current_source_url"
+            },
+            {
+              "catalog_index": 938,
+              "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
+              "name_ja": "ちいかわ ご当地ミニタオル (東京)",
+              "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+              "primary_review_url_kind": "current_source_url"
+            },
+            {
+              "catalog_index": 941,
+              "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
+              "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
+              "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+              "primary_review_url_kind": "current_source_url"
+            },
+            {
+              "catalog_index": 942,
+              "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
+              "name_ja": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
+              "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+              "primary_review_url_kind": "current_source_url"
+            }
+          ]
+        }
       },
       {
         "rank": 6,
@@ -8714,7 +9162,8 @@
           "candidate_identity_flags_resolved",
           "replacement_candidate_source_url_if_current_candidate_is_wrong",
           "manual_note_explaining_keep_or_reject_decision"
-        ]
+        ],
+        "review_start": {}
       },
       {
         "rank": 7,
@@ -8731,7 +9180,8 @@
           "trusted_source_url_or_manual_evidence_url",
           "image_url_source_explained",
           "manual_note_for_nonstandard_source"
-        ]
+        ],
+        "review_start": {}
       }
     ],
     "phase_queue_breakdown": [
@@ -8929,6 +9379,53 @@
         ],
         "work_packs": [],
         "current_batch": {},
+        "review_start": {
+          "workflow": "replace_generic_source_then_extract_image",
+          "batch_id": "image-attachment-action-001",
+          "source_store": "Stellive Store",
+          "row_count": 20,
+          "primary_review_url_rows": 20,
+          "first_primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+          "first_primary_review_url_kind": "source_search_url",
+          "sample_items_with_primary_review_url": 20,
+          "sample_primary_review_items": [
+            {
+              "catalog_index": 2325,
+              "name_ko": "스텔라이브 1주년 뱃지 세트",
+              "name_ja": null,
+              "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+              "primary_review_url_kind": "source_search_url"
+            },
+            {
+              "catalog_index": 2352,
+              "name_ko": "강지 마스코트 인형",
+              "name_ja": null,
+              "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+              "primary_review_url_kind": "source_search_url"
+            },
+            {
+              "catalog_index": 2355,
+              "name_ko": "아이리 칸나 생일 기념 굿즈 박스",
+              "name_ja": null,
+              "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+              "primary_review_url_kind": "source_search_url"
+            },
+            {
+              "catalog_index": 2356,
+              "name_ko": "아이리 칸나 마스코트 인형",
+              "name_ja": null,
+              "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+              "primary_review_url_kind": "source_search_url"
+            },
+            {
+              "catalog_index": 2357,
+              "name_ko": "아이리 칸나 키링 세트",
+              "name_ja": null,
+              "primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%ED%82%A4%EB%A7%81%20%EC%84%B8%ED%8A%B8",
+              "primary_review_url_kind": "source_search_url"
+            }
+          ]
+        },
         "notes": [
           "These rows already have a source_url, but it is a listing or generic storefront URL.",
           "Confirm the exact product detail page before attaching an image."
@@ -8954,6 +9451,53 @@
         "top_source_stores": [],
         "work_packs": [],
         "current_batch": {},
+        "review_start": {
+          "workflow": "review_gotouchi_official_candidates",
+          "batch_id": "image-attachment-action-006",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "row_count": 20,
+          "primary_review_url_rows": 20,
+          "first_primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+          "first_primary_review_url_kind": "current_source_url",
+          "sample_items_with_primary_review_url": 20,
+          "sample_primary_review_items": [
+            {
+              "catalog_index": 936,
+              "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
+              "name_ja": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
+              "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+              "primary_review_url_kind": "current_source_url"
+            },
+            {
+              "catalog_index": 937,
+              "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
+              "name_ja": "うさぎ ご当地マスコット (浅草)",
+              "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+              "primary_review_url_kind": "current_source_url"
+            },
+            {
+              "catalog_index": 938,
+              "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
+              "name_ja": "ちいかわ ご当地ミニタオル (東京)",
+              "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+              "primary_review_url_kind": "current_source_url"
+            },
+            {
+              "catalog_index": 941,
+              "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
+              "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
+              "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+              "primary_review_url_kind": "current_source_url"
+            },
+            {
+              "catalog_index": 942,
+              "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
+              "name_ja": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
+              "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+              "primary_review_url_kind": "current_source_url"
+            }
+          ]
+        },
         "notes": [
           "Do not use lineup or wrong-variant images as if they were exact product photos."
         ]
@@ -10413,6 +10957,7 @@
             }
           ]
         },
+        "review_start": {},
         "notes": [
           "The current_batch is the next concrete 20-row pack to review.",
           "Rows stay dry-run safe until the public confirmation template is manually filled."
@@ -10438,6 +10983,7 @@
         "top_source_stores": [],
         "work_packs": [],
         "current_batch": {},
+        "review_start": {},
         "notes": [
           "These rows are outside the current focus-pack coverage and should be rotated into later packs."
         ]
@@ -10462,6 +11008,7 @@
         "top_source_stores": [],
         "work_packs": [],
         "current_batch": {},
+        "review_start": {},
         "notes": [
           "Use trusted official/manufacturer evidence and record why the source is acceptable."
         ]
