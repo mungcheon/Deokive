@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T23:25:05Z",
+  "generated_at": "2026-07-24T18:42:15Z",
   "scope": "animation_category_coverage_audit",
   "summary": {
     "animation_goods_rows": 2167,
@@ -18,7 +18,14 @@
     "app_animation_visuals_covered": true,
     "failed_check_count": 0,
     "status": "pass",
-    "auto_apply_enabled": false
+    "auto_apply_enabled": false,
+    "visual_taxonomy_gate_status": "visual_coverage_passed_normalization_review_pending",
+    "unknown_category_blockers": 0,
+    "visual_token_blockers": 0,
+    "normalization_review_blockers": 4,
+    "normalization_review_blocker_rows": 36,
+    "taxonomy_auto_apply_ready": false,
+    "next_safe_phase": "confirm_category_normalization_before_import"
   },
   "checks": [
     {
@@ -43,6 +50,18 @@
       "value": true
     }
   ],
+  "visual_taxonomy_gate": {
+    "status": "visual_coverage_passed_normalization_review_pending",
+    "unknown_category_blockers": 0,
+    "visual_token_blockers": 0,
+    "normalization_review_blockers": 4,
+    "normalization_review_blocker_rows": 36,
+    "auto_apply_ready": false,
+    "auto_apply_enabled": false,
+    "next_safe_phase": "confirm_category_normalization_before_import",
+    "manual_review_required": true,
+    "safety_note": "Folder colors and icons cover the animation taxonomy, but canonical category normalization still needs manual confirmation before any import writes."
+  },
   "normalization_suggestions": [
     {
       "category": "클리어파일",

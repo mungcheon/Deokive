@@ -1098,7 +1098,33 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(quality["animation_category_coverage_audit"]["unknown_category_count"], 0)
         self.assertEqual(quality["animation_category_coverage_audit"]["failed_check_count"], 0)
         self.assertIs(quality["animation_category_coverage_audit"]["auto_apply_enabled"], False)
+        self.assertEqual(
+            quality["animation_category_coverage_audit"]["visual_taxonomy_gate_status"],
+            "visual_coverage_passed_normalization_review_pending",
+        )
+        self.assertEqual(
+            quality["animation_category_coverage_audit"]["normalization_review_blockers"],
+            4,
+        )
+        self.assertEqual(
+            quality["animation_category_coverage_audit"]["normalization_review_blocker_rows"],
+            36,
+        )
+        self.assertEqual(
+            quality["animation_category_coverage_audit"]["next_safe_phase"],
+            "confirm_category_normalization_before_import",
+        )
+        self.assertIs(
+            quality["animation_category_coverage_audit"]["taxonomy_auto_apply_ready"],
+            False,
+        )
         animation_categories = reports.load_json(reports.ANIMATION_CATEGORIES)
+        coverage_audit = reports.load_json(reports.ANIMATION_CATEGORY_COVERAGE_AUDIT)
+        self.assertEqual(
+            coverage_audit["visual_taxonomy_gate"]["status"],
+            "visual_coverage_passed_normalization_review_pending",
+        )
+        self.assertTrue(coverage_audit["visual_taxonomy_gate"]["manual_review_required"])
         normalization_queue = animation_categories["normalization_review_queue"]
         self.assertEqual(
             quality["animation_category_review"]["normalization_review_queue_count"],

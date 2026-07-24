@@ -7494,6 +7494,23 @@ def build_animation_category_coverage_audit_public(
         for row in animation_categories.get("normalization_suggestions", [])
         if isinstance(row, dict)
     ]
+    category_readiness = (
+        animation_categories.get("category_readiness", {})
+        if isinstance(animation_categories.get("category_readiness", {}), dict)
+        else {}
+    )
+    normalization_review_queue = [
+        row
+        for row in animation_categories.get("normalization_review_queue", [])
+        if isinstance(row, dict)
+    ]
+    normalization_review_rows = int(
+        summary.get("normalization_review_queue_rows")
+        or sum(int(row.get("affected_catalog_rows") or 0) for row in normalization_review_queue)
+    )
+    normalization_review_count = int(
+        summary.get("normalization_review_queue_count") or len(normalization_review_queue)
+    )
     checks = [
         {
             "key": "unknown_categories_clear",
@@ -7524,6 +7541,22 @@ def build_animation_category_coverage_audit_public(
         },
     ]
     failed_checks = [row for row in checks if row.get("status") != "pass"]
+    visual_taxonomy_gate_status = (
+        "coverage_failed"
+        if failed_checks
+        else "visual_coverage_passed_normalization_review_pending"
+        if normalization_review_count or normalization_review_rows
+        else "ready_for_manual_confirmed_import"
+    )
+    if failed_checks:
+        next_safe_phase = "fix_animation_category_coverage_failures"
+    elif normalization_review_count or normalization_review_rows:
+        next_safe_phase = str(
+            category_readiness.get("next_safe_phase")
+            or "review_canonical_category_normalization"
+        )
+    else:
+        next_safe_phase = "no_animation_category_cleanup_required"
     return {
         "schema_version": 1,
         "generated_at": generated_at,
@@ -7549,8 +7582,35 @@ def build_animation_category_coverage_audit_public(
             "failed_check_count": len(failed_checks),
             "status": "pass" if not failed_checks else "fail",
             "auto_apply_enabled": False,
+            "visual_taxonomy_gate_status": visual_taxonomy_gate_status,
+            "unknown_category_blockers": int(summary.get("unknown_category_count") or 0),
+            "visual_token_blockers": len(missing_visual_token_categories),
+            "normalization_review_blockers": normalization_review_count,
+            "normalization_review_blocker_rows": normalization_review_rows,
+            "taxonomy_auto_apply_ready": False,
+            "next_safe_phase": next_safe_phase,
         },
         "checks": checks,
+        "visual_taxonomy_gate": {
+            "status": visual_taxonomy_gate_status,
+            "unknown_category_blockers": int(summary.get("unknown_category_count") or 0),
+            "visual_token_blockers": len(missing_visual_token_categories),
+            "normalization_review_blockers": normalization_review_count,
+            "normalization_review_blocker_rows": normalization_review_rows,
+            "auto_apply_ready": False,
+            "auto_apply_enabled": False,
+            "next_safe_phase": next_safe_phase,
+            "manual_review_required": bool(
+                normalization_review_count
+                or normalization_review_rows
+                or int(summary.get("unknown_category_count") or 0)
+                or missing_visual_token_categories
+            ),
+            "safety_note": (
+                "Folder colors and icons cover the animation taxonomy, but canonical category "
+                "normalization still needs manual confirmation before any import writes."
+            ),
+        },
         "normalization_suggestions": normalization_suggestions,
         "unknown_categories": unknown_categories,
         "category_families": animation_categories.get("category_families", []),
