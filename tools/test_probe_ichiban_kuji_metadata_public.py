@@ -123,6 +123,55 @@ class ProbeIchibanKujiMetadataPublicTest(unittest.TestCase):
             report["pages"][0]["unsafe_price_candidates"][0]["manual_review_required"]
         )
 
+    def test_coin_reference_yen_amount_is_noise(self) -> None:
+        rows = [
+            {
+                "catalog_index": 5,
+                "name_ko": "一番くじ テスト - E賞",
+                "source_url": "https://1kuji.com/products/test5",
+                "release_date": "2008-05",
+                "official_price_jpy": None,
+            }
+        ]
+        html = """
+        <html><body>
+          <section>劇中同様、500円玉は入らない仕様を再現！</section>
+        </body></html>
+        """
+        report = probe.build_report(rows, fetch_text=lambda url: html, sleep_seconds=0)
+
+        self.assertEqual(report["summary"]["safe_price_url_count"], 0)
+        self.assertEqual(
+            dict(report["summary"]["unsafe_price_candidate_reasons"]),
+            {"likely_copyright_or_non_price_yen_noise": 1},
+        )
+        self.assertEqual(
+            report["pages"][0]["unsafe_price_candidates"][0]["reason"],
+            "likely_copyright_or_non_price_yen_noise",
+        )
+
+    def test_unsafe_price_reason_summary_ignores_pages_without_missing_price(self) -> None:
+        rows = [
+            {
+                "catalog_index": 6,
+                "name_ko": "一番くじ テスト - F賞",
+                "source_url": "https://1kuji.com/products/test6",
+                "release_date": None,
+                "official_price_jpy": 650,
+            }
+        ]
+        html = """
+        <html><body>
+          <section>■発売日：<br />未定</section>
+          <section>■メーカー希望小売価格：1回650円(税10％込)</section>
+        </body></html>
+        """
+        report = probe.build_report(rows, fetch_text=lambda url: html, sleep_seconds=0)
+
+        self.assertEqual(report["summary"]["rows_missing_official_price_jpy"], 0)
+        self.assertEqual(report["pages"][0]["unsafe_price_candidate_count"], 1)
+        self.assertEqual(report["summary"]["unsafe_price_candidate_reasons"], [])
+
 
 if __name__ == "__main__":
     unittest.main()
