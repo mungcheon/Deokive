@@ -692,6 +692,18 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(quality["candidate_source_url_review_queue"]["candidate_review_rows"], 3)
         self.assertEqual(quality["candidate_source_url_review_queue"]["with_candidate_options"], 3)
         self.assertEqual(
+            quality["candidate_source_url_review_queue"]["manual_image_url_slot_rows"],
+            3,
+        )
+        self.assertEqual(
+            quality["candidate_source_url_review_queue"]["candidate_image_url_hint_rows"],
+            3,
+        )
+        self.assertEqual(
+            quality["candidate_source_url_review_queue"]["manual_image_url_slot_coverage"],
+            1.0,
+        )
+        self.assertEqual(
             quality["candidate_source_url_review_queue"]["review_readiness"][
                 "status"
             ],

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T20:00:25Z",
+  "generated_at": "2026-07-24T20:14:21Z",
   "scope": "catalog_candidate_source_url_review_queue",
   "summary": {
     "candidate_review_rows": 3,
@@ -47,6 +47,9 @@
     ],
     "with_candidate_options": 3,
     "with_store_search_url": 3,
+    "manual_image_url_slot_rows": 3,
+    "candidate_image_url_hint_rows": 3,
+    "manual_image_url_slot_coverage": 1.0,
     "auto_apply_enabled": false
   },
   "review_readiness": {
@@ -72,7 +75,8 @@
     "required_evidence": [
       "candidate_source_url_is_exact_product_detail_page",
       "candidate_title_matches_catalog_name_character_variant",
-      "candidate_image_matches_product_or_is_rejected_with_reason"
+      "candidate_image_matches_product_or_is_rejected_with_reason",
+      "manual_image_url_is_exact_product_image_when_available"
     ],
     "next_machine_step_after_review": "import_confirmed_source_urls_then_extract_images",
     "auto_apply_enabled": false
@@ -81,6 +85,7 @@
     "This queue covers low-confidence and weak candidate source URLs.",
     "Candidate URLs are review hints only, not import evidence.",
     "Leave manual_value blank when no candidate is an exact product/detail page.",
+    "When the exact product page image is also confirmed, put it in source_url_import_template.manual_image_url.",
     "Dry-run tools/import_confirmed_source_urls.py after manual confirmations.",
     "Then rebuild image attachment queues to extract or confirm image_url."
   ],
@@ -182,9 +187,12 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "candidate_source_url": "",
+            "candidate_image_url": "",
             "manual_note": ""
           },
           "review_blockers": [
@@ -329,9 +337,12 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "candidate_source_url": "",
+            "candidate_image_url": "",
             "manual_note": ""
           },
           "review_blockers": [
@@ -465,9 +476,12 @@
             "field": "source_url",
             "manual_confirmed": false,
             "manual_value": "",
+            "manual_image_url": "",
+            "manual_image_note": "",
             "evidence_url": "",
             "current_source_url": "https://fanding.kr/@stellive/shop",
             "candidate_source_url": "",
+            "candidate_image_url": "",
             "manual_note": ""
           },
           "review_blockers": [
@@ -625,9 +639,12 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "candidate_source_url": "",
+        "candidate_image_url": "",
         "manual_note": ""
       },
       "review_blockers": [
@@ -721,9 +738,12 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "candidate_source_url": "",
+        "candidate_image_url": "",
         "manual_note": ""
       },
       "review_blockers": [
@@ -829,9 +849,12 @@
         "field": "source_url",
         "manual_confirmed": false,
         "manual_value": "",
+        "manual_image_url": "",
+        "manual_image_note": "",
         "evidence_url": "",
         "current_source_url": "https://fanding.kr/@stellive/shop",
         "candidate_source_url": "",
+        "candidate_image_url": "",
         "manual_note": ""
       },
       "review_blockers": [

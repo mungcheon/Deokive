@@ -10123,6 +10123,9 @@
     ],
     "with_candidate_options": 3,
     "with_store_search_url": 3,
+    "manual_image_url_slot_rows": 3,
+    "candidate_image_url_hint_rows": 3,
+    "manual_image_url_slot_coverage": 1.0,
     "auto_apply_enabled": false,
     "review_readiness": {
       "status": "manual_candidate_review_required",
@@ -10147,7 +10150,8 @@
       "required_evidence": [
         "candidate_source_url_is_exact_product_detail_page",
         "candidate_title_matches_catalog_name_character_variant",
-        "candidate_image_matches_product_or_is_rejected_with_reason"
+        "candidate_image_matches_product_or_is_rejected_with_reason",
+        "manual_image_url_is_exact_product_image_when_available"
       ],
       "next_machine_step_after_review": "import_confirmed_source_urls_then_extract_images",
       "auto_apply_enabled": false
