@@ -1491,6 +1491,8 @@ class PublicCatalogReportTests(unittest.TestCase):
 
         batches = agent_queue.get("batches", [])
         top_batches = agent_queue.get("top_next_batches", [])
+        ichiban_metadata_action = reports.load_json(reports.ICHIIBAN_KUJI_METADATA_ACTION_QUEUE)
+        ichiban_metadata_action_summary = ichiban_metadata_action.get("summary", {})
         confirmed_readiness = reports.load_json(reports.CONFIRMED_IMPORT_READINESS)
         requested_focus_action = reports.load_json(reports.REQUESTED_FOCUS_ACTION_QUEUE)
         requested_focus_action_summary = requested_focus_action.get("summary", {})
@@ -1524,6 +1526,37 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertTrue(
             any(item.get("primary_review_url") for item in fallback_agent_batch.get("sample_items", []))
+        )
+        ichiban_next_campaign_patch_batch = next(
+            batch
+            for batch in batches
+            if batch.get("title") == "Ichiban Kuji metadata next campaign patch review"
+        )
+        self.assertEqual(
+            ichiban_next_campaign_patch_batch.get("rows"),
+            ichiban_metadata_action_summary.get("next_campaign_patch_review_batch_rows"),
+        )
+        self.assertEqual(
+            ichiban_next_campaign_patch_batch.get("review_summary", {}).get(
+                "next_campaign_patch_review_batch_template_rows"
+            ),
+            ichiban_metadata_action_summary.get(
+                "next_campaign_patch_review_batch_template_rows"
+            ),
+        )
+        self.assertEqual(
+            ichiban_next_campaign_patch_batch.get("review_summary", {}).get(
+                "next_campaign_patch_review_batch_field_counts"
+            ),
+            ichiban_metadata_action_summary.get(
+                "next_campaign_patch_review_batch_field_counts"
+            ),
+        )
+        self.assertTrue(
+            all(
+                item.get("primary_review_url")
+                for item in ichiban_next_campaign_patch_batch.get("sample_items", [])
+            )
         )
         first_requested_focus_action_batch = next(
             batch

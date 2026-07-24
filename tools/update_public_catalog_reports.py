@@ -5266,9 +5266,57 @@ def build_agent_work_queue_public(
     ichiban_action_batches = [
         batch for batch in ichiban_metadata_action_queue.get("batches", []) if isinstance(batch, dict)
     ]
+    ichiban_next_patch_batch = [
+        row
+        for row in ichiban_metadata_action_queue.get(
+            "next_campaign_patch_review_batch", []
+        )
+        if isinstance(row, dict)
+    ]
+    ichiban_action_summary = ichiban_metadata_action_queue.get("summary", {})
     ichiban_action_work_order = [
         step for step in ichiban_metadata_action_queue.get("work_order", []) if isinstance(step, dict)
     ]
+    if ichiban_next_patch_batch:
+        add_batch(
+            agent_id="agent-ichiban-action",
+            workstream="ichiban_kuji_metadata_action_queue",
+            priority=18,
+            title="Ichiban Kuji metadata next campaign patch review",
+            public_report=ICHIIBAN_KUJI_METADATA_ACTION_QUEUE,
+            rows=len(ichiban_next_patch_batch),
+            recommended_action=(
+                "Open each primary_review_url, confirm labeled campaign metadata, "
+                "then fill the campaign patch template fields."
+            ),
+            acceptance_criteria=[
+                "Use the primary_review_url before any fallback evidence URL.",
+                "Fill only fields listed in fields_to_confirm for each campaign.",
+                "Set manual_confirmed=true only after every manual_value field is filled from labeled official evidence.",
+                "Auto-apply remains disabled for historical campaign metadata.",
+            ],
+            samples=ichiban_next_patch_batch,
+            review_summary={
+                "next_campaign_patch_review_batch_rows": len(ichiban_next_patch_batch),
+                "next_campaign_patch_review_batch_template_rows": int(
+                    ichiban_action_summary.get(
+                        "next_campaign_patch_review_batch_template_rows"
+                    )
+                    or 0
+                ),
+                "next_campaign_patch_review_batch_primary_review_url_rows": int(
+                    ichiban_action_summary.get(
+                        "next_campaign_patch_review_batch_primary_review_url_rows"
+                    )
+                    or 0
+                ),
+                "next_campaign_patch_review_batch_field_counts": (
+                    ichiban_action_summary.get(
+                        "next_campaign_patch_review_batch_field_counts", []
+                    )
+                ),
+            },
+        )
     for step in ichiban_action_work_order:
         add_batch(
             agent_id="agent-ichiban-action",
