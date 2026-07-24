@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T15:25:55Z",
+  "generated_at": "2026-07-24T15:31:06Z",
   "summary": {
     "catalog_rows": 20347,
     "coverage": {
       "source_url": 0.9687,
       "image_url": 0.9651,
-      "release_date": 0.9316
+      "release_date": 0.9327
     },
     "missing": {
       "source_url": 637,
       "image_url": 710,
-      "release_date": 1392,
+      "release_date": 1370,
       "official_price_jpy": 567,
       "barcode": 10090,
       "name_ja": 526
@@ -24,7 +24,7 @@
       "ichiban_missing_release_date_rows": 8,
       "ichiban_missing_price_rows": 350,
       "generic_source_patch_candidate_rows": 3,
-      "requested_focus_open_rows": 8055,
+      "requested_focus_open_rows": 8033,
       "danganronpa_missing_media_rows": 34,
       "danganronpa_patch_template_pending_rows": 34,
       "danganronpa_patch_template_ready_rows": 0,
@@ -84,10 +84,10 @@
       "ichiban_metadata_next_campaign_patch_review_batch_rows": 8,
       "ichiban_metadata_next_campaign_patch_review_batch_template_rows": 8,
       "ichiban_metadata_next_campaign_patch_review_batch_primary_review_url_rows": 8,
-      "metadata_action_missing_cells": 2485,
+      "metadata_action_missing_cells": 2463,
       "metadata_actionable_groups": 166,
       "metadata_unqueued_actionable_groups": 0,
-      "metadata_actionable_missing_cells": 2485,
+      "metadata_actionable_missing_cells": 2463,
       "metadata_unqueued_actionable_missing_cells": 0,
       "metadata_primary_review_url_groups": 130,
       "animation_category_review_rows": 0,
@@ -136,7 +136,7 @@
     {
       "key": "release_date_coverage",
       "status": "pass",
-      "value": 0.9316,
+      "value": 0.9327,
       "target": 0.9
     },
     {
@@ -156,7 +156,7 @@
     {
       "workstream": "requested_focus_enrichment",
       "status": "open",
-      "open_rows": 8055,
+      "open_rows": 8033,
       "primary_report": "data/requested_focus_enrichment_public.json",
       "next_step": "work_user_requested_focus_topics_first",
       "auto_apply_enabled": false
@@ -1458,7 +1458,7 @@
     {
       "workstream": "metadata_backlog",
       "status": "open",
-      "open_rows": 13922,
+      "open_rows": 13900,
       "primary_report": "data/catalog_metadata_backlog_public.json",
       "next_step": "review_field_evidence_policy",
       "auto_apply_enabled": false
@@ -1466,7 +1466,7 @@
     {
       "workstream": "metadata_review_batches",
       "status": "manual_review",
-      "open_rows": 13922,
+      "open_rows": 13900,
       "primary_report": "data/catalog_metadata_review_batches_public.json",
       "next_step": "work_full_metadata_review_batches",
       "auto_apply_enabled": false
@@ -1474,10 +1474,10 @@
     {
       "workstream": "metadata_action_queue",
       "status": "manual_review",
-      "open_rows": 2485,
+      "open_rows": 2463,
       "actionable_group_count": 166,
       "unqueued_actionable_group_count": 0,
-      "actionable_missing_cells": 2485,
+      "actionable_missing_cells": 2463,
       "unqueued_actionable_missing_cells": 0,
       "group_queue_coverage": 1.0,
       "missing_cell_queue_coverage": 1.0,
@@ -1499,7 +1499,7 @@
       "missing_cells_by_field": [
         [
           "release_date",
-          1392
+          1370
         ],
         [
           "official_price_jpy",
@@ -1548,10 +1548,6 @@
           62
         ],
         [
-          "Movic",
-          61
-        ],
-        [
           "코토부키야",
           50
         ],
@@ -1562,6 +1558,10 @@
         [
           "ご当地ちいかわ 공식(API)",
           41
+        ],
+        [
+          "Movic",
+          39
         ],
         [
           "닌텐도 스토어",
@@ -1785,16 +1785,6 @@
         },
         {
           "field": "release_date",
-          "source_store": "Movic",
-          "missing_rows": 60,
-          "priority": 10,
-          "workflow": "official_metadata_review",
-          "primary_review_url": null,
-          "primary_review_url_kind": "manual_lookup_required",
-          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
-        },
-        {
-          "field": "release_date",
           "source_store": "코토부키야",
           "missing_rows": 50,
           "priority": 10,
@@ -1811,6 +1801,16 @@
           "workflow": "official_metadata_review",
           "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
           "primary_review_url_kind": "sample_source_url",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
+        },
+        {
+          "field": "release_date",
+          "source_store": "Movic",
+          "missing_rows": 38,
+          "priority": 10,
+          "workflow": "official_metadata_review",
+          "primary_review_url": null,
+          "primary_review_url_kind": "manual_lookup_required",
           "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
         },
         {
@@ -2153,11 +2153,11 @@
     },
     {
       "source_store": "Movic",
-      "priority_score": 464.5,
+      "priority_score": 420.5,
       "rows": 84,
       "missing_source_url": 36,
       "missing_image_url": 36,
-      "missing_release_date": 60,
+      "missing_release_date": 38,
       "missing_price_jpy": 1,
       "missing_barcode": 39,
       "recommended_first_action": "source_and_image_enrichment"
@@ -2720,7 +2720,7 @@
       "priority": 10,
       "workstream": "requested_focus_enrichment",
       "public_report": "data/requested_focus_enrichment_public.json",
-      "open_rows": 8055,
+      "open_rows": 8033,
       "topics_with_open_work": 4,
       "recommended_next_action": "Prioritize user-requested focus topics before broad catalog enrichment."
     },
@@ -7572,7 +7572,7 @@
       "public_report": "data/catalog_metadata_review_batches_public.json",
       "batch_count": 30,
       "field_store_group_count": 351,
-      "missing_cell_count": 13922,
+      "missing_cell_count": 13900,
       "recommended_next_action": "Use full field/store metadata batches for title, barcode, date, price, source, and image cleanup."
     },
     {
@@ -7582,8 +7582,8 @@
       "actionable_group_count": 166,
       "queued_group_count": 166,
       "unqueued_actionable_group_count": 0,
-      "actionable_missing_cells": 2485,
-      "queued_missing_cells": 2485,
+      "actionable_missing_cells": 2463,
+      "queued_missing_cells": 2463,
       "unqueued_actionable_missing_cells": 0,
       "group_queue_coverage": 1.0,
       "missing_cell_queue_coverage": 1.0,
@@ -7604,7 +7604,7 @@
       "missing_cells_by_field": [
         [
           "release_date",
-          1392
+          1370
         ],
         [
           "official_price_jpy",
@@ -7653,10 +7653,6 @@
           62
         ],
         [
-          "Movic",
-          61
-        ],
-        [
           "코토부키야",
           50
         ],
@@ -7667,6 +7663,10 @@
         [
           "ご当地ちいかわ 공식(API)",
           41
+        ],
+        [
+          "Movic",
+          39
         ],
         [
           "닌텐도 스토어",
@@ -7890,16 +7890,6 @@
         },
         {
           "field": "release_date",
-          "source_store": "Movic",
-          "missing_rows": 60,
-          "priority": 10,
-          "workflow": "official_metadata_review",
-          "primary_review_url": null,
-          "primary_review_url_kind": "manual_lookup_required",
-          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
-        },
-        {
-          "field": "release_date",
           "source_store": "코토부키야",
           "missing_rows": 50,
           "priority": 10,
@@ -7916,6 +7906,16 @@
           "workflow": "official_metadata_review",
           "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
           "primary_review_url_kind": "sample_source_url",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
+        },
+        {
+          "field": "release_date",
+          "source_store": "Movic",
+          "missing_rows": 38,
+          "priority": 10,
+          "workflow": "official_metadata_review",
+          "primary_review_url": null,
+          "primary_review_url_kind": "manual_lookup_required",
           "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
         },
         {
