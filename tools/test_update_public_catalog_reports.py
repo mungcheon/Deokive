@@ -2994,6 +2994,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         image_action = reports.load_json(reports.IMAGE_ATTACHMENT_ACTION_QUEUE)
         image_action_summary = image_action.get("summary", {})
+        image_blocking_dashboard = image_action.get("blocking_dashboard", {})
         image_scorecard = next(
             row
             for row in operations.get("workstream_scorecard", [])
@@ -3028,6 +3029,48 @@ class PublicCatalogReportTests(unittest.TestCase):
             if batch.get("title") == "대표 이미지 후보 다음 10개 검수"
         )
         self.assertGreater(image_action_summary.get("primary_review_url_rows", 0), 0)
+        self.assertEqual(
+            image_blocking_dashboard.get("status"),
+            "blocked_until_manual_source_or_image_confirmation",
+        )
+        self.assertEqual(
+            image_blocking_dashboard.get("blocked_before_image_import_rows"),
+            image_action_summary.get("blocked_before_image_import_rows"),
+        )
+        self.assertEqual(
+            image_blocking_dashboard.get("source_url_update_required_rows"),
+            image_action_summary.get("source_url_update_required_rows"),
+        )
+        self.assertEqual(
+            image_blocking_dashboard.get("representative_image_review_required_rows"),
+            image_action_summary.get("representative_image_review_required_rows"),
+        )
+        self.assertEqual(
+            image_blocking_dashboard.get("next_safe_phase"),
+            "replace_generic_source_urls",
+        )
+        self.assertEqual(
+            image_blocking_dashboard.get("next_source_url_review_batch_rows"),
+            image_action_summary.get("next_source_url_review_batch_rows"),
+        )
+        self.assertEqual(
+            image_blocking_dashboard.get("next_representative_image_review_batch_rows"),
+            image_action_summary.get("next_representative_image_review_batch_rows"),
+        )
+        self.assertTrue(
+            image_blocking_dashboard.get("first_source_url_review", {}).get(
+                "primary_review_url"
+            )
+        )
+        self.assertTrue(
+            image_blocking_dashboard.get(
+                "first_representative_image_review", {}
+            ).get("primary_review_url")
+        )
+        self.assertFalse(image_blocking_dashboard.get("auto_apply_enabled"))
+        self.assertTrue(
+            image_blocking_dashboard.get("manual_review_required_before_import")
+        )
         self.assertEqual(
             sum(count for _, count in image_action_summary.get("by_review_lane", [])),
             image_action_summary.get("sample_action_item_rows"),

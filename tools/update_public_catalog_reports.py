@@ -619,7 +619,125 @@ def enrich_image_action_queue_source_url_review(
         enriched_batch, "source_url_review_lane"
     )
     enriched["summary"] = summary
+    enriched["blocking_dashboard"] = image_attachment_blocking_dashboard(enriched)
     return enriched
+
+
+def image_attachment_blocking_dashboard(
+    image_action_queue: dict[str, Any],
+) -> dict[str, Any]:
+    summary = image_action_queue.get("summary") or {}
+    readiness = image_action_queue.get("attachment_readiness") or {}
+    next_source_url_batch = [
+        row
+        for row in image_action_queue.get("next_source_url_review_batch") or []
+        if isinstance(row, dict)
+    ]
+    next_representative_batch = [
+        row
+        for row in image_action_queue.get("next_representative_image_review_batch")
+        or []
+        if isinstance(row, dict)
+    ]
+    source_url_rows = int(summary.get("source_url_update_required_rows") or 0)
+    representative_rows = int(
+        summary.get("representative_image_review_required_rows") or 0
+    )
+    blocked_rows = int(
+        summary.get("blocked_before_image_import_rows")
+        or readiness.get("blocked_before_image_import_rows")
+        or 0
+    )
+    ready_rows = int(
+        summary.get("image_url_ready_rows")
+        or readiness.get("image_url_review_ready_rows")
+        or 0
+    )
+    local_download_ready_rows = int(
+        summary.get("download_ready_after_manual_image_url_rows")
+        or readiness.get("download_ready_after_manual_image_url_rows")
+        or 0
+    )
+    next_lane = (
+        "replace_generic_source_urls"
+        if source_url_rows
+        else "review_representative_image_candidates"
+        if representative_rows
+        else "import_confirmed_image_urls"
+        if ready_rows
+        else "no_image_attachment_action"
+    )
+    first_source_review = next_source_url_batch[0] if next_source_url_batch else {}
+    first_representative_review = (
+        next_representative_batch[0] if next_representative_batch else {}
+    )
+    return {
+        "status": (
+            "blocked_until_manual_source_or_image_confirmation"
+            if blocked_rows
+            else "ready_for_confirmed_image_import"
+            if ready_rows
+            else "clear"
+        ),
+        "blocked_before_image_import_rows": blocked_rows,
+        "source_url_update_required_rows": source_url_rows,
+        "representative_image_review_required_rows": representative_rows,
+        "image_url_ready_rows": ready_rows,
+        "manual_confirmation_required_rows": int(
+            summary.get("manual_confirmation_required_rows") or blocked_rows
+        ),
+        "local_download_ready_after_manual_image_url_rows": local_download_ready_rows,
+        "next_safe_phase": next_lane,
+        "next_source_url_review_batch_rows": len(next_source_url_batch),
+        "next_representative_image_review_batch_rows": len(next_representative_batch),
+        "primary_review_url_rows": int(summary.get("primary_review_url_rows") or 0),
+        "primary_review_url_missing_rows": int(
+            summary.get("primary_review_url_missing_rows") or 0
+        ),
+        "source_url_review_start_coverage": summary.get(
+            "source_url_update_review_start_coverage", 0
+        ),
+        "top_blockers": summary.get("image_import_blocker_counts", [])[:6],
+        "source_url_candidate_status_counts": summary.get(
+            "source_url_candidate_status_counts", []
+        ),
+        "representative_candidate_status_counts": summary.get(
+            "representative_candidate_status_counts", []
+        ),
+        "first_source_url_review": {
+            "row_index": first_source_review.get("row_index"),
+            "name_ko": first_source_review.get("name_ko"),
+            "source_store": first_source_review.get("source_store"),
+            "primary_review_url": first_source_review.get("primary_review_url"),
+            "primary_review_url_kind": first_source_review.get(
+                "primary_review_url_kind"
+            ),
+            "candidate_status": first_source_review.get("candidate_status"),
+            "source_url_review_lane": first_source_review.get(
+                "source_url_review_lane"
+            ),
+        }
+        if first_source_review
+        else {},
+        "first_representative_image_review": {
+            "row_index": first_representative_review.get("row_index"),
+            "name_ko": first_representative_review.get("name_ko"),
+            "source_store": first_representative_review.get("source_store"),
+            "primary_review_url": first_representative_review.get(
+                "primary_review_url"
+            ),
+            "primary_review_url_kind": first_representative_review.get(
+                "primary_review_url_kind"
+            ),
+            "candidate_status": first_representative_review.get(
+                "candidate_status"
+            ),
+        }
+        if first_representative_review
+        else {},
+        "auto_apply_enabled": False,
+        "manual_review_required_before_import": bool(blocked_rows),
+    }
 
 
 def _merge_existing_image_source_candidate_batches(
