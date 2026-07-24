@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T08:02:51Z",
+  "generated_at": "2026-07-24T08:15:11Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 25,
@@ -106,8 +106,22 @@
     "confirmed_import_top_work_order_row_count": 641,
     "confirmed_import_top_work_order_lane": "confirm_template_rows",
     "confirmed_import_top_work_order_workflow": "source_discovery",
+    "requested_focus_topic_count": 5,
+    "requested_focus_open_rows": 8069,
+    "requested_focus_topics_with_open_work": 4,
+    "requested_focus_missing_image_rows": 34,
+    "requested_focus_missing_source_url_rows": 34,
+    "requested_focus_missing_release_date_rows": 124,
+    "requested_focus_missing_official_price_jpy_rows": 383,
     "requested_focus_actionable_template_rows": 600,
     "requested_focus_barcode_template_rows": 5674,
+    "requested_focus_queued_action_rows": 600,
+    "requested_focus_unqueued_actionable_rows": 0,
+    "requested_focus_queue_coverage": 1.0,
+    "requested_focus_non_barcode_template_rows": 600,
+    "requested_focus_total_review_template_rows": 6274,
+    "requested_focus_non_barcode_template_share": 0.0956,
+    "requested_focus_review_url_rows": 600,
     "danganronpa_missing_media_rows": 34,
     "danganronpa_missing_image_url_rows": 34,
     "danganronpa_missing_source_url_rows": 34,
@@ -115,6 +129,12 @@
     "danganronpa_official_search_rows": 18,
     "danganronpa_licensed_retailer_review_rows": 10,
     "danganronpa_official_prize_search_rows": 6,
+    "danganronpa_confirmed_patch_template_rows": 34,
+    "danganronpa_confirmed_patch_template_pending_rows": 34,
+    "danganronpa_patch_template_ready_rows": 0,
+    "danganronpa_patch_template_skipped_rows": 34,
+    "danganronpa_patch_template_manual_confirmed_source_rows": 0,
+    "danganronpa_patch_template_manual_confirmed_image_rows": 0,
     "ichiban_campaign_rows": 614,
     "ichiban_catalog_kuji_item_rows": 7898,
     "ichiban_campaigns_with_catalog_items": 576,
@@ -382,7 +402,18 @@
       "blocker": "Exact source evidence is required before catalog mutation.",
       "auto_apply_enabled": false,
       "evidence": {
+        "topic_count": 5,
+        "total_matched_catalog_rows": 8178,
+        "total_requested_labels": 27,
+        "topics_with_open_work": 4,
+        "open_rows": 8069,
+        "missing_image_rows": 34,
+        "missing_source_url_rows": 34,
+        "missing_release_date_rows": 124,
+        "missing_official_price_jpy_rows": 383,
+        "requested_needs_review": 1,
         "batch_count": 313,
+        "topic_with_batches_count": 4,
         "by_topic": [
           [
             "ichiban_kuji",
@@ -475,8 +506,14 @@
       "evidence": {
         "actionable_template_rows": 600,
         "queued_action_rows": 600,
+        "unqueued_actionable_rows": 0,
+        "queue_coverage": 1.0,
         "action_batch_count": 86,
         "barcode_template_rows_excluded": 5674,
+        "non_barcode_template_rows": 600,
+        "total_review_template_rows": 6274,
+        "non_barcode_template_share": 0.0956,
+        "skipped_non_template_rows": 1,
         "field_counts": [
           [
             "official_price_jpy",
@@ -516,7 +553,64 @@
             "bokubu_style",
             14
           ]
-        ]
+        ],
+        "blocked_reason_counts": [
+          [
+            "price_requires_labeled_yen_evidence",
+            399
+          ],
+          [
+            "release_date_requires_labeled_source_evidence",
+            132
+          ],
+          [
+            "missing_exact_source_url_for_requested_focus",
+            34
+          ],
+          [
+            "image_url_requires_confirmed_source_evidence",
+            34
+          ],
+          [
+            "name_ja_requires_official_label_evidence",
+            1
+          ]
+        ],
+        "blocked_until_counts": [
+          [
+            "labeled_official_price_confirmed",
+            399
+          ],
+          [
+            "labeled_release_date_confirmed",
+            132
+          ],
+          [
+            "exact_product_source_url_confirmed",
+            34
+          ],
+          [
+            "exact_source_url_and_image_url_confirmed",
+            34
+          ],
+          [
+            "official_japanese_name_confirmed",
+            1
+          ]
+        ],
+        "review_url_rows": 600,
+        "primary_review_url_kind_counts": [
+          [
+            "existing_source_url",
+            498
+          ],
+          [
+            "domain_limited_web_search",
+            102
+          ]
+        ],
+        "barcode_template_rows_excluded_blocked_reason": "barcode_research_deferred_from_requested_focus_action_queue",
+        "barcode_template_rows_excluded_blocked_until": "non_barcode_requested_focus_queue_completed"
       }
     },
     {
@@ -537,6 +631,20 @@
         "official_search_rows": 18,
         "licensed_retailer_review_rows": 10,
         "official_prize_search_rows": 6,
+        "confirmed_patch_template_rows": 34,
+        "confirmed_patch_template_pending_rows": 34,
+        "template_dry_run_rows": 34,
+        "template_dry_run_ready_rows": 0,
+        "template_dry_run_skipped_rows": 34,
+        "template_dry_run_blocked_rows": 0,
+        "manual_confirmed_source_rows": 0,
+        "manual_confirmed_image_rows": 0,
+        "template_dry_run_by_status": [
+          [
+            "skipped_pending_manual_confirmation",
+            34
+          ]
+        ],
         "by_source_store": [
           [
             "애니메이트",

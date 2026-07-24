@@ -299,10 +299,27 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     ],
                 }
             },
+            "requested_focus_enrichment_public.json": {
+                "summary": {
+                    "topic_count": 2,
+                    "total_matched_catalog_rows": 9,
+                    "total_requested_labels": 4,
+                    "topics_with_open_work": 2,
+                    "open_rows": 7,
+                    "missing_image_rows": 1,
+                    "missing_source_url_rows": 1,
+                    "missing_release_date_rows": 2,
+                    "missing_official_price_jpy_rows": 3,
+                    "requested_needs_review": 1,
+                }
+            },
             "requested_focus_review_batches_public.json": {
                 "summary": {
                     "review_row_count": 5,
                     "batch_count": 1,
+                    "topic_with_batches_count": 2,
+                    "by_topic": [["ichiban_kuji", 3], ["danganronpa", 2]],
+                    "by_missing_field": [["barcode", 3], ["source_url", 1], ["image_url", 1]],
                     "field_patch_template_count": 5,
                     "field_patch_template_counts": [
                         ["barcode", 3],
@@ -315,9 +332,29 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                 "summary": {
                     "actionable_template_rows": 2,
                     "queued_action_rows": 2,
+                    "unqueued_actionable_rows": 0,
+                    "queue_coverage": 1.0,
                     "action_batch_count": 1,
                     "barcode_template_rows_excluded": 3,
+                    "non_barcode_template_rows": 2,
+                    "total_review_template_rows": 5,
+                    "non_barcode_template_share": 0.4,
+                    "skipped_non_template_rows": 0,
                     "field_counts": [["source_url", 1], ["image_url", 1]],
+                    "topic_counts": [["danganronpa", 2]],
+                    "blocked_reason_counts": [
+                        ["missing_exact_source_url_for_requested_focus", 1],
+                    ],
+                    "blocked_until_counts": [
+                        ["exact_product_source_url_confirmed", 1],
+                    ],
+                    "review_url_rows": 2,
+                    "primary_review_url_kind_counts": [
+                        ["existing_source_url", 1],
+                        ["domain_limited_web_search", 1],
+                    ],
+                    "barcode_template_rows_excluded_blocked_reason": "barcode_research_deferred",
+                    "barcode_template_rows_excluded_blocked_until": "source_image_date_price_queue_reviewed",
                 }
             },
             "danganronpa_missing_media_public.json": {
@@ -329,12 +366,25 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "official_search_rows": 2,
                     "licensed_retailer_review_rows": 1,
                     "official_prize_search_rows": 1,
+                    "confirmed_patch_template_rows": 4,
+                    "confirmed_patch_template_pending_rows": 4,
                     "by_source_store": [["Movic", 2], ["Taito", 1], ["AmiAmi", 1]],
                     "by_source_kind": [
                         ["official_manufacturer", 2],
                         ["official_prize", 1],
                         ["licensed_retailer", 1],
                     ],
+                }
+            },
+            "danganronpa_patch_template_dry_run_public.json": {
+                "summary": {
+                    "template_rows": 4,
+                    "ready_rows": 0,
+                    "skipped_rows": 4,
+                    "blocked_rows": 0,
+                    "manual_confirmed_source_rows": 0,
+                    "manual_confirmed_image_rows": 0,
+                    "by_status": [["skipped_pending_manual_confirmation", 4]],
                 }
             },
             "catalog_deduplication_public.json": {
@@ -688,8 +738,35 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
             for action in report["actions"]
             if action["workstream"] == "requested_focus_review_batches"
         )
+        self.assertEqual(requested["evidence"]["topic_count"], 2)
+        self.assertEqual(requested["evidence"]["total_matched_catalog_rows"], 9)
+        self.assertEqual(requested["evidence"]["total_requested_labels"], 4)
+        self.assertEqual(requested["evidence"]["topics_with_open_work"], 2)
+        self.assertEqual(requested["evidence"]["open_rows"], 7)
+        self.assertEqual(requested["evidence"]["missing_image_rows"], 1)
+        self.assertEqual(requested["evidence"]["missing_source_url_rows"], 1)
+        self.assertEqual(requested["evidence"]["missing_release_date_rows"], 2)
+        self.assertEqual(requested["evidence"]["missing_official_price_jpy_rows"], 3)
+        self.assertEqual(requested["evidence"]["requested_needs_review"], 1)
+        self.assertEqual(requested["evidence"]["topic_with_batches_count"], 2)
+        self.assertEqual(requested["evidence"]["by_topic"][0], ["ichiban_kuji", 3])
+        self.assertEqual(requested["evidence"]["by_missing_field"][0], ["barcode", 3])
+        self.assertEqual(report["summary"]["requested_focus_topic_count"], 2)
+        self.assertEqual(report["summary"]["requested_focus_open_rows"], 7)
+        self.assertEqual(report["summary"]["requested_focus_topics_with_open_work"], 2)
+        self.assertEqual(report["summary"]["requested_focus_missing_image_rows"], 1)
+        self.assertEqual(report["summary"]["requested_focus_missing_source_url_rows"], 1)
+        self.assertEqual(report["summary"]["requested_focus_missing_release_date_rows"], 2)
+        self.assertEqual(report["summary"]["requested_focus_missing_official_price_jpy_rows"], 3)
         self.assertEqual(report["summary"]["requested_focus_actionable_template_rows"], 2)
         self.assertEqual(report["summary"]["requested_focus_barcode_template_rows"], 3)
+        self.assertEqual(report["summary"]["requested_focus_queued_action_rows"], 2)
+        self.assertEqual(report["summary"]["requested_focus_unqueued_actionable_rows"], 0)
+        self.assertEqual(report["summary"]["requested_focus_queue_coverage"], 1.0)
+        self.assertEqual(report["summary"]["requested_focus_non_barcode_template_rows"], 2)
+        self.assertEqual(report["summary"]["requested_focus_total_review_template_rows"], 5)
+        self.assertEqual(report["summary"]["requested_focus_non_barcode_template_share"], 0.4)
+        self.assertEqual(report["summary"]["requested_focus_review_url_rows"], 2)
         self.assertEqual(requested["evidence"]["actionable_non_barcode_template_rows"], 2)
         metadata_action = next(
             action
@@ -706,7 +783,34 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         )
         self.assertEqual(action_queue["priority"], 11)
         self.assertEqual(action_queue["rows"], 2)
+        self.assertEqual(action_queue["evidence"]["unqueued_actionable_rows"], 0)
+        self.assertEqual(action_queue["evidence"]["queue_coverage"], 1.0)
         self.assertEqual(action_queue["evidence"]["barcode_template_rows_excluded"], 3)
+        self.assertEqual(action_queue["evidence"]["non_barcode_template_rows"], 2)
+        self.assertEqual(action_queue["evidence"]["total_review_template_rows"], 5)
+        self.assertEqual(action_queue["evidence"]["non_barcode_template_share"], 0.4)
+        self.assertEqual(action_queue["evidence"]["skipped_non_template_rows"], 0)
+        self.assertEqual(
+            action_queue["evidence"]["blocked_reason_counts"][0],
+            ["missing_exact_source_url_for_requested_focus", 1],
+        )
+        self.assertEqual(
+            action_queue["evidence"]["blocked_until_counts"][0],
+            ["exact_product_source_url_confirmed", 1],
+        )
+        self.assertEqual(action_queue["evidence"]["review_url_rows"], 2)
+        self.assertEqual(
+            action_queue["evidence"]["primary_review_url_kind_counts"],
+            [["existing_source_url", 1], ["domain_limited_web_search", 1]],
+        )
+        self.assertEqual(
+            action_queue["evidence"]["barcode_template_rows_excluded_blocked_reason"],
+            "barcode_research_deferred",
+        )
+        self.assertEqual(
+            action_queue["evidence"]["barcode_template_rows_excluded_blocked_until"],
+            "source_image_date_price_queue_reviewed",
+        )
         danganronpa = next(
             action
             for action in report["actions"]
@@ -720,6 +824,18 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(danganronpa["evidence"]["official_search_rows"], 2)
         self.assertEqual(danganronpa["evidence"]["licensed_retailer_review_rows"], 1)
         self.assertEqual(danganronpa["evidence"]["official_prize_search_rows"], 1)
+        self.assertEqual(danganronpa["evidence"]["confirmed_patch_template_rows"], 4)
+        self.assertEqual(danganronpa["evidence"]["confirmed_patch_template_pending_rows"], 4)
+        self.assertEqual(danganronpa["evidence"]["template_dry_run_rows"], 4)
+        self.assertEqual(danganronpa["evidence"]["template_dry_run_ready_rows"], 0)
+        self.assertEqual(danganronpa["evidence"]["template_dry_run_skipped_rows"], 4)
+        self.assertEqual(danganronpa["evidence"]["template_dry_run_blocked_rows"], 0)
+        self.assertEqual(danganronpa["evidence"]["manual_confirmed_source_rows"], 0)
+        self.assertEqual(danganronpa["evidence"]["manual_confirmed_image_rows"], 0)
+        self.assertEqual(
+            danganronpa["evidence"]["template_dry_run_by_status"],
+            [["skipped_pending_manual_confirmation", 4]],
+        )
         self.assertEqual(danganronpa["evidence"]["by_source_store"][0], ["Movic", 2])
         self.assertEqual(report["summary"]["danganronpa_missing_media_rows"], 4)
         self.assertEqual(report["summary"]["danganronpa_missing_image_url_rows"], 4)
@@ -728,6 +844,21 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["danganronpa_official_search_rows"], 2)
         self.assertEqual(report["summary"]["danganronpa_licensed_retailer_review_rows"], 1)
         self.assertEqual(report["summary"]["danganronpa_official_prize_search_rows"], 1)
+        self.assertEqual(report["summary"]["danganronpa_confirmed_patch_template_rows"], 4)
+        self.assertEqual(
+            report["summary"]["danganronpa_confirmed_patch_template_pending_rows"],
+            4,
+        )
+        self.assertEqual(report["summary"]["danganronpa_patch_template_ready_rows"], 0)
+        self.assertEqual(report["summary"]["danganronpa_patch_template_skipped_rows"], 4)
+        self.assertEqual(
+            report["summary"]["danganronpa_patch_template_manual_confirmed_source_rows"],
+            0,
+        )
+        self.assertEqual(
+            report["summary"]["danganronpa_patch_template_manual_confirmed_image_rows"],
+            0,
+        )
         source_action = next(
             action
             for action in report["actions"]

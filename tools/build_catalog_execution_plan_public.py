@@ -138,9 +138,11 @@ def _build_plan(load_report) -> dict[str, Any]:
     ensky_cache_candidate_action_queue = load_report("ensky_cache_candidate_action_queue_public.json")
     metadata_batches = load_report("catalog_metadata_review_batches_public.json")
     metadata_action_queue = load_report("catalog_metadata_action_queue_public.json")
+    requested_enrichment = load_report("requested_focus_enrichment_public.json")
     requested_batches = load_report("requested_focus_review_batches_public.json")
     requested_action_queue = load_report("requested_focus_action_queue_public.json")
     danganronpa_missing_media = load_report("danganronpa_missing_media_public.json")
+    danganronpa_patch_template_dry_run = load_report("danganronpa_patch_template_dry_run_public.json")
     dedupe_catalog = load_report("catalog_deduplication_public.json")
     dedupe_batches = load_report("catalog_deduplication_review_batches_public.json")
     dedupe_action_queue = load_report("catalog_deduplication_action_queue_public.json")
@@ -192,9 +194,11 @@ def _build_plan(load_report) -> dict[str, Any]:
     metadata_summary = _summary(metadata_batches)
     metadata_action_summary = _summary(metadata_action_queue)
     source_next_focus_pack_summary = _summary(source_next_focus_pack)
+    requested_enrichment_summary = _summary(requested_enrichment)
     requested_summary = _summary(requested_batches)
     requested_action_summary = _summary(requested_action_queue)
     danganronpa_media_summary = _summary(danganronpa_missing_media)
+    danganronpa_dry_run_summary = _summary(danganronpa_patch_template_dry_run)
     dedupe_catalog_summary = _summary(dedupe_catalog)
     dedupe_summary = _summary(dedupe_batches)
     dedupe_action_summary = _summary(dedupe_action_queue)
@@ -314,7 +318,36 @@ def _build_plan(load_report) -> dict[str, Any]:
             next_step="prioritize_user_requested_topics",
             blocker="Exact source evidence is required before catalog mutation.",
             evidence={
+                "topic_count": _count(requested_enrichment_summary, "topic_count"),
+                "total_matched_catalog_rows": _count(
+                    requested_enrichment_summary, "total_matched_catalog_rows"
+                ),
+                "total_requested_labels": _count(
+                    requested_enrichment_summary, "total_requested_labels"
+                ),
+                "topics_with_open_work": _count(
+                    requested_enrichment_summary, "topics_with_open_work"
+                ),
+                "open_rows": _count(requested_enrichment_summary, "open_rows"),
+                "missing_image_rows": _count(
+                    requested_enrichment_summary, "missing_image_rows"
+                ),
+                "missing_source_url_rows": _count(
+                    requested_enrichment_summary, "missing_source_url_rows"
+                ),
+                "missing_release_date_rows": _count(
+                    requested_enrichment_summary, "missing_release_date_rows"
+                ),
+                "missing_official_price_jpy_rows": _count(
+                    requested_enrichment_summary, "missing_official_price_jpy_rows"
+                ),
+                "requested_needs_review": _count(
+                    requested_enrichment_summary, "requested_needs_review"
+                ),
                 "batch_count": _count(requested_summary, "batch_count"),
+                "topic_with_batches_count": _count(
+                    requested_summary, "topic_with_batches_count"
+                ),
                 "by_topic": requested_summary.get("by_topic", []),
                 "by_missing_field": requested_summary.get("by_missing_field", []),
                 "field_patch_template_count": _count(requested_summary, "field_patch_template_count"),
@@ -338,10 +371,42 @@ def _build_plan(load_report) -> dict[str, Any]:
             evidence={
                 "actionable_template_rows": _count(requested_action_summary, "actionable_template_rows"),
                 "queued_action_rows": _count(requested_action_summary, "queued_action_rows"),
+                "unqueued_actionable_rows": _count(
+                    requested_action_summary, "unqueued_actionable_rows"
+                ),
+                "queue_coverage": requested_action_summary.get("queue_coverage"),
                 "action_batch_count": _count(requested_action_summary, "action_batch_count"),
                 "barcode_template_rows_excluded": _count(requested_action_summary, "barcode_template_rows_excluded"),
+                "non_barcode_template_rows": _count(
+                    requested_action_summary, "non_barcode_template_rows"
+                ),
+                "total_review_template_rows": _count(
+                    requested_action_summary, "total_review_template_rows"
+                ),
+                "non_barcode_template_share": requested_action_summary.get(
+                    "non_barcode_template_share"
+                ),
+                "skipped_non_template_rows": _count(
+                    requested_action_summary, "skipped_non_template_rows"
+                ),
                 "field_counts": requested_action_summary.get("field_counts", []),
                 "topic_counts": requested_action_summary.get("topic_counts", []),
+                "blocked_reason_counts": requested_action_summary.get(
+                    "blocked_reason_counts", []
+                ),
+                "blocked_until_counts": requested_action_summary.get(
+                    "blocked_until_counts", []
+                ),
+                "review_url_rows": _count(requested_action_summary, "review_url_rows"),
+                "primary_review_url_kind_counts": requested_action_summary.get(
+                    "primary_review_url_kind_counts", []
+                ),
+                "barcode_template_rows_excluded_blocked_reason": requested_action_summary.get(
+                    "barcode_template_rows_excluded_blocked_reason"
+                ),
+                "barcode_template_rows_excluded_blocked_until": requested_action_summary.get(
+                    "barcode_template_rows_excluded_blocked_until"
+                ),
             },
         )
     )
@@ -369,6 +434,29 @@ def _build_plan(load_report) -> dict[str, Any]:
                     danganronpa_media_summary, "licensed_retailer_review_rows"
                 ),
                 "official_prize_search_rows": _count(danganronpa_media_summary, "official_prize_search_rows"),
+                "confirmed_patch_template_rows": _count(
+                    danganronpa_media_summary, "confirmed_patch_template_rows"
+                ),
+                "confirmed_patch_template_pending_rows": _count(
+                    danganronpa_media_summary, "confirmed_patch_template_pending_rows"
+                ),
+                "template_dry_run_rows": _count(danganronpa_dry_run_summary, "template_rows"),
+                "template_dry_run_ready_rows": _count(danganronpa_dry_run_summary, "ready_rows"),
+                "template_dry_run_skipped_rows": _count(
+                    danganronpa_dry_run_summary, "skipped_rows"
+                ),
+                "template_dry_run_blocked_rows": _count(
+                    danganronpa_dry_run_summary, "blocked_rows"
+                ),
+                "manual_confirmed_source_rows": _count(
+                    danganronpa_dry_run_summary, "manual_confirmed_source_rows"
+                ),
+                "manual_confirmed_image_rows": _count(
+                    danganronpa_dry_run_summary, "manual_confirmed_image_rows"
+                ),
+                "template_dry_run_by_status": danganronpa_dry_run_summary.get(
+                    "by_status", []
+                ),
                 "by_source_store": danganronpa_media_summary.get("by_source_store", []),
                 "by_source_kind": danganronpa_media_summary.get("by_source_kind", []),
             },
@@ -1611,8 +1699,50 @@ def _build_plan(load_report) -> dict[str, Any]:
             "confirmed_import_top_work_order_workflow": confirmed_summary.get(
                 "top_work_order_workflow"
             ),
+            "requested_focus_topic_count": _count(
+                requested_enrichment_summary, "topic_count"
+            ),
+            "requested_focus_open_rows": _count(
+                requested_enrichment_summary, "open_rows"
+            ),
+            "requested_focus_topics_with_open_work": _count(
+                requested_enrichment_summary, "topics_with_open_work"
+            ),
+            "requested_focus_missing_image_rows": _count(
+                requested_enrichment_summary, "missing_image_rows"
+            ),
+            "requested_focus_missing_source_url_rows": _count(
+                requested_enrichment_summary, "missing_source_url_rows"
+            ),
+            "requested_focus_missing_release_date_rows": _count(
+                requested_enrichment_summary, "missing_release_date_rows"
+            ),
+            "requested_focus_missing_official_price_jpy_rows": _count(
+                requested_enrichment_summary, "missing_official_price_jpy_rows"
+            ),
             "requested_focus_actionable_template_rows": requested_actionable_template_rows,
             "requested_focus_barcode_template_rows": requested_barcode_template_rows,
+            "requested_focus_queued_action_rows": _count(
+                requested_action_summary, "queued_action_rows"
+            ),
+            "requested_focus_unqueued_actionable_rows": _count(
+                requested_action_summary, "unqueued_actionable_rows"
+            ),
+            "requested_focus_queue_coverage": requested_action_summary.get(
+                "queue_coverage"
+            ),
+            "requested_focus_non_barcode_template_rows": _count(
+                requested_action_summary, "non_barcode_template_rows"
+            ),
+            "requested_focus_total_review_template_rows": _count(
+                requested_action_summary, "total_review_template_rows"
+            ),
+            "requested_focus_non_barcode_template_share": requested_action_summary.get(
+                "non_barcode_template_share"
+            ),
+            "requested_focus_review_url_rows": _count(
+                requested_action_summary, "review_url_rows"
+            ),
             "danganronpa_missing_media_rows": _count(danganronpa_media_summary, "missing_media_rows"),
             "danganronpa_missing_image_url_rows": _count(danganronpa_media_summary, "missing_image_url_rows"),
             "danganronpa_missing_source_url_rows": _count(
@@ -1627,6 +1757,24 @@ def _build_plan(load_report) -> dict[str, Any]:
             ),
             "danganronpa_official_prize_search_rows": _count(
                 danganronpa_media_summary, "official_prize_search_rows"
+            ),
+            "danganronpa_confirmed_patch_template_rows": _count(
+                danganronpa_media_summary, "confirmed_patch_template_rows"
+            ),
+            "danganronpa_confirmed_patch_template_pending_rows": _count(
+                danganronpa_media_summary, "confirmed_patch_template_pending_rows"
+            ),
+            "danganronpa_patch_template_ready_rows": _count(
+                danganronpa_dry_run_summary, "ready_rows"
+            ),
+            "danganronpa_patch_template_skipped_rows": _count(
+                danganronpa_dry_run_summary, "skipped_rows"
+            ),
+            "danganronpa_patch_template_manual_confirmed_source_rows": _count(
+                danganronpa_dry_run_summary, "manual_confirmed_source_rows"
+            ),
+            "danganronpa_patch_template_manual_confirmed_image_rows": _count(
+                danganronpa_dry_run_summary, "manual_confirmed_image_rows"
             ),
             "ichiban_campaign_rows": _count(kuji_history_summary, "campaign_rows"),
             "ichiban_catalog_kuji_item_rows": _count(kuji_history_summary, "catalog_kuji_item_rows"),
