@@ -1462,6 +1462,26 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(focused_source_fallback["public_action_rows"], 17)
         self.assertEqual(focused_source_fallback["skipped_rows"], 17)
         self.assertEqual(focused_source_fallback["skip_reason_counts"], [["manual_confirmed_false", 17]])
+        source_next_focus_fallback = reports.load_json(
+            reports.SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE
+        )
+        source_next_focus_fallback_summary = source_next_focus_fallback.get("summary", {})
+        fallback_agent_batch = next(
+            batch
+            for batch in batches
+            if batch.get("workstream") == "source_discovery_next_focus_fallback_queue"
+        )
+        self.assertEqual(
+            fallback_agent_batch["review_summary"]["first_primary_review_url"],
+            source_next_focus_fallback_summary["first_primary_review_url"],
+        )
+        self.assertEqual(
+            fallback_agent_batch["review_summary"]["first_primary_review_url_kind"],
+            source_next_focus_fallback_summary["first_primary_review_url_kind"],
+        )
+        self.assertTrue(
+            any(item.get("primary_review_url") for item in fallback_agent_batch.get("sample_items", []))
+        )
         self.assertGreater(len(batches), 0)
         self.assertLessEqual(len(batches), reports.MAX_AGENT_WORK_QUEUE_BATCHES)
         self.assertEqual(agent_queue["summary"]["max_published_batches"], reports.MAX_AGENT_WORK_QUEUE_BATCHES)

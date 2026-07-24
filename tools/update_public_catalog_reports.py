@@ -4183,6 +4183,7 @@ def build_agent_work_queue_public(
     animation_split_review_override: dict[str, Any] | None = None,
     animation_unmatched_keyword_review_override: dict[str, Any] | None = None,
     source_next_focus_pack_override: dict[str, Any] | None = None,
+    source_next_focus_fallback_queue_override: dict[str, Any] | None = None,
     source_discovery_starter_queue_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     batches: list[dict[str, Any]] = []
@@ -4213,6 +4214,13 @@ def build_agent_work_queue_public(
         if source_next_focus_pack_override is not None
         else load_json(SOURCE_DISCOVERY_NEXT_FOCUS_PACK, {})
         if SOURCE_DISCOVERY_NEXT_FOCUS_PACK.exists()
+        else {}
+    )
+    source_next_focus_fallback_queue = (
+        source_next_focus_fallback_queue_override
+        if source_next_focus_fallback_queue_override is not None
+        else load_json(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE, {})
+        if SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.exists()
         else {}
     )
     source_discovery_starter_queue = (
@@ -4344,6 +4352,8 @@ def build_agent_work_queue_public(
         if workstream == "source_detail_candidate_action_queue":
             return "candidate_review_required"
         if workstream == "source_discovery_starter_queue":
+            return "exact_source_discovery_required"
+        if workstream == "source_discovery_next_focus_fallback_queue":
             return "exact_source_discovery_required"
         if workstream == "source_url_discovery":
             return "exact_source_discovery_required"
@@ -4566,6 +4576,48 @@ def build_agent_work_queue_public(
                 "focus_pack_progress_remaining_rows": sum(
                     int(row.get("remaining_review_rows") or 0) for row in focus_progress_rows
                 ),
+            },
+        )
+
+    fallback_summary = source_next_focus_fallback_queue.get("summary", {})
+    fallback_review_rows = [
+        row for row in source_next_focus_fallback_queue.get("review_table", []) if isinstance(row, dict)
+    ]
+    if fallback_review_rows:
+        add_batch(
+            agent_id="agent-source-fallback",
+            workstream="source_discovery_next_focus_fallback_queue",
+            priority=20,
+            title="현재 포커스팩 fallback 소스 확인",
+            public_report=SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE,
+            rows=int(fallback_summary.get("queue_rows") or len(fallback_review_rows)),
+            recommended_action=(
+                "Open primary_review_url values and fill manual_confirmed_source_url only for exact product pages."
+            ),
+            acceptance_criteria=[
+                "primary_review_url is only a review starting point; accepted source_url must be an exact product/detail page.",
+                "Rows with variant or metadata blockers stay blocked until identity is disambiguated.",
+                "Keep auto-apply disabled and prepare manual confirmed source templates only.",
+            ],
+            samples=fallback_review_rows[:8],
+            review_summary={
+                "queue_rows": int(fallback_summary.get("queue_rows") or len(fallback_review_rows)),
+                "review_table_rows": int(fallback_summary.get("review_table_rows") or len(fallback_review_rows)),
+                "source_confirmation_ready_rows": int(
+                    fallback_summary.get("source_confirmation_ready_rows") or 0
+                ),
+                "metadata_backfill_required_rows": int(
+                    fallback_summary.get("metadata_backfill_required_rows") or 0
+                ),
+                "variant_disambiguation_required_rows": int(
+                    fallback_summary.get("variant_disambiguation_required_rows") or 0
+                ),
+                "first_primary_review_url": fallback_summary.get("first_primary_review_url"),
+                "first_primary_review_url_kind": fallback_summary.get("first_primary_review_url_kind"),
+                "first_domain_limited_web_search_url": fallback_summary.get(
+                    "first_domain_limited_web_search_url"
+                ),
+                "work_order_lanes": fallback_summary.get("work_order_lanes", []),
             },
         )
 
@@ -7430,6 +7482,7 @@ def validate_report_consistency(
         f"data/{SOURCE_DISCOVERY_REVIEW_BATCHES.name}",
         f"data/{SOURCE_DISCOVERY_STARTER_QUEUE.name}",
         f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_PACK.name}",
+        f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}",
         f"data/{METADATA_BACKLOG.name}",
         f"data/{METADATA_REVIEW_BATCHES.name}",
         f"data/{METADATA_ACTION_QUEUE.name}",
@@ -7952,6 +8005,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         animation_split_review,
         animation_unmatched_keyword_review,
         source_discovery_next_focus_pack,
+        source_discovery_next_focus_fallback_queue,
         source_discovery_starter_queue,
     )
     from build_catalog_execution_plan_public import build_plan_from_reports
