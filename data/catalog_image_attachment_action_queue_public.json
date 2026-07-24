@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T11:44:24Z",
+  "generated_at": "2026-07-24T11:59:10Z",
   "scope": "catalog_image_attachment_action_queue",
   "summary": {
     "actionable_image_rows": 73,
@@ -114,6 +114,50 @@
         1
       ]
     ],
+    "representative_candidate_review_guidance": [
+      {
+        "status": "motif_only_type_mismatch",
+        "rows": 16,
+        "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+        "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+        "required_evidence": [
+          "same character",
+          "same regional motif",
+          "same product type",
+          "same visible variant when separated by character or design"
+        ],
+        "manual_confirmed_allowed": false,
+        "auto_apply_allowed": false
+      },
+      {
+        "status": "no_official_candidate",
+        "rows": 6,
+        "risk": "no_official_candidate_image_found_for_exact_item",
+        "recommended_action": "search_official_or_trusted_source_before_import",
+        "required_evidence": [
+          "exact product name or official listing context",
+          "same character",
+          "same regional motif",
+          "same product type"
+        ],
+        "manual_confirmed_allowed": false,
+        "auto_apply_allowed": false
+      },
+      {
+        "status": "rejected_visual_mismatch",
+        "rows": 1,
+        "risk": "candidate_was_rejected_by_visual_or_identity_check",
+        "recommended_action": "do_not_reuse_rejected_candidate_search_new_evidence",
+        "required_evidence": [
+          "fresh image URL from exact product evidence",
+          "same character",
+          "same regional motif",
+          "same product type"
+        ],
+        "manual_confirmed_allowed": false,
+        "auto_apply_allowed": false
+      }
+    ],
     "image_url_ready_rows": 0,
     "blocked_before_image_import_rows": 73,
     "download_ready_after_manual_image_url_rows": 73,
@@ -151,6 +195,36 @@
         "no_official_candidate",
         1
       ]
+    ],
+    "next_representative_image_review_batch_guidance": [
+      {
+        "status": "motif_only_type_mismatch",
+        "rows": 9,
+        "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+        "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+        "required_evidence": [
+          "same character",
+          "same regional motif",
+          "same product type",
+          "same visible variant when separated by character or design"
+        ],
+        "manual_confirmed_allowed": false,
+        "auto_apply_allowed": false
+      },
+      {
+        "status": "no_official_candidate",
+        "rows": 1,
+        "risk": "no_official_candidate_image_found_for_exact_item",
+        "recommended_action": "search_official_or_trusted_source_before_import",
+        "required_evidence": [
+          "exact product name or official listing context",
+          "same character",
+          "same regional motif",
+          "same product type"
+        ],
+        "manual_confirmed_allowed": false,
+        "auto_apply_allowed": false
+      }
     ],
     "representative_image_review_workstream_count": 1,
     "excluded_workflow_rows": [
@@ -364,6 +438,19 @@
           "first_fallback_web_search_url": "",
           "suggested_local_image_path": "assets/catalog_images/catalog_2325.webp",
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "source_url_update_required": true,
           "representative_image_review_required": false
@@ -381,6 +468,19 @@
           "first_fallback_web_search_url": "",
           "suggested_local_image_path": "assets/catalog_images/catalog_2352.webp",
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "source_url_update_required": true,
           "representative_image_review_required": false
@@ -398,6 +498,19 @@
           "first_fallback_web_search_url": "",
           "suggested_local_image_path": "assets/catalog_images/catalog_2355.webp",
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "source_url_update_required": true,
           "representative_image_review_required": false
@@ -415,6 +528,19 @@
           "first_fallback_web_search_url": "",
           "suggested_local_image_path": "assets/catalog_images/catalog_2356.webp",
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "source_url_update_required": true,
           "representative_image_review_required": false
@@ -432,6 +558,19 @@
           "first_fallback_web_search_url": "",
           "suggested_local_image_path": "assets/catalog_images/catalog_2357.webp",
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "source_url_update_required": true,
           "representative_image_review_required": false
@@ -449,6 +588,19 @@
           "first_fallback_web_search_url": "",
           "suggested_local_image_path": "assets/catalog_images/catalog_2361.webp",
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "source_url_update_required": true,
           "representative_image_review_required": false
@@ -466,6 +618,19 @@
           "first_fallback_web_search_url": "",
           "suggested_local_image_path": "assets/catalog_images/catalog_2362.webp",
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "source_url_update_required": true,
           "representative_image_review_required": false
@@ -483,6 +648,19 @@
           "first_fallback_web_search_url": "",
           "suggested_local_image_path": "assets/catalog_images/catalog_2363.webp",
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "source_url_update_required": true,
           "representative_image_review_required": false
@@ -605,6 +783,19 @@
           "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ashop.weverse.io+SEVENTEEN+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C",
           "suggested_local_image_path": "assets/catalog_images/catalog_17613.webp",
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "source_url_update_required": true,
           "representative_image_review_required": false
@@ -622,6 +813,19 @@
           "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ashop.weverse.io+ZEROBASEONE+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C",
           "suggested_local_image_path": "assets/catalog_images/catalog_17622.webp",
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "source_url_update_required": true,
           "representative_image_review_required": false
@@ -639,6 +843,19 @@
           "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ashop.weverse.io+ILLIT+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C",
           "suggested_local_image_path": "assets/catalog_images/catalog_17623.webp",
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "source_url_update_required": true,
           "representative_image_review_required": false
@@ -765,6 +982,19 @@
           "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Apokemoncenter-online.com+%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3+%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF+%28%E3%83%94%E3%82%AB%E3%83%81%E3%83%A5%E3%82%A6%29+%EC%9D%B8%ED%98%95",
           "suggested_local_image_path": "assets/catalog_images/catalog_1098.webp",
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "source_url_update_required": true,
           "representative_image_review_required": false
@@ -782,6 +1012,19 @@
           "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Apokemoncenter-online.com+%ED%8F%AC%EC%BC%93%EB%AA%AC+%EC%B9%B4%EB%93%9C+%EA%B2%8C%EC%9E%84+%EB%B6%80%EC%8A%A4%ED%84%B0+%ED%8C%A9+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%B9%B4%EB%93%9C",
           "suggested_local_image_path": "assets/catalog_images/catalog_17593.webp",
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "source_url_update_required": true,
           "representative_image_review_required": false
@@ -920,6 +1163,19 @@
           "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E6%B5%85%E8%8D%89+%E9%9B%B7%E9%96%80%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4%EB%A7%81",
           "suggested_local_image_path": "assets/catalog_images/catalog_936.webp",
           "representative_candidate_status": "motif_only_type_mismatch",
+          "representative_candidate_review_guidance": {
+            "status": "motif_only_type_mismatch",
+            "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+            "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+            "required_evidence": [
+              "same character",
+              "same regional motif",
+              "same product type",
+              "same visible variant when separated by character or design"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [
             {
               "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
@@ -962,6 +1218,19 @@
           "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%86%E3%81%95%E3%81%8E+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E6%B5%85%E8%8D%89%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8",
           "suggested_local_image_path": "assets/catalog_images/catalog_937.webp",
           "representative_candidate_status": "no_official_candidate",
+          "representative_candidate_review_guidance": {
+            "status": "no_official_candidate",
+            "risk": "no_official_candidate_image_found_for_exact_item",
+            "recommended_action": "search_official_or_trusted_source_before_import",
+            "required_evidence": [
+              "exact product name or official listing context",
+              "same character",
+              "same regional motif",
+              "same product type"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "source_url_update_required": false,
           "representative_image_review_required": true
@@ -979,6 +1248,19 @@
           "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9F%E3%83%8B%E3%82%BF%E3%82%AA%E3%83%AB+%28%E6%9D%B1%E4%BA%AC%29+%E3%81%94%E5%BD%93%E5%9C%B0+%ED%83%80%EC%9B%94",
           "suggested_local_image_path": "assets/catalog_images/catalog_938.webp",
           "representative_candidate_status": "motif_only_type_mismatch",
+          "representative_candidate_review_guidance": {
+            "status": "motif_only_type_mismatch",
+            "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+            "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+            "required_evidence": [
+              "same character",
+              "same regional motif",
+              "same product type",
+              "same visible variant when separated by character or design"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [
             {
               "page": "https://www.jp-api.com/contents/NOD62/PGE5/",
@@ -1057,6 +1339,19 @@
           "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%86%E3%81%95%E3%81%8E+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E5%A4%A7%E9%98%AA+%E9%80%9A%E5%A4%A9%E9%96%A3%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8",
           "suggested_local_image_path": "assets/catalog_images/catalog_941.webp",
           "representative_candidate_status": "motif_only_type_mismatch",
+          "representative_candidate_review_guidance": {
+            "status": "motif_only_type_mismatch",
+            "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+            "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+            "required_evidence": [
+              "same character",
+              "same regional motif",
+              "same product type",
+              "same visible variant when separated by character or design"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [
             {
               "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
@@ -1123,6 +1418,19 @@
           "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC+%28%E5%A4%A7%E9%98%AA+%E3%81%9F%E3%81%93%E7%84%BC%E3%81%8D%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4%EB%A7%81",
           "suggested_local_image_path": "assets/catalog_images/catalog_942.webp",
           "representative_candidate_status": "motif_only_type_mismatch",
+          "representative_candidate_review_guidance": {
+            "status": "motif_only_type_mismatch",
+            "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+            "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+            "required_evidence": [
+              "same character",
+              "same regional motif",
+              "same product type",
+              "same visible variant when separated by character or design"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [
             {
               "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
@@ -1190,6 +1498,19 @@
           "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9F%E3%83%8B%E3%82%BF%E3%82%AA%E3%83%AB+%28%E5%A4%A7%E9%98%AA%29+%E3%81%94%E5%BD%93%E5%9C%B0+%ED%83%80%EC%9B%94",
           "suggested_local_image_path": "assets/catalog_images/catalog_943.webp",
           "representative_candidate_status": "motif_only_type_mismatch",
+          "representative_candidate_review_guidance": {
+            "status": "motif_only_type_mismatch",
+            "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+            "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+            "required_evidence": [
+              "same character",
+              "same regional motif",
+              "same product type",
+              "same visible variant when separated by character or design"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [
             {
               "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
@@ -1244,6 +1565,19 @@
           "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E4%BA%AC%E9%83%BD+%E8%88%9E%E5%A6%93%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8",
           "suggested_local_image_path": "assets/catalog_images/catalog_944.webp",
           "representative_candidate_status": "motif_only_type_mismatch",
+          "representative_candidate_review_guidance": {
+            "status": "motif_only_type_mismatch",
+            "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+            "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+            "required_evidence": [
+              "same character",
+              "same regional motif",
+              "same product type",
+              "same visible variant when separated by character or design"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [
             {
               "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
@@ -1322,6 +1656,19 @@
           "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E4%BA%AC%E9%83%BD+%E8%88%9E%E5%A6%93%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8",
           "suggested_local_image_path": "assets/catalog_images/catalog_945.webp",
           "representative_candidate_status": "motif_only_type_mismatch",
+          "representative_candidate_review_guidance": {
+            "status": "motif_only_type_mismatch",
+            "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+            "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+            "required_evidence": [
+              "same character",
+              "same regional motif",
+              "same product type",
+              "same visible variant when separated by character or design"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [
             {
               "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
@@ -5626,6 +5973,19 @@
       "evidence_url": "",
       "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
       "representative_candidate_status": "motif_only_type_mismatch",
+      "representative_candidate_review_guidance": {
+        "status": "motif_only_type_mismatch",
+        "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+        "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+        "required_evidence": [
+          "same character",
+          "same regional motif",
+          "same product type",
+          "same visible variant when separated by character or design"
+        ],
+        "manual_confirmed_allowed": false,
+        "auto_apply_allowed": false
+      },
       "representative_top_candidates": [
         {
           "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
@@ -5715,6 +6075,19 @@
       "evidence_url": "",
       "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
       "representative_candidate_status": "no_official_candidate",
+      "representative_candidate_review_guidance": {
+        "status": "no_official_candidate",
+        "risk": "no_official_candidate_image_found_for_exact_item",
+        "recommended_action": "search_official_or_trusted_source_before_import",
+        "required_evidence": [
+          "exact product name or official listing context",
+          "same character",
+          "same regional motif",
+          "same product type"
+        ],
+        "manual_confirmed_allowed": false,
+        "auto_apply_allowed": false
+      },
       "representative_top_candidates": [],
       "suggested_local_image_path": "assets/catalog_images/catalog_937.webp",
       "local_image_download_instruction": {
@@ -5779,6 +6152,19 @@
       "evidence_url": "",
       "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
       "representative_candidate_status": "motif_only_type_mismatch",
+      "representative_candidate_review_guidance": {
+        "status": "motif_only_type_mismatch",
+        "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+        "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+        "required_evidence": [
+          "same character",
+          "same regional motif",
+          "same product type",
+          "same visible variant when separated by character or design"
+        ],
+        "manual_confirmed_allowed": false,
+        "auto_apply_allowed": false
+      },
       "representative_top_candidates": [
         {
           "page": "https://www.jp-api.com/contents/NOD62/PGE5/",
@@ -5904,6 +6290,19 @@
       "evidence_url": "",
       "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
       "representative_candidate_status": "motif_only_type_mismatch",
+      "representative_candidate_review_guidance": {
+        "status": "motif_only_type_mismatch",
+        "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+        "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+        "required_evidence": [
+          "same character",
+          "same regional motif",
+          "same product type",
+          "same visible variant when separated by character or design"
+        ],
+        "manual_confirmed_allowed": false,
+        "auto_apply_allowed": false
+      },
       "representative_top_candidates": [
         {
           "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
@@ -6017,6 +6416,19 @@
       "evidence_url": "",
       "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
       "representative_candidate_status": "motif_only_type_mismatch",
+      "representative_candidate_review_guidance": {
+        "status": "motif_only_type_mismatch",
+        "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+        "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+        "required_evidence": [
+          "same character",
+          "same regional motif",
+          "same product type",
+          "same visible variant when separated by character or design"
+        ],
+        "manual_confirmed_allowed": false,
+        "auto_apply_allowed": false
+      },
       "representative_top_candidates": [
         {
           "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
@@ -6131,6 +6543,19 @@
       "evidence_url": "",
       "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
       "representative_candidate_status": "motif_only_type_mismatch",
+      "representative_candidate_review_guidance": {
+        "status": "motif_only_type_mismatch",
+        "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+        "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+        "required_evidence": [
+          "same character",
+          "same regional motif",
+          "same product type",
+          "same visible variant when separated by character or design"
+        ],
+        "manual_confirmed_allowed": false,
+        "auto_apply_allowed": false
+      },
       "representative_top_candidates": [
         {
           "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
@@ -6232,6 +6657,19 @@
       "evidence_url": "",
       "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
       "representative_candidate_status": "motif_only_type_mismatch",
+      "representative_candidate_review_guidance": {
+        "status": "motif_only_type_mismatch",
+        "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+        "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+        "required_evidence": [
+          "same character",
+          "same regional motif",
+          "same product type",
+          "same visible variant when separated by character or design"
+        ],
+        "manual_confirmed_allowed": false,
+        "auto_apply_allowed": false
+      },
       "representative_top_candidates": [
         {
           "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
@@ -6357,6 +6795,19 @@
       "evidence_url": "",
       "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
       "representative_candidate_status": "motif_only_type_mismatch",
+      "representative_candidate_review_guidance": {
+        "status": "motif_only_type_mismatch",
+        "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+        "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+        "required_evidence": [
+          "same character",
+          "same regional motif",
+          "same product type",
+          "same visible variant when separated by character or design"
+        ],
+        "manual_confirmed_allowed": false,
+        "auto_apply_allowed": false
+      },
       "representative_top_candidates": [
         {
           "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
@@ -6482,6 +6933,19 @@
       "evidence_url": "",
       "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
       "representative_candidate_status": "motif_only_type_mismatch",
+      "representative_candidate_review_guidance": {
+        "status": "motif_only_type_mismatch",
+        "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+        "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+        "required_evidence": [
+          "same character",
+          "same regional motif",
+          "same product type",
+          "same visible variant when separated by character or design"
+        ],
+        "manual_confirmed_allowed": false,
+        "auto_apply_allowed": false
+      },
       "representative_top_candidates": [
         {
           "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
@@ -6571,6 +7035,19 @@
       "evidence_url": "",
       "candidate_source_url": "https://www.jp-api.com/contents/NOD62/",
       "representative_candidate_status": "motif_only_type_mismatch",
+      "representative_candidate_review_guidance": {
+        "status": "motif_only_type_mismatch",
+        "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+        "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+        "required_evidence": [
+          "same character",
+          "same regional motif",
+          "same product type",
+          "same visible variant when separated by character or design"
+        ],
+        "manual_confirmed_allowed": false,
+        "auto_apply_allowed": false
+      },
       "representative_top_candidates": [
         {
           "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
@@ -6688,6 +7165,36 @@
           "no_official_candidate",
           1
         ]
+      ],
+      "representative_candidate_review_guidance": [
+        {
+          "status": "motif_only_type_mismatch",
+          "rows": 9,
+          "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+          "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+          "required_evidence": [
+            "same character",
+            "same regional motif",
+            "same product type",
+            "same visible variant when separated by character or design"
+          ],
+          "manual_confirmed_allowed": false,
+          "auto_apply_allowed": false
+        },
+        {
+          "status": "no_official_candidate",
+          "rows": 1,
+          "risk": "no_official_candidate_image_found_for_exact_item",
+          "recommended_action": "search_official_or_trusted_source_before_import",
+          "required_evidence": [
+            "exact product name or official listing context",
+            "same character",
+            "same regional motif",
+            "same product type"
+          ],
+          "manual_confirmed_allowed": false,
+          "auto_apply_allowed": false
+        }
       ],
       "operator_step": "Confirm product type and variant before accepting representative official images.",
       "unblocks": "manual_catalog_image_url_import",
@@ -6882,6 +7389,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2325.webp",
           "local_image_download_instruction": {
@@ -6977,6 +7497,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2352.webp",
           "local_image_download_instruction": {
@@ -7072,6 +7605,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2355.webp",
           "local_image_download_instruction": {
@@ -7167,6 +7713,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2356.webp",
           "local_image_download_instruction": {
@@ -7262,6 +7821,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2357.webp",
           "local_image_download_instruction": {
@@ -7357,6 +7929,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2361.webp",
           "local_image_download_instruction": {
@@ -7452,6 +8037,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2362.webp",
           "local_image_download_instruction": {
@@ -7547,6 +8145,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2363.webp",
           "local_image_download_instruction": {
@@ -7642,6 +8253,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2372.webp",
           "local_image_download_instruction": {
@@ -7737,6 +8361,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2373.webp",
           "local_image_download_instruction": {
@@ -7832,6 +8469,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2374.webp",
           "local_image_download_instruction": {
@@ -7927,6 +8577,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2375.webp",
           "local_image_download_instruction": {
@@ -8022,6 +8685,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2376.webp",
           "local_image_download_instruction": {
@@ -8117,6 +8793,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2399.webp",
           "local_image_download_instruction": {
@@ -8212,6 +8901,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2401.webp",
           "local_image_download_instruction": {
@@ -8307,6 +9009,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2404.webp",
           "local_image_download_instruction": {
@@ -8402,6 +9117,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2405.webp",
           "local_image_download_instruction": {
@@ -8497,6 +9225,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2406.webp",
           "local_image_download_instruction": {
@@ -8592,6 +9333,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2407.webp",
           "local_image_download_instruction": {
@@ -8687,6 +9441,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2412.webp",
           "local_image_download_instruction": {
@@ -8868,6 +9635,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2413.webp",
           "local_image_download_instruction": {
@@ -8963,6 +9743,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2414.webp",
           "local_image_download_instruction": {
@@ -9058,6 +9851,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2416.webp",
           "local_image_download_instruction": {
@@ -9153,6 +9959,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2422.webp",
           "local_image_download_instruction": {
@@ -9248,6 +10067,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2433.webp",
           "local_image_download_instruction": {
@@ -9343,6 +10175,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2434.webp",
           "local_image_download_instruction": {
@@ -9438,6 +10283,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2435.webp",
           "local_image_download_instruction": {
@@ -9533,6 +10391,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2436.webp",
           "local_image_download_instruction": {
@@ -9628,6 +10499,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2437.webp",
           "local_image_download_instruction": {
@@ -9723,6 +10607,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2438.webp",
           "local_image_download_instruction": {
@@ -9818,6 +10715,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2439.webp",
           "local_image_download_instruction": {
@@ -9913,6 +10823,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2440.webp",
           "local_image_download_instruction": {
@@ -10008,6 +10931,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2443.webp",
           "local_image_download_instruction": {
@@ -10103,6 +11039,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2445.webp",
           "local_image_download_instruction": {
@@ -10198,6 +11147,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2446.webp",
           "local_image_download_instruction": {
@@ -10293,6 +11255,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2447.webp",
           "local_image_download_instruction": {
@@ -10388,6 +11363,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2448.webp",
           "local_image_download_instruction": {
@@ -10483,6 +11471,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2453.webp",
           "local_image_download_instruction": {
@@ -10578,6 +11579,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2454.webp",
           "local_image_download_instruction": {
@@ -10673,6 +11687,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2458.webp",
           "local_image_download_instruction": {
@@ -10850,6 +11877,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2459.webp",
           "local_image_download_instruction": {
@@ -10945,6 +11985,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2460.webp",
           "local_image_download_instruction": {
@@ -11040,6 +12093,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2461.webp",
           "local_image_download_instruction": {
@@ -11135,6 +12201,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2462.webp",
           "local_image_download_instruction": {
@@ -11230,6 +12309,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_2464.webp",
           "local_image_download_instruction": {
@@ -11405,6 +12497,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_17613.webp",
           "local_image_download_instruction": {
@@ -11506,6 +12611,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_17622.webp",
           "local_image_download_instruction": {
@@ -11607,6 +12725,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_17623.webp",
           "local_image_download_instruction": {
@@ -11788,6 +12919,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_1098.webp",
           "local_image_download_instruction": {
@@ -11891,6 +13035,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": null,
+          "representative_candidate_review_guidance": {
+            "status": "unknown",
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+              "same character",
+              "same motif or variant",
+              "same product type",
+              "official or trusted source URL"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_17593.webp",
           "local_image_download_instruction": {
@@ -12046,6 +13203,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": "motif_only_type_mismatch",
+          "representative_candidate_review_guidance": {
+            "status": "motif_only_type_mismatch",
+            "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+            "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+            "required_evidence": [
+              "same character",
+              "same regional motif",
+              "same product type",
+              "same visible variant when separated by character or design"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [
             {
               "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
@@ -12144,6 +13314,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": "no_official_candidate",
+          "representative_candidate_review_guidance": {
+            "status": "no_official_candidate",
+            "risk": "no_official_candidate_image_found_for_exact_item",
+            "recommended_action": "search_official_or_trusted_source_before_import",
+            "required_evidence": [
+              "exact product name or official listing context",
+              "same character",
+              "same regional motif",
+              "same product type"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_937.webp",
           "local_image_download_instruction": {
@@ -12217,6 +13400,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": "motif_only_type_mismatch",
+          "representative_candidate_review_guidance": {
+            "status": "motif_only_type_mismatch",
+            "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+            "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+            "required_evidence": [
+              "same character",
+              "same regional motif",
+              "same product type",
+              "same visible variant when separated by character or design"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [
             {
               "page": "https://www.jp-api.com/contents/NOD62/PGE5/",
@@ -12351,6 +13547,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": "motif_only_type_mismatch",
+          "representative_candidate_review_guidance": {
+            "status": "motif_only_type_mismatch",
+            "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+            "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+            "required_evidence": [
+              "same character",
+              "same regional motif",
+              "same product type",
+              "same visible variant when separated by character or design"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [
             {
               "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
@@ -12473,6 +13682,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": "motif_only_type_mismatch",
+          "representative_candidate_review_guidance": {
+            "status": "motif_only_type_mismatch",
+            "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+            "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+            "required_evidence": [
+              "same character",
+              "same regional motif",
+              "same product type",
+              "same visible variant when separated by character or design"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [
             {
               "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
@@ -12596,6 +13818,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": "motif_only_type_mismatch",
+          "representative_candidate_review_guidance": {
+            "status": "motif_only_type_mismatch",
+            "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+            "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+            "required_evidence": [
+              "same character",
+              "same regional motif",
+              "same product type",
+              "same visible variant when separated by character or design"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [
             {
               "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
@@ -12706,6 +13941,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": "motif_only_type_mismatch",
+          "representative_candidate_review_guidance": {
+            "status": "motif_only_type_mismatch",
+            "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+            "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+            "required_evidence": [
+              "same character",
+              "same regional motif",
+              "same product type",
+              "same visible variant when separated by character or design"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [
             {
               "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
@@ -12840,6 +14088,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": "motif_only_type_mismatch",
+          "representative_candidate_review_guidance": {
+            "status": "motif_only_type_mismatch",
+            "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+            "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+            "required_evidence": [
+              "same character",
+              "same regional motif",
+              "same product type",
+              "same visible variant when separated by character or design"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [
             {
               "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
@@ -12974,6 +14235,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": "motif_only_type_mismatch",
+          "representative_candidate_review_guidance": {
+            "status": "motif_only_type_mismatch",
+            "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+            "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+            "required_evidence": [
+              "same character",
+              "same regional motif",
+              "same product type",
+              "same visible variant when separated by character or design"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [
             {
               "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
@@ -13072,6 +14346,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": "motif_only_type_mismatch",
+          "representative_candidate_review_guidance": {
+            "status": "motif_only_type_mismatch",
+            "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+            "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+            "required_evidence": [
+              "same character",
+              "same regional motif",
+              "same product type",
+              "same visible variant when separated by character or design"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [
             {
               "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
@@ -13182,6 +14469,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": "motif_only_type_mismatch",
+          "representative_candidate_review_guidance": {
+            "status": "motif_only_type_mismatch",
+            "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+            "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+            "required_evidence": [
+              "same character",
+              "same regional motif",
+              "same product type",
+              "same visible variant when separated by character or design"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [
             {
               "page": "https://www.jp-api.com/contents/NOD62/PGE3/",
@@ -13304,6 +14604,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": "no_official_candidate",
+          "representative_candidate_review_guidance": {
+            "status": "no_official_candidate",
+            "risk": "no_official_candidate_image_found_for_exact_item",
+            "recommended_action": "search_official_or_trusted_source_before_import",
+            "required_evidence": [
+              "exact product name or official listing context",
+              "same character",
+              "same regional motif",
+              "same product type"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_954.webp",
           "local_image_download_instruction": {
@@ -13377,6 +14690,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": "no_official_candidate",
+          "representative_candidate_review_guidance": {
+            "status": "no_official_candidate",
+            "risk": "no_official_candidate_image_found_for_exact_item",
+            "recommended_action": "search_official_or_trusted_source_before_import",
+            "required_evidence": [
+              "exact product name or official listing context",
+              "same character",
+              "same regional motif",
+              "same product type"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_955.webp",
           "local_image_download_instruction": {
@@ -13450,6 +14776,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": "motif_only_type_mismatch",
+          "representative_candidate_review_guidance": {
+            "status": "motif_only_type_mismatch",
+            "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+            "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+            "required_evidence": [
+              "same character",
+              "same regional motif",
+              "same product type",
+              "same visible variant when separated by character or design"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [
             {
               "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
@@ -13536,6 +14875,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": "no_official_candidate",
+          "representative_candidate_review_guidance": {
+            "status": "no_official_candidate",
+            "risk": "no_official_candidate_image_found_for_exact_item",
+            "recommended_action": "search_official_or_trusted_source_before_import",
+            "required_evidence": [
+              "exact product name or official listing context",
+              "same character",
+              "same regional motif",
+              "same product type"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_957.webp",
           "local_image_download_instruction": {
@@ -13609,6 +14961,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": "motif_only_type_mismatch",
+          "representative_candidate_review_guidance": {
+            "status": "motif_only_type_mismatch",
+            "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+            "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+            "required_evidence": [
+              "same character",
+              "same regional motif",
+              "same product type",
+              "same visible variant when separated by character or design"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [
             {
               "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
@@ -13707,6 +15072,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": "no_official_candidate",
+          "representative_candidate_review_guidance": {
+            "status": "no_official_candidate",
+            "risk": "no_official_candidate_image_found_for_exact_item",
+            "recommended_action": "search_official_or_trusted_source_before_import",
+            "required_evidence": [
+              "exact product name or official listing context",
+              "same character",
+              "same regional motif",
+              "same product type"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_959.webp",
           "local_image_download_instruction": {
@@ -13780,6 +15158,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": "no_official_candidate",
+          "representative_candidate_review_guidance": {
+            "status": "no_official_candidate",
+            "risk": "no_official_candidate_image_found_for_exact_item",
+            "recommended_action": "search_official_or_trusted_source_before_import",
+            "required_evidence": [
+              "exact product name or official listing context",
+              "same character",
+              "same regional motif",
+              "same product type"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [],
           "suggested_local_image_path": "assets/catalog_images/catalog_960.webp",
           "local_image_download_instruction": {
@@ -13853,6 +15244,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": "rejected_visual_mismatch",
+          "representative_candidate_review_guidance": {
+            "status": "rejected_visual_mismatch",
+            "risk": "candidate_was_rejected_by_visual_or_identity_check",
+            "recommended_action": "do_not_reuse_rejected_candidate_search_new_evidence",
+            "required_evidence": [
+              "fresh image URL from exact product evidence",
+              "same character",
+              "same regional motif",
+              "same product type"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [
             {
               "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
@@ -13963,6 +15367,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": "motif_only_type_mismatch",
+          "representative_candidate_review_guidance": {
+            "status": "motif_only_type_mismatch",
+            "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+            "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+            "required_evidence": [
+              "same character",
+              "same regional motif",
+              "same product type",
+              "same visible variant when separated by character or design"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [
             {
               "page": "https://www.jp-api.com/contents/NOD62/PGE5/",
@@ -14171,6 +15588,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": "motif_only_type_mismatch",
+          "representative_candidate_review_guidance": {
+            "status": "motif_only_type_mismatch",
+            "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+            "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+            "required_evidence": [
+              "same character",
+              "same regional motif",
+              "same product type",
+              "same visible variant when separated by character or design"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [
             {
               "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
@@ -14281,6 +15711,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": "motif_only_type_mismatch",
+          "representative_candidate_review_guidance": {
+            "status": "motif_only_type_mismatch",
+            "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+            "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+            "required_evidence": [
+              "same character",
+              "same regional motif",
+              "same product type",
+              "same visible variant when separated by character or design"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [
             {
               "page": "https://www.jp-api.com/contents/NOD62/PGE2/",
@@ -14379,6 +15822,19 @@
             "local_image_path_field": "local_image_path"
           },
           "representative_candidate_status": "motif_only_type_mismatch",
+          "representative_candidate_review_guidance": {
+            "status": "motif_only_type_mismatch",
+            "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+            "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+            "required_evidence": [
+              "same character",
+              "same regional motif",
+              "same product type",
+              "same visible variant when separated by character or design"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
           "representative_top_candidates": [
             {
               "page": "https://www.jp-api.com/contents/NOD62/PGE4/",

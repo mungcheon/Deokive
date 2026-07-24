@@ -422,6 +422,25 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
             report["summary"]["representative_candidate_status_counts"],
             [["motif_only_type_mismatch", 3]],
         )
+        self.assertEqual(
+            report["summary"]["representative_candidate_review_guidance"][0]["status"],
+            "motif_only_type_mismatch",
+        )
+        self.assertEqual(
+            report["summary"]["representative_candidate_review_guidance"][0]["rows"],
+            3,
+        )
+        self.assertFalse(
+            report["summary"]["representative_candidate_review_guidance"][0][
+                "manual_confirmed_allowed"
+            ]
+        )
+        self.assertIn(
+            "same product type",
+            report["summary"]["representative_candidate_review_guidance"][0][
+                "required_evidence"
+            ],
+        )
         self.assertEqual(report["summary"]["source_url_update_template_rows"], 0)
         self.assertEqual(report["summary"]["source_url_update_work_order_count"], 0)
         self.assertEqual(report["summary"]["source_url_update_template_batch_count"], 0)
@@ -437,6 +456,12 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(
             report["summary"]["next_representative_image_review_batch_candidate_status_counts"],
             [["motif_only_type_mismatch", 3]],
+        )
+        self.assertEqual(
+            report["summary"]["next_representative_image_review_batch_guidance"][0][
+                "recommended_action"
+            ],
+            "reject_candidate_or_find_exact_same_product_type_image",
         )
         self.assertEqual(report["summary"]["action_batch_count"], 1)
         self.assertEqual(report["summary"]["workstream_count"], 1)
@@ -455,6 +480,12 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
             report["next_operator_actions"][0]["representative_candidate_status_counts"],
             [["motif_only_type_mismatch", 3]],
         )
+        self.assertEqual(
+            report["next_operator_actions"][0]["representative_candidate_review_guidance"][0][
+                "risk"
+            ],
+            "official_candidate_matches_regional_motif_but_not_product_type",
+        )
         self.assertEqual(report["next_actions"][1]["next_batch_id"], "image-attachment-action-001")
         self.assertEqual(
             report["batches"][0]["items"][0]["review_lane"],
@@ -463,6 +494,12 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(
             report["batches"][0]["items"][0]["representative_candidate_status"],
             "motif_only_type_mismatch",
+        )
+        self.assertEqual(
+            report["batches"][0]["items"][0]["representative_candidate_review_guidance"][
+                "recommended_action"
+            ],
+            "reject_candidate_or_find_exact_same_product_type_image",
         )
         self.assertEqual(
             report["batches"][0]["items"][0]["representative_top_candidates"][0]["alt"],
@@ -489,6 +526,12 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(
             representative_review["representative_candidate_status"],
             "motif_only_type_mismatch",
+        )
+        self.assertIn(
+            "same product type",
+            representative_review["representative_candidate_review_guidance"][
+                "required_evidence"
+            ],
         )
         self.assertEqual(
             representative_review["representative_top_candidates"][0]["image_url"],

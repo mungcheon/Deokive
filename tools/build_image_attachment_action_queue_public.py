@@ -104,6 +104,80 @@ def _counter_pairs(rows: list[dict[str, Any]], key: str) -> list[list[Any]]:
     return [[name, count] for name, count in counts.most_common()]
 
 
+REPRESENTATIVE_CANDIDATE_REVIEW_GUIDANCE = {
+    "motif_only_type_mismatch": {
+        "risk": "official_candidate_matches_regional_motif_but_not_product_type",
+        "recommended_action": "reject_candidate_or_find_exact_same_product_type_image",
+        "required_evidence": [
+            "same character",
+            "same regional motif",
+            "same product type",
+            "same visible variant when separated by character or design",
+        ],
+        "manual_confirmed_allowed": False,
+    },
+    "no_official_candidate": {
+        "risk": "no_official_candidate_image_found_for_exact_item",
+        "recommended_action": "search_official_or_trusted_source_before_import",
+        "required_evidence": [
+            "exact product name or official listing context",
+            "same character",
+            "same regional motif",
+            "same product type",
+        ],
+        "manual_confirmed_allowed": False,
+    },
+    "rejected_visual_mismatch": {
+        "risk": "candidate_was_rejected_by_visual_or_identity_check",
+        "recommended_action": "do_not_reuse_rejected_candidate_search_new_evidence",
+        "required_evidence": [
+            "fresh image URL from exact product evidence",
+            "same character",
+            "same regional motif",
+            "same product type",
+        ],
+        "manual_confirmed_allowed": False,
+    },
+}
+
+
+def _representative_candidate_review_guidance(status: Any) -> dict[str, Any]:
+    normalized = str(status or "").strip()
+    guidance = REPRESENTATIVE_CANDIDATE_REVIEW_GUIDANCE.get(normalized)
+    if guidance is None:
+        guidance = {
+            "risk": "representative_candidate_status_unknown",
+            "recommended_action": "inspect_candidate_and_require_exact_identity_evidence",
+            "required_evidence": [
+                "same character",
+                "same motif or variant",
+                "same product type",
+                "official or trusted source URL",
+            ],
+            "manual_confirmed_allowed": False,
+        }
+    return {
+        "status": normalized or "unknown",
+        **guidance,
+        "auto_apply_allowed": False,
+    }
+
+
+def _representative_candidate_guidance_summary(
+    rows: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    counts = Counter(str(row.get("representative_candidate_status") or "") for row in rows)
+    counts.pop("", None)
+    return [
+        {
+            "status": status,
+            "rows": count,
+            **_representative_candidate_review_guidance(status),
+        }
+        for status, count in counts.most_common()
+    ]
+
+
 def _list_counter_pairs(rows: list[dict[str, Any]], key: str) -> list[list[Any]]:
     counts = Counter()
     for row in rows:
@@ -221,6 +295,9 @@ def _build_workstreams(batches: list[dict[str, Any]]) -> list[dict[str, Any]]:
                         ),
                         "representative_candidate_status": item.get(
                             "representative_candidate_status"
+                        ),
+                        "representative_candidate_review_guidance": _representative_candidate_review_guidance(
+                            item.get("representative_candidate_status")
                         ),
                         "representative_top_candidates": item.get(
                             "representative_top_candidates"
@@ -521,6 +598,9 @@ def _build_next_representative_image_review_batch(
                 "representative_candidate_status": row.get(
                     "representative_candidate_status"
                 ),
+                "representative_candidate_review_guidance": _representative_candidate_review_guidance(
+                    row.get("representative_candidate_status")
+                ),
                 "representative_top_candidates": row.get(
                     "representative_top_candidates"
                 )
@@ -769,6 +849,9 @@ def _build_next_operator_actions(
                     next_representative_image_review_batch,
                     "representative_candidate_status",
                 ),
+                "representative_candidate_review_guidance": _representative_candidate_guidance_summary(
+                    next_representative_image_review_batch
+                ),
                 "operator_step": "Confirm product type and variant before accepting representative official images.",
                 "unblocks": "manual_catalog_image_url_import",
                 "auto_apply_enabled": False,
@@ -824,6 +907,9 @@ def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
         "source_url_import_template": source_url_template,
         "catalog_field_import_template": catalog_template,
         "representative_candidate_status": item.get("candidate_status"),
+        "representative_candidate_review_guidance": _representative_candidate_review_guidance(
+            item.get("candidate_status")
+        ),
         "representative_top_candidates": item.get("top_candidates") or [],
         "suggested_local_image_path": suggested_local_image_path,
         "local_image_download_instruction": _local_image_download_instruction(
@@ -1275,6 +1361,9 @@ def build_report(
                 action_items,
                 "representative_candidate_status",
             ),
+            "representative_candidate_review_guidance": _representative_candidate_guidance_summary(
+                action_items
+            ),
             "image_url_ready_rows": image_url_ready_rows,
             "blocked_before_image_import_rows": attachment_readiness[
                 "blocked_before_image_import_rows"
@@ -1337,6 +1426,9 @@ def build_report(
             "next_representative_image_review_batch_candidate_status_counts": _counter_pairs(
                 next_representative_image_review_batch,
                 "representative_candidate_status",
+            ),
+            "next_representative_image_review_batch_guidance": _representative_candidate_guidance_summary(
+                next_representative_image_review_batch
             ),
             "representative_image_review_workstream_count": sum(
                 1 for row in workstreams if row.get("representative_image_review_rows")
