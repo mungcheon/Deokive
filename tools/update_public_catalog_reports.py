@@ -1594,11 +1594,49 @@ def build_image_attachment_template_import_dry_run_public(
         "auto_apply_enabled": False,
         "write": False,
     }
+    import_readiness = {
+        "status": "ready_to_import"
+        if summary["updated_rows"]
+        else "blocked_until_manual_image_evidence",
+        "template_items": summary["template_items"],
+        "manual_confirmed_rows": summary["manual_confirmed_rows"],
+        "ready_image_rows": summary["ready_image_rows"],
+        "ready_to_import_rows": summary["updated_rows"],
+        "blocked_rows": summary["blocked_rows"],
+        "blocked_reason_count": len(summary["skip_reason_counts"]),
+        "source_url_update_required_rows": summary["source_url_update_required_rows"],
+        "representative_image_review_required_rows": summary[
+            "representative_image_review_required_rows"
+        ],
+        "next_safe_phase": (
+            "confirm_exact_source_urls_before_image_import"
+            if summary["source_url_update_required_rows"]
+            else "review_representative_images_before_image_import"
+            if summary["representative_image_review_required_rows"]
+            else "fill_manual_image_url_confirmations"
+        ),
+        "confirmed_queue": str(IMAGE_ATTACHMENT_CONFIRMED_TEMPLATE.relative_to(ROOT)).replace("\\", "/"),
+        "import_tool": "tools/import_confirmed_image_attachment_rows.py",
+        "manual_evidence_required": True,
+        "auto_apply_enabled": False,
+        "write_enabled": False,
+        "blocked_reasons": [
+            reason for reason, count in summary["skip_reason_counts"] if count
+        ],
+        "required_before_write": [
+            "manual_confirmed=true",
+            "field=image_url",
+            "manual_value is a direct product image URL",
+            "candidate_source_url or evidence_url points to the exact product page",
+            "source/image pair passes generic-image and product-source safety checks",
+        ],
+    }
     return {
         "schema_version": 2,
         "generated_at": generated_at,
         "scope": "catalog_image_attachment_template_import_dry_run",
         "summary": summary,
+        "import_readiness": import_readiness,
         "write": False,
         "queue": str(IMAGE_ATTACHMENT_CONFIRMED_TEMPLATE.relative_to(ROOT)).replace("\\", "/"),
         "updated_rows": len(result["updated"]),
@@ -1611,13 +1649,7 @@ def build_image_attachment_template_import_dry_run_public(
             "import_tool": "tools/import_confirmed_image_attachment_rows.py",
             "auto_apply_enabled": False,
             "write_enabled": False,
-            "required_before_write": [
-                "manual_confirmed=true",
-                "field=image_url",
-                "manual_value is a direct product image URL",
-                "candidate_source_url or evidence_url points to the exact product page",
-                "source/image pair passes generic-image and product-source safety checks",
-            ],
+            "required_before_write": import_readiness["required_before_write"],
         },
     }
 
@@ -10854,6 +10886,10 @@ def update_reports(write: bool) -> dict[str, Any]:
         target["image_attachment_template_import_dry_run"] = {
             "public_report": f"data/{IMAGE_ATTACHMENT_TEMPLATE_IMPORT_DRY_RUN.name}",
             **image_attachment_template_import_dry_run["summary"],
+            "import_readiness": image_attachment_template_import_dry_run.get(
+                "import_readiness",
+                {},
+            ),
         }
         target["manual_source_url_search_queue"] = {
             "public_report": f"data/{MANUAL_SOURCE_URL_SEARCH_QUEUE.name}",

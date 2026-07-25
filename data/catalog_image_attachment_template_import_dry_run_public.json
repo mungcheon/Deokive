@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-07-24T18:15:26Z",
+  "generated_at": "2026-07-25T02:20:35Z",
   "scope": "catalog_image_attachment_template_import_dry_run",
   "summary": {
     "template_items": 73,
@@ -20,6 +20,33 @@
     ],
     "auto_apply_enabled": false,
     "write": false
+  },
+  "import_readiness": {
+    "status": "blocked_until_manual_image_evidence",
+    "template_items": 73,
+    "manual_confirmed_rows": 0,
+    "ready_image_rows": 0,
+    "ready_to_import_rows": 0,
+    "blocked_rows": 73,
+    "blocked_reason_count": 1,
+    "source_url_update_required_rows": 50,
+    "representative_image_review_required_rows": 23,
+    "next_safe_phase": "confirm_exact_source_urls_before_image_import",
+    "confirmed_queue": "data/catalog_image_attachment_confirmed_template_public.json",
+    "import_tool": "tools/import_confirmed_image_attachment_rows.py",
+    "manual_evidence_required": true,
+    "auto_apply_enabled": false,
+    "write_enabled": false,
+    "blocked_reasons": [
+      "manual_confirmed_false"
+    ],
+    "required_before_write": [
+      "manual_confirmed=true",
+      "field=image_url",
+      "manual_value is a direct product image URL",
+      "candidate_source_url or evidence_url points to the exact product page",
+      "source/image pair passes generic-image and product-source safety checks"
+    ]
   },
   "write": false,
   "queue": "data/catalog_image_attachment_confirmed_template_public.json",

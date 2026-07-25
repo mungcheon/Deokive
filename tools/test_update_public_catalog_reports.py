@@ -615,6 +615,34 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(quality["image_attachment_template_import_dry_run"]["skipped_rows"], 73)
         self.assertEqual(quality["image_attachment_template_import_dry_run"]["manual_confirmed_rows"], 0)
         self.assertIs(quality["image_attachment_template_import_dry_run"]["auto_apply_enabled"], False)
+        image_import_readiness = image_attachment_import["import_readiness"]
+        self.assertEqual(
+            quality["image_attachment_template_import_dry_run"]["import_readiness"],
+            image_import_readiness,
+        )
+        self.assertEqual(
+            image_import_readiness["status"],
+            "blocked_until_manual_image_evidence",
+        )
+        self.assertEqual(image_import_readiness["template_items"], 73)
+        self.assertEqual(image_import_readiness["blocked_rows"], 73)
+        self.assertEqual(image_import_readiness["source_url_update_required_rows"], 50)
+        self.assertEqual(image_import_readiness["representative_image_review_required_rows"], 23)
+        self.assertEqual(
+            image_import_readiness["next_safe_phase"],
+            "confirm_exact_source_urls_before_image_import",
+        )
+        self.assertEqual(
+            image_import_readiness["blocked_reasons"],
+            ["manual_confirmed_false"],
+        )
+        self.assertEqual(
+            image_import_readiness["import_tool"],
+            "tools/import_confirmed_image_attachment_rows.py",
+        )
+        self.assertTrue(image_import_readiness["manual_evidence_required"])
+        self.assertFalse(image_import_readiness["auto_apply_enabled"])
+        self.assertFalse(image_import_readiness["write_enabled"])
         image_alignment = quality["image_attachment_queue_alignment"]
         self.assertEqual(image_alignment["missing_image_rows"], result["missing"]["image_url"])
         self.assertEqual(image_alignment["actionable_image_rows"], 73)
@@ -5744,6 +5772,23 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(dry_run["summary"]["skipped_rows"], 1)
         self.assertEqual(dry_run["summary"]["skip_reason_counts"], [("manual_confirmed_false", 1)])
         self.assertIs(dry_run["summary"]["auto_apply_enabled"], False)
+        self.assertEqual(
+            dry_run["import_readiness"]["status"],
+            "blocked_until_manual_image_evidence",
+        )
+        self.assertEqual(dry_run["import_readiness"]["blocked_rows"], 1)
+        self.assertEqual(
+            dry_run["import_readiness"]["next_safe_phase"],
+            "confirm_exact_source_urls_before_image_import",
+        )
+        self.assertEqual(
+            dry_run["import_readiness"]["blocked_reasons"],
+            ["manual_confirmed_false"],
+        )
+        self.assertEqual(
+            dry_run["import_readiness"]["required_before_write"],
+            dry_run["automation_policy"]["required_before_write"],
+        )
         self.assertEqual(dry_run["queue"], "data/catalog_image_attachment_confirmed_template_public.json")
         self.assertEqual(dry_run["skipped_sample"][0]["reason"], "manual_confirmed_false")
 
