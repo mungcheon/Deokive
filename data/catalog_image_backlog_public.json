@@ -2586,6 +2586,9 @@
     "source_discovery_focus_template_work_order_packs": 62,
     "source_discovery_focus_template_dry_run_skipped_rows": 667,
     "source_discovery_next_focus_pack_rows": 20,
+    "source_discovery_next_focus_pack_manual_quarantine": true,
+    "source_discovery_next_focus_pack_quarantine_reason": "official_cache_safe_exact_match_absent",
+    "source_discovery_recommended_active_focus_pack_id": "source-discovery-focus-002",
     "source_discovery_focus_pack_progress_queues": 62,
     "source_discovery_focus_pack_progress_remaining_rows": 667,
     "source_discovery_starter_queue_rows": 672,
@@ -2607,7 +2610,7 @@
     "image_attachment_unqueued_actionable_rows": 0,
     "image_attachment_source_url_search_hint_rows": 45,
     "image_attachment_source_url_missing_search_hint_rows": 5,
-    "image_attachment_source_url_fallback_web_search_rows": 5,
+    "image_attachment_source_url_fallback_web_search_rows": 50,
     "image_attachment_source_url_any_search_hint_rows": 50,
     "image_attachment_source_url_missing_any_search_hint_rows": 0,
     "image_attachment_source_url_primary_review_url_rows": 50,
@@ -2648,7 +2651,15 @@
     "catalog_goal_missing_image_rows": 745,
     "catalog_goal_source_url_update_rows": 50,
     "catalog_goal_animation_category_rows": 36,
-    "catalog_goal_ichiban_manual_review_rows": 64
+    "catalog_goal_ichiban_manual_review_rows": 64,
+    "catalog_goal_next_handoff_pillar": "dedupe",
+    "catalog_goal_next_handoff_lane": "ichiban_reissue_campaign_review",
+    "catalog_goal_next_handoff_first_step_rows": 4,
+    "catalog_goal_dedupe_handoff_first_step_rows": 4,
+    "catalog_goal_missing_image_handoff_first_step_rows": 10,
+    "catalog_goal_source_url_handoff_first_step_rows": 20,
+    "catalog_goal_animation_category_handoff_first_step_rows": 4,
+    "catalog_goal_ichiban_handoff_first_step_rows": 20
   },
   "agent_work_queue": {
     "public_report": "data/catalog_agent_work_queue_public.json",
@@ -2908,6 +2919,9 @@
       "source_discovery_focus_template_work_order_packs": 62,
       "source_discovery_focus_template_dry_run_skipped_rows": 667,
       "source_discovery_next_focus_pack_rows": 20,
+      "source_discovery_next_focus_pack_manual_quarantine": true,
+      "source_discovery_next_focus_pack_quarantine_reason": "official_cache_safe_exact_match_absent",
+      "source_discovery_recommended_active_focus_pack_id": "source-discovery-focus-002",
       "source_discovery_focus_pack_progress_queues": 62,
       "source_discovery_focus_pack_progress_remaining_rows": 667,
       "source_discovery_starter_queue_rows": 672,
@@ -2929,7 +2943,7 @@
       "image_attachment_unqueued_actionable_rows": 0,
       "image_attachment_source_url_search_hint_rows": 45,
       "image_attachment_source_url_missing_search_hint_rows": 5,
-      "image_attachment_source_url_fallback_web_search_rows": 5,
+      "image_attachment_source_url_fallback_web_search_rows": 50,
       "image_attachment_source_url_any_search_hint_rows": 50,
       "image_attachment_source_url_missing_any_search_hint_rows": 0,
       "image_attachment_source_url_primary_review_url_rows": 50,
@@ -2970,7 +2984,15 @@
       "catalog_goal_missing_image_rows": 745,
       "catalog_goal_source_url_update_rows": 50,
       "catalog_goal_animation_category_rows": 36,
-      "catalog_goal_ichiban_manual_review_rows": 64
+      "catalog_goal_ichiban_manual_review_rows": 64,
+      "catalog_goal_next_handoff_pillar": "dedupe",
+      "catalog_goal_next_handoff_lane": "ichiban_reissue_campaign_review",
+      "catalog_goal_next_handoff_first_step_rows": 4,
+      "catalog_goal_dedupe_handoff_first_step_rows": 4,
+      "catalog_goal_missing_image_handoff_first_step_rows": 10,
+      "catalog_goal_source_url_handoff_first_step_rows": 20,
+      "catalog_goal_animation_category_handoff_first_step_rows": 4,
+      "catalog_goal_ichiban_handoff_first_step_rows": 20
     },
     "confirmed_import_template_rows": 1160,
     "confirmed_import_action_queue_rows": 4252,
@@ -4018,6 +4040,9 @@
       "source_discovery_focus_template_work_order_packs": 62,
       "source_discovery_focus_template_dry_run_skipped_rows": 667,
       "source_discovery_next_focus_pack_rows": 20,
+      "source_discovery_next_focus_pack_manual_quarantine": true,
+      "source_discovery_next_focus_pack_quarantine_reason": "official_cache_safe_exact_match_absent",
+      "source_discovery_recommended_active_focus_pack_id": "source-discovery-focus-002",
       "source_discovery_focus_pack_progress_queues": 62,
       "source_discovery_focus_pack_progress_remaining_rows": 667,
       "source_discovery_starter_queue_rows": 672,
@@ -4039,7 +4064,7 @@
       "image_attachment_unqueued_actionable_rows": 0,
       "image_attachment_source_url_search_hint_rows": 45,
       "image_attachment_source_url_missing_search_hint_rows": 5,
-      "image_attachment_source_url_fallback_web_search_rows": 5,
+      "image_attachment_source_url_fallback_web_search_rows": 50,
       "image_attachment_source_url_any_search_hint_rows": 50,
       "image_attachment_source_url_missing_any_search_hint_rows": 0,
       "image_attachment_source_url_primary_review_url_rows": 50,
@@ -4080,7 +4105,15 @@
       "catalog_goal_missing_image_rows": 745,
       "catalog_goal_source_url_update_rows": 50,
       "catalog_goal_animation_category_rows": 36,
-      "catalog_goal_ichiban_manual_review_rows": 64
+      "catalog_goal_ichiban_manual_review_rows": 64,
+      "catalog_goal_next_handoff_pillar": "dedupe",
+      "catalog_goal_next_handoff_lane": "ichiban_reissue_campaign_review",
+      "catalog_goal_next_handoff_first_step_rows": 4,
+      "catalog_goal_dedupe_handoff_first_step_rows": 4,
+      "catalog_goal_missing_image_handoff_first_step_rows": 10,
+      "catalog_goal_source_url_handoff_first_step_rows": 20,
+      "catalog_goal_animation_category_handoff_first_step_rows": 4,
+      "catalog_goal_ichiban_handoff_first_step_rows": 20
     },
     "confirmed_import_template_rows": 1160,
     "confirmed_import_action_queue_rows": 4252,
@@ -4600,6 +4633,143 @@
       ],
       "next_safe_phase": "verify_ichiban_campaign_pages_before_dedupe",
       "safety_note": "Duplicate evidence can represent retailer mirrors, variants, or reissues. No catalog row may be merged or deleted until an explicit manual keep/drop decision is recorded."
+    },
+    "next_execution_summary": {
+      "lane_count": 5,
+      "open_rows": 161,
+      "next_batch_rows": 82,
+      "next_safe_phase": "same_barcode_fast_review",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false,
+      "manual_evidence_required": true
+    },
+    "next_execution_lanes": [
+      {
+        "lane": "same_barcode_fast_review",
+        "status": "next",
+        "open_rows": 42,
+        "next_batch_rows": 10,
+        "review_start_rows": 10,
+        "manual_decision_rows": 10,
+        "next_action": "compare barcode, official title, image, and variant before recording keep/drop decisions"
+      },
+      {
+        "lane": "visual_identity_review",
+        "status": "manual_visual_review_required",
+        "open_rows": 19,
+        "next_batch_rows": 10,
+        "review_start_rows": 10,
+        "manual_decision_rows": 10,
+        "next_action": "open primary review URLs and confirm image differences are retailer mirrors, not variants"
+      },
+      {
+        "lane": "shared_source_or_image_lineup_review",
+        "status": "held_until_identity_review",
+        "open_rows": 6,
+        "next_batch_rows": 0,
+        "review_start_rows": 6,
+        "manual_decision_rows": 6,
+        "next_action": "keep held until lineup, set, or representative image ambiguity is resolved"
+      },
+      {
+        "lane": "ichiban_reissue_identity_review",
+        "status": "blocking_safe_dedupe",
+        "open_rows": 46,
+        "next_batch_rows": 20,
+        "review_start_rows": 20,
+        "manual_decision_rows": 20,
+        "next_action": "verify official 1kuji campaign pages before any repeated-name dedupe import"
+      },
+      {
+        "lane": "manual_keep_drop_import_template",
+        "status": "blocked_until_manual_confirmed",
+        "open_rows": 48,
+        "next_batch_rows": 42,
+        "review_start_rows": 42,
+        "manual_decision_rows": 42,
+        "next_action": "fill manual_confirmed=true only after exact same sellable product evidence is recorded"
+      }
+    ],
+    "operator_handoff": {
+      "status": "ichiban_reissue_review_required",
+      "current_lane": "ichiban_reissue_campaign_review",
+      "current_review_section": "ichiban_reissue_campaign_work_order",
+      "blocked_reasons": [
+        "explicit_manual_keep_drop_confirmation_required",
+        "ichiban_reissue_manual_confirmation_required",
+        "variant_or_retailer_identity_review_required"
+      ],
+      "next_safe_phase": "verify_ichiban_campaign_pages_before_dedupe",
+      "manual_decision_required_groups": 48,
+      "ichiban_reissue_work_order_rows": 20,
+      "ichiban_reissue_campaign_work_order_rows": 4,
+      "handoff_steps": [
+        {
+          "step": 1,
+          "lane": "ichiban_reissue_campaign_review",
+          "status": "manual_campaign_identity_confirmation_required",
+          "next_batch_rows": 4,
+          "review_section": "ichiban_reissue_campaign_work_order",
+          "write_template_section": "decision_template",
+          "first_evidence_url": "https://1kuji.com/products/onep6",
+          "first_work_order_id": "ichiban-reissue-campaign-001",
+          "required_before_write": [
+            "manual_confirmed=true",
+            "campaign decision is recorded",
+            "official campaign title, release period, and prize lineup are compared",
+            "affected item work orders stay protected until campaign identity is clear"
+          ],
+          "unblocks": "ichiban_reissue_item_decisions",
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
+        },
+        {
+          "step": 2,
+          "lane": "ichiban_reissue_identity_review",
+          "status": "manual_reissue_or_duplicate_decision_required",
+          "next_batch_rows": 20,
+          "review_section": "ichiban_reissue_work_order",
+          "write_template_section": "decision_template",
+          "first_evidence_url": "https://1kuji.com/products/haikyu4",
+          "first_work_order_id": "ichiban-reissue-dedupe-001",
+          "required_before_write": [
+            "manual_confirmed=true",
+            "decision is reissue_or_campaign_variant_keep_separate or same_sellable_product_keep_drop_confirmed",
+            "release/campaign name, prize rank, prize name, and variant are compared",
+            "Last One and Double Chance price exceptions stay at 0 JPY"
+          ],
+          "unblocks": "safe_manual_keep_drop_review",
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
+        },
+        {
+          "step": 3,
+          "lane": "manual_keep_drop_import_template",
+          "status": "explicit_keep_drop_confirmation_required",
+          "next_batch_rows": 10,
+          "review_section": "batches",
+          "write_template_section": "dedupe_decision_template",
+          "first_primary_review_url": "https://chiikawamarket.jp/ko/products/4570189195898",
+          "first_batch_id": "dedupe-action-001",
+          "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+          "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+          "required_before_write": [
+            "manual_confirmed=true",
+            "same sellable product identity is proven",
+            "keep_catalog_index is chosen",
+            "drop_catalog_indexes and evidence_urls are recorded"
+          ],
+          "unblocks": "explicit_manual_keep_drop_decision_confirmed",
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
+        }
+      ],
+      "safety_policy": {
+        "auto_merge_enabled": false,
+        "auto_delete_enabled": false,
+        "require_explicit_keep_drop_decision": true,
+        "protect_ichiban_reissues_until_confirmed": true
+      }
     }
   },
   "image_attachment_action_queue": {
@@ -4677,11 +4847,16 @@
     "source_url_update_template_rows": 50,
     "source_url_update_search_hint_rows": 45,
     "source_url_update_missing_search_hint_rows": 5,
-    "source_url_update_fallback_web_search_rows": 5,
+    "source_url_update_fallback_web_search_rows": 50,
     "source_url_update_any_search_hint_rows": 50,
     "source_url_update_missing_any_search_hint_rows": 0,
     "source_url_update_primary_review_url_rows": 50,
     "source_url_update_missing_primary_review_url_rows": 0,
+    "source_url_update_candidate_hint_rows": 3,
+    "source_url_update_low_confidence_candidate_rows": 3,
+    "source_url_update_no_candidate_rows": 42,
+    "source_url_update_manual_search_rows": 47,
+    "source_url_update_fallback_web_search_url_rows": 50,
     "source_url_update_review_start_coverage": 1.0,
     "source_url_candidate_status_counts": [
       [
@@ -4703,6 +4878,9 @@
         1
       ]
     ],
+    "next_source_url_review_batch_candidate_hint_rows": 1,
+    "next_source_url_review_batch_no_candidate_rows": 9,
+    "next_source_url_review_batch_manual_search_rows": 9,
     "primary_review_url_rows": 73,
     "primary_review_url_kind_counts": [
       [
@@ -5438,6 +5616,295 @@
       ],
       "manual_confirmation_required": true,
       "auto_apply_enabled": false
+    },
+    "operator_handoff": {
+      "status": "source_url_replacement_required",
+      "current_lane": "source_url_replacement_first",
+      "current_batch_id": "image-attachment-action-001",
+      "current_first_primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+      "blocked_before_image_import_rows": 73,
+      "ready_to_import_image_url_rows": 0,
+      "local_download_ready_after_confirmation_rows": 73,
+      "manual_review_required": true,
+      "handoff_steps": [
+        {
+          "step": 1,
+          "lane": "source_url_replacement_first",
+          "status": "manual_source_url_confirmation_required",
+          "next_batch_rows": 10,
+          "review_section": "next_source_url_review_batch",
+          "write_template_section": "source_url_update_template",
+          "import_tool": "tools/import_confirmed_image_attachment_rows.py",
+          "first_primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+          "first_primary_review_url_kind": "source_search_url",
+          "batch_triage": {
+            "rows": 10,
+            "candidate_hint_rows": 1,
+            "low_confidence_candidate_rows": 1,
+            "no_candidate_rows": 9,
+            "manual_search_rows": 9,
+            "search_hint_rows": 10,
+            "fallback_web_search_url_rows": 10,
+            "primary_review_url_rows": 10,
+            "candidate_status_counts": [
+              [
+                "no_candidate",
+                9
+              ],
+              [
+                "low_confidence_candidate",
+                1
+              ]
+            ],
+            "source_url_review_lane_counts": [
+              [
+                "manual_search_required",
+                9
+              ],
+              [
+                "low_confidence_candidate_review",
+                1
+              ]
+            ],
+            "primary_review_url_kind_counts": [
+              [
+                "source_search_url",
+                10
+              ]
+            ],
+            "recommended_review_order": [
+              "Review rows with candidate_options first, but accept only exact product detail matches.",
+              "For no_candidate rows, open source_search_url first and fallback_web_search_urls second.",
+              "Do not fill manual_value with storefront, search result, category, or low-confidence non-matching URLs.",
+              "Only after exact source_url confirmation should image_url evidence be filled/imported."
+            ],
+            "manual_confirmation_required": true,
+            "auto_apply_enabled": false
+          },
+          "template_triage": {
+            "rows": 50,
+            "candidate_hint_rows": 3,
+            "low_confidence_candidate_rows": 3,
+            "no_candidate_rows": 42,
+            "manual_search_rows": 47,
+            "search_hint_rows": 50,
+            "fallback_web_search_url_rows": 50,
+            "primary_review_url_rows": 50,
+            "candidate_status_counts": [
+              [
+                "no_candidate",
+                42
+              ],
+              [
+                "no_candidate_report",
+                5
+              ],
+              [
+                "low_confidence_candidate",
+                2
+              ],
+              [
+                "weak_manual_review_candidate",
+                1
+              ]
+            ],
+            "source_url_review_lane_counts": [
+              [
+                "manual_search_required",
+                42
+              ],
+              [
+                "candidate_provider_missing",
+                5
+              ],
+              [
+                "low_confidence_candidate_review",
+                2
+              ],
+              [
+                "weak_candidate_review",
+                1
+              ]
+            ],
+            "primary_review_url_kind_counts": [
+              [
+                "source_search_url",
+                45
+              ],
+              [
+                "fallback_web_search",
+                5
+              ]
+            ],
+            "recommended_review_order": [
+              "Review rows with candidate_options first, but accept only exact product detail matches.",
+              "For no_candidate rows, open source_search_url first and fallback_web_search_urls second.",
+              "Do not fill manual_value with storefront, search result, category, or low-confidence non-matching URLs.",
+              "Only after exact source_url confirmation should image_url evidence be filled/imported."
+            ],
+            "manual_confirmation_required": true,
+            "auto_apply_enabled": false
+          },
+          "required_before_write": [
+            "manual_confirmed=true",
+            "manual_value is the exact product detail URL",
+            "evidence_url proves the same exact product",
+            "manual_image_url is filled only when the page proves the exact product image"
+          ],
+          "unblocks": "image_url_extraction_and_attachment_review",
+          "auto_apply_enabled": false
+        },
+        {
+          "step": 2,
+          "lane": "representative_image_candidate_review",
+          "status": "manual_variant_confirmation_required",
+          "next_batch_rows": 10,
+          "review_section": "next_representative_image_review_batch",
+          "write_template_section": "catalog_field_import_template",
+          "import_tool": "tools/import_confirmed_image_attachment_rows.py",
+          "first_primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+          "first_primary_review_url_kind": "current_source_url",
+          "required_before_write": [
+            "manual_confirmed=true",
+            "manual_image_url is a direct product image URL",
+            "evidence_url or candidate_source_url proves the exact product context",
+            "character, motif, product type, and variant are manually checked"
+          ],
+          "unblocks": "manual_catalog_image_url_import",
+          "auto_apply_enabled": false
+        },
+        {
+          "step": 3,
+          "lane": "local_image_download_after_confirmation",
+          "status": "waiting_for_confirmed_image_urls",
+          "next_batch_rows": 73,
+          "review_section": "catalog_image_attachment_confirmed_template_public.json",
+          "write_template_section": "local_image_download_instruction",
+          "import_tool": "tools/import_confirmed_image_attachment_rows.py",
+          "required_before_write": [
+            "confirmed image_url exists",
+            "suggested_local_image_path is present",
+            "downloaded asset exists under assets/catalog_images",
+            "local_image_path and image_url stay paired for the same catalog row"
+          ],
+          "unblocks": "public_site_image_rendering_from_local_assets",
+          "auto_apply_enabled": false
+        }
+      ],
+      "safety_policy": {
+        "auto_apply_enabled": false,
+        "do_not_attach_search_result_images": true,
+        "require_exact_product_evidence": true,
+        "private_collection_storage": "local_device_only"
+      }
+    },
+    "next_source_url_review_batch_triage": {
+      "rows": 10,
+      "candidate_hint_rows": 1,
+      "low_confidence_candidate_rows": 1,
+      "no_candidate_rows": 9,
+      "manual_search_rows": 9,
+      "search_hint_rows": 10,
+      "fallback_web_search_url_rows": 10,
+      "primary_review_url_rows": 10,
+      "candidate_status_counts": [
+        [
+          "no_candidate",
+          9
+        ],
+        [
+          "low_confidence_candidate",
+          1
+        ]
+      ],
+      "source_url_review_lane_counts": [
+        [
+          "manual_search_required",
+          9
+        ],
+        [
+          "low_confidence_candidate_review",
+          1
+        ]
+      ],
+      "primary_review_url_kind_counts": [
+        [
+          "source_search_url",
+          10
+        ]
+      ],
+      "recommended_review_order": [
+        "Review rows with candidate_options first, but accept only exact product detail matches.",
+        "For no_candidate rows, open source_search_url first and fallback_web_search_urls second.",
+        "Do not fill manual_value with storefront, search result, category, or low-confidence non-matching URLs.",
+        "Only after exact source_url confirmation should image_url evidence be filled/imported."
+      ],
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false
+    },
+    "source_url_update_template_triage": {
+      "rows": 50,
+      "candidate_hint_rows": 3,
+      "low_confidence_candidate_rows": 3,
+      "no_candidate_rows": 42,
+      "manual_search_rows": 47,
+      "search_hint_rows": 50,
+      "fallback_web_search_url_rows": 50,
+      "primary_review_url_rows": 50,
+      "candidate_status_counts": [
+        [
+          "no_candidate",
+          42
+        ],
+        [
+          "no_candidate_report",
+          5
+        ],
+        [
+          "low_confidence_candidate",
+          2
+        ],
+        [
+          "weak_manual_review_candidate",
+          1
+        ]
+      ],
+      "source_url_review_lane_counts": [
+        [
+          "manual_search_required",
+          42
+        ],
+        [
+          "candidate_provider_missing",
+          5
+        ],
+        [
+          "low_confidence_candidate_review",
+          2
+        ],
+        [
+          "weak_candidate_review",
+          1
+        ]
+      ],
+      "primary_review_url_kind_counts": [
+        [
+          "source_search_url",
+          45
+        ],
+        [
+          "fallback_web_search",
+          5
+        ]
+      ],
+      "recommended_review_order": [
+        "Review rows with candidate_options first, but accept only exact product detail matches.",
+        "For no_candidate rows, open source_search_url first and fallback_web_search_urls second.",
+        "Do not fill manual_value with storefront, search result, category, or low-confidence non-matching URLs.",
+        "Only after exact source_url confirmation should image_url evidence be filled/imported."
+      ],
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false
     }
   },
   "ichiban_kuji_metadata_action_queue": {
@@ -5500,6 +5967,9 @@
     "next_campaign_patch_review_batch_rows": 8,
     "next_campaign_patch_review_batch_template_rows": 8,
     "next_campaign_patch_review_batch_primary_review_url_rows": 8,
+    "next_campaign_patch_review_batch_release_date_rows": 2,
+    "next_campaign_patch_review_batch_price_rows": 6,
+    "next_campaign_patch_review_batch_manual_confirmation_required_rows": 8,
     "next_campaign_patch_review_batch_field_counts": [
       [
         "official_price_jpy",
@@ -5559,6 +6029,41 @@
             14199,
             14200
           ],
+          "metadata_evidence_summary": {
+            "campaign_slug": "jujutsu-o",
+            "fields_to_confirm": [
+              "release_date"
+            ],
+            "primary_review_url": "https://1kuji.com/products/jujutsu-o",
+            "primary_review_url_kind": "official_1kuji_campaign_page",
+            "official_review_url_ready": true,
+            "evidence_url_count": 1,
+            "catalog_item_rows": 8,
+            "sample_name_count": 8,
+            "sample_catalog_indexes": [
+              14193,
+              14194,
+              14195,
+              14196,
+              14197,
+              14198,
+              14199,
+              14200
+            ],
+            "field_patch_template_count": 1,
+            "zero_price_exception_sample_rows": 1,
+            "release_date_patch_required": true,
+            "non_exception_price_patch_required": false,
+            "expected_manual_value_formats": {
+              "release_date": "YYYY-MM-DD"
+            },
+            "manual_official_confirmation_required": true,
+            "safe_to_auto_apply": false,
+            "auto_apply_enabled": false,
+            "blocked_until": "labeled_official_1kuji_campaign_metadata_confirmed",
+            "field": "release_date",
+            "manual_value_format": "YYYY-MM-DD"
+          },
           "manual_confirmed": false,
           "manual_note": "",
           "requires_labeled_official_evidence": true,
@@ -5603,6 +6108,41 @@
             17073,
             17074
           ],
+          "metadata_evidence_summary": {
+            "campaign_slug": "myhero_o5",
+            "fields_to_confirm": [
+              "release_date"
+            ],
+            "primary_review_url": "https://1kuji.com/products/myhero_o5",
+            "primary_review_url_kind": "official_1kuji_campaign_page",
+            "official_review_url_ready": true,
+            "evidence_url_count": 1,
+            "catalog_item_rows": 8,
+            "sample_name_count": 8,
+            "sample_catalog_indexes": [
+              17067,
+              17068,
+              17069,
+              17070,
+              17071,
+              17072,
+              17073,
+              17074
+            ],
+            "field_patch_template_count": 1,
+            "zero_price_exception_sample_rows": 1,
+            "release_date_patch_required": true,
+            "non_exception_price_patch_required": false,
+            "expected_manual_value_formats": {
+              "release_date": "YYYY-MM-DD"
+            },
+            "manual_official_confirmation_required": true,
+            "safe_to_auto_apply": false,
+            "auto_apply_enabled": false,
+            "blocked_until": "labeled_official_1kuji_campaign_metadata_confirmed",
+            "field": "release_date",
+            "manual_value_format": "YYYY-MM-DD"
+          },
           "manual_confirmed": false,
           "manual_note": "",
           "requires_labeled_official_evidence": true,
@@ -5646,6 +6186,40 @@
             16821,
             16822
           ],
+          "metadata_evidence_summary": {
+            "campaign_slug": "10",
+            "fields_to_confirm": [
+              "official_price_jpy"
+            ],
+            "primary_review_url": "https://1kuji.com/products/10",
+            "primary_review_url_kind": "official_1kuji_campaign_page",
+            "official_review_url_ready": true,
+            "evidence_url_count": 1,
+            "catalog_item_rows": 7,
+            "sample_name_count": 7,
+            "sample_catalog_indexes": [
+              16816,
+              16817,
+              16818,
+              16819,
+              16820,
+              16821,
+              16822
+            ],
+            "field_patch_template_count": 1,
+            "zero_price_exception_sample_rows": 0,
+            "release_date_patch_required": false,
+            "non_exception_price_patch_required": true,
+            "expected_manual_value_formats": {
+              "official_price_jpy": "integer JPY draw price, no currency symbol"
+            },
+            "manual_official_confirmation_required": true,
+            "safe_to_auto_apply": false,
+            "auto_apply_enabled": false,
+            "blocked_until": "labeled_official_1kuji_campaign_metadata_confirmed",
+            "field": "official_price_jpy",
+            "manual_value_format": "integer JPY draw price, no currency symbol"
+          },
           "manual_confirmed": false,
           "manual_note": "",
           "requires_labeled_official_evidence": true,
@@ -5690,6 +6264,40 @@
             17588,
             17589
           ],
+          "metadata_evidence_summary": {
+            "campaign_slug": "38",
+            "fields_to_confirm": [
+              "official_price_jpy"
+            ],
+            "primary_review_url": "https://1kuji.com/products/38",
+            "primary_review_url_kind": "official_1kuji_campaign_page",
+            "official_review_url_ready": true,
+            "evidence_url_count": 1,
+            "catalog_item_rows": 7,
+            "sample_name_count": 7,
+            "sample_catalog_indexes": [
+              17583,
+              17584,
+              17585,
+              17586,
+              17587,
+              17588,
+              17589
+            ],
+            "field_patch_template_count": 1,
+            "zero_price_exception_sample_rows": 0,
+            "release_date_patch_required": false,
+            "non_exception_price_patch_required": true,
+            "expected_manual_value_formats": {
+              "official_price_jpy": "integer JPY draw price, no currency symbol"
+            },
+            "manual_official_confirmation_required": true,
+            "safe_to_auto_apply": false,
+            "auto_apply_enabled": false,
+            "blocked_until": "labeled_official_1kuji_campaign_metadata_confirmed",
+            "field": "official_price_jpy",
+            "manual_value_format": "integer JPY draw price, no currency symbol"
+          },
           "manual_confirmed": false,
           "manual_note": "",
           "requires_labeled_official_evidence": true,
@@ -5735,6 +6343,41 @@
             16222,
             16223
           ],
+          "metadata_evidence_summary": {
+            "campaign_slug": "49",
+            "fields_to_confirm": [
+              "official_price_jpy"
+            ],
+            "primary_review_url": "https://1kuji.com/products/49",
+            "primary_review_url_kind": "official_1kuji_campaign_page",
+            "official_review_url_ready": true,
+            "evidence_url_count": 1,
+            "catalog_item_rows": 8,
+            "sample_name_count": 8,
+            "sample_catalog_indexes": [
+              16216,
+              16217,
+              16218,
+              16219,
+              16220,
+              16221,
+              16222,
+              16223
+            ],
+            "field_patch_template_count": 1,
+            "zero_price_exception_sample_rows": 0,
+            "release_date_patch_required": false,
+            "non_exception_price_patch_required": true,
+            "expected_manual_value_formats": {
+              "official_price_jpy": "integer JPY draw price, no currency symbol"
+            },
+            "manual_official_confirmation_required": true,
+            "safe_to_auto_apply": false,
+            "auto_apply_enabled": false,
+            "blocked_until": "labeled_official_1kuji_campaign_metadata_confirmed",
+            "field": "official_price_jpy",
+            "manual_value_format": "integer JPY draw price, no currency symbol"
+          },
           "manual_confirmed": false,
           "manual_note": "",
           "requires_labeled_official_evidence": true,
@@ -5779,6 +6422,40 @@
             16814,
             16815
           ],
+          "metadata_evidence_summary": {
+            "campaign_slug": "53",
+            "fields_to_confirm": [
+              "official_price_jpy"
+            ],
+            "primary_review_url": "https://1kuji.com/products/53",
+            "primary_review_url_kind": "official_1kuji_campaign_page",
+            "official_review_url_ready": true,
+            "evidence_url_count": 1,
+            "catalog_item_rows": 7,
+            "sample_name_count": 7,
+            "sample_catalog_indexes": [
+              16809,
+              16810,
+              16811,
+              16812,
+              16813,
+              16814,
+              16815
+            ],
+            "field_patch_template_count": 1,
+            "zero_price_exception_sample_rows": 0,
+            "release_date_patch_required": false,
+            "non_exception_price_patch_required": true,
+            "expected_manual_value_formats": {
+              "official_price_jpy": "integer JPY draw price, no currency symbol"
+            },
+            "manual_official_confirmation_required": true,
+            "safe_to_auto_apply": false,
+            "auto_apply_enabled": false,
+            "blocked_until": "labeled_official_1kuji_campaign_metadata_confirmed",
+            "field": "official_price_jpy",
+            "manual_value_format": "integer JPY draw price, no currency symbol"
+          },
           "manual_confirmed": false,
           "manual_note": "",
           "requires_labeled_official_evidence": true,
@@ -5823,6 +6500,40 @@
             17581,
             17582
           ],
+          "metadata_evidence_summary": {
+            "campaign_slug": "64",
+            "fields_to_confirm": [
+              "official_price_jpy"
+            ],
+            "primary_review_url": "https://1kuji.com/products/64",
+            "primary_review_url_kind": "official_1kuji_campaign_page",
+            "official_review_url_ready": true,
+            "evidence_url_count": 1,
+            "catalog_item_rows": 7,
+            "sample_name_count": 7,
+            "sample_catalog_indexes": [
+              17576,
+              17577,
+              17578,
+              17579,
+              17580,
+              17581,
+              17582
+            ],
+            "field_patch_template_count": 1,
+            "zero_price_exception_sample_rows": 0,
+            "release_date_patch_required": false,
+            "non_exception_price_patch_required": true,
+            "expected_manual_value_formats": {
+              "official_price_jpy": "integer JPY draw price, no currency symbol"
+            },
+            "manual_official_confirmation_required": true,
+            "safe_to_auto_apply": false,
+            "auto_apply_enabled": false,
+            "blocked_until": "labeled_official_1kuji_campaign_metadata_confirmed",
+            "field": "official_price_jpy",
+            "manual_value_format": "integer JPY draw price, no currency symbol"
+          },
           "manual_confirmed": false,
           "manual_note": "",
           "requires_labeled_official_evidence": true,
@@ -5867,6 +6578,40 @@
             16214,
             16215
           ],
+          "metadata_evidence_summary": {
+            "campaign_slug": "71",
+            "fields_to_confirm": [
+              "official_price_jpy"
+            ],
+            "primary_review_url": "https://1kuji.com/products/71",
+            "primary_review_url_kind": "official_1kuji_campaign_page",
+            "official_review_url_ready": true,
+            "evidence_url_count": 1,
+            "catalog_item_rows": 7,
+            "sample_name_count": 7,
+            "sample_catalog_indexes": [
+              16209,
+              16210,
+              16211,
+              16212,
+              16213,
+              16214,
+              16215
+            ],
+            "field_patch_template_count": 1,
+            "zero_price_exception_sample_rows": 0,
+            "release_date_patch_required": false,
+            "non_exception_price_patch_required": true,
+            "expected_manual_value_formats": {
+              "official_price_jpy": "integer JPY draw price, no currency symbol"
+            },
+            "manual_official_confirmation_required": true,
+            "safe_to_auto_apply": false,
+            "auto_apply_enabled": false,
+            "blocked_until": "labeled_official_1kuji_campaign_metadata_confirmed",
+            "field": "official_price_jpy",
+            "manual_value_format": "integer JPY draw price, no currency symbol"
+          },
           "manual_confirmed": false,
           "manual_note": "",
           "requires_labeled_official_evidence": true,
@@ -7313,6 +8058,8 @@
       "animation-category-normalization-004"
     ],
     "next_normalization_review_batch_preserve_sub_series_rows": 4,
+    "next_normalization_review_batch_sample_keyword_supported_rows": 4,
+    "next_normalization_review_batch_sample_keyword_review_required_rows": 0,
     "target_visual_token_rows": 4,
     "target_visual_token_catalog_rows": 36,
     "target_visual_color_groups": [
@@ -7418,6 +8165,101 @@
       "app_folder_palette_sorted_by_family": true,
       "safety_note": "Folder colors and icons are available, but category normalization changes must be manually confirmed before any import writes."
     },
+    "operator_handoff": {
+      "status": "normalization_review_required",
+      "current_lane": "canonical_category_normalization_review",
+      "current_review_section": "next_normalization_review_batch",
+      "queued_catalog_rows": 36,
+      "queued_categories": 4,
+      "normalization_review_rows": 36,
+      "folder_visual_coverage_ready": true,
+      "app_folder_palette_sorted_by_family": true,
+      "work_order_lanes": [
+        "canonical_category_normalization_review"
+      ],
+      "handoff_steps": [
+        {
+          "step": 1,
+          "lane": "canonical_category_normalization_review",
+          "status": "manual_canonical_category_normalization_required",
+          "next_batch_rows": 4,
+          "affected_catalog_rows": 36,
+          "review_section": "next_normalization_review_batch",
+          "write_template_section": "normalization_confirmation_template.rows",
+          "first_review_id": "animation-category-normalization-001",
+          "first_source_category": "클리어파일",
+          "first_target_category": "문구",
+          "required_before_write": [
+            "manual_confirmed=true",
+            "sample names fit the target canonical category",
+            "source category is preserved as sub_series when useful for search",
+            "manual note explains the category semantics"
+          ],
+          "unblocks": "normalization_import_template",
+          "auto_apply_enabled": false
+        },
+        {
+          "step": 2,
+          "lane": "folder_visual_token_verification",
+          "status": "ready",
+          "next_batch_rows": 4,
+          "affected_catalog_rows": 36,
+          "review_section": "target_visual_token_summary.tokens",
+          "write_template_section": "folder_color_group/folder_icon_key",
+          "color_groups": [
+            [
+              "violet",
+              3
+            ],
+            [
+              "green",
+              1
+            ]
+          ],
+          "primary_icon_keys": [
+            [
+              "sticky_note",
+              3
+            ],
+            [
+              "inventory",
+              1
+            ]
+          ],
+          "required_before_write": [
+            "folder color exists in app folder palette",
+            "folder icon key exists in app icon options",
+            "palette remains sorted by similar color families"
+          ],
+          "unblocks": "app_folder_visual_consistency",
+          "auto_apply_enabled": false
+        },
+        {
+          "step": 3,
+          "lane": "normalization_import_template",
+          "status": "waiting_for_manual_confirmations",
+          "next_batch_rows": 4,
+          "affected_catalog_rows": 36,
+          "review_section": "normalization_confirmation_template",
+          "write_template_section": "server/animation_category_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_animation_category_rows.py",
+          "required_before_write": [
+            "confirmed rows copied to confirmed queue",
+            "manual_confirmed=true",
+            "manual_decision is allowed for the template",
+            "folder color and icon values are preserved"
+          ],
+          "unblocks": "canonical_category_normalization_manually_confirmed",
+          "auto_apply_enabled": false
+        }
+      ],
+      "safety_policy": {
+        "auto_apply_enabled": false,
+        "auto_create_folders": false,
+        "require_manual_category_confirmation": true,
+        "preserve_folder_visual_tokens": true
+      }
+    },
     "normalization_confirmation_template": {
       "status": "manual_canonical_category_normalization_required",
       "template_rows": 4,
@@ -7425,6 +8267,8 @@
       "manual_confirmed_rows": 0,
       "ready_to_import_rows": 0,
       "preserve_sub_series_rows": 4,
+      "sample_keyword_supported_rows": 4,
+      "sample_keyword_review_required_rows": 0,
       "target_category_counts": [
         [
           "문구",
@@ -7490,6 +8334,140 @@
             "一番くじ 僕のヒーローアカデミア FIGHTING HEROES feat. One's Justice - OJコラボ賞② クリアファイルセット feat. One's Justice",
             "一番くじ 僕のヒーローアカデミア FIGHTING HEROES feat. SMASH RISING - E賞 クリアファイルセット feat. SMASH RISING"
           ],
+          "sample_evidence_summary": {
+            "sample_name_count": 8,
+            "source_category_keyword_hits": 8,
+            "target_category_keyword_hits": 8,
+            "source_category_keyword_coverage": 1.0,
+            "target_category_keyword_coverage": 1.0,
+            "source_category_keywords": [
+              "클리어파일",
+              "クリアファイル",
+              "clear file",
+              "clearfile"
+            ],
+            "target_category_keywords": [
+              "클리어파일",
+              "クリアファイル",
+              "カード",
+              "ポストカード",
+              "ステッカー",
+              "ジッパーバッグ",
+              "clear file",
+              "postcard",
+              "sticker",
+              "card"
+            ],
+            "matched_keyword_counts": [
+              [
+                "クリアファイル",
+                16
+              ]
+            ],
+            "all_samples_match_source_category_keyword": true,
+            "all_samples_match_target_category_keyword": true,
+            "source_hit_sample_rows": [
+              {
+                "name": "一番くじ 呪術廻戦 懐玉・玉折 ～弐～ - F賞 クリアファイル2枚セット",
+                "matched_keywords": [
+                  "クリアファイル"
+                ]
+              },
+              {
+                "name": "一番くじ 劇場版 呪術廻戦 0 ～宣戦布告～ - J賞 クリアファイル2枚セット",
+                "matched_keywords": [
+                  "クリアファイル"
+                ]
+              },
+              {
+                "name": "一番くじ 劇場版 呪術廻戦 0 - I賞 クリアファイルセット",
+                "matched_keywords": [
+                  "クリアファイル"
+                ]
+              },
+              {
+                "name": "一番くじ 呪術廻戦 ～弐～ - F賞 クリアファイルセット",
+                "matched_keywords": [
+                  "クリアファイル"
+                ]
+              },
+              {
+                "name": "一番くじ 僕のヒーローアカデミア －二人のあこがれ－ - G賞 クリアファイルセット",
+                "matched_keywords": [
+                  "クリアファイル"
+                ]
+              },
+              {
+                "name": "一番くじ 僕のヒーローアカデミア ー意志ー - G賞 クリアファイルセット",
+                "matched_keywords": [
+                  "クリアファイル"
+                ]
+              },
+              {
+                "name": "一番くじ 僕のヒーローアカデミア FIGHTING HEROES feat. One's Justice - OJコラボ賞② クリアファイルセット feat. One's Justice",
+                "matched_keywords": [
+                  "クリアファイル"
+                ]
+              },
+              {
+                "name": "一番くじ 僕のヒーローアカデミア FIGHTING HEROES feat. SMASH RISING - E賞 クリアファイルセット feat. SMASH RISING",
+                "matched_keywords": [
+                  "クリアファイル"
+                ]
+              }
+            ],
+            "target_hit_sample_rows": [
+              {
+                "name": "一番くじ 呪術廻戦 懐玉・玉折 ～弐～ - F賞 クリアファイル2枚セット",
+                "matched_keywords": [
+                  "クリアファイル"
+                ]
+              },
+              {
+                "name": "一番くじ 劇場版 呪術廻戦 0 ～宣戦布告～ - J賞 クリアファイル2枚セット",
+                "matched_keywords": [
+                  "クリアファイル"
+                ]
+              },
+              {
+                "name": "一番くじ 劇場版 呪術廻戦 0 - I賞 クリアファイルセット",
+                "matched_keywords": [
+                  "クリアファイル"
+                ]
+              },
+              {
+                "name": "一番くじ 呪術廻戦 ～弐～ - F賞 クリアファイルセット",
+                "matched_keywords": [
+                  "クリアファイル"
+                ]
+              },
+              {
+                "name": "一番くじ 僕のヒーローアカデミア －二人のあこがれ－ - G賞 クリアファイルセット",
+                "matched_keywords": [
+                  "クリアファイル"
+                ]
+              },
+              {
+                "name": "一番くじ 僕のヒーローアカデミア ー意志ー - G賞 クリアファイルセット",
+                "matched_keywords": [
+                  "クリアファイル"
+                ]
+              },
+              {
+                "name": "一番くじ 僕のヒーローアカデミア FIGHTING HEROES feat. One's Justice - OJコラボ賞② クリアファイルセット feat. One's Justice",
+                "matched_keywords": [
+                  "クリアファイル"
+                ]
+              },
+              {
+                "name": "一番くじ 僕のヒーローアカデミア FIGHTING HEROES feat. SMASH RISING - E賞 クリアファイルセット feat. SMASH RISING",
+                "matched_keywords": [
+                  "クリアファイル"
+                ]
+              }
+            ],
+            "review_signal": "sample_keywords_support_normalization"
+          },
           "manual_confirmed": false,
           "manual_decision": "",
           "manual_note": "",
@@ -7529,6 +8507,88 @@
             "一番くじ 僕のヒーローアカデミア -更に向こうへ- - K賞 カードホルダー",
             "一番くじ 僕のヒーローアカデミア 開催文化祭!! - I賞 カードホルダー"
           ],
+          "sample_evidence_summary": {
+            "sample_name_count": 3,
+            "source_category_keyword_hits": 3,
+            "target_category_keyword_hits": 3,
+            "source_category_keyword_coverage": 1.0,
+            "target_category_keyword_coverage": 1.0,
+            "source_category_keywords": [
+              "카드",
+              "カード",
+              "ポストカード",
+              "postcard",
+              "card holder",
+              "card"
+            ],
+            "target_category_keywords": [
+              "클리어파일",
+              "クリアファイル",
+              "カード",
+              "ポストカード",
+              "ステッカー",
+              "ジッパーバッグ",
+              "clear file",
+              "postcard",
+              "sticker",
+              "card"
+            ],
+            "matched_keyword_counts": [
+              [
+                "カード",
+                6
+              ],
+              [
+                "ポストカード",
+                2
+              ]
+            ],
+            "all_samples_match_source_category_keyword": true,
+            "all_samples_match_target_category_keyword": true,
+            "source_hit_sample_rows": [
+              {
+                "name": "一番くじ 葬送のフリーレン - H賞 繋がるポストカード",
+                "matched_keywords": [
+                  "カード",
+                  "ポストカード"
+                ]
+              },
+              {
+                "name": "一番くじ 僕のヒーローアカデミア -更に向こうへ- - K賞 カードホルダー",
+                "matched_keywords": [
+                  "カード"
+                ]
+              },
+              {
+                "name": "一番くじ 僕のヒーローアカデミア 開催文化祭!! - I賞 カードホルダー",
+                "matched_keywords": [
+                  "カード"
+                ]
+              }
+            ],
+            "target_hit_sample_rows": [
+              {
+                "name": "一番くじ 葬送のフリーレン - H賞 繋がるポストカード",
+                "matched_keywords": [
+                  "カード",
+                  "ポストカード"
+                ]
+              },
+              {
+                "name": "一番くじ 僕のヒーローアカデミア -更に向こうへ- - K賞 カードホルダー",
+                "matched_keywords": [
+                  "カード"
+                ]
+              },
+              {
+                "name": "一番くじ 僕のヒーローアカデミア 開催文化祭!! - I賞 カードホルダー",
+                "matched_keywords": [
+                  "カード"
+                ]
+              }
+            ],
+            "review_signal": "sample_keywords_support_normalization"
+          },
           "manual_confirmed": false,
           "manual_decision": "",
           "manual_note": "",
@@ -7573,6 +8633,152 @@
             "一番くじ 呪術廻戦 渋谷事変 ～弐～ - N賞 クリアファイル・ステッカーセット",
             "一番くじ 僕のヒーローアカデミア -更に向こうへ- - L賞 ステッカーセット"
           ],
+          "sample_evidence_summary": {
+            "sample_name_count": 8,
+            "source_category_keyword_hits": 8,
+            "target_category_keyword_hits": 8,
+            "source_category_keyword_coverage": 1.0,
+            "target_category_keyword_coverage": 1.0,
+            "source_category_keywords": [
+              "스티커",
+              "ステッカー",
+              "sticker"
+            ],
+            "target_category_keywords": [
+              "클리어파일",
+              "クリアファイル",
+              "カード",
+              "ポストカード",
+              "ステッカー",
+              "ジッパーバッグ",
+              "clear file",
+              "postcard",
+              "sticker",
+              "card"
+            ],
+            "matched_keyword_counts": [
+              [
+                "ステッカー",
+                16
+              ],
+              [
+                "クリアファイル",
+                4
+              ],
+              [
+                "ジッパーバッグ",
+                1
+              ]
+            ],
+            "all_samples_match_source_category_keyword": true,
+            "all_samples_match_target_category_keyword": true,
+            "source_hit_sample_rows": [
+              {
+                "name": "一番くじ 呪術廻戦 死滅回游 ～弐～ - M賞 マグネット＆ステッカーセット",
+                "matched_keywords": [
+                  "ステッカー"
+                ]
+              },
+              {
+                "name": "一番くじ 呪術廻戦 死滅回游 ～壱～ - N賞 ステッカーセット",
+                "matched_keywords": [
+                  "ステッカー"
+                ]
+              },
+              {
+                "name": "一番くじ ヴィジランテ -僕のヒーローアカデミア ILLEGALS- - H賞 ジッパーバッグ＆ステッカーセット",
+                "matched_keywords": [
+                  "ステッカー"
+                ]
+              },
+              {
+                "name": "一番くじ 劇場版 呪術廻戦 ０ ー1224ー - E賞 クリアファイル・ステッカーセット",
+                "matched_keywords": [
+                  "ステッカー"
+                ]
+              },
+              {
+                "name": "一番くじ 呪術廻戦 5th anniversary - K賞 クリアファイル・ステッカーセット",
+                "matched_keywords": [
+                  "ステッカー"
+                ]
+              },
+              {
+                "name": "一番くじ 呪術廻戦 渋谷事変 ～参～ - D賞 クリアファイル・ステッカーセット",
+                "matched_keywords": [
+                  "ステッカー"
+                ]
+              },
+              {
+                "name": "一番くじ 呪術廻戦 渋谷事変 ～弐～ - N賞 クリアファイル・ステッカーセット",
+                "matched_keywords": [
+                  "ステッカー"
+                ]
+              },
+              {
+                "name": "一番くじ 僕のヒーローアカデミア -更に向こうへ- - L賞 ステッカーセット",
+                "matched_keywords": [
+                  "ステッカー"
+                ]
+              }
+            ],
+            "target_hit_sample_rows": [
+              {
+                "name": "一番くじ 呪術廻戦 死滅回游 ～弐～ - M賞 マグネット＆ステッカーセット",
+                "matched_keywords": [
+                  "ステッカー"
+                ]
+              },
+              {
+                "name": "一番くじ 呪術廻戦 死滅回游 ～壱～ - N賞 ステッカーセット",
+                "matched_keywords": [
+                  "ステッカー"
+                ]
+              },
+              {
+                "name": "一番くじ ヴィジランテ -僕のヒーローアカデミア ILLEGALS- - H賞 ジッパーバッグ＆ステッカーセット",
+                "matched_keywords": [
+                  "ステッカー",
+                  "ジッパーバッグ"
+                ]
+              },
+              {
+                "name": "一番くじ 劇場版 呪術廻戦 ０ ー1224ー - E賞 クリアファイル・ステッカーセット",
+                "matched_keywords": [
+                  "クリアファイル",
+                  "ステッカー"
+                ]
+              },
+              {
+                "name": "一番くじ 呪術廻戦 5th anniversary - K賞 クリアファイル・ステッカーセット",
+                "matched_keywords": [
+                  "クリアファイル",
+                  "ステッカー"
+                ]
+              },
+              {
+                "name": "一番くじ 呪術廻戦 渋谷事変 ～参～ - D賞 クリアファイル・ステッカーセット",
+                "matched_keywords": [
+                  "クリアファイル",
+                  "ステッカー"
+                ]
+              },
+              {
+                "name": "一番くじ 呪術廻戦 渋谷事変 ～弐～ - N賞 クリアファイル・ステッカーセット",
+                "matched_keywords": [
+                  "クリアファイル",
+                  "ステッカー"
+                ]
+              },
+              {
+                "name": "一番くじ 僕のヒーローアカデミア -更に向こうへ- - L賞 ステッカーセット",
+                "matched_keywords": [
+                  "ステッカー"
+                ]
+              }
+            ],
+            "review_signal": "sample_keywords_support_normalization"
+          },
           "manual_confirmed": false,
           "manual_decision": "",
           "manual_note": "",
@@ -7610,6 +8816,50 @@
           "sample_names": [
             "一番くじ 僕のヒーローアカデミア～休み時間！～ - E賞 1-A教室ポーチ"
           ],
+          "sample_evidence_summary": {
+            "sample_name_count": 1,
+            "source_category_keyword_hits": 1,
+            "target_category_keyword_hits": 1,
+            "source_category_keyword_coverage": 1.0,
+            "target_category_keyword_coverage": 1.0,
+            "source_category_keywords": [
+              "파우치",
+              "ポーチ",
+              "pouch"
+            ],
+            "target_category_keywords": [
+              "파우치",
+              "ポーチ",
+              "pouch",
+              "bag",
+              "バッグ"
+            ],
+            "matched_keyword_counts": [
+              [
+                "ポーチ",
+                2
+              ]
+            ],
+            "all_samples_match_source_category_keyword": true,
+            "all_samples_match_target_category_keyword": true,
+            "source_hit_sample_rows": [
+              {
+                "name": "一番くじ 僕のヒーローアカデミア～休み時間！～ - E賞 1-A教室ポーチ",
+                "matched_keywords": [
+                  "ポーチ"
+                ]
+              }
+            ],
+            "target_hit_sample_rows": [
+              {
+                "name": "一番くじ 僕のヒーローアカデミア～休み時間！～ - E賞 1-A教室ポーチ",
+                "matched_keywords": [
+                  "ポーチ"
+                ]
+              }
+            ],
+            "review_signal": "sample_keywords_support_normalization"
+          },
           "manual_confirmed": false,
           "manual_decision": "",
           "manual_note": "",
@@ -7628,7 +8878,95 @@
         "Confirm folder_color_hex and folder_icon_key exist in the app folder visual catalog.",
         "Copy confirmed rows to server/animation_category_confirmed_rows.json, set manual_confirmed=true, then run tools/import_confirmed_animation_category_rows.py."
       ]
-    }
+    },
+    "next_execution_summary": {
+      "lane_count": 3,
+      "open_rows": 108,
+      "next_batch_rows": 44,
+      "next_safe_phase": "canonical_category_normalization_review",
+      "auto_apply_enabled": false,
+      "manual_evidence_required": true
+    },
+    "next_execution_lanes": [
+      {
+        "lane": "canonical_category_normalization_review",
+        "status": "next",
+        "open_rows": 36,
+        "next_batch_rows": 36,
+        "review_start_rows": 4,
+        "manual_decision_rows": 4,
+        "next_action": "confirm source categories can be normalized into canonical folder categories",
+        "target_categories": [
+          [
+            "문구",
+            3
+          ],
+          [
+            "가방",
+            1
+          ]
+        ],
+        "source_categories": [
+          [
+            "클리어파일",
+            1
+          ],
+          [
+            "카드",
+            1
+          ],
+          [
+            "스티커",
+            1
+          ],
+          [
+            "파우치",
+            1
+          ]
+        ],
+        "preserve_sub_series_rows": 4
+      },
+      {
+        "lane": "folder_visual_token_verification",
+        "status": "ready",
+        "open_rows": 36,
+        "next_batch_rows": 4,
+        "review_start_rows": 4,
+        "manual_decision_rows": 0,
+        "next_action": "use available sorted folder colors and icons for the normalized categories",
+        "color_groups": [
+          [
+            "violet",
+            3
+          ],
+          [
+            "green",
+            1
+          ]
+        ],
+        "icon_keys": [
+          [
+            "sticky_note",
+            3
+          ],
+          [
+            "inventory",
+            1
+          ]
+        ]
+      },
+      {
+        "lane": "normalization_import_template",
+        "status": "blocked_until_manual_confirmed",
+        "open_rows": 36,
+        "next_batch_rows": 4,
+        "review_start_rows": 4,
+        "manual_decision_rows": 4,
+        "next_action": "set manual_confirmed=true only after canonical category normalization is verified",
+        "confirmed_queue": "server/animation_category_confirmed_rows.json",
+        "import_tool": "tools/import_confirmed_animation_category_rows.py"
+      }
+    ]
   },
   "image_asset_audit": {
     "public_report": "data/catalog_image_asset_audit_public.json",
@@ -9135,6 +10473,8 @@
     "direct_image_action_workflows_with_review_start": 2,
     "manual_image_research_review_start_rows": 5,
     "manual_image_research_review_start_kind": "fallback_web_search",
+    "source_discovery_review_start_rows": 20,
+    "source_discovery_review_start_kind": "domain_limited_web_search",
     "image_attachment_template_rows": 73,
     "image_attachment_template_confirmed_rows": 0,
     "image_attachment_template_source_update_required_rows": 50,
@@ -9532,7 +10872,66 @@
               }
             ]
           },
-          "review_start": {}
+          "review_start": {
+            "workflow": "find_source_then_extract_image",
+            "batch_id": "source-discovery-focus-001-exact-url-review",
+            "focus_pack_id": "source-discovery-focus-001",
+            "source_store": "엔스카이",
+            "row_count": 20,
+            "primary_review_url_rows": 20,
+            "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+            "first_primary_review_url_kind": "domain_limited_web_search",
+            "review_section": "source_discovery_next_focus_exact_url_review_queue",
+            "source": "source_discovery_next_focus_exact_url_review_queue_public.json",
+            "template": "source_discovery_focus_confirmed_template_public.json",
+            "source_url_confirmation_patch_template_rows": 0,
+            "rediscovery_work_order_rows": 20,
+            "sample_items_with_primary_review_url": 5,
+            "sample_primary_review_items": [
+              {
+                "catalog_index": 922,
+                "name_ko": "치이카와 러버 스트랩 (우사기)",
+                "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
+                "source_store": "엔스카이",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+                "primary_review_url_kind": "domain_limited_web_search"
+              },
+              {
+                "catalog_index": 923,
+                "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
+                "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+                "source_store": "엔스카이",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29%22",
+                "primary_review_url_kind": "domain_limited_web_search"
+              },
+              {
+                "catalog_index": 924,
+                "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
+                "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+                "source_store": "엔스카이",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29%22",
+                "primary_review_url_kind": "domain_limited_web_search"
+              },
+              {
+                "catalog_index": 925,
+                "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
+                "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+                "source_store": "엔스카이",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29%22",
+                "primary_review_url_kind": "domain_limited_web_search"
+              },
+              {
+                "catalog_index": 926,
+                "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
+                "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
+                "source_store": "엔스카이",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29%22",
+                "primary_review_url_kind": "domain_limited_web_search"
+              }
+            ],
+            "manual_confirmation_required": true,
+            "auto_apply_enabled": false
+          }
         },
         {
           "rank": 5,
@@ -9868,7 +11267,66 @@
             "title_character_variant_type_match",
             "image_url_from_confirmed_source_or_trusted_official_cdn"
           ],
-          "review_start": {}
+          "review_start": {
+            "workflow": "find_source_then_extract_image",
+            "batch_id": "source-discovery-focus-001-exact-url-review",
+            "focus_pack_id": "source-discovery-focus-001",
+            "source_store": "엔스카이",
+            "row_count": 20,
+            "primary_review_url_rows": 20,
+            "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+            "first_primary_review_url_kind": "domain_limited_web_search",
+            "review_section": "source_discovery_next_focus_exact_url_review_queue",
+            "source": "source_discovery_next_focus_exact_url_review_queue_public.json",
+            "template": "source_discovery_focus_confirmed_template_public.json",
+            "source_url_confirmation_patch_template_rows": 0,
+            "rediscovery_work_order_rows": 20,
+            "sample_items_with_primary_review_url": 5,
+            "sample_primary_review_items": [
+              {
+                "catalog_index": 922,
+                "name_ko": "치이카와 러버 스트랩 (우사기)",
+                "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
+                "source_store": "엔스카이",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+                "primary_review_url_kind": "domain_limited_web_search"
+              },
+              {
+                "catalog_index": 923,
+                "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
+                "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+                "source_store": "엔스카이",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29%22",
+                "primary_review_url_kind": "domain_limited_web_search"
+              },
+              {
+                "catalog_index": 924,
+                "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
+                "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+                "source_store": "엔스카이",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29%22",
+                "primary_review_url_kind": "domain_limited_web_search"
+              },
+              {
+                "catalog_index": 925,
+                "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
+                "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+                "source_store": "엔스카이",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29%22",
+                "primary_review_url_kind": "domain_limited_web_search"
+              },
+              {
+                "catalog_index": 926,
+                "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
+                "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
+                "source_store": "엔스카이",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29%22",
+                "primary_review_url_kind": "domain_limited_web_search"
+              }
+            ],
+            "manual_confirmation_required": true,
+            "auto_apply_enabled": false
+          }
         },
         {
           "rank": 5,
@@ -10161,6 +11619,41 @@
           "next_step": "manual_official_source_and_image_evidence_recorded"
         }
       ],
+      "image_evidence_bottleneck_summary": {
+        "status": "source_or_image_evidence_required",
+        "missing_image_rows": 745,
+        "known_image_download_problem_rows": 0,
+        "image_url_evidence_missing_rows": 745,
+        "auto_import_ready_rows": 0,
+        "manual_confirmation_required_rows": 745,
+        "source_first_rows": 717,
+        "representative_review_rows": 23,
+        "manual_image_research_rows": 5,
+        "source_discovery_focus_pack_rows": 667,
+        "next_queue_lane": "replace_generic_source_urls",
+        "next_queue_rows": 50,
+        "next_queue_source": "catalog_image_attachment_action_queue_public.json",
+        "next_queue_template": "catalog_image_attachment_confirmed_template_public.json",
+        "next_queue_blocked_until": "generic_source_url_replaced_with_exact_product_source",
+        "bottleneck_rows": [
+          {
+            "bucket": "source_url_or_storefront_replacement_required",
+            "rows": 717,
+            "next_step": "confirm_exact_product_source_url_before_image_import"
+          },
+          {
+            "bucket": "representative_image_product_type_review_required",
+            "rows": 23,
+            "next_step": "confirm_candidate_matches_exact_product_type_and_variant"
+          },
+          {
+            "bucket": "manual_nonstandard_image_research_required",
+            "rows": 5,
+            "next_step": "record_trusted_source_and_image_evidence"
+          }
+        ],
+        "operator_message": "Known image files are complete for rows that already have image URLs; remaining rows need exact source/image evidence before download/import."
+      },
       "manual_only": true,
       "auto_apply_enabled": false,
       "operator_message": "No missing-image DB row can be imported automatically yet; fill the next confirmation template with exact product source/image evidence first."
@@ -10720,6 +12213,29 @@
     "focus_pack_progress_queue_count": 62,
     "focus_pack_progress_remaining_rows": 667,
     "next_pack_after_current": "source-discovery-focus-002",
+    "current_focus_resolution_status": "manual_source_search_required_after_official_cache_miss",
+    "current_focus_manual_quarantine": true,
+    "current_focus_quarantine_reason": "official_cache_safe_exact_match_absent",
+    "recommended_active_focus_pack_id": "source-discovery-focus-002",
+    "recommended_active_pack_items": 20,
+    "recommended_active_official_search_url_count": 20,
+    "current_focus_cache_cross_check": {
+      "cross_checked_rows": 20,
+      "safe_exact_match_rows": 0,
+      "broad_candidate_rows": 4,
+      "no_candidate_rows": 16,
+      "status_counts": [
+        [
+          "no_cache_candidate",
+          16
+        ],
+        [
+          "broad_cache_candidate",
+          4
+        ]
+      ],
+      "auto_apply_enabled": false
+    },
     "auto_apply_enabled": false
   },
   "source_discovery_next_focus_pack_import_dry_run": {
@@ -11649,7 +13165,29 @@
             "review_required"
           ],
           "recommended_decision": "campaign_pair_reissue_keep_all_separate",
+          "recommended_decision_reason": "same_campaign_slug_family_with_numbered_suffix",
+          "required_evidence": [
+            "campaign_titles_compared",
+            "release_periods_compared",
+            "prize_lineups_compared",
+            "manual_decision_keep_separate_or_keep_drop"
+          ],
+          "manual_confirmation_fields_required": [
+            "manual_confirmed",
+            "decision",
+            "evidence_url",
+            "manual_note"
+          ],
           "likely_same_campaign_family_reissue": true,
+          "campaign_slug_family_count": 1,
+          "campaign_slugs": [
+            "onep6",
+            "onep8"
+          ],
+          "numeric_suffixes": [
+            "6",
+            "8"
+          ],
           "source_urls": [
             "https://1kuji.com/products/onep6",
             "https://1kuji.com/products/onep8"
@@ -11705,6 +13243,11 @@
             "Do not delete or merge until every affected item work order has manual_confirmed=true."
           ],
           "evidence_url": "https://1kuji.com/products/onep6",
+          "evidence_gap_summary": {
+            "missing_evidence_url": false,
+            "missing_source_url_pair": false,
+            "missing_affected_item_work_order_ids": false
+          },
           "manual_note": "",
           "blocked_until": "campaign_pair_reissue_or_duplicate_decision_confirmed",
           "operator_instruction": "Confirm both official campaign pages before deciding. Keep separate for reissues/waves; only move to item keep/drop review when both pages prove an exact duplicate campaign relationship.",
@@ -11723,7 +13266,28 @@
             "review_required"
           ],
           "recommended_decision": "campaign_pair_reissue_keep_all_separate",
+          "recommended_decision_reason": "same_campaign_slug_family_with_numbered_suffix",
+          "required_evidence": [
+            "campaign_titles_compared",
+            "release_periods_compared",
+            "prize_lineups_compared",
+            "manual_decision_keep_separate_or_keep_drop"
+          ],
+          "manual_confirmation_fields_required": [
+            "manual_confirmed",
+            "decision",
+            "evidence_url",
+            "manual_note"
+          ],
           "likely_same_campaign_family_reissue": true,
+          "campaign_slug_family_count": 1,
+          "campaign_slugs": [
+            "kimetsu",
+            "kimetsu2"
+          ],
+          "numeric_suffixes": [
+            "2"
+          ],
           "source_urls": [
             "https://1kuji.com/products/kimetsu",
             "https://1kuji.com/products/kimetsu2"
@@ -11775,6 +13339,11 @@
             "Do not delete or merge until every affected item work order has manual_confirmed=true."
           ],
           "evidence_url": "https://1kuji.com/products/kimetsu",
+          "evidence_gap_summary": {
+            "missing_evidence_url": false,
+            "missing_source_url_pair": false,
+            "missing_affected_item_work_order_ids": false
+          },
           "manual_note": "",
           "blocked_until": "campaign_pair_reissue_or_duplicate_decision_confirmed",
           "operator_instruction": "Confirm both official campaign pages before deciding. Keep separate for reissues/waves; only move to item keep/drop review when both pages prove an exact duplicate campaign relationship.",
@@ -11793,7 +13362,28 @@
             "review_required"
           ],
           "recommended_decision": "campaign_pair_reissue_keep_all_separate",
+          "recommended_decision_reason": "same_campaign_slug_family_with_numbered_suffix",
+          "required_evidence": [
+            "campaign_titles_compared",
+            "release_periods_compared",
+            "prize_lineups_compared",
+            "manual_decision_keep_separate_or_keep_drop"
+          ],
+          "manual_confirmation_fields_required": [
+            "manual_confirmed",
+            "decision",
+            "evidence_url",
+            "manual_note"
+          ],
           "likely_same_campaign_family_reissue": true,
+          "campaign_slug_family_count": 1,
+          "campaign_slugs": [
+            "naruto_wcf",
+            "naruto_wcf2"
+          ],
+          "numeric_suffixes": [
+            "2"
+          ],
           "source_urls": [
             "https://1kuji.com/products/naruto_wcf",
             "https://1kuji.com/products/naruto_wcf2"
@@ -11829,6 +13419,11 @@
             "Do not delete or merge until every affected item work order has manual_confirmed=true."
           ],
           "evidence_url": "https://1kuji.com/products/naruto_wcf",
+          "evidence_gap_summary": {
+            "missing_evidence_url": false,
+            "missing_source_url_pair": false,
+            "missing_affected_item_work_order_ids": false
+          },
           "manual_note": "",
           "blocked_until": "campaign_pair_reissue_or_duplicate_decision_confirmed",
           "operator_instruction": "Confirm both official campaign pages before deciding. Keep separate for reissues/waves; only move to item keep/drop review when both pages prove an exact duplicate campaign relationship.",
@@ -11847,7 +13442,29 @@
             "review_required"
           ],
           "recommended_decision": "campaign_pair_reissue_keep_all_separate",
+          "recommended_decision_reason": "same_campaign_slug_family_with_numbered_suffix",
+          "required_evidence": [
+            "campaign_titles_compared",
+            "release_periods_compared",
+            "prize_lineups_compared",
+            "manual_decision_keep_separate_or_keep_drop"
+          ],
+          "manual_confirmation_fields_required": [
+            "manual_confirmed",
+            "decision",
+            "evidence_url",
+            "manual_note"
+          ],
           "likely_same_campaign_family_reissue": true,
+          "campaign_slug_family_count": 1,
+          "campaign_slugs": [
+            "haikyu4",
+            "haikyu8"
+          ],
+          "numeric_suffixes": [
+            "4",
+            "8"
+          ],
           "source_urls": [
             "https://1kuji.com/products/haikyu4",
             "https://1kuji.com/products/haikyu8"
@@ -11879,6 +13496,11 @@
             "Do not delete or merge until every affected item work order has manual_confirmed=true."
           ],
           "evidence_url": "https://1kuji.com/products/haikyu4",
+          "evidence_gap_summary": {
+            "missing_evidence_url": false,
+            "missing_source_url_pair": false,
+            "missing_affected_item_work_order_ids": false
+          },
           "manual_note": "",
           "blocked_until": "campaign_pair_reissue_or_duplicate_decision_confirmed",
           "operator_instruction": "Confirm both official campaign pages before deciding. Keep separate for reissues/waves; only move to item keep/drop review when both pages prove an exact duplicate campaign relationship.",
@@ -11907,6 +13529,7 @@
     "candidate_source_review_rows": 3,
     "direct_image_action_rows": 73,
     "roadmap_phase_count": 5,
+    "next_execution_lane_count": 5,
     "auto_apply_enabled": false,
     "completion_readiness": {
       "status": "current_focus_fallback_review_required",
@@ -11921,9 +13544,28 @@
       "current_focus_remaining_rows": 20,
       "current_focus_fallback_rows": 20,
       "next_pack_after_current": "source-discovery-focus-002",
+      "current_focus_resolution_status": "manual_source_search_required_after_official_cache_miss",
+      "current_focus_cache_cross_check": {
+        "cross_checked_rows": 20,
+        "safe_exact_match_rows": 0,
+        "broad_candidate_rows": 4,
+        "no_candidate_rows": 16,
+        "status_counts": [
+          [
+            "no_cache_candidate",
+            16
+          ],
+          [
+            "broad_cache_candidate",
+            4
+          ]
+        ],
+        "auto_apply_enabled": false
+      },
+      "recommended_next_focus_pack_id": "source-discovery-focus-002",
       "all_sample_candidates_rejected_rows": 20,
       "safe_candidate_detail_link_rows": 0,
-      "next_safe_phase": "ignore_rejected_samples_and_run_exact_source_search",
+      "next_safe_phase": "rotate_to_next_focus_pack_or_manual_source_research_current_pack",
       "next_queue": {
         "source": "data/source_discovery_next_focus_exact_url_review_queue_public.json",
         "queue_rows": 20,
@@ -11937,9 +13579,164 @@
       },
       "blocked_until": "exact_product_detail_source_url_confirmed",
       "blocked_reasons": [
+        "official_cache_safe_exact_match_absent",
         "sample_candidate_links_rejected"
       ],
       "safety_note": "Source discovery queues are review-only. Confirm exact official product detail URLs before image attachment."
+    },
+    "next_execution_summary": {
+      "lane_count": 5,
+      "open_rows": 813,
+      "next_batch_rows": 166,
+      "next_safe_phase": "exact_source_url_review",
+      "auto_apply_enabled": false,
+      "manual_evidence_required": true
+    },
+    "next_execution_lanes": [
+      {
+        "lane": "exact_source_url_review",
+        "status": "manual_cache_miss_research_required",
+        "open_rows": 20,
+        "next_batch_rows": 20,
+        "review_start_rows": 20,
+        "manual_decision_rows": 20,
+        "public_report": "data/source_discovery_next_focus_exact_url_review_queue_public.json",
+        "next_action": "ignore broad/rejected samples and confirm exact product detail URLs"
+      },
+      {
+        "lane": "metadata_field_confirmation",
+        "status": "blocked_until_exact_source_url_confirmed",
+        "open_rows": 3,
+        "next_batch_rows": 3,
+        "review_start_rows": 3,
+        "manual_decision_rows": 3,
+        "public_report": "data/source_discovery_next_focus_metadata_field_import_dry_run_public.json",
+        "next_action": "confirm sub-series, Japanese name, and character fields from exact official evidence"
+      },
+      {
+        "lane": "focus_pack_rotation",
+        "status": "queued_after_current_focus",
+        "open_rows": 667,
+        "next_batch_rows": 20,
+        "review_start_rows": 20,
+        "manual_decision_rows": 20,
+        "public_report": "data/source_discovery_focus_packs_public.json",
+        "next_action": "start the next focus pack while the current cache-miss pack waits for manual exact source research"
+      },
+      {
+        "lane": "generic_source_replacement",
+        "status": "manual_source_review_required",
+        "open_rows": 50,
+        "next_batch_rows": 50,
+        "review_start_rows": 50,
+        "manual_decision_rows": 50,
+        "public_report": "data/catalog_image_source_url_confirmed_template_public.json",
+        "next_action": "replace generic storefront URLs with exact product source URLs before image import"
+      },
+      {
+        "lane": "image_attachment_after_source_confirmation",
+        "status": "blocked_until_source_or_image_evidence_confirmed",
+        "open_rows": 73,
+        "next_batch_rows": 73,
+        "review_start_rows": 73,
+        "manual_decision_rows": 73,
+        "public_report": "data/catalog_image_attachment_action_queue_public.json",
+        "next_action": "attach image URLs only after exact source page and image identity are confirmed"
+      }
+    ],
+    "operator_handoff": {
+      "status": "current_focus_fallback_review_required",
+      "current_lane": "exact_source_url_review",
+      "current_review_section": "source_discovery_next_focus_exact_url_review_queue",
+      "current_focus_pack_id": "source-discovery-focus-001",
+      "queued_source_rows": 667,
+      "current_focus_remaining_rows": 20,
+      "safe_candidate_detail_link_rows": 0,
+      "all_sample_candidates_rejected_rows": 20,
+      "next_safe_phase": "rotate_to_next_focus_pack_or_manual_source_research_current_pack",
+      "blocked_reasons": [
+        "official_cache_safe_exact_match_absent",
+        "sample_candidate_links_rejected"
+      ],
+      "current_focus_resolution_status": "manual_source_search_required_after_official_cache_miss",
+      "current_focus_cache_cross_check": {
+        "cross_checked_rows": 20,
+        "safe_exact_match_rows": 0,
+        "broad_candidate_rows": 4,
+        "no_candidate_rows": 16,
+        "status_counts": [
+          [
+            "no_cache_candidate",
+            16
+          ],
+          [
+            "broad_cache_candidate",
+            4
+          ]
+        ],
+        "auto_apply_enabled": false
+      },
+      "recommended_next_focus_pack_id": "source-discovery-focus-002",
+      "handoff_steps": [
+        {
+          "step": 1,
+          "lane": "exact_source_url_review",
+          "status": "manual_exact_source_url_search_required",
+          "next_batch_rows": 20,
+          "review_section": "source_discovery_next_focus_exact_url_review_queue",
+          "write_template_section": "source_url_confirmation_patch_template.rows",
+          "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+          "first_primary_review_url_kind": "domain_limited_web_search",
+          "template_rows": 10,
+          "rediscovery_work_order_rows": 20,
+          "required_before_write": [
+            "manual_confirmed=true",
+            "manual_value is an exact product detail URL",
+            "evidence_url proves the same exact catalog row",
+            "broad search/listing/storefront URLs stay rejected"
+          ],
+          "unblocks": "metadata_field_confirmation",
+          "auto_apply_enabled": false
+        },
+        {
+          "step": 2,
+          "lane": "metadata_field_confirmation",
+          "status": "blocked_until_exact_source_url_confirmed",
+          "next_batch_rows": 3,
+          "review_section": "source_discovery_next_focus_metadata_field_import_dry_run",
+          "write_template_section": "metadata_field_import_template",
+          "required_before_write": [
+            "exact source_url is confirmed",
+            "manual metadata values come from official product evidence",
+            "Japanese name, sub-series, and character fields match the product page"
+          ],
+          "unblocks": "focus_pack_rotation",
+          "auto_apply_enabled": false
+        },
+        {
+          "step": 3,
+          "lane": "image_attachment_after_source_confirmation",
+          "status": "blocked_until_source_or_image_evidence_confirmed",
+          "next_batch_rows": 73,
+          "review_section": "catalog_image_attachment_action_queue",
+          "write_template_section": "image_attachment_confirmed_template",
+          "required_before_write": [
+            "exact source page is confirmed",
+            "image_url is a direct product image URL",
+            "source/image pair identifies the same catalog row",
+            "local image path remains private/device-safe until published asset exists"
+          ],
+          "unblocks": "public_catalog_image_rendering",
+          "auto_apply_enabled": false
+        }
+      ],
+      "safety_policy": {
+        "auto_apply_enabled": false,
+        "auto_import_source_url": false,
+        "auto_import_image_url": false,
+        "require_exact_product_source_evidence": true,
+        "reject_broad_search_or_storefront_urls": true
+      }
     }
   },
   "image_attachment_template_import_dry_run": {
@@ -11960,7 +13757,34 @@
       ]
     ],
     "auto_apply_enabled": false,
-    "write": false
+    "write": false,
+    "import_readiness": {
+      "status": "blocked_until_manual_image_evidence",
+      "template_items": 73,
+      "manual_confirmed_rows": 0,
+      "ready_image_rows": 0,
+      "ready_to_import_rows": 0,
+      "blocked_rows": 73,
+      "blocked_reason_count": 1,
+      "source_url_update_required_rows": 50,
+      "representative_image_review_required_rows": 23,
+      "next_safe_phase": "confirm_exact_source_urls_before_image_import",
+      "confirmed_queue": "data/catalog_image_attachment_confirmed_template_public.json",
+      "import_tool": "tools/import_confirmed_image_attachment_rows.py",
+      "manual_evidence_required": true,
+      "auto_apply_enabled": false,
+      "write_enabled": false,
+      "blocked_reasons": [
+        "manual_confirmed_false"
+      ],
+      "required_before_write": [
+        "manual_confirmed=true",
+        "field=image_url",
+        "manual_value is a direct product image URL",
+        "candidate_source_url or evidence_url points to the exact product page",
+        "source/image pair passes generic-image and product-source safety checks"
+      ]
+    }
   },
   "image_attachment_queue_alignment": {
     "public_reports": [
@@ -12190,6 +14014,122 @@
       ]
     },
     "price_and_prize_policy_gate_status": "reissue_review_required",
+    "next_execution_summary": {
+      "lane_count": 4,
+      "open_rows": 125,
+      "queued_rows": 125,
+      "next_batch_rows": 81,
+      "next_safe_phase": "confirm_ichiban_campaign_metadata",
+      "auto_apply_enabled": false,
+      "manual_official_confirmation_required": true
+    },
+    "next_execution_lanes": [
+      {
+        "lane": "campaign_metadata_confirmation",
+        "status": "next",
+        "open_rows": 44,
+        "queued_rows": 44,
+        "next_batch_rows": 20,
+        "next_action": "confirm official campaign title, release date, source URL, and campaign-level price metadata"
+      },
+      {
+        "lane": "campaign_price_confirmation",
+        "status": "manual_official_price_review_required",
+        "open_rows": 41,
+        "queued_rows": 41,
+        "next_batch_rows": 41,
+        "next_action": "fill non-exception official prices before same-campaign reissue decisions"
+      },
+      {
+        "lane": "reissue_identity_review",
+        "status": "blocked_until_campaign_metadata_confirmed",
+        "open_rows": 20,
+        "queued_rows": 20,
+        "next_batch_rows": 20,
+        "next_action": "decide keep-separate vs same-sellable-product only from official campaign evidence"
+      },
+      {
+        "lane": "prize_policy_guard",
+        "status": "policy_pass",
+        "open_rows": 20,
+        "queued_rows": 20,
+        "next_batch_rows": 0,
+        "next_action": "keep Last One and Double Chance at 0 JPY and preserve same-rank numbered variants"
+      }
+    ],
+    "operator_handoff": {
+      "status": "manual_review_required",
+      "current_lane": "campaign_metadata_confirmation",
+      "current_review_section": "ichiban_kuji_metadata_action_queue",
+      "manual_metadata_campaigns": 44,
+      "missing_price_campaign_groups": 41,
+      "reissue_review_groups": 20,
+      "zero_price_policy_ready": true,
+      "numbered_variant_policy_ready": true,
+      "last_one_and_double_chance_zero_price_protected": true,
+      "handoff_steps": [
+        {
+          "step": 1,
+          "lane": "campaign_metadata_confirmation",
+          "status": "manual_official_campaign_metadata_required",
+          "next_batch_rows": 20,
+          "open_rows": 44,
+          "review_section": "ichiban_kuji_metadata_action_queue",
+          "write_template_section": "campaign_field_confirmation_template",
+          "first_primary_review_url": "https://1kuji.com/products/jujutsu-o",
+          "required_before_write": [
+            "manual_confirmed=true",
+            "official campaign title/source URL is confirmed",
+            "release date is copied from official campaign evidence",
+            "campaign-level draw price is confirmed for non-exception rows"
+          ],
+          "unblocks": "campaign_price_confirmation",
+          "auto_apply_enabled": false
+        },
+        {
+          "step": 2,
+          "lane": "campaign_price_confirmation",
+          "status": "manual_official_price_review_required",
+          "next_batch_rows": 41,
+          "open_rows": 41,
+          "review_section": "ichiban_kuji_metadata_action_queue",
+          "write_template_section": "official_price_jpy field patches",
+          "required_before_write": [
+            "official draw price is confirmed from campaign page",
+            "Last One and Double Chance prize exceptions remain 0 JPY",
+            "non-exception missing prices are filled before reissue decisions"
+          ],
+          "unblocks": "reissue_identity_review",
+          "auto_apply_enabled": false
+        },
+        {
+          "step": 3,
+          "lane": "reissue_identity_review",
+          "status": "manual_reissue_or_duplicate_decision_required",
+          "next_batch_rows": 20,
+          "open_rows": 20,
+          "review_section": "ichiban_kuji_reissue_decision_template",
+          "write_template_section": "decision_template",
+          "required_before_write": [
+            "campaign title, release period, and lineup are compared",
+            "release/campaign name, prize rank, prize name, and variant are preserved",
+            "decision is keep separate for reissue/campaign variants or keep/drop for exact duplicates",
+            "auto merge/delete stays disabled until manual evidence is recorded"
+          ],
+          "unblocks": "safe_dedupe_keep_drop_review",
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false
+        }
+      ],
+      "safety_policy": {
+        "auto_apply_enabled": false,
+        "auto_merge_enabled": false,
+        "auto_delete_enabled": false,
+        "require_official_campaign_evidence": true,
+        "preserve_reissue_and_variant_rows_until_confirmed": true,
+        "last_one_and_double_chance_price_jpy": 0
+      }
+    },
     "price_policy_auto_apply_ready_rows": 0,
     "price_policy_auto_merge_ready_rows": 0,
     "price_policy_auto_delete_ready_rows": 0,
@@ -14454,6 +16394,10 @@
     "item_template_price_policy_blocked_rows": 8,
     "campaign_template_price_policy_blocked_rows": 1,
     "campaign_template_high_impact_rows": 2,
+    "campaign_template_local_catalog_evidence_rows": 4,
+    "campaign_template_release_date_differs_by_source_url_rows": 4,
+    "campaign_template_image_url_differs_by_source_url_rows": 4,
+    "campaign_template_local_keep_separate_recommended_rows": 4,
     "campaign_covered_item_template_rows": 20,
     "standalone_item_template_rows": 0,
     "campaign_item_decision_preview_rows": 20,
@@ -14470,6 +16414,7 @@
     "campaign_review_batch_zero_price_exception_sample_rows": 2,
     "campaign_review_batch_non_exception_missing_price_sample_rows": 8,
     "campaign_review_batch_price_policy_blocked_rows": 1,
+    "campaign_review_batch_local_keep_separate_recommended_rows": 4,
     "campaign_review_batch_item_preview_rows": 20,
     "campaign_review_batch_visible_item_preview_rows": 20,
     "campaign_review_batch_truncated_campaigns": 0,
@@ -15472,6 +17417,20 @@
         20
       ]
     ],
+    "ensky_cache_cross_checked_rows": 20,
+    "ensky_cache_safe_exact_match_rows": 0,
+    "ensky_cache_broad_candidate_rows": 4,
+    "ensky_cache_no_candidate_rows": 16,
+    "ensky_cache_status_counts": [
+      [
+        "no_cache_candidate",
+        16
+      ],
+      [
+        "broad_cache_candidate",
+        4
+      ]
+    ],
     "auto_apply_enabled": false,
     "recommended_next_action": "Use exact title candidates only after manual review; broad Ensky search result pages are not source_url evidence."
   },
@@ -15608,7 +17567,112 @@
         "next_queue_lane": "same_barcode_fast_review",
         "next_queue_rows": 10,
         "next_safe_phase": "verify_ichiban_campaign_pages_before_dedupe",
-        "public_report": "data/catalog_deduplication_action_queue_public.json"
+        "public_report": "data/catalog_deduplication_action_queue_public.json",
+        "next_execution_summary": {
+          "lane_count": 5,
+          "open_rows": 161,
+          "next_batch_rows": 82,
+          "next_safe_phase": "same_barcode_fast_review",
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false,
+          "manual_evidence_required": true
+        },
+        "next_execution_lane_count": 5,
+        "next_execution_open_rows": 161,
+        "next_execution_next_batch_rows": 82,
+        "first_next_execution_lane": "same_barcode_fast_review",
+        "first_next_execution_status": "next",
+        "first_next_execution_rows": 42,
+        "first_next_execution_public_report": "data/catalog_deduplication_action_queue_public.json",
+        "operator_handoff": {
+          "status": "ichiban_reissue_review_required",
+          "current_lane": "ichiban_reissue_campaign_review",
+          "current_review_section": "ichiban_reissue_campaign_work_order",
+          "blocked_reasons": [
+            "explicit_manual_keep_drop_confirmation_required",
+            "ichiban_reissue_manual_confirmation_required",
+            "variant_or_retailer_identity_review_required"
+          ],
+          "next_safe_phase": "verify_ichiban_campaign_pages_before_dedupe",
+          "manual_decision_required_groups": 48,
+          "ichiban_reissue_work_order_rows": 20,
+          "ichiban_reissue_campaign_work_order_rows": 4,
+          "handoff_steps": [
+            {
+              "step": 1,
+              "lane": "ichiban_reissue_campaign_review",
+              "status": "manual_campaign_identity_confirmation_required",
+              "next_batch_rows": 4,
+              "review_section": "ichiban_reissue_campaign_work_order",
+              "write_template_section": "decision_template",
+              "first_evidence_url": "https://1kuji.com/products/onep6",
+              "first_work_order_id": "ichiban-reissue-campaign-001",
+              "required_before_write": [
+                "manual_confirmed=true",
+                "campaign decision is recorded",
+                "official campaign title, release period, and prize lineup are compared",
+                "affected item work orders stay protected until campaign identity is clear"
+              ],
+              "unblocks": "ichiban_reissue_item_decisions",
+              "auto_merge_enabled": false,
+              "auto_delete_enabled": false
+            },
+            {
+              "step": 2,
+              "lane": "ichiban_reissue_identity_review",
+              "status": "manual_reissue_or_duplicate_decision_required",
+              "next_batch_rows": 20,
+              "review_section": "ichiban_reissue_work_order",
+              "write_template_section": "decision_template",
+              "first_evidence_url": "https://1kuji.com/products/haikyu4",
+              "first_work_order_id": "ichiban-reissue-dedupe-001",
+              "required_before_write": [
+                "manual_confirmed=true",
+                "decision is reissue_or_campaign_variant_keep_separate or same_sellable_product_keep_drop_confirmed",
+                "release/campaign name, prize rank, prize name, and variant are compared",
+                "Last One and Double Chance price exceptions stay at 0 JPY"
+              ],
+              "unblocks": "safe_manual_keep_drop_review",
+              "auto_merge_enabled": false,
+              "auto_delete_enabled": false
+            },
+            {
+              "step": 3,
+              "lane": "manual_keep_drop_import_template",
+              "status": "explicit_keep_drop_confirmation_required",
+              "next_batch_rows": 10,
+              "review_section": "batches",
+              "write_template_section": "dedupe_decision_template",
+              "first_primary_review_url": "https://chiikawamarket.jp/ko/products/4570189195898",
+              "first_batch_id": "dedupe-action-001",
+              "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+              "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+              "required_before_write": [
+                "manual_confirmed=true",
+                "same sellable product identity is proven",
+                "keep_catalog_index is chosen",
+                "drop_catalog_indexes and evidence_urls are recorded"
+              ],
+              "unblocks": "explicit_manual_keep_drop_decision_confirmed",
+              "auto_merge_enabled": false,
+              "auto_delete_enabled": false
+            }
+          ],
+          "safety_policy": {
+            "auto_merge_enabled": false,
+            "auto_delete_enabled": false,
+            "require_explicit_keep_drop_decision": true,
+            "protect_ichiban_reissues_until_confirmed": true
+          }
+        },
+        "handoff_public_report": "data/catalog_deduplication_action_queue_public.json",
+        "handoff_status": "ichiban_reissue_review_required",
+        "handoff_current_lane": "ichiban_reissue_campaign_review",
+        "handoff_current_review_section": "ichiban_reissue_campaign_work_order",
+        "handoff_step_count": 3,
+        "handoff_first_step_lane": "ichiban_reissue_campaign_review",
+        "handoff_first_step_status": "manual_campaign_identity_confirmation_required",
+        "handoff_first_step_rows": 4
       },
       {
         "pillar": "missing_images",
@@ -15681,7 +17745,204 @@
           }
         ],
         "next_safe_phase": "replace_generic_source_urls",
-        "public_report": "data/catalog_missing_image_actionability_public.json"
+        "public_report": "data/catalog_missing_image_actionability_public.json",
+        "next_execution_summary": {},
+        "next_execution_lane_count": 0,
+        "next_execution_open_rows": 0,
+        "next_execution_next_batch_rows": 0,
+        "first_next_execution_lane": null,
+        "first_next_execution_status": null,
+        "first_next_execution_rows": 0,
+        "first_next_execution_public_report": "data/catalog_missing_image_actionability_public.json",
+        "operator_handoff": {
+          "status": "source_url_replacement_required",
+          "current_lane": "source_url_replacement_first",
+          "current_batch_id": "image-attachment-action-001",
+          "current_first_primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+          "blocked_before_image_import_rows": 73,
+          "ready_to_import_image_url_rows": 0,
+          "local_download_ready_after_confirmation_rows": 73,
+          "manual_review_required": true,
+          "handoff_steps": [
+            {
+              "step": 1,
+              "lane": "source_url_replacement_first",
+              "status": "manual_source_url_confirmation_required",
+              "next_batch_rows": 10,
+              "review_section": "next_source_url_review_batch",
+              "write_template_section": "source_url_update_template",
+              "import_tool": "tools/import_confirmed_image_attachment_rows.py",
+              "first_primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+              "first_primary_review_url_kind": "source_search_url",
+              "batch_triage": {
+                "rows": 10,
+                "candidate_hint_rows": 1,
+                "low_confidence_candidate_rows": 1,
+                "no_candidate_rows": 9,
+                "manual_search_rows": 9,
+                "search_hint_rows": 10,
+                "fallback_web_search_url_rows": 10,
+                "primary_review_url_rows": 10,
+                "candidate_status_counts": [
+                  [
+                    "no_candidate",
+                    9
+                  ],
+                  [
+                    "low_confidence_candidate",
+                    1
+                  ]
+                ],
+                "source_url_review_lane_counts": [
+                  [
+                    "manual_search_required",
+                    9
+                  ],
+                  [
+                    "low_confidence_candidate_review",
+                    1
+                  ]
+                ],
+                "primary_review_url_kind_counts": [
+                  [
+                    "source_search_url",
+                    10
+                  ]
+                ],
+                "recommended_review_order": [
+                  "Review rows with candidate_options first, but accept only exact product detail matches.",
+                  "For no_candidate rows, open source_search_url first and fallback_web_search_urls second.",
+                  "Do not fill manual_value with storefront, search result, category, or low-confidence non-matching URLs.",
+                  "Only after exact source_url confirmation should image_url evidence be filled/imported."
+                ],
+                "manual_confirmation_required": true,
+                "auto_apply_enabled": false
+              },
+              "template_triage": {
+                "rows": 50,
+                "candidate_hint_rows": 3,
+                "low_confidence_candidate_rows": 3,
+                "no_candidate_rows": 42,
+                "manual_search_rows": 47,
+                "search_hint_rows": 50,
+                "fallback_web_search_url_rows": 50,
+                "primary_review_url_rows": 50,
+                "candidate_status_counts": [
+                  [
+                    "no_candidate",
+                    42
+                  ],
+                  [
+                    "no_candidate_report",
+                    5
+                  ],
+                  [
+                    "low_confidence_candidate",
+                    2
+                  ],
+                  [
+                    "weak_manual_review_candidate",
+                    1
+                  ]
+                ],
+                "source_url_review_lane_counts": [
+                  [
+                    "manual_search_required",
+                    42
+                  ],
+                  [
+                    "candidate_provider_missing",
+                    5
+                  ],
+                  [
+                    "low_confidence_candidate_review",
+                    2
+                  ],
+                  [
+                    "weak_candidate_review",
+                    1
+                  ]
+                ],
+                "primary_review_url_kind_counts": [
+                  [
+                    "source_search_url",
+                    45
+                  ],
+                  [
+                    "fallback_web_search",
+                    5
+                  ]
+                ],
+                "recommended_review_order": [
+                  "Review rows with candidate_options first, but accept only exact product detail matches.",
+                  "For no_candidate rows, open source_search_url first and fallback_web_search_urls second.",
+                  "Do not fill manual_value with storefront, search result, category, or low-confidence non-matching URLs.",
+                  "Only after exact source_url confirmation should image_url evidence be filled/imported."
+                ],
+                "manual_confirmation_required": true,
+                "auto_apply_enabled": false
+              },
+              "required_before_write": [
+                "manual_confirmed=true",
+                "manual_value is the exact product detail URL",
+                "evidence_url proves the same exact product",
+                "manual_image_url is filled only when the page proves the exact product image"
+              ],
+              "unblocks": "image_url_extraction_and_attachment_review",
+              "auto_apply_enabled": false
+            },
+            {
+              "step": 2,
+              "lane": "representative_image_candidate_review",
+              "status": "manual_variant_confirmation_required",
+              "next_batch_rows": 10,
+              "review_section": "next_representative_image_review_batch",
+              "write_template_section": "catalog_field_import_template",
+              "import_tool": "tools/import_confirmed_image_attachment_rows.py",
+              "first_primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+              "first_primary_review_url_kind": "current_source_url",
+              "required_before_write": [
+                "manual_confirmed=true",
+                "manual_image_url is a direct product image URL",
+                "evidence_url or candidate_source_url proves the exact product context",
+                "character, motif, product type, and variant are manually checked"
+              ],
+              "unblocks": "manual_catalog_image_url_import",
+              "auto_apply_enabled": false
+            },
+            {
+              "step": 3,
+              "lane": "local_image_download_after_confirmation",
+              "status": "waiting_for_confirmed_image_urls",
+              "next_batch_rows": 73,
+              "review_section": "catalog_image_attachment_confirmed_template_public.json",
+              "write_template_section": "local_image_download_instruction",
+              "import_tool": "tools/import_confirmed_image_attachment_rows.py",
+              "required_before_write": [
+                "confirmed image_url exists",
+                "suggested_local_image_path is present",
+                "downloaded asset exists under assets/catalog_images",
+                "local_image_path and image_url stay paired for the same catalog row"
+              ],
+              "unblocks": "public_site_image_rendering_from_local_assets",
+              "auto_apply_enabled": false
+            }
+          ],
+          "safety_policy": {
+            "auto_apply_enabled": false,
+            "do_not_attach_search_result_images": true,
+            "require_exact_product_evidence": true,
+            "private_collection_storage": "local_device_only"
+          }
+        },
+        "handoff_public_report": "data/catalog_image_attachment_action_queue_public.json",
+        "handoff_status": "source_url_replacement_required",
+        "handoff_current_lane": "source_url_replacement_first",
+        "handoff_current_review_section": null,
+        "handoff_step_count": 3,
+        "handoff_first_step_lane": "source_url_replacement_first",
+        "handoff_first_step_status": "manual_source_url_confirmation_required",
+        "handoff_first_step_rows": 10
       },
       {
         "pillar": "source_url_updates",
@@ -15733,7 +17994,124 @@
           "source_url_candidates_require_manual_review"
         ],
         "next_safe_phase": "review_candidate_source_urls",
-        "public_report": "data/catalog_image_source_url_confirmed_template_public.json"
+        "public_report": "data/catalog_image_source_url_confirmed_template_public.json",
+        "next_execution_summary": {
+          "lane_count": 5,
+          "open_rows": 813,
+          "next_batch_rows": 166,
+          "next_safe_phase": "exact_source_url_review",
+          "auto_apply_enabled": false,
+          "manual_evidence_required": true
+        },
+        "next_execution_lane_count": 5,
+        "next_execution_open_rows": 813,
+        "next_execution_next_batch_rows": 166,
+        "first_next_execution_lane": "exact_source_url_review",
+        "first_next_execution_status": "manual_cache_miss_research_required",
+        "first_next_execution_rows": 20,
+        "first_next_execution_public_report": "data/source_discovery_next_focus_exact_url_review_queue_public.json",
+        "operator_handoff": {
+          "status": "current_focus_fallback_review_required",
+          "current_lane": "exact_source_url_review",
+          "current_review_section": "source_discovery_next_focus_exact_url_review_queue",
+          "current_focus_pack_id": "source-discovery-focus-001",
+          "queued_source_rows": 667,
+          "current_focus_remaining_rows": 20,
+          "safe_candidate_detail_link_rows": 0,
+          "all_sample_candidates_rejected_rows": 20,
+          "next_safe_phase": "rotate_to_next_focus_pack_or_manual_source_research_current_pack",
+          "blocked_reasons": [
+            "official_cache_safe_exact_match_absent",
+            "sample_candidate_links_rejected"
+          ],
+          "current_focus_resolution_status": "manual_source_search_required_after_official_cache_miss",
+          "current_focus_cache_cross_check": {
+            "cross_checked_rows": 20,
+            "safe_exact_match_rows": 0,
+            "broad_candidate_rows": 4,
+            "no_candidate_rows": 16,
+            "status_counts": [
+              [
+                "no_cache_candidate",
+                16
+              ],
+              [
+                "broad_cache_candidate",
+                4
+              ]
+            ],
+            "auto_apply_enabled": false
+          },
+          "recommended_next_focus_pack_id": "source-discovery-focus-002",
+          "handoff_steps": [
+            {
+              "step": 1,
+              "lane": "exact_source_url_review",
+              "status": "manual_exact_source_url_search_required",
+              "next_batch_rows": 20,
+              "review_section": "source_discovery_next_focus_exact_url_review_queue",
+              "write_template_section": "source_url_confirmation_patch_template.rows",
+              "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+              "first_primary_review_url_kind": "domain_limited_web_search",
+              "template_rows": 10,
+              "rediscovery_work_order_rows": 20,
+              "required_before_write": [
+                "manual_confirmed=true",
+                "manual_value is an exact product detail URL",
+                "evidence_url proves the same exact catalog row",
+                "broad search/listing/storefront URLs stay rejected"
+              ],
+              "unblocks": "metadata_field_confirmation",
+              "auto_apply_enabled": false
+            },
+            {
+              "step": 2,
+              "lane": "metadata_field_confirmation",
+              "status": "blocked_until_exact_source_url_confirmed",
+              "next_batch_rows": 3,
+              "review_section": "source_discovery_next_focus_metadata_field_import_dry_run",
+              "write_template_section": "metadata_field_import_template",
+              "required_before_write": [
+                "exact source_url is confirmed",
+                "manual metadata values come from official product evidence",
+                "Japanese name, sub-series, and character fields match the product page"
+              ],
+              "unblocks": "focus_pack_rotation",
+              "auto_apply_enabled": false
+            },
+            {
+              "step": 3,
+              "lane": "image_attachment_after_source_confirmation",
+              "status": "blocked_until_source_or_image_evidence_confirmed",
+              "next_batch_rows": 73,
+              "review_section": "catalog_image_attachment_action_queue",
+              "write_template_section": "image_attachment_confirmed_template",
+              "required_before_write": [
+                "exact source page is confirmed",
+                "image_url is a direct product image URL",
+                "source/image pair identifies the same catalog row",
+                "local image path remains private/device-safe until published asset exists"
+              ],
+              "unblocks": "public_catalog_image_rendering",
+              "auto_apply_enabled": false
+            }
+          ],
+          "safety_policy": {
+            "auto_apply_enabled": false,
+            "auto_import_source_url": false,
+            "auto_import_image_url": false,
+            "require_exact_product_source_evidence": true,
+            "reject_broad_search_or_storefront_urls": true
+          }
+        },
+        "handoff_public_report": "data/source_discovery_completion_roadmap_public.json",
+        "handoff_status": "current_focus_fallback_review_required",
+        "handoff_current_lane": "exact_source_url_review",
+        "handoff_current_review_section": "source_discovery_next_focus_exact_url_review_queue",
+        "handoff_step_count": 3,
+        "handoff_first_step_lane": "exact_source_url_review",
+        "handoff_first_step_status": "manual_exact_source_url_search_required",
+        "handoff_first_step_rows": 20
       },
       {
         "pillar": "animation_categories",
@@ -15762,7 +18140,125 @@
         "visual_palette_ordered": true,
         "app_animation_visuals_covered": true,
         "next_safe_phase": "confirm_canonical_animation_category_normalization",
-        "public_report": "data/animation_category_coverage_audit_public.json"
+        "public_report": "data/animation_category_coverage_audit_public.json",
+        "next_execution_summary": {
+          "lane_count": 3,
+          "open_rows": 108,
+          "next_batch_rows": 44,
+          "next_safe_phase": "canonical_category_normalization_review",
+          "auto_apply_enabled": false,
+          "manual_evidence_required": true
+        },
+        "next_execution_lane_count": 3,
+        "next_execution_open_rows": 108,
+        "next_execution_next_batch_rows": 44,
+        "first_next_execution_lane": "canonical_category_normalization_review",
+        "first_next_execution_status": "next",
+        "first_next_execution_rows": 36,
+        "first_next_execution_public_report": "data/animation_category_coverage_audit_public.json",
+        "operator_handoff": {
+          "status": "normalization_review_required",
+          "current_lane": "canonical_category_normalization_review",
+          "current_review_section": "next_normalization_review_batch",
+          "queued_catalog_rows": 36,
+          "queued_categories": 4,
+          "normalization_review_rows": 36,
+          "folder_visual_coverage_ready": true,
+          "app_folder_palette_sorted_by_family": true,
+          "work_order_lanes": [
+            "canonical_category_normalization_review"
+          ],
+          "handoff_steps": [
+            {
+              "step": 1,
+              "lane": "canonical_category_normalization_review",
+              "status": "manual_canonical_category_normalization_required",
+              "next_batch_rows": 4,
+              "affected_catalog_rows": 36,
+              "review_section": "next_normalization_review_batch",
+              "write_template_section": "normalization_confirmation_template.rows",
+              "first_review_id": "animation-category-normalization-001",
+              "first_source_category": "클리어파일",
+              "first_target_category": "문구",
+              "required_before_write": [
+                "manual_confirmed=true",
+                "sample names fit the target canonical category",
+                "source category is preserved as sub_series when useful for search",
+                "manual note explains the category semantics"
+              ],
+              "unblocks": "normalization_import_template",
+              "auto_apply_enabled": false
+            },
+            {
+              "step": 2,
+              "lane": "folder_visual_token_verification",
+              "status": "ready",
+              "next_batch_rows": 4,
+              "affected_catalog_rows": 36,
+              "review_section": "target_visual_token_summary.tokens",
+              "write_template_section": "folder_color_group/folder_icon_key",
+              "color_groups": [
+                [
+                  "violet",
+                  3
+                ],
+                [
+                  "green",
+                  1
+                ]
+              ],
+              "primary_icon_keys": [
+                [
+                  "sticky_note",
+                  3
+                ],
+                [
+                  "inventory",
+                  1
+                ]
+              ],
+              "required_before_write": [
+                "folder color exists in app folder palette",
+                "folder icon key exists in app icon options",
+                "palette remains sorted by similar color families"
+              ],
+              "unblocks": "app_folder_visual_consistency",
+              "auto_apply_enabled": false
+            },
+            {
+              "step": 3,
+              "lane": "normalization_import_template",
+              "status": "waiting_for_manual_confirmations",
+              "next_batch_rows": 4,
+              "affected_catalog_rows": 36,
+              "review_section": "normalization_confirmation_template",
+              "write_template_section": "server/animation_category_confirmed_rows.json",
+              "import_tool": "tools/import_confirmed_animation_category_rows.py",
+              "required_before_write": [
+                "confirmed rows copied to confirmed queue",
+                "manual_confirmed=true",
+                "manual_decision is allowed for the template",
+                "folder color and icon values are preserved"
+              ],
+              "unblocks": "canonical_category_normalization_manually_confirmed",
+              "auto_apply_enabled": false
+            }
+          ],
+          "safety_policy": {
+            "auto_apply_enabled": false,
+            "auto_create_folders": false,
+            "require_manual_category_confirmation": true,
+            "preserve_folder_visual_tokens": true
+          }
+        },
+        "handoff_public_report": "data/animation_category_action_queue_public.json",
+        "handoff_status": "normalization_review_required",
+        "handoff_current_lane": "canonical_category_normalization_review",
+        "handoff_current_review_section": "next_normalization_review_batch",
+        "handoff_step_count": 3,
+        "handoff_first_step_lane": "canonical_category_normalization_review",
+        "handoff_first_step_status": "manual_canonical_category_normalization_required",
+        "handoff_first_step_rows": 4
       },
       {
         "pillar": "ichiban_kuji_history",
@@ -15804,7 +18300,104 @@
         "numbered_variant_policy_ready": true,
         "last_one_and_double_chance_zero_price_protected": true,
         "next_safe_phase": "confirm_campaign_prices_then_review_reissue_identity",
-        "public_report": "data/ichiban_kuji_historical_roadmap_public.json"
+        "public_report": "data/ichiban_kuji_historical_roadmap_public.json",
+        "next_execution_summary": {
+          "lane_count": 4,
+          "open_rows": 125,
+          "queued_rows": 125,
+          "next_batch_rows": 81,
+          "next_safe_phase": "confirm_ichiban_campaign_metadata",
+          "auto_apply_enabled": false,
+          "manual_official_confirmation_required": true
+        },
+        "next_execution_lane_count": 4,
+        "next_execution_open_rows": 125,
+        "next_execution_next_batch_rows": 81,
+        "first_next_execution_lane": "campaign_metadata_confirmation",
+        "first_next_execution_status": "next",
+        "first_next_execution_rows": 44,
+        "first_next_execution_public_report": "data/ichiban_kuji_historical_roadmap_public.json",
+        "operator_handoff": {
+          "status": "manual_review_required",
+          "current_lane": "campaign_metadata_confirmation",
+          "current_review_section": "ichiban_kuji_metadata_action_queue",
+          "manual_metadata_campaigns": 44,
+          "missing_price_campaign_groups": 41,
+          "reissue_review_groups": 20,
+          "zero_price_policy_ready": true,
+          "numbered_variant_policy_ready": true,
+          "last_one_and_double_chance_zero_price_protected": true,
+          "handoff_steps": [
+            {
+              "step": 1,
+              "lane": "campaign_metadata_confirmation",
+              "status": "manual_official_campaign_metadata_required",
+              "next_batch_rows": 20,
+              "open_rows": 44,
+              "review_section": "ichiban_kuji_metadata_action_queue",
+              "write_template_section": "campaign_field_confirmation_template",
+              "first_primary_review_url": "https://1kuji.com/products/jujutsu-o",
+              "required_before_write": [
+                "manual_confirmed=true",
+                "official campaign title/source URL is confirmed",
+                "release date is copied from official campaign evidence",
+                "campaign-level draw price is confirmed for non-exception rows"
+              ],
+              "unblocks": "campaign_price_confirmation",
+              "auto_apply_enabled": false
+            },
+            {
+              "step": 2,
+              "lane": "campaign_price_confirmation",
+              "status": "manual_official_price_review_required",
+              "next_batch_rows": 41,
+              "open_rows": 41,
+              "review_section": "ichiban_kuji_metadata_action_queue",
+              "write_template_section": "official_price_jpy field patches",
+              "required_before_write": [
+                "official draw price is confirmed from campaign page",
+                "Last One and Double Chance prize exceptions remain 0 JPY",
+                "non-exception missing prices are filled before reissue decisions"
+              ],
+              "unblocks": "reissue_identity_review",
+              "auto_apply_enabled": false
+            },
+            {
+              "step": 3,
+              "lane": "reissue_identity_review",
+              "status": "manual_reissue_or_duplicate_decision_required",
+              "next_batch_rows": 20,
+              "open_rows": 20,
+              "review_section": "ichiban_kuji_reissue_decision_template",
+              "write_template_section": "decision_template",
+              "required_before_write": [
+                "campaign title, release period, and lineup are compared",
+                "release/campaign name, prize rank, prize name, and variant are preserved",
+                "decision is keep separate for reissue/campaign variants or keep/drop for exact duplicates",
+                "auto merge/delete stays disabled until manual evidence is recorded"
+              ],
+              "unblocks": "safe_dedupe_keep_drop_review",
+              "auto_merge_enabled": false,
+              "auto_delete_enabled": false
+            }
+          ],
+          "safety_policy": {
+            "auto_apply_enabled": false,
+            "auto_merge_enabled": false,
+            "auto_delete_enabled": false,
+            "require_official_campaign_evidence": true,
+            "preserve_reissue_and_variant_rows_until_confirmed": true,
+            "last_one_and_double_chance_price_jpy": 0
+          }
+        },
+        "handoff_public_report": "data/ichiban_kuji_historical_roadmap_public.json",
+        "handoff_status": "manual_review_required",
+        "handoff_current_lane": "campaign_metadata_confirmation",
+        "handoff_current_review_section": "ichiban_kuji_metadata_action_queue",
+        "handoff_step_count": 3,
+        "handoff_first_step_lane": "campaign_metadata_confirmation",
+        "handoff_first_step_status": "manual_official_campaign_metadata_required",
+        "handoff_first_step_rows": 20
       }
     ],
     "blocked_reasons": [
@@ -15843,6 +18436,13 @@
         "next_safe_phase": "verify_ichiban_campaign_pages_before_dedupe",
         "next_queue_lane": "same_barcode_fast_review",
         "next_queue_rows": 10,
+        "next_execution_lane_count": 5,
+        "next_execution_open_rows": 161,
+        "next_execution_next_batch_rows": 82,
+        "first_next_execution_lane": "same_barcode_fast_review",
+        "first_next_execution_status": "next",
+        "first_next_execution_rows": 42,
+        "first_next_execution_public_report": "data/catalog_deduplication_action_queue_public.json",
         "public_report": "data/catalog_deduplication_action_queue_public.json"
       },
       {
@@ -15854,6 +18454,13 @@
         "next_safe_phase": "replace_generic_source_urls",
         "next_queue_lane": "replace_generic_source_urls",
         "next_queue_rows": 50,
+        "next_execution_lane_count": 0,
+        "next_execution_open_rows": 0,
+        "next_execution_next_batch_rows": 0,
+        "first_next_execution_lane": null,
+        "first_next_execution_status": null,
+        "first_next_execution_rows": 0,
+        "first_next_execution_public_report": "data/catalog_missing_image_actionability_public.json",
         "public_report": "data/catalog_missing_image_actionability_public.json"
       },
       {
@@ -15865,6 +18472,13 @@
         "next_safe_phase": "review_candidate_source_urls",
         "next_queue_lane": "candidate_review_required",
         "next_queue_rows": 3,
+        "next_execution_lane_count": 5,
+        "next_execution_open_rows": 813,
+        "next_execution_next_batch_rows": 166,
+        "first_next_execution_lane": "exact_source_url_review",
+        "first_next_execution_status": "next",
+        "first_next_execution_rows": 20,
+        "first_next_execution_public_report": "data/source_discovery_next_focus_exact_url_review_queue_public.json",
         "public_report": "data/catalog_image_source_url_confirmed_template_public.json"
       },
       {
@@ -15876,6 +18490,13 @@
         "next_safe_phase": "confirm_canonical_animation_category_normalization",
         "next_queue_lane": "canonical_category_normalization_review",
         "next_queue_rows": 36,
+        "next_execution_lane_count": 3,
+        "next_execution_open_rows": 108,
+        "next_execution_next_batch_rows": 44,
+        "first_next_execution_lane": "canonical_category_normalization_review",
+        "first_next_execution_status": "next",
+        "first_next_execution_rows": 36,
+        "first_next_execution_public_report": "data/animation_category_coverage_audit_public.json",
         "public_report": "data/animation_category_coverage_audit_public.json"
       },
       {
@@ -15887,6 +18508,13 @@
         "next_safe_phase": "confirm_campaign_prices_then_review_reissue_identity",
         "next_queue_lane": null,
         "next_queue_rows": 0,
+        "next_execution_lane_count": 4,
+        "next_execution_open_rows": 125,
+        "next_execution_next_batch_rows": 81,
+        "first_next_execution_lane": "campaign_metadata_confirmation",
+        "first_next_execution_status": "next",
+        "first_next_execution_rows": 44,
+        "first_next_execution_public_report": "data/ichiban_kuji_historical_roadmap_public.json",
         "public_report": "data/ichiban_kuji_historical_roadmap_public.json"
       }
     ],
@@ -15899,6 +18527,13 @@
       "next_safe_phase": "verify_ichiban_campaign_pages_before_dedupe",
       "next_queue_lane": "same_barcode_fast_review",
       "next_queue_rows": 10,
+      "next_execution_lane_count": 5,
+      "next_execution_open_rows": 161,
+      "next_execution_next_batch_rows": 82,
+      "first_next_execution_lane": "same_barcode_fast_review",
+      "first_next_execution_status": "next",
+      "first_next_execution_rows": 42,
+      "first_next_execution_public_report": "data/catalog_deduplication_action_queue_public.json",
       "public_report": "data/catalog_deduplication_action_queue_public.json"
     },
     "auto_apply_enabled": false,
