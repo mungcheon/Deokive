@@ -16873,7 +16873,23 @@
         "next_queue_lane": "same_barcode_fast_review",
         "next_queue_rows": 10,
         "next_safe_phase": "verify_ichiban_campaign_pages_before_dedupe",
-        "public_report": "data/catalog_deduplication_action_queue_public.json"
+        "public_report": "data/catalog_deduplication_action_queue_public.json",
+        "next_execution_summary": {
+          "lane_count": 5,
+          "open_rows": 161,
+          "next_batch_rows": 82,
+          "next_safe_phase": "same_barcode_fast_review",
+          "auto_merge_enabled": false,
+          "auto_delete_enabled": false,
+          "manual_evidence_required": true
+        },
+        "next_execution_lane_count": 5,
+        "next_execution_open_rows": 161,
+        "next_execution_next_batch_rows": 82,
+        "first_next_execution_lane": "same_barcode_fast_review",
+        "first_next_execution_status": "next",
+        "first_next_execution_rows": 42,
+        "first_next_execution_public_report": "data/catalog_deduplication_action_queue_public.json"
       },
       {
         "pillar": "missing_images",
@@ -16946,7 +16962,22 @@
           }
         ],
         "next_safe_phase": "replace_generic_source_urls",
-        "public_report": "data/catalog_missing_image_actionability_public.json"
+        "public_report": "data/catalog_missing_image_actionability_public.json",
+        "next_execution_summary": {
+          "lane_count": 4,
+          "open_rows": 745,
+          "next_batch_rows": 75,
+          "next_safe_phase": "replace_generic_source_urls",
+          "auto_apply_enabled": false,
+          "manual_evidence_required": true
+        },
+        "next_execution_lane_count": 4,
+        "next_execution_open_rows": 745,
+        "next_execution_next_batch_rows": 75,
+        "first_next_execution_lane": "replace_generic_source_urls",
+        "first_next_execution_status": "next",
+        "first_next_execution_rows": 50,
+        "first_next_execution_public_report": "data/catalog_missing_image_actionability_public.json"
       },
       {
         "pillar": "source_url_updates",
@@ -16998,7 +17029,22 @@
           "source_url_candidates_require_manual_review"
         ],
         "next_safe_phase": "review_candidate_source_urls",
-        "public_report": "data/catalog_image_source_url_confirmed_template_public.json"
+        "public_report": "data/catalog_image_source_url_confirmed_template_public.json",
+        "next_execution_summary": {
+          "lane_count": 5,
+          "open_rows": 813,
+          "next_batch_rows": 166,
+          "next_safe_phase": "exact_source_url_review",
+          "auto_apply_enabled": false,
+          "manual_evidence_required": true
+        },
+        "next_execution_lane_count": 5,
+        "next_execution_open_rows": 813,
+        "next_execution_next_batch_rows": 166,
+        "first_next_execution_lane": "exact_source_url_review",
+        "first_next_execution_status": "next",
+        "first_next_execution_rows": 20,
+        "first_next_execution_public_report": "data/source_discovery_next_focus_exact_url_review_queue_public.json"
       },
       {
         "pillar": "animation_categories",
@@ -17027,7 +17073,22 @@
         "visual_palette_ordered": true,
         "app_animation_visuals_covered": true,
         "next_safe_phase": "confirm_canonical_animation_category_normalization",
-        "public_report": "data/animation_category_coverage_audit_public.json"
+        "public_report": "data/animation_category_coverage_audit_public.json",
+        "next_execution_summary": {
+          "lane_count": 3,
+          "open_rows": 108,
+          "next_batch_rows": 44,
+          "next_safe_phase": "canonical_category_normalization_review",
+          "auto_apply_enabled": false,
+          "manual_evidence_required": true
+        },
+        "next_execution_lane_count": 3,
+        "next_execution_open_rows": 108,
+        "next_execution_next_batch_rows": 44,
+        "first_next_execution_lane": "canonical_category_normalization_review",
+        "first_next_execution_status": "next",
+        "first_next_execution_rows": 36,
+        "first_next_execution_public_report": "data/animation_category_coverage_audit_public.json"
       },
       {
         "pillar": "ichiban_kuji_history",
@@ -17069,7 +17130,23 @@
         "numbered_variant_policy_ready": true,
         "last_one_and_double_chance_zero_price_protected": true,
         "next_safe_phase": "confirm_campaign_prices_then_review_reissue_identity",
-        "public_report": "data/ichiban_kuji_historical_roadmap_public.json"
+        "public_report": "data/ichiban_kuji_historical_roadmap_public.json",
+        "next_execution_summary": {
+          "lane_count": 4,
+          "open_rows": 125,
+          "queued_rows": 125,
+          "next_batch_rows": 81,
+          "next_safe_phase": "confirm_ichiban_campaign_metadata",
+          "auto_apply_enabled": false,
+          "manual_official_confirmation_required": true
+        },
+        "next_execution_lane_count": 4,
+        "next_execution_open_rows": 125,
+        "next_execution_next_batch_rows": 81,
+        "first_next_execution_lane": "campaign_metadata_confirmation",
+        "first_next_execution_status": "next",
+        "first_next_execution_rows": 44,
+        "first_next_execution_public_report": "data/ichiban_kuji_historical_roadmap_public.json"
       }
     ],
     "blocked_reasons": [
@@ -17108,6 +17185,13 @@
         "next_safe_phase": "verify_ichiban_campaign_pages_before_dedupe",
         "next_queue_lane": "same_barcode_fast_review",
         "next_queue_rows": 10,
+        "next_execution_lane_count": 5,
+        "next_execution_open_rows": 161,
+        "next_execution_next_batch_rows": 82,
+        "first_next_execution_lane": "same_barcode_fast_review",
+        "first_next_execution_status": "next",
+        "first_next_execution_rows": 42,
+        "first_next_execution_public_report": "data/catalog_deduplication_action_queue_public.json",
         "public_report": "data/catalog_deduplication_action_queue_public.json"
       },
       {
@@ -17119,6 +17203,13 @@
         "next_safe_phase": "replace_generic_source_urls",
         "next_queue_lane": "replace_generic_source_urls",
         "next_queue_rows": 50,
+        "next_execution_lane_count": 4,
+        "next_execution_open_rows": 745,
+        "next_execution_next_batch_rows": 75,
+        "first_next_execution_lane": "replace_generic_source_urls",
+        "first_next_execution_status": "next",
+        "first_next_execution_rows": 50,
+        "first_next_execution_public_report": "data/catalog_missing_image_actionability_public.json",
         "public_report": "data/catalog_missing_image_actionability_public.json"
       },
       {
@@ -17130,6 +17221,13 @@
         "next_safe_phase": "review_candidate_source_urls",
         "next_queue_lane": "candidate_review_required",
         "next_queue_rows": 3,
+        "next_execution_lane_count": 5,
+        "next_execution_open_rows": 813,
+        "next_execution_next_batch_rows": 166,
+        "first_next_execution_lane": "exact_source_url_review",
+        "first_next_execution_status": "next",
+        "first_next_execution_rows": 20,
+        "first_next_execution_public_report": "data/source_discovery_next_focus_exact_url_review_queue_public.json",
         "public_report": "data/catalog_image_source_url_confirmed_template_public.json"
       },
       {
@@ -17141,6 +17239,13 @@
         "next_safe_phase": "confirm_canonical_animation_category_normalization",
         "next_queue_lane": "canonical_category_normalization_review",
         "next_queue_rows": 36,
+        "next_execution_lane_count": 3,
+        "next_execution_open_rows": 108,
+        "next_execution_next_batch_rows": 44,
+        "first_next_execution_lane": "canonical_category_normalization_review",
+        "first_next_execution_status": "next",
+        "first_next_execution_rows": 36,
+        "first_next_execution_public_report": "data/animation_category_coverage_audit_public.json",
         "public_report": "data/animation_category_coverage_audit_public.json"
       },
       {
@@ -17152,6 +17257,13 @@
         "next_safe_phase": "confirm_campaign_prices_then_review_reissue_identity",
         "next_queue_lane": null,
         "next_queue_rows": 0,
+        "next_execution_lane_count": 4,
+        "next_execution_open_rows": 125,
+        "next_execution_next_batch_rows": 81,
+        "first_next_execution_lane": "campaign_metadata_confirmation",
+        "first_next_execution_status": "next",
+        "first_next_execution_rows": 44,
+        "first_next_execution_public_report": "data/ichiban_kuji_historical_roadmap_public.json",
         "public_report": "data/ichiban_kuji_historical_roadmap_public.json"
       }
     ],
@@ -17164,6 +17276,13 @@
       "next_safe_phase": "verify_ichiban_campaign_pages_before_dedupe",
       "next_queue_lane": "same_barcode_fast_review",
       "next_queue_rows": 10,
+      "next_execution_lane_count": 5,
+      "next_execution_open_rows": 161,
+      "next_execution_next_batch_rows": 82,
+      "first_next_execution_lane": "same_barcode_fast_review",
+      "first_next_execution_status": "next",
+      "first_next_execution_rows": 42,
+      "first_next_execution_public_report": "data/catalog_deduplication_action_queue_public.json",
       "public_report": "data/catalog_deduplication_action_queue_public.json"
     },
     "auto_apply_enabled": false,

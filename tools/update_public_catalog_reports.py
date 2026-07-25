@@ -577,6 +577,17 @@ def catalog_goal_readiness_dashboard(goal_gate: dict[str, Any]) -> dict[str, Any
             "next_safe_phase": row.get("next_safe_phase"),
             "next_queue_lane": row.get("next_queue_lane"),
             "next_queue_rows": _int(row, "next_queue_rows"),
+            "next_execution_lane_count": _int(row, "next_execution_lane_count"),
+            "next_execution_open_rows": _int(row, "next_execution_open_rows"),
+            "next_execution_next_batch_rows": _int(
+                row, "next_execution_next_batch_rows"
+            ),
+            "first_next_execution_lane": row.get("first_next_execution_lane"),
+            "first_next_execution_status": row.get("first_next_execution_status"),
+            "first_next_execution_rows": _int(row, "first_next_execution_rows"),
+            "first_next_execution_public_report": row.get(
+                "first_next_execution_public_report"
+            ),
             "public_report": row.get("public_report"),
         }
         for row in normalized_pillars
@@ -12668,6 +12679,39 @@ def update_reports(write: bool) -> dict[str, Any]:
                 "public_report": f"data/{ICHIIBAN_KUJI_HISTORICAL_ROADMAP.name}",
             },
         ]
+        next_execution_sources = {
+            "dedupe": target.get("deduplication_action_queue", {}),
+            "missing_images": target.get("image_backlog", {}),
+            "source_url_updates": target.get("source_discovery_completion_roadmap", {}),
+            "animation_categories": target.get("animation_category_action_queue", {}),
+            "ichiban_kuji_history": target.get("ichiban_kuji_historical_roadmap", {}),
+        }
+        for pillar in goal_pillars:
+            source = next_execution_sources.get(str(pillar.get("pillar") or ""), {})
+            if not isinstance(source, dict):
+                continue
+            summary = source.get("next_execution_summary", {})
+            lanes = source.get("next_execution_lanes", [])
+            if not isinstance(summary, dict):
+                summary = {}
+            if not isinstance(lanes, list):
+                lanes = []
+            first_lane = next((lane for lane in lanes if isinstance(lane, dict)), {})
+            pillar["next_execution_summary"] = summary
+            pillar["next_execution_lane_count"] = int(summary.get("lane_count") or 0)
+            pillar["next_execution_open_rows"] = int(summary.get("open_rows") or 0)
+            pillar["next_execution_next_batch_rows"] = int(
+                summary.get("next_batch_rows") or 0
+            )
+            pillar["first_next_execution_lane"] = first_lane.get("lane")
+            pillar["first_next_execution_status"] = first_lane.get("status")
+            pillar["first_next_execution_rows"] = int(
+                first_lane.get("open_rows") or 0
+            )
+            pillar["first_next_execution_public_report"] = first_lane.get(
+                "public_report",
+                pillar.get("public_report"),
+            )
         target["catalog_goal_progress_gate"] = {
             "status": "manual_review_required",
             "pillar_count": len(goal_pillars),
@@ -12697,12 +12741,13 @@ def update_reports(write: bool) -> dict[str, Any]:
             "auto_merge_enabled": False,
             "auto_delete_enabled": False,
         }
-        expose_catalog_goal_open_queues(
-            operations,
-            agent_work_queue,
-            execution_plan,
-            target,
-        )
+        if target is quality:
+            expose_catalog_goal_open_queues(
+                operations,
+                agent_work_queue,
+                execution_plan,
+                target,
+            )
 
     consistency_findings = validate_report_consistency(
         rows,

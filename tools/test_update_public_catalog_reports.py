@@ -2048,6 +2048,14 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(pillars["dedupe"]["next_queue_lane"], "same_barcode_fast_review")
         self.assertEqual(pillars["dedupe"]["next_queue_rows"], 10)
+        self.assertEqual(pillars["dedupe"]["next_execution_lane_count"], 5)
+        self.assertEqual(pillars["dedupe"]["next_execution_open_rows"], 161)
+        self.assertEqual(pillars["dedupe"]["next_execution_next_batch_rows"], 82)
+        self.assertEqual(
+            pillars["dedupe"]["first_next_execution_lane"],
+            "same_barcode_fast_review",
+        )
+        self.assertEqual(pillars["dedupe"]["first_next_execution_rows"], 42)
         self.assertEqual(pillars["missing_images"]["open_rows"], 745)
         self.assertEqual(pillars["missing_images"]["queued_rows"], 745)
         self.assertEqual(pillars["missing_images"]["unqueued_rows"], 0)
@@ -2057,6 +2065,12 @@ class PublicCatalogReportTests(unittest.TestCase):
             "replace_generic_source_urls",
         )
         self.assertEqual(pillars["missing_images"]["next_queue_rows"], 50)
+        self.assertEqual(pillars["missing_images"]["next_execution_lane_count"], 4)
+        self.assertEqual(pillars["missing_images"]["next_execution_open_rows"], 745)
+        self.assertEqual(
+            pillars["missing_images"]["first_next_execution_lane"],
+            "replace_generic_source_urls",
+        )
         self.assertEqual(pillars["missing_images"]["execution_queue_count"], 5)
         self.assertEqual(
             pillars["missing_images"]["manual_validation_required_rows"],
@@ -2287,6 +2301,13 @@ class PublicCatalogReportTests(unittest.TestCase):
                 "source_url_candidates_require_manual_review",
             ],
         )
+        self.assertEqual(pillars["source_url_updates"]["next_execution_lane_count"], 5)
+        self.assertEqual(pillars["source_url_updates"]["next_execution_open_rows"], 813)
+        self.assertEqual(
+            pillars["source_url_updates"]["first_next_execution_lane"],
+            "exact_source_url_review",
+        )
+        self.assertEqual(pillars["source_url_updates"]["first_next_execution_rows"], 20)
         self.assertEqual(pillars["animation_categories"]["manual_review_rows"], 36)
         self.assertEqual(pillars["animation_categories"]["queued_rows"], 36)
         self.assertEqual(pillars["animation_categories"]["unqueued_rows"], 0)
@@ -2383,6 +2404,13 @@ class PublicCatalogReportTests(unittest.TestCase):
             pillars["animation_categories"]["target_categories"],
             [["문구", 3], ["가방", 1]],
         )
+        self.assertEqual(pillars["animation_categories"]["next_execution_lane_count"], 3)
+        self.assertEqual(pillars["animation_categories"]["next_execution_open_rows"], 108)
+        self.assertEqual(
+            pillars["animation_categories"]["first_next_execution_lane"],
+            "canonical_category_normalization_review",
+        )
+        self.assertEqual(pillars["animation_categories"]["first_next_execution_rows"], 36)
         self.assertTrue(pillars["animation_categories"]["visual_palette_ordered"])
         self.assertTrue(
             pillars["animation_categories"]["app_animation_visuals_covered"]
@@ -2475,6 +2503,13 @@ class PublicCatalogReportTests(unittest.TestCase):
                 "last_one_and_double_chance_zero_price_protected"
             ]
         )
+        self.assertEqual(pillars["ichiban_kuji_history"]["next_execution_lane_count"], 4)
+        self.assertEqual(pillars["ichiban_kuji_history"]["next_execution_open_rows"], 125)
+        self.assertEqual(
+            pillars["ichiban_kuji_history"]["first_next_execution_lane"],
+            "campaign_metadata_confirmation",
+        )
+        self.assertEqual(pillars["ichiban_kuji_history"]["first_next_execution_rows"], 44)
         readiness_dashboard = quality["goal_readiness_dashboard"]
         self.assertEqual(readiness_dashboard["status"], "manual_review_required")
         self.assertTrue(readiness_dashboard["manual_review_required"])
@@ -2507,6 +2542,11 @@ class PublicCatalogReportTests(unittest.TestCase):
             "dedupe",
         )
         self.assertEqual(blocking_pillars["dedupe"]["manual_review_rows"], 48)
+        self.assertEqual(blocking_pillars["dedupe"]["next_execution_lane_count"], 5)
+        self.assertEqual(
+            blocking_pillars["dedupe"]["first_next_execution_lane"],
+            "same_barcode_fast_review",
+        )
         self.assertEqual(
             blocking_pillars["dedupe"]["next_safe_phase"],
             "verify_ichiban_campaign_pages_before_dedupe",
@@ -2516,8 +2556,20 @@ class PublicCatalogReportTests(unittest.TestCase):
             "replace_generic_source_urls",
         )
         self.assertEqual(
+            blocking_pillars["missing_images"]["next_execution_open_rows"],
+            745,
+        )
+        self.assertEqual(
             blocking_pillars["source_url_updates"]["next_queue_lane"],
             "candidate_review_required",
+        )
+        self.assertEqual(
+            blocking_pillars["source_url_updates"]["first_next_execution_lane"],
+            "exact_source_url_review",
+        )
+        self.assertEqual(
+            blocking_pillars["source_url_updates"]["first_next_execution_public_report"],
+            "data/source_discovery_next_focus_exact_url_review_queue_public.json",
         )
         operations = reports.load_json(reports.OPERATIONS_REPORT)
         agent_queue = reports.load_json(reports.AGENT_WORK_QUEUE)
