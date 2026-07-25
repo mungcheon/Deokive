@@ -332,6 +332,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/source_discovery_completion_roadmap_public.json", updated_files)
         self.assertIn("data/catalog_missing_image_actionability_public.json", updated_files)
         self.assertIn("data/catalog_deduplication_fast_review_public.json", updated_files)
+        self.assertIn("data/ichiban_kuji_metadata_review_batches_public.json", updated_files)
         self.assertIn("data/ichiban_kuji_metadata_fast_review_public.json", updated_files)
         self.assertIn("data/ichiban_kuji_prize_policy_audit_public.json", updated_files)
         self.assertIn("data/ichiban_kuji_prize_policy_issue_queue_public.json", updated_files)
@@ -1241,7 +1242,7 @@ class PublicCatalogReportTests(unittest.TestCase):
             reissue_decision_template[
                 "item_template_non_exception_missing_price_sample_rows"
             ],
-            16,
+            8,
         )
         self.assertEqual(
             reissue_decision_template["item_template_zero_price_exception_sample_rows"],
@@ -1361,7 +1362,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             reissue_blocking_dashboard["non_exception_missing_price_sample_rows"],
-            8,
+            4,
         )
         self.assertEqual(
             reissue_blocking_dashboard["zero_price_exception_sample_rows"],
@@ -1389,7 +1390,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             price_policy_reviews[0]["non_exception_missing_price_sample_rows"],
-            8,
+            4,
         )
         self.assertEqual(
             price_policy_reviews[0]["missing_regular_price_sample_rows_visible"],
@@ -1979,8 +1980,8 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(metadata_confirmation_template["template_rows"], 8)
         self.assertEqual(metadata_confirmation_template["campaign_rows"], 8)
-        self.assertEqual(metadata_confirmation_template["release_date_rows"], 2)
-        self.assertEqual(metadata_confirmation_template["official_price_jpy_rows"], 6)
+        self.assertEqual(metadata_confirmation_template["release_date_rows"], 1)
+        self.assertEqual(metadata_confirmation_template["official_price_jpy_rows"], 7)
         self.assertEqual(metadata_confirmation_template["manual_confirmed_rows"], 0)
         self.assertEqual(metadata_confirmation_template["ready_to_import_rows"], 0)
         self.assertEqual(metadata_confirmation_template["primary_review_url_rows"], 8)
@@ -1991,11 +1992,11 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             metadata_action["next_campaign_patch_review_batch_release_date_rows"],
-            2,
+            1,
         )
         self.assertEqual(
             metadata_action["next_campaign_patch_review_batch_price_rows"],
-            6,
+            7,
         )
         self.assertEqual(
             metadata_action[
@@ -2118,8 +2119,8 @@ class PublicCatalogReportTests(unittest.TestCase):
             {
                 "lane": "campaign_metadata_confirmation",
                 "status": "next",
-                "open_rows": 44,
-                "queued_rows": 44,
+                "open_rows": 41,
+                "queued_rows": 41,
                 "next_batch_rows": 20,
                 "next_action": "confirm official campaign title, release date, source URL, and campaign-level price metadata",
             },
@@ -2191,8 +2192,8 @@ class PublicCatalogReportTests(unittest.TestCase):
             ichiban_handoff["current_lane"],
             "campaign_metadata_confirmation",
         )
-        self.assertEqual(ichiban_handoff["manual_metadata_campaigns"], 44)
-        self.assertEqual(ichiban_handoff["missing_price_campaign_groups"], 41)
+        self.assertEqual(ichiban_handoff["manual_metadata_campaigns"], 41)
+        self.assertEqual(ichiban_handoff["missing_price_campaign_groups"], 40)
         self.assertEqual(ichiban_handoff["reissue_review_groups"], 20)
         self.assertTrue(
             ichiban_handoff["last_one_and_double_chance_zero_price_protected"]
@@ -2225,7 +2226,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(goal_gate["pillar_count"], 5)
         self.assertEqual(goal_gate["manual_review_pillar_count"], 5)
         self.assertEqual(goal_gate["auto_apply_ready_rows"], 0)
-        self.assertEqual(goal_gate["manual_review_rows"], 943)
+        self.assertEqual(goal_gate["manual_review_rows"], 940)
         self.assertEqual(goal_gate["next_safe_phase"], "review_candidate_source_urls")
         pillars = {row["pillar"]: row for row in goal_gate["pillars"]}
         self.assertEqual(
@@ -2741,14 +2742,14 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertTrue(
             pillars["animation_categories"]["app_animation_visuals_covered"]
         )
-        self.assertEqual(pillars["ichiban_kuji_history"]["manual_review_rows"], 64)
-        self.assertEqual(pillars["ichiban_kuji_history"]["queued_rows"], 64)
+        self.assertEqual(pillars["ichiban_kuji_history"]["manual_review_rows"], 61)
+        self.assertEqual(pillars["ichiban_kuji_history"]["queued_rows"], 61)
         self.assertEqual(pillars["ichiban_kuji_history"]["unqueued_rows"], 0)
         self.assertEqual(pillars["ichiban_kuji_history"]["queue_coverage"], 1.0)
-        self.assertEqual(pillars["ichiban_kuji_history"]["metadata_campaigns"], 44)
+        self.assertEqual(pillars["ichiban_kuji_history"]["metadata_campaigns"], 41)
         self.assertEqual(
             pillars["ichiban_kuji_history"]["metadata_queued_campaigns"],
-            44,
+            41,
         )
         self.assertEqual(
             pillars["ichiban_kuji_history"]["metadata_unqueued_campaigns"],
@@ -2778,7 +2779,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             pillars["ichiban_kuji_history"]["metadata_next_queue_field_counts"],
-            [["official_price_jpy", 6], ["release_date", 2]],
+            [["official_price_jpy", 7], ["release_date", 1]],
         )
         self.assertEqual(
             pillars["ichiban_kuji_history"]["reissue_review_groups"],
@@ -2830,18 +2831,18 @@ class PublicCatalogReportTests(unittest.TestCase):
             ]
         )
         self.assertEqual(pillars["ichiban_kuji_history"]["next_execution_lane_count"], 4)
-        self.assertEqual(pillars["ichiban_kuji_history"]["next_execution_open_rows"], 125)
+        self.assertEqual(pillars["ichiban_kuji_history"]["next_execution_open_rows"], 121)
         self.assertEqual(
             pillars["ichiban_kuji_history"]["first_next_execution_lane"],
             "campaign_metadata_confirmation",
         )
-        self.assertEqual(pillars["ichiban_kuji_history"]["first_next_execution_rows"], 44)
+        self.assertEqual(pillars["ichiban_kuji_history"]["first_next_execution_rows"], 41)
         readiness_dashboard = quality["goal_readiness_dashboard"]
         self.assertEqual(readiness_dashboard["status"], "manual_review_required")
         self.assertTrue(readiness_dashboard["manual_review_required"])
         self.assertEqual(readiness_dashboard["pillar_count"], 5)
         self.assertEqual(readiness_dashboard["blocking_pillar_count"], 5)
-        self.assertEqual(readiness_dashboard["manual_review_rows"], 943)
+        self.assertEqual(readiness_dashboard["manual_review_rows"], 940)
         self.assertEqual(readiness_dashboard["auto_apply_ready_rows"], 0)
         self.assertEqual(
             readiness_dashboard["next_safe_phase"],
@@ -3045,13 +3046,13 @@ class PublicCatalogReportTests(unittest.TestCase):
         ichiban_history = reports.load_json(reports.ICHIIBAN_KUJI_HISTORY)
         self.assertEqual(
             ichiban_history["summary"]["official_price_jpy_review_queue_campaigns"],
-            41,
+            40,
         )
         self.assertEqual(
             ichiban_history["summary"][
                 "missing_official_price_jpy_campaign_groups"
             ],
-            41,
+            40,
         )
         self.assertTrue(
             ichiban_history["summary"][
@@ -3070,7 +3071,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             ichiban_history["summary"]["metadata_manual_review_campaigns"],
-            42,
+            41,
         )
         self.assertEqual(
             ichiban_history["summary"]["metadata_auto_apply_ready_campaigns"],
@@ -3104,7 +3105,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             roadmap["summary"]["official_price_jpy_review_queue_campaigns"],
-            41,
+            40,
         )
         self.assertTrue(
             roadmap["summary"][

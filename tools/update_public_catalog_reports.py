@@ -28,6 +28,7 @@ import build_ichiban_prize_policy_issue_queue_public
 import build_ichiban_prize_name_image_patch_candidates_public
 import build_ichiban_prize_name_image_review_public
 import build_ichiban_kuji_metadata_action_queue_public
+import build_ichiban_kuji_metadata_review_batches_public
 import build_ichiban_kuji_metadata_fast_review_public
 import build_ichiban_reissue_decision_template_public
 import build_ichiban_reissue_deduplication_summary_public
@@ -10924,9 +10925,16 @@ def update_reports(write: bool) -> dict[str, Any]:
     animation_action_queue["next_execution_lanes"] = animation_next_execution_lanes
     animation_action_queue["next_execution_summary"] = animation_next_execution_summary
     ichiban_kuji_history = build_ichiban_kuji_history_public(items)
-    ichiban_metadata_review_batches = load_json(
-        ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES,
-        {},
+    ichiban_metadata_review_batches = (
+        build_ichiban_kuji_metadata_review_batches_public.build_report(
+            ichiban_kuji_history,
+            [
+                row
+                for row in ichiban_kuji_history.get("campaign_metadata_review_queue", [])
+                if isinstance(row, dict)
+            ],
+            batch_size=8,
+        )
     )
     ichiban_metadata_action_queue = (
         build_ichiban_kuji_metadata_action_queue_public.build_report(
@@ -13542,6 +13550,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(ANIMATION_CATEGORY_SPLIT_REVIEW, animation_split_review)
         write_json(ANIMATION_CATEGORY_UNMATCHED_KEYWORD_REVIEW, animation_unmatched_keyword_review)
         write_json(ICHIIBAN_KUJI_HISTORY, ichiban_kuji_history)
+        write_json(ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES, ichiban_metadata_review_batches)
         write_json(ICHIIBAN_KUJI_METADATA_ACTION_QUEUE, ichiban_metadata_action_queue)
         write_json(ICHIIBAN_KUJI_METADATA_FAST_REVIEW, ichiban_metadata_fast_review)
         write_json(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW, ichiban_kuji_prize_name_image_review)
@@ -13691,6 +13700,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(ANIMATION_CATEGORY_SPLIT_REVIEW.relative_to(ROOT)),
             str(ANIMATION_CATEGORY_UNMATCHED_KEYWORD_REVIEW.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_HISTORY.relative_to(ROOT)),
+            str(ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_METADATA_FAST_REVIEW.relative_to(ROOT)),
             str(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW.relative_to(ROOT)),

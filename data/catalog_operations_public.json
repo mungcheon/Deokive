@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-25T06:43:36Z",
+  "generated_at": "2026-07-25T06:57:00Z",
   "summary": {
     "catalog_rows": 20347,
     "coverage": {
@@ -82,10 +82,10 @@
       "image_attachment_source_url_primary_review_url_rows": 50,
       "image_attachment_source_url_missing_primary_review_url_rows": 0,
       "image_attachment_local_download_ready_rows": 73,
-      "ichiban_metadata_action_campaigns": 44,
-      "ichiban_metadata_actionable_campaigns": 44,
+      "ichiban_metadata_action_campaigns": 41,
+      "ichiban_metadata_actionable_campaigns": 41,
       "ichiban_metadata_unqueued_action_campaigns": 0,
-      "ichiban_metadata_queued_catalog_item_rows": 381,
+      "ichiban_metadata_queued_catalog_item_rows": 350,
       "ichiban_metadata_next_campaign_patch_review_batch_rows": 8,
       "ichiban_metadata_next_campaign_patch_review_batch_template_rows": 8,
       "ichiban_metadata_next_campaign_patch_review_batch_primary_review_url_rows": 8,
@@ -111,13 +111,13 @@
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
       "ichiban_prize_name_image_patch_blocked_rows": 0,
       "catalog_goal_manual_review_pillars": 5,
-      "catalog_goal_manual_review_rows": 943,
+      "catalog_goal_manual_review_rows": 940,
       "catalog_goal_auto_apply_ready_rows": 0,
       "catalog_goal_dedupe_manual_review_rows": 48,
       "catalog_goal_missing_image_rows": 745,
       "catalog_goal_source_url_update_rows": 50,
       "catalog_goal_animation_category_rows": 36,
-      "catalog_goal_ichiban_manual_review_rows": 64,
+      "catalog_goal_ichiban_manual_review_rows": 61,
       "catalog_goal_next_handoff_pillar": "dedupe",
       "catalog_goal_next_handoff_lane": "ichiban_reissue_campaign_review",
       "catalog_goal_next_handoff_first_step_rows": 4,
@@ -1976,11 +1976,11 @@
     {
       "workstream": "ichiban_kuji_metadata_action_queue",
       "status": "manual_review",
-      "open_rows": 44,
-      "actionable_campaigns": 44,
+      "open_rows": 41,
+      "actionable_campaigns": 41,
       "unqueued_action_campaigns": 0,
       "campaign_queue_coverage": 1.0,
-      "queued_catalog_item_rows": 381,
+      "queued_catalog_item_rows": 350,
       "primary_report": "data/ichiban_kuji_metadata_action_queue_public.json",
       "next_step": "fill_confirmed_ichiban_campaign_patch_templates",
       "next_campaign_patch_review_batch_rows": 8,
@@ -1988,11 +1988,11 @@
       "next_campaign_patch_review_batch_field_counts": [
         [
           "official_price_jpy",
-          6
+          7
         ],
         [
           "release_date",
-          2
+          1
         ]
       ],
       "work_order_lanes": [
@@ -10443,20 +10443,20 @@
       "priority": 53,
       "workstream": "ichiban_kuji_metadata_action_queue",
       "public_report": "data/ichiban_kuji_metadata_action_queue_public.json",
-      "actionable_campaigns": 44,
-      "queued_action_campaigns": 44,
+      "actionable_campaigns": 41,
+      "queued_action_campaigns": 41,
       "unqueued_action_campaigns": 0,
       "campaign_queue_coverage": 1.0,
-      "queued_catalog_item_rows": 381,
+      "queued_catalog_item_rows": 350,
       "action_batch_count": 6,
       "field_patch_template_counts": [
         [
           "official_price_jpy",
-          42
+          40
         ],
         [
           "release_date",
-          2
+          1
         ]
       ],
       "next_campaign_patch_review_batch_rows": 8,
@@ -10465,11 +10465,11 @@
       "next_campaign_patch_review_batch_field_counts": [
         [
           "official_price_jpy",
-          6
+          7
         ],
         [
           "release_date",
-          2
+          1
         ]
       ],
       "work_order_steps": 2,
@@ -10692,7 +10692,7 @@
     "manual_review_required": true,
     "pillar_count": 5,
     "blocking_pillar_count": 5,
-    "manual_review_rows": 943,
+    "manual_review_rows": 940,
     "auto_apply_ready_rows": 0,
     "next_safe_phase": "review_candidate_source_urls",
     "blocked_reasons": [
@@ -10807,17 +10807,17 @@
         "pillar": "ichiban_kuji_history",
         "label": "Organize historical Ichiban Kuji metadata and reissues",
         "status": "reissue_review_required",
-        "manual_review_rows": 64,
+        "manual_review_rows": 61,
         "auto_apply_ready_rows": 0,
         "next_safe_phase": "confirm_campaign_prices_then_review_reissue_identity",
         "next_queue_lane": null,
         "next_queue_rows": 0,
         "next_execution_lane_count": 4,
-        "next_execution_open_rows": 124,
+        "next_execution_open_rows": 121,
         "next_execution_next_batch_rows": 80,
         "first_next_execution_lane": "campaign_metadata_confirmation",
         "first_next_execution_status": "next",
-        "first_next_execution_rows": 44,
+        "first_next_execution_rows": 41,
         "first_next_execution_public_report": "data/ichiban_kuji_historical_roadmap_public.json",
         "handoff_status": "manual_review_required",
         "handoff_current_lane": "campaign_metadata_confirmation",
