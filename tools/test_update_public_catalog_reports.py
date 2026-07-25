@@ -5755,6 +5755,16 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertTrue(
             ichiban_reissue_dedupe_next_action.get("campaign_url_comparison_preview")
         )
+        self.assertIn(
+            "item_identity_summary",
+            ichiban_reissue_dedupe_next_action.get("campaign_url_comparison_preview")[0],
+        )
+        self.assertEqual(
+            ichiban_reissue_dedupe_next_action.get("campaign_url_comparison_preview")[0][
+                "item_identity_summary"
+            ].get("item_work_order_count"),
+            1,
+        )
         self.assertEqual(
             ichiban_reissue_dedupe_next_action.get("decision_template_rows"),
             dedupe_action_summary.get("ichiban_reissue_decision_template_rows"),
@@ -5935,6 +5945,20 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertTrue(
             all(item.get("source_url") for item in ichiban_reissue_lane_batch["sample_items"])
+        )
+        self.assertIn(
+            "item_identity_summary",
+            ichiban_reissue_lane_batch.get("review_summary", {}),
+        )
+        self.assertIn(
+            "item_identity_summary",
+            ichiban_reissue_lane_batch["sample_items"][0],
+        )
+        self.assertEqual(
+            ichiban_reissue_lane_batch.get("review_summary", {})
+            .get("item_identity_summary", {})
+            .get("item_work_order_count"),
+            1,
         )
         self.assertEqual(
             open_queues.get("ichiban_metadata_action_campaigns"),

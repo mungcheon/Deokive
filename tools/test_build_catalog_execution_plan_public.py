@@ -505,7 +505,19 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                         "explicit_manual_keep_drop_confirmation_required"
                     ],
                     "next_safe_phase": "verify_ichiban_campaign_pages_before_dedupe",
-                }
+                },
+                "ichiban_reissue_work_order": [
+                    {
+                        "work_order_id": "ichiban-reissue-dedupe-001",
+                        "normalized_name": "一番くじ Sample - A賞 Figure",
+                        "item_identity_summary": {
+                            "item_work_order_count": 1,
+                            "catalog_row_count": 2,
+                            "rows_missing_image_url": 2,
+                            "rows_missing_official_price_jpy": 0,
+                        },
+                    }
+                ],
             },
             "ichiban_kuji_reissue_decision_template_public.json": {
                 "summary": {
@@ -1421,6 +1433,12 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "ichiban_reissue_next_campaign_review_batch"
                 ]
             ),
+            2,
+        )
+        self.assertEqual(
+            ichiban_reissue_dedupe_action["evidence"][
+                "ichiban_reissue_item_identity_summary_preview"
+            ][0]["item_identity_summary"]["rows_missing_image_url"],
             2,
         )
         self.assertEqual(

@@ -350,6 +350,13 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
             report["ichiban_reissue_review_lane"][0]["merge_blockers"],
         )
         identity_summary = report["ichiban_reissue_work_order"][0]["prize_identity_summary"]
+        item_identity_summary = report["ichiban_reissue_work_order"][0]["item_identity_summary"]
+        self.assertEqual(item_identity_summary["item_work_order_count"], 1)
+        self.assertEqual(item_identity_summary["catalog_row_count"], 2)
+        self.assertEqual(item_identity_summary["identity_label_count"], 1)
+        self.assertEqual(item_identity_summary["rows_missing_image_url"], 2)
+        self.assertEqual(item_identity_summary["official_price_jpy_values"], [0])
+        self.assertTrue(item_identity_summary["zero_price_exception_policy_pass"])
         self.assertEqual(identity_summary["prize_labels"], ["ラストワン賞"])
         self.assertEqual(identity_summary["campaign_titles"], ["一番くじ Sample"])
         self.assertEqual(identity_summary["prize_ranks"], ["ラストワン賞"])

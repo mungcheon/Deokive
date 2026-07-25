@@ -1473,6 +1473,15 @@ def _build_plan(load_report) -> dict[str, Any]:
                     )
                     if isinstance(row, dict)
                 ][:4],
+                "ichiban_reissue_item_identity_summary_preview": [
+                    {
+                        "work_order_id": row.get("work_order_id"),
+                        "normalized_name": row.get("normalized_name"),
+                        "item_identity_summary": row.get("item_identity_summary"),
+                    }
+                    for row in dedupe_action_queue.get("ichiban_reissue_work_order", [])
+                    if isinstance(row, dict) and row.get("item_identity_summary")
+                ][:4],
                 "ichiban_reissue_protected_groups": _count(
                     dedupe_action_summary, "ichiban_reissue_protected_groups"
                 ),

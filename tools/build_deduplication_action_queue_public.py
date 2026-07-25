@@ -439,6 +439,21 @@ def ichiban_reissue_work_order(
         prize_identity = _prize_identity_summary(sample_rows)
         campaign_url_comparison = _campaign_url_comparison(source_urls)
         evidence_summary = _evidence_url_summary(source_urls)
+        zero_price_exception_policy = {
+            "last_one_or_double_chance_rows_must_be_zero_jpy": True,
+            "current_group_pass": prize_identity["zero_price_exception_policy_pass"],
+            "nonzero_exception_rows": prize_identity["zero_price_exception_nonzero_rows"],
+        }
+        item_identity_summary = _campaign_item_identity_summary(
+            [
+                {
+                    "catalog_indexes": catalog_indexes,
+                    "prize_identity_summary": prize_identity,
+                    "zero_price_exception_policy": zero_price_exception_policy,
+                    "sample_rows": sample_rows,
+                }
+            ]
+        )
         orders.append(
             {
                 "work_order_id": f"ichiban-reissue-dedupe-{rank:03d}",
@@ -478,11 +493,8 @@ def ichiban_reissue_work_order(
                     "protected_if_reissue": True,
                 },
                 "prize_identity_summary": prize_identity,
-                "zero_price_exception_policy": {
-                    "last_one_or_double_chance_rows_must_be_zero_jpy": True,
-                    "current_group_pass": prize_identity["zero_price_exception_policy_pass"],
-                    "nonzero_exception_rows": prize_identity["zero_price_exception_nonzero_rows"],
-                },
+                "zero_price_exception_policy": zero_price_exception_policy,
+                "item_identity_summary": item_identity_summary,
                 "sample_rows": sample_rows,
                 "merge_blockers": ["ichiban_reissue_manual_confirmation_required"],
                 "auto_merge_enabled": False,

@@ -426,6 +426,7 @@ def build() -> dict[str, Any]:
                     "work_order_id": row.get("work_order_id"),
                     "normalized_name": row.get("normalized_name"),
                     "campaign_url_comparison": row.get("campaign_url_comparison"),
+                    "item_identity_summary": row.get("item_identity_summary"),
                 }
                 for row in _top(public_deduplication_action_queue.get("ichiban_reissue_work_order"), 5)
             ],

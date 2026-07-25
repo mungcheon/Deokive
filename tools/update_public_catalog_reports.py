@@ -4896,6 +4896,7 @@ def build_operations_public(
                     "work_order_id": row.get("work_order_id"),
                     "normalized_name": row.get("normalized_name"),
                     "campaign_url_comparison": row.get("campaign_url_comparison"),
+                    "item_identity_summary": row.get("item_identity_summary"),
                 }
                 for row in dedupe_action_queue.get("ichiban_reissue_work_order", [])[:5]
                 if isinstance(row, dict)
@@ -7405,7 +7406,16 @@ def build_agent_work_queue_public(
     ichiban_reissue_review_lane = [
         lane for lane in dedupe_action_queue.get("ichiban_reissue_review_lane", []) if isinstance(lane, dict)
     ]
+    ichiban_reissue_work_order_by_name = {
+        str(order.get("normalized_name") or ""): order
+        for order in dedupe_action_queue.get("ichiban_reissue_work_order", [])
+        if isinstance(order, dict)
+    }
     for lane_index, lane in enumerate(ichiban_reissue_review_lane[:8], start=1):
+        matched_work_order = ichiban_reissue_work_order_by_name.get(
+            str(lane.get("normalized_name") or "")
+        ) or {}
+        item_identity_summary = matched_work_order.get("item_identity_summary") or {}
         add_batch(
             agent_id="agent-ichiban-reissue-dedupe",
             workstream="ichiban_kuji_reissue_dedupe_review",
@@ -7428,6 +7438,7 @@ def build_agent_work_queue_public(
                     **compact_sample(item),
                     "source_url": item.get("source_url"),
                     "campaign_url_comparison": lane.get("campaign_url_comparison"),
+                    "item_identity_summary": item_identity_summary,
                 }
                 for item in lane.get("sample_rows", [])
                 if isinstance(item, dict)
@@ -7444,6 +7455,7 @@ def build_agent_work_queue_public(
                 ),
                 "has_reissue_signal": bool(lane.get("has_reissue_signal")),
                 "reissue_signal_reasons": lane.get("reissue_signal_reasons") or [],
+                "item_identity_summary": item_identity_summary,
             },
         )
     campaign_first_review_plan = [

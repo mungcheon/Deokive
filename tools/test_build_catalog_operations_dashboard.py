@@ -709,6 +709,11 @@ class CatalogOperationsDashboardTests(unittest.TestCase):
                                     "campaign_slug_families": ["sample"],
                                     "likely_same_campaign_family_reissue": True,
                                 },
+                                "item_identity_summary": {
+                                    "item_work_order_count": 1,
+                                    "catalog_row_count": 2,
+                                    "rows_missing_image_url": 2,
+                                },
                             }
                         ],
                     },
@@ -1082,6 +1087,12 @@ class CatalogOperationsDashboardTests(unittest.TestCase):
                 "campaign_slug_families"
             ],
             ["sample"],
+        )
+        self.assertEqual(
+            public_dedupe_board["ichiban_campaign_url_comparison_preview"][0]["item_identity_summary"][
+                "rows_missing_image_url"
+            ],
+            2,
         )
         source_url_board = next(item for item in payload["workboards"] if item["area"] == "Source URL bottlenecks")
         self.assertEqual(source_url_board["primary_metric"], 8)
