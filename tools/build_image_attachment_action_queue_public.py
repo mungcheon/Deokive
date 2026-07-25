@@ -766,6 +766,9 @@ def _build_next_representative_image_review_batch(
         template = row.get("catalog_field_import_template")
         if not isinstance(template, dict):
             template = {}
+        local_image_review_summary = _local_image_candidate_review_summary(
+            row.get("suggested_local_image_path")
+        )
         rows.append(
             {
                 "manual_confirmed": False,
@@ -802,6 +805,7 @@ def _build_next_representative_image_review_batch(
                 "local_image_download_instruction": row.get(
                     "local_image_download_instruction"
                 ),
+                "local_image_candidate_review_summary": local_image_review_summary,
                 "catalog_field_import_template": template,
                 "blocked_until": "representative_image_exact_product_type_confirmed",
                 "operator_checklist": [
@@ -1283,6 +1287,25 @@ def _local_image_download_instruction(suggested_local_image_path: str) -> dict[s
             "write_local_image_path_with_image_url_import",
             "verify_file_exists_in_assets_and_web_public_assets",
         ],
+    }
+
+
+def _local_image_candidate_review_summary(suggested_local_image_path: Any) -> dict[str, Any]:
+    path = str(suggested_local_image_path or "").strip()
+    if not path:
+        return {
+            "has_suggested_local_image_path": False,
+            "target_local_image_path": "",
+            "target_public_asset_path": "",
+            "local_image_file_exists": False,
+            "public_asset_file_exists": False,
+        }
+    return {
+        "has_suggested_local_image_path": True,
+        "target_local_image_path": path,
+        "target_public_asset_path": f"assets/{path}",
+        "local_image_file_exists": (ROOT / path).exists(),
+        "public_asset_file_exists": (ROOT / "assets" / path).exists(),
     }
 
 
@@ -1838,6 +1861,20 @@ def build_report(
                 1
                 for row in next_representative_image_review_batch
                 if row.get("suggested_local_image_path")
+            ),
+            "next_representative_image_review_batch_local_image_file_exists_rows": sum(
+                1
+                for row in next_representative_image_review_batch
+                if (
+                    row.get("local_image_candidate_review_summary") or {}
+                ).get("local_image_file_exists")
+            ),
+            "next_representative_image_review_batch_public_asset_file_exists_rows": sum(
+                1
+                for row in next_representative_image_review_batch
+                if (
+                    row.get("local_image_candidate_review_summary") or {}
+                ).get("public_asset_file_exists")
             ),
             "next_representative_image_review_batch_primary_review_url_kind_counts": _counter_pairs(
                 next_representative_image_review_batch,

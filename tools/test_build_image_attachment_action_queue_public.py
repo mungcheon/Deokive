@@ -162,6 +162,18 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["next_representative_image_review_batch_primary_review_url_rows"], 0)
         self.assertEqual(report["summary"]["next_representative_image_review_batch_local_path_rows"], 0)
         self.assertEqual(
+            report["summary"][
+                "next_representative_image_review_batch_local_image_file_exists_rows"
+            ],
+            0,
+        )
+        self.assertEqual(
+            report["summary"][
+                "next_representative_image_review_batch_public_asset_file_exists_rows"
+            ],
+            0,
+        )
+        self.assertEqual(
             report["summary"]["next_representative_image_review_batch_primary_review_url_kind_counts"],
             [],
         )
@@ -560,6 +572,18 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["next_representative_image_review_batch_primary_review_url_rows"], 3)
         self.assertEqual(report["summary"]["next_representative_image_review_batch_local_path_rows"], 3)
         self.assertEqual(
+            report["summary"][
+                "next_representative_image_review_batch_local_image_file_exists_rows"
+            ],
+            0,
+        )
+        self.assertEqual(
+            report["summary"][
+                "next_representative_image_review_batch_public_asset_file_exists_rows"
+            ],
+            0,
+        )
+        self.assertEqual(
             dict(report["summary"]["next_representative_image_review_batch_primary_review_url_kind_counts"]),
             {"fallback_web_search": 3},
         )
@@ -638,6 +662,16 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(
             representative_review["suggested_local_image_path"],
             "assets/catalog_images/catalog_0.webp",
+        )
+        self.assertEqual(
+            representative_review["local_image_candidate_review_summary"],
+            {
+                "has_suggested_local_image_path": True,
+                "target_local_image_path": "assets/catalog_images/catalog_0.webp",
+                "target_public_asset_path": "assets/assets/catalog_images/catalog_0.webp",
+                "local_image_file_exists": False,
+                "public_asset_file_exists": False,
+            },
         )
         self.assertEqual(
             representative_review["representative_candidate_status"],
