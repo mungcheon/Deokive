@@ -1468,6 +1468,24 @@ class PublicCatalogReportTests(unittest.TestCase):
             )
             self.assertEqual(quality["deduplication_fast_review"]["manual_confirmed_true"], 0)
             self.assertIs(quality["deduplication_fast_review"]["auto_delete_enabled"], False)
+            patch_template = quality["deduplication_fast_review"][
+                "manual_confirmation_patch_template"
+            ]
+            self.assertEqual(patch_template["template_rows"], 10)
+            self.assertEqual(patch_template["drop_candidate_rows"], 10)
+            self.assertEqual(patch_template["ready_to_import_rows"], 0)
+            self.assertEqual(patch_template["blocked_rows"], 10)
+            self.assertFalse(patch_template["auto_merge_enabled"])
+            self.assertFalse(patch_template["auto_delete_enabled"])
+            self.assertEqual(
+                patch_template["rows"][0]["decision"],
+                "review_required",
+            )
+            self.assertIn(
+                "same_sellable_product_confirmed",
+                patch_template["rows"][0],
+            )
+            self.assertTrue(patch_template["rows"][0]["primary_review_url"])
             alignment = quality["deduplication_queue_alignment"]
             self.assertEqual(alignment["duplicate_review_groups"], 61)
             self.assertEqual(alignment["actionable_groups"], 48)

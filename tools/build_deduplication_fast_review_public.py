@@ -265,6 +265,69 @@ def next_fast_review_batch(items: list[dict[str, Any]], *, limit: int = 10) -> l
     return rows
 
 
+def manual_confirmation_patch_template(next_batch: list[dict[str, Any]]) -> dict[str, Any]:
+    rows: list[dict[str, Any]] = []
+    for position, item in enumerate(next_batch, start=1):
+        template = dict(item.get("dedupe_decision_template") or {})
+        review_urls = item.get("review_urls") or []
+        rows.append(
+            {
+                "patch_row_id": f"dedupe-fast-review-{position:03d}",
+                "manual_confirmed": False,
+                "same_sellable_product_confirmed": False,
+                "decision": "review_required",
+                "allowed_decisions": [
+                    "drop_duplicates",
+                    "merge_duplicates",
+                    "remove_duplicate_rows",
+                    "keep_separate_variant_or_reissue",
+                    "needs_more_evidence",
+                    "review_required",
+                ],
+                "key_type": item.get("key_type") or template.get("key_type"),
+                "key": item.get("key") or template.get("key"),
+                "fast_review_lane": item.get("fast_review_lane"),
+                "fast_review_warning": item.get("fast_review_warning"),
+                "keep_catalog_index": item.get("keep_catalog_index") or template.get("keep_catalog_index"),
+                "drop_catalog_indexes": item.get("drop_catalog_indexes") or template.get("drop_catalog_indexes") or [],
+                "primary_review_url": item.get("primary_review_url"),
+                "evidence_url": item.get("primary_review_url") or (review_urls[0] if review_urls else ""),
+                "review_urls": review_urls,
+                "identity_delta": item.get("identity_delta") or {},
+                "image_url_only_same_identity": bool(item.get("image_url_only_same_identity")),
+                "manual_note": "",
+                "operator_instruction": (
+                    "Fill manual_confirmed=true and same_sellable_product_confirmed=true only after "
+                    "the review URLs prove the keep/drop rows are the same sellable product. "
+                    "Leave false for variants, reissues, or uncertain image differences."
+                ),
+                "auto_merge_enabled": False,
+                "auto_delete_enabled": False,
+            }
+        )
+    ready_rows = sum(
+        1
+        for row in rows
+        if row.get("manual_confirmed") is True
+        and row.get("same_sellable_product_confirmed") is True
+        and row.get("decision") not in {"review_required", "needs_more_evidence", "keep_separate_variant_or_reissue"}
+    )
+    return {
+        "scope": "deduplication_next_fast_review_manual_confirmation_patch",
+        "template_rows": len(rows),
+        "ready_to_import_rows": ready_rows,
+        "blocked_rows": len(rows) - ready_rows,
+        "drop_candidate_rows": sum(len(row.get("drop_catalog_indexes") or []) for row in rows),
+        "requires_manual_review": True,
+        "requires_same_sellable_product_confirmation": True,
+        "auto_merge_enabled": False,
+        "auto_delete_enabled": False,
+        "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+        "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+        "rows": rows,
+    }
+
+
 def _fast_review_lane(same_barcode: bool, same_source_url: bool, same_image_url: bool) -> str:
     if same_barcode and same_source_url and same_image_url:
         return "same_barcode_source_and_image"
@@ -319,6 +382,7 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
         for blocker in blockers:
             by_blocker[str(blocker)] += 1
     next_batch = next_fast_review_batch(fast_groups)
+    patch_template = manual_confirmation_patch_template(next_batch)
 
     return {
         "schema_version": 1,
@@ -341,6 +405,9 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
             "next_fast_review_batch_drop_candidate_rows": sum(
                 len(item.get("drop_catalog_indexes") or []) for item in next_batch
             ),
+            "manual_confirmation_patch_template_rows": patch_template["template_rows"],
+            "manual_confirmation_patch_ready_to_import_rows": patch_template["ready_to_import_rows"],
+            "manual_confirmation_patch_blocked_rows": patch_template["blocked_rows"],
             "next_fast_review_batch_primary_review_url_groups": sum(
                 1 for item in next_batch if item.get("primary_review_url")
             ),
@@ -374,6 +441,7 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
             ),
         },
         "next_fast_review_batch": next_batch,
+        "manual_confirmation_patch_template": patch_template,
         "items": fast_groups,
         "held_for_later_summary": {
             "by_review_confidence": counter_rows(

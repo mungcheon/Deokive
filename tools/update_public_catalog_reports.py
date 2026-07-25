@@ -10987,12 +10987,14 @@ def update_reports(write: bool) -> dict[str, Any]:
                     {},
                 ),
             }
-        if DEDUPLICATION_FAST_REVIEW.exists():
-            dedupe_fast_review = load_json(DEDUPLICATION_FAST_REVIEW, {})
-            dedupe_fast_summary = dedupe_fast_review.get("summary", {})
-            target["deduplication_fast_review"] = copy_report_summary(
-                DEDUPLICATION_FAST_REVIEW, "deduplication_fast_review"
+        if deduplication_fast_review:
+            dedupe_fast_summary = deduplication_fast_review.get("summary", {})
+            target["deduplication_fast_review"] = report_summary(
+                deduplication_fast_review, DEDUPLICATION_FAST_REVIEW
             )
+            target["deduplication_fast_review"][
+                "manual_confirmation_patch_template"
+            ] = deduplication_fast_review.get("manual_confirmation_patch_template", {})
             target["deduplication_queue_alignment"] = {
                 "public_reports": [
                     f"data/{DEDUPLICATION.name}",
