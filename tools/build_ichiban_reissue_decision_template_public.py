@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 DEFAULT_INPUT = DATA / "catalog_deduplication_action_queue_public.json"
 DEFAULT_OUTPUT = DATA / "ichiban_kuji_reissue_decision_template_public.json"
+DEFAULT_CATALOG_PUBLIC = DATA / "catalog_public.json"
 
 
 def _now_utc() -> str:
@@ -28,6 +29,23 @@ def _load_json(path: Path) -> dict[str, Any]:
     if not isinstance(payload, dict):
         raise SystemExit(f"{path} must contain a JSON object")
     return payload
+
+
+def _load_catalog_index(path: Path = DEFAULT_CATALOG_PUBLIC) -> dict[int, dict[str, Any]]:
+    if not path.exists():
+        return {}
+    payload = _load_json(path)
+    rows = payload.get("items")
+    if not isinstance(rows, list):
+        return {}
+    index: dict[int, dict[str, Any]] = {}
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        catalog_index = row.get("catalog_index")
+        if isinstance(catalog_index, int):
+            index[catalog_index] = row
+    return index
 
 
 def _safe_list(value: Any) -> list[dict[str, Any]]:
@@ -67,6 +85,141 @@ def _sample_rows_with_identity(rows: list[dict[str, Any]]) -> int:
         and row.get("prize_item_name")
         and row.get("identity_label")
     )
+
+
+def _enrich_sample_rows_from_catalog(
+    rows: list[dict[str, Any]],
+    catalog_index: dict[int, dict[str, Any]],
+) -> list[dict[str, Any]]:
+    if not catalog_index:
+        return rows
+    enriched_rows: list[dict[str, Any]] = []
+    for row in rows:
+        enriched = dict(row)
+        index = row.get("catalog_index")
+        catalog_row = catalog_index.get(index) if isinstance(index, int) else None
+        if catalog_row:
+            for field in (
+                "release_date",
+                "image_url",
+                "local_image_path",
+                "source_store",
+                "category",
+                "character_name",
+            ):
+                value = catalog_row.get(field)
+                if value not in (None, ""):
+                    enriched[field] = value
+            if enriched.get("official_price_jpy") in (None, ""):
+                enriched["official_price_jpy"] = catalog_row.get("official_price_jpy")
+            if not enriched.get("source_url"):
+                enriched["source_url"] = catalog_row.get("source_url")
+        enriched_rows.append(enriched)
+    return enriched_rows
+
+
+def _unique_values(values: list[Any]) -> list[Any]:
+    unique: list[Any] = []
+    seen: set[str] = set()
+    for value in values:
+        if value in (None, ""):
+            continue
+        key = json.dumps(value, ensure_ascii=False, sort_keys=True)
+        if key in seen:
+            continue
+        seen.add(key)
+        unique.append(value)
+    return sorted(unique, key=lambda item: str(item))
+
+
+def _sets_differ(sets: list[list[Any]]) -> bool:
+    normalized = {
+        json.dumps(_unique_values(values), ensure_ascii=False, sort_keys=True)
+        for values in sets
+        if _unique_values(values)
+    }
+    return len(normalized) > 1
+
+
+def _source_url_catalog_evidence_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    by_source: dict[str, list[dict[str, Any]]] = {}
+    for row in rows:
+        source_url = str(row.get("source_url") or "").strip()
+        if not source_url:
+            continue
+        by_source.setdefault(source_url, []).append(row)
+
+    source_summaries: list[dict[str, Any]] = []
+    for source_url in sorted(by_source):
+        source_rows = by_source[source_url]
+        source_summaries.append(
+            {
+                "source_url": source_url,
+                "catalog_indexes": sorted(
+                    index
+                    for row in source_rows
+                    if isinstance((index := row.get("catalog_index")), int)
+                ),
+                "release_dates": _unique_values(
+                    [row.get("release_date") for row in source_rows]
+                ),
+                "image_urls": _unique_values(
+                    [row.get("image_url") for row in source_rows]
+                ),
+                "local_image_paths": _unique_values(
+                    [row.get("local_image_path") for row in source_rows]
+                ),
+                "official_price_jpy_values": _unique_values(
+                    [row.get("official_price_jpy") for row in source_rows]
+                ),
+                "identity_labels": _unique_values(
+                    [row.get("identity_label") for row in source_rows]
+                ),
+                "sample_names_ja": _unique_values(
+                    [row.get("name_ja") for row in source_rows]
+                )[:6],
+                "row_count": len(source_rows),
+            }
+        )
+
+    release_sets = [item["release_dates"] for item in source_summaries]
+    image_sets = [item["image_urls"] for item in source_summaries]
+    local_image_sets = [item["local_image_paths"] for item in source_summaries]
+    price_sets = [item["official_price_jpy_values"] for item in source_summaries]
+    signals: list[str] = []
+    if _sets_differ(release_sets):
+        signals.append("release_date_differs_by_source_url")
+    if _sets_differ(image_sets):
+        signals.append("image_url_differs_by_source_url")
+    if _sets_differ(local_image_sets):
+        signals.append("local_image_path_differs_by_source_url")
+    if _sets_differ(price_sets):
+        signals.append("official_price_jpy_differs_by_source_url")
+
+    has_strong_keep_separate_signal = any(
+        signal in signals
+        for signal in (
+            "release_date_differs_by_source_url",
+            "image_url_differs_by_source_url",
+            "local_image_path_differs_by_source_url",
+        )
+    )
+    return {
+        "source_url_count": len(source_summaries),
+        "source_url_summaries": source_summaries,
+        "release_date_sets_differ": _sets_differ(release_sets),
+        "image_url_sets_differ": _sets_differ(image_sets),
+        "local_image_path_sets_differ": _sets_differ(local_image_sets),
+        "official_price_jpy_sets_differ": _sets_differ(price_sets),
+        "reissue_evidence_signals": signals,
+        "recommended_campaign_decision_from_local_evidence": (
+            "campaign_pair_reissue_keep_all_separate"
+            if has_strong_keep_separate_signal
+            else "needs_more_source_evidence"
+        ),
+        "evidence_basis": "data/catalog_public.json rows matched by catalog_index",
+        "manual_confirmation_required": True,
+    }
 
 
 def _is_zero_price_prize(row: dict[str, Any]) -> bool:
@@ -189,9 +342,15 @@ def _campaign_decision_guidance(row: dict[str, Any], risk_summary: dict[str, Any
     }
 
 
-def _item_template(row: dict[str, Any]) -> dict[str, Any]:
+def _item_template(
+    row: dict[str, Any],
+    catalog_index: dict[int, dict[str, Any]] | None = None,
+) -> dict[str, Any]:
     template = _copy_template(row)
-    sample_rows = row.get("sample_rows") or []
+    sample_rows = _enrich_sample_rows_from_catalog(
+        row.get("sample_rows") or [],
+        catalog_index or {},
+    )
     risk_summary = _row_risk_summary(sample_rows)
     comparison = row.get("campaign_url_comparison") or {}
     review_tags = list(risk_summary["review_risk_tags"])
@@ -231,20 +390,43 @@ def _item_template(row: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _campaign_template(row: dict[str, Any]) -> dict[str, Any]:
+def _campaign_template(
+    row: dict[str, Any],
+    catalog_index: dict[int, dict[str, Any]] | None = None,
+) -> dict[str, Any]:
     template = _copy_template(row)
-    sample_rows = row.get("sample_rows") or []
+    sample_rows = _enrich_sample_rows_from_catalog(
+        row.get("sample_rows") or [],
+        catalog_index or {},
+    )
     risk_summary = _row_risk_summary(sample_rows)
     comparison = row.get("campaign_url_comparison") or {}
+    catalog_evidence = _source_url_catalog_evidence_summary(sample_rows)
     review_tags = list(risk_summary["review_risk_tags"])
     if comparison.get("likely_same_campaign_family_reissue"):
         review_tags.append("likely_same_campaign_family_reissue")
+    for signal in catalog_evidence.get("reissue_evidence_signals") or []:
+        review_tags.append(signal)
     if int(row.get("item_work_order_count") or 0) >= 5:
         review_tags.append("high_impact_campaign_pair")
     risk_summary = {
         **risk_summary,
         "review_risk_tags": review_tags,
     }
+    campaign_decision_guidance = _campaign_decision_guidance(row, risk_summary)
+    local_recommendation = catalog_evidence.get(
+        "recommended_campaign_decision_from_local_evidence"
+    )
+    if local_recommendation == "campaign_pair_reissue_keep_all_separate":
+        campaign_decision_guidance = {
+            **campaign_decision_guidance,
+            "recommended_first_decision": local_recommendation,
+            "local_catalog_evidence_supports_keep_separate": True,
+            "local_catalog_evidence_signals": catalog_evidence.get(
+                "reissue_evidence_signals"
+            )
+            or [],
+        }
     return {
         "campaign_work_order_id": row.get("campaign_work_order_id"),
         "priority": row.get("priority"),
@@ -259,9 +441,10 @@ def _campaign_template(row: dict[str, Any]) -> dict[str, Any]:
         "manual_review_checklist": row.get("manual_review_checklist") or [],
         "sample_rows": sample_rows,
         "sample_rows_with_identity_fields": _sample_rows_with_identity(sample_rows),
+        "catalog_evidence_summary": catalog_evidence,
         "review_risk_summary": risk_summary,
         "price_policy_review": _price_policy_review(row, risk_summary),
-        "campaign_decision_guidance": _campaign_decision_guidance(row, risk_summary),
+        "campaign_decision_guidance": campaign_decision_guidance,
         "recommended_review_lane": (
             "campaign_pair_first"
             if int(row.get("item_work_order_count") or 0) > 1
@@ -390,6 +573,7 @@ def _next_campaign_review_batch(
                 "source_urls": campaign.get("source_urls") or [],
                 "prize_labels": campaign.get("prize_labels") or [],
                 "campaign_url_comparison": campaign.get("campaign_url_comparison") or {},
+                "catalog_evidence_summary": campaign.get("catalog_evidence_summary") or {},
                 "review_risk_tags": (campaign.get("review_risk_summary") or {}).get("review_risk_tags") or [],
                 "price_policy_review": campaign.get("price_policy_review") or {},
                 "recommended_review_lane": campaign.get("recommended_review_lane"),
@@ -814,10 +998,20 @@ def _blocking_dashboard(
     }
 
 
-def build_report(action_queue: dict[str, Any], *, generated_at: str | None = None) -> dict[str, Any]:
-    item_templates = [_item_template(row) for row in _safe_list(action_queue.get("ichiban_reissue_work_order"))]
+def build_report(
+    action_queue: dict[str, Any],
+    *,
+    catalog_index: dict[int, dict[str, Any]] | None = None,
+    generated_at: str | None = None,
+) -> dict[str, Any]:
+    catalog_index = catalog_index or _load_catalog_index()
+    item_templates = [
+        _item_template(row, catalog_index)
+        for row in _safe_list(action_queue.get("ichiban_reissue_work_order"))
+    ]
     campaign_templates = [
-        _campaign_template(row) for row in _safe_list(action_queue.get("ichiban_reissue_campaign_work_order"))
+        _campaign_template(row, catalog_index)
+        for row in _safe_list(action_queue.get("ichiban_reissue_campaign_work_order"))
     ]
     item_templates_by_id = {
         str(item.get("work_order_id")): item
@@ -922,6 +1116,35 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
             for campaign in campaign_templates
             if int(campaign.get("item_work_order_count") or 0) >= 5
         ),
+        "campaign_template_local_catalog_evidence_rows": sum(
+            1
+            for campaign in campaign_templates
+            if (campaign.get("catalog_evidence_summary") or {}).get(
+                "source_url_count"
+            )
+        ),
+        "campaign_template_release_date_differs_by_source_url_rows": sum(
+            1
+            for campaign in campaign_templates
+            if (campaign.get("catalog_evidence_summary") or {}).get(
+                "release_date_sets_differ"
+            )
+        ),
+        "campaign_template_image_url_differs_by_source_url_rows": sum(
+            1
+            for campaign in campaign_templates
+            if (campaign.get("catalog_evidence_summary") or {}).get(
+                "image_url_sets_differ"
+            )
+        ),
+        "campaign_template_local_keep_separate_recommended_rows": sum(
+            1
+            for campaign in campaign_templates
+            if (campaign.get("catalog_evidence_summary") or {}).get(
+                "recommended_campaign_decision_from_local_evidence"
+            )
+            == "campaign_pair_reissue_keep_all_separate"
+        ),
         "campaign_covered_item_template_rows": sum(
             1 for item in item_templates if item.get("work_order_id") in campaign_covered_item_ids
         ),
@@ -989,6 +1212,14 @@ def build_report(action_queue: dict[str, Any], *, generated_at: str | None = Non
                 "blocks_keep_drop_decision"
             )
         ),
+        "campaign_review_batch_local_keep_separate_recommended_rows": sum(
+            1
+            for campaign in next_campaign_review_batch
+            if (campaign.get("catalog_evidence_summary") or {}).get(
+                "recommended_campaign_decision_from_local_evidence"
+            )
+            == "campaign_pair_reissue_keep_all_separate"
+        ),
         "campaign_review_batch_item_preview_rows": sum(
             int(campaign.get("item_review_preview_rows") or 0)
             for campaign in next_campaign_review_batch
@@ -1053,10 +1284,14 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--catalog", type=Path, default=DEFAULT_CATALOG_PUBLIC)
     parser.add_argument("--write", action="store_true")
     args = parser.parse_args()
 
-    report = build_report(_load_json(args.input))
+    report = build_report(
+        _load_json(args.input),
+        catalog_index=_load_catalog_index(args.catalog),
+    )
     if args.write:
         write_report(report, args.output)
     print(json.dumps(report["summary"], ensure_ascii=False, indent=2))

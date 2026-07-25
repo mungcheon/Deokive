@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-25T03:21:39Z",
+  "generated_at": "2026-07-25T03:42:15Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 25,
@@ -6093,10 +6093,106 @@
               "likely_same_campaign_family_reissue": true,
               "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
             },
+            "catalog_evidence_summary": {
+              "source_url_count": 2,
+              "source_url_summaries": [
+                {
+                  "source_url": "https://1kuji.com/products/onep6",
+                  "catalog_indexes": [
+                    16141,
+                    16142,
+                    16143,
+                    16144
+                  ],
+                  "release_dates": [
+                    "2011-08-31"
+                  ],
+                  "image_urls": [
+                    "https://assets.1kuji.com/uploads/product_item/image/1496/9957ecc1-7554-432d-a085-c2c02bbd3719.jpg",
+                    "https://assets.1kuji.com/uploads/product_item/image/1497/3f89a343-8c36-4165-a6cf-9d4970b1729a.jpg",
+                    "https://assets.1kuji.com/uploads/product_item/image/1498/fd2ddbc3-b888-4bbe-bb05-a80e3c3630dd.jpg",
+                    "https://assets.1kuji.com/uploads/product_item/image/1499/252f3961-f356-4479-a855-bfc878def810.jpg"
+                  ],
+                  "local_image_paths": [
+                    "assets/catalog_images/1bec553292dc8a4f1d04.webp",
+                    "assets/catalog_images/2959b263d8b9c0c003df.webp",
+                    "assets/catalog_images/8e7482c2e7d19347790e.webp",
+                    "assets/catalog_images/a23de30d042256048c7e.webp"
+                  ],
+                  "official_price_jpy_values": [],
+                  "identity_labels": [
+                    "一番くじ ワンピース ～マリンフォード最終決戦編～ / A賞 / シャンクスフィギュア",
+                    "一番くじ ワンピース ～マリンフォード最終決戦編～ / B賞 / ミホークフィギュア",
+                    "一番くじ ワンピース ～マリンフォード最終決戦編～ / C賞 / ルフィフィギュア",
+                    "一番くじ ワンピース ～マリンフォード最終決戦編～ / D賞 / スポーツタオル"
+                  ],
+                  "sample_names_ja": [
+                    "A賞 シャンクスフィギュア",
+                    "B賞 ミホークフィギュア",
+                    "C賞 ルフィフィギュア",
+                    "D賞 スポーツタオル"
+                  ],
+                  "row_count": 4
+                },
+                {
+                  "source_url": "https://1kuji.com/products/onep8",
+                  "catalog_indexes": [
+                    16103,
+                    16104,
+                    16105,
+                    16106
+                  ],
+                  "release_dates": [
+                    "2011-12-10"
+                  ],
+                  "image_urls": [
+                    "https://assets.1kuji.com/uploads/product_item/image/1795/54c0bdb9-c565-4b83-a50a-41242d2d78a1.jpg",
+                    "https://assets.1kuji.com/uploads/product_item/image/1796/ee2bde9a-49f4-4303-b4db-d0646c793386.jpg",
+                    "https://assets.1kuji.com/uploads/product_item/image/1797/6609aba5-90ea-4f43-91e0-b21e5c98a377.jpg",
+                    "https://assets.1kuji.com/uploads/product_item/image/1798/3bbed2ce-1e5b-4568-8d24-694382801e4c.jpg"
+                  ],
+                  "local_image_paths": [
+                    "assets/catalog_images/1924b18ea418a00c2d91.webp",
+                    "assets/catalog_images/377fe1f5c27a79837fc1.webp",
+                    "assets/catalog_images/3a50172a8040daef997b.webp",
+                    "assets/catalog_images/d133ea26a0901e43fcbe.webp"
+                  ],
+                  "official_price_jpy_values": [],
+                  "identity_labels": [
+                    "一番くじ ワンピース ～マリンフォード最終決戦編～ / A賞 / シャンクスフィギュア",
+                    "一番くじ ワンピース ～マリンフォード最終決戦編～ / B賞 / ミホークフィギュア",
+                    "一番くじ ワンピース ～マリンフォード最終決戦編～ / C賞 / ルフィフィギュア",
+                    "一番くじ ワンピース ～マリンフォード最終決戦編～ / D賞 / スポーツタオル"
+                  ],
+                  "sample_names_ja": [
+                    "A賞 シャンクスフィギュア",
+                    "B賞 ミホークフィギュア",
+                    "C賞 ルフィフィギュア",
+                    "D賞 スポーツタオル"
+                  ],
+                  "row_count": 4
+                }
+              ],
+              "release_date_sets_differ": true,
+              "image_url_sets_differ": true,
+              "local_image_path_sets_differ": true,
+              "official_price_jpy_sets_differ": false,
+              "reissue_evidence_signals": [
+                "release_date_differs_by_source_url",
+                "image_url_differs_by_source_url",
+                "local_image_path_differs_by_source_url"
+              ],
+              "recommended_campaign_decision_from_local_evidence": "campaign_pair_reissue_keep_all_separate",
+              "evidence_basis": "data/catalog_public.json rows matched by catalog_index",
+              "manual_confirmation_required": true
+            },
             "review_risk_tags": [
               "non_exception_price_missing",
               "identity_fields_complete",
               "likely_same_campaign_family_reissue",
+              "release_date_differs_by_source_url",
+              "image_url_differs_by_source_url",
+              "local_image_path_differs_by_source_url",
               "high_impact_campaign_pair"
             ],
             "price_policy_review": {
@@ -6156,7 +6252,13 @@
               "price_policy_blocks_keep_drop": true,
               "manual_confirmed_allowed": false,
               "auto_merge_enabled": false,
-              "auto_delete_enabled": false
+              "auto_delete_enabled": false,
+              "local_catalog_evidence_supports_keep_separate": true,
+              "local_catalog_evidence_signals": [
+                "release_date_differs_by_source_url",
+                "image_url_differs_by_source_url",
+                "local_image_path_differs_by_source_url"
+              ]
             },
             "affected_item_work_order_ids": [
               "ichiban-reissue-dedupe-006",
@@ -6708,9 +6810,109 @@
               "likely_same_campaign_family_reissue": true,
               "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
             },
+            "catalog_evidence_summary": {
+              "source_url_count": 2,
+              "source_url_summaries": [
+                {
+                  "source_url": "https://1kuji.com/products/kimetsu",
+                  "catalog_indexes": [
+                    13777,
+                    13778,
+                    13779,
+                    13780
+                  ],
+                  "release_dates": [
+                    "2019-08-31"
+                  ],
+                  "image_urls": [
+                    "https://assets.1kuji.com/uploads/product_item/image/16426/a2da514d-8838-4660-b3f5-83945c361d4d.jpg",
+                    "https://assets.1kuji.com/uploads/product_item/image/16427/86dc2ace-a013-41de-a0ab-3c2bb3310377.jpg",
+                    "https://assets.1kuji.com/uploads/product_item/image/16428/d4bf6eb7-3ed8-4312-8ee7-939371789db1.jpg",
+                    "https://assets.1kuji.com/uploads/product_item/image/16429/a14127f3-db76-4220-a935-2edb61de7d2f.jpg"
+                  ],
+                  "local_image_paths": [
+                    "assets/catalog_images/0293cc21fcddee8e8e84.webp",
+                    "assets/catalog_images/086bf1105df1e594f281.webp",
+                    "assets/catalog_images/1276064ba54b2af52b84.webp",
+                    "assets/catalog_images/768e2494547596ea843e.webp"
+                  ],
+                  "official_price_jpy_values": [
+                    694
+                  ],
+                  "identity_labels": [
+                    "一番くじ 鬼滅の刃 / A賞 / 竈門炭治郎 フィギュア",
+                    "一番くじ 鬼滅の刃 / B賞 / 竈門禰豆子 フィギュア",
+                    "一番くじ 鬼滅の刃 / C賞 / 竈門炭治郎 ちょこのっこ ぬいぐるみ",
+                    "一番くじ 鬼滅の刃 / D賞 / 竈門禰豆子 ちょこのっこ ぬいぐるみ"
+                  ],
+                  "sample_names_ja": [
+                    "A賞 竈門炭治郎 フィギュア",
+                    "B賞 竈門禰豆子 フィギュア",
+                    "C賞 竈門炭治郎 ちょこのっこ ぬいぐるみ",
+                    "D賞 竈門禰豆子 ちょこのっこ ぬいぐるみ"
+                  ],
+                  "row_count": 4
+                },
+                {
+                  "source_url": "https://1kuji.com/products/kimetsu2",
+                  "catalog_indexes": [
+                    13770,
+                    13771,
+                    13772,
+                    13773
+                  ],
+                  "release_dates": [
+                    "2019-12-21"
+                  ],
+                  "image_urls": [
+                    "https://assets.1kuji.com/uploads/product_item/image/16618/ff4ad17c-4b6a-425d-ab1e-04b0e7f8b26c.jpg",
+                    "https://assets.1kuji.com/uploads/product_item/image/16619/fded7a91-5993-44d0-a3c1-214d88b1dceb.jpg",
+                    "https://assets.1kuji.com/uploads/product_item/image/16620/b176a0ea-a946-4838-a44d-97ccaefab5ca.jpg",
+                    "https://assets.1kuji.com/uploads/product_item/image/16621/67a1fd09-c2bd-4073-ade4-eb07582ccc0a.jpg"
+                  ],
+                  "local_image_paths": [
+                    "assets/catalog_images/109e5c4b28819808f9f3.webp",
+                    "assets/catalog_images/adfe51e43159286e382e.webp",
+                    "assets/catalog_images/dd3ac07a6fba4d184222.webp",
+                    "assets/catalog_images/f525b7b370193a6e61f5.webp"
+                  ],
+                  "official_price_jpy_values": [
+                    694
+                  ],
+                  "identity_labels": [
+                    "一番くじ 鬼滅の刃 / A賞 / 竈門炭治郎 フィギュア",
+                    "一番くじ 鬼滅の刃 / B賞 / 竈門禰豆子 フィギュア",
+                    "一番くじ 鬼滅の刃 / C賞 / 竈門炭治郎 ちょこのっこ ぬいぐるみ",
+                    "一番くじ 鬼滅の刃 / D賞 / 竈門禰豆子 ちょこのっこ ぬいぐるみ"
+                  ],
+                  "sample_names_ja": [
+                    "A賞 竈門炭治郎 フィギュア",
+                    "B賞 竈門禰豆子 フィギュア",
+                    "C賞 竈門炭治郎 ちょこのっこ ぬいぐるみ",
+                    "D賞 竈門禰豆子 ちょこのっこ ぬいぐるみ"
+                  ],
+                  "row_count": 4
+                }
+              ],
+              "release_date_sets_differ": true,
+              "image_url_sets_differ": true,
+              "local_image_path_sets_differ": true,
+              "official_price_jpy_sets_differ": false,
+              "reissue_evidence_signals": [
+                "release_date_differs_by_source_url",
+                "image_url_differs_by_source_url",
+                "local_image_path_differs_by_source_url"
+              ],
+              "recommended_campaign_decision_from_local_evidence": "campaign_pair_reissue_keep_all_separate",
+              "evidence_basis": "data/catalog_public.json rows matched by catalog_index",
+              "manual_confirmation_required": true
+            },
             "review_risk_tags": [
               "identity_fields_complete",
               "likely_same_campaign_family_reissue",
+              "release_date_differs_by_source_url",
+              "image_url_differs_by_source_url",
+              "local_image_path_differs_by_source_url",
               "high_impact_campaign_pair"
             ],
             "price_policy_review": {
@@ -6765,7 +6967,13 @@
               "price_policy_blocks_keep_drop": false,
               "manual_confirmed_allowed": false,
               "auto_merge_enabled": false,
-              "auto_delete_enabled": false
+              "auto_delete_enabled": false,
+              "local_catalog_evidence_supports_keep_separate": true,
+              "local_catalog_evidence_signals": [
+                "release_date_differs_by_source_url",
+                "image_url_differs_by_source_url",
+                "local_image_path_differs_by_source_url"
+              ]
             },
             "affected_item_work_order_ids": [
               "ichiban-reissue-dedupe-014",
@@ -7223,9 +7431,99 @@
               "likely_same_campaign_family_reissue": true,
               "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
             },
+            "catalog_evidence_summary": {
+              "source_url_count": 2,
+              "source_url_summaries": [
+                {
+                  "source_url": "https://1kuji.com/products/naruto_wcf",
+                  "catalog_indexes": [
+                    14305,
+                    14306,
+                    14307
+                  ],
+                  "release_dates": [
+                    "2016-02-06"
+                  ],
+                  "image_urls": [
+                    "https://assets.1kuji.com/uploads/product_item/image/9377/bd3802b3-52ac-4d22-b5c5-02c77df9387f.jpg",
+                    "https://assets.1kuji.com/uploads/product_item/image/9378/9537fd5c-1aa1-4285-9541-c91384490032.jpg",
+                    "https://assets.1kuji.com/uploads/product_item/image/9379/80177625-95da-4ff3-9bcf-73e3fe114708.jpg"
+                  ],
+                  "local_image_paths": [
+                    "assets/catalog_images/7f814cfecd28651c81df.webp",
+                    "assets/catalog_images/814e70bbba98393da90e.webp",
+                    "assets/catalog_images/d17dd0a82fb73973faa9.webp"
+                  ],
+                  "official_price_jpy_values": [
+                    1000
+                  ],
+                  "identity_labels": [
+                    "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア / A賞 / ナルトワールドコレクタブルフィギュア メタリックカラーver.",
+                    "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア / B賞 / ワールドコレクタブルフィギュア メタリックカラーver.",
+                    "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア / C賞 / ワールドコレクタブルフィギュア"
+                  ],
+                  "sample_names_ja": [
+                    "A賞 ナルトワールドコレクタブルフィギュア メタリックカラーver.",
+                    "B賞 ワールドコレクタブルフィギュア メタリックカラーver.",
+                    "C賞 ワールドコレクタブルフィギュア"
+                  ],
+                  "row_count": 3
+                },
+                {
+                  "source_url": "https://1kuji.com/products/naruto_wcf2",
+                  "catalog_indexes": [
+                    14302,
+                    14303,
+                    14304
+                  ],
+                  "release_dates": [
+                    "2016-10-08"
+                  ],
+                  "image_urls": [
+                    "https://assets.1kuji.com/uploads/product_item/image/10561/fbd4cd59-2ae4-46df-9056-ab9655329101.jpg",
+                    "https://assets.1kuji.com/uploads/product_item/image/10562/03475c3e-9726-4cad-91dd-be3f1429fd58.jpg",
+                    "https://assets.1kuji.com/uploads/product_item/image/10563/80ca8754-3a8b-4e1c-998a-9641463bb13d.jpg"
+                  ],
+                  "local_image_paths": [
+                    "assets/catalog_images/4b7b0f5a27bb14a02636.webp",
+                    "assets/catalog_images/741896cf335c6533d7d6.webp",
+                    "assets/catalog_images/aa8c304e7908e2fe72dd.webp"
+                  ],
+                  "official_price_jpy_values": [
+                    1000
+                  ],
+                  "identity_labels": [
+                    "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア / A賞 / ナルトワールドコレクタブルフィギュア メタリックカラーver.",
+                    "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア / B賞 / ワールドコレクタブルフィギュア メタリックカラーver.",
+                    "一番くじ NARUTO-ナルト- 疾風伝 ワールドコレクタブルフィギュア / C賞 / ワールドコレクタブルフィギュア"
+                  ],
+                  "sample_names_ja": [
+                    "A賞 ナルトワールドコレクタブルフィギュア メタリックカラーver.",
+                    "B賞 ワールドコレクタブルフィギュア メタリックカラーver.",
+                    "C賞 ワールドコレクタブルフィギュア"
+                  ],
+                  "row_count": 3
+                }
+              ],
+              "release_date_sets_differ": true,
+              "image_url_sets_differ": true,
+              "local_image_path_sets_differ": true,
+              "official_price_jpy_sets_differ": false,
+              "reissue_evidence_signals": [
+                "release_date_differs_by_source_url",
+                "image_url_differs_by_source_url",
+                "local_image_path_differs_by_source_url"
+              ],
+              "recommended_campaign_decision_from_local_evidence": "campaign_pair_reissue_keep_all_separate",
+              "evidence_basis": "data/catalog_public.json rows matched by catalog_index",
+              "manual_confirmation_required": true
+            },
             "review_risk_tags": [
               "identity_fields_complete",
-              "likely_same_campaign_family_reissue"
+              "likely_same_campaign_family_reissue",
+              "release_date_differs_by_source_url",
+              "image_url_differs_by_source_url",
+              "local_image_path_differs_by_source_url"
             ],
             "price_policy_review": {
               "status": "price_policy_clear_for_identity_review",
@@ -7279,7 +7577,13 @@
               "price_policy_blocks_keep_drop": false,
               "manual_confirmed_allowed": false,
               "auto_merge_enabled": false,
-              "auto_delete_enabled": false
+              "auto_delete_enabled": false,
+              "local_catalog_evidence_supports_keep_separate": true,
+              "local_catalog_evidence_signals": [
+                "release_date_differs_by_source_url",
+                "image_url_differs_by_source_url",
+                "local_image_path_differs_by_source_url"
+              ]
             },
             "affected_item_work_order_ids": [
               "ichiban-reissue-dedupe-003",
@@ -7500,10 +7804,92 @@
               "likely_same_campaign_family_reissue": true,
               "dedupe_risk_note": "Same slug family with numbered campaign URLs usually needs reissue/campaign-wave review before dedupe."
             },
+            "catalog_evidence_summary": {
+              "source_url_count": 2,
+              "source_url_summaries": [
+                {
+                  "source_url": "https://1kuji.com/products/haikyu4",
+                  "catalog_indexes": [
+                    14817,
+                    14818
+                  ],
+                  "release_dates": [
+                    "2015-03-22"
+                  ],
+                  "image_urls": [
+                    "https://assets.1kuji.com/uploads/product_item/image/5581/f8582476-7c2d-4fa3-92d8-4a9a4c7b337d.jpg",
+                    "https://assets.1kuji.com/uploads/product_item/image/5582/8860d50c-9655-4827-9934-c55eb248a970.jpg"
+                  ],
+                  "local_image_paths": [
+                    "assets/catalog_images/9c3abb86df4cb29ac2bf.webp",
+                    "assets/catalog_images/9cac4e67f6216cf8882a.webp"
+                  ],
+                  "official_price_jpy_values": [
+                    0,
+                    310
+                  ],
+                  "identity_labels": [
+                    "一番おみくじ ハイキュー!! 缶バッジ / ラストワン賞 / スペシャル缶バッジ",
+                    "一番おみくじ ハイキュー!! 缶バッジ / 缶バッジ"
+                  ],
+                  "sample_names_ja": [
+                    "ラストワン賞 スペシャル缶バッジ",
+                    "缶バッジ"
+                  ],
+                  "row_count": 2
+                },
+                {
+                  "source_url": "https://1kuji.com/products/haikyu8",
+                  "catalog_indexes": [
+                    14797,
+                    14798
+                  ],
+                  "release_dates": [
+                    "2015-05-30"
+                  ],
+                  "image_urls": [
+                    "https://assets.1kuji.com/uploads/product_item/image/6463/92e863d0-b94d-4b98-846e-c582da258f0b.jpg",
+                    "https://assets.1kuji.com/uploads/product_item/image/6464/218ffdd9-695b-43ce-99d9-3ef4ed61cd7d.jpg"
+                  ],
+                  "local_image_paths": [
+                    "assets/catalog_images/5ecffa197aa7f48b1a8d.webp",
+                    "assets/catalog_images/bfbe31777811be4ade6c.webp"
+                  ],
+                  "official_price_jpy_values": [
+                    0,
+                    310
+                  ],
+                  "identity_labels": [
+                    "一番おみくじ ハイキュー!! 缶バッジ / ラストワン賞 / スペシャル缶バッジ",
+                    "一番おみくじ ハイキュー!! 缶バッジ / 缶バッジ"
+                  ],
+                  "sample_names_ja": [
+                    "ラストワン賞 スペシャル缶バッジ",
+                    "缶バッジ"
+                  ],
+                  "row_count": 2
+                }
+              ],
+              "release_date_sets_differ": true,
+              "image_url_sets_differ": true,
+              "local_image_path_sets_differ": true,
+              "official_price_jpy_sets_differ": false,
+              "reissue_evidence_signals": [
+                "release_date_differs_by_source_url",
+                "image_url_differs_by_source_url",
+                "local_image_path_differs_by_source_url"
+              ],
+              "recommended_campaign_decision_from_local_evidence": "campaign_pair_reissue_keep_all_separate",
+              "evidence_basis": "data/catalog_public.json rows matched by catalog_index",
+              "manual_confirmation_required": true
+            },
             "review_risk_tags": [
               "zero_price_exception_rows_present",
               "identity_fields_complete",
-              "likely_same_campaign_family_reissue"
+              "likely_same_campaign_family_reissue",
+              "release_date_differs_by_source_url",
+              "image_url_differs_by_source_url",
+              "local_image_path_differs_by_source_url"
             ],
             "price_policy_review": {
               "status": "price_policy_clear_for_identity_review",
@@ -7558,7 +7944,13 @@
               "price_policy_blocks_keep_drop": false,
               "manual_confirmed_allowed": false,
               "auto_merge_enabled": false,
-              "auto_delete_enabled": false
+              "auto_delete_enabled": false,
+              "local_catalog_evidence_supports_keep_separate": true,
+              "local_catalog_evidence_signals": [
+                "release_date_differs_by_source_url",
+                "image_url_differs_by_source_url",
+                "local_image_path_differs_by_source_url"
+              ]
             },
             "affected_item_work_order_ids": [
               "ichiban-reissue-dedupe-001",

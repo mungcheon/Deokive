@@ -1194,6 +1194,28 @@ class PublicCatalogReportTests(unittest.TestCase):
             1,
         )
         self.assertEqual(
+            reissue_decision_template["campaign_template_local_catalog_evidence_rows"],
+            4,
+        )
+        self.assertEqual(
+            reissue_decision_template[
+                "campaign_template_release_date_differs_by_source_url_rows"
+            ],
+            4,
+        )
+        self.assertEqual(
+            reissue_decision_template[
+                "campaign_template_image_url_differs_by_source_url_rows"
+            ],
+            4,
+        )
+        self.assertEqual(
+            reissue_decision_template[
+                "campaign_template_local_keep_separate_recommended_rows"
+            ],
+            4,
+        )
+        self.assertEqual(
             reissue_decision_template["campaign_review_readiness_status"],
             "campaign_review_ready_manual_only",
         )
@@ -1213,6 +1235,42 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertFalse(reissue_decision_template["auto_delete_enabled"])
         self.assertTrue(
             reissue_decision_template["manual_review_required_before_mutation"]
+        )
+        reissue_decision_report = reports.load_json(
+            reports.ICHIIBAN_KUJI_REISSUE_DECISION_TEMPLATE
+        )
+        first_campaign_template = reissue_decision_report["campaign_templates"][0]
+        first_catalog_evidence = first_campaign_template["catalog_evidence_summary"]
+        self.assertEqual(first_catalog_evidence["source_url_count"], 2)
+        self.assertTrue(first_catalog_evidence["release_date_sets_differ"])
+        self.assertTrue(first_catalog_evidence["image_url_sets_differ"])
+        self.assertTrue(first_catalog_evidence["local_image_path_sets_differ"])
+        self.assertEqual(
+            first_catalog_evidence[
+                "recommended_campaign_decision_from_local_evidence"
+            ],
+            "campaign_pair_reissue_keep_all_separate",
+        )
+        self.assertIn(
+            "release_date_differs_by_source_url",
+            first_catalog_evidence["reissue_evidence_signals"],
+        )
+        self.assertIn(
+            "image_url_differs_by_source_url",
+            first_catalog_evidence["reissue_evidence_signals"],
+        )
+        self.assertEqual(
+            first_campaign_template["campaign_decision_guidance"][
+                "recommended_first_decision"
+            ],
+            "campaign_pair_reissue_keep_all_separate",
+        )
+        first_batch_campaign = reissue_decision_report["next_campaign_review_batch"][0]
+        self.assertEqual(
+            first_batch_campaign["catalog_evidence_summary"][
+                "recommended_campaign_decision_from_local_evidence"
+            ],
+            "campaign_pair_reissue_keep_all_separate",
         )
         reissue_blocking_dashboard = reissue_decision_template["blocking_dashboard"]
         self.assertEqual(
