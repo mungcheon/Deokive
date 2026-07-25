@@ -581,6 +581,82 @@ def _campaign_first_review_summary(plan: list[dict[str, Any]]) -> dict[str, Any]
     }
 
 
+def _campaign_first_confirmation_patch_template(
+    plan: list[dict[str, Any]],
+) -> dict[str, Any]:
+    rows: list[dict[str, Any]] = []
+    for position, item in enumerate(plan, start=1):
+        comparison = item.get("campaign_url_comparison")
+        comparison = comparison if isinstance(comparison, dict) else {}
+        source_urls = item.get("source_urls") or []
+        rows.append(
+            {
+                "patch_row_id": f"ichiban-campaign-reissue-review-{position:03d}",
+                "manual_confirmed": False,
+                "campaign_work_order_id": item.get("campaign_work_order_id"),
+                "decision": "review_required",
+                "allowed_decisions": [
+                    "campaign_pair_reissue_keep_all_separate",
+                    "campaign_pair_duplicate_review_each_item_keep_drop",
+                    "needs_more_source_evidence",
+                    "review_required",
+                ],
+                "recommended_decision": (
+                    "campaign_pair_reissue_keep_all_separate"
+                    if comparison.get("likely_same_campaign_family_reissue")
+                    else "needs_more_source_evidence"
+                ),
+                "likely_same_campaign_family_reissue": bool(
+                    comparison.get("likely_same_campaign_family_reissue")
+                ),
+                "source_urls": source_urls,
+                "first_evidence_url": item.get("first_evidence_url") or _first_url(source_urls),
+                "evidence_url_count": item.get("evidence_url_count"),
+                "item_work_order_count": item.get("item_work_order_count") or 0,
+                "affected_item_work_order_ids": item.get("affected_item_work_order_ids") or [],
+                "catalog_indexes": item.get("catalog_indexes") or [],
+                "prize_labels": item.get("prize_labels") or [],
+                "campaign_slug_families": comparison.get("campaign_slug_families") or [],
+                "manual_review_checklist": item.get("manual_review_checklist") or [],
+                "evidence_url": item.get("first_evidence_url") or _first_url(source_urls),
+                "manual_note": "",
+                "blocked_until": "campaign_pair_reissue_or_duplicate_decision_confirmed",
+                "operator_instruction": (
+                    "Confirm both official campaign pages before deciding. "
+                    "Keep separate for reissues/waves; only move to item keep/drop review when both pages prove an exact duplicate campaign relationship."
+                ),
+                "auto_merge_enabled": False,
+                "auto_delete_enabled": False,
+            }
+        )
+    ready_rows = sum(
+        1
+        for row in rows
+        if row.get("manual_confirmed") is True
+        and row.get("decision")
+        in {
+            "campaign_pair_reissue_keep_all_separate",
+            "campaign_pair_duplicate_review_each_item_keep_drop",
+        }
+    )
+    return {
+        "scope": "ichiban_campaign_first_reissue_confirmation_patch",
+        "template_rows": len(rows),
+        "ready_to_import_rows": ready_rows,
+        "blocked_rows": len(rows) - ready_rows,
+        "item_work_order_rows_blocked": sum(
+            int(row.get("item_work_order_count") or 0) for row in rows
+        ),
+        "likely_same_campaign_family_reissue_rows": sum(
+            1 for row in rows if row.get("likely_same_campaign_family_reissue")
+        ),
+        "requires_manual_review": True,
+        "auto_merge_enabled": False,
+        "auto_delete_enabled": False,
+        "rows": rows,
+    }
+
+
 def _completion_readiness(
     *,
     issue_count: int,
@@ -753,6 +829,9 @@ def build_queue(
     ]
     campaign_first_review_plan = _campaign_first_review_plan(dedupe_action_queue)
     campaign_first_summary = _campaign_first_review_summary(campaign_first_review_plan)
+    campaign_first_patch_template = _campaign_first_confirmation_patch_template(
+        campaign_first_review_plan
+    )
     for rank, row in enumerate(reissue_work_orders, start=1):
         issues.append(_reissue_work_order(row, rank))
 
@@ -841,6 +920,15 @@ def build_queue(
             "campaign_first_review_plans_with_evidence_urls": sum(
                 1 for row in campaign_first_review_plan if row.get("first_evidence_url")
             ),
+            "campaign_first_confirmation_patch_template_rows": campaign_first_patch_template[
+                "template_rows"
+            ],
+            "campaign_first_confirmation_patch_ready_to_import_rows": campaign_first_patch_template[
+                "ready_to_import_rows"
+            ],
+            "campaign_first_confirmation_patch_blocked_rows": campaign_first_patch_template[
+                "blocked_rows"
+            ],
             "campaign_first_review_first_evidence_url": _first_url(
                 [row.get("first_evidence_url") for row in campaign_first_review_plan]
             ),
@@ -875,6 +963,7 @@ def build_queue(
             "unnumbered_multi_item_prizes": "manual_review" if unnumbered_multi else "clear",
         },
         "campaign_first_review_summary": campaign_first_summary,
+        "campaign_first_confirmation_patch_template": campaign_first_patch_template,
         "completion_readiness": completion_readiness,
         "protected_unnumbered_multi_item_prize_groups": protected_groups,
         "campaign_first_review_plan": campaign_first_review_plan,

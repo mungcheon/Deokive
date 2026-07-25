@@ -5086,6 +5086,30 @@ class PublicCatalogReportTests(unittest.TestCase):
             ichiban_prize_next_action.get("prize_policy_review_batch_count"),
             ichiban_prize_audit_summary.get("prize_policy_review_batch_count"),
         )
+        campaign_first_patch = ichiban_prize_issue.get(
+            "campaign_first_confirmation_patch_template",
+            {},
+        )
+        self.assertEqual(campaign_first_patch.get("template_rows"), 4)
+        self.assertEqual(campaign_first_patch.get("ready_to_import_rows"), 0)
+        self.assertEqual(campaign_first_patch.get("blocked_rows"), 4)
+        self.assertEqual(
+            campaign_first_patch.get("item_work_order_rows_blocked"),
+            20,
+        )
+        self.assertFalse(campaign_first_patch.get("auto_merge_enabled"))
+        self.assertFalse(campaign_first_patch.get("auto_delete_enabled"))
+        self.assertTrue(campaign_first_patch.get("rows", [])[0].get("first_evidence_url"))
+        self.assertIn(
+            "campaign_pair_reissue_keep_all_separate",
+            campaign_first_patch.get("rows", [])[0].get("allowed_decisions", []),
+        )
+        self.assertEqual(
+            quality.get("ichiban_kuji_prize_policy_issue_queue", {})
+            .get("campaign_first_confirmation_patch_template", {})
+            .get("template_rows"),
+            campaign_first_patch.get("template_rows"),
+        )
         self.assertEqual(
             ichiban_reissue_execution_action["evidence"].get("ichiban_reissue_work_order_rows"),
             dedupe_action_summary.get("ichiban_reissue_work_order_rows"),

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T06:57:02Z",
+  "generated_at": "2026-07-25T00:36:35Z",
   "scope": "public_catalog_ichiban_kuji_prize_policy",
   "summary": {
     "issue_rows": 20,
@@ -40,6 +40,9 @@
     "campaign_first_review_likely_same_family_rows": 4,
     "campaign_first_review_item_work_order_rows": 20,
     "campaign_first_review_plans_with_evidence_urls": 4,
+    "campaign_first_confirmation_patch_template_rows": 4,
+    "campaign_first_confirmation_patch_ready_to_import_rows": 0,
+    "campaign_first_confirmation_patch_blocked_rows": 4,
     "campaign_first_review_first_evidence_url": "https://1kuji.com/products/onep6",
     "probable_reissue_review_groups": 20,
     "probable_reissue_sample_rows": 40,
@@ -109,6 +112,267 @@
     ],
     "recommended_first_decision": "campaign_pair_reissue_keep_all_separate_or_duplicate_review_each_item",
     "blocked_until": "campaign_pair_reissue_or_duplicate_decision_confirmed"
+  },
+  "campaign_first_confirmation_patch_template": {
+    "scope": "ichiban_campaign_first_reissue_confirmation_patch",
+    "template_rows": 4,
+    "ready_to_import_rows": 0,
+    "blocked_rows": 4,
+    "item_work_order_rows_blocked": 20,
+    "likely_same_campaign_family_reissue_rows": 4,
+    "requires_manual_review": true,
+    "auto_merge_enabled": false,
+    "auto_delete_enabled": false,
+    "rows": [
+      {
+        "patch_row_id": "ichiban-campaign-reissue-review-001",
+        "manual_confirmed": false,
+        "campaign_work_order_id": "ichiban-reissue-campaign-001",
+        "decision": "review_required",
+        "allowed_decisions": [
+          "campaign_pair_reissue_keep_all_separate",
+          "campaign_pair_duplicate_review_each_item_keep_drop",
+          "needs_more_source_evidence",
+          "review_required"
+        ],
+        "recommended_decision": "campaign_pair_reissue_keep_all_separate",
+        "likely_same_campaign_family_reissue": true,
+        "source_urls": [
+          "https://1kuji.com/products/onep6",
+          "https://1kuji.com/products/onep8"
+        ],
+        "first_evidence_url": "https://1kuji.com/products/onep6",
+        "evidence_url_count": 2,
+        "item_work_order_count": 8,
+        "affected_item_work_order_ids": [
+          "ichiban-reissue-dedupe-006",
+          "ichiban-reissue-dedupe-007",
+          "ichiban-reissue-dedupe-008",
+          "ichiban-reissue-dedupe-009",
+          "ichiban-reissue-dedupe-010",
+          "ichiban-reissue-dedupe-011",
+          "ichiban-reissue-dedupe-012",
+          "ichiban-reissue-dedupe-013"
+        ],
+        "catalog_indexes": [
+          16103,
+          16104,
+          16105,
+          16106,
+          16107,
+          16108,
+          16109,
+          16110,
+          16141,
+          16142,
+          16143,
+          16144,
+          16145,
+          16146,
+          16147,
+          16148
+        ],
+        "prize_labels": [
+          "A賞",
+          "B賞",
+          "C賞",
+          "D賞",
+          "E賞",
+          "F賞",
+          "G賞",
+          "H賞"
+        ],
+        "campaign_slug_families": [
+          "onep"
+        ],
+        "manual_review_checklist": [
+          "Open both campaign URLs and compare official campaign title, sale/release period, and lineup.",
+          "If the campaign pages are separate release waves or reissues, mark every item_work_order_id as reissue_or_campaign_variant_keep_separate.",
+          "If the pages are duplicate mirrors of the same campaign, review each item work order for keep/drop.",
+          "Do not delete or merge until every affected item work order has manual_confirmed=true."
+        ],
+        "evidence_url": "https://1kuji.com/products/onep6",
+        "manual_note": "",
+        "blocked_until": "campaign_pair_reissue_or_duplicate_decision_confirmed",
+        "operator_instruction": "Confirm both official campaign pages before deciding. Keep separate for reissues/waves; only move to item keep/drop review when both pages prove an exact duplicate campaign relationship.",
+        "auto_merge_enabled": false,
+        "auto_delete_enabled": false
+      },
+      {
+        "patch_row_id": "ichiban-campaign-reissue-review-002",
+        "manual_confirmed": false,
+        "campaign_work_order_id": "ichiban-reissue-campaign-002",
+        "decision": "review_required",
+        "allowed_decisions": [
+          "campaign_pair_reissue_keep_all_separate",
+          "campaign_pair_duplicate_review_each_item_keep_drop",
+          "needs_more_source_evidence",
+          "review_required"
+        ],
+        "recommended_decision": "campaign_pair_reissue_keep_all_separate",
+        "likely_same_campaign_family_reissue": true,
+        "source_urls": [
+          "https://1kuji.com/products/kimetsu",
+          "https://1kuji.com/products/kimetsu2"
+        ],
+        "first_evidence_url": "https://1kuji.com/products/kimetsu",
+        "evidence_url_count": 2,
+        "item_work_order_count": 7,
+        "affected_item_work_order_ids": [
+          "ichiban-reissue-dedupe-014",
+          "ichiban-reissue-dedupe-015",
+          "ichiban-reissue-dedupe-016",
+          "ichiban-reissue-dedupe-017",
+          "ichiban-reissue-dedupe-018",
+          "ichiban-reissue-dedupe-019",
+          "ichiban-reissue-dedupe-020"
+        ],
+        "catalog_indexes": [
+          13770,
+          13771,
+          13772,
+          13773,
+          13774,
+          13775,
+          13776,
+          13777,
+          13778,
+          13779,
+          13780,
+          13781,
+          13782,
+          13783
+        ],
+        "prize_labels": [
+          "A賞",
+          "B賞",
+          "C賞",
+          "D賞",
+          "E賞",
+          "F賞",
+          "ラストワン賞"
+        ],
+        "campaign_slug_families": [
+          "kimetsu"
+        ],
+        "manual_review_checklist": [
+          "Open both campaign URLs and compare official campaign title, sale/release period, and lineup.",
+          "If the campaign pages are separate release waves or reissues, mark every item_work_order_id as reissue_or_campaign_variant_keep_separate.",
+          "If the pages are duplicate mirrors of the same campaign, review each item work order for keep/drop.",
+          "Do not delete or merge until every affected item work order has manual_confirmed=true."
+        ],
+        "evidence_url": "https://1kuji.com/products/kimetsu",
+        "manual_note": "",
+        "blocked_until": "campaign_pair_reissue_or_duplicate_decision_confirmed",
+        "operator_instruction": "Confirm both official campaign pages before deciding. Keep separate for reissues/waves; only move to item keep/drop review when both pages prove an exact duplicate campaign relationship.",
+        "auto_merge_enabled": false,
+        "auto_delete_enabled": false
+      },
+      {
+        "patch_row_id": "ichiban-campaign-reissue-review-003",
+        "manual_confirmed": false,
+        "campaign_work_order_id": "ichiban-reissue-campaign-003",
+        "decision": "review_required",
+        "allowed_decisions": [
+          "campaign_pair_reissue_keep_all_separate",
+          "campaign_pair_duplicate_review_each_item_keep_drop",
+          "needs_more_source_evidence",
+          "review_required"
+        ],
+        "recommended_decision": "campaign_pair_reissue_keep_all_separate",
+        "likely_same_campaign_family_reissue": true,
+        "source_urls": [
+          "https://1kuji.com/products/naruto_wcf",
+          "https://1kuji.com/products/naruto_wcf2"
+        ],
+        "first_evidence_url": "https://1kuji.com/products/naruto_wcf",
+        "evidence_url_count": 2,
+        "item_work_order_count": 3,
+        "affected_item_work_order_ids": [
+          "ichiban-reissue-dedupe-003",
+          "ichiban-reissue-dedupe-004",
+          "ichiban-reissue-dedupe-005"
+        ],
+        "catalog_indexes": [
+          14302,
+          14303,
+          14304,
+          14305,
+          14306,
+          14307
+        ],
+        "prize_labels": [
+          "A賞",
+          "B賞",
+          "C賞"
+        ],
+        "campaign_slug_families": [
+          "naruto_wcf"
+        ],
+        "manual_review_checklist": [
+          "Open both campaign URLs and compare official campaign title, sale/release period, and lineup.",
+          "If the campaign pages are separate release waves or reissues, mark every item_work_order_id as reissue_or_campaign_variant_keep_separate.",
+          "If the pages are duplicate mirrors of the same campaign, review each item work order for keep/drop.",
+          "Do not delete or merge until every affected item work order has manual_confirmed=true."
+        ],
+        "evidence_url": "https://1kuji.com/products/naruto_wcf",
+        "manual_note": "",
+        "blocked_until": "campaign_pair_reissue_or_duplicate_decision_confirmed",
+        "operator_instruction": "Confirm both official campaign pages before deciding. Keep separate for reissues/waves; only move to item keep/drop review when both pages prove an exact duplicate campaign relationship.",
+        "auto_merge_enabled": false,
+        "auto_delete_enabled": false
+      },
+      {
+        "patch_row_id": "ichiban-campaign-reissue-review-004",
+        "manual_confirmed": false,
+        "campaign_work_order_id": "ichiban-reissue-campaign-004",
+        "decision": "review_required",
+        "allowed_decisions": [
+          "campaign_pair_reissue_keep_all_separate",
+          "campaign_pair_duplicate_review_each_item_keep_drop",
+          "needs_more_source_evidence",
+          "review_required"
+        ],
+        "recommended_decision": "campaign_pair_reissue_keep_all_separate",
+        "likely_same_campaign_family_reissue": true,
+        "source_urls": [
+          "https://1kuji.com/products/haikyu4",
+          "https://1kuji.com/products/haikyu8"
+        ],
+        "first_evidence_url": "https://1kuji.com/products/haikyu4",
+        "evidence_url_count": 2,
+        "item_work_order_count": 2,
+        "affected_item_work_order_ids": [
+          "ichiban-reissue-dedupe-001",
+          "ichiban-reissue-dedupe-002"
+        ],
+        "catalog_indexes": [
+          14797,
+          14798,
+          14817,
+          14818
+        ],
+        "prize_labels": [
+          "ラストワン賞",
+          "缶バッジ"
+        ],
+        "campaign_slug_families": [
+          "haikyu"
+        ],
+        "manual_review_checklist": [
+          "Open both campaign URLs and compare official campaign title, sale/release period, and lineup.",
+          "If the campaign pages are separate release waves or reissues, mark every item_work_order_id as reissue_or_campaign_variant_keep_separate.",
+          "If the pages are duplicate mirrors of the same campaign, review each item work order for keep/drop.",
+          "Do not delete or merge until every affected item work order has manual_confirmed=true."
+        ],
+        "evidence_url": "https://1kuji.com/products/haikyu4",
+        "manual_note": "",
+        "blocked_until": "campaign_pair_reissue_or_duplicate_decision_confirmed",
+        "operator_instruction": "Confirm both official campaign pages before deciding. Keep separate for reissues/waves; only move to item keep/drop review when both pages prove an exact duplicate campaign relationship.",
+        "auto_merge_enabled": false,
+        "auto_delete_enabled": false
+      }
+    ]
   },
   "completion_readiness": {
     "status": "ichiban_reissue_review_required",

@@ -11206,6 +11206,12 @@ def update_reports(write: bool) -> dict[str, Any]:
                 "completion_readiness",
                 {},
             ),
+            "campaign_first_confirmation_patch_template": (
+                ichiban_kuji_prize_policy_issue_queue.get(
+                    "campaign_first_confirmation_patch_template",
+                    {},
+                )
+            ),
         }
         target["ichiban_kuji_reissue_deduplication"] = {
             "public_report": f"data/{ICHIIBAN_KUJI_REISSUE_DEDUPLICATION.name}",
