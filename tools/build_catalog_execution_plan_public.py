@@ -531,8 +531,21 @@ def _build_plan(load_report) -> dict[str, Any]:
                     "next_focus_pack_rows": _count(source_focus_template_summary, "next_focus_pack_rows"),
                     "next_official_search_url": source_focus_template_summary.get("next_official_search_url"),
                     "current_focus_pack_id": source_next_focus_pack_summary.get("focus_pack_id"),
+                    "current_focus_manual_quarantine": source_next_focus_pack_summary.get(
+                        "current_focus_manual_quarantine"
+                    ),
+                    "current_focus_resolution_status": source_next_focus_pack_summary.get(
+                        "current_focus_resolution_status"
+                    ),
+                    "current_focus_quarantine_reason": source_next_focus_pack_summary.get(
+                        "current_focus_quarantine_reason"
+                    ),
+                    "recommended_active_focus_pack_id": source_next_focus_pack_summary.get(
+                        "recommended_active_focus_pack_id"
+                    ),
                     "pack_queue_preview_count": _count(source_next_focus_pack_summary, "pack_queue_preview_count"),
                     "next_pack_after_current": source_next_focus_pack_summary.get("next_pack_after_current"),
+                    "recommended_active_pack": source_next_focus_pack.get("recommended_active_pack"),
                     "pack_queue_preview": source_next_focus_pack.get("pack_queue_preview", []),
                     "manual_confirmed_rows": _count(source_focus_template_summary, "manual_confirmed_rows"),
                     "dry_run_updated_rows": _count(source_focus_template_import, "updated_rows"),

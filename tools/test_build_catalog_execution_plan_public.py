@@ -149,11 +149,22 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     "focus_pack_id": "source-discovery-focus-001",
                     "pack_queue_preview_count": 2,
                     "next_pack_after_current": "source-discovery-focus-002",
+                    "current_focus_manual_quarantine": True,
+                    "current_focus_resolution_status": (
+                        "manual_source_search_required_after_official_cache_miss"
+                    ),
+                    "current_focus_quarantine_reason": "official_cache_safe_exact_match_absent",
+                    "recommended_active_focus_pack_id": "source-discovery-focus-002",
+                },
+                "recommended_active_pack": {
+                    "focus_pack_id": "source-discovery-focus-002",
+                    "is_recommended_active_pack": True,
                 },
                 "pack_queue_preview": [
                     {
                         "focus_pack_id": "source-discovery-focus-001",
                         "is_current_pack": True,
+                        "manual_quarantine": True,
                         "source_store": "Animate",
                         "target_category": "Acrylic stand",
                         "remaining_review_rows": 4,
@@ -161,6 +172,7 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
                     {
                         "focus_pack_id": "source-discovery-focus-002",
                         "is_current_pack": False,
+                        "is_recommended_active_pack": True,
                         "source_store": "Animate",
                         "target_category": "Badge",
                         "remaining_review_rows": 4,
@@ -1023,6 +1035,23 @@ class BuildCatalogExecutionPlanPublicTest(unittest.TestCase):
         self.assertEqual(source_focus["evidence"]["next_target_category"], "Acrylic stand")
         self.assertEqual(source_focus["evidence"]["next_focus_pack_rows"], 4)
         self.assertEqual(source_focus["evidence"]["current_focus_pack_id"], "source-discovery-focus-001")
+        self.assertTrue(source_focus["evidence"]["current_focus_manual_quarantine"])
+        self.assertEqual(
+            source_focus["evidence"]["current_focus_resolution_status"],
+            "manual_source_search_required_after_official_cache_miss",
+        )
+        self.assertEqual(
+            source_focus["evidence"]["current_focus_quarantine_reason"],
+            "official_cache_safe_exact_match_absent",
+        )
+        self.assertEqual(
+            source_focus["evidence"]["recommended_active_focus_pack_id"],
+            "source-discovery-focus-002",
+        )
+        self.assertEqual(
+            source_focus["evidence"]["recommended_active_pack"]["focus_pack_id"],
+            "source-discovery-focus-002",
+        )
         self.assertEqual(source_focus["evidence"]["pack_queue_preview_count"], 2)
         self.assertEqual(source_focus["evidence"]["next_pack_after_current"], "source-discovery-focus-002")
         self.assertEqual(

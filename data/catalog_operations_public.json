@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-25T03:50:50Z",
+  "generated_at": "2026-07-25T05:25:54Z",
   "summary": {
     "catalog_rows": 20347,
     "coverage": {
@@ -52,6 +52,9 @@
       "source_discovery_focus_template_work_order_packs": 62,
       "source_discovery_focus_template_dry_run_skipped_rows": 667,
       "source_discovery_next_focus_pack_rows": 20,
+      "source_discovery_next_focus_pack_manual_quarantine": true,
+      "source_discovery_next_focus_pack_quarantine_reason": "official_cache_safe_exact_match_absent",
+      "source_discovery_recommended_active_focus_pack_id": "source-discovery-focus-002",
       "source_discovery_focus_pack_progress_queues": 62,
       "source_discovery_focus_pack_progress_remaining_rows": 667,
       "source_discovery_starter_queue_rows": 672,
@@ -6657,9 +6660,39 @@
       "next_target_category": "키링",
       "next_focus_pack_rows": 20,
       "next_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
+      "current_focus_pack_id": "source-discovery-focus-001",
+      "current_focus_manual_quarantine": true,
+      "current_focus_resolution_status": "manual_source_search_required_after_official_cache_miss",
+      "current_focus_quarantine_reason": "official_cache_safe_exact_match_absent",
+      "recommended_active_focus_pack_id": "source-discovery-focus-002",
+      "recommended_active_pack": {
+        "priority": 2,
+        "focus_pack_id": "source-discovery-focus-002",
+        "is_current_pack": false,
+        "is_recommended_active_pack": true,
+        "manual_quarantine": false,
+        "quarantine_reason": null,
+        "source_store": "엔스카이",
+        "target_category": "키링",
+        "row_count": 20,
+        "confirmed_source_rows": 0,
+        "remaining_review_rows": 20,
+        "blocked_rows": 20,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "review_status": "not_started",
+        "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+        "next_action": "open this focus pack next while the previous pack is quarantined"
+      },
       "dry_run_updated_rows": 0,
       "dry_run_skipped_rows": 667,
-      "recommended_next_action": "Open the focus template work_order and confirm exact product source URLs for the next store/category pack."
+      "recommended_next_action": "Hold the cache-miss current pack for manual source research and open the recommended active pack next."
     },
     {
       "priority": 20,
@@ -6667,11 +6700,40 @@
       "public_report": "data/source_discovery_next_focus_pack_public.json",
       "focus_pack_id": "source-discovery-focus-001",
       "pack_items": 20,
+      "current_focus_manual_quarantine": true,
+      "current_focus_resolution_status": "manual_source_search_required_after_official_cache_miss",
+      "current_focus_quarantine_reason": "official_cache_safe_exact_match_absent",
+      "recommended_active_focus_pack_id": "source-discovery-focus-002",
+      "recommended_active_pack": {
+        "priority": 2,
+        "focus_pack_id": "source-discovery-focus-002",
+        "is_current_pack": false,
+        "is_recommended_active_pack": true,
+        "manual_quarantine": false,
+        "quarantine_reason": null,
+        "source_store": "엔스카이",
+        "target_category": "키링",
+        "row_count": 20,
+        "confirmed_source_rows": 0,
+        "remaining_review_rows": 20,
+        "blocked_rows": 20,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "review_status": "not_started",
+        "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+        "next_action": "open this focus pack next while the previous pack is quarantined"
+      },
       "focus_pack_progress_queue_count": 62,
       "focus_pack_progress_remaining_rows": 667,
       "current_remaining_review_rows": 20,
       "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
-      "recommended_next_action": "Work the current source discovery focus pack first, then move down the progress queue."
+      "recommended_next_action": "Skip automatic work on the quarantined current pack; open the recommended active pack and keep exact-source review manual."
     },
     {
       "priority": 20,
@@ -10617,7 +10679,7 @@
         "next_execution_open_rows": 813,
         "next_execution_next_batch_rows": 166,
         "first_next_execution_lane": "exact_source_url_review",
-        "first_next_execution_status": "next",
+        "first_next_execution_status": "manual_cache_miss_research_required",
         "first_next_execution_rows": 20,
         "first_next_execution_public_report": "data/source_discovery_next_focus_exact_url_review_queue_public.json",
         "handoff_status": "current_focus_fallback_review_required",

@@ -5092,6 +5092,19 @@ class PublicCatalogReportTests(unittest.TestCase):
             open_queues.get("source_discovery_next_focus_pack_rows"),
             source_next_focus_pack_summary.get("pack_items"),
         )
+        if "source_discovery_next_focus_pack_manual_quarantine" in open_queues:
+            self.assertEqual(
+                open_queues.get("source_discovery_next_focus_pack_manual_quarantine"),
+                source_next_focus_pack_summary.get("current_focus_manual_quarantine", False),
+            )
+            self.assertEqual(
+                open_queues.get("source_discovery_next_focus_pack_quarantine_reason"),
+                source_next_focus_pack_summary.get("current_focus_quarantine_reason"),
+            )
+            self.assertEqual(
+                open_queues.get("source_discovery_recommended_active_focus_pack_id"),
+                source_next_focus_pack_summary.get("recommended_active_focus_pack_id"),
+            )
         self.assertEqual(
             open_queues.get("source_discovery_focus_pack_progress_queues"),
             source_next_focus_pack_summary.get("focus_pack_progress_queue_count"),
@@ -5104,6 +5117,15 @@ class PublicCatalogReportTests(unittest.TestCase):
             source_next_focus_pack_next_action.get("focus_pack_progress_queue_count"),
             source_next_focus_pack_summary.get("focus_pack_progress_queue_count"),
         )
+        if "current_focus_manual_quarantine" in source_next_focus_pack_next_action:
+            self.assertEqual(
+                source_next_focus_pack_next_action.get("current_focus_manual_quarantine"),
+                source_next_focus_pack_summary.get("current_focus_manual_quarantine"),
+            )
+            self.assertEqual(
+                source_next_focus_pack_next_action.get("recommended_active_focus_pack_id"),
+                source_next_focus_pack_summary.get("recommended_active_focus_pack_id"),
+            )
         self.assertGreater(len(source_next_focus_pack_agent_batches), 0)
         self.assertEqual(
             source_next_focus_pack_agent_batches[0]["review_summary"].get(

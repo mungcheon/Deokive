@@ -355,6 +355,19 @@ def build() -> dict[str, Any]:
             "work_order_pack_count": public_focus_template_summary.get("work_order_pack_count"),
             "current_focus_pack_id": public_source_next_focus_summary.get("focus_pack_id"),
             "current_focus_pack_items": public_source_next_focus_summary.get("pack_items"),
+            "current_focus_manual_quarantine": public_source_next_focus_summary.get(
+                "current_focus_manual_quarantine"
+            ),
+            "current_focus_resolution_status": public_source_next_focus_summary.get(
+                "current_focus_resolution_status"
+            ),
+            "current_focus_quarantine_reason": public_source_next_focus_summary.get(
+                "current_focus_quarantine_reason"
+            ),
+            "recommended_active_focus_pack_id": public_source_next_focus_summary.get(
+                "recommended_active_focus_pack_id"
+            ),
+            "recommended_active_pack": public_source_next_focus_pack.get("recommended_active_pack"),
             "focus_pack_progress_queue_count": public_source_next_focus_summary.get("focus_pack_progress_queue_count"),
             "focus_pack_progress_remaining_rows": public_source_next_focus_summary.get(
                 "focus_pack_progress_remaining_rows"

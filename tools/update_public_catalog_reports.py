@@ -4559,9 +4559,27 @@ def build_operations_public(
             "next_target_category": source_focus_template_summary.get("next_target_category"),
             "next_focus_pack_rows": source_focus_template_summary.get("next_focus_pack_rows", 0),
             "next_official_search_url": source_focus_template_summary.get("next_official_search_url"),
+            "current_focus_pack_id": source_next_focus_pack_summary.get("focus_pack_id"),
+            "current_focus_manual_quarantine": source_next_focus_pack_summary.get(
+                "current_focus_manual_quarantine"
+            ),
+            "current_focus_resolution_status": source_next_focus_pack_summary.get(
+                "current_focus_resolution_status"
+            ),
+            "current_focus_quarantine_reason": source_next_focus_pack_summary.get(
+                "current_focus_quarantine_reason"
+            ),
+            "recommended_active_focus_pack_id": source_next_focus_pack_summary.get(
+                "recommended_active_focus_pack_id"
+            ),
+            "recommended_active_pack": source_next_focus_pack.get("recommended_active_pack"),
             "dry_run_updated_rows": source_focus_template_import.get("updated_rows", 0),
             "dry_run_skipped_rows": source_focus_template_import.get("skipped_rows", 0),
-            "recommended_next_action": "Open the focus template work_order and confirm exact product source URLs for the next store/category pack.",
+            "recommended_next_action": (
+                "Hold the cache-miss current pack for manual source research and open the recommended active pack next."
+                if source_next_focus_pack_summary.get("current_focus_manual_quarantine")
+                else "Open the focus template work_order and confirm exact product source URLs for the next store/category pack."
+            ),
         } if source_focus_template_summary else None,
         {
             "priority": 20,
@@ -4569,6 +4587,19 @@ def build_operations_public(
             "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_PACK.name}",
             "focus_pack_id": source_next_focus_pack_summary.get("focus_pack_id"),
             "pack_items": source_next_focus_pack_summary.get("pack_items", 0),
+            "current_focus_manual_quarantine": source_next_focus_pack_summary.get(
+                "current_focus_manual_quarantine"
+            ),
+            "current_focus_resolution_status": source_next_focus_pack_summary.get(
+                "current_focus_resolution_status"
+            ),
+            "current_focus_quarantine_reason": source_next_focus_pack_summary.get(
+                "current_focus_quarantine_reason"
+            ),
+            "recommended_active_focus_pack_id": source_next_focus_pack_summary.get(
+                "recommended_active_focus_pack_id"
+            ),
+            "recommended_active_pack": source_next_focus_pack.get("recommended_active_pack"),
             "focus_pack_progress_queue_count": source_next_focus_pack_summary.get(
                 "focus_pack_progress_queue_count", 0
             ),
@@ -4577,7 +4608,11 @@ def build_operations_public(
             ),
             "current_remaining_review_rows": source_next_focus_pack_summary.get("remaining_review_rows", 0),
             "first_official_search_url": source_next_focus_pack_summary.get("first_official_search_url"),
-            "recommended_next_action": "Work the current source discovery focus pack first, then move down the progress queue.",
+            "recommended_next_action": (
+                "Skip automatic work on the quarantined current pack; open the recommended active pack and keep exact-source review manual."
+                if source_next_focus_pack_summary.get("current_focus_manual_quarantine")
+                else "Work the current source discovery focus pack first, then move down the progress queue."
+            ),
         } if source_next_focus_pack_summary else None,
         {
             "priority": 20,
@@ -5914,6 +5949,15 @@ def build_operations_public(
     if source_next_focus_pack_summary:
         open_review_queues["source_discovery_next_focus_pack_rows"] = source_next_focus_pack_summary.get(
             "pack_items", 0
+        )
+        open_review_queues["source_discovery_next_focus_pack_manual_quarantine"] = (
+            source_next_focus_pack_summary.get("current_focus_manual_quarantine", False)
+        )
+        open_review_queues["source_discovery_next_focus_pack_quarantine_reason"] = (
+            source_next_focus_pack_summary.get("current_focus_quarantine_reason")
+        )
+        open_review_queues["source_discovery_recommended_active_focus_pack_id"] = (
+            source_next_focus_pack_summary.get("recommended_active_focus_pack_id")
         )
         open_review_queues["source_discovery_focus_pack_progress_queues"] = source_next_focus_pack_summary.get(
             "focus_pack_progress_queue_count", 0
@@ -10151,6 +10195,15 @@ def validate_report_consistency(
     if source_next_focus_pack_summary:
         expected_open_queues["source_discovery_next_focus_pack_rows"] = source_next_focus_pack_summary.get(
             "pack_items", 0
+        )
+        expected_open_queues["source_discovery_next_focus_pack_manual_quarantine"] = (
+            source_next_focus_pack_summary.get("current_focus_manual_quarantine", False)
+        )
+        expected_open_queues["source_discovery_next_focus_pack_quarantine_reason"] = (
+            source_next_focus_pack_summary.get("current_focus_quarantine_reason")
+        )
+        expected_open_queues["source_discovery_recommended_active_focus_pack_id"] = (
+            source_next_focus_pack_summary.get("recommended_active_focus_pack_id")
         )
         expected_open_queues["source_discovery_focus_pack_progress_queues"] = (
             source_next_focus_pack_summary.get("focus_pack_progress_queue_count", 0)

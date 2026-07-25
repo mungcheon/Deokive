@@ -630,18 +630,32 @@ class CatalogOperationsDashboardTests(unittest.TestCase):
                         "summary": {
                             "focus_pack_id": "source-discovery-focus-001",
                             "pack_items": 20,
+                            "current_focus_manual_quarantine": True,
+                            "current_focus_resolution_status": (
+                                "manual_source_search_required_after_official_cache_miss"
+                            ),
+                            "current_focus_quarantine_reason": (
+                                "official_cache_safe_exact_match_absent"
+                            ),
+                            "recommended_active_focus_pack_id": "source-discovery-focus-002",
                             "focus_pack_progress_queue_count": 24,
                             "focus_pack_progress_remaining_rows": 427,
+                        },
+                        "recommended_active_pack": {
+                            "focus_pack_id": "source-discovery-focus-002",
+                            "is_recommended_active_pack": True,
                         },
                         "focus_pack_progress_queue": [
                             {
                                 "focus_pack_id": "source-discovery-focus-001",
+                                "manual_quarantine": True,
                                 "source_store": "Animate",
                                 "target_category": "Acrylic stand",
                                 "remaining_review_rows": 20,
                             },
                             {
                                 "focus_pack_id": "source-discovery-focus-002",
+                                "is_recommended_active_pack": True,
                                 "source_store": "Animate",
                                 "target_category": "Badge",
                                 "remaining_review_rows": 20,
@@ -1028,6 +1042,23 @@ class CatalogOperationsDashboardTests(unittest.TestCase):
         self.assertEqual(public_image_board["next_official_search_url"], "https://animate.example/search?q=stand")
         self.assertEqual(public_image_board["current_focus_pack_id"], "source-discovery-focus-001")
         self.assertEqual(public_image_board["current_focus_pack_items"], 20)
+        self.assertTrue(public_image_board["current_focus_manual_quarantine"])
+        self.assertEqual(
+            public_image_board["current_focus_resolution_status"],
+            "manual_source_search_required_after_official_cache_miss",
+        )
+        self.assertEqual(
+            public_image_board["current_focus_quarantine_reason"],
+            "official_cache_safe_exact_match_absent",
+        )
+        self.assertEqual(
+            public_image_board["recommended_active_focus_pack_id"],
+            "source-discovery-focus-002",
+        )
+        self.assertEqual(
+            public_image_board["recommended_active_pack"]["focus_pack_id"],
+            "source-discovery-focus-002",
+        )
         self.assertEqual(public_image_board["focus_pack_progress_queue_count"], 24)
         self.assertEqual(public_image_board["focus_pack_progress_remaining_rows"], 427)
         self.assertEqual(public_image_board["focus_pack_progress_preview"][0]["remaining_review_rows"], 20)
