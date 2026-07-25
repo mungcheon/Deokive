@@ -10,6 +10,45 @@ import build_source_discovery_next_focus_split_queues_public as split_queues
 
 
 class SourceDiscoveryNextFocusSplitQueueTests(unittest.TestCase):
+    def test_exact_url_query_prioritizes_series_context(self):
+        payload = {
+            "review_table": [
+                {
+                    "catalog_index": 1568,
+                    "focus_pack_id": "source-discovery-focus-002",
+                    "source_store": "엔스카이",
+                    "affiliation": "葬送のフリーレン",
+                    "category": "키링",
+                    "name_ko": "펀 러버 스트랩",
+                    "name_ja": "フェルン ラバーストラップ",
+                    "primary_review_url": "https://www.google.com/search?q=example",
+                    "primary_review_url_kind": "domain_limited_web_search",
+                    "can_confirm_source_url_after_page_match": True,
+                    "identity_review_status": "exact_page_match_review_ready",
+                }
+            ]
+        }
+
+        exact_report, _ = split_queues.build_reports(
+            payload,
+            fetch_audit={"items": []},
+            generated_at="2026-07-25T00:00:00Z",
+        )
+
+        queries = exact_report["items"][0]["exact_source_search_queries"]
+        self.assertEqual(queries[0]["label"], "google_context_title_detail_1")
+        self.assertEqual(
+            queries[0]["query"],
+            'site:www.enskyshop.com/products/detail "葬送のフリーレン フェルン ラバーストラップ"',
+        )
+        self.assertEqual(queries[1]["label"], "duckduckgo_context_title_detail_1")
+        self.assertIn(
+            ("google_context_title_detail_1", 1),
+            exact_report["summary"]["rediscovery_work_order_label_counts"],
+        )
+        patch_row = exact_report["source_url_confirmation_patch_template"]["rows"][0]
+        self.assertEqual(patch_row["affiliation"], "葬送のフリーレン")
+
     def test_exact_url_queue_exposes_manual_patch_template(self):
         payload = {
             "review_table": [

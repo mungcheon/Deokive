@@ -20,6 +20,11 @@ DATA = ROOT / "data"
 DEFAULT_INPUT = DATA / "source_discovery_next_focus_fallback_queue_public.json"
 EXACT_URL_QUEUE = DATA / "source_discovery_next_focus_exact_url_review_queue_public.json"
 IDENTITY_BACKFILL_QUEUE = DATA / "source_discovery_next_focus_identity_backfill_queue_public.json"
+AFFILIATION_SEARCH_ALIASES = {
+    "귀멸의 칼날": ["鬼滅の刃"],
+    "원피스": ["ONE PIECE", "ワンピース"],
+    "장송의 프리렌": ["葬送のフリーレン"],
+}
 
 
 def _now_utc() -> str:
@@ -123,6 +128,23 @@ def _parenthetical_variant(value: Any) -> str:
     return title.split("(", 1)[1].split(")", 1)[0].strip()
 
 
+def _context_titles(row: dict[str, Any]) -> list[str]:
+    title = _compact_title(row.get("name_ja") or row.get("name_ko"))
+    context = _compact_title(row.get("series_name") or row.get("affiliation"))
+    if not title or not context:
+        return []
+    contexts = AFFILIATION_SEARCH_ALIASES.get(context) or [context]
+    titles: list[str] = []
+    for context_term in contexts:
+        context_term = _compact_title(context_term)
+        if not context_term:
+            continue
+        context_title = title if context_term in title else f"{context_term} {title}"
+        if context_title not in titles:
+            titles.append(context_title)
+    return titles
+
+
 def _search_url(query: str, *, engine: str) -> str:
     encoded = quote_plus(query)
     if engine == "google":
@@ -134,9 +156,25 @@ def _search_url(query: str, *, engine: str) -> str:
 
 def _exact_source_search_queries(row: dict[str, Any]) -> list[dict[str, str]]:
     title = _compact_title(row.get("name_ja") or row.get("name_ko"))
+    context_titles = _context_titles(row)
     base_title = _title_without_parenthetical(title)
     variant = _parenthetical_variant(title)
     queries: list[tuple[str, str, str]] = []
+    for context_index, context_title in enumerate(context_titles, start=1):
+        queries.append(
+            (
+                f"google_context_title_detail_{context_index}",
+                f'site:www.enskyshop.com/products/detail "{context_title}"',
+                "google",
+            )
+        )
+        queries.append(
+            (
+                f"duckduckgo_context_title_detail_{context_index}",
+                f'site:enskyshop.com/products/detail "{context_title}"',
+                "duckduckgo",
+            )
+        )
     if title:
         queries.append(
             (
@@ -395,6 +433,8 @@ def _exact_item(row: dict[str, Any], fetch_audit_by_index: dict[int, dict[str, A
         "catalog_index": row.get("catalog_index"),
         "focus_pack_id": row.get("focus_pack_id"),
         "source_store": row.get("source_store"),
+        "affiliation": row.get("affiliation"),
+        "series_name": row.get("series_name"),
         "category": row.get("category"),
         "name_ko": row.get("name_ko"),
         "name_ja": row.get("name_ja"),
@@ -459,6 +499,8 @@ def _source_url_patch_row(item: dict[str, Any], index: int) -> dict[str, Any]:
         "manual_evidence_url": "",
         "manual_note": "",
         "source_store": item.get("source_store"),
+        "affiliation": item.get("affiliation"),
+        "series_name": item.get("series_name"),
         "category": item.get("category"),
         "name_ko": item.get("name_ko"),
         "name_ja": item.get("name_ja"),
@@ -577,6 +619,8 @@ def _identity_item(row: dict[str, Any]) -> dict[str, Any]:
         "catalog_index": row.get("catalog_index"),
         "focus_pack_id": row.get("focus_pack_id"),
         "source_store": row.get("source_store"),
+        "affiliation": row.get("affiliation"),
+        "series_name": row.get("series_name"),
         "category": row.get("category"),
         "name_ko": row.get("name_ko"),
         "name_ja": row.get("name_ja"),
