@@ -67,9 +67,33 @@ def _template_item(
     template = dict(template) if isinstance(template, dict) else {}
     source_hint = _source_hint_for(item, template, hints_by_index)
     source_url = item.get("source_url") or template.get("candidate_source_url") or template.get("evidence_url")
-    candidate_source_url = str(source_hint.get("candidate_source_url") or "") if source_hint else ""
-    candidate_image_url = str(source_hint.get("candidate_image_url") or "") if source_hint else ""
-    candidate_title = str(source_hint.get("candidate_title") or "") if source_hint else ""
+    candidate_source_url = (
+        str(
+            source_hint.get("candidate_source_url")
+            or source_hint.get("candidate_source_url_hint")
+            or ""
+        )
+        if source_hint
+        else ""
+    )
+    candidate_image_url = (
+        str(
+            source_hint.get("candidate_image_url")
+            or source_hint.get("candidate_image_url_hint")
+            or ""
+        )
+        if source_hint
+        else ""
+    )
+    candidate_title = (
+        str(
+            source_hint.get("candidate_title")
+            or source_hint.get("candidate_title_hint")
+            or ""
+        )
+        if source_hint
+        else ""
+    )
     source_url_review_lane = str(source_hint.get("source_url_review_lane") or "") if source_hint else ""
     blockers = source_hint.get("source_url_review_blockers") if source_hint else []
     source_url_review_blockers = blockers if isinstance(blockers, list) else []

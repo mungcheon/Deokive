@@ -110,6 +110,52 @@ class BuildImageAttachmentConfirmedTemplatePublicTest(unittest.TestCase):
         self.assertTrue(item["source_url_update_required"])
         self.assertFalse(item["representative_image"])
 
+    def test_build_template_preserves_source_url_hint_fields(self) -> None:
+        action_queue = {
+            "batches": [
+                {
+                    "batch_id": "image-attachment-action-001",
+                    "workflow": "replace_generic_source_then_extract_image",
+                    "source_store": "Stellive Store",
+                    "items": [
+                        {
+                            "catalog_index": 20,
+                            "workflow": "replace_generic_source_then_extract_image",
+                            "source_store": "Stellive Store",
+                            "name_ko": "Acrylic Stand",
+                            "category": "Acrylic Stand",
+                            "source_url_update_required": True,
+                            "review_lane": "source_url_replacement_first",
+                            "catalog_field_import_template": {
+                                "row_index": 20,
+                                "field": "image_url",
+                            },
+                        }
+                    ],
+                }
+            ]
+        }
+        source_url_template = {
+            "items": [
+                {
+                    "row_index": 20,
+                    "candidate_source_url_hint": "https://fanding.kr/@stellive/shop/200",
+                    "candidate_image_url_hint": "https://cdn.example.test/stand.webp",
+                    "candidate_title_hint": "Acrylic Stand candidate",
+                    "source_url_review_lane": "low_confidence_candidate_review",
+                }
+            ]
+        }
+
+        template = builder.build_template(action_queue, source_url_template)
+
+        item = template["items"][0]
+        self.assertEqual(item["candidate_source_url"], "https://fanding.kr/@stellive/shop/200")
+        self.assertEqual(item["candidate_image_url"], "https://cdn.example.test/stand.webp")
+        self.assertEqual(item["candidate_title"], "Acrylic Stand candidate")
+        self.assertEqual(item["evidence_url"], "https://fanding.kr/@stellive/shop/200")
+        self.assertEqual(template["summary"]["source_url_candidate_prefilled_rows"], 1)
+
 
 if __name__ == "__main__":
     unittest.main()

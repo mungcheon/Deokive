@@ -22,6 +22,7 @@ import build_deduplication_fast_review_public
 import build_ensky_cache_candidate_action_queue_public
 import build_gotouchi_official_candidate_review_queue_public
 import build_image_attachment_action_queue_public
+import build_image_attachment_confirmed_template_public
 import build_image_source_url_confirmed_template_public
 import build_ichiban_prize_policy_issue_queue_public
 import build_ichiban_prize_name_image_patch_candidates_public
@@ -810,6 +811,30 @@ def enrich_image_action_queue_source_url_review(
         template_rows,
         existing_rows,
     )
+    enriched["source_url_update_template"] = _merge_image_source_candidate_rows(
+        image_action_queue.get("source_url_update_template") or [],
+        template_rows,
+        existing_rows,
+    )
+    enriched["source_url_update_template_batches"] = (
+        _merge_image_source_candidate_template_batches(
+            image_action_queue.get("source_url_update_template_batches") or [],
+            template_rows,
+            existing_rows,
+        )
+    )
+    template_triage = (
+        build_image_attachment_action_queue_public._source_url_review_batch_triage(
+            enriched["source_url_update_template"]
+        )
+    )
+    next_triage = (
+        build_image_attachment_action_queue_public._source_url_review_batch_triage(
+            enriched_batch
+        )
+    )
+    enriched["source_url_update_template_triage"] = template_triage
+    enriched["next_source_url_review_batch_triage"] = next_triage
     summary = dict(enriched.get("summary") or {})
     summary["source_url_candidate_status_counts"] = _count_pairs(
         enriched_batch, "candidate_status"
@@ -817,7 +842,43 @@ def enrich_image_action_queue_source_url_review(
     summary["source_url_review_lane_counts"] = _count_pairs(
         enriched_batch, "source_url_review_lane"
     )
+    summary["source_url_update_candidate_hint_rows"] = template_triage[
+        "candidate_hint_rows"
+    ]
+    summary["source_url_update_low_confidence_candidate_rows"] = template_triage[
+        "low_confidence_candidate_rows"
+    ]
+    summary["source_url_update_no_candidate_rows"] = template_triage[
+        "no_candidate_rows"
+    ]
+    summary["source_url_update_manual_search_rows"] = template_triage[
+        "manual_search_rows"
+    ]
+    summary["next_source_url_review_batch_candidate_hint_rows"] = next_triage[
+        "candidate_hint_rows"
+    ]
+    summary["next_source_url_review_batch_no_candidate_rows"] = next_triage[
+        "no_candidate_rows"
+    ]
+    summary["next_source_url_review_batch_manual_search_rows"] = next_triage[
+        "manual_search_rows"
+    ]
     enriched["summary"] = summary
+    handoff = dict(enriched.get("operator_handoff") or {})
+    handoff_steps = []
+    for step in handoff.get("handoff_steps") or []:
+        if not isinstance(step, dict):
+            continue
+        if step.get("lane") == "source_url_replacement_first":
+            step = {
+                **step,
+                "batch_triage": next_triage,
+                "template_triage": template_triage,
+            }
+        handoff_steps.append(step)
+    if handoff_steps:
+        handoff["handoff_steps"] = handoff_steps
+        enriched["operator_handoff"] = handoff
     enriched["blocking_dashboard"] = image_attachment_blocking_dashboard(enriched)
     return enriched
 
@@ -1055,6 +1116,44 @@ def _merge_existing_image_source_candidate_batches(
     return enriched_batches
 
 
+def _merge_image_source_candidate_rows(
+    rows: list[Any],
+    template_rows: dict[tuple[str, Any], dict[str, Any]],
+    existing_rows: dict[tuple[str, Any], dict[str, Any]],
+) -> list[dict[str, Any]]:
+    enriched_rows: list[dict[str, Any]] = []
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        enriched_row = dict(row)
+        template = _find_image_source_candidate_row(enriched_row, template_rows)
+        if isinstance(template, dict):
+            _copy_non_empty_image_source_candidate_context(enriched_row, template)
+            _merge_existing_source_url_review_guidance(enriched_row, template)
+        existing = _find_image_source_candidate_row(enriched_row, existing_rows)
+        enriched_rows.append(_merge_existing_image_source_candidate(enriched_row, existing))
+    return enriched_rows
+
+
+def _merge_image_source_candidate_template_batches(
+    batches: list[Any],
+    template_rows: dict[tuple[str, Any], dict[str, Any]],
+    existing_rows: dict[tuple[str, Any], dict[str, Any]],
+) -> list[dict[str, Any]]:
+    enriched_batches: list[dict[str, Any]] = []
+    for batch in batches:
+        if not isinstance(batch, dict):
+            continue
+        enriched_batch = dict(batch)
+        enriched_batch["rows"] = _merge_image_source_candidate_rows(
+            batch.get("rows") or [],
+            template_rows,
+            existing_rows,
+        )
+        enriched_batches.append(enriched_batch)
+    return enriched_batches
+
+
 def _image_source_candidate_rows_by_index(
     existing_action_queue: dict[str, Any],
 ) -> dict[tuple[str, Any], dict[str, Any]]:
@@ -1130,6 +1229,9 @@ _IMAGE_SOURCE_CANDIDATE_CONTEXT_KEYS = (
     "candidate_score",
     "candidate_count",
     "candidate_options",
+    "candidate_source_url_hint",
+    "candidate_image_url_hint",
+    "candidate_title_hint",
     "source_url_review_lane",
     "source_url_review_blockers",
     "match_diagnostics",
@@ -10773,9 +10875,11 @@ def update_reports(write: bool) -> dict[str, Any]:
         existing_action_queue=existing_image_attachment_action_queue,
     )
     image_attachment_confirmed_template = (
-        load_json(IMAGE_ATTACHMENT_CONFIRMED_TEMPLATE, {})
-        if IMAGE_ATTACHMENT_CONFIRMED_TEMPLATE.exists()
-        else {"items": []}
+        build_image_attachment_confirmed_template_public.build_template(
+            image_attachment_action_queue,
+            image_source_url_confirmed_template,
+            generated_at=generated_at,
+        )
     )
     image_attachment_template_import_dry_run = build_image_attachment_template_import_dry_run_public(
         image_attachment_confirmed_template,
@@ -13307,6 +13411,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(ENSKY_CACHE_CANDIDATE_ACTION_QUEUE, ensky_cache_candidate_action_queue)
         write_json(IMAGE_ATTACHMENT_ACTION_QUEUE, image_attachment_action_queue)
         write_json(IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE, image_source_url_confirmed_template)
+        write_json(IMAGE_ATTACHMENT_CONFIRMED_TEMPLATE, image_attachment_confirmed_template)
         write_json(IMAGE_ATTACHMENT_TEMPLATE_IMPORT_DRY_RUN, image_attachment_template_import_dry_run)
         write_json(MANUAL_SOURCE_URL_SEARCH_QUEUE, manual_source_url_search_queue)
         write_json(PROVIDER_MISSING_SOURCE_URL_QUEUE, provider_missing_source_url_queue)
@@ -13381,6 +13486,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(GOTOUCHI_OFFICIAL_CANDIDATE_REVIEW_QUEUE.relative_to(ROOT)),
             str(IMAGE_ATTACHMENT_ACTION_QUEUE.relative_to(ROOT)),
             str(IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE.relative_to(ROOT)),
+            str(IMAGE_ATTACHMENT_CONFIRMED_TEMPLATE.relative_to(ROOT)),
             str(MANUAL_SOURCE_URL_SEARCH_QUEUE.relative_to(ROOT)),
             str(PROVIDER_MISSING_SOURCE_URL_QUEUE.relative_to(ROOT)),
             str(CANDIDATE_SOURCE_URL_REVIEW_QUEUE.relative_to(ROOT)),

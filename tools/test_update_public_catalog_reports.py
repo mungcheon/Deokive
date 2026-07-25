@@ -4075,6 +4075,13 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         image_action = reports.load_json(reports.IMAGE_ATTACHMENT_ACTION_QUEUE)
         image_action_summary = image_action.get("summary", {})
+        image_attachment_template = reports.load_json(
+            reports.IMAGE_ATTACHMENT_CONFIRMED_TEMPLATE
+        )
+        image_attachment_template_summary = image_attachment_template.get(
+            "summary",
+            {},
+        )
         image_blocking_dashboard = image_action.get("blocking_dashboard", {})
         image_scorecard = next(
             row
@@ -4157,6 +4164,26 @@ class PublicCatalogReportTests(unittest.TestCase):
             image_action.get("source_url_update_template_triage", {}).get(
                 "manual_search_rows"
             ),
+        )
+        self.assertEqual(
+            image_attachment_template_summary.get(
+                "source_url_candidate_prefilled_rows"
+            ),
+            image_action_summary.get("source_url_update_candidate_hint_rows"),
+        )
+        self.assertGreaterEqual(
+            image_attachment_template_summary.get(
+                "source_url_candidate_prefilled_rows",
+                0,
+            ),
+            1,
+        )
+        self.assertTrue(
+            any(
+                item.get("candidate_image_url")
+                for item in image_attachment_template.get("items", [])
+                if item.get("source_url_update_required")
+            )
         )
         self.assertEqual(
             image_action.get("operator_handoff", {})
