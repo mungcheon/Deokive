@@ -10,6 +10,10 @@ import build_image_enrichment_queue as queue
 
 
 class ImageEnrichmentQueueTests(unittest.TestCase):
+    def test_default_input_is_public_catalog_source_of_truth(self) -> None:
+        self.assertEqual(queue.DEFAULT_INPUT.name, "catalog_public.json")
+        self.assertIn("data", queue.DEFAULT_INPUT.parts)
+
     def test_row_identifier_prefers_catalog_index_for_public_catalog_rows(self) -> None:
         self.assertEqual(queue.row_identifier({"catalog_index": 17613}, 17452), 17613)
         self.assertEqual(queue.row_identifier({"catalog_index": "17622"}, 17461), 17622)

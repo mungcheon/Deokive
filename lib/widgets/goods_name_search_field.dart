@@ -408,65 +408,29 @@ class _CatalogPickerActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: _catalogPickerActionBackground,
-      borderRadius: BorderRadius.circular(999),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(999),
-        onTap: onPressed,
-        child: Container(
-          constraints: const BoxConstraints(minWidth: 104, minHeight: 34),
+    return ConstrainedBox(
+      constraints: const BoxConstraints(minWidth: 104, minHeight: 34),
+      child: FilledButton.icon(
+        onPressed: onPressed,
+        icon: const Icon(Icons.add_rounded, size: 16),
+        label: Text(
+          label,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          softWrap: false,
+        ),
+        style: FilledButton.styleFrom(
+          backgroundColor: _catalogPickerActionBackground,
+          foregroundColor: _catalogPickerActionForeground,
           padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 8),
-          child: IconTheme(
-            data: const IconThemeData(
-              color: _catalogPickerActionForeground,
-              size: 16,
-            ),
-            child: DefaultTextStyle.merge(
-              style: const TextStyle(
-                color: _catalogPickerActionForeground,
-                fontSize: 12,
-                fontWeight: FontWeight.w900,
-                height: 1,
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.add_rounded,
-                    color: _catalogPickerActionForeground,
-                  ),
-                  const SizedBox(width: 4),
-                  Flexible(
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text(
-                        label,
-                        maxLines: 1,
-                        softWrap: false,
-                        overflow: TextOverflow.visible,
-                        style: const TextStyle(
-                          inherit: false,
-                          color: _catalogPickerActionForeground,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w900,
-                          height: 1,
-                          decoration: TextDecoration.none,
-                          shadows: [],
-                        ),
-                        strutStyle: const StrutStyle(
-                          fontSize: 12,
-                          height: 1.15,
-                          forceStrutHeight: true,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+          minimumSize: const Size(104, 34),
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          textStyle: const TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w900,
+            height: 1,
           ),
+          shape: const StadiumBorder(),
         ),
       ),
     );

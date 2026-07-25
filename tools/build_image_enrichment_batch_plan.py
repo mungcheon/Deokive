@@ -15,8 +15,8 @@ except Exception:
     pass
 
 ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_SEED = ROOT / "server" / "catalog_seed_from_local.json"
-DEFAULT_QUEUE = ROOT / "server" / "catalog_image_enrichment_queue.json"
+DEFAULT_SEED = ROOT / "data" / "catalog_public.json"
+DEFAULT_QUEUE = ROOT / "server" / "catalog_image_enrichment_queue_current.json"
 DEFAULT_JSON = ROOT / "server" / "catalog_image_enrichment_batch_plan.json"
 DEFAULT_CSV = ROOT / "server" / "catalog_image_enrichment_batch_plan.csv"
 DEFAULT_MD = ROOT / "server" / "catalog_image_enrichment_batch_plan.md"
@@ -54,6 +54,15 @@ INDIVIDUAL_HINTS = (
 
 def _read_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8-sig"))
+
+
+def _load_catalog_rows(path: Path) -> list[dict[str, Any]]:
+    payload = _read_json(path)
+    if isinstance(payload, dict) and isinstance(payload.get("items"), list):
+        return [row for row in payload["items"] if isinstance(row, dict)]
+    if isinstance(payload, list):
+        return [row for row in payload if isinstance(row, dict)]
+    raise ValueError(f"{path} must contain a JSON list or an object with items")
 
 
 def _compact_text(value: Any) -> str:
@@ -161,11 +170,9 @@ def _review_artifacts(batch_type: str) -> dict[str, str]:
 
 
 def build(seed_path: Path, queue_path: Path) -> dict[str, Any]:
-    seed_rows = _read_json(seed_path)
+    seed_rows = _load_catalog_rows(seed_path)
     queue_payload = _read_json(queue_path)
     queue = queue_payload.get("queue") or queue_payload.get("items") or []
-    if not isinstance(seed_rows, list):
-        raise ValueError(f"{seed_path} must contain a JSON list")
     if not isinstance(queue, list):
         raise ValueError(f"{queue_path} must contain queue/items list")
 

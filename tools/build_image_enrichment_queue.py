@@ -19,7 +19,7 @@ except Exception:
     pass
 
 ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_INPUT = ROOT / "server" / "catalog_seed_from_local.json"
+DEFAULT_INPUT = ROOT / "data" / "catalog_public.json"
 DEFAULT_JSON = ROOT / "server" / "catalog_image_enrichment_queue_current.json"
 DEFAULT_CSV = ROOT / "server" / "catalog_image_enrichment_queue_current.csv"
 

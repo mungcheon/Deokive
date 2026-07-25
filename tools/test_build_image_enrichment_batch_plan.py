@@ -12,6 +12,55 @@ import build_image_enrichment_batch_plan as plan
 
 
 class BuildImageEnrichmentBatchPlanTests(unittest.TestCase):
+    def test_default_inputs_use_public_catalog_and_current_image_queue(self) -> None:
+        self.assertEqual(plan.DEFAULT_SEED.name, "catalog_public.json")
+        self.assertIn("data", plan.DEFAULT_SEED.parts)
+        self.assertEqual(plan.DEFAULT_QUEUE.name, "catalog_image_enrichment_queue_current.json")
+
+    def test_loads_public_catalog_object_with_items(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            seed = root / "catalog_public.json"
+            queue = root / "queue.json"
+            seed.write_text(
+                json.dumps(
+                    {
+                        "items": [
+                            {
+                                "name_ko": "A acrylic stand alpha",
+                                "category": "acrylic stand",
+                                "character_name": "Alpha",
+                            }
+                        ]
+                    },
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+            queue.write_text(
+                json.dumps(
+                    {
+                        "queue": [
+                            {
+                                "row_index": 0,
+                                "name_ko": "A acrylic stand alpha",
+                                "category": "acrylic stand",
+                                "affiliation": "Series A",
+                                "source_store": "Store A",
+                                "strategy": "official_search",
+                            }
+                        ]
+                    },
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+
+            payload = plan.build(seed, queue)
+
+        self.assertEqual(payload["missing_images"], 1)
+        self.assertEqual(payload["workstreams"][0]["missing_images"], 1)
+
     def test_groups_character_rows_into_workstream_and_batches(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

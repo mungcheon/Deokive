@@ -415,99 +415,33 @@ class _CatalogImportActionButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: 48,
-      child: Material(
-        color: backgroundColor,
-        elevation: onPressed == null ? 0 : 3,
-        shape: const StadiumBorder(),
-        clipBehavior: Clip.antiAlias,
-        child: InkWell(
-          onTap: onPressed,
-          child: DecoratedBox(
-            decoration: ShapeDecoration(
-              shape: StadiumBorder(
-                side: BorderSide(
-                  color: onPressed == null
-                      ? foregroundColor.withValues(alpha: 0.12)
-                      : foregroundColor.withValues(alpha: 0.1),
-                ),
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18),
-              child: Center(
-                child: _CatalogImportButtonLabel(
-                  icon: icon,
-                  label: label,
-                  color: foregroundColor,
-                ),
-              ),
-            ),
+      child: FilledButton.icon(
+        onPressed: onPressed,
+        icon: Icon(icon, size: 19),
+        label: Text(
+          label,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          softWrap: false,
+        ),
+        style: FilledButton.styleFrom(
+          backgroundColor: backgroundColor,
+          disabledBackgroundColor: _catalogImportButtonDisabledBackground,
+          foregroundColor: foregroundColor,
+          disabledForegroundColor: _catalogImportButtonDisabledForeground,
+          elevation: onPressed == null ? 0 : 3,
+          padding: const EdgeInsets.symmetric(horizontal: 18),
+          textStyle: const TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w900,
+            height: 1,
           ),
+          shape: const StadiumBorder(),
         ),
       ),
     );
   }
 }
-
-class _CatalogImportButtonLabel extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final Color color;
-
-  const _CatalogImportButtonLabel({
-    required this.icon,
-    required this.label,
-    required this.color,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final textStyle = TextStyle(
-      inherit: false,
-      color: color,
-      fontSize: 15,
-      fontWeight: FontWeight.w900,
-      height: 1,
-      decoration: TextDecoration.none,
-      fontFamilyFallback: _kCatalogImportButtonFontFallback,
-      shadows: const [],
-    );
-
-    return IconTheme.merge(
-      data: IconThemeData(color: color, size: 19),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, color: color, size: 19),
-          const SizedBox(width: 6),
-          Flexible(
-            child: FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Text(
-                label,
-                maxLines: 1,
-                overflow: TextOverflow.visible,
-                softWrap: false,
-                textAlign: TextAlign.center,
-                style: textStyle,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-const _kCatalogImportButtonFontFallback = <String>[
-  'Apple SD Gothic Neo',
-  'Malgun Gothic',
-  'Noto Sans KR',
-  'Roboto',
-  'Arial',
-  'sans-serif',
-];
 
 class _CatalogImportDestination {
   final FolderItem folder;

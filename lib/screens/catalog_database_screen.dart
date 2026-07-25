@@ -587,114 +587,34 @@ class _CatalogAddButton extends StatelessWidget {
     return SizedBox(
       height: 40,
       width: expanded ? double.infinity : 144,
-      child: Material(
-        color: background,
-        elevation: disabled ? 0 : 5,
-        shadowColor: _catalogAddButtonBackground.withValues(alpha: 0.34),
-        shape: const StadiumBorder(),
-        clipBehavior: Clip.antiAlias,
-        child: InkWell(
-          onTap: disabled ? null : onPressed,
-          child: DecoratedBox(
-            decoration: ShapeDecoration(
-              shape: StadiumBorder(
-                side: BorderSide(
-                  color: disabled
-                      ? _catalogAddButtonDisabledForeground.withValues(
-                          alpha: 0.12,
-                        )
-                      : _catalogAddButtonForeground.withValues(alpha: 0.1),
-                ),
-              ),
-            ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: expanded ? 16 : 12),
-              child: Center(
-                child: _CatalogButtonLabel(
-                  icon: icon,
-                  label: label,
-                  color: foreground,
-                  iconSize: 17,
-                  fontSize: 13,
-                  gap: 5,
-                  fontFamilyFallback: _kCatalogButtonFontFallback,
-                ),
-              ),
-            ),
+      child: FilledButton.icon(
+        onPressed: disabled || onPressed == null ? null : () => onPressed!(),
+        icon: Icon(icon, size: 17),
+        label: Text(
+          label,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          softWrap: false,
+        ),
+        style: FilledButton.styleFrom(
+          backgroundColor: background,
+          disabledBackgroundColor: _catalogAddButtonDisabledBackground,
+          foregroundColor: foreground,
+          disabledForegroundColor: _catalogAddButtonDisabledForeground,
+          elevation: disabled ? 0 : 5,
+          shadowColor: _catalogAddButtonBackground.withValues(alpha: 0.34),
+          padding: EdgeInsets.symmetric(horizontal: expanded ? 16 : 12),
+          textStyle: const TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w900,
+            height: 1,
           ),
+          shape: const StadiumBorder(),
         ),
       ),
     );
   }
 }
-
-class _CatalogButtonLabel extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final Color color;
-  final double iconSize;
-  final double fontSize;
-  final double gap;
-  final List<String> fontFamilyFallback;
-
-  const _CatalogButtonLabel({
-    required this.icon,
-    required this.label,
-    required this.color,
-    required this.iconSize,
-    required this.fontSize,
-    required this.gap,
-    required this.fontFamilyFallback,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final baseStyle = Theme.of(context).textTheme.labelMedium;
-    final textStyle = (baseStyle ?? const TextStyle()).copyWith(
-      color: color,
-      fontSize: fontSize,
-      fontWeight: FontWeight.w900,
-      height: 1,
-      decoration: TextDecoration.none,
-      fontFamilyFallback: fontFamilyFallback,
-      shadows: const [],
-    );
-
-    return DefaultTextStyle(
-      style: textStyle,
-      child: IconTheme.merge(
-        data: IconThemeData(color: color, size: iconSize),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(icon, color: color, size: iconSize),
-            SizedBox(width: gap),
-            Flexible(
-              child: Text(
-                label,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                softWrap: false,
-                textAlign: TextAlign.center,
-                style: textStyle,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-const _kCatalogButtonFontFallback = <String>[
-  'Apple SD Gothic Neo',
-  'Malgun Gothic',
-  'Noto Sans KR',
-  'Roboto',
-  'Arial',
-  'sans-serif',
-];
 
 class _CatalogImage extends StatelessWidget {
   final GoodsCatalogEntry entry;
