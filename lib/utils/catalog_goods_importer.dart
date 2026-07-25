@@ -417,12 +417,20 @@ class _CatalogImportActionButton extends StatelessWidget {
       height: 48,
       child: FilledButton.icon(
         onPressed: onPressed,
-        icon: Icon(icon, size: 19),
+        icon: Icon(icon, size: 19, color: foregroundColor),
         label: Text(
           label,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           softWrap: false,
+          style: TextStyle(
+            color: foregroundColor,
+            fontSize: 15,
+            fontWeight: FontWeight.w900,
+            height: 1,
+            fontFamilyFallback: const ['Malgun Gothic', 'Apple SD Gothic Neo'],
+            shadows: const [],
+          ),
         ),
         style: FilledButton.styleFrom(
           backgroundColor: backgroundColor,

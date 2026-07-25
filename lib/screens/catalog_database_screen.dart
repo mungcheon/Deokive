@@ -586,15 +586,23 @@ class _CatalogAddButton extends StatelessWidget {
         : _catalogAddButtonForeground;
     return SizedBox(
       height: 40,
-      width: expanded ? double.infinity : 144,
+      width: expanded ? double.infinity : 152,
       child: FilledButton.icon(
         onPressed: disabled || onPressed == null ? null : () => onPressed!(),
-        icon: Icon(icon, size: 17),
+        icon: Icon(icon, size: 17, color: foreground),
         label: Text(
           label,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           softWrap: false,
+          style: TextStyle(
+            color: foreground,
+            fontSize: 13,
+            fontWeight: FontWeight.w900,
+            height: 1,
+            fontFamilyFallback: const ['Malgun Gothic', 'Apple SD Gothic Neo'],
+            shadows: const [],
+          ),
         ),
         style: FilledButton.styleFrom(
           backgroundColor: background,

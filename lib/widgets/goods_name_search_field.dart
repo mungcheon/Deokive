@@ -412,12 +412,24 @@ class _CatalogPickerActionButton extends StatelessWidget {
       constraints: const BoxConstraints(minWidth: 104, minHeight: 34),
       child: FilledButton.icon(
         onPressed: onPressed,
-        icon: const Icon(Icons.add_rounded, size: 16),
+        icon: const Icon(
+          Icons.add_rounded,
+          size: 16,
+          color: _catalogPickerActionForeground,
+        ),
         label: Text(
           label,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           softWrap: false,
+          style: const TextStyle(
+            color: _catalogPickerActionForeground,
+            fontSize: 12,
+            fontWeight: FontWeight.w900,
+            height: 1,
+            fontFamilyFallback: ['Malgun Gothic', 'Apple SD Gothic Neo'],
+            shadows: [],
+          ),
         ),
         style: FilledButton.styleFrom(
           backgroundColor: _catalogPickerActionBackground,
