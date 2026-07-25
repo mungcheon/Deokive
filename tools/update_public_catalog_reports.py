@@ -664,6 +664,78 @@ def catalog_goal_readiness_dashboard(goal_gate: dict[str, Any]) -> dict[str, Any
     }
 
 
+def catalog_goal_handoff_next_batches(goal_gate: dict[str, Any]) -> list[dict[str, Any]]:
+    pillars = goal_gate.get("pillars", [])
+    if not isinstance(pillars, list):
+        return []
+
+    def _int(value: Any) -> int:
+        try:
+            return int(value or 0)
+        except (TypeError, ValueError):
+            return 0
+
+    batches: list[dict[str, Any]] = []
+    for index, pillar in enumerate(
+        row for row in pillars if isinstance(row, dict) and row.get("pillar")
+    ):
+        status = str(pillar.get("status") or "").lower()
+        if (
+            _int(pillar.get("manual_review_rows")) <= 0
+            and status in {"pass", "ready", "no_open_policy_issues"}
+        ):
+            continue
+        handoff = pillar.get("operator_handoff", {})
+        if not isinstance(handoff, dict):
+            handoff = {}
+        steps = handoff.get("handoff_steps", [])
+        if not isinstance(steps, list):
+            steps = []
+        first_step = next((step for step in steps if isinstance(step, dict)), {})
+        first_step_rows = (
+            first_step.get("next_batch_rows")
+            if first_step.get("next_batch_rows") is not None
+            else first_step.get("open_rows")
+        )
+        first_review_url = (
+            first_step.get("first_primary_review_url")
+            or first_step.get("first_evidence_url")
+        )
+        batches.append(
+            {
+                "priority": index + 1,
+                "pillar": pillar.get("pillar"),
+                "label": pillar.get("label"),
+                "lane": handoff.get("current_lane")
+                or first_step.get("lane")
+                or pillar.get("handoff_current_lane"),
+                "status": handoff.get("status")
+                or first_step.get("status")
+                or pillar.get("handoff_status"),
+                "rows": _int(first_step_rows),
+                "review_section": first_step.get("review_section")
+                or handoff.get("current_review_section")
+                or pillar.get("handoff_current_review_section"),
+                "write_template_section": first_step.get("write_template_section"),
+                "public_report": pillar.get("handoff_public_report")
+                or pillar.get("public_report"),
+                "next_safe_phase": pillar.get("next_safe_phase"),
+                "first_review_url": first_review_url,
+                "auto_apply_enabled": bool(first_step.get("auto_apply_enabled", False)),
+                "auto_merge_enabled": bool(first_step.get("auto_merge_enabled", False)),
+                "auto_delete_enabled": bool(first_step.get("auto_delete_enabled", False)),
+                "required_before_write": first_step.get(
+                    "required_before_write",
+                    [],
+                )
+                if isinstance(first_step.get("required_before_write", []), list)
+                else [],
+                "unblocks": first_step.get("unblocks"),
+            }
+        )
+    return batches
+
+
 def expose_catalog_goal_open_queues(
     operations: dict[str, Any],
     agent_work_queue: dict[str, Any],
@@ -673,10 +745,15 @@ def expose_catalog_goal_open_queues(
     goal_gate = target.get("catalog_goal_progress_gate", {})
     goal_open_queues = catalog_goal_open_review_queues(goal_gate)
     readiness_dashboard = catalog_goal_readiness_dashboard(goal_gate)
+    handoff_batches = catalog_goal_handoff_next_batches(goal_gate)
     target["goal_readiness_dashboard"] = readiness_dashboard
     operations["goal_readiness_dashboard"] = readiness_dashboard
     agent_work_queue["goal_readiness_dashboard"] = readiness_dashboard
     execution_plan["goal_readiness_dashboard"] = readiness_dashboard
+    target["goal_handoff_next_batches"] = handoff_batches
+    operations["goal_handoff_next_batches"] = handoff_batches
+    agent_work_queue["goal_handoff_next_batches"] = handoff_batches
+    execution_plan["goal_handoff_next_batches"] = handoff_batches
     operations["summary"]["open_review_queues"].update(goal_open_queues)
     agent_work_queue["summary"]["open_review_queues"] = operations["summary"][
         "open_review_queues"
@@ -13031,6 +13108,13 @@ def update_reports(write: bool) -> dict[str, Any]:
             "animation_categories": target.get("animation_category_action_queue", {}),
             "ichiban_kuji_history": target.get("ichiban_kuji_historical_roadmap", {}),
         }
+        operator_handoff_public_reports = {
+            "dedupe": f"data/{DEDUPLICATION_ACTION_QUEUE.name}",
+            "missing_images": f"data/{IMAGE_ATTACHMENT_ACTION_QUEUE.name}",
+            "source_url_updates": f"data/{SOURCE_DISCOVERY_ROADMAP.name}",
+            "animation_categories": f"data/{ANIMATION_CATEGORY_ACTION_QUEUE.name}",
+            "ichiban_kuji_history": f"data/{ICHIIBAN_KUJI_HISTORICAL_ROADMAP.name}",
+        }
         for pillar in goal_pillars:
             pillar_key = str(pillar.get("pillar") or "")
             source = next_execution_sources.get(pillar_key, {})
@@ -13077,6 +13161,10 @@ def update_reports(write: bool) -> dict[str, Any]:
                 else first_step.get("open_rows")
             )
             pillar["operator_handoff"] = handoff
+            pillar["handoff_public_report"] = operator_handoff_public_reports.get(
+                pillar_key,
+                pillar.get("public_report"),
+            )
             pillar["handoff_status"] = handoff.get("status")
             pillar["handoff_current_lane"] = handoff.get("current_lane")
             pillar["handoff_current_review_section"] = handoff.get(

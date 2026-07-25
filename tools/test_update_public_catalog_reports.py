@@ -2788,6 +2788,41 @@ class PublicCatalogReportTests(unittest.TestCase):
             execution_plan["goal_readiness_dashboard"],
             readiness_dashboard,
         )
+        handoff_batches = quality["goal_handoff_next_batches"]
+        self.assertEqual(len(handoff_batches), 5)
+        self.assertEqual(
+            operations["goal_handoff_next_batches"],
+            handoff_batches,
+        )
+        self.assertEqual(
+            agent_queue["goal_handoff_next_batches"],
+            handoff_batches,
+        )
+        self.assertEqual(
+            execution_plan["goal_handoff_next_batches"],
+            handoff_batches,
+        )
+        self.assertEqual(handoff_batches[0]["pillar"], "dedupe")
+        self.assertEqual(
+            handoff_batches[0]["lane"],
+            "ichiban_reissue_campaign_review",
+        )
+        self.assertEqual(handoff_batches[0]["rows"], 4)
+        self.assertEqual(
+            handoff_batches[0]["review_section"],
+            "ichiban_reissue_campaign_work_order",
+        )
+        self.assertEqual(
+            handoff_batches[0]["public_report"],
+            "data/catalog_deduplication_action_queue_public.json",
+        )
+        self.assertFalse(handoff_batches[0]["auto_merge_enabled"])
+        self.assertFalse(handoff_batches[0]["auto_delete_enabled"])
+        self.assertEqual(
+            handoff_batches[1]["public_report"],
+            "data/catalog_image_attachment_action_queue_public.json",
+        )
+        self.assertEqual(handoff_batches[1]["rows"], 10)
         open_queues = operations["summary"]["open_review_queues"]
         self.assertEqual(
             open_queues["catalog_goal_manual_review_pillars"],

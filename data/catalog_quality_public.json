@@ -17391,6 +17391,7 @@
             "protect_ichiban_reissues_until_confirmed": true
           }
         },
+        "handoff_public_report": "data/catalog_deduplication_action_queue_public.json",
         "handoff_status": "ichiban_reissue_review_required",
         "handoff_current_lane": "ichiban_reissue_campaign_review",
         "handoff_current_review_section": "ichiban_reissue_campaign_work_order",
@@ -17559,6 +17560,7 @@
             "private_collection_storage": "local_device_only"
           }
         },
+        "handoff_public_report": "data/catalog_image_attachment_action_queue_public.json",
         "handoff_status": "source_url_replacement_required",
         "handoff_current_lane": "source_url_replacement_first",
         "handoff_current_review_section": null,
@@ -17707,6 +17709,7 @@
             "reject_broad_search_or_storefront_urls": true
           }
         },
+        "handoff_public_report": "data/source_discovery_completion_roadmap_public.json",
         "handoff_status": "current_focus_fallback_review_required",
         "handoff_current_lane": "exact_source_url_review",
         "handoff_current_review_section": "source_discovery_next_focus_exact_url_review_queue",
@@ -17853,6 +17856,7 @@
             "preserve_folder_visual_tokens": true
           }
         },
+        "handoff_public_report": "data/animation_category_action_queue_public.json",
         "handoff_status": "normalization_review_required",
         "handoff_current_lane": "canonical_category_normalization_review",
         "handoff_current_review_section": "next_normalization_review_batch",
@@ -17991,6 +17995,7 @@
             "last_one_and_double_chance_price_jpy": 0
           }
         },
+        "handoff_public_report": "data/ichiban_kuji_historical_roadmap_public.json",
         "handoff_status": "manual_review_required",
         "handoff_current_lane": "campaign_metadata_confirmation",
         "handoff_current_review_section": "ichiban_kuji_metadata_action_queue",
@@ -18181,5 +18186,122 @@
     "auto_apply_enabled": false,
     "auto_merge_enabled": false,
     "auto_delete_enabled": false
-  }
+  },
+  "goal_handoff_next_batches": [
+    {
+      "priority": 1,
+      "pillar": "dedupe",
+      "label": "Deduplicate catalog rows",
+      "lane": "ichiban_reissue_campaign_review",
+      "status": "ichiban_reissue_review_required",
+      "rows": 4,
+      "review_section": "ichiban_reissue_campaign_work_order",
+      "write_template_section": "decision_template",
+      "public_report": "data/catalog_deduplication_action_queue_public.json",
+      "next_safe_phase": "verify_ichiban_campaign_pages_before_dedupe",
+      "first_review_url": "https://1kuji.com/products/onep6",
+      "auto_apply_enabled": false,
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false,
+      "required_before_write": [
+        "manual_confirmed=true",
+        "campaign decision is recorded",
+        "official campaign title, release period, and prize lineup are compared",
+        "affected item work orders stay protected until campaign identity is clear"
+      ],
+      "unblocks": "ichiban_reissue_item_decisions"
+    },
+    {
+      "priority": 2,
+      "pillar": "missing_images",
+      "label": "Resolve missing catalog images",
+      "lane": "source_url_replacement_first",
+      "status": "source_url_replacement_required",
+      "rows": 10,
+      "review_section": "next_source_url_review_batch",
+      "write_template_section": "source_url_update_template",
+      "public_report": "data/catalog_image_attachment_action_queue_public.json",
+      "next_safe_phase": "replace_generic_source_urls",
+      "first_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+      "auto_apply_enabled": false,
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false,
+      "required_before_write": [
+        "manual_confirmed=true",
+        "manual_value is the exact product detail URL",
+        "evidence_url proves the same exact product",
+        "manual_image_url is filled only when the page proves the exact product image"
+      ],
+      "unblocks": "image_url_extraction_and_attachment_review"
+    },
+    {
+      "priority": 3,
+      "pillar": "source_url_updates",
+      "label": "Replace generic source URLs before image import",
+      "lane": "exact_source_url_review",
+      "status": "current_focus_fallback_review_required",
+      "rows": 20,
+      "review_section": "source_discovery_next_focus_exact_url_review_queue",
+      "write_template_section": "source_url_confirmation_patch_template.rows",
+      "public_report": "data/source_discovery_completion_roadmap_public.json",
+      "next_safe_phase": "review_candidate_source_urls",
+      "first_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+      "auto_apply_enabled": false,
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false,
+      "required_before_write": [
+        "manual_confirmed=true",
+        "manual_value is an exact product detail URL",
+        "evidence_url proves the same exact catalog row",
+        "broad search/listing/storefront URLs stay rejected"
+      ],
+      "unblocks": "metadata_field_confirmation"
+    },
+    {
+      "priority": 4,
+      "pillar": "animation_categories",
+      "label": "Normalize animation goods categories and folder visuals",
+      "lane": "canonical_category_normalization_review",
+      "status": "normalization_review_required",
+      "rows": 4,
+      "review_section": "next_normalization_review_batch",
+      "write_template_section": "normalization_confirmation_template.rows",
+      "public_report": "data/animation_category_action_queue_public.json",
+      "next_safe_phase": "confirm_canonical_animation_category_normalization",
+      "first_review_url": null,
+      "auto_apply_enabled": false,
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false,
+      "required_before_write": [
+        "manual_confirmed=true",
+        "sample names fit the target canonical category",
+        "source category is preserved as sub_series when useful for search",
+        "manual note explains the category semantics"
+      ],
+      "unblocks": "normalization_import_template"
+    },
+    {
+      "priority": 5,
+      "pillar": "ichiban_kuji_history",
+      "label": "Organize historical Ichiban Kuji metadata and reissues",
+      "lane": "campaign_metadata_confirmation",
+      "status": "manual_review_required",
+      "rows": 20,
+      "review_section": "ichiban_kuji_metadata_action_queue",
+      "write_template_section": "campaign_field_confirmation_template",
+      "public_report": "data/ichiban_kuji_historical_roadmap_public.json",
+      "next_safe_phase": "confirm_campaign_prices_then_review_reissue_identity",
+      "first_review_url": "https://1kuji.com/products/jujutsu-o",
+      "auto_apply_enabled": false,
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false,
+      "required_before_write": [
+        "manual_confirmed=true",
+        "official campaign title/source URL is confirmed",
+        "release date is copied from official campaign evidence",
+        "campaign-level draw price is confirmed for non-exception rows"
+      ],
+      "unblocks": "campaign_price_confirmation"
+    }
+  ]
 }
