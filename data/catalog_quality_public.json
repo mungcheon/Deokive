@@ -6588,6 +6588,36 @@
             "manual_confirmation_required": true,
             "auto_apply_enabled": false
           },
+          "template_triage": {
+            "rows": 50,
+            "candidate_hint_rows": 0,
+            "low_confidence_candidate_rows": 0,
+            "no_candidate_rows": 0,
+            "manual_search_rows": 50,
+            "search_hint_rows": 50,
+            "fallback_web_search_url_rows": 50,
+            "primary_review_url_rows": 50,
+            "candidate_status_counts": [],
+            "source_url_review_lane_counts": [],
+            "primary_review_url_kind_counts": [
+              [
+                "source_search_url",
+                45
+              ],
+              [
+                "fallback_web_search",
+                5
+              ]
+            ],
+            "recommended_review_order": [
+              "Review rows with candidate_options first, but accept only exact product detail matches.",
+              "For no_candidate rows, open source_search_url first and fallback_web_search_urls second.",
+              "Do not fill manual_value with storefront, search result, category, or low-confidence non-matching URLs.",
+              "Only after exact source_url confirmation should image_url evidence be filled/imported."
+            ],
+            "manual_confirmation_required": true,
+            "auto_apply_enabled": false
+          },
           "required_before_write": [
             "manual_confirmed=true",
             "manual_value is the exact product detail URL",
@@ -6656,6 +6686,36 @@
         [
           "source_search_url",
           10
+        ]
+      ],
+      "recommended_review_order": [
+        "Review rows with candidate_options first, but accept only exact product detail matches.",
+        "For no_candidate rows, open source_search_url first and fallback_web_search_urls second.",
+        "Do not fill manual_value with storefront, search result, category, or low-confidence non-matching URLs.",
+        "Only after exact source_url confirmation should image_url evidence be filled/imported."
+      ],
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false
+    },
+    "source_url_update_template_triage": {
+      "rows": 50,
+      "candidate_hint_rows": 0,
+      "low_confidence_candidate_rows": 0,
+      "no_candidate_rows": 0,
+      "manual_search_rows": 50,
+      "search_hint_rows": 50,
+      "fallback_web_search_url_rows": 50,
+      "primary_review_url_rows": 50,
+      "candidate_status_counts": [],
+      "source_url_review_lane_counts": [],
+      "primary_review_url_kind_counts": [
+        [
+          "source_search_url",
+          45
+        ],
+        [
+          "fallback_web_search",
+          5
         ]
       ],
       "recommended_review_order": [
@@ -18305,6 +18365,36 @@
                   [
                     "source_search_url",
                     10
+                  ]
+                ],
+                "recommended_review_order": [
+                  "Review rows with candidate_options first, but accept only exact product detail matches.",
+                  "For no_candidate rows, open source_search_url first and fallback_web_search_urls second.",
+                  "Do not fill manual_value with storefront, search result, category, or low-confidence non-matching URLs.",
+                  "Only after exact source_url confirmation should image_url evidence be filled/imported."
+                ],
+                "manual_confirmation_required": true,
+                "auto_apply_enabled": false
+              },
+              "template_triage": {
+                "rows": 50,
+                "candidate_hint_rows": 0,
+                "low_confidence_candidate_rows": 0,
+                "no_candidate_rows": 0,
+                "manual_search_rows": 50,
+                "search_hint_rows": 50,
+                "fallback_web_search_url_rows": 50,
+                "primary_review_url_rows": 50,
+                "candidate_status_counts": [],
+                "source_url_review_lane_counts": [],
+                "primary_review_url_kind_counts": [
+                  [
+                    "source_search_url",
+                    45
+                  ],
+                  [
+                    "fallback_web_search",
+                    5
                   ]
                 ],
                 "recommended_review_order": [

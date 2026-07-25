@@ -11759,6 +11759,10 @@ def update_reports(write: bool) -> dict[str, Any]:
                     "next_source_url_review_batch_triage",
                     {},
                 ),
+                "source_url_update_template_triage": image_attachment_action_queue.get(
+                    "source_url_update_template_triage",
+                    {},
+                ),
             }
             target["image_attachment_queue_alignment"] = {
                 "public_reports": [

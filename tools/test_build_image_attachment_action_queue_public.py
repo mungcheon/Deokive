@@ -109,6 +109,17 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
             report["summary"]["source_url_review_lane_counts"],
             [["low_confidence_candidate_review", 1]],
         )
+        self.assertEqual(report["summary"]["source_url_update_candidate_hint_rows"], 1)
+        self.assertEqual(
+            report["summary"]["source_url_update_low_confidence_candidate_rows"],
+            1,
+        )
+        self.assertEqual(report["summary"]["source_url_update_no_candidate_rows"], 0)
+        self.assertEqual(report["summary"]["source_url_update_manual_search_rows"], 1)
+        self.assertEqual(
+            report["summary"]["source_url_update_fallback_web_search_url_rows"],
+            2,
+        )
         self.assertEqual(report["summary"]["next_source_url_review_batch_candidate_hint_rows"], 1)
         self.assertEqual(report["summary"]["next_source_url_review_batch_no_candidate_rows"], 0)
         self.assertEqual(report["summary"]["next_source_url_review_batch_manual_search_rows"], 1)
@@ -448,9 +459,20 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(triage["manual_search_rows"], 1)
         self.assertEqual(triage["search_hint_rows"], 2)
         self.assertFalse(triage["auto_apply_enabled"])
+        template_triage = report["source_url_update_template_triage"]
+        self.assertEqual(template_triage["rows"], 2)
+        self.assertEqual(template_triage["candidate_hint_rows"], 1)
+        self.assertEqual(template_triage["low_confidence_candidate_rows"], 1)
+        self.assertEqual(template_triage["manual_search_rows"], 1)
+        self.assertEqual(template_triage["fallback_web_search_url_rows"], 2)
+        self.assertFalse(template_triage["auto_apply_enabled"])
         self.assertEqual(
             report["operator_handoff"]["handoff_steps"][0]["batch_triage"],
             triage,
+        )
+        self.assertEqual(
+            report["operator_handoff"]["handoff_steps"][0]["template_triage"],
+            template_triage,
         )
         self.assertEqual(
             report["workstreams"][0]["review_summary"]["first_primary_review_url"],

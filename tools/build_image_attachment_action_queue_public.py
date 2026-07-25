@@ -1061,6 +1061,7 @@ def _build_operator_handoff(
     next_operator_actions: list[dict[str, Any]],
     next_source_url_review_batch: list[dict[str, Any]],
     next_source_url_review_batch_triage: dict[str, Any],
+    source_url_update_template_triage: dict[str, Any],
     next_representative_image_review_batch: list[dict[str, Any]],
 ) -> dict[str, Any]:
     first_action = next_operator_actions[0] if next_operator_actions else {}
@@ -1082,6 +1083,7 @@ def _build_operator_handoff(
                     "primary_review_url_kind", "manual_lookup_required"
                 ),
                 "batch_triage": next_source_url_review_batch_triage,
+                "template_triage": source_url_update_template_triage,
                 "required_before_write": [
                     "manual_confirmed=true",
                     "manual_value is the exact product detail URL",
@@ -1634,6 +1636,9 @@ def build_report(
     source_url_update_template_batches = _build_source_url_update_template_batches(
         source_url_update_template
     )
+    source_url_update_template_triage = _source_url_review_batch_triage(
+        source_url_update_template
+    )
     next_source_url_review_batch = _build_next_source_url_review_batch(
         source_url_update_template
     )
@@ -1665,6 +1670,7 @@ def build_report(
         next_operator_actions=next_operator_actions,
         next_source_url_review_batch=next_source_url_review_batch,
         next_source_url_review_batch_triage=next_source_url_review_batch_triage,
+        source_url_update_template_triage=source_url_update_template_triage,
         next_representative_image_review_batch=next_representative_image_review_batch,
     )
     return {
@@ -1706,6 +1712,21 @@ def build_report(
             "source_url_update_missing_primary_review_url_rows": (
                 source_url_update_required_rows - source_url_update_primary_review_url_rows
             ),
+            "source_url_update_candidate_hint_rows": source_url_update_template_triage[
+                "candidate_hint_rows"
+            ],
+            "source_url_update_low_confidence_candidate_rows": source_url_update_template_triage[
+                "low_confidence_candidate_rows"
+            ],
+            "source_url_update_no_candidate_rows": source_url_update_template_triage[
+                "no_candidate_rows"
+            ],
+            "source_url_update_manual_search_rows": source_url_update_template_triage[
+                "manual_search_rows"
+            ],
+            "source_url_update_fallback_web_search_url_rows": source_url_update_template_triage[
+                "fallback_web_search_url_rows"
+            ],
             "source_url_update_review_start_coverage": (
                 round(
                     source_url_update_primary_review_url_rows / source_url_update_required_rows,
@@ -1848,6 +1869,7 @@ def build_report(
         "workstreams": workstreams,
         "source_url_update_work_order": source_url_update_work_order,
         "source_url_update_template": source_url_update_template,
+        "source_url_update_template_triage": source_url_update_template_triage,
         "source_url_update_template_batches": source_url_update_template_batches,
         "next_source_url_review_batch": next_source_url_review_batch,
         "next_source_url_review_batch_triage": next_source_url_review_batch_triage,
