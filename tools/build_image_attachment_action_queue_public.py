@@ -223,6 +223,76 @@ def _source_url_review_guidance(row: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _source_url_review_next_steps(row: dict[str, Any]) -> list[str]:
+    candidate_status = str(row.get("candidate_status") or "")
+    steps = [
+        "Open primary_review_url/source_search_url first.",
+        "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+        "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+    ]
+    if candidate_status in {"low_confidence_candidate", "weak_manual_review_candidate"}:
+        steps.insert(
+            1,
+            "Treat candidate_options as hints only; reject them when the candidate title or image names a different product.",
+        )
+    if candidate_status == "no_candidate":
+        steps.insert(
+            1,
+            "Use fallback_web_search_urls and store_search_hints because no reliable candidate URL was found automatically.",
+        )
+    steps.append("After source_url is confirmed, return to image_url attachment using the product image from that page.")
+    return steps
+
+
+def _source_url_search_refinement_queries(row: dict[str, Any], *, limit: int = 5) -> list[dict[str, str]]:
+    name = str(row.get("name_ja") or row.get("name_ko") or "").strip()
+    if not name:
+        return []
+    category = str(row.get("category") or "").strip()
+    source_store = str(row.get("source_store") or "").strip()
+    domains = _store_search_domains(source_store)
+    if not domains:
+        current_host = urlsplit(str(row.get("current_source_url") or "")).netloc.lower()
+        if current_host:
+            domains = [current_host]
+    raw_queries: list[tuple[str, str]] = []
+    for domain in domains:
+        raw_queries.extend(
+            [
+                ("exact_name_on_store_domain", f'site:{domain} "{name}"'),
+                (
+                    "exact_name_category_on_store_domain",
+                    f'site:{domain} "{name}" "{category}"' if category else f'site:{domain} "{name}"',
+                ),
+            ]
+        )
+    if source_store:
+        raw_queries.append(
+            (
+                "store_name_exact_name",
+                f'"{source_store}" "{name}" "{category}"' if category else f'"{source_store}" "{name}"',
+            )
+        )
+
+    seen: set[str] = set()
+    queries: list[dict[str, str]] = []
+    for label, query in raw_queries:
+        query = " ".join(query.split())
+        if not query or query in seen:
+            continue
+        seen.add(query)
+        queries.append(
+            {
+                "label": label,
+                "query": query,
+                "url": f"https://www.google.com/search?q={quote_plus(query)}",
+            }
+        )
+        if len(queries) >= limit:
+            break
+    return queries
+
+
 REPRESENTATIVE_CANDIDATE_REVIEW_GUIDANCE = {
     "motif_only_type_mismatch": {
         "risk": "official_candidate_matches_regional_motif_but_not_product_type",
@@ -679,6 +749,10 @@ def _build_next_source_url_review_batch(
                 "store_search_hints": row.get("store_search_hints") or {},
                 "source_url_review_guidance": row.get("source_url_review_guidance")
                 or _source_url_review_guidance(row),
+                "operator_next_steps": row.get("operator_next_steps")
+                or _source_url_review_next_steps(row),
+                "search_refinement_queries": row.get("search_refinement_queries")
+                or _source_url_search_refinement_queries(row),
                 "manual_value": "",
                 "evidence_url": "",
                 "candidate_source_url": "",
@@ -715,6 +789,10 @@ def _source_url_review_batch_triage(rows: list[dict[str, Any]]) -> dict[str, Any
         if row.get("source_search_url") or row.get("first_fallback_web_search_url")
     )
     fallback_url_rows = sum(1 for row in rows if row.get("fallback_web_search_urls"))
+    refinement_query_rows = sum(1 for row in rows if row.get("search_refinement_queries"))
+    refinement_queries = sum(
+        len(row.get("search_refinement_queries") or []) for row in rows
+    )
     return {
         "rows": len(rows),
         "candidate_hint_rows": candidate_hint_rows,
@@ -723,6 +801,8 @@ def _source_url_review_batch_triage(rows: list[dict[str, Any]]) -> dict[str, Any
         "manual_search_rows": len(rows) - candidate_hint_rows,
         "search_hint_rows": search_hint_rows,
         "fallback_web_search_url_rows": fallback_url_rows,
+        "search_refinement_query_rows": refinement_query_rows,
+        "search_refinement_queries": refinement_queries,
         "primary_review_url_rows": sum(1 for row in rows if row.get("primary_review_url")),
         "candidate_status_counts": _counter_pairs(rows, "candidate_status"),
         "source_url_review_lane_counts": _counter_pairs(
@@ -1509,6 +1589,8 @@ def _source_url_import_template(item: dict[str, Any], group: dict[str, Any]) -> 
         if value not in (None, "", []):
             row[key] = value
     row["source_url_review_guidance"] = _source_url_review_guidance(row)
+    row["operator_next_steps"] = _source_url_review_next_steps(row)
+    row["search_refinement_queries"] = _source_url_search_refinement_queries(row)
     return row
 
 

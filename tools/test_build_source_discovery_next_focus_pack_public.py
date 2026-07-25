@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -10,6 +11,78 @@ import build_source_discovery_next_focus_pack_public as builder
 
 
 class BuildSourceDiscoveryNextFocusPackPublicTest(unittest.TestCase):
+    def test_main_loads_exact_url_candidate_audit_for_quarantine(self) -> None:
+        template = {
+            "summary": {"template_items": 2, "work_order_pack_count": 2},
+            "work_order": [
+                {
+                    "priority": 1,
+                    "focus_pack_id": "source-discovery-focus-001",
+                    "source_store": "Ensky",
+                    "row_count": 1,
+                    "remaining_review_rows": 1,
+                    "review_status": "not_started",
+                },
+                {
+                    "priority": 2,
+                    "focus_pack_id": "source-discovery-focus-002",
+                    "source_store": "Ensky",
+                    "row_count": 1,
+                    "remaining_review_rows": 1,
+                    "review_status": "not_started",
+                },
+            ],
+            "items": [
+                {"focus_pack_id": "source-discovery-focus-001", "catalog_index": 10},
+                {"focus_pack_id": "source-discovery-focus-002", "catalog_index": 20},
+            ],
+        }
+        audit = {
+            "summary": {
+                "queue_rows": 1,
+                "ensky_cache_cross_checked_rows": 1,
+                "ensky_cache_safe_exact_match_rows": 0,
+            }
+        }
+
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            input_path = tmp_path / "template.json"
+            output_path = tmp_path / "output.json"
+            audit_path = tmp_path / "audit.json"
+            input_path.write_text(
+                builder.json.dumps(template, ensure_ascii=False),
+                encoding="utf-8",
+            )
+            audit_path.write_text(
+                builder.json.dumps(audit, ensure_ascii=False),
+                encoding="utf-8",
+            )
+            original_argv = sys.argv
+            try:
+                sys.argv = [
+                    "build_source_discovery_next_focus_pack_public.py",
+                    "--input",
+                    str(input_path),
+                    "--output",
+                    str(output_path),
+                    "--exact-url-candidate-audit",
+                    str(audit_path),
+                    "--write",
+                ]
+                self.assertEqual(builder.main(), 0)
+            finally:
+                sys.argv = original_argv
+
+            report = builder.load_json(output_path)
+
+        self.assertEqual(report["summary"]["focus_pack_id"], "source-discovery-focus-002")
+        self.assertEqual(
+            report["summary"]["current_focus_pack_id"],
+            "source-discovery-focus-001",
+        )
+        self.assertTrue(report["summary"]["current_focus_manual_quarantine"])
+
     def test_build_report_publishes_only_next_focus_pack_items(self) -> None:
         template = {
             "summary": {

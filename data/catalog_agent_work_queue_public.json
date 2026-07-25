@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-25T08:20:49Z",
+  "generated_at": "2026-07-25T09:13:00Z",
   "summary": {
     "batch_count": 160,
     "max_published_batches": 160,
@@ -4113,6 +4113,39 @@
             "candidate_review_note": "Candidate options are review hints only; do not copy the top candidate without exact title/member/event/type confirmation.",
             "auto_apply_allowed": false
           },
+          "operator_next_steps": [
+            "Open primary_review_url/source_search_url first.",
+            "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+            "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+            "After source_url is confirmed, return to image_url attachment using the product image from that page."
+          ],
+          "search_refinement_queries": [
+            {
+              "label": "exact_name_on_store_domain",
+              "query": "site:fanding.kr \"스텔라이브 1주년 뱃지 세트\"",
+              "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C+1%EC%A3%BC%EB%85%84+%EB%B1%83%EC%A7%80+%EC%84%B8%ED%8A%B8%22"
+            },
+            {
+              "label": "exact_name_category_on_store_domain",
+              "query": "site:fanding.kr \"스텔라이브 1주년 뱃지 세트\" \"캔뱃지\"",
+              "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C+1%EC%A3%BC%EB%85%84+%EB%B1%83%EC%A7%80+%EC%84%B8%ED%8A%B8%22+%22%EC%BA%94%EB%B1%83%EC%A7%80%22"
+            },
+            {
+              "label": "exact_name_on_store_domain",
+              "query": "site:stellive.fanding.kr \"스텔라이브 1주년 뱃지 세트\"",
+              "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C+1%EC%A3%BC%EB%85%84+%EB%B1%83%EC%A7%80+%EC%84%B8%ED%8A%B8%22"
+            },
+            {
+              "label": "exact_name_category_on_store_domain",
+              "query": "site:stellive.fanding.kr \"스텔라이브 1주년 뱃지 세트\" \"캔뱃지\"",
+              "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C+1%EC%A3%BC%EB%85%84+%EB%B1%83%EC%A7%80+%EC%84%B8%ED%8A%B8%22+%22%EC%BA%94%EB%B1%83%EC%A7%80%22"
+            },
+            {
+              "label": "store_name_exact_name",
+              "query": "\"Stellive Store\" \"스텔라이브 1주년 뱃지 세트\" \"캔뱃지\"",
+              "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C+1%EC%A3%BC%EB%85%84+%EB%B1%83%EC%A7%80+%EC%84%B8%ED%8A%B8%22+%22%EC%BA%94%EB%B1%83%EC%A7%80%22"
+            }
+          ],
           "manual_value": "",
           "evidence_url": "",
           "candidate_source_url": "",
@@ -4209,6 +4242,39 @@
             "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
           },
+          "operator_next_steps": [
+            "Open primary_review_url/source_search_url first.",
+            "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+            "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+            "After source_url is confirmed, return to image_url attachment using the product image from that page."
+          ],
+          "search_refinement_queries": [
+            {
+              "label": "exact_name_on_store_domain",
+              "query": "site:fanding.kr \"강지 마스코트 인형\"",
+              "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EA%B0%95%EC%A7%80+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22"
+            },
+            {
+              "label": "exact_name_category_on_store_domain",
+              "query": "site:fanding.kr \"강지 마스코트 인형\" \"인형\"",
+              "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EA%B0%95%EC%A7%80+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+            },
+            {
+              "label": "exact_name_on_store_domain",
+              "query": "site:stellive.fanding.kr \"강지 마스코트 인형\"",
+              "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EA%B0%95%EC%A7%80+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22"
+            },
+            {
+              "label": "exact_name_category_on_store_domain",
+              "query": "site:stellive.fanding.kr \"강지 마스코트 인형\" \"인형\"",
+              "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EA%B0%95%EC%A7%80+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+            },
+            {
+              "label": "store_name_exact_name",
+              "query": "\"Stellive Store\" \"강지 마스코트 인형\" \"인형\"",
+              "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%EA%B0%95%EC%A7%80+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+            }
+          ],
           "manual_value": "",
           "evidence_url": "",
           "candidate_source_url": "",
@@ -4312,6 +4378,39 @@
             "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
           },
+          "operator_next_steps": [
+            "Open primary_review_url/source_search_url first.",
+            "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+            "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+            "After source_url is confirmed, return to image_url attachment using the product image from that page."
+          ],
+          "search_refinement_queries": [
+            {
+              "label": "exact_name_on_store_domain",
+              "query": "site:fanding.kr \"아이리 칸나 생일 기념 굿즈 박스\"",
+              "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EA%B5%BF%EC%A6%88+%EB%B0%95%EC%8A%A4%22"
+            },
+            {
+              "label": "exact_name_category_on_store_domain",
+              "query": "site:fanding.kr \"아이리 칸나 생일 기념 굿즈 박스\" \"액세서리\"",
+              "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EA%B5%BF%EC%A6%88+%EB%B0%95%EC%8A%A4%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+            },
+            {
+              "label": "exact_name_on_store_domain",
+              "query": "site:stellive.fanding.kr \"아이리 칸나 생일 기념 굿즈 박스\"",
+              "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EA%B5%BF%EC%A6%88+%EB%B0%95%EC%8A%A4%22"
+            },
+            {
+              "label": "exact_name_category_on_store_domain",
+              "query": "site:stellive.fanding.kr \"아이리 칸나 생일 기념 굿즈 박스\" \"액세서리\"",
+              "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EA%B5%BF%EC%A6%88+%EB%B0%95%EC%8A%A4%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+            },
+            {
+              "label": "store_name_exact_name",
+              "query": "\"Stellive Store\" \"아이리 칸나 생일 기념 굿즈 박스\" \"액세서리\"",
+              "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EA%B5%BF%EC%A6%88+%EB%B0%95%EC%8A%A4%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+            }
+          ],
           "manual_value": "",
           "evidence_url": "",
           "candidate_source_url": "",
@@ -4410,6 +4509,39 @@
             "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
           },
+          "operator_next_steps": [
+            "Open primary_review_url/source_search_url first.",
+            "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+            "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+            "After source_url is confirmed, return to image_url attachment using the product image from that page."
+          ],
+          "search_refinement_queries": [
+            {
+              "label": "exact_name_on_store_domain",
+              "query": "site:fanding.kr \"아이리 칸나 마스코트 인형\"",
+              "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22"
+            },
+            {
+              "label": "exact_name_category_on_store_domain",
+              "query": "site:fanding.kr \"아이리 칸나 마스코트 인형\" \"인형\"",
+              "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+            },
+            {
+              "label": "exact_name_on_store_domain",
+              "query": "site:stellive.fanding.kr \"아이리 칸나 마스코트 인형\"",
+              "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22"
+            },
+            {
+              "label": "exact_name_category_on_store_domain",
+              "query": "site:stellive.fanding.kr \"아이리 칸나 마스코트 인형\" \"인형\"",
+              "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+            },
+            {
+              "label": "store_name_exact_name",
+              "query": "\"Stellive Store\" \"아이리 칸나 마스코트 인형\" \"인형\"",
+              "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+            }
+          ],
           "manual_value": "",
           "evidence_url": "",
           "candidate_source_url": "",
@@ -4508,6 +4640,39 @@
             "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
           },
+          "operator_next_steps": [
+            "Open primary_review_url/source_search_url first.",
+            "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+            "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+            "After source_url is confirmed, return to image_url attachment using the product image from that page."
+          ],
+          "search_refinement_queries": [
+            {
+              "label": "exact_name_on_store_domain",
+              "query": "site:fanding.kr \"아이리 칸나 키링 세트\"",
+              "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%ED%82%A4%EB%A7%81+%EC%84%B8%ED%8A%B8%22"
+            },
+            {
+              "label": "exact_name_category_on_store_domain",
+              "query": "site:fanding.kr \"아이리 칸나 키링 세트\" \"액세서리\"",
+              "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%ED%82%A4%EB%A7%81+%EC%84%B8%ED%8A%B8%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+            },
+            {
+              "label": "exact_name_on_store_domain",
+              "query": "site:stellive.fanding.kr \"아이리 칸나 키링 세트\"",
+              "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%ED%82%A4%EB%A7%81+%EC%84%B8%ED%8A%B8%22"
+            },
+            {
+              "label": "exact_name_category_on_store_domain",
+              "query": "site:stellive.fanding.kr \"아이리 칸나 키링 세트\" \"액세서리\"",
+              "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%ED%82%A4%EB%A7%81+%EC%84%B8%ED%8A%B8%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+            },
+            {
+              "label": "store_name_exact_name",
+              "query": "\"Stellive Store\" \"아이리 칸나 키링 세트\" \"액세서리\"",
+              "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%ED%82%A4%EB%A7%81+%EC%84%B8%ED%8A%B8%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+            }
+          ],
           "manual_value": "",
           "evidence_url": "",
           "candidate_source_url": "",
@@ -4611,6 +4776,39 @@
             "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
           },
+          "operator_next_steps": [
+            "Open primary_review_url/source_search_url first.",
+            "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+            "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+            "After source_url is confirmed, return to image_url attachment using the product image from that page."
+          ],
+          "search_refinement_queries": [
+            {
+              "label": "exact_name_on_store_domain",
+              "query": "site:fanding.kr \"쿠루미 노아 데뷔 기념 아크릴 스탠드\"",
+              "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%8D%B0%EB%B7%94+%EA%B8%B0%EB%85%90+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+            },
+            {
+              "label": "exact_name_category_on_store_domain",
+              "query": "site:fanding.kr \"쿠루미 노아 데뷔 기념 아크릴 스탠드\" \"아크릴 스탠드\"",
+              "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%8D%B0%EB%B7%94+%EA%B8%B0%EB%85%90+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22+%22%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+            },
+            {
+              "label": "exact_name_on_store_domain",
+              "query": "site:stellive.fanding.kr \"쿠루미 노아 데뷔 기념 아크릴 스탠드\"",
+              "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%8D%B0%EB%B7%94+%EA%B8%B0%EB%85%90+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+            },
+            {
+              "label": "exact_name_category_on_store_domain",
+              "query": "site:stellive.fanding.kr \"쿠루미 노아 데뷔 기념 아크릴 스탠드\" \"아크릴 스탠드\"",
+              "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%8D%B0%EB%B7%94+%EA%B8%B0%EB%85%90+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22+%22%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+            },
+            {
+              "label": "store_name_exact_name",
+              "query": "\"Stellive Store\" \"쿠루미 노아 데뷔 기념 아크릴 스탠드\" \"아크릴 스탠드\"",
+              "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%8D%B0%EB%B7%94+%EA%B8%B0%EB%85%90+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22+%22%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+            }
+          ],
           "manual_value": "",
           "evidence_url": "",
           "candidate_source_url": "",
@@ -4713,6 +4911,39 @@
             "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
           },
+          "operator_next_steps": [
+            "Open primary_review_url/source_search_url first.",
+            "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+            "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+            "After source_url is confirmed, return to image_url attachment using the product image from that page."
+          ],
+          "search_refinement_queries": [
+            {
+              "label": "exact_name_on_store_domain",
+              "query": "site:fanding.kr \"쿠루미 노아 생일 기념 굿즈\"",
+              "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EA%B5%BF%EC%A6%88%22"
+            },
+            {
+              "label": "exact_name_category_on_store_domain",
+              "query": "site:fanding.kr \"쿠루미 노아 생일 기념 굿즈\" \"액세서리\"",
+              "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EA%B5%BF%EC%A6%88%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+            },
+            {
+              "label": "exact_name_on_store_domain",
+              "query": "site:stellive.fanding.kr \"쿠루미 노아 생일 기념 굿즈\"",
+              "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EA%B5%BF%EC%A6%88%22"
+            },
+            {
+              "label": "exact_name_category_on_store_domain",
+              "query": "site:stellive.fanding.kr \"쿠루미 노아 생일 기념 굿즈\" \"액세서리\"",
+              "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EA%B5%BF%EC%A6%88%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+            },
+            {
+              "label": "store_name_exact_name",
+              "query": "\"Stellive Store\" \"쿠루미 노아 생일 기념 굿즈\" \"액세서리\"",
+              "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EA%B5%BF%EC%A6%88%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+            }
+          ],
           "manual_value": "",
           "evidence_url": "",
           "candidate_source_url": "",
@@ -4811,6 +5042,39 @@
             "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
           },
+          "operator_next_steps": [
+            "Open primary_review_url/source_search_url first.",
+            "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+            "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+            "After source_url is confirmed, return to image_url attachment using the product image from that page."
+          ],
+          "search_refinement_queries": [
+            {
+              "label": "exact_name_on_store_domain",
+              "query": "site:fanding.kr \"쿠루미 노아 마스코트 인형\"",
+              "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22"
+            },
+            {
+              "label": "exact_name_category_on_store_domain",
+              "query": "site:fanding.kr \"쿠루미 노아 마스코트 인형\" \"인형\"",
+              "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+            },
+            {
+              "label": "exact_name_on_store_domain",
+              "query": "site:stellive.fanding.kr \"쿠루미 노아 마스코트 인형\"",
+              "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22"
+            },
+            {
+              "label": "exact_name_category_on_store_domain",
+              "query": "site:stellive.fanding.kr \"쿠루미 노아 마스코트 인형\" \"인형\"",
+              "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+            },
+            {
+              "label": "store_name_exact_name",
+              "query": "\"Stellive Store\" \"쿠루미 노아 마스코트 인형\" \"인형\"",
+              "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+            }
+          ],
           "manual_value": "",
           "evidence_url": "",
           "candidate_source_url": "",
@@ -4909,6 +5173,39 @@
             "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
           },
+          "operator_next_steps": [
+            "Open primary_review_url/source_search_url first.",
+            "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+            "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+            "After source_url is confirmed, return to image_url attachment using the product image from that page."
+          ],
+          "search_refinement_queries": [
+            {
+              "label": "exact_name_on_store_domain",
+              "query": "site:fanding.kr \"하나코 코코나 마스코트 인형\"",
+              "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22"
+            },
+            {
+              "label": "exact_name_category_on_store_domain",
+              "query": "site:fanding.kr \"하나코 코코나 마스코트 인형\" \"인형\"",
+              "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+            },
+            {
+              "label": "exact_name_on_store_domain",
+              "query": "site:stellive.fanding.kr \"하나코 코코나 마스코트 인형\"",
+              "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22"
+            },
+            {
+              "label": "exact_name_category_on_store_domain",
+              "query": "site:stellive.fanding.kr \"하나코 코코나 마스코트 인형\" \"인형\"",
+              "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+            },
+            {
+              "label": "store_name_exact_name",
+              "query": "\"Stellive Store\" \"하나코 코코나 마스코트 인형\" \"인형\"",
+              "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+            }
+          ],
           "manual_value": "",
           "evidence_url": "",
           "candidate_source_url": "",
@@ -5010,6 +5307,39 @@
             "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
             "auto_apply_allowed": false
           },
+          "operator_next_steps": [
+            "Open primary_review_url/source_search_url first.",
+            "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+            "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+            "After source_url is confirmed, return to image_url attachment using the product image from that page."
+          ],
+          "search_refinement_queries": [
+            {
+              "label": "exact_name_on_store_domain",
+              "query": "site:fanding.kr \"비비 데뷔 기념 아크릴 스탠드\"",
+              "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EB%B9%84%EB%B9%84+%EB%8D%B0%EB%B7%94+%EA%B8%B0%EB%85%90+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+            },
+            {
+              "label": "exact_name_category_on_store_domain",
+              "query": "site:fanding.kr \"비비 데뷔 기념 아크릴 스탠드\" \"아크릴 스탠드\"",
+              "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EB%B9%84%EB%B9%84+%EB%8D%B0%EB%B7%94+%EA%B8%B0%EB%85%90+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22+%22%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+            },
+            {
+              "label": "exact_name_on_store_domain",
+              "query": "site:stellive.fanding.kr \"비비 데뷔 기념 아크릴 스탠드\"",
+              "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EB%B9%84%EB%B9%84+%EB%8D%B0%EB%B7%94+%EA%B8%B0%EB%85%90+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+            },
+            {
+              "label": "exact_name_category_on_store_domain",
+              "query": "site:stellive.fanding.kr \"비비 데뷔 기념 아크릴 스탠드\" \"아크릴 스탠드\"",
+              "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EB%B9%84%EB%B9%84+%EB%8D%B0%EB%B7%94+%EA%B8%B0%EB%85%90+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22+%22%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+            },
+            {
+              "label": "store_name_exact_name",
+              "query": "\"Stellive Store\" \"비비 데뷔 기념 아크릴 스탠드\" \"아크릴 스탠드\"",
+              "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%EB%B9%84%EB%B9%84+%EB%8D%B0%EB%B7%94+%EA%B8%B0%EB%85%90+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22+%22%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+            }
+          ],
           "manual_value": "",
           "evidence_url": "",
           "candidate_source_url": "",
@@ -6488,6 +6818,8 @@
           "catalog_index": 1568,
           "focus_pack_id": "source-discovery-focus-002",
           "source_store": "엔스카이",
+          "affiliation": "장송의 프리렌",
+          "series_name": null,
           "category": "키링",
           "name_ko": "펀 러버 스트랩",
           "name_ja": "フェルン ラバーストラップ",
@@ -6535,6 +6867,8 @@
           "catalog_index": 1569,
           "focus_pack_id": "source-discovery-focus-002",
           "source_store": "엔스카이",
+          "affiliation": "장송의 프리렌",
+          "series_name": null,
           "category": "키링",
           "name_ko": "슈타르크 러버 스트랩",
           "name_ja": "シュタルク ラバーストラップ",
@@ -6582,6 +6916,8 @@
           "catalog_index": 1570,
           "focus_pack_id": "source-discovery-focus-002",
           "source_store": "엔스카이",
+          "affiliation": "장송의 프리렌",
+          "series_name": null,
           "category": "키링",
           "name_ko": "히멜 러버 스트랩",
           "name_ja": "ヒンメル ラバーストラップ",
@@ -6629,6 +6965,8 @@
           "catalog_index": 1571,
           "focus_pack_id": "source-discovery-focus-002",
           "source_store": "엔스카이",
+          "affiliation": "장송의 프리렌",
+          "series_name": null,
           "category": "키링",
           "name_ko": "하이터 러버 스트랩",
           "name_ja": "ハイター ラバーストラップ",
@@ -6676,6 +7014,8 @@
           "catalog_index": 1572,
           "focus_pack_id": "source-discovery-focus-002",
           "source_store": "엔스카이",
+          "affiliation": "장송의 프리렌",
+          "series_name": null,
           "category": "키링",
           "name_ko": "아이젠 러버 스트랩",
           "name_ja": "アイゼン ラバーストラップ",
@@ -6723,6 +7063,8 @@
           "catalog_index": 1573,
           "focus_pack_id": "source-discovery-focus-002",
           "source_store": "엔스카이",
+          "affiliation": "귀멸의 칼날",
+          "series_name": null,
           "category": "키링",
           "name_ko": "카마도 탄지로 러버 스트랩",
           "name_ja": "竈門炭治郎 ラバーストラップ",
@@ -6770,6 +7112,8 @@
           "catalog_index": 1574,
           "focus_pack_id": "source-discovery-focus-002",
           "source_store": "엔스카이",
+          "affiliation": "귀멸의 칼날",
+          "series_name": null,
           "category": "키링",
           "name_ko": "카마도 네즈코 러버 스트랩",
           "name_ja": "竈門禰豆子 ラバーストラップ",
@@ -6817,6 +7161,8 @@
           "catalog_index": 1575,
           "focus_pack_id": "source-discovery-focus-002",
           "source_store": "엔스카이",
+          "affiliation": "귀멸의 칼날",
+          "series_name": null,
           "category": "키링",
           "name_ko": "아가츠마 젠이츠 러버 스트랩",
           "name_ja": "我妻善逸 ラバーストラップ",
@@ -9270,6 +9616,39 @@
               "candidate_review_note": "Candidate options are review hints only; do not copy the top candidate without exact title/member/event/type confirmation.",
               "auto_apply_allowed": false
             },
+            "operator_next_steps": [
+              "Open primary_review_url/source_search_url first.",
+              "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+              "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+              "After source_url is confirmed, return to image_url attachment using the product image from that page."
+            ],
+            "search_refinement_queries": [
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:fanding.kr \"스텔라이브 1주년 뱃지 세트\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C+1%EC%A3%BC%EB%85%84+%EB%B1%83%EC%A7%80+%EC%84%B8%ED%8A%B8%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:fanding.kr \"스텔라이브 1주년 뱃지 세트\" \"캔뱃지\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C+1%EC%A3%BC%EB%85%84+%EB%B1%83%EC%A7%80+%EC%84%B8%ED%8A%B8%22+%22%EC%BA%94%EB%B1%83%EC%A7%80%22"
+              },
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:stellive.fanding.kr \"스텔라이브 1주년 뱃지 세트\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C+1%EC%A3%BC%EB%85%84+%EB%B1%83%EC%A7%80+%EC%84%B8%ED%8A%B8%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:stellive.fanding.kr \"스텔라이브 1주년 뱃지 세트\" \"캔뱃지\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C+1%EC%A3%BC%EB%85%84+%EB%B1%83%EC%A7%80+%EC%84%B8%ED%8A%B8%22+%22%EC%BA%94%EB%B1%83%EC%A7%80%22"
+              },
+              {
+                "label": "store_name_exact_name",
+                "query": "\"Stellive Store\" \"스텔라이브 1주년 뱃지 세트\" \"캔뱃지\"",
+                "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C+1%EC%A3%BC%EB%85%84+%EB%B1%83%EC%A7%80+%EC%84%B8%ED%8A%B8%22+%22%EC%BA%94%EB%B1%83%EC%A7%80%22"
+              }
+            ],
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Afanding.kr+%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C+1%EC%A3%BC%EB%85%84+%EB%B1%83%EC%A7%80+%EC%84%B8%ED%8A%B8+%EC%BA%94%EB%B1%83%EC%A7%80",
             "fallback_web_search_urls": [
               "https://www.google.com/search?q=site%3Afanding.kr+%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C+1%EC%A3%BC%EB%85%84+%EB%B1%83%EC%A7%80+%EC%84%B8%ED%8A%B8+%EC%BA%94%EB%B1%83%EC%A7%80",
@@ -9631,6 +10010,39 @@
               "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
+            "operator_next_steps": [
+              "Open primary_review_url/source_search_url first.",
+              "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+              "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+              "After source_url is confirmed, return to image_url attachment using the product image from that page."
+            ],
+            "search_refinement_queries": [
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:fanding.kr \"강지 마스코트 인형\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EA%B0%95%EC%A7%80+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:fanding.kr \"강지 마스코트 인형\" \"인형\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EA%B0%95%EC%A7%80+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+              },
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:stellive.fanding.kr \"강지 마스코트 인형\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EA%B0%95%EC%A7%80+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:stellive.fanding.kr \"강지 마스코트 인형\" \"인형\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EA%B0%95%EC%A7%80+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+              },
+              {
+                "label": "store_name_exact_name",
+                "query": "\"Stellive Store\" \"강지 마스코트 인형\" \"인형\"",
+                "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%EA%B0%95%EC%A7%80+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+              }
+            ],
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Afanding.kr+%EA%B0%95%EC%A7%80+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95+%EC%9D%B8%ED%98%95",
             "fallback_web_search_urls": [
               "https://www.google.com/search?q=site%3Afanding.kr+%EA%B0%95%EC%A7%80+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95+%EC%9D%B8%ED%98%95",
@@ -9829,6 +10241,39 @@
               "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
+            "operator_next_steps": [
+              "Open primary_review_url/source_search_url first.",
+              "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+              "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+              "After source_url is confirmed, return to image_url attachment using the product image from that page."
+            ],
+            "search_refinement_queries": [
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:fanding.kr \"아이리 칸나 생일 기념 굿즈 박스\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EA%B5%BF%EC%A6%88+%EB%B0%95%EC%8A%A4%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:fanding.kr \"아이리 칸나 생일 기념 굿즈 박스\" \"액세서리\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EA%B5%BF%EC%A6%88+%EB%B0%95%EC%8A%A4%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+              },
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:stellive.fanding.kr \"아이리 칸나 생일 기념 굿즈 박스\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EA%B5%BF%EC%A6%88+%EB%B0%95%EC%8A%A4%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:stellive.fanding.kr \"아이리 칸나 생일 기념 굿즈 박스\" \"액세서리\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EA%B5%BF%EC%A6%88+%EB%B0%95%EC%8A%A4%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+              },
+              {
+                "label": "store_name_exact_name",
+                "query": "\"Stellive Store\" \"아이리 칸나 생일 기념 굿즈 박스\" \"액세서리\"",
+                "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EA%B5%BF%EC%A6%88+%EB%B0%95%EC%8A%A4%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+              }
+            ],
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Afanding.kr+%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EA%B5%BF%EC%A6%88+%EB%B0%95%EC%8A%A4+%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC",
             "fallback_web_search_urls": [
               "https://www.google.com/search?q=site%3Afanding.kr+%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EA%B5%BF%EC%A6%88+%EB%B0%95%EC%8A%A4+%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC",
@@ -10034,6 +10479,39 @@
               "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
+            "operator_next_steps": [
+              "Open primary_review_url/source_search_url first.",
+              "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+              "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+              "After source_url is confirmed, return to image_url attachment using the product image from that page."
+            ],
+            "search_refinement_queries": [
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:fanding.kr \"아이리 칸나 마스코트 인형\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:fanding.kr \"아이리 칸나 마스코트 인형\" \"인형\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+              },
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:stellive.fanding.kr \"아이리 칸나 마스코트 인형\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:stellive.fanding.kr \"아이리 칸나 마스코트 인형\" \"인형\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+              },
+              {
+                "label": "store_name_exact_name",
+                "query": "\"Stellive Store\" \"아이리 칸나 마스코트 인형\" \"인형\"",
+                "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+              }
+            ],
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Afanding.kr+%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95+%EC%9D%B8%ED%98%95",
             "fallback_web_search_urls": [
               "https://www.google.com/search?q=site%3Afanding.kr+%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95+%EC%9D%B8%ED%98%95",
@@ -10234,6 +10712,39 @@
               "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
+            "operator_next_steps": [
+              "Open primary_review_url/source_search_url first.",
+              "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+              "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+              "After source_url is confirmed, return to image_url attachment using the product image from that page."
+            ],
+            "search_refinement_queries": [
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:fanding.kr \"아이리 칸나 키링 세트\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%ED%82%A4%EB%A7%81+%EC%84%B8%ED%8A%B8%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:fanding.kr \"아이리 칸나 키링 세트\" \"액세서리\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%ED%82%A4%EB%A7%81+%EC%84%B8%ED%8A%B8%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+              },
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:stellive.fanding.kr \"아이리 칸나 키링 세트\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%ED%82%A4%EB%A7%81+%EC%84%B8%ED%8A%B8%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:stellive.fanding.kr \"아이리 칸나 키링 세트\" \"액세서리\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%ED%82%A4%EB%A7%81+%EC%84%B8%ED%8A%B8%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+              },
+              {
+                "label": "store_name_exact_name",
+                "query": "\"Stellive Store\" \"아이리 칸나 키링 세트\" \"액세서리\"",
+                "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%ED%82%A4%EB%A7%81+%EC%84%B8%ED%8A%B8%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+              }
+            ],
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Afanding.kr+%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%ED%82%A4%EB%A7%81+%EC%84%B8%ED%8A%B8+%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC",
             "fallback_web_search_urls": [
               "https://www.google.com/search?q=site%3Afanding.kr+%EC%95%84%EC%9D%B4%EB%A6%AC+%EC%B9%B8%EB%82%98+%ED%82%A4%EB%A7%81+%EC%84%B8%ED%8A%B8+%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC",
@@ -10434,6 +10945,39 @@
               "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
+            "operator_next_steps": [
+              "Open primary_review_url/source_search_url first.",
+              "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+              "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+              "After source_url is confirmed, return to image_url attachment using the product image from that page."
+            ],
+            "search_refinement_queries": [
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:fanding.kr \"쿠루미 노아 데뷔 기념 아크릴 스탠드\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%8D%B0%EB%B7%94+%EA%B8%B0%EB%85%90+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:fanding.kr \"쿠루미 노아 데뷔 기념 아크릴 스탠드\" \"아크릴 스탠드\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%8D%B0%EB%B7%94+%EA%B8%B0%EB%85%90+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22+%22%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+              },
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:stellive.fanding.kr \"쿠루미 노아 데뷔 기념 아크릴 스탠드\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%8D%B0%EB%B7%94+%EA%B8%B0%EB%85%90+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:stellive.fanding.kr \"쿠루미 노아 데뷔 기념 아크릴 스탠드\" \"아크릴 스탠드\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%8D%B0%EB%B7%94+%EA%B8%B0%EB%85%90+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22+%22%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+              },
+              {
+                "label": "store_name_exact_name",
+                "query": "\"Stellive Store\" \"쿠루미 노아 데뷔 기념 아크릴 스탠드\" \"아크릴 스탠드\"",
+                "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%8D%B0%EB%B7%94+%EA%B8%B0%EB%85%90+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22+%22%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+              }
+            ],
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Afanding.kr+%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%8D%B0%EB%B7%94+%EA%B8%B0%EB%85%90+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C",
             "fallback_web_search_urls": [
               "https://www.google.com/search?q=site%3Afanding.kr+%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%8D%B0%EB%B7%94+%EA%B8%B0%EB%85%90+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C",
@@ -10639,6 +11183,39 @@
               "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
+            "operator_next_steps": [
+              "Open primary_review_url/source_search_url first.",
+              "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+              "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+              "After source_url is confirmed, return to image_url attachment using the product image from that page."
+            ],
+            "search_refinement_queries": [
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:fanding.kr \"쿠루미 노아 생일 기념 굿즈\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EA%B5%BF%EC%A6%88%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:fanding.kr \"쿠루미 노아 생일 기념 굿즈\" \"액세서리\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EA%B5%BF%EC%A6%88%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+              },
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:stellive.fanding.kr \"쿠루미 노아 생일 기념 굿즈\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EA%B5%BF%EC%A6%88%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:stellive.fanding.kr \"쿠루미 노아 생일 기념 굿즈\" \"액세서리\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EA%B5%BF%EC%A6%88%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+              },
+              {
+                "label": "store_name_exact_name",
+                "query": "\"Stellive Store\" \"쿠루미 노아 생일 기념 굿즈\" \"액세서리\"",
+                "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EA%B5%BF%EC%A6%88%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+              }
+            ],
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Afanding.kr+%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EA%B5%BF%EC%A6%88+%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC",
             "fallback_web_search_urls": [
               "https://www.google.com/search?q=site%3Afanding.kr+%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EA%B5%BF%EC%A6%88+%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC",
@@ -10843,6 +11420,39 @@
               "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
+            "operator_next_steps": [
+              "Open primary_review_url/source_search_url first.",
+              "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+              "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+              "After source_url is confirmed, return to image_url attachment using the product image from that page."
+            ],
+            "search_refinement_queries": [
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:fanding.kr \"쿠루미 노아 마스코트 인형\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:fanding.kr \"쿠루미 노아 마스코트 인형\" \"인형\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+              },
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:stellive.fanding.kr \"쿠루미 노아 마스코트 인형\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:stellive.fanding.kr \"쿠루미 노아 마스코트 인형\" \"인형\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+              },
+              {
+                "label": "store_name_exact_name",
+                "query": "\"Stellive Store\" \"쿠루미 노아 마스코트 인형\" \"인형\"",
+                "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+              }
+            ],
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Afanding.kr+%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95+%EC%9D%B8%ED%98%95",
             "fallback_web_search_urls": [
               "https://www.google.com/search?q=site%3Afanding.kr+%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EC%9D%B8%ED%98%95+%EC%9D%B8%ED%98%95",
@@ -11124,6 +11734,39 @@
               "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
+            "operator_next_steps": [
+              "Open primary_review_url/source_search_url first.",
+              "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+              "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+              "After source_url is confirmed, return to image_url attachment using the product image from that page."
+            ],
+            "search_refinement_queries": [
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:fanding.kr \"쿠루미 노아 생일 아크릴 스탠드 (드레스 ver.)\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EC%83%9D%EC%9D%BC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EB%93%9C%EB%A0%88%EC%8A%A4+ver.%29%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:fanding.kr \"쿠루미 노아 생일 아크릴 스탠드 (드레스 ver.)\" \"아크릴 스탠드\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EC%83%9D%EC%9D%BC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EB%93%9C%EB%A0%88%EC%8A%A4+ver.%29%22+%22%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+              },
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:stellive.fanding.kr \"쿠루미 노아 생일 아크릴 스탠드 (드레스 ver.)\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EC%83%9D%EC%9D%BC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EB%93%9C%EB%A0%88%EC%8A%A4+ver.%29%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:stellive.fanding.kr \"쿠루미 노아 생일 아크릴 스탠드 (드레스 ver.)\" \"아크릴 스탠드\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EC%83%9D%EC%9D%BC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EB%93%9C%EB%A0%88%EC%8A%A4+ver.%29%22+%22%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+              },
+              {
+                "label": "store_name_exact_name",
+                "query": "\"Stellive Store\" \"쿠루미 노아 생일 아크릴 스탠드 (드레스 ver.)\" \"아크릴 스탠드\"",
+                "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EC%83%9D%EC%9D%BC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EB%93%9C%EB%A0%88%EC%8A%A4+ver.%29%22+%22%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+              }
+            ],
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Afanding.kr+%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EC%83%9D%EC%9D%BC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EB%93%9C%EB%A0%88%EC%8A%A4+ver.%29+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C",
             "fallback_web_search_urls": [
               "https://www.google.com/search?q=site%3Afanding.kr+%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EC%83%9D%EC%9D%BC+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%28%EB%93%9C%EB%A0%88%EC%8A%A4+ver.%29+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C",
@@ -11328,6 +11971,39 @@
               "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
+            "operator_next_steps": [
+              "Open primary_review_url/source_search_url first.",
+              "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+              "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+              "After source_url is confirmed, return to image_url attachment using the product image from that page."
+            ],
+            "search_refinement_queries": [
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:fanding.kr \"쿠루미 노아 봉제 인형\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%B4%89%EC%A0%9C+%EC%9D%B8%ED%98%95%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:fanding.kr \"쿠루미 노아 봉제 인형\" \"인형\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%B4%89%EC%A0%9C+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+              },
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:stellive.fanding.kr \"쿠루미 노아 봉제 인형\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%B4%89%EC%A0%9C+%EC%9D%B8%ED%98%95%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:stellive.fanding.kr \"쿠루미 노아 봉제 인형\" \"인형\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%B4%89%EC%A0%9C+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+              },
+              {
+                "label": "store_name_exact_name",
+                "query": "\"Stellive Store\" \"쿠루미 노아 봉제 인형\" \"인형\"",
+                "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%B4%89%EC%A0%9C+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+              }
+            ],
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Afanding.kr+%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%B4%89%EC%A0%9C+%EC%9D%B8%ED%98%95+%EC%9D%B8%ED%98%95",
             "fallback_web_search_urls": [
               "https://www.google.com/search?q=site%3Afanding.kr+%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%EB%B4%89%EC%A0%9C+%EC%9D%B8%ED%98%95+%EC%9D%B8%ED%98%95",
@@ -11528,6 +12204,39 @@
               "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
+            "operator_next_steps": [
+              "Open primary_review_url/source_search_url first.",
+              "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+              "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+              "After source_url is confirmed, return to image_url attachment using the product image from that page."
+            ],
+            "search_refinement_queries": [
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:fanding.kr \"쿠루미 노아 클리어 파일 세트\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%ED%81%B4%EB%A6%AC%EC%96%B4+%ED%8C%8C%EC%9D%BC+%EC%84%B8%ED%8A%B8%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:fanding.kr \"쿠루미 노아 클리어 파일 세트\" \"액세서리\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%ED%81%B4%EB%A6%AC%EC%96%B4+%ED%8C%8C%EC%9D%BC+%EC%84%B8%ED%8A%B8%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+              },
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:stellive.fanding.kr \"쿠루미 노아 클리어 파일 세트\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%ED%81%B4%EB%A6%AC%EC%96%B4+%ED%8C%8C%EC%9D%BC+%EC%84%B8%ED%8A%B8%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:stellive.fanding.kr \"쿠루미 노아 클리어 파일 세트\" \"액세서리\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%ED%81%B4%EB%A6%AC%EC%96%B4+%ED%8C%8C%EC%9D%BC+%EC%84%B8%ED%8A%B8%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+              },
+              {
+                "label": "store_name_exact_name",
+                "query": "\"Stellive Store\" \"쿠루미 노아 클리어 파일 세트\" \"액세서리\"",
+                "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%ED%81%B4%EB%A6%AC%EC%96%B4+%ED%8C%8C%EC%9D%BC+%EC%84%B8%ED%8A%B8%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+              }
+            ],
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Afanding.kr+%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%ED%81%B4%EB%A6%AC%EC%96%B4+%ED%8C%8C%EC%9D%BC+%EC%84%B8%ED%8A%B8+%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC",
             "fallback_web_search_urls": [
               "https://www.google.com/search?q=site%3Afanding.kr+%EC%BF%A0%EB%A3%A8%EB%AF%B8+%EB%85%B8%EC%95%84+%ED%81%B4%EB%A6%AC%EC%96%B4+%ED%8C%8C%EC%9D%BC+%EC%84%B8%ED%8A%B8+%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC",
@@ -11729,6 +12438,39 @@
               "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
+            "operator_next_steps": [
+              "Open primary_review_url/source_search_url first.",
+              "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+              "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+              "After source_url is confirmed, return to image_url attachment using the product image from that page."
+            ],
+            "search_refinement_queries": [
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:fanding.kr \"네네코 마시로 데뷔 1주년 아크릴 스탠드\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EB%84%A4%EB%84%A4%EC%BD%94+%EB%A7%88%EC%8B%9C%EB%A1%9C+%EB%8D%B0%EB%B7%94+1%EC%A3%BC%EB%85%84+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:fanding.kr \"네네코 마시로 데뷔 1주년 아크릴 스탠드\" \"아크릴 스탠드\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%EB%84%A4%EB%84%A4%EC%BD%94+%EB%A7%88%EC%8B%9C%EB%A1%9C+%EB%8D%B0%EB%B7%94+1%EC%A3%BC%EB%85%84+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22+%22%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+              },
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:stellive.fanding.kr \"네네코 마시로 데뷔 1주년 아크릴 스탠드\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EB%84%A4%EB%84%A4%EC%BD%94+%EB%A7%88%EC%8B%9C%EB%A1%9C+%EB%8D%B0%EB%B7%94+1%EC%A3%BC%EB%85%84+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:stellive.fanding.kr \"네네코 마시로 데뷔 1주년 아크릴 스탠드\" \"아크릴 스탠드\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%EB%84%A4%EB%84%A4%EC%BD%94+%EB%A7%88%EC%8B%9C%EB%A1%9C+%EB%8D%B0%EB%B7%94+1%EC%A3%BC%EB%85%84+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22+%22%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+              },
+              {
+                "label": "store_name_exact_name",
+                "query": "\"Stellive Store\" \"네네코 마시로 데뷔 1주년 아크릴 스탠드\" \"아크릴 스탠드\"",
+                "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%EB%84%A4%EB%84%A4%EC%BD%94+%EB%A7%88%EC%8B%9C%EB%A1%9C+%EB%8D%B0%EB%B7%94+1%EC%A3%BC%EB%85%84+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22+%22%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+              }
+            ],
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Afanding.kr+%EB%84%A4%EB%84%A4%EC%BD%94+%EB%A7%88%EC%8B%9C%EB%A1%9C+%EB%8D%B0%EB%B7%94+1%EC%A3%BC%EB%85%84+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C",
             "fallback_web_search_urls": [
               "https://www.google.com/search?q=site%3Afanding.kr+%EB%84%A4%EB%84%A4%EC%BD%94+%EB%A7%88%EC%8B%9C%EB%A1%9C+%EB%8D%B0%EB%B7%94+1%EC%A3%BC%EB%85%84+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C",
@@ -11935,6 +12677,39 @@
               "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
+            "operator_next_steps": [
+              "Open primary_review_url/source_search_url first.",
+              "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+              "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+              "After source_url is confirmed, return to image_url attachment using the product image from that page."
+            ],
+            "search_refinement_queries": [
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:fanding.kr \"하나코 코코나 생일 굿즈 박스\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%EC%83%9D%EC%9D%BC+%EA%B5%BF%EC%A6%88+%EB%B0%95%EC%8A%A4%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:fanding.kr \"하나코 코코나 생일 굿즈 박스\" \"액세서리\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%EC%83%9D%EC%9D%BC+%EA%B5%BF%EC%A6%88+%EB%B0%95%EC%8A%A4%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+              },
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:stellive.fanding.kr \"하나코 코코나 생일 굿즈 박스\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%EC%83%9D%EC%9D%BC+%EA%B5%BF%EC%A6%88+%EB%B0%95%EC%8A%A4%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:stellive.fanding.kr \"하나코 코코나 생일 굿즈 박스\" \"액세서리\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%EC%83%9D%EC%9D%BC+%EA%B5%BF%EC%A6%88+%EB%B0%95%EC%8A%A4%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+              },
+              {
+                "label": "store_name_exact_name",
+                "query": "\"Stellive Store\" \"하나코 코코나 생일 굿즈 박스\" \"액세서리\"",
+                "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%EC%83%9D%EC%9D%BC+%EA%B5%BF%EC%A6%88+%EB%B0%95%EC%8A%A4%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+              }
+            ],
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Afanding.kr+%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%EC%83%9D%EC%9D%BC+%EA%B5%BF%EC%A6%88+%EB%B0%95%EC%8A%A4+%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC",
             "fallback_web_search_urls": [
               "https://www.google.com/search?q=site%3Afanding.kr+%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%EC%83%9D%EC%9D%BC+%EA%B5%BF%EC%A6%88+%EB%B0%95%EC%8A%A4+%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC",
@@ -12139,6 +12914,39 @@
               "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
+            "operator_next_steps": [
+              "Open primary_review_url/source_search_url first.",
+              "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+              "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+              "After source_url is confirmed, return to image_url attachment using the product image from that page."
+            ],
+            "search_refinement_queries": [
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:fanding.kr \"하나코 코코나 마스코트 봉제 인형\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EB%B4%89%EC%A0%9C+%EC%9D%B8%ED%98%95%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:fanding.kr \"하나코 코코나 마스코트 봉제 인형\" \"인형\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EB%B4%89%EC%A0%9C+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+              },
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:stellive.fanding.kr \"하나코 코코나 마스코트 봉제 인형\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EB%B4%89%EC%A0%9C+%EC%9D%B8%ED%98%95%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:stellive.fanding.kr \"하나코 코코나 마스코트 봉제 인형\" \"인형\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EB%B4%89%EC%A0%9C+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+              },
+              {
+                "label": "store_name_exact_name",
+                "query": "\"Stellive Store\" \"하나코 코코나 마스코트 봉제 인형\" \"인형\"",
+                "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EB%B4%89%EC%A0%9C+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+              }
+            ],
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Afanding.kr+%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EB%B4%89%EC%A0%9C+%EC%9D%B8%ED%98%95+%EC%9D%B8%ED%98%95",
             "fallback_web_search_urls": [
               "https://www.google.com/search?q=site%3Afanding.kr+%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EB%B4%89%EC%A0%9C+%EC%9D%B8%ED%98%95+%EC%9D%B8%ED%98%95",
@@ -12340,6 +13148,39 @@
               "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
+            "operator_next_steps": [
+              "Open primary_review_url/source_search_url first.",
+              "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+              "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+              "After source_url is confirmed, return to image_url attachment using the product image from that page."
+            ],
+            "search_refinement_queries": [
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:fanding.kr \"하나코 코코나 토트백\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%ED%86%A0%ED%8A%B8%EB%B0%B1%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:fanding.kr \"하나코 코코나 토트백\" \"의류\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%ED%86%A0%ED%8A%B8%EB%B0%B1%22+%22%EC%9D%98%EB%A5%98%22"
+              },
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:stellive.fanding.kr \"하나코 코코나 토트백\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%ED%86%A0%ED%8A%B8%EB%B0%B1%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:stellive.fanding.kr \"하나코 코코나 토트백\" \"의류\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%ED%86%A0%ED%8A%B8%EB%B0%B1%22+%22%EC%9D%98%EB%A5%98%22"
+              },
+              {
+                "label": "store_name_exact_name",
+                "query": "\"Stellive Store\" \"하나코 코코나 토트백\" \"의류\"",
+                "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%ED%86%A0%ED%8A%B8%EB%B0%B1%22+%22%EC%9D%98%EB%A5%98%22"
+              }
+            ],
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Afanding.kr+%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%ED%86%A0%ED%8A%B8%EB%B0%B1+%EC%9D%98%EB%A5%98",
             "fallback_web_search_urls": [
               "https://www.google.com/search?q=site%3Afanding.kr+%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%ED%86%A0%ED%8A%B8%EB%B0%B1+%EC%9D%98%EB%A5%98",
@@ -12539,6 +13380,39 @@
               "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
+            "operator_next_steps": [
+              "Open primary_review_url/source_search_url first.",
+              "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+              "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+              "After source_url is confirmed, return to image_url attachment using the product image from that page."
+            ],
+            "search_refinement_queries": [
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:fanding.kr \"하나코 코코나 클리어 파일 세트\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%ED%81%B4%EB%A6%AC%EC%96%B4+%ED%8C%8C%EC%9D%BC+%EC%84%B8%ED%8A%B8%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:fanding.kr \"하나코 코코나 클리어 파일 세트\" \"액세서리\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%ED%81%B4%EB%A6%AC%EC%96%B4+%ED%8C%8C%EC%9D%BC+%EC%84%B8%ED%8A%B8%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+              },
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:stellive.fanding.kr \"하나코 코코나 클리어 파일 세트\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%ED%81%B4%EB%A6%AC%EC%96%B4+%ED%8C%8C%EC%9D%BC+%EC%84%B8%ED%8A%B8%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:stellive.fanding.kr \"하나코 코코나 클리어 파일 세트\" \"액세서리\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%ED%81%B4%EB%A6%AC%EC%96%B4+%ED%8C%8C%EC%9D%BC+%EC%84%B8%ED%8A%B8%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+              },
+              {
+                "label": "store_name_exact_name",
+                "query": "\"Stellive Store\" \"하나코 코코나 클리어 파일 세트\" \"액세서리\"",
+                "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%ED%81%B4%EB%A6%AC%EC%96%B4+%ED%8C%8C%EC%9D%BC+%EC%84%B8%ED%8A%B8%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+              }
+            ],
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Afanding.kr+%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%ED%81%B4%EB%A6%AC%EC%96%B4+%ED%8C%8C%EC%9D%BC+%EC%84%B8%ED%8A%B8+%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC",
             "fallback_web_search_urls": [
               "https://www.google.com/search?q=site%3Afanding.kr+%ED%95%98%EB%82%98%EC%BD%94+%EC%BD%94%EC%BD%94%EB%82%98+%ED%81%B4%EB%A6%AC%EC%96%B4+%ED%8C%8C%EC%9D%BC+%EC%84%B8%ED%8A%B8+%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC",
@@ -12746,6 +13620,8 @@
           "catalog_index": 1568,
           "focus_pack_id": "source-discovery-focus-002",
           "source_store": "엔스카이",
+          "affiliation": "장송의 프리렌",
+          "series_name": null,
           "category": "키링",
           "name_ko": "펀 러버 스트랩",
           "name_ja": "フェルン ラバーストラップ",
@@ -12793,6 +13669,8 @@
           "catalog_index": 1569,
           "focus_pack_id": "source-discovery-focus-002",
           "source_store": "엔스카이",
+          "affiliation": "장송의 프리렌",
+          "series_name": null,
           "category": "키링",
           "name_ko": "슈타르크 러버 스트랩",
           "name_ja": "シュタルク ラバーストラップ",
@@ -12840,6 +13718,8 @@
           "catalog_index": 1570,
           "focus_pack_id": "source-discovery-focus-002",
           "source_store": "엔스카이",
+          "affiliation": "장송의 프리렌",
+          "series_name": null,
           "category": "키링",
           "name_ko": "히멜 러버 스트랩",
           "name_ja": "ヒンメル ラバーストラップ",
@@ -12887,6 +13767,8 @@
           "catalog_index": 1571,
           "focus_pack_id": "source-discovery-focus-002",
           "source_store": "엔스카이",
+          "affiliation": "장송의 프리렌",
+          "series_name": null,
           "category": "키링",
           "name_ko": "하이터 러버 스트랩",
           "name_ja": "ハイター ラバーストラップ",
@@ -12934,6 +13816,8 @@
           "catalog_index": 1572,
           "focus_pack_id": "source-discovery-focus-002",
           "source_store": "엔스카이",
+          "affiliation": "장송의 프리렌",
+          "series_name": null,
           "category": "키링",
           "name_ko": "아이젠 러버 스트랩",
           "name_ja": "アイゼン ラバーストラップ",
@@ -12981,6 +13865,8 @@
           "catalog_index": 1573,
           "focus_pack_id": "source-discovery-focus-002",
           "source_store": "엔스카이",
+          "affiliation": "귀멸의 칼날",
+          "series_name": null,
           "category": "키링",
           "name_ko": "카마도 탄지로 러버 스트랩",
           "name_ja": "竈門炭治郎 ラバーストラップ",
@@ -13028,6 +13914,8 @@
           "catalog_index": 1574,
           "focus_pack_id": "source-discovery-focus-002",
           "source_store": "엔스카이",
+          "affiliation": "귀멸의 칼날",
+          "series_name": null,
           "category": "키링",
           "name_ko": "카마도 네즈코 러버 스트랩",
           "name_ja": "竈門禰豆子 ラバーストラップ",
@@ -13075,6 +13963,8 @@
           "catalog_index": 1575,
           "focus_pack_id": "source-discovery-focus-002",
           "source_store": "엔스카이",
+          "affiliation": "귀멸의 칼날",
+          "series_name": null,
           "category": "키링",
           "name_ko": "아가츠마 젠이츠 러버 스트랩",
           "name_ja": "我妻善逸 ラバーストラップ",
@@ -13817,13 +14707,13 @@
       "review_summary": {
         "queue_rows": 20,
         "audited_rows": 20,
-        "store_search_broad_result_rows": 19,
+        "store_search_broad_result_rows": 18,
         "exact_title_candidate_rows": 0,
         "auto_apply_ready_rows": 0,
         "fallback_to_domain_limited_web_search_rows": 20,
-        "sample_product_detail_link_rows": 19,
-        "sample_product_detail_links": 95,
-        "broad_result_sample_detail_link_rows": 19,
+        "sample_product_detail_link_rows": 18,
+        "sample_product_detail_links": 90,
+        "broad_result_sample_detail_link_rows": 18,
         "primary_manual_review_url_rows": 20,
         "primary_manual_review_url_kind_counts": [
           [
@@ -16083,6 +16973,39 @@
               "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
+            "operator_next_steps": [
+              "Open primary_review_url/source_search_url first.",
+              "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+              "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+              "After source_url is confirmed, return to image_url attachment using the product image from that page."
+            ],
+            "search_refinement_queries": [
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:fanding.kr \"후야 데뷔 굿즈 박스\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%ED%9B%84%EC%95%BC+%EB%8D%B0%EB%B7%94+%EA%B5%BF%EC%A6%88+%EB%B0%95%EC%8A%A4%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:fanding.kr \"후야 데뷔 굿즈 박스\" \"액세서리\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%ED%9B%84%EC%95%BC+%EB%8D%B0%EB%B7%94+%EA%B5%BF%EC%A6%88+%EB%B0%95%EC%8A%A4%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+              },
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:stellive.fanding.kr \"후야 데뷔 굿즈 박스\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%ED%9B%84%EC%95%BC+%EB%8D%B0%EB%B7%94+%EA%B5%BF%EC%A6%88+%EB%B0%95%EC%8A%A4%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:stellive.fanding.kr \"후야 데뷔 굿즈 박스\" \"액세서리\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%ED%9B%84%EC%95%BC+%EB%8D%B0%EB%B7%94+%EA%B5%BF%EC%A6%88+%EB%B0%95%EC%8A%A4%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+              },
+              {
+                "label": "store_name_exact_name",
+                "query": "\"Stellive Store\" \"후야 데뷔 굿즈 박스\" \"액세서리\"",
+                "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%ED%9B%84%EC%95%BC+%EB%8D%B0%EB%B7%94+%EA%B5%BF%EC%A6%88+%EB%B0%95%EC%8A%A4%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+              }
+            ],
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Afanding.kr+%ED%9B%84%EC%95%BC+%EB%8D%B0%EB%B7%94+%EA%B5%BF%EC%A6%88+%EB%B0%95%EC%8A%A4+%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC",
             "fallback_web_search_urls": [
               "https://www.google.com/search?q=site%3Afanding.kr+%ED%9B%84%EC%95%BC+%EB%8D%B0%EB%B7%94+%EA%B5%BF%EC%A6%88+%EB%B0%95%EC%8A%A4+%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC",
@@ -16285,6 +17208,39 @@
               "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
+            "operator_next_steps": [
+              "Open primary_review_url/source_search_url first.",
+              "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+              "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+              "After source_url is confirmed, return to image_url attachment using the product image from that page."
+            ],
+            "search_refinement_queries": [
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:fanding.kr \"후야 첫 생일 기념 아크릴 스탠드\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%ED%9B%84%EC%95%BC+%EC%B2%AB+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:fanding.kr \"후야 첫 생일 기념 아크릴 스탠드\" \"아크릴 스탠드\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%ED%9B%84%EC%95%BC+%EC%B2%AB+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22+%22%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+              },
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:stellive.fanding.kr \"후야 첫 생일 기념 아크릴 스탠드\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%ED%9B%84%EC%95%BC+%EC%B2%AB+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:stellive.fanding.kr \"후야 첫 생일 기념 아크릴 스탠드\" \"아크릴 스탠드\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%ED%9B%84%EC%95%BC+%EC%B2%AB+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22+%22%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+              },
+              {
+                "label": "store_name_exact_name",
+                "query": "\"Stellive Store\" \"후야 첫 생일 기념 아크릴 스탠드\" \"아크릴 스탠드\"",
+                "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%ED%9B%84%EC%95%BC+%EC%B2%AB+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22+%22%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C%22"
+              }
+            ],
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Afanding.kr+%ED%9B%84%EC%95%BC+%EC%B2%AB+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C",
             "fallback_web_search_urls": [
               "https://www.google.com/search?q=site%3Afanding.kr+%ED%9B%84%EC%95%BC+%EC%B2%AB+%EC%83%9D%EC%9D%BC+%EA%B8%B0%EB%85%90+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C",
@@ -16488,6 +17444,39 @@
               "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
+            "operator_next_steps": [
+              "Open primary_review_url/source_search_url first.",
+              "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+              "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+              "After source_url is confirmed, return to image_url attachment using the product image from that page."
+            ],
+            "search_refinement_queries": [
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:fanding.kr \"후야 마스코트 봉제 인형\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%ED%9B%84%EC%95%BC+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EB%B4%89%EC%A0%9C+%EC%9D%B8%ED%98%95%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:fanding.kr \"후야 마스코트 봉제 인형\" \"인형\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%ED%9B%84%EC%95%BC+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EB%B4%89%EC%A0%9C+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+              },
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:stellive.fanding.kr \"후야 마스코트 봉제 인형\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%ED%9B%84%EC%95%BC+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EB%B4%89%EC%A0%9C+%EC%9D%B8%ED%98%95%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:stellive.fanding.kr \"후야 마스코트 봉제 인형\" \"인형\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%ED%9B%84%EC%95%BC+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EB%B4%89%EC%A0%9C+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+              },
+              {
+                "label": "store_name_exact_name",
+                "query": "\"Stellive Store\" \"후야 마스코트 봉제 인형\" \"인형\"",
+                "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%ED%9B%84%EC%95%BC+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EB%B4%89%EC%A0%9C+%EC%9D%B8%ED%98%95%22+%22%EC%9D%B8%ED%98%95%22"
+              }
+            ],
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Afanding.kr+%ED%9B%84%EC%95%BC+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EB%B4%89%EC%A0%9C+%EC%9D%B8%ED%98%95+%EC%9D%B8%ED%98%95",
             "fallback_web_search_urls": [
               "https://www.google.com/search?q=site%3Afanding.kr+%ED%9B%84%EC%95%BC+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8+%EB%B4%89%EC%A0%9C+%EC%9D%B8%ED%98%95+%EC%9D%B8%ED%98%95",
@@ -16687,6 +17676,39 @@
               "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
+            "operator_next_steps": [
+              "Open primary_review_url/source_search_url first.",
+              "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+              "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+              "After source_url is confirmed, return to image_url attachment using the product image from that page."
+            ],
+            "search_refinement_queries": [
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:fanding.kr \"후야 아크릴 키링\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%ED%9B%84%EC%95%BC+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4%EB%A7%81%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:fanding.kr \"후야 아크릴 키링\" \"액세서리\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%ED%9B%84%EC%95%BC+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4%EB%A7%81%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+              },
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:stellive.fanding.kr \"후야 아크릴 키링\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%ED%9B%84%EC%95%BC+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4%EB%A7%81%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:stellive.fanding.kr \"후야 아크릴 키링\" \"액세서리\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%ED%9B%84%EC%95%BC+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4%EB%A7%81%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+              },
+              {
+                "label": "store_name_exact_name",
+                "query": "\"Stellive Store\" \"후야 아크릴 키링\" \"액세서리\"",
+                "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%ED%9B%84%EC%95%BC+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4%EB%A7%81%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+              }
+            ],
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Afanding.kr+%ED%9B%84%EC%95%BC+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4%EB%A7%81+%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC",
             "fallback_web_search_urls": [
               "https://www.google.com/search?q=site%3Afanding.kr+%ED%9B%84%EC%95%BC+%EC%95%84%ED%81%AC%EB%A6%B4+%ED%82%A4%EB%A7%81+%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC",
@@ -16885,6 +17907,39 @@
               "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
+            "operator_next_steps": [
+              "Open primary_review_url/source_search_url first.",
+              "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+              "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+              "After source_url is confirmed, return to image_url attachment using the product image from that page."
+            ],
+            "search_refinement_queries": [
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:fanding.kr \"후야 클리어 파일 세트\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%ED%9B%84%EC%95%BC+%ED%81%B4%EB%A6%AC%EC%96%B4+%ED%8C%8C%EC%9D%BC+%EC%84%B8%ED%8A%B8%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:fanding.kr \"후야 클리어 파일 세트\" \"액세서리\"",
+                "url": "https://www.google.com/search?q=site%3Afanding.kr+%22%ED%9B%84%EC%95%BC+%ED%81%B4%EB%A6%AC%EC%96%B4+%ED%8C%8C%EC%9D%BC+%EC%84%B8%ED%8A%B8%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+              },
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:stellive.fanding.kr \"후야 클리어 파일 세트\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%ED%9B%84%EC%95%BC+%ED%81%B4%EB%A6%AC%EC%96%B4+%ED%8C%8C%EC%9D%BC+%EC%84%B8%ED%8A%B8%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:stellive.fanding.kr \"후야 클리어 파일 세트\" \"액세서리\"",
+                "url": "https://www.google.com/search?q=site%3Astellive.fanding.kr+%22%ED%9B%84%EC%95%BC+%ED%81%B4%EB%A6%AC%EC%96%B4+%ED%8C%8C%EC%9D%BC+%EC%84%B8%ED%8A%B8%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+              },
+              {
+                "label": "store_name_exact_name",
+                "query": "\"Stellive Store\" \"후야 클리어 파일 세트\" \"액세서리\"",
+                "url": "https://www.google.com/search?q=%22Stellive+Store%22+%22%ED%9B%84%EC%95%BC+%ED%81%B4%EB%A6%AC%EC%96%B4+%ED%8C%8C%EC%9D%BC+%EC%84%B8%ED%8A%B8%22+%22%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC%22"
+              }
+            ],
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Afanding.kr+%ED%9B%84%EC%95%BC+%ED%81%B4%EB%A6%AC%EC%96%B4+%ED%8C%8C%EC%9D%BC+%EC%84%B8%ED%8A%B8+%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC",
             "fallback_web_search_urls": [
               "https://www.google.com/search?q=site%3Afanding.kr+%ED%9B%84%EC%95%BC+%ED%81%B4%EB%A6%AC%EC%96%B4+%ED%8C%8C%EC%9D%BC+%EC%84%B8%ED%8A%B8+%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC",
@@ -17164,6 +18219,29 @@
               "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
+            "operator_next_steps": [
+              "Open primary_review_url/source_search_url first.",
+              "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+              "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+              "After source_url is confirmed, return to image_url attachment using the product image from that page."
+            ],
+            "search_refinement_queries": [
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:shop.weverse.io \"SEVENTEEN 포토카드 (랜덤)\"",
+                "url": "https://www.google.com/search?q=site%3Ashop.weverse.io+%22SEVENTEEN+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:shop.weverse.io \"SEVENTEEN 포토카드 (랜덤)\" \"포토카드\"",
+                "url": "https://www.google.com/search?q=site%3Ashop.weverse.io+%22SEVENTEEN+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29%22+%22%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%22"
+              },
+              {
+                "label": "store_name_exact_name",
+                "query": "\"Weverse Shop\" \"SEVENTEEN 포토카드 (랜덤)\" \"포토카드\"",
+                "url": "https://www.google.com/search?q=%22Weverse+Shop%22+%22SEVENTEEN+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29%22+%22%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%22"
+              }
+            ],
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ashop.weverse.io+SEVENTEEN+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C",
             "fallback_web_search_urls": [
               "https://www.google.com/search?q=site%3Ashop.weverse.io+SEVENTEEN+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C",
@@ -17348,6 +18426,29 @@
               "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
+            "operator_next_steps": [
+              "Open primary_review_url/source_search_url first.",
+              "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+              "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+              "After source_url is confirmed, return to image_url attachment using the product image from that page."
+            ],
+            "search_refinement_queries": [
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:shop.weverse.io \"ZEROBASEONE 포토카드 (랜덤)\"",
+                "url": "https://www.google.com/search?q=site%3Ashop.weverse.io+%22ZEROBASEONE+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:shop.weverse.io \"ZEROBASEONE 포토카드 (랜덤)\" \"포토카드\"",
+                "url": "https://www.google.com/search?q=site%3Ashop.weverse.io+%22ZEROBASEONE+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29%22+%22%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%22"
+              },
+              {
+                "label": "store_name_exact_name",
+                "query": "\"Weverse Shop\" \"ZEROBASEONE 포토카드 (랜덤)\" \"포토카드\"",
+                "url": "https://www.google.com/search?q=%22Weverse+Shop%22+%22ZEROBASEONE+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29%22+%22%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%22"
+              }
+            ],
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ashop.weverse.io+ZEROBASEONE+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C",
             "fallback_web_search_urls": [
               "https://www.google.com/search?q=site%3Ashop.weverse.io+ZEROBASEONE+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C",
@@ -17532,6 +18633,29 @@
               "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
+            "operator_next_steps": [
+              "Open primary_review_url/source_search_url first.",
+              "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+              "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+              "After source_url is confirmed, return to image_url attachment using the product image from that page."
+            ],
+            "search_refinement_queries": [
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:shop.weverse.io \"ILLIT 포토카드 (랜덤)\"",
+                "url": "https://www.google.com/search?q=site%3Ashop.weverse.io+%22ILLIT+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:shop.weverse.io \"ILLIT 포토카드 (랜덤)\" \"포토카드\"",
+                "url": "https://www.google.com/search?q=site%3Ashop.weverse.io+%22ILLIT+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29%22+%22%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%22"
+              },
+              {
+                "label": "store_name_exact_name",
+                "query": "\"Weverse Shop\" \"ILLIT 포토카드 (랜덤)\" \"포토카드\"",
+                "url": "https://www.google.com/search?q=%22Weverse+Shop%22+%22ILLIT+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29%22+%22%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%22"
+              }
+            ],
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ashop.weverse.io+ILLIT+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C",
             "fallback_web_search_urls": [
               "https://www.google.com/search?q=site%3Ashop.weverse.io+ILLIT+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C",
@@ -17959,6 +19083,39 @@
               "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
+            "operator_next_steps": [
+              "Open primary_review_url/source_search_url first.",
+              "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+              "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+              "After source_url is confirmed, return to image_url attachment using the product image from that page."
+            ],
+            "search_refinement_queries": [
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:pokemoncenter-online.com \"ポケモン ぬいぐるみ (ピカチュウ)\"",
+                "url": "https://www.google.com/search?q=site%3Apokemoncenter-online.com+%22%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3+%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF+%28%E3%83%94%E3%82%AB%E3%83%81%E3%83%A5%E3%82%A6%29%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:pokemoncenter-online.com \"ポケモン ぬいぐるみ (ピカチュウ)\" \"인형\"",
+                "url": "https://www.google.com/search?q=site%3Apokemoncenter-online.com+%22%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3+%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF+%28%E3%83%94%E3%82%AB%E3%83%81%E3%83%A5%E3%82%A6%29%22+%22%EC%9D%B8%ED%98%95%22"
+              },
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:pokemoncenter.co.kr \"ポケモン ぬいぐるみ (ピカチュウ)\"",
+                "url": "https://www.google.com/search?q=site%3Apokemoncenter.co.kr+%22%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3+%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF+%28%E3%83%94%E3%82%AB%E3%83%81%E3%83%A5%E3%82%A6%29%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:pokemoncenter.co.kr \"ポケモン ぬいぐるみ (ピカチュウ)\" \"인형\"",
+                "url": "https://www.google.com/search?q=site%3Apokemoncenter.co.kr+%22%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3+%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF+%28%E3%83%94%E3%82%AB%E3%83%81%E3%83%A5%E3%82%A6%29%22+%22%EC%9D%B8%ED%98%95%22"
+              },
+              {
+                "label": "store_name_exact_name",
+                "query": "\"포켓몬 센터\" \"ポケモン ぬいぐるみ (ピカチュウ)\" \"인형\"",
+                "url": "https://www.google.com/search?q=%22%ED%8F%AC%EC%BC%93%EB%AA%AC+%EC%84%BC%ED%84%B0%22+%22%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3+%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF+%28%E3%83%94%E3%82%AB%E3%83%81%E3%83%A5%E3%82%A6%29%22+%22%EC%9D%B8%ED%98%95%22"
+              }
+            ],
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Apokemoncenter-online.com+%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3+%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF+%28%E3%83%94%E3%82%AB%E3%83%81%E3%83%A5%E3%82%A6%29+%EC%9D%B8%ED%98%95",
             "fallback_web_search_urls": [
               "https://www.google.com/search?q=site%3Apokemoncenter-online.com+%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3+%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF+%28%E3%83%94%E3%82%AB%E3%83%81%E3%83%A5%E3%82%A6%29+%EC%9D%B8%ED%98%95",
@@ -18145,6 +19302,39 @@
               "candidate_review_note": "No usable candidate was found; use source_search_url, store_search_hints, or fallback_search_queries for manual lookup.",
               "auto_apply_allowed": false
             },
+            "operator_next_steps": [
+              "Open primary_review_url/source_search_url first.",
+              "Confirm the opened page is an exact product detail page, not a storefront, search, category, cart, or account page.",
+              "Copy the URL only when the title, event/member/variant wording, and goods type match the catalog row.",
+              "After source_url is confirmed, return to image_url attachment using the product image from that page."
+            ],
+            "search_refinement_queries": [
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:pokemoncenter-online.com \"포켓몬 카드 게임 부스터 팩\"",
+                "url": "https://www.google.com/search?q=site%3Apokemoncenter-online.com+%22%ED%8F%AC%EC%BC%93%EB%AA%AC+%EC%B9%B4%EB%93%9C+%EA%B2%8C%EC%9E%84+%EB%B6%80%EC%8A%A4%ED%84%B0+%ED%8C%A9%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:pokemoncenter-online.com \"포켓몬 카드 게임 부스터 팩\" \"트레이딩 카드\"",
+                "url": "https://www.google.com/search?q=site%3Apokemoncenter-online.com+%22%ED%8F%AC%EC%BC%93%EB%AA%AC+%EC%B9%B4%EB%93%9C+%EA%B2%8C%EC%9E%84+%EB%B6%80%EC%8A%A4%ED%84%B0+%ED%8C%A9%22+%22%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%B9%B4%EB%93%9C%22"
+              },
+              {
+                "label": "exact_name_on_store_domain",
+                "query": "site:pokemoncenter.co.kr \"포켓몬 카드 게임 부스터 팩\"",
+                "url": "https://www.google.com/search?q=site%3Apokemoncenter.co.kr+%22%ED%8F%AC%EC%BC%93%EB%AA%AC+%EC%B9%B4%EB%93%9C+%EA%B2%8C%EC%9E%84+%EB%B6%80%EC%8A%A4%ED%84%B0+%ED%8C%A9%22"
+              },
+              {
+                "label": "exact_name_category_on_store_domain",
+                "query": "site:pokemoncenter.co.kr \"포켓몬 카드 게임 부스터 팩\" \"트레이딩 카드\"",
+                "url": "https://www.google.com/search?q=site%3Apokemoncenter.co.kr+%22%ED%8F%AC%EC%BC%93%EB%AA%AC+%EC%B9%B4%EB%93%9C+%EA%B2%8C%EC%9E%84+%EB%B6%80%EC%8A%A4%ED%84%B0+%ED%8C%A9%22+%22%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%B9%B4%EB%93%9C%22"
+              },
+              {
+                "label": "store_name_exact_name",
+                "query": "\"포켓몬 센터\" \"포켓몬 카드 게임 부스터 팩\" \"트레이딩 카드\"",
+                "url": "https://www.google.com/search?q=%22%ED%8F%AC%EC%BC%93%EB%AA%AC+%EC%84%BC%ED%84%B0%22+%22%ED%8F%AC%EC%BC%93%EB%AA%AC+%EC%B9%B4%EB%93%9C+%EA%B2%8C%EC%9E%84+%EB%B6%80%EC%8A%A4%ED%84%B0+%ED%8C%A9%22+%22%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%B9%B4%EB%93%9C%22"
+              }
+            ],
             "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Apokemoncenter-online.com+%ED%8F%AC%EC%BC%93%EB%AA%AC+%EC%B9%B4%EB%93%9C+%EA%B2%8C%EC%9E%84+%EB%B6%80%EC%8A%A4%ED%84%B0+%ED%8C%A9+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%B9%B4%EB%93%9C",
             "fallback_web_search_urls": [
               "https://www.google.com/search?q=site%3Apokemoncenter-online.com+%ED%8F%AC%EC%BC%93%EB%AA%AC+%EC%B9%B4%EB%93%9C+%EA%B2%8C%EC%9E%84+%EB%B6%80%EC%8A%A4%ED%84%B0+%ED%8C%A9+%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9+%EC%B9%B4%EB%93%9C",

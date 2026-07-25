@@ -198,6 +198,14 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
             report["summary"]["source_url_update_fallback_web_search_url_rows"],
             2,
         )
+        self.assertEqual(
+            report["source_url_update_template_triage"]["search_refinement_query_rows"],
+            2,
+        )
+        self.assertGreaterEqual(
+            report["source_url_update_template_triage"]["search_refinement_queries"],
+            2,
+        )
         self.assertEqual(report["summary"]["next_source_url_review_batch_candidate_hint_rows"], 1)
         self.assertEqual(report["summary"]["next_source_url_review_batch_no_candidate_rows"], 0)
         self.assertEqual(report["summary"]["next_source_url_review_batch_manual_search_rows"], 1)
@@ -504,6 +512,11 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(flat_template[0]["field"], "source_url")
         self.assertEqual(flat_template[0]["manual_value"], "")
         self.assertEqual(flat_template[0]["candidate_status"], "low_confidence_candidate")
+        self.assertTrue(flat_template[0]["search_refinement_queries"])
+        self.assertIn(
+            "Treat candidate_options as hints only",
+            flat_template[0]["operator_next_steps"][1],
+        )
         self.assertEqual(
             flat_template[0]["source_url_review_guidance"]["accepted_url_patterns"][0],
             "https://fanding.kr/@stellive/shop/{product_no}",
@@ -539,6 +552,14 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
             report["next_source_url_review_batch"][0]["operator_checklist"][1],
         )
         self.assertEqual(
+            report["next_source_url_review_batch"][0]["search_refinement_queries"],
+            flat_template[0]["search_refinement_queries"],
+        )
+        self.assertIn(
+            "Treat candidate_options as hints only",
+            report["next_source_url_review_batch"][0]["operator_next_steps"][1],
+        )
+        self.assertEqual(
             report["next_source_url_review_batch"][0]["unblocks"],
             "image_url_extraction_and_attachment_review",
         )
@@ -548,6 +569,8 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(triage["low_confidence_candidate_rows"], 1)
         self.assertEqual(triage["manual_search_rows"], 1)
         self.assertEqual(triage["search_hint_rows"], 2)
+        self.assertEqual(triage["search_refinement_query_rows"], 2)
+        self.assertGreaterEqual(triage["search_refinement_queries"], 2)
         self.assertFalse(triage["auto_apply_enabled"])
         template_triage = report["source_url_update_template_triage"]
         self.assertEqual(template_triage["rows"], 2)
@@ -555,6 +578,8 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(template_triage["low_confidence_candidate_rows"], 1)
         self.assertEqual(template_triage["manual_search_rows"], 1)
         self.assertEqual(template_triage["fallback_web_search_url_rows"], 2)
+        self.assertEqual(template_triage["search_refinement_query_rows"], 2)
+        self.assertGreaterEqual(template_triage["search_refinement_queries"], 2)
         self.assertFalse(template_triage["auto_apply_enabled"])
         self.assertEqual(
             report["operator_handoff"]["handoff_steps"][0]["batch_triage"],

@@ -12,6 +12,9 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 DEFAULT_INPUT = DATA / "source_discovery_focus_confirmed_template_public.json"
 DEFAULT_OUTPUT = DATA / "source_discovery_next_focus_pack_public.json"
+DEFAULT_EXACT_URL_CANDIDATE_AUDIT = (
+    DATA / "source_discovery_next_focus_exact_url_candidate_audit_public.json"
+)
 
 SOURCE_DISCOVERY_BLOCKED_REASON = "exact_product_detail_source_url_not_confirmed"
 SOURCE_DISCOVERY_BLOCKED_UNTIL = "exact_product_detail_source_url_confirmed"
@@ -447,10 +450,23 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument(
+        "--exact-url-candidate-audit",
+        type=Path,
+        default=DEFAULT_EXACT_URL_CANDIDATE_AUDIT,
+    )
     parser.add_argument("--write", action="store_true")
     args = parser.parse_args()
 
-    report = build_report(load_json(args.input))
+    exact_url_candidate_audit = (
+        load_json(args.exact_url_candidate_audit)
+        if args.exact_url_candidate_audit.exists()
+        else None
+    )
+    report = build_report(
+        load_json(args.input),
+        exact_url_candidate_audit=exact_url_candidate_audit,
+    )
     if args.write:
         args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report["summary"], ensure_ascii=False, indent=2))

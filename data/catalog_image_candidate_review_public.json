@@ -2261,7 +2261,7 @@
     "public_report": "data/catalog_agent_work_queue_public.json",
     "batch_count": 160,
     "max_published_batches": 160,
-    "summed_batch_rows": 20533,
+    "summed_batch_rows": 20539,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -3891,20 +3891,24 @@
     "source_focus_template_work_order_pack_count": 62,
     "source_focus_template_next_pack_rows": 20,
     "source_next_focus_detail_pack_items": 20,
-    "source_next_focus_detail_action_lane_count": 2,
-    "source_next_focus_detail_metadata_enrichment_template_rows": 1,
-    "source_next_focus_detail_metadata_field_import_template_rows": 3,
-    "source_next_focus_detail_metadata_field_import_supported_rows": 3,
+    "source_next_focus_detail_action_lane_count": 3,
+    "source_next_focus_detail_metadata_enrichment_template_rows": 7,
+    "source_next_focus_detail_metadata_field_import_template_rows": 21,
+    "source_next_focus_detail_metadata_field_import_supported_rows": 21,
     "source_next_focus_detail_metadata_field_import_dry_run_updated_rows": 0,
-    "source_next_focus_detail_metadata_field_import_dry_run_skipped_rows": 3,
+    "source_next_focus_detail_metadata_field_import_dry_run_skipped_rows": 21,
     "source_next_focus_detail_action_lanes": [
       [
+        "confirm_exact_candidate_identity",
+        1
+      ],
+      [
         "fallback_source_search",
-        19
+        12
       ],
       [
         "catalog_variant_metadata_enrichment",
-        1
+        7
       ]
     ],
     "source_next_focus_fallback_rows": 20,
@@ -4450,7 +4454,7 @@
     "source_url_update_missing_primary_review_url_rows": 0,
     "source_url_update_candidate_hint_rows": 3,
     "source_url_update_low_confidence_candidate_rows": 3,
-    "source_url_update_no_candidate_rows": 47,
+    "source_url_update_no_candidate_rows": 42,
     "source_url_update_manual_search_rows": 47,
     "source_url_update_fallback_web_search_url_rows": 50,
     "source_url_update_review_start_coverage": 1.0,
@@ -5239,6 +5243,8 @@
             "manual_search_rows": 9,
             "search_hint_rows": 10,
             "fallback_web_search_url_rows": 10,
+            "search_refinement_query_rows": 10,
+            "search_refinement_queries": 50,
             "primary_review_url_rows": 10,
             "candidate_status_counts": [
               [
@@ -5283,6 +5289,8 @@
             "manual_search_rows": 47,
             "search_hint_rows": 50,
             "fallback_web_search_url_rows": 50,
+            "search_refinement_query_rows": 50,
+            "search_refinement_queries": 244,
             "primary_review_url_rows": 50,
             "candidate_status_counts": [
               [
@@ -5396,6 +5404,8 @@
       "manual_search_rows": 9,
       "search_hint_rows": 10,
       "fallback_web_search_url_rows": 10,
+      "search_refinement_query_rows": 10,
+      "search_refinement_queries": 50,
       "primary_review_url_rows": 10,
       "candidate_status_counts": [
         [
@@ -5440,6 +5450,8 @@
       "manual_search_rows": 47,
       "search_hint_rows": 50,
       "fallback_web_search_url_rows": 50,
+      "search_refinement_query_rows": 50,
+      "search_refinement_queries": 244,
       "primary_review_url_rows": 50,
       "candidate_status_counts": [
         [
@@ -10016,7 +10028,8 @@
     "source_discovery_confirmed_focus_source_rows": 0,
     "source_discovery_focus_template_rows": 667,
     "source_discovery_focus_template_confirmed_rows": 0,
-    "source_discovery_next_focus_pack_id": "source-discovery-focus-001",
+    "source_discovery_template_next_focus_pack_id": "source-discovery-focus-001",
+    "source_discovery_next_focus_pack_id": "source-discovery-focus-002",
     "source_discovery_next_focus_pack_rows": 20,
     "source_discovery_next_focus_action_lane_count": 1,
     "source_discovery_next_focus_action_lanes": [
@@ -10274,7 +10287,7 @@
             }
           ],
           "current_focus_pack": {
-            "focus_pack_id": "source-discovery-focus-001",
+            "focus_pack_id": "source-discovery-focus-002",
             "source_store": "엔스카이",
             "target_category": "키링",
             "row_count": 20,
@@ -10292,21 +10305,26 @@
               "title_character_variant_type_match",
               "image_url_from_confirmed_source_or_trusted_official_cdn"
             ],
+            "template_focus_pack_id": "source-discovery-focus-001",
             "candidate_review_summary": {
               "pack_items": 20,
-              "items_with_candidates": 1,
-              "candidate_rows": 1,
-              "manual_candidate_review_rows": 1,
-              "no_candidate_items": 19,
-              "next_action_lane_count": 2,
+              "items_with_candidates": 8,
+              "candidate_rows": 17,
+              "manual_candidate_review_rows": 16,
+              "no_candidate_items": 12,
+              "next_action_lane_count": 3,
               "next_action_lanes": [
                 [
+                  "confirm_exact_candidate_identity",
+                  1
+                ],
+                [
                   "fallback_source_search",
-                  19
+                  12
                 ],
                 [
                   "catalog_variant_metadata_enrichment",
-                  1
+                  7
                 ]
               ],
               "official_search_has_results": 0,
@@ -10317,78 +10335,78 @@
               "queue_rows": 20,
               "fallback_query_count": 120,
               "manual_confirmed_rows": 0,
-              "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
-              "first_fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29"
+              "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+              "first_fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
             },
             "candidate_review_samples": [
               {
-                "catalog_index": 922,
-                "name_ko": "치이카와 러버 스트랩 (우사기)",
-                "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
+                "catalog_index": 1568,
+                "name_ko": "펀 러버 스트랩",
+                "name_ja": "フェルン ラバーストラップ",
                 "candidate_count": 0,
                 "official_search_audit_status": "official_search_unavailable",
                 "needs_fallback_web_search": true,
                 "status": null
               },
               {
-                "catalog_index": 923,
-                "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
-                "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+                "catalog_index": 1569,
+                "name_ko": "슈타르크 러버 스트랩",
+                "name_ja": "シュタルク ラバーストラップ",
                 "candidate_count": 0,
                 "official_search_audit_status": "official_search_unavailable",
                 "needs_fallback_web_search": true,
                 "status": null
               },
               {
-                "catalog_index": 924,
-                "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
-                "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+                "catalog_index": 1570,
+                "name_ko": "히멜 러버 스트랩",
+                "name_ja": "ヒンメル ラバーストラップ",
                 "candidate_count": 0,
                 "official_search_audit_status": "official_search_unavailable",
                 "needs_fallback_web_search": true,
                 "status": null
               },
               {
-                "catalog_index": 925,
-                "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
-                "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+                "catalog_index": 1571,
+                "name_ko": "하이터 러버 스트랩",
+                "name_ja": "ハイター ラバーストラップ",
                 "candidate_count": 0,
                 "official_search_audit_status": "official_search_unavailable",
                 "needs_fallback_web_search": true,
                 "status": null
               },
               {
-                "catalog_index": 926,
-                "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
-                "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
+                "catalog_index": 1572,
+                "name_ko": "아이젠 러버 스트랩",
+                "name_ja": "アイゼン ラバーストラップ",
                 "candidate_count": 0,
                 "official_search_audit_status": "official_search_unavailable",
                 "needs_fallback_web_search": true,
                 "status": null
               },
               {
-                "catalog_index": 1531,
-                "name_ko": "하츠네 미쿠 메탈릭 러버 스트랩",
-                "name_ja": "初音ミク メタリックラバーストラップ",
-                "candidate_count": 0,
-                "official_search_audit_status": "official_search_unavailable",
-                "needs_fallback_web_search": true,
-                "status": null
-              },
-              {
-                "catalog_index": 1539,
-                "name_ko": "토도로키 쇼토 러버 스트랩",
-                "name_ja": "轟焦凍 ラバーストラップ",
+                "catalog_index": 1573,
+                "name_ko": "카마도 탄지로 러버 스트랩",
+                "name_ja": "竈門炭治郎 ラバーストラップ",
                 "candidate_count": 1,
                 "official_search_audit_status": "official_search_unavailable",
                 "needs_fallback_web_search": true,
                 "status": null
               },
               {
-                "catalog_index": 1541,
-                "name_ko": "다비 메탈릭 러버 스트랩",
-                "name_ja": "荼毘 メタリックラバーストラップ",
-                "candidate_count": 0,
+                "catalog_index": 1574,
+                "name_ko": "카마도 네즈코 러버 스트랩",
+                "name_ja": "竈門禰豆子 ラバーストラップ",
+                "candidate_count": 4,
+                "official_search_audit_status": "official_search_unavailable",
+                "needs_fallback_web_search": true,
+                "status": null
+              },
+              {
+                "catalog_index": 1575,
+                "name_ko": "아가츠마 젠이츠 러버 스트랩",
+                "name_ja": "我妻善逸 ラバーストラップ",
+                "candidate_count": 1,
                 "official_search_audit_status": "official_search_unavailable",
                 "needs_fallback_web_search": true,
                 "status": null
@@ -10396,117 +10414,117 @@
             ],
             "fallback_review_samples": [
               {
-                "catalog_index": 922,
-                "name_ko": "치이카와 러버 스트랩 (우사기)",
-                "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
+                "catalog_index": 1568,
+                "name_ko": "펀 러버 스트랩",
+                "name_ja": "フェルン ラバーストラップ",
                 "domain_limited_web_search_url_count": 6,
-                "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29"
+                "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
               },
               {
-                "catalog_index": 923,
-                "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
-                "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+                "catalog_index": 1569,
+                "name_ko": "슈타르크 러버 스트랩",
+                "name_ja": "シュタルク ラバーストラップ",
                 "domain_limited_web_search_url_count": 6,
-                "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29"
+                "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
               },
               {
-                "catalog_index": 924,
-                "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
-                "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+                "catalog_index": 1570,
+                "name_ko": "히멜 러버 스트랩",
+                "name_ja": "ヒンメル ラバーストラップ",
                 "domain_limited_web_search_url_count": 6,
-                "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29"
+                "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
               },
               {
-                "catalog_index": 925,
-                "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
-                "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+                "catalog_index": 1571,
+                "name_ko": "하이터 러버 스트랩",
+                "name_ja": "ハイター ラバーストラップ",
                 "domain_limited_web_search_url_count": 6,
-                "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29"
+                "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
               },
               {
-                "catalog_index": 926,
-                "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
-                "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
+                "catalog_index": 1572,
+                "name_ko": "아이젠 러버 스트랩",
+                "name_ja": "アイゼン ラバーストラップ",
                 "domain_limited_web_search_url_count": 6,
-                "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29"
+                "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
               },
               {
-                "catalog_index": 1531,
-                "name_ko": "하츠네 미쿠 메탈릭 러버 스트랩",
-                "name_ja": "初音ミク メタリックラバーストラップ",
+                "catalog_index": 1573,
+                "name_ko": "카마도 탄지로 러버 스트랩",
+                "name_ja": "竈門炭治郎 ラバーストラップ",
                 "domain_limited_web_search_url_count": 6,
-                "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+                "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
               },
               {
-                "catalog_index": 1539,
-                "name_ko": "토도로키 쇼토 러버 스트랩",
-                "name_ja": "轟焦凍 ラバーストラップ",
+                "catalog_index": 1574,
+                "name_ko": "카마도 네즈코 러버 스트랩",
+                "name_ja": "竈門禰豆子 ラバーストラップ",
                 "domain_limited_web_search_url_count": 6,
-                "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E8%BD%9F%E7%84%A6%E5%87%8D%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+                "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E7%AB%88%E9%96%80%E7%A6%B0%E8%B1%86%E5%AD%90%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
               },
               {
-                "catalog_index": 1541,
-                "name_ko": "다비 메탈릭 러버 스트랩",
-                "name_ja": "荼毘 メタリックラバーストラップ",
+                "catalog_index": 1575,
+                "name_ko": "아가츠마 젠이츠 러버 스트랩",
+                "name_ja": "我妻善逸 ラバーストラップ",
                 "domain_limited_web_search_url_count": 6,
-                "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E8%8D%BC%E6%AF%98%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+                "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E6%88%91%E5%A6%BB%E5%96%84%E9%80%B8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
               }
             ]
           },
           "review_start": {
             "workflow": "find_source_then_extract_image",
-            "batch_id": "source-discovery-focus-001-exact-url-review",
-            "focus_pack_id": "source-discovery-focus-001",
+            "batch_id": "source-discovery-focus-002-exact-url-review",
+            "focus_pack_id": "source-discovery-focus-002",
             "source_store": "엔스카이",
             "row_count": 20,
             "primary_review_url_rows": 20,
-            "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+            "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
             "first_primary_review_url_kind": "domain_limited_web_search",
             "review_section": "source_discovery_next_focus_exact_url_review_queue",
             "source": "source_discovery_next_focus_exact_url_review_queue_public.json",
             "template": "source_discovery_focus_confirmed_template_public.json",
-            "source_url_confirmation_patch_template_rows": 0,
+            "source_url_confirmation_patch_template_rows": 10,
             "rediscovery_work_order_rows": 20,
             "sample_items_with_primary_review_url": 5,
             "sample_primary_review_items": [
               {
-                "catalog_index": 922,
-                "name_ko": "치이카와 러버 스트랩 (우사기)",
-                "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
+                "catalog_index": 1568,
+                "name_ko": "펀 러버 스트랩",
+                "name_ja": "フェルン ラバーストラップ",
                 "source_store": "엔스카이",
-                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
                 "primary_review_url_kind": "domain_limited_web_search"
               },
               {
-                "catalog_index": 923,
-                "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
-                "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+                "catalog_index": 1569,
+                "name_ko": "슈타르크 러버 스트랩",
+                "name_ja": "シュタルク ラバーストラップ",
                 "source_store": "엔스카이",
-                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29%22",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
                 "primary_review_url_kind": "domain_limited_web_search"
               },
               {
-                "catalog_index": 924,
-                "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
-                "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+                "catalog_index": 1570,
+                "name_ko": "히멜 러버 스트랩",
+                "name_ja": "ヒンメル ラバーストラップ",
                 "source_store": "엔스카이",
-                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29%22",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
                 "primary_review_url_kind": "domain_limited_web_search"
               },
               {
-                "catalog_index": 925,
-                "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
-                "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+                "catalog_index": 1571,
+                "name_ko": "하이터 러버 스트랩",
+                "name_ja": "ハイター ラバーストラップ",
                 "source_store": "엔스카이",
-                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29%22",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
                 "primary_review_url_kind": "domain_limited_web_search"
               },
               {
-                "catalog_index": 926,
-                "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
-                "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
+                "catalog_index": 1572,
+                "name_ko": "아이젠 러버 스트랩",
+                "name_ja": "アイゼン ラバーストラップ",
                 "source_store": "엔스카이",
-                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29%22",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
                 "primary_review_url_kind": "domain_limited_web_search"
               }
             ],
@@ -10850,58 +10868,58 @@
           ],
           "review_start": {
             "workflow": "find_source_then_extract_image",
-            "batch_id": "source-discovery-focus-001-exact-url-review",
-            "focus_pack_id": "source-discovery-focus-001",
+            "batch_id": "source-discovery-focus-002-exact-url-review",
+            "focus_pack_id": "source-discovery-focus-002",
             "source_store": "엔스카이",
             "row_count": 20,
             "primary_review_url_rows": 20,
-            "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+            "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
             "first_primary_review_url_kind": "domain_limited_web_search",
             "review_section": "source_discovery_next_focus_exact_url_review_queue",
             "source": "source_discovery_next_focus_exact_url_review_queue_public.json",
             "template": "source_discovery_focus_confirmed_template_public.json",
-            "source_url_confirmation_patch_template_rows": 0,
+            "source_url_confirmation_patch_template_rows": 10,
             "rediscovery_work_order_rows": 20,
             "sample_items_with_primary_review_url": 5,
             "sample_primary_review_items": [
               {
-                "catalog_index": 922,
-                "name_ko": "치이카와 러버 스트랩 (우사기)",
-                "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
+                "catalog_index": 1568,
+                "name_ko": "펀 러버 스트랩",
+                "name_ja": "フェルン ラバーストラップ",
                 "source_store": "엔스카이",
-                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
                 "primary_review_url_kind": "domain_limited_web_search"
               },
               {
-                "catalog_index": 923,
-                "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
-                "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+                "catalog_index": 1569,
+                "name_ko": "슈타르크 러버 스트랩",
+                "name_ja": "シュタルク ラバーストラップ",
                 "source_store": "엔스카이",
-                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29%22",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
                 "primary_review_url_kind": "domain_limited_web_search"
               },
               {
-                "catalog_index": 924,
-                "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
-                "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+                "catalog_index": 1570,
+                "name_ko": "히멜 러버 스트랩",
+                "name_ja": "ヒンメル ラバーストラップ",
                 "source_store": "엔스카이",
-                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29%22",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
                 "primary_review_url_kind": "domain_limited_web_search"
               },
               {
-                "catalog_index": 925,
-                "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
-                "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+                "catalog_index": 1571,
+                "name_ko": "하이터 러버 스트랩",
+                "name_ja": "ハイター ラバーストラップ",
                 "source_store": "엔스카이",
-                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29%22",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
                 "primary_review_url_kind": "domain_limited_web_search"
               },
               {
-                "catalog_index": 926,
-                "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
-                "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
+                "catalog_index": 1572,
+                "name_ko": "아이젠 러버 스트랩",
+                "name_ja": "アイゼン ラバーストラップ",
                 "source_store": "엔스카이",
-                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29%22",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
                 "primary_review_url_kind": "domain_limited_web_search"
               }
             ],
@@ -11759,8 +11777,9 @@
   },
   "source_discovery_next_focus_pack": {
     "public_report": "data/source_discovery_next_focus_pack_public.json",
-    "focus_pack_id": "source-discovery-focus-001",
-    "pack_priority": 1,
+    "focus_pack_id": "source-discovery-focus-002",
+    "current_focus_pack_id": "source-discovery-focus-001",
+    "pack_priority": 2,
     "source_store": "엔스카이",
     "target_category": "키링",
     "pack_items": 20,
@@ -11793,7 +11812,7 @@
     "work_order_pack_count": 62,
     "template_items": 667,
     "official_search_url_count": 20,
-    "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
+    "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
     "pack_queue_preview_count": 8,
     "focus_pack_progress_queue_count": 62,
     "focus_pack_progress_remaining_rows": 667,
@@ -11837,35 +11856,40 @@
   },
   "source_discovery_next_focus_pack_fetch_audit": {
     "public_report": "data/source_discovery_next_focus_pack_fetch_audit_public.json",
-    "focus_pack_id": "source-discovery-focus-001",
+    "focus_pack_id": "source-discovery-focus-002",
     "pack_items": 20,
     "official_search_ok_rows": 0,
     "official_search_unavailable_rows": 20,
     "official_search_needs_fallback_rows": 20,
-    "official_search_unreachable_rows": 0,
-    "official_search_broad_but_reachable_rows": 20,
-    "store_fetch_blocked_rows": 0,
+    "official_search_unreachable_rows": 20,
+    "official_search_broad_but_reachable_rows": 0,
+    "store_fetch_blocked_rows": 20,
     "official_search_no_result_rows": 0,
-    "official_search_broad_result_rows": 20,
+    "official_search_broad_result_rows": 0,
     "broad_result_link_threshold": 30,
-    "official_search_with_product_detail_link_rows": 20,
-    "store_fetch_blocked_by_netloc": [],
-    "all_unavailable_rows_are_store_fetch_blocked": false,
+    "official_search_with_product_detail_link_rows": 0,
+    "store_fetch_blocked_by_netloc": [
+      [
+        "www.enskyshop.com",
+        20
+      ]
+    ],
+    "all_unavailable_rows_are_store_fetch_blocked": true,
     "status_counts": [
       [
-        "ok_200_broad_result_set",
+        "http_error_429",
         20
       ]
     ],
     "http_status_counts": [
       [
-        "200",
+        "429",
         20
       ]
     ],
     "fallback_web_search_required": true,
     "auto_apply_enabled": false,
-    "recommended_next_action": "refine_broad_official_search_results_to_exact_detail_urls"
+    "recommended_next_action": "resolve_unreachable_or_no_result_official_search_urls_before_source_import"
   },
   "ichiban_kuji_prize_name_image_review": {
     "public_report": "data/ichiban_kuji_prize_name_image_review_public.json",
@@ -11901,19 +11925,19 @@
   },
   "source_discovery_next_focus_fallback_queue": {
     "public_report": "data/source_discovery_next_focus_fallback_queue_public.json",
-    "focus_pack_id": "source-discovery-focus-001",
+    "focus_pack_id": "source-discovery-focus-002",
     "queue_rows": 20,
     "manual_confirmed_rows": 0,
-    "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
+    "fallback_reason": "official_search_fetch_http_error",
     "by_fallback_reason": [
       [
-        "broad_official_search_result_requires_exact_detail_url",
+        "official_search_fetch_http_error",
         20
       ]
     ],
     "by_http_status": [
       [
-        "200",
+        "429",
         20
       ]
     ],
@@ -11948,9 +11972,9 @@
       "legacy_mobile_store_search",
       "evidence_fill_and_dry_run"
     ],
-    "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
-    "first_fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
-    "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+    "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+    "first_fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+    "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
     "first_primary_review_url_kind": "domain_limited_web_search",
     "auto_apply_enabled": false,
     "recommended_next_action": "review_fallback_queue_and_fill_exact_manual_confirmed_source_urls"
@@ -11969,109 +11993,133 @@
   },
   "source_discovery_next_focus_detail_candidates": {
     "public_report": "data/source_discovery_next_focus_detail_candidates_public.json",
-    "focus_pack_id": "source-discovery-focus-001",
+    "focus_pack_id": "source-discovery-focus-002",
     "source_store": "엔스카이",
     "target_category": "키링",
     "pack_items": 20,
-    "items_with_candidates": 1,
+    "items_with_candidates": 8,
     "items_with_candidates_from_official_no_results": 0,
     "candidate_rows_from_fallback_search": 0,
-    "candidate_rows": 1,
-    "exact_candidate_review_rows": 0,
-    "manual_candidate_review_rows": 1,
-    "no_candidate_items": 19,
+    "candidate_rows": 17,
+    "exact_candidate_review_rows": 1,
+    "manual_candidate_review_rows": 16,
+    "no_candidate_items": 12,
     "candidate_fetch_error_items": 0,
-    "candidate_confirmation_template_rows": 1,
-    "exact_candidate_confirmation_shortlist_rows": 0,
-    "candidate_confirmation_exact_review_rows": 0,
-    "candidate_confirmation_manual_review_rows": 1,
+    "candidate_confirmation_template_rows": 17,
+    "exact_candidate_confirmation_shortlist_rows": 1,
+    "candidate_confirmation_exact_review_rows": 1,
+    "candidate_confirmation_manual_review_rows": 16,
     "candidate_confirmation_manual_confirmed_rows": 0,
-    "metadata_enrichment_template_rows": 1,
-    "metadata_field_import_template_rows": 3,
-    "metadata_field_import_supported_rows": 3,
+    "metadata_enrichment_template_rows": 7,
+    "metadata_field_import_template_rows": 21,
+    "metadata_field_import_supported_rows": 21,
     "metadata_field_review_counts": [
       [
         "sub_series",
-        1
+        7
       ],
       [
         "name_ja",
-        1
+        7
       ],
       [
         "character_name",
-        1
+        7
       ]
     ],
     "candidate_blocker_counts": [
       [
-        "token_overlap_below_2",
-        1
+        "broad_query_without_variant",
+        16
       ],
       [
-        "broad_query_without_variant",
-        1
+        "token_overlap_below_2",
+        14
+      ],
+      [
+        "rank_not_first",
+        9
       ]
     ],
     "review_bucket_counts": [
       [
         "fallback_search_required",
-        19
+        12
       ],
       [
         "manual_candidate_identity_review",
+        7
+      ],
+      [
+        "exact_candidate_shortlist_review",
         1
       ]
     ],
     "review_decision_counts": [
       [
         "fallback_search_required",
-        19
+        12
       ],
       [
         "catalog_variant_detail_required_before_import",
+        7
+      ],
+      [
+        "exact_candidate_confirmation_ready",
         1
       ]
     ],
     "review_decision_reason_counts": [
       [
         "no_candidate_returned_from_provider_search",
-        19
+        12
       ],
       [
         "catalog_row_is_too_broad_for_single_product_image",
-        1
+        7
       ],
       [
         "candidate_title_has_weak_token_overlap",
-        1
+        5
+      ],
+      [
+        "multiple_variants_require_catalog_sub_series_or_character_detail",
+        4
       ]
     ],
-    "next_action_lane_count": 2,
+    "next_action_lane_count": 3,
     "next_action_lanes": [
       [
+        "confirm_exact_candidate_identity",
+        1
+      ],
+      [
         "fallback_source_search",
-        19
+        12
       ],
       [
         "catalog_variant_metadata_enrichment",
-        1
+        7
       ]
     ],
-    "fallback_bridge_rows": 19,
-    "manual_review_item_rows": 1,
-    "variant_detail_required_rows": 1,
-    "exact_candidate_confirmation_ready_items": 0,
+    "fallback_bridge_rows": 12,
+    "manual_review_item_rows": 7,
+    "variant_detail_required_rows": 7,
+    "exact_candidate_confirmation_ready_items": 1,
     "blocked_candidate_research_item_rows": 0,
-    "completion_readiness_status": "fallback_search_required",
+    "completion_readiness_status": "exact_candidate_confirmation_ready",
     "auto_apply_ready_rows": 0,
     "status_counts": [
       [
-        "no_candidates_found",
-        19
+        "manual_candidate_review",
+        16
       ],
       [
-        "manual_candidate_review",
+        "no_candidates_found",
+        12
+      ],
+      [
+        "exact_candidate_review",
         1
       ]
     ],
@@ -13253,55 +13301,54 @@
       "queued_source_rows": 667,
       "focus_source_rows": 667,
       "remaining_focus_review_rows": 667,
-      "current_focus_pack_id": "source-discovery-focus-001",
+      "current_focus_pack_id": "source-discovery-focus-002",
       "current_focus_pack_rows": 20,
       "current_focus_remaining_rows": 20,
       "current_focus_fallback_rows": 20,
       "next_pack_after_current": "source-discovery-focus-002",
-      "current_focus_resolution_status": "manual_source_search_required_after_official_cache_miss",
+      "current_focus_resolution_status": "manual_exact_source_url_review_required",
       "current_focus_cache_cross_check": {
-        "cross_checked_rows": 20,
+        "cross_checked_rows": 10,
         "safe_exact_match_rows": 0,
-        "broad_candidate_rows": 4,
-        "no_candidate_rows": 16,
+        "broad_candidate_rows": 1,
+        "no_candidate_rows": 9,
         "status_counts": [
           [
             "no_cache_candidate",
-            16
+            9
           ],
           [
             "broad_cache_candidate",
-            4
+            1
           ]
         ],
         "auto_apply_enabled": false
       },
-      "recommended_next_focus_pack_id": "source-discovery-focus-002",
-      "all_sample_candidates_rejected_rows": 20,
+      "recommended_next_focus_pack_id": null,
+      "all_sample_candidates_rejected_rows": 18,
       "safe_candidate_detail_link_rows": 0,
-      "next_safe_phase": "rotate_to_next_focus_pack_or_manual_source_research_current_pack",
+      "next_safe_phase": "review_fallback_queue_and_fill_exact_manual_confirmed_source_urls",
       "next_queue": {
-        "source": "data/source_discovery_next_focus_exact_url_review_queue_public.json",
+        "source": "data/source_discovery_next_focus_fallback_queue_public.json",
         "queue_rows": 20,
-        "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
-        "all_sample_candidates_rejected_rows": 20,
+        "fallback_reason": "official_search_fetch_http_error",
+        "all_sample_candidates_rejected_rows": 18,
         "safe_candidate_detail_link_rows": 0,
-        "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+        "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
         "first_primary_review_url_kind": "domain_limited_web_search",
-        "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
-        "first_fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29"
+        "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+        "first_fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
       },
       "blocked_until": "exact_product_detail_source_url_confirmed",
       "blocked_reasons": [
-        "official_cache_safe_exact_match_absent",
-        "sample_candidate_links_rejected"
+        "fallback_search_required"
       ],
       "safety_note": "Source discovery queues are review-only. Confirm exact official product detail URLs before image attachment."
     },
     "next_execution_summary": {
       "lane_count": 5,
-      "open_rows": 813,
-      "next_batch_rows": 166,
+      "open_rows": 831,
+      "next_batch_rows": 184,
       "next_safe_phase": "exact_source_url_review",
       "auto_apply_enabled": false,
       "manual_evidence_required": true
@@ -13309,21 +13356,21 @@
     "next_execution_lanes": [
       {
         "lane": "exact_source_url_review",
-        "status": "manual_cache_miss_research_required",
+        "status": "manual_fallback_review_required",
         "open_rows": 20,
         "next_batch_rows": 20,
         "review_start_rows": 20,
         "manual_decision_rows": 20,
-        "public_report": "data/source_discovery_next_focus_exact_url_review_queue_public.json",
+        "public_report": "data/source_discovery_next_focus_fallback_queue_public.json",
         "next_action": "ignore broad/rejected samples and confirm exact product detail URLs"
       },
       {
         "lane": "metadata_field_confirmation",
         "status": "blocked_until_exact_source_url_confirmed",
-        "open_rows": 3,
-        "next_batch_rows": 3,
-        "review_start_rows": 3,
-        "manual_decision_rows": 3,
+        "open_rows": 21,
+        "next_batch_rows": 21,
+        "review_start_rows": 21,
+        "manual_decision_rows": 21,
         "public_report": "data/source_discovery_next_focus_metadata_field_import_dry_run_public.json",
         "next_action": "confirm sub-series, Japanese name, and character fields from exact official evidence"
       },
@@ -13335,7 +13382,7 @@
         "review_start_rows": 20,
         "manual_decision_rows": 20,
         "public_report": "data/source_discovery_focus_packs_public.json",
-        "next_action": "start the next focus pack while the current cache-miss pack waits for manual exact source research"
+        "next_action": "rotate through source discovery packs after the current exact URL review is resolved"
       },
       {
         "lane": "generic_source_replacement",
@@ -13362,35 +13409,34 @@
       "status": "current_focus_fallback_review_required",
       "current_lane": "exact_source_url_review",
       "current_review_section": "source_discovery_next_focus_exact_url_review_queue",
-      "current_focus_pack_id": "source-discovery-focus-001",
+      "current_focus_pack_id": "source-discovery-focus-002",
       "queued_source_rows": 667,
       "current_focus_remaining_rows": 20,
       "safe_candidate_detail_link_rows": 0,
-      "all_sample_candidates_rejected_rows": 20,
-      "next_safe_phase": "rotate_to_next_focus_pack_or_manual_source_research_current_pack",
+      "all_sample_candidates_rejected_rows": 18,
+      "next_safe_phase": "review_fallback_queue_and_fill_exact_manual_confirmed_source_urls",
       "blocked_reasons": [
-        "official_cache_safe_exact_match_absent",
-        "sample_candidate_links_rejected"
+        "fallback_search_required"
       ],
-      "current_focus_resolution_status": "manual_source_search_required_after_official_cache_miss",
+      "current_focus_resolution_status": "manual_exact_source_url_review_required",
       "current_focus_cache_cross_check": {
-        "cross_checked_rows": 20,
+        "cross_checked_rows": 10,
         "safe_exact_match_rows": 0,
-        "broad_candidate_rows": 4,
-        "no_candidate_rows": 16,
+        "broad_candidate_rows": 1,
+        "no_candidate_rows": 9,
         "status_counts": [
           [
             "no_cache_candidate",
-            16
+            9
           ],
           [
             "broad_cache_candidate",
-            4
+            1
           ]
         ],
         "auto_apply_enabled": false
       },
-      "recommended_next_focus_pack_id": "source-discovery-focus-002",
+      "recommended_next_focus_pack_id": null,
       "handoff_steps": [
         {
           "step": 1,
@@ -13399,7 +13445,7 @@
           "next_batch_rows": 20,
           "review_section": "source_discovery_next_focus_exact_url_review_queue",
           "write_template_section": "source_url_confirmation_patch_template.rows",
-          "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+          "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
           "first_primary_review_url_kind": "domain_limited_web_search",
           "template_rows": 10,
           "rediscovery_work_order_rows": 20,
@@ -13416,7 +13462,7 @@
           "step": 2,
           "lane": "metadata_field_confirmation",
           "status": "blocked_until_exact_source_url_confirmed",
-          "next_batch_rows": 3,
+          "next_batch_rows": 21,
           "review_section": "source_discovery_next_focus_metadata_field_import_dry_run",
           "write_template_section": "metadata_field_import_template",
           "required_before_write": [
@@ -13946,10 +13992,18 @@
     ],
     "primary_review_url_rows": 20,
     "exact_source_search_query_rows": 20,
-    "exact_source_search_queries": 50,
+    "exact_source_search_queries": 94,
     "rediscovery_work_order_rows": 20,
-    "rediscovery_work_order_steps": 70,
+    "rediscovery_work_order_steps": 114,
     "rediscovery_work_order_label_counts": [
+      [
+        "google_context_title_detail_1",
+        20
+      ],
+      [
+        "duckduckgo_context_title_detail_1",
+        20
+      ],
       [
         "google_exact_title_detail",
         20
@@ -13963,18 +14017,18 @@
         20
       ],
       [
-        "google_split_title_variant_detail",
-        5
+        "google_context_title_detail_2",
+        7
       ],
       [
-        "google_base_title_detail",
-        5
+        "duckduckgo_context_title_detail_2",
+        7
       ]
     ],
     "rediscovery_work_order_status_counts": [
       [
         "manual_query_execution_required",
-        50
+        94
       ],
       [
         "manual_store_search_required_if_exact_queries_fail",
@@ -13987,40 +14041,57 @@
         20
       ]
     ],
-    "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+    "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
     "first_primary_review_url_kind": "domain_limited_web_search",
     "candidate_detail_link_title_match_counts": [
       [
         "title_mismatch",
-        100
+        90
       ]
     ],
-    "candidate_detail_link_title_mismatch_rows": 100,
+    "candidate_detail_link_title_mismatch_rows": 90,
     "auto_apply_enabled": false,
     "blocked_identity_rows": 0,
-    "candidate_detail_link_rows": 20,
-    "candidate_detail_links": 100,
+    "candidate_detail_link_rows": 18,
+    "candidate_detail_links": 90,
     "safe_candidate_detail_link_rows": 0,
     "safe_candidate_detail_links": 0,
-    "rejected_candidate_detail_link_rows": 20,
-    "rejected_candidate_detail_links": 100,
-    "all_sample_candidates_rejected_rows": 20,
+    "rejected_candidate_detail_link_rows": 18,
+    "rejected_candidate_detail_links": 90,
+    "all_sample_candidates_rejected_rows": 18,
     "candidate_detail_link_source_counts": [
       [
         "official_search_result_sample_links",
-        20
+        18
       ]
     ],
     "candidate_detail_link_review_status_counts": [
       [
         "broad_search_sample_requires_identity_check",
-        20
+        18
       ]
     ],
-    "candidate_detail_link_warning_rows": 20,
-    "broad_candidate_detail_link_rows": 20,
-    "recommended_next_action": "ignore rejected sample links and use primary/domain-limited review URLs for exact source search",
+    "candidate_detail_link_warning_rows": 18,
+    "broad_candidate_detail_link_rows": 18,
+    "recommended_next_action": "confirm exact product detail source URLs for these rows before image attachment",
     "source_url_confirmation_patch_template": {
+      "summary": {
+        "status": "manual_exact_source_url_search_required_no_safe_candidates",
+        "template_rows": 10,
+        "ready_to_import_rows": 0,
+        "blocked_rows": 10,
+        "candidate_detail_link_rows": 0,
+        "safe_candidate_detail_link_coverage": 0.0,
+        "rejected_candidate_detail_link_rows": 10,
+        "all_sample_candidates_rejected_rows": 10,
+        "unsafe_sample_candidate_detail_link_rows": 10,
+        "exact_source_search_query_rows": 10,
+        "rediscovery_work_order_rows": 10,
+        "rediscovery_work_order_steps": 50,
+        "manual_image_url_slot_rows": 10,
+        "auto_apply_enabled": false,
+        "next_operator_action": "open primary_review_url or exact_source_search_queries; ignore unsafe sample links until title identity is confirmed"
+      },
       "status": "manual_exact_source_url_search_required_no_safe_candidates",
       "template_rows": 10,
       "ready_to_import_rows": 0,
@@ -14032,8 +14103,14 @@
       "unsafe_sample_candidate_detail_link_rows": 10,
       "exact_source_search_query_rows": 10,
       "rediscovery_work_order_rows": 10,
-      "rediscovery_work_order_steps": 40,
+      "rediscovery_work_order_steps": 50,
       "manual_image_url_slot_rows": 10,
+      "operator_next_steps": [
+        "Open primary_review_url first for each row.",
+        "Use exact_source_search_queries when primary_review_url is a broad search page.",
+        "Copy manual_confirmed_source_url only from an exact product detail page on the allowed source domain.",
+        "Copy manual_confirmed_image_url only from the confirmed product page or a direct product image referenced by it."
+      ],
       "auto_apply_enabled": false,
       "import_tool": "tools/import_confirmed_source_discovery_rows.py",
       "dry_run_command": "python -m tools.import_confirmed_source_discovery_rows --queue server/source_discovery_confirmed_rows.json",
@@ -14042,52 +14119,54 @@
       "rows": [
         {
           "patch_row_id": "source-discovery-exact-url-review-001",
-          "catalog_index": 922,
+          "catalog_index": 1568,
           "manual_confirmed": false,
           "manual_confirmed_source_url": "",
           "manual_confirmed_image_url": "",
           "manual_evidence_url": "",
           "manual_note": "",
           "source_store": "엔스카이",
+          "affiliation": "장송의 프리렌",
+          "series_name": null,
           "category": "키링",
-          "name_ko": "치이카와 러버 스트랩 (우사기)",
-          "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
-          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+          "name_ko": "펀 러버 스트랩",
+          "name_ja": "フェルン ラバーストラップ",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
           "primary_review_url_kind": "domain_limited_web_search",
           "exact_source_search_queries": [
             {
+              "label": "google_context_title_detail_1",
+              "engine": "google",
+              "query": "site:www.enskyshop.com/products/detail \"葬送のフリーレン フェルン ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3+%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+            },
+            {
+              "label": "duckduckgo_context_title_detail_1",
+              "engine": "duckduckgo",
+              "query": "site:enskyshop.com/products/detail \"葬送のフリーレン フェルン ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3+%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+            },
+            {
               "label": "google_exact_title_detail",
               "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ ラバーストラップ (うさぎ)\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22"
+              "query": "site:www.enskyshop.com/products/detail \"フェルン ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
             },
             {
               "label": "duckduckgo_exact_title_detail",
               "engine": "duckduckgo",
-              "query": "site:enskyshop.com/products/detail \"ちいかわ ラバーストラップ (うさぎ)\"",
-              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22"
-            },
-            {
-              "label": "google_split_title_variant_detail",
-              "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ ラバーストラップ\" \"うさぎ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22+%22%E3%81%86%E3%81%95%E3%81%8E%22"
-            },
-            {
-              "label": "google_base_title_detail",
-              "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ ラバーストラップ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+              "query": "site:enskyshop.com/products/detail \"フェルン ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
             }
           ],
           "rediscovery_work_order": [
             {
               "step": 1,
               "status": "manual_query_execution_required",
-              "label": "google_exact_title_detail",
+              "label": "google_context_title_detail_1",
               "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ ラバーストラップ (うさぎ)\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+              "query": "site:www.enskyshop.com/products/detail \"葬送のフリーレン フェルン ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3+%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -14097,10 +14176,10 @@
             {
               "step": 2,
               "status": "manual_query_execution_required",
-              "label": "duckduckgo_exact_title_detail",
+              "label": "duckduckgo_context_title_detail_1",
               "engine": "duckduckgo",
-              "query": "site:enskyshop.com/products/detail \"ちいかわ ラバーストラップ (うさぎ)\"",
-              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+              "query": "site:enskyshop.com/products/detail \"葬送のフリーレン フェルン ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3+%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -14110,10 +14189,10 @@
             {
               "step": 3,
               "status": "manual_query_execution_required",
-              "label": "google_split_title_variant_detail",
+              "label": "google_exact_title_detail",
               "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ ラバーストラップ\" \"うさぎ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22+%22%E3%81%86%E3%81%95%E3%81%8E%22",
+              "query": "site:www.enskyshop.com/products/detail \"フェルン ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -14123,10 +14202,10 @@
             {
               "step": 4,
               "status": "manual_query_execution_required",
-              "label": "google_base_title_detail",
-              "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ ラバーストラップ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+              "label": "duckduckgo_exact_title_detail",
+              "engine": "duckduckgo",
+              "query": "site:enskyshop.com/products/detail \"フェルン ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -14138,15 +14217,15 @@
               "status": "manual_store_search_required_if_exact_queries_fail",
               "label": "fallback_store_search",
               "engine": "official_store",
-              "query": "ちいかわ ラバーストラップ (うさぎ)",
-              "url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
+              "query": "フェルン ラバーストラップ",
+              "url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
               "accept_only_if": [
                 "open the exact product detail page from the store result before confirming",
                 "do not reuse broad search result sample links if their titles already mismatched"
               ]
             }
           ],
-          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
           "candidate_detail_links": [],
           "unsafe_sample_candidate_detail_links": [
             "https://www.enskyshop.com/products/detail/32395",
@@ -14255,52 +14334,54 @@
         },
         {
           "patch_row_id": "source-discovery-exact-url-review-002",
-          "catalog_index": 923,
+          "catalog_index": 1569,
           "manual_confirmed": false,
           "manual_confirmed_source_url": "",
           "manual_confirmed_image_url": "",
           "manual_evidence_url": "",
           "manual_note": "",
           "source_store": "엔스카이",
+          "affiliation": "장송의 프리렌",
+          "series_name": null,
           "category": "키링",
-          "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
-          "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
-          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29%22",
+          "name_ko": "슈타르크 러버 스트랩",
+          "name_ja": "シュタルク ラバーストラップ",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
           "primary_review_url_kind": "domain_limited_web_search",
           "exact_source_search_queries": [
             {
+              "label": "google_context_title_detail_1",
+              "engine": "google",
+              "query": "site:www.enskyshop.com/products/detail \"葬送のフリーレン シュタルク ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3+%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+            },
+            {
+              "label": "duckduckgo_context_title_detail_1",
+              "engine": "duckduckgo",
+              "query": "site:enskyshop.com/products/detail \"葬送のフリーレン シュタルク ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3+%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+            },
+            {
               "label": "google_exact_title_detail",
               "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ もちぷにラバーストラップ (モモンガ)\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29%22"
+              "query": "site:www.enskyshop.com/products/detail \"シュタルク ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
             },
             {
               "label": "duckduckgo_exact_title_detail",
               "engine": "duckduckgo",
-              "query": "site:enskyshop.com/products/detail \"ちいかわ もちぷにラバーストラップ (モモンガ)\"",
-              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29%22"
-            },
-            {
-              "label": "google_split_title_variant_detail",
-              "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ もちぷにラバーストラップ\" \"モモンガ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22+%22%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%22"
-            },
-            {
-              "label": "google_base_title_detail",
-              "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ もちぷにラバーストラップ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+              "query": "site:enskyshop.com/products/detail \"シュタルク ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
             }
           ],
           "rediscovery_work_order": [
             {
               "step": 1,
               "status": "manual_query_execution_required",
-              "label": "google_exact_title_detail",
+              "label": "google_context_title_detail_1",
               "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ もちぷにラバーストラップ (モモンガ)\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29%22",
+              "query": "site:www.enskyshop.com/products/detail \"葬送のフリーレン シュタルク ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3+%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -14310,10 +14391,10 @@
             {
               "step": 2,
               "status": "manual_query_execution_required",
-              "label": "duckduckgo_exact_title_detail",
+              "label": "duckduckgo_context_title_detail_1",
               "engine": "duckduckgo",
-              "query": "site:enskyshop.com/products/detail \"ちいかわ もちぷにラバーストラップ (モモンガ)\"",
-              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29%22",
+              "query": "site:enskyshop.com/products/detail \"葬送のフリーレン シュタルク ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3+%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -14323,10 +14404,10 @@
             {
               "step": 3,
               "status": "manual_query_execution_required",
-              "label": "google_split_title_variant_detail",
+              "label": "google_exact_title_detail",
               "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ もちぷにラバーストラップ\" \"モモンガ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22+%22%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%22",
+              "query": "site:www.enskyshop.com/products/detail \"シュタルク ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -14336,10 +14417,10 @@
             {
               "step": 4,
               "status": "manual_query_execution_required",
-              "label": "google_base_title_detail",
-              "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ もちぷにラバーストラップ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+              "label": "duckduckgo_exact_title_detail",
+              "engine": "duckduckgo",
+              "query": "site:enskyshop.com/products/detail \"シュタルク ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -14351,15 +14432,15 @@
               "status": "manual_store_search_required_if_exact_queries_fail",
               "label": "fallback_store_search",
               "engine": "official_store",
-              "query": "ちいかわ もちぷにラバーストラップ (モモンガ)",
-              "url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29",
+              "query": "シュタルク ラバーストラップ",
+              "url": "https://www.enskyshop.com/products/list?name=%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
               "accept_only_if": [
                 "open the exact product detail page from the store result before confirming",
                 "do not reuse broad search result sample links if their titles already mismatched"
               ]
             }
           ],
-          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29",
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
           "candidate_detail_links": [],
           "unsafe_sample_candidate_detail_links": [
             "https://www.enskyshop.com/products/detail/32395",
@@ -14468,52 +14549,54 @@
         },
         {
           "patch_row_id": "source-discovery-exact-url-review-003",
-          "catalog_index": 924,
+          "catalog_index": 1570,
           "manual_confirmed": false,
           "manual_confirmed_source_url": "",
           "manual_confirmed_image_url": "",
           "manual_evidence_url": "",
           "manual_note": "",
           "source_store": "엔스카이",
+          "affiliation": "장송의 프리렌",
+          "series_name": null,
           "category": "키링",
-          "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
-          "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
-          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29%22",
+          "name_ko": "히멜 러버 스트랩",
+          "name_ja": "ヒンメル ラバーストラップ",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
           "primary_review_url_kind": "domain_limited_web_search",
           "exact_source_search_queries": [
             {
+              "label": "google_context_title_detail_1",
+              "engine": "google",
+              "query": "site:www.enskyshop.com/products/detail \"葬送のフリーレン ヒンメル ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3+%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+            },
+            {
+              "label": "duckduckgo_context_title_detail_1",
+              "engine": "duckduckgo",
+              "query": "site:enskyshop.com/products/detail \"葬送のフリーレン ヒンメル ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3+%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+            },
+            {
               "label": "google_exact_title_detail",
               "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ もちぷにラバーストラップ (栗まんじゅう)\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29%22"
+              "query": "site:www.enskyshop.com/products/detail \"ヒンメル ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
             },
             {
               "label": "duckduckgo_exact_title_detail",
               "engine": "duckduckgo",
-              "query": "site:enskyshop.com/products/detail \"ちいかわ もちぷにラバーストラップ (栗まんじゅう)\"",
-              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29%22"
-            },
-            {
-              "label": "google_split_title_variant_detail",
-              "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ もちぷにラバーストラップ\" \"栗まんじゅう\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22+%22%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%22"
-            },
-            {
-              "label": "google_base_title_detail",
-              "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ もちぷにラバーストラップ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+              "query": "site:enskyshop.com/products/detail \"ヒンメル ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
             }
           ],
           "rediscovery_work_order": [
             {
               "step": 1,
               "status": "manual_query_execution_required",
-              "label": "google_exact_title_detail",
+              "label": "google_context_title_detail_1",
               "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ もちぷにラバーストラップ (栗まんじゅう)\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29%22",
+              "query": "site:www.enskyshop.com/products/detail \"葬送のフリーレン ヒンメル ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3+%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -14523,10 +14606,10 @@
             {
               "step": 2,
               "status": "manual_query_execution_required",
-              "label": "duckduckgo_exact_title_detail",
+              "label": "duckduckgo_context_title_detail_1",
               "engine": "duckduckgo",
-              "query": "site:enskyshop.com/products/detail \"ちいかわ もちぷにラバーストラップ (栗まんじゅう)\"",
-              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29%22",
+              "query": "site:enskyshop.com/products/detail \"葬送のフリーレン ヒンメル ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3+%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -14536,10 +14619,10 @@
             {
               "step": 3,
               "status": "manual_query_execution_required",
-              "label": "google_split_title_variant_detail",
+              "label": "google_exact_title_detail",
               "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ もちぷにラバーストラップ\" \"栗まんじゅう\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22+%22%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%22",
+              "query": "site:www.enskyshop.com/products/detail \"ヒンメル ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -14549,10 +14632,10 @@
             {
               "step": 4,
               "status": "manual_query_execution_required",
-              "label": "google_base_title_detail",
-              "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ もちぷにラバーストラップ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+              "label": "duckduckgo_exact_title_detail",
+              "engine": "duckduckgo",
+              "query": "site:enskyshop.com/products/detail \"ヒンメル ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -14564,15 +14647,15 @@
               "status": "manual_store_search_required_if_exact_queries_fail",
               "label": "fallback_store_search",
               "engine": "official_store",
-              "query": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
-              "url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29",
+              "query": "ヒンメル ラバーストラップ",
+              "url": "https://www.enskyshop.com/products/list?name=%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
               "accept_only_if": [
                 "open the exact product detail page from the store result before confirming",
                 "do not reuse broad search result sample links if their titles already mismatched"
               ]
             }
           ],
-          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29",
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
           "candidate_detail_links": [],
           "unsafe_sample_candidate_detail_links": [
             "https://www.enskyshop.com/products/detail/32395",
@@ -14681,52 +14764,54 @@
         },
         {
           "patch_row_id": "source-discovery-exact-url-review-004",
-          "catalog_index": 925,
+          "catalog_index": 1571,
           "manual_confirmed": false,
           "manual_confirmed_source_url": "",
           "manual_confirmed_image_url": "",
           "manual_evidence_url": "",
           "manual_note": "",
           "source_store": "엔스카이",
+          "affiliation": "장송의 프리렌",
+          "series_name": null,
           "category": "키링",
-          "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
-          "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
-          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29%22",
+          "name_ko": "하이터 러버 스트랩",
+          "name_ja": "ハイター ラバーストラップ",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
           "primary_review_url_kind": "domain_limited_web_search",
           "exact_source_search_queries": [
             {
+              "label": "google_context_title_detail_1",
+              "engine": "google",
+              "query": "site:www.enskyshop.com/products/detail \"葬送のフリーレン ハイター ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3+%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+            },
+            {
+              "label": "duckduckgo_context_title_detail_1",
+              "engine": "duckduckgo",
+              "query": "site:enskyshop.com/products/detail \"葬送のフリーレン ハイター ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3+%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+            },
+            {
               "label": "google_exact_title_detail",
               "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ カラビナ付きラバーストラップ (ちいかわ)\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29%22"
+              "query": "site:www.enskyshop.com/products/detail \"ハイター ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
             },
             {
               "label": "duckduckgo_exact_title_detail",
               "engine": "duckduckgo",
-              "query": "site:enskyshop.com/products/detail \"ちいかわ カラビナ付きラバーストラップ (ちいかわ)\"",
-              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29%22"
-            },
-            {
-              "label": "google_split_title_variant_detail",
-              "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ カラビナ付きラバーストラップ\" \"ちいかわ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%22"
-            },
-            {
-              "label": "google_base_title_detail",
-              "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ カラビナ付きラバーストラップ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+              "query": "site:enskyshop.com/products/detail \"ハイター ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
             }
           ],
           "rediscovery_work_order": [
             {
               "step": 1,
               "status": "manual_query_execution_required",
-              "label": "google_exact_title_detail",
+              "label": "google_context_title_detail_1",
               "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ カラビナ付きラバーストラップ (ちいかわ)\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29%22",
+              "query": "site:www.enskyshop.com/products/detail \"葬送のフリーレン ハイター ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3+%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -14736,10 +14821,10 @@
             {
               "step": 2,
               "status": "manual_query_execution_required",
-              "label": "duckduckgo_exact_title_detail",
+              "label": "duckduckgo_context_title_detail_1",
               "engine": "duckduckgo",
-              "query": "site:enskyshop.com/products/detail \"ちいかわ カラビナ付きラバーストラップ (ちいかわ)\"",
-              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29%22",
+              "query": "site:enskyshop.com/products/detail \"葬送のフリーレン ハイター ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3+%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -14749,10 +14834,10 @@
             {
               "step": 3,
               "status": "manual_query_execution_required",
-              "label": "google_split_title_variant_detail",
+              "label": "google_exact_title_detail",
               "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ カラビナ付きラバーストラップ\" \"ちいかわ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%22",
+              "query": "site:www.enskyshop.com/products/detail \"ハイター ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -14762,10 +14847,10 @@
             {
               "step": 4,
               "status": "manual_query_execution_required",
-              "label": "google_base_title_detail",
-              "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ カラビナ付きラバーストラップ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+              "label": "duckduckgo_exact_title_detail",
+              "engine": "duckduckgo",
+              "query": "site:enskyshop.com/products/detail \"ハイター ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -14777,15 +14862,15 @@
               "status": "manual_store_search_required_if_exact_queries_fail",
               "label": "fallback_store_search",
               "engine": "official_store",
-              "query": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
-              "url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
+              "query": "ハイター ラバーストラップ",
+              "url": "https://www.enskyshop.com/products/list?name=%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
               "accept_only_if": [
                 "open the exact product detail page from the store result before confirming",
                 "do not reuse broad search result sample links if their titles already mismatched"
               ]
             }
           ],
-          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
           "candidate_detail_links": [],
           "unsafe_sample_candidate_detail_links": [
             "https://www.enskyshop.com/products/detail/32395",
@@ -14894,52 +14979,54 @@
         },
         {
           "patch_row_id": "source-discovery-exact-url-review-005",
-          "catalog_index": 926,
+          "catalog_index": 1572,
           "manual_confirmed": false,
           "manual_confirmed_source_url": "",
           "manual_confirmed_image_url": "",
           "manual_evidence_url": "",
           "manual_note": "",
           "source_store": "엔스카이",
+          "affiliation": "장송의 프리렌",
+          "series_name": null,
           "category": "키링",
-          "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
-          "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
-          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29%22",
+          "name_ko": "아이젠 러버 스트랩",
+          "name_ja": "アイゼン ラバーストラップ",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
           "primary_review_url_kind": "domain_limited_web_search",
           "exact_source_search_queries": [
             {
+              "label": "google_context_title_detail_1",
+              "engine": "google",
+              "query": "site:www.enskyshop.com/products/detail \"葬送のフリーレン アイゼン ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3+%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+            },
+            {
+              "label": "duckduckgo_context_title_detail_1",
+              "engine": "duckduckgo",
+              "query": "site:enskyshop.com/products/detail \"葬送のフリーレン アイゼン ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3+%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+            },
+            {
               "label": "google_exact_title_detail",
               "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ カラビナ付きラバーストラップ (ハチワレ)\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29%22"
+              "query": "site:www.enskyshop.com/products/detail \"アイゼン ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
             },
             {
               "label": "duckduckgo_exact_title_detail",
               "engine": "duckduckgo",
-              "query": "site:enskyshop.com/products/detail \"ちいかわ カラビナ付きラバーストラップ (ハチワレ)\"",
-              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29%22"
-            },
-            {
-              "label": "google_split_title_variant_detail",
-              "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ カラビナ付きラバーストラップ\" \"ハチワレ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22+%22%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%22"
-            },
-            {
-              "label": "google_base_title_detail",
-              "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ カラビナ付きラバーストラップ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+              "query": "site:enskyshop.com/products/detail \"アイゼン ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
             }
           ],
           "rediscovery_work_order": [
             {
               "step": 1,
               "status": "manual_query_execution_required",
-              "label": "google_exact_title_detail",
+              "label": "google_context_title_detail_1",
               "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ カラビナ付きラバーストラップ (ハチワレ)\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29%22",
+              "query": "site:www.enskyshop.com/products/detail \"葬送のフリーレン アイゼン ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3+%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -14949,10 +15036,10 @@
             {
               "step": 2,
               "status": "manual_query_execution_required",
-              "label": "duckduckgo_exact_title_detail",
+              "label": "duckduckgo_context_title_detail_1",
               "engine": "duckduckgo",
-              "query": "site:enskyshop.com/products/detail \"ちいかわ カラビナ付きラバーストラップ (ハチワレ)\"",
-              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29%22",
+              "query": "site:enskyshop.com/products/detail \"葬送のフリーレン アイゼン ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3+%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -14962,10 +15049,10 @@
             {
               "step": 3,
               "status": "manual_query_execution_required",
-              "label": "google_split_title_variant_detail",
+              "label": "google_exact_title_detail",
               "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ カラビナ付きラバーストラップ\" \"ハチワレ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22+%22%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%22",
+              "query": "site:www.enskyshop.com/products/detail \"アイゼン ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -14975,10 +15062,10 @@
             {
               "step": 4,
               "status": "manual_query_execution_required",
-              "label": "google_base_title_detail",
-              "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ちいかわ カラビナ付きラバーストラップ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+              "label": "duckduckgo_exact_title_detail",
+              "engine": "duckduckgo",
+              "query": "site:enskyshop.com/products/detail \"アイゼン ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -14990,15 +15077,15 @@
               "status": "manual_store_search_required_if_exact_queries_fail",
               "label": "fallback_store_search",
               "engine": "official_store",
-              "query": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
-              "url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29",
+              "query": "アイゼン ラバーストラップ",
+              "url": "https://www.enskyshop.com/products/list?name=%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
               "accept_only_if": [
                 "open the exact product detail page from the store result before confirming",
                 "do not reuse broad search result sample links if their titles already mismatched"
               ]
             }
           ],
-          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29",
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
           "candidate_detail_links": [],
           "unsafe_sample_candidate_detail_links": [
             "https://www.enskyshop.com/products/detail/32395",
@@ -15107,40 +15194,54 @@
         },
         {
           "patch_row_id": "source-discovery-exact-url-review-006",
-          "catalog_index": 1531,
+          "catalog_index": 1573,
           "manual_confirmed": false,
           "manual_confirmed_source_url": "",
           "manual_confirmed_image_url": "",
           "manual_evidence_url": "",
           "manual_note": "",
           "source_store": "엔스카이",
+          "affiliation": "귀멸의 칼날",
+          "series_name": null,
           "category": "키링",
-          "name_ko": "하츠네 미쿠 메탈릭 러버 스트랩",
-          "name_ja": "初音ミク メタリックラバーストラップ",
-          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF+%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+          "name_ko": "카마도 탄지로 러버 스트랩",
+          "name_ja": "竈門炭治郎 ラバーストラップ",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
           "primary_review_url_kind": "domain_limited_web_search",
           "exact_source_search_queries": [
             {
+              "label": "google_context_title_detail_1",
+              "engine": "google",
+              "query": "site:www.enskyshop.com/products/detail \"鬼滅の刃 竈門炭治郎 ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+            },
+            {
+              "label": "duckduckgo_context_title_detail_1",
+              "engine": "duckduckgo",
+              "query": "site:enskyshop.com/products/detail \"鬼滅の刃 竈門炭治郎 ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+            },
+            {
               "label": "google_exact_title_detail",
               "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"初音ミク メタリックラバーストラップ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF+%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+              "query": "site:www.enskyshop.com/products/detail \"竈門炭治郎 ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
             },
             {
               "label": "duckduckgo_exact_title_detail",
               "engine": "duckduckgo",
-              "query": "site:enskyshop.com/products/detail \"初音ミク メタリックラバーストラップ\"",
-              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF+%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+              "query": "site:enskyshop.com/products/detail \"竈門炭治郎 ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
             }
           ],
           "rediscovery_work_order": [
             {
               "step": 1,
               "status": "manual_query_execution_required",
-              "label": "google_exact_title_detail",
+              "label": "google_context_title_detail_1",
               "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"初音ミク メタリックラバーストラップ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF+%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+              "query": "site:www.enskyshop.com/products/detail \"鬼滅の刃 竈門炭治郎 ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -15150,10 +15251,10 @@
             {
               "step": 2,
               "status": "manual_query_execution_required",
-              "label": "duckduckgo_exact_title_detail",
+              "label": "duckduckgo_context_title_detail_1",
               "engine": "duckduckgo",
-              "query": "site:enskyshop.com/products/detail \"初音ミク メタリックラバーストラップ\"",
-              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF+%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+              "query": "site:enskyshop.com/products/detail \"鬼滅の刃 竈門炭治郎 ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -15162,18 +15263,44 @@
             },
             {
               "step": 3,
+              "status": "manual_query_execution_required",
+              "label": "google_exact_title_detail",
+              "engine": "google",
+              "query": "site:www.enskyshop.com/products/detail \"竈門炭治郎 ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+              "accept_only_if": [
+                "result URL is an official product detail page on the allowed source domain",
+                "page title or h1 matches this catalog item name and variant",
+                "image URL is copied only from the confirmed product page or a direct product image referenced by it"
+              ]
+            },
+            {
+              "step": 4,
+              "status": "manual_query_execution_required",
+              "label": "duckduckgo_exact_title_detail",
+              "engine": "duckduckgo",
+              "query": "site:enskyshop.com/products/detail \"竈門炭治郎 ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+              "accept_only_if": [
+                "result URL is an official product detail page on the allowed source domain",
+                "page title or h1 matches this catalog item name and variant",
+                "image URL is copied only from the confirmed product page or a direct product image referenced by it"
+              ]
+            },
+            {
+              "step": 5,
               "status": "manual_store_search_required_if_exact_queries_fail",
               "label": "fallback_store_search",
               "engine": "official_store",
-              "query": "初音ミク メタリックラバーストラップ",
-              "url": "https://www.enskyshop.com/products/list?name=%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+              "query": "竈門炭治郎 ラバーストラップ",
+              "url": "https://www.enskyshop.com/products/list?name=%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
               "accept_only_if": [
                 "open the exact product detail page from the store result before confirming",
                 "do not reuse broad search result sample links if their titles already mismatched"
               ]
             }
           ],
-          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
           "candidate_detail_links": [],
           "unsafe_sample_candidate_detail_links": [
             "https://www.enskyshop.com/products/detail/32395",
@@ -15282,40 +15409,54 @@
         },
         {
           "patch_row_id": "source-discovery-exact-url-review-007",
-          "catalog_index": 1539,
+          "catalog_index": 1574,
           "manual_confirmed": false,
           "manual_confirmed_source_url": "",
           "manual_confirmed_image_url": "",
           "manual_evidence_url": "",
           "manual_note": "",
           "source_store": "엔스카이",
+          "affiliation": "귀멸의 칼날",
+          "series_name": null,
           "category": "키링",
-          "name_ko": "토도로키 쇼토 러버 스트랩",
-          "name_ja": "轟焦凍 ラバーストラップ",
-          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%BD%9F%E7%84%A6%E5%87%8D+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+          "name_ko": "카마도 네즈코 러버 스트랩",
+          "name_ja": "竈門禰豆子 ラバーストラップ",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E7%AB%88%E9%96%80%E7%A6%B0%E8%B1%86%E5%AD%90+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
           "primary_review_url_kind": "domain_limited_web_search",
           "exact_source_search_queries": [
             {
+              "label": "google_context_title_detail_1",
+              "engine": "google",
+              "query": "site:www.enskyshop.com/products/detail \"鬼滅の刃 竈門禰豆子 ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E7%AB%88%E9%96%80%E7%A6%B0%E8%B1%86%E5%AD%90+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+            },
+            {
+              "label": "duckduckgo_context_title_detail_1",
+              "engine": "duckduckgo",
+              "query": "site:enskyshop.com/products/detail \"鬼滅の刃 竈門禰豆子 ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E7%AB%88%E9%96%80%E7%A6%B0%E8%B1%86%E5%AD%90+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+            },
+            {
               "label": "google_exact_title_detail",
               "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"轟焦凍 ラバーストラップ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%BD%9F%E7%84%A6%E5%87%8D+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+              "query": "site:www.enskyshop.com/products/detail \"竈門禰豆子 ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E7%AB%88%E9%96%80%E7%A6%B0%E8%B1%86%E5%AD%90+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
             },
             {
               "label": "duckduckgo_exact_title_detail",
               "engine": "duckduckgo",
-              "query": "site:enskyshop.com/products/detail \"轟焦凍 ラバーストラップ\"",
-              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E8%BD%9F%E7%84%A6%E5%87%8D+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+              "query": "site:enskyshop.com/products/detail \"竈門禰豆子 ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E7%AB%88%E9%96%80%E7%A6%B0%E8%B1%86%E5%AD%90+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
             }
           ],
           "rediscovery_work_order": [
             {
               "step": 1,
               "status": "manual_query_execution_required",
-              "label": "google_exact_title_detail",
+              "label": "google_context_title_detail_1",
               "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"轟焦凍 ラバーストラップ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%BD%9F%E7%84%A6%E5%87%8D+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+              "query": "site:www.enskyshop.com/products/detail \"鬼滅の刃 竈門禰豆子 ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E7%AB%88%E9%96%80%E7%A6%B0%E8%B1%86%E5%AD%90+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -15325,10 +15466,10 @@
             {
               "step": 2,
               "status": "manual_query_execution_required",
-              "label": "duckduckgo_exact_title_detail",
+              "label": "duckduckgo_context_title_detail_1",
               "engine": "duckduckgo",
-              "query": "site:enskyshop.com/products/detail \"轟焦凍 ラバーストラップ\"",
-              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E8%BD%9F%E7%84%A6%E5%87%8D+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+              "query": "site:enskyshop.com/products/detail \"鬼滅の刃 竈門禰豆子 ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E7%AB%88%E9%96%80%E7%A6%B0%E8%B1%86%E5%AD%90+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -15337,18 +15478,44 @@
             },
             {
               "step": 3,
+              "status": "manual_query_execution_required",
+              "label": "google_exact_title_detail",
+              "engine": "google",
+              "query": "site:www.enskyshop.com/products/detail \"竈門禰豆子 ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E7%AB%88%E9%96%80%E7%A6%B0%E8%B1%86%E5%AD%90+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+              "accept_only_if": [
+                "result URL is an official product detail page on the allowed source domain",
+                "page title or h1 matches this catalog item name and variant",
+                "image URL is copied only from the confirmed product page or a direct product image referenced by it"
+              ]
+            },
+            {
+              "step": 4,
+              "status": "manual_query_execution_required",
+              "label": "duckduckgo_exact_title_detail",
+              "engine": "duckduckgo",
+              "query": "site:enskyshop.com/products/detail \"竈門禰豆子 ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E7%AB%88%E9%96%80%E7%A6%B0%E8%B1%86%E5%AD%90+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+              "accept_only_if": [
+                "result URL is an official product detail page on the allowed source domain",
+                "page title or h1 matches this catalog item name and variant",
+                "image URL is copied only from the confirmed product page or a direct product image referenced by it"
+              ]
+            },
+            {
+              "step": 5,
               "status": "manual_store_search_required_if_exact_queries_fail",
               "label": "fallback_store_search",
               "engine": "official_store",
-              "query": "轟焦凍 ラバーストラップ",
-              "url": "https://www.enskyshop.com/products/list?name=%E8%BD%9F%E7%84%A6%E5%87%8D%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+              "query": "竈門禰豆子 ラバーストラップ",
+              "url": "https://www.enskyshop.com/products/list?name=%E7%AB%88%E9%96%80%E7%A6%B0%E8%B1%86%E5%AD%90%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
               "accept_only_if": [
                 "open the exact product detail page from the store result before confirming",
                 "do not reuse broad search result sample links if their titles already mismatched"
               ]
             }
           ],
-          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E8%BD%9F%E7%84%A6%E5%87%8D%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E7%AB%88%E9%96%80%E7%A6%B0%E8%B1%86%E5%AD%90%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
           "candidate_detail_links": [],
           "unsafe_sample_candidate_detail_links": [
             "https://www.enskyshop.com/products/detail/32395",
@@ -15457,40 +15624,54 @@
         },
         {
           "patch_row_id": "source-discovery-exact-url-review-008",
-          "catalog_index": 1541,
+          "catalog_index": 1575,
           "manual_confirmed": false,
           "manual_confirmed_source_url": "",
           "manual_confirmed_image_url": "",
           "manual_evidence_url": "",
           "manual_note": "",
           "source_store": "엔스카이",
+          "affiliation": "귀멸의 칼날",
+          "series_name": null,
           "category": "키링",
-          "name_ko": "다비 메탈릭 러버 스트랩",
-          "name_ja": "荼毘 メタリックラバーストラップ",
-          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%8D%BC%E6%AF%98+%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+          "name_ko": "아가츠마 젠이츠 러버 스트랩",
+          "name_ja": "我妻善逸 ラバーストラップ",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E6%88%91%E5%A6%BB%E5%96%84%E9%80%B8+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
           "primary_review_url_kind": "domain_limited_web_search",
           "exact_source_search_queries": [
             {
+              "label": "google_context_title_detail_1",
+              "engine": "google",
+              "query": "site:www.enskyshop.com/products/detail \"鬼滅の刃 我妻善逸 ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E6%88%91%E5%A6%BB%E5%96%84%E9%80%B8+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+            },
+            {
+              "label": "duckduckgo_context_title_detail_1",
+              "engine": "duckduckgo",
+              "query": "site:enskyshop.com/products/detail \"鬼滅の刃 我妻善逸 ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E6%88%91%E5%A6%BB%E5%96%84%E9%80%B8+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+            },
+            {
               "label": "google_exact_title_detail",
               "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"荼毘 メタリックラバーストラップ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%8D%BC%E6%AF%98+%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+              "query": "site:www.enskyshop.com/products/detail \"我妻善逸 ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E6%88%91%E5%A6%BB%E5%96%84%E9%80%B8+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
             },
             {
               "label": "duckduckgo_exact_title_detail",
               "engine": "duckduckgo",
-              "query": "site:enskyshop.com/products/detail \"荼毘 メタリックラバーストラップ\"",
-              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E8%8D%BC%E6%AF%98+%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+              "query": "site:enskyshop.com/products/detail \"我妻善逸 ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E6%88%91%E5%A6%BB%E5%96%84%E9%80%B8+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
             }
           ],
           "rediscovery_work_order": [
             {
               "step": 1,
               "status": "manual_query_execution_required",
-              "label": "google_exact_title_detail",
+              "label": "google_context_title_detail_1",
               "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"荼毘 メタリックラバーストラップ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%8D%BC%E6%AF%98+%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+              "query": "site:www.enskyshop.com/products/detail \"鬼滅の刃 我妻善逸 ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E6%88%91%E5%A6%BB%E5%96%84%E9%80%B8+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -15500,10 +15681,10 @@
             {
               "step": 2,
               "status": "manual_query_execution_required",
-              "label": "duckduckgo_exact_title_detail",
+              "label": "duckduckgo_context_title_detail_1",
               "engine": "duckduckgo",
-              "query": "site:enskyshop.com/products/detail \"荼毘 メタリックラバーストラップ\"",
-              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E8%8D%BC%E6%AF%98+%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+              "query": "site:enskyshop.com/products/detail \"鬼滅の刃 我妻善逸 ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E6%88%91%E5%A6%BB%E5%96%84%E9%80%B8+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -15512,18 +15693,44 @@
             },
             {
               "step": 3,
+              "status": "manual_query_execution_required",
+              "label": "google_exact_title_detail",
+              "engine": "google",
+              "query": "site:www.enskyshop.com/products/detail \"我妻善逸 ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E6%88%91%E5%A6%BB%E5%96%84%E9%80%B8+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+              "accept_only_if": [
+                "result URL is an official product detail page on the allowed source domain",
+                "page title or h1 matches this catalog item name and variant",
+                "image URL is copied only from the confirmed product page or a direct product image referenced by it"
+              ]
+            },
+            {
+              "step": 4,
+              "status": "manual_query_execution_required",
+              "label": "duckduckgo_exact_title_detail",
+              "engine": "duckduckgo",
+              "query": "site:enskyshop.com/products/detail \"我妻善逸 ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E6%88%91%E5%A6%BB%E5%96%84%E9%80%B8+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+              "accept_only_if": [
+                "result URL is an official product detail page on the allowed source domain",
+                "page title or h1 matches this catalog item name and variant",
+                "image URL is copied only from the confirmed product page or a direct product image referenced by it"
+              ]
+            },
+            {
+              "step": 5,
               "status": "manual_store_search_required_if_exact_queries_fail",
               "label": "fallback_store_search",
               "engine": "official_store",
-              "query": "荼毘 メタリックラバーストラップ",
-              "url": "https://www.enskyshop.com/products/list?name=%E8%8D%BC%E6%AF%98%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+              "query": "我妻善逸 ラバーストラップ",
+              "url": "https://www.enskyshop.com/products/list?name=%E6%88%91%E5%A6%BB%E5%96%84%E9%80%B8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
               "accept_only_if": [
                 "open the exact product detail page from the store result before confirming",
                 "do not reuse broad search result sample links if their titles already mismatched"
               ]
             }
           ],
-          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E8%8D%BC%E6%AF%98%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E6%88%91%E5%A6%BB%E5%96%84%E9%80%B8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
           "candidate_detail_links": [],
           "unsafe_sample_candidate_detail_links": [
             "https://www.enskyshop.com/products/detail/32395",
@@ -15632,40 +15839,54 @@
         },
         {
           "patch_row_id": "source-discovery-exact-url-review-009",
-          "catalog_index": 1542,
+          "catalog_index": 1576,
           "manual_confirmed": false,
           "manual_confirmed_source_url": "",
           "manual_confirmed_image_url": "",
           "manual_evidence_url": "",
           "manual_note": "",
           "source_store": "엔스카이",
+          "affiliation": "귀멸의 칼날",
+          "series_name": null,
           "category": "키링",
-          "name_ko": "올마이트 러버 스트랩",
-          "name_ja": "オールマイト ラバーストラップ",
-          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+          "name_ko": "하시비라 이노스케 러버 스트랩",
+          "name_ja": "嘴平伊之助 ラバーストラップ",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%98%B4%E5%B9%B3%E4%BC%8A%E4%B9%8B%E5%8A%A9+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
           "primary_review_url_kind": "domain_limited_web_search",
           "exact_source_search_queries": [
             {
+              "label": "google_context_title_detail_1",
+              "engine": "google",
+              "query": "site:www.enskyshop.com/products/detail \"鬼滅の刃 嘴平伊之助 ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E5%98%B4%E5%B9%B3%E4%BC%8A%E4%B9%8B%E5%8A%A9+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+            },
+            {
+              "label": "duckduckgo_context_title_detail_1",
+              "engine": "duckduckgo",
+              "query": "site:enskyshop.com/products/detail \"鬼滅の刃 嘴平伊之助 ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E5%98%B4%E5%B9%B3%E4%BC%8A%E4%B9%8B%E5%8A%A9+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+            },
+            {
               "label": "google_exact_title_detail",
               "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"オールマイト ラバーストラップ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+              "query": "site:www.enskyshop.com/products/detail \"嘴平伊之助 ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%98%B4%E5%B9%B3%E4%BC%8A%E4%B9%8B%E5%8A%A9+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
             },
             {
               "label": "duckduckgo_exact_title_detail",
               "engine": "duckduckgo",
-              "query": "site:enskyshop.com/products/detail \"オールマイト ラバーストラップ\"",
-              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+              "query": "site:enskyshop.com/products/detail \"嘴平伊之助 ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E5%98%B4%E5%B9%B3%E4%BC%8A%E4%B9%8B%E5%8A%A9+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
             }
           ],
           "rediscovery_work_order": [
             {
               "step": 1,
               "status": "manual_query_execution_required",
-              "label": "google_exact_title_detail",
+              "label": "google_context_title_detail_1",
               "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"オールマイト ラバーストラップ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+              "query": "site:www.enskyshop.com/products/detail \"鬼滅の刃 嘴平伊之助 ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E5%98%B4%E5%B9%B3%E4%BC%8A%E4%B9%8B%E5%8A%A9+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -15675,10 +15896,10 @@
             {
               "step": 2,
               "status": "manual_query_execution_required",
-              "label": "duckduckgo_exact_title_detail",
+              "label": "duckduckgo_context_title_detail_1",
               "engine": "duckduckgo",
-              "query": "site:enskyshop.com/products/detail \"オールマイト ラバーストラップ\"",
-              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+              "query": "site:enskyshop.com/products/detail \"鬼滅の刃 嘴平伊之助 ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E5%98%B4%E5%B9%B3%E4%BC%8A%E4%B9%8B%E5%8A%A9+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -15687,18 +15908,44 @@
             },
             {
               "step": 3,
+              "status": "manual_query_execution_required",
+              "label": "google_exact_title_detail",
+              "engine": "google",
+              "query": "site:www.enskyshop.com/products/detail \"嘴平伊之助 ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%98%B4%E5%B9%B3%E4%BC%8A%E4%B9%8B%E5%8A%A9+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+              "accept_only_if": [
+                "result URL is an official product detail page on the allowed source domain",
+                "page title or h1 matches this catalog item name and variant",
+                "image URL is copied only from the confirmed product page or a direct product image referenced by it"
+              ]
+            },
+            {
+              "step": 4,
+              "status": "manual_query_execution_required",
+              "label": "duckduckgo_exact_title_detail",
+              "engine": "duckduckgo",
+              "query": "site:enskyshop.com/products/detail \"嘴平伊之助 ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E5%98%B4%E5%B9%B3%E4%BC%8A%E4%B9%8B%E5%8A%A9+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+              "accept_only_if": [
+                "result URL is an official product detail page on the allowed source domain",
+                "page title or h1 matches this catalog item name and variant",
+                "image URL is copied only from the confirmed product page or a direct product image referenced by it"
+              ]
+            },
+            {
+              "step": 5,
               "status": "manual_store_search_required_if_exact_queries_fail",
               "label": "fallback_store_search",
               "engine": "official_store",
-              "query": "オールマイト ラバーストラップ",
-              "url": "https://www.enskyshop.com/products/list?name=%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+              "query": "嘴平伊之助 ラバーストラップ",
+              "url": "https://www.enskyshop.com/products/list?name=%E5%98%B4%E5%B9%B3%E4%BC%8A%E4%B9%8B%E5%8A%A9%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
               "accept_only_if": [
                 "open the exact product detail page from the store result before confirming",
                 "do not reuse broad search result sample links if their titles already mismatched"
               ]
             }
           ],
-          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E5%98%B4%E5%B9%B3%E4%BC%8A%E4%B9%8B%E5%8A%A9%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
           "candidate_detail_links": [],
           "unsafe_sample_candidate_detail_links": [
             "https://www.enskyshop.com/products/detail/32395",
@@ -15807,40 +16054,54 @@
         },
         {
           "patch_row_id": "source-discovery-exact-url-review-010",
-          "catalog_index": 1543,
+          "catalog_index": 1577,
           "manual_confirmed": false,
           "manual_confirmed_source_url": "",
           "manual_confirmed_image_url": "",
           "manual_evidence_url": "",
           "manual_note": "",
           "source_store": "엔스카이",
+          "affiliation": "귀멸의 칼날",
+          "series_name": null,
           "category": "키링",
-          "name_ko": "곤 프릭스 러버 스트랩",
-          "name_ja": "ゴン=フリークス ラバーストラップ",
-          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%B4%E3%83%B3%3D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+          "name_ko": "토미오카 기유 러버 스트랩",
+          "name_ja": "冨岡義勇 ラバーストラップ",
+          "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%86%A8%E5%B2%A1%E7%BE%A9%E5%8B%87+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
           "primary_review_url_kind": "domain_limited_web_search",
           "exact_source_search_queries": [
             {
+              "label": "google_context_title_detail_1",
+              "engine": "google",
+              "query": "site:www.enskyshop.com/products/detail \"鬼滅の刃 冨岡義勇 ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E5%86%A8%E5%B2%A1%E7%BE%A9%E5%8B%87+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+            },
+            {
+              "label": "duckduckgo_context_title_detail_1",
+              "engine": "duckduckgo",
+              "query": "site:enskyshop.com/products/detail \"鬼滅の刃 冨岡義勇 ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E5%86%A8%E5%B2%A1%E7%BE%A9%E5%8B%87+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+            },
+            {
               "label": "google_exact_title_detail",
               "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ゴン=フリークス ラバーストラップ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%B4%E3%83%B3%3D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+              "query": "site:www.enskyshop.com/products/detail \"冨岡義勇 ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%86%A8%E5%B2%A1%E7%BE%A9%E5%8B%87+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
             },
             {
               "label": "duckduckgo_exact_title_detail",
               "engine": "duckduckgo",
-              "query": "site:enskyshop.com/products/detail \"ゴン=フリークス ラバーストラップ\"",
-              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E3%82%B4%E3%83%B3%3D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
+              "query": "site:enskyshop.com/products/detail \"冨岡義勇 ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E5%86%A8%E5%B2%A1%E7%BE%A9%E5%8B%87+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22"
             }
           ],
           "rediscovery_work_order": [
             {
               "step": 1,
               "status": "manual_query_execution_required",
-              "label": "google_exact_title_detail",
+              "label": "google_context_title_detail_1",
               "engine": "google",
-              "query": "site:www.enskyshop.com/products/detail \"ゴン=フリークス ラバーストラップ\"",
-              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%B4%E3%83%B3%3D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+              "query": "site:www.enskyshop.com/products/detail \"鬼滅の刃 冨岡義勇 ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E5%86%A8%E5%B2%A1%E7%BE%A9%E5%8B%87+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -15850,10 +16111,10 @@
             {
               "step": 2,
               "status": "manual_query_execution_required",
-              "label": "duckduckgo_exact_title_detail",
+              "label": "duckduckgo_context_title_detail_1",
               "engine": "duckduckgo",
-              "query": "site:enskyshop.com/products/detail \"ゴン=フリークス ラバーストラップ\"",
-              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E3%82%B4%E3%83%B3%3D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+              "query": "site:enskyshop.com/products/detail \"鬼滅の刃 冨岡義勇 ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E5%86%A8%E5%B2%A1%E7%BE%A9%E5%8B%87+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "accept_only_if": [
                 "result URL is an official product detail page on the allowed source domain",
                 "page title or h1 matches this catalog item name and variant",
@@ -15862,18 +16123,44 @@
             },
             {
               "step": 3,
+              "status": "manual_query_execution_required",
+              "label": "google_exact_title_detail",
+              "engine": "google",
+              "query": "site:www.enskyshop.com/products/detail \"冨岡義勇 ラバーストラップ\"",
+              "url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%86%A8%E5%B2%A1%E7%BE%A9%E5%8B%87+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+              "accept_only_if": [
+                "result URL is an official product detail page on the allowed source domain",
+                "page title or h1 matches this catalog item name and variant",
+                "image URL is copied only from the confirmed product page or a direct product image referenced by it"
+              ]
+            },
+            {
+              "step": 4,
+              "status": "manual_query_execution_required",
+              "label": "duckduckgo_exact_title_detail",
+              "engine": "duckduckgo",
+              "query": "site:enskyshop.com/products/detail \"冨岡義勇 ラバーストラップ\"",
+              "url": "https://duckduckgo.com/?q=site%3Aenskyshop.com%2Fproducts%2Fdetail+%22%E5%86%A8%E5%B2%A1%E7%BE%A9%E5%8B%87+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+              "accept_only_if": [
+                "result URL is an official product detail page on the allowed source domain",
+                "page title or h1 matches this catalog item name and variant",
+                "image URL is copied only from the confirmed product page or a direct product image referenced by it"
+              ]
+            },
+            {
+              "step": 5,
               "status": "manual_store_search_required_if_exact_queries_fail",
               "label": "fallback_store_search",
               "engine": "official_store",
-              "query": "ゴン=フリークス ラバーストラップ",
-              "url": "https://www.enskyshop.com/products/list?name=%E3%82%B4%E3%83%B3%3D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+              "query": "冨岡義勇 ラバーストラップ",
+              "url": "https://www.enskyshop.com/products/list?name=%E5%86%A8%E5%B2%A1%E7%BE%A9%E5%8B%87%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
               "accept_only_if": [
                 "open the exact product detail page from the store result before confirming",
                 "do not reuse broad search result sample links if their titles already mismatched"
               ]
             }
           ],
-          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%B4%E3%83%B3%3D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E5%86%A8%E5%B2%A1%E7%BE%A9%E5%8B%87%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
           "candidate_detail_links": [],
           "unsafe_sample_candidate_detail_links": [
             "https://www.enskyshop.com/products/detail/32395",
@@ -17079,16 +17366,16 @@
   },
   "source_discovery_next_focus_metadata_field_import_dry_run": {
     "public_report": "data/source_discovery_next_focus_metadata_field_import_dry_run_public.json",
-    "template_items": 3,
+    "template_items": 21,
     "manual_confirmed_rows": 0,
     "ready_field_rows": 0,
     "updated_rows": 0,
-    "skipped_rows": 3,
-    "blocked_rows": 3,
+    "skipped_rows": 21,
+    "blocked_rows": 21,
     "skip_reason_counts": [
       [
         "manual_confirmed_false",
-        3
+        21
       ]
     ],
     "auto_apply_enabled": false,
@@ -17098,25 +17385,25 @@
     "public_report": "data/source_discovery_next_focus_exact_url_candidate_audit_public.json",
     "queue_rows": 20,
     "audited_rows": 20,
-    "store_search_ok_rows": 20,
-    "store_search_broad_result_rows": 20,
+    "store_search_ok_rows": 18,
+    "store_search_broad_result_rows": 18,
     "exact_title_candidate_rows": 0,
     "auto_apply_ready_rows": 0,
     "manual_review_candidate_rows": 0,
     "broad_result_link_threshold": 30,
-    "sample_product_detail_link_rows": 20,
-    "sample_product_detail_links": 100,
-    "sample_product_detail_link_snapshot_rows": 100,
+    "sample_product_detail_link_rows": 18,
+    "sample_product_detail_links": 90,
+    "sample_product_detail_link_snapshot_rows": 90,
     "unique_sample_product_detail_link_snapshots": 5,
-    "sample_product_detail_link_snapshot_ok_rows": 100,
-    "sample_product_detail_link_title_mismatch_rows": 100,
+    "sample_product_detail_link_snapshot_ok_rows": 90,
+    "sample_product_detail_link_title_mismatch_rows": 90,
     "sample_product_detail_link_title_match_counts": [
       [
         "title_mismatch",
-        100
+        90
       ]
     ],
-    "broad_result_sample_detail_link_rows": 20,
+    "broad_result_sample_detail_link_rows": 18,
     "fallback_to_domain_limited_web_search_rows": 20,
     "primary_manual_review_url_rows": 20,
     "primary_manual_review_url_kind_counts": [
@@ -17131,18 +17418,18 @@
         20
       ]
     ],
-    "ensky_cache_cross_checked_rows": 20,
+    "ensky_cache_cross_checked_rows": 10,
     "ensky_cache_safe_exact_match_rows": 0,
-    "ensky_cache_broad_candidate_rows": 4,
-    "ensky_cache_no_candidate_rows": 16,
+    "ensky_cache_broad_candidate_rows": 1,
+    "ensky_cache_no_candidate_rows": 9,
     "ensky_cache_status_counts": [
       [
         "no_cache_candidate",
-        16
+        9
       ],
       [
         "broad_cache_candidate",
-        4
+        1
       ]
     ],
     "auto_apply_enabled": false,
@@ -17408,7 +17695,7 @@
         "source_discovery_focus_pack_rows": 667,
         "source_discovery_remaining_focus_review_rows": 667,
         "source_discovery_next_focus_pack_rows": 20,
-        "source_discovery_next_focus_pack_id": "source-discovery-focus-001",
+        "source_discovery_next_focus_pack_id": "source-discovery-focus-002",
         "source_discovery_next_focus_action_lanes": [
           [
             "exact_source_url_review",
@@ -17496,6 +17783,8 @@
                 "manual_search_rows": 9,
                 "search_hint_rows": 10,
                 "fallback_web_search_url_rows": 10,
+                "search_refinement_query_rows": 10,
+                "search_refinement_queries": 50,
                 "primary_review_url_rows": 10,
                 "candidate_status_counts": [
                   [
@@ -17540,6 +17829,8 @@
                 "manual_search_rows": 47,
                 "search_hint_rows": 50,
                 "fallback_web_search_url_rows": 50,
+                "search_refinement_query_rows": 50,
+                "search_refinement_queries": 244,
                 "primary_review_url_rows": 50,
                 "candidate_status_counts": [
                   [
@@ -17707,52 +17998,51 @@
         "public_report": "data/catalog_image_source_url_confirmed_template_public.json",
         "next_execution_summary": {
           "lane_count": 5,
-          "open_rows": 813,
-          "next_batch_rows": 166,
+          "open_rows": 831,
+          "next_batch_rows": 184,
           "next_safe_phase": "exact_source_url_review",
           "auto_apply_enabled": false,
           "manual_evidence_required": true
         },
         "next_execution_lane_count": 5,
-        "next_execution_open_rows": 813,
-        "next_execution_next_batch_rows": 166,
+        "next_execution_open_rows": 831,
+        "next_execution_next_batch_rows": 184,
         "first_next_execution_lane": "exact_source_url_review",
-        "first_next_execution_status": "manual_cache_miss_research_required",
+        "first_next_execution_status": "manual_fallback_review_required",
         "first_next_execution_rows": 20,
-        "first_next_execution_public_report": "data/source_discovery_next_focus_exact_url_review_queue_public.json",
+        "first_next_execution_public_report": "data/source_discovery_next_focus_fallback_queue_public.json",
         "operator_handoff": {
           "status": "current_focus_fallback_review_required",
           "current_lane": "exact_source_url_review",
           "current_review_section": "source_discovery_next_focus_exact_url_review_queue",
-          "current_focus_pack_id": "source-discovery-focus-001",
+          "current_focus_pack_id": "source-discovery-focus-002",
           "queued_source_rows": 667,
           "current_focus_remaining_rows": 20,
           "safe_candidate_detail_link_rows": 0,
-          "all_sample_candidates_rejected_rows": 20,
-          "next_safe_phase": "rotate_to_next_focus_pack_or_manual_source_research_current_pack",
+          "all_sample_candidates_rejected_rows": 18,
+          "next_safe_phase": "review_fallback_queue_and_fill_exact_manual_confirmed_source_urls",
           "blocked_reasons": [
-            "official_cache_safe_exact_match_absent",
-            "sample_candidate_links_rejected"
+            "fallback_search_required"
           ],
-          "current_focus_resolution_status": "manual_source_search_required_after_official_cache_miss",
+          "current_focus_resolution_status": "manual_exact_source_url_review_required",
           "current_focus_cache_cross_check": {
-            "cross_checked_rows": 20,
+            "cross_checked_rows": 10,
             "safe_exact_match_rows": 0,
-            "broad_candidate_rows": 4,
-            "no_candidate_rows": 16,
+            "broad_candidate_rows": 1,
+            "no_candidate_rows": 9,
             "status_counts": [
               [
                 "no_cache_candidate",
-                16
+                9
               ],
               [
                 "broad_cache_candidate",
-                4
+                1
               ]
             ],
             "auto_apply_enabled": false
           },
-          "recommended_next_focus_pack_id": "source-discovery-focus-002",
+          "recommended_next_focus_pack_id": null,
           "handoff_steps": [
             {
               "step": 1,
@@ -17761,7 +18051,7 @@
               "next_batch_rows": 20,
               "review_section": "source_discovery_next_focus_exact_url_review_queue",
               "write_template_section": "source_url_confirmation_patch_template.rows",
-              "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+              "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
               "first_primary_review_url_kind": "domain_limited_web_search",
               "template_rows": 10,
               "rediscovery_work_order_rows": 20,
@@ -17778,7 +18068,7 @@
               "step": 2,
               "lane": "metadata_field_confirmation",
               "status": "blocked_until_exact_source_url_confirmed",
-              "next_batch_rows": 3,
+              "next_batch_rows": 21,
               "review_section": "source_discovery_next_focus_metadata_field_import_dry_run",
               "write_template_section": "metadata_field_import_template",
               "required_before_write": [
