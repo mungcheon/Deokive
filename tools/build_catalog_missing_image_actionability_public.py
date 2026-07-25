@@ -399,6 +399,45 @@ def build_source_discovery_work_packs(groups: list[dict[str, Any]], limit: int =
         ]
         category_counts = Counter(str(item.get("category") or "") for item in samples)
         affiliation_counts = Counter(str(item.get("affiliation") or "") for item in samples)
+        review_items: list[dict[str, Any]] = []
+        for sample in samples[:8]:
+            review_url = str(sample.get("official_search_url") or "").strip()
+            review_url_kind = "official_search_url"
+            if not review_url:
+                review_url = manual_search_url(sample)
+                review_url_kind = "fallback_web_search"
+            if not review_url:
+                continue
+            review_items.append(
+                {
+                    "catalog_index": sample.get("catalog_index"),
+                    "name_ko": sample.get("name_ko"),
+                    "name_ja": sample.get("name_ja"),
+                    "source_store": sample.get("source_store") or source_store,
+                    "category": sample.get("category"),
+                    "primary_review_url": review_url,
+                    "primary_review_url_kind": review_url_kind,
+                }
+            )
+        review_start = {}
+        if review_items:
+            review_start = {
+                "batch_id": f"missing-image-source-discovery-{len(packs) + 1:03d}-review-start",
+                "workflow": "find_source_then_extract_image",
+                "source_store": source_store,
+                "row_count": int(group.get("missing_image_rows") or 0),
+                "primary_review_url_rows": len(review_items),
+                "first_primary_review_url": review_items[0]["primary_review_url"],
+                "first_primary_review_url_kind": review_items[0]["primary_review_url_kind"],
+                "manual_confirmation_required": True,
+                "auto_apply_enabled": False,
+                "items": review_items,
+                "review_checklist": [
+                    "Open primary_review_url for each item.",
+                    "Record only exact product detail source_url, not a search/listing page.",
+                    "Confirm title, character, variant, and goods type before any image attachment.",
+                ],
+            }
         packs.append(
             {
                 "pack_id": f"missing-image-source-discovery-{len(packs) + 1:03d}",
@@ -408,6 +447,10 @@ def build_source_discovery_work_packs(groups: list[dict[str, Any]], limit: int =
                 "official_search_available": bool(group.get("official_search_available")),
                 "next_step": "confirm_exact_source_url_then_fill_source_templates",
                 "template": "source_discovery_focus_confirmed_template_public.json",
+                "review_start": review_start,
+                "first_primary_review_url": review_start.get("first_primary_review_url") if review_start else "",
+                "first_primary_review_url_kind": review_start.get("first_primary_review_url_kind") if review_start else "",
+                "primary_review_url_rows": review_start.get("primary_review_url_rows", 0) if review_start else 0,
                 "manual_confirmation_required": True,
                 "auto_apply_enabled": False,
                 "review_checklist": [

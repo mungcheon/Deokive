@@ -674,7 +674,13 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
                     "workflow": "find_source_then_extract_image",
                     "source_store": "Animate",
                     "missing_image_rows": 3,
-                    "sample_items": [{"catalog_index": 1, "name_ko": "Needs source"}],
+                    "sample_items": [
+                        {
+                            "catalog_index": 1,
+                            "name_ko": "Needs source",
+                            "official_search_url": "https://animate.example/search?q=needs-source",
+                        }
+                    ],
                 },
                 {
                     "workflow": "find_source_then_extract_image",
@@ -703,6 +709,24 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["source_discovery_work_pack_rows"], 4)
         self.assertEqual(report["source_discovery_work_packs"][0]["source_store"], "Animate")
         self.assertEqual(report["source_discovery_work_packs"][0]["row_count"], 3)
+        self.assertEqual(
+            report["source_discovery_work_packs"][0]["first_primary_review_url"],
+            "https://animate.example/search?q=needs-source",
+        )
+        self.assertEqual(
+            report["source_discovery_work_packs"][0]["review_start"]["items"][0][
+                "primary_review_url_kind"
+            ],
+            "official_search_url",
+        )
+        self.assertIn(
+            "https://www.google.com/search",
+            report["source_discovery_work_packs"][1]["first_primary_review_url"],
+        )
+        self.assertEqual(
+            report["source_discovery_work_packs"][1]["first_primary_review_url_kind"],
+            "fallback_web_search",
+        )
         self.assertEqual(discover["top_work_packs"][0]["source_store"], "Animate")
         self.assertEqual(discover["top_work_packs"][0]["row_count"], 3)
         self.assertTrue(any("falls back" in note for note in discover["notes"]))
