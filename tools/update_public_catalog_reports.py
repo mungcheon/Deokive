@@ -732,6 +732,67 @@ def image_attachment_blocking_dashboard(
     first_representative_review = (
         next_representative_batch[0] if next_representative_batch else {}
     )
+    source_url_patch_rows = []
+    for position, row in enumerate(next_source_url_batch[:10], start=1):
+        candidate_options = row.get("candidate_options") or []
+        top_candidate = candidate_options[0] if candidate_options else {}
+        source_url_patch_rows.append(
+            {
+                "patch_row_id": f"image-source-url-review-{position:03d}",
+                "manual_confirmed": False,
+                "field": "source_url",
+                "row_index": row.get("row_index"),
+                "catalog_index": row.get("catalog_index"),
+                "name_ko": row.get("name_ko"),
+                "name_ja": row.get("name_ja"),
+                "source_store": row.get("source_store"),
+                "category": row.get("category"),
+                "current_source_url": row.get("current_source_url"),
+                "manual_value": "",
+                "candidate_source_url_hint": top_candidate.get("source_url")
+                or row.get("candidate_source_url_hint")
+                or row.get("candidate_source_url"),
+                "candidate_image_url_hint": top_candidate.get("image_url")
+                or row.get("candidate_image_url_hint")
+                or row.get("candidate_image_url"),
+                "candidate_title_hint": top_candidate.get("title")
+                or row.get("candidate_title_hint")
+                or row.get("candidate_title"),
+                "candidate_score": row.get("candidate_score"),
+                "candidate_status": row.get("candidate_status"),
+                "candidate_count": row.get("candidate_count"),
+                "primary_review_url": row.get("primary_review_url"),
+                "primary_review_url_kind": row.get("primary_review_url_kind"),
+                "evidence_url": "",
+                "manual_image_url": "",
+                "manual_image_note": "",
+                "source_url_review_lane": row.get("source_url_review_lane"),
+                "source_url_review_blockers": row.get("source_url_review_blockers")
+                or [],
+                "fallback_search_queries": row.get("fallback_search_queries") or [],
+                "store_search_hints": row.get("store_search_hints") or {},
+                "blocked_until": "exact_product_source_url_confirmed",
+                "operator_instruction": (
+                    "Fill manual_value/evidence_url only with an exact product detail URL. "
+                    "Fill manual_image_url only when the confirmed product page or official CDN proves the exact image."
+                ),
+                "auto_apply_enabled": False,
+            }
+        )
+    source_url_patch_template = {
+        "scope": "image_attachment_next_source_url_confirmation_patch",
+        "template_rows": len(source_url_patch_rows),
+        "ready_to_import_rows": 0,
+        "blocked_rows": len(source_url_patch_rows),
+        "candidate_hint_rows": sum(
+            1 for row in source_url_patch_rows if row.get("candidate_source_url_hint")
+        ),
+        "manual_image_url_slot_rows": len(source_url_patch_rows),
+        "requires_manual_review": True,
+        "auto_apply_enabled": False,
+        "import_tool": "tools/import_confirmed_image_attachment_rows.py",
+        "rows": source_url_patch_rows,
+    }
     return {
         "status": (
             "blocked_until_manual_source_or_image_confirmation"
@@ -762,6 +823,7 @@ def image_attachment_blocking_dashboard(
         "source_url_candidate_status_counts": summary.get(
             "source_url_candidate_status_counts", []
         ),
+        "source_url_confirmation_patch_template": source_url_patch_template,
         "representative_candidate_status_counts": summary.get(
             "representative_candidate_status_counts", []
         ),

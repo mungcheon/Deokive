@@ -3419,6 +3419,16 @@ class PublicCatalogReportTests(unittest.TestCase):
                 "first_representative_image_review", {}
             ).get("primary_review_url")
         )
+        source_url_patch = image_blocking_dashboard.get(
+            "source_url_confirmation_patch_template", {}
+        )
+        self.assertEqual(source_url_patch.get("template_rows"), 10)
+        self.assertEqual(source_url_patch.get("ready_to_import_rows"), 0)
+        self.assertEqual(source_url_patch.get("blocked_rows"), 10)
+        self.assertGreaterEqual(source_url_patch.get("candidate_hint_rows"), 1)
+        self.assertFalse(source_url_patch.get("auto_apply_enabled"))
+        self.assertTrue(source_url_patch.get("rows", [])[0].get("primary_review_url"))
+        self.assertIn("manual_image_url", source_url_patch.get("rows", [])[0])
         self.assertFalse(image_blocking_dashboard.get("auto_apply_enabled"))
         self.assertTrue(
             image_blocking_dashboard.get("manual_review_required_before_import")
@@ -3433,6 +3443,12 @@ class PublicCatalogReportTests(unittest.TestCase):
                 "blocked_before_image_import_rows"
             ),
             image_blocking_dashboard.get("blocked_before_image_import_rows"),
+        )
+        self.assertEqual(
+            quality_image_action.get("blocking_dashboard", {})
+            .get("source_url_confirmation_patch_template", {})
+            .get("template_rows"),
+            source_url_patch.get("template_rows"),
         )
         self.assertEqual(
             quality_image_action.get("attachment_readiness", {}).get(
