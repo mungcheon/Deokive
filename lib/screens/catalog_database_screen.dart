@@ -12,24 +12,6 @@ const _catalogAddButtonBackground = Color(0xFF252938);
 const _catalogAddButtonForeground = Color(0xFFFFFFFF);
 const _catalogAddButtonDisabledBackground = Color(0xFFDDE1E8);
 const _catalogAddButtonDisabledForeground = Color(0xFF596070);
-const _catalogAddButtonTextStyle = TextStyle(
-  inherit: false,
-  color: _catalogAddButtonForeground,
-  fontSize: 13,
-  fontWeight: FontWeight.w900,
-  height: 1.1,
-  decoration: TextDecoration.none,
-  fontFamilyFallback: _kCatalogButtonFontFallback,
-);
-const _catalogAddButtonDisabledTextStyle = TextStyle(
-  inherit: false,
-  color: _catalogAddButtonDisabledForeground,
-  fontSize: 13,
-  fontWeight: FontWeight.w900,
-  height: 1.1,
-  decoration: TextDecoration.none,
-  fontFamilyFallback: _kCatalogButtonFontFallback,
-);
 
 class CatalogDatabaseScreen extends StatefulWidget {
   final FolderItem? initialFolder;
@@ -667,8 +649,8 @@ class _CatalogButtonLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = TextStyle(
-      inherit: false,
+    final baseStyle = Theme.of(context).textTheme.labelMedium;
+    final textStyle = (baseStyle ?? const TextStyle()).copyWith(
       color: color,
       fontSize: fontSize,
       fontWeight: FontWeight.w900,
@@ -695,9 +677,7 @@ class _CatalogButtonLabel extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 softWrap: false,
                 textAlign: TextAlign.center,
-                style: color == _catalogAddButtonDisabledForeground
-                    ? _catalogAddButtonDisabledTextStyle
-                    : _catalogAddButtonTextStyle,
+                style: textStyle,
               ),
             ),
           ],
