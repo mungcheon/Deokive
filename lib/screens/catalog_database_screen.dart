@@ -587,44 +587,64 @@ class _CatalogAddButton extends StatelessWidget {
     return SizedBox(
       height: 40,
       width: expanded ? double.infinity : 118,
-      child: FilledButton.icon(
-        onPressed: disabled || onPressed == null ? null : () => onPressed!(),
-        icon: Icon(icon, size: 17, color: foreground),
-        label: FittedBox(
-          fit: BoxFit.scaleDown,
-          child: Text(
-            label,
-            maxLines: 1,
-            overflow: TextOverflow.visible,
-            softWrap: false,
-            style: TextStyle(
-              color: foreground,
-              fontSize: 13,
-              fontWeight: FontWeight.w900,
-              height: 1,
-              letterSpacing: 0,
-              fontFamilyFallback: const [
-                'Malgun Gothic',
-                'Apple SD Gothic Neo',
-              ],
-              shadows: const [],
+      child: Material(
+        color: background,
+        elevation: disabled ? 0 : 5,
+        shadowColor: _catalogAddButtonBackground.withValues(alpha: 0.34),
+        shape: const StadiumBorder(),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: disabled || onPressed == null ? null : () => onPressed!(),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: expanded ? 16 : 10),
+            child: IconTheme(
+              data: IconThemeData(color: foreground),
+              child: DefaultTextStyle(
+                style: TextStyle(
+                  color: foreground,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w900,
+                  height: 1,
+                  letterSpacing: 0,
+                  fontFamilyFallback: const [
+                    'Malgun Gothic',
+                    'Apple SD Gothic Neo',
+                  ],
+                  shadows: const [],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(icon, size: 17),
+                    const SizedBox(width: 6),
+                    Flexible(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          label,
+                          maxLines: 1,
+                          overflow: TextOverflow.visible,
+                          softWrap: false,
+                          style: TextStyle(
+                            color: foreground,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w900,
+                            height: 1,
+                            letterSpacing: 0,
+                            fontFamilyFallback: const [
+                              'Malgun Gothic',
+                              'Apple SD Gothic Neo',
+                            ],
+                            shadows: const [],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
-        ),
-        style: FilledButton.styleFrom(
-          backgroundColor: background,
-          disabledBackgroundColor: _catalogAddButtonDisabledBackground,
-          foregroundColor: foreground,
-          disabledForegroundColor: _catalogAddButtonDisabledForeground,
-          elevation: disabled ? 0 : 5,
-          shadowColor: _catalogAddButtonBackground.withValues(alpha: 0.34),
-          padding: EdgeInsets.symmetric(horizontal: expanded ? 16 : 10),
-          textStyle: const TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.w900,
-            height: 1,
-          ),
-          shape: const StadiumBorder(),
         ),
       ),
     );

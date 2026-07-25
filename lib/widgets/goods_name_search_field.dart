@@ -410,43 +410,62 @@ class _CatalogPickerActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: const BoxConstraints(minWidth: 104, minHeight: 34),
-      child: FilledButton.icon(
-        onPressed: onPressed,
-        icon: const Icon(
-          Icons.add_rounded,
-          size: 16,
-          color: _catalogPickerActionForeground,
-        ),
-        label: FittedBox(
-          fit: BoxFit.scaleDown,
-          child: Text(
-            label,
-            maxLines: 1,
-            overflow: TextOverflow.visible,
-            softWrap: false,
-            style: const TextStyle(
-              color: _catalogPickerActionForeground,
-              fontSize: 12,
-              fontWeight: FontWeight.w900,
-              height: 1,
-              letterSpacing: 0,
-              fontFamilyFallback: ['Malgun Gothic', 'Apple SD Gothic Neo'],
-              shadows: [],
+      child: Material(
+        color: _catalogPickerActionBackground,
+        elevation: 2,
+        shadowColor: _catalogPickerActionBackground.withValues(alpha: 0.22),
+        shape: const StadiumBorder(),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: onPressed,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 8),
+            child: IconTheme(
+              data: const IconThemeData(color: _catalogPickerActionForeground),
+              child: DefaultTextStyle(
+                style: const TextStyle(
+                  color: _catalogPickerActionForeground,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w900,
+                  height: 1,
+                  letterSpacing: 0,
+                  fontFamilyFallback: ['Malgun Gothic', 'Apple SD Gothic Neo'],
+                  shadows: [],
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.add_rounded, size: 16),
+                    const SizedBox(width: 5),
+                    Flexible(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          label,
+                          maxLines: 1,
+                          overflow: TextOverflow.visible,
+                          softWrap: false,
+                          style: const TextStyle(
+                            color: _catalogPickerActionForeground,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w900,
+                            height: 1,
+                            letterSpacing: 0,
+                            fontFamilyFallback: [
+                              'Malgun Gothic',
+                              'Apple SD Gothic Neo',
+                            ],
+                            shadows: [],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
-        ),
-        style: FilledButton.styleFrom(
-          backgroundColor: _catalogPickerActionBackground,
-          foregroundColor: _catalogPickerActionForeground,
-          padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 8),
-          minimumSize: const Size(104, 34),
-          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          textStyle: const TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w900,
-            height: 1,
-          ),
-          shape: const StadiumBorder(),
         ),
       ),
     );

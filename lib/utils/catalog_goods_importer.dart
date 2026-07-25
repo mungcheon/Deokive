@@ -415,36 +415,62 @@ class _CatalogImportActionButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: 48,
-      child: FilledButton.icon(
-        onPressed: onPressed,
-        icon: Icon(icon, size: 19, color: foregroundColor),
-        label: Text(
-          label,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          softWrap: false,
-          style: TextStyle(
-            color: foregroundColor,
-            fontSize: 15,
-            fontWeight: FontWeight.w900,
-            height: 1,
-            fontFamilyFallback: const ['Malgun Gothic', 'Apple SD Gothic Neo'],
-            shadows: const [],
+      child: Material(
+        color: backgroundColor,
+        elevation: onPressed == null ? 0 : 3,
+        shadowColor: _catalogImportButtonBackground.withValues(alpha: 0.24),
+        shape: const StadiumBorder(),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: onPressed,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 18),
+            child: IconTheme(
+              data: IconThemeData(color: foregroundColor),
+              child: DefaultTextStyle(
+                style: TextStyle(
+                  color: foregroundColor,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w900,
+                  height: 1,
+                  fontFamilyFallback: const [
+                    'Malgun Gothic',
+                    'Apple SD Gothic Neo',
+                  ],
+                  shadows: const [],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(icon, size: 19),
+                    const SizedBox(width: 7),
+                    Flexible(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          label,
+                          maxLines: 1,
+                          overflow: TextOverflow.visible,
+                          softWrap: false,
+                          style: TextStyle(
+                            color: foregroundColor,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w900,
+                            height: 1,
+                            fontFamilyFallback: const [
+                              'Malgun Gothic',
+                              'Apple SD Gothic Neo',
+                            ],
+                            shadows: const [],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
-        ),
-        style: FilledButton.styleFrom(
-          backgroundColor: backgroundColor,
-          disabledBackgroundColor: _catalogImportButtonDisabledBackground,
-          foregroundColor: foregroundColor,
-          disabledForegroundColor: _catalogImportButtonDisabledForeground,
-          elevation: onPressed == null ? 0 : 3,
-          padding: const EdgeInsets.symmetric(horizontal: 18),
-          textStyle: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w900,
-            height: 1,
-          ),
-          shape: const StadiumBorder(),
         ),
       ),
     );
