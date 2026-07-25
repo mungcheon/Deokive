@@ -47,6 +47,33 @@ def normalize_text(value: Any) -> str:
     return re.sub(r"\s+", "", str(value or "")).lower()
 
 
+def target_title_tokens(value: Any) -> list[str]:
+    text = str(value or "")
+    tokens = [text]
+    tokens.extend(re.findall(r"[（(]([^）)]+)[）)]", text))
+    tokens.extend(re.split(r"[\s/・,、【】\[\]（）()]+", text))
+    normalized: list[str] = []
+    for token in tokens:
+        token = normalize_text(token)
+        if len(token) >= 3 and token not in normalized:
+            normalized.append(token)
+    return normalized
+
+
+def title_match_status(target_title: str, page_title_value: str, page_h1_value: str) -> str:
+    haystack = normalize_text(f"{page_title_value} {page_h1_value}")
+    if not haystack:
+        return "missing_title"
+    target = normalize_text(target_title)
+    if target and target in haystack:
+        return "exact_target_title_in_page_title"
+    tokens = target_title_tokens(target_title)
+    matched = [token for token in tokens if token in haystack]
+    if len(matched) >= 2:
+        return "partial_title_token_match"
+    return "title_mismatch"
+
+
 def clean_text(value: str) -> str:
     return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", value)).strip()
 
@@ -72,6 +99,7 @@ def unique_detail_links(html: str, base_url: str) -> list[str]:
 
 def sample_detail_link_snapshots(
     links: list[str],
+    target_title: str,
     fetcher: Fetcher,
     cache: dict[str, dict[str, Any]],
     *,
@@ -97,7 +125,13 @@ def sample_detail_link_snapshots(
                     "title": page_title(html),
                     "h1": page_h1(html),
                 }
-        snapshots.append(cache[link])
+        snapshot = dict(cache[link])
+        snapshot["title_match_status"] = title_match_status(
+            target_title,
+            str(snapshot.get("title") or ""),
+            str(snapshot.get("h1") or ""),
+        )
+        snapshots.append(snapshot)
     return snapshots
 
 
@@ -180,7 +214,10 @@ def audit_item(
     links = unique_detail_links(html, base)
     exact_links = exact_title_detail_links(html, base, title)
     broad = len(links) > BROAD_RESULT_LINK_THRESHOLD
-    snapshots = sample_detail_link_snapshots(links, fetcher, detail_snapshot_cache)
+    snapshots = sample_detail_link_snapshots(links, title, fetcher, detail_snapshot_cache)
+    snapshot_match_counts = Counter(
+        str(snapshot.get("title_match_status") or "unknown") for snapshot in snapshots
+    )
     result.update(
         {
             "store_search_fetch_status": "ok",
@@ -193,6 +230,11 @@ def audit_item(
             "sample_product_detail_link_snapshot_rows": len(snapshots),
             "sample_product_detail_link_snapshot_ok_rows": sum(
                 1 for snapshot in snapshots if snapshot.get("fetch_status") == "ok"
+            ),
+            "sample_product_detail_link_title_match_counts": snapshot_match_counts.most_common(),
+            "sample_product_detail_link_title_mismatch_rows": snapshot_match_counts.get(
+                "title_mismatch",
+                0,
             ),
             "sample_product_detail_link_source": "broad_official_search_result",
             "sample_product_detail_link_warning": (
@@ -265,6 +307,15 @@ def build_report(
                 )
                 for item in audited
             ),
+            "sample_product_detail_link_title_mismatch_rows": sum(
+                int(item.get("sample_product_detail_link_title_mismatch_rows") or 0)
+                for item in audited
+            ),
+            "sample_product_detail_link_title_match_counts": Counter(
+                str(snapshot.get("title_match_status") or "unknown")
+                for item in audited
+                for snapshot in item.get("sample_product_detail_link_snapshots") or []
+            ).most_common(),
             "broad_result_sample_detail_link_rows": sum(
                 1
                 for item in audited

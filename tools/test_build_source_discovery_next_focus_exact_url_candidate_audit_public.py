@@ -56,8 +56,14 @@ class SourceDiscoveryExactUrlCandidateAuditTests(unittest.TestCase):
         self.assertEqual(report["summary"]["store_search_broad_result_rows"], 2)
         self.assertEqual(report["summary"]["sample_product_detail_link_snapshot_rows"], 10)
         self.assertEqual(report["summary"]["unique_sample_product_detail_link_snapshots"], 5)
+        self.assertEqual(report["summary"]["sample_product_detail_link_title_mismatch_rows"], 10)
+        self.assertEqual(
+            report["summary"]["sample_product_detail_link_title_match_counts"],
+            [("title_mismatch", 10)],
+        )
         first = report["items"][0]["sample_product_detail_link_snapshots"][0]
         self.assertEqual(first["fetch_status"], "ok")
+        self.assertEqual(first["title_match_status"], "title_mismatch")
         self.assertEqual(first["title"], "Wrong Pretty Cure Product ｜ エンスカイショップ")
         self.assertEqual(first["h1"], "Wrong Pretty Cure Product")
         self.assertEqual(calls.count("https://www.enskyshop.com/products/detail/100"), 1)

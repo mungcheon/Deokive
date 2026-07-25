@@ -42,6 +42,11 @@ def _base_summary(items: list[dict[str, Any]]) -> dict[str, Any]:
         for item in items
         if str(item.get("primary_review_url") or "")
     )
+    by_snapshot_title_match = Counter(
+        str(snapshot.get("title_match_status") or "unknown")
+        for item in items
+        for snapshot in item.get("candidate_detail_link_snapshots") or []
+    )
     return {
         "queue_rows": len(items),
         "manual_confirmed_rows": sum(1 for item in items if item.get("manual_confirmed") is True),
@@ -62,6 +67,8 @@ def _base_summary(items: list[dict[str, Any]]) -> dict[str, Any]:
             ),
             "",
         ),
+        "candidate_detail_link_title_match_counts": by_snapshot_title_match.most_common(),
+        "candidate_detail_link_title_mismatch_rows": by_snapshot_title_match.get("title_mismatch", 0),
         "auto_apply_enabled": False,
     }
 
@@ -131,6 +138,7 @@ def _candidate_detail_link_snapshots(
                     "fetch_status": snapshot.get("fetch_status"),
                     "title": snapshot.get("title") or "",
                     "h1": snapshot.get("h1") or "",
+                    "title_match_status": snapshot.get("title_match_status") or "",
                     "fetch_error": snapshot.get("fetch_error") or "",
                 }
             )
