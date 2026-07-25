@@ -1133,6 +1133,20 @@ class PublicCatalogReportTests(unittest.TestCase):
                 quality["source_discovery_next_focus_exact_url_candidate_audit"]["auto_apply_enabled"],
                 False,
             )
+            self.assertEqual(
+                quality["source_discovery_next_focus_exact_url_candidate_audit"][
+                    "ensky_cache_cross_checked_rows"
+                ],
+                quality["source_discovery_next_focus_exact_url_review_queue"][
+                    "queue_rows"
+                ],
+            )
+            self.assertEqual(
+                quality["source_discovery_next_focus_exact_url_candidate_audit"][
+                    "ensky_cache_safe_exact_match_rows"
+                ],
+                0,
+            )
         self.assertEqual(
             quality["source_discovery_next_focus_identity_backfill_queue"][
                 "queue_rows"

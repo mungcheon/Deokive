@@ -11071,6 +11071,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             build_source_discovery_next_focus_exact_url_candidate_audit_public.build_report(
                 source_discovery_next_focus_exact_url_queue,
                 generated_at=generated_at,
+                cache_coverage=ensky_cache_coverage,
             ),
             existing_source_discovery_next_focus_exact_url_candidate_audit,
             source_discovery_next_focus_exact_url_queue,

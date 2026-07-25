@@ -21,6 +21,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 DEFAULT_INPUT = DATA / "source_discovery_next_focus_exact_url_review_queue_public.json"
 DEFAULT_OUTPUT = DATA / "source_discovery_next_focus_exact_url_candidate_audit_public.json"
+DEFAULT_ENSKY_CACHE_COVERAGE = DATA / "ensky_missing_image_cache_coverage_public.json"
 BROAD_RESULT_LINK_THRESHOLD = 30
 
 Fetcher = Callable[[str], str]
@@ -256,15 +257,80 @@ def audit_item(
     return result
 
 
+def cache_coverage_by_index(cache_coverage: dict[str, Any] | None) -> dict[int, dict[str, Any]]:
+    if not isinstance(cache_coverage, dict):
+        return {}
+    out: dict[int, dict[str, Any]] = {}
+    for item in cache_coverage.get("items") or []:
+        if not isinstance(item, dict):
+            continue
+        try:
+            catalog_index = int(item.get("catalog_index"))
+        except (TypeError, ValueError):
+            continue
+        out[catalog_index] = item
+    return out
+
+
+def attach_cache_coverage_evidence(
+    audited: list[dict[str, Any]],
+    cache_coverage: dict[str, Any] | None,
+) -> list[dict[str, Any]]:
+    by_index = cache_coverage_by_index(cache_coverage)
+    if not by_index:
+        return audited
+    enriched: list[dict[str, Any]] = []
+    for item in audited:
+        try:
+            catalog_index = int(item.get("catalog_index"))
+        except (TypeError, ValueError):
+            enriched.append(item)
+            continue
+        cache_item = by_index.get(catalog_index)
+        if not cache_item:
+            enriched.append(item)
+            continue
+        candidates = [
+            candidate
+            for candidate in cache_item.get("candidates") or []
+            if isinstance(candidate, dict)
+        ]
+        enriched.append(
+            {
+                **item,
+                "ensky_cache_coverage": {
+                    "status": cache_item.get("status"),
+                    "candidate_count": int(cache_item.get("candidate_count") or 0),
+                    "safe_exact_match": bool(cache_item.get("safe_exact_match")),
+                    "top_candidate_title": (
+                        (candidates[0] or {}).get("title") if candidates else None
+                    ),
+                    "top_candidate_source_url": (
+                        (candidates[0] or {}).get("source_url") if candidates else None
+                    ),
+                    "top_candidate_image_url": (
+                        (candidates[0] or {}).get("image_url") if candidates else None
+                    ),
+                    "evidence_role": "official_sitemap_cache_cross_check",
+                },
+            }
+        )
+    return enriched
+
+
 def build_report(
     queue: dict[str, Any],
     *,
     generated_at: str | None = None,
     fetcher: Fetcher = fetch_html,
+    cache_coverage: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     items = [item for item in queue.get("items") or [] if isinstance(item, dict)]
     detail_snapshot_cache: dict[str, dict[str, Any]] = {}
-    audited = [audit_item(item, fetcher, detail_snapshot_cache) for item in items]
+    audited = attach_cache_coverage_evidence(
+        [audit_item(item, fetcher, detail_snapshot_cache) for item in items],
+        cache_coverage,
+    )
     exact_ready = [
         item
         for item in audited
@@ -339,6 +405,31 @@ def build_report(
                 for item in audited
                 if item.get("domain_limited_web_search_url")
             ).most_common(),
+            "ensky_cache_cross_checked_rows": sum(
+                1 for item in audited if item.get("ensky_cache_coverage")
+            ),
+            "ensky_cache_safe_exact_match_rows": sum(
+                1
+                for item in audited
+                if (item.get("ensky_cache_coverage") or {}).get("safe_exact_match")
+            ),
+            "ensky_cache_broad_candidate_rows": sum(
+                1
+                for item in audited
+                if (item.get("ensky_cache_coverage") or {}).get("status")
+                == "broad_cache_candidate"
+            ),
+            "ensky_cache_no_candidate_rows": sum(
+                1
+                for item in audited
+                if (item.get("ensky_cache_coverage") or {}).get("status")
+                == "no_cache_candidate"
+            ),
+            "ensky_cache_status_counts": Counter(
+                str((item.get("ensky_cache_coverage") or {}).get("status") or "")
+                for item in audited
+                if item.get("ensky_cache_coverage")
+            ).most_common(),
             "auto_apply_enabled": False,
             "recommended_next_action": "Use exact title candidates only after manual review; broad Ensky search result pages are not source_url evidence.",
         },
@@ -359,10 +450,16 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--ensky-cache-coverage", type=Path, default=DEFAULT_ENSKY_CACHE_COVERAGE)
     parser.add_argument("--write", action="store_true")
     args = parser.parse_args()
 
-    report = build_report(load_json(args.input))
+    cache_coverage = (
+        load_json(args.ensky_cache_coverage)
+        if args.ensky_cache_coverage.exists()
+        else None
+    )
+    report = build_report(load_json(args.input), cache_coverage=cache_coverage)
     if args.write:
         write_report(report, args.output)
     print(json.dumps(report["summary"], ensure_ascii=False, indent=2))
