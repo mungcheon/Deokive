@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-25T08:20:49Z",
+  "generated_at": "2026-07-25T08:37:10Z",
   "scope": "source_discovery_next_focus_exact_url_review_queue",
   "source_report": "data/source_discovery_next_focus_fallback_queue_public.json",
   "summary": {
@@ -99,6 +99,23 @@
     "requires_manual_review": true
   },
   "source_url_confirmation_patch_template": {
+    "summary": {
+      "status": "manual_exact_source_url_search_required_no_safe_candidates",
+      "template_rows": 10,
+      "ready_to_import_rows": 0,
+      "blocked_rows": 10,
+      "candidate_detail_link_rows": 0,
+      "safe_candidate_detail_link_coverage": 0.0,
+      "rejected_candidate_detail_link_rows": 10,
+      "all_sample_candidates_rejected_rows": 10,
+      "unsafe_sample_candidate_detail_link_rows": 10,
+      "exact_source_search_query_rows": 10,
+      "rediscovery_work_order_rows": 10,
+      "rediscovery_work_order_steps": 30,
+      "manual_image_url_slot_rows": 10,
+      "auto_apply_enabled": false,
+      "next_operator_action": "open primary_review_url or exact_source_search_queries; ignore unsafe sample links until title identity is confirmed"
+    },
     "status": "manual_exact_source_url_search_required_no_safe_candidates",
     "template_rows": 10,
     "ready_to_import_rows": 0,
@@ -112,6 +129,12 @@
     "rediscovery_work_order_rows": 10,
     "rediscovery_work_order_steps": 30,
     "manual_image_url_slot_rows": 10,
+    "operator_next_steps": [
+      "Open primary_review_url first for each row.",
+      "Use exact_source_search_queries when primary_review_url is a broad search page.",
+      "Copy manual_confirmed_source_url only from an exact product detail page on the allowed source domain.",
+      "Copy manual_confirmed_image_url only from the confirmed product page or a direct product image referenced by it."
+    ],
     "auto_apply_enabled": false,
     "import_tool": "tools/import_confirmed_source_discovery_rows.py",
     "dry_run_command": "python -m tools.import_confirmed_source_discovery_rows --queue server/source_discovery_confirmed_rows.json",

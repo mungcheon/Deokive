@@ -494,40 +494,74 @@ def _source_url_patch_template(items: list[dict[str, Any]], *, limit: int = 10) 
     rejected_candidate_rows = sum(1 for row in rows if row.get("rejected_candidate_detail_links"))
     exact_query_rows = sum(1 for row in rows if row.get("exact_source_search_queries"))
     rediscovery_rows = sum(1 for row in rows if row.get("rediscovery_work_order"))
-    return {
-        "status": "manual_exact_source_url_confirmation_required"
+    ready_rows = sum(
+        1
+        for row in rows
+        if row.get("manual_confirmed") is True and row.get("manual_confirmed_source_url")
+    )
+    blocked_rows = sum(
+        1
+        for row in rows
+        if not (row.get("manual_confirmed") is True and row.get("manual_confirmed_source_url"))
+    )
+    unsafe_sample_rows = sum(
+        1 for row in rows if row.get("unsafe_sample_candidate_detail_links")
+    )
+    all_samples_rejected_rows = sum(
+        1
+        for row in rows
+        if row.get("unsafe_sample_candidate_detail_links")
+        and not row.get("candidate_detail_links")
+        and row.get("rejected_candidate_detail_links")
+    )
+    rediscovery_steps = sum(len(row.get("rediscovery_work_order") or []) for row in rows)
+    status = (
+        "manual_exact_source_url_confirmation_required"
         if candidate_rows
-        else "manual_exact_source_url_search_required_no_safe_candidates",
+        else "manual_exact_source_url_search_required_no_safe_candidates"
+    )
+    summary = {
+        "status": status,
         "template_rows": len(rows),
-        "ready_to_import_rows": sum(
-            1
-            for row in rows
-            if row.get("manual_confirmed") is True and row.get("manual_confirmed_source_url")
+        "ready_to_import_rows": ready_rows,
+        "blocked_rows": blocked_rows,
+        "candidate_detail_link_rows": candidate_rows,
+        "safe_candidate_detail_link_coverage": round(candidate_rows / len(rows), 4) if rows else 0.0,
+        "rejected_candidate_detail_link_rows": rejected_candidate_rows,
+        "all_sample_candidates_rejected_rows": all_samples_rejected_rows,
+        "unsafe_sample_candidate_detail_link_rows": unsafe_sample_rows,
+        "exact_source_search_query_rows": exact_query_rows,
+        "rediscovery_work_order_rows": rediscovery_rows,
+        "rediscovery_work_order_steps": rediscovery_steps,
+        "manual_image_url_slot_rows": len(rows),
+        "auto_apply_enabled": False,
+        "next_operator_action": (
+            "open primary_review_url or exact_source_search_queries; ignore unsafe sample links until title identity is confirmed"
+            if all_samples_rejected_rows
+            else "confirm exact product detail URL and product image before filling manual_confirmed_* fields"
         ),
-        "blocked_rows": sum(
-            1
-            for row in rows
-            if not (row.get("manual_confirmed") is True and row.get("manual_confirmed_source_url"))
-        ),
+    }
+    return {
+        "summary": summary,
+        "status": status,
+        "template_rows": len(rows),
+        "ready_to_import_rows": ready_rows,
+        "blocked_rows": blocked_rows,
         "candidate_detail_link_rows": candidate_rows,
         "candidate_detail_link_coverage": round(candidate_rows / len(rows), 4) if rows else 0.0,
         "rejected_candidate_detail_link_rows": rejected_candidate_rows,
-        "all_sample_candidates_rejected_rows": sum(
-            1
-            for row in rows
-            if row.get("unsafe_sample_candidate_detail_links")
-            and not row.get("candidate_detail_links")
-            and row.get("rejected_candidate_detail_links")
-        ),
-        "unsafe_sample_candidate_detail_link_rows": sum(
-            1 for row in rows if row.get("unsafe_sample_candidate_detail_links")
-        ),
+        "all_sample_candidates_rejected_rows": all_samples_rejected_rows,
+        "unsafe_sample_candidate_detail_link_rows": unsafe_sample_rows,
         "exact_source_search_query_rows": exact_query_rows,
         "rediscovery_work_order_rows": rediscovery_rows,
-        "rediscovery_work_order_steps": sum(
-            len(row.get("rediscovery_work_order") or []) for row in rows
-        ),
+        "rediscovery_work_order_steps": rediscovery_steps,
         "manual_image_url_slot_rows": len(rows),
+        "operator_next_steps": [
+            "Open primary_review_url first for each row.",
+            "Use exact_source_search_queries when primary_review_url is a broad search page.",
+            "Copy manual_confirmed_source_url only from an exact product detail page on the allowed source domain.",
+            "Copy manual_confirmed_image_url only from the confirmed product page or a direct product image referenced by it.",
+        ],
         "auto_apply_enabled": False,
         "import_tool": "tools/import_confirmed_source_discovery_rows.py",
         "dry_run_command": "python -m tools.import_confirmed_source_discovery_rows --queue server/source_discovery_confirmed_rows.json",

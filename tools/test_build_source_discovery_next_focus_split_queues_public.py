@@ -97,6 +97,19 @@ class SourceDiscoveryNextFocusSplitQueueTests(unittest.TestCase):
         self.assertEqual(template["all_sample_candidates_rejected_rows"], 1)
         self.assertEqual(template["rediscovery_work_order_rows"], 1)
         self.assertGreaterEqual(template["rediscovery_work_order_steps"], 4)
+        self.assertEqual(template["summary"]["status"], template["status"])
+        self.assertEqual(
+            template["summary"]["all_sample_candidates_rejected_rows"],
+            template["all_sample_candidates_rejected_rows"],
+        )
+        self.assertIn(
+            "primary_review_url",
+            template["summary"]["next_operator_action"],
+        )
+        self.assertIn(
+            "Open primary_review_url first for each row.",
+            template["operator_next_steps"],
+        )
         self.assertIs(template["auto_apply_enabled"], False)
         row = template["rows"][0]
         self.assertEqual(row["catalog_index"], 922)
