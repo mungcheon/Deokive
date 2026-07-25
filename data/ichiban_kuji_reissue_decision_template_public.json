@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-25T06:38:54Z",
+  "generated_at": "2026-07-25T06:43:36Z",
   "scope": "ichiban_kuji_reissue_decision_template",
   "source_report": "data/catalog_deduplication_action_queue_public.json",
   "summary": {
@@ -36,7 +36,7 @@
     ],
     "same_campaign_family_reissue_item_rows": 20,
     "zero_price_exception_reissue_item_rows": 2,
-    "item_template_non_exception_missing_price_sample_rows": 16,
+    "item_template_non_exception_missing_price_sample_rows": 8,
     "item_template_zero_price_exception_sample_rows": 4,
     "item_template_price_policy_blocked_rows": 8,
     "campaign_template_price_policy_blocked_rows": 1,
@@ -59,7 +59,7 @@
     "campaign_review_batch_item_work_order_rows": 20,
     "campaign_review_batch_catalog_index_rows": 40,
     "campaign_review_batch_zero_price_exception_sample_rows": 2,
-    "campaign_review_batch_non_exception_missing_price_sample_rows": 8,
+    "campaign_review_batch_non_exception_missing_price_sample_rows": 4,
     "campaign_review_batch_price_policy_blocked_rows": 1,
     "campaign_review_batch_local_keep_separate_recommended_rows": 4,
     "campaign_review_batch_item_preview_rows": 20,
@@ -90,7 +90,7 @@
     "campaigns_with_evidence_urls": 4,
     "campaigns_missing_evidence_urls": 0,
     "price_policy_blocked_campaign_rows": 1,
-    "non_exception_missing_price_sample_rows": 8,
+    "non_exception_missing_price_sample_rows": 4,
     "zero_price_exception_sample_rows": 2,
     "last_one_double_chance_expected_price_jpy": 0,
     "price_policy_blocked_campaign_reviews": [
@@ -105,7 +105,7 @@
         "price_policy_blockers": [
           "non_exception_official_price_missing"
         ],
-        "non_exception_missing_price_sample_rows": 8,
+        "non_exception_missing_price_sample_rows": 4,
         "zero_price_exception_sample_rows": 0,
         "last_one_double_chance_expected_price_jpy": 0,
         "missing_regular_price_samples": [
@@ -303,7 +303,7 @@
       "price_policy_blockers": [
         "non_exception_official_price_missing"
       ],
-      "non_exception_missing_price_sample_rows": 8,
+      "non_exception_missing_price_sample_rows": 4,
       "zero_price_exception_sample_rows": 0,
       "last_one_double_chance_expected_price_jpy": 0,
       "missing_regular_price_samples": [
@@ -1035,7 +1035,7 @@
           "name_ja": "A賞 シャンクスフィギュア",
           "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "sub_series": "A賞",
-          "official_price_jpy": null,
+          "official_price_jpy": 500,
           "source_url": "https://1kuji.com/products/onep6",
           "campaign_title": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "prize_rank": "A賞",
@@ -1075,7 +1075,7 @@
           "name_ja": "B賞 ミホークフィギュア",
           "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "sub_series": "B賞",
-          "official_price_jpy": null,
+          "official_price_jpy": 500,
           "source_url": "https://1kuji.com/products/onep6",
           "campaign_title": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "prize_rank": "B賞",
@@ -1115,7 +1115,7 @@
           "name_ja": "C賞 ルフィフィギュア",
           "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "sub_series": "C賞",
-          "official_price_jpy": null,
+          "official_price_jpy": 500,
           "source_url": "https://1kuji.com/products/onep6",
           "campaign_title": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "prize_rank": "C賞",
@@ -1155,7 +1155,7 @@
           "name_ja": "D賞 スポーツタオル",
           "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "sub_series": "D賞",
-          "official_price_jpy": null,
+          "official_price_jpy": 500,
           "source_url": "https://1kuji.com/products/onep6",
           "campaign_title": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "prize_rank": "D賞",
@@ -1197,7 +1197,9 @@
               "assets/catalog_images/8e7482c2e7d19347790e.webp",
               "assets/catalog_images/a23de30d042256048c7e.webp"
             ],
-            "official_price_jpy_values": [],
+            "official_price_jpy_values": [
+              500
+            ],
             "identity_labels": [
               "一番くじ ワンピース ～マリンフォード最終決戦編～ / A賞 / シャンクスフィギュア",
               "一番くじ ワンピース ～マリンフォード最終決戦編～ / B賞 / ミホークフィギュア",
@@ -1268,7 +1270,7 @@
         "sample_row_count": 8,
         "zero_price_exception_sample_rows": 0,
         "zero_price_exception_nonzero_sample_rows": 0,
-        "non_exception_missing_price_sample_rows": 8,
+        "non_exception_missing_price_sample_rows": 4,
         "identity_field_sample_rows": 8,
         "review_risk_tags": [
           "non_exception_price_missing",
@@ -1285,7 +1287,7 @@
         "blockers": [
           "non_exception_official_price_missing"
         ],
-        "non_exception_missing_price_sample_rows": 8,
+        "non_exception_missing_price_sample_rows": 4,
         "zero_price_exception_sample_rows": 0,
         "zero_price_exception_nonzero_sample_rows": 0,
         "last_one_double_chance_expected_price_jpy": 0,
@@ -1320,7 +1322,7 @@
           "blockers": [
             "non_exception_official_price_missing"
           ],
-          "non_exception_missing_price_sample_rows": 8,
+          "non_exception_missing_price_sample_rows": 4,
           "zero_price_exception_sample_rows": 0,
           "zero_price_exception_nonzero_sample_rows": 0,
           "last_one_double_chance_expected_price_jpy": 0,
@@ -1439,7 +1441,7 @@
             "blockers": [
               "non_exception_official_price_missing"
             ],
-            "non_exception_missing_price_sample_rows": 2,
+            "non_exception_missing_price_sample_rows": 1,
             "zero_price_exception_sample_rows": 0,
             "zero_price_exception_nonzero_sample_rows": 0,
             "last_one_double_chance_expected_price_jpy": 0,
@@ -1498,7 +1500,7 @@
             "blockers": [
               "non_exception_official_price_missing"
             ],
-            "non_exception_missing_price_sample_rows": 2,
+            "non_exception_missing_price_sample_rows": 1,
             "zero_price_exception_sample_rows": 0,
             "zero_price_exception_nonzero_sample_rows": 0,
             "last_one_double_chance_expected_price_jpy": 0,
@@ -1557,7 +1559,7 @@
             "blockers": [
               "non_exception_official_price_missing"
             ],
-            "non_exception_missing_price_sample_rows": 2,
+            "non_exception_missing_price_sample_rows": 1,
             "zero_price_exception_sample_rows": 0,
             "zero_price_exception_nonzero_sample_rows": 0,
             "last_one_double_chance_expected_price_jpy": 0,
@@ -1616,7 +1618,7 @@
             "blockers": [
               "non_exception_official_price_missing"
             ],
-            "non_exception_missing_price_sample_rows": 2,
+            "non_exception_missing_price_sample_rows": 1,
             "zero_price_exception_sample_rows": 0,
             "zero_price_exception_nonzero_sample_rows": 0,
             "last_one_double_chance_expected_price_jpy": 0,
@@ -1675,7 +1677,7 @@
             "blockers": [
               "non_exception_official_price_missing"
             ],
-            "non_exception_missing_price_sample_rows": 2,
+            "non_exception_missing_price_sample_rows": 1,
             "zero_price_exception_sample_rows": 0,
             "zero_price_exception_nonzero_sample_rows": 0,
             "last_one_double_chance_expected_price_jpy": 0,
@@ -1734,7 +1736,7 @@
             "blockers": [
               "non_exception_official_price_missing"
             ],
-            "non_exception_missing_price_sample_rows": 2,
+            "non_exception_missing_price_sample_rows": 1,
             "zero_price_exception_sample_rows": 0,
             "zero_price_exception_nonzero_sample_rows": 0,
             "last_one_double_chance_expected_price_jpy": 0,
@@ -1793,7 +1795,7 @@
             "blockers": [
               "non_exception_official_price_missing"
             ],
-            "non_exception_missing_price_sample_rows": 2,
+            "non_exception_missing_price_sample_rows": 1,
             "zero_price_exception_sample_rows": 0,
             "zero_price_exception_nonzero_sample_rows": 0,
             "last_one_double_chance_expected_price_jpy": 0,
@@ -1852,7 +1854,7 @@
             "blockers": [
               "non_exception_official_price_missing"
             ],
-            "non_exception_missing_price_sample_rows": 2,
+            "non_exception_missing_price_sample_rows": 1,
             "zero_price_exception_sample_rows": 0,
             "zero_price_exception_nonzero_sample_rows": 0,
             "last_one_double_chance_expected_price_jpy": 0,
@@ -3728,7 +3730,7 @@
     "campaigns_missing_evidence_urls": 0,
     "likely_same_campaign_family_reissue_rows": 4,
     "price_policy_blocked_campaign_rows": 1,
-    "non_exception_missing_price_sample_rows": 8,
+    "non_exception_missing_price_sample_rows": 4,
     "zero_price_exception_sample_rows": 2,
     "first_campaign_evidence_url": "https://1kuji.com/products/onep6",
     "recommended_next_action": "review_campaign_pages_first_then_apply_campaign_decision_to_item_previews",
@@ -3808,7 +3810,9 @@
               "assets/catalog_images/8e7482c2e7d19347790e.webp",
               "assets/catalog_images/a23de30d042256048c7e.webp"
             ],
-            "official_price_jpy_values": [],
+            "official_price_jpy_values": [
+              500
+            ],
             "identity_labels": [
               "一番くじ ワンピース ～マリンフォード最終決戦編～ / A賞 / シャンクスフィギュア",
               "一番くじ ワンピース ～マリンフォード最終決戦編～ / B賞 / ミホークフィギュア",
@@ -3889,7 +3893,7 @@
         "blockers": [
           "non_exception_official_price_missing"
         ],
-        "non_exception_missing_price_sample_rows": 8,
+        "non_exception_missing_price_sample_rows": 4,
         "zero_price_exception_sample_rows": 0,
         "zero_price_exception_nonzero_sample_rows": 0,
         "last_one_double_chance_expected_price_jpy": 0,
@@ -3926,7 +3930,7 @@
           "blockers": [
             "non_exception_official_price_missing"
           ],
-          "non_exception_missing_price_sample_rows": 8,
+          "non_exception_missing_price_sample_rows": 4,
           "zero_price_exception_sample_rows": 0,
           "zero_price_exception_nonzero_sample_rows": 0,
           "last_one_double_chance_expected_price_jpy": 0,
@@ -4006,7 +4010,7 @@
             "blockers": [
               "non_exception_official_price_missing"
             ],
-            "non_exception_missing_price_sample_rows": 2,
+            "non_exception_missing_price_sample_rows": 1,
             "zero_price_exception_sample_rows": 0,
             "zero_price_exception_nonzero_sample_rows": 0,
             "last_one_double_chance_expected_price_jpy": 0,
@@ -4068,7 +4072,7 @@
             "blockers": [
               "non_exception_official_price_missing"
             ],
-            "non_exception_missing_price_sample_rows": 2,
+            "non_exception_missing_price_sample_rows": 1,
             "zero_price_exception_sample_rows": 0,
             "zero_price_exception_nonzero_sample_rows": 0,
             "last_one_double_chance_expected_price_jpy": 0,
@@ -4130,7 +4134,7 @@
             "blockers": [
               "non_exception_official_price_missing"
             ],
-            "non_exception_missing_price_sample_rows": 2,
+            "non_exception_missing_price_sample_rows": 1,
             "zero_price_exception_sample_rows": 0,
             "zero_price_exception_nonzero_sample_rows": 0,
             "last_one_double_chance_expected_price_jpy": 0,
@@ -4192,7 +4196,7 @@
             "blockers": [
               "non_exception_official_price_missing"
             ],
-            "non_exception_missing_price_sample_rows": 2,
+            "non_exception_missing_price_sample_rows": 1,
             "zero_price_exception_sample_rows": 0,
             "zero_price_exception_nonzero_sample_rows": 0,
             "last_one_double_chance_expected_price_jpy": 0,
@@ -4254,7 +4258,7 @@
             "blockers": [
               "non_exception_official_price_missing"
             ],
-            "non_exception_missing_price_sample_rows": 2,
+            "non_exception_missing_price_sample_rows": 1,
             "zero_price_exception_sample_rows": 0,
             "zero_price_exception_nonzero_sample_rows": 0,
             "last_one_double_chance_expected_price_jpy": 0,
@@ -4316,7 +4320,7 @@
             "blockers": [
               "non_exception_official_price_missing"
             ],
-            "non_exception_missing_price_sample_rows": 2,
+            "non_exception_missing_price_sample_rows": 1,
             "zero_price_exception_sample_rows": 0,
             "zero_price_exception_nonzero_sample_rows": 0,
             "last_one_double_chance_expected_price_jpy": 0,
@@ -4378,7 +4382,7 @@
             "blockers": [
               "non_exception_official_price_missing"
             ],
-            "non_exception_missing_price_sample_rows": 2,
+            "non_exception_missing_price_sample_rows": 1,
             "zero_price_exception_sample_rows": 0,
             "zero_price_exception_nonzero_sample_rows": 0,
             "last_one_double_chance_expected_price_jpy": 0,
@@ -4440,7 +4444,7 @@
             "blockers": [
               "non_exception_official_price_missing"
             ],
-            "non_exception_missing_price_sample_rows": 2,
+            "non_exception_missing_price_sample_rows": 1,
             "zero_price_exception_sample_rows": 0,
             "zero_price_exception_nonzero_sample_rows": 0,
             "last_one_double_chance_expected_price_jpy": 0,
@@ -6586,7 +6590,7 @@
           "name_ja": "A賞 シャンクスフィギュア",
           "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "sub_series": "A賞",
-          "official_price_jpy": null,
+          "official_price_jpy": 500,
           "source_url": "https://1kuji.com/products/onep6",
           "campaign_title": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "prize_rank": "A賞",
@@ -6606,7 +6610,7 @@
         "sample_row_count": 2,
         "zero_price_exception_sample_rows": 0,
         "zero_price_exception_nonzero_sample_rows": 0,
-        "non_exception_missing_price_sample_rows": 2,
+        "non_exception_missing_price_sample_rows": 1,
         "identity_field_sample_rows": 2,
         "review_risk_tags": [
           "non_exception_price_missing",
@@ -6619,7 +6623,7 @@
         "blockers": [
           "non_exception_official_price_missing"
         ],
-        "non_exception_missing_price_sample_rows": 2,
+        "non_exception_missing_price_sample_rows": 1,
         "zero_price_exception_sample_rows": 0,
         "zero_price_exception_nonzero_sample_rows": 0,
         "last_one_double_chance_expected_price_jpy": 0,
@@ -6737,7 +6741,7 @@
           "name_ja": "B賞 ミホークフィギュア",
           "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "sub_series": "B賞",
-          "official_price_jpy": null,
+          "official_price_jpy": 500,
           "source_url": "https://1kuji.com/products/onep6",
           "campaign_title": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "prize_rank": "B賞",
@@ -6757,7 +6761,7 @@
         "sample_row_count": 2,
         "zero_price_exception_sample_rows": 0,
         "zero_price_exception_nonzero_sample_rows": 0,
-        "non_exception_missing_price_sample_rows": 2,
+        "non_exception_missing_price_sample_rows": 1,
         "identity_field_sample_rows": 2,
         "review_risk_tags": [
           "non_exception_price_missing",
@@ -6770,7 +6774,7 @@
         "blockers": [
           "non_exception_official_price_missing"
         ],
-        "non_exception_missing_price_sample_rows": 2,
+        "non_exception_missing_price_sample_rows": 1,
         "zero_price_exception_sample_rows": 0,
         "zero_price_exception_nonzero_sample_rows": 0,
         "last_one_double_chance_expected_price_jpy": 0,
@@ -6888,7 +6892,7 @@
           "name_ja": "C賞 ルフィフィギュア",
           "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "sub_series": "C賞",
-          "official_price_jpy": null,
+          "official_price_jpy": 500,
           "source_url": "https://1kuji.com/products/onep6",
           "campaign_title": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "prize_rank": "C賞",
@@ -6908,7 +6912,7 @@
         "sample_row_count": 2,
         "zero_price_exception_sample_rows": 0,
         "zero_price_exception_nonzero_sample_rows": 0,
-        "non_exception_missing_price_sample_rows": 2,
+        "non_exception_missing_price_sample_rows": 1,
         "identity_field_sample_rows": 2,
         "review_risk_tags": [
           "non_exception_price_missing",
@@ -6921,7 +6925,7 @@
         "blockers": [
           "non_exception_official_price_missing"
         ],
-        "non_exception_missing_price_sample_rows": 2,
+        "non_exception_missing_price_sample_rows": 1,
         "zero_price_exception_sample_rows": 0,
         "zero_price_exception_nonzero_sample_rows": 0,
         "last_one_double_chance_expected_price_jpy": 0,
@@ -7039,7 +7043,7 @@
           "name_ja": "D賞 スポーツタオル",
           "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "sub_series": "D賞",
-          "official_price_jpy": null,
+          "official_price_jpy": 500,
           "source_url": "https://1kuji.com/products/onep6",
           "campaign_title": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "prize_rank": "D賞",
@@ -7059,7 +7063,7 @@
         "sample_row_count": 2,
         "zero_price_exception_sample_rows": 0,
         "zero_price_exception_nonzero_sample_rows": 0,
-        "non_exception_missing_price_sample_rows": 2,
+        "non_exception_missing_price_sample_rows": 1,
         "identity_field_sample_rows": 2,
         "review_risk_tags": [
           "non_exception_price_missing",
@@ -7072,7 +7076,7 @@
         "blockers": [
           "non_exception_official_price_missing"
         ],
-        "non_exception_missing_price_sample_rows": 2,
+        "non_exception_missing_price_sample_rows": 1,
         "zero_price_exception_sample_rows": 0,
         "zero_price_exception_nonzero_sample_rows": 0,
         "last_one_double_chance_expected_price_jpy": 0,
@@ -7190,7 +7194,7 @@
           "name_ja": "E賞 カードスタンドフィギュア",
           "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "sub_series": "E賞",
-          "official_price_jpy": null,
+          "official_price_jpy": 500,
           "source_url": "https://1kuji.com/products/onep6",
           "campaign_title": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "prize_rank": "E賞",
@@ -7210,7 +7214,7 @@
         "sample_row_count": 2,
         "zero_price_exception_sample_rows": 0,
         "zero_price_exception_nonzero_sample_rows": 0,
-        "non_exception_missing_price_sample_rows": 2,
+        "non_exception_missing_price_sample_rows": 1,
         "identity_field_sample_rows": 2,
         "review_risk_tags": [
           "non_exception_price_missing",
@@ -7223,7 +7227,7 @@
         "blockers": [
           "non_exception_official_price_missing"
         ],
-        "non_exception_missing_price_sample_rows": 2,
+        "non_exception_missing_price_sample_rows": 1,
         "zero_price_exception_sample_rows": 0,
         "zero_price_exception_nonzero_sample_rows": 0,
         "last_one_double_chance_expected_price_jpy": 0,
@@ -7341,7 +7345,7 @@
           "name_ja": "F賞 湯のみ",
           "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "sub_series": "F賞",
-          "official_price_jpy": null,
+          "official_price_jpy": 500,
           "source_url": "https://1kuji.com/products/onep6",
           "campaign_title": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "prize_rank": "F賞",
@@ -7361,7 +7365,7 @@
         "sample_row_count": 2,
         "zero_price_exception_sample_rows": 0,
         "zero_price_exception_nonzero_sample_rows": 0,
-        "non_exception_missing_price_sample_rows": 2,
+        "non_exception_missing_price_sample_rows": 1,
         "identity_field_sample_rows": 2,
         "review_risk_tags": [
           "non_exception_price_missing",
@@ -7374,7 +7378,7 @@
         "blockers": [
           "non_exception_official_price_missing"
         ],
-        "non_exception_missing_price_sample_rows": 2,
+        "non_exception_missing_price_sample_rows": 1,
         "zero_price_exception_sample_rows": 0,
         "zero_price_exception_nonzero_sample_rows": 0,
         "last_one_double_chance_expected_price_jpy": 0,
@@ -7492,7 +7496,7 @@
           "name_ja": "G賞 見開きメモ帳",
           "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "sub_series": "G賞",
-          "official_price_jpy": null,
+          "official_price_jpy": 500,
           "source_url": "https://1kuji.com/products/onep6",
           "campaign_title": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "prize_rank": "G賞",
@@ -7512,7 +7516,7 @@
         "sample_row_count": 2,
         "zero_price_exception_sample_rows": 0,
         "zero_price_exception_nonzero_sample_rows": 0,
-        "non_exception_missing_price_sample_rows": 2,
+        "non_exception_missing_price_sample_rows": 1,
         "identity_field_sample_rows": 2,
         "review_risk_tags": [
           "non_exception_price_missing",
@@ -7525,7 +7529,7 @@
         "blockers": [
           "non_exception_official_price_missing"
         ],
-        "non_exception_missing_price_sample_rows": 2,
+        "non_exception_missing_price_sample_rows": 1,
         "zero_price_exception_sample_rows": 0,
         "zero_price_exception_nonzero_sample_rows": 0,
         "last_one_double_chance_expected_price_jpy": 0,
@@ -7643,7 +7647,7 @@
           "name_ja": "H賞 デザインストラップ",
           "series_name": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "sub_series": "H賞",
-          "official_price_jpy": null,
+          "official_price_jpy": 500,
           "source_url": "https://1kuji.com/products/onep6",
           "campaign_title": "一番くじ ワンピース ～マリンフォード最終決戦編～",
           "prize_rank": "H賞",
@@ -7663,7 +7667,7 @@
         "sample_row_count": 2,
         "zero_price_exception_sample_rows": 0,
         "zero_price_exception_nonzero_sample_rows": 0,
-        "non_exception_missing_price_sample_rows": 2,
+        "non_exception_missing_price_sample_rows": 1,
         "identity_field_sample_rows": 2,
         "review_risk_tags": [
           "non_exception_price_missing",
@@ -7676,7 +7680,7 @@
         "blockers": [
           "non_exception_official_price_missing"
         ],
-        "non_exception_missing_price_sample_rows": 2,
+        "non_exception_missing_price_sample_rows": 1,
         "zero_price_exception_sample_rows": 0,
         "zero_price_exception_nonzero_sample_rows": 0,
         "last_one_double_chance_expected_price_jpy": 0,

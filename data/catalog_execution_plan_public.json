@@ -1,20 +1,20 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-25T06:39:36Z",
+  "generated_at": "2026-07-25T06:44:19Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 25,
     "blocked_action_count": 1,
     "manual_review_action_count": 22,
     "pending_import_action_count": 0,
-    "total_action_rows": 33034,
+    "total_action_rows": 33018,
     "open_review_queues": {
       "source_discovery_rows": 672,
       "image_missing_rows": 745,
       "dedupe_groups": 61,
       "animation_unknown_categories": 0,
       "ichiban_missing_release_date_rows": 8,
-      "ichiban_missing_price_rows": 350,
+      "ichiban_missing_price_rows": 342,
       "generic_source_patch_candidate_rows": 3,
       "requested_focus_open_rows": 8033,
       "danganronpa_missing_media_rows": 34,
@@ -81,10 +81,10 @@
       "ichiban_metadata_next_campaign_patch_review_batch_rows": 8,
       "ichiban_metadata_next_campaign_patch_review_batch_template_rows": 8,
       "ichiban_metadata_next_campaign_patch_review_batch_primary_review_url_rows": 8,
-      "metadata_action_missing_cells": 2441,
+      "metadata_action_missing_cells": 2433,
       "metadata_actionable_groups": 166,
       "metadata_unqueued_actionable_groups": 0,
-      "metadata_actionable_missing_cells": 2441,
+      "metadata_actionable_missing_cells": 2433,
       "metadata_unqueued_actionable_missing_cells": 0,
       "metadata_primary_review_url_groups": 130,
       "animation_category_review_rows": 0,
@@ -5482,7 +5482,7 @@
       "workstream": "metadata_review_batches",
       "public_report": "data/catalog_metadata_review_batches_public.json",
       "status": "manual_review",
-      "rows": 13940,
+      "rows": 13932,
       "command": "Fill titles, barcodes, dates, prices, sources, and images from reviewed evidence.",
       "next_step": "work_field_store_metadata_batches",
       "blocker": "Broad metadata updates require field-specific evidence policies.",
@@ -5493,7 +5493,7 @@
           "name_ja": 526,
           "release_date": 1348,
           "barcode": 10082,
-          "official_price_jpy": 567,
+          "official_price_jpy": 559,
           "image_url": 745,
           "source_url": 672
         }
@@ -5504,7 +5504,7 @@
       "workstream": "metadata_action_queue",
       "public_report": "data/catalog_metadata_action_queue_public.json",
       "status": "manual_review",
-      "rows": 2441,
+      "rows": 2433,
       "command": "Confirm release dates, prices, and Japanese names from official evidence before barcode work.",
       "next_step": "fill_confirmed_metadata_patch_templates",
       "blocker": "Auto metadata import is disabled; every field/store group needs evidence.",
@@ -5512,8 +5512,8 @@
       "evidence": {
         "actionable_group_count": 166,
         "queued_group_count": 166,
-        "actionable_missing_cells": 2441,
-        "queued_missing_cells": 2441,
+        "actionable_missing_cells": 2433,
+        "queued_missing_cells": 2433,
         "action_batch_count": 14,
         "field_counts": [
           [
@@ -5536,7 +5536,7 @@
           ],
           [
             "official_price_jpy",
-            567
+            559
           ],
           [
             "name_ja",
@@ -5546,7 +5546,7 @@
         "missing_cells_by_source_store": [
           [
             "이치방쿠지",
-            358
+            350
           ],
           [
             "Stellive Store",
@@ -5709,7 +5709,7 @@
           {
             "field": "official_price_jpy",
             "source_store": "이치방쿠지",
-            "missing_rows": 350,
+            "missing_rows": 342,
             "priority": 20,
             "workflow": "official_metadata_review",
             "primary_review_url": "https://1kuji.com/products/naru",
@@ -6168,7 +6168,7 @@
         "ichiban_reissue_item_price_policy_blocked_rows": 8,
         "ichiban_reissue_campaign_price_policy_blocked_rows": 1,
         "ichiban_reissue_campaign_review_batch_price_policy_blocked_rows": 1,
-        "ichiban_reissue_campaign_review_batch_missing_regular_price_sample_rows": 8,
+        "ichiban_reissue_campaign_review_batch_missing_regular_price_sample_rows": 4,
         "ichiban_reissue_zero_price_exception_sample_rows": 4,
         "ichiban_reissue_next_campaign_review_batch": [
           {
@@ -6235,7 +6235,9 @@
                     "assets/catalog_images/8e7482c2e7d19347790e.webp",
                     "assets/catalog_images/a23de30d042256048c7e.webp"
                   ],
-                  "official_price_jpy_values": [],
+                  "official_price_jpy_values": [
+                    500
+                  ],
                   "identity_labels": [
                     "一番くじ ワンピース ～マリンフォード最終決戦編～ / A賞 / シャンクスフィギュア",
                     "一番くじ ワンピース ～マリンフォード最終決戦編～ / B賞 / ミホークフィギュア",
@@ -6316,7 +6318,7 @@
               "blockers": [
                 "non_exception_official_price_missing"
               ],
-              "non_exception_missing_price_sample_rows": 8,
+              "non_exception_missing_price_sample_rows": 4,
               "zero_price_exception_sample_rows": 0,
               "zero_price_exception_nonzero_sample_rows": 0,
               "last_one_double_chance_expected_price_jpy": 0,
@@ -6353,7 +6355,7 @@
                 "blockers": [
                   "non_exception_official_price_missing"
                 ],
-                "non_exception_missing_price_sample_rows": 8,
+                "non_exception_missing_price_sample_rows": 4,
                 "zero_price_exception_sample_rows": 0,
                 "zero_price_exception_nonzero_sample_rows": 0,
                 "last_one_double_chance_expected_price_jpy": 0,
@@ -6433,7 +6435,7 @@
                   "blockers": [
                     "non_exception_official_price_missing"
                   ],
-                  "non_exception_missing_price_sample_rows": 2,
+                  "non_exception_missing_price_sample_rows": 1,
                   "zero_price_exception_sample_rows": 0,
                   "zero_price_exception_nonzero_sample_rows": 0,
                   "last_one_double_chance_expected_price_jpy": 0,
@@ -6495,7 +6497,7 @@
                   "blockers": [
                     "non_exception_official_price_missing"
                   ],
-                  "non_exception_missing_price_sample_rows": 2,
+                  "non_exception_missing_price_sample_rows": 1,
                   "zero_price_exception_sample_rows": 0,
                   "zero_price_exception_nonzero_sample_rows": 0,
                   "last_one_double_chance_expected_price_jpy": 0,
@@ -6557,7 +6559,7 @@
                   "blockers": [
                     "non_exception_official_price_missing"
                   ],
-                  "non_exception_missing_price_sample_rows": 2,
+                  "non_exception_missing_price_sample_rows": 1,
                   "zero_price_exception_sample_rows": 0,
                   "zero_price_exception_nonzero_sample_rows": 0,
                   "last_one_double_chance_expected_price_jpy": 0,
@@ -6619,7 +6621,7 @@
                   "blockers": [
                     "non_exception_official_price_missing"
                   ],
-                  "non_exception_missing_price_sample_rows": 2,
+                  "non_exception_missing_price_sample_rows": 1,
                   "zero_price_exception_sample_rows": 0,
                   "zero_price_exception_nonzero_sample_rows": 0,
                   "last_one_double_chance_expected_price_jpy": 0,
@@ -6681,7 +6683,7 @@
                   "blockers": [
                     "non_exception_official_price_missing"
                   ],
-                  "non_exception_missing_price_sample_rows": 2,
+                  "non_exception_missing_price_sample_rows": 1,
                   "zero_price_exception_sample_rows": 0,
                   "zero_price_exception_nonzero_sample_rows": 0,
                   "last_one_double_chance_expected_price_jpy": 0,
@@ -6743,7 +6745,7 @@
                   "blockers": [
                     "non_exception_official_price_missing"
                   ],
-                  "non_exception_missing_price_sample_rows": 2,
+                  "non_exception_missing_price_sample_rows": 1,
                   "zero_price_exception_sample_rows": 0,
                   "zero_price_exception_nonzero_sample_rows": 0,
                   "last_one_double_chance_expected_price_jpy": 0,
@@ -6805,7 +6807,7 @@
                   "blockers": [
                     "non_exception_official_price_missing"
                   ],
-                  "non_exception_missing_price_sample_rows": 2,
+                  "non_exception_missing_price_sample_rows": 1,
                   "zero_price_exception_sample_rows": 0,
                   "zero_price_exception_nonzero_sample_rows": 0,
                   "last_one_double_chance_expected_price_jpy": 0,
@@ -6867,7 +6869,7 @@
                   "blockers": [
                     "non_exception_official_price_missing"
                   ],
-                  "non_exception_missing_price_sample_rows": 2,
+                  "non_exception_missing_price_sample_rows": 1,
                   "zero_price_exception_sample_rows": 0,
                   "zero_price_exception_nonzero_sample_rows": 0,
                   "last_one_double_chance_expected_price_jpy": 0,
@@ -8735,8 +8737,8 @@
         "next_queue_lane": null,
         "next_queue_rows": 0,
         "next_execution_lane_count": 4,
-        "next_execution_open_rows": 125,
-        "next_execution_next_batch_rows": 81,
+        "next_execution_open_rows": 124,
+        "next_execution_next_batch_rows": 80,
         "first_next_execution_lane": "campaign_metadata_confirmation",
         "first_next_execution_status": "next",
         "first_next_execution_rows": 44,
