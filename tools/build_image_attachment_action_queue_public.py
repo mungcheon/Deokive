@@ -568,7 +568,7 @@ def _build_source_url_update_work_order(action_items: list[dict[str, Any]]) -> l
                 ],
                 "recommended_review_order": [
                     "Open official_search_url when present.",
-                    "If official_search_url is empty, open first_fallback_web_search_url as a starting point.",
+                    "Use first_fallback_web_search_url as a secondary site-limited search when the official search has no exact detail page.",
                     "Confirm the exact product detail page, not a storefront/search page.",
                     "Treat low-confidence candidate_options as hints; reject them unless title, member/event, category, and product type all match.",
                     "Fill source_url_import_template.manual_value and evidence_url.",
@@ -1303,8 +1303,6 @@ def _fallback_web_search_urls(
     *,
     limit: int = 4,
 ) -> list[str]:
-    if source_search_url:
-        return []
     name = str(item.get("name_ja") or item.get("name_ko") or "").strip()
     if not name:
         return []

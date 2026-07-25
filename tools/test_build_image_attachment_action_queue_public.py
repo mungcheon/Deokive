@@ -95,7 +95,7 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["source_url_update_template_rows"], 2)
         self.assertEqual(report["summary"]["source_url_update_search_hint_rows"], 1)
         self.assertEqual(report["summary"]["source_url_update_missing_search_hint_rows"], 1)
-        self.assertEqual(report["summary"]["source_url_update_fallback_web_search_rows"], 1)
+        self.assertEqual(report["summary"]["source_url_update_fallback_web_search_rows"], 2)
         self.assertEqual(report["summary"]["source_url_update_any_search_hint_rows"], 2)
         self.assertEqual(report["summary"]["source_url_update_missing_any_search_hint_rows"], 0)
         self.assertEqual(report["summary"]["source_url_update_primary_review_url_rows"], 2)
@@ -356,7 +356,7 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(work_order["source_store"], "Stellive Store")
         self.assertEqual(work_order["row_count"], 2)
         self.assertEqual(work_order["source_url_update_template_rows"], 2)
-        self.assertEqual(work_order["fallback_web_search_url_rows"], 1)
+        self.assertEqual(work_order["fallback_web_search_url_rows"], 2)
         self.assertEqual(work_order["current_source_urls"], [{"source_url": "https://example.com/shop", "rows": 2}])
         self.assertEqual(work_order["sample_items"][0]["catalog_index"], 2)
         self.assertEqual(
@@ -391,7 +391,7 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
             ],
         )
         self.assertIn(
-            "first_fallback_web_search_url",
+            "secondary site-limited search",
             work_order["recommended_review_order"][1],
         )
         self.assertIn("exact product detail page", work_order["recommended_review_order"][2])
@@ -414,7 +414,7 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(template_batch["source_store"], "Stellive Store")
         self.assertEqual(template_batch["row_count"], 2)
         self.assertEqual(template_batch["official_search_url_rows"], 1)
-        self.assertEqual(template_batch["fallback_web_search_url_rows"], 1)
+        self.assertEqual(template_batch["fallback_web_search_url_rows"], 2)
         self.assertEqual([row["row_index"] for row in template_batch["rows"]], [2, 1])
         self.assertEqual([row["row_index"] for row in report["next_source_url_review_batch"]], [2, 1])
         self.assertFalse(report["next_source_url_review_batch"][0]["manual_confirmed"])
