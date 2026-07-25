@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T18:45:46Z",
+  "generated_at": "2026-07-25T01:48:49Z",
   "summary": {
     "catalog_ichiban_rows": 7898,
     "campaign_rows": 614,
@@ -59,6 +59,49 @@
       ]
     },
     "price_and_prize_policy_gate_status": "reissue_review_required",
+    "next_execution_summary": {
+      "lane_count": 4,
+      "open_rows": 125,
+      "queued_rows": 125,
+      "next_batch_rows": 81,
+      "next_safe_phase": "confirm_ichiban_campaign_metadata",
+      "auto_apply_enabled": false,
+      "manual_official_confirmation_required": true
+    },
+    "next_execution_lanes": [
+      {
+        "lane": "campaign_metadata_confirmation",
+        "status": "next",
+        "open_rows": 44,
+        "queued_rows": 44,
+        "next_batch_rows": 20,
+        "next_action": "confirm official campaign title, release date, source URL, and campaign-level price metadata"
+      },
+      {
+        "lane": "campaign_price_confirmation",
+        "status": "manual_official_price_review_required",
+        "open_rows": 41,
+        "queued_rows": 41,
+        "next_batch_rows": 41,
+        "next_action": "fill non-exception official prices before same-campaign reissue decisions"
+      },
+      {
+        "lane": "reissue_identity_review",
+        "status": "blocked_until_campaign_metadata_confirmed",
+        "open_rows": 20,
+        "queued_rows": 20,
+        "next_batch_rows": 20,
+        "next_action": "decide keep-separate vs same-sellable-product only from official campaign evidence"
+      },
+      {
+        "lane": "prize_policy_guard",
+        "status": "policy_pass",
+        "open_rows": 20,
+        "queued_rows": 20,
+        "next_batch_rows": 0,
+        "next_action": "keep Last One and Double Chance at 0 JPY and preserve same-rank numbered variants"
+      }
+    ],
     "price_policy_auto_apply_ready_rows": 0,
     "price_policy_auto_merge_ready_rows": 0,
     "price_policy_auto_delete_ready_rows": 0,
@@ -66,6 +109,49 @@
     "auto_merge_enabled": false,
     "auto_delete_enabled": false
   },
+  "next_execution_summary": {
+    "lane_count": 4,
+    "open_rows": 125,
+    "queued_rows": 125,
+    "next_batch_rows": 81,
+    "next_safe_phase": "confirm_ichiban_campaign_metadata",
+    "auto_apply_enabled": false,
+    "manual_official_confirmation_required": true
+  },
+  "next_execution_lanes": [
+    {
+      "lane": "campaign_metadata_confirmation",
+      "status": "next",
+      "open_rows": 44,
+      "queued_rows": 44,
+      "next_batch_rows": 20,
+      "next_action": "confirm official campaign title, release date, source URL, and campaign-level price metadata"
+    },
+    {
+      "lane": "campaign_price_confirmation",
+      "status": "manual_official_price_review_required",
+      "open_rows": 41,
+      "queued_rows": 41,
+      "next_batch_rows": 41,
+      "next_action": "fill non-exception official prices before same-campaign reissue decisions"
+    },
+    {
+      "lane": "reissue_identity_review",
+      "status": "blocked_until_campaign_metadata_confirmed",
+      "open_rows": 20,
+      "queued_rows": 20,
+      "next_batch_rows": 20,
+      "next_action": "decide keep-separate vs same-sellable-product only from official campaign evidence"
+    },
+    {
+      "lane": "prize_policy_guard",
+      "status": "policy_pass",
+      "open_rows": 20,
+      "queued_rows": 20,
+      "next_batch_rows": 0,
+      "next_action": "keep Last One and Double Chance at 0 JPY and preserve same-rank numbered variants"
+    }
+  ],
   "phases": [
     {
       "phase": "confirm_ichiban_campaign_metadata",

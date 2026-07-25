@@ -8711,6 +8711,59 @@ def build_ichiban_kuji_historical_roadmap_public(
             if reason
         ],
     }
+    ichiban_next_execution_lanes = [
+        {
+            "lane": "campaign_metadata_confirmation",
+            "status": "next",
+            "open_rows": value(metadata_action, "actionable_campaigns"),
+            "queued_rows": value(metadata_action, "queued_action_campaigns"),
+            "next_batch_rows": value(metadata_fast, "fast_review_campaigns"),
+            "next_action": "confirm official campaign title, release date, source URL, and campaign-level price metadata",
+        },
+        {
+            "lane": "campaign_price_confirmation",
+            "status": "manual_official_price_review_required",
+            "open_rows": value(history, "missing_official_price_jpy_campaign_groups"),
+            "queued_rows": value(history, "official_price_jpy_review_queue_campaigns"),
+            "next_batch_rows": value(history, "official_price_jpy_review_queue_campaigns"),
+            "next_action": "fill non-exception official prices before same-campaign reissue decisions",
+        },
+        {
+            "lane": "reissue_identity_review",
+            "status": "blocked_until_campaign_metadata_confirmed",
+            "open_rows": reissue_review_groups,
+            "queued_rows": value(prize_policy, "probable_reissue_work_order_rows"),
+            "next_batch_rows": value(prize_policy, "probable_reissue_work_order_rows"),
+            "next_action": "decide keep-separate vs same-sellable-product only from official campaign evidence",
+        },
+        {
+            "lane": "prize_policy_guard",
+            "status": "policy_pass"
+            if zero_price_policy_ready and numbered_variant_policy_ready
+            else "policy_review_required",
+            "open_rows": value(prize_policy, "issue_rows"),
+            "queued_rows": value(prize_policy, "issue_rows"),
+            "next_batch_rows": value(prize_policy, "prize_policy_review_batch_count"),
+            "next_action": "keep Last One and Double Chance at 0 JPY and preserve same-rank numbered variants",
+        },
+        {
+            "lane": "prize_name_image_patch_review",
+            "status": "manual_lineup_confirmation_required"
+            if value(patch_candidates, "open_candidate_rows")
+            or value(prize_name_image, "review_rows")
+            else "no_open_rows",
+            "open_rows": value(patch_candidates, "open_candidate_rows")
+            + value(prize_name_image, "review_rows"),
+            "queued_rows": value(patch_candidates, "open_candidate_rows")
+            + value(prize_name_image, "review_rows"),
+            "next_batch_rows": value(patch_candidates, "open_candidate_rows")
+            + value(prize_name_image, "review_rows"),
+            "next_action": "attach prize images only when official campaign, rank, item, and variant all match",
+        },
+    ]
+    ichiban_next_execution_lanes = [
+        lane for lane in ichiban_next_execution_lanes if int(lane.get("open_rows") or 0) > 0
+    ]
 
     summary = {
         "catalog_ichiban_rows": value(history, "catalog_kuji_item_rows"),
@@ -8796,6 +8849,29 @@ def build_ichiban_kuji_historical_roadmap_public(
         },
         "price_and_prize_policy_gate": price_and_prize_policy_gate,
         "price_and_prize_policy_gate_status": price_and_prize_policy_gate["status"],
+        "next_execution_summary": {
+            "lane_count": len(ichiban_next_execution_lanes),
+            "open_rows": sum(
+                int(lane.get("open_rows") or 0)
+                for lane in ichiban_next_execution_lanes
+            ),
+            "queued_rows": sum(
+                int(lane.get("queued_rows") or 0)
+                for lane in ichiban_next_execution_lanes
+            ),
+            "next_batch_rows": sum(
+                int(lane.get("next_batch_rows") or 0)
+                for lane in ichiban_next_execution_lanes
+            ),
+            "next_safe_phase": "confirm_ichiban_campaign_metadata"
+            if ichiban_next_execution_lanes
+            else "ichiban_cleanup_clear",
+            "auto_apply_enabled": False,
+            "manual_official_confirmation_required": bool(
+                ichiban_next_execution_lanes
+            ),
+        },
+        "next_execution_lanes": ichiban_next_execution_lanes,
         "price_policy_auto_apply_ready_rows": 0,
         "price_policy_auto_merge_ready_rows": 0,
         "price_policy_auto_delete_ready_rows": 0,
@@ -8808,6 +8884,8 @@ def build_ichiban_kuji_historical_roadmap_public(
         "schema_version": 1,
         "generated_at": generated_at,
         "summary": summary,
+        "next_execution_summary": summary["next_execution_summary"],
+        "next_execution_lanes": ichiban_next_execution_lanes,
         "phases": phases,
         "instructions": [
             "Use this roadmap as the public manual work order for historical Ichiban Kuji cleanup.",

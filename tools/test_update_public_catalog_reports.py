@@ -1791,6 +1791,36 @@ class PublicCatalogReportTests(unittest.TestCase):
             len(roadmap["phases"]),
         )
         self.assertEqual(
+            roadmap["next_execution_summary"]["next_safe_phase"],
+            "confirm_ichiban_campaign_metadata",
+        )
+        self.assertEqual(
+            quality["ichiban_kuji_historical_roadmap"]["next_execution_summary"],
+            roadmap["next_execution_summary"],
+        )
+        self.assertIn(
+            {
+                "lane": "campaign_metadata_confirmation",
+                "status": "next",
+                "open_rows": 44,
+                "queued_rows": 44,
+                "next_batch_rows": 20,
+                "next_action": "confirm official campaign title, release date, source URL, and campaign-level price metadata",
+            },
+            roadmap["next_execution_lanes"],
+        )
+        self.assertIn(
+            {
+                "lane": "prize_policy_guard",
+                "status": "policy_pass",
+                "open_rows": 20,
+                "queued_rows": 20,
+                "next_batch_rows": 0,
+                "next_action": "keep Last One and Double Chance at 0 JPY and preserve same-rank numbered variants",
+            },
+            quality["ichiban_kuji_historical_roadmap"]["next_execution_lanes"],
+        )
+        self.assertEqual(
             quality["ichiban_kuji_historical_roadmap"]["metadata_actionable_campaigns"],
             roadmap["summary"]["metadata_actionable_campaigns"],
         )
