@@ -68,6 +68,8 @@ class SourceDiscoveryNextFocusSplitQueueTests(unittest.TestCase):
         self.assertEqual(exact_report["summary"]["safe_candidate_detail_link_rows"], 0)
         self.assertEqual(exact_report["summary"]["rejected_candidate_detail_link_rows"], 1)
         self.assertEqual(exact_report["summary"]["all_sample_candidates_rejected_rows"], 1)
+        self.assertEqual(exact_report["summary"]["exact_source_search_query_rows"], 1)
+        self.assertGreaterEqual(exact_report["summary"]["exact_source_search_queries"], 3)
         self.assertEqual(
             exact_report["summary"]["recommended_next_action"],
             "ignore rejected sample links and use primary/domain-limited review URLs for exact source search",
@@ -88,6 +90,12 @@ class SourceDiscoveryNextFocusSplitQueueTests(unittest.TestCase):
         self.assertEqual(row["catalog_index"], 922)
         self.assertEqual(row["manual_confirmed_source_url"], "")
         self.assertEqual(row["candidate_detail_links"], [])
+        self.assertGreaterEqual(len(row["exact_source_search_queries"]), 3)
+        self.assertIn(
+            'site:www.enskyshop.com/products/detail "ちいかわ ラバーストラップ (うさぎ)"',
+            [query["query"] for query in row["exact_source_search_queries"]],
+        )
+        self.assertTrue(row["exact_source_search_queries"][0]["url"].startswith("https://"))
         self.assertEqual(row["safe_candidate_detail_link_count"], 0)
         self.assertEqual(row["rejected_candidate_detail_link_count"], 1)
         self.assertEqual(

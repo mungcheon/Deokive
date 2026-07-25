@@ -7,7 +7,7 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
-from urllib.parse import urlsplit
+from urllib.parse import quote_plus, urlsplit
 
 try:
     sys.stdout.reconfigure(encoding="utf-8")
@@ -53,8 +53,14 @@ def _base_summary(items: list[dict[str, Any]]) -> dict[str, Any]:
         "by_source_store": by_store.most_common(),
         "by_category": by_category.most_common(),
         "by_identity_review_status": by_status.most_common(),
-        "primary_review_url_rows": sum(1 for item in items if str(item.get("primary_review_url") or "")),
-        "primary_review_url_kind_counts": by_review_url_kind.most_common(),
+            "primary_review_url_rows": sum(1 for item in items if str(item.get("primary_review_url") or "")),
+            "exact_source_search_query_rows": sum(
+                1 for item in items if item.get("exact_source_search_queries")
+            ),
+            "exact_source_search_queries": sum(
+                len(item.get("exact_source_search_queries") or []) for item in items
+            ),
+            "primary_review_url_kind_counts": by_review_url_kind.most_common(),
         "first_primary_review_url": next(
             (str(item.get("primary_review_url") or "") for item in items if str(item.get("primary_review_url") or "")),
             "",
@@ -81,6 +87,87 @@ def _primary_review_url(row: dict[str, Any]) -> tuple[Any, str]:
     if row.get("fallback_store_search_url"):
         return row.get("fallback_store_search_url"), "fallback_store_search"
     return "", ""
+
+
+def _compact_title(value: Any) -> str:
+    return " ".join(str(value or "").replace("（", "(").replace("）", ")").split())
+
+
+def _title_without_parenthetical(value: Any) -> str:
+    title = _compact_title(value)
+    if "(" not in title:
+        return title
+    return title.split("(", 1)[0].strip()
+
+
+def _parenthetical_variant(value: Any) -> str:
+    title = _compact_title(value)
+    if "(" not in title or ")" not in title:
+        return ""
+    return title.split("(", 1)[1].split(")", 1)[0].strip()
+
+
+def _search_url(query: str, *, engine: str) -> str:
+    encoded = quote_plus(query)
+    if engine == "google":
+        return f"https://www.google.com/search?q={encoded}"
+    if engine == "duckduckgo":
+        return f"https://duckduckgo.com/?q={encoded}"
+    raise ValueError(f"unsupported search engine: {engine}")
+
+
+def _exact_source_search_queries(row: dict[str, Any]) -> list[dict[str, str]]:
+    title = _compact_title(row.get("name_ja") or row.get("name_ko"))
+    base_title = _title_without_parenthetical(title)
+    variant = _parenthetical_variant(title)
+    queries: list[tuple[str, str, str]] = []
+    if title:
+        queries.append(
+            (
+                "google_exact_title_detail",
+                f'site:www.enskyshop.com/products/detail "{title}"',
+                "google",
+            )
+        )
+        queries.append(
+            (
+                "duckduckgo_exact_title_detail",
+                f'site:enskyshop.com/products/detail "{title}"',
+                "duckduckgo",
+            )
+        )
+    if base_title and variant:
+        queries.append(
+            (
+                "google_split_title_variant_detail",
+                f'site:www.enskyshop.com/products/detail "{base_title}" "{variant}"',
+                "google",
+            )
+        )
+    if base_title:
+        queries.append(
+            (
+                "google_base_title_detail",
+                f'site:www.enskyshop.com/products/detail "{base_title}"',
+                "google",
+            )
+        )
+
+    seen: set[str] = set()
+    result: list[dict[str, str]] = []
+    for label, query, engine in queries:
+        if query in seen:
+            continue
+        seen.add(query)
+        result.append(
+            {
+                "label": label,
+                "engine": engine,
+                "query": query,
+                "url": _search_url(query, engine=engine),
+            }
+        )
+    return result
 
 
 def _absolute_candidate_url(url: Any, row: dict[str, Any]) -> str:
@@ -261,6 +348,7 @@ def _exact_item(row: dict[str, Any], fetch_audit_by_index: dict[int, dict[str, A
         "search_term": row.get("search_term"),
         "primary_review_url": primary_review_url,
         "primary_review_url_kind": primary_review_url_kind,
+        "exact_source_search_queries": _exact_source_search_queries(row),
         "candidate_detail_links": candidate_detail_links,
         "safe_candidate_detail_links": safe_candidate_detail_links,
         "rejected_candidate_detail_links": rejected_candidate_detail_links,
@@ -322,6 +410,7 @@ def _source_url_patch_row(item: dict[str, Any], index: int) -> dict[str, Any]:
         "name_ja": item.get("name_ja"),
         "primary_review_url": item.get("primary_review_url"),
         "primary_review_url_kind": item.get("primary_review_url_kind"),
+        "exact_source_search_queries": item.get("exact_source_search_queries") or [],
         "fallback_store_search_url": item.get("fallback_store_search_url"),
         "candidate_detail_links": safe_candidate_links[:5],
         "unsafe_sample_candidate_detail_links": raw_candidate_links[:5],
@@ -348,6 +437,7 @@ def _source_url_patch_template(items: list[dict[str, Any]], *, limit: int = 10) 
     rows = [_source_url_patch_row(item, index) for index, item in enumerate(items[:limit])]
     candidate_rows = sum(1 for row in rows if row.get("candidate_detail_links"))
     rejected_candidate_rows = sum(1 for row in rows if row.get("rejected_candidate_detail_links"))
+    exact_query_rows = sum(1 for row in rows if row.get("exact_source_search_queries"))
     return {
         "status": "manual_exact_source_url_confirmation_required"
         if candidate_rows
@@ -376,6 +466,7 @@ def _source_url_patch_template(items: list[dict[str, Any]], *, limit: int = 10) 
         "unsafe_sample_candidate_detail_link_rows": sum(
             1 for row in rows if row.get("unsafe_sample_candidate_detail_links")
         ),
+        "exact_source_search_query_rows": exact_query_rows,
         "manual_image_url_slot_rows": len(rows),
         "auto_apply_enabled": False,
         "import_tool": "tools/import_confirmed_source_discovery_rows.py",
