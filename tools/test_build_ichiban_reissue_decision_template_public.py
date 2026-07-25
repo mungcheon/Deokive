@@ -507,6 +507,32 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
         )
         self.assertEqual(report["summary"]["campaign_review_batch_truncated_campaigns"], 1)
 
+    def test_zero_price_tokens_do_not_require_regular_price(self):
+        for label in (
+            "\u30e9\u30b9\u30c8\u30ef\u30f3\u8cde",
+            "\u30c0\u30d6\u30eb\u30c1\u30e3\u30f3\u30b9\u30ad\u30e3\u30f3\u30da\u30fc\u30f3",
+        ):
+            with self.subTest(label=label):
+                risk = builder._row_risk_summary(
+                    [
+                        {
+                            "name_ko": f"Sample Kuji - {label} Prize",
+                            "name_ja": f"{label} Prize",
+                            "sub_series": label,
+                            "prize_rank": label,
+                            "prize_item_name": "Prize",
+                            "official_price_jpy": None,
+                        }
+                    ]
+                )
+
+                self.assertEqual(risk["zero_price_exception_sample_rows"], 1)
+                self.assertEqual(risk["non_exception_missing_price_sample_rows"], 0)
+                self.assertIn(
+                    "zero_price_exception_rows_present",
+                    risk["review_risk_tags"],
+                )
+
 
 if __name__ == "__main__":
     unittest.main()

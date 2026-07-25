@@ -18,6 +18,15 @@ DATA = ROOT / "data"
 DEFAULT_INPUT = DATA / "catalog_deduplication_action_queue_public.json"
 DEFAULT_OUTPUT = DATA / "ichiban_kuji_reissue_decision_template_public.json"
 DEFAULT_CATALOG_PUBLIC = DATA / "catalog_public.json"
+ZERO_PRICE_PRIZE_TOKENS = (
+    "\u30e9\u30b9\u30c8\u30ef\u30f3\u8cde",  # ラストワン賞
+    "\u30e9\u30b9\u30c8\u30ef\u30f3",  # ラストワン
+    "LAST ONE",
+    "Last One",
+    "\ub354\ube14\ucc2c\uc2a4",  # 더블찬스
+    "\u30c0\u30d6\u30eb\u30c1\u30e3\u30f3\u30b9",  # ダブルチャンス
+    "\u30c0\u30d6\u30eb\u30c1\u30e3\u30f3\u30b9\u30ad\u30e3\u30f3\u30da\u30fc\u30f3",  # ダブルチャンスキャンペーン
+)
 
 
 def _now_utc() -> str:
@@ -227,7 +236,7 @@ def _is_zero_price_prize(row: dict[str, Any]) -> bool:
         str(row.get(key) or "")
         for key in ("name_ko", "name_ja", "sub_series", "prize_rank", "prize_item_name")
     )
-    return any(token in label for token in ("ラストワン", "LAST ONE", "Last One", "더블찬스", "ダブルチャンス"))
+    return any(token in label for token in ZERO_PRICE_PRIZE_TOKENS)
 
 
 def _row_risk_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
@@ -1102,9 +1111,16 @@ def build_report(
             "same_campaign_family_reissue_review",
             0,
         ),
-        "zero_price_exception_reissue_item_rows": item_review_lanes.get(
-            "zero_price_exception_reissue_review",
-            0,
+        "zero_price_exception_reissue_item_rows": sum(
+            1
+            for item in item_templates
+            if int(
+                (item.get("price_policy_review") or {}).get(
+                    "zero_price_exception_sample_rows"
+                )
+                or 0
+            )
+            > 0
         ),
         "item_template_non_exception_missing_price_sample_rows": sum(
             int(
