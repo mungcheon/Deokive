@@ -613,50 +613,69 @@ class _CatalogAddButton extends StatelessWidget {
         ),
         child: FittedBox(
           fit: BoxFit.scaleDown,
-          child: IconTheme(
-            data: IconThemeData(color: foreground, size: 17),
-            child: DefaultTextStyle(
-              style: TextStyle(
-                inherit: false,
-                color: foreground,
-                fontSize: 13,
-                fontWeight: FontWeight.w900,
-                height: 1,
-                decoration: TextDecoration.none,
-                fontFamilyFallback: _kCatalogButtonFontFallback,
-                shadows: const [],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    icon,
-                    color: foreground,
-                    size: 17,
-                  ),
-                  const SizedBox(width: 5),
-                  Text(
-                    label,
-                    style: TextStyle(
-                      inherit: false,
-                      color: foreground,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w900,
-                      height: 1,
-                      decoration: TextDecoration.none,
-                      fontFamilyFallback: _kCatalogButtonFontFallback,
-                      shadows: const [],
-                    ),
-                    maxLines: 1,
-                    softWrap: false,
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
+          child: _CatalogButtonLabel(
+            icon: icon,
+            label: label,
+            color: foreground,
+            iconSize: 17,
+            fontSize: 13,
+            gap: 5,
+            fontFamilyFallback: _kCatalogButtonFontFallback,
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _CatalogButtonLabel extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final Color color;
+  final double iconSize;
+  final double fontSize;
+  final double gap;
+  final List<String> fontFamilyFallback;
+
+  const _CatalogButtonLabel({
+    required this.icon,
+    required this.label,
+    required this.color,
+    required this.iconSize,
+    required this.fontSize,
+    required this.gap,
+    required this.fontFamilyFallback,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final textStyle = TextStyle(
+      inherit: false,
+      color: color,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w900,
+      height: 1,
+      decoration: TextDecoration.none,
+      fontFamilyFallback: fontFamilyFallback,
+      shadows: const [],
+    );
+
+    return IconTheme.merge(
+      data: IconThemeData(color: color, size: iconSize),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, color: color, size: iconSize),
+          SizedBox(width: gap),
+          RichText(
+            maxLines: 1,
+            overflow: TextOverflow.visible,
+            softWrap: false,
+            textAlign: TextAlign.center,
+            text: TextSpan(text: label, style: textStyle),
+          ),
+        ],
       ),
     );
   }

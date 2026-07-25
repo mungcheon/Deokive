@@ -439,50 +439,57 @@ class _CatalogImportActionButton extends StatelessWidget {
         ),
         child: FittedBox(
           fit: BoxFit.scaleDown,
-          child: IconTheme(
-            data: IconThemeData(color: foregroundColor, size: 19),
-            child: DefaultTextStyle(
-              style: TextStyle(
-                inherit: false,
-                color: foregroundColor,
-                fontSize: 15,
-                fontWeight: FontWeight.w900,
-                height: 1,
-                decoration: TextDecoration.none,
-                fontFamilyFallback: _kCatalogImportButtonFontFallback,
-                shadows: const [],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    icon,
-                    color: foregroundColor,
-                    size: 19,
-                  ),
-                  const SizedBox(width: 6),
-                  Text(
-                    label,
-                    style: TextStyle(
-                      inherit: false,
-                      color: foregroundColor,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w900,
-                      height: 1,
-                      decoration: TextDecoration.none,
-                      fontFamilyFallback: _kCatalogImportButtonFontFallback,
-                      shadows: const [],
-                    ),
-                    maxLines: 1,
-                    softWrap: false,
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
+          child: _CatalogImportButtonLabel(
+            icon: icon,
+            label: label,
+            color: foregroundColor,
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _CatalogImportButtonLabel extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final Color color;
+
+  const _CatalogImportButtonLabel({
+    required this.icon,
+    required this.label,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final textStyle = TextStyle(
+      inherit: false,
+      color: color,
+      fontSize: 15,
+      fontWeight: FontWeight.w900,
+      height: 1,
+      decoration: TextDecoration.none,
+      fontFamilyFallback: _kCatalogImportButtonFontFallback,
+      shadows: const [],
+    );
+
+    return IconTheme.merge(
+      data: IconThemeData(color: color, size: 19),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, color: color, size: 19),
+          const SizedBox(width: 6),
+          RichText(
+            maxLines: 1,
+            overflow: TextOverflow.visible,
+            softWrap: false,
+            textAlign: TextAlign.center,
+            text: TextSpan(text: label, style: textStyle),
+          ),
+        ],
       ),
     );
   }
