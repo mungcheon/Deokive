@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-25T01:14:30Z",
+  "generated_at": "2026-07-25T02:24:57Z",
   "scope": "source_discovery_completion_roadmap",
   "summary": {
     "missing_image_rows": 745,
@@ -20,6 +20,7 @@
     "candidate_source_review_rows": 3,
     "direct_image_action_rows": 73,
     "roadmap_phase_count": 5,
+    "next_execution_lane_count": 5,
     "auto_apply_enabled": false
   },
   "completion_readiness": {
@@ -55,6 +56,66 @@
     ],
     "safety_note": "Source discovery queues are review-only. Confirm exact official product detail URLs before image attachment."
   },
+  "next_execution_summary": {
+    "lane_count": 5,
+    "open_rows": 813,
+    "next_batch_rows": 166,
+    "next_safe_phase": "exact_source_url_review",
+    "auto_apply_enabled": false,
+    "manual_evidence_required": true
+  },
+  "next_execution_lanes": [
+    {
+      "lane": "exact_source_url_review",
+      "status": "next",
+      "open_rows": 20,
+      "next_batch_rows": 20,
+      "review_start_rows": 20,
+      "manual_decision_rows": 20,
+      "public_report": "data/source_discovery_next_focus_exact_url_review_queue_public.json",
+      "next_action": "ignore broad/rejected samples and confirm exact product detail URLs"
+    },
+    {
+      "lane": "metadata_field_confirmation",
+      "status": "blocked_until_exact_source_url_confirmed",
+      "open_rows": 3,
+      "next_batch_rows": 3,
+      "review_start_rows": 3,
+      "manual_decision_rows": 3,
+      "public_report": "data/source_discovery_next_focus_metadata_field_import_dry_run_public.json",
+      "next_action": "confirm sub-series, Japanese name, and character fields from exact official evidence"
+    },
+    {
+      "lane": "focus_pack_rotation",
+      "status": "queued_after_current_focus",
+      "open_rows": 667,
+      "next_batch_rows": 20,
+      "review_start_rows": 20,
+      "manual_decision_rows": 20,
+      "public_report": "data/source_discovery_focus_packs_public.json",
+      "next_action": "rotate through source discovery packs after the current exact URL review is resolved"
+    },
+    {
+      "lane": "generic_source_replacement",
+      "status": "manual_source_review_required",
+      "open_rows": 50,
+      "next_batch_rows": 50,
+      "review_start_rows": 50,
+      "manual_decision_rows": 50,
+      "public_report": "data/catalog_image_source_url_confirmed_template_public.json",
+      "next_action": "replace generic storefront URLs with exact product source URLs before image import"
+    },
+    {
+      "lane": "image_attachment_after_source_confirmation",
+      "status": "blocked_until_source_or_image_evidence_confirmed",
+      "open_rows": 73,
+      "next_batch_rows": 73,
+      "review_start_rows": 73,
+      "manual_decision_rows": 73,
+      "public_report": "data/catalog_image_attachment_action_queue_public.json",
+      "next_action": "attach image URLs only after exact source page and image identity are confirmed"
+    }
+  ],
   "current_focus_pack": {
     "focus_pack_id": "source-discovery-focus-001",
     "source_store": "엔스카이",

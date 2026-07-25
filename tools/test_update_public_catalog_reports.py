@@ -1416,6 +1416,46 @@ class PublicCatalogReportTests(unittest.TestCase):
             quality["source_discovery_completion_roadmap"]["auto_apply_ready_rows"],
             0,
         )
+        source_roadmap = reports.load_json(reports.SOURCE_DISCOVERY_ROADMAP)
+        source_next_execution_summary = source_roadmap["next_execution_summary"]
+        self.assertEqual(
+            quality["source_discovery_completion_roadmap"]["next_execution_summary"],
+            source_next_execution_summary,
+        )
+        self.assertEqual(source_next_execution_summary["lane_count"], 5)
+        self.assertEqual(source_next_execution_summary["open_rows"], 813)
+        self.assertEqual(source_next_execution_summary["next_batch_rows"], 166)
+        self.assertEqual(
+            source_next_execution_summary["next_safe_phase"],
+            "exact_source_url_review",
+        )
+        self.assertFalse(source_next_execution_summary["auto_apply_enabled"])
+        self.assertTrue(source_next_execution_summary["manual_evidence_required"])
+        source_lanes = source_roadmap["next_execution_lanes"]
+        self.assertEqual(
+            quality["source_discovery_completion_roadmap"]["next_execution_lanes"],
+            source_lanes,
+        )
+        self.assertEqual(
+            [lane["lane"] for lane in source_lanes],
+            [
+                "exact_source_url_review",
+                "metadata_field_confirmation",
+                "focus_pack_rotation",
+                "generic_source_replacement",
+                "image_attachment_after_source_confirmation",
+            ],
+        )
+        self.assertEqual(source_lanes[0]["open_rows"], 20)
+        self.assertEqual(
+            source_lanes[0]["public_report"],
+            "data/source_discovery_next_focus_exact_url_review_queue_public.json",
+        )
+        self.assertEqual(source_lanes[1]["open_rows"], 3)
+        self.assertEqual(source_lanes[1]["manual_decision_rows"], 3)
+        self.assertEqual(source_lanes[2]["open_rows"], 667)
+        self.assertEqual(source_lanes[3]["open_rows"], 50)
+        self.assertEqual(source_lanes[4]["open_rows"], 73)
         self.assertGreaterEqual(quality["source_discovery_completion_roadmap"]["top_10_store_coverage"], 0.8)
         self.assertIs(quality["source_discovery_completion_roadmap"]["auto_apply_enabled"], False)
         self.assertEqual(quality["ensky_cache_coverage"]["missing_ensky_image_rows"], 142)
@@ -2951,7 +2991,18 @@ class PublicCatalogReportTests(unittest.TestCase):
             image_attachment_action_queue={
                 "summary": {
                     "actionable_image_rows": 4,
+                    "queued_image_rows": 4,
+                    "primary_review_url_rows": 4,
+                    "sample_action_item_rows": 4,
                     "source_url_update_required_rows": 6,
+                    "source_url_update_primary_review_url_rows": 6,
+                    "source_url_update_template_rows": 6,
+                }
+            },
+            source_discovery_next_focus_metadata_field_import={
+                "summary": {
+                    "template_items": 3,
+                    "blocked_rows": 3,
                 }
             },
         )
@@ -2993,6 +3044,31 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             roadmap["completion_readiness"]["next_queue"]["first_primary_review_url_kind"],
             "domain_limited_web_search",
+        )
+        self.assertEqual(roadmap["next_execution_summary"]["lane_count"], 5)
+        self.assertEqual(roadmap["next_execution_summary"]["open_rows"], 20)
+        self.assertEqual(
+            roadmap["next_execution_summary"]["next_safe_phase"],
+            "exact_source_url_review",
+        )
+        self.assertEqual(
+            [lane["lane"] for lane in roadmap["next_execution_lanes"]],
+            [
+                "exact_source_url_review",
+                "metadata_field_confirmation",
+                "focus_pack_rotation",
+                "generic_source_replacement",
+                "image_attachment_after_source_confirmation",
+            ],
+        )
+        self.assertEqual(roadmap["next_execution_lanes"][0]["open_rows"], 2)
+        self.assertEqual(roadmap["next_execution_lanes"][1]["open_rows"], 3)
+        self.assertEqual(roadmap["next_execution_lanes"][2]["open_rows"], 5)
+        self.assertEqual(roadmap["next_execution_lanes"][3]["open_rows"], 6)
+        self.assertEqual(roadmap["next_execution_lanes"][4]["open_rows"], 4)
+        self.assertEqual(
+            roadmap["next_execution_lanes"][1]["public_report"],
+            "data/source_discovery_next_focus_metadata_field_import_dry_run_public.json",
         )
         self.assertEqual(roadmap["phases"][3]["rows"], 6)
         self.assertIs(summary["auto_apply_enabled"], False)

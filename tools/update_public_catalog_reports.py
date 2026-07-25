@@ -1743,6 +1743,7 @@ def build_source_discovery_completion_roadmap_public(
     provider_missing_source_url_queue: dict[str, Any],
     candidate_source_url_review_queue: dict[str, Any],
     image_attachment_action_queue: dict[str, Any],
+    source_discovery_next_focus_metadata_field_import: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     action_summary = source_discovery_action_queue.get("summary", {})
     bottleneck_summary = source_discovery_store_bottlenecks.get("summary", {})
@@ -1754,6 +1755,11 @@ def build_source_discovery_completion_roadmap_public(
     provider_summary = provider_missing_source_url_queue.get("summary", {})
     candidate_summary = candidate_source_url_review_queue.get("summary", {})
     image_action_summary = image_attachment_action_queue.get("summary", {})
+    metadata_import_summary = (
+        source_discovery_next_focus_metadata_field_import.get("summary", {})
+        if isinstance(source_discovery_next_focus_metadata_field_import, dict)
+        else {}
+    )
     missing_summary = missing_image_actionability.get("summary", {})
 
     stores = [
@@ -1985,6 +1991,103 @@ def build_source_discovery_completion_roadmap_public(
             "next_machine_step": "import_confirmed_image_attachment_rows_after_manual_review",
         },
     ]
+    next_execution_lanes = [
+        {
+            "lane": "exact_source_url_review",
+            "status": (
+                "next"
+                if all_sample_candidates_rejected
+                else "manual_fallback_review_required"
+            ),
+            "open_rows": int(
+                exact_url_summary.get("queue_rows")
+                or fallback_summary.get("queue_rows")
+                or 0
+            ),
+            "next_batch_rows": int(
+                exact_url_summary.get("queue_rows")
+                or fallback_summary.get("queue_rows")
+                or 0
+            ),
+            "review_start_rows": int(fallback_summary.get("queue_rows") or 0),
+            "manual_decision_rows": int(
+                exact_url_summary.get("queue_rows")
+                or fallback_summary.get("queue_rows")
+                or 0
+            ),
+            "public_report": (
+                f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_QUEUE.name}"
+                if all_sample_candidates_rejected
+                else f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}"
+            ),
+            "next_action": "ignore broad/rejected samples and confirm exact product detail URLs",
+        },
+        {
+            "lane": "metadata_field_confirmation",
+            "status": "blocked_until_exact_source_url_confirmed",
+            "open_rows": int(metadata_import_summary.get("template_items") or 0),
+            "next_batch_rows": int(metadata_import_summary.get("blocked_rows") or 0),
+            "review_start_rows": int(metadata_import_summary.get("template_items") or 0),
+            "manual_decision_rows": int(metadata_import_summary.get("template_items") or 0),
+            "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_METADATA_FIELD_IMPORT.name}",
+            "next_action": "confirm sub-series, Japanese name, and character fields from exact official evidence",
+        },
+        {
+            "lane": "focus_pack_rotation",
+            "status": "queued_after_current_focus",
+            "open_rows": int(focus_summary.get("remaining_focus_review_rows") or 0),
+            "next_batch_rows": int(next_focus_summary.get("pack_items") or 0),
+            "review_start_rows": int(next_focus_summary.get("pack_items") or 0),
+            "manual_decision_rows": int(next_focus_summary.get("pack_items") or 0),
+            "public_report": f"data/{SOURCE_DISCOVERY_FOCUS_PACKS.name}",
+            "next_action": "rotate through source discovery packs after the current exact URL review is resolved",
+        },
+        {
+            "lane": "generic_source_replacement",
+            "status": "manual_source_review_required",
+            "open_rows": int(manual_summary.get("manual_search_required_rows") or 0)
+            + int(provider_summary.get("provider_missing_rows") or 0)
+            + int(candidate_summary.get("candidate_review_rows") or 0),
+            "next_batch_rows": int(
+                image_action_summary.get("source_url_update_required_rows") or 0
+            ),
+            "review_start_rows": int(
+                image_action_summary.get("source_url_update_primary_review_url_rows") or 0
+            ),
+            "manual_decision_rows": int(
+                image_action_summary.get("source_url_update_template_rows") or 0
+            ),
+            "public_report": f"data/{IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE.name}",
+            "next_action": "replace generic storefront URLs with exact product source URLs before image import",
+        },
+        {
+            "lane": "image_attachment_after_source_confirmation",
+            "status": "blocked_until_source_or_image_evidence_confirmed",
+            "open_rows": int(image_action_summary.get("actionable_image_rows") or 0),
+            "next_batch_rows": int(image_action_summary.get("queued_image_rows") or 0),
+            "review_start_rows": int(image_action_summary.get("primary_review_url_rows") or 0),
+            "manual_decision_rows": int(image_action_summary.get("sample_action_item_rows") or 0),
+            "public_report": f"data/{IMAGE_ATTACHMENT_ACTION_QUEUE.name}",
+            "next_action": "attach image URLs only after exact source page and image identity are confirmed",
+        },
+    ]
+    next_execution_lanes = [
+        lane for lane in next_execution_lanes if int(lane.get("open_rows") or 0) > 0
+    ]
+    next_execution_summary = {
+        "lane_count": len(next_execution_lanes),
+        "open_rows": sum(int(lane.get("open_rows") or 0) for lane in next_execution_lanes),
+        "next_batch_rows": sum(
+            int(lane.get("next_batch_rows") or 0) for lane in next_execution_lanes
+        ),
+        "next_safe_phase": (
+            next_execution_lanes[0]["lane"]
+            if next_execution_lanes
+            else "source_discovery_complete"
+        ),
+        "auto_apply_enabled": False,
+        "manual_evidence_required": bool(next_execution_lanes),
+    }
 
     source_rows = int(action_summary.get("queued_source_rows") or 0)
     focus_rows = int(focus_summary.get("focus_source_rows") or 0)
@@ -2013,9 +2116,12 @@ def build_source_discovery_completion_roadmap_public(
             "candidate_source_review_rows": int(candidate_summary.get("candidate_review_rows") or 0),
             "direct_image_action_rows": int(image_action_summary.get("actionable_image_rows") or 0),
             "roadmap_phase_count": len(phases),
+            "next_execution_lane_count": len(next_execution_lanes),
             "auto_apply_enabled": False,
         },
         "completion_readiness": completion_readiness,
+        "next_execution_summary": next_execution_summary,
+        "next_execution_lanes": next_execution_lanes,
         "current_focus_pack": current_pack,
         "top_store_steps": top_store_steps,
         "phases": phases,
@@ -10507,6 +10613,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         provider_missing_source_url_queue=provider_missing_source_url_queue,
         candidate_source_url_review_queue=candidate_source_url_review_queue,
         image_attachment_action_queue=image_attachment_action_queue,
+        source_discovery_next_focus_metadata_field_import=source_discovery_next_focus_metadata_field_import,
     )
     operations = build_operations_public(
         generated_at,
@@ -10831,6 +10938,14 @@ def update_reports(write: bool) -> dict[str, Any]:
             "completion_readiness": source_discovery_completion_roadmap.get(
                 "completion_readiness",
                 {},
+            ),
+            "next_execution_summary": source_discovery_completion_roadmap.get(
+                "next_execution_summary",
+                {},
+            ),
+            "next_execution_lanes": source_discovery_completion_roadmap.get(
+                "next_execution_lanes",
+                [],
             ),
         }
         if ANIMATE_MISSING_IMAGE_SEARCH.exists():
