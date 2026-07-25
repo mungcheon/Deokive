@@ -417,18 +417,22 @@ class _CatalogPickerActionButton extends StatelessWidget {
           size: 16,
           color: _catalogPickerActionForeground,
         ),
-        label: Text(
-          label,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          softWrap: false,
-          style: const TextStyle(
-            color: _catalogPickerActionForeground,
-            fontSize: 12,
-            fontWeight: FontWeight.w900,
-            height: 1,
-            fontFamilyFallback: ['Malgun Gothic', 'Apple SD Gothic Neo'],
-            shadows: [],
+        label: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            label,
+            maxLines: 1,
+            overflow: TextOverflow.visible,
+            softWrap: false,
+            style: const TextStyle(
+              color: _catalogPickerActionForeground,
+              fontSize: 12,
+              fontWeight: FontWeight.w900,
+              height: 1,
+              letterSpacing: 0,
+              fontFamilyFallback: ['Malgun Gothic', 'Apple SD Gothic Neo'],
+              shadows: [],
+            ),
           ),
         ),
         style: FilledButton.styleFrom(

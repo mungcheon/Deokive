@@ -586,22 +586,29 @@ class _CatalogAddButton extends StatelessWidget {
         : _catalogAddButtonForeground;
     return SizedBox(
       height: 40,
-      width: expanded ? double.infinity : 152,
+      width: expanded ? double.infinity : 118,
       child: FilledButton.icon(
         onPressed: disabled || onPressed == null ? null : () => onPressed!(),
         icon: Icon(icon, size: 17, color: foreground),
-        label: Text(
-          label,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          softWrap: false,
-          style: TextStyle(
-            color: foreground,
-            fontSize: 13,
-            fontWeight: FontWeight.w900,
-            height: 1,
-            fontFamilyFallback: const ['Malgun Gothic', 'Apple SD Gothic Neo'],
-            shadows: const [],
+        label: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            label,
+            maxLines: 1,
+            overflow: TextOverflow.visible,
+            softWrap: false,
+            style: TextStyle(
+              color: foreground,
+              fontSize: 13,
+              fontWeight: FontWeight.w900,
+              height: 1,
+              letterSpacing: 0,
+              fontFamilyFallback: const [
+                'Malgun Gothic',
+                'Apple SD Gothic Neo',
+              ],
+              shadows: const [],
+            ),
           ),
         ),
         style: FilledButton.styleFrom(
@@ -611,7 +618,7 @@ class _CatalogAddButton extends StatelessWidget {
           disabledForegroundColor: _catalogAddButtonDisabledForeground,
           elevation: disabled ? 0 : 5,
           shadowColor: _catalogAddButtonBackground.withValues(alpha: 0.34),
-          padding: EdgeInsets.symmetric(horizontal: expanded ? 16 : 12),
+          padding: EdgeInsets.symmetric(horizontal: expanded ? 16 : 10),
           textStyle: const TextStyle(
             fontSize: 13,
             fontWeight: FontWeight.w900,
