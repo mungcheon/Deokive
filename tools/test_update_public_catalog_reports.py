@@ -506,6 +506,33 @@ class PublicCatalogReportTests(unittest.TestCase):
                 ]["lane"],
                 "replace_generic_source_urls",
             )
+            bottleneck_summary = quality["missing_image_actionability"][
+                "blocking_dashboard"
+            ]["image_evidence_bottleneck_summary"]
+            self.assertEqual(
+                bottleneck_summary["status"],
+                "source_or_image_evidence_required",
+            )
+            self.assertEqual(
+                bottleneck_summary["missing_image_rows"],
+                result["missing"]["image_url"],
+            )
+            self.assertEqual(bottleneck_summary["known_image_download_problem_rows"], 0)
+            self.assertEqual(
+                bottleneck_summary["image_url_evidence_missing_rows"],
+                result["missing"]["image_url"],
+            )
+            self.assertEqual(bottleneck_summary["auto_import_ready_rows"], 0)
+            self.assertEqual(
+                bottleneck_summary["manual_confirmation_required_rows"],
+                result["missing"]["image_url"],
+            )
+            self.assertEqual(bottleneck_summary["next_queue_lane"], "replace_generic_source_urls")
+            self.assertEqual(bottleneck_summary["next_queue_rows"], 50)
+            self.assertEqual(
+                bottleneck_summary["bottleneck_rows"][0]["bucket"],
+                "source_url_or_storefront_replacement_required",
+            )
             self.assertEqual(completion_plan["total_open_rows"], result["missing"]["image_url"])
             self.assertEqual(completion_plan["phase_rows_total"], result["missing"]["image_url"])
             self.assertEqual(completion_plan["status"], "balanced")

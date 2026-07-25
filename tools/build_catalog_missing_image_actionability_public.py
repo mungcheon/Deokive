@@ -1142,6 +1142,31 @@ def build_blocking_dashboard(
     queued_rows_total = int(execution_queue_summary.get("queued_rows_total") or 0)
     not_yet_queued_rows = int(execution_queue_summary.get("not_yet_queued_rows") or 0)
     progress_blocked = manual_validation_required_rows > auto_import_ready_rows
+    evidence_bottleneck_rows = [
+        {
+            "bucket": "source_url_or_storefront_replacement_required",
+            "rows": int(summary.get("source_first_rows") or 0),
+            "next_step": "confirm_exact_product_source_url_before_image_import",
+        },
+        {
+            "bucket": "representative_image_product_type_review_required",
+            "rows": int(summary.get("review_before_attach_rows") or 0),
+            "next_step": "confirm_candidate_matches_exact_product_type_and_variant",
+        },
+        {
+            "bucket": "manual_nonstandard_image_research_required",
+            "rows": int(summary.get("manual_image_research_rows") or 0),
+            "next_step": "record_trusted_source_and_image_evidence",
+        },
+        {
+            "bucket": "ready_after_manual_template_confirmation",
+            "rows": auto_import_ready_rows,
+            "next_step": "run_import_after_manual_confirmed_template_rows_exist",
+        },
+    ]
+    evidence_bottleneck_rows = [
+        row for row in evidence_bottleneck_rows if int(row.get("rows") or 0) > 0
+    ]
 
     return {
         "status": "manual_evidence_required" if progress_blocked else "ready_for_import_review",
@@ -1201,6 +1226,41 @@ def build_blocking_dashboard(
             }
             for phase in phases[:5]
         ],
+        "image_evidence_bottleneck_summary": {
+            "status": "source_or_image_evidence_required"
+            if progress_blocked
+            else "ready_for_confirmed_template_import",
+            "missing_image_rows": total_open_rows,
+            "known_image_download_problem_rows": 0,
+            "image_url_evidence_missing_rows": manual_validation_required_rows,
+            "auto_import_ready_rows": auto_import_ready_rows,
+            "manual_confirmation_required_rows": max(
+                manual_validation_required_rows - auto_import_ready_rows,
+                0,
+            ),
+            "source_first_rows": int(summary.get("source_first_rows") or 0),
+            "representative_review_rows": int(
+                summary.get("review_before_attach_rows") or 0
+            ),
+            "manual_image_research_rows": int(
+                summary.get("manual_image_research_rows") or 0
+            ),
+            "source_discovery_focus_pack_rows": int(
+                summary.get("source_discovery_remaining_focus_review_rows") or 0
+            ),
+            "next_queue_lane": next_queue.get("lane"),
+            "next_queue_rows": next_queue.get("row_count") or 0,
+            "next_queue_source": next_queue.get("source"),
+            "next_queue_template": next_queue.get("template"),
+            "next_queue_blocked_until": next_queue.get("blocked_until"),
+            "bottleneck_rows": evidence_bottleneck_rows,
+            "operator_message": (
+                "Known image files are complete for rows that already have image URLs; "
+                "remaining rows need exact source/image evidence before download/import."
+                if progress_blocked
+                else "Manual confirmations are ready to import and then download/cache."
+            ),
+        },
         "manual_only": True,
         "auto_apply_enabled": False,
         "operator_message": (

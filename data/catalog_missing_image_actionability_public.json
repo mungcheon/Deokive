@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T22:18:44Z",
+  "generated_at": "2026-07-25T04:08:46Z",
   "scope": "catalog_missing_image_actionability",
   "summary": {
     "missing_image_rows": 745,
@@ -9587,6 +9587,41 @@
         "next_step": "manual_official_source_and_image_evidence_recorded"
       }
     ],
+    "image_evidence_bottleneck_summary": {
+      "status": "source_or_image_evidence_required",
+      "missing_image_rows": 745,
+      "known_image_download_problem_rows": 0,
+      "image_url_evidence_missing_rows": 745,
+      "auto_import_ready_rows": 0,
+      "manual_confirmation_required_rows": 745,
+      "source_first_rows": 717,
+      "representative_review_rows": 23,
+      "manual_image_research_rows": 5,
+      "source_discovery_focus_pack_rows": 667,
+      "next_queue_lane": "replace_generic_source_urls",
+      "next_queue_rows": 50,
+      "next_queue_source": "catalog_image_attachment_action_queue_public.json",
+      "next_queue_template": "catalog_image_attachment_confirmed_template_public.json",
+      "next_queue_blocked_until": "generic_source_url_replaced_with_exact_product_source",
+      "bottleneck_rows": [
+        {
+          "bucket": "source_url_or_storefront_replacement_required",
+          "rows": 717,
+          "next_step": "confirm_exact_product_source_url_before_image_import"
+        },
+        {
+          "bucket": "representative_image_product_type_review_required",
+          "rows": 23,
+          "next_step": "confirm_candidate_matches_exact_product_type_and_variant"
+        },
+        {
+          "bucket": "manual_nonstandard_image_research_required",
+          "rows": 5,
+          "next_step": "record_trusted_source_and_image_evidence"
+        }
+      ],
+      "operator_message": "Known image files are complete for rows that already have image URLs; remaining rows need exact source/image evidence before download/import."
+    },
     "manual_only": true,
     "auto_apply_enabled": false,
     "operator_message": "No missing-image DB row can be imported automatically yet; fill the next confirmation template with exact product source/image evidence first."

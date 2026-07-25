@@ -525,6 +525,21 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
             blocking_dashboard["top_blocked_reason"]["blocked_reason"],
             "generic_or_listing_source_url_cannot_support_image_import",
         )
+        bottleneck = blocking_dashboard["image_evidence_bottleneck_summary"]
+        self.assertEqual(bottleneck["status"], "source_or_image_evidence_required")
+        self.assertEqual(bottleneck["missing_image_rows"], 6)
+        self.assertEqual(bottleneck["known_image_download_problem_rows"], 0)
+        self.assertEqual(bottleneck["image_url_evidence_missing_rows"], 6)
+        self.assertEqual(bottleneck["auto_import_ready_rows"], 1)
+        self.assertEqual(bottleneck["manual_confirmation_required_rows"], 5)
+        self.assertEqual(bottleneck["source_first_rows"], 3)
+        self.assertEqual(bottleneck["representative_review_rows"], 1)
+        self.assertEqual(bottleneck["manual_image_research_rows"], 1)
+        self.assertEqual(bottleneck["next_queue_lane"], "confirm_source_detail_candidates")
+        self.assertEqual(
+            bottleneck["bottleneck_rows"][0]["bucket"],
+            "source_url_or_storefront_replacement_required",
+        )
         self.assertFalse(blocking_dashboard["auto_apply_enabled"])
         phase_breakdown = {
             row["phase_id"]: row for row in execution_queue["phase_queue_breakdown"]
