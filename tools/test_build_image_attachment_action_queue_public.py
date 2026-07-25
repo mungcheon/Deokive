@@ -109,6 +109,9 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
             report["summary"]["source_url_review_lane_counts"],
             [["low_confidence_candidate_review", 1]],
         )
+        self.assertEqual(report["summary"]["next_source_url_review_batch_candidate_hint_rows"], 1)
+        self.assertEqual(report["summary"]["next_source_url_review_batch_no_candidate_rows"], 0)
+        self.assertEqual(report["summary"]["next_source_url_review_batch_manual_search_rows"], 1)
         self.assertEqual(report["summary"]["primary_review_url_rows"], 2)
         self.assertEqual(report["summary"]["primary_review_url_missing_rows"], 0)
         self.assertEqual(
@@ -437,6 +440,17 @@ class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(
             report["next_source_url_review_batch"][0]["unblocks"],
             "image_url_extraction_and_attachment_review",
+        )
+        triage = report["next_source_url_review_batch_triage"]
+        self.assertEqual(triage["rows"], 2)
+        self.assertEqual(triage["candidate_hint_rows"], 1)
+        self.assertEqual(triage["low_confidence_candidate_rows"], 1)
+        self.assertEqual(triage["manual_search_rows"], 1)
+        self.assertEqual(triage["search_hint_rows"], 2)
+        self.assertFalse(triage["auto_apply_enabled"])
+        self.assertEqual(
+            report["operator_handoff"]["handoff_steps"][0]["batch_triage"],
+            triage,
         )
         self.assertEqual(
             report["workstreams"][0]["review_summary"]["first_primary_review_url"],

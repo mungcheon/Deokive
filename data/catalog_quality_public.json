@@ -5803,6 +5803,9 @@
         1
       ]
     ],
+    "next_source_url_review_batch_candidate_hint_rows": 0,
+    "next_source_url_review_batch_no_candidate_rows": 0,
+    "next_source_url_review_batch_manual_search_rows": 10,
     "primary_review_url_rows": 73,
     "primary_review_url_kind_counts": [
       [
@@ -6559,6 +6562,32 @@
           "import_tool": "tools/import_confirmed_image_attachment_rows.py",
           "first_primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
           "first_primary_review_url_kind": "source_search_url",
+          "batch_triage": {
+            "rows": 10,
+            "candidate_hint_rows": 0,
+            "low_confidence_candidate_rows": 0,
+            "no_candidate_rows": 0,
+            "manual_search_rows": 10,
+            "search_hint_rows": 10,
+            "fallback_web_search_url_rows": 10,
+            "primary_review_url_rows": 10,
+            "candidate_status_counts": [],
+            "source_url_review_lane_counts": [],
+            "primary_review_url_kind_counts": [
+              [
+                "source_search_url",
+                10
+              ]
+            ],
+            "recommended_review_order": [
+              "Review rows with candidate_options first, but accept only exact product detail matches.",
+              "For no_candidate rows, open source_search_url first and fallback_web_search_urls second.",
+              "Do not fill manual_value with storefront, search result, category, or low-confidence non-matching URLs.",
+              "Only after exact source_url confirmation should image_url evidence be filled/imported."
+            ],
+            "manual_confirmation_required": true,
+            "auto_apply_enabled": false
+          },
           "required_before_write": [
             "manual_confirmed=true",
             "manual_value is the exact product detail URL",
@@ -6611,6 +6640,32 @@
         "require_exact_product_evidence": true,
         "private_collection_storage": "local_device_only"
       }
+    },
+    "next_source_url_review_batch_triage": {
+      "rows": 10,
+      "candidate_hint_rows": 0,
+      "low_confidence_candidate_rows": 0,
+      "no_candidate_rows": 0,
+      "manual_search_rows": 10,
+      "search_hint_rows": 10,
+      "fallback_web_search_url_rows": 10,
+      "primary_review_url_rows": 10,
+      "candidate_status_counts": [],
+      "source_url_review_lane_counts": [],
+      "primary_review_url_kind_counts": [
+        [
+          "source_search_url",
+          10
+        ]
+      ],
+      "recommended_review_order": [
+        "Review rows with candidate_options first, but accept only exact product detail matches.",
+        "For no_candidate rows, open source_search_url first and fallback_web_search_urls second.",
+        "Do not fill manual_value with storefront, search result, category, or low-confidence non-matching URLs.",
+        "Only after exact source_url confirmation should image_url evidence be filled/imported."
+      ],
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false
     }
   },
   "ichiban_kuji_metadata_action_queue": {
@@ -18235,6 +18290,32 @@
               "import_tool": "tools/import_confirmed_image_attachment_rows.py",
               "first_primary_review_url": "https://fanding.kr/@stellive/shop?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
               "first_primary_review_url_kind": "source_search_url",
+              "batch_triage": {
+                "rows": 10,
+                "candidate_hint_rows": 0,
+                "low_confidence_candidate_rows": 0,
+                "no_candidate_rows": 0,
+                "manual_search_rows": 10,
+                "search_hint_rows": 10,
+                "fallback_web_search_url_rows": 10,
+                "primary_review_url_rows": 10,
+                "candidate_status_counts": [],
+                "source_url_review_lane_counts": [],
+                "primary_review_url_kind_counts": [
+                  [
+                    "source_search_url",
+                    10
+                  ]
+                ],
+                "recommended_review_order": [
+                  "Review rows with candidate_options first, but accept only exact product detail matches.",
+                  "For no_candidate rows, open source_search_url first and fallback_web_search_urls second.",
+                  "Do not fill manual_value with storefront, search result, category, or low-confidence non-matching URLs.",
+                  "Only after exact source_url confirmation should image_url evidence be filled/imported."
+                ],
+                "manual_confirmation_required": true,
+                "auto_apply_enabled": false
+              },
               "required_before_write": [
                 "manual_confirmed=true",
                 "manual_value is the exact product detail URL",

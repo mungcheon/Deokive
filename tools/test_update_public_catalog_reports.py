@@ -4135,6 +4135,24 @@ class PublicCatalogReportTests(unittest.TestCase):
             image_action_summary.get("next_source_url_review_batch_rows"),
         )
         self.assertEqual(
+            image_action_summary.get("next_source_url_review_batch_candidate_hint_rows"),
+            image_action.get("next_source_url_review_batch_triage", {}).get(
+                "candidate_hint_rows"
+            ),
+        )
+        self.assertEqual(
+            image_action_summary.get("next_source_url_review_batch_manual_search_rows"),
+            image_action.get("next_source_url_review_batch_triage", {}).get(
+                "manual_search_rows"
+            ),
+        )
+        self.assertEqual(
+            image_action.get("operator_handoff", {})
+            .get("handoff_steps", [{}])[0]
+            .get("batch_triage"),
+            image_action.get("next_source_url_review_batch_triage"),
+        )
+        self.assertEqual(
             image_blocking_dashboard.get("next_representative_image_review_batch_rows"),
             image_action_summary.get("next_representative_image_review_batch_rows"),
         )
@@ -4166,6 +4184,10 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             quality_image_action.get("blocking_dashboard", {}).get("status"),
             image_blocking_dashboard.get("status"),
+        )
+        self.assertEqual(
+            quality_image_action.get("next_source_url_review_batch_triage"),
+            image_action.get("next_source_url_review_batch_triage"),
         )
         self.assertEqual(
             quality_image_action.get("blocking_dashboard", {}).get(

@@ -698,6 +698,52 @@ def _build_next_source_url_review_batch(
     return rows
 
 
+def _source_url_review_batch_triage(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    candidate_hint_rows = sum(1 for row in rows if row.get("candidate_options"))
+    low_confidence_rows = sum(
+        1
+        for row in rows
+        if str(row.get("candidate_status") or "")
+        in {"low_confidence_candidate", "weak_manual_review_candidate"}
+    )
+    no_candidate_rows = sum(
+        1 for row in rows if str(row.get("candidate_status") or "") == "no_candidate"
+    )
+    search_hint_rows = sum(
+        1
+        for row in rows
+        if row.get("source_search_url") or row.get("first_fallback_web_search_url")
+    )
+    fallback_url_rows = sum(1 for row in rows if row.get("fallback_web_search_urls"))
+    return {
+        "rows": len(rows),
+        "candidate_hint_rows": candidate_hint_rows,
+        "low_confidence_candidate_rows": low_confidence_rows,
+        "no_candidate_rows": no_candidate_rows,
+        "manual_search_rows": len(rows) - candidate_hint_rows,
+        "search_hint_rows": search_hint_rows,
+        "fallback_web_search_url_rows": fallback_url_rows,
+        "primary_review_url_rows": sum(1 for row in rows if row.get("primary_review_url")),
+        "candidate_status_counts": _counter_pairs(rows, "candidate_status"),
+        "source_url_review_lane_counts": _counter_pairs(
+            rows,
+            "source_url_review_lane",
+        ),
+        "primary_review_url_kind_counts": _counter_pairs(
+            rows,
+            "primary_review_url_kind",
+        ),
+        "recommended_review_order": [
+            "Review rows with candidate_options first, but accept only exact product detail matches.",
+            "For no_candidate rows, open source_search_url first and fallback_web_search_urls second.",
+            "Do not fill manual_value with storefront, search result, category, or low-confidence non-matching URLs.",
+            "Only after exact source_url confirmation should image_url evidence be filled/imported.",
+        ],
+        "manual_confirmation_required": True,
+        "auto_apply_enabled": False,
+    }
+
+
 def _build_next_representative_image_review_batch(
     action_items: list[dict[str, Any]],
     *,
@@ -1014,6 +1060,7 @@ def _build_operator_handoff(
     attachment_readiness: dict[str, Any],
     next_operator_actions: list[dict[str, Any]],
     next_source_url_review_batch: list[dict[str, Any]],
+    next_source_url_review_batch_triage: dict[str, Any],
     next_representative_image_review_batch: list[dict[str, Any]],
 ) -> dict[str, Any]:
     first_action = next_operator_actions[0] if next_operator_actions else {}
@@ -1034,6 +1081,7 @@ def _build_operator_handoff(
                 "first_primary_review_url_kind": next_source_url_review_batch[0].get(
                     "primary_review_url_kind", "manual_lookup_required"
                 ),
+                "batch_triage": next_source_url_review_batch_triage,
                 "required_before_write": [
                     "manual_confirmed=true",
                     "manual_value is the exact product detail URL",
@@ -1589,6 +1637,9 @@ def build_report(
     next_source_url_review_batch = _build_next_source_url_review_batch(
         source_url_update_template
     )
+    next_source_url_review_batch_triage = _source_url_review_batch_triage(
+        next_source_url_review_batch
+    )
     next_representative_image_review_batch = (
         _build_next_representative_image_review_batch(action_items)
     )
@@ -1613,6 +1664,7 @@ def build_report(
         attachment_readiness=attachment_readiness,
         next_operator_actions=next_operator_actions,
         next_source_url_review_batch=next_source_url_review_batch,
+        next_source_url_review_batch_triage=next_source_url_review_batch_triage,
         next_representative_image_review_batch=next_representative_image_review_batch,
     )
     return {
@@ -1669,6 +1721,15 @@ def build_report(
             "source_url_review_lane_counts": _counter_pairs(
                 next_source_url_review_batch,
                 "source_url_review_lane",
+            ),
+            "next_source_url_review_batch_candidate_hint_rows": (
+                next_source_url_review_batch_triage["candidate_hint_rows"]
+            ),
+            "next_source_url_review_batch_no_candidate_rows": (
+                next_source_url_review_batch_triage["no_candidate_rows"]
+            ),
+            "next_source_url_review_batch_manual_search_rows": (
+                next_source_url_review_batch_triage["manual_search_rows"]
             ),
             "primary_review_url_rows": primary_review_url_rows,
             "primary_review_url_kind_counts": primary_review_url_kind_counts,
@@ -1789,6 +1850,7 @@ def build_report(
         "source_url_update_template": source_url_update_template,
         "source_url_update_template_batches": source_url_update_template_batches,
         "next_source_url_review_batch": next_source_url_review_batch,
+        "next_source_url_review_batch_triage": next_source_url_review_batch_triage,
         "next_representative_image_review_batch": next_representative_image_review_batch,
         "next_operator_actions": next_operator_actions,
         "next_actions": [

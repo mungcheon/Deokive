@@ -11755,6 +11755,10 @@ def update_reports(write: bool) -> dict[str, Any]:
                     "operator_handoff",
                     {},
                 ),
+                "next_source_url_review_batch_triage": image_attachment_action_queue.get(
+                    "next_source_url_review_batch_triage",
+                    {},
+                ),
             }
             target["image_attachment_queue_alignment"] = {
                 "public_reports": [
