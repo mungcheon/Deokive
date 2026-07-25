@@ -587,40 +587,40 @@ class _CatalogAddButton extends StatelessWidget {
     return SizedBox(
       height: 40,
       width: expanded ? double.infinity : 136,
-      child: FilledButton(
-        onPressed: disabled ? null : onPressed,
-        style: FilledButton.styleFrom(
-          backgroundColor: background,
-          disabledBackgroundColor: background,
-          foregroundColor: foreground,
-          disabledForegroundColor: foreground,
-          elevation: disabled ? 0 : 5,
-          shadowColor: _catalogAddButtonBackground.withValues(alpha: 0.34),
-          padding: EdgeInsets.symmetric(horizontal: expanded ? 14 : 13),
-          minimumSize: Size(expanded ? 0 : 136, 40),
-          fixedSize: Size(expanded ? double.infinity : 136, 40),
-          shape: const StadiumBorder(),
-          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          visualDensity: VisualDensity.compact,
-        ).copyWith(
-          side: WidgetStatePropertyAll(
-            BorderSide(
-              color: disabled
-                  ? _catalogAddButtonDisabledForeground.withValues(alpha: 0.12)
-                  : _catalogAddButtonForeground.withValues(alpha: 0.1),
+      child: Material(
+        color: background,
+        elevation: disabled ? 0 : 5,
+        shadowColor: _catalogAddButtonBackground.withValues(alpha: 0.34),
+        shape: const StadiumBorder(),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: disabled ? null : onPressed,
+          child: DecoratedBox(
+            decoration: ShapeDecoration(
+              shape: StadiumBorder(
+                side: BorderSide(
+                  color: disabled
+                      ? _catalogAddButtonDisabledForeground.withValues(
+                          alpha: 0.12,
+                        )
+                      : _catalogAddButtonForeground.withValues(alpha: 0.1),
+                ),
+              ),
             ),
-          ),
-        ),
-        child: FittedBox(
-          fit: BoxFit.scaleDown,
-          child: _CatalogButtonLabel(
-            icon: icon,
-            label: label,
-            color: foreground,
-            iconSize: 17,
-            fontSize: 13,
-            gap: 5,
-            fontFamilyFallback: _kCatalogButtonFontFallback,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: expanded ? 14 : 13),
+              child: Center(
+                child: _CatalogButtonLabel(
+                  icon: icon,
+                  label: label,
+                  color: foreground,
+                  iconSize: 17,
+                  fontSize: 13,
+                  gap: 5,
+                  fontFamilyFallback: _kCatalogButtonFontFallback,
+                ),
+              ),
+            ),
           ),
         ),
       ),

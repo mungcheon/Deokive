@@ -415,34 +415,33 @@ class _CatalogImportActionButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: 48,
-      child: FilledButton(
-        onPressed: onPressed,
-        style: FilledButton.styleFrom(
-          backgroundColor: backgroundColor,
-          disabledBackgroundColor: backgroundColor,
-          foregroundColor: foregroundColor,
-          disabledForegroundColor: foregroundColor,
-          elevation: onPressed == null ? 0 : 3,
-          padding: const EdgeInsets.symmetric(horizontal: 18),
-          minimumSize: const Size.fromHeight(48),
-          fixedSize: const Size.fromHeight(48),
-          shape: const StadiumBorder(),
-          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        ).copyWith(
-          side: WidgetStatePropertyAll(
-            BorderSide(
-              color: onPressed == null
-                  ? foregroundColor.withValues(alpha: 0.12)
-                  : foregroundColor.withValues(alpha: 0.1),
+      child: Material(
+        color: backgroundColor,
+        elevation: onPressed == null ? 0 : 3,
+        shape: const StadiumBorder(),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: onPressed,
+          child: DecoratedBox(
+            decoration: ShapeDecoration(
+              shape: StadiumBorder(
+                side: BorderSide(
+                  color: onPressed == null
+                      ? foregroundColor.withValues(alpha: 0.12)
+                      : foregroundColor.withValues(alpha: 0.1),
+                ),
+              ),
             ),
-          ),
-        ),
-        child: FittedBox(
-          fit: BoxFit.scaleDown,
-          child: _CatalogImportButtonLabel(
-            icon: icon,
-            label: label,
-            color: foregroundColor,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 18),
+              child: Center(
+                child: _CatalogImportButtonLabel(
+                  icon: icon,
+                  label: label,
+                  color: foregroundColor,
+                ),
+              ),
+            ),
           ),
         ),
       ),
