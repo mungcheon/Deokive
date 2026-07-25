@@ -171,6 +171,18 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
             ],
         )
         self.assertEqual(report["summary"]["next_normalization_review_batch_preserve_sub_series_rows"], 1)
+        self.assertEqual(
+            report["summary"][
+                "next_normalization_review_batch_sample_keyword_supported_rows"
+            ],
+            1,
+        )
+        self.assertEqual(
+            report["summary"][
+                "next_normalization_review_batch_sample_keyword_review_required_rows"
+            ],
+            0,
+        )
         self.assertEqual(report["summary"]["target_visual_token_rows"], 2)
         self.assertEqual(report["summary"]["target_visual_token_catalog_rows"], 105)
         self.assertEqual(report["summary"]["target_visual_color_groups"], [("mint", 1), ("blue", 1)])
@@ -250,6 +262,8 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(normalization_template["manual_confirmed_rows"], 0)
         self.assertEqual(normalization_template["ready_to_import_rows"], 0)
         self.assertEqual(normalization_template["preserve_sub_series_rows"], 1)
+        self.assertEqual(normalization_template["sample_keyword_supported_rows"], 1)
+        self.assertEqual(normalization_template["sample_keyword_review_required_rows"], 0)
         self.assertFalse(normalization_template["auto_apply_enabled"])
         normalization_template_row = normalization_template["rows"][0]
         self.assertEqual(normalization_template_row["source_category"], "Clear File")
@@ -261,6 +275,20 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
         self.assertIn(
             "normalize_to_target_category_preserve_source_sub_series",
             normalization_template_row["allowed_manual_decisions"],
+        )
+        self.assertEqual(
+            normalization_template_row["sample_evidence_summary"]["review_signal"],
+            "sample_keywords_support_normalization",
+        )
+        self.assertTrue(
+            normalization_template_row["sample_evidence_summary"][
+                "all_samples_match_source_category_keyword"
+            ]
+        )
+        next_normalization_row = report["next_normalization_review_batch"][0]
+        self.assertEqual(
+            next_normalization_row["sample_evidence_summary"]["review_signal"],
+            "sample_keywords_support_normalization",
         )
         self.assertEqual(
             report["work_order"][1]["target_category_visual_tokens"][0]["primary_icon_key"],

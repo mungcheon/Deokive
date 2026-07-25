@@ -320,6 +320,89 @@ def _visual_review_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+NORMALIZATION_SOURCE_KEYWORDS = {
+    "클리어파일": ["클리어파일", "クリアファイル", "clear file", "clearfile"],
+    "카드": ["카드", "カード", "ポストカード", "postcard", "card holder", "card"],
+    "스티커": ["스티커", "ステッカー", "sticker"],
+    "파우치": ["파우치", "ポーチ", "pouch"],
+}
+
+
+TARGET_CATEGORY_KIND_KEYWORDS = {
+    "문구": [
+        "클리어파일",
+        "クリアファイル",
+        "カード",
+        "ポストカード",
+        "ステッカー",
+        "ジッパーバッグ",
+        "clear file",
+        "postcard",
+        "sticker",
+        "card",
+    ],
+    "가방": ["파우치", "ポーチ", "pouch", "bag", "バッグ"],
+}
+
+
+def _keyword_hits(name: str, keywords: list[str]) -> list[str]:
+    lowered = name.casefold()
+    return [keyword for keyword in keywords if keyword.casefold() in lowered]
+
+
+def _normalization_sample_evidence(
+    source_category: str,
+    target_category: str,
+    sample_names: list[Any],
+) -> dict[str, Any]:
+    names = [str(name).strip() for name in sample_names if str(name).strip()]
+    source_keywords = NORMALIZATION_SOURCE_KEYWORDS.get(source_category, [source_category])
+    target_keywords = TARGET_CATEGORY_KIND_KEYWORDS.get(target_category, [])
+    source_hit_rows = []
+    target_hit_rows = []
+    keyword_counts: Counter[str] = Counter()
+    for name in names:
+        source_hits = _keyword_hits(name, source_keywords)
+        target_hits = _keyword_hits(name, target_keywords)
+        for keyword in source_hits + target_hits:
+            keyword_counts[keyword] += 1
+        if source_hits:
+            source_hit_rows.append({"name": name, "matched_keywords": source_hits})
+        if target_hits:
+            target_hit_rows.append({"name": name, "matched_keywords": target_hits})
+
+    sample_count = len(names)
+    source_match_count = len(source_hit_rows)
+    target_match_count = len(target_hit_rows)
+    return {
+        "sample_name_count": sample_count,
+        "source_category_keyword_hits": source_match_count,
+        "target_category_keyword_hits": target_match_count,
+        "source_category_keyword_coverage": round(source_match_count / sample_count, 4)
+        if sample_count
+        else 0.0,
+        "target_category_keyword_coverage": round(target_match_count / sample_count, 4)
+        if sample_count
+        else 0.0,
+        "source_category_keywords": source_keywords,
+        "target_category_keywords": target_keywords,
+        "matched_keyword_counts": keyword_counts.most_common(),
+        "all_samples_match_source_category_keyword": bool(sample_count)
+        and source_match_count == sample_count,
+        "all_samples_match_target_category_keyword": bool(sample_count)
+        and target_match_count == sample_count,
+        "source_hit_sample_rows": source_hit_rows[:8],
+        "target_hit_sample_rows": target_hit_rows[:8],
+        "review_signal": (
+            "sample_keywords_support_normalization"
+            if sample_count
+            and source_match_count == sample_count
+            and (not target_keywords or target_match_count == sample_count)
+            else "manual_sample_semantics_review_required"
+        ),
+    }
+
+
 def _normalization_decision_guidance(row: dict[str, Any]) -> dict[str, Any]:
     template = (
         row.get("category_mapping_template")
@@ -334,6 +417,11 @@ def _normalization_decision_guidance(row: dict[str, Any]) -> dict[str, Any]:
     ).strip()
     preserve_source = bool(template.get("preserve_source_category_as_sub_series"))
     sample_names = row.get("sample_names") or []
+    sample_evidence = _normalization_sample_evidence(
+        source_category,
+        target_category,
+        sample_names,
+    )
     return {
         "status": "canonical_category_normalization_confirmation_required",
         "recommended_decision": "normalize_to_target_category_preserve_source_sub_series"
@@ -349,6 +437,7 @@ def _normalization_decision_guidance(row: dict[str, Any]) -> dict[str, Any]:
             else ""
         ),
         "sample_name_count": len(sample_names),
+        "sample_evidence_summary": sample_evidence,
         "required_evidence": [
             "sample names fit the target canonical category",
             "source category remains useful as a subtype/search label",
@@ -387,6 +476,11 @@ def _next_normalization_review_batch(
                 "target_category": row.get("suggested_category"),
                 "affected_catalog_rows": int(row.get("rows") or 0),
                 "sample_names": row.get("sample_names") or [],
+                "sample_evidence_summary": _normalization_sample_evidence(
+                    str(row.get("category") or ""),
+                    str(row.get("suggested_category") or ""),
+                    row.get("sample_names") or [],
+                ),
                 "preserve_source_category_as_sub_series": preserve_source,
                 "folder_color_group": template.get("folder_color_group") or row.get("suggested_color_group"),
                 "folder_color_hex": template.get("folder_color_hex") or row.get("suggested_color_hex"),
@@ -424,6 +518,12 @@ def _compact_normalization(
     blocker = _mode_blocker(mapping_mode)
     target_category = str(template.get("target_category") or row.get("suggested_category") or "").strip()
     target_visual = dict((visual_tokens or {}).get(target_category) or {})
+    source_category = str(template.get("source_category") or row.get("category") or "").strip()
+    sample_evidence = _normalization_sample_evidence(
+        source_category,
+        target_category,
+        sample_names,
+    )
     return {
         "review_id": row.get("review_id"),
         "category": row.get("category"),
@@ -452,8 +552,16 @@ def _compact_normalization(
             "preserve_source_category_as_sub_series": bool(
                 template.get("preserve_source_category_as_sub_series")
             ),
+            "sample_evidence_review_signal": sample_evidence["review_signal"],
+            "source_category_keyword_coverage": sample_evidence[
+                "source_category_keyword_coverage"
+            ],
+            "target_category_keyword_coverage": sample_evidence[
+                "target_category_keyword_coverage"
+            ],
         },
         "normalization_decision_guidance": _normalization_decision_guidance(row),
+        "sample_evidence_summary": sample_evidence,
         "name_split_hints": [],
         "sample_names": sample_names,
         "category_mapping_template": {
@@ -473,6 +581,7 @@ def _compact_normalization(
             "folder_icon_options": target_visual.get("icon_options") or [],
             "affected_catalog_rows": rows,
             "manual_note": template.get("manual_note") or "",
+            "sample_evidence_summary": sample_evidence,
             **blocker,
         },
         "manual_confirmation_template": CONFIRMED_TEMPLATE,
@@ -756,6 +865,8 @@ def _normalization_confirmation_template(
                     [],
                 ),
                 "sample_names": row.get("sample_names") or [],
+                "sample_evidence_summary": row.get("sample_evidence_summary")
+                or {},
                 "manual_confirmed": False,
                 "manual_decision": "",
                 "manual_note": "",
@@ -781,6 +892,18 @@ def _normalization_confirmation_template(
         "ready_to_import_rows": 0,
         "preserve_sub_series_rows": sum(
             1 for row in rows if row.get("preserve_source_category_as_sub_series")
+        ),
+        "sample_keyword_supported_rows": sum(
+            1
+            for row in rows
+            if (row.get("sample_evidence_summary") or {}).get("review_signal")
+            == "sample_keywords_support_normalization"
+        ),
+        "sample_keyword_review_required_rows": sum(
+            1
+            for row in rows
+            if (row.get("sample_evidence_summary") or {}).get("review_signal")
+            == "manual_sample_semantics_review_required"
         ),
         "target_category_counts": Counter(
             str(row.get("target_category") or "") for row in rows
@@ -1036,6 +1159,18 @@ def build_queue(
         }
         for row in next_normalization_review_batch
     ]
+    normalization_keyword_supported_rows = sum(
+        1
+        for row in next_normalization_review_batch
+        if (row.get("sample_evidence_summary") or {}).get("review_signal")
+        == "sample_keywords_support_normalization"
+    )
+    normalization_keyword_review_required_rows = sum(
+        1
+        for row in next_normalization_review_batch
+        if (row.get("sample_evidence_summary") or {}).get("review_signal")
+        == "manual_sample_semantics_review_required"
+    )
     queued_review_categories = len(queued) + len(next_normalization_review_batch)
     queued_review_catalog_rows = queued_rows + normalization_batch_rows
     summary = {
@@ -1077,6 +1212,8 @@ def build_queue(
             for row in next_normalization_review_batch
             if row.get("preserve_source_category_as_sub_series")
         ),
+        "next_normalization_review_batch_sample_keyword_supported_rows": normalization_keyword_supported_rows,
+        "next_normalization_review_batch_sample_keyword_review_required_rows": normalization_keyword_review_required_rows,
         "target_visual_token_rows": target_visual_summary["visual_token_rows"],
         "target_visual_token_catalog_rows": target_visual_summary["affected_catalog_rows"],
         "target_visual_color_groups": target_visual_summary["color_group_counts"],
