@@ -520,6 +520,27 @@ def catalog_goal_open_review_queues(goal_gate: dict[str, Any]) -> dict[str, Any]
         for row in pillars
         if isinstance(row, dict) and row.get("pillar")
     }
+    def _int(value: Any) -> int:
+        try:
+            return int(value or 0)
+        except (TypeError, ValueError):
+            return 0
+
+    blocking = [
+        row
+        for row in pillars
+        if isinstance(row, dict)
+        and (
+            _int(row.get("manual_review_rows")) > 0
+            or str(row.get("status") or "").lower()
+            not in {"pass", "ready", "no_open_policy_issues"}
+        )
+    ]
+    next_pillar = blocking[0] if blocking else {}
+
+    def _pillar_value(pillar: str, key: str, default: Any = 0) -> Any:
+        return by_pillar.get(pillar, {}).get(key, default)
+
     return {
         "catalog_goal_manual_review_pillars": goal_gate.get(
             "manual_review_pillar_count", 0
@@ -543,6 +564,26 @@ def catalog_goal_open_review_queues(goal_gate: dict[str, Any]) -> dict[str, Any]
         "catalog_goal_ichiban_manual_review_rows": by_pillar.get(
             "ichiban_kuji_history", {}
         ).get("manual_review_rows", 0),
+        "catalog_goal_next_handoff_pillar": next_pillar.get("pillar"),
+        "catalog_goal_next_handoff_lane": next_pillar.get("handoff_current_lane"),
+        "catalog_goal_next_handoff_first_step_rows": _int(
+            next_pillar.get("handoff_first_step_rows") or 0
+        ),
+        "catalog_goal_dedupe_handoff_first_step_rows": _int(
+            _pillar_value("dedupe", "handoff_first_step_rows")
+        ),
+        "catalog_goal_missing_image_handoff_first_step_rows": _int(
+            _pillar_value("missing_images", "handoff_first_step_rows")
+        ),
+        "catalog_goal_source_url_handoff_first_step_rows": _int(
+            _pillar_value("source_url_updates", "handoff_first_step_rows")
+        ),
+        "catalog_goal_animation_category_handoff_first_step_rows": _int(
+            _pillar_value("animation_categories", "handoff_first_step_rows")
+        ),
+        "catalog_goal_ichiban_handoff_first_step_rows": _int(
+            _pillar_value("ichiban_kuji_history", "handoff_first_step_rows")
+        ),
     }
 
 

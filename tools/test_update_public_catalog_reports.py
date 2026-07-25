@@ -2821,6 +2821,32 @@ class PublicCatalogReportTests(unittest.TestCase):
             open_queues["catalog_goal_ichiban_manual_review_rows"],
             pillars["ichiban_kuji_history"]["manual_review_rows"],
         )
+        self.assertEqual(open_queues["catalog_goal_next_handoff_pillar"], "dedupe")
+        self.assertEqual(
+            open_queues["catalog_goal_next_handoff_lane"],
+            "ichiban_reissue_campaign_review",
+        )
+        self.assertEqual(open_queues["catalog_goal_next_handoff_first_step_rows"], 4)
+        self.assertEqual(
+            open_queues["catalog_goal_dedupe_handoff_first_step_rows"],
+            pillars["dedupe"]["handoff_first_step_rows"],
+        )
+        self.assertEqual(
+            open_queues["catalog_goal_missing_image_handoff_first_step_rows"],
+            pillars["missing_images"]["handoff_first_step_rows"],
+        )
+        self.assertEqual(
+            open_queues["catalog_goal_source_url_handoff_first_step_rows"],
+            pillars["source_url_updates"]["handoff_first_step_rows"],
+        )
+        self.assertEqual(
+            open_queues["catalog_goal_animation_category_handoff_first_step_rows"],
+            pillars["animation_categories"]["handoff_first_step_rows"],
+        )
+        self.assertEqual(
+            open_queues["catalog_goal_ichiban_handoff_first_step_rows"],
+            pillars["ichiban_kuji_history"]["handoff_first_step_rows"],
+        )
         self.assertEqual(
             agent_queue["summary"]["open_review_queues"],
             open_queues,
