@@ -802,6 +802,128 @@ def _normalization_confirmation_template(
     }
 
 
+def _build_operator_handoff(
+    *,
+    summary: dict[str, Any],
+    blocking_dashboard: dict[str, Any],
+    next_normalization_review_batch: list[dict[str, Any]],
+    normalization_confirmation_template: dict[str, Any],
+    target_visual_summary: dict[str, Any],
+    app_visual_catalog: dict[str, Any],
+    work_order: list[dict[str, Any]],
+) -> dict[str, Any]:
+    handoff_steps: list[dict[str, Any]] = []
+    if next_normalization_review_batch:
+        first = next_normalization_review_batch[0]
+        handoff_steps.append(
+            {
+                "step": 1,
+                "lane": "canonical_category_normalization_review",
+                "status": "manual_canonical_category_normalization_required",
+                "next_batch_rows": len(next_normalization_review_batch),
+                "affected_catalog_rows": int(
+                    summary.get("next_normalization_review_batch_catalog_rows") or 0
+                ),
+                "review_section": "next_normalization_review_batch",
+                "write_template_section": "normalization_confirmation_template.rows",
+                "first_review_id": first.get("review_id"),
+                "first_source_category": first.get("source_category"),
+                "first_target_category": first.get("target_category"),
+                "required_before_write": [
+                    "manual_confirmed=true",
+                    "sample names fit the target canonical category",
+                    "source category is preserved as sub_series when useful for search",
+                    "manual note explains the category semantics",
+                ],
+                "unblocks": "normalization_import_template",
+                "auto_apply_enabled": False,
+            }
+        )
+    if int(target_visual_summary.get("visual_token_rows") or 0):
+        handoff_steps.append(
+            {
+                "step": len(handoff_steps) + 1,
+                "lane": "folder_visual_token_verification",
+                "status": "ready" if app_visual_catalog.get("animation_visuals_covered") else "manual_visual_token_review_required",
+                "next_batch_rows": int(target_visual_summary.get("visual_token_rows") or 0),
+                "affected_catalog_rows": int(
+                    target_visual_summary.get("affected_catalog_rows") or 0
+                ),
+                "review_section": "target_visual_token_summary.tokens",
+                "write_template_section": "folder_color_group/folder_icon_key",
+                "color_groups": target_visual_summary.get("color_group_counts", []),
+                "primary_icon_keys": target_visual_summary.get(
+                    "primary_icon_key_counts", []
+                ),
+                "required_before_write": [
+                    "folder color exists in app folder palette",
+                    "folder icon key exists in app icon options",
+                    "palette remains sorted by similar color families",
+                ],
+                "unblocks": "app_folder_visual_consistency",
+                "auto_apply_enabled": False,
+            }
+        )
+    if normalization_confirmation_template.get("template_rows"):
+        handoff_steps.append(
+            {
+                "step": len(handoff_steps) + 1,
+                "lane": "normalization_import_template",
+                "status": "waiting_for_manual_confirmations",
+                "next_batch_rows": int(
+                    normalization_confirmation_template.get("template_rows") or 0
+                ),
+                "affected_catalog_rows": int(
+                    normalization_confirmation_template.get("affected_catalog_rows")
+                    or 0
+                ),
+                "review_section": "normalization_confirmation_template",
+                "write_template_section": CONFIRMED_QUEUE,
+                "import_tool": IMPORT_TOOL,
+                "required_before_write": [
+                    "confirmed rows copied to confirmed queue",
+                    "manual_confirmed=true",
+                    "manual_decision is allowed for the template",
+                    "folder color and icon values are preserved",
+                ],
+                "unblocks": "canonical_category_normalization_manually_confirmed",
+                "auto_apply_enabled": False,
+            }
+        )
+    return {
+        "status": blocking_dashboard.get("status", "unknown"),
+        "current_lane": (
+            handoff_steps[0].get("lane")
+            if handoff_steps
+            else "no_animation_category_action_required"
+        ),
+        "current_review_section": (
+            handoff_steps[0].get("review_section") if handoff_steps else None
+        ),
+        "queued_catalog_rows": int(summary.get("queued_catalog_rows") or 0),
+        "queued_categories": int(summary.get("queued_categories") or 0),
+        "normalization_review_rows": int(
+            summary.get("normalization_review_rows") or 0
+        ),
+        "folder_visual_coverage_ready": bool(
+            blocking_dashboard.get("folder_visual_coverage_ready")
+        ),
+        "app_folder_palette_sorted_by_family": bool(
+            app_visual_catalog.get("palette_sorted_by_family")
+        ),
+        "work_order_lanes": [
+            str(row.get("lane") or "") for row in work_order if row.get("lane")
+        ],
+        "handoff_steps": handoff_steps,
+        "safety_policy": {
+            "auto_apply_enabled": False,
+            "auto_create_folders": False,
+            "require_manual_category_confirmation": True,
+            "preserve_folder_visual_tokens": True,
+        },
+    }
+
+
 def build_queue(
     payload: dict[str, Any],
     *,
@@ -992,12 +1114,22 @@ def build_queue(
     normalization_confirmation_template = _normalization_confirmation_template(
         next_normalization_review_batch
     )
+    operator_handoff = _build_operator_handoff(
+        summary=summary,
+        blocking_dashboard=blocking_dashboard,
+        next_normalization_review_batch=next_normalization_review_batch,
+        normalization_confirmation_template=normalization_confirmation_template,
+        target_visual_summary=target_visual_summary,
+        app_visual_catalog=app_visual_catalog,
+        work_order=work_order,
+    )
     return {
         "schema_version": 1,
         "generated_at": _now_utc(),
         "scope": "animation_category_action_queue",
         "summary": summary,
         "blocking_dashboard": blocking_dashboard,
+        "operator_handoff": operator_handoff,
         "app_folder_visual_catalog": app_visual_catalog,
         "target_visual_token_summary": target_visual_summary,
         "next_normalization_review_batch": next_normalization_review_batch,

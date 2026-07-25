@@ -8567,6 +8567,101 @@
       "app_folder_palette_sorted_by_family": true,
       "safety_note": "Folder colors and icons are available, but category normalization changes must be manually confirmed before any import writes."
     },
+    "operator_handoff": {
+      "status": "normalization_review_required",
+      "current_lane": "canonical_category_normalization_review",
+      "current_review_section": "next_normalization_review_batch",
+      "queued_catalog_rows": 36,
+      "queued_categories": 4,
+      "normalization_review_rows": 36,
+      "folder_visual_coverage_ready": true,
+      "app_folder_palette_sorted_by_family": true,
+      "work_order_lanes": [
+        "canonical_category_normalization_review"
+      ],
+      "handoff_steps": [
+        {
+          "step": 1,
+          "lane": "canonical_category_normalization_review",
+          "status": "manual_canonical_category_normalization_required",
+          "next_batch_rows": 4,
+          "affected_catalog_rows": 36,
+          "review_section": "next_normalization_review_batch",
+          "write_template_section": "normalization_confirmation_template.rows",
+          "first_review_id": "animation-category-normalization-001",
+          "first_source_category": "클리어파일",
+          "first_target_category": "문구",
+          "required_before_write": [
+            "manual_confirmed=true",
+            "sample names fit the target canonical category",
+            "source category is preserved as sub_series when useful for search",
+            "manual note explains the category semantics"
+          ],
+          "unblocks": "normalization_import_template",
+          "auto_apply_enabled": false
+        },
+        {
+          "step": 2,
+          "lane": "folder_visual_token_verification",
+          "status": "ready",
+          "next_batch_rows": 4,
+          "affected_catalog_rows": 36,
+          "review_section": "target_visual_token_summary.tokens",
+          "write_template_section": "folder_color_group/folder_icon_key",
+          "color_groups": [
+            [
+              "violet",
+              3
+            ],
+            [
+              "green",
+              1
+            ]
+          ],
+          "primary_icon_keys": [
+            [
+              "sticky_note",
+              3
+            ],
+            [
+              "inventory",
+              1
+            ]
+          ],
+          "required_before_write": [
+            "folder color exists in app folder palette",
+            "folder icon key exists in app icon options",
+            "palette remains sorted by similar color families"
+          ],
+          "unblocks": "app_folder_visual_consistency",
+          "auto_apply_enabled": false
+        },
+        {
+          "step": 3,
+          "lane": "normalization_import_template",
+          "status": "waiting_for_manual_confirmations",
+          "next_batch_rows": 4,
+          "affected_catalog_rows": 36,
+          "review_section": "normalization_confirmation_template",
+          "write_template_section": "server/animation_category_confirmed_rows.json",
+          "import_tool": "tools/import_confirmed_animation_category_rows.py",
+          "required_before_write": [
+            "confirmed rows copied to confirmed queue",
+            "manual_confirmed=true",
+            "manual_decision is allowed for the template",
+            "folder color and icon values are preserved"
+          ],
+          "unblocks": "canonical_category_normalization_manually_confirmed",
+          "auto_apply_enabled": false
+        }
+      ],
+      "safety_policy": {
+        "auto_apply_enabled": false,
+        "auto_create_folders": false,
+        "require_manual_category_confirmation": true,
+        "preserve_folder_visual_tokens": true
+      }
+    },
     "normalization_confirmation_template": {
       "status": "manual_canonical_category_normalization_required",
       "template_rows": 4,

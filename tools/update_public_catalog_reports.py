@@ -11806,6 +11806,10 @@ def update_reports(write: bool) -> dict[str, Any]:
                 "blocking_dashboard",
                 {},
             ),
+            "operator_handoff": animation_action_queue.get(
+                "operator_handoff",
+                {},
+            ),
             "normalization_confirmation_template": animation_action_queue.get(
                 "normalization_confirmation_template",
                 {},

@@ -2414,6 +2414,40 @@ class PublicCatalogReportTests(unittest.TestCase):
             animation_lanes[2]["import_tool"],
             "tools/import_confirmed_animation_category_rows.py",
         )
+        animation_handoff = reports.load_json(
+            reports.ANIMATION_CATEGORY_ACTION_QUEUE
+        )["operator_handoff"]
+        self.assertEqual(animation_action["operator_handoff"], animation_handoff)
+        self.assertEqual(
+            animation_handoff["status"],
+            animation_action["blocking_dashboard"]["status"],
+        )
+        self.assertEqual(
+            animation_handoff["current_lane"],
+            "canonical_category_normalization_review",
+        )
+        self.assertEqual(animation_handoff["queued_catalog_rows"], 36)
+        self.assertEqual(animation_handoff["queued_categories"], 4)
+        self.assertTrue(animation_handoff["folder_visual_coverage_ready"])
+        self.assertTrue(animation_handoff["app_folder_palette_sorted_by_family"])
+        self.assertFalse(
+            animation_handoff["safety_policy"]["auto_apply_enabled"]
+        )
+        self.assertFalse(
+            animation_handoff["safety_policy"]["auto_create_folders"]
+        )
+        self.assertEqual(
+            [step["lane"] for step in animation_handoff["handoff_steps"]],
+            [
+                "canonical_category_normalization_review",
+                "folder_visual_token_verification",
+                "normalization_import_template",
+            ],
+        )
+        self.assertEqual(
+            animation_handoff["handoff_steps"][0]["affected_catalog_rows"],
+            36,
+        )
         self.assertEqual(
             {
                 (row["source_category"], row["target_category"])
