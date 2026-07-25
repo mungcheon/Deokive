@@ -2243,6 +2243,53 @@ class PublicCatalogReportTests(unittest.TestCase):
             normalization_template["folder_color_group_counts"],
             [["violet", 3], ["green", 1]],
         )
+        animation_next_execution_summary = animation_action["next_execution_summary"]
+        self.assertEqual(
+            animation_next_execution_summary,
+            reports.load_json(reports.ANIMATION_CATEGORY_ACTION_QUEUE)[
+                "next_execution_summary"
+            ],
+        )
+        self.assertEqual(animation_next_execution_summary["lane_count"], 3)
+        self.assertEqual(animation_next_execution_summary["open_rows"], 108)
+        self.assertEqual(animation_next_execution_summary["next_batch_rows"], 44)
+        self.assertEqual(
+            animation_next_execution_summary["next_safe_phase"],
+            "canonical_category_normalization_review",
+        )
+        self.assertFalse(animation_next_execution_summary["auto_apply_enabled"])
+        self.assertTrue(animation_next_execution_summary["manual_evidence_required"])
+        animation_lanes = animation_action["next_execution_lanes"]
+        self.assertEqual(
+            animation_lanes,
+            reports.load_json(reports.ANIMATION_CATEGORY_ACTION_QUEUE)[
+                "next_execution_lanes"
+            ],
+        )
+        self.assertEqual(
+            [lane["lane"] for lane in animation_lanes],
+            [
+                "canonical_category_normalization_review",
+                "folder_visual_token_verification",
+                "normalization_import_template",
+            ],
+        )
+        self.assertEqual(animation_lanes[0]["open_rows"], 36)
+        self.assertEqual(animation_lanes[0]["review_start_rows"], 4)
+        self.assertEqual(animation_lanes[0]["manual_decision_rows"], 4)
+        self.assertEqual(
+            animation_lanes[0]["target_categories"],
+            [["문구", 3], ["가방", 1]],
+        )
+        self.assertEqual(animation_lanes[1]["open_rows"], 36)
+        self.assertEqual(animation_lanes[1]["status"], "ready")
+        self.assertEqual(animation_lanes[1]["color_groups"], [["violet", 3], ["green", 1]])
+        self.assertEqual(animation_lanes[2]["open_rows"], 36)
+        self.assertEqual(animation_lanes[2]["manual_decision_rows"], 4)
+        self.assertEqual(
+            animation_lanes[2]["import_tool"],
+            "tools/import_confirmed_animation_category_rows.py",
+        )
         self.assertEqual(
             {
                 (row["source_category"], row["target_category"])

@@ -1313,6 +1313,69 @@ def build_deduplication_next_execution_lanes(
     return [lane for lane in lanes if lane["open_rows"] > 0]
 
 
+def build_animation_category_next_execution_lanes(
+    animation_action_queue: dict[str, Any],
+) -> list[dict[str, Any]]:
+    summary = animation_action_queue.get("summary", {})
+    blocking_dashboard = animation_action_queue.get("blocking_dashboard", {})
+    normalization_template = animation_action_queue.get(
+        "normalization_confirmation_template",
+        {},
+    )
+    lanes = [
+        {
+            "lane": "canonical_category_normalization_review",
+            "status": "next",
+            "open_rows": int(summary.get("normalization_review_queued_catalog_rows") or 0),
+            "next_batch_rows": int(
+                summary.get("next_normalization_review_batch_catalog_rows") or 0
+            ),
+            "review_start_rows": int(summary.get("next_normalization_review_batch_rows") or 0),
+            "manual_decision_rows": int(normalization_template.get("template_rows") or 0),
+            "next_action": "confirm source categories can be normalized into canonical folder categories",
+            "target_categories": summary.get("next_normalization_review_batch_target_categories", []),
+            "source_categories": summary.get("next_normalization_review_batch_source_categories", []),
+            "preserve_sub_series_rows": int(
+                summary.get("next_normalization_review_batch_preserve_sub_series_rows") or 0
+            ),
+        },
+        {
+            "lane": "folder_visual_token_verification",
+            "status": "ready",
+            "open_rows": int(summary.get("target_visual_token_catalog_rows") or 0),
+            "next_batch_rows": int(summary.get("target_visual_token_rows") or 0),
+            "review_start_rows": int(summary.get("target_visual_token_rows") or 0),
+            "manual_decision_rows": 0,
+            "next_action": "use available sorted folder colors and icons for the normalized categories",
+            "color_groups": summary.get("target_visual_color_groups", []),
+            "icon_keys": summary.get("target_visual_primary_icon_keys", []),
+        },
+        {
+            "lane": "normalization_import_template",
+            "status": "blocked_until_manual_confirmed",
+            "open_rows": int(normalization_template.get("affected_catalog_rows") or 0),
+            "next_batch_rows": int(normalization_template.get("template_rows") or 0),
+            "review_start_rows": int(normalization_template.get("template_rows") or 0),
+            "manual_decision_rows": int(normalization_template.get("template_rows") or 0),
+            "next_action": "set manual_confirmed=true only after canonical category normalization is verified",
+            "confirmed_queue": normalization_template.get(
+                "confirmed_queue",
+                "server/animation_category_confirmed_rows.json",
+            ),
+            "import_tool": normalization_template.get(
+                "import_tool",
+                "tools/import_confirmed_animation_category_rows.py",
+            ),
+        },
+    ]
+    return [
+        lane
+        for lane in lanes
+        if int(lane.get("open_rows") or 0) > 0
+        or blocking_dashboard.get("folder_visual_coverage_ready") is True
+    ]
+
+
 def catalog_currency_invariant_findings(catalog: dict[str, Any]) -> list[str]:
     items = catalog.get("items", [])
     if not isinstance(items, list):
@@ -10051,6 +10114,25 @@ def update_reports(write: bool) -> dict[str, Any]:
         unmatched_keyword_review=animation_unmatched_keyword_review,
         normalization_review=animation_categories,
     )
+    animation_next_execution_lanes = build_animation_category_next_execution_lanes(
+        animation_action_queue,
+    )
+    animation_next_execution_summary = {
+        "lane_count": len(animation_next_execution_lanes),
+        "open_rows": sum(int(lane.get("open_rows") or 0) for lane in animation_next_execution_lanes),
+        "next_batch_rows": sum(
+            int(lane.get("next_batch_rows") or 0) for lane in animation_next_execution_lanes
+        ),
+        "next_safe_phase": (
+            animation_next_execution_lanes[0]["lane"]
+            if animation_next_execution_lanes
+            else "animation_category_cleanup_clear"
+        ),
+        "auto_apply_enabled": False,
+        "manual_evidence_required": bool(animation_next_execution_lanes),
+    }
+    animation_action_queue["next_execution_lanes"] = animation_next_execution_lanes
+    animation_action_queue["next_execution_summary"] = animation_next_execution_summary
     ichiban_kuji_history = build_ichiban_kuji_history_public(items)
     ichiban_metadata_review_batches = load_json(
         ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES,
@@ -11553,6 +11635,14 @@ def update_reports(write: bool) -> dict[str, Any]:
             "normalization_confirmation_template": animation_action_queue.get(
                 "normalization_confirmation_template",
                 {},
+            ),
+            "next_execution_summary": animation_action_queue.get(
+                "next_execution_summary",
+                {},
+            ),
+            "next_execution_lanes": animation_action_queue.get(
+                "next_execution_lanes",
+                [],
             ),
         }
         if ANIMATION_CATEGORY_SPLIT_REVIEW.exists():

@@ -8623,7 +8623,95 @@
         "Confirm folder_color_hex and folder_icon_key exist in the app folder visual catalog.",
         "Copy confirmed rows to server/animation_category_confirmed_rows.json, set manual_confirmed=true, then run tools/import_confirmed_animation_category_rows.py."
       ]
-    }
+    },
+    "next_execution_summary": {
+      "lane_count": 3,
+      "open_rows": 108,
+      "next_batch_rows": 44,
+      "next_safe_phase": "canonical_category_normalization_review",
+      "auto_apply_enabled": false,
+      "manual_evidence_required": true
+    },
+    "next_execution_lanes": [
+      {
+        "lane": "canonical_category_normalization_review",
+        "status": "next",
+        "open_rows": 36,
+        "next_batch_rows": 36,
+        "review_start_rows": 4,
+        "manual_decision_rows": 4,
+        "next_action": "confirm source categories can be normalized into canonical folder categories",
+        "target_categories": [
+          [
+            "문구",
+            3
+          ],
+          [
+            "가방",
+            1
+          ]
+        ],
+        "source_categories": [
+          [
+            "클리어파일",
+            1
+          ],
+          [
+            "카드",
+            1
+          ],
+          [
+            "스티커",
+            1
+          ],
+          [
+            "파우치",
+            1
+          ]
+        ],
+        "preserve_sub_series_rows": 4
+      },
+      {
+        "lane": "folder_visual_token_verification",
+        "status": "ready",
+        "open_rows": 36,
+        "next_batch_rows": 4,
+        "review_start_rows": 4,
+        "manual_decision_rows": 0,
+        "next_action": "use available sorted folder colors and icons for the normalized categories",
+        "color_groups": [
+          [
+            "violet",
+            3
+          ],
+          [
+            "green",
+            1
+          ]
+        ],
+        "icon_keys": [
+          [
+            "sticky_note",
+            3
+          ],
+          [
+            "inventory",
+            1
+          ]
+        ]
+      },
+      {
+        "lane": "normalization_import_template",
+        "status": "blocked_until_manual_confirmed",
+        "open_rows": 36,
+        "next_batch_rows": 4,
+        "review_start_rows": 4,
+        "manual_decision_rows": 4,
+        "next_action": "set manual_confirmed=true only after canonical category normalization is verified",
+        "confirmed_queue": "server/animation_category_confirmed_rows.json",
+        "import_tool": "tools/import_confirmed_animation_category_rows.py"
+      }
+    ]
   },
   "image_asset_audit": {
     "public_report": "data/catalog_image_asset_audit_public.json",
