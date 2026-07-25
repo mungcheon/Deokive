@@ -1226,6 +1226,93 @@ def build_missing_image_next_execution_lanes(
     return [lane for lane in lanes if lane["open_rows"] > 0]
 
 
+def _pair_count(pairs: Any, key: str) -> int:
+    if not isinstance(pairs, list):
+        return 0
+    for pair in pairs:
+        if isinstance(pair, (list, tuple)) and len(pair) >= 2 and pair[0] == key:
+            try:
+                return int(pair[1] or 0)
+            except (TypeError, ValueError):
+                return 0
+    return 0
+
+
+def build_deduplication_next_execution_lanes(
+    dedupe_action_summary: dict[str, Any],
+    deduplication_fast_review: dict[str, Any],
+    deduplication_template_import_dry_run: dict[str, Any],
+) -> list[dict[str, Any]]:
+    fast_summary = deduplication_fast_review.get("summary", {})
+    template_summary = deduplication_template_import_dry_run.get("summary", {})
+    shared_lineup_groups = _pair_count(
+        dedupe_action_summary.get("by_merge_blocker"),
+        "shared_source_or_image_may_represent_lineup",
+    )
+    lanes = [
+        {
+            "lane": "same_barcode_fast_review",
+            "status": "next",
+            "open_rows": int(fast_summary.get("fast_review_groups") or 0),
+            "next_batch_rows": int(fast_summary.get("next_fast_review_batch_groups") or 0),
+            "review_start_rows": int(
+                fast_summary.get("next_fast_review_batch_primary_review_url_groups") or 0
+            ),
+            "manual_decision_rows": int(
+                fast_summary.get("manual_confirmation_patch_template_rows") or 0
+            ),
+            "next_action": "compare barcode, official title, image, and variant before recording keep/drop decisions",
+        },
+        {
+            "lane": "visual_identity_review",
+            "status": "manual_visual_review_required",
+            "open_rows": int(fast_summary.get("image_url_only_same_identity_groups") or 0),
+            "next_batch_rows": int(
+                fast_summary.get("next_fast_review_batch_image_url_only_same_identity_groups") or 0
+            ),
+            "review_start_rows": int(
+                fast_summary.get("next_fast_review_batch_primary_review_url_groups") or 0
+            ),
+            "manual_decision_rows": int(
+                fast_summary.get("manual_confirmation_patch_template_rows") or 0
+            ),
+            "next_action": "open primary review URLs and confirm image differences are retailer mirrors, not variants",
+        },
+        {
+            "lane": "shared_source_or_image_lineup_review",
+            "status": "held_until_identity_review",
+            "open_rows": shared_lineup_groups,
+            "next_batch_rows": 0,
+            "review_start_rows": shared_lineup_groups,
+            "manual_decision_rows": shared_lineup_groups,
+            "next_action": "keep held until lineup, set, or representative image ambiguity is resolved",
+        },
+        {
+            "lane": "ichiban_reissue_identity_review",
+            "status": "blocking_safe_dedupe",
+            "open_rows": int(dedupe_action_summary.get("ichiban_reissue_review_groups") or 0),
+            "next_batch_rows": int(dedupe_action_summary.get("ichiban_reissue_work_order_rows") or 0),
+            "review_start_rows": int(
+                dedupe_action_summary.get("ichiban_reissue_work_orders_with_evidence_urls") or 0
+            ),
+            "manual_decision_rows": int(
+                dedupe_action_summary.get("ichiban_reissue_decision_template_rows") or 0
+            ),
+            "next_action": "verify official 1kuji campaign pages before any repeated-name dedupe import",
+        },
+        {
+            "lane": "manual_keep_drop_import_template",
+            "status": "blocked_until_manual_confirmed",
+            "open_rows": int(dedupe_action_summary.get("explicit_keep_drop_required_groups") or 0),
+            "next_batch_rows": int(template_summary.get("blocked_rows") or 0),
+            "review_start_rows": int(template_summary.get("template_items") or 0),
+            "manual_decision_rows": int(template_summary.get("template_items") or 0),
+            "next_action": "fill manual_confirmed=true only after exact same sellable product evidence is recorded",
+        },
+    ]
+    return [lane for lane in lanes if lane["open_rows"] > 0]
+
+
 def catalog_currency_invariant_findings(catalog: dict[str, Any]) -> list[str]:
     items = catalog.get("items", [])
     if not isinstance(items, list):
@@ -10105,6 +10192,28 @@ def update_reports(write: bool) -> dict[str, Any]:
         deduplication_action_queue,
         generated_at=generated_at,
     )
+    dedupe_next_execution_lanes = build_deduplication_next_execution_lanes(
+        deduplication_action_queue.get("summary", {}),
+        deduplication_fast_review,
+        deduplication_template_import_dry_run,
+    )
+    dedupe_next_execution_summary = {
+        "lane_count": len(dedupe_next_execution_lanes),
+        "open_rows": sum(int(lane.get("open_rows") or 0) for lane in dedupe_next_execution_lanes),
+        "next_batch_rows": sum(
+            int(lane.get("next_batch_rows") or 0) for lane in dedupe_next_execution_lanes
+        ),
+        "next_safe_phase": (
+            dedupe_next_execution_lanes[0]["lane"]
+            if dedupe_next_execution_lanes
+            else "deduplication_clear"
+        ),
+        "auto_merge_enabled": False,
+        "auto_delete_enabled": False,
+        "manual_evidence_required": bool(dedupe_next_execution_lanes),
+    }
+    deduplication_action_queue["next_execution_lanes"] = dedupe_next_execution_lanes
+    deduplication_action_queue["next_execution_summary"] = dedupe_next_execution_summary
     ichiban_kuji_prize_policy_issue_queue = (
         build_ichiban_prize_policy_issue_queue_public.build_queue(
             ichiban_prize_policy_audit_source,
@@ -11340,6 +11449,14 @@ def update_reports(write: bool) -> dict[str, Any]:
                     "completion_readiness",
                     {},
                 ),
+                "next_execution_summary": deduplication_action_queue.get(
+                    "next_execution_summary",
+                    {},
+                ),
+                "next_execution_lanes": deduplication_action_queue.get(
+                    "next_execution_lanes",
+                    [],
+                ),
             }
         elif DEDUPLICATION_ACTION_QUEUE.exists():
             dedupe_action_queue = load_json(DEDUPLICATION_ACTION_QUEUE, {})
@@ -11352,6 +11469,14 @@ def update_reports(write: bool) -> dict[str, Any]:
                 "completion_readiness": dedupe_action_queue.get(
                     "completion_readiness",
                     {},
+                ),
+                "next_execution_summary": dedupe_action_queue.get(
+                    "next_execution_summary",
+                    {},
+                ),
+                "next_execution_lanes": dedupe_action_queue.get(
+                    "next_execution_lanes",
+                    [],
                 ),
             }
         if deduplication_fast_review:

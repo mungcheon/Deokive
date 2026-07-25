@@ -1522,6 +1522,44 @@ class PublicCatalogReportTests(unittest.TestCase):
             )
             self.assertFalse(quality_dedupe_readiness["auto_merge_enabled"])
             self.assertFalse(quality_dedupe_readiness["auto_delete_enabled"])
+            dedupe_next_execution_summary = dedupe_action["next_execution_summary"]
+            self.assertEqual(
+                quality["deduplication_action_queue"]["next_execution_summary"],
+                dedupe_next_execution_summary,
+            )
+            self.assertEqual(dedupe_next_execution_summary["lane_count"], 5)
+            self.assertEqual(dedupe_next_execution_summary["open_rows"], 161)
+            self.assertEqual(dedupe_next_execution_summary["next_batch_rows"], 82)
+            self.assertEqual(
+                dedupe_next_execution_summary["next_safe_phase"],
+                "same_barcode_fast_review",
+            )
+            self.assertFalse(dedupe_next_execution_summary["auto_merge_enabled"])
+            self.assertFalse(dedupe_next_execution_summary["auto_delete_enabled"])
+            self.assertTrue(dedupe_next_execution_summary["manual_evidence_required"])
+            dedupe_lanes = dedupe_action["next_execution_lanes"]
+            self.assertEqual(
+                quality["deduplication_action_queue"]["next_execution_lanes"],
+                dedupe_lanes,
+            )
+            self.assertEqual(
+                [lane["lane"] for lane in dedupe_lanes],
+                [
+                    "same_barcode_fast_review",
+                    "visual_identity_review",
+                    "shared_source_or_image_lineup_review",
+                    "ichiban_reissue_identity_review",
+                    "manual_keep_drop_import_template",
+                ],
+            )
+            self.assertEqual(dedupe_lanes[0]["open_rows"], 42)
+            self.assertEqual(dedupe_lanes[0]["next_batch_rows"], 10)
+            self.assertEqual(dedupe_lanes[1]["open_rows"], 19)
+            self.assertEqual(dedupe_lanes[2]["open_rows"], 6)
+            self.assertEqual(dedupe_lanes[3]["open_rows"], 46)
+            self.assertEqual(dedupe_lanes[3]["next_batch_rows"], 20)
+            self.assertEqual(dedupe_lanes[4]["open_rows"], 48)
+            self.assertEqual(dedupe_lanes[4]["manual_decision_rows"], 42)
             self.assertEqual(quality["deduplication_fast_review"]["fast_review_groups"], 42)
             self.assertEqual(
                 quality["deduplication_fast_review"]["image_url_only_same_identity_groups"],

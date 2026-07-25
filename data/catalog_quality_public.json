@@ -5539,7 +5539,63 @@
       ],
       "next_safe_phase": "verify_ichiban_campaign_pages_before_dedupe",
       "safety_note": "Duplicate evidence can represent retailer mirrors, variants, or reissues. No catalog row may be merged or deleted until an explicit manual keep/drop decision is recorded."
-    }
+    },
+    "next_execution_summary": {
+      "lane_count": 5,
+      "open_rows": 161,
+      "next_batch_rows": 82,
+      "next_safe_phase": "same_barcode_fast_review",
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false,
+      "manual_evidence_required": true
+    },
+    "next_execution_lanes": [
+      {
+        "lane": "same_barcode_fast_review",
+        "status": "next",
+        "open_rows": 42,
+        "next_batch_rows": 10,
+        "review_start_rows": 10,
+        "manual_decision_rows": 10,
+        "next_action": "compare barcode, official title, image, and variant before recording keep/drop decisions"
+      },
+      {
+        "lane": "visual_identity_review",
+        "status": "manual_visual_review_required",
+        "open_rows": 19,
+        "next_batch_rows": 10,
+        "review_start_rows": 10,
+        "manual_decision_rows": 10,
+        "next_action": "open primary review URLs and confirm image differences are retailer mirrors, not variants"
+      },
+      {
+        "lane": "shared_source_or_image_lineup_review",
+        "status": "held_until_identity_review",
+        "open_rows": 6,
+        "next_batch_rows": 0,
+        "review_start_rows": 6,
+        "manual_decision_rows": 6,
+        "next_action": "keep held until lineup, set, or representative image ambiguity is resolved"
+      },
+      {
+        "lane": "ichiban_reissue_identity_review",
+        "status": "blocking_safe_dedupe",
+        "open_rows": 46,
+        "next_batch_rows": 20,
+        "review_start_rows": 20,
+        "manual_decision_rows": 20,
+        "next_action": "verify official 1kuji campaign pages before any repeated-name dedupe import"
+      },
+      {
+        "lane": "manual_keep_drop_import_template",
+        "status": "blocked_until_manual_confirmed",
+        "open_rows": 48,
+        "next_batch_rows": 42,
+        "review_start_rows": 42,
+        "manual_decision_rows": 42,
+        "next_action": "fill manual_confirmed=true only after exact same sellable product evidence is recorded"
+      }
+    ]
   },
   "image_attachment_action_queue": {
     "public_report": "data/catalog_image_attachment_action_queue_public.json",
