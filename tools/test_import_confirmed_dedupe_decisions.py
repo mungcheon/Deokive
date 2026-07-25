@@ -55,6 +55,46 @@ class ImportConfirmedDedupeDecisionsTest(unittest.TestCase):
         self.assertEqual(result["updated"], [])
         self.assertEqual(result["skipped"][0]["reason"], "unsupported_decision")
 
+    def test_campaign_level_review_never_deactivates_seed_rows(self) -> None:
+        campaign_item = _item(
+            patch_row_id="ichiban-campaign-reissue-review-001",
+            campaign_work_order_id="campaign-onep6-onep8",
+            decision="campaign_pair_reissue_keep_all_separate",
+            recommended_decision="campaign_pair_reissue_keep_all_separate",
+            evidence_url="https://1kuji.com/products/onep6",
+            source_urls=[
+                "https://1kuji.com/products/onep6",
+                "https://1kuji.com/products/onep8",
+            ],
+            manual_note="official campaign pages are different waves",
+        )
+
+        result = import_decisions({"items": [campaign_item]}, [_row(10), _row(11)])
+
+        self.assertEqual(result["updated"], [])
+        self.assertTrue(result["seed_rows"][1]["is_active"])
+        self.assertEqual(
+            result["skipped"][0]["reason"],
+            "campaign_level_review_not_importable_as_keep_drop",
+        )
+
+    def test_campaign_level_review_requires_evidence_url(self) -> None:
+        campaign_item = _item(
+            patch_row_id="ichiban-campaign-reissue-review-001",
+            decision="campaign_pair_reissue_keep_all_separate",
+            evidence_url="",
+            manual_note="checked",
+            source_urls=[
+                "https://1kuji.com/products/onep6",
+                "https://1kuji.com/products/onep8",
+            ],
+        )
+
+        result = import_decisions({"items": [campaign_item]}, [_row(10), _row(11)])
+
+        self.assertEqual(result["updated"], [])
+        self.assertEqual(result["skipped"][0]["reason"], "campaign_evidence_url_missing")
+
     def test_rejects_missing_keep_row(self) -> None:
         result = import_decisions({"items": [_item(keep_catalog_index=99)]}, [_row(10), _row(11)])
 

@@ -19,6 +19,12 @@ FALLBACK_QUEUE = SERVER / "catalog_dedupe_confirmed_decisions.template.json"
 DEFAULT_SEED = SERVER / "catalog_seed_from_local.json"
 DEFAULT_REPORT = SERVER / "catalog_dedupe_confirmed_import_report.json"
 ACCEPTED_DECISIONS = {"keep_drop_confirmed", "merge_duplicates", "deactivate_drops"}
+CAMPAIGN_LEVEL_DECISIONS = {
+    "campaign_pair_reissue_keep_all_separate",
+    "campaign_pair_duplicate_review_each_item_keep_drop",
+    "needs_more_source_evidence",
+    "review_required",
+}
 
 
 def _confirmed(value: Any) -> bool:
@@ -35,6 +41,38 @@ def _int_list(value: Any) -> list[int]:
         if isinstance(item, int) and not isinstance(item, bool):
             out.append(item)
     return out
+
+
+def _text(value: Any) -> str:
+    return str(value or "").strip()
+
+
+def _is_campaign_level_review(item: dict[str, Any]) -> bool:
+    decision = _text(item.get("decision"))
+    if decision.startswith("campaign_pair_"):
+        return True
+    if _text(item.get("patch_row_id")).startswith("ichiban-campaign-reissue-review-"):
+        return True
+    if item.get("campaign_work_order_id") or item.get("campaign_slugs"):
+        return True
+    return False
+
+
+def _campaign_level_skip_reason(item: dict[str, Any]) -> str:
+    decision = _text(item.get("decision"))
+    if decision not in CAMPAIGN_LEVEL_DECISIONS:
+        return "campaign_decision_required"
+    if decision in {"review_required", "needs_more_source_evidence"}:
+        return "campaign_relationship_not_confirmed"
+    if not _text(item.get("evidence_url")):
+        return "campaign_evidence_url_missing"
+    if not _text(item.get("manual_note")):
+        return "campaign_manual_note_missing"
+    source_urls = item.get("source_urls")
+    source_url_count = sum(1 for url in source_urls or [] if _text(url)) if isinstance(source_urls, list) else 0
+    if source_url_count < 2:
+        return "campaign_source_url_pair_missing"
+    return "campaign_level_review_not_importable_as_keep_drop"
 
 
 def _iter_items(raw_queue: Any) -> list[dict[str, Any]]:
@@ -74,15 +112,21 @@ def import_decisions(
         keep_index = item.get("keep_catalog_index")
         drop_indexes = _int_list(item.get("drop_catalog_indexes"))
         base = {
+            "patch_row_id": item.get("patch_row_id"),
             "key_type": item.get("key_type"),
             "key": item.get("key"),
             "keep_catalog_index": keep_index,
             "drop_catalog_indexes": drop_indexes,
+            "campaign_work_order_id": item.get("campaign_work_order_id"),
+            "recommended_decision": item.get("recommended_decision"),
         }
         if not _confirmed(item.get("manual_confirmed")):
             skipped.append({**base, "reason": "manual_confirmed_false"})
             continue
-        decision = str(item.get("decision") or "").strip()
+        decision = _text(item.get("decision"))
+        if _is_campaign_level_review(item):
+            skipped.append({**base, "reason": _campaign_level_skip_reason(item), "decision": decision})
+            continue
         if decision not in ACCEPTED_DECISIONS:
             skipped.append({**base, "reason": "unsupported_decision", "decision": decision})
             continue
