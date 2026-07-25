@@ -10276,6 +10276,10 @@ def update_reports(write: bool) -> dict[str, Any]:
         target["source_discovery_next_focus_exact_url_review_queue"] = {
             "public_report": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_QUEUE.name}",
             **source_discovery_next_focus_exact_url_queue["summary"],
+            "source_url_confirmation_patch_template": source_discovery_next_focus_exact_url_queue.get(
+                "source_url_confirmation_patch_template",
+                {},
+            ),
         }
         if source_discovery_next_focus_exact_url_candidate_audit.get("summary"):
             target["source_discovery_next_focus_exact_url_candidate_audit"] = {

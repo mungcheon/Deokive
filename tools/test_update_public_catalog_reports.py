@@ -982,6 +982,33 @@ class PublicCatalogReportTests(unittest.TestCase):
             ],
             fallback_queue_rows,
         )
+        exact_url_patch_template = quality[
+            "source_discovery_next_focus_exact_url_review_queue"
+        ]["source_url_confirmation_patch_template"]
+        self.assertEqual(
+            exact_url_patch_template["status"],
+            "manual_exact_source_url_confirmation_required",
+        )
+        self.assertEqual(
+            exact_url_patch_template["template_rows"],
+            min(
+                10,
+                quality["source_discovery_next_focus_exact_url_review_queue"][
+                    "queue_rows"
+                ],
+            ),
+        )
+        self.assertEqual(exact_url_patch_template["ready_to_import_rows"], 0)
+        self.assertEqual(
+            exact_url_patch_template["blocked_rows"],
+            exact_url_patch_template["template_rows"],
+        )
+        self.assertIs(exact_url_patch_template["auto_apply_enabled"], False)
+        if exact_url_patch_template["template_rows"]:
+            first_patch_row = exact_url_patch_template["rows"][0]
+            self.assertIn("catalog_index", first_patch_row)
+            self.assertEqual(first_patch_row["manual_confirmed_source_url"], "")
+            self.assertIn("ready_condition", first_patch_row)
         if "source_discovery_next_focus_exact_url_candidate_audit" in quality:
             self.assertEqual(
                 quality["source_discovery_next_focus_exact_url_candidate_audit"]["queue_rows"],

@@ -186,6 +186,72 @@ def _exact_item(row: dict[str, Any], fetch_audit_by_index: dict[int, dict[str, A
     }
 
 
+def _source_url_patch_row(item: dict[str, Any], index: int) -> dict[str, Any]:
+    candidate_links = [
+        str(link).strip()
+        for link in item.get("candidate_detail_links") or []
+        if str(link).strip()
+    ]
+    guidance = item.get("source_url_review_guidance") or {}
+    return {
+        "patch_row_id": f"source-discovery-exact-url-review-{index + 1:03d}",
+        "catalog_index": item.get("catalog_index"),
+        "manual_confirmed": False,
+        "manual_confirmed_source_url": "",
+        "manual_confirmed_image_url": "",
+        "manual_evidence_url": "",
+        "manual_note": "",
+        "source_store": item.get("source_store"),
+        "category": item.get("category"),
+        "name_ko": item.get("name_ko"),
+        "name_ja": item.get("name_ja"),
+        "primary_review_url": item.get("primary_review_url"),
+        "primary_review_url_kind": item.get("primary_review_url_kind"),
+        "fallback_store_search_url": item.get("fallback_store_search_url"),
+        "candidate_detail_links": candidate_links[:5],
+        "candidate_detail_link_review_status": item.get("candidate_detail_link_review_status") or "",
+        "candidate_detail_link_warning": item.get("candidate_detail_link_warning") or "",
+        "allowed_source_domains": guidance.get("allowed_source_domains") or [],
+        "accepted_source_url_patterns": guidance.get("accepted_source_url_patterns") or [],
+        "rejected_source_url_patterns": guidance.get("rejected_source_url_patterns") or [],
+        "confirmation_checks": guidance.get("confirmation_checks") or [],
+        "ready_condition": (
+            "Set manual_confirmed=true only after manual_confirmed_source_url is an exact product detail page "
+            "for this catalog row. manual_confirmed_image_url must come from that confirmed page or a direct "
+            "product image referenced by it."
+        ),
+        "auto_apply_enabled": False,
+    }
+
+
+def _source_url_patch_template(items: list[dict[str, Any]], *, limit: int = 10) -> dict[str, Any]:
+    rows = [_source_url_patch_row(item, index) for index, item in enumerate(items[:limit])]
+    candidate_rows = sum(1 for row in rows if row.get("candidate_detail_links"))
+    return {
+        "status": "manual_exact_source_url_confirmation_required",
+        "template_rows": len(rows),
+        "ready_to_import_rows": sum(
+            1
+            for row in rows
+            if row.get("manual_confirmed") is True and row.get("manual_confirmed_source_url")
+        ),
+        "blocked_rows": sum(
+            1
+            for row in rows
+            if not (row.get("manual_confirmed") is True and row.get("manual_confirmed_source_url"))
+        ),
+        "candidate_detail_link_rows": candidate_rows,
+        "candidate_detail_link_coverage": round(candidate_rows / len(rows), 4) if rows else 0.0,
+        "manual_image_url_slot_rows": len(rows),
+        "auto_apply_enabled": False,
+        "import_tool": "tools/import_confirmed_source_discovery_rows.py",
+        "dry_run_command": "python -m tools.import_confirmed_source_discovery_rows --queue server/source_discovery_confirmed_rows.json",
+        "import_command": "python -m tools.import_confirmed_source_discovery_rows --queue server/source_discovery_confirmed_rows.json --write",
+        "target_file": "server/source_discovery_confirmed_rows.json",
+        "rows": rows,
+    }
+
+
 def _identity_item(row: dict[str, Any]) -> dict[str, Any]:
     primary_review_url, primary_review_url_kind = _primary_review_url(row)
     return {
@@ -278,6 +344,7 @@ def build_reports(
             "auto_apply_image_url": False,
             "requires_manual_review": True,
         },
+        "source_url_confirmation_patch_template": _source_url_patch_template(exact_items),
         "items": exact_items,
     }
     identity_report = {
