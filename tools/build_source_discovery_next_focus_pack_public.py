@@ -317,7 +317,26 @@ def build_report(
         for item in template.get("items") or []
         if isinstance(item, dict) and item.get("focus_pack_id") == focus_pack_id
     ]
+    recommended_active_focus_pack_id = (
+        cache_miss_resolution.get("recommended_active_focus_pack_id")
+        if cache_miss_resolution
+        else None
+    )
+    recommended_active_items = [
+        _compact_item(item)
+        for item in template.get("items") or []
+        if isinstance(item, dict)
+        and recommended_active_focus_pack_id
+        and item.get("focus_pack_id") == recommended_active_focus_pack_id
+    ]
     official_search_urls = sorted({str(item.get("official_search_url")) for item in items if item.get("official_search_url")})
+    recommended_active_official_search_urls = sorted(
+        {
+            str(item.get("official_search_url"))
+            for item in recommended_active_items
+            if item.get("official_search_url")
+        }
+    )
     blocked_reason_counts = Counter(str(item.get("blocked_reason") or "") for item in items)
     blocked_until_counts = Counter(str(item.get("blocked_until") or "") for item in items)
     template_items = (template.get("summary") or {}).get("template_items", 0)
@@ -366,9 +385,11 @@ def build_report(
                 cache_miss_resolution.get("reason") if cache_miss_resolution else None
             ),
             "recommended_active_focus_pack_id": (
-                cache_miss_resolution.get("recommended_active_focus_pack_id")
-                if cache_miss_resolution
-                else None
+                recommended_active_focus_pack_id
+            ),
+            "recommended_active_pack_items": len(recommended_active_items),
+            "recommended_active_official_search_url_count": len(
+                recommended_active_official_search_urls
             ),
             "current_focus_cache_cross_check": (
                 cache_miss_resolution.get("cache_cross_check")
@@ -392,7 +413,9 @@ def build_report(
         "pack_queue_preview": pack_queue_preview,
         "focus_pack_progress_queue": focus_pack_progress_queue,
         "official_search_urls": official_search_urls,
+        "recommended_active_official_search_urls": recommended_active_official_search_urls,
         "items": items,
+        "recommended_active_items": recommended_active_items,
         "automation_policy": {
             "auto_apply_source_url": False,
             "auto_apply_image_url": False,

@@ -280,6 +280,7 @@ class BuildSourceDiscoveryNextFocusPackPublicTest(unittest.TestCase):
             report["summary"]["recommended_active_focus_pack_id"],
             "source-discovery-focus-002",
         )
+        self.assertEqual(report["summary"]["recommended_active_pack_items"], 1)
         self.assertEqual(
             report["summary"]["current_focus_cache_cross_check"]["safe_exact_match_rows"],
             0,
@@ -299,6 +300,10 @@ class BuildSourceDiscoveryNextFocusPackPublicTest(unittest.TestCase):
         )
         self.assertTrue(report["pack_queue_preview"][1]["is_recommended_active_pack"])
         self.assertEqual([item["catalog_index"] for item in report["items"]], [10, 11])
+        self.assertEqual(
+            [item["catalog_index"] for item in report["recommended_active_items"]],
+            [12],
+        )
 
     def test_build_report_preserves_unicode_catalog_fields(self) -> None:
         template = {
