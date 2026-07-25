@@ -1530,6 +1530,7 @@ class PublicCatalogReportTests(unittest.TestCase):
                 "confirm_current_focus_pack_source_urls",
                 "review_fallback_queue_and_fill_exact_manual_confirmed_source_urls",
                 "ignore_rejected_samples_and_run_exact_source_search",
+                "rotate_to_next_focus_pack_or_manual_source_research_current_pack",
             },
         )
         self.assertEqual(

@@ -28,6 +28,8 @@ IMAGE_ATTACHMENT_REQUIRED_EVIDENCE = [
     "image_url_from_allowed_domain_or_official_cdn",
     "image_identity_matches_catalog_row",
 ]
+CACHE_MISS_RESOLUTION_STATUS = "manual_source_search_required_after_official_cache_miss"
+QUARANTINED_REVIEW_STATUS = "manual_quarantine_cache_miss"
 
 
 def now_utc() -> str:
@@ -112,17 +114,35 @@ def _next_work_order(template: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _pack_queue_preview(template: dict[str, Any], focus_pack_id: Any, *, limit: int = 8) -> list[dict[str, Any]]:
-    rows = _focus_pack_progress_queue(template, focus_pack_id)
+def _pack_queue_preview(
+    template: dict[str, Any],
+    focus_pack_id: Any,
+    *,
+    limit: int = 8,
+    cache_miss_resolution: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    rows = _focus_pack_progress_queue(
+        template,
+        focus_pack_id,
+        cache_miss_resolution=cache_miss_resolution,
+    )
     return rows[:limit]
 
 
-def _focus_pack_progress_queue(template: dict[str, Any], focus_pack_id: Any) -> list[dict[str, Any]]:
+def _focus_pack_progress_queue(
+    template: dict[str, Any],
+    focus_pack_id: Any,
+    *,
+    cache_miss_resolution: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
     progress = _pack_progress(template)
     rows: list[dict[str, Any]] = []
     work_order = template.get("work_order")
     if not isinstance(work_order, list):
         return rows
+    cache_miss_resolution = cache_miss_resolution or {}
+    quarantined_pack_id = str(cache_miss_resolution.get("focus_pack_id") or "")
+    recommended_pack_id = str(cache_miss_resolution.get("recommended_active_focus_pack_id") or "")
 
     for row in work_order:
         if not isinstance(row, dict):
@@ -136,11 +156,20 @@ def _focus_pack_progress_queue(template: dict[str, Any], focus_pack_id: Any) -> 
         )
         if row.get("review_status") == "completed" or remaining <= 0:
             continue
-        rows.append(
-            {
+        is_quarantined = bool(quarantined_pack_id and pack_id == quarantined_pack_id)
+        is_recommended_active = bool(recommended_pack_id and pack_id == recommended_pack_id)
+        review_status = "in_progress" if stats.get("confirmed") else row.get("review_status")
+        if is_quarantined:
+            review_status = QUARANTINED_REVIEW_STATUS
+        item = {
                 "priority": row.get("priority"),
                 "focus_pack_id": row.get("focus_pack_id"),
                 "is_current_pack": pack_id == str(focus_pack_id or ""),
+                "is_recommended_active_pack": is_recommended_active,
+                "manual_quarantine": is_quarantined,
+                "quarantine_reason": (
+                    cache_miss_resolution.get("reason") if is_quarantined else None
+                ),
                 "source_store": row.get("source_store"),
                 "target_category": row.get("target_category"),
                 "row_count": int(stats.get("items") or row.get("row_count") or 0),
@@ -150,11 +179,51 @@ def _focus_pack_progress_queue(template: dict[str, Any], focus_pack_id: Any) -> 
                 "blocked_reason": row.get("blocked_reason") or SOURCE_DISCOVERY_BLOCKED_REASON,
                 "blocked_until": row.get("blocked_until") or SOURCE_DISCOVERY_BLOCKED_UNTIL,
                 "required_evidence": row.get("required_evidence") or SOURCE_DISCOVERY_REQUIRED_EVIDENCE,
-                "review_status": "in_progress" if stats.get("confirmed") else row.get("review_status"),
+                "review_status": review_status,
                 "first_official_search_url": row.get("first_official_search_url"),
             }
-        )
+        if is_quarantined:
+            item["resolution_status"] = CACHE_MISS_RESOLUTION_STATUS
+            item["cache_cross_check"] = cache_miss_resolution.get("cache_cross_check")
+            item["next_action"] = (
+                "hold for manual exact source research; do not auto-import broad/cache candidates"
+            )
+        elif is_recommended_active:
+            item["next_action"] = "open this focus pack next while the previous pack is quarantined"
+        rows.append(item)
     return rows
+
+
+def _current_focus_cache_miss_resolution(
+    exact_url_candidate_audit: dict[str, Any] | None,
+    next_pack: dict[str, Any],
+) -> dict[str, Any] | None:
+    if not isinstance(exact_url_candidate_audit, dict):
+        return None
+    summary = exact_url_candidate_audit.get("summary")
+    if not isinstance(summary, dict):
+        return None
+    queue_rows = int(summary.get("queue_rows") or 0)
+    cross_checked_rows = int(summary.get("ensky_cache_cross_checked_rows") or 0)
+    safe_exact_rows = int(summary.get("ensky_cache_safe_exact_match_rows") or 0)
+    current_rows = int(next_pack.get("remaining_review_rows") or next_pack.get("row_count") or 0)
+    if not queue_rows or not current_rows:
+        return None
+    if queue_rows != current_rows or cross_checked_rows < queue_rows or safe_exact_rows:
+        return None
+    return {
+        "focus_pack_id": next_pack.get("focus_pack_id"),
+        "reason": "official_cache_safe_exact_match_absent",
+        "resolution_status": CACHE_MISS_RESOLUTION_STATUS,
+        "cache_cross_check": {
+            "cross_checked_rows": cross_checked_rows,
+            "safe_exact_match_rows": safe_exact_rows,
+            "broad_candidate_rows": int(summary.get("ensky_cache_broad_candidate_rows") or 0),
+            "no_candidate_rows": int(summary.get("ensky_cache_no_candidate_rows") or 0),
+            "status_counts": summary.get("ensky_cache_status_counts", []),
+            "auto_apply_enabled": False,
+        },
+    }
 
 
 def _compact_item(item: dict[str, Any]) -> dict[str, Any]:
@@ -209,11 +278,40 @@ def _compact_item(item: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def build_report(template: dict[str, Any], *, generated_at: str | None = None) -> dict[str, Any]:
+def build_report(
+    template: dict[str, Any],
+    *,
+    generated_at: str | None = None,
+    exact_url_candidate_audit: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     next_pack = _next_work_order(template)
     focus_pack_id = next_pack.get("focus_pack_id")
-    focus_pack_progress_queue = _focus_pack_progress_queue(template, focus_pack_id)
-    pack_queue_preview = _pack_queue_preview(template, focus_pack_id)
+    cache_miss_resolution = _current_focus_cache_miss_resolution(
+        exact_url_candidate_audit,
+        next_pack,
+    )
+    focus_pack_progress_queue = _focus_pack_progress_queue(
+        template,
+        focus_pack_id,
+        cache_miss_resolution=cache_miss_resolution,
+    )
+    if cache_miss_resolution:
+        for row in focus_pack_progress_queue:
+            if not row.get("manual_quarantine"):
+                cache_miss_resolution["recommended_active_focus_pack_id"] = row.get(
+                    "focus_pack_id"
+                )
+                break
+        focus_pack_progress_queue = _focus_pack_progress_queue(
+            template,
+            focus_pack_id,
+            cache_miss_resolution=cache_miss_resolution,
+        )
+    pack_queue_preview = _pack_queue_preview(
+        template,
+        focus_pack_id,
+        cache_miss_resolution=cache_miss_resolution,
+    )
     items = [
         _compact_item(item)
         for item in template.get("items") or []
@@ -258,6 +356,25 @@ def build_report(template: dict[str, Any], *, generated_at: str | None = None) -
                 if len(pack_queue_preview) > 1
                 else None
             ),
+            "current_focus_resolution_status": (
+                cache_miss_resolution.get("resolution_status")
+                if cache_miss_resolution
+                else None
+            ),
+            "current_focus_manual_quarantine": bool(cache_miss_resolution),
+            "current_focus_quarantine_reason": (
+                cache_miss_resolution.get("reason") if cache_miss_resolution else None
+            ),
+            "recommended_active_focus_pack_id": (
+                cache_miss_resolution.get("recommended_active_focus_pack_id")
+                if cache_miss_resolution
+                else None
+            ),
+            "current_focus_cache_cross_check": (
+                cache_miss_resolution.get("cache_cross_check")
+                if cache_miss_resolution
+                else None
+            ),
             "auto_apply_enabled": False,
         },
         "instructions": [
@@ -267,6 +384,11 @@ def build_report(template: dict[str, Any], *, generated_at: str | None = None) -
             "Run tools/import_confirmed_source_discovery_rows.py as a dry run before any write.",
         ],
         "next_pack": next_pack,
+        "current_focus_resolution": cache_miss_resolution,
+        "recommended_active_pack": next(
+            (row for row in focus_pack_progress_queue if row.get("is_recommended_active_pack")),
+            None,
+        ),
         "pack_queue_preview": pack_queue_preview,
         "focus_pack_progress_queue": focus_pack_progress_queue,
         "official_search_urls": official_search_urls,

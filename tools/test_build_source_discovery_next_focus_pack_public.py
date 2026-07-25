@@ -203,6 +203,103 @@ class BuildSourceDiscoveryNextFocusPackPublicTest(unittest.TestCase):
         self.assertEqual(report["focus_pack_progress_queue"][0]["focus_pack_id"], "source-discovery-focus-002")
         self.assertEqual([item["catalog_index"] for item in report["items"]], [12])
 
+    def test_build_report_marks_cache_miss_pack_quarantined(self) -> None:
+        template = {
+            "summary": {"template_items": 3, "work_order_pack_count": 2},
+            "work_order": [
+                {
+                    "priority": 1,
+                    "focus_pack_id": "source-discovery-focus-001",
+                    "source_store": "Ensky",
+                    "row_count": 2,
+                    "review_status": "not_started",
+                    "remaining_review_rows": 2,
+                    "target_category": "Keychain",
+                },
+                {
+                    "priority": 2,
+                    "focus_pack_id": "source-discovery-focus-002",
+                    "source_store": "Ensky",
+                    "row_count": 1,
+                    "review_status": "not_started",
+                    "remaining_review_rows": 1,
+                    "target_category": "Keychain",
+                },
+            ],
+            "items": [
+                {
+                    "focus_pack_id": "source-discovery-focus-001",
+                    "catalog_index": 10,
+                    "source_store": "Ensky",
+                    "category": "Keychain",
+                    "name_ko": "Keychain A",
+                },
+                {
+                    "focus_pack_id": "source-discovery-focus-001",
+                    "catalog_index": 11,
+                    "source_store": "Ensky",
+                    "category": "Keychain",
+                    "name_ko": "Keychain B",
+                },
+                {
+                    "focus_pack_id": "source-discovery-focus-002",
+                    "catalog_index": 12,
+                    "source_store": "Ensky",
+                    "category": "Keychain",
+                    "name_ko": "Keychain C",
+                },
+            ],
+        }
+        audit = {
+            "summary": {
+                "queue_rows": 2,
+                "ensky_cache_cross_checked_rows": 2,
+                "ensky_cache_safe_exact_match_rows": 0,
+                "ensky_cache_broad_candidate_rows": 1,
+                "ensky_cache_no_candidate_rows": 1,
+                "ensky_cache_status_counts": [
+                    ["broad_cache_candidate", 1],
+                    ["no_cache_candidate", 1],
+                ],
+            }
+        }
+
+        report = builder.build_report(
+            template,
+            generated_at="2026-07-22T00:00:00Z",
+            exact_url_candidate_audit=audit,
+        )
+
+        self.assertEqual(report["summary"]["focus_pack_id"], "source-discovery-focus-001")
+        self.assertTrue(report["summary"]["current_focus_manual_quarantine"])
+        self.assertEqual(
+            report["summary"]["current_focus_resolution_status"],
+            "manual_source_search_required_after_official_cache_miss",
+        )
+        self.assertEqual(
+            report["summary"]["recommended_active_focus_pack_id"],
+            "source-discovery-focus-002",
+        )
+        self.assertEqual(
+            report["summary"]["current_focus_cache_cross_check"]["safe_exact_match_rows"],
+            0,
+        )
+        self.assertEqual(
+            report["current_focus_resolution"]["reason"],
+            "official_cache_safe_exact_match_absent",
+        )
+        self.assertEqual(
+            report["recommended_active_pack"]["focus_pack_id"],
+            "source-discovery-focus-002",
+        )
+        self.assertTrue(report["pack_queue_preview"][0]["manual_quarantine"])
+        self.assertEqual(
+            report["pack_queue_preview"][0]["review_status"],
+            "manual_quarantine_cache_miss",
+        )
+        self.assertTrue(report["pack_queue_preview"][1]["is_recommended_active_pack"])
+        self.assertEqual([item["catalog_index"] for item in report["items"]], [10, 11])
+
     def test_build_report_preserves_unicode_catalog_fields(self) -> None:
         template = {
             "summary": {"template_items": 1, "work_order_pack_count": 1},

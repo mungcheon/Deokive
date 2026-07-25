@@ -11089,6 +11089,12 @@ def update_reports(write: bool) -> dict[str, Any]:
     source_discovery_next_focus_pack = build_source_discovery_next_focus_pack_public.build_report(
         source_discovery_focus_template,
         generated_at=generated_at,
+        exact_url_candidate_audit=load_json(
+            SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_CANDIDATE_AUDIT,
+            {},
+        )
+        if SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_CANDIDATE_AUDIT.exists()
+        else {},
     )
     source_discovery_next_focus_pack_import = build_source_discovery_import_dry_run_public(
         source_discovery_next_focus_pack,
