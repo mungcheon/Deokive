@@ -427,6 +427,33 @@ def _campaign_template(
             )
             or [],
         }
+    template = {
+        **template,
+        "recommended_decision": campaign_decision_guidance.get(
+            "recommended_first_decision"
+        ),
+        "recommended_decision_reason": (
+            "local_catalog_evidence_supports_keep_separate"
+            if campaign_decision_guidance.get(
+                "local_catalog_evidence_supports_keep_separate"
+            )
+            else "campaign_url_family_requires_manual_reissue_review"
+            if comparison.get("likely_same_campaign_family_reissue")
+            else "official_campaign_evidence_required"
+        ),
+        "required_evidence": campaign_decision_guidance.get("required_evidence")
+        or [],
+        "local_catalog_evidence_signals": catalog_evidence.get(
+            "reissue_evidence_signals"
+        )
+        or [],
+        "price_policy_blocks_keep_drop": bool(
+            campaign_decision_guidance.get("price_policy_blocks_keep_drop")
+        ),
+        "manual_review_required_before_mutation": True,
+        "auto_merge_enabled": False,
+        "auto_delete_enabled": False,
+    }
     return {
         "campaign_work_order_id": row.get("campaign_work_order_id"),
         "priority": row.get("priority"),

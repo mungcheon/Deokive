@@ -146,6 +146,34 @@ class IchibanReissueDecisionTemplateTests(unittest.TestCase):
         self.assertEqual(report["campaign_templates"][0]["decision"], "")
         self.assertEqual(report["item_templates"][0]["decision"], "")
         self.assertEqual(
+            report["campaign_templates"][0]["decision_template"][
+                "recommended_decision"
+            ],
+            "campaign_pair_reissue_keep_all_separate",
+        )
+        self.assertEqual(
+            report["campaign_templates"][0]["decision_template"][
+                "recommended_decision_reason"
+            ],
+            "campaign_url_family_requires_manual_reissue_review",
+        )
+        self.assertIn(
+            "official campaign title on every source URL",
+            report["campaign_templates"][0]["decision_template"][
+                "required_evidence"
+            ],
+        )
+        self.assertTrue(
+            report["campaign_templates"][0]["decision_template"][
+                "price_policy_blocks_keep_drop"
+            ]
+        )
+        self.assertFalse(
+            report["campaign_templates"][0]["decision_template"][
+                "auto_merge_enabled"
+            ]
+        )
+        self.assertEqual(
             report["campaign_templates"][0]["affected_item_work_order_ids"],
             ["item-001", "item-002"],
         )

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-25T03:41:22Z",
+  "generated_at": "2026-07-25T05:55:02Z",
   "scope": "ichiban_kuji_reissue_decision_template",
   "source_report": "data/catalog_deduplication_action_queue_public.json",
   "summary": {
@@ -1368,7 +1368,26 @@
           "https://1kuji.com/products/onep6",
           "https://1kuji.com/products/onep8"
         ],
-        "manual_note": ""
+        "manual_note": "",
+        "recommended_decision": "campaign_pair_reissue_keep_all_separate",
+        "recommended_decision_reason": "local_catalog_evidence_supports_keep_separate",
+        "required_evidence": [
+          "official campaign title on every source URL",
+          "sale or release period on every source URL",
+          "full prize lineup compared by rank",
+          "same-rank prize item names compared",
+          "variant names checked when one rank contains multiple kinds",
+          "non-exception official price confirmed or explicitly left unknown"
+        ],
+        "local_catalog_evidence_signals": [
+          "release_date_differs_by_source_url",
+          "image_url_differs_by_source_url",
+          "local_image_path_differs_by_source_url"
+        ],
+        "price_policy_blocks_keep_drop": true,
+        "manual_review_required_before_mutation": true,
+        "auto_merge_enabled": false,
+        "auto_delete_enabled": false
       },
       "manual_confirmed": false,
       "decision": "",
@@ -2279,7 +2298,25 @@
           "https://1kuji.com/products/kimetsu",
           "https://1kuji.com/products/kimetsu2"
         ],
-        "manual_note": ""
+        "manual_note": "",
+        "recommended_decision": "campaign_pair_reissue_keep_all_separate",
+        "recommended_decision_reason": "local_catalog_evidence_supports_keep_separate",
+        "required_evidence": [
+          "official campaign title on every source URL",
+          "sale or release period on every source URL",
+          "full prize lineup compared by rank",
+          "same-rank prize item names compared",
+          "variant names checked when one rank contains multiple kinds"
+        ],
+        "local_catalog_evidence_signals": [
+          "release_date_differs_by_source_url",
+          "image_url_differs_by_source_url",
+          "local_image_path_differs_by_source_url"
+        ],
+        "price_policy_blocks_keep_drop": false,
+        "manual_review_required_before_mutation": true,
+        "auto_merge_enabled": false,
+        "auto_delete_enabled": false
       },
       "manual_confirmed": false,
       "decision": "",
@@ -3033,7 +3070,25 @@
           "https://1kuji.com/products/naruto_wcf",
           "https://1kuji.com/products/naruto_wcf2"
         ],
-        "manual_note": ""
+        "manual_note": "",
+        "recommended_decision": "campaign_pair_reissue_keep_all_separate",
+        "recommended_decision_reason": "local_catalog_evidence_supports_keep_separate",
+        "required_evidence": [
+          "official campaign title on every source URL",
+          "sale or release period on every source URL",
+          "full prize lineup compared by rank",
+          "same-rank prize item names compared",
+          "variant names checked when one rank contains multiple kinds"
+        ],
+        "local_catalog_evidence_signals": [
+          "release_date_differs_by_source_url",
+          "image_url_differs_by_source_url",
+          "local_image_path_differs_by_source_url"
+        ],
+        "price_policy_blocks_keep_drop": false,
+        "manual_review_required_before_mutation": true,
+        "auto_merge_enabled": false,
+        "auto_delete_enabled": false
       },
       "manual_confirmed": false,
       "decision": "",
@@ -3516,7 +3571,26 @@
           "https://1kuji.com/products/haikyu4",
           "https://1kuji.com/products/haikyu8"
         ],
-        "manual_note": ""
+        "manual_note": "",
+        "recommended_decision": "campaign_pair_reissue_keep_all_separate",
+        "recommended_decision_reason": "local_catalog_evidence_supports_keep_separate",
+        "required_evidence": [
+          "official campaign title on every source URL",
+          "sale or release period on every source URL",
+          "full prize lineup compared by rank",
+          "same-rank prize item names compared",
+          "variant names checked when one rank contains multiple kinds",
+          "Last One or Double Chance rows keep official_price_jpy=0"
+        ],
+        "local_catalog_evidence_signals": [
+          "release_date_differs_by_source_url",
+          "image_url_differs_by_source_url",
+          "local_image_path_differs_by_source_url"
+        ],
+        "price_policy_blocks_keep_drop": false,
+        "manual_review_required_before_mutation": true,
+        "auto_merge_enabled": false,
+        "auto_delete_enabled": false
       },
       "manual_confirmed": false,
       "decision": "",
