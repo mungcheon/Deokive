@@ -1456,6 +1456,36 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(source_lanes[2]["open_rows"], 667)
         self.assertEqual(source_lanes[3]["open_rows"], 50)
         self.assertEqual(source_lanes[4]["open_rows"], 73)
+        source_handoff = source_roadmap["operator_handoff"]
+        self.assertEqual(
+            quality["source_discovery_completion_roadmap"]["operator_handoff"],
+            source_handoff,
+        )
+        self.assertEqual(
+            source_handoff["status"],
+            source_roadmap["completion_readiness"]["status"],
+        )
+        self.assertEqual(source_handoff["current_lane"], "exact_source_url_review")
+        self.assertEqual(source_handoff["current_focus_pack_id"], "source-discovery-focus-001")
+        self.assertEqual(source_handoff["current_focus_remaining_rows"], 20)
+        self.assertEqual(source_handoff["safe_candidate_detail_link_rows"], 0)
+        self.assertEqual(source_handoff["all_sample_candidates_rejected_rows"], 20)
+        self.assertFalse(source_handoff["safety_policy"]["auto_import_source_url"])
+        self.assertFalse(source_handoff["safety_policy"]["auto_import_image_url"])
+        self.assertTrue(
+            source_handoff["safety_policy"][
+                "reject_broad_search_or_storefront_urls"
+            ]
+        )
+        self.assertEqual(
+            [step["lane"] for step in source_handoff["handoff_steps"]],
+            [
+                "exact_source_url_review",
+                "metadata_field_confirmation",
+                "image_attachment_after_source_confirmation",
+            ],
+        )
+        self.assertEqual(source_handoff["handoff_steps"][0]["next_batch_rows"], 20)
         self.assertGreaterEqual(quality["source_discovery_completion_roadmap"]["top_10_store_coverage"], 0.8)
         self.assertIs(quality["source_discovery_completion_roadmap"]["auto_apply_enabled"], False)
         self.assertEqual(quality["ensky_cache_coverage"]["missing_ensky_image_rows"], 142)

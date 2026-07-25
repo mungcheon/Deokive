@@ -13465,7 +13465,81 @@
         "public_report": "data/catalog_image_attachment_action_queue_public.json",
         "next_action": "attach image URLs only after exact source page and image identity are confirmed"
       }
-    ]
+    ],
+    "operator_handoff": {
+      "status": "current_focus_fallback_review_required",
+      "current_lane": "exact_source_url_review",
+      "current_review_section": "source_discovery_next_focus_exact_url_review_queue",
+      "current_focus_pack_id": "source-discovery-focus-001",
+      "queued_source_rows": 667,
+      "current_focus_remaining_rows": 20,
+      "safe_candidate_detail_link_rows": 0,
+      "all_sample_candidates_rejected_rows": 20,
+      "next_safe_phase": "ignore_rejected_samples_and_run_exact_source_search",
+      "blocked_reasons": [
+        "sample_candidate_links_rejected"
+      ],
+      "handoff_steps": [
+        {
+          "step": 1,
+          "lane": "exact_source_url_review",
+          "status": "manual_exact_source_url_search_required",
+          "next_batch_rows": 20,
+          "review_section": "source_discovery_next_focus_exact_url_review_queue",
+          "write_template_section": "source_url_confirmation_patch_template.rows",
+          "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+          "first_primary_review_url_kind": "domain_limited_web_search",
+          "template_rows": 10,
+          "rediscovery_work_order_rows": 20,
+          "required_before_write": [
+            "manual_confirmed=true",
+            "manual_value is an exact product detail URL",
+            "evidence_url proves the same exact catalog row",
+            "broad search/listing/storefront URLs stay rejected"
+          ],
+          "unblocks": "metadata_field_confirmation",
+          "auto_apply_enabled": false
+        },
+        {
+          "step": 2,
+          "lane": "metadata_field_confirmation",
+          "status": "blocked_until_exact_source_url_confirmed",
+          "next_batch_rows": 3,
+          "review_section": "source_discovery_next_focus_metadata_field_import_dry_run",
+          "write_template_section": "metadata_field_import_template",
+          "required_before_write": [
+            "exact source_url is confirmed",
+            "manual metadata values come from official product evidence",
+            "Japanese name, sub-series, and character fields match the product page"
+          ],
+          "unblocks": "focus_pack_rotation",
+          "auto_apply_enabled": false
+        },
+        {
+          "step": 3,
+          "lane": "image_attachment_after_source_confirmation",
+          "status": "blocked_until_source_or_image_evidence_confirmed",
+          "next_batch_rows": 73,
+          "review_section": "catalog_image_attachment_action_queue",
+          "write_template_section": "image_attachment_confirmed_template",
+          "required_before_write": [
+            "exact source page is confirmed",
+            "image_url is a direct product image URL",
+            "source/image pair identifies the same catalog row",
+            "local image path remains private/device-safe until published asset exists"
+          ],
+          "unblocks": "public_catalog_image_rendering",
+          "auto_apply_enabled": false
+        }
+      ],
+      "safety_policy": {
+        "auto_apply_enabled": false,
+        "auto_import_source_url": false,
+        "auto_import_image_url": false,
+        "require_exact_product_source_evidence": true,
+        "reject_broad_search_or_storefront_urls": true
+      }
+    }
   },
   "ichiban_kuji_historical_roadmap": {
     "public_report": "data/ichiban_kuji_historical_roadmap_public.json",

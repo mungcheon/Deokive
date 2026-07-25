@@ -1740,6 +1740,136 @@ def build_metadata_field_import_dry_run_public(
     }
 
 
+def build_source_discovery_operator_handoff(
+    *,
+    completion_readiness: dict[str, Any],
+    next_execution_lanes: list[dict[str, Any]],
+    source_discovery_next_focus_exact_url_queue: dict[str, Any],
+    source_discovery_next_focus_fallback_queue: dict[str, Any],
+    source_discovery_next_focus_metadata_field_import: dict[str, Any] | None,
+    image_attachment_action_queue: dict[str, Any],
+) -> dict[str, Any]:
+    exact_summary = source_discovery_next_focus_exact_url_queue.get("summary", {})
+    fallback_summary = source_discovery_next_focus_fallback_queue.get("summary", {})
+    patch_template = source_discovery_next_focus_exact_url_queue.get(
+        "source_url_confirmation_patch_template",
+        {},
+    )
+    metadata_summary = (
+        source_discovery_next_focus_metadata_field_import.get("summary", {})
+        if isinstance(source_discovery_next_focus_metadata_field_import, dict)
+        else {}
+    )
+    image_summary = image_attachment_action_queue.get("summary", {})
+
+    handoff_steps: list[dict[str, Any]] = []
+    exact_rows = int(exact_summary.get("queue_rows") or fallback_summary.get("queue_rows") or 0)
+    if exact_rows:
+        handoff_steps.append(
+            {
+                "step": 1,
+                "lane": "exact_source_url_review",
+                "status": "manual_exact_source_url_search_required",
+                "next_batch_rows": exact_rows,
+                "review_section": "source_discovery_next_focus_exact_url_review_queue",
+                "write_template_section": "source_url_confirmation_patch_template.rows",
+                "first_primary_review_url": exact_summary.get("first_primary_review_url")
+                or fallback_summary.get("first_primary_review_url")
+                or completion_readiness.get("next_queue", {}).get("first_primary_review_url"),
+                "first_primary_review_url_kind": (
+                    exact_summary.get("primary_review_url_kind")
+                    or fallback_summary.get("first_primary_review_url_kind")
+                    or completion_readiness.get("next_queue", {}).get(
+                        "first_primary_review_url_kind"
+                    )
+                    or "domain_limited_web_search"
+                ),
+                "template_rows": int(patch_template.get("template_rows") or 0),
+                "rediscovery_work_order_rows": int(
+                    exact_summary.get("rediscovery_work_order_rows") or 0
+                ),
+                "required_before_write": [
+                    "manual_confirmed=true",
+                    "manual_value is an exact product detail URL",
+                    "evidence_url proves the same exact catalog row",
+                    "broad search/listing/storefront URLs stay rejected",
+                ],
+                "unblocks": "metadata_field_confirmation",
+                "auto_apply_enabled": False,
+            }
+        )
+    metadata_rows = int(metadata_summary.get("template_items") or 0)
+    if metadata_rows:
+        handoff_steps.append(
+            {
+                "step": len(handoff_steps) + 1,
+                "lane": "metadata_field_confirmation",
+                "status": "blocked_until_exact_source_url_confirmed",
+                "next_batch_rows": metadata_rows,
+                "review_section": "source_discovery_next_focus_metadata_field_import_dry_run",
+                "write_template_section": "metadata_field_import_template",
+                "required_before_write": [
+                    "exact source_url is confirmed",
+                    "manual metadata values come from official product evidence",
+                    "Japanese name, sub-series, and character fields match the product page",
+                ],
+                "unblocks": "focus_pack_rotation",
+                "auto_apply_enabled": False,
+            }
+        )
+    image_rows = int(image_summary.get("actionable_image_rows") or 0)
+    if image_rows:
+        handoff_steps.append(
+            {
+                "step": len(handoff_steps) + 1,
+                "lane": "image_attachment_after_source_confirmation",
+                "status": "blocked_until_source_or_image_evidence_confirmed",
+                "next_batch_rows": int(image_summary.get("queued_image_rows") or image_rows),
+                "review_section": "catalog_image_attachment_action_queue",
+                "write_template_section": "image_attachment_confirmed_template",
+                "required_before_write": [
+                    "exact source page is confirmed",
+                    "image_url is a direct product image URL",
+                    "source/image pair identifies the same catalog row",
+                    "local image path remains private/device-safe until published asset exists",
+                ],
+                "unblocks": "public_catalog_image_rendering",
+                "auto_apply_enabled": False,
+            }
+        )
+    first_lane = next_execution_lanes[0] if next_execution_lanes else {}
+    return {
+        "status": completion_readiness.get("status", "unknown"),
+        "current_lane": first_lane.get("lane") or (
+            handoff_steps[0].get("lane") if handoff_steps else "source_discovery_complete"
+        ),
+        "current_review_section": (
+            handoff_steps[0].get("review_section") if handoff_steps else None
+        ),
+        "current_focus_pack_id": completion_readiness.get("current_focus_pack_id"),
+        "queued_source_rows": int(completion_readiness.get("queued_source_rows") or 0),
+        "current_focus_remaining_rows": int(
+            completion_readiness.get("current_focus_remaining_rows") or 0
+        ),
+        "safe_candidate_detail_link_rows": int(
+            completion_readiness.get("safe_candidate_detail_link_rows") or 0
+        ),
+        "all_sample_candidates_rejected_rows": int(
+            completion_readiness.get("all_sample_candidates_rejected_rows") or 0
+        ),
+        "next_safe_phase": completion_readiness.get("next_safe_phase"),
+        "blocked_reasons": completion_readiness.get("blocked_reasons", []),
+        "handoff_steps": handoff_steps,
+        "safety_policy": {
+            "auto_apply_enabled": False,
+            "auto_import_source_url": False,
+            "auto_import_image_url": False,
+            "require_exact_product_source_evidence": True,
+            "reject_broad_search_or_storefront_urls": True,
+        },
+    }
+
+
 def build_source_discovery_completion_roadmap_public(
     *,
     generated_at: str,
@@ -2099,6 +2229,14 @@ def build_source_discovery_completion_roadmap_public(
         "auto_apply_enabled": False,
         "manual_evidence_required": bool(next_execution_lanes),
     }
+    operator_handoff = build_source_discovery_operator_handoff(
+        completion_readiness=completion_readiness,
+        next_execution_lanes=next_execution_lanes,
+        source_discovery_next_focus_exact_url_queue=source_discovery_next_focus_exact_url_queue,
+        source_discovery_next_focus_fallback_queue=source_discovery_next_focus_fallback_queue,
+        source_discovery_next_focus_metadata_field_import=source_discovery_next_focus_metadata_field_import,
+        image_attachment_action_queue=image_attachment_action_queue,
+    )
 
     source_rows = int(action_summary.get("queued_source_rows") or 0)
     focus_rows = int(focus_summary.get("focus_source_rows") or 0)
@@ -2133,6 +2271,7 @@ def build_source_discovery_completion_roadmap_public(
         "completion_readiness": completion_readiness,
         "next_execution_summary": next_execution_summary,
         "next_execution_lanes": next_execution_lanes,
+        "operator_handoff": operator_handoff,
         "current_focus_pack": current_pack,
         "top_store_steps": top_store_steps,
         "phases": phases,
@@ -10957,6 +11096,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             "next_execution_lanes": source_discovery_completion_roadmap.get(
                 "next_execution_lanes",
                 [],
+            ),
+            "operator_handoff": source_discovery_completion_roadmap.get(
+                "operator_handoff",
+                {},
             ),
         }
         if ANIMATE_MISSING_IMAGE_SEARCH.exists():
