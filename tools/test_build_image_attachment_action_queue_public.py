@@ -10,6 +10,23 @@ import build_image_attachment_action_queue_public as queue
 
 
 class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
+    def test_store_search_helpers_support_korean_pokemon_center_name(self) -> None:
+        store = "\ud3ec\ucf13\ubaac \uc13c\ud130"
+
+        self.assertEqual(
+            queue._store_search_domains(store),
+            ["pokemoncenter-online.com", "pokemoncenter.co.kr"],
+        )
+        self.assertEqual(
+            queue._source_search_url(
+                {
+                    "source_store": store,
+                    "name_ko": "\ud3ec\ucf13\ubaac \uce74\ub4dc",
+                }
+            ),
+            "https://www.pokemoncenter-online.com/search/?keyword=%ED%8F%AC%EC%BC%93%EB%AA%AC+%EC%B9%B4%EB%93%9C",
+        )
+
     def test_generic_storefront_rows_get_store_search_urls(self) -> None:
         enrichment = {
             "groups": [
