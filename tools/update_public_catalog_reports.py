@@ -2088,6 +2088,15 @@ def build_source_discovery_operator_handoff(
         ),
         "next_safe_phase": completion_readiness.get("next_safe_phase"),
         "blocked_reasons": completion_readiness.get("blocked_reasons", []),
+        "current_focus_resolution_status": completion_readiness.get(
+            "current_focus_resolution_status"
+        ),
+        "current_focus_cache_cross_check": completion_readiness.get(
+            "current_focus_cache_cross_check"
+        ),
+        "recommended_next_focus_pack_id": completion_readiness.get(
+            "recommended_next_focus_pack_id"
+        ),
         "handoff_steps": handoff_steps,
         "safety_policy": {
             "auto_apply_enabled": False,
@@ -2114,6 +2123,7 @@ def build_source_discovery_completion_roadmap_public(
     candidate_source_url_review_queue: dict[str, Any],
     image_attachment_action_queue: dict[str, Any],
     source_discovery_next_focus_metadata_field_import: dict[str, Any] | None = None,
+    source_discovery_next_focus_exact_url_candidate_audit: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     action_summary = source_discovery_action_queue.get("summary", {})
     bottleneck_summary = source_discovery_store_bottlenecks.get("summary", {})
@@ -2121,6 +2131,11 @@ def build_source_discovery_completion_roadmap_public(
     next_focus_summary = source_discovery_next_focus_pack.get("summary", {})
     fallback_summary = source_discovery_next_focus_fallback_queue.get("summary", {})
     exact_url_summary = source_discovery_next_focus_exact_url_queue.get("summary", {})
+    exact_url_candidate_audit_summary = (
+        source_discovery_next_focus_exact_url_candidate_audit.get("summary", {})
+        if isinstance(source_discovery_next_focus_exact_url_candidate_audit, dict)
+        else {}
+    )
     manual_summary = manual_source_url_search_queue.get("summary", {})
     provider_summary = provider_missing_source_url_queue.get("summary", {})
     candidate_summary = candidate_source_url_review_queue.get("summary", {})
@@ -2191,8 +2206,47 @@ def build_source_discovery_completion_roadmap_public(
         and int(exact_url_summary.get("all_sample_candidates_rejected_rows") or 0)
         == int(exact_url_summary.get("queue_rows") or 0)
     )
+    exact_queue_rows = int(exact_url_summary.get("queue_rows") or 0)
+    cache_cross_checked_rows = int(
+        exact_url_candidate_audit_summary.get("ensky_cache_cross_checked_rows") or 0
+    )
+    cache_safe_exact_rows = int(
+        exact_url_candidate_audit_summary.get("ensky_cache_safe_exact_match_rows") or 0
+    )
+    current_focus_cache_miss = (
+        exact_queue_rows > 0
+        and cache_cross_checked_rows >= exact_queue_rows
+        and cache_safe_exact_rows == 0
+        and int(exact_url_summary.get("safe_candidate_detail_link_rows") or 0) == 0
+    )
+    current_focus_cache_cross_check = {
+        "cross_checked_rows": cache_cross_checked_rows,
+        "safe_exact_match_rows": cache_safe_exact_rows,
+        "broad_candidate_rows": int(
+            exact_url_candidate_audit_summary.get("ensky_cache_broad_candidate_rows") or 0
+        ),
+        "no_candidate_rows": int(
+            exact_url_candidate_audit_summary.get("ensky_cache_no_candidate_rows") or 0
+        ),
+        "status_counts": exact_url_candidate_audit_summary.get(
+            "ensky_cache_status_counts",
+            [],
+        ),
+        "auto_apply_enabled": False,
+    } if cache_cross_checked_rows else None
+    current_focus_resolution_status = (
+        "manual_source_search_required_after_official_cache_miss"
+        if current_focus_cache_miss
+        else "manual_exact_source_url_review_required"
+        if exact_queue_rows
+        else "source_discovery_focus_rotation_ready"
+        if int(focus_summary.get("remaining_focus_review_rows") or 0)
+        else "source_discovery_complete"
+    )
     next_safe_phase = (
-        "ignore_rejected_samples_and_run_exact_source_search"
+        "rotate_to_next_focus_pack_or_manual_source_research_current_pack"
+        if current_focus_cache_miss
+        else "ignore_rejected_samples_and_run_exact_source_search"
         if all_sample_candidates_rejected
         else "review_fallback_queue_and_fill_exact_manual_confirmed_source_urls"
         if int(fallback_summary.get("queue_rows") or 0)
@@ -2228,7 +2282,15 @@ def build_source_discovery_completion_roadmap_public(
             "safe_candidate_detail_link_rows",
             0,
         ),
+        "cache_cross_check": current_focus_cache_cross_check,
+        "resolution_status": current_focus_resolution_status,
+        "recommended_next_focus_pack_id": next_focus_summary.get("next_pack_after_current")
+        if current_focus_cache_miss
+        else None,
         "recommended_action": (
+            "quarantine current focus for manual exact source research and continue the next focus pack"
+            if current_focus_cache_miss
+            else
             "ignore rejected sample links and run exact source search from the primary review URLs"
             if all_sample_candidates_rejected
             else "confirm current focus pack source URLs before image attachment"
@@ -2256,6 +2318,11 @@ def build_source_discovery_completion_roadmap_public(
         "current_focus_remaining_rows": int(next_focus_summary.get("remaining_review_rows") or 0),
         "current_focus_fallback_rows": int(fallback_summary.get("queue_rows") or 0),
         "next_pack_after_current": next_focus_summary.get("next_pack_after_current"),
+        "current_focus_resolution_status": current_focus_resolution_status,
+        "current_focus_cache_cross_check": current_focus_cache_cross_check,
+        "recommended_next_focus_pack_id": next_focus_summary.get("next_pack_after_current")
+        if current_focus_cache_miss
+        else None,
         "all_sample_candidates_rejected_rows": int(
             exact_url_summary.get("all_sample_candidates_rejected_rows") or 0
         ),
@@ -2305,6 +2372,9 @@ def build_source_discovery_completion_roadmap_public(
         },
         "blocked_until": "exact_product_detail_source_url_confirmed",
         "blocked_reasons": [
+            "official_cache_safe_exact_match_absent"
+            if current_focus_cache_miss
+            else None,
             "sample_candidate_links_rejected"
             if all_sample_candidates_rejected
             else "fallback_search_required"
@@ -2315,6 +2385,9 @@ def build_source_discovery_completion_roadmap_public(
             "Source discovery queues are review-only. Confirm exact official product detail URLs before image attachment."
         ),
     }
+    completion_readiness["blocked_reasons"] = [
+        reason for reason in completion_readiness["blocked_reasons"] if reason
+    ]
 
     phases = [
         {
@@ -2365,7 +2438,9 @@ def build_source_discovery_completion_roadmap_public(
         {
             "lane": "exact_source_url_review",
             "status": (
-                "next"
+                "manual_cache_miss_research_required"
+                if current_focus_cache_miss
+                else "next"
                 if all_sample_candidates_rejected
                 else "manual_fallback_review_required"
             ),
@@ -2410,7 +2485,11 @@ def build_source_discovery_completion_roadmap_public(
             "review_start_rows": int(next_focus_summary.get("pack_items") or 0),
             "manual_decision_rows": int(next_focus_summary.get("pack_items") or 0),
             "public_report": f"data/{SOURCE_DISCOVERY_FOCUS_PACKS.name}",
-            "next_action": "rotate through source discovery packs after the current exact URL review is resolved",
+            "next_action": (
+                "start the next focus pack while the current cache-miss pack waits for manual exact source research"
+                if current_focus_cache_miss
+                else "rotate through source discovery packs after the current exact URL review is resolved"
+            ),
         },
         {
             "lane": "generic_source_replacement",
@@ -11125,6 +11204,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         candidate_source_url_review_queue=candidate_source_url_review_queue,
         image_attachment_action_queue=image_attachment_action_queue,
         source_discovery_next_focus_metadata_field_import=source_discovery_next_focus_metadata_field_import,
+        source_discovery_next_focus_exact_url_candidate_audit=source_discovery_next_focus_exact_url_candidate_audit,
     )
     operations = build_operations_public(
         generated_at,

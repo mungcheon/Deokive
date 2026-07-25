@@ -14477,9 +14477,28 @@
       "current_focus_remaining_rows": 20,
       "current_focus_fallback_rows": 20,
       "next_pack_after_current": "source-discovery-focus-002",
+      "current_focus_resolution_status": "manual_source_search_required_after_official_cache_miss",
+      "current_focus_cache_cross_check": {
+        "cross_checked_rows": 20,
+        "safe_exact_match_rows": 0,
+        "broad_candidate_rows": 4,
+        "no_candidate_rows": 16,
+        "status_counts": [
+          [
+            "no_cache_candidate",
+            16
+          ],
+          [
+            "broad_cache_candidate",
+            4
+          ]
+        ],
+        "auto_apply_enabled": false
+      },
+      "recommended_next_focus_pack_id": "source-discovery-focus-002",
       "all_sample_candidates_rejected_rows": 20,
       "safe_candidate_detail_link_rows": 0,
-      "next_safe_phase": "ignore_rejected_samples_and_run_exact_source_search",
+      "next_safe_phase": "rotate_to_next_focus_pack_or_manual_source_research_current_pack",
       "next_queue": {
         "source": "data/source_discovery_next_focus_exact_url_review_queue_public.json",
         "queue_rows": 20,
@@ -14493,6 +14512,7 @@
       },
       "blocked_until": "exact_product_detail_source_url_confirmed",
       "blocked_reasons": [
+        "official_cache_safe_exact_match_absent",
         "sample_candidate_links_rejected"
       ],
       "safety_note": "Source discovery queues are review-only. Confirm exact official product detail URLs before image attachment."
@@ -14508,7 +14528,7 @@
     "next_execution_lanes": [
       {
         "lane": "exact_source_url_review",
-        "status": "next",
+        "status": "manual_cache_miss_research_required",
         "open_rows": 20,
         "next_batch_rows": 20,
         "review_start_rows": 20,
@@ -14534,7 +14554,7 @@
         "review_start_rows": 20,
         "manual_decision_rows": 20,
         "public_report": "data/source_discovery_focus_packs_public.json",
-        "next_action": "rotate through source discovery packs after the current exact URL review is resolved"
+        "next_action": "start the next focus pack while the current cache-miss pack waits for manual exact source research"
       },
       {
         "lane": "generic_source_replacement",
@@ -14566,10 +14586,30 @@
       "current_focus_remaining_rows": 20,
       "safe_candidate_detail_link_rows": 0,
       "all_sample_candidates_rejected_rows": 20,
-      "next_safe_phase": "ignore_rejected_samples_and_run_exact_source_search",
+      "next_safe_phase": "rotate_to_next_focus_pack_or_manual_source_research_current_pack",
       "blocked_reasons": [
+        "official_cache_safe_exact_match_absent",
         "sample_candidate_links_rejected"
       ],
+      "current_focus_resolution_status": "manual_source_search_required_after_official_cache_miss",
+      "current_focus_cache_cross_check": {
+        "cross_checked_rows": 20,
+        "safe_exact_match_rows": 0,
+        "broad_candidate_rows": 4,
+        "no_candidate_rows": 16,
+        "status_counts": [
+          [
+            "no_cache_candidate",
+            16
+          ],
+          [
+            "broad_cache_candidate",
+            4
+          ]
+        ],
+        "auto_apply_enabled": false
+      },
+      "recommended_next_focus_pack_id": "source-discovery-focus-002",
       "handoff_steps": [
         {
           "step": 1,
@@ -18826,7 +18866,7 @@
         "next_execution_open_rows": 813,
         "next_execution_next_batch_rows": 166,
         "first_next_execution_lane": "exact_source_url_review",
-        "first_next_execution_status": "next",
+        "first_next_execution_status": "manual_cache_miss_research_required",
         "first_next_execution_rows": 20,
         "first_next_execution_public_report": "data/source_discovery_next_focus_exact_url_review_queue_public.json",
         "operator_handoff": {
@@ -18838,10 +18878,30 @@
           "current_focus_remaining_rows": 20,
           "safe_candidate_detail_link_rows": 0,
           "all_sample_candidates_rejected_rows": 20,
-          "next_safe_phase": "ignore_rejected_samples_and_run_exact_source_search",
+          "next_safe_phase": "rotate_to_next_focus_pack_or_manual_source_research_current_pack",
           "blocked_reasons": [
+            "official_cache_safe_exact_match_absent",
             "sample_candidate_links_rejected"
           ],
+          "current_focus_resolution_status": "manual_source_search_required_after_official_cache_miss",
+          "current_focus_cache_cross_check": {
+            "cross_checked_rows": 20,
+            "safe_exact_match_rows": 0,
+            "broad_candidate_rows": 4,
+            "no_candidate_rows": 16,
+            "status_counts": [
+              [
+                "no_cache_candidate",
+                16
+              ],
+              [
+                "broad_cache_candidate",
+                4
+              ]
+            ],
+            "auto_apply_enabled": false
+          },
+          "recommended_next_focus_pack_id": "source-discovery-focus-002",
           "handoff_steps": [
             {
               "step": 1,
@@ -19289,7 +19349,7 @@
         "next_execution_open_rows": 813,
         "next_execution_next_batch_rows": 166,
         "first_next_execution_lane": "exact_source_url_review",
-        "first_next_execution_status": "next",
+        "first_next_execution_status": "manual_cache_miss_research_required",
         "first_next_execution_rows": 20,
         "first_next_execution_public_report": "data/source_discovery_next_focus_exact_url_review_queue_public.json",
         "handoff_status": "current_focus_fallback_review_required",

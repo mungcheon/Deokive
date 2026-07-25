@@ -3458,6 +3458,19 @@ class PublicCatalogReportTests(unittest.TestCase):
                     "source_url_update_template_rows": 6,
                 }
             },
+            source_discovery_next_focus_exact_url_candidate_audit={
+                "summary": {
+                    "queue_rows": 2,
+                    "ensky_cache_cross_checked_rows": 2,
+                    "ensky_cache_safe_exact_match_rows": 0,
+                    "ensky_cache_broad_candidate_rows": 1,
+                    "ensky_cache_no_candidate_rows": 1,
+                    "ensky_cache_status_counts": [
+                        ["broad_cache_candidate", 1],
+                        ["no_cache_candidate", 1],
+                    ],
+                }
+            },
             source_discovery_next_focus_metadata_field_import={
                 "summary": {
                     "template_items": 3,
@@ -3490,7 +3503,17 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             roadmap["completion_readiness"]["next_safe_phase"],
-            "ignore_rejected_samples_and_run_exact_source_search",
+            "rotate_to_next_focus_pack_or_manual_source_research_current_pack",
+        )
+        self.assertEqual(
+            roadmap["completion_readiness"]["current_focus_resolution_status"],
+            "manual_source_search_required_after_official_cache_miss",
+        )
+        self.assertEqual(
+            roadmap["completion_readiness"]["current_focus_cache_cross_check"][
+                "safe_exact_match_rows"
+            ],
+            0,
         )
         self.assertEqual(
             roadmap["completion_readiness"]["next_queue"]["source"],
@@ -3498,7 +3521,10 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             roadmap["completion_readiness"]["blocked_reasons"],
-            ["sample_candidate_links_rejected"],
+            [
+                "official_cache_safe_exact_match_absent",
+                "sample_candidate_links_rejected",
+            ],
         )
         self.assertEqual(
             roadmap["completion_readiness"]["next_queue"]["first_primary_review_url_kind"],
@@ -3521,6 +3547,10 @@ class PublicCatalogReportTests(unittest.TestCase):
             ],
         )
         self.assertEqual(roadmap["next_execution_lanes"][0]["open_rows"], 2)
+        self.assertEqual(
+            roadmap["next_execution_lanes"][0]["status"],
+            "manual_cache_miss_research_required",
+        )
         self.assertEqual(roadmap["next_execution_lanes"][1]["open_rows"], 3)
         self.assertEqual(roadmap["next_execution_lanes"][2]["open_rows"], 5)
         self.assertEqual(roadmap["next_execution_lanes"][3]["open_rows"], 6)
@@ -3530,6 +3560,14 @@ class PublicCatalogReportTests(unittest.TestCase):
             "data/source_discovery_next_focus_metadata_field_import_dry_run_public.json",
         )
         self.assertEqual(roadmap["phases"][3]["rows"], 6)
+        self.assertEqual(
+            roadmap["current_focus_pack"]["resolution_status"],
+            "manual_source_search_required_after_official_cache_miss",
+        )
+        self.assertEqual(
+            roadmap["operator_handoff"]["current_focus_resolution_status"],
+            "manual_source_search_required_after_official_cache_miss",
+        )
         self.assertIs(summary["auto_apply_enabled"], False)
 
     def test_ichiban_kuji_historical_roadmap_summarizes_manual_phases(self):
