@@ -611,44 +611,35 @@ class _CatalogAddButton extends StatelessWidget {
             ),
           ),
         ),
-        child: IconTheme(
-          data: IconThemeData(color: foreground, size: 17),
-          child: DefaultTextStyle.merge(
-            style: TextStyle(
-              color: foreground,
-              fontSize: 13,
-              fontWeight: FontWeight.w900,
-              height: 1,
-              decoration: TextDecoration.none,
-              fontFamilyFallback: _kCatalogButtonFontFallback,
-              shadows: const [],
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(icon),
-                const SizedBox(width: 5),
-                Flexible(
-                  child: Text(
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: IconTheme(
+            data: IconThemeData(color: foreground, size: 17),
+            child: DefaultTextStyle(
+              style: TextStyle(
+                inherit: false,
+                color: foreground,
+                fontSize: 13,
+                fontWeight: FontWeight.w900,
+                height: 1,
+                decoration: TextDecoration.none,
+                fontFamilyFallback: _kCatalogButtonFontFallback,
+                shadows: const [],
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(icon),
+                  const SizedBox(width: 5),
+                  Text(
                     label,
                     maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
                     softWrap: false,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      inherit: false,
-                      color: foreground,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w900,
-                      height: 1,
-                      decoration: TextDecoration.none,
-                      fontFamilyFallback: _kCatalogButtonFontFallback,
-                      shadows: const [],
-                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

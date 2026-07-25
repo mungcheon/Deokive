@@ -437,44 +437,35 @@ class _CatalogImportActionButton extends StatelessWidget {
             ),
           ),
         ),
-        child: IconTheme(
-          data: IconThemeData(color: foregroundColor, size: 19),
-          child: DefaultTextStyle.merge(
-            style: TextStyle(
-              color: foregroundColor,
-              fontSize: 15,
-              fontWeight: FontWeight.w900,
-              height: 1,
-              decoration: TextDecoration.none,
-              fontFamilyFallback: _kCatalogImportButtonFontFallback,
-              shadows: const [],
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(icon),
-                const SizedBox(width: 6),
-                Flexible(
-                  child: Text(
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: IconTheme(
+            data: IconThemeData(color: foregroundColor, size: 19),
+            child: DefaultTextStyle(
+              style: TextStyle(
+                inherit: false,
+                color: foregroundColor,
+                fontSize: 15,
+                fontWeight: FontWeight.w900,
+                height: 1,
+                decoration: TextDecoration.none,
+                fontFamilyFallback: _kCatalogImportButtonFontFallback,
+                shadows: const [],
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(icon),
+                  const SizedBox(width: 6),
+                  Text(
                     label,
                     maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
                     softWrap: false,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      inherit: false,
-                      color: foregroundColor,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w900,
-                      height: 1,
-                      decoration: TextDecoration.none,
-                      fontFamilyFallback: _kCatalogImportButtonFontFallback,
-                      shadows: const [],
-                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
