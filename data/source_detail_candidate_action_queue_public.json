@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T22:27:14Z",
+  "generated_at": "2026-07-25T07:18:33Z",
   "scope": "source_detail_candidate_action_queue",
   "summary": {
     "candidate_action_rows": 15,
@@ -99,6 +99,10 @@
       [
         "candidate_title_multi_variant_or_bundle",
         2
+      ],
+      [
+        "candidate_title_missing_catalog_specific_token",
+        1
       ],
       [
         "candidate_title_product_type_mismatch",
@@ -215,7 +219,8 @@
             "up"
           ],
           "candidate_identity_flags": [
-            "only_generic_shared_tokens"
+            "only_generic_shared_tokens",
+            "candidate_title_missing_catalog_specific_token"
           ],
           "safe_source_image_pair": true,
           "source_report": "server/catalog_source_detail_candidates.json",

@@ -195,6 +195,21 @@ def is_generic_token(value: Any) -> bool:
     return token in {normalize_token(item) for item in GENERIC_SHARED_TOKENS}
 
 
+def specific_identity_tokens(*values: Any) -> list[str]:
+    tokens: list[str] = []
+    seen: set[str] = set()
+    for value in values:
+        text = str(value or "")
+        for raw_token in re.findall(r"[A-Za-z0-9]+|[\u3040-\u30ff]+|[\u3400-\u9fff]+|[\uac00-\ud7af]+", text):
+            token = raw_token.strip()
+            normalized = normalize_token(token)
+            if len(normalized) < 2 or normalized in seen or is_generic_token(token):
+                continue
+            seen.add(normalized)
+            tokens.append(token)
+    return tokens
+
+
 def parenthetical_terms(*values: Any) -> list[str]:
     terms: list[str] = []
     for value in values:
@@ -254,6 +269,10 @@ def candidate_identity_flags(row: dict[str, Any]) -> list[str]:
     ]
     if missing_terms:
         flags.append("candidate_title_missing_catalog_variant_hint")
+
+    specific_tokens = specific_identity_tokens(row.get("query"), row.get("name_ja"), row.get("name_ko"))
+    if specific_tokens and not any(normalize_token(token) in title_text for token in specific_tokens):
+        flags.append("candidate_title_missing_catalog_specific_token")
 
     catalog_variant_groups = variant_hint_groups(name_text_raw)
     candidate_variant_groups = variant_hint_groups(row.get("candidate_title"))

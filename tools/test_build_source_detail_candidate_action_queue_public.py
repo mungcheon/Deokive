@@ -209,10 +209,14 @@ class BuildSourceDetailCandidateActionQueuePublicTest(unittest.TestCase):
                 ["candidate_title_mentions_crossover", 1],
                 ["candidate_title_missing_catalog_variant_hint", 1],
                 ["candidate_title_missing_catalog_named_variant", 1],
+                ["candidate_title_missing_catalog_specific_token", 1],
             ],
         )
         items = {item["catalog_index"]: item for batch in report["batches"] for item in batch["items"]}
-        self.assertEqual(items[3]["candidate_identity_flags"], ["only_generic_shared_tokens"])
+        self.assertEqual(
+            items[3]["candidate_identity_flags"],
+            ["only_generic_shared_tokens", "candidate_title_missing_catalog_specific_token"],
+        )
         self.assertFalse(items[3]["identity_safe_source_image_pair"])
         self.assertEqual(items[3]["review_priority"], 35)
         self.assertEqual(items[3]["recommended_action"], "recheck_candidate_identity_before_source_or_image_patch")
