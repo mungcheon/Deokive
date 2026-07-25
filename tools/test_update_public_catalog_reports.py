@@ -579,6 +579,27 @@ class PublicCatalogReportTests(unittest.TestCase):
                 "fallback_web_search",
             )
             self.assertEqual(
+                quality["missing_image_actionability"][
+                    "source_discovery_review_start_rows"
+                ],
+                20,
+            )
+            self.assertEqual(
+                quality["missing_image_actionability"][
+                    "source_discovery_review_start_kind"
+                ],
+                "domain_limited_web_search",
+            )
+            source_discovery_phase = next(
+                phase
+                for phase in completion_plan["phases"]
+                if phase["phase_id"] == "complete_source_discovery_focus_packs"
+            )
+            self.assertEqual(
+                source_discovery_phase["review_start"]["review_section"],
+                "source_discovery_next_focus_exact_url_review_queue",
+            )
+            self.assertEqual(
                 quality["missing_image_actionability"]["completion_plan_phase_rows_total"],
                 result["missing"]["image_url"],
             )

@@ -11403,6 +11403,8 @@
     "direct_image_action_workflows_with_review_start": 2,
     "manual_image_research_review_start_rows": 5,
     "manual_image_research_review_start_kind": "fallback_web_search",
+    "source_discovery_review_start_rows": 20,
+    "source_discovery_review_start_kind": "domain_limited_web_search",
     "image_attachment_template_rows": 73,
     "image_attachment_template_confirmed_rows": 0,
     "image_attachment_template_source_update_required_rows": 50,
@@ -11800,7 +11802,66 @@
               }
             ]
           },
-          "review_start": {}
+          "review_start": {
+            "workflow": "find_source_then_extract_image",
+            "batch_id": "source-discovery-focus-001-exact-url-review",
+            "focus_pack_id": "source-discovery-focus-001",
+            "source_store": "엔스카이",
+            "row_count": 20,
+            "primary_review_url_rows": 20,
+            "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+            "first_primary_review_url_kind": "domain_limited_web_search",
+            "review_section": "source_discovery_next_focus_exact_url_review_queue",
+            "source": "source_discovery_next_focus_exact_url_review_queue_public.json",
+            "template": "source_discovery_focus_confirmed_template_public.json",
+            "source_url_confirmation_patch_template_rows": 0,
+            "rediscovery_work_order_rows": 20,
+            "sample_items_with_primary_review_url": 5,
+            "sample_primary_review_items": [
+              {
+                "catalog_index": 922,
+                "name_ko": "치이카와 러버 스트랩 (우사기)",
+                "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
+                "source_store": "엔스카이",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+                "primary_review_url_kind": "domain_limited_web_search"
+              },
+              {
+                "catalog_index": 923,
+                "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
+                "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+                "source_store": "엔스카이",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29%22",
+                "primary_review_url_kind": "domain_limited_web_search"
+              },
+              {
+                "catalog_index": 924,
+                "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
+                "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+                "source_store": "엔스카이",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29%22",
+                "primary_review_url_kind": "domain_limited_web_search"
+              },
+              {
+                "catalog_index": 925,
+                "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
+                "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+                "source_store": "엔스카이",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29%22",
+                "primary_review_url_kind": "domain_limited_web_search"
+              },
+              {
+                "catalog_index": 926,
+                "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
+                "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
+                "source_store": "엔스카이",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29%22",
+                "primary_review_url_kind": "domain_limited_web_search"
+              }
+            ],
+            "manual_confirmation_required": true,
+            "auto_apply_enabled": false
+          }
         },
         {
           "rank": 5,
@@ -12136,7 +12197,66 @@
             "title_character_variant_type_match",
             "image_url_from_confirmed_source_or_trusted_official_cdn"
           ],
-          "review_start": {}
+          "review_start": {
+            "workflow": "find_source_then_extract_image",
+            "batch_id": "source-discovery-focus-001-exact-url-review",
+            "focus_pack_id": "source-discovery-focus-001",
+            "source_store": "엔스카이",
+            "row_count": 20,
+            "primary_review_url_rows": 20,
+            "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+            "first_primary_review_url_kind": "domain_limited_web_search",
+            "review_section": "source_discovery_next_focus_exact_url_review_queue",
+            "source": "source_discovery_next_focus_exact_url_review_queue_public.json",
+            "template": "source_discovery_focus_confirmed_template_public.json",
+            "source_url_confirmation_patch_template_rows": 0,
+            "rediscovery_work_order_rows": 20,
+            "sample_items_with_primary_review_url": 5,
+            "sample_primary_review_items": [
+              {
+                "catalog_index": 922,
+                "name_ko": "치이카와 러버 스트랩 (우사기)",
+                "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
+                "source_store": "엔스카이",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+                "primary_review_url_kind": "domain_limited_web_search"
+              },
+              {
+                "catalog_index": 923,
+                "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
+                "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+                "source_store": "엔스카이",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29%22",
+                "primary_review_url_kind": "domain_limited_web_search"
+              },
+              {
+                "catalog_index": 924,
+                "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
+                "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+                "source_store": "엔스카이",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29%22",
+                "primary_review_url_kind": "domain_limited_web_search"
+              },
+              {
+                "catalog_index": 925,
+                "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
+                "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+                "source_store": "엔스카이",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29%22",
+                "primary_review_url_kind": "domain_limited_web_search"
+              },
+              {
+                "catalog_index": 926,
+                "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
+                "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
+                "source_store": "엔스카이",
+                "primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29%22",
+                "primary_review_url_kind": "domain_limited_web_search"
+              }
+            ],
+            "manual_confirmation_required": true,
+            "auto_apply_enabled": false
+          }
         },
         {
           "rank": 5,

@@ -195,7 +195,28 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
                 }
             ],
         }
-        next_focus_exact_url_queue = {"summary": {"queue_rows": 1}}
+        next_focus_exact_url_queue = {
+            "summary": {
+                "queue_rows": 1,
+                "primary_review_url_rows": 1,
+                "first_primary_review_url": "https://google.example/search-exact",
+                "first_primary_review_url_kind": "domain_limited_web_search",
+                "rediscovery_work_order_rows": 1,
+            },
+            "items": [
+                {
+                    "catalog_index": 3,
+                    "name_ko": "Source first",
+                    "name_ja": "Source first JP",
+                    "source_store": "Store C",
+                    "primary_review_url": "https://google.example/search-exact",
+                    "primary_review_url_kind": "domain_limited_web_search",
+                }
+            ],
+            "source_url_confirmation_patch_template": {
+                "summary": {"template_rows": 1}
+            },
+        }
         next_focus_identity_backfill_queue = {"summary": {"queue_rows": 1}}
         source_detail_queue = {
             "batches": [
@@ -330,6 +351,11 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
             [["current_source_url", 1]],
         )
         self.assertEqual(report["summary"]["direct_image_action_workflows_with_review_start"], 2)
+        self.assertEqual(report["summary"]["source_discovery_review_start_rows"], 1)
+        self.assertEqual(
+            report["summary"]["source_discovery_review_start_kind"],
+            "domain_limited_web_search",
+        )
         self.assertEqual(report["summary"]["image_attachment_template_rows"], 2)
         self.assertEqual(report["summary"]["image_attachment_template_confirmed_rows"], 0)
         self.assertEqual(report["summary"]["image_attachment_template_source_update_required_rows"], 1)
@@ -450,6 +476,20 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
             "https://store-c.example/search?q=acrylic",
         )
         self.assertEqual(
+            work_order[3]["review_start"]["first_primary_review_url"],
+            "https://google.example/search-exact",
+        )
+        self.assertEqual(
+            work_order[3]["review_start"]["review_section"],
+            "source_discovery_next_focus_exact_url_review_queue",
+        )
+        self.assertEqual(
+            report["source_discovery_review_start"][
+                "source_url_confirmation_patch_template_rows"
+            ],
+            1,
+        )
+        self.assertEqual(
             report["next_source_discovery_focus_pack"]["confirmed_template"],
             "data/source_discovery_focus_confirmed_template_public.json",
         )
@@ -549,6 +589,12 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
             queue_by_lane["replace_generic_source_urls"]["review_start"]["batch_id"],
             "image-attachment-action-001",
         )
+        self.assertEqual(
+            queue_by_lane["discover_exact_source_urls"]["review_start"][
+                "first_primary_review_url"
+            ],
+            "https://google.example/search-exact",
+        )
         completion_phases = {
             row["phase_id"]: row for row in report["completion_plan"]["phases"]
         }
@@ -576,6 +622,12 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
                 "first_primary_review_url"
             ],
             "https://gotouchi.example/item",
+        )
+        self.assertEqual(
+            completion_phases["complete_source_discovery_focus_packs"][
+                "review_start"
+            ]["first_primary_review_url"],
+            "https://google.example/search-exact",
         )
         self.assertEqual(
             completion_phases["manual_nonstandard_image_research"]["review_start"][

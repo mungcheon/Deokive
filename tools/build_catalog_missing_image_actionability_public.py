@@ -549,6 +549,7 @@ def build_work_order(
     next_source_discovery_focus_pack: dict[str, Any] | None = None,
     image_action_review_starts: dict[str, dict[str, Any]] | None = None,
     manual_research_review_start: dict[str, Any] | None = None,
+    source_discovery_review_start: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
     readiness_by_name = {str(row.get("readiness") or ""): row for row in readiness_rows}
     source_discovery_row = readiness_by_name.get("source_url_discovery_required", {})
@@ -666,6 +667,7 @@ def build_work_order(
         top_stores=top_source_discovery_stores,
         top_work_packs=(source_discovery_work_packs or [])[:8],
         current_focus_pack=next_source_discovery_focus_pack,
+        review_start=source_discovery_review_start,
         **readiness_blocker("source_url_discovery_required"),
         notes=[
             "Focus packs cover the highest-volume official-store gaps before broad manual research.",
@@ -721,6 +723,7 @@ def build_completion_plan(
     next_source_discovery_focus_pack: dict[str, Any] | None = None,
     image_action_review_starts: dict[str, dict[str, Any]] | None = None,
     manual_research_review_start: dict[str, Any] | None = None,
+    source_discovery_review_start: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     generic_source_rows = int(summary.get("image_attachment_template_source_update_required_rows") or 0)
     representative_rows = int(summary.get("image_attachment_template_representative_review_rows") or 0)
@@ -833,6 +836,7 @@ def build_completion_plan(
         top_source_stores=discovery_stores,
         work_packs=(source_discovery_work_packs or [])[:8],
         current_batch=next_source_discovery_focus_pack,
+        review_start=source_discovery_review_start,
         notes=[
             "The current_batch is the next concrete 20-row pack to review.",
             "Rows stay dry-run safe until the public confirmation template is manually filled.",
@@ -1503,6 +1507,112 @@ def build_image_action_review_starts(action_queue: dict[str, Any]) -> dict[str, 
     return starts
 
 
+def build_source_discovery_review_start(
+    next_focus_pack: dict[str, Any] | None,
+    exact_url_queue: dict[str, Any] | None,
+) -> dict[str, Any]:
+    if not isinstance(exact_url_queue, dict):
+        return {}
+    summary = (
+        exact_url_queue.get("summary")
+        if isinstance(exact_url_queue.get("summary"), dict)
+        else {}
+    )
+    queue_rows = int(summary.get("queue_rows") or 0)
+    first_url = str(summary.get("first_primary_review_url") or "").strip()
+    if queue_rows <= 0 or not first_url:
+        return {}
+
+    items = [
+        item
+        for item in exact_url_queue.get("items") or []
+        if isinstance(item, dict)
+    ]
+    first_item = items[0] if items else {}
+    focus_pack_id = (
+        (next_focus_pack or {}).get("focus_pack_id")
+        or summary.get("focus_pack_id")
+        or "source-discovery-next-focus"
+    )
+    source_store = (
+        first_item.get("source_store")
+        or (next_focus_pack or {}).get("source_store")
+        or ((summary.get("by_source_store") or [[None]])[0][0])
+    )
+    template = (
+        (
+            exact_url_queue.get("source_url_confirmation_patch_template")
+            if isinstance(
+                exact_url_queue.get("source_url_confirmation_patch_template"),
+                dict,
+            )
+            else {}
+        )
+        .get("summary")
+        if isinstance(
+            (
+                exact_url_queue.get("source_url_confirmation_patch_template")
+                if isinstance(
+                    exact_url_queue.get("source_url_confirmation_patch_template"),
+                    dict,
+                )
+                else {}
+            ).get("summary"),
+            dict,
+        )
+        else {}
+    )
+    sample_items = []
+    for item in items:
+        primary_url = item.get("primary_review_url") or item.get(
+            "first_primary_review_url"
+        )
+        if not primary_url:
+            continue
+        sample_items.append(
+            {
+                "catalog_index": item.get("catalog_index"),
+                "name_ko": item.get("name_ko"),
+                "name_ja": item.get("name_ja"),
+                "source_store": item.get("source_store"),
+                "primary_review_url": primary_url,
+                "primary_review_url_kind": item.get("primary_review_url_kind")
+                or summary.get("first_primary_review_url_kind"),
+            }
+        )
+        if len(sample_items) >= 5:
+            break
+
+    return {
+        "workflow": "find_source_then_extract_image",
+        "batch_id": f"{focus_pack_id}-exact-url-review",
+        "focus_pack_id": focus_pack_id,
+        "source_store": source_store,
+        "row_count": queue_rows,
+        "primary_review_url_rows": int(
+            summary.get("primary_review_url_rows") or queue_rows
+        ),
+        "first_primary_review_url": first_url,
+        "first_primary_review_url_kind": str(
+            summary.get("first_primary_review_url_kind")
+            or "domain_limited_web_search"
+        ),
+        "review_section": "source_discovery_next_focus_exact_url_review_queue",
+        "source": "source_discovery_next_focus_exact_url_review_queue_public.json",
+        "template": "source_discovery_focus_confirmed_template_public.json",
+        "source_url_confirmation_patch_template_rows": int(
+            template.get("template_rows") or 0
+        ),
+        "rediscovery_work_order_rows": int(
+            summary.get("rediscovery_work_order_rows") or 0
+        ),
+        "sample_items_with_primary_review_url": len(sample_items),
+        "sample_primary_review_items": sample_items,
+        "manual_confirmation_required": True,
+        "auto_apply_enabled": False,
+    }
+
+
 def build_report(
     enrichment: dict[str, Any],
     action_queue: dict[str, Any],
@@ -1598,6 +1708,10 @@ def build_report(
         next_focus_pack_from_template_summary(focus_template_summary),
         source_discovery_next_focus_detail_candidates,
         source_discovery_next_focus_fallback_queue,
+    )
+    source_discovery_review_start = build_source_discovery_review_start(
+        next_source_discovery_focus_pack,
+        source_discovery_next_focus_exact_url_queue,
     )
     readiness_total = sum(int(row.get("rows") or 0) for row in base_readiness_rows)
     missing_image_rows = int(summary.get("missing_image_rows") or readiness_total)
@@ -1739,6 +1853,12 @@ def build_report(
         "manual_image_research_review_start_kind": (
             manual_research_review_start.get("first_primary_review_url_kind") or ""
         ),
+        "source_discovery_review_start_rows": int(
+            source_discovery_review_start.get("primary_review_url_rows") or 0
+        ),
+        "source_discovery_review_start_kind": (
+            source_discovery_review_start.get("first_primary_review_url_kind") or ""
+        ),
         "image_attachment_template_rows": int(image_attachment_template_summary.get("template_items") or 0),
         "image_attachment_template_confirmed_rows": int(
             image_attachment_template_summary.get("manual_confirmed_rows") or 0
@@ -1770,6 +1890,7 @@ def build_report(
         next_source_discovery_focus_pack,
         image_action_review_starts,
         manual_research_review_start,
+        source_discovery_review_start,
     )
     manual_validation_focus = build_manual_validation_focus(summary_out, work_order)
     completion_plan = build_completion_plan(
@@ -1779,6 +1900,7 @@ def build_report(
         next_source_discovery_focus_pack,
         image_action_review_starts,
         manual_research_review_start,
+        source_discovery_review_start,
     )
     execution_queue_summary = build_execution_queue_summary(
         summary_out,
@@ -1839,6 +1961,7 @@ def build_report(
         "source_discovery_work_packs": source_discovery_work_packs,
         "image_action_review_starts": image_action_review_starts,
         "manual_research_review_start": manual_research_review_start,
+        "source_discovery_review_start": source_discovery_review_start,
         "next_source_discovery_focus_pack": next_source_discovery_focus_pack or {},
         "work_order": work_order,
         "manual_validation_focus": manual_validation_focus,
