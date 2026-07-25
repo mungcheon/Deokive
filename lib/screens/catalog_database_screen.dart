@@ -12,6 +12,24 @@ const _catalogAddButtonBackground = Color(0xFF252938);
 const _catalogAddButtonForeground = Color(0xFFFFFFFF);
 const _catalogAddButtonDisabledBackground = Color(0xFFDDE1E8);
 const _catalogAddButtonDisabledForeground = Color(0xFF596070);
+const _catalogAddButtonTextStyle = TextStyle(
+  inherit: false,
+  color: _catalogAddButtonForeground,
+  fontSize: 13,
+  fontWeight: FontWeight.w900,
+  height: 1.1,
+  decoration: TextDecoration.none,
+  fontFamilyFallback: _kCatalogButtonFontFallback,
+);
+const _catalogAddButtonDisabledTextStyle = TextStyle(
+  inherit: false,
+  color: _catalogAddButtonDisabledForeground,
+  fontSize: 13,
+  fontWeight: FontWeight.w900,
+  height: 1.1,
+  decoration: TextDecoration.none,
+  fontFamilyFallback: _kCatalogButtonFontFallback,
+);
 
 class CatalogDatabaseScreen extends StatefulWidget {
   final FolderItem? initialFolder;
@@ -660,28 +678,30 @@ class _CatalogButtonLabel extends StatelessWidget {
       shadows: const [],
     );
 
-    return IconTheme.merge(
-      data: IconThemeData(color: color, size: iconSize),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, color: color, size: iconSize),
-          SizedBox(width: gap),
-          Flexible(
-            child: FittedBox(
-              fit: BoxFit.scaleDown,
+    return DefaultTextStyle(
+      style: textStyle,
+      child: IconTheme.merge(
+        data: IconThemeData(color: color, size: iconSize),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, color: color, size: iconSize),
+            SizedBox(width: gap),
+            Flexible(
               child: Text(
                 label,
                 maxLines: 1,
-                overflow: TextOverflow.visible,
+                overflow: TextOverflow.ellipsis,
                 softWrap: false,
                 textAlign: TextAlign.center,
-                style: textStyle,
+                style: color == _catalogAddButtonDisabledForeground
+                    ? _catalogAddButtonDisabledTextStyle
+                    : _catalogAddButtonTextStyle,
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
