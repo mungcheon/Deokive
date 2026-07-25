@@ -183,6 +183,73 @@ def _patch_summary(templates: list[dict[str, Any]], catalog_item_rows: Any) -> d
     }
 
 
+def _manual_value_formats(fields: list[str]) -> dict[str, str]:
+    formats: dict[str, str] = {}
+    for field in fields:
+        guidance = _field_review_guidance(field)
+        manual_value_format = str(guidance.get("manual_value_format") or "").strip()
+        if manual_value_format:
+            formats[field] = manual_value_format
+    return formats
+
+
+def _metadata_evidence_summary(
+    *,
+    slug: Any,
+    fields: list[str],
+    primary_review_url: Any,
+    primary_review_url_kind: Any,
+    evidence_urls: Any,
+    catalog_item_rows: Any,
+    sample_catalog_indexes: Any,
+    sample_names: Any,
+    field_patch_template_count: int,
+) -> dict[str, Any]:
+    sample_names_list = [
+        str(name)
+        for name in (sample_names or [])
+        if str(name or "").strip()
+    ]
+    exception_sample_rows = sum(
+        1
+        for name in sample_names_list
+        if "ラストワン" in name
+        or "Last One" in name
+        or "LAST ONE" in name
+        or "ダブルチャンス" in name
+        or "Double Chance" in name
+        or "DOUBLE CHANCE" in name
+    )
+    urls = [
+        str(url).strip()
+        for url in (evidence_urls or [])
+        if str(url or "").strip()
+    ]
+    primary_url = str(primary_review_url or "").strip()
+    if primary_url and primary_url not in urls:
+        urls.insert(0, primary_url)
+    return {
+        "campaign_slug": slug,
+        "fields_to_confirm": fields,
+        "primary_review_url": primary_url,
+        "primary_review_url_kind": str(primary_review_url_kind or ""),
+        "official_review_url_ready": _review_url_kind(primary_url).startswith("official_1kuji"),
+        "evidence_url_count": len(urls),
+        "catalog_item_rows": int(catalog_item_rows or 0),
+        "sample_name_count": len(sample_names_list),
+        "sample_catalog_indexes": list(sample_catalog_indexes or [])[:8],
+        "field_patch_template_count": field_patch_template_count,
+        "zero_price_exception_sample_rows": exception_sample_rows,
+        "release_date_patch_required": "release_date" in fields,
+        "non_exception_price_patch_required": "official_price_jpy" in fields,
+        "expected_manual_value_formats": _manual_value_formats(fields),
+        "manual_official_confirmation_required": True,
+        "safe_to_auto_apply": False,
+        "auto_apply_enabled": False,
+        "blocked_until": UNBLOCKS_WHEN,
+    }
+
+
 def _review_lane(workflow: Any, fields: list[str]) -> str:
     workflow_text = str(workflow or "")
     if "release_date" in fields and "official_price_jpy" in fields:
@@ -284,6 +351,17 @@ def _campaign_patch_work_order(campaigns: list[dict[str, Any]]) -> list[dict[str
             for template in templates
             if template.get("field")
         ]
+        evidence_summary = _metadata_evidence_summary(
+            slug=campaign.get("slug"),
+            fields=fields,
+            primary_review_url=campaign.get("primary_review_url"),
+            primary_review_url_kind=campaign.get("primary_review_url_kind"),
+            evidence_urls=campaign.get("evidence_urls") or [],
+            catalog_item_rows=campaign.get("catalog_item_rows"),
+            sample_catalog_indexes=campaign.get("sample_catalog_indexes") or [],
+            sample_names=campaign.get("sample_names") or [],
+            field_patch_template_count=len(templates),
+        )
         rows.append(
             {
                 "rank": index,
@@ -300,6 +378,7 @@ def _campaign_patch_work_order(campaigns: list[dict[str, Any]]) -> list[dict[str
                 "field_patch_template_count": len(templates),
                 "sample_catalog_indexes": campaign.get("sample_catalog_indexes") or [],
                 "sample_names": campaign.get("sample_names") or [],
+                "metadata_evidence_summary": evidence_summary,
                 "manual_confirmation_requirements": campaign.get(
                     "manual_confirmation_requirements"
                 )
@@ -328,6 +407,18 @@ def _next_campaign_patch_review_batch(
             for template in row.get("field_patch_templates") or []
             if isinstance(template, dict)
         ]
+        fields = list(row.get("fields_to_confirm") or [])
+        evidence_summary = _metadata_evidence_summary(
+            slug=row.get("slug"),
+            fields=fields,
+            primary_review_url=row.get("primary_review_url"),
+            primary_review_url_kind=row.get("primary_review_url_kind"),
+            evidence_urls=row.get("evidence_urls") or [],
+            catalog_item_rows=row.get("catalog_item_rows"),
+            sample_catalog_indexes=row.get("sample_catalog_indexes") or [],
+            sample_names=row.get("sample_names") or [],
+            field_patch_template_count=len(templates),
+        )
         rows.append(
             {
                 "manual_confirmed": False,
@@ -339,9 +430,10 @@ def _next_campaign_patch_review_batch(
                 "primary_review_url_kind": row.get("primary_review_url_kind"),
                 "evidence_urls": row.get("evidence_urls") or [],
                 "catalog_item_rows": row.get("catalog_item_rows"),
-                "fields_to_confirm": row.get("fields_to_confirm") or [],
+                "fields_to_confirm": fields,
                 "sample_catalog_indexes": row.get("sample_catalog_indexes") or [],
                 "sample_names": (row.get("sample_names") or [])[:8],
+                "metadata_evidence_summary": evidence_summary,
                 "field_patch_templates": templates,
                 "manual_value_fields_to_fill": [
                     {
@@ -383,6 +475,9 @@ def _campaign_field_confirmation_template(
             if not isinstance(template, dict):
                 continue
             field = str(template.get("field") or "")
+            evidence_summary = dict(campaign.get("metadata_evidence_summary") or {})
+            evidence_summary["field"] = field
+            evidence_summary["manual_value_format"] = _manual_value_formats([field]).get(field, "")
             rows.append(
                 {
                     "rank": campaign.get("rank"),
@@ -406,6 +501,7 @@ def _campaign_field_confirmation_template(
                         "target_catalog_indexes_sample",
                         [],
                     ),
+                    "metadata_evidence_summary": evidence_summary,
                     "manual_confirmed": False,
                     "manual_note": "",
                     "requires_labeled_official_evidence": bool(
@@ -617,6 +713,23 @@ def build_report(review_batches: dict[str, Any], *, max_campaigns: int = 32, bat
             ),
             "next_campaign_patch_review_batch_primary_review_url_rows": sum(
                 1 for row in next_campaign_patch_review_batch if row.get("primary_review_url")
+            ),
+            "next_campaign_patch_review_batch_release_date_rows": sum(
+                1
+                for row in next_campaign_patch_review_batch
+                if "release_date" in (row.get("fields_to_confirm") or [])
+            ),
+            "next_campaign_patch_review_batch_price_rows": sum(
+                1
+                for row in next_campaign_patch_review_batch
+                if "official_price_jpy" in (row.get("fields_to_confirm") or [])
+            ),
+            "next_campaign_patch_review_batch_manual_confirmation_required_rows": sum(
+                1
+                for row in next_campaign_patch_review_batch
+                if row.get("metadata_evidence_summary", {}).get(
+                    "manual_official_confirmation_required"
+                )
             ),
             "next_campaign_patch_review_batch_field_counts": Counter(
                 field

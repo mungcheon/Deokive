@@ -1926,12 +1926,36 @@ class PublicCatalogReportTests(unittest.TestCase):
             metadata_action["campaign_field_confirmation_template_rows"],
             8,
         )
+        self.assertEqual(
+            metadata_action["next_campaign_patch_review_batch_release_date_rows"],
+            2,
+        )
+        self.assertEqual(
+            metadata_action["next_campaign_patch_review_batch_price_rows"],
+            6,
+        )
+        self.assertEqual(
+            metadata_action[
+                "next_campaign_patch_review_batch_manual_confirmation_required_rows"
+            ],
+            8,
+        )
         first_metadata_template = metadata_confirmation_template["rows"][0]
         self.assertEqual(first_metadata_template["field"], "release_date")
         self.assertEqual(first_metadata_template["campaign_slug"], "jujutsu-o")
         self.assertTrue(first_metadata_template["primary_review_url"])
         self.assertEqual(first_metadata_template["manual_value"], "")
         self.assertFalse(first_metadata_template["manual_confirmed"])
+        first_metadata_summary = first_metadata_template["metadata_evidence_summary"]
+        self.assertEqual(first_metadata_summary["campaign_slug"], "jujutsu-o")
+        self.assertEqual(first_metadata_summary["fields_to_confirm"], ["release_date"])
+        self.assertTrue(first_metadata_summary["official_review_url_ready"])
+        self.assertTrue(first_metadata_summary["manual_official_confirmation_required"])
+        self.assertFalse(first_metadata_summary["safe_to_auto_apply"])
+        self.assertEqual(
+            first_metadata_summary["expected_manual_value_formats"]["release_date"],
+            "YYYY-MM-DD",
+        )
         if reports.ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.exists():
             prize_audit = reports.load_json(reports.ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT)
             self.assertEqual(
