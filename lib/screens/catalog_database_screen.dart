@@ -668,12 +668,13 @@ class _CatalogButtonLabel extends StatelessWidget {
         children: [
           Icon(icon, color: color, size: iconSize),
           SizedBox(width: gap),
-          RichText(
+          Text(
+            label,
             maxLines: 1,
             overflow: TextOverflow.visible,
             softWrap: false,
             textAlign: TextAlign.center,
-            text: TextSpan(text: label, style: textStyle),
+            style: textStyle,
           ),
         ],
       ),
