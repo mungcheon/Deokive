@@ -415,25 +415,8 @@ class _CatalogImportActionButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: 48,
-      child: FilledButton.icon(
+      child: FilledButton(
         onPressed: onPressed,
-        icon: Icon(icon, color: foregroundColor, size: 19),
-        label: Text(
-          label,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          softWrap: false,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: foregroundColor,
-            fontSize: 15,
-            fontWeight: FontWeight.w900,
-            height: 1,
-            decoration: TextDecoration.none,
-            fontFamilyFallback: _kCatalogImportButtonFontFallback,
-            shadows: const [],
-          ),
-        ),
         style: FilledButton.styleFrom(
           backgroundColor: backgroundColor,
           disabledBackgroundColor: backgroundColor,
@@ -451,6 +434,47 @@ class _CatalogImportActionButton extends StatelessWidget {
               color: onPressed == null
                   ? foregroundColor.withValues(alpha: 0.12)
                   : foregroundColor.withValues(alpha: 0.1),
+            ),
+          ),
+        ),
+        child: IconTheme(
+          data: IconThemeData(color: foregroundColor, size: 19),
+          child: DefaultTextStyle.merge(
+            style: TextStyle(
+              color: foregroundColor,
+              fontSize: 15,
+              fontWeight: FontWeight.w900,
+              height: 1,
+              decoration: TextDecoration.none,
+              fontFamilyFallback: _kCatalogImportButtonFontFallback,
+              shadows: const [],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(icon),
+                const SizedBox(width: 6),
+                Flexible(
+                  child: Text(
+                    label,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    softWrap: false,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      inherit: false,
+                      color: foregroundColor,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w900,
+                      height: 1,
+                      decoration: TextDecoration.none,
+                      fontFamilyFallback: _kCatalogImportButtonFontFallback,
+                      shadows: const [],
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
