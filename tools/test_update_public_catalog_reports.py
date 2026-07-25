@@ -753,6 +753,37 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIs(quality["provider_missing_source_url_queue"]["auto_apply_enabled"], False)
         self.assertEqual(quality["candidate_source_url_review_queue"]["candidate_review_rows"], 3)
         self.assertEqual(quality["candidate_source_url_review_queue"]["with_candidate_options"], 3)
+        candidate_patch_template = quality["candidate_source_url_review_queue"][
+            "candidate_review_patch_template"
+        ]
+        self.assertEqual(
+            candidate_patch_template["status"],
+            "manual_candidate_review_required",
+        )
+        self.assertEqual(candidate_patch_template["template_rows"], 3)
+        self.assertEqual(candidate_patch_template["ready_to_import_rows"], 0)
+        self.assertEqual(
+            candidate_patch_template["manual_confirmation_required_rows"],
+            3,
+        )
+        self.assertFalse(candidate_patch_template["auto_apply_enabled"])
+        self.assertEqual(
+            candidate_patch_template["single_candidate_option_rows"],
+            2,
+        )
+        self.assertEqual(
+            candidate_patch_template["multi_candidate_option_rows"],
+            1,
+        )
+        first_candidate_patch = candidate_patch_template["rows"][0]
+        self.assertIn(
+            "accept_exact_product_source_url",
+            first_candidate_patch["allowed_manual_decisions"],
+        )
+        self.assertEqual(first_candidate_patch["manual_decision"], "")
+        self.assertEqual(first_candidate_patch["manual_value"], "")
+        self.assertTrue(first_candidate_patch["top_candidate_source_url"])
+        self.assertTrue(first_candidate_patch["top_candidate_image_url"])
         self.assertEqual(
             quality["candidate_source_url_review_queue"]["manual_image_url_slot_rows"],
             3,

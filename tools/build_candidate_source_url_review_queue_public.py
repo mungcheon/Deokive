@@ -199,6 +199,67 @@ def _review_readiness(rows: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def _candidate_review_patch_template(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    template_rows: list[dict[str, Any]] = []
+    for row in rows:
+        candidates = row.get("candidate_options") or []
+        if not candidates:
+            continue
+        top_candidate = candidates[0]
+        template_rows.append(
+            {
+                "row_index": row.get("row_index"),
+                "catalog_index": row.get("catalog_index"),
+                "name_ko": row.get("name_ko"),
+                "source_store": row.get("source_store"),
+                "category": row.get("category"),
+                "current_source_url": row.get("current_source_url"),
+                "candidate_status": row.get("candidate_status"),
+                "candidate_score": row.get("candidate_score"),
+                "candidate_count": row.get("candidate_count") or 0,
+                "top_candidate_title": top_candidate.get("title"),
+                "top_candidate_source_url": top_candidate.get("source_url"),
+                "top_candidate_image_url": top_candidate.get("image_url"),
+                "top_candidate_release_date": top_candidate.get("release_date"),
+                "candidate_options": candidates,
+                "manual_decision": "",
+                "manual_value": "",
+                "manual_image_url": "",
+                "evidence_url": "",
+                "manual_note": "",
+                "allowed_manual_decisions": [
+                    "accept_exact_product_source_url",
+                    "reject_candidate_needs_manual_search",
+                    "needs_more_evidence",
+                ],
+                "blocked_until": "manual_decision_and_exact_product_evidence",
+                "auto_apply_enabled": False,
+            }
+        )
+
+    single_option_rows = sum(
+        1 for row in template_rows if int(row.get("candidate_count") or 0) == 1
+    )
+    return {
+        "status": "manual_candidate_review_required"
+        if template_rows
+        else "no_candidate_review_rows",
+        "template_rows": len(template_rows),
+        "single_candidate_option_rows": single_option_rows,
+        "multi_candidate_option_rows": len(template_rows) - single_option_rows,
+        "ready_to_import_rows": 0,
+        "manual_confirmation_required_rows": len(template_rows),
+        "auto_apply_enabled": False,
+        "rows": template_rows,
+        "import_instructions": [
+            "Use manual_decision=accept_exact_product_source_url only when the candidate is the exact product detail page.",
+            "Copy the accepted detail URL into manual_value and evidence_url.",
+            "Copy top_candidate_image_url into manual_image_url only when the product image also matches the catalog row.",
+            "Rejected or uncertain candidates must stay blank and continue through manual search.",
+        ],
+    }
+
+
 def build_queue(template: dict[str, Any], *, generated_at: str | None = None) -> dict[str, Any]:
     rows = [
         _queue_item(row)
@@ -219,6 +280,7 @@ def build_queue(template: dict[str, Any], *, generated_at: str | None = None) ->
         if isinstance(row.get("top_candidate"), dict)
         and _compact_text(row["top_candidate"].get("image_url"))
     )
+    candidate_review_patch_template = _candidate_review_patch_template(rows)
 
     return {
         "schema_version": 1,
@@ -239,6 +301,7 @@ def build_queue(template: dict[str, Any], *, generated_at: str | None = None) ->
             "auto_apply_enabled": False,
         },
         "review_readiness": _review_readiness(rows),
+        "candidate_review_patch_template": candidate_review_patch_template,
         "instructions": [
             "This queue covers low-confidence and weak candidate source URLs.",
             "Candidate URLs are review hints only, not import evidence.",
