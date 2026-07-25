@@ -234,6 +234,104 @@ def _evidence_url_summary(source_urls: list[str]) -> dict[str, Any]:
     }
 
 
+def _campaign_item_identity_summary(orders: list[dict[str, Any]]) -> dict[str, Any]:
+    sample_rows = [
+        row
+        for order in orders
+        for row in order.get("sample_rows") or []
+        if isinstance(row, dict)
+    ]
+    prize_summaries = [
+        summary
+        for order in orders
+        if isinstance((summary := order.get("prize_identity_summary")), dict)
+    ]
+    zero_price_policies = [
+        policy
+        for order in orders
+        if isinstance((policy := order.get("zero_price_exception_policy")), dict)
+    ]
+    return {
+        "item_work_order_count": len(orders),
+        "catalog_row_count": len(
+            {
+                catalog_index
+                for order in orders
+                for catalog_index in order.get("catalog_indexes") or []
+                if isinstance(catalog_index, int)
+            }
+        ),
+        "identity_label_count": len(
+            {
+                label
+                for summary in prize_summaries
+                for label in summary.get("identity_labels") or []
+                if str(label).strip()
+            }
+        ),
+        "prize_rank_count": len(
+            {
+                rank
+                for summary in prize_summaries
+                for rank in summary.get("prize_ranks") or []
+                if str(rank).strip()
+            }
+        ),
+        "variant_name_count": len(
+            {
+                variant
+                for summary in prize_summaries
+                for variant in summary.get("variant_names") or []
+                if str(variant).strip()
+            }
+        ),
+        "official_price_jpy_values": sorted(
+            {
+                price
+                for summary in prize_summaries
+                for price in summary.get("official_price_jpy_values") or []
+                if isinstance(price, int)
+            }
+        ),
+        "zero_price_exception_policy_pass": all(
+            bool(policy.get("current_group_pass")) for policy in zero_price_policies
+        )
+        if zero_price_policies
+        else True,
+        "zero_price_exception_nonzero_rows": sum(
+            int(policy.get("nonzero_exception_rows") or 0)
+            for policy in zero_price_policies
+        ),
+        "rows_missing_image_url": sum(
+            1 for row in sample_rows if not _present(row.get("image_url"))
+        ),
+        "rows_missing_official_price_jpy": sum(
+            1 for row in sample_rows if _price_value(row) is None
+        ),
+        "review_risk_flags": [
+            flag
+            for flag, enabled in [
+                (
+                    "zero_price_exception_policy_failed",
+                    any(
+                        int(policy.get("nonzero_exception_rows") or 0) > 0
+                        for policy in zero_price_policies
+                    ),
+                ),
+                (
+                    "sample_rows_missing_image_url",
+                    any(not _present(row.get("image_url")) for row in sample_rows),
+                ),
+                (
+                    "sample_rows_missing_official_price_jpy",
+                    any(_price_value(row) is None for row in sample_rows),
+                ),
+            ]
+            if enabled
+        ],
+    }
+
+
 def protected_ichiban_reissue_catalog_indexes(policy_audit: dict[str, Any] | None) -> set[int]:
     if not policy_audit:
         return set()
@@ -435,6 +533,7 @@ def ichiban_reissue_campaign_work_order(
             if isinstance(row, dict)
         ][:12]
         evidence_summary = _evidence_url_summary(list(source_urls))
+        item_identity_summary = _campaign_item_identity_summary(orders)
         campaign_orders.append(
             {
                 "campaign_work_order_id": f"ichiban-reissue-campaign-{rank:03d}",
@@ -447,6 +546,7 @@ def ichiban_reissue_campaign_work_order(
                 "catalog_indexes": catalog_indexes,
                 "catalog_row_count": len(catalog_indexes),
                 "prize_labels": prize_labels,
+                "item_identity_summary": item_identity_summary,
                 "review_state": "campaign_pair_reissue_or_duplicate_decision_required",
                 "next_machine_step": "compare_campaign_pair_once_then_apply_decision_to_item_work_orders",
                 "manual_review_checklist": [

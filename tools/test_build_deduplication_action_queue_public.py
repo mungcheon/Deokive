@@ -311,6 +311,18 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
         campaign_order = report["ichiban_reissue_campaign_work_order"][0]
         self.assertEqual(campaign_order["item_work_order_count"], 1)
         self.assertEqual(campaign_order["catalog_row_count"], 2)
+        self.assertEqual(campaign_order["item_identity_summary"]["item_work_order_count"], 1)
+        self.assertEqual(campaign_order["item_identity_summary"]["catalog_row_count"], 2)
+        self.assertEqual(campaign_order["item_identity_summary"]["identity_label_count"], 1)
+        self.assertEqual(campaign_order["item_identity_summary"]["prize_rank_count"], 1)
+        self.assertEqual(campaign_order["item_identity_summary"]["official_price_jpy_values"], [0])
+        self.assertTrue(campaign_order["item_identity_summary"]["zero_price_exception_policy_pass"])
+        self.assertEqual(campaign_order["item_identity_summary"]["zero_price_exception_nonzero_rows"], 0)
+        self.assertEqual(campaign_order["item_identity_summary"]["rows_missing_image_url"], 2)
+        self.assertIn(
+            "sample_rows_missing_image_url",
+            campaign_order["item_identity_summary"]["review_risk_flags"],
+        )
         self.assertEqual(
             campaign_order["decision_template"]["decision_options"][0],
             "campaign_pair_reissue_keep_all_separate",
@@ -487,6 +499,16 @@ class BuildDeduplicationActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(campaign_order["item_work_order_count"], 2)
         self.assertEqual(campaign_order["catalog_indexes"], [101, 102, 103, 104])
         self.assertEqual(campaign_order["prize_labels"], ["A賞", "B賞"])
+        self.assertEqual(campaign_order["item_identity_summary"]["item_work_order_count"], 2)
+        self.assertEqual(campaign_order["item_identity_summary"]["catalog_row_count"], 4)
+        self.assertEqual(campaign_order["item_identity_summary"]["identity_label_count"], 2)
+        self.assertEqual(campaign_order["item_identity_summary"]["prize_rank_count"], 2)
+        self.assertEqual(campaign_order["item_identity_summary"]["rows_missing_image_url"], 4)
+        self.assertEqual(campaign_order["item_identity_summary"]["rows_missing_official_price_jpy"], 4)
+        self.assertIn(
+            "sample_rows_missing_official_price_jpy",
+            campaign_order["item_identity_summary"]["review_risk_flags"],
+        )
         self.assertEqual(campaign_order["first_evidence_url"], "https://1kuji.com/products/sample")
         self.assertEqual(campaign_order["evidence_url_count"], 2)
         self.assertEqual(
