@@ -589,6 +589,14 @@ def _campaign_first_confirmation_patch_template(
         comparison = item.get("campaign_url_comparison")
         comparison = comparison if isinstance(comparison, dict) else {}
         source_urls = item.get("source_urls") or []
+        recommended_decision = (
+            "campaign_pair_reissue_keep_all_separate"
+            if comparison.get("likely_same_campaign_family_reissue")
+            else "needs_more_source_evidence"
+        )
+        required_evidence = lane_blocker(
+            "probable_reissue_or_campaign_variant_review"
+        ).get("required_evidence") or []
         rows.append(
             {
                 "patch_row_id": f"ichiban-campaign-reissue-review-{position:03d}",
@@ -601,14 +609,25 @@ def _campaign_first_confirmation_patch_template(
                     "needs_more_source_evidence",
                     "review_required",
                 ],
-                "recommended_decision": (
-                    "campaign_pair_reissue_keep_all_separate"
+                "recommended_decision": recommended_decision,
+                "recommended_decision_reason": (
+                    "same_campaign_slug_family_with_numbered_suffix"
                     if comparison.get("likely_same_campaign_family_reissue")
-                    else "needs_more_source_evidence"
+                    else "campaign_relationship_needs_more_source_evidence"
                 ),
+                "required_evidence": required_evidence,
+                "manual_confirmation_fields_required": [
+                    "manual_confirmed",
+                    "decision",
+                    "evidence_url",
+                    "manual_note",
+                ],
                 "likely_same_campaign_family_reissue": bool(
                     comparison.get("likely_same_campaign_family_reissue")
                 ),
+                "campaign_slug_family_count": comparison.get("campaign_slug_family_count"),
+                "campaign_slugs": comparison.get("campaign_slugs") or [],
+                "numeric_suffixes": comparison.get("numeric_suffixes") or [],
                 "source_urls": source_urls,
                 "first_evidence_url": item.get("first_evidence_url") or _first_url(source_urls),
                 "evidence_url_count": item.get("evidence_url_count"),
@@ -619,6 +638,18 @@ def _campaign_first_confirmation_patch_template(
                 "campaign_slug_families": comparison.get("campaign_slug_families") or [],
                 "manual_review_checklist": item.get("manual_review_checklist") or [],
                 "evidence_url": item.get("first_evidence_url") or _first_url(source_urls),
+                "evidence_gap_summary": {
+                    "missing_evidence_url": not bool(
+                        item.get("first_evidence_url") or _first_url(source_urls)
+                    ),
+                    "missing_source_url_pair": len(
+                        [url for url in source_urls if str(url or "").strip()]
+                    )
+                    < 2,
+                    "missing_affected_item_work_order_ids": not bool(
+                        item.get("affected_item_work_order_ids")
+                    ),
+                },
                 "manual_note": "",
                 "blocked_until": "campaign_pair_reissue_or_duplicate_decision_confirmed",
                 "operator_instruction": (

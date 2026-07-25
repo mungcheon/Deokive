@@ -309,6 +309,22 @@ class BuildIchibanPrizePolicyIssueQueuePublicTest(unittest.TestCase):
             report["campaign_first_review_plan"][0]["decision_options"][0],
             "campaign_pair_reissue_keep_all_separate",
         )
+        patch_row = report["campaign_first_confirmation_patch_template"]["rows"][0]
+        self.assertEqual(
+            patch_row["recommended_decision"],
+            "campaign_pair_reissue_keep_all_separate",
+        )
+        self.assertEqual(
+            patch_row["recommended_decision_reason"],
+            "same_campaign_slug_family_with_numbered_suffix",
+        )
+        self.assertIn("campaign_titles_compared", patch_row["required_evidence"])
+        self.assertIn("manual_note", patch_row["manual_confirmation_fields_required"])
+        self.assertFalse(patch_row["evidence_gap_summary"]["missing_evidence_url"])
+        self.assertFalse(patch_row["evidence_gap_summary"]["missing_source_url_pair"])
+        self.assertFalse(
+            patch_row["evidence_gap_summary"]["missing_affected_item_work_order_ids"]
+        )
 
     def test_clean_price_policy_still_surfaces_remaining_reviews(self) -> None:
         report = queue.build_queue(
