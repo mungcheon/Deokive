@@ -65,15 +65,24 @@ class SourceDiscoveryNextFocusSplitQueueTests(unittest.TestCase):
         )
 
         self.assertEqual(identity_report["summary"]["queue_rows"], 0)
+        self.assertEqual(exact_report["summary"]["safe_candidate_detail_link_rows"], 0)
+        self.assertEqual(exact_report["summary"]["rejected_candidate_detail_link_rows"], 1)
+        self.assertEqual(exact_report["summary"]["all_sample_candidates_rejected_rows"], 1)
+        self.assertEqual(
+            exact_report["summary"]["recommended_next_action"],
+            "ignore rejected sample links and use primary/domain-limited review URLs for exact source search",
+        )
         template = exact_report["source_url_confirmation_patch_template"]
         self.assertEqual(
-            template["status"], "manual_exact_source_url_confirmation_required"
+            template["status"],
+            "manual_exact_source_url_search_required_no_safe_candidates",
         )
         self.assertEqual(template["template_rows"], 1)
         self.assertEqual(template["ready_to_import_rows"], 0)
         self.assertEqual(template["blocked_rows"], 1)
         self.assertEqual(template["candidate_detail_link_rows"], 0)
         self.assertEqual(template["rejected_candidate_detail_link_rows"], 1)
+        self.assertEqual(template["all_sample_candidates_rejected_rows"], 1)
         self.assertIs(template["auto_apply_enabled"], False)
         row = template["rows"][0]
         self.assertEqual(row["catalog_index"], 922)
@@ -84,6 +93,10 @@ class SourceDiscoveryNextFocusSplitQueueTests(unittest.TestCase):
         self.assertEqual(
             row["unsafe_sample_candidate_detail_links"],
             ["https://www.enskyshop.com/products/detail/30883"],
+        )
+        self.assertEqual(
+            exact_report["items"][0]["next_action"],
+            "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
         )
         self.assertEqual(
             row["rejected_candidate_detail_links"][0]["rejection_reason"],

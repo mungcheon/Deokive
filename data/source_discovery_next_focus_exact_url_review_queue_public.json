@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-25T01:05:34Z",
+  "generated_at": "2026-07-25T01:09:09Z",
   "scope": "source_discovery_next_focus_exact_url_review_queue",
   "source_report": "data/source_discovery_next_focus_fallback_queue_public.json",
   "summary": {
@@ -48,6 +48,7 @@
     "safe_candidate_detail_links": 0,
     "rejected_candidate_detail_link_rows": 20,
     "rejected_candidate_detail_links": 100,
+    "all_sample_candidates_rejected_rows": 20,
     "candidate_detail_link_source_counts": [
       [
         "official_search_result_sample_links",
@@ -62,7 +63,7 @@
     ],
     "candidate_detail_link_warning_rows": 20,
     "broad_candidate_detail_link_rows": 20,
-    "recommended_next_action": "confirm exact product detail source URLs for these rows before image attachment"
+    "recommended_next_action": "ignore rejected sample links and use primary/domain-limited review URLs for exact source search"
   },
   "automation_policy": {
     "auto_apply_source_url": false,
@@ -70,13 +71,14 @@
     "requires_manual_review": true
   },
   "source_url_confirmation_patch_template": {
-    "status": "manual_exact_source_url_confirmation_required",
+    "status": "manual_exact_source_url_search_required_no_safe_candidates",
     "template_rows": 10,
     "ready_to_import_rows": 0,
     "blocked_rows": 10,
     "candidate_detail_link_rows": 0,
     "candidate_detail_link_coverage": 0.0,
     "rejected_candidate_detail_link_rows": 10,
+    "all_sample_candidates_rejected_rows": 10,
     "unsafe_sample_candidate_detail_link_rows": 10,
     "manual_image_url_slot_rows": 10,
     "auto_apply_enabled": false,
@@ -1405,7 +1407,7 @@
       "manual_confirmed_image_url": "",
       "manual_evidence_url": "",
       "manual_note": "",
-      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "next_action": "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -1538,7 +1540,7 @@
       "manual_confirmed_image_url": "",
       "manual_evidence_url": "",
       "manual_note": "",
-      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "next_action": "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -1671,7 +1673,7 @@
       "manual_confirmed_image_url": "",
       "manual_evidence_url": "",
       "manual_note": "",
-      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "next_action": "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -1804,7 +1806,7 @@
       "manual_confirmed_image_url": "",
       "manual_evidence_url": "",
       "manual_note": "",
-      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "next_action": "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -1937,7 +1939,7 @@
       "manual_confirmed_image_url": "",
       "manual_evidence_url": "",
       "manual_note": "",
-      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "next_action": "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -2070,7 +2072,7 @@
       "manual_confirmed_image_url": "",
       "manual_evidence_url": "",
       "manual_note": "",
-      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "next_action": "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -2203,7 +2205,7 @@
       "manual_confirmed_image_url": "",
       "manual_evidence_url": "",
       "manual_note": "",
-      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "next_action": "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -2336,7 +2338,7 @@
       "manual_confirmed_image_url": "",
       "manual_evidence_url": "",
       "manual_note": "",
-      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "next_action": "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -2469,7 +2471,7 @@
       "manual_confirmed_image_url": "",
       "manual_evidence_url": "",
       "manual_note": "",
-      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "next_action": "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -2602,7 +2604,7 @@
       "manual_confirmed_image_url": "",
       "manual_evidence_url": "",
       "manual_note": "",
-      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "next_action": "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -2735,7 +2737,7 @@
       "manual_confirmed_image_url": "",
       "manual_evidence_url": "",
       "manual_note": "",
-      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "next_action": "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -2868,7 +2870,7 @@
       "manual_confirmed_image_url": "",
       "manual_evidence_url": "",
       "manual_note": "",
-      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "next_action": "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -3001,7 +3003,7 @@
       "manual_confirmed_image_url": "",
       "manual_evidence_url": "",
       "manual_note": "",
-      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "next_action": "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -3134,7 +3136,7 @@
       "manual_confirmed_image_url": "",
       "manual_evidence_url": "",
       "manual_note": "",
-      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "next_action": "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -3267,7 +3269,7 @@
       "manual_confirmed_image_url": "",
       "manual_evidence_url": "",
       "manual_note": "",
-      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "next_action": "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -3400,7 +3402,7 @@
       "manual_confirmed_image_url": "",
       "manual_evidence_url": "",
       "manual_note": "",
-      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "next_action": "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -3533,7 +3535,7 @@
       "manual_confirmed_image_url": "",
       "manual_evidence_url": "",
       "manual_note": "",
-      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "next_action": "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -3666,7 +3668,7 @@
       "manual_confirmed_image_url": "",
       "manual_evidence_url": "",
       "manual_note": "",
-      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "next_action": "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -3799,7 +3801,7 @@
       "manual_confirmed_image_url": "",
       "manual_evidence_url": "",
       "manual_note": "",
-      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "next_action": "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -3932,7 +3934,7 @@
       "manual_confirmed_image_url": "",
       "manual_evidence_url": "",
       "manual_note": "",
-      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "next_action": "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [

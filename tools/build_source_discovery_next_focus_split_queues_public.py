@@ -184,6 +184,18 @@ def _rejected_candidate_detail_links(
     return rejected
 
 
+def _candidate_review_next_action(
+    candidate_links: list[str],
+    safe_candidate_links: list[str],
+    rejected_candidate_links: list[dict[str, Any]],
+) -> str:
+    if candidate_links and not safe_candidate_links and rejected_candidate_links:
+        return "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search"
+    if safe_candidate_links:
+        return "review_safe_candidate_detail_links_before_manual_confirmation"
+    return "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url"
+
+
 def _candidate_detail_link_review_fields(
     row: dict[str, Any],
     fetch_audit_by_index: dict[int, dict[str, Any]],
@@ -266,7 +278,11 @@ def _exact_item(row: dict[str, Any], fetch_audit_by_index: dict[int, dict[str, A
         "manual_confirmed_image_url": "",
         "manual_evidence_url": "",
         "manual_note": "",
-        "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+        "next_action": _candidate_review_next_action(
+            candidate_detail_links,
+            safe_candidate_detail_links,
+            rejected_candidate_detail_links,
+        ),
         "acceptance_rule": row.get("acceptance_rule"),
         "source_url_review_guidance": row.get("source_url_review_guidance") or {},
         "identity_review_status": row.get("identity_review_status"),
@@ -333,7 +349,9 @@ def _source_url_patch_template(items: list[dict[str, Any]], *, limit: int = 10) 
     candidate_rows = sum(1 for row in rows if row.get("candidate_detail_links"))
     rejected_candidate_rows = sum(1 for row in rows if row.get("rejected_candidate_detail_links"))
     return {
-        "status": "manual_exact_source_url_confirmation_required",
+        "status": "manual_exact_source_url_confirmation_required"
+        if candidate_rows
+        else "manual_exact_source_url_search_required_no_safe_candidates",
         "template_rows": len(rows),
         "ready_to_import_rows": sum(
             1
@@ -348,6 +366,13 @@ def _source_url_patch_template(items: list[dict[str, Any]], *, limit: int = 10) 
         "candidate_detail_link_rows": candidate_rows,
         "candidate_detail_link_coverage": round(candidate_rows / len(rows), 4) if rows else 0.0,
         "rejected_candidate_detail_link_rows": rejected_candidate_rows,
+        "all_sample_candidates_rejected_rows": sum(
+            1
+            for row in rows
+            if row.get("unsafe_sample_candidate_detail_links")
+            and not row.get("candidate_detail_links")
+            and row.get("rejected_candidate_detail_links")
+        ),
         "unsafe_sample_candidate_detail_link_rows": sum(
             1 for row in rows if row.get("unsafe_sample_candidate_detail_links")
         ),
@@ -439,6 +464,13 @@ def build_reports(
             "rejected_candidate_detail_links": sum(
                 int(item.get("rejected_candidate_detail_link_count") or 0) for item in exact_items
             ),
+            "all_sample_candidates_rejected_rows": sum(
+                1
+                for item in exact_items
+                if item.get("candidate_detail_links")
+                and not item.get("safe_candidate_detail_links")
+                and item.get("rejected_candidate_detail_links")
+            ),
             "candidate_detail_link_source_counts": Counter(
                 str(item.get("candidate_detail_link_source") or "")
                 for item in exact_items
@@ -458,7 +490,17 @@ def build_reports(
                 if item.get("candidate_detail_link_review_status")
                 == "broad_search_sample_requires_identity_check"
             ),
-            "recommended_next_action": "confirm exact product detail source URLs for these rows before image attachment",
+            "recommended_next_action": (
+                "ignore rejected sample links and use primary/domain-limited review URLs for exact source search"
+                if exact_items
+                and all(
+                    item.get("candidate_detail_links")
+                    and not item.get("safe_candidate_detail_links")
+                    and item.get("rejected_candidate_detail_links")
+                    for item in exact_items
+                )
+                else "confirm exact product detail source URLs for these rows before image attachment"
+            ),
         },
         "automation_policy": {
             "auto_apply_source_url": False,

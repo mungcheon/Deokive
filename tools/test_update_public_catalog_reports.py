@@ -985,9 +985,12 @@ class PublicCatalogReportTests(unittest.TestCase):
         exact_url_patch_template = quality[
             "source_discovery_next_focus_exact_url_review_queue"
         ]["source_url_confirmation_patch_template"]
-        self.assertEqual(
+        self.assertIn(
             exact_url_patch_template["status"],
-            "manual_exact_source_url_confirmation_required",
+            {
+                "manual_exact_source_url_confirmation_required",
+                "manual_exact_source_url_search_required_no_safe_candidates",
+            },
         )
         self.assertEqual(
             exact_url_patch_template["template_rows"],
@@ -1004,6 +1007,15 @@ class PublicCatalogReportTests(unittest.TestCase):
             exact_url_patch_template["template_rows"],
         )
         self.assertIs(exact_url_patch_template["auto_apply_enabled"], False)
+        if (
+            exact_url_patch_template["status"]
+            == "manual_exact_source_url_search_required_no_safe_candidates"
+        ):
+            self.assertEqual(exact_url_patch_template["candidate_detail_link_rows"], 0)
+            self.assertEqual(
+                exact_url_patch_template["all_sample_candidates_rejected_rows"],
+                exact_url_patch_template["template_rows"],
+            )
         if exact_url_patch_template["template_rows"]:
             first_patch_row = exact_url_patch_template["rows"][0]
             self.assertIn("catalog_index", first_patch_row)

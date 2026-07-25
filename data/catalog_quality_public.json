@@ -13252,6 +13252,7 @@
     "safe_candidate_detail_links": 0,
     "rejected_candidate_detail_link_rows": 20,
     "rejected_candidate_detail_links": 100,
+    "all_sample_candidates_rejected_rows": 20,
     "candidate_detail_link_source_counts": [
       [
         "official_search_result_sample_links",
@@ -13266,15 +13267,16 @@
     ],
     "candidate_detail_link_warning_rows": 20,
     "broad_candidate_detail_link_rows": 20,
-    "recommended_next_action": "confirm exact product detail source URLs for these rows before image attachment",
+    "recommended_next_action": "ignore rejected sample links and use primary/domain-limited review URLs for exact source search",
     "source_url_confirmation_patch_template": {
-      "status": "manual_exact_source_url_confirmation_required",
+      "status": "manual_exact_source_url_search_required_no_safe_candidates",
       "template_rows": 10,
       "ready_to_import_rows": 0,
       "blocked_rows": 10,
       "candidate_detail_link_rows": 0,
       "candidate_detail_link_coverage": 0.0,
       "rejected_candidate_detail_link_rows": 10,
+      "all_sample_candidates_rejected_rows": 10,
       "unsafe_sample_candidate_detail_link_rows": 10,
       "manual_image_url_slot_rows": 10,
       "auto_apply_enabled": false,
