@@ -10244,6 +10244,13 @@ def validate_report_consistency(
         expected_open_queues.update(
             catalog_goal_open_review_queues(catalog_goal_progress_gate)
         )
+        expected_goal_handoff_batches = catalog_goal_handoff_next_batches(
+            catalog_goal_progress_gate
+        )
+        if operations.get("goal_handoff_next_batches") != expected_goal_handoff_batches:
+            findings.append("operations.goal_handoff_next_batches does not match catalog goal gate")
+        if agent_work_queue.get("goal_handoff_next_batches") != expected_goal_handoff_batches:
+            findings.append("agent_work_queue.goal_handoff_next_batches does not match catalog goal gate")
     if open_queues != expected_open_queues:
         findings.append(
             "operations.open_review_queues does not match source report summaries: "
@@ -11126,6 +11133,12 @@ def update_reports(write: bool) -> dict[str, Any]:
     )
     if execution_plan["summary"].get("open_review_queues") != operations["summary"]["open_review_queues"]:
         raise ValueError("execution plan open queues do not match operations open queues")
+    if execution_plan.get("goal_handoff_next_batches") != operations.get(
+        "goal_handoff_next_batches"
+    ):
+        raise ValueError(
+            "execution plan goal handoff next batches do not match operations"
+        )
 
     catalog_generated_at = catalog.get("meta", {}).get("generated_at") or generated_at
     public_meta = load_json(PUBLIC_META, {})
