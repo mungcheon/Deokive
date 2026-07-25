@@ -10,6 +10,67 @@ import build_image_attachment_action_queue_public as queue
 
 
 class BuildImageAttachmentActionQueuePublicTest(unittest.TestCase):
+    def test_generic_storefront_rows_get_store_search_urls(self) -> None:
+        enrichment = {
+            "groups": [
+                {
+                    "workflow": "replace_generic_source_then_extract_image",
+                    "source_store": "Weverse Shop",
+                    "missing_image_rows": 1,
+                    "sample_items": [
+                        {
+                            "catalog_index": 10,
+                            "name_ko": "SEVENTEEN 포토카드 (랜덤)",
+                            "category": "포토카드",
+                            "source_url": "https://shop.weverse.io/home",
+                            "catalog_field_import_template": {"field": "image_url"},
+                        }
+                    ],
+                },
+                {
+                    "workflow": "replace_generic_source_then_extract_image",
+                    "source_store": "포켓몬 센터",
+                    "missing_image_rows": 1,
+                    "sample_items": [
+                        {
+                            "catalog_index": 11,
+                            "name_ko": "포켓몬 카드 게임 부스터 팩",
+                            "category": "트레이딩 카드",
+                            "source_url": "https://www.pokemoncenter-online.com/",
+                            "catalog_field_import_template": {"field": "image_url"},
+                        }
+                    ],
+                },
+            ]
+        }
+
+        report = queue.build_report(enrichment, max_batches=10, batch_size=20)
+        items = [
+            item
+            for batch in report["batches"]
+            for item in batch.get("items", [])
+        ]
+        by_store = {item["source_store"]: item for item in items}
+
+        self.assertEqual(
+            by_store["Weverse Shop"]["primary_review_url_kind"],
+            "source_search_url",
+        )
+        self.assertEqual(
+            by_store["Weverse Shop"]["source_search_url"],
+            "https://shop.weverse.io/search?keyword=SEVENTEEN+%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C+%28%EB%9E%9C%EB%8D%A4%29",
+        )
+        self.assertEqual(
+            by_store["포켓몬 센터"]["primary_review_url_kind"],
+            "source_search_url",
+        )
+        self.assertEqual(
+            by_store["포켓몬 센터"]["source_search_url"],
+            "https://www.pokemoncenter-online.com/search/?keyword=%ED%8F%AC%EC%BC%93%EB%AA%AC+%EC%B9%B4%EB%93%9C+%EA%B2%8C%EC%9E%84+%EB%B6%80%EC%8A%A4%ED%84%B0+%ED%8C%A9",
+        )
+        self.assertEqual(report["summary"]["source_url_update_search_hint_rows"], 2)
+        self.assertEqual(report["summary"]["source_url_update_missing_search_hint_rows"], 0)
+
     def test_build_report_keeps_actionable_image_workflows(self) -> None:
         enrichment = {
             "groups": [

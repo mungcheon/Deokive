@@ -1180,10 +1180,20 @@ def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]
     source_url_update_required = workflow == "replace_generic_source_then_extract_image"
     representative_image_review_required = workflow == "review_gotouchi_official_candidates"
     image_url_ready = workflow == "extract_from_existing_source_url"
-    source_url_template = _source_url_import_template(item, group) if source_url_update_required else None
+    item_with_store = {
+        **item,
+        "source_store": item.get("source_store") or group.get("source_store"),
+    }
+    source_url_template = (
+        _source_url_import_template(item_with_store, group)
+        if source_url_update_required
+        else None
+    )
     review_lane = _review_lane(workflow)
-    source_search_url = _source_search_url(item, template)
-    fallback_web_search_urls = _fallback_web_search_urls(item, group, source_search_url)
+    source_search_url = _source_search_url(item_with_store, template)
+    fallback_web_search_urls = _fallback_web_search_urls(
+        item_with_store, group, source_search_url
+    )
     catalog_template = _normalized_catalog_field_template(template, source_search_url)
     suggested_local_image_path = _suggested_local_image_path(item)
     if suggested_local_image_path:
@@ -1356,6 +1366,7 @@ def _source_search_url(item: dict[str, Any], template: dict[str, Any] | None = N
         or item.get("source_search_url")
         or template.get("official_search_url")
         or template.get("source_search_url")
+        or _default_store_source_search_url(item)
     )
 
 
@@ -1413,6 +1424,28 @@ def _fallback_web_search_urls(
         if len(urls) >= limit:
             break
     return urls
+
+
+def _default_store_source_search_url(item: dict[str, Any]) -> str:
+    source_store = str(item.get("source_store") or "").strip()
+    normalized_store = source_store.lower()
+    query = str(
+        item.get("name_ja")
+        or item.get("name_ko")
+        or " ".join(
+            str(part or "").strip()
+            for part in (item.get("series_name"), item.get("category"))
+            if str(part or "").strip()
+        )
+    ).strip()
+    if not query:
+        return ""
+    encoded = quote_plus(query)
+    if "weverse" in normalized_store:
+        return f"https://shop.weverse.io/search?keyword={encoded}"
+    if "포켓몬" in source_store or "pokemon" in normalized_store:
+        return f"https://www.pokemoncenter-online.com/search/?keyword={encoded}"
+    return ""
 
 
 def _store_search_domains(source_store: str) -> list[str]:
