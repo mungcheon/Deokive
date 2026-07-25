@@ -145,6 +145,45 @@ def _candidate_detail_link_snapshots(
     return snapshots
 
 
+def _snapshot_url_map(snapshots: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    return {str(snapshot.get("url") or ""): snapshot for snapshot in snapshots}
+
+
+def _safe_candidate_detail_links(
+    candidate_links: list[str],
+    snapshots: list[dict[str, Any]],
+) -> list[str]:
+    by_url = _snapshot_url_map(snapshots)
+    safe: list[str] = []
+    for link in candidate_links:
+        status = str((by_url.get(link) or {}).get("title_match_status") or "")
+        if status in {"exact_target_title_in_page_title", "partial_title_token_match"}:
+            safe.append(link)
+    return safe
+
+
+def _rejected_candidate_detail_links(
+    candidate_links: list[str],
+    snapshots: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    by_url = _snapshot_url_map(snapshots)
+    rejected: list[dict[str, Any]] = []
+    for link in candidate_links:
+        snapshot = by_url.get(link) or {}
+        status = str(snapshot.get("title_match_status") or "")
+        if status != "title_mismatch":
+            continue
+        rejected.append(
+            {
+                "url": link,
+                "title": snapshot.get("title") or "",
+                "h1": snapshot.get("h1") or "",
+                "rejection_reason": "candidate_page_title_does_not_match_catalog_item",
+            }
+        )
+    return rejected
+
+
 def _candidate_detail_link_review_fields(
     row: dict[str, Any],
     fetch_audit_by_index: dict[int, dict[str, Any]],
@@ -187,6 +226,14 @@ def _exact_item(row: dict[str, Any], fetch_audit_by_index: dict[int, dict[str, A
         row,
         fetch_audit_by_index,
     )
+    safe_candidate_detail_links = _safe_candidate_detail_links(
+        candidate_detail_links,
+        candidate_detail_link_snapshots,
+    )
+    rejected_candidate_detail_links = _rejected_candidate_detail_links(
+        candidate_detail_links,
+        candidate_detail_link_snapshots,
+    )
     candidate_review_fields = _candidate_detail_link_review_fields(
         row,
         fetch_audit_by_index,
@@ -203,8 +250,12 @@ def _exact_item(row: dict[str, Any], fetch_audit_by_index: dict[int, dict[str, A
         "primary_review_url": primary_review_url,
         "primary_review_url_kind": primary_review_url_kind,
         "candidate_detail_links": candidate_detail_links,
+        "safe_candidate_detail_links": safe_candidate_detail_links,
+        "rejected_candidate_detail_links": rejected_candidate_detail_links,
         "candidate_detail_link_snapshots": candidate_detail_link_snapshots,
         "candidate_detail_link_count": len(candidate_detail_links),
+        "safe_candidate_detail_link_count": len(safe_candidate_detail_links),
+        "rejected_candidate_detail_link_count": len(rejected_candidate_detail_links),
         "candidate_detail_link_snapshot_count": len(candidate_detail_link_snapshots),
         "first_candidate_detail_link": candidate_detail_links[0] if candidate_detail_links else "",
         **candidate_review_fields,
@@ -225,10 +276,20 @@ def _exact_item(row: dict[str, Any], fetch_audit_by_index: dict[int, dict[str, A
 
 
 def _source_url_patch_row(item: dict[str, Any], index: int) -> dict[str, Any]:
-    candidate_links = [
+    raw_candidate_links = [
         str(link).strip()
         for link in item.get("candidate_detail_links") or []
         if str(link).strip()
+    ]
+    safe_candidate_links = [
+        str(link).strip()
+        for link in item.get("safe_candidate_detail_links") or []
+        if str(link).strip()
+    ]
+    rejected_candidate_links = [
+        row
+        for row in item.get("rejected_candidate_detail_links") or []
+        if isinstance(row, dict)
     ]
     guidance = item.get("source_url_review_guidance") or {}
     return {
@@ -246,7 +307,11 @@ def _source_url_patch_row(item: dict[str, Any], index: int) -> dict[str, Any]:
         "primary_review_url": item.get("primary_review_url"),
         "primary_review_url_kind": item.get("primary_review_url_kind"),
         "fallback_store_search_url": item.get("fallback_store_search_url"),
-        "candidate_detail_links": candidate_links[:5],
+        "candidate_detail_links": safe_candidate_links[:5],
+        "unsafe_sample_candidate_detail_links": raw_candidate_links[:5],
+        "rejected_candidate_detail_links": rejected_candidate_links[:5],
+        "safe_candidate_detail_link_count": len(safe_candidate_links),
+        "rejected_candidate_detail_link_count": len(rejected_candidate_links),
         "candidate_detail_link_snapshots": item.get("candidate_detail_link_snapshots") or [],
         "candidate_detail_link_review_status": item.get("candidate_detail_link_review_status") or "",
         "candidate_detail_link_warning": item.get("candidate_detail_link_warning") or "",
@@ -266,6 +331,7 @@ def _source_url_patch_row(item: dict[str, Any], index: int) -> dict[str, Any]:
 def _source_url_patch_template(items: list[dict[str, Any]], *, limit: int = 10) -> dict[str, Any]:
     rows = [_source_url_patch_row(item, index) for index, item in enumerate(items[:limit])]
     candidate_rows = sum(1 for row in rows if row.get("candidate_detail_links"))
+    rejected_candidate_rows = sum(1 for row in rows if row.get("rejected_candidate_detail_links"))
     return {
         "status": "manual_exact_source_url_confirmation_required",
         "template_rows": len(rows),
@@ -281,6 +347,10 @@ def _source_url_patch_template(items: list[dict[str, Any]], *, limit: int = 10) 
         ),
         "candidate_detail_link_rows": candidate_rows,
         "candidate_detail_link_coverage": round(candidate_rows / len(rows), 4) if rows else 0.0,
+        "rejected_candidate_detail_link_rows": rejected_candidate_rows,
+        "unsafe_sample_candidate_detail_link_rows": sum(
+            1 for row in rows if row.get("unsafe_sample_candidate_detail_links")
+        ),
         "manual_image_url_slot_rows": len(rows),
         "auto_apply_enabled": False,
         "import_tool": "tools/import_confirmed_source_discovery_rows.py",
@@ -356,6 +426,18 @@ def build_reports(
             ),
             "candidate_detail_links": sum(
                 int(item.get("candidate_detail_link_count") or 0) for item in exact_items
+            ),
+            "safe_candidate_detail_link_rows": sum(
+                1 for item in exact_items if item.get("safe_candidate_detail_links")
+            ),
+            "safe_candidate_detail_links": sum(
+                int(item.get("safe_candidate_detail_link_count") or 0) for item in exact_items
+            ),
+            "rejected_candidate_detail_link_rows": sum(
+                1 for item in exact_items if item.get("rejected_candidate_detail_links")
+            ),
+            "rejected_candidate_detail_links": sum(
+                int(item.get("rejected_candidate_detail_link_count") or 0) for item in exact_items
             ),
             "candidate_detail_link_source_counts": Counter(
                 str(item.get("candidate_detail_link_source") or "")

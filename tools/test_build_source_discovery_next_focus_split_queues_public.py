@@ -51,6 +51,7 @@ class SourceDiscoveryNextFocusSplitQueueTests(unittest.TestCase):
                             "fetch_status": "ok",
                             "title": "Different Product ｜ エンスカイショップ",
                             "h1": "Different Product",
+                            "title_match_status": "title_mismatch",
                         }
                     ],
                 }
@@ -71,14 +72,22 @@ class SourceDiscoveryNextFocusSplitQueueTests(unittest.TestCase):
         self.assertEqual(template["template_rows"], 1)
         self.assertEqual(template["ready_to_import_rows"], 0)
         self.assertEqual(template["blocked_rows"], 1)
-        self.assertEqual(template["candidate_detail_link_rows"], 1)
+        self.assertEqual(template["candidate_detail_link_rows"], 0)
+        self.assertEqual(template["rejected_candidate_detail_link_rows"], 1)
         self.assertIs(template["auto_apply_enabled"], False)
         row = template["rows"][0]
         self.assertEqual(row["catalog_index"], 922)
         self.assertEqual(row["manual_confirmed_source_url"], "")
+        self.assertEqual(row["candidate_detail_links"], [])
+        self.assertEqual(row["safe_candidate_detail_link_count"], 0)
+        self.assertEqual(row["rejected_candidate_detail_link_count"], 1)
         self.assertEqual(
-            row["candidate_detail_links"],
+            row["unsafe_sample_candidate_detail_links"],
             ["https://www.enskyshop.com/products/detail/30883"],
+        )
+        self.assertEqual(
+            row["rejected_candidate_detail_links"][0]["rejection_reason"],
+            "candidate_page_title_does_not_match_catalog_item",
         )
         self.assertEqual(
             row["candidate_detail_link_snapshots"][0]["title"],
