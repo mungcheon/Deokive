@@ -586,7 +586,7 @@ class _CatalogAddButton extends StatelessWidget {
         : _catalogAddButtonForeground;
     return SizedBox(
       height: 40,
-      width: expanded ? double.infinity : 136,
+      width: expanded ? double.infinity : 144,
       child: Material(
         color: background,
         elevation: disabled ? 0 : 5,
@@ -608,7 +608,7 @@ class _CatalogAddButton extends StatelessWidget {
               ),
             ),
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: expanded ? 14 : 13),
+              padding: EdgeInsets.symmetric(horizontal: expanded ? 16 : 12),
               child: Center(
                 child: _CatalogButtonLabel(
                   icon: icon,
@@ -668,13 +668,18 @@ class _CatalogButtonLabel extends StatelessWidget {
         children: [
           Icon(icon, color: color, size: iconSize),
           SizedBox(width: gap),
-          Text(
-            label,
-            maxLines: 1,
-            overflow: TextOverflow.visible,
-            softWrap: false,
-            textAlign: TextAlign.center,
-            style: textStyle,
+          Flexible(
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                label,
+                maxLines: 1,
+                overflow: TextOverflow.visible,
+                softWrap: false,
+                textAlign: TextAlign.center,
+                style: textStyle,
+              ),
+            ),
           ),
         ],
       ),

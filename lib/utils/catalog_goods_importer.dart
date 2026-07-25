@@ -481,13 +481,18 @@ class _CatalogImportButtonLabel extends StatelessWidget {
         children: [
           Icon(icon, color: color, size: 19),
           const SizedBox(width: 6),
-          Text(
-            label,
-            maxLines: 1,
-            overflow: TextOverflow.visible,
-            softWrap: false,
-            textAlign: TextAlign.center,
-            style: textStyle,
+          Flexible(
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                label,
+                maxLines: 1,
+                overflow: TextOverflow.visible,
+                softWrap: false,
+                textAlign: TextAlign.center,
+                style: textStyle,
+              ),
+            ),
           ),
         ],
       ),
