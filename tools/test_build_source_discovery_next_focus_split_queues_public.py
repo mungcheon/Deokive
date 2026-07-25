@@ -70,6 +70,16 @@ class SourceDiscoveryNextFocusSplitQueueTests(unittest.TestCase):
         self.assertEqual(exact_report["summary"]["all_sample_candidates_rejected_rows"], 1)
         self.assertEqual(exact_report["summary"]["exact_source_search_query_rows"], 1)
         self.assertGreaterEqual(exact_report["summary"]["exact_source_search_queries"], 3)
+        self.assertEqual(exact_report["summary"]["rediscovery_work_order_rows"], 1)
+        self.assertGreaterEqual(exact_report["summary"]["rediscovery_work_order_steps"], 4)
+        self.assertIn(
+            ("google_exact_title_detail", 1),
+            exact_report["summary"]["rediscovery_work_order_label_counts"],
+        )
+        self.assertIn(
+            ("manual_query_execution_required", 4),
+            exact_report["summary"]["rediscovery_work_order_status_counts"],
+        )
         self.assertEqual(
             exact_report["summary"]["recommended_next_action"],
             "ignore rejected sample links and use primary/domain-limited review URLs for exact source search",
@@ -85,6 +95,8 @@ class SourceDiscoveryNextFocusSplitQueueTests(unittest.TestCase):
         self.assertEqual(template["candidate_detail_link_rows"], 0)
         self.assertEqual(template["rejected_candidate_detail_link_rows"], 1)
         self.assertEqual(template["all_sample_candidates_rejected_rows"], 1)
+        self.assertEqual(template["rediscovery_work_order_rows"], 1)
+        self.assertGreaterEqual(template["rediscovery_work_order_steps"], 4)
         self.assertIs(template["auto_apply_enabled"], False)
         row = template["rows"][0]
         self.assertEqual(row["catalog_index"], 922)
@@ -96,6 +108,15 @@ class SourceDiscoveryNextFocusSplitQueueTests(unittest.TestCase):
             [query["query"] for query in row["exact_source_search_queries"]],
         )
         self.assertTrue(row["exact_source_search_queries"][0]["url"].startswith("https://"))
+        self.assertEqual(row["rediscovery_work_order"][0]["label"], "google_exact_title_detail")
+        self.assertEqual(
+            row["rediscovery_work_order"][0]["status"],
+            "manual_query_execution_required",
+        )
+        self.assertIn(
+            "do not reuse broad search result sample links if their titles already mismatched",
+            row["rediscovery_work_order"][-1]["accept_only_if"],
+        )
         self.assertEqual(row["safe_candidate_detail_link_count"], 0)
         self.assertEqual(row["rejected_candidate_detail_link_count"], 1)
         self.assertEqual(

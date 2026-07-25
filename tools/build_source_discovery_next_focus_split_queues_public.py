@@ -47,20 +47,36 @@ def _base_summary(items: list[dict[str, Any]]) -> dict[str, Any]:
         for item in items
         for snapshot in item.get("candidate_detail_link_snapshots") or []
     )
+    by_rediscovery_label = Counter(
+        str(step.get("label") or "unknown")
+        for item in items
+        for step in item.get("rediscovery_work_order") or []
+    )
+    by_rediscovery_status = Counter(
+        str(step.get("status") or "unknown")
+        for item in items
+        for step in item.get("rediscovery_work_order") or []
+    )
     return {
         "queue_rows": len(items),
         "manual_confirmed_rows": sum(1 for item in items if item.get("manual_confirmed") is True),
         "by_source_store": by_store.most_common(),
         "by_category": by_category.most_common(),
         "by_identity_review_status": by_status.most_common(),
-            "primary_review_url_rows": sum(1 for item in items if str(item.get("primary_review_url") or "")),
-            "exact_source_search_query_rows": sum(
-                1 for item in items if item.get("exact_source_search_queries")
-            ),
-            "exact_source_search_queries": sum(
-                len(item.get("exact_source_search_queries") or []) for item in items
-            ),
-            "primary_review_url_kind_counts": by_review_url_kind.most_common(),
+        "primary_review_url_rows": sum(1 for item in items if str(item.get("primary_review_url") or "")),
+        "exact_source_search_query_rows": sum(
+            1 for item in items if item.get("exact_source_search_queries")
+        ),
+        "exact_source_search_queries": sum(
+            len(item.get("exact_source_search_queries") or []) for item in items
+        ),
+        "rediscovery_work_order_rows": sum(1 for item in items if item.get("rediscovery_work_order")),
+        "rediscovery_work_order_steps": sum(
+            len(item.get("rediscovery_work_order") or []) for item in items
+        ),
+        "rediscovery_work_order_label_counts": by_rediscovery_label.most_common(),
+        "rediscovery_work_order_status_counts": by_rediscovery_status.most_common(),
+        "primary_review_url_kind_counts": by_review_url_kind.most_common(),
         "first_primary_review_url": next(
             (str(item.get("primary_review_url") or "") for item in items if str(item.get("primary_review_url") or "")),
             "",
@@ -168,6 +184,42 @@ def _exact_source_search_queries(row: dict[str, Any]) -> list[dict[str, str]]:
             }
         )
     return result
+
+
+def _rediscovery_work_order(row: dict[str, Any], queries: list[dict[str, str]]) -> list[dict[str, Any]]:
+    steps: list[dict[str, Any]] = []
+    for index, query in enumerate(queries, start=1):
+        steps.append(
+            {
+                "step": index,
+                "status": "manual_query_execution_required",
+                "label": query.get("label") or "",
+                "engine": query.get("engine") or "",
+                "query": query.get("query") or "",
+                "url": query.get("url") or "",
+                "accept_only_if": [
+                    "result URL is an official product detail page on the allowed source domain",
+                    "page title or h1 matches this catalog item name and variant",
+                    "image URL is copied only from the confirmed product page or a direct product image referenced by it",
+                ],
+            }
+        )
+    if row.get("fallback_store_search_url"):
+        steps.append(
+            {
+                "step": len(steps) + 1,
+                "status": "manual_store_search_required_if_exact_queries_fail",
+                "label": "fallback_store_search",
+                "engine": "official_store",
+                "query": str(row.get("search_term") or row.get("name_ja") or row.get("name_ko") or ""),
+                "url": str(row.get("fallback_store_search_url") or ""),
+                "accept_only_if": [
+                    "open the exact product detail page from the store result before confirming",
+                    "do not reuse broad search result sample links if their titles already mismatched",
+                ],
+            }
+        )
+    return steps
 
 
 def _absolute_candidate_url(url: Any, row: dict[str, Any]) -> str:
@@ -320,6 +372,7 @@ def _candidate_detail_link_review_fields(
 
 def _exact_item(row: dict[str, Any], fetch_audit_by_index: dict[int, dict[str, Any]]) -> dict[str, Any]:
     primary_review_url, primary_review_url_kind = _primary_review_url(row)
+    exact_source_search_queries = _exact_source_search_queries(row)
     candidate_detail_links = _candidate_detail_links(row, fetch_audit_by_index)
     candidate_detail_link_snapshots = _candidate_detail_link_snapshots(
         row,
@@ -348,7 +401,8 @@ def _exact_item(row: dict[str, Any], fetch_audit_by_index: dict[int, dict[str, A
         "search_term": row.get("search_term"),
         "primary_review_url": primary_review_url,
         "primary_review_url_kind": primary_review_url_kind,
-        "exact_source_search_queries": _exact_source_search_queries(row),
+        "exact_source_search_queries": exact_source_search_queries,
+        "rediscovery_work_order": _rediscovery_work_order(row, exact_source_search_queries),
         "candidate_detail_links": candidate_detail_links,
         "safe_candidate_detail_links": safe_candidate_detail_links,
         "rejected_candidate_detail_links": rejected_candidate_detail_links,
@@ -411,6 +465,7 @@ def _source_url_patch_row(item: dict[str, Any], index: int) -> dict[str, Any]:
         "primary_review_url": item.get("primary_review_url"),
         "primary_review_url_kind": item.get("primary_review_url_kind"),
         "exact_source_search_queries": item.get("exact_source_search_queries") or [],
+        "rediscovery_work_order": item.get("rediscovery_work_order") or [],
         "fallback_store_search_url": item.get("fallback_store_search_url"),
         "candidate_detail_links": safe_candidate_links[:5],
         "unsafe_sample_candidate_detail_links": raw_candidate_links[:5],
@@ -438,6 +493,7 @@ def _source_url_patch_template(items: list[dict[str, Any]], *, limit: int = 10) 
     candidate_rows = sum(1 for row in rows if row.get("candidate_detail_links"))
     rejected_candidate_rows = sum(1 for row in rows if row.get("rejected_candidate_detail_links"))
     exact_query_rows = sum(1 for row in rows if row.get("exact_source_search_queries"))
+    rediscovery_rows = sum(1 for row in rows if row.get("rediscovery_work_order"))
     return {
         "status": "manual_exact_source_url_confirmation_required"
         if candidate_rows
@@ -467,6 +523,10 @@ def _source_url_patch_template(items: list[dict[str, Any]], *, limit: int = 10) 
             1 for row in rows if row.get("unsafe_sample_candidate_detail_links")
         ),
         "exact_source_search_query_rows": exact_query_rows,
+        "rediscovery_work_order_rows": rediscovery_rows,
+        "rediscovery_work_order_steps": sum(
+            len(row.get("rediscovery_work_order") or []) for row in rows
+        ),
         "manual_image_url_slot_rows": len(rows),
         "auto_apply_enabled": False,
         "import_tool": "tools/import_confirmed_source_discovery_rows.py",
