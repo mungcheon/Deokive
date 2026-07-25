@@ -1354,6 +1354,7 @@ class PublicCatalogReportTests(unittest.TestCase):
             {
                 "confirm_current_focus_pack_source_urls",
                 "review_fallback_queue_and_fill_exact_manual_confirmed_source_urls",
+                "ignore_rejected_samples_and_run_exact_source_search",
             },
         )
         self.assertEqual(
@@ -2767,6 +2768,13 @@ class PublicCatalogReportTests(unittest.TestCase):
                     "first_primary_review_url_kind": "domain_limited_web_search",
                 }
             },
+            source_discovery_next_focus_exact_url_queue={
+                "summary": {
+                    "queue_rows": 2,
+                    "all_sample_candidates_rejected_rows": 2,
+                    "safe_candidate_detail_link_rows": 0,
+                }
+            },
             manual_source_url_search_queue={"summary": {"manual_search_required_rows": 3}},
             provider_missing_source_url_queue={"summary": {"provider_missing_rows": 2}},
             candidate_source_url_review_queue={"summary": {"candidate_review_rows": 1}},
@@ -2799,6 +2807,18 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             roadmap["completion_readiness"]["next_queue"]["first_primary_review_url"],
             "https://google.example/fallback",
+        )
+        self.assertEqual(
+            roadmap["completion_readiness"]["next_safe_phase"],
+            "ignore_rejected_samples_and_run_exact_source_search",
+        )
+        self.assertEqual(
+            roadmap["completion_readiness"]["next_queue"]["source"],
+            "data/source_discovery_next_focus_exact_url_review_queue_public.json",
+        )
+        self.assertEqual(
+            roadmap["completion_readiness"]["blocked_reasons"],
+            ["sample_candidate_links_rejected"],
         )
         self.assertEqual(
             roadmap["completion_readiness"]["next_queue"]["first_primary_review_url_kind"],

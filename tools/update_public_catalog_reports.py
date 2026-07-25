@@ -1416,6 +1416,7 @@ def build_source_discovery_completion_roadmap_public(
     source_discovery_focus_packs: dict[str, Any],
     source_discovery_next_focus_pack: dict[str, Any],
     source_discovery_next_focus_fallback_queue: dict[str, Any],
+    source_discovery_next_focus_exact_url_queue: dict[str, Any],
     manual_source_url_search_queue: dict[str, Any],
     provider_missing_source_url_queue: dict[str, Any],
     candidate_source_url_review_queue: dict[str, Any],
@@ -1426,6 +1427,7 @@ def build_source_discovery_completion_roadmap_public(
     focus_summary = source_discovery_focus_packs.get("summary", {})
     next_focus_summary = source_discovery_next_focus_pack.get("summary", {})
     fallback_summary = source_discovery_next_focus_fallback_queue.get("summary", {})
+    exact_url_summary = source_discovery_next_focus_exact_url_queue.get("summary", {})
     manual_summary = manual_source_url_search_queue.get("summary", {})
     provider_summary = provider_missing_source_url_queue.get("summary", {})
     candidate_summary = candidate_source_url_review_queue.get("summary", {})
@@ -1486,6 +1488,22 @@ def build_source_discovery_completion_roadmap_public(
             }
         )
 
+    all_sample_candidates_rejected = (
+        int(exact_url_summary.get("queue_rows") or 0) > 0
+        and int(exact_url_summary.get("all_sample_candidates_rejected_rows") or 0)
+        == int(exact_url_summary.get("queue_rows") or 0)
+    )
+    next_safe_phase = (
+        "ignore_rejected_samples_and_run_exact_source_search"
+        if all_sample_candidates_rejected
+        else "review_fallback_queue_and_fill_exact_manual_confirmed_source_urls"
+        if int(fallback_summary.get("queue_rows") or 0)
+        else "confirm_current_focus_pack_source_urls"
+        if int(next_focus_summary.get("remaining_review_rows") or 0)
+        else "rotate_to_next_focus_pack"
+        if int(focus_summary.get("remaining_focus_review_rows") or 0)
+        else "archive_source_discovery_completion"
+    )
     current_pack = {
         "focus_pack_id": next_focus_summary.get("focus_pack_id"),
         "source_store": next_focus_summary.get("source_store"),
@@ -1504,7 +1522,19 @@ def build_source_discovery_completion_roadmap_public(
             else ""
         ),
         "first_fallback_store_search_url": fallback_summary.get("first_fallback_store_search_url"),
-        "recommended_action": "confirm current focus pack source URLs before image attachment",
+        "all_sample_candidates_rejected_rows": exact_url_summary.get(
+            "all_sample_candidates_rejected_rows",
+            0,
+        ),
+        "safe_candidate_detail_link_rows": exact_url_summary.get(
+            "safe_candidate_detail_link_rows",
+            0,
+        ),
+        "recommended_action": (
+            "ignore rejected sample links and run exact source search from the primary review URLs"
+            if all_sample_candidates_rejected
+            else "confirm current focus pack source URLs before image attachment"
+        ),
     }
     completion_readiness_status = (
         "current_focus_fallback_review_required"
@@ -1528,19 +1558,29 @@ def build_source_discovery_completion_roadmap_public(
         "current_focus_remaining_rows": int(next_focus_summary.get("remaining_review_rows") or 0),
         "current_focus_fallback_rows": int(fallback_summary.get("queue_rows") or 0),
         "next_pack_after_current": next_focus_summary.get("next_pack_after_current"),
-        "next_safe_phase": (
-            "review_fallback_queue_and_fill_exact_manual_confirmed_source_urls"
-            if int(fallback_summary.get("queue_rows") or 0)
-            else "confirm_current_focus_pack_source_urls"
-            if int(next_focus_summary.get("remaining_review_rows") or 0)
-            else "rotate_to_next_focus_pack"
-            if int(focus_summary.get("remaining_focus_review_rows") or 0)
-            else "archive_source_discovery_completion"
+        "all_sample_candidates_rejected_rows": int(
+            exact_url_summary.get("all_sample_candidates_rejected_rows") or 0
         ),
+        "safe_candidate_detail_link_rows": int(
+            exact_url_summary.get("safe_candidate_detail_link_rows") or 0
+        ),
+        "next_safe_phase": next_safe_phase,
         "next_queue": {
-            "source": f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}",
-            "queue_rows": int(fallback_summary.get("queue_rows") or 0),
+            "source": (
+                f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_QUEUE.name}"
+                if all_sample_candidates_rejected
+                else f"data/{SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE.name}"
+            ),
+            "queue_rows": int(
+                exact_url_summary.get("queue_rows") or fallback_summary.get("queue_rows") or 0
+            ),
             "fallback_reason": fallback_summary.get("fallback_reason"),
+            "all_sample_candidates_rejected_rows": int(
+                exact_url_summary.get("all_sample_candidates_rejected_rows") or 0
+            ),
+            "safe_candidate_detail_link_rows": int(
+                exact_url_summary.get("safe_candidate_detail_link_rows") or 0
+            ),
             "first_primary_review_url": fallback_summary.get("first_primary_review_url"),
             "first_primary_review_url_kind": fallback_summary.get(
                 "first_primary_review_url_kind"
@@ -1567,7 +1607,9 @@ def build_source_discovery_completion_roadmap_public(
         },
         "blocked_until": "exact_product_detail_source_url_confirmed",
         "blocked_reasons": [
-            "fallback_search_required"
+            "sample_candidate_links_rejected"
+            if all_sample_candidates_rejected
+            else "fallback_search_required"
             if int(fallback_summary.get("queue_rows") or 0)
             else "exact_product_source_url_not_confirmed"
         ],
@@ -10010,6 +10052,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         source_discovery_focus_packs=source_discovery_focus_packs,
         source_discovery_next_focus_pack=source_discovery_next_focus_pack,
         source_discovery_next_focus_fallback_queue=source_discovery_next_focus_fallback_queue,
+        source_discovery_next_focus_exact_url_queue=source_discovery_next_focus_exact_url_queue,
         manual_source_url_search_queue=manual_source_url_search_queue,
         provider_missing_source_url_queue=provider_missing_source_url_queue,
         candidate_source_url_review_queue=candidate_source_url_review_queue,

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T21:13:55Z",
+  "generated_at": "2026-07-25T01:14:30Z",
   "scope": "source_discovery_completion_roadmap",
   "summary": {
     "missing_image_rows": 745,
@@ -35,11 +35,15 @@
     "current_focus_remaining_rows": 20,
     "current_focus_fallback_rows": 20,
     "next_pack_after_current": "source-discovery-focus-002",
-    "next_safe_phase": "review_fallback_queue_and_fill_exact_manual_confirmed_source_urls",
+    "all_sample_candidates_rejected_rows": 20,
+    "safe_candidate_detail_link_rows": 0,
+    "next_safe_phase": "ignore_rejected_samples_and_run_exact_source_search",
     "next_queue": {
-      "source": "data/source_discovery_next_focus_fallback_queue_public.json",
+      "source": "data/source_discovery_next_focus_exact_url_review_queue_public.json",
       "queue_rows": 20,
       "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
+      "all_sample_candidates_rejected_rows": 20,
+      "safe_candidate_detail_link_rows": 0,
       "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
       "first_primary_review_url_kind": "domain_limited_web_search",
       "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
@@ -47,7 +51,7 @@
     },
     "blocked_until": "exact_product_detail_source_url_confirmed",
     "blocked_reasons": [
-      "fallback_search_required"
+      "sample_candidate_links_rejected"
     ],
     "safety_note": "Source discovery queues are review-only. Confirm exact official product detail URLs before image attachment."
   },
@@ -63,7 +67,9 @@
     "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
     "first_primary_review_url_kind": "domain_limited_web_search",
     "first_fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
-    "recommended_action": "confirm current focus pack source URLs before image attachment"
+    "all_sample_candidates_rejected_rows": 20,
+    "safe_candidate_detail_link_rows": 0,
+    "recommended_action": "ignore rejected sample links and run exact source search from the primary review URLs"
   },
   "top_store_steps": [
     {
