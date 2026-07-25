@@ -240,6 +240,28 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["work_order"][1]["affected_catalog_rows"], 8)
         self.assertEqual(report["work_order"][1]["categories"], ["Clear File"])
         self.assertEqual(report["work_order"][1]["target_categories"], ["Stationery"])
+        normalization_template = report["normalization_confirmation_template"]
+        self.assertEqual(
+            normalization_template["status"],
+            "manual_canonical_category_normalization_required",
+        )
+        self.assertEqual(normalization_template["template_rows"], 1)
+        self.assertEqual(normalization_template["affected_catalog_rows"], 8)
+        self.assertEqual(normalization_template["manual_confirmed_rows"], 0)
+        self.assertEqual(normalization_template["ready_to_import_rows"], 0)
+        self.assertEqual(normalization_template["preserve_sub_series_rows"], 1)
+        self.assertFalse(normalization_template["auto_apply_enabled"])
+        normalization_template_row = normalization_template["rows"][0]
+        self.assertEqual(normalization_template_row["source_category"], "Clear File")
+        self.assertEqual(normalization_template_row["target_category"], "Stationery")
+        self.assertEqual(
+            normalization_template_row["manual_decision"],
+            "",
+        )
+        self.assertIn(
+            "normalize_to_target_category_preserve_source_sub_series",
+            normalization_template_row["allowed_manual_decisions"],
+        )
         self.assertEqual(
             report["work_order"][1]["target_category_visual_tokens"][0]["primary_icon_key"],
             "sticky_note_2",

@@ -2044,6 +2044,38 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(pillars["animation_categories"]["queued_rows"], 36)
         self.assertEqual(pillars["animation_categories"]["unqueued_rows"], 0)
         self.assertEqual(pillars["animation_categories"]["queue_coverage"], 1.0)
+        animation_action = quality["animation_category_action_queue"]
+        normalization_template = animation_action["normalization_confirmation_template"]
+        self.assertEqual(
+            normalization_template["status"],
+            "manual_canonical_category_normalization_required",
+        )
+        self.assertEqual(normalization_template["template_rows"], 4)
+        self.assertEqual(normalization_template["affected_catalog_rows"], 36)
+        self.assertEqual(normalization_template["manual_confirmed_rows"], 0)
+        self.assertEqual(normalization_template["ready_to_import_rows"], 0)
+        self.assertEqual(normalization_template["preserve_sub_series_rows"], 4)
+        self.assertFalse(normalization_template["auto_apply_enabled"])
+        self.assertEqual(
+            normalization_template["target_category_counts"],
+            [["문구", 3], ["가방", 1]],
+        )
+        self.assertEqual(
+            normalization_template["folder_color_group_counts"],
+            [["violet", 3], ["green", 1]],
+        )
+        self.assertEqual(
+            {
+                (row["source_category"], row["target_category"])
+                for row in normalization_template["rows"]
+            },
+            {
+                ("클리어파일", "문구"),
+                ("카드", "문구"),
+                ("스티커", "문구"),
+                ("파우치", "가방"),
+            },
+        )
         self.assertEqual(
             pillars["animation_categories"]["next_queue_lane"],
             "canonical_category_normalization_review",

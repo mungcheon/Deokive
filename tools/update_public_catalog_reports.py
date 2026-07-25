@@ -11056,6 +11056,10 @@ def update_reports(write: bool) -> dict[str, Any]:
                 "blocking_dashboard",
                 {},
             ),
+            "normalization_confirmation_template": animation_action_queue.get(
+                "normalization_confirmation_template",
+                {},
+            ),
         }
         if ANIMATION_CATEGORY_SPLIT_REVIEW.exists():
             target["animation_category_split_review"] = copy_report_summary(

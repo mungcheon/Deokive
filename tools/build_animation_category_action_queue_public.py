@@ -723,6 +723,85 @@ def _blocking_dashboard(
     }
 
 
+def _normalization_confirmation_template(
+    normalization_rows: list[dict[str, Any]],
+) -> dict[str, Any]:
+    rows: list[dict[str, Any]] = []
+    for row in normalization_rows:
+        mapping_template = row.get("category_mapping_template")
+        if not isinstance(mapping_template, dict):
+            continue
+        rows.append(
+            {
+                "review_id": row.get("review_id"),
+                "source_category": row.get("source_category"),
+                "target_category": row.get("target_category"),
+                "affected_catalog_rows": int(
+                    row.get("affected_catalog_rows") or 0
+                ),
+                "preserve_source_category_as_sub_series": bool(
+                    row.get("preserve_source_category_as_sub_series")
+                ),
+                "suggested_sub_series_value": row.get("source_category"),
+                "folder_name": mapping_template.get("folder_name"),
+                "folder_color_hex": mapping_template.get("folder_color_hex"),
+                "folder_color_hint": mapping_template.get("folder_color_hint"),
+                "folder_color_group": mapping_template.get("folder_color_group"),
+                "folder_color_sort_order": mapping_template.get(
+                    "folder_color_sort_order"
+                ),
+                "folder_icon_key": mapping_template.get("folder_icon_key"),
+                "folder_icon_options": mapping_template.get(
+                    "folder_icon_options",
+                    [],
+                ),
+                "sample_names": row.get("sample_names") or [],
+                "manual_confirmed": False,
+                "manual_decision": "",
+                "manual_note": "",
+                "allowed_manual_decisions": [
+                    "normalize_to_target_category_preserve_source_sub_series",
+                    "keep_source_category_as_primary_category",
+                    "needs_name_level_split_review",
+                ],
+                "blocked_until": "canonical_category_normalization_manually_confirmed",
+                "auto_apply_enabled": False,
+            }
+        )
+
+    return {
+        "status": "manual_canonical_category_normalization_required"
+        if rows
+        else "no_canonical_category_normalization_rows",
+        "template_rows": len(rows),
+        "affected_catalog_rows": sum(
+            int(row.get("affected_catalog_rows") or 0) for row in rows
+        ),
+        "manual_confirmed_rows": 0,
+        "ready_to_import_rows": 0,
+        "preserve_sub_series_rows": sum(
+            1 for row in rows if row.get("preserve_source_category_as_sub_series")
+        ),
+        "target_category_counts": Counter(
+            str(row.get("target_category") or "") for row in rows
+        ).most_common(),
+        "folder_color_group_counts": Counter(
+            str(row.get("folder_color_group") or "") for row in rows
+        ).most_common(),
+        "folder_icon_key_counts": Counter(
+            str(row.get("folder_icon_key") or "") for row in rows
+        ).most_common(),
+        "auto_apply_enabled": False,
+        "rows": rows,
+        "import_instructions": [
+            "Confirm each source_category should move to target_category before importing.",
+            "Keep preserve_source_category_as_sub_series=true when the old category is useful as a subtype/search label.",
+            "Confirm folder_color_hex and folder_icon_key exist in the app folder visual catalog.",
+            f"Copy confirmed rows to {CONFIRMED_QUEUE}, set manual_confirmed=true, then run {IMPORT_TOOL}.",
+        ],
+    }
+
+
 def build_queue(
     payload: dict[str, Any],
     *,
@@ -910,6 +989,9 @@ def build_queue(
         work_order=work_order,
         app_visual_catalog=app_visual_catalog,
     )
+    normalization_confirmation_template = _normalization_confirmation_template(
+        next_normalization_review_batch
+    )
     return {
         "schema_version": 1,
         "generated_at": _now_utc(),
@@ -919,6 +1001,7 @@ def build_queue(
         "app_folder_visual_catalog": app_visual_catalog,
         "target_visual_token_summary": target_visual_summary,
         "next_normalization_review_batch": next_normalization_review_batch,
+        "normalization_confirmation_template": normalization_confirmation_template,
         "work_order": work_order,
         "batches": batches,
         "automation_policy": {
