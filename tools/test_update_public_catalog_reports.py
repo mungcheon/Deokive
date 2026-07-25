@@ -3815,6 +3815,42 @@ class PublicCatalogReportTests(unittest.TestCase):
                 "local_image_download_instruction_ready_rows"
             ),
         )
+        operator_handoff = image_action.get("operator_handoff", {})
+        self.assertEqual(
+            operator_handoff.get("status"),
+            image_action.get("execution_readiness", {}).get("status"),
+        )
+        self.assertEqual(
+            operator_handoff.get("current_lane"),
+            "source_url_replacement_first",
+        )
+        self.assertEqual(
+            operator_handoff.get("blocked_before_image_import_rows"),
+            image_action.get("attachment_readiness", {}).get(
+                "blocked_before_image_import_rows"
+            ),
+        )
+        self.assertEqual(
+            operator_handoff.get("local_download_ready_after_confirmation_rows"),
+            image_action.get("attachment_readiness", {}).get(
+                "local_image_download_instruction_ready_rows"
+            ),
+        )
+        self.assertFalse(
+            operator_handoff.get("safety_policy", {}).get("auto_apply_enabled")
+        )
+        self.assertEqual(
+            operator_handoff.get("handoff_steps", [])[0].get("lane"),
+            "source_url_replacement_first",
+        )
+        self.assertEqual(
+            operator_handoff.get("handoff_steps", [])[0].get("next_batch_rows"),
+            image_action_summary.get("next_source_url_review_batch_rows"),
+        )
+        self.assertEqual(
+            quality_image_action.get("operator_handoff"),
+            operator_handoff,
+        )
         self.assertEqual(
             sum(count for _, count in image_action_summary.get("by_review_lane", [])),
             image_action_summary.get("sample_action_item_rows"),

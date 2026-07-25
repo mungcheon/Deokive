@@ -1008,6 +1008,117 @@ def _build_next_operator_actions(
     return actions
 
 
+def _build_operator_handoff(
+    *,
+    execution_readiness: dict[str, Any],
+    attachment_readiness: dict[str, Any],
+    next_operator_actions: list[dict[str, Any]],
+    next_source_url_review_batch: list[dict[str, Any]],
+    next_representative_image_review_batch: list[dict[str, Any]],
+) -> dict[str, Any]:
+    first_action = next_operator_actions[0] if next_operator_actions else {}
+    handoff_steps: list[dict[str, Any]] = []
+    if next_source_url_review_batch:
+        handoff_steps.append(
+            {
+                "step": 1,
+                "lane": "source_url_replacement_first",
+                "status": "manual_source_url_confirmation_required",
+                "next_batch_rows": len(next_source_url_review_batch),
+                "review_section": "next_source_url_review_batch",
+                "write_template_section": "source_url_update_template",
+                "import_tool": "tools/import_confirmed_image_attachment_rows.py",
+                "first_primary_review_url": next_source_url_review_batch[0].get(
+                    "primary_review_url", ""
+                ),
+                "first_primary_review_url_kind": next_source_url_review_batch[0].get(
+                    "primary_review_url_kind", "manual_lookup_required"
+                ),
+                "required_before_write": [
+                    "manual_confirmed=true",
+                    "manual_value is the exact product detail URL",
+                    "evidence_url proves the same exact product",
+                    "manual_image_url is filled only when the page proves the exact product image",
+                ],
+                "unblocks": "image_url_extraction_and_attachment_review",
+                "auto_apply_enabled": False,
+            }
+        )
+    if next_representative_image_review_batch:
+        handoff_steps.append(
+            {
+                "step": len(handoff_steps) + 1,
+                "lane": "representative_image_candidate_review",
+                "status": "manual_variant_confirmation_required",
+                "next_batch_rows": len(next_representative_image_review_batch),
+                "review_section": "next_representative_image_review_batch",
+                "write_template_section": "catalog_field_import_template",
+                "import_tool": "tools/import_confirmed_image_attachment_rows.py",
+                "first_primary_review_url": next_representative_image_review_batch[0].get(
+                    "primary_review_url", ""
+                ),
+                "first_primary_review_url_kind": next_representative_image_review_batch[0].get(
+                    "primary_review_url_kind", "manual_lookup_required"
+                ),
+                "required_before_write": [
+                    "manual_confirmed=true",
+                    "manual_image_url is a direct product image URL",
+                    "evidence_url or candidate_source_url proves the exact product context",
+                    "character, motif, product type, and variant are manually checked",
+                ],
+                "unblocks": "manual_catalog_image_url_import",
+                "auto_apply_enabled": False,
+            }
+        )
+    handoff_steps.append(
+        {
+            "step": len(handoff_steps) + 1,
+            "lane": "local_image_download_after_confirmation",
+            "status": "waiting_for_confirmed_image_urls",
+            "next_batch_rows": int(
+                attachment_readiness.get("local_image_download_instruction_ready_rows")
+                or 0
+            ),
+            "review_section": "catalog_image_attachment_confirmed_template_public.json",
+            "write_template_section": "local_image_download_instruction",
+            "import_tool": "tools/import_confirmed_image_attachment_rows.py",
+            "required_before_write": [
+                "confirmed image_url exists",
+                "suggested_local_image_path is present",
+                "downloaded asset exists under assets/catalog_images",
+                "local_image_path and image_url stay paired for the same catalog row",
+            ],
+            "unblocks": "public_site_image_rendering_from_local_assets",
+            "auto_apply_enabled": False,
+        }
+    )
+    return {
+        "status": execution_readiness.get("status", "unknown"),
+        "current_lane": first_action.get("lane") or "no_actionable_image_attachment_rows",
+        "current_batch_id": first_action.get("next_batch_id"),
+        "current_first_primary_review_url": first_action.get(
+            "first_primary_review_url", ""
+        ),
+        "blocked_before_image_import_rows": int(
+            attachment_readiness.get("blocked_before_image_import_rows") or 0
+        ),
+        "ready_to_import_image_url_rows": int(
+            attachment_readiness.get("can_import_image_urls_now_rows") or 0
+        ),
+        "local_download_ready_after_confirmation_rows": int(
+            attachment_readiness.get("local_image_download_instruction_ready_rows") or 0
+        ),
+        "manual_review_required": True,
+        "handoff_steps": handoff_steps,
+        "safety_policy": {
+            "auto_apply_enabled": False,
+            "do_not_attach_search_result_images": True,
+            "require_exact_product_evidence": True,
+            "private_collection_storage": "local_device_only",
+        },
+    }
+
+
 def _compact_item(group: dict[str, Any], item: dict[str, Any]) -> dict[str, Any]:
     template = item.get("catalog_field_import_template")
     template = template if isinstance(template, dict) else {}
@@ -1499,6 +1610,13 @@ def build_report(
         next_source_url_review_batch=next_source_url_review_batch,
         next_representative_image_review_batch=next_representative_image_review_batch,
     )
+    operator_handoff = _build_operator_handoff(
+        execution_readiness=execution_readiness,
+        attachment_readiness=attachment_readiness,
+        next_operator_actions=next_operator_actions,
+        next_source_url_review_batch=next_source_url_review_batch,
+        next_representative_image_review_batch=next_representative_image_review_batch,
+    )
     return {
         "schema_version": 1,
         "generated_at": _now_utc(),
@@ -1667,6 +1785,7 @@ def build_report(
             "For generic storefront rows, fill source_url_import_template before the image_url template.",
         ],
         "execution_readiness": execution_readiness,
+        "operator_handoff": operator_handoff,
         "workstreams": workstreams,
         "source_url_update_work_order": source_url_update_work_order,
         "source_url_update_template": source_url_update_template,

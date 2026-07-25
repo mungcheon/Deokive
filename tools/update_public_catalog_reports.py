@@ -11346,6 +11346,10 @@ def update_reports(write: bool) -> dict[str, Any]:
                     "attachment_readiness",
                     {},
                 ),
+                "operator_handoff": image_attachment_action_queue.get(
+                    "operator_handoff",
+                    {},
+                ),
             }
             target["image_attachment_queue_alignment"] = {
                 "public_reports": [
