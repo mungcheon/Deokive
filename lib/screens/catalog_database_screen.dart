@@ -630,10 +630,24 @@ class _CatalogAddButton extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(icon),
+                  Icon(
+                    icon,
+                    color: foreground,
+                    size: 17,
+                  ),
                   const SizedBox(width: 5),
                   Text(
                     label,
+                    style: TextStyle(
+                      inherit: false,
+                      color: foreground,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w900,
+                      height: 1,
+                      decoration: TextDecoration.none,
+                      fontFamilyFallback: _kCatalogButtonFontFallback,
+                      shadows: const [],
+                    ),
                     maxLines: 1,
                     softWrap: false,
                     textAlign: TextAlign.center,

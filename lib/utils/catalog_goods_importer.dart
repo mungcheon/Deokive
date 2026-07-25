@@ -456,10 +456,24 @@ class _CatalogImportActionButton extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(icon),
+                  Icon(
+                    icon,
+                    color: foregroundColor,
+                    size: 19,
+                  ),
                   const SizedBox(width: 6),
                   Text(
                     label,
+                    style: TextStyle(
+                      inherit: false,
+                      color: foregroundColor,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w900,
+                      height: 1,
+                      decoration: TextDecoration.none,
+                      fontFamilyFallback: _kCatalogImportButtonFontFallback,
+                      shadows: const [],
+                    ),
                     maxLines: 1,
                     softWrap: false,
                     textAlign: TextAlign.center,
