@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-25T02:57:17Z",
+  "generated_at": "2026-07-25T03:10:00Z",
   "summary": {
     "catalog_rows": 20347,
     "coverage": {
@@ -10130,6 +10130,13 @@
         "first_next_execution_status": "next",
         "first_next_execution_rows": 42,
         "first_next_execution_public_report": "data/catalog_deduplication_action_queue_public.json",
+        "handoff_status": "ichiban_reissue_review_required",
+        "handoff_current_lane": "ichiban_reissue_campaign_review",
+        "handoff_current_review_section": "ichiban_reissue_campaign_work_order",
+        "handoff_step_count": 3,
+        "handoff_first_step_lane": "ichiban_reissue_campaign_review",
+        "handoff_first_step_status": "manual_campaign_identity_confirmation_required",
+        "handoff_first_step_rows": 4,
         "public_report": "data/catalog_deduplication_action_queue_public.json"
       },
       {
@@ -10148,6 +10155,13 @@
         "first_next_execution_status": "next",
         "first_next_execution_rows": 50,
         "first_next_execution_public_report": "data/catalog_missing_image_actionability_public.json",
+        "handoff_status": "source_url_replacement_required",
+        "handoff_current_lane": "source_url_replacement_first",
+        "handoff_current_review_section": null,
+        "handoff_step_count": 3,
+        "handoff_first_step_lane": "source_url_replacement_first",
+        "handoff_first_step_status": "manual_source_url_confirmation_required",
+        "handoff_first_step_rows": 10,
         "public_report": "data/catalog_missing_image_actionability_public.json"
       },
       {
@@ -10166,6 +10180,13 @@
         "first_next_execution_status": "next",
         "first_next_execution_rows": 20,
         "first_next_execution_public_report": "data/source_discovery_next_focus_exact_url_review_queue_public.json",
+        "handoff_status": "current_focus_fallback_review_required",
+        "handoff_current_lane": "exact_source_url_review",
+        "handoff_current_review_section": "source_discovery_next_focus_exact_url_review_queue",
+        "handoff_step_count": 3,
+        "handoff_first_step_lane": "exact_source_url_review",
+        "handoff_first_step_status": "manual_exact_source_url_search_required",
+        "handoff_first_step_rows": 20,
         "public_report": "data/catalog_image_source_url_confirmed_template_public.json"
       },
       {
@@ -10184,6 +10205,13 @@
         "first_next_execution_status": "next",
         "first_next_execution_rows": 36,
         "first_next_execution_public_report": "data/animation_category_coverage_audit_public.json",
+        "handoff_status": "normalization_review_required",
+        "handoff_current_lane": "canonical_category_normalization_review",
+        "handoff_current_review_section": "next_normalization_review_batch",
+        "handoff_step_count": 3,
+        "handoff_first_step_lane": "canonical_category_normalization_review",
+        "handoff_first_step_status": "manual_canonical_category_normalization_required",
+        "handoff_first_step_rows": 4,
         "public_report": "data/animation_category_coverage_audit_public.json"
       },
       {
@@ -10202,6 +10230,13 @@
         "first_next_execution_status": "next",
         "first_next_execution_rows": 44,
         "first_next_execution_public_report": "data/ichiban_kuji_historical_roadmap_public.json",
+        "handoff_status": "manual_review_required",
+        "handoff_current_lane": "campaign_metadata_confirmation",
+        "handoff_current_review_section": "ichiban_kuji_metadata_action_queue",
+        "handoff_step_count": 3,
+        "handoff_first_step_lane": "campaign_metadata_confirmation",
+        "handoff_first_step_status": "manual_official_campaign_metadata_required",
+        "handoff_first_step_rows": 20,
         "public_report": "data/ichiban_kuji_historical_roadmap_public.json"
       }
     ],
@@ -10221,6 +10256,13 @@
       "first_next_execution_status": "next",
       "first_next_execution_rows": 42,
       "first_next_execution_public_report": "data/catalog_deduplication_action_queue_public.json",
+      "handoff_status": "ichiban_reissue_review_required",
+      "handoff_current_lane": "ichiban_reissue_campaign_review",
+      "handoff_current_review_section": "ichiban_reissue_campaign_work_order",
+      "handoff_step_count": 3,
+      "handoff_first_step_lane": "ichiban_reissue_campaign_review",
+      "handoff_first_step_status": "manual_campaign_identity_confirmation_required",
+      "handoff_first_step_rows": 4,
       "public_report": "data/catalog_deduplication_action_queue_public.json"
     },
     "auto_apply_enabled": false,

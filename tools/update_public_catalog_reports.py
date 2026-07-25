@@ -588,6 +588,15 @@ def catalog_goal_readiness_dashboard(goal_gate: dict[str, Any]) -> dict[str, Any
             "first_next_execution_public_report": row.get(
                 "first_next_execution_public_report"
             ),
+            "handoff_status": row.get("handoff_status"),
+            "handoff_current_lane": row.get("handoff_current_lane"),
+            "handoff_current_review_section": row.get(
+                "handoff_current_review_section"
+            ),
+            "handoff_step_count": _int(row, "handoff_step_count"),
+            "handoff_first_step_lane": row.get("handoff_first_step_lane"),
+            "handoff_first_step_status": row.get("handoff_first_step_status"),
+            "handoff_first_step_rows": _int(row, "handoff_first_step_rows"),
             "public_report": row.get("public_report"),
         }
         for row in normalized_pillars
@@ -12974,10 +12983,18 @@ def update_reports(write: bool) -> dict[str, Any]:
             "animation_categories": target.get("animation_category_action_queue", {}),
             "ichiban_kuji_history": target.get("ichiban_kuji_historical_roadmap", {}),
         }
+        operator_handoff_sources = {
+            "dedupe": target.get("deduplication_action_queue", {}),
+            "missing_images": target.get("image_attachment_action_queue", {}),
+            "source_url_updates": target.get("source_discovery_completion_roadmap", {}),
+            "animation_categories": target.get("animation_category_action_queue", {}),
+            "ichiban_kuji_history": target.get("ichiban_kuji_historical_roadmap", {}),
+        }
         for pillar in goal_pillars:
-            source = next_execution_sources.get(str(pillar.get("pillar") or ""), {})
+            pillar_key = str(pillar.get("pillar") or "")
+            source = next_execution_sources.get(pillar_key, {})
             if not isinstance(source, dict):
-                continue
+                source = {}
             summary = source.get("next_execution_summary", {})
             lanes = source.get("next_execution_lanes", [])
             if not isinstance(summary, dict):
@@ -13000,6 +13017,34 @@ def update_reports(write: bool) -> dict[str, Any]:
                 "public_report",
                 pillar.get("public_report"),
             )
+            handoff_source = operator_handoff_sources.get(pillar_key, {})
+            if not isinstance(handoff_source, dict):
+                handoff_source = {}
+            handoff = handoff_source.get("operator_handoff", {})
+            if not isinstance(handoff, dict):
+                handoff = {}
+            handoff_steps = handoff.get("handoff_steps", [])
+            if not isinstance(handoff_steps, list):
+                handoff_steps = []
+            first_step = next(
+                (step for step in handoff_steps if isinstance(step, dict)),
+                {},
+            )
+            first_step_rows = (
+                first_step.get("next_batch_rows")
+                if first_step.get("next_batch_rows") is not None
+                else first_step.get("open_rows")
+            )
+            pillar["operator_handoff"] = handoff
+            pillar["handoff_status"] = handoff.get("status")
+            pillar["handoff_current_lane"] = handoff.get("current_lane")
+            pillar["handoff_current_review_section"] = handoff.get(
+                "current_review_section"
+            )
+            pillar["handoff_step_count"] = len(handoff_steps)
+            pillar["handoff_first_step_lane"] = first_step.get("lane")
+            pillar["handoff_first_step_status"] = first_step.get("status")
+            pillar["handoff_first_step_rows"] = int(first_step_rows or 0)
         target["catalog_goal_progress_gate"] = {
             "status": "manual_review_required",
             "pillar_count": len(goal_pillars),

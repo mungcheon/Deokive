@@ -2093,6 +2093,50 @@ class PublicCatalogReportTests(unittest.TestCase):
                 "ichiban_kuji_history",
             },
         )
+        self.assertEqual(
+            pillars["dedupe"]["handoff_current_lane"],
+            "ichiban_reissue_campaign_review",
+        )
+        self.assertEqual(pillars["dedupe"]["handoff_step_count"], 3)
+        self.assertEqual(
+            pillars["dedupe"]["handoff_first_step_lane"],
+            "ichiban_reissue_campaign_review",
+        )
+        self.assertEqual(pillars["dedupe"]["handoff_first_step_rows"], 4)
+        self.assertEqual(
+            pillars["missing_images"]["handoff_current_lane"],
+            "source_url_replacement_first",
+        )
+        self.assertEqual(pillars["missing_images"]["handoff_step_count"], 3)
+        self.assertEqual(
+            pillars["missing_images"]["handoff_first_step_lane"],
+            "source_url_replacement_first",
+        )
+        self.assertEqual(pillars["missing_images"]["handoff_first_step_rows"], 10)
+        self.assertEqual(
+            pillars["source_url_updates"]["handoff_current_lane"],
+            "exact_source_url_review",
+        )
+        self.assertEqual(
+            pillars["source_url_updates"]["handoff_first_step_rows"],
+            20,
+        )
+        self.assertEqual(
+            pillars["animation_categories"]["handoff_current_lane"],
+            "canonical_category_normalization_review",
+        )
+        self.assertEqual(
+            pillars["animation_categories"]["handoff_first_step_rows"],
+            4,
+        )
+        self.assertEqual(
+            pillars["ichiban_kuji_history"]["handoff_current_lane"],
+            "campaign_metadata_confirmation",
+        )
+        self.assertEqual(
+            pillars["ichiban_kuji_history"]["handoff_first_step_rows"],
+            20,
+        )
         self.assertEqual(pillars["dedupe"]["status"], "blocked_until_manual_review")
         self.assertEqual(pillars["dedupe"]["open_rows"], 48)
         self.assertEqual(pillars["dedupe"]["manual_review_rows"], 48)
@@ -2685,6 +2729,11 @@ class PublicCatalogReportTests(unittest.TestCase):
             "same_barcode_fast_review",
         )
         self.assertEqual(
+            blocking_pillars["dedupe"]["handoff_current_lane"],
+            "ichiban_reissue_campaign_review",
+        )
+        self.assertEqual(blocking_pillars["dedupe"]["handoff_first_step_rows"], 4)
+        self.assertEqual(
             blocking_pillars["dedupe"]["next_safe_phase"],
             "verify_ichiban_campaign_pages_before_dedupe",
         )
@@ -2697,12 +2746,28 @@ class PublicCatalogReportTests(unittest.TestCase):
             745,
         )
         self.assertEqual(
+            blocking_pillars["missing_images"]["handoff_current_lane"],
+            "source_url_replacement_first",
+        )
+        self.assertEqual(
+            blocking_pillars["missing_images"]["handoff_first_step_rows"],
+            10,
+        )
+        self.assertEqual(
             blocking_pillars["source_url_updates"]["next_queue_lane"],
             "candidate_review_required",
         )
         self.assertEqual(
             blocking_pillars["source_url_updates"]["first_next_execution_lane"],
             "exact_source_url_review",
+        )
+        self.assertEqual(
+            blocking_pillars["source_url_updates"]["handoff_current_lane"],
+            "exact_source_url_review",
+        )
+        self.assertEqual(
+            blocking_pillars["source_url_updates"]["handoff_first_step_rows"],
+            20,
         )
         self.assertEqual(
             blocking_pillars["source_url_updates"]["first_next_execution_public_report"],
