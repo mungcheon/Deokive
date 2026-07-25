@@ -65,6 +65,13 @@ class BuildIchibanPrizePolicyIssueQueuePublicTest(unittest.TestCase):
                         "campaign_url_comparison": {
                             "likely_same_campaign_family_reissue": True,
                         },
+                        "catalog_row_count": 2,
+                        "item_identity_summary": {
+                            "official_price_jpy_values": [790],
+                            "rows_missing_image_url": 1,
+                            "rows_missing_official_price_jpy": 0,
+                            "zero_price_exception_policy_pass": True,
+                        },
                         "decision_template": {
                             "campaign_work_order_id": "ichiban-reissue-campaign-001",
                             "manual_confirmed": False,
@@ -310,6 +317,26 @@ class BuildIchibanPrizePolicyIssueQueuePublicTest(unittest.TestCase):
             "campaign_pair_reissue_keep_all_separate",
         )
         patch_row = report["campaign_first_confirmation_patch_template"]["rows"][0]
+        self.assertEqual(patch_row["catalog_row_count"], 2)
+        self.assertEqual(
+            patch_row["item_identity_summary"]["official_price_jpy_values"],
+            [790],
+        )
+        self.assertEqual(
+            patch_row["campaign_pair_evidence_summary"],
+            {
+                "source_url_count": 2,
+                "has_numbered_campaign_suffixes": False,
+                "likely_same_campaign_family_reissue": True,
+                "item_work_order_count": 1,
+                "catalog_row_count": 2,
+                "prize_label_count": 1,
+                "zero_price_exception_policy_pass": True,
+                "rows_missing_image_url": 1,
+                "rows_missing_official_price_jpy": 0,
+                "official_price_jpy_values": [790],
+            },
+        )
         self.assertEqual(
             patch_row["recommended_decision"],
             "campaign_pair_reissue_keep_all_separate",

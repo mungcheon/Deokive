@@ -520,6 +520,8 @@ def _campaign_first_review_plan(dedupe_action_queue: dict[str, Any]) -> list[dic
                 "evidence_url_count": row.get("evidence_url_count")
                 or sum(1 for url in source_urls if str(url or "").strip()),
                 "campaign_url_comparison": row.get("campaign_url_comparison") or {},
+                "catalog_row_count": row.get("catalog_row_count") or len(row.get("catalog_indexes") or []),
+                "item_identity_summary": row.get("item_identity_summary") or {},
                 "item_work_order_count": row.get("item_work_order_count") or 0,
                 "affected_item_work_order_ids": decision_template.get("affected_item_work_order_ids")
                 or row.get("item_work_order_ids")
@@ -632,6 +634,8 @@ def _campaign_first_confirmation_patch_template(
                 "first_evidence_url": item.get("first_evidence_url") or _first_url(source_urls),
                 "evidence_url_count": item.get("evidence_url_count"),
                 "item_work_order_count": item.get("item_work_order_count") or 0,
+                "catalog_row_count": item.get("catalog_row_count") or len(item.get("catalog_indexes") or []),
+                "item_identity_summary": item.get("item_identity_summary") or {},
                 "affected_item_work_order_ids": item.get("affected_item_work_order_ids") or [],
                 "catalog_indexes": item.get("catalog_indexes") or [],
                 "prize_labels": item.get("prize_labels") or [],
@@ -649,6 +653,31 @@ def _campaign_first_confirmation_patch_template(
                     "missing_affected_item_work_order_ids": not bool(
                         item.get("affected_item_work_order_ids")
                     ),
+                },
+                "campaign_pair_evidence_summary": {
+                    "source_url_count": len([url for url in source_urls if str(url or "").strip()]),
+                    "has_numbered_campaign_suffixes": bool(
+                        comparison.get("has_numbered_campaign_suffixes")
+                    ),
+                    "likely_same_campaign_family_reissue": bool(
+                        comparison.get("likely_same_campaign_family_reissue")
+                    ),
+                    "item_work_order_count": item.get("item_work_order_count") or 0,
+                    "catalog_row_count": item.get("catalog_row_count") or len(item.get("catalog_indexes") or []),
+                    "prize_label_count": len(item.get("prize_labels") or []),
+                    "zero_price_exception_policy_pass": (
+                        item.get("item_identity_summary") or {}
+                    ).get("zero_price_exception_policy_pass"),
+                    "rows_missing_image_url": (item.get("item_identity_summary") or {}).get(
+                        "rows_missing_image_url"
+                    ),
+                    "rows_missing_official_price_jpy": (
+                        item.get("item_identity_summary") or {}
+                    ).get("rows_missing_official_price_jpy"),
+                    "official_price_jpy_values": (
+                        item.get("item_identity_summary") or {}
+                    ).get("official_price_jpy_values")
+                    or [],
                 },
                 "manual_note": "",
                 "blocked_until": "campaign_pair_reissue_or_duplicate_decision_confirmed",
