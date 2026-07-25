@@ -9203,6 +9203,126 @@ def build_ichiban_kuji_historical_roadmap_public(
         lane for lane in ichiban_next_execution_lanes if int(lane.get("open_rows") or 0) > 0
     ]
 
+    def build_operator_handoff() -> dict[str, Any]:
+        handoff_steps: list[dict[str, Any]] = []
+        metadata_rows = value(metadata_action, "actionable_campaigns")
+        if metadata_rows:
+            handoff_steps.append(
+                {
+                    "step": 1,
+                    "lane": "campaign_metadata_confirmation",
+                    "status": "manual_official_campaign_metadata_required",
+                    "next_batch_rows": value(metadata_fast, "fast_review_campaigns"),
+                    "open_rows": metadata_rows,
+                    "review_section": "ichiban_kuji_metadata_action_queue",
+                    "write_template_section": "campaign_field_confirmation_template",
+                    "first_primary_review_url": metadata_action.get(
+                        "first_primary_review_url", ""
+                    ),
+                    "required_before_write": [
+                        "manual_confirmed=true",
+                        "official campaign title/source URL is confirmed",
+                        "release date is copied from official campaign evidence",
+                        "campaign-level draw price is confirmed for non-exception rows",
+                    ],
+                    "unblocks": "campaign_price_confirmation",
+                    "auto_apply_enabled": False,
+                }
+            )
+        price_rows = value(history, "missing_official_price_jpy_campaign_groups")
+        if price_rows:
+            handoff_steps.append(
+                {
+                    "step": len(handoff_steps) + 1,
+                    "lane": "campaign_price_confirmation",
+                    "status": "manual_official_price_review_required",
+                    "next_batch_rows": price_rows,
+                    "open_rows": price_rows,
+                    "review_section": "ichiban_kuji_metadata_action_queue",
+                    "write_template_section": "official_price_jpy field patches",
+                    "required_before_write": [
+                        "official draw price is confirmed from campaign page",
+                        "Last One and Double Chance prize exceptions remain 0 JPY",
+                        "non-exception missing prices are filled before reissue decisions",
+                    ],
+                    "unblocks": "reissue_identity_review",
+                    "auto_apply_enabled": False,
+                }
+            )
+        if reissue_review_groups:
+            handoff_steps.append(
+                {
+                    "step": len(handoff_steps) + 1,
+                    "lane": "reissue_identity_review",
+                    "status": "manual_reissue_or_duplicate_decision_required",
+                    "next_batch_rows": value(
+                        prize_policy,
+                        "probable_reissue_work_order_rows",
+                    ),
+                    "open_rows": reissue_review_groups,
+                    "review_section": "ichiban_kuji_reissue_decision_template",
+                    "write_template_section": "decision_template",
+                    "required_before_write": [
+                        "campaign title, release period, and lineup are compared",
+                        "release/campaign name, prize rank, prize name, and variant are preserved",
+                        "decision is keep separate for reissue/campaign variants or keep/drop for exact duplicates",
+                        "auto merge/delete stays disabled until manual evidence is recorded",
+                    ],
+                    "unblocks": "safe_dedupe_keep_drop_review",
+                    "auto_merge_enabled": False,
+                    "auto_delete_enabled": False,
+                }
+            )
+        prize_patch_rows = value(patch_candidates, "open_candidate_rows") + value(
+            prize_name_image,
+            "review_rows",
+        )
+        if prize_patch_rows:
+            handoff_steps.append(
+                {
+                    "step": len(handoff_steps) + 1,
+                    "lane": "prize_name_image_patch_review",
+                    "status": "manual_lineup_confirmation_required",
+                    "next_batch_rows": prize_patch_rows,
+                    "open_rows": prize_patch_rows,
+                    "review_section": "ichiban_kuji_prize_name_image_patch_candidates",
+                    "write_template_section": "prize name/image patch template",
+                    "required_before_write": [
+                        "official campaign lineup confirms rank and prize name",
+                        "same rank with multiple kinds keeps visible variant wording",
+                        "image URL matches the exact campaign, rank, prize, and variant",
+                    ],
+                    "unblocks": "public_prize_image_and_name_quality",
+                    "auto_apply_enabled": False,
+                }
+            )
+        return {
+            "status": "manual_review_required" if handoff_steps else "ichiban_cleanup_clear",
+            "current_lane": (
+                handoff_steps[0].get("lane")
+                if handoff_steps
+                else "ichiban_cleanup_clear"
+            ),
+            "current_review_section": (
+                handoff_steps[0].get("review_section") if handoff_steps else None
+            ),
+            "manual_metadata_campaigns": metadata_rows,
+            "missing_price_campaign_groups": price_rows,
+            "reissue_review_groups": reissue_review_groups,
+            "zero_price_policy_ready": zero_price_policy_ready,
+            "numbered_variant_policy_ready": numbered_variant_policy_ready,
+            "last_one_and_double_chance_zero_price_protected": zero_price_policy_ready,
+            "handoff_steps": handoff_steps,
+            "safety_policy": {
+                "auto_apply_enabled": False,
+                "auto_merge_enabled": False,
+                "auto_delete_enabled": False,
+                "require_official_campaign_evidence": True,
+                "preserve_reissue_and_variant_rows_until_confirmed": True,
+                "last_one_and_double_chance_price_jpy": 0,
+            },
+        }
+
     summary = {
         "catalog_ichiban_rows": value(history, "catalog_kuji_item_rows"),
         "campaign_rows": value(history, "campaign_rows"),
@@ -9310,6 +9430,7 @@ def build_ichiban_kuji_historical_roadmap_public(
             ),
         },
         "next_execution_lanes": ichiban_next_execution_lanes,
+        "operator_handoff": build_operator_handoff(),
         "price_policy_auto_apply_ready_rows": 0,
         "price_policy_auto_merge_ready_rows": 0,
         "price_policy_auto_delete_ready_rows": 0,
@@ -9324,6 +9445,7 @@ def build_ichiban_kuji_historical_roadmap_public(
         "summary": summary,
         "next_execution_summary": summary["next_execution_summary"],
         "next_execution_lanes": ichiban_next_execution_lanes,
+        "operator_handoff": summary["operator_handoff"],
         "phases": phases,
         "instructions": [
             "Use this roadmap as the public manual work order for historical Ichiban Kuji cleanup.",
@@ -12069,6 +12191,13 @@ def update_reports(write: bool) -> dict[str, Any]:
         target["ichiban_kuji_historical_roadmap"] = {
             "public_report": f"data/{ICHIIBAN_KUJI_HISTORICAL_ROADMAP.name}",
             **ichiban_kuji_historical_roadmap.get("summary", {}),
+            "operator_handoff": ichiban_kuji_historical_roadmap.get(
+                "operator_handoff",
+                ichiban_kuji_historical_roadmap.get("summary", {}).get(
+                    "operator_handoff",
+                    {},
+                ),
+            ),
         }
         target["operations"] = {
             "public_report": f"data/{OPERATIONS_REPORT.name}",

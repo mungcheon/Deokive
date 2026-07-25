@@ -2037,6 +2037,44 @@ class PublicCatalogReportTests(unittest.TestCase):
                 "price_and_prize_policy_gate"
             ]["blocked_reasons"],
         )
+        ichiban_handoff = roadmap["operator_handoff"]
+        self.assertEqual(
+            quality["ichiban_kuji_historical_roadmap"]["operator_handoff"],
+            ichiban_handoff,
+        )
+        self.assertEqual(
+            ichiban_handoff["current_lane"],
+            "campaign_metadata_confirmation",
+        )
+        self.assertEqual(ichiban_handoff["manual_metadata_campaigns"], 44)
+        self.assertEqual(ichiban_handoff["missing_price_campaign_groups"], 41)
+        self.assertEqual(ichiban_handoff["reissue_review_groups"], 20)
+        self.assertTrue(
+            ichiban_handoff["last_one_and_double_chance_zero_price_protected"]
+        )
+        self.assertFalse(ichiban_handoff["safety_policy"]["auto_apply_enabled"])
+        self.assertFalse(ichiban_handoff["safety_policy"]["auto_merge_enabled"])
+        self.assertFalse(ichiban_handoff["safety_policy"]["auto_delete_enabled"])
+        self.assertEqual(
+            ichiban_handoff["safety_policy"][
+                "last_one_and_double_chance_price_jpy"
+            ],
+            0,
+        )
+        self.assertEqual(
+            [step["lane"] for step in ichiban_handoff["handoff_steps"]],
+            [
+                "campaign_metadata_confirmation",
+                "campaign_price_confirmation",
+                "reissue_identity_review",
+            ],
+        )
+        self.assertEqual(
+            quality["ichiban_kuji_historical_roadmap"][
+                "prize_name_image_patch_open_rows"
+            ],
+            0,
+        )
         goal_gate = quality["catalog_goal_progress_gate"]
         self.assertEqual(goal_gate["status"], "manual_review_required")
         self.assertEqual(goal_gate["pillar_count"], 5)
