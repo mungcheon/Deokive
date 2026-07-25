@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-25T02:11:37Z",
+  "generated_at": "2026-07-25T02:45:23Z",
   "scope": "catalog_deduplication_action_queue",
   "summary": {
     "actionable_groups": 48,
@@ -180,6 +180,87 @@
       "variant_or_retailer_identity_review_required"
     ],
     "next_safe_phase": "verify_ichiban_campaign_pages_before_dedupe"
+  },
+  "operator_handoff": {
+    "status": "ichiban_reissue_review_required",
+    "current_lane": "ichiban_reissue_campaign_review",
+    "current_review_section": "ichiban_reissue_campaign_work_order",
+    "blocked_reasons": [
+      "explicit_manual_keep_drop_confirmation_required",
+      "ichiban_reissue_manual_confirmation_required",
+      "variant_or_retailer_identity_review_required"
+    ],
+    "next_safe_phase": "verify_ichiban_campaign_pages_before_dedupe",
+    "manual_decision_required_groups": 48,
+    "ichiban_reissue_work_order_rows": 20,
+    "ichiban_reissue_campaign_work_order_rows": 4,
+    "handoff_steps": [
+      {
+        "step": 1,
+        "lane": "ichiban_reissue_campaign_review",
+        "status": "manual_campaign_identity_confirmation_required",
+        "next_batch_rows": 4,
+        "review_section": "ichiban_reissue_campaign_work_order",
+        "write_template_section": "decision_template",
+        "first_evidence_url": "https://1kuji.com/products/onep6",
+        "first_work_order_id": "ichiban-reissue-campaign-001",
+        "required_before_write": [
+          "manual_confirmed=true",
+          "campaign decision is recorded",
+          "official campaign title, release period, and prize lineup are compared",
+          "affected item work orders stay protected until campaign identity is clear"
+        ],
+        "unblocks": "ichiban_reissue_item_decisions",
+        "auto_merge_enabled": false,
+        "auto_delete_enabled": false
+      },
+      {
+        "step": 2,
+        "lane": "ichiban_reissue_identity_review",
+        "status": "manual_reissue_or_duplicate_decision_required",
+        "next_batch_rows": 20,
+        "review_section": "ichiban_reissue_work_order",
+        "write_template_section": "decision_template",
+        "first_evidence_url": "https://1kuji.com/products/haikyu4",
+        "first_work_order_id": "ichiban-reissue-dedupe-001",
+        "required_before_write": [
+          "manual_confirmed=true",
+          "decision is reissue_or_campaign_variant_keep_separate or same_sellable_product_keep_drop_confirmed",
+          "release/campaign name, prize rank, prize name, and variant are compared",
+          "Last One and Double Chance price exceptions stay at 0 JPY"
+        ],
+        "unblocks": "safe_manual_keep_drop_review",
+        "auto_merge_enabled": false,
+        "auto_delete_enabled": false
+      },
+      {
+        "step": 3,
+        "lane": "manual_keep_drop_import_template",
+        "status": "explicit_keep_drop_confirmation_required",
+        "next_batch_rows": 10,
+        "review_section": "batches",
+        "write_template_section": "dedupe_decision_template",
+        "first_primary_review_url": "https://chiikawamarket.jp/ko/products/4570189195898",
+        "first_batch_id": "dedupe-action-001",
+        "import_tool": "tools/import_confirmed_dedupe_decisions.py",
+        "confirmed_queue": "server/catalog_dedupe_confirmed_decisions.json",
+        "required_before_write": [
+          "manual_confirmed=true",
+          "same sellable product identity is proven",
+          "keep_catalog_index is chosen",
+          "drop_catalog_indexes and evidence_urls are recorded"
+        ],
+        "unblocks": "explicit_manual_keep_drop_decision_confirmed",
+        "auto_merge_enabled": false,
+        "auto_delete_enabled": false
+      }
+    ],
+    "safety_policy": {
+      "auto_merge_enabled": false,
+      "auto_delete_enabled": false,
+      "require_explicit_keep_drop_decision": true,
+      "protect_ichiban_reissues_until_confirmed": true
+    }
   },
   "instructions": [
     "Use this queue for the safest dedupe reviews first; it still never deletes automatically.",

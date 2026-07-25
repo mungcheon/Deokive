@@ -11705,6 +11705,10 @@ def update_reports(write: bool) -> dict[str, Any]:
                     "next_execution_lanes",
                     [],
                 ),
+                "operator_handoff": deduplication_action_queue.get(
+                    "operator_handoff",
+                    {},
+                ),
             }
         elif DEDUPLICATION_ACTION_QUEUE.exists():
             dedupe_action_queue = load_json(DEDUPLICATION_ACTION_QUEUE, {})
@@ -11725,6 +11729,10 @@ def update_reports(write: bool) -> dict[str, Any]:
                 "next_execution_lanes": dedupe_action_queue.get(
                     "next_execution_lanes",
                     [],
+                ),
+                "operator_handoff": dedupe_action_queue.get(
+                    "operator_handoff",
+                    {},
                 ),
             }
         if deduplication_fast_review:

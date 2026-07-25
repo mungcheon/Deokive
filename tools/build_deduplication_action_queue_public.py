@@ -516,6 +516,113 @@ def _catalog_indexes(group: dict[str, Any]) -> set[int]:
     return indexes
 
 
+def _build_operator_handoff(
+    *,
+    completion_readiness: dict[str, Any],
+    dedupe_safety_gate: dict[str, Any],
+    batches: list[dict[str, Any]],
+    reissue_work_orders: list[dict[str, Any]],
+    reissue_campaign_work_orders: list[dict[str, Any]],
+) -> dict[str, Any]:
+    handoff_steps: list[dict[str, Any]] = []
+    if reissue_campaign_work_orders:
+        first = reissue_campaign_work_orders[0]
+        handoff_steps.append(
+            {
+                "step": 1,
+                "lane": "ichiban_reissue_campaign_review",
+                "status": "manual_campaign_identity_confirmation_required",
+                "next_batch_rows": len(reissue_campaign_work_orders),
+                "review_section": "ichiban_reissue_campaign_work_order",
+                "write_template_section": "decision_template",
+                "first_evidence_url": first.get("first_evidence_url", ""),
+                "first_work_order_id": first.get("campaign_work_order_id"),
+                "required_before_write": [
+                    "manual_confirmed=true",
+                    "campaign decision is recorded",
+                    "official campaign title, release period, and prize lineup are compared",
+                    "affected item work orders stay protected until campaign identity is clear",
+                ],
+                "unblocks": "ichiban_reissue_item_decisions",
+                "auto_merge_enabled": False,
+                "auto_delete_enabled": False,
+            }
+        )
+    if reissue_work_orders:
+        first = reissue_work_orders[0]
+        handoff_steps.append(
+            {
+                "step": len(handoff_steps) + 1,
+                "lane": "ichiban_reissue_identity_review",
+                "status": "manual_reissue_or_duplicate_decision_required",
+                "next_batch_rows": min(20, len(reissue_work_orders)),
+                "review_section": "ichiban_reissue_work_order",
+                "write_template_section": "decision_template",
+                "first_evidence_url": first.get("first_evidence_url", ""),
+                "first_work_order_id": first.get("work_order_id"),
+                "required_before_write": [
+                    "manual_confirmed=true",
+                    "decision is reissue_or_campaign_variant_keep_separate or same_sellable_product_keep_drop_confirmed",
+                    "release/campaign name, prize rank, prize name, and variant are compared",
+                    "Last One and Double Chance price exceptions stay at 0 JPY",
+                ],
+                "unblocks": "safe_manual_keep_drop_review",
+                "auto_merge_enabled": False,
+                "auto_delete_enabled": False,
+            }
+        )
+    if batches:
+        first = batches[0]
+        handoff_steps.append(
+            {
+                "step": len(handoff_steps) + 1,
+                "lane": "manual_keep_drop_import_template",
+                "status": "explicit_keep_drop_confirmation_required",
+                "next_batch_rows": int(first.get("group_count") or 0),
+                "review_section": "batches",
+                "write_template_section": "dedupe_decision_template",
+                "first_primary_review_url": first.get("first_primary_review_url", ""),
+                "first_batch_id": first.get("batch_id"),
+                "import_tool": IMPORT_TOOL,
+                "confirmed_queue": CONFIRMED_QUEUE,
+                "required_before_write": [
+                    "manual_confirmed=true",
+                    "same sellable product identity is proven",
+                    "keep_catalog_index is chosen",
+                    "drop_catalog_indexes and evidence_urls are recorded",
+                ],
+                "unblocks": UNBLOCKS_WHEN,
+                "auto_merge_enabled": False,
+                "auto_delete_enabled": False,
+            }
+        )
+    return {
+        "status": completion_readiness.get("status", "unknown"),
+        "current_lane": (
+            handoff_steps[0].get("lane")
+            if handoff_steps
+            else "no_dedupe_action_required"
+        ),
+        "current_review_section": (
+            handoff_steps[0].get("review_section") if handoff_steps else None
+        ),
+        "blocked_reasons": completion_readiness.get("blocked_reasons", []),
+        "next_safe_phase": completion_readiness.get("next_safe_phase"),
+        "manual_decision_required_groups": int(
+            dedupe_safety_gate.get("manual_decision_required_groups") or 0
+        ),
+        "ichiban_reissue_work_order_rows": len(reissue_work_orders),
+        "ichiban_reissue_campaign_work_order_rows": len(reissue_campaign_work_orders),
+        "handoff_steps": handoff_steps,
+        "safety_policy": {
+            "auto_merge_enabled": False,
+            "auto_delete_enabled": False,
+            "require_explicit_keep_drop_decision": True,
+            "protect_ichiban_reissues_until_confirmed": True,
+        },
+    }
+
+
 def _row_richness(row: dict[str, Any]) -> int:
     value = row.get("richness")
     if isinstance(value, int):
@@ -906,6 +1013,14 @@ def build_report(
             }
         )
 
+    operator_handoff = _build_operator_handoff(
+        completion_readiness=completion_readiness,
+        dedupe_safety_gate=dedupe_safety_gate,
+        batches=batches,
+        reissue_work_orders=reissue_work_orders,
+        reissue_campaign_work_orders=reissue_campaign_work_orders,
+    )
+
     return {
         "schema_version": 1,
         "generated_at": _now_utc(),
@@ -971,6 +1086,7 @@ def build_report(
         },
         "completion_readiness": completion_readiness,
         "dedupe_safety_gate": dedupe_safety_gate,
+        "operator_handoff": operator_handoff,
         "instructions": [
             "Use this queue for the safest dedupe reviews first; it still never deletes automatically.",
             "Variant caution and manual identity check groups remain in catalog_deduplication_review_batches_public.json.",

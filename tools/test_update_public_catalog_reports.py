@@ -1628,6 +1628,41 @@ class PublicCatalogReportTests(unittest.TestCase):
             self.assertEqual(dedupe_lanes[3]["next_batch_rows"], 20)
             self.assertEqual(dedupe_lanes[4]["open_rows"], 48)
             self.assertEqual(dedupe_lanes[4]["manual_decision_rows"], 42)
+            dedupe_handoff = dedupe_action.get("operator_handoff", {})
+            self.assertEqual(
+                quality["deduplication_action_queue"]["operator_handoff"],
+                dedupe_handoff,
+            )
+            self.assertEqual(
+                dedupe_handoff.get("status"),
+                dedupe_action.get("completion_readiness", {}).get("status"),
+            )
+            self.assertEqual(
+                dedupe_handoff.get("current_lane"),
+                "ichiban_reissue_campaign_review",
+            )
+            self.assertEqual(
+                dedupe_handoff.get("manual_decision_required_groups"),
+                dedupe_action.get("dedupe_safety_gate", {}).get(
+                    "manual_decision_required_groups"
+                ),
+            )
+            self.assertEqual(
+                dedupe_handoff.get("ichiban_reissue_work_order_rows"),
+                dedupe_action_summary["ichiban_reissue_work_order_rows"],
+            )
+            self.assertFalse(
+                dedupe_handoff.get("safety_policy", {}).get("auto_merge_enabled")
+            )
+            self.assertTrue(
+                dedupe_handoff.get("safety_policy", {}).get(
+                    "protect_ichiban_reissues_until_confirmed"
+                )
+            )
+            self.assertEqual(
+                dedupe_handoff.get("handoff_steps", [])[0].get("lane"),
+                "ichiban_reissue_campaign_review",
+            )
             self.assertEqual(quality["deduplication_fast_review"]["fast_review_groups"], 42)
             self.assertEqual(
                 quality["deduplication_fast_review"]["image_url_only_same_identity_groups"],
