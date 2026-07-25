@@ -1082,8 +1082,148 @@ def fetch_audit_matches_focus_pack(
     ) == _catalog_index_sequence(focus_pack)
 
 
+def exact_url_candidate_audit_matches_queue(
+    candidate_audit: dict[str, Any],
+    exact_url_queue: dict[str, Any],
+) -> bool:
+    return bool(candidate_audit.get("items")) and _catalog_index_sequence(
+        candidate_audit
+    ) == _catalog_index_sequence(exact_url_queue)
+
+
+def keep_existing_exact_url_candidate_audit_if_new_loses_samples(
+    new_audit: dict[str, Any],
+    existing_audit: dict[str, Any],
+    exact_url_queue: dict[str, Any],
+) -> dict[str, Any]:
+    new_summary = new_audit.get("summary", {}) if isinstance(new_audit, dict) else {}
+    existing_summary = (
+        existing_audit.get("summary", {}) if isinstance(existing_audit, dict) else {}
+    )
+    if (
+        exact_url_candidate_audit_matches_queue(existing_audit, exact_url_queue)
+        and int(new_summary.get("sample_product_detail_links") or 0) == 0
+        and int(existing_summary.get("sample_product_detail_links") or 0) > 0
+    ):
+        preserved = dict(existing_audit)
+        preserved["preserved_after_fetch_regression"] = {
+            "reason": "new_exact_url_candidate_audit_had_no_sample_product_detail_links",
+            "new_sample_product_detail_links": int(
+                new_summary.get("sample_product_detail_links") or 0
+            ),
+            "preserved_sample_product_detail_links": int(
+                existing_summary.get("sample_product_detail_links") or 0
+            ),
+        }
+        return preserved
+    return new_audit
+
+
 def present(value: Any) -> bool:
     return value not in (None, "", [], {})
+
+
+def build_missing_image_next_execution_lanes(
+    missing_image_summary: dict[str, Any],
+    missing_image_execution: dict[str, Any],
+    image_attachment_action_summary: dict[str, Any],
+) -> list[dict[str, Any]]:
+    next_queue = missing_image_execution.get("next_queue", {})
+    next_queue_lane = next_queue.get("lane")
+    next_queue_rows = next_queue.get("rows", next_queue.get("row_count", 0))
+    lanes = [
+        {
+            "lane": "replace_generic_source_urls",
+            "status": (
+                "next"
+                if next_queue_lane == "replace_generic_source_urls"
+                else "manual_review_required"
+            ),
+            "open_rows": int(
+                image_attachment_action_summary.get(
+                    "source_url_update_required_rows",
+                    0,
+                )
+                or 0
+            ),
+            "next_batch_rows": int(next_queue_rows or 0)
+            if next_queue_lane == "replace_generic_source_urls"
+            else 0,
+            "review_start_rows": int(
+                image_attachment_action_summary.get(
+                    "source_url_update_primary_review_url_rows",
+                    0,
+                )
+                or 0
+            ),
+            "next_action": "confirm exact product source URLs before attaching images",
+        },
+        {
+            "lane": "representative_image_review",
+            "status": "manual_review_required",
+            "open_rows": int(
+                image_attachment_action_summary.get(
+                    "representative_image_review_required_rows",
+                    0,
+                )
+                or 0
+            ),
+            "next_batch_rows": int(
+                image_attachment_action_summary.get(
+                    "next_representative_review_batch_rows",
+                    0,
+                )
+                or 0
+            ),
+            "review_start_rows": int(
+                image_attachment_action_summary.get(
+                    "next_representative_review_primary_url_rows",
+                    0,
+                )
+                or 0
+            ),
+            "next_action": "review representative images only after confirming product type",
+        },
+        {
+            "lane": "source_discovery_focus_packs",
+            "status": "manual_source_discovery_required",
+            "open_rows": int(
+                missing_image_summary.get(
+                    "source_discovery_remaining_focus_review_rows",
+                    0,
+                )
+                or 0
+            ),
+            "next_batch_rows": int(
+                missing_image_summary.get("source_discovery_next_focus_pack_rows", 0)
+                or 0
+            ),
+            "review_start_rows": int(
+                missing_image_summary.get("source_discovery_next_focus_pack_rows", 0)
+                or 0
+            ),
+            "next_action": "confirm exact source pages before image URL attachment",
+        },
+        {
+            "lane": "manual_image_research",
+            "status": "manual_research_required",
+            "open_rows": int(
+                missing_image_summary.get("manual_image_research_rows", 0) or 0
+            ),
+            "next_batch_rows": int(
+                missing_image_summary.get("manual_image_research_rows", 0) or 0
+            ),
+            "review_start_rows": int(
+                missing_image_summary.get(
+                    "manual_image_research_review_start_rows",
+                    0,
+                )
+                or 0
+            ),
+            "next_action": "search official or reliable product image evidence manually",
+        },
+    ]
+    return [lane for lane in lanes if lane["open_rows"] > 0]
 
 
 def catalog_currency_invariant_findings(catalog: dict[str, Any]) -> list[str]:
@@ -10004,10 +10144,19 @@ def update_reports(write: bool) -> dict[str, Any]:
         fetch_audit=source_discovery_next_focus_fetch_audit,
         generated_at=generated_at,
     )
+    existing_source_discovery_next_focus_exact_url_candidate_audit = (
+        load_json(SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_CANDIDATE_AUDIT, {})
+        if SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_CANDIDATE_AUDIT.exists()
+        else {}
+    )
     source_discovery_next_focus_exact_url_candidate_audit = (
-        build_source_discovery_next_focus_exact_url_candidate_audit_public.build_report(
+        keep_existing_exact_url_candidate_audit_if_new_loses_samples(
+            build_source_discovery_next_focus_exact_url_candidate_audit_public.build_report(
+                source_discovery_next_focus_exact_url_queue,
+                generated_at=generated_at,
+            ),
+            existing_source_discovery_next_focus_exact_url_candidate_audit,
             source_discovery_next_focus_exact_url_queue,
-            generated_at=generated_at,
         )
     )
     (
@@ -10245,13 +10394,36 @@ def update_reports(write: bool) -> dict[str, Any]:
             "missing_with_generic_source_url": summary["missing_with_generic_source_url"],
         }
     )
+    image_attachment_action_summary = image_attachment_action_queue.get("summary", {})
+    image_next_execution_lanes = build_missing_image_next_execution_lanes(
+        missing_image_actionability.get("summary", {}),
+        missing_image_actionability.get("execution_queue_summary", {}),
+        image_attachment_action_summary,
+    )
     image_backlog["candidate_review_summary"] = dict(image_candidate_summary)
+    image_backlog["next_execution_lanes"] = image_next_execution_lanes
+    image_backlog["next_execution_summary"] = {
+        "lane_count": len(image_next_execution_lanes),
+        "open_rows": sum(int(lane.get("open_rows") or 0) for lane in image_next_execution_lanes),
+        "next_batch_rows": sum(
+            int(lane.get("next_batch_rows") or 0) for lane in image_next_execution_lanes
+        ),
+        "next_safe_phase": (
+            image_next_execution_lanes[0]["lane"]
+            if image_next_execution_lanes
+            else "image_backlog_clear"
+        ),
+        "auto_apply_enabled": False,
+        "manual_evidence_required": bool(image_next_execution_lanes),
+    }
     quality["image_backlog"] = {
         **(quality.get("image_backlog") if isinstance(quality.get("image_backlog"), dict) else {}),
         "missing_images": missing["image_url"],
         "provider_candidate_items": image_candidate_summary.get("provider_candidate_items", 0),
         "manual_or_blocked_items": image_candidate_summary.get("manual_or_blocked_items", 0),
         "missing_with_generic_source_url": summary["missing_with_generic_source_url"],
+        "next_execution_summary": dict(image_backlog["next_execution_summary"]),
+        "next_execution_lanes": image_next_execution_lanes,
         "public_report": f"data/{IMAGE_BACKLOG.name}",
         "candidate_review_report": f"data/{IMAGE_CANDIDATES.name}",
         "candidate_review_summary": dict(image_candidate_summary),

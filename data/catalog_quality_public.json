@@ -2685,7 +2685,49 @@
       "missing_with_source_url": 73,
       "missing_with_exact_source_url": 0,
       "missing_with_generic_source_url": 73
-    }
+    },
+    "next_execution_summary": {
+      "lane_count": 4,
+      "open_rows": 745,
+      "next_batch_rows": 75,
+      "next_safe_phase": "replace_generic_source_urls",
+      "auto_apply_enabled": false,
+      "manual_evidence_required": true
+    },
+    "next_execution_lanes": [
+      {
+        "lane": "replace_generic_source_urls",
+        "status": "next",
+        "open_rows": 50,
+        "next_batch_rows": 50,
+        "review_start_rows": 50,
+        "next_action": "confirm exact product source URLs before attaching images"
+      },
+      {
+        "lane": "representative_image_review",
+        "status": "manual_review_required",
+        "open_rows": 23,
+        "next_batch_rows": 0,
+        "review_start_rows": 0,
+        "next_action": "review representative images only after confirming product type"
+      },
+      {
+        "lane": "source_discovery_focus_packs",
+        "status": "manual_source_discovery_required",
+        "open_rows": 667,
+        "next_batch_rows": 20,
+        "review_start_rows": 20,
+        "next_action": "confirm exact source pages before image URL attachment"
+      },
+      {
+        "lane": "manual_image_research",
+        "status": "manual_research_required",
+        "open_rows": 5,
+        "next_batch_rows": 5,
+        "review_start_rows": 5,
+        "next_action": "search official or reliable product image evidence manually"
+      }
+    ]
   },
   "gotouchi_chiikawa_image_candidates": {
     "public_report": "data/gotouchi_chiikawa_image_candidates_public.json",

@@ -375,6 +375,25 @@ class PublicCatalogReportTests(unittest.TestCase):
             image_backlog["candidate_review_summary"]["missing_images"],
             result["missing"]["image_url"],
         )
+        self.assertEqual(
+            image_backlog["next_execution_summary"]["next_safe_phase"],
+            "replace_generic_source_urls",
+        )
+        self.assertEqual(
+            image_backlog["next_execution_summary"]["next_batch_rows"],
+            75,
+        )
+        self.assertIn(
+            {
+                "lane": "replace_generic_source_urls",
+                "status": "next",
+                "open_rows": 50,
+                "next_batch_rows": 50,
+                "review_start_rows": 50,
+                "next_action": "confirm exact product source URLs before attaching images",
+            },
+            image_backlog["next_execution_lanes"],
+        )
         self.assertEqual(quality["missing_image_priority"]["missing_image_rows"], result["missing"]["image_url"])
         self.assertEqual(
             quality["source_discovery_starter_queue"]["starter_queue_rows"],
@@ -385,6 +404,14 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertIs(quality["source_discovery_starter_queue"]["auto_apply_enabled"], False)
         self.assertEqual(quality["image_backlog"]["missing_images"], result["missing"]["image_url"])
+        self.assertEqual(
+            quality["image_backlog"]["next_execution_summary"],
+            image_backlog["next_execution_summary"],
+        )
+        self.assertEqual(
+            quality["image_backlog"]["next_execution_lanes"],
+            image_backlog["next_execution_lanes"],
+        )
         self.assertEqual(
             quality["image_backlog"]["candidate_review_summary"]["missing_images"],
             result["missing"]["image_url"],
