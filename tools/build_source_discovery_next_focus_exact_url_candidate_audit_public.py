@@ -47,6 +47,20 @@ def normalize_text(value: Any) -> str:
     return re.sub(r"\s+", "", str(value or "")).lower()
 
 
+def clean_text(value: str) -> str:
+    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", value)).strip()
+
+
+def page_title(html: str) -> str:
+    match = re.search(r"<title[^>]*>(.*?)</title>", html, re.S | re.I)
+    return clean_text(match.group(1)) if match else ""
+
+
+def page_h1(html: str) -> str:
+    match = re.search(r"<h1[^>]*>(.*?)</h1>", html, re.S | re.I)
+    return clean_text(match.group(1)) if match else ""
+
+
 def unique_detail_links(html: str, base_url: str) -> list[str]:
     links: list[str] = []
     for match in re.finditer(r'href=["\']([^"\']*/products/detail/\d+)', html):
@@ -54,6 +68,37 @@ def unique_detail_links(html: str, base_url: str) -> list[str]:
         if link not in links:
             links.append(link)
     return links
+
+
+def sample_detail_link_snapshots(
+    links: list[str],
+    fetcher: Fetcher,
+    cache: dict[str, dict[str, Any]],
+    *,
+    limit: int = 5,
+) -> list[dict[str, Any]]:
+    snapshots: list[dict[str, Any]] = []
+    for link in links[:limit]:
+        if link not in cache:
+            try:
+                html = fetcher(link)
+            except Exception as exc:  # pragma: no cover - exercised through integration runs
+                cache[link] = {
+                    "url": link,
+                    "fetch_status": "fetch_error",
+                    "fetch_error": type(exc).__name__,
+                    "title": "",
+                    "h1": "",
+                }
+            else:
+                cache[link] = {
+                    "url": link,
+                    "fetch_status": "ok",
+                    "title": page_title(html),
+                    "h1": page_h1(html),
+                }
+        snapshots.append(cache[link])
+    return snapshots
 
 
 def exact_title_detail_links(html: str, base_url: str, title: str) -> list[str]:
@@ -79,7 +124,11 @@ def domain_limited_web_search_url(item: dict[str, Any]) -> str:
     return f"https://duckduckgo.com/?q={quote_plus(query)}"
 
 
-def audit_item(item: dict[str, Any], fetcher: Fetcher) -> dict[str, Any]:
+def audit_item(
+    item: dict[str, Any],
+    fetcher: Fetcher,
+    detail_snapshot_cache: dict[str, dict[str, Any]],
+) -> dict[str, Any]:
     url = str(item.get("fallback_store_search_url") or "")
     title = str(item.get("name_ja") or item.get("name_ko") or "")
     primary_review_url = str(item.get("primary_review_url") or "")
@@ -131,6 +180,7 @@ def audit_item(item: dict[str, Any], fetcher: Fetcher) -> dict[str, Any]:
     links = unique_detail_links(html, base)
     exact_links = exact_title_detail_links(html, base, title)
     broad = len(links) > BROAD_RESULT_LINK_THRESHOLD
+    snapshots = sample_detail_link_snapshots(links, fetcher, detail_snapshot_cache)
     result.update(
         {
             "store_search_fetch_status": "ok",
@@ -139,6 +189,11 @@ def audit_item(item: dict[str, Any], fetcher: Fetcher) -> dict[str, Any]:
             "candidate_source_urls": exact_links[:5],
             "sample_product_detail_links": links[:5],
             "sample_product_detail_link_count": min(len(links), 5),
+            "sample_product_detail_link_snapshots": snapshots,
+            "sample_product_detail_link_snapshot_rows": len(snapshots),
+            "sample_product_detail_link_snapshot_ok_rows": sum(
+                1 for snapshot in snapshots if snapshot.get("fetch_status") == "ok"
+            ),
             "sample_product_detail_link_source": "broad_official_search_result",
             "sample_product_detail_link_warning": (
                 "Sample detail links come from the official search result page and are only review starting points; "
@@ -166,7 +221,8 @@ def build_report(
     fetcher: Fetcher = fetch_html,
 ) -> dict[str, Any]:
     items = [item for item in queue.get("items") or [] if isinstance(item, dict)]
-    audited = [audit_item(item, fetcher) for item in items]
+    detail_snapshot_cache: dict[str, dict[str, Any]] = {}
+    audited = [audit_item(item, fetcher, detail_snapshot_cache) for item in items]
     exact_ready = [
         item
         for item in audited
@@ -196,6 +252,18 @@ def build_report(
             ),
             "sample_product_detail_links": sum(
                 len(item.get("sample_product_detail_links") or []) for item in audited
+            ),
+            "sample_product_detail_link_snapshot_rows": sum(
+                len(item.get("sample_product_detail_link_snapshots") or []) for item in audited
+            ),
+            "unique_sample_product_detail_link_snapshots": len(detail_snapshot_cache),
+            "sample_product_detail_link_snapshot_ok_rows": sum(
+                sum(
+                    1
+                    for snapshot in item.get("sample_product_detail_link_snapshots") or []
+                    if snapshot.get("fetch_status") == "ok"
+                )
+                for item in audited
             ),
             "broad_result_sample_detail_link_rows": sum(
                 1

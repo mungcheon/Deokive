@@ -9968,6 +9968,14 @@ def update_reports(write: bool) -> dict[str, Any]:
             generated_at=generated_at,
         )
     )
+    (
+        source_discovery_next_focus_exact_url_queue,
+        source_discovery_next_focus_identity_backfill_queue,
+    ) = build_source_discovery_next_focus_split_queues_public.build_reports(
+        source_discovery_next_focus_fallback_queue,
+        fetch_audit=source_discovery_next_focus_exact_url_candidate_audit,
+        generated_at=generated_at,
+    )
     source_discovery_next_focus_identity_candidate_review_queue = (
         build_source_discovery_next_focus_identity_candidate_review_public.build_report(
             source_discovery_next_focus_identity_backfill_queue,

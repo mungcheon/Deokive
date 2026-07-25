@@ -113,6 +113,30 @@ def _candidate_detail_links(row: dict[str, Any], fetch_audit_by_index: dict[int,
     return links
 
 
+def _candidate_detail_link_snapshots(
+    row: dict[str, Any],
+    fetch_audit_by_index: dict[int, dict[str, Any]],
+) -> list[dict[str, Any]]:
+    try:
+        catalog_index = int(row.get("catalog_index"))
+    except (TypeError, ValueError):
+        return []
+    audit_item = fetch_audit_by_index.get(catalog_index) or {}
+    snapshots: list[dict[str, Any]] = []
+    for snapshot in audit_item.get("sample_product_detail_link_snapshots") or []:
+        if isinstance(snapshot, dict):
+            snapshots.append(
+                {
+                    "url": snapshot.get("url"),
+                    "fetch_status": snapshot.get("fetch_status"),
+                    "title": snapshot.get("title") or "",
+                    "h1": snapshot.get("h1") or "",
+                    "fetch_error": snapshot.get("fetch_error") or "",
+                }
+            )
+    return snapshots
+
+
 def _candidate_detail_link_review_fields(
     row: dict[str, Any],
     fetch_audit_by_index: dict[int, dict[str, Any]],
@@ -151,6 +175,10 @@ def _candidate_detail_link_review_fields(
 def _exact_item(row: dict[str, Any], fetch_audit_by_index: dict[int, dict[str, Any]]) -> dict[str, Any]:
     primary_review_url, primary_review_url_kind = _primary_review_url(row)
     candidate_detail_links = _candidate_detail_links(row, fetch_audit_by_index)
+    candidate_detail_link_snapshots = _candidate_detail_link_snapshots(
+        row,
+        fetch_audit_by_index,
+    )
     candidate_review_fields = _candidate_detail_link_review_fields(
         row,
         fetch_audit_by_index,
@@ -167,7 +195,9 @@ def _exact_item(row: dict[str, Any], fetch_audit_by_index: dict[int, dict[str, A
         "primary_review_url": primary_review_url,
         "primary_review_url_kind": primary_review_url_kind,
         "candidate_detail_links": candidate_detail_links,
+        "candidate_detail_link_snapshots": candidate_detail_link_snapshots,
         "candidate_detail_link_count": len(candidate_detail_links),
+        "candidate_detail_link_snapshot_count": len(candidate_detail_link_snapshots),
         "first_candidate_detail_link": candidate_detail_links[0] if candidate_detail_links else "",
         **candidate_review_fields,
         "first_domain_limited_web_search_url": row.get("first_domain_limited_web_search_url"),
@@ -209,6 +239,7 @@ def _source_url_patch_row(item: dict[str, Any], index: int) -> dict[str, Any]:
         "primary_review_url_kind": item.get("primary_review_url_kind"),
         "fallback_store_search_url": item.get("fallback_store_search_url"),
         "candidate_detail_links": candidate_links[:5],
+        "candidate_detail_link_snapshots": item.get("candidate_detail_link_snapshots") or [],
         "candidate_detail_link_review_status": item.get("candidate_detail_link_review_status") or "",
         "candidate_detail_link_warning": item.get("candidate_detail_link_warning") or "",
         "allowed_source_domains": guidance.get("allowed_source_domains") or [],

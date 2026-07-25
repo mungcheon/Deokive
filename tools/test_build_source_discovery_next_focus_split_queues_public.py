@@ -45,6 +45,14 @@ class SourceDiscoveryNextFocusSplitQueueTests(unittest.TestCase):
                     "sample_product_detail_links": [
                         "https://www.enskyshop.com/products/detail/30883"
                     ],
+                    "sample_product_detail_link_snapshots": [
+                        {
+                            "url": "https://www.enskyshop.com/products/detail/30883",
+                            "fetch_status": "ok",
+                            "title": "Different Product ｜ エンスカイショップ",
+                            "h1": "Different Product",
+                        }
+                    ],
                 }
             ]
         }
@@ -71,6 +79,10 @@ class SourceDiscoveryNextFocusSplitQueueTests(unittest.TestCase):
         self.assertEqual(
             row["candidate_detail_links"],
             ["https://www.enskyshop.com/products/detail/30883"],
+        )
+        self.assertEqual(
+            row["candidate_detail_link_snapshots"][0]["title"],
+            "Different Product ｜ エンスカイショップ",
         )
         self.assertEqual(row["allowed_source_domains"], ["www.enskyshop.com"])
         self.assertIn("exact product detail page", row["ready_condition"])

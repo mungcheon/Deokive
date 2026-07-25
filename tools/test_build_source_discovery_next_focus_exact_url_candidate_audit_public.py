@@ -6,115 +6,61 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-import build_source_discovery_next_focus_exact_url_candidate_audit_public as target
+import build_source_discovery_next_focus_exact_url_candidate_audit_public as audit
 
 
-class SourceDiscoveryNextFocusExactUrlCandidateAuditPublicTest(unittest.TestCase):
-    def test_broad_store_search_is_not_auto_apply_ready(self) -> None:
+class SourceDiscoveryExactUrlCandidateAuditTests(unittest.TestCase):
+    def test_broad_result_sample_links_include_cached_page_titles(self):
+        calls: list[str] = []
+
+        def fetcher(url: str) -> str:
+            calls.append(url)
+            if "products/list" in url:
+                links = "".join(
+                    f'<a href="/products/detail/{index}">item</a>'
+                    for index in range(100, 135)
+                )
+                return f"<html><body>{links}</body></html>"
+            return (
+                "<html><head><title>Wrong Pretty Cure Product ｜ "
+                "エンスカイショップ</title></head>"
+                "<body><h1>Wrong Pretty Cure Product</h1></body></html>"
+            )
+
         queue = {
             "items": [
                 {
-                    "catalog_index": 1,
-                    "source_store": "Ensky",
+                    "catalog_index": 922,
+                    "source_store": "엔스카이",
+                    "category": "키링",
                     "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
-                    "primary_review_url": "https://www.google.com/search?q=primary",
-                    "primary_review_url_kind": "domain_limited_web_search",
-                    "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=x",
-                }
-            ]
-        }
-        links = "".join(
-            f'<a href="/products/detail/{10000 + index}">Other product {index}</a>'
-            for index in range(target.BROAD_RESULT_LINK_THRESHOLD + 1)
-        )
-
-        report = target.build_report(queue, generated_at="2026-01-01T00:00:00Z", fetcher=lambda _: links)
-
-        self.assertEqual(report["summary"]["queue_rows"], 1)
-        self.assertEqual(report["summary"]["store_search_broad_result_rows"], 1)
-        self.assertEqual(report["summary"]["auto_apply_ready_rows"], 0)
-        self.assertEqual(report["summary"]["sample_product_detail_link_rows"], 1)
-        self.assertEqual(report["summary"]["sample_product_detail_links"], 5)
-        self.assertEqual(report["summary"]["broad_result_sample_detail_link_rows"], 1)
-        self.assertEqual(report["summary"]["primary_manual_review_url_rows"], 1)
-        self.assertEqual(
-            report["summary"]["primary_manual_review_url_kind_counts"],
-            [("domain_limited_web_search", 1)],
-        )
-        self.assertEqual(
-            report["summary"]["domain_limited_web_search_role_counts"],
-            [("secondary_search_hint", 1)],
-        )
-        self.assertTrue(report["items"][0]["broad_result_page"])
-        self.assertEqual(report["items"][0]["candidate_source_urls"], [])
-        self.assertEqual(len(report["items"][0]["sample_product_detail_links"]), 5)
-        self.assertEqual(
-            report["items"][0]["sample_product_detail_links"][0],
-            "https://www.enskyshop.com/products/detail/10000",
-        )
-        self.assertEqual(
-            report["items"][0]["sample_product_detail_link_source"],
-            "broad_official_search_result",
-        )
-        self.assertIn(
-            "only review starting points",
-            report["items"][0]["sample_product_detail_link_warning"],
-        )
-        self.assertEqual(
-            report["items"][0]["manual_review_queue_report"],
-            "data/source_discovery_next_focus_exact_url_review_queue_public.json",
-        )
-        self.assertEqual(
-            report["items"][0]["primary_manual_review_url"],
-            "https://www.google.com/search?q=primary",
-        )
-        self.assertEqual(
-            report["items"][0]["domain_limited_web_search_role"],
-            "secondary_search_hint",
-        )
-        self.assertIn("Open primary_manual_review_url first", report["items"][0]["manual_review_instruction"])
-        self.assertIn("site%3Aenskyshop.com%2Fproducts%2Fdetail", report["items"][0]["domain_limited_web_search_url"])
-        self.assertIn("%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F", report["items"][0]["domain_limited_web_search_url"])
-        self.assertEqual(report["items"][0]["recommended_next_action"], "use_domain_limited_web_search_url")
-
-    def test_exact_title_candidate_is_manual_review_only(self) -> None:
-        queue = {
-            "items": [
+                    "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=sample",
+                },
                 {
-                    "catalog_index": 2,
-                    "source_store": "Ensky",
-                    "name_ja": "五条悟 ラバーストラップ",
-                    "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=y",
-                }
+                    "catalog_index": 923,
+                    "source_store": "엔스카이",
+                    "category": "키링",
+                    "name_ja": "ちいかわ ラバーストラップ (ハチワレ)",
+                    "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=sample",
+                },
             ]
         }
-        html = """
-        <div class="ec-shelfGrid__item">
-          <a href="/products/detail/12345">五条悟 ラバーストラップ</a>
-        </div>
-        """
 
-        report = target.build_report(queue, generated_at="2026-01-01T00:00:00Z", fetcher=lambda _: html)
+        report = audit.build_report(
+            queue,
+            generated_at="2026-07-25T00:00:00Z",
+            fetcher=fetcher,
+        )
 
-        self.assertEqual(report["summary"]["exact_title_candidate_rows"], 1)
-        self.assertEqual(report["summary"]["manual_review_candidate_rows"], 1)
-        self.assertEqual(report["summary"]["auto_apply_ready_rows"], 0)
-        self.assertEqual(report["summary"]["sample_product_detail_link_rows"], 1)
-        self.assertEqual(report["summary"]["sample_product_detail_links"], 1)
-        self.assertEqual(report["summary"]["broad_result_sample_detail_link_rows"], 0)
-        self.assertFalse(report["items"][0]["broad_result_page"])
-        self.assertEqual(
-            report["items"][0]["candidate_source_urls"],
-            ["https://www.enskyshop.com/products/detail/12345"],
-        )
-        self.assertEqual(
-            report["items"][0]["recommended_next_action"],
-            "review_exact_title_candidate_source_urls",
-        )
-        self.assertIn(
-            "%22%E4%BA%94%E6%9D%A1%E6%82%9F",
-            report["items"][0]["domain_limited_web_search_url"],
-        )
+        self.assertEqual(report["summary"]["queue_rows"], 2)
+        self.assertEqual(report["summary"]["store_search_broad_result_rows"], 2)
+        self.assertEqual(report["summary"]["sample_product_detail_link_snapshot_rows"], 10)
+        self.assertEqual(report["summary"]["unique_sample_product_detail_link_snapshots"], 5)
+        first = report["items"][0]["sample_product_detail_link_snapshots"][0]
+        self.assertEqual(first["fetch_status"], "ok")
+        self.assertEqual(first["title"], "Wrong Pretty Cure Product ｜ エンスカイショップ")
+        self.assertEqual(first["h1"], "Wrong Pretty Cure Product")
+        self.assertEqual(calls.count("https://www.enskyshop.com/products/detail/100"), 1)
 
 
 if __name__ == "__main__":
