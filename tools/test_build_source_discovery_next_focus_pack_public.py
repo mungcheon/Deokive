@@ -270,7 +270,10 @@ class BuildSourceDiscoveryNextFocusPackPublicTest(unittest.TestCase):
             exact_url_candidate_audit=audit,
         )
 
-        self.assertEqual(report["summary"]["focus_pack_id"], "source-discovery-focus-001")
+        self.assertEqual(report["summary"]["focus_pack_id"], "source-discovery-focus-002")
+        self.assertEqual(report["summary"]["current_focus_pack_id"], "source-discovery-focus-001")
+        self.assertEqual(report["summary"]["pack_priority"], 2)
+        self.assertEqual(report["summary"]["pack_items"], 1)
         self.assertTrue(report["summary"]["current_focus_manual_quarantine"])
         self.assertEqual(
             report["summary"]["current_focus_resolution_status"],
@@ -293,13 +296,25 @@ class BuildSourceDiscoveryNextFocusPackPublicTest(unittest.TestCase):
             report["recommended_active_pack"]["focus_pack_id"],
             "source-discovery-focus-002",
         )
+        self.assertEqual(
+            report["active_pack"]["focus_pack_id"],
+            "source-discovery-focus-002",
+        )
+        self.assertEqual(
+            report["quarantined_focus_pack"]["focus_pack_id"],
+            "source-discovery-focus-001",
+        )
         self.assertTrue(report["pack_queue_preview"][0]["manual_quarantine"])
         self.assertEqual(
             report["pack_queue_preview"][0]["review_status"],
             "manual_quarantine_cache_miss",
         )
         self.assertTrue(report["pack_queue_preview"][1]["is_recommended_active_pack"])
-        self.assertEqual([item["catalog_index"] for item in report["items"]], [10, 11])
+        self.assertEqual([item["catalog_index"] for item in report["items"]], [12])
+        self.assertEqual(
+            [item["catalog_index"] for item in report["current_focus_items"]],
+            [10, 11],
+        )
         self.assertEqual(
             [item["catalog_index"] for item in report["recommended_active_items"]],
             [12],

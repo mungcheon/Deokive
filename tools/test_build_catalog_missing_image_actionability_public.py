@@ -143,6 +143,9 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         image_attachment_template_dry_run = {"updated_rows": 0, "skipped_rows": 2}
         next_focus_detail_candidates = {
             "summary": {
+                "focus_pack_id": "source-discovery-focus-002",
+                "source_store": "Store D",
+                "target_category": "Charm",
                 "pack_items": 2,
                 "items_with_candidates": 1,
                 "candidate_rows": 3,
@@ -313,7 +316,14 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["source_discovery_confirmed_focus_source_rows"], 0)
         self.assertEqual(report["summary"]["source_discovery_focus_template_rows"], 4)
         self.assertEqual(report["summary"]["source_discovery_focus_template_confirmed_rows"], 0)
-        self.assertEqual(report["summary"]["source_discovery_next_focus_pack_id"], "source-discovery-focus-001")
+        self.assertEqual(
+            report["summary"]["source_discovery_template_next_focus_pack_id"],
+            "source-discovery-focus-001",
+        )
+        self.assertEqual(
+            report["summary"]["source_discovery_next_focus_pack_id"],
+            "source-discovery-focus-002",
+        )
         self.assertEqual(report["summary"]["source_discovery_next_focus_pack_rows"], 2)
         self.assertEqual(report["summary"]["source_discovery_next_focus_action_lane_count"], 2)
         self.assertEqual(

@@ -312,7 +312,7 @@ def build_report(
         focus_pack_id,
         cache_miss_resolution=cache_miss_resolution,
     )
-    items = [
+    current_items = [
         _compact_item(item)
         for item in template.get("items") or []
         if isinstance(item, dict) and item.get("focus_pack_id") == focus_pack_id
@@ -329,6 +329,19 @@ def build_report(
         and recommended_active_focus_pack_id
         and item.get("focus_pack_id") == recommended_active_focus_pack_id
     ]
+    active_focus_pack_id = recommended_active_focus_pack_id or focus_pack_id
+    active_pack = (
+        next(
+            (
+                row
+                for row in focus_pack_progress_queue
+                if row.get("focus_pack_id") == active_focus_pack_id
+            ),
+            None,
+        )
+        or next_pack
+    )
+    items = recommended_active_items if recommended_active_focus_pack_id else current_items
     official_search_urls = sorted({str(item.get("official_search_url")) for item in items if item.get("official_search_url")})
     recommended_active_official_search_urls = sorted(
         {
@@ -345,13 +358,14 @@ def build_report(
         "generated_at": generated_at or now_utc(),
         "scope": "source_discovery_next_focus_pack",
         "summary": {
-            "focus_pack_id": focus_pack_id,
-            "pack_priority": next_pack.get("priority"),
-            "source_store": next_pack.get("source_store"),
-            "target_category": next_pack.get("target_category"),
+            "focus_pack_id": active_focus_pack_id,
+            "current_focus_pack_id": focus_pack_id,
+            "pack_priority": active_pack.get("priority"),
+            "source_store": active_pack.get("source_store"),
+            "target_category": active_pack.get("target_category"),
             "pack_items": len(items),
-            "confirmed_source_rows": next_pack.get("confirmed_source_rows") or 0,
-            "remaining_review_rows": next_pack.get("remaining_review_rows") or len(items),
+            "confirmed_source_rows": active_pack.get("confirmed_source_rows") or 0,
+            "remaining_review_rows": active_pack.get("remaining_review_rows") or len(items),
             "blocked_rows": sum(blocked_reason_counts.values()),
             "by_blocked_reason": [
                 [key, value] for key, value in blocked_reason_counts.most_common(10) if key
@@ -364,7 +378,7 @@ def build_report(
             "work_order_pack_count": (template.get("summary") or {}).get("work_order_pack_count", 0),
             "template_items": template_items,
             "official_search_url_count": len(official_search_urls),
-            "first_official_search_url": next_pack.get("first_official_search_url"),
+            "first_official_search_url": active_pack.get("first_official_search_url"),
             "pack_queue_preview_count": len(pack_queue_preview),
             "focus_pack_progress_queue_count": len(focus_pack_progress_queue),
             "focus_pack_progress_remaining_rows": sum(
@@ -405,7 +419,9 @@ def build_report(
             "Run tools/import_confirmed_source_discovery_rows.py as a dry run before any write.",
         ],
         "next_pack": next_pack,
+        "active_pack": active_pack,
         "current_focus_resolution": cache_miss_resolution,
+        "quarantined_focus_pack": next_pack if cache_miss_resolution else None,
         "recommended_active_pack": next(
             (row for row in focus_pack_progress_queue if row.get("is_recommended_active_pack")),
             None,
@@ -415,6 +431,7 @@ def build_report(
         "official_search_urls": official_search_urls,
         "recommended_active_official_search_urls": recommended_active_official_search_urls,
         "items": items,
+        "current_focus_items": current_items,
         "recommended_active_items": recommended_active_items,
         "automation_policy": {
             "auto_apply_source_url": False,

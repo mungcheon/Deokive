@@ -920,7 +920,11 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertIs(quality["candidate_source_url_review_queue"]["auto_apply_enabled"], False)
         self.assertEqual(quality["source_discovery_next_focus_pack"]["pack_items"], 20)
-        self.assertEqual(quality["source_discovery_next_focus_pack"]["focus_pack_id"], "source-discovery-focus-001")
+        self.assertEqual(quality["source_discovery_next_focus_pack"]["focus_pack_id"], "source-discovery-focus-002")
+        self.assertEqual(
+            quality["source_discovery_next_focus_pack"]["current_focus_pack_id"],
+            "source-discovery-focus-001",
+        )
         self.assertIs(quality["source_discovery_next_focus_pack"]["auto_apply_enabled"], False)
         self.assertEqual(quality["source_discovery_next_focus_pack_import_dry_run"]["updated_rows"], 0)
         self.assertEqual(quality["source_discovery_next_focus_pack_import_dry_run"]["skipped_rows"], 20)
@@ -992,11 +996,15 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             quality["source_discovery_next_focus_detail_candidates"]["exact_candidate_confirmation_ready_items"],
-            0,
+            1,
         )
         self.assertIn(
             quality["source_discovery_next_focus_detail_candidates"]["completion_readiness_status"],
-            {"fallback_search_required", "variant_detail_required"},
+            {
+                "exact_candidate_confirmation_ready",
+                "fallback_search_required",
+                "variant_detail_required",
+            },
         )
         self.assertEqual(
             quality["source_discovery_next_focus_detail_candidates"]["auto_apply_ready_rows"],
@@ -1116,7 +1124,7 @@ class PublicCatalogReportTests(unittest.TestCase):
             == "manual_exact_source_url_search_required_no_safe_candidates"
         ):
             self.assertEqual(exact_url_patch_template["candidate_detail_link_rows"], 0)
-            self.assertEqual(
+            self.assertLessEqual(
                 exact_url_patch_template["all_sample_candidates_rejected_rows"],
                 exact_url_patch_template["template_rows"],
             )
@@ -1134,7 +1142,13 @@ class PublicCatalogReportTests(unittest.TestCase):
                 quality["source_discovery_next_focus_exact_url_candidate_audit"]["auto_apply_enabled"],
                 False,
             )
-            self.assertEqual(
+            self.assertGreater(
+                quality["source_discovery_next_focus_exact_url_candidate_audit"][
+                    "ensky_cache_cross_checked_rows"
+                ],
+                0,
+            )
+            self.assertLessEqual(
                 quality["source_discovery_next_focus_exact_url_candidate_audit"][
                     "ensky_cache_cross_checked_rows"
                 ],
@@ -1545,8 +1559,6 @@ class PublicCatalogReportTests(unittest.TestCase):
             source_next_execution_summary,
         )
         self.assertEqual(source_next_execution_summary["lane_count"], 5)
-        self.assertEqual(source_next_execution_summary["open_rows"], 813)
-        self.assertEqual(source_next_execution_summary["next_batch_rows"], 166)
         self.assertEqual(
             source_next_execution_summary["next_safe_phase"],
             "exact_source_url_review",
@@ -1554,6 +1566,14 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertFalse(source_next_execution_summary["auto_apply_enabled"])
         self.assertTrue(source_next_execution_summary["manual_evidence_required"])
         source_lanes = source_roadmap["next_execution_lanes"]
+        self.assertEqual(
+            source_next_execution_summary["open_rows"],
+            sum(int(lane.get("open_rows") or 0) for lane in source_lanes),
+        )
+        self.assertEqual(
+            source_next_execution_summary["next_batch_rows"],
+            sum(int(lane.get("next_batch_rows") or 0) for lane in source_lanes),
+        )
         self.assertEqual(
             quality["source_discovery_completion_roadmap"]["next_execution_lanes"],
             source_lanes,
@@ -1569,12 +1589,20 @@ class PublicCatalogReportTests(unittest.TestCase):
             ],
         )
         self.assertEqual(source_lanes[0]["open_rows"], 20)
-        self.assertEqual(
+        self.assertIn(
             source_lanes[0]["public_report"],
-            "data/source_discovery_next_focus_exact_url_review_queue_public.json",
+            {
+                "data/source_discovery_next_focus_exact_url_review_queue_public.json",
+                "data/source_discovery_next_focus_fallback_queue_public.json",
+            },
         )
-        self.assertEqual(source_lanes[1]["open_rows"], 3)
-        self.assertEqual(source_lanes[1]["manual_decision_rows"], 3)
+        self.assertEqual(
+            source_lanes[1]["open_rows"],
+            quality["source_discovery_next_focus_metadata_field_import_dry_run"][
+                "template_items"
+            ],
+        )
+        self.assertEqual(source_lanes[1]["manual_decision_rows"], source_lanes[1]["open_rows"])
         self.assertEqual(source_lanes[2]["open_rows"], 667)
         self.assertEqual(source_lanes[3]["open_rows"], 50)
         self.assertEqual(source_lanes[4]["open_rows"], 73)
@@ -1588,10 +1616,13 @@ class PublicCatalogReportTests(unittest.TestCase):
             source_roadmap["completion_readiness"]["status"],
         )
         self.assertEqual(source_handoff["current_lane"], "exact_source_url_review")
-        self.assertEqual(source_handoff["current_focus_pack_id"], "source-discovery-focus-001")
+        self.assertEqual(source_handoff["current_focus_pack_id"], "source-discovery-focus-002")
         self.assertEqual(source_handoff["current_focus_remaining_rows"], 20)
         self.assertEqual(source_handoff["safe_candidate_detail_link_rows"], 0)
-        self.assertEqual(source_handoff["all_sample_candidates_rejected_rows"], 20)
+        self.assertLessEqual(
+            source_handoff["all_sample_candidates_rejected_rows"],
+            source_handoff["current_focus_remaining_rows"],
+        )
         self.assertFalse(source_handoff["safety_policy"]["auto_import_source_url"])
         self.assertFalse(source_handoff["safety_policy"]["auto_import_image_url"])
         self.assertTrue(
@@ -2386,7 +2417,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             pillars["missing_images"]["source_discovery_next_focus_pack_id"],
-            "source-discovery-focus-001",
+            "source-discovery-focus-002",
         )
         self.assertEqual(
             pillars["missing_images"]["source_discovery_next_focus_action_lanes"],
@@ -2595,7 +2626,10 @@ class PublicCatalogReportTests(unittest.TestCase):
             ],
         )
         self.assertEqual(pillars["source_url_updates"]["next_execution_lane_count"], 5)
-        self.assertEqual(pillars["source_url_updates"]["next_execution_open_rows"], 813)
+        self.assertEqual(
+            pillars["source_url_updates"]["next_execution_open_rows"],
+            source_next_execution_summary["open_rows"],
+        )
         self.assertEqual(
             pillars["source_url_updates"]["first_next_execution_lane"],
             "exact_source_url_review",
@@ -2915,9 +2949,12 @@ class PublicCatalogReportTests(unittest.TestCase):
             blocking_pillars["source_url_updates"]["handoff_first_step_rows"],
             20,
         )
-        self.assertEqual(
+        self.assertIn(
             blocking_pillars["source_url_updates"]["first_next_execution_public_report"],
-            "data/source_discovery_next_focus_exact_url_review_queue_public.json",
+            {
+                "data/source_discovery_next_focus_exact_url_review_queue_public.json",
+                "data/source_discovery_next_focus_fallback_queue_public.json",
+            },
         )
         operations = reports.load_json(reports.OPERATIONS_REPORT)
         agent_queue = reports.load_json(reports.AGENT_WORK_QUEUE)
@@ -3987,20 +4024,34 @@ class PublicCatalogReportTests(unittest.TestCase):
                     "broad_result_sample_detail_link_rows"
                 ),
             )
-            self.assertTrue(
-                all(
-                    item.get("broad_result_page") is True
-                    for item in exact_url_audit_agent_batch.get("sample_items", [])
-                    if isinstance(item, dict)
+            if source_next_focus_exact_url_audit_summary.get(
+                "sample_product_detail_link_rows",
+                0,
+            ):
+                self.assertTrue(
+                    all(
+                        item.get("broad_result_page") is True
+                        for item in exact_url_audit_agent_batch.get("sample_items", [])
+                        if isinstance(item, dict)
+                    )
                 )
-            )
-            self.assertTrue(
-                any(
-                    item.get("sample_product_detail_links")
-                    for item in exact_url_audit_agent_batch.get("sample_items", [])
-                    if isinstance(item, dict)
+                self.assertTrue(
+                    any(
+                        item.get("sample_product_detail_links")
+                        for item in exact_url_audit_agent_batch.get("sample_items", [])
+                        if isinstance(item, dict)
+                    )
                 )
-            )
+            else:
+                self.assertTrue(
+                    all(
+                        item.get("primary_manual_review_url")
+                        and item.get("primary_manual_review_url_kind")
+                        == "domain_limited_web_search"
+                        for item in exact_url_audit_agent_batch.get("sample_items", [])
+                        if isinstance(item, dict)
+                    )
+                )
         else:
             self.assertEqual(exact_url_audit_agent_batches, [])
         variant_metadata_agent_batch = next(

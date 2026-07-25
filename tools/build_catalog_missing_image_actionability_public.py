@@ -519,6 +519,16 @@ def enrich_next_focus_pack(
     ] if isinstance(fallback_queue, dict) else []
 
     if detail_summary:
+        active_focus_pack_id = detail_summary.get("focus_pack_id")
+        if active_focus_pack_id and active_focus_pack_id != enriched.get("focus_pack_id"):
+            enriched["template_focus_pack_id"] = enriched.get("focus_pack_id")
+            enriched["focus_pack_id"] = active_focus_pack_id
+        if detail_summary.get("source_store"):
+            enriched["source_store"] = detail_summary.get("source_store")
+        if detail_summary.get("target_category"):
+            enriched["target_category"] = detail_summary.get("target_category")
+        if detail_summary.get("pack_items") is not None:
+            enriched["row_count"] = int(detail_summary.get("pack_items") or 0)
         enriched["candidate_review_summary"] = {
             "pack_items": int(detail_summary.get("pack_items") or 0),
             "items_with_candidates": int(detail_summary.get("items_with_candidates") or 0),
@@ -1825,6 +1835,7 @@ def build_report(
         "source_discovery_confirmed_focus_source_rows": int(focus_summary.get("confirmed_focus_source_rows") or 0),
         "source_discovery_focus_template_rows": int(focus_template_summary.get("template_items") or 0),
         "source_discovery_focus_template_confirmed_rows": int(focus_template_summary.get("manual_confirmed_rows") or 0),
+        "source_discovery_template_next_focus_pack_id": focus_template_summary.get("next_focus_pack_id"),
         "source_discovery_next_focus_pack_id": (
             next_source_discovery_focus_pack.get("focus_pack_id")
             if next_source_discovery_focus_pack

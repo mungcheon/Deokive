@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-25T07:48:27Z",
+  "generated_at": "2026-07-25T08:21:45Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 25,
@@ -299,20 +299,24 @@
     "source_focus_template_work_order_pack_count": 62,
     "source_focus_template_next_pack_rows": 20,
     "source_next_focus_detail_pack_items": 20,
-    "source_next_focus_detail_action_lane_count": 2,
-    "source_next_focus_detail_metadata_enrichment_template_rows": 1,
-    "source_next_focus_detail_metadata_field_import_template_rows": 3,
-    "source_next_focus_detail_metadata_field_import_supported_rows": 3,
+    "source_next_focus_detail_action_lane_count": 3,
+    "source_next_focus_detail_metadata_enrichment_template_rows": 7,
+    "source_next_focus_detail_metadata_field_import_template_rows": 21,
+    "source_next_focus_detail_metadata_field_import_supported_rows": 21,
     "source_next_focus_detail_metadata_field_import_dry_run_updated_rows": 0,
-    "source_next_focus_detail_metadata_field_import_dry_run_skipped_rows": 3,
+    "source_next_focus_detail_metadata_field_import_dry_run_skipped_rows": 21,
     "source_next_focus_detail_action_lanes": [
       [
+        "confirm_exact_candidate_identity",
+        1
+      ],
+      [
         "fallback_source_search",
-        19
+        12
       ],
       [
         "catalog_variant_metadata_enrichment",
-        1
+        7
       ]
     ],
     "source_next_focus_fallback_rows": 20,
@@ -816,7 +820,7 @@
         "next_target_category": "키링",
         "next_focus_pack_rows": 20,
         "next_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
-        "current_focus_pack_id": "source-discovery-focus-001",
+        "current_focus_pack_id": "source-discovery-focus-002",
         "current_focus_manual_quarantine": true,
         "current_focus_resolution_status": "manual_source_search_required_after_official_cache_miss",
         "current_focus_quarantine_reason": "official_cache_safe_exact_match_absent",
@@ -1078,33 +1082,37 @@
       "blocker": "Rows still need exact product identity or source evidence before source/image import.",
       "auto_apply_enabled": false,
       "evidence": {
-        "focus_pack_id": "source-discovery-focus-001",
+        "focus_pack_id": "source-discovery-focus-002",
         "pack_items": 20,
-        "items_with_candidates": 1,
-        "candidate_rows": 1,
-        "metadata_enrichment_template_rows": 1,
-        "metadata_field_import_template_rows": 3,
-        "metadata_field_import_supported_rows": 3,
+        "items_with_candidates": 8,
+        "candidate_rows": 17,
+        "metadata_enrichment_template_rows": 7,
+        "metadata_field_import_template_rows": 21,
+        "metadata_field_import_supported_rows": 21,
         "metadata_field_import_dry_run_updated_rows": 0,
-        "metadata_field_import_dry_run_skipped_rows": 3,
+        "metadata_field_import_dry_run_skipped_rows": 21,
         "metadata_field_import_dry_run_skip_reason_counts": [
           [
             "manual_confirmed_false",
-            3
+            21
           ]
         ],
-        "next_action_lane_count": 2,
+        "next_action_lane_count": 3,
         "next_action_lanes": [
           [
+            "confirm_exact_candidate_identity",
+            1
+          ],
+          [
             "fallback_source_search",
-            19
+            12
           ],
           [
             "catalog_variant_metadata_enrichment",
-            1
+            7
           ]
         ],
-        "completion_readiness_status": "fallback_search_required",
+        "completion_readiness_status": "exact_candidate_confirmation_ready",
         "auto_apply_ready_rows": 0,
         "auto_apply_enabled": false
       }
@@ -1164,7 +1172,7 @@
       "blocker": "Every fallback source_url still needs exact product identity confirmation before import.",
       "auto_apply_enabled": false,
       "evidence": {
-        "focus_pack_id": "source-discovery-focus-001",
+        "focus_pack_id": "source-discovery-focus-002",
         "queue_rows": 20,
         "manual_confirmed_rows": 0,
         "source_confirmation_ready_rows": 20,
@@ -1214,9 +1222,9 @@
           "legacy_mobile_store_search",
           "evidence_fill_and_dry_run"
         ],
-        "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
-        "first_fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
-        "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+        "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+        "first_fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+        "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
         "first_primary_review_url_kind": "domain_limited_web_search"
       }
     },
@@ -1231,7 +1239,7 @@
       "blocker": "Current focus pack official_search_url values are not fetchable; do not import source_url/image_url from these search URLs.",
       "auto_apply_enabled": false,
       "evidence": {
-        "focus_pack_id": "source-discovery-focus-001",
+        "focus_pack_id": "source-discovery-focus-002",
         "pack_items": 20,
         "official_search_ok_rows": 0,
         "official_search_unavailable_rows": 20,
@@ -8757,12 +8765,12 @@
         "next_queue_lane": "candidate_review_required",
         "next_queue_rows": 3,
         "next_execution_lane_count": 5,
-        "next_execution_open_rows": 813,
-        "next_execution_next_batch_rows": 166,
+        "next_execution_open_rows": 831,
+        "next_execution_next_batch_rows": 184,
         "first_next_execution_lane": "exact_source_url_review",
-        "first_next_execution_status": "manual_cache_miss_research_required",
+        "first_next_execution_status": "manual_fallback_review_required",
         "first_next_execution_rows": 20,
-        "first_next_execution_public_report": "data/source_discovery_next_focus_exact_url_review_queue_public.json",
+        "first_next_execution_public_report": "data/source_discovery_next_focus_fallback_queue_public.json",
         "handoff_status": "current_focus_fallback_review_required",
         "handoff_current_lane": "exact_source_url_review",
         "handoff_current_review_section": "source_discovery_next_focus_exact_url_review_queue",
@@ -8910,7 +8918,7 @@
       "write_template_section": "source_url_confirmation_patch_template.rows",
       "public_report": "data/source_discovery_completion_roadmap_public.json",
       "next_safe_phase": "review_candidate_source_urls",
-      "first_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%86%E3%81%95%E3%81%8E%29%22",
+      "first_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
       "auto_apply_enabled": false,
       "auto_merge_enabled": false,
       "auto_delete_enabled": false,
