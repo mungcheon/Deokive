@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T18:15:26Z",
+  "generated_at": "2026-07-25T00:13:40Z",
   "scope": "ichiban_kuji_metadata_action_queue",
   "summary": {
     "actionable_campaigns": 44,
@@ -71,6 +71,9 @@
         2
       ]
     ],
+    "campaign_field_confirmation_template_rows": 8,
+    "campaign_field_confirmation_template_campaign_rows": 8,
+    "campaign_field_confirmation_template_ready_to_import_rows": 0,
     "skipped_without_templates": 0,
     "auto_apply_enabled": false
   },
@@ -5192,6 +5195,390 @@
       "auto_apply_enabled": false
     }
   ],
+  "campaign_field_confirmation_template": {
+    "status": "manual_official_campaign_metadata_confirmation_required",
+    "template_rows": 8,
+    "campaign_rows": 8,
+    "target_catalog_item_rows": 59,
+    "field_counts": [
+      [
+        "official_price_jpy",
+        6
+      ],
+      [
+        "release_date",
+        2
+      ]
+    ],
+    "release_date_rows": 2,
+    "official_price_jpy_rows": 6,
+    "manual_confirmed_rows": 0,
+    "ready_to_import_rows": 0,
+    "primary_review_url_rows": 8,
+    "auto_apply_enabled": false,
+    "rows": [
+      {
+        "rank": 1,
+        "review_lane": "confirm_campaign_release_date",
+        "campaign_slug": "jujutsu-o",
+        "campaign_title": "一番くじ 呪術廻戦 －オンライン－",
+        "primary_review_url": "https://1kuji.com/products/jujutsu-o",
+        "primary_review_url_kind": "official_1kuji_campaign_page",
+        "field": "release_date",
+        "manual_value": "",
+        "evidence_url": "https://1kuji.com/products/jujutsu-o",
+        "target_scope": "all_catalog_rows_for_campaign_url",
+        "target_catalog_item_rows": 8,
+        "target_catalog_indexes_sample": [
+          14193,
+          14194,
+          14195,
+          14196,
+          14197,
+          14198,
+          14199,
+          14200
+        ],
+        "manual_confirmed": false,
+        "manual_note": "",
+        "requires_labeled_official_evidence": true,
+        "field_review_guidance": {
+          "manual_value_format": "YYYY-MM-DD",
+          "accepted_evidence": [
+            "official 1kuji campaign page labeled as release date, sale start date, or 発売日",
+            "captured official 1kuji archive evidence with the matching campaign title"
+          ],
+          "do_not_use": [
+            "double chance entry deadlines",
+            "prize shipping or delivery dates",
+            "unlabeled dates from reseller listings or fan summaries"
+          ],
+          "review_notes": [
+            "Use the campaign-level release or sales-start date for every catalog row in the campaign.",
+            "If the official page only shows a month or broad period, leave manual_value blank and explain it in manual_note."
+          ]
+        },
+        "blocked_until": "manual_official_evidence_confirmed",
+        "auto_apply_enabled": false
+      },
+      {
+        "rank": 2,
+        "review_lane": "confirm_campaign_release_date",
+        "campaign_slug": "myhero_o5",
+        "campaign_title": "一番くじ 僕のヴィランアカデミア",
+        "primary_review_url": "https://1kuji.com/products/myhero_o5",
+        "primary_review_url_kind": "official_1kuji_campaign_page",
+        "field": "release_date",
+        "manual_value": "",
+        "evidence_url": "https://1kuji.com/products/myhero_o5",
+        "target_scope": "all_catalog_rows_for_campaign_url",
+        "target_catalog_item_rows": 8,
+        "target_catalog_indexes_sample": [
+          17067,
+          17068,
+          17069,
+          17070,
+          17071,
+          17072,
+          17073,
+          17074
+        ],
+        "manual_confirmed": false,
+        "manual_note": "",
+        "requires_labeled_official_evidence": true,
+        "field_review_guidance": {
+          "manual_value_format": "YYYY-MM-DD",
+          "accepted_evidence": [
+            "official 1kuji campaign page labeled as release date, sale start date, or 発売日",
+            "captured official 1kuji archive evidence with the matching campaign title"
+          ],
+          "do_not_use": [
+            "double chance entry deadlines",
+            "prize shipping or delivery dates",
+            "unlabeled dates from reseller listings or fan summaries"
+          ],
+          "review_notes": [
+            "Use the campaign-level release or sales-start date for every catalog row in the campaign.",
+            "If the official page only shows a month or broad period, leave manual_value blank and explain it in manual_note."
+          ]
+        },
+        "blocked_until": "manual_official_evidence_confirmed",
+        "auto_apply_enabled": false
+      },
+      {
+        "rank": 3,
+        "review_lane": "confirm_campaign_draw_price",
+        "campaign_slug": "10",
+        "campaign_title": "一番くじドラゴンボールＺ限界突破編",
+        "primary_review_url": "https://1kuji.com/products/10",
+        "primary_review_url_kind": "official_1kuji_campaign_page",
+        "field": "official_price_jpy",
+        "manual_value": "",
+        "evidence_url": "https://1kuji.com/products/10",
+        "target_scope": "all_catalog_rows_for_campaign_url",
+        "target_catalog_item_rows": 7,
+        "target_catalog_indexes_sample": [
+          16816,
+          16817,
+          16818,
+          16819,
+          16820,
+          16821,
+          16822
+        ],
+        "manual_confirmed": false,
+        "manual_note": "",
+        "requires_labeled_official_evidence": true,
+        "field_review_guidance": {
+          "manual_value_format": "integer JPY draw price, no currency symbol",
+          "accepted_evidence": [
+            "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+            "captured official 1kuji archive evidence with the matching campaign title"
+          ],
+          "do_not_use": [
+            "resale, marketplace, or shop listing prices",
+            "Last One prize value",
+            "Double Chance prize value",
+            "0 unless the reviewed template explicitly targets a zero-price prize exception"
+          ],
+          "review_notes": [
+            "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+            "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+          ]
+        },
+        "blocked_until": "manual_official_evidence_confirmed",
+        "auto_apply_enabled": false
+      },
+      {
+        "rank": 4,
+        "review_lane": "confirm_campaign_draw_price",
+        "campaign_slug": "38",
+        "campaign_title": "一番くじ機動戦士ガンダム00",
+        "primary_review_url": "https://1kuji.com/products/38",
+        "primary_review_url_kind": "official_1kuji_campaign_page",
+        "field": "official_price_jpy",
+        "manual_value": "",
+        "evidence_url": "https://1kuji.com/products/38",
+        "target_scope": "all_catalog_rows_for_campaign_url",
+        "target_catalog_item_rows": 7,
+        "target_catalog_indexes_sample": [
+          17583,
+          17584,
+          17585,
+          17586,
+          17587,
+          17588,
+          17589
+        ],
+        "manual_confirmed": false,
+        "manual_note": "",
+        "requires_labeled_official_evidence": true,
+        "field_review_guidance": {
+          "manual_value_format": "integer JPY draw price, no currency symbol",
+          "accepted_evidence": [
+            "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+            "captured official 1kuji archive evidence with the matching campaign title"
+          ],
+          "do_not_use": [
+            "resale, marketplace, or shop listing prices",
+            "Last One prize value",
+            "Double Chance prize value",
+            "0 unless the reviewed template explicitly targets a zero-price prize exception"
+          ],
+          "review_notes": [
+            "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+            "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+          ]
+        },
+        "blocked_until": "manual_official_evidence_confirmed",
+        "auto_apply_enabled": false
+      },
+      {
+        "rank": 5,
+        "review_lane": "confirm_campaign_draw_price",
+        "campaign_slug": "49",
+        "campaign_title": "一番くじテレビアニメ「ワンピース」",
+        "primary_review_url": "https://1kuji.com/products/49",
+        "primary_review_url_kind": "official_1kuji_campaign_page",
+        "field": "official_price_jpy",
+        "manual_value": "",
+        "evidence_url": "https://1kuji.com/products/49",
+        "target_scope": "all_catalog_rows_for_campaign_url",
+        "target_catalog_item_rows": 8,
+        "target_catalog_indexes_sample": [
+          16216,
+          16217,
+          16218,
+          16219,
+          16220,
+          16221,
+          16222,
+          16223
+        ],
+        "manual_confirmed": false,
+        "manual_note": "",
+        "requires_labeled_official_evidence": true,
+        "field_review_guidance": {
+          "manual_value_format": "integer JPY draw price, no currency symbol",
+          "accepted_evidence": [
+            "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+            "captured official 1kuji archive evidence with the matching campaign title"
+          ],
+          "do_not_use": [
+            "resale, marketplace, or shop listing prices",
+            "Last One prize value",
+            "Double Chance prize value",
+            "0 unless the reviewed template explicitly targets a zero-price prize exception"
+          ],
+          "review_notes": [
+            "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+            "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+          ]
+        },
+        "blocked_until": "manual_official_evidence_confirmed",
+        "auto_apply_enabled": false
+      },
+      {
+        "rank": 6,
+        "review_lane": "confirm_campaign_draw_price",
+        "campaign_slug": "53",
+        "campaign_title": "一番くじドラゴンボール 摩訶不思議アドベンチャー編",
+        "primary_review_url": "https://1kuji.com/products/53",
+        "primary_review_url_kind": "official_1kuji_campaign_page",
+        "field": "official_price_jpy",
+        "manual_value": "",
+        "evidence_url": "https://1kuji.com/products/53",
+        "target_scope": "all_catalog_rows_for_campaign_url",
+        "target_catalog_item_rows": 7,
+        "target_catalog_indexes_sample": [
+          16809,
+          16810,
+          16811,
+          16812,
+          16813,
+          16814,
+          16815
+        ],
+        "manual_confirmed": false,
+        "manual_note": "",
+        "requires_labeled_official_evidence": true,
+        "field_review_guidance": {
+          "manual_value_format": "integer JPY draw price, no currency symbol",
+          "accepted_evidence": [
+            "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+            "captured official 1kuji archive evidence with the matching campaign title"
+          ],
+          "do_not_use": [
+            "resale, marketplace, or shop listing prices",
+            "Last One prize value",
+            "Double Chance prize value",
+            "0 unless the reviewed template explicitly targets a zero-price prize exception"
+          ],
+          "review_notes": [
+            "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+            "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+          ]
+        },
+        "blocked_until": "manual_official_evidence_confirmed",
+        "auto_apply_enabled": false
+      },
+      {
+        "rank": 7,
+        "review_lane": "confirm_campaign_draw_price",
+        "campaign_slug": "64",
+        "campaign_title": "シャア専用一番くじ機動戦士ガンダム～赤い彗星編～",
+        "primary_review_url": "https://1kuji.com/products/64",
+        "primary_review_url_kind": "official_1kuji_campaign_page",
+        "field": "official_price_jpy",
+        "manual_value": "",
+        "evidence_url": "https://1kuji.com/products/64",
+        "target_scope": "all_catalog_rows_for_campaign_url",
+        "target_catalog_item_rows": 7,
+        "target_catalog_indexes_sample": [
+          17576,
+          17577,
+          17578,
+          17579,
+          17580,
+          17581,
+          17582
+        ],
+        "manual_confirmed": false,
+        "manual_note": "",
+        "requires_labeled_official_evidence": true,
+        "field_review_guidance": {
+          "manual_value_format": "integer JPY draw price, no currency symbol",
+          "accepted_evidence": [
+            "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+            "captured official 1kuji archive evidence with the matching campaign title"
+          ],
+          "do_not_use": [
+            "resale, marketplace, or shop listing prices",
+            "Last One prize value",
+            "Double Chance prize value",
+            "0 unless the reviewed template explicitly targets a zero-price prize exception"
+          ],
+          "review_notes": [
+            "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+            "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+          ]
+        },
+        "blocked_until": "manual_official_evidence_confirmed",
+        "auto_apply_enabled": false
+      },
+      {
+        "rank": 8,
+        "review_lane": "confirm_campaign_draw_price",
+        "campaign_slug": "71",
+        "campaign_title": "一番くじワンピース～スリラーバーク編～",
+        "primary_review_url": "https://1kuji.com/products/71",
+        "primary_review_url_kind": "official_1kuji_campaign_page",
+        "field": "official_price_jpy",
+        "manual_value": "",
+        "evidence_url": "https://1kuji.com/products/71",
+        "target_scope": "all_catalog_rows_for_campaign_url",
+        "target_catalog_item_rows": 7,
+        "target_catalog_indexes_sample": [
+          16209,
+          16210,
+          16211,
+          16212,
+          16213,
+          16214,
+          16215
+        ],
+        "manual_confirmed": false,
+        "manual_note": "",
+        "requires_labeled_official_evidence": true,
+        "field_review_guidance": {
+          "manual_value_format": "integer JPY draw price, no currency symbol",
+          "accepted_evidence": [
+            "official 1kuji campaign page labeled as draw price, price per try, 1回, or メーカー希望小売価格",
+            "captured official 1kuji archive evidence with the matching campaign title"
+          ],
+          "do_not_use": [
+            "resale, marketplace, or shop listing prices",
+            "Last One prize value",
+            "Double Chance prize value",
+            "0 unless the reviewed template explicitly targets a zero-price prize exception"
+          ],
+          "review_notes": [
+            "For ordinary prize rows, use the campaign draw price and keep the currency as JPY.",
+            "Last One and Double Chance catalog item prices are handled by the prize-price policy queue; do not overwrite campaign draw price work with those exception values."
+          ]
+        },
+        "blocked_until": "manual_official_evidence_confirmed",
+        "auto_apply_enabled": false
+      }
+    ],
+    "import_instructions": [
+      "Open primary_review_url and confirm the campaign title matches the catalog series.",
+      "Fill manual_value only from labeled official 1kuji campaign metadata or captured official evidence.",
+      "For release_date, ignore Double Chance deadlines and prize shipping dates.",
+      "For official_price_jpy, use the campaign draw price in JPY, not Last One or Double Chance exception values.",
+      "Copy confirmed rows to server/ichiban_kuji_metadata_confirmed_rows.json, set manual_confirmed=true, then run tools/import_confirmed_ichiban_metadata_rows.py."
+    ]
+  },
   "batches": [
     {
       "batch_id": "ichiban-metadata-action-001",

@@ -1592,6 +1592,32 @@ class PublicCatalogReportTests(unittest.TestCase):
             self.assertEqual(quality["ichiban_kuji_metadata_fast_review"]["fast_review_campaigns"], 20)
             self.assertEqual(quality["ichiban_kuji_metadata_fast_review"]["manual_confirmed_true"], 0)
             self.assertIs(quality["ichiban_kuji_metadata_fast_review"]["auto_apply_enabled"], False)
+        metadata_action = quality["ichiban_kuji_metadata_action_queue"]
+        metadata_confirmation_template = metadata_action[
+            "campaign_field_confirmation_template"
+        ]
+        self.assertEqual(
+            metadata_confirmation_template["status"],
+            "manual_official_campaign_metadata_confirmation_required",
+        )
+        self.assertEqual(metadata_confirmation_template["template_rows"], 8)
+        self.assertEqual(metadata_confirmation_template["campaign_rows"], 8)
+        self.assertEqual(metadata_confirmation_template["release_date_rows"], 2)
+        self.assertEqual(metadata_confirmation_template["official_price_jpy_rows"], 6)
+        self.assertEqual(metadata_confirmation_template["manual_confirmed_rows"], 0)
+        self.assertEqual(metadata_confirmation_template["ready_to_import_rows"], 0)
+        self.assertEqual(metadata_confirmation_template["primary_review_url_rows"], 8)
+        self.assertFalse(metadata_confirmation_template["auto_apply_enabled"])
+        self.assertEqual(
+            metadata_action["campaign_field_confirmation_template_rows"],
+            8,
+        )
+        first_metadata_template = metadata_confirmation_template["rows"][0]
+        self.assertEqual(first_metadata_template["field"], "release_date")
+        self.assertEqual(first_metadata_template["campaign_slug"], "jujutsu-o")
+        self.assertTrue(first_metadata_template["primary_review_url"])
+        self.assertEqual(first_metadata_template["manual_value"], "")
+        self.assertFalse(first_metadata_template["manual_confirmed"])
         if reports.ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.exists():
             prize_audit = reports.load_json(reports.ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT)
             self.assertEqual(

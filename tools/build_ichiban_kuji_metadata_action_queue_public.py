@@ -374,6 +374,81 @@ def _next_campaign_patch_review_batch(
     return rows
 
 
+def _campaign_field_confirmation_template(
+    next_campaign_patch_review_batch: list[dict[str, Any]],
+) -> dict[str, Any]:
+    rows: list[dict[str, Any]] = []
+    for campaign in next_campaign_patch_review_batch:
+        for template in campaign.get("field_patch_templates") or []:
+            if not isinstance(template, dict):
+                continue
+            field = str(template.get("field") or "")
+            rows.append(
+                {
+                    "rank": campaign.get("rank"),
+                    "review_lane": campaign.get("review_lane"),
+                    "campaign_slug": campaign.get("slug"),
+                    "campaign_title": campaign.get("title"),
+                    "primary_review_url": campaign.get("primary_review_url"),
+                    "primary_review_url_kind": campaign.get(
+                        "primary_review_url_kind"
+                    ),
+                    "field": field,
+                    "manual_value": "",
+                    "evidence_url": template.get("evidence_url")
+                    or campaign.get("primary_review_url")
+                    or "",
+                    "target_scope": template.get("target_scope"),
+                    "target_catalog_item_rows": template.get(
+                        "target_catalog_item_rows"
+                    ),
+                    "target_catalog_indexes_sample": template.get(
+                        "target_catalog_indexes_sample",
+                        [],
+                    ),
+                    "manual_confirmed": False,
+                    "manual_note": "",
+                    "requires_labeled_official_evidence": bool(
+                        template.get("requires_labeled_official_evidence")
+                    ),
+                    "field_review_guidance": _field_review_guidance(field),
+                    "blocked_until": "manual_official_evidence_confirmed",
+                    "auto_apply_enabled": False,
+                }
+            )
+
+    field_counts = Counter(str(row.get("field") or "") for row in rows)
+    return {
+        "status": "manual_official_campaign_metadata_confirmation_required"
+        if rows
+        else "no_campaign_field_confirmation_rows",
+        "template_rows": len(rows),
+        "campaign_rows": len(
+            {row.get("campaign_slug") for row in rows if row.get("campaign_slug")}
+        ),
+        "target_catalog_item_rows": sum(
+            int(row.get("target_catalog_item_rows") or 0) for row in rows
+        ),
+        "field_counts": field_counts.most_common(),
+        "release_date_rows": field_counts.get("release_date", 0),
+        "official_price_jpy_rows": field_counts.get("official_price_jpy", 0),
+        "manual_confirmed_rows": 0,
+        "ready_to_import_rows": 0,
+        "primary_review_url_rows": sum(
+            1 for row in rows if row.get("primary_review_url")
+        ),
+        "auto_apply_enabled": False,
+        "rows": rows,
+        "import_instructions": [
+            "Open primary_review_url and confirm the campaign title matches the catalog series.",
+            "Fill manual_value only from labeled official 1kuji campaign metadata or captured official evidence.",
+            "For release_date, ignore Double Chance deadlines and prize shipping dates.",
+            "For official_price_jpy, use the campaign draw price in JPY, not Last One or Double Chance exception values.",
+            f"Copy confirmed rows to {CONFIRMED_QUEUE}, set manual_confirmed=true, then run {IMPORT_TOOL}.",
+        ],
+    }
+
+
 def _compact_campaign(campaign: dict[str, Any], batch: dict[str, Any]) -> dict[str, Any]:
     templates = [
         _enrich_field_patch_template(template)
@@ -445,6 +520,9 @@ def build_report(review_batches: dict[str, Any], *, max_campaigns: int = 32, bat
     campaign_patch_work_order = _campaign_patch_work_order(published)
     next_campaign_patch_review_batch = _next_campaign_patch_review_batch(
         campaign_patch_work_order
+    )
+    campaign_field_confirmation_template = _campaign_field_confirmation_template(
+        next_campaign_patch_review_batch
     )
 
     batches: list[dict[str, Any]] = []
@@ -545,6 +623,15 @@ def build_report(review_batches: dict[str, Any], *, max_campaigns: int = 32, bat
                 for row in next_campaign_patch_review_batch
                 for field in row.get("fields_to_confirm") or []
             ).most_common(),
+            "campaign_field_confirmation_template_rows": (
+                campaign_field_confirmation_template["template_rows"]
+            ),
+            "campaign_field_confirmation_template_campaign_rows": (
+                campaign_field_confirmation_template["campaign_rows"]
+            ),
+            "campaign_field_confirmation_template_ready_to_import_rows": (
+                campaign_field_confirmation_template["ready_to_import_rows"]
+            ),
             "skipped_without_templates": skipped_without_templates,
             "auto_apply_enabled": False,
         },
@@ -557,6 +644,7 @@ def build_report(review_batches: dict[str, Any], *, max_campaigns: int = 32, bat
         "work_order": work_order,
         "campaign_patch_work_order": campaign_patch_work_order,
         "next_campaign_patch_review_batch": next_campaign_patch_review_batch,
+        "campaign_field_confirmation_template": campaign_field_confirmation_template,
         "batches": batches,
         "automation_policy": {
             "auto_apply_release_date": False,

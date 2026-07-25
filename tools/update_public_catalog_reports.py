@@ -11086,8 +11086,36 @@ def update_reports(write: bool) -> dict[str, Any]:
                 ICHIIBAN_KUJI_METADATA_REVIEW_BATCHES, "ichiban_kuji_metadata_review_batches"
             )
         if ICHIIBAN_KUJI_METADATA_ACTION_QUEUE.exists():
-            target["ichiban_kuji_metadata_action_queue"] = copy_report_summary(
-                ICHIIBAN_KUJI_METADATA_ACTION_QUEUE, "ichiban_kuji_metadata_action_queue"
+            target["ichiban_kuji_metadata_action_queue"] = {
+                **copy_report_summary(
+                    ICHIIBAN_KUJI_METADATA_ACTION_QUEUE,
+                    "ichiban_kuji_metadata_action_queue",
+                ),
+                "campaign_field_confirmation_template": (
+                    ichiban_metadata_action_queue.get(
+                        "campaign_field_confirmation_template",
+                        {},
+                    )
+                ),
+            }
+            template = target["ichiban_kuji_metadata_action_queue"][
+                "campaign_field_confirmation_template"
+            ]
+            target["ichiban_kuji_metadata_action_queue"].update(
+                {
+                    "campaign_field_confirmation_template_rows": template.get(
+                        "template_rows",
+                        0,
+                    ),
+                    "campaign_field_confirmation_template_campaign_rows": template.get(
+                        "campaign_rows",
+                        0,
+                    ),
+                    "campaign_field_confirmation_template_ready_to_import_rows": template.get(
+                        "ready_to_import_rows",
+                        0,
+                    ),
+                }
             )
         if ichiban_metadata_fast_review:
             target["ichiban_kuji_metadata_fast_review"] = {
