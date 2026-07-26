@@ -47,6 +47,7 @@ jobs:
           python tools/build_source_discovery_next_focus_live_source_probe_public.py --write
           python tools/build_source_discovery_next_focus_variant_metadata_backfill_public.py --write
           python tools/build_source_discovery_next_focus_variant_metadata_confirmed_template_public.py --write
+          python tools/build_source_discovery_next_focus_handoff_public.py
           python tools/import_confirmed_variant_metadata_backfill_rows.py
           python tools/build_confirmed_import_readiness_public.py
           python tools/audit_confirmed_import_queues.py
@@ -167,6 +168,8 @@ jobs:
             data/catalog_missing_image_actionability_public.json \
             data/source_discovery_next_focus_detail_candidates_public.json \
             data/source_discovery_next_focus_fallback_queue_public.json \
+            data/source_discovery_next_focus_handoff_public.json \
+            data/source_discovery_next_focus_handoff_public.md \
             data/source_discovery_next_focus_exact_url_review_queue_public.json \
             data/source_discovery_next_focus_identity_backfill_queue_public.json \
             data/source_discovery_next_focus_live_source_probe_public.json \
