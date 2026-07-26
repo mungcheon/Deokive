@@ -75,6 +75,12 @@ class BuildImageAttachmentConfirmedTemplatePublicTest(unittest.TestCase):
         self.assertEqual(template["summary"]["manual_confirmed_rows"], 0)
         self.assertEqual(template["summary"]["source_url_update_required_rows"], 1)
         self.assertEqual(template["summary"]["representative_image_review_required_rows"], 0)
+        self.assertEqual(template["summary"]["image_url_review_ready_rows"], 0)
+        self.assertEqual(template["summary"]["prefilled_image_url_rows"], 0)
+        self.assertEqual(template["summary"]["candidate_image_url_hint_rows"], 1)
+        self.assertEqual(template["summary"]["candidate_source_url_hint_rows"], 1)
+        self.assertEqual(template["summary"]["manual_value_missing_rows"], 1)
+        self.assertEqual(template["summary"]["ready_but_unconfirmed_rows"], 0)
         self.assertEqual(template["summary"]["source_url_candidate_prefilled_rows"], 1)
         self.assertEqual(template["summary"]["by_review_lane"], [["source_url_replacement_first", 1]])
         self.assertEqual(
@@ -155,6 +161,38 @@ class BuildImageAttachmentConfirmedTemplatePublicTest(unittest.TestCase):
         self.assertEqual(item["candidate_title"], "Acrylic Stand candidate")
         self.assertEqual(item["evidence_url"], "https://fanding.kr/@stellive/shop/200")
         self.assertEqual(template["summary"]["source_url_candidate_prefilled_rows"], 1)
+
+    def test_image_url_ready_still_requires_manual_value_before_import(self) -> None:
+        action_queue = {
+            "batches": [
+                {
+                    "batch_id": "image-attachment-action-001",
+                    "workflow": "extract_from_existing_source_url",
+                    "source_store": "Official Store",
+                    "items": [
+                        {
+                            "catalog_index": 30,
+                            "source_store": "Official Store",
+                            "name_ko": "Ready for review",
+                            "category": "Badge",
+                            "image_url_ready": True,
+                            "catalog_field_import_template": {
+                                "row_index": 30,
+                                "field": "image_url",
+                            },
+                        }
+                    ],
+                }
+            ]
+        }
+
+        template = builder.build_template(action_queue, generated_at="2026-07-22T00:00:00Z")
+
+        self.assertEqual(template["summary"]["image_url_ready_rows"], 1)
+        self.assertEqual(template["summary"]["image_url_review_ready_rows"], 1)
+        self.assertEqual(template["summary"]["prefilled_image_url_rows"], 0)
+        self.assertEqual(template["summary"]["ready_but_unconfirmed_rows"], 1)
+        self.assertIn("not importable until manual_value is filled", " ".join(template["instructions"]))
 
 
 if __name__ == "__main__":

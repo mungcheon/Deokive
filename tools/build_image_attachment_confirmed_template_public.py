@@ -167,6 +167,11 @@ def build_template(
                 by_image_import_blocker[str(blocker)] += 1
             by_source_url_review_lane[str(row.get("source_url_review_lane") or "")] += 1
 
+    image_url_review_ready_rows = sum(1 for item in items if item.get("image_url_ready"))
+    prefilled_image_url_rows = sum(1 for item in items if item.get("manual_value"))
+    candidate_image_url_hint_rows = sum(1 for item in items if item.get("candidate_image_url"))
+    candidate_source_url_hint_rows = sum(1 for item in items if item.get("candidate_source_url"))
+
     return {
         "schema_version": 1,
         "generated_at": generated_at or now_utc(),
@@ -178,7 +183,15 @@ def build_template(
             "representative_image_review_required_rows": sum(
                 1 for item in items if item.get("representative_image_review_required")
             ),
-            "image_url_ready_rows": sum(1 for item in items if item.get("image_url_ready")),
+            "image_url_ready_rows": image_url_review_ready_rows,
+            "image_url_review_ready_rows": image_url_review_ready_rows,
+            "prefilled_image_url_rows": prefilled_image_url_rows,
+            "candidate_image_url_hint_rows": candidate_image_url_hint_rows,
+            "candidate_source_url_hint_rows": candidate_source_url_hint_rows,
+            "manual_value_missing_rows": sum(1 for item in items if not item.get("manual_value")),
+            "ready_but_unconfirmed_rows": sum(
+                1 for item in items if item.get("image_url_ready") and not item.get("manual_value")
+            ),
             "source_url_candidate_prefilled_rows": sum(
                 1 for item in items if item.get("candidate_source_url") or item.get("candidate_image_url")
             ),
@@ -201,6 +214,7 @@ def build_template(
             "Set manual_confirmed to true only after exact product image evidence is checked.",
             "Put the verified image URL in manual_value.",
             "Put the exact product/detail page in candidate_source_url or evidence_url.",
+            "image_url_ready means the row is ready for manual image review; it is not importable until manual_value is filled.",
             "Rows with candidate_image_url are still blocked until candidate_source_url is exact-product confirmed.",
             "For representative images, keep representative_image true only when the product type match is acceptable.",
             "Dry-run tools/import_confirmed_image_attachment_rows.py before any --write import.",

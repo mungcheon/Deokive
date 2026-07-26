@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T14:20:39Z",
+  "generated_at": "2026-07-26T14:37:49Z",
   "scope": "catalog_image_attachment_confirmed_template",
   "summary": {
     "template_items": 37,
@@ -8,6 +8,12 @@
     "source_url_update_required_rows": 0,
     "representative_image_review_required_rows": 22,
     "image_url_ready_rows": 15,
+    "image_url_review_ready_rows": 15,
+    "prefilled_image_url_rows": 0,
+    "candidate_image_url_hint_rows": 0,
+    "candidate_source_url_hint_rows": 0,
+    "manual_value_missing_rows": 37,
+    "ready_but_unconfirmed_rows": 15,
     "source_url_candidate_prefilled_rows": 0,
     "batch_count": 7,
     "by_batch": [
@@ -138,6 +144,7 @@
     "Set manual_confirmed to true only after exact product image evidence is checked.",
     "Put the verified image URL in manual_value.",
     "Put the exact product/detail page in candidate_source_url or evidence_url.",
+    "image_url_ready means the row is ready for manual image review; it is not importable until manual_value is filled.",
     "Rows with candidate_image_url are still blocked until candidate_source_url is exact-product confirmed.",
     "For representative images, keep representative_image true only when the product type match is acceptable.",
     "Dry-run tools/import_confirmed_image_attachment_rows.py before any --write import."
