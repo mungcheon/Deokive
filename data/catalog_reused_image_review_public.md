@@ -1,20 +1,12 @@
 # Catalog Reused Image Review
 
-- Reused image groups: `51`
-- High risk groups: `1`
+- Reused image groups: `50`
+- High risk groups: `0`
 - Medium risk groups: `0`
 - Low risk groups: `50`
-- Review rows: `126`
+- Review rows: `124`
 
 ## Groups
-
-### HIGH - assets/catalog_images/dd003e71b50d6dc1c73f.webp (2 rows)
-- Action: `clear_or_replace_after_manual_identity_review`
-- Reasons: `shared_across_multiple_affiliations, lineup_or_trading_image_possible`
-- Affiliations: `나의 히어로 아카데미아, 혼합`
-- Categories: `피규어`
-- `17827` 유라유라 헤드 피규어 하츠네 미쿠 / 나히아 / 헌터헌터 / ゆらゆらヘッド 初音ミク 僕のヒーローアカデミア HUNTER×HUNTER (혼합, 피규어)
-- `17931` 유라유라 헤드 나의 히어로 아카데미아 피규어 / ゆらゆらヘッド 僕のヒーローアカデミア フィギュア (나의 히어로 아카데미아, 피규어)
 
 ### LOW - assets/catalog_images/3f39466a08acbd83b268.webp (6 rows)
 - Action: `likely_lineup_or_set_image_review_later`

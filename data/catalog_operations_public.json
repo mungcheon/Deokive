@@ -1,19 +1,19 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T13:20:45Z",
+  "generated_at": "2026-07-26T13:26:26Z",
   "summary": {
-    "catalog_rows": 20347,
+    "catalog_rows": 20346,
     "coverage": {
       "source_url": 0.9623,
       "image_url": 0.9584,
-      "release_date": 0.9337
+      "release_date": 0.9338
     },
     "missing": {
       "source_url": 768,
       "image_url": 846,
-      "release_date": 1348,
-      "official_price_jpy": 559,
-      "barcode": 10082,
+      "release_date": 1347,
+      "official_price_jpy": 558,
+      "barcode": 10081,
       "name_ja": 526
     },
     "open_review_queues": {
@@ -89,12 +89,12 @@
       "ichiban_metadata_next_campaign_patch_review_batch_rows": 8,
       "ichiban_metadata_next_campaign_patch_review_batch_template_rows": 8,
       "ichiban_metadata_next_campaign_patch_review_batch_primary_review_url_rows": 8,
-      "metadata_action_missing_cells": 2433,
-      "metadata_actionable_groups": 166,
+      "metadata_action_missing_cells": 2431,
+      "metadata_actionable_groups": 164,
       "metadata_unqueued_actionable_groups": 0,
-      "metadata_actionable_missing_cells": 2433,
+      "metadata_actionable_missing_cells": 2431,
       "metadata_unqueued_actionable_missing_cells": 0,
-      "metadata_primary_review_url_groups": 127,
+      "metadata_primary_review_url_groups": 125,
       "animation_category_review_rows": 0,
       "animation_category_action_rows": 0,
       "animation_category_split_review_categories": 0,
@@ -147,8 +147,8 @@
       "status": "pass",
       "value": 1.0,
       "target": 1,
-      "image_url_rows": 19501,
-      "local_image_path_rows": 19501,
+      "image_url_rows": 19500,
+      "local_image_path_rows": 19500,
       "image_url_without_local_path_rows": 0,
       "missing_local_image_files": 0,
       "missing_web_public_asset_files": 0,
@@ -157,7 +157,7 @@
     {
       "key": "release_date_coverage",
       "status": "pass",
-      "value": 0.9337,
+      "value": 0.9338,
       "target": 0.9
     },
     {
@@ -322,7 +322,7 @@
     {
       "workstream": "source_discovery_review_batches",
       "status": "open",
-      "open_rows": 751,
+      "open_rows": 768,
       "primary_report": "data/source_discovery_review_batches_public.json",
       "next_step": "work_source_discovery_batches_by_store",
       "auto_apply_enabled": false
@@ -1519,7 +1519,7 @@
     {
       "workstream": "metadata_backlog",
       "status": "open",
-      "open_rows": 14129,
+      "open_rows": 14126,
       "primary_report": "data/catalog_metadata_backlog_public.json",
       "next_step": "review_field_evidence_policy",
       "auto_apply_enabled": false
@@ -1527,7 +1527,7 @@
     {
       "workstream": "metadata_review_batches",
       "status": "manual_review",
-      "open_rows": 14129,
+      "open_rows": 14126,
       "primary_report": "data/catalog_metadata_review_batches_public.json",
       "next_step": "work_full_metadata_review_batches",
       "auto_apply_enabled": false
@@ -1535,20 +1535,20 @@
     {
       "workstream": "metadata_action_queue",
       "status": "manual_review",
-      "open_rows": 2433,
-      "actionable_group_count": 166,
+      "open_rows": 2431,
+      "actionable_group_count": 164,
       "unqueued_actionable_group_count": 0,
-      "actionable_missing_cells": 2433,
+      "actionable_missing_cells": 2431,
       "unqueued_actionable_missing_cells": 0,
       "group_queue_coverage": 1.0,
       "missing_cell_queue_coverage": 1.0,
-      "primary_review_url_groups": 127,
+      "primary_review_url_groups": 125,
       "first_primary_review_url": "https://www.goodsmile.info/ja/product/13483/",
       "first_primary_review_url_kind": "sample_source_url",
       "primary_review_url_kind_counts": [
         [
           "sample_source_url",
-          127
+          125
         ],
         [
           "manual_lookup_required",
@@ -1560,11 +1560,11 @@
       "missing_cells_by_field": [
         [
           "release_date",
-          1348
+          1347
         ],
         [
           "official_price_jpy",
-          559
+          558
         ],
         [
           "name_ja",
@@ -2889,8 +2889,8 @@
       "priority": 19,
       "workstream": "local_image_asset_audit",
       "public_report": "data/catalog_image_asset_audit_public.json",
-      "image_url_rows": 19501,
-      "local_image_path_rows": 19501,
+      "image_url_rows": 19500,
+      "local_image_path_rows": 19500,
       "image_url_without_local_path_rows": 0,
       "missing_local_image_files": 0,
       "missing_web_public_asset_files": 0,
@@ -5896,8 +5896,8 @@
       "priority": 21,
       "workstream": "source_discovery_review_batches",
       "public_report": "data/source_discovery_review_batches_public.json",
-      "batch_count": 63,
-      "source_discovery_rows": 751,
+      "batch_count": 64,
+      "source_discovery_rows": 768,
       "recommended_next_action": "Assign full source discovery batches by store/workflow before image imports."
     },
     {
@@ -6798,31 +6798,31 @@
       "priority": 31,
       "workstream": "metadata_review_batches",
       "public_report": "data/catalog_metadata_review_batches_public.json",
-      "batch_count": 31,
-      "field_store_group_count": 361,
-      "missing_cell_count": 14129,
+      "batch_count": 30,
+      "field_store_group_count": 359,
+      "missing_cell_count": 14126,
       "recommended_next_action": "Use full field/store metadata batches for title, barcode, date, price, source, and image cleanup."
     },
     {
       "priority": 32,
       "workstream": "metadata_action_queue",
       "public_report": "data/catalog_metadata_action_queue_public.json",
-      "actionable_group_count": 166,
-      "queued_group_count": 166,
+      "actionable_group_count": 164,
+      "queued_group_count": 164,
       "unqueued_actionable_group_count": 0,
-      "actionable_missing_cells": 2433,
-      "queued_missing_cells": 2433,
+      "actionable_missing_cells": 2431,
+      "queued_missing_cells": 2431,
       "unqueued_actionable_missing_cells": 0,
       "group_queue_coverage": 1.0,
       "missing_cell_queue_coverage": 1.0,
       "action_batch_count": 14,
-      "primary_review_url_groups": 127,
+      "primary_review_url_groups": 125,
       "first_primary_review_url": "https://www.goodsmile.info/ja/product/13483/",
       "first_primary_review_url_kind": "sample_source_url",
       "primary_review_url_kind_counts": [
         [
           "sample_source_url",
-          127
+          125
         ],
         [
           "manual_lookup_required",
@@ -6832,11 +6832,11 @@
       "missing_cells_by_field": [
         [
           "release_date",
-          1348
+          1347
         ],
         [
           "official_price_jpy",
-          559
+          558
         ],
         [
           "name_ja",

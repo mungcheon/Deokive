@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T13:21:30Z",
+  "generated_at": "2026-07-26T13:27:11Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 24,
     "blocked_action_count": 0,
     "manual_review_action_count": 21,
     "pending_import_action_count": 0,
-    "total_action_rows": 33613,
+    "total_action_rows": 33611,
     "open_review_queues": {
       "source_discovery_rows": 768,
       "image_missing_rows": 846,
@@ -81,12 +81,12 @@
       "ichiban_metadata_next_campaign_patch_review_batch_rows": 8,
       "ichiban_metadata_next_campaign_patch_review_batch_template_rows": 8,
       "ichiban_metadata_next_campaign_patch_review_batch_primary_review_url_rows": 8,
-      "metadata_action_missing_cells": 2433,
-      "metadata_actionable_groups": 166,
+      "metadata_action_missing_cells": 2431,
+      "metadata_actionable_groups": 164,
       "metadata_unqueued_actionable_groups": 0,
-      "metadata_actionable_missing_cells": 2433,
+      "metadata_actionable_missing_cells": 2431,
       "metadata_unqueued_actionable_missing_cells": 0,
-      "metadata_primary_review_url_groups": 127,
+      "metadata_primary_review_url_groups": 125,
       "animation_category_review_rows": 0,
       "animation_category_action_rows": 0,
       "animation_category_split_review_categories": 0,
@@ -137,8 +137,8 @@
     "requested_focus_topic_count": 5,
     "requested_focus_open_rows": 8033,
     "requested_focus_topics_with_open_work": 4,
-    "requested_focus_missing_image_rows": 37,
-    "requested_focus_missing_source_url_rows": 37,
+    "requested_focus_missing_image_rows": 40,
+    "requested_focus_missing_source_url_rows": 40,
     "requested_focus_missing_release_date_rows": 88,
     "requested_focus_missing_official_price_jpy_rows": 375,
     "requested_focus_actionable_template_rows": 600,
@@ -150,17 +150,17 @@
     "requested_focus_total_review_template_rows": 6274,
     "requested_focus_non_barcode_template_share": 0.0956,
     "requested_focus_review_url_rows": 600,
-    "danganronpa_missing_media_rows": 37,
-    "danganronpa_missing_image_url_rows": 37,
-    "danganronpa_missing_source_url_rows": 37,
-    "danganronpa_missing_media_review_batch_count": 9,
+    "danganronpa_missing_media_rows": 40,
+    "danganronpa_missing_image_url_rows": 40,
+    "danganronpa_missing_source_url_rows": 40,
+    "danganronpa_missing_media_review_batch_count": 10,
     "danganronpa_official_search_rows": 19,
     "danganronpa_licensed_retailer_review_rows": 11,
     "danganronpa_official_prize_search_rows": 6,
-    "danganronpa_confirmed_patch_template_rows": 37,
-    "danganronpa_confirmed_patch_template_pending_rows": 37,
+    "danganronpa_confirmed_patch_template_rows": 40,
+    "danganronpa_confirmed_patch_template_pending_rows": 40,
     "danganronpa_patch_template_ready_rows": 0,
-    "danganronpa_patch_template_skipped_rows": 37,
+    "danganronpa_patch_template_skipped_rows": 40,
     "danganronpa_patch_template_manual_confirmed_source_rows": 0,
     "danganronpa_patch_template_manual_confirmed_image_rows": 0,
     "ichiban_campaign_rows": 614,
@@ -222,7 +222,7 @@
     "image_download_readiness_status": "known_image_assets_complete",
     "image_url_without_local_path_rows": 0,
     "image_missing_local_image_files": 0,
-    "image_rows_still_requiring_url_evidence": 825,
+    "image_rows_still_requiring_url_evidence": 846,
     "image_missing_evidence_top_source_stores": [
       [
         "엔스카이",
@@ -260,7 +260,7 @@
     "image_missing_evidence_top_categories": [
       [
         "피규어",
-        127
+        144
       ],
       [
         "인형",
@@ -268,11 +268,11 @@
       ],
       [
         "아크릴 스탠드",
-        123
+        125
       ],
       [
         "캔뱃지",
-        95
+        97
       ],
       [
         "마스코트",
@@ -292,9 +292,9 @@
       ]
     ],
     "image_auto_download_ready_rows": 0,
-    "image_attachment_template_rows": 74,
+    "image_attachment_template_rows": 78,
     "image_attachment_template_confirmed_rows": 0,
-    "image_attachment_template_dry_run_skipped_rows": 74,
+    "image_attachment_template_dry_run_skipped_rows": 78,
     "source_focus_template_rows": 758,
     "source_focus_template_work_order_pack_count": 67,
     "source_focus_template_next_pack_rows": 20,
@@ -510,8 +510,8 @@
         "total_requested_labels": 27,
         "topics_with_open_work": 4,
         "open_rows": 8033,
-        "missing_image_rows": 37,
-        "missing_source_url_rows": 37,
+        "missing_image_rows": 40,
+        "missing_source_url_rows": 40,
         "missing_release_date_rows": 88,
         "missing_official_price_jpy_rows": 375,
         "requested_needs_review": 1,
@@ -721,31 +721,31 @@
       "workstream": "danganronpa_missing_media",
       "public_report": "data/danganronpa_missing_media_public.json",
       "status": "manual_review",
-      "rows": 37,
+      "rows": 40,
       "command": "Review Danganronpa rows missing both source and image evidence; fill exact official or licensed source URLs before attaching images.",
       "next_step": "work_danganronpa_missing_media_review_batches",
       "blocker": "Exact official or licensed source evidence is required before catalog mutation.",
       "auto_apply_enabled": false,
       "evidence": {
-        "missing_media_rows": 37,
-        "missing_image_url_rows": 37,
-        "missing_source_url_rows": 37,
-        "review_batch_count": 9,
+        "missing_media_rows": 40,
+        "missing_image_url_rows": 40,
+        "missing_source_url_rows": 40,
+        "review_batch_count": 10,
         "official_search_rows": 19,
         "licensed_retailer_review_rows": 11,
         "official_prize_search_rows": 6,
-        "confirmed_patch_template_rows": 37,
-        "confirmed_patch_template_pending_rows": 37,
-        "template_dry_run_rows": 37,
+        "confirmed_patch_template_rows": 40,
+        "confirmed_patch_template_pending_rows": 40,
+        "template_dry_run_rows": 40,
         "template_dry_run_ready_rows": 0,
-        "template_dry_run_skipped_rows": 37,
+        "template_dry_run_skipped_rows": 40,
         "template_dry_run_blocked_rows": 0,
         "manual_confirmed_source_rows": 0,
         "manual_confirmed_image_rows": 0,
         "template_dry_run_by_status": [
           [
             "skipped_pending_manual_confirmation",
-            37
+            40
           ]
         ],
         "by_source_store": [
@@ -763,6 +763,10 @@
           ],
           [
             "굿스마일컴퍼니",
+            3
+          ],
+          [
+            "Banpresto",
             3
           ],
           [
@@ -801,7 +805,7 @@
           ],
           [
             "manual_review",
-            1
+            4
           ]
         ]
       }
@@ -2512,16 +2516,16 @@
       "evidence": {
         "known_image_asset_status": "pass",
         "download_readiness_status": "known_image_assets_complete",
-        "image_url_rows": 19522,
-        "local_image_path_rows": 19522,
+        "image_url_rows": 19501,
+        "local_image_path_rows": 19501,
         "image_url_without_local_path_rows": 0,
         "missing_local_image_files": 0,
         "missing_web_public_asset_files": 0,
         "known_image_download_blocker_rows": 0,
         "auto_download_ready_rows": 0,
-        "rows_still_requiring_image_url_evidence": 825,
+        "rows_still_requiring_image_url_evidence": 846,
         "missing_image_evidence_priority": {
-          "rows": 825,
+          "rows": 846,
           "by_source_store": [
             [
               "엔스카이",
@@ -2564,6 +2568,10 @@
               21
             ],
             [
+              "Banpresto",
+              17
+            ],
+            [
               "치이카와 중국 팝업스토어",
               15
             ],
@@ -2598,16 +2606,12 @@
             [
               "MINISO 중국",
               7
-            ],
-            [
-              "산리오",
-              6
             ]
           ],
           "by_category": [
             [
               "피규어",
-              127
+              144
             ],
             [
               "인형",
@@ -2615,11 +2619,11 @@
             ],
             [
               "아크릴 스탠드",
-              123
+              125
             ],
             [
               "캔뱃지",
-              95
+              97
             ],
             [
               "마스코트",
@@ -2693,7 +2697,7 @@
             ],
             [
               "원피스",
-              82
+              84
             ],
             [
               "나의 히어로 아카데미아",
@@ -2713,7 +2717,7 @@
             ],
             [
               "메이드 인 어비스",
-              41
+              45
             ],
             [
               "스텔라이브",
@@ -2721,7 +2725,7 @@
             ],
             [
               "단간론파",
-              37
+              40
             ],
             [
               "체인소 맨",
@@ -2733,7 +2737,7 @@
             ],
             [
               "장송의 프리렌",
-              26
+              31
             ],
             [
               "짱구는 못말려",
@@ -2752,26 +2756,26 @@
               12
             ],
             [
+              "봇치 더 록",
+              12
+            ],
+            [
+              "리제로",
+              12
+            ],
+            [
               "전생슬",
               12
             ],
             [
               "SPY×FAMILY",
               11
-            ],
-            [
-              "최애의 아이",
-              11
-            ],
-            [
-              "봇치 더 록",
-              11
             ]
           ],
           "by_series_name": [
             [
               "(blank)",
-              737
+              758
             ],
             [
               "ご当地",
@@ -3175,11 +3179,11 @@
         "download_ready_after_manual_image_url_rows": 78,
         "suggested_local_image_path_rows": 78,
         "local_image_download_instruction_ready_rows": 78,
-        "image_attachment_template_rows": 74,
+        "image_attachment_template_rows": 78,
         "image_attachment_template_confirmed_rows": 0,
         "image_attachment_template_dry_run_updated_rows": 0,
-        "image_attachment_template_dry_run_skipped_rows": 74,
-        "source_discovery_focus_template_rows": 741,
+        "image_attachment_template_dry_run_skipped_rows": 78,
+        "source_discovery_focus_template_rows": 758,
         "source_discovery_focus_template_confirmed_rows": 0,
         "workstream_count": 6,
         "source_url_update_workstream_count": 0,
@@ -4530,19 +4534,19 @@
       "workstream": "metadata_review_batches",
       "public_report": "data/catalog_metadata_review_batches_public.json",
       "status": "manual_review",
-      "rows": 14129,
+      "rows": 14126,
       "command": "Fill titles, barcodes, dates, prices, sources, and images from reviewed evidence.",
       "next_step": "work_field_store_metadata_batches",
       "blocker": "Broad metadata updates require field-specific evidence policies.",
       "auto_apply_enabled": false,
       "evidence": {
-        "batch_count": 31,
+        "batch_count": 30,
         "field_missing_totals": {
           "name_ja": 526,
-          "release_date": 1348,
-          "barcode": 10082,
+          "release_date": 1347,
+          "barcode": 10081,
           "image_url": 846,
-          "official_price_jpy": 559,
+          "official_price_jpy": 558,
           "source_url": 768
         }
       }
@@ -4552,25 +4556,25 @@
       "workstream": "metadata_action_queue",
       "public_report": "data/catalog_metadata_action_queue_public.json",
       "status": "manual_review",
-      "rows": 2433,
+      "rows": 2431,
       "command": "Confirm release dates, prices, and Japanese names from official evidence before barcode work.",
       "next_step": "fill_confirmed_metadata_patch_templates",
       "blocker": "Auto metadata import is disabled; every field/store group needs evidence.",
       "auto_apply_enabled": false,
       "evidence": {
-        "actionable_group_count": 166,
-        "queued_group_count": 166,
-        "actionable_missing_cells": 2433,
-        "queued_missing_cells": 2433,
+        "actionable_group_count": 164,
+        "queued_group_count": 164,
+        "actionable_missing_cells": 2431,
+        "queued_missing_cells": 2431,
         "action_batch_count": 14,
         "field_counts": [
           [
             "release_date",
-            83
+            82
           ],
           [
             "official_price_jpy",
-            42
+            41
           ],
           [
             "name_ja",
@@ -4580,11 +4584,11 @@
         "missing_cells_by_field": [
           [
             "release_date",
-            1348
+            1347
           ],
           [
             "official_price_jpy",
-            559
+            558
           ],
           [
             "name_ja",

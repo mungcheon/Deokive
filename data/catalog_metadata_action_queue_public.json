@@ -1,26 +1,26 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T13:20:45Z",
+  "generated_at": "2026-07-26T13:26:26Z",
   "scope": "catalog_metadata_action_queue",
   "summary": {
-    "actionable_group_count": 166,
-    "queued_group_count": 166,
+    "actionable_group_count": 164,
+    "queued_group_count": 164,
     "unqueued_actionable_group_count": 0,
-    "actionable_missing_cells": 2433,
-    "queued_missing_cells": 2433,
+    "actionable_missing_cells": 2431,
+    "queued_missing_cells": 2431,
     "unqueued_actionable_missing_cells": 0,
     "group_queue_coverage": 1.0,
     "missing_cell_queue_coverage": 1.0,
     "action_batch_count": 14,
     "batch_size": 12,
     "max_groups": 200,
-    "primary_review_url_groups": 127,
+    "primary_review_url_groups": 125,
     "first_primary_review_url": "https://www.goodsmile.info/ja/product/13483/",
     "first_primary_review_url_kind": "sample_source_url",
     "primary_review_url_kind_counts": [
       [
         "sample_source_url",
-        127
+        125
       ],
       [
         "manual_lookup_required",
@@ -30,11 +30,11 @@
     "field_counts": [
       [
         "release_date",
-        83
+        82
       ],
       [
         "official_price_jpy",
-        42
+        41
       ],
       [
         "name_ja",
@@ -206,11 +206,11 @@
     "missing_cells_by_field": [
       [
         "release_date",
-        1348
+        1347
       ],
       [
         "official_price_jpy",
-        559
+        558
       ],
       [
         "name_ja",
@@ -584,7 +584,7 @@
     "excluded_field_missing_cells": [
       [
         "barcode",
-        10082
+        10081
       ],
       [
         "image_url",
@@ -8325,10 +8325,6 @@
           1
         ],
         [
-          "Max Limited",
-          1
-        ],
-        [
           "TOHO animation STORE",
           1
         ],
@@ -8338,6 +8334,10 @@
         ],
         [
           "hololive production official shop",
+          1
+        ],
+        [
+          "ufotable",
           1
         ]
       ],
@@ -8394,10 +8394,6 @@
           1
         ],
         [
-          "Max Limited",
-          1
-        ],
-        [
           "TOHO animation STORE",
           1
         ],
@@ -8407,6 +8403,10 @@
         ],
         [
           "hololive production official shop",
+          1
+        ],
+        [
+          "ufotable",
           1
         ]
       ],
@@ -8854,58 +8854,6 @@
         },
         {
           "field": "release_date",
-          "source_store": "Max Limited",
-          "missing_rows": 1,
-          "priority": 10,
-          "workflow": "official_metadata_review",
-          "evidence_required": "official product or campaign page showing release/sale date",
-          "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
-          "next_machine_step": "official_metadata_extraction",
-          "primary_review_url": "https://max-jpn.com/series1/yurayura/item_detail11.html",
-          "primary_review_url_kind": "sample_source_url",
-          "review_urls": [
-            {
-              "url": "https://max-jpn.com/series1/yurayura/item_detail11.html",
-              "kind": "sample_source_url",
-              "catalog_index": "17827",
-              "label": "ゆらゆらヘッド 初音ミク 僕のヒーローアカデミア HUNTER×HUNTER"
-            }
-          ],
-          "review_url_count": 1,
-          "sample_catalog_indexes": [
-            17827
-          ],
-          "sample_items": [
-            {
-              "catalog_index": 17827,
-              "name_ko": "유라유라 헤드 피규어 하츠네 미쿠 / 나히아 / 헌터헌터",
-              "name_ja": "ゆらゆらヘッド 初音ミク 僕のヒーローアカデミア HUNTER×HUNTER",
-              "series_name": "유라유라 피규어 하츠네미쿠, 나히아, 헌터헌터",
-              "category": "피규어",
-              "source_url": "https://max-jpn.com/series1/yurayura/item_detail11.html",
-              "image_url": "https://max-jpn.com/imgs/character1/myhero/30/01.jpg"
-            }
-          ],
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "field": "release_date",
-            "manual_value": "",
-            "evidence_url": "",
-            "source_store": "Max Limited",
-            "target_scope": "field_source_store_group",
-            "target_missing_rows": 1,
-            "target_catalog_indexes_sample": [
-              17827
-            ],
-            "requires_exact_official_or_trusted_evidence": true,
-            "blocked_until": "manual_metadata_evidence_confirmed"
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "field": "release_date",
           "source_store": "TOHO animation STORE",
           "missing_rows": 1,
           "priority": 10,
@@ -9059,153 +9007,7 @@
             "blocked_until": "manual_metadata_evidence_confirmed"
           },
           "auto_apply_enabled": false
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-action-007",
-      "priority": 10,
-      "group_count": 12,
-      "missing_cell_count": 353,
-      "offset": 72,
-      "field_counts": [
-        [
-          "release_date",
-          11
-        ],
-        [
-          "official_price_jpy",
-          1
-        ]
-      ],
-      "source_store_counts": [
-        [
-          "ufotable",
-          1
-        ],
-        [
-          "芥見下々『呪術廻戦』展",
-          1
-        ],
-        [
-          "릴파 생일 카페",
-          1
-        ],
-        [
-          "밀짚모자 스토어",
-          1
-        ],
-        [
-          "밀짚모자 스토어 상하이",
-          1
-        ],
-        [
-          "반다이 캔디",
-          1
-        ],
-        [
-          "브시로드 크리에이티브",
-          1
-        ],
-        [
-          "이세계 페스티벌",
-          1
-        ],
-        [
-          "점프 숍",
-          1
-        ],
-        [
-          "치이카와 포켓",
-          1
-        ],
-        [
-          "하이큐!! 10주년 기념전",
-          1
-        ],
-        [
-          "이치방쿠지",
-          1
-        ]
-      ],
-      "primary_review_url_groups": 11,
-      "primary_review_url_kind_counts": [
-        [
-          "sample_source_url",
-          11
-        ],
-        [
-          "manual_lookup_required",
-          1
-        ]
-      ],
-      "first_primary_review_url": "https://kimetsu.com/hashiraten/goods.html",
-      "first_primary_review_url_kind": "sample_source_url",
-      "missing_cells_by_field": [
-        [
-          "official_price_jpy",
-          342
-        ],
-        [
-          "release_date",
-          11
-        ]
-      ],
-      "missing_cells_by_source_store": [
-        [
-          "이치방쿠지",
-          342
-        ],
-        [
-          "ufotable",
-          1
-        ],
-        [
-          "芥見下々『呪術廻戦』展",
-          1
-        ],
-        [
-          "릴파 생일 카페",
-          1
-        ],
-        [
-          "밀짚모자 스토어",
-          1
-        ],
-        [
-          "밀짚모자 스토어 상하이",
-          1
-        ],
-        [
-          "반다이 캔디",
-          1
-        ],
-        [
-          "브시로드 크리에이티브",
-          1
-        ],
-        [
-          "이세계 페스티벌",
-          1
-        ],
-        [
-          "점프 숍",
-          1
-        ],
-        [
-          "치이카와 포켓",
-          1
-        ],
-        [
-          "하이큐!! 10주년 기념전",
-          1
-        ]
-      ],
-      "review_state": "manual_metadata_evidence_confirmation_required",
-      "next_machine_step": "fill_confirmed_metadata_patch_templates",
-      "recommended_action": "Confirm official metadata evidence, then fill field/store patch templates.",
-      "groups": [
+        },
         {
           "field": "release_date",
           "source_store": "ufotable",
@@ -9257,7 +9059,153 @@
             "blocked_until": "manual_metadata_evidence_confirmed"
           },
           "auto_apply_enabled": false
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-action-007",
+      "priority": 10,
+      "group_count": 12,
+      "missing_cell_count": 450,
+      "offset": 72,
+      "field_counts": [
+        [
+          "release_date",
+          10
+        ],
+        [
+          "official_price_jpy",
+          2
+        ]
+      ],
+      "source_store_counts": [
+        [
+          "芥見下々『呪術廻戦』展",
+          1
+        ],
+        [
+          "릴파 생일 카페",
+          1
+        ],
+        [
+          "밀짚모자 스토어",
+          1
+        ],
+        [
+          "밀짚모자 스토어 상하이",
+          1
+        ],
+        [
+          "반다이 캔디",
+          1
+        ],
+        [
+          "브시로드 크리에이티브",
+          1
+        ],
+        [
+          "이세계 페스티벌",
+          1
+        ],
+        [
+          "점프 숍",
+          1
+        ],
+        [
+          "치이카와 포켓",
+          1
+        ],
+        [
+          "하이큐!! 10주년 기념전",
+          1
+        ],
+        [
+          "이치방쿠지",
+          1
+        ],
+        [
+          "Stellive Store",
+          1
+        ]
+      ],
+      "primary_review_url_groups": 11,
+      "primary_review_url_kind_counts": [
+        [
+          "sample_source_url",
+          11
+        ],
+        [
+          "manual_lookup_required",
+          1
+        ]
+      ],
+      "first_primary_review_url": "https://jujutsuten.com/goods/",
+      "first_primary_review_url_kind": "sample_source_url",
+      "missing_cells_by_field": [
+        [
+          "official_price_jpy",
+          440
+        ],
+        [
+          "release_date",
+          10
+        ]
+      ],
+      "missing_cells_by_source_store": [
+        [
+          "이치방쿠지",
+          342
+        ],
+        [
+          "Stellive Store",
+          98
+        ],
+        [
+          "芥見下々『呪術廻戦』展",
+          1
+        ],
+        [
+          "릴파 생일 카페",
+          1
+        ],
+        [
+          "밀짚모자 스토어",
+          1
+        ],
+        [
+          "밀짚모자 스토어 상하이",
+          1
+        ],
+        [
+          "반다이 캔디",
+          1
+        ],
+        [
+          "브시로드 크리에이티브",
+          1
+        ],
+        [
+          "이세계 페스티벌",
+          1
+        ],
+        [
+          "점프 숍",
+          1
+        ],
+        [
+          "치이카와 포켓",
+          1
+        ],
+        [
+          "하이큐!! 10주년 기념전",
+          1
+        ]
+      ],
+      "review_state": "manual_metadata_evidence_confirmation_required",
+      "next_machine_step": "fill_confirmed_metadata_patch_templates",
+      "recommended_action": "Confirm official metadata evidence, then fill field/store patch templates.",
+      "groups": [
         {
           "field": "release_date",
           "source_store": "芥見下々『呪術廻戦』展",
@@ -9899,145 +9847,7 @@
             "blocked_until": "manual_metadata_evidence_confirmed"
           },
           "auto_apply_enabled": false
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-action-008",
-      "priority": 20,
-      "group_count": 12,
-      "missing_cell_count": 178,
-      "offset": 84,
-      "field_counts": [
-        [
-          "official_price_jpy",
-          12
-        ]
-      ],
-      "source_store_counts": [
-        [
-          "Stellive Store",
-          1
-        ],
-        [
-          "MINISO",
-          1
-        ],
-        [
-          "치이카와 중국 팝업스토어",
-          1
-        ],
-        [
-          "치이카와 온라인 쿠지",
-          1
-        ],
-        [
-          "MINISO 중국",
-          1
-        ],
-        [
-          "Fanding",
-          1
-        ],
-        [
-          "치이카와샵 용산",
-          1
-        ],
-        [
-          "이세계아이돌 공식 굿즈",
-          1
-        ],
-        [
-          "EDITH",
-          1
-        ],
-        [
-          "TAPIOCA online shop",
-          1
-        ],
-        [
-          "검색 추가",
-          1
-        ],
-        [
-          "애니메이트",
-          1
-        ]
-      ],
-      "primary_review_url_groups": 8,
-      "primary_review_url_kind_counts": [
-        [
-          "sample_source_url",
-          8
-        ],
-        [
-          "manual_lookup_required",
-          4
-        ]
-      ],
-      "first_primary_review_url": "https://fanding.kr/@stellive/shop",
-      "first_primary_review_url_kind": "sample_source_url",
-      "missing_cells_by_field": [
-        [
-          "official_price_jpy",
-          178
-        ]
-      ],
-      "missing_cells_by_source_store": [
-        [
-          "Stellive Store",
-          98
-        ],
-        [
-          "MINISO",
-          18
-        ],
-        [
-          "치이카와 중국 팝업스토어",
-          15
-        ],
-        [
-          "치이카와 온라인 쿠지",
-          14
-        ],
-        [
-          "MINISO 중국",
-          7
-        ],
-        [
-          "Fanding",
-          5
-        ],
-        [
-          "치이카와샵 용산",
-          5
-        ],
-        [
-          "이세계아이돌 공식 굿즈",
-          4
-        ],
-        [
-          "EDITH",
-          3
-        ],
-        [
-          "TAPIOCA online shop",
-          3
-        ],
-        [
-          "검색 추가",
-          3
-        ],
-        [
-          "애니메이트",
-          3
-        ]
-      ],
-      "review_state": "manual_metadata_evidence_confirmation_required",
-      "next_machine_step": "fill_confirmed_metadata_patch_templates",
-      "recommended_action": "Confirm official metadata evidence, then fill field/store patch templates.",
-      "groups": [
+        },
         {
           "field": "official_price_jpy",
           "source_store": "Stellive Store",
@@ -10172,7 +9982,145 @@
             "blocked_until": "manual_metadata_evidence_confirmed"
           },
           "auto_apply_enabled": false
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-action-008",
+      "priority": 20,
+      "group_count": 12,
+      "missing_cell_count": 82,
+      "offset": 84,
+      "field_counts": [
+        [
+          "official_price_jpy",
+          12
+        ]
+      ],
+      "source_store_counts": [
+        [
+          "MINISO",
+          1
+        ],
+        [
+          "치이카와 중국 팝업스토어",
+          1
+        ],
+        [
+          "치이카와 온라인 쿠지",
+          1
+        ],
+        [
+          "MINISO 중국",
+          1
+        ],
+        [
+          "Fanding",
+          1
+        ],
+        [
+          "치이카와샵 용산",
+          1
+        ],
+        [
+          "이세계아이돌 공식 굿즈",
+          1
+        ],
+        [
+          "EDITH",
+          1
+        ],
+        [
+          "TAPIOCA online shop",
+          1
+        ],
+        [
+          "검색 추가",
+          1
+        ],
+        [
+          "애니메이트",
+          1
+        ],
+        [
+          "PR TIMES / empty",
+          1
+        ]
+      ],
+      "primary_review_url_groups": 8,
+      "primary_review_url_kind_counts": [
+        [
+          "sample_source_url",
+          8
+        ],
+        [
+          "manual_lookup_required",
+          4
+        ]
+      ],
+      "first_primary_review_url": "https://www.miniso.com/",
+      "first_primary_review_url_kind": "sample_source_url",
+      "missing_cells_by_field": [
+        [
+          "official_price_jpy",
+          82
+        ]
+      ],
+      "missing_cells_by_source_store": [
+        [
+          "MINISO",
+          18
+        ],
+        [
+          "치이카와 중국 팝업스토어",
+          15
+        ],
+        [
+          "치이카와 온라인 쿠지",
+          14
+        ],
+        [
+          "MINISO 중국",
+          7
+        ],
+        [
+          "Fanding",
+          5
+        ],
+        [
+          "치이카와샵 용산",
+          5
+        ],
+        [
+          "이세계아이돌 공식 굿즈",
+          4
+        ],
+        [
+          "EDITH",
+          3
+        ],
+        [
+          "TAPIOCA online shop",
+          3
+        ],
+        [
+          "검색 추가",
+          3
+        ],
+        [
+          "애니메이트",
+          3
+        ],
+        [
+          "PR TIMES / empty",
+          2
+        ]
+      ],
+      "review_state": "manual_metadata_evidence_confirmation_required",
+      "next_machine_step": "fill_confirmed_metadata_patch_templates",
+      "recommended_action": "Confirm official metadata evidence, then fill field/store patch templates.",
+      "groups": [
         {
           "field": "official_price_jpy",
           "source_store": "MINISO",
@@ -11282,145 +11230,7 @@
             "blocked_until": "manual_metadata_evidence_confirmed"
           },
           "auto_apply_enabled": false
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-action-009",
-      "priority": 20,
-      "group_count": 12,
-      "missing_cell_count": 22,
-      "offset": 96,
-      "field_counts": [
-        [
-          "official_price_jpy",
-          12
-        ]
-      ],
-      "source_store_counts": [
-        [
-          "PR TIMES / empty",
-          1
-        ],
-        [
-          "PalVerse",
-          1
-        ],
-        [
-          "SVC 공식",
-          1
-        ],
-        [
-          "TAITO Prize",
-          1
-        ],
-        [
-          "Taito",
-          1
-        ],
-        [
-          "ご当地ちいかわ 공식(API)",
-          1
-        ],
-        [
-          "두찜",
-          1
-        ],
-        [
-          "롯데웰푸드",
-          1
-        ],
-        [
-          "메가하우스",
-          1
-        ],
-        [
-          "이세계아이돌 팝업스토어",
-          1
-        ],
-        [
-          "AMNIBUS STORE",
-          1
-        ],
-        [
-          "DAISO",
-          1
-        ]
-      ],
-      "primary_review_url_groups": 9,
-      "primary_review_url_kind_counts": [
-        [
-          "sample_source_url",
-          9
-        ],
-        [
-          "manual_lookup_required",
-          3
-        ]
-      ],
-      "first_primary_review_url": "https://prtimes.jp/main/html/rd/p/000000033.000076366.html",
-      "first_primary_review_url_kind": "sample_source_url",
-      "missing_cells_by_field": [
-        [
-          "official_price_jpy",
-          22
-        ]
-      ],
-      "missing_cells_by_source_store": [
-        [
-          "PR TIMES / empty",
-          2
-        ],
-        [
-          "PalVerse",
-          2
-        ],
-        [
-          "SVC 공식",
-          2
-        ],
-        [
-          "TAITO Prize",
-          2
-        ],
-        [
-          "Taito",
-          2
-        ],
-        [
-          "ご当地ちいかわ 공식(API)",
-          2
-        ],
-        [
-          "두찜",
-          2
-        ],
-        [
-          "롯데웰푸드",
-          2
-        ],
-        [
-          "메가하우스",
-          2
-        ],
-        [
-          "이세계아이돌 팝업스토어",
-          2
-        ],
-        [
-          "AMNIBUS STORE",
-          1
-        ],
-        [
-          "DAISO",
-          1
-        ]
-      ],
-      "review_state": "manual_metadata_evidence_confirmation_required",
-      "next_machine_step": "fill_confirmed_metadata_patch_templates",
-      "recommended_action": "Confirm official metadata evidence, then fill field/store patch templates.",
-      "groups": [
+        },
         {
           "field": "official_price_jpy",
           "source_store": "PR TIMES / empty",
@@ -11489,7 +11299,145 @@
             "blocked_until": "manual_metadata_evidence_confirmed"
           },
           "auto_apply_enabled": false
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-action-009",
+      "priority": 20,
+      "group_count": 12,
+      "missing_cell_count": 21,
+      "offset": 96,
+      "field_counts": [
+        [
+          "official_price_jpy",
+          12
+        ]
+      ],
+      "source_store_counts": [
+        [
+          "PalVerse",
+          1
+        ],
+        [
+          "SVC 공식",
+          1
+        ],
+        [
+          "TAITO Prize",
+          1
+        ],
+        [
+          "Taito",
+          1
+        ],
+        [
+          "ご当地ちいかわ 공식(API)",
+          1
+        ],
+        [
+          "두찜",
+          1
+        ],
+        [
+          "롯데웰푸드",
+          1
+        ],
+        [
+          "메가하우스",
+          1
+        ],
+        [
+          "이세계아이돌 팝업스토어",
+          1
+        ],
+        [
+          "AMNIBUS STORE",
+          1
+        ],
+        [
+          "DAISO",
+          1
+        ],
+        [
+          "Heart Bread Antique",
+          1
+        ]
+      ],
+      "primary_review_url_groups": 9,
+      "primary_review_url_kind_counts": [
+        [
+          "sample_source_url",
+          9
+        ],
+        [
+          "manual_lookup_required",
+          3
+        ]
+      ],
+      "first_primary_review_url": "https://palverse-figure.com/product/product-128/",
+      "first_primary_review_url_kind": "sample_source_url",
+      "missing_cells_by_field": [
+        [
+          "official_price_jpy",
+          21
+        ]
+      ],
+      "missing_cells_by_source_store": [
+        [
+          "PalVerse",
+          2
+        ],
+        [
+          "SVC 공식",
+          2
+        ],
+        [
+          "TAITO Prize",
+          2
+        ],
+        [
+          "Taito",
+          2
+        ],
+        [
+          "ご当地ちいかわ 공식(API)",
+          2
+        ],
+        [
+          "두찜",
+          2
+        ],
+        [
+          "롯데웰푸드",
+          2
+        ],
+        [
+          "메가하우스",
+          2
+        ],
+        [
+          "이세계아이돌 팝업스토어",
+          2
+        ],
+        [
+          "AMNIBUS STORE",
+          1
+        ],
+        [
+          "DAISO",
+          1
+        ],
+        [
+          "Heart Bread Antique",
+          1
+        ]
+      ],
+      "review_state": "manual_metadata_evidence_confirmation_required",
+      "next_machine_step": "fill_confirmed_metadata_patch_templates",
+      "recommended_action": "Confirm official metadata evidence, then fill field/store patch templates.",
+      "groups": [
         {
           "field": "official_price_jpy",
           "source_store": "PalVerse",
@@ -12151,141 +12099,7 @@
             "blocked_until": "manual_metadata_evidence_confirmed"
           },
           "auto_apply_enabled": false
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-action-010",
-      "priority": 20,
-      "group_count": 12,
-      "missing_cell_count": 12,
-      "offset": 108,
-      "field_counts": [
-        [
-          "official_price_jpy",
-          12
-        ]
-      ],
-      "source_store_counts": [
-        [
-          "Heart Bread Antique",
-          1
-        ],
-        [
-          "Max Limited",
-          1
-        ],
-        [
-          "Movic",
-          1
-        ],
-        [
-          "Piapro / Cocollabo",
-          1
-        ],
-        [
-          "Re-ment",
-          1
-        ],
-        [
-          "Weverse Shop",
-          1
-        ],
-        [
-          "Withmuu",
-          1
-        ],
-        [
-          "YG SELECT",
-          1
-        ],
-        [
-          "aespa Official Store",
-          1
-        ],
-        [
-          "굿스마일컴퍼니",
-          1
-        ],
-        [
-          "릴파 생일 카페",
-          1
-        ],
-        [
-          "브시로드 크리에이티브",
-          1
-        ]
-      ],
-      "primary_review_url_groups": 12,
-      "primary_review_url_kind_counts": [
-        [
-          "sample_source_url",
-          12
-        ]
-      ],
-      "first_primary_review_url": "https://www.heart-bread.com/column/%E3%80%90%E3%83%89%E3%83%A9%E3%83%9E%EF%BC%86%E6%98%A0%E7%94%BB%E3%80%8E%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91%E3%80%8F%E3%81%A8%E5%88%9D%E3%82%B3%E3%83%A9%E3%83%9C%EF%BC%81%E3%80%91.html",
-      "first_primary_review_url_kind": "sample_source_url",
-      "missing_cells_by_field": [
-        [
-          "official_price_jpy",
-          12
-        ]
-      ],
-      "missing_cells_by_source_store": [
-        [
-          "Heart Bread Antique",
-          1
-        ],
-        [
-          "Max Limited",
-          1
-        ],
-        [
-          "Movic",
-          1
-        ],
-        [
-          "Piapro / Cocollabo",
-          1
-        ],
-        [
-          "Re-ment",
-          1
-        ],
-        [
-          "Weverse Shop",
-          1
-        ],
-        [
-          "Withmuu",
-          1
-        ],
-        [
-          "YG SELECT",
-          1
-        ],
-        [
-          "aespa Official Store",
-          1
-        ],
-        [
-          "굿스마일컴퍼니",
-          1
-        ],
-        [
-          "릴파 생일 카페",
-          1
-        ],
-        [
-          "브시로드 크리에이티브",
-          1
-        ]
-      ],
-      "review_state": "manual_metadata_evidence_confirmation_required",
-      "next_machine_step": "fill_confirmed_metadata_patch_templates",
-      "recommended_action": "Confirm official metadata evidence, then fill field/store patch templates.",
-      "groups": [
+        },
         {
           "field": "official_price_jpy",
           "source_store": "Heart Bread Antique",
@@ -12337,59 +12151,141 @@
             "blocked_until": "manual_metadata_evidence_confirmed"
           },
           "auto_apply_enabled": false
-        },
-        {
-          "field": "official_price_jpy",
-          "source_store": "Max Limited",
-          "missing_rows": 1,
-          "priority": 20,
-          "workflow": "official_metadata_review",
-          "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
-          "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
-          "next_machine_step": "official_metadata_extraction",
-          "primary_review_url": "https://max-jpn.com/series1/yurayura/item_detail11.html",
-          "primary_review_url_kind": "sample_source_url",
-          "review_urls": [
-            {
-              "url": "https://max-jpn.com/series1/yurayura/item_detail11.html",
-              "kind": "sample_source_url",
-              "catalog_index": "17827",
-              "label": "ゆらゆらヘッド 初音ミク 僕のヒーローアカデミア HUNTER×HUNTER"
-            }
-          ],
-          "review_url_count": 1,
-          "sample_catalog_indexes": [
-            17827
-          ],
-          "sample_items": [
-            {
-              "catalog_index": 17827,
-              "name_ko": "유라유라 헤드 피규어 하츠네 미쿠 / 나히아 / 헌터헌터",
-              "name_ja": "ゆらゆらヘッド 初音ミク 僕のヒーローアカデミア HUNTER×HUNTER",
-              "series_name": "유라유라 피규어 하츠네미쿠, 나히아, 헌터헌터",
-              "category": "피규어",
-              "source_url": "https://max-jpn.com/series1/yurayura/item_detail11.html",
-              "image_url": "https://max-jpn.com/imgs/character1/myhero/30/01.jpg"
-            }
-          ],
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "field": "official_price_jpy",
-            "manual_value": "",
-            "evidence_url": "",
-            "source_store": "Max Limited",
-            "target_scope": "field_source_store_group",
-            "target_missing_rows": 1,
-            "target_catalog_indexes_sample": [
-              17827
-            ],
-            "requires_exact_official_or_trusted_evidence": true,
-            "blocked_until": "manual_metadata_evidence_confirmed"
-          },
-          "auto_apply_enabled": false
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-action-010",
+      "priority": 20,
+      "group_count": 12,
+      "missing_cell_count": 12,
+      "offset": 108,
+      "field_counts": [
+        [
+          "official_price_jpy",
+          12
+        ]
+      ],
+      "source_store_counts": [
+        [
+          "Movic",
+          1
+        ],
+        [
+          "Piapro / Cocollabo",
+          1
+        ],
+        [
+          "Re-ment",
+          1
+        ],
+        [
+          "Weverse Shop",
+          1
+        ],
+        [
+          "Withmuu",
+          1
+        ],
+        [
+          "YG SELECT",
+          1
+        ],
+        [
+          "aespa Official Store",
+          1
+        ],
+        [
+          "굿스마일컴퍼니",
+          1
+        ],
+        [
+          "릴파 생일 카페",
+          1
+        ],
+        [
+          "브시로드 크리에이티브",
+          1
+        ],
+        [
+          "이세계 페스티벌",
+          1
+        ],
+        [
+          "치이카와 마켓",
+          1
+        ]
+      ],
+      "primary_review_url_groups": 12,
+      "primary_review_url_kind_counts": [
+        [
+          "sample_source_url",
+          12
+        ]
+      ],
+      "first_primary_review_url": "https://www.movic.jp/shop/pages/withcat.aspx",
+      "first_primary_review_url_kind": "sample_source_url",
+      "missing_cells_by_field": [
+        [
+          "official_price_jpy",
+          12
+        ]
+      ],
+      "missing_cells_by_source_store": [
+        [
+          "Movic",
+          1
+        ],
+        [
+          "Piapro / Cocollabo",
+          1
+        ],
+        [
+          "Re-ment",
+          1
+        ],
+        [
+          "Weverse Shop",
+          1
+        ],
+        [
+          "Withmuu",
+          1
+        ],
+        [
+          "YG SELECT",
+          1
+        ],
+        [
+          "aespa Official Store",
+          1
+        ],
+        [
+          "굿스마일컴퍼니",
+          1
+        ],
+        [
+          "릴파 생일 카페",
+          1
+        ],
+        [
+          "브시로드 크리에이티브",
+          1
+        ],
+        [
+          "이세계 페스티벌",
+          1
+        ],
+        [
+          "치이카와 마켓",
+          1
+        ]
+      ],
+      "review_state": "manual_metadata_evidence_confirmation_required",
+      "next_machine_step": "fill_confirmed_metadata_patch_templates",
+      "recommended_action": "Confirm official metadata evidence, then fill field/store patch templates.",
+      "groups": [
         {
           "field": "official_price_jpy",
           "source_store": "Movic",
@@ -12909,145 +12805,7 @@
             "blocked_until": "manual_metadata_evidence_confirmed"
           },
           "auto_apply_enabled": false
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-action-011",
-      "priority": 20,
-      "group_count": 12,
-      "missing_cell_count": 375,
-      "offset": 120,
-      "field_counts": [
-        [
-          "name_ja",
-          7
-        ],
-        [
-          "official_price_jpy",
-          5
-        ]
-      ],
-      "source_store_counts": [
-        [
-          "치이카와 마켓",
-          2
-        ],
-        [
-          "이세계 페스티벌",
-          1
-        ],
-        [
-          "치이카와 모구모구 혼포",
-          1
-        ],
-        [
-          "치이카와 포켓",
-          1
-        ],
-        [
-          "텀블벅",
-          1
-        ],
-        [
-          "Stellive Store",
-          1
-        ],
-        [
-          "나가노 마켓",
-          1
-        ],
-        [
-          "애니메이트",
-          1
-        ],
-        [
-          "치이카와 파크",
-          1
-        ],
-        [
-          "Weverse Shop",
-          1
-        ],
-        [
-          "닌텐도 스토어",
-          1
-        ]
-      ],
-      "primary_review_url_groups": 11,
-      "primary_review_url_kind_counts": [
-        [
-          "sample_source_url",
-          11
-        ],
-        [
-          "manual_lookup_required",
-          1
-        ]
-      ],
-      "first_primary_review_url": "https://x.com/bevir_news/status/1917410092015837672",
-      "first_primary_review_url_kind": "sample_source_url",
-      "missing_cells_by_field": [
-        [
-          "name_ja",
-          370
-        ],
-        [
-          "official_price_jpy",
-          5
-        ]
-      ],
-      "missing_cells_by_source_store": [
-        [
-          "Stellive Store",
-          97
-        ],
-        [
-          "나가노 마켓",
-          79
-        ],
-        [
-          "애니메이트",
-          63
-        ],
-        [
-          "치이카와 파크",
-          62
-        ],
-        [
-          "Weverse Shop",
-          33
-        ],
-        [
-          "치이카와 마켓",
-          21
-        ],
-        [
-          "닌텐도 스토어",
-          16
-        ],
-        [
-          "이세계 페스티벌",
-          1
-        ],
-        [
-          "치이카와 모구모구 혼포",
-          1
-        ],
-        [
-          "치이카와 포켓",
-          1
-        ],
-        [
-          "텀블벅",
-          1
-        ]
-      ],
-      "review_state": "manual_metadata_evidence_confirmation_required",
-      "next_machine_step": "fill_confirmed_metadata_patch_templates",
-      "recommended_action": "Confirm official metadata evidence, then fill field/store patch templates.",
-      "groups": [
+        },
         {
           "field": "official_price_jpy",
           "source_store": "이세계 페스티벌",
@@ -13151,7 +12909,153 @@
             "blocked_until": "manual_metadata_evidence_confirmed"
           },
           "auto_apply_enabled": false
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-action-011",
+      "priority": 20,
+      "group_count": 12,
+      "missing_cell_count": 400,
+      "offset": 120,
+      "field_counts": [
+        [
+          "name_ja",
+          9
+        ],
+        [
+          "official_price_jpy",
+          3
+        ]
+      ],
+      "source_store_counts": [
+        [
+          "치이카와 모구모구 혼포",
+          1
+        ],
+        [
+          "치이카와 포켓",
+          1
+        ],
+        [
+          "텀블벅",
+          1
+        ],
+        [
+          "Stellive Store",
+          1
+        ],
+        [
+          "나가노 마켓",
+          1
+        ],
+        [
+          "애니메이트",
+          1
+        ],
+        [
+          "치이카와 파크",
+          1
+        ],
+        [
+          "Weverse Shop",
+          1
+        ],
+        [
+          "치이카와 마켓",
+          1
+        ],
+        [
+          "닌텐도 스토어",
+          1
+        ],
+        [
+          "MINISO",
+          1
+        ],
+        [
+          "JYP SHOP",
+          1
+        ]
+      ],
+      "primary_review_url_groups": 11,
+      "primary_review_url_kind_counts": [
+        [
+          "sample_source_url",
+          11
+        ],
+        [
+          "manual_lookup_required",
+          1
+        ]
+      ],
+      "first_primary_review_url": "https://chiikawamogumogu.shop/",
+      "first_primary_review_url_kind": "sample_source_url",
+      "missing_cells_by_field": [
+        [
+          "name_ja",
+          397
+        ],
+        [
+          "official_price_jpy",
+          3
+        ]
+      ],
+      "missing_cells_by_source_store": [
+        [
+          "Stellive Store",
+          97
+        ],
+        [
+          "나가노 마켓",
+          79
+        ],
+        [
+          "애니메이트",
+          63
+        ],
+        [
+          "치이카와 파크",
+          62
+        ],
+        [
+          "Weverse Shop",
+          33
+        ],
+        [
+          "치이카와 마켓",
+          20
+        ],
+        [
+          "닌텐도 스토어",
+          16
+        ],
+        [
+          "MINISO",
+          14
+        ],
+        [
+          "JYP SHOP",
+          13
+        ],
+        [
+          "치이카와 모구모구 혼포",
+          1
+        ],
+        [
+          "치이카와 포켓",
+          1
+        ],
+        [
+          "텀블벅",
+          1
+        ]
+      ],
+      "review_state": "manual_metadata_evidence_confirmation_required",
+      "next_machine_step": "fill_confirmed_metadata_patch_templates",
+      "recommended_action": "Confirm official metadata evidence, then fill field/store patch templates.",
+      "groups": [
         {
           "field": "official_price_jpy",
           "source_store": "치이카와 모구모구 혼포",
@@ -14359,145 +14263,7 @@
             "blocked_until": "manual_metadata_evidence_confirmed"
           },
           "auto_apply_enabled": false
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-action-012",
-      "priority": 30,
-      "group_count": 12,
-      "missing_cell_count": 108,
-      "offset": 132,
-      "field_counts": [
-        [
-          "name_ja",
-          12
-        ]
-      ],
-      "source_store_counts": [
-        [
-          "MINISO",
-          1
-        ],
-        [
-          "JYP SHOP",
-          1
-        ],
-        [
-          "Hololive Production Official Shop",
-          1
-        ],
-        [
-          "YG SELECT",
-          1
-        ],
-        [
-          "반다이",
-          1
-        ],
-        [
-          "SM STORE",
-          1
-        ],
-        [
-          "치이카와 모구모구 혼포",
-          1
-        ],
-        [
-          "Square Enix e-STORE",
-          1
-        ],
-        [
-          "귀멸의 칼날 공식",
-          1
-        ],
-        [
-          "포켓몬 센터",
-          1
-        ],
-        [
-          "산리오",
-          1
-        ],
-        [
-          "Fanding",
-          1
-        ]
-      ],
-      "primary_review_url_groups": 9,
-      "primary_review_url_kind_counts": [
-        [
-          "sample_source_url",
-          9
-        ],
-        [
-          "manual_lookup_required",
-          3
-        ]
-      ],
-      "first_primary_review_url": "https://www.miniso.com/",
-      "first_primary_review_url_kind": "sample_source_url",
-      "missing_cells_by_field": [
-        [
-          "name_ja",
-          108
-        ]
-      ],
-      "missing_cells_by_source_store": [
-        [
-          "MINISO",
-          14
-        ],
-        [
-          "JYP SHOP",
-          13
-        ],
-        [
-          "Hololive Production Official Shop",
-          10
-        ],
-        [
-          "YG SELECT",
-          10
-        ],
-        [
-          "반다이",
-          10
-        ],
-        [
-          "SM STORE",
-          9
-        ],
-        [
-          "치이카와 모구모구 혼포",
-          9
-        ],
-        [
-          "Square Enix e-STORE",
-          8
-        ],
-        [
-          "귀멸의 칼날 공식",
-          7
-        ],
-        [
-          "포켓몬 센터",
-          7
-        ],
-        [
-          "산리오",
-          6
-        ],
-        [
-          "Fanding",
-          5
-        ]
-      ],
-      "review_state": "manual_metadata_evidence_confirmation_required",
-      "next_machine_step": "fill_confirmed_metadata_patch_templates",
-      "recommended_action": "Confirm official metadata evidence, then fill field/store patch templates.",
-      "groups": [
+        },
         {
           "field": "name_ja",
           "source_store": "MINISO",
@@ -14779,7 +14545,145 @@
             "blocked_until": "manual_metadata_evidence_confirmed"
           },
           "auto_apply_enabled": false
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-action-012",
+      "priority": 30,
+      "group_count": 12,
+      "missing_cell_count": 89,
+      "offset": 132,
+      "field_counts": [
+        [
+          "name_ja",
+          12
+        ]
+      ],
+      "source_store_counts": [
+        [
+          "Hololive Production Official Shop",
+          1
+        ],
+        [
+          "YG SELECT",
+          1
+        ],
+        [
+          "반다이",
+          1
+        ],
+        [
+          "SM STORE",
+          1
+        ],
+        [
+          "치이카와 모구모구 혼포",
+          1
+        ],
+        [
+          "Square Enix e-STORE",
+          1
+        ],
+        [
+          "귀멸의 칼날 공식",
+          1
+        ],
+        [
+          "포켓몬 센터",
+          1
+        ],
+        [
+          "산리오",
+          1
+        ],
+        [
+          "Fanding",
+          1
+        ],
+        [
+          "Geek Jack",
+          1
+        ],
+        [
+          "디즈니 스토어",
+          1
+        ]
+      ],
+      "primary_review_url_groups": 8,
+      "primary_review_url_kind_counts": [
+        [
+          "sample_source_url",
+          8
+        ],
+        [
+          "manual_lookup_required",
+          4
+        ]
+      ],
+      "first_primary_review_url": "https://shop.hololivepro.com/products/hololivefriendswithu_shirakamifubuki",
+      "first_primary_review_url_kind": "sample_source_url",
+      "missing_cells_by_field": [
+        [
+          "name_ja",
+          89
+        ]
+      ],
+      "missing_cells_by_source_store": [
+        [
+          "Hololive Production Official Shop",
+          10
+        ],
+        [
+          "YG SELECT",
+          10
+        ],
+        [
+          "반다이",
+          10
+        ],
+        [
+          "SM STORE",
+          9
+        ],
+        [
+          "치이카와 모구모구 혼포",
+          9
+        ],
+        [
+          "Square Enix e-STORE",
+          8
+        ],
+        [
+          "귀멸의 칼날 공식",
+          7
+        ],
+        [
+          "포켓몬 센터",
+          7
+        ],
+        [
+          "산리오",
+          6
+        ],
+        [
+          "Fanding",
+          5
+        ],
+        [
+          "Geek Jack",
+          4
+        ],
+        [
+          "디즈니 스토어",
+          4
+        ]
+      ],
+      "review_state": "manual_metadata_evidence_confirmation_required",
+      "next_machine_step": "fill_confirmed_metadata_patch_templates",
+      "recommended_action": "Confirm official metadata evidence, then fill field/store patch templates.",
+      "groups": [
         {
           "field": "name_ja",
           "source_store": "Hololive Production Official Shop",
@@ -16157,145 +16061,7 @@
             "blocked_until": "manual_metadata_evidence_confirmed"
           },
           "auto_apply_enabled": false
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-action-013",
-      "priority": 30,
-      "group_count": 12,
-      "missing_cell_count": 34,
-      "offset": 144,
-      "field_counts": [
-        [
-          "name_ja",
-          12
-        ]
-      ],
-      "source_store_counts": [
-        [
-          "Geek Jack",
-          1
-        ],
-        [
-          "디즈니 스토어",
-          1
-        ],
-        [
-          "이세계아이돌 공식 굿즈",
-          1
-        ],
-        [
-          "HoYoLAB Shop",
-          1
-        ],
-        [
-          "Nijisanji Official Store",
-          1
-        ],
-        [
-          "STARSHIP STORE",
-          1
-        ],
-        [
-          "아이돌 공식",
-          1
-        ],
-        [
-          "ATLUS STORE",
-          1
-        ],
-        [
-          "CUBE STORE",
-          1
-        ],
-        [
-          "IST STORE",
-          1
-        ],
-        [
-          "KQ FELLAZ",
-          1
-        ],
-        [
-          "SVC 공식",
-          1
-        ]
-      ],
-      "primary_review_url_groups": 8,
-      "primary_review_url_kind_counts": [
-        [
-          "sample_source_url",
-          8
-        ],
-        [
-          "manual_lookup_required",
-          4
-        ]
-      ],
-      "first_primary_review_url": "https://shop.geekjack.net/products/hololive-friends-with-u-mori-calliope-re",
-      "first_primary_review_url_kind": "sample_source_url",
-      "missing_cells_by_field": [
-        [
-          "name_ja",
-          34
-        ]
-      ],
-      "missing_cells_by_source_store": [
-        [
-          "Geek Jack",
-          4
-        ],
-        [
-          "디즈니 스토어",
-          4
-        ],
-        [
-          "이세계아이돌 공식 굿즈",
-          4
-        ],
-        [
-          "HoYoLAB Shop",
-          3
-        ],
-        [
-          "Nijisanji Official Store",
-          3
-        ],
-        [
-          "STARSHIP STORE",
-          3
-        ],
-        [
-          "아이돌 공식",
-          3
-        ],
-        [
-          "ATLUS STORE",
-          2
-        ],
-        [
-          "CUBE STORE",
-          2
-        ],
-        [
-          "IST STORE",
-          2
-        ],
-        [
-          "KQ FELLAZ",
-          2
-        ],
-        [
-          "SVC 공식",
-          2
-        ]
-      ],
-      "review_state": "manual_metadata_evidence_confirmation_required",
-      "next_machine_step": "fill_confirmed_metadata_patch_templates",
-      "recommended_action": "Confirm official metadata evidence, then fill field/store patch templates.",
-      "groups": [
+        },
         {
           "field": "name_ja",
           "source_store": "Geek Jack",
@@ -16476,7 +16242,145 @@
             "blocked_until": "manual_metadata_evidence_confirmed"
           },
           "auto_apply_enabled": false
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-action-013",
+      "priority": 30,
+      "group_count": 12,
+      "missing_cell_count": 30,
+      "offset": 144,
+      "field_counts": [
+        [
+          "name_ja",
+          12
+        ]
+      ],
+      "source_store_counts": [
+        [
+          "이세계아이돌 공식 굿즈",
+          1
+        ],
+        [
+          "HoYoLAB Shop",
+          1
+        ],
+        [
+          "Nijisanji Official Store",
+          1
+        ],
+        [
+          "STARSHIP STORE",
+          1
+        ],
+        [
+          "아이돌 공식",
+          1
+        ],
+        [
+          "ATLUS STORE",
+          1
+        ],
+        [
+          "CUBE STORE",
+          1
+        ],
+        [
+          "IST STORE",
+          1
+        ],
+        [
+          "KQ FELLAZ",
+          1
+        ],
+        [
+          "SVC 공식",
+          1
+        ],
+        [
+          "두찜",
+          1
+        ],
+        [
+          "롯데웰푸드",
+          1
+        ]
+      ],
+      "primary_review_url_groups": 8,
+      "primary_review_url_kind_counts": [
+        [
+          "sample_source_url",
+          8
+        ],
+        [
+          "manual_lookup_required",
+          4
+        ]
+      ],
+      "first_primary_review_url": "https://hoyoversemerch.com/product/character-acrylic-frames-genshin-impact/",
+      "first_primary_review_url_kind": "sample_source_url",
+      "missing_cells_by_field": [
+        [
+          "name_ja",
+          30
+        ]
+      ],
+      "missing_cells_by_source_store": [
+        [
+          "이세계아이돌 공식 굿즈",
+          4
+        ],
+        [
+          "HoYoLAB Shop",
+          3
+        ],
+        [
+          "Nijisanji Official Store",
+          3
+        ],
+        [
+          "STARSHIP STORE",
+          3
+        ],
+        [
+          "아이돌 공식",
+          3
+        ],
+        [
+          "ATLUS STORE",
+          2
+        ],
+        [
+          "CUBE STORE",
+          2
+        ],
+        [
+          "IST STORE",
+          2
+        ],
+        [
+          "KQ FELLAZ",
+          2
+        ],
+        [
+          "SVC 공식",
+          2
+        ],
+        [
+          "두찜",
+          2
+        ],
+        [
+          "롯데웰푸드",
+          2
+        ]
+      ],
+      "review_state": "manual_metadata_evidence_confirmation_required",
+      "next_machine_step": "fill_confirmed_metadata_patch_templates",
+      "recommended_action": "Confirm official metadata evidence, then fill field/store patch templates.",
+      "groups": [
         {
           "field": "name_ja",
           "source_store": "이세계아이돌 공식 굿즈",
@@ -17187,129 +17091,7 @@
             "blocked_until": "manual_metadata_evidence_confirmed"
           },
           "auto_apply_enabled": false
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-action-014",
-      "priority": 30,
-      "group_count": 10,
-      "missing_cell_count": 14,
-      "offset": 156,
-      "field_counts": [
-        [
-          "name_ja",
-          10
-        ]
-      ],
-      "source_store_counts": [
-        [
-          "두찜",
-          1
-        ],
-        [
-          "롯데웰푸드",
-          1
-        ],
-        [
-          "이세계아이돌 팝업스토어",
-          1
-        ],
-        [
-          "커비 카페",
-          1
-        ],
-        [
-          "CAPCOM STORE",
-          1
-        ],
-        [
-          "Withmuu",
-          1
-        ],
-        [
-          "aespa Official Store",
-          1
-        ],
-        [
-          "릴파 생일 카페",
-          1
-        ],
-        [
-          "이세계 페스티벌",
-          1
-        ],
-        [
-          "텀블벅",
-          1
-        ]
-      ],
-      "primary_review_url_groups": 8,
-      "primary_review_url_kind_counts": [
-        [
-          "sample_source_url",
-          8
-        ],
-        [
-          "manual_lookup_required",
-          2
-        ]
-      ],
-      "first_primary_review_url": "https://twozzim.com/bbs/board.php?bo_table=news&wr_id=18",
-      "first_primary_review_url_kind": "sample_source_url",
-      "missing_cells_by_field": [
-        [
-          "name_ja",
-          14
-        ]
-      ],
-      "missing_cells_by_source_store": [
-        [
-          "두찜",
-          2
-        ],
-        [
-          "롯데웰푸드",
-          2
-        ],
-        [
-          "이세계아이돌 팝업스토어",
-          2
-        ],
-        [
-          "커비 카페",
-          2
-        ],
-        [
-          "CAPCOM STORE",
-          1
-        ],
-        [
-          "Withmuu",
-          1
-        ],
-        [
-          "aespa Official Store",
-          1
-        ],
-        [
-          "릴파 생일 카페",
-          1
-        ],
-        [
-          "이세계 페스티벌",
-          1
-        ],
-        [
-          "텀블벅",
-          1
-        ]
-      ],
-      "review_state": "manual_metadata_evidence_confirmation_required",
-      "next_machine_step": "fill_confirmed_metadata_patch_templates",
-      "recommended_action": "Confirm official metadata evidence, then fill field/store patch templates.",
-      "groups": [
+        },
         {
           "field": "name_ja",
           "source_store": "두찜",
@@ -17428,7 +17210,113 @@
             "blocked_until": "manual_metadata_evidence_confirmed"
           },
           "auto_apply_enabled": false
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-action-014",
+      "priority": 30,
+      "group_count": 8,
+      "missing_cell_count": 10,
+      "offset": 156,
+      "field_counts": [
+        [
+          "name_ja",
+          8
+        ]
+      ],
+      "source_store_counts": [
+        [
+          "이세계아이돌 팝업스토어",
+          1
+        ],
+        [
+          "커비 카페",
+          1
+        ],
+        [
+          "CAPCOM STORE",
+          1
+        ],
+        [
+          "Withmuu",
+          1
+        ],
+        [
+          "aespa Official Store",
+          1
+        ],
+        [
+          "릴파 생일 카페",
+          1
+        ],
+        [
+          "이세계 페스티벌",
+          1
+        ],
+        [
+          "텀블벅",
+          1
+        ]
+      ],
+      "primary_review_url_groups": 7,
+      "primary_review_url_kind_counts": [
+        [
+          "sample_source_url",
+          7
+        ],
+        [
+          "manual_lookup_required",
+          1
+        ]
+      ],
+      "first_primary_review_url": "https://www.nintendo.com/us/store/products/waddle-dee-6-plush-107847/",
+      "first_primary_review_url_kind": "sample_source_url",
+      "missing_cells_by_field": [
+        [
+          "name_ja",
+          10
+        ]
+      ],
+      "missing_cells_by_source_store": [
+        [
+          "이세계아이돌 팝업스토어",
+          2
+        ],
+        [
+          "커비 카페",
+          2
+        ],
+        [
+          "CAPCOM STORE",
+          1
+        ],
+        [
+          "Withmuu",
+          1
+        ],
+        [
+          "aespa Official Store",
+          1
+        ],
+        [
+          "릴파 생일 카페",
+          1
+        ],
+        [
+          "이세계 페스티벌",
+          1
+        ],
+        [
+          "텀블벅",
+          1
+        ]
+      ],
+      "review_state": "manual_metadata_evidence_confirmation_required",
+      "next_machine_step": "fill_confirmed_metadata_patch_templates",
+      "recommended_action": "Confirm official metadata evidence, then fill field/store patch templates.",
+      "groups": [
         {
           "field": "name_ja",
           "source_store": "이세계아이돌 팝업스토어",
