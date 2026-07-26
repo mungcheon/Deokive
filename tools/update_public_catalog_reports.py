@@ -42,6 +42,7 @@ import build_provider_missing_source_url_queue_public
 import build_requested_focus_action_queue_public
 import build_requested_focus_next_work_public
 import build_reused_image_deduplication_review_public
+import build_reused_image_dedupe_confirmation_template_public
 import build_source_discovery_next_focus_detail_candidates_public
 import build_source_discovery_next_focus_exact_url_candidate_audit_public
 import build_source_discovery_next_focus_fallback_queue_public
@@ -69,6 +70,8 @@ IMAGE_ASSET_AUDIT = DATA / "catalog_image_asset_audit_public.json"
 REUSED_IMAGE_REVIEW = DATA / "catalog_reused_image_review_public.json"
 REUSED_IMAGE_REVIEW_MD = DATA / "catalog_reused_image_review_public.md"
 REUSED_IMAGE_DEDUPLICATION_REVIEW = DATA / "catalog_reused_image_deduplication_review_public.json"
+REUSED_IMAGE_DEDUPLICATION_CONFIRMED_TEMPLATE = DATA / "catalog_reused_image_deduplication_confirmed_template_public.json"
+REUSED_IMAGE_DEDUPLICATION_CONFIRMED_TEMPLATE_MD = DATA / "catalog_reused_image_deduplication_confirmed_template_public.md"
 REUSED_IMAGE_DEDUPLICATION_IMPORT_DRY_RUN = DATA / "catalog_reused_image_deduplication_import_dry_run_public.json"
 MISSING_IMAGE_PRIORITY = DATA / "catalog_missing_image_priority_public.json"
 SOURCE_DISCOVERY_STARTER_QUEUE = DATA / "source_discovery_starter_queue_public.json"
@@ -10999,9 +11002,15 @@ def update_reports(write: bool) -> dict[str, Any]:
             generated_at=generated_at,
         )
     )
+    reused_image_deduplication_confirmed_template = (
+        build_reused_image_dedupe_confirmation_template_public.build_template(
+            reused_image_deduplication_review,
+            generated_at=generated_at,
+        )
+    )
     reused_image_deduplication_import_dry_run = (
         import_confirmed_reused_image_deduplication_rows.import_confirmed(
-            reused_image_deduplication_review,
+            reused_image_deduplication_confirmed_template,
             catalog,
             write=False,
         )
@@ -11616,6 +11625,11 @@ def update_reports(write: bool) -> dict[str, Any]:
         target["catalog_reused_image_deduplication_review"] = {
             "public_report": f"data/{REUSED_IMAGE_DEDUPLICATION_REVIEW.name}",
             **reused_image_deduplication_review["summary"],
+        }
+        target["catalog_reused_image_deduplication_confirmed_template"] = {
+            "public_report": f"data/{REUSED_IMAGE_DEDUPLICATION_CONFIRMED_TEMPLATE.name}",
+            "markdown_report": f"data/{REUSED_IMAGE_DEDUPLICATION_CONFIRMED_TEMPLATE_MD.name}",
+            **reused_image_deduplication_confirmed_template["summary"],
         }
         target["catalog_reused_image_deduplication_import_dry_run"] = {
             "public_report": f"data/{REUSED_IMAGE_DEDUPLICATION_IMPORT_DRY_RUN.name}",
@@ -13652,6 +13666,11 @@ def update_reports(write: bool) -> dict[str, Any]:
             REUSED_IMAGE_REVIEW_MD,
         )
         write_json(REUSED_IMAGE_DEDUPLICATION_REVIEW, reused_image_deduplication_review)
+        write_json(REUSED_IMAGE_DEDUPLICATION_CONFIRMED_TEMPLATE, reused_image_deduplication_confirmed_template)
+        build_reused_image_dedupe_confirmation_template_public.write_markdown(
+            reused_image_deduplication_confirmed_template,
+            REUSED_IMAGE_DEDUPLICATION_CONFIRMED_TEMPLATE_MD,
+        )
         write_json(
             REUSED_IMAGE_DEDUPLICATION_IMPORT_DRY_RUN,
             {
@@ -13734,6 +13753,8 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(REUSED_IMAGE_REVIEW.relative_to(ROOT)),
             str(REUSED_IMAGE_REVIEW_MD.relative_to(ROOT)),
             str(REUSED_IMAGE_DEDUPLICATION_REVIEW.relative_to(ROOT)),
+            str(REUSED_IMAGE_DEDUPLICATION_CONFIRMED_TEMPLATE.relative_to(ROOT)),
+            str(REUSED_IMAGE_DEDUPLICATION_CONFIRMED_TEMPLATE_MD.relative_to(ROOT)),
             str(REUSED_IMAGE_DEDUPLICATION_IMPORT_DRY_RUN.relative_to(ROOT)),
             str(MISSING_IMAGE_PRIORITY.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_STARTER_QUEUE.relative_to(ROOT)),
