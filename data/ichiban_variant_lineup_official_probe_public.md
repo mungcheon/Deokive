@@ -1,14 +1,13 @@
 # Ichiban Variant Lineup Official Probe
 
 - Candidate rows: `32`
-- Rows with official expected variant count: `31`
+- Rows with official expected variant count: `32`
 - Blind choice rows: `2`
 - Safe auto-apply rows: `0`
 
 ## Status
 
-- `matched`: `31`
-- `official_item_not_matched`: `1`
+- `matched`: `32`
 
 ## Candidates
 
@@ -22,21 +21,21 @@
 ### #13806 matched
 - Official: 一番くじ SPY×FAMILY-Care for another?- / E賞 食器アソート
 - Expected variants: 3
-- Choice: unknown
+- Choice: selectable
 - Action: review_before_variant_split
 - Proposed display: 一番くじ SPY×FAMILY-Care for another?- / E賞 / 食器アソート / 기타
 
 ### #13807 matched
 - Official: 一番くじ SPY×FAMILY-Care for another?- / F賞 タオルアソート
 - Expected variants: 4
-- Choice: unknown
+- Choice: selectable
 - Action: review_before_variant_split
 - Proposed display: 一番くじ SPY×FAMILY-Care for another?- / F賞 / タオルアソート / 기타
 
 ### #13825 matched
 - Official: 一番くじ 劇場版 SPY×FAMILY CODE: White / F賞 ステーショナリーアソート
 - Expected variants: 5
-- Choice: unknown
+- Choice: selectable
 - Action: review_before_variant_split
 - Proposed display: 一番くじ 劇場版 SPY×FAMILY CODE: White / F賞 / ステーショナリーアソート / 기타
 
@@ -50,7 +49,7 @@
 ### #13865 matched
 - Official: 一番くじ SPY×FAMILY -Extra Mission- / G賞 タオルアソート
 - Expected variants: 10
-- Choice: unknown
+- Choice: selectable
 - Action: review_before_variant_split
 - Proposed display: 一番くじ SPY×FAMILY -Extra Mission- / G賞 / タオルアソート / 기타
 
@@ -64,7 +63,7 @@
 ### #14350 matched
 - Official: 一番くじ 星のカービィ Kirby Café PETIT / G賞 まるでお店のような ステーショナリーアソート PETIT
 - Expected variants: 5
-- Choice: unknown
+- Choice: selectable
 - Action: review_before_variant_split
 - Proposed display: 一番くじ 星のカービィ Kirby Café PETIT / G賞 / まるでお店のような ステーショナリーアソート PETIT / 기타
 
@@ -176,7 +175,7 @@
 ### #15933 matched
 - Official: 一番くじ ART OF Chopper 『ヴィンテージクリーチャーズ』 / G賞 テーブルウェアアソート～カラーガラスver.～
 - Expected variants: 3
-- Choice: unknown
+- Choice: selectable
 - Action: review_before_variant_split
 - Proposed display: 一番くじ ART OF Chopper 『ヴィンテージクリーチャーズ』 / G賞 / テーブルウェアアソート～カラーガラスver.～ / 기타
 
@@ -190,7 +189,7 @@
 ### #16289 matched
 - Official: 一番くじ ドラゴンボール EX 孫悟空修業編 / H賞 ステーショナリーアソート
 - Expected variants: 6
-- Choice: unknown
+- Choice: selectable
 - Action: review_before_variant_split
 - Proposed display: 一番くじ ドラゴンボール EX 孫悟空修業編 / H賞 / ステーショナリーアソート / 기타
 
@@ -225,10 +224,13 @@
 ### #17500 matched
 - Official: 一番くじ 機動戦士ガンダム 35th Anniversary / F賞 食器アソート
 - Expected variants: 6
-- Choice: unknown
+- Choice: selectable
 - Action: review_before_variant_split
 - Proposed display: 一番くじ 機動戦士ガンダム 35th Anniversary / F賞 / 食器アソート / 기타
 
-### #17665 official_item_not_matched
-- Error: 
-- Source: https://1kuji.com/products/db_d
+### #17665 matched
+- Official: 一番くじ ドラゴンボールDAIMA / H賞 ラバーアソート
+- Expected variants: 8
+- Choice: selectable
+- Action: review_before_variant_split
+- Proposed display: 一番くじ ドラゴンボールDAIMA / H賞 / ラバーアソート / 기타

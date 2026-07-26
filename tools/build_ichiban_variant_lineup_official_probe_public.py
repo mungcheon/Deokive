@@ -42,6 +42,22 @@ IMG_RE = re.compile(r'<img[^>]+(?:src|data-src)=["\']([^"\']+)["\'][^>]*>', re.I
 HREF_IMAGE_RE = re.compile(r'<a[^>]+href=["\']([^"\']+\.(?:webp|jpe?g|png)(?:\?[^"\']*)?)["\']', re.IGNORECASE)
 TAG_RE = re.compile(r"<[^>]+>")
 COUNT_RE = re.compile(r"\u5168\s*(\d+)\s*\u7a2e")
+SPECIAL_POPUP_START_RE = re.compile(
+    r'<div\s+class=["\'][^"\']*\bpopupCol\b[^"\']*["\']\s+id=["\']popup_prize(?P<rank>[A-Z])["\'][^>]*>',
+    re.IGNORECASE | re.DOTALL,
+)
+SPECIAL_TITLE_ALT_RE = re.compile(
+    r'<img[^>]+class=["\'][^"\']*\bpopupTitImg\b[^"\']*["\'][^>]+alt=["\'](?P<alt>[^"\']+)["\']',
+    re.IGNORECASE | re.DOTALL,
+)
+SPECIAL_TITLE_RE = re.compile(
+    r'<h3[^>]+class=["\'][^"\']*\bpopupTit\b[^"\']*["\'][^>]*>(?P<title>.*?)</h3>',
+    re.IGNORECASE | re.DOTALL,
+)
+SPECIAL_DETAIL_COL_RE = re.compile(
+    r'<div[^>]+class=["\'][^"\']*\bpopupDetailCol\b[^"\']*["\'][^>]*>(?P<body>.*?)</div>\s*</div>\s*</li>',
+    re.IGNORECASE | re.DOTALL,
+)
 
 
 def load_json(path: Path) -> Any:
@@ -53,10 +69,14 @@ def _text(value: Any) -> str:
 
 
 def fetch_text(url: str) -> str:
+    return fetch_page(url)[0]
+
+
+def fetch_page(url: str) -> tuple[str, str]:
     request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
     with urllib.request.urlopen(request, timeout=30) as response:
         charset = response.headers.get_content_charset() or "utf-8"
-        return response.read().decode(charset, errors="replace")
+        return response.read().decode(charset, errors="replace"), response.geturl()
 
 
 def _plain(value: str) -> str:
@@ -101,7 +121,62 @@ def extract_item_blocks(source: str, page_url: str) -> list[dict[str, Any]]:
                 "choice_policy": _choice_policy(detail),
             }
         )
+    if not items:
+        items = extract_special_popup_blocks(source, page_url)
     return items
+
+
+def extract_special_popup_blocks(source: str, page_url: str) -> list[dict[str, Any]]:
+    items: list[dict[str, Any]] = []
+    for rank, body in _special_popup_bodies(source):
+        title_alt = _first_group(SPECIAL_TITLE_ALT_RE, body)
+        title = _first_group(SPECIAL_TITLE_RE, body)
+        official_name = title_alt or f"{rank}\u8cde {title}".strip()
+        detail = _special_detail_text(body)
+        images: list[str] = []
+        for pattern in (HREF_IMAGE_RE, IMG_RE):
+            for match in pattern.finditer(body):
+                image_url = _absolute_url(match.group(1), page_url)
+                if "/tit_prize" in image_url:
+                    continue
+                if image_url.startswith(("http://", "https://")) and image_url not in images:
+                    images.append(image_url)
+        items.append(
+            {
+                "official_name": official_name,
+                "official_detail": detail,
+                "official_images": images,
+                "expected_variant_count": _expected_variant_count(detail),
+                "choice_policy": _choice_policy(detail),
+            }
+        )
+    return items
+
+
+def _special_popup_bodies(source: str) -> list[tuple[str, str]]:
+    bodies: list[tuple[str, str]] = []
+    tag_re = re.compile(r"</?div\b[^>]*>", re.IGNORECASE)
+    for match in SPECIAL_POPUP_START_RE.finditer(source):
+        rank = match.group("rank").upper()
+        depth = 0
+        end = match.end()
+        for tag_match in tag_re.finditer(source, match.start()):
+            tag = tag_match.group(0)
+            if tag.startswith("</"):
+                depth -= 1
+                if depth == 0:
+                    end = tag_match.end()
+                    break
+            else:
+                depth += 1
+        bodies.append((rank, source[match.start() : end]))
+    return bodies
+
+
+def _special_detail_text(body: str) -> str:
+    detail_match = SPECIAL_DETAIL_COL_RE.search(body)
+    detail_body = detail_match.group("body") if detail_match else body
+    return _plain(detail_body)
 
 
 def _expected_variant_count(detail: str) -> int | None:
@@ -114,7 +189,7 @@ def _expected_variant_count(detail: str) -> int | None:
 def _choice_policy(detail: str) -> str:
     if "\u9078\u3079\u307e\u305b\u3093" in detail:
         return "blind"
-    if "\u9078\u3079\u307e\u3059" in detail:
+    if "\u9078\u3079\u307e\u3059" in detail or "\u9078\u3079\u308b" in detail:
         return "selectable"
     return "unknown"
 
@@ -200,10 +275,10 @@ def build_probe(review: dict[str, Any], *, sleep: float = 0.2) -> dict[str, Any]
         if index:
             time.sleep(sleep)
         try:
-            source = fetch_text(url)
+            source, final_url = fetch_page(url)
             campaign_title = _campaign_title(source)
-            items = extract_item_blocks(source, url)
-            page_cache[url] = {"campaign_title": campaign_title, "item_count": len(items)}
+            items = extract_item_blocks(source, final_url)
+            page_cache[url] = {"campaign_title": campaign_title, "final_url": final_url, "item_count": len(items)}
             for row in url_rows:
                 candidates.append(_candidate(row, _find_official_item(row, items), campaign_title))
         except Exception as error:  # noqa: BLE001 - report network/parser failures without mutating DB.

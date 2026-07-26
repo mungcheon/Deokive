@@ -7,7 +7,11 @@ from unittest import mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from tools.build_ichiban_variant_lineup_official_probe_public import build_probe, extract_item_blocks
+from tools.build_ichiban_variant_lineup_official_probe_public import (
+    build_probe,
+    extract_item_blocks,
+    extract_special_popup_blocks,
+)
 
 
 class BuildIchibanVariantLineupOfficialProbePublicTest(unittest.TestCase):
@@ -61,8 +65,8 @@ class BuildIchibanVariantLineupOfficialProbePublicTest(unittest.TestCase):
         """
 
         with mock.patch(
-            "tools.build_ichiban_variant_lineup_official_probe_public.fetch_text",
-            return_value=source,
+            "tools.build_ichiban_variant_lineup_official_probe_public.fetch_page",
+            return_value=(source, "https://1kuji.com/products/test"),
         ):
             report = build_probe(review, sleep=0)
 
@@ -76,6 +80,46 @@ class BuildIchibanVariantLineupOfficialProbePublicTest(unittest.TestCase):
             candidate["proposed_display_name_ko"],
             "一番くじ TEST / H賞 / 名場面ステッカーアソート / 기타",
         )
+
+    def test_extracts_special_popup_items(self) -> None:
+        source = """
+        <html><head><title>一番くじ ドラゴンボールDAIMA｜一番くじ倶楽部</title></head>
+        <body>
+          <li class="prizeSub">
+            <a href="#popup_prizeH"><img src="images/lineup/img_h.jpg?v01" alt="H賞 ラバーアソート"></a>
+            <div class="popupCol" id="popup_prizeH">
+              <div class="popupColInner popupH">
+                <div class="popupTitCol">
+                  <img src="images/popup/tit_prizeH.png?v01" alt="H賞 ラバーアソート" class="popupTitImg">
+                  <h3 class="popupTit">ラバーアソート</h3>
+                </div>
+                <div class="popupSliderCol">
+                  <ul class="swiper-wrapper">
+                    <li class="swiper-slide"><img src="images/popup/prizeH_01.jpg?v01" alt="H賞 ラバーアソート"></li>
+                    <li class="swiper-slide"><img src="images/popup/prizeH_02.jpg?v01" alt="H賞 ラバーアソート"></li>
+                  </ul>
+                </div>
+                <div class="popupDetailCol">
+                  <div class="popupDetailBox">
+                    <ul class="popupDetailList">
+                      <li class="popupDetailListItem"><span>全4種</span></li>
+                      <li class="popupDetailListItem"><span>選べる全4種！</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </body></html>
+        """
+
+        items = extract_special_popup_blocks(source, "https://sf.1kuji.com/1kuji_db/db_d/")
+
+        self.assertEqual(len(items), 1)
+        self.assertEqual(items[0]["official_name"], "H賞 ラバーアソート")
+        self.assertEqual(items[0]["expected_variant_count"], 4)
+        self.assertEqual(items[0]["choice_policy"], "selectable")
+        self.assertTrue(items[0]["official_images"][0].endswith("/images/popup/prizeH_01.jpg?v01"))
 
 
 if __name__ == "__main__":
