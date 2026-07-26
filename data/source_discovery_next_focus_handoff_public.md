@@ -72,6 +72,6 @@
 - `1593` 트라팔가 로 카라비너 러버 스트랩 / トラファルガー・ロー カラビナ付きラバーストラップ (원피스, 키링)
   - Review: https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%88%E3%83%A9%E3%83%95%E3%82%A1%E3%83%AB%E3%82%AC%E3%83%BC%E3%83%BB%E3%83%AD%E3%83%BC+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22
   - Decision: confirm exact detail URL or leave blank
-- `1594` 덴지 러버 스트랩 / デンジ ラバーストラップ (체인소 맨, 키링)
+- `1594` 덴지 러버 스트랩 / デンジ ラバーストラップ (체인소맨, 키링)
   - Review: https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%87%E3%83%B3%E3%82%B8+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22
   - Decision: confirm exact detail URL or leave blank

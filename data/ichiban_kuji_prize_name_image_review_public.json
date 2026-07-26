@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T20:54:43Z",
+  "generated_at": "2026-07-26T23:23:33Z",
   "scope": "ichiban_kuji_prize_name_image_review",
   "summary": {
     "kuji_rows": 7902,
-    "review_rows": 64,
-    "name_structure_review_rows": 64,
+    "review_rows": 66,
+    "name_structure_review_rows": 66,
     "image_identity_review_rows": 0,
     "same_campaign_prize_rank_name_duplicate_rows": 0,
     "same_campaign_image_reused_different_name_rows": 0,
@@ -14,7 +14,7 @@
     "review_reason_counts": [
       [
         "display_name_does_not_match_series_and_prize_name",
-        64
+        66
       ]
     ],
     "auto_apply_enabled": false,
@@ -2195,6 +2195,141 @@
     {
       "manual_review_status": "not_started",
       "manual_confirmed": false,
+      "catalog_index": 14747,
+      "series_name": "一番おみくじ ハイキュー!!缶バッジ～セカンドシーズン!～",
+      "prize_rank": "缶バッジ",
+      "prize_item_name": "缶バッジ",
+      "expected_prize_display_name": "缶バッジ",
+      "display_name_ko": "一番おみくじ ハイキュー!!缶バッジ～セカンドシーズン!～ / 缶バッジ / 缶バッジ / 기타",
+      "expected_display_name_ko": "一番おみくじ ハイキュー!!缶バッジ～セカンドシーズン!～ / 缶バッジ / 기타",
+      "category": "캔뱃지",
+      "character_name": "기타",
+      "official_price_jpy": 310,
+      "release_date": "2016-01-16",
+      "source_url": "https://1kuji.com/products/haikyu13",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/9231/6c0d84aa-4881-42f1-96e3-aa5301b63682.jpg",
+      "local_image_path": "assets/catalog_images/1ec4b3c5e262c00e1aca.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 14747,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/haikyu13",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 14817,
+      "series_name": "一番おみくじ ハイキュー!! 缶バッジ",
+      "prize_rank": "缶バッジ",
+      "prize_item_name": "缶バッジ",
+      "expected_prize_display_name": "缶バッジ",
+      "display_name_ko": "一番おみくじ ハイキュー!! 缶バッジ / 缶バッジ / 缶バッジ / 기타",
+      "expected_display_name_ko": "一番おみくじ ハイキュー!! 缶バッジ / 缶バッジ / 기타",
+      "category": "캔뱃지",
+      "character_name": "기타",
+      "official_price_jpy": 310,
+      "release_date": "2015-03-22",
+      "source_url": "https://1kuji.com/products/haikyu4",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/5581/f8582476-7c2d-4fa3-92d8-4a9a4c7b337d.jpg",
+      "local_image_path": "assets/catalog_images/9c3abb86df4cb29ac2bf.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 14817,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/haikyu4",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 14797,
+      "series_name": "一番おみくじ ハイキュー!! 缶バッジ",
+      "prize_rank": "缶バッジ",
+      "prize_item_name": "缶バッジ",
+      "expected_prize_display_name": "缶バッジ",
+      "display_name_ko": "一番おみくじ ハイキュー!! 缶バッジ / 缶バッジ / 缶バッジ / 기타",
+      "expected_display_name_ko": "一番おみくじ ハイキュー!! 缶バッジ / 缶バッジ / 기타",
+      "category": "캔뱃지",
+      "character_name": "기타",
+      "official_price_jpy": 310,
+      "release_date": "2015-05-30",
+      "source_url": "https://1kuji.com/products/haikyu8",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/6463/92e863d0-b94d-4b98-846e-c582da258f0b.jpg",
+      "local_image_path": "assets/catalog_images/5ecffa197aa7f48b1a8d.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 14797,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/haikyu8",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
       "catalog_index": 13956,
       "series_name": "一番くじ ホロライブ ちょこのっこコレクション",
       "prize_rank": "ラプラス・ダークネス賞",
@@ -2368,51 +2503,6 @@
         "sub_series": "<confirmed_prize_rank_or_blank>",
         "image_url": "<confirmed_official_image_url_or_blank>",
         "evidence_url": "https://1kuji.com/products/naruto",
-        "manual_confirmed": false
-      },
-      "auto_apply_enabled": false
-    },
-    {
-      "manual_review_status": "not_started",
-      "manual_confirmed": false,
-      "catalog_index": 15701,
-      "series_name": "一番くじ ワンピース 20th anniversary",
-      "prize_rank": "ダブルチャンス",
-      "prize_item_name": "ダブルチャンスキャンペーンルフィ記念フィギュア",
-      "expected_prize_display_name": "ダブルチャンスキャンペーンルフィ記念フィギュア",
-      "display_name_ko": "一番くじ ワンピース 20th anniversary / ダブルチャンス / ダブルチャンスキャンペーンルフィ記念フィギュア / 몽키 D. 루피",
-      "expected_display_name_ko": "一番くじ ワンピース 20th anniversary / ダブルチャンス / キャンペーンルフィ記念フィギュア / 몽키 D. 루피",
-      "category": "굿즈",
-      "character_name": "몽키 D. 루피",
-      "official_price_jpy": 0,
-      "release_date": "2017-12-09",
-      "source_url": "https://1kuji.com/products/onep42",
-      "image_url": "https://sn.bpnavi.jp/onep42/images/w.png",
-      "local_image_path": "assets/catalog_images/d672ad715e94c4c7ea30.webp",
-      "review_reason": "display_name_does_not_match_series_and_prize_name",
-      "name_policy": {
-        "required_components": [
-          "ichiban_release_name(series_name)",
-          "prize_rank(sub_series)",
-          "prize_item_name(name_ja)",
-          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
-        ],
-        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
-        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
-      },
-      "image_review_policy": {
-        "requires_same_campaign": true,
-        "requires_same_prize_rank": true,
-        "requires_same_variant_or_item": true,
-        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
-      },
-      "manual_fix_template": {
-        "catalog_index": 15701,
-        "name_ko": "<confirmed_display_name_or_blank>",
-        "name_ja": "<confirmed_prize_item_name_or_blank>",
-        "sub_series": "<confirmed_prize_rank_or_blank>",
-        "image_url": "<confirmed_official_image_url_or_blank>",
-        "evidence_url": "https://1kuji.com/products/onep42",
         "manual_confirmed": false
       },
       "auto_apply_enabled": false

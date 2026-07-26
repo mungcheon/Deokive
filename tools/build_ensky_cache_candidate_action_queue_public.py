@@ -58,7 +58,7 @@ AFFILIATION_TITLE_HINTS = {
         "\u30d2\u30ed\u30a2\u30ab",
         "hero academia",
     },
-    "\uccb4\uc778\uc18c \ub9e8": {"\u30c1\u30a7\u30f3\u30bd\u30fc\u30de\u30f3", "chainsaw man"},
+    "\uccb4\uc778\uc18c\ub9e8": {"\u30c1\u30a7\u30f3\u30bd\u30fc\u30de\u30f3", "chainsaw man"},
     "\uc6d0\ud53c\uc2a4": {"\u30ef\u30f3\u30d4\u30fc\u30b9", "one piece"},
     "\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c": {
         "\u846c\u9001\u306e\u30d5\u30ea\u30fc\u30ec\u30f3",

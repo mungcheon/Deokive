@@ -181,6 +181,20 @@ class BuildEnskyCacheCandidateActionQueuePublicTest(unittest.TestCase):
 
         self.assertIn("candidate_title_affiliation_mismatch", flags)
 
+    def test_chainsaw_man_canonical_affiliation_matches_ensky_title_hint(self) -> None:
+        flags = queue.candidate_identity_flags(
+            {
+                "affiliation": "\uccb4\uc778\uc18c\ub9e8",
+                "name_ja": "\u30c1\u30a7\u30f3\u30bd\u30fc\u30de\u30f3 \u30a2\u30af\u30ea\u30eb\u30b9\u30bf\u30f3\u30c9 (\u30d1\u30ef\u30fc)",
+                "category": "\u30a2\u30af\u30ea\u30eb\u30b9\u30bf\u30f3\u30c9",
+            },
+            {
+                "title": "\u30c1\u30a7\u30f3\u30bd\u30fc\u30de\u30f3 \u30a2\u30af\u30ea\u30eb\u30b9\u30bf\u30f3\u30c9 / \u30d1\u30ef\u30fc",
+            },
+        )
+
+        self.assertNotIn("candidate_title_affiliation_mismatch", flags)
+
     def test_build_report_prioritizes_lower_identity_risk_candidates(self) -> None:
         cache_coverage = {
             "items": [

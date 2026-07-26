@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T20:54:43Z",
+  "generated_at": "2026-07-26T23:23:33Z",
   "summary": {
     "catalog_rows": 20313,
     "coverage": {
@@ -58,7 +58,7 @@
       "source_discovery_focus_pack_progress_queues": 67,
       "source_discovery_focus_pack_progress_remaining_rows": 752,
       "source_discovery_starter_queue_rows": 762,
-      "source_discovery_starter_queue_groups": 391,
+      "source_discovery_starter_queue_groups": 382,
       "source_discovery_next_focus_fallback_rows": 20,
       "source_discovery_next_focus_fallback_manual_confirmed_rows": 0,
       "source_detail_candidate_action_rows": 15,
@@ -69,7 +69,7 @@
       "official_detail_review_rows": 3,
       "official_detail_review_candidate_rows": 3,
       "official_detail_review_manual_confirmed_rows": 0,
-      "ensky_cache_candidate_action_rows": 39,
+      "ensky_cache_candidate_action_rows": 28,
       "ensky_cache_candidate_manual_confirmed_rows": 0,
       "image_attachment_action_rows": 24,
       "image_attachment_actionable_rows": 24,
@@ -105,9 +105,9 @@
       "animation_category_unmatched_keyword_rows": 0,
       "animation_category_unmatched_keyword_candidates": 0,
       "animation_category_unmatched_keyword_product_type_candidates": 0,
-      "ichiban_prize_name_image_review_rows": 64,
+      "ichiban_prize_name_image_review_rows": 66,
       "ichiban_prize_multi_item_rank_groups": 417,
-      "ichiban_prize_name_image_patch_candidate_rows": 64,
+      "ichiban_prize_name_image_patch_candidate_rows": 66,
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
       "ichiban_prize_name_image_patch_blocked_rows": 0,
       "catalog_goal_manual_review_pillars": 5,
@@ -313,7 +313,7 @@
       "workstream": "source_discovery_starter_queue",
       "status": "manual_review",
       "open_rows": 762,
-      "starter_queue_groups": 391,
+      "starter_queue_groups": 382,
       "coverage_matches_missing_source_url_rows": true,
       "primary_report": "data/source_discovery_starter_queue_public.json",
       "next_step": "find_exact_official_product_source_url",
@@ -1115,37 +1115,29 @@
     {
       "workstream": "ensky_cache_candidate_action_queue",
       "status": "manual_review",
-      "open_rows": 39,
-      "action_batch_count": 4,
+      "open_rows": 28,
+      "action_batch_count": 3,
       "manual_confirmed_true": 0,
-      "candidate_source_url_ready_rows": 39,
-      "candidate_image_url_ready_rows": 39,
+      "candidate_source_url_ready_rows": 28,
+      "candidate_image_url_ready_rows": 28,
       "safe_exact_top_candidate_rows": 0,
       "can_import_now_rows": 0,
-      "blocked_manual_review_rows": 39,
+      "blocked_manual_review_rows": 28,
       "by_affiliation": [
         [
           "주술회전",
           11
         ],
         [
-          "귀멸의 칼날",
-          7
-        ],
-        [
           "나의 히어로 아카데미아",
           5
         ],
         [
-          "체인소 맨",
+          "체인소맨",
           5
         ],
         [
           "단간론파",
-          4
-        ],
-        [
-          "원피스",
           4
         ],
         [
@@ -1160,30 +1152,26 @@
       "by_category": [
         [
           "아크릴 스탠드",
-          11
-        ],
-        [
-          "캔뱃지",
-          8
-        ],
-        [
-          "머그컵",
-          6
+          9
         ],
         [
           "마스코트",
           5
         ],
         [
-          "문구",
+          "머그컵",
           4
         ],
         [
-          "응원용품",
-          2
+          "캔뱃지",
+          4
         ],
         [
-          "인형",
+          "문구",
+          3
+        ],
+        [
+          "응원용품",
           2
         ],
         [
@@ -1192,13 +1180,16 @@
         ]
       ],
       "import_readiness": {
-        "candidate_rows": 39,
-        "candidate_source_url_ready_rows": 39,
-        "candidate_image_url_ready_rows": 39,
+        "candidate_rows": 28,
+        "candidate_source_url_ready_rows": 28,
+        "candidate_image_url_ready_rows": 28,
         "safe_exact_top_candidate_rows": 0,
-        "identity_warning_rows": 39,
+        "identity_warning_rows": 28,
+        "low_risk_review_rows": 0,
+        "medium_risk_review_rows": 0,
+        "high_risk_review_rows": 28,
         "can_import_now_rows": 0,
-        "blocked_manual_review_rows": 39,
+        "blocked_manual_review_rows": 28,
         "manual_confirmation_required": true,
         "auto_apply_enabled": false
       },
@@ -1937,8 +1928,8 @@
     {
       "workstream": "ichiban_kuji_prize_name_image_review",
       "status": "manual_review",
-      "open_rows": 64,
-      "name_structure_review_rows": 64,
+      "open_rows": 66,
+      "name_structure_review_rows": 66,
       "image_identity_review_rows": 0,
       "multi_item_prize_rank_groups": 417,
       "multi_item_prize_rank_catalog_rows": 2945,
@@ -1949,10 +1940,10 @@
     {
       "workstream": "ichiban_kuji_prize_name_image_patch_candidates",
       "status": "manual_review",
-      "open_rows": 64,
-      "candidate_rows": 64,
+      "open_rows": 66,
+      "candidate_rows": 66,
       "manual_confirmed_rows": 0,
-      "exact_image_match_rows": 62,
+      "exact_image_match_rows": 64,
       "strong_name_match_rows": 2,
       "blocked_rows": 0,
       "primary_report": "data/ichiban_kuji_prize_name_image_patch_candidates_public.json",
@@ -2987,12 +2978,12 @@
             41
           ],
           [
-            "단간론파",
+            "체인소맨",
             40
           ],
           [
-            "체인소 맨",
-            35
+            "단간론파",
+            40
           ],
           [
             "하츠네 미쿠",
@@ -4875,13 +4866,158 @@
       "workstream": "source_discovery_starter_queue",
       "public_report": "data/source_discovery_starter_queue_public.json",
       "starter_queue_rows": 762,
-      "starter_queue_groups": 391,
+      "starter_queue_groups": 382,
       "next_review_batch_rows": 20,
       "next_review_batch_group_count": 4,
       "next_review_batch_primary_source_store": "엔스카이",
       "next_review_batch": [
         {
           "group_rank": 1,
+          "item_rank": 1,
+          "source_store": "엔스카이",
+          "affiliation": "원피스",
+          "category": "키링",
+          "group_rows": 10,
+          "primary_strategy": "official_search",
+          "recommended_workflow": "official_storefront_search_then_exact_detail_match",
+          "first_group_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%8A%E3%83%9F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "first_group_fallback_web_search_url": null,
+          "catalog_index": 1583,
+          "name_ko": "나미 러버 스트랩",
+          "name_ja": "ナミ ラバーストラップ",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ナミ ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%8A%E3%83%9F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ],
+          "review_instructions": [
+            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
+            "Accept only an exact official or licensed product/detail page.",
+            "Do not fill image_url unless the exact product image is visible on the accepted source."
+          ]
+        },
+        {
+          "group_rank": 1,
+          "item_rank": 2,
+          "source_store": "엔스카이",
+          "affiliation": "원피스",
+          "category": "키링",
+          "group_rows": 10,
+          "primary_strategy": "official_search",
+          "recommended_workflow": "official_storefront_search_then_exact_detail_match",
+          "first_group_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%8A%E3%83%9F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "first_group_fallback_web_search_url": null,
+          "catalog_index": 1584,
+          "name_ko": "상디 러버 스트랩",
+          "name_ja": "サンジ ラバーストラップ",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "サンジ ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%82%B5%E3%83%B3%E3%82%B8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ],
+          "review_instructions": [
+            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
+            "Accept only an exact official or licensed product/detail page.",
+            "Do not fill image_url unless the exact product image is visible on the accepted source."
+          ]
+        },
+        {
+          "group_rank": 1,
+          "item_rank": 3,
+          "source_store": "엔스카이",
+          "affiliation": "원피스",
+          "category": "키링",
+          "group_rows": 10,
+          "primary_strategy": "official_search",
+          "recommended_workflow": "official_storefront_search_then_exact_detail_match",
+          "first_group_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%8A%E3%83%9F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "first_group_fallback_web_search_url": null,
+          "catalog_index": 1585,
+          "name_ko": "우솝 러버 스트랩",
+          "name_ja": "ウソップ ラバーストラップ",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ウソップ ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ],
+          "review_instructions": [
+            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
+            "Accept only an exact official or licensed product/detail page.",
+            "Do not fill image_url unless the exact product image is visible on the accepted source."
+          ]
+        },
+        {
+          "group_rank": 1,
+          "item_rank": 4,
+          "source_store": "엔스카이",
+          "affiliation": "원피스",
+          "category": "키링",
+          "group_rows": 10,
+          "primary_strategy": "official_search",
+          "recommended_workflow": "official_storefront_search_then_exact_detail_match",
+          "first_group_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%8A%E3%83%9F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "first_group_fallback_web_search_url": null,
+          "catalog_index": 1587,
+          "name_ko": "니코 로빈 러버 스트랩",
+          "name_ja": "ニコ・ロビン ラバーストラップ",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ニコ・ロビン ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%8B%E3%82%B3%E3%83%BB%E3%83%AD%E3%83%93%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ],
+          "review_instructions": [
+            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
+            "Accept only an exact official or licensed product/detail page.",
+            "Do not fill image_url unless the exact product image is visible on the accepted source."
+          ]
+        },
+        {
+          "group_rank": 1,
+          "item_rank": 5,
+          "source_store": "엔스카이",
+          "affiliation": "원피스",
+          "category": "키링",
+          "group_rows": 10,
+          "primary_strategy": "official_search",
+          "recommended_workflow": "official_storefront_search_then_exact_detail_match",
+          "first_group_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%8A%E3%83%9F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "first_group_fallback_web_search_url": null,
+          "catalog_index": 1588,
+          "name_ko": "프랑키 러버 스트랩",
+          "name_ja": "フランキー ラバーストラップ",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "フランキー ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ],
+          "review_instructions": [
+            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
+            "Accept only an exact official or licensed product/detail page.",
+            "Do not fill image_url unless the exact product image is visible on the accepted source."
+          ]
+        },
+        {
+          "group_rank": 2,
           "item_rank": 1,
           "source_store": "엔스카이",
           "affiliation": "장송의 프리렌",
@@ -4910,7 +5046,7 @@
           ]
         },
         {
-          "group_rank": 1,
+          "group_rank": 2,
           "item_rank": 2,
           "source_store": "엔스카이",
           "affiliation": "장송의 프리렌",
@@ -4939,7 +5075,7 @@
           ]
         },
         {
-          "group_rank": 1,
+          "group_rank": 2,
           "item_rank": 3,
           "source_store": "엔스카이",
           "affiliation": "장송의 프리렌",
@@ -4968,7 +5104,7 @@
           ]
         },
         {
-          "group_rank": 1,
+          "group_rank": 2,
           "item_rank": 4,
           "source_store": "엔스카이",
           "affiliation": "장송의 프리렌",
@@ -4997,7 +5133,7 @@
           ]
         },
         {
-          "group_rank": 1,
+          "group_rank": 2,
           "item_rank": 5,
           "source_store": "엔스카이",
           "affiliation": "장송의 프리렌",
@@ -5026,7 +5162,7 @@
           ]
         },
         {
-          "group_rank": 2,
+          "group_rank": 3,
           "item_rank": 1,
           "source_store": "FuRyu",
           "affiliation": "나의 히어로 아카데미아",
@@ -5055,7 +5191,7 @@
           ]
         },
         {
-          "group_rank": 2,
+          "group_rank": 3,
           "item_rank": 2,
           "source_store": "FuRyu",
           "affiliation": "나의 히어로 아카데미아",
@@ -5084,7 +5220,7 @@
           ]
         },
         {
-          "group_rank": 2,
+          "group_rank": 3,
           "item_rank": 3,
           "source_store": "FuRyu",
           "affiliation": "나의 히어로 아카데미아",
@@ -5113,7 +5249,7 @@
           ]
         },
         {
-          "group_rank": 2,
+          "group_rank": 3,
           "item_rank": 4,
           "source_store": "FuRyu",
           "affiliation": "나의 히어로 아카데미아",
@@ -5142,7 +5278,7 @@
           ]
         },
         {
-          "group_rank": 2,
+          "group_rank": 3,
           "item_rank": 5,
           "source_store": "FuRyu",
           "affiliation": "나의 히어로 아카데미아",
@@ -5159,151 +5295,6 @@
           "strategy": "official_search",
           "search_query": "ぬーどるストッパーフィギュア 爆豪勝己",
           "search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ],
-          "review_instructions": [
-            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
-            "Accept only an exact official or licensed product/detail page.",
-            "Do not fill image_url unless the exact product image is visible on the accepted source."
-          ]
-        },
-        {
-          "group_rank": 3,
-          "item_rank": 1,
-          "source_store": "엔스카이",
-          "affiliation": "원피스",
-          "category": "키링",
-          "group_rows": 8,
-          "primary_strategy": "official_search",
-          "recommended_workflow": "official_storefront_search_then_exact_detail_match",
-          "first_group_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "first_group_fallback_web_search_url": null,
-          "catalog_index": 1585,
-          "name_ko": "우솝 러버 스트랩",
-          "name_ja": "ウソップ ラバーストラップ",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ウソップ ラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ],
-          "review_instructions": [
-            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
-            "Accept only an exact official or licensed product/detail page.",
-            "Do not fill image_url unless the exact product image is visible on the accepted source."
-          ]
-        },
-        {
-          "group_rank": 3,
-          "item_rank": 2,
-          "source_store": "엔스카이",
-          "affiliation": "원피스",
-          "category": "키링",
-          "group_rows": 8,
-          "primary_strategy": "official_search",
-          "recommended_workflow": "official_storefront_search_then_exact_detail_match",
-          "first_group_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "first_group_fallback_web_search_url": null,
-          "catalog_index": 1587,
-          "name_ko": "니코 로빈 러버 스트랩",
-          "name_ja": "ニコ・ロビン ラバーストラップ",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ニコ・ロビン ラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%8B%E3%82%B3%E3%83%BB%E3%83%AD%E3%83%93%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ],
-          "review_instructions": [
-            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
-            "Accept only an exact official or licensed product/detail page.",
-            "Do not fill image_url unless the exact product image is visible on the accepted source."
-          ]
-        },
-        {
-          "group_rank": 3,
-          "item_rank": 3,
-          "source_store": "엔스카이",
-          "affiliation": "원피스",
-          "category": "키링",
-          "group_rows": 8,
-          "primary_strategy": "official_search",
-          "recommended_workflow": "official_storefront_search_then_exact_detail_match",
-          "first_group_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "first_group_fallback_web_search_url": null,
-          "catalog_index": 1588,
-          "name_ko": "프랑키 러버 스트랩",
-          "name_ja": "フランキー ラバーストラップ",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "フランキー ラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ],
-          "review_instructions": [
-            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
-            "Accept only an exact official or licensed product/detail page.",
-            "Do not fill image_url unless the exact product image is visible on the accepted source."
-          ]
-        },
-        {
-          "group_rank": 3,
-          "item_rank": 4,
-          "source_store": "엔스카이",
-          "affiliation": "원피스",
-          "category": "키링",
-          "group_rows": 8,
-          "primary_strategy": "official_search",
-          "recommended_workflow": "official_storefront_search_then_exact_detail_match",
-          "first_group_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "first_group_fallback_web_search_url": null,
-          "catalog_index": 1589,
-          "name_ko": "브룩 러버 스트랩",
-          "name_ja": "ブルック ラバーストラップ",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ブルック ラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%96%E3%83%AB%E3%83%83%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ],
-          "review_instructions": [
-            "Open search_url first when present; otherwise start from first_group_fallback_web_search_url.",
-            "Accept only an exact official or licensed product/detail page.",
-            "Do not fill image_url unless the exact product image is visible on the accepted source."
-          ]
-        },
-        {
-          "group_rank": 3,
-          "item_rank": 5,
-          "source_store": "엔스카이",
-          "affiliation": "원피스",
-          "category": "키링",
-          "group_rows": 8,
-          "primary_strategy": "official_search",
-          "recommended_workflow": "official_storefront_search_then_exact_detail_match",
-          "first_group_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "first_group_fallback_web_search_url": null,
-          "catalog_index": 1590,
-          "name_ko": "징베 러버 스트랩",
-          "name_ja": "ジンベエ ラバーストラップ",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ジンベエ ラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%82%B8%E3%83%B3%E3%83%99%E3%82%A8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
           "required_evidence": [
             "exact_product_source_url",
             "title_character_variant_type_match",
@@ -5463,26 +5454,20 @@
       ],
       "coverage_matches_missing_source_url_rows": true,
       "top_group_keys": [
+        "엔스카이 | 원피스 | 키링",
         "엔스카이 | 장송의 프리렌 | 인형",
         "FuRyu | 나의 히어로 아카데미아 | 피규어",
-        "엔스카이 | 원피스 | 키링",
         "굿스마일컴퍼니 | 원피스 | 피규어",
-        "엔스카이 | 헌터X헌터 | 마스코트"
+        "엔스카이 | 주술회전 | 키링"
       ],
       "top_search_urls": [
+        "https://www.enskyshop.com/products/list?name=%E3%83%8A%E3%83%9F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
         "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
         "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85",
-        "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
         "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=POP%20UP%20PARADE%20%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97",
-        "https://www.enskyshop.com/products/list?name=%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E3%82%B4%E3%83%B3%EF%BC%9D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9"
+        "https://www.enskyshop.com/products/list?name=%E8%99%8E%E6%9D%96%E6%82%A0%E4%BB%81%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
       ],
-      "top_fallback_web_search_urls": [
-        "https://www.google.com/search?q=%EC%B9%98%EC%9D%B4%EC%B9%B4%EC%99%80%20%EC%A4%91%EA%B5%AD%20%ED%8C%9D%EC%97%85%20%ED%95%9C%EC%A0%95%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%28%EC%83%81%ED%95%98%EC%9D%B4%29%20%EC%B9%98%EC%9D%B4%EC%B9%B4%EC%99%80%20%EC%A4%91%EA%B5%AD%20%ED%8C%9D%EC%97%85%EC%8A%A4%ED%86%A0%EC%96%B4%20%EC%B9%98%EC%9D%B4%EC%B9%B4%EC%99%80%20official%20goods",
-        "https://www.google.com/search?q=%EA%B7%80%EB%A9%B8%EC%9D%98%20%EC%B9%BC%EB%82%A0%20%EB%94%94%ED%8F%AC%EB%A5%B4%EB%A9%94%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%28%EB%84%A4%EC%A6%88%EC%BD%94%29%20%EA%B7%80%EB%A9%B8%EC%9D%98%20%EC%B9%BC%EB%82%A0%20%EA%B3%B5%EC%8B%9D%20%EA%B7%80%EB%A9%B8%EC%9D%98%20%EC%B9%BC%EB%82%A0%20official%20goods",
-        "https://www.google.com/search?q=%EC%B9%98%EC%9D%B4%EC%B9%B4%EC%99%80%20x%20%EB%AF%B8%EB%8B%88%EC%86%8C%20%EB%B4%89%EC%A0%9C%EC%9D%B8%ED%98%95%20%28%EC%A4%91%EA%B5%AD%20%EC%BD%9C%EB%9D%BC%EB%B3%B4%29%20MINISO%20%EC%A4%91%EA%B5%AD%20%EC%B9%98%EC%9D%B4%EC%B9%B4%EC%99%80%20official%20goods",
-        "https://www.google.com/search?q=%EA%B7%80%EB%A9%B8%EC%9D%98%20%EC%B9%BC%EB%82%A0%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EC%B9%B4%EB%A7%88%EB%8F%84%20%ED%83%84%EC%A7%80%EB%A1%9C%29%20%EA%B7%80%EB%A9%B8%EC%9D%98%20%EC%B9%BC%EB%82%A0%20%EA%B3%B5%EC%8B%9D%20%EA%B7%80%EB%A9%B8%EC%9D%98%20%EC%B9%BC%EB%82%A0%20official%20goods",
-        "https://www.google.com/search?q=%EC%9B%90%ED%94%BC%EC%8A%A4%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EC%B9%B4%EC%9D%B4%EB%8F%84%29%20%EB%AC%B4%EA%B8%B0%EC%99%80%EB%9D%BC%EC%8A%A4%ED%86%A0%EC%96%B4%20%EC%9B%90%ED%94%BC%EC%8A%A4%20official%20goods"
-      ],
+      "top_fallback_web_search_urls": [],
       "recommended_next_action": "Open starter search URLs and confirm exact official product/detail source pages before image import."
     },
     {
@@ -6377,37 +6362,29 @@
       "priority": 23,
       "workstream": "ensky_cache_candidate_action_queue",
       "public_report": "data/ensky_cache_candidate_action_queue_public.json",
-      "candidate_action_rows": 39,
-      "action_batch_count": 4,
+      "candidate_action_rows": 28,
+      "action_batch_count": 3,
       "manual_confirmed_true": 0,
-      "candidate_source_url_ready_rows": 39,
-      "candidate_image_url_ready_rows": 39,
+      "candidate_source_url_ready_rows": 28,
+      "candidate_image_url_ready_rows": 28,
       "safe_exact_top_candidate_rows": 0,
       "can_import_now_rows": 0,
-      "blocked_manual_review_rows": 39,
+      "blocked_manual_review_rows": 28,
       "by_affiliation": [
         [
           "주술회전",
           11
         ],
         [
-          "귀멸의 칼날",
-          7
-        ],
-        [
           "나의 히어로 아카데미아",
           5
         ],
         [
-          "체인소 맨",
+          "체인소맨",
           5
         ],
         [
           "단간론파",
-          4
-        ],
-        [
-          "원피스",
           4
         ],
         [
@@ -6422,30 +6399,26 @@
       "by_category": [
         [
           "아크릴 스탠드",
-          11
-        ],
-        [
-          "캔뱃지",
-          8
-        ],
-        [
-          "머그컵",
-          6
+          9
         ],
         [
           "마스코트",
           5
         ],
         [
-          "문구",
+          "머그컵",
           4
         ],
         [
-          "응원용품",
-          2
+          "캔뱃지",
+          4
         ],
         [
-          "인형",
+          "문구",
+          3
+        ],
+        [
+          "응원용품",
           2
         ],
         [
@@ -6454,13 +6427,16 @@
         ]
       ],
       "import_readiness": {
-        "candidate_rows": 39,
-        "candidate_source_url_ready_rows": 39,
-        "candidate_image_url_ready_rows": 39,
+        "candidate_rows": 28,
+        "candidate_source_url_ready_rows": 28,
+        "candidate_image_url_ready_rows": 28,
         "safe_exact_top_candidate_rows": 0,
-        "identity_warning_rows": 39,
+        "identity_warning_rows": 28,
+        "low_risk_review_rows": 0,
+        "medium_risk_review_rows": 0,
+        "high_risk_review_rows": 28,
         "can_import_now_rows": 0,
-        "blocked_manual_review_rows": 39,
+        "blocked_manual_review_rows": 28,
         "manual_confirmation_required": true,
         "auto_apply_enabled": false
       },
@@ -9353,8 +9329,8 @@
       "priority": 54,
       "workstream": "ichiban_kuji_prize_name_image_review",
       "public_report": "data/ichiban_kuji_prize_name_image_review_public.json",
-      "review_rows": 64,
-      "name_structure_review_rows": 64,
+      "review_rows": 66,
+      "name_structure_review_rows": 66,
       "image_identity_review_rows": 0,
       "multi_item_prize_rank_groups": 417,
       "multi_item_prize_rank_catalog_rows": 2945,
@@ -9365,10 +9341,10 @@
       "priority": 54,
       "workstream": "ichiban_kuji_prize_name_image_patch_candidates",
       "public_report": "data/ichiban_kuji_prize_name_image_patch_candidates_public.json",
-      "candidate_rows": 64,
-      "open_candidate_rows": 64,
+      "candidate_rows": 66,
+      "open_candidate_rows": 66,
       "manual_confirmed_rows": 0,
-      "exact_image_match_rows": 62,
+      "exact_image_match_rows": 64,
       "strong_name_match_rows": 2,
       "blocked_rows": 0,
       "fetch_failure_urls": 0,
@@ -9613,8 +9589,8 @@
         "next_queue_lane": null,
         "next_queue_rows": 0,
         "next_execution_lane_count": 5,
-        "next_execution_open_rows": 249,
-        "next_execution_next_batch_rows": 208,
+        "next_execution_open_rows": 253,
+        "next_execution_next_batch_rows": 212,
         "first_next_execution_lane": "campaign_metadata_confirmation",
         "first_next_execution_status": "next",
         "first_next_execution_rows": 41,

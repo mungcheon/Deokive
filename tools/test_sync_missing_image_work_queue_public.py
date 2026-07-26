@@ -123,6 +123,37 @@ class SyncMissingImageWorkQueuePublicTests(unittest.TestCase):
         self.assertIn("www.enskyshop.com/products/list?name=", item["search_url"])
         self.assertNotIn("/search?q=old", item["search_url"])
 
+    def test_refreshes_stale_query_from_current_catalog_name(self) -> None:
+        catalog = {
+            "items": [
+                {
+                    "catalog_index": 6,
+                    "name_ko": "\uccb4\uc778\uc18c\ub9e8 \ubaa8\uc790\uc774\ud06c \uc544\ud06c\ub9b4 \uc2a4\ud0e0\ub4dc",
+                    "category": "\uc544\ud06c\ub9b4 \uc2a4\ud0e0\ub4dc",
+                    "affiliation": "\uccb4\uc778\uc18c\ub9e8",
+                    "source_store": "\uc5d4\uc2a4\uce74\uc774",
+                }
+            ]
+        }
+        queue = {
+            "items": [
+                {
+                    "row_index": 6,
+                    "strategy": "official_search",
+                    "provider_status": "search_only",
+                    "automation_safety": "candidate_provider_script_required",
+                    "priority": 10,
+                    "query": "\uccb4\uc778\uc18c \ub9e8 \ubaa8\uc790\uc774\ud06c \uc544\ud06c\ub9b4 \uc2a4\ud0e0\ub4dc",
+                }
+            ]
+        }
+
+        result = sync_queue(catalog, queue)
+
+        item = result["queue"]["items"][0]
+        self.assertEqual(item["query"], "\uccb4\uc778\uc18c\ub9e8 \ubaa8\uc790\uc774\ud06c \uc544\ud06c\ub9b4 \uc2a4\ud0e0\ub4dc")
+        self.assertNotIn("%20%EB%A7%A8", item["search_url"])
+
     def test_promotes_existing_manual_review_when_store_gets_official_search_lane(self) -> None:
         catalog = {
             "items": [

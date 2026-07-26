@@ -21747,7 +21747,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 메탈릭 러버 스트랩 (덴지)',
+    nameKo: '체인소맨 메탈릭 러버 스트랩 (덴지)',
     nameJa: 'チェンソーマン メタリックラバーストラップ (デンジ)',
     category: '키링',
     characterName: '덴지',
@@ -22459,7 +22459,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: 'Cospa',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 아크릴 스탠드 (마키마)',
+    nameKo: '체인소맨 아크릴 스탠드 (마키마)',
     nameJa: 'チェンソーマン アクリルスタンド (マキマ)',
     category: '아크릴 스탠드',
     characterName: '마키마',
@@ -22469,7 +22469,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 아크릴 스탠드 (파워)',
+    nameKo: '체인소맨 아크릴 스탠드 (파워)',
     nameJa: 'チェンソーマン アクリルスタンド (パワー)',
     category: '아크릴 스탠드',
     characterName: '파워',
@@ -22479,7 +22479,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 아크릴 스탠드 (아키)',
+    nameKo: '체인소맨 아크릴 스탠드 (아키)',
     nameJa: 'チェンソーマン アクリルスタンド (早川アキ)',
     category: '아크릴 스탠드',
     characterName: '하야카와 아키',
@@ -22489,7 +22489,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 아크릴 피규어 (덴지 폼)',
+    nameKo: '체인소맨 아크릴 피규어 (덴지 폼)',
     nameJa: 'チェンソーマン アクリルフィギュア (チェンソーマン形態)',
     category: '아크릴 스탠드',
     characterName: '덴지',
@@ -22499,7 +22499,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: '코토부키야',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 모자이크 아크릴 스탠드 (마키마)',
+    nameKo: '체인소맨 모자이크 아크릴 스탠드 (마키마)',
     nameJa: 'チェンソーマン モザイクアクリルスタンド (マキマ)',
     category: '아크릴 스탠드',
     characterName: '마키마',
@@ -22509,7 +22509,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: 'Cospa',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 빅 아크릴 스탠드 (파워)',
+    nameKo: '체인소맨 빅 아크릴 스탠드 (파워)',
     nameJa: 'チェンソーマン ビッグアクリルスタンド (パワー)',
     category: '아크릴 스탠드',
     characterName: '파워',
@@ -23303,7 +23303,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: 'AmiAmi',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 트레이딩 캔뱃지 덴지',
+    nameKo: '체인소맨 트레이딩 캔뱃지 덴지',
     nameJa: 'チェンソーマン トレーディング缶バッジ デンジ',
     category: '캔뱃지',
     characterName: '덴지',
@@ -23313,7 +23313,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: '점프 캐릭터즈 스토어',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 트레이딩 캔뱃지 파워',
+    nameKo: '체인소맨 트레이딩 캔뱃지 파워',
     nameJa: 'チェンソーマン トレーディング缶バッジ パワー',
     category: '캔뱃지',
     characterName: '파워',
@@ -23323,7 +23323,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: '점프 캐릭터즈 스토어',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 트레이딩 캔뱃지 마키마',
+    nameKo: '체인소맨 트레이딩 캔뱃지 마키마',
     nameJa: 'チェンソーマン トレーディング缶バッジ マキマ',
     category: '캔뱃지',
     characterName: '마키마',
@@ -23333,7 +23333,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: '점프 캐릭터즈 스토어',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 트레이딩 캔뱃지 아키 하야카와',
+    nameKo: '체인소맨 트레이딩 캔뱃지 아키 하야카와',
     nameJa: 'チェンソーマン トレーディング缶バッジ 早川アキ',
     category: '캔뱃지',
     characterName: '하야카와 아키',
@@ -23343,7 +23343,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: '점프 캐릭터즈 스토어',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 메탈릭 캔뱃지 덴지',
+    nameKo: '체인소맨 메탈릭 캔뱃지 덴지',
     nameJa: 'チェンソーマン メタリック缶バッジ デンジ',
     category: '캔뱃지',
     characterName: '덴지',
@@ -23353,7 +23353,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: 'Movic',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 빅 캔뱃지 마키마',
+    nameKo: '체인소맨 빅 캔뱃지 마키마',
     nameJa: 'チェンソーマン BIG缶バッジ マキマ',
     category: '캔뱃지',
     characterName: '마키마',
@@ -23363,7 +23363,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: 'Movic',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 의상 변경 캔뱃지 파워',
+    nameKo: '체인소맨 의상 변경 캔뱃지 파워',
     nameJa: 'チェンソーマン 衣装替え缶バッジ パワー',
     category: '캔뱃지',
     characterName: '파워',
@@ -23373,7 +23373,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: '애니메이트',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 일상 시리즈 캔뱃지 덴지&파워',
+    nameKo: '체인소맨 일상 시리즈 캔뱃지 덴지&파워',
     nameJa: 'チェンソーマン 日常シリーズ缶バッジ デンジ＆パワー',
     category: '캔뱃지',
     characterName: '덴지',
@@ -23383,7 +23383,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: '코토부키야',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 클리어 파일 A4 덴지',
+    nameKo: '체인소맨 클리어 파일 A4 덴지',
     nameJa: 'チェンソーマン クリアファイルA4 デンジ',
     category: '문구',
     characterName: '덴지',
@@ -23393,7 +23393,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: '점프 캐릭터즈 스토어',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 클리어 파일 세트 공안 4과',
+    nameKo: '체인소맨 클리어 파일 세트 공안 4과',
     nameJa: 'チェンソーマン クリアファイルセット 公安4課',
     category: '문구',
     characterName: '하야카와 아키',
@@ -23403,7 +23403,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: '애니메이트',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 일러스트 카드 컬렉션 마키마',
+    nameKo: '체인소맨 일러스트 카드 컬렉션 마키마',
     nameJa: 'チェンソーマン イラストカードコレクション マキマ',
     category: '문구',
     characterName: '마키마',
@@ -23413,7 +23413,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: '점프 캐릭터즈 스토어',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 일러스트 카드 컬렉션 아키',
+    nameKo: '체인소맨 일러스트 카드 컬렉션 아키',
     nameJa: 'チェンソーマン イラストカードコレクション アキ',
     category: '문구',
     characterName: '하야카와 아키',
@@ -23423,7 +23423,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: 'AmiAmi',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 학원 시리즈 캔뱃지 덴지',
+    nameKo: '체인소맨 학원 시리즈 캔뱃지 덴지',
     nameJa: 'チェンソーマン 学園シリーズ缶バッジ デンジ',
     category: '캔뱃지',
     characterName: '덴지',
@@ -24350,7 +24350,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: 'DAISO',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 덴지 머그컵',
+    nameKo: '체인소맨 덴지 머그컵',
     nameJa: 'チェンソーマン デンジ マグカップ',
     category: '머그컵',
     characterName: '덴지',
@@ -24360,7 +24360,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: '점프 캐릭터즈 스토어',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 마키마 머그컵',
+    nameKo: '체인소맨 마키마 머그컵',
     nameJa: 'チェンソーマン マキマ マグカップ',
     category: '머그컵',
     characterName: '마키마',
@@ -24370,7 +24370,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: '점프 캐릭터즈 스토어',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 파워 마이크로 화이버 타올',
+    nameKo: '체인소맨 파워 마이크로 화이버 타올',
     nameJa: 'チェンソーマン パワー マイクロファイバータオル',
     category: '타월',
     characterName: '파워',
@@ -24380,7 +24380,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: 'Cospa',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 아키 토트백',
+    nameKo: '체인소맨 아키 토트백',
     nameJa: 'チェンソーマン 早川アキ トートバッグ',
     category: '가방',
     characterName: '하야카와 아키',
@@ -24395,7 +24395,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     releaseDate: '2026-07-24',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 포치타 우치와',
+    nameKo: '체인소맨 포치타 우치와',
     nameJa: 'チェンソーマン ポチタ うちわ',
     category: '응원용품',
     characterName: '포치타',
@@ -24405,7 +24405,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 레제 의상 변경 머그컵',
+    nameKo: '체인소맨 레제 의상 변경 머그컵',
     nameJa: 'チェンソーマン レゼ 衣装替え マグカップ',
     category: '머그컵',
     characterName: '레제',
@@ -24415,7 +24415,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: '애니메이트',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 카페 클리어 보틀',
+    nameKo: '체인소맨 카페 클리어 보틀',
     nameJa: 'チェンソーマン カフェコラボ クリアボトル',
     category: '생활잡화',
     characterName: '덴지',
@@ -24425,7 +24425,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: '애니메이트',
   ),
   GoodsCatalogEntry(
-    nameKo: '체인소 맨 키시베 머그컵',
+    nameKo: '체인소맨 키시베 머그컵',
     nameJa: 'チェンソーマン 岸辺 マグカップ',
     category: '머그컵',
     characterName: '키시베',

@@ -166,8 +166,9 @@ def _refresh_existing_item(item: dict[str, Any], row: dict[str, Any]) -> dict[st
     source_url = str(row.get("source_url") or "").strip()
     refreshed["source_url_is_generic"] = bool(refreshed.get("source_url_is_generic")) and bool(source_url)
     refreshed["source_url_is_product_detail"] = bool(refreshed.get("source_url_is_product_detail")) and bool(source_url)
-    if not refreshed.get("query"):
-        refreshed["query"] = _query(row)
+    expected_query = _query(row)
+    if expected_query:
+        refreshed["query"] = expected_query
     _maybe_refresh_manual_strategy(refreshed, row)
     expected_search_url = _search_url(row, str(refreshed.get("query") or ""))
     if expected_search_url and refreshed.get("strategy") in {"official_search", "manual_official_search_review"}:
