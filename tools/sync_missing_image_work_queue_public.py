@@ -37,6 +37,12 @@ OFFICIAL_SEARCH_STORES = {
     "Cospa": ("manual_official_search_review", "search_only_manual", "manual_confirmation_required", 20, "https://www.cospa.com/cospa/itemlist/id/00000/mode/title/page/1/series_index/{query}"),
     "SEGA": ("manual_official_search_review", "search_only_manual", "manual_confirmation_required", 20, "https://segaplaza.jp/search/?q={query}"),
     "Re-ment": ("manual_official_search_review", "search_only_manual", "manual_confirmation_required", 20, "https://www.re-ment.co.jp/?s={query}"),
+    "메가하우스": ("manual_official_search_review", "search_only_manual", "manual_confirmation_required", 20, "https://www.megahobby.jp/products/?s={query}"),
+    "Bandai Premium": ("manual_official_search_review", "search_only_manual", "manual_confirmation_required", 20, "https://p-bandai.jp/search/?q={query}"),
+    "포켓몬 센터": ("manual_official_search_review", "search_only_manual", "manual_confirmation_required", 20, "https://www.pokemoncenter-online.com/search/?keyword={query}"),
+    "산리오": ("manual_official_search_review", "search_only_manual", "manual_confirmation_required", 20, "https://shop.sanrio.co.jp/search?keyword={query}"),
+    "디즈니 스토어": ("manual_official_search_review", "search_only_manual", "manual_confirmation_required", 20, "https://store.disney.co.jp/search?q={query}"),
+    "무기와라스토어": ("manual_official_search_review", "search_only_manual", "manual_confirmation_required", 20, "https://www.google.com/search?q=site%3Amugiwara-store.com%20{query}"),
 }
 
 FIELDNAMES = [
@@ -162,12 +168,31 @@ def _refresh_existing_item(item: dict[str, Any], row: dict[str, Any]) -> dict[st
     refreshed["source_url_is_product_detail"] = bool(refreshed.get("source_url_is_product_detail")) and bool(source_url)
     if not refreshed.get("query"):
         refreshed["query"] = _query(row)
+    _maybe_refresh_manual_strategy(refreshed, row)
     expected_search_url = _search_url(row, str(refreshed.get("query") or ""))
     if expected_search_url and refreshed.get("strategy") in {"official_search", "manual_official_search_review"}:
         refreshed["search_url"] = expected_search_url
     elif not refreshed.get("search_url"):
         refreshed["search_url"] = expected_search_url
     return refreshed
+
+
+def _maybe_refresh_manual_strategy(item: dict[str, Any], row: dict[str, Any]) -> None:
+    current_strategy = str(item.get("strategy") or "")
+    current_provider_status = str(item.get("provider_status") or "")
+    current_automation_safety = str(item.get("automation_safety") or "")
+    if current_strategy not in {"manual_review", ""}:
+        return
+    if current_provider_status not in {"manual_only", ""}:
+        return
+    if current_automation_safety not in {"manual_research_required", ""}:
+        return
+    strategy, provider_status, automation_safety, priority, _template = _strategy_for(row)
+    if strategy in {"official_search", "manual_official_search_review"}:
+        item["strategy"] = strategy
+        item["provider_status"] = provider_status
+        item["automation_safety"] = automation_safety
+        item["priority"] = priority
 
 
 def _new_queue_item(row: dict[str, Any]) -> dict[str, Any]:

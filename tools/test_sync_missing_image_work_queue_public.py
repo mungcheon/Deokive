@@ -123,6 +123,42 @@ class SyncMissingImageWorkQueuePublicTests(unittest.TestCase):
         self.assertIn("www.enskyshop.com/products/list?name=", item["search_url"])
         self.assertNotIn("/search?q=old", item["search_url"])
 
+    def test_promotes_existing_manual_review_when_store_gets_official_search_lane(self) -> None:
+        catalog = {
+            "items": [
+                {
+                    "catalog_index": 5,
+                    "name_ko": "원피스 피규어",
+                    "name_ja": "ONE PIECE フィギュア",
+                    "category": "피규어",
+                    "affiliation": "원피스",
+                    "source_store": "메가하우스",
+                }
+            ]
+        }
+        queue = {
+            "items": [
+                {
+                    "row_index": 5,
+                    "strategy": "manual_review",
+                    "provider_status": "manual_only",
+                    "automation_safety": "manual_research_required",
+                    "priority": 50,
+                    "query": "ONE PIECE フィギュア",
+                    "search_url": "https://www.google.com/search?q=old",
+                }
+            ]
+        }
+
+        result = sync_queue(catalog, queue)
+
+        item = result["queue"]["items"][0]
+        self.assertEqual(item["strategy"], "manual_official_search_review")
+        self.assertEqual(item["provider_status"], "search_only_manual")
+        self.assertEqual(item["automation_safety"], "manual_confirmation_required")
+        self.assertEqual(item["priority"], 20)
+        self.assertIn("megahobby.jp/products/?s=", item["search_url"])
+
 
 if __name__ == "__main__":
     unittest.main()
