@@ -122,6 +122,96 @@ class BuildEnskyCacheCandidateActionQueuePublicTest(unittest.TestCase):
             ],
         )
 
+    def test_build_report_treats_capsule_standy_as_stand_type(self) -> None:
+        flags = queue.candidate_identity_flags(
+            {
+                "name_ja": "\u9b3c\u6ec5\u306e\u5203 \u7f36\u30d0\u30c3\u30b8 \u7ac8\u9580\u70ad\u6cbb\u90ce",
+                "category": "\u7f36\u30d0\u30c3\u30b8",
+            },
+            {
+                "title": "\u9b3c\u6ec5\u306e\u5203 \u30ab\u30d6\u30bb\u30eb\u30b9\u30bf\u30f3\u30c7\u30a3 / \u7ac8\u9580\u70ad\u6cbb\u90ce",
+            },
+        )
+
+        self.assertIn("candidate_title_product_type_mismatch", flags)
+
+    def test_build_report_treats_chibigumi_as_plush_type(self) -> None:
+        flags = queue.candidate_identity_flags(
+            {
+                "affiliation": "\u30ef\u30f3\u30d4\u30fc\u30b9",
+                "name_ja": "\u3061\u3073\u3050\u308b\u307f \u30e2\u30f3\u30ad\u30fc\u30fbD\u30fb\u30eb\u30d5\u30a3",
+                "category": "\u4eba\u5f62",
+            },
+            {
+                "title": "\u30ef\u30f3\u30d4\u30fc\u30b9 \u30ab\u30d6\u30bb\u30eb\u30b9\u30bf\u30f3\u30c7\u30a3 / \u30e2\u30f3\u30ad\u30fc\u30fbD\u30fb\u30eb\u30d5\u30a3",
+            },
+        )
+
+        self.assertIn("candidate_title_product_type_mismatch", flags)
+
+    def test_build_report_flags_affiliation_mismatch(self) -> None:
+        flags = queue.candidate_identity_flags(
+            {
+                "affiliation": "\ub2e8\uac04\ub860\ud30c",
+                "name_ja": "\u304a\u307e\u3093\u3058\u3085\u3046 \u30de\u30b9\u30b3\u30c3\u30c8 \u30e2\u30ce\u30af\u30de",
+                "category": "\u30de\u30b9\u30b3\u30c3\u30c8",
+            },
+            {
+                "title": "TV\u30a2\u30cb\u30e1\u300eFate/strange Fake\u300f \u304a\u307e\u3093\u3058\u3085\u3046\u306b\u304e\u306b\u304e\u30de\u30b9\u30b3\u30c3\u30c8",
+            },
+        )
+
+        self.assertIn("candidate_title_affiliation_mismatch", flags)
+
+    def test_build_report_prioritizes_lower_identity_risk_candidates(self) -> None:
+        cache_coverage = {
+            "items": [
+                {
+                    "catalog_index": 10,
+                    "name_ko": "Danganronpa mascot",
+                    "name_ja": "\u304a\u307e\u3093\u3058\u3085\u3046 \u30de\u30b9\u30b3\u30c3\u30c8 \u30e2\u30ce\u30af\u30de",
+                    "source_store": queue.ENSKY_STORE,
+                    "affiliation": "Danganronpa",
+                    "category": "\u30de\u30b9\u30b3\u30c3\u30c8",
+                    "status": "broad_cache_candidate",
+                    "candidate_count": 9,
+                    "top_candidates": [
+                        {
+                            "title": "Fate rubber strap 1BOX",
+                            "source_url": "https://www.enskyshop.com/products/detail/10",
+                            "image_url": "https://www.enskyshop.com/html/upload/save_image/10.jpg",
+                        }
+                    ],
+                },
+                {
+                    "catalog_index": 11,
+                    "name_ko": "Jujutsu rubber strap",
+                    "name_ja": "\u864e\u6756\u60a0\u4ec1 \u30e9\u30d0\u30fc\u30b9\u30c8\u30e9\u30c3\u30d7",
+                    "source_store": queue.ENSKY_STORE,
+                    "affiliation": "Jujutsu Kaisen",
+                    "category": "\u30ad\u30fc\u30ea\u30f3\u30b0",
+                    "status": "broad_cache_candidate",
+                    "candidate_count": 1,
+                    "top_candidates": [
+                        {
+                            "title": "\u546a\u8853\u5efb\u6226 \u864e\u6756\u60a0\u4ec1 \u30e9\u30d0\u30fc\u30b9\u30c8\u30e9\u30c3\u30d7",
+                            "source_url": "https://www.enskyshop.com/products/detail/11",
+                            "image_url": "https://www.enskyshop.com/html/upload/save_image/11.jpg",
+                        }
+                    ],
+                },
+            ]
+        }
+
+        report = queue.build_report(cache_coverage, generated_at="2026-07-22T00:00:00Z", batch_size=10)
+
+        first_item = report["batches"][0]["items"][0]
+        self.assertEqual(first_item["catalog_index"], 11)
+        self.assertLessEqual(
+            len(first_item["candidate_identity_flags"]),
+            len(report["batches"][0]["items"][1]["candidate_identity_flags"]),
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

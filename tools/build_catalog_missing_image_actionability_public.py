@@ -29,6 +29,7 @@ DEFAULT_SOURCE_DISCOVERY_NEXT_FOCUS_EXACT_URL_QUEUE = (
 DEFAULT_SOURCE_DISCOVERY_NEXT_FOCUS_IDENTITY_BACKFILL_QUEUE = (
     DATA / "source_discovery_next_focus_identity_backfill_queue_public.json"
 )
+DEFAULT_ENSKY_CACHE_CANDIDATE_ACTION_QUEUE = DATA / "ensky_cache_candidate_action_queue_public.json"
 DEFAULT_IMAGE_ATTACHMENT_TEMPLATE = DATA / "catalog_image_attachment_confirmed_template_public.json"
 DEFAULT_IMAGE_ATTACHMENT_TEMPLATE_DRY_RUN = DATA / "catalog_image_attachment_template_import_dry_run_public.json"
 DEFAULT_OUTPUT = DATA / "catalog_missing_image_actionability_public.json"
@@ -1666,6 +1667,81 @@ def build_source_discovery_review_start(
     }
 
 
+def build_ensky_cache_candidate_review_start(
+    ensky_cache_candidate_action_queue: dict[str, Any] | None,
+) -> dict[str, Any]:
+    if not isinstance(ensky_cache_candidate_action_queue, dict):
+        return {}
+    summary = (
+        ensky_cache_candidate_action_queue.get("summary")
+        if isinstance(ensky_cache_candidate_action_queue.get("summary"), dict)
+        else {}
+    )
+    batches = [
+        batch
+        for batch in ensky_cache_candidate_action_queue.get("batches") or []
+        if isinstance(batch, dict)
+    ]
+    first_batch = batches[0] if batches else {}
+    items = [
+        item
+        for item in first_batch.get("items") or []
+        if isinstance(item, dict)
+    ]
+    sample_items: list[dict[str, Any]] = []
+    for item in items[:8]:
+        top_candidates = [
+            candidate
+            for candidate in item.get("top_candidates") or []
+            if isinstance(candidate, dict)
+        ]
+        top_candidate = top_candidates[0] if top_candidates else {}
+        sample_items.append(
+            {
+                "catalog_index": item.get("catalog_index"),
+                "name_ko": item.get("name_ko"),
+                "name_ja": item.get("name_ja"),
+                "affiliation": item.get("affiliation"),
+                "category": item.get("category"),
+                "candidate_title": top_candidate.get("candidate_title"),
+                "candidate_source_url": top_candidate.get("candidate_source_url"),
+                "candidate_image_url": top_candidate.get("candidate_image_url"),
+                "candidate_identity_flags": item.get("candidate_identity_flags") or [],
+                "manual_confirmed_required": True,
+            }
+        )
+    if not summary and not sample_items:
+        return {}
+    return {
+        "batch_id": first_batch.get("batch_id"),
+        "source_store": "\uc5d4\uc2a4\uce74\uc774",
+        "row_count": int(first_batch.get("row_count") or len(items)),
+        "candidate_action_rows": int(summary.get("candidate_action_rows") or 0),
+        "action_batch_count": int(summary.get("action_batch_count") or len(batches)),
+        "candidate_source_url_ready_rows": int(
+            summary.get("candidate_source_url_ready_rows") or 0
+        ),
+        "candidate_image_url_ready_rows": int(
+            summary.get("candidate_image_url_ready_rows") or 0
+        ),
+        "can_import_now_rows": int(summary.get("can_import_now_rows") or 0),
+        "identity_warning_rows": int(summary.get("identity_warning_rows") or 0),
+        "first_primary_review_url": (
+            sample_items[0].get("candidate_source_url") if sample_items else ""
+        ),
+        "first_primary_review_url_kind": "candidate_source_url",
+        "sample_items_with_candidate_urls": len(
+            [item for item in sample_items if item.get("candidate_source_url")]
+        ),
+        "sample_candidate_items": sample_items,
+        "review_section": "ensky_cache_candidate_action_queue",
+        "source": "ensky_cache_candidate_action_queue_public.json",
+        "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+        "manual_confirmation_required": True,
+        "auto_apply_enabled": False,
+    }
+
+
 def build_report(
     enrichment: dict[str, Any],
     action_queue: dict[str, Any],
@@ -1679,6 +1755,7 @@ def build_report(
     source_discovery_next_focus_fallback_queue: dict[str, Any] | None = None,
     source_discovery_next_focus_exact_url_queue: dict[str, Any] | None = None,
     source_discovery_next_focus_identity_backfill_queue: dict[str, Any] | None = None,
+    ensky_cache_candidate_action_queue: dict[str, Any] | None = None,
     *,
     generated_at: str | None = None,
 ) -> dict[str, Any]:
@@ -1724,6 +1801,12 @@ def build_report(
         and isinstance(source_discovery_next_focus_identity_backfill_queue.get("summary"), dict)
         else {}
     )
+    ensky_cache_candidate_summary = (
+        ensky_cache_candidate_action_queue.get("summary")
+        if isinstance(ensky_cache_candidate_action_queue, dict)
+        and isinstance(ensky_cache_candidate_action_queue.get("summary"), dict)
+        else {}
+    )
     groups = [group for group in enrichment.get("groups", []) if isinstance(group, dict)]
     source_detail_missing = source_detail_missing_items(source_detail_queue)
     source_detail_ready = [
@@ -1765,6 +1848,9 @@ def build_report(
     source_discovery_review_start = build_source_discovery_review_start(
         next_source_discovery_focus_pack,
         source_discovery_next_focus_exact_url_queue,
+    )
+    ensky_cache_review_start = build_ensky_cache_candidate_review_start(
+        ensky_cache_candidate_action_queue
     )
     readiness_total = sum(int(row.get("rows") or 0) for row in base_readiness_rows)
     missing_image_rows = int(summary.get("missing_image_rows") or readiness_total)
@@ -1913,6 +1999,21 @@ def build_report(
         "source_discovery_review_start_kind": (
             source_discovery_review_start.get("first_primary_review_url_kind") or ""
         ),
+        "ensky_cache_candidate_action_rows": int(
+            ensky_cache_candidate_summary.get("candidate_action_rows") or 0
+        ),
+        "ensky_cache_candidate_review_start_rows": int(
+            ensky_cache_review_start.get("row_count") or 0
+        ),
+        "ensky_cache_candidate_review_start_kind": (
+            ensky_cache_review_start.get("first_primary_review_url_kind") or ""
+        ),
+        "ensky_cache_candidate_action_batch_count": int(
+            ensky_cache_candidate_summary.get("action_batch_count") or 0
+        ),
+        "ensky_cache_candidate_can_import_now_rows": int(
+            ensky_cache_candidate_summary.get("can_import_now_rows") or 0
+        ),
         "image_attachment_template_rows": int(image_attachment_template_summary.get("template_items") or 0),
         "image_attachment_template_confirmed_rows": int(
             image_attachment_template_summary.get("manual_confirmed_rows") or 0
@@ -2016,6 +2117,7 @@ def build_report(
         "image_action_review_starts": image_action_review_starts,
         "manual_research_review_start": manual_research_review_start,
         "source_discovery_review_start": source_discovery_review_start,
+        "ensky_cache_candidate_review_start": ensky_cache_review_start,
         "next_source_discovery_focus_pack": next_source_discovery_focus_pack or {},
         "work_order": work_order,
         "manual_validation_focus": manual_validation_focus,
@@ -2091,6 +2193,11 @@ def main() -> int:
         type=Path,
         default=DEFAULT_SOURCE_DISCOVERY_NEXT_FOCUS_IDENTITY_BACKFILL_QUEUE,
     )
+    parser.add_argument(
+        "--ensky-cache-candidate-action-queue",
+        type=Path,
+        default=DEFAULT_ENSKY_CACHE_CANDIDATE_ACTION_QUEUE,
+    )
     parser.add_argument("--image-attachment-template", type=Path, default=DEFAULT_IMAGE_ATTACHMENT_TEMPLATE)
     parser.add_argument(
         "--image-attachment-template-dry-run",
@@ -2142,6 +2249,11 @@ def main() -> int:
         if args.source_discovery_next_focus_identity_backfill_queue.exists()
         else None
     )
+    ensky_cache_candidate_action_queue = (
+        load_json(args.ensky_cache_candidate_action_queue)
+        if args.ensky_cache_candidate_action_queue.exists()
+        else None
+    )
     report = build_report(
         load_json(args.enrichment),
         load_json(args.action_queue),
@@ -2155,6 +2267,7 @@ def main() -> int:
         source_discovery_next_focus_fallback_queue=next_focus_fallback_queue,
         source_discovery_next_focus_exact_url_queue=next_focus_exact_url_queue,
         source_discovery_next_focus_identity_backfill_queue=next_focus_identity_backfill_queue,
+        ensky_cache_candidate_action_queue=ensky_cache_candidate_action_queue,
     )
     if args.write:
         args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

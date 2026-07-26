@@ -221,6 +221,39 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
             },
         }
         next_focus_identity_backfill_queue = {"summary": {"queue_rows": 1}}
+        ensky_cache_candidate_action_queue = {
+            "summary": {
+                "candidate_action_rows": 2,
+                "action_batch_count": 1,
+                "candidate_source_url_ready_rows": 2,
+                "candidate_image_url_ready_rows": 2,
+                "can_import_now_rows": 0,
+                "identity_warning_rows": 2,
+            },
+            "batches": [
+                {
+                    "batch_id": "ensky-cache-candidate-action-001",
+                    "row_count": 2,
+                    "items": [
+                        {
+                            "catalog_index": 11,
+                            "name_ko": "Ensky candidate",
+                            "name_ja": "Ensky candidate JP",
+                            "affiliation": "Ensky Series",
+                            "category": "Keyring",
+                            "candidate_identity_flags": ["candidate_title_multi_variant_or_lineup"],
+                            "top_candidates": [
+                                {
+                                    "candidate_title": "Ensky candidate lineup",
+                                    "candidate_source_url": "https://www.enskyshop.com/products/detail/123",
+                                    "candidate_image_url": "https://www.enskyshop.com/html/upload/save_image/123.jpg",
+                                }
+                            ],
+                        }
+                    ],
+                }
+            ],
+        }
         source_detail_queue = {
             "batches": [
                 {
@@ -291,6 +324,7 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
             source_discovery_next_focus_fallback_queue=next_focus_fallback_queue,
             source_discovery_next_focus_exact_url_queue=next_focus_exact_url_queue,
             source_discovery_next_focus_identity_backfill_queue=next_focus_identity_backfill_queue,
+            ensky_cache_candidate_action_queue=ensky_cache_candidate_action_queue,
             generated_at="2026-07-22T00:00:00Z",
         )
 
@@ -365,6 +399,22 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         self.assertEqual(
             report["summary"]["source_discovery_review_start_kind"],
             "domain_limited_web_search",
+        )
+        self.assertEqual(report["summary"]["ensky_cache_candidate_action_rows"], 2)
+        self.assertEqual(report["summary"]["ensky_cache_candidate_review_start_rows"], 2)
+        self.assertEqual(
+            report["summary"]["ensky_cache_candidate_review_start_kind"],
+            "candidate_source_url",
+        )
+        self.assertEqual(report["summary"]["ensky_cache_candidate_action_batch_count"], 1)
+        self.assertEqual(report["summary"]["ensky_cache_candidate_can_import_now_rows"], 0)
+        self.assertEqual(
+            report["ensky_cache_candidate_review_start"]["first_primary_review_url"],
+            "https://www.enskyshop.com/products/detail/123",
+        )
+        self.assertEqual(
+            report["ensky_cache_candidate_review_start"]["sample_candidate_items"][0]["candidate_image_url"],
+            "https://www.enskyshop.com/html/upload/save_image/123.jpg",
         )
         self.assertEqual(report["summary"]["image_attachment_template_rows"], 2)
         self.assertEqual(report["summary"]["image_attachment_template_confirmed_rows"], 0)
