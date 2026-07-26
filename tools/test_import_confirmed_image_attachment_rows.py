@@ -86,6 +86,20 @@ class ImportConfirmedImageAttachmentRowsTest(unittest.TestCase):
         self.assertEqual(result["updated"], [])
         self.assertEqual(result["skipped"][0]["reason"], "row_index_identity_mismatch")
 
+    def test_falls_back_to_catalog_index_when_row_index_is_stale(self) -> None:
+        result = import_rows(
+            {"items": [_item(row_index=0, catalog_index=99)]},
+            [
+                _row(catalog_index=1, name_ko="다른 굿즈"),
+                _row(catalog_index=99),
+            ],
+        )
+
+        self.assertEqual(len(result["updated"]), 1)
+        self.assertEqual(result["updated"][0]["row_index"], 1)
+        self.assertEqual(result["seed_rows"][1]["source_url"], SOURCE)
+        self.assertEqual(result["seed_rows"][1]["image_url"], IMAGE)
+
 
 if __name__ == "__main__":
     unittest.main()

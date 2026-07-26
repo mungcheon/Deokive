@@ -115,18 +115,32 @@ def _iter_items(raw_queue: Any) -> list[dict[str, Any]]:
     raise SystemExit("queue must contain items, a list of items, or one requested-focus patch object")
 
 
+def _identity_matches(row: dict[str, Any], item: dict[str, Any]) -> bool:
+    return item.get("name_ko") in (None, "", row.get("name_ko")) and item.get("source_store") in (
+        None,
+        "",
+        row.get("source_store"),
+    )
+
+
 def _find_row(seed_rows: list[dict[str, Any]], item: dict[str, Any]) -> tuple[int | None, str | None]:
     row_index = item.get("row_index")
     if isinstance(row_index, int) and not isinstance(row_index, bool) and 0 <= row_index < len(seed_rows):
         row = seed_rows[row_index]
-        if item.get("name_ko") in (None, "", row.get("name_ko")) and item.get("source_store") in (None, "", row.get("source_store")):
+        if _identity_matches(row, item):
             return row_index, None
-        return None, "row_index_identity_mismatch"
     catalog_index = item.get("catalog_index")
     if isinstance(catalog_index, int) and not isinstance(catalog_index, bool):
         matches = [index for index, row in enumerate(seed_rows) if row.get("catalog_index") == catalog_index]
         if len(matches) == 1:
-            return matches[0], None
+            row = seed_rows[matches[0]]
+            if _identity_matches(row, item):
+                return matches[0], None
+            return None, "catalog_index_identity_mismatch"
+        if len(matches) > 1:
+            return None, "catalog_index_not_unique"
+    if isinstance(row_index, int) and not isinstance(row_index, bool) and 0 <= row_index < len(seed_rows):
+        return None, "row_index_identity_mismatch"
     return None, "seed_match_missing"
 
 

@@ -98,6 +98,19 @@ class ImportConfirmedRequestedFocusRowsTest(unittest.TestCase):
 
         self.assertEqual(result["seed_rows"][0]["official_price_jpy"], 880)
 
+    def test_falls_back_to_catalog_index_when_row_index_is_stale(self) -> None:
+        result = import_rows(
+            {"items": [_item("release_date", "2026-07", row_index=0, catalog_index=99)]},
+            [
+                _row(catalog_index=1, name_ko="다른 굿즈"),
+                _row(catalog_index=99),
+            ],
+        )
+
+        self.assertEqual(len(result["updated"]), 1)
+        self.assertEqual(result["updated"][0]["row_index"], 1)
+        self.assertEqual(result["seed_rows"][1]["release_date"], "2026-07")
+
 
 if __name__ == "__main__":
     unittest.main()
