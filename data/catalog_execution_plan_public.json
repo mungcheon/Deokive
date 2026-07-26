@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T23:24:29Z",
+  "generated_at": "2026-07-26T23:34:57Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 26,
     "blocked_action_count": 0,
     "manual_review_action_count": 23,
     "pending_import_action_count": 0,
-    "total_action_rows": 33475,
+    "total_action_rows": 33386,
     "open_review_queues": {
       "source_discovery_rows": 762,
       "image_missing_rows": 786,
-      "dedupe_groups": 61,
+      "dedupe_groups": 59,
       "animation_unknown_categories": 0,
       "ichiban_missing_release_date_rows": 8,
       "ichiban_missing_price_rows": 342,
@@ -24,8 +24,8 @@
       "confirmed_import_action_queue_rows": 4252,
       "confirmed_import_pending_rows": 0,
       "confirmed_import_variant_metadata_template_rows": 2,
-      "dedupe_action_groups": 48,
-      "dedupe_actionable_groups": 48,
+      "dedupe_action_groups": 18,
+      "dedupe_actionable_groups": 18,
       "dedupe_unqueued_actionable_groups": 0,
       "ichiban_reissue_dedupe_review_groups": 46,
       "ichiban_probable_reissue_dedupe_review_groups": 20,
@@ -81,10 +81,10 @@
       "ichiban_metadata_next_campaign_patch_review_batch_rows": 8,
       "ichiban_metadata_next_campaign_patch_review_batch_template_rows": 8,
       "ichiban_metadata_next_campaign_patch_review_batch_primary_review_url_rows": 8,
-      "metadata_action_missing_cells": 2421,
+      "metadata_action_missing_cells": 2402,
       "metadata_actionable_groups": 164,
       "metadata_unqueued_actionable_groups": 0,
-      "metadata_actionable_missing_cells": 2421,
+      "metadata_actionable_missing_cells": 2402,
       "metadata_unqueued_actionable_missing_cells": 0,
       "metadata_primary_review_url_groups": 125,
       "animation_category_review_rows": 0,
@@ -103,9 +103,9 @@
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
       "ichiban_prize_name_image_patch_blocked_rows": 0,
       "catalog_goal_manual_review_pillars": 5,
-      "catalog_goal_manual_review_rows": 895,
+      "catalog_goal_manual_review_rows": 865,
       "catalog_goal_auto_apply_ready_rows": 0,
-      "catalog_goal_dedupe_manual_review_rows": 48,
+      "catalog_goal_dedupe_manual_review_rows": 18,
       "catalog_goal_missing_image_rows": 786,
       "catalog_goal_source_url_update_rows": 0,
       "catalog_goal_animation_category_rows": 0,
@@ -197,10 +197,10 @@
     "ichiban_prize_name_image_patch_candidate_rows": 66,
     "ichiban_prize_name_image_patch_blocked_rows": 0,
     "dedupe_fast_review_groups": 42,
-    "dedupe_duplicate_groups": 61,
-    "dedupe_duplicate_rows": 61,
-    "dedupe_actionable_groups": 48,
-    "dedupe_queued_groups": 48,
+    "dedupe_duplicate_groups": 59,
+    "dedupe_duplicate_rows": 59,
+    "dedupe_actionable_groups": 18,
+    "dedupe_queued_groups": 18,
     "dedupe_auto_merge_ready_groups": 0,
     "dedupe_auto_delete_ready_groups": 0,
     "dedupe_template_blocked_rows": 42,
@@ -2410,8 +2410,8 @@
       "evidence": {
         "known_image_asset_status": "pass",
         "download_readiness_status": "known_image_assets_complete",
-        "image_url_rows": 19527,
-        "local_image_path_rows": 19527,
+        "image_url_rows": 19508,
+        "local_image_path_rows": 19508,
         "image_url_without_local_path_rows": 0,
         "missing_local_image_files": 0,
         "missing_web_public_asset_files": 0,
@@ -2618,12 +2618,12 @@
               41
             ],
             [
-              "단간론파",
+              "체인소맨",
               40
             ],
             [
-              "체인소맨",
-              35
+              "단간론파",
+              40
             ],
             [
               "하츠네 미쿠",
@@ -4376,7 +4376,7 @@
       "workstream": "metadata_review_batches",
       "public_report": "data/catalog_metadata_review_batches_public.json",
       "status": "manual_review",
-      "rows": 14017,
+      "rows": 13998,
       "command": "Fill titles, barcodes, dates, prices, sources, and images from reviewed evidence.",
       "next_step": "work_field_store_metadata_batches",
       "blocker": "Broad metadata updates require field-specific evidence policies.",
@@ -4384,7 +4384,7 @@
       "evidence": {
         "batch_count": 30,
         "field_missing_totals": {
-          "name_ja": 526,
+          "name_ja": 507,
           "release_date": 1342,
           "barcode": 10048,
           "official_price_jpy": 553,
@@ -4398,7 +4398,7 @@
       "workstream": "metadata_action_queue",
       "public_report": "data/catalog_metadata_action_queue_public.json",
       "status": "manual_review",
-      "rows": 2421,
+      "rows": 2402,
       "command": "Confirm release dates, prices, and Japanese names from official evidence before barcode work.",
       "next_step": "fill_confirmed_metadata_patch_templates",
       "blocker": "Auto metadata import is disabled; every field/store group needs evidence.",
@@ -4406,8 +4406,8 @@
       "evidence": {
         "actionable_group_count": 164,
         "queued_group_count": 164,
-        "actionable_missing_cells": 2421,
-        "queued_missing_cells": 2421,
+        "actionable_missing_cells": 2402,
+        "queued_missing_cells": 2402,
         "action_batch_count": 14,
         "field_counts": [
           [
@@ -4434,7 +4434,7 @@
           ],
           [
             "name_ja",
-            526
+            507
           ]
         ],
         "missing_cells_by_source_store": [
@@ -4471,16 +4471,16 @@
             66
           ],
           [
-            "치이카와 파크",
-            62
-          ],
-          [
             "MINISO",
             50
           ],
           [
             "코토부키야",
             46
+          ],
+          [
+            "치이카와 파크",
+            43
           ],
           [
             "ご当地ちいかわ 공식(API)",
@@ -4701,16 +4701,6 @@
             "recommended_action": "Verify original Japanese product titles from official listings."
           },
           {
-            "field": "name_ja",
-            "source_store": "치이카와 파크",
-            "missing_rows": 62,
-            "priority": 30,
-            "workflow": "official_title_review",
-            "primary_review_url": "https://chiikawamarket.jp/ko/products/4571609367451",
-            "primary_review_url_kind": "sample_source_url",
-            "recommended_action": "Verify original Japanese product titles from official listings."
-          },
-          {
             "field": "release_date",
             "source_store": "코토부키야",
             "missing_rows": 46,
@@ -4719,6 +4709,16 @@
             "primary_review_url": "https://www.kotobukiya.co.jp/product/detail/p4934054077151/",
             "primary_review_url_kind": "sample_source_url",
             "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
+          },
+          {
+            "field": "name_ja",
+            "source_store": "치이카와 파크",
+            "missing_rows": 43,
+            "priority": 30,
+            "workflow": "official_title_review",
+            "primary_review_url": "https://chiikawamarket.jp/ko/products/4571609367451",
+            "primary_review_url_kind": "sample_source_url",
+            "recommended_action": "Verify original Japanese product titles from official listings."
           },
           {
             "field": "release_date",
@@ -4854,19 +4854,19 @@
       "workstream": "deduplication_review",
       "public_report": "data/catalog_deduplication_review_batches_public.json",
       "status": "manual_review",
-      "rows": 80,
+      "rows": 59,
       "command": "Review duplicate groups and record explicit keep/drop decisions before deletion.",
       "next_step": "compare_duplicate_group_evidence",
       "blocker": "auto_delete_enabled is false; variant risk requires manual decisions.",
       "auto_apply_enabled": false,
       "evidence": {
-        "duplicate_groups": 61,
-        "duplicate_rows": 61,
-        "published_groups": 61,
+        "duplicate_groups": 59,
+        "duplicate_rows": 59,
+        "published_groups": 59,
         "by_key_type": [
           [
             "barcode",
-            60
+            58
           ],
           [
             "source_url",
@@ -4876,7 +4876,7 @@
         "by_review_risk": [
           [
             "strong_identity_review",
-            42
+            40
           ],
           [
             "variant_risk_review",
@@ -4888,23 +4888,23 @@
           ]
         ],
         "top_review_risk": "strong_identity_review",
-        "batch_count": 7,
+        "batch_count": 5,
         "by_review_confidence": [
           [
-            "high_review_confidence",
-            42
-          ],
-          [
             "manual_identity_check",
-            24
+            23
           ],
           [
             "variant_caution",
-            8
+            18
+          ],
+          [
+            "high_review_confidence",
+            17
           ],
           [
             "medium_review_confidence",
-            6
+            1
           ]
         ]
       }
@@ -4914,93 +4914,89 @@
       "workstream": "deduplication_action_queue",
       "public_report": "data/catalog_deduplication_action_queue_public.json",
       "status": "manual_review",
-      "rows": 48,
+      "rows": 18,
       "command": "Review high/medium-confidence duplicate groups before variant-risk dedupe work.",
       "next_step": "record_manual_keep_drop_decisions_for_safe_dedupe_groups",
       "blocker": "Auto-merge and auto-delete remain disabled; every group needs explicit confirmation.",
       "auto_apply_enabled": false,
       "evidence": {
-        "actionable_groups": 48,
-        "queued_groups": 48,
+        "actionable_groups": 18,
+        "queued_groups": 18,
         "unqueued_actionable_groups": 0,
         "queue_coverage": 1.0,
-        "action_batch_count": 5,
+        "action_batch_count": 2,
         "by_key_type": [
           [
             "barcode",
-            42
-          ],
-          [
-            "image_url",
-            4
+            17
           ],
           [
             "source_url",
-            2
+            1
           ]
         ],
         "by_review_confidence": [
           [
             "high_review_confidence",
-            42
+            17
           ],
           [
             "medium_review_confidence",
-            6
+            1
           ]
         ],
         "by_merge_blocker": [
           [
             "multi_store_variant_or_retailer_review",
-            42
+            17
           ],
           [
             "shared_source_or_image_may_represent_lineup",
-            6
+            1
           ]
         ],
         "by_manual_review_required_reason": [
           [
+            "image_url_differs",
+            18
+          ],
+          [
             "manual_keep_drop_confirmation_required",
-            48
+            18
           ],
           [
             "same_sellable_product_identity_must_be_confirmed",
-            48
-          ],
-          [
-            "image_url_differs",
-            43
+            18
           ],
           [
             "multi_store_review",
-            42
+            17
           ],
           [
             "multi_store_variant_or_retailer_review",
-            42
+            17
           ],
           [
             "name_differs",
-            25
+            17
           ],
           [
             "source_url_differs",
-            8
+            11
           ],
           [
             "shared_source_or_image_may_represent_lineup",
-            6
+            1
           ]
         ],
         "excluded_review_confidence": [
           [
             "manual_identity_check",
-            24
+            23
           ],
           [
             "variant_caution",
-            8
+            18
           ]
         ],
         "completion_readiness_status": "ichiban_reissue_review_required",
@@ -5011,10 +5007,10 @@
           "auto_merge_enabled": false,
           "auto_delete_enabled": false,
           "manual_confirmed_groups": 0,
-          "actionable_groups": 48,
-          "queued_groups": 48,
+          "actionable_groups": 18,
+          "queued_groups": 18,
           "unqueued_actionable_groups": 0,
-          "explicit_keep_drop_required_groups": 48,
+          "explicit_keep_drop_required_groups": 18,
           "ichiban_reissue_review_groups": 46,
           "ichiban_probable_reissue_review_groups": 20,
           "ichiban_reissue_work_order_rows": 20,
@@ -5030,7 +5026,7 @@
         },
         "auto_merge_ready_groups": 0,
         "auto_delete_ready_groups": 0,
-        "explicit_keep_drop_required_groups": 48,
+        "explicit_keep_drop_required_groups": 18,
         "template_manual_confirmed_rows": 0,
         "template_ready_decision_rows": 0,
         "template_blocked_rows": 42,
@@ -7398,7 +7394,7 @@
           "status": "manual_review_required",
           "manual_metadata_campaigns": 41,
           "manual_reissue_review_groups": 20,
-          "manual_prize_name_image_patch_rows": 128,
+          "manual_prize_name_image_patch_rows": 132,
           "zero_price_policy_ready": true,
           "numbered_variant_policy_ready": true,
           "blocked_auto_apply_reasons": [
@@ -7429,7 +7425,7 @@
     "manual_review_required": true,
     "pillar_count": 5,
     "blocking_pillar_count": 5,
-    "manual_review_rows": 895,
+    "manual_review_rows": 865,
     "auto_apply_ready_rows": 0,
     "next_safe_phase": "review_candidate_source_urls",
     "blocked_reasons": [
@@ -7444,17 +7440,17 @@
         "pillar": "dedupe",
         "label": "Deduplicate catalog rows",
         "status": "blocked_until_manual_review",
-        "manual_review_rows": 48,
+        "manual_review_rows": 18,
         "auto_apply_ready_rows": 0,
         "next_safe_phase": "verify_ichiban_campaign_pages_before_dedupe",
         "next_queue_lane": "same_barcode_fast_review",
         "next_queue_rows": 10,
-        "next_execution_lane_count": 5,
-        "next_execution_open_rows": 161,
-        "next_execution_next_batch_rows": 82,
+        "next_execution_lane_count": 4,
+        "next_execution_open_rows": 82,
+        "next_execution_next_batch_rows": 47,
         "first_next_execution_lane": "same_barcode_fast_review",
         "first_next_execution_status": "next",
-        "first_next_execution_rows": 42,
+        "first_next_execution_rows": 17,
         "first_next_execution_public_report": "data/catalog_deduplication_action_queue_public.json",
         "handoff_status": "ichiban_reissue_review_required",
         "handoff_current_lane": "ichiban_reissue_campaign_review",
@@ -7570,17 +7566,17 @@
       "pillar": "dedupe",
       "label": "Deduplicate catalog rows",
       "status": "blocked_until_manual_review",
-      "manual_review_rows": 48,
+      "manual_review_rows": 18,
       "auto_apply_ready_rows": 0,
       "next_safe_phase": "verify_ichiban_campaign_pages_before_dedupe",
       "next_queue_lane": "same_barcode_fast_review",
       "next_queue_rows": 10,
-      "next_execution_lane_count": 5,
-      "next_execution_open_rows": 161,
-      "next_execution_next_batch_rows": 82,
+      "next_execution_lane_count": 4,
+      "next_execution_open_rows": 82,
+      "next_execution_next_batch_rows": 47,
       "first_next_execution_lane": "same_barcode_fast_review",
       "first_next_execution_status": "next",
-      "first_next_execution_rows": 42,
+      "first_next_execution_rows": 17,
       "first_next_execution_public_report": "data/catalog_deduplication_action_queue_public.json",
       "handoff_status": "ichiban_reissue_review_required",
       "handoff_current_lane": "ichiban_reissue_campaign_review",

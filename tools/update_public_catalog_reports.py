@@ -21,6 +21,7 @@ import build_catalog_reused_image_review_public
 import build_deduplication_action_queue_public
 import build_deduplication_confirmed_template_public
 import build_deduplication_fast_review_public
+import build_deduplication_review_batches_public
 import build_ensky_cache_candidate_action_queue_public
 import build_gotouchi_official_candidate_review_queue_public
 import build_catalog_image_attachment_review_board_public
@@ -9932,6 +9933,7 @@ def validate_report_consistency(
     source_discovery_focus_template_import_override: dict[str, Any] | None = None,
     source_discovery_next_focus_pack_override: dict[str, Any] | None = None,
     image_attachment_action_queue_override: dict[str, Any] | None = None,
+    deduplication_action_queue_override: dict[str, Any] | None = None,
     ichiban_prize_name_image_review_override: dict[str, Any] | None = None,
     ichiban_prize_name_image_patch_candidates_override: dict[str, Any] | None = None,
 ) -> list[str]:
@@ -10463,7 +10465,11 @@ def validate_report_consistency(
         expected_open_queues["ichiban_prize_name_image_patch_blocked_rows"] = (
             ichiban_prize_name_image_patch_summary.get("blocked_rows", 0)
         )
-    dedupe_action_queue = load_json(DEDUPLICATION_ACTION_QUEUE, {}) if DEDUPLICATION_ACTION_QUEUE.exists() else {}
+    dedupe_action_queue = (
+        deduplication_action_queue_override
+        if deduplication_action_queue_override is not None
+        else load_json(DEDUPLICATION_ACTION_QUEUE, {}) if DEDUPLICATION_ACTION_QUEUE.exists() else {}
+    )
     dedupe_action_summary = dedupe_action_queue.get("summary", {})
     if dedupe_action_summary:
         expected_open_queues["dedupe_action_groups"] = dedupe_action_summary.get("queued_groups", 0)
@@ -11136,10 +11142,11 @@ def update_reports(write: bool) -> dict[str, Any]:
         if ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT.exists()
         else {}
     )
+    deduplication_review_batches = build_deduplication_review_batches_public.build_report(
+        [group for group in deduplication.get("groups", []) if isinstance(group, dict)]
+    )
     deduplication_action_queue = build_deduplication_action_queue_public.build_report(
-        load_json(DEDUPLICATION_REVIEW_BATCHES, {})
-        if DEDUPLICATION_REVIEW_BATCHES.exists()
-        else {},
+        deduplication_review_batches,
         max_groups=100,
         batch_size=10,
         ichiban_policy_audit=ichiban_prize_policy_audit_source,
@@ -11482,7 +11489,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             "catalog_metadata_action_queue_public.json": metadata_action_queue,
             "requested_focus_review_batches_public.json": requested_focus_review_batches,
             "requested_focus_action_queue_public.json": requested_focus_action_queue,
-            "catalog_deduplication_review_batches_public.json": load_json(DEDUPLICATION_REVIEW_BATCHES, {}),
+            "catalog_deduplication_review_batches_public.json": deduplication_review_batches,
             "catalog_deduplication_action_queue_public.json": deduplication_action_queue,
             "ichiban_kuji_reissue_decision_template_public.json": ichiban_kuji_reissue_decision_template,
             "ichiban_kuji_metadata_review_batches_public.json": ichiban_metadata_review_batches,
@@ -13643,6 +13650,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         source_discovery_focus_template_import_override=source_discovery_focus_template_import,
         source_discovery_next_focus_pack_override=source_discovery_next_focus_pack,
         image_attachment_action_queue_override=image_attachment_action_queue,
+        deduplication_action_queue_override=deduplication_action_queue,
         ichiban_prize_name_image_review_override=ichiban_kuji_prize_name_image_review,
         ichiban_prize_name_image_patch_candidates_override=ichiban_kuji_prize_name_image_patch_candidates,
     )

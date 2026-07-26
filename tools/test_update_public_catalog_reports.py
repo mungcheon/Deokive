@@ -453,25 +453,63 @@ class PublicCatalogReportTests(unittest.TestCase):
             quality["catalog_reused_image_deduplication_import_dry_run"]["auto_delete_enabled"]
         )
         if reports.ANIMATE_MISSING_IMAGE_SEARCH.exists():
-            self.assertEqual(quality["animate_missing_image_search"]["missing_animate_image_rows"], 148)
+            animate_missing_image_search = reports.load_json(reports.ANIMATE_MISSING_IMAGE_SEARCH)
+            self.assertEqual(
+                quality["animate_missing_image_search"]["missing_animate_image_rows"],
+                animate_missing_image_search["summary"]["missing_animate_image_rows"],
+            )
             self.assertIs(quality["animate_missing_image_search"]["auto_apply_enabled"], False)
         if reports.GOODSMILE_MISSING_IMAGE_SEARCH.exists():
-            self.assertEqual(quality["goodsmile_missing_image_search"]["missing_goodsmile_image_rows"], 57)
+            goodsmile_missing_image_search = reports.load_json(reports.GOODSMILE_MISSING_IMAGE_SEARCH)
+            self.assertEqual(
+                quality["goodsmile_missing_image_search"]["missing_goodsmile_image_rows"],
+                goodsmile_missing_image_search["summary"]["missing_goodsmile_image_rows"],
+            )
             self.assertIs(quality["goodsmile_missing_image_search"]["auto_apply_enabled"], False)
         if reports.KOTOBUKIYA_MOVIC_MISSING_IMAGE_SEARCH.exists():
-            self.assertEqual(quality["kotobukiya_movic_missing_image_search"]["missing_target_image_rows"], 80)
+            kotobukiya_movic_missing_image_search = reports.load_json(
+                reports.KOTOBUKIYA_MOVIC_MISSING_IMAGE_SEARCH
+            )
+            self.assertEqual(
+                quality["kotobukiya_movic_missing_image_search"]["missing_target_image_rows"],
+                kotobukiya_movic_missing_image_search["summary"]["missing_target_image_rows"],
+            )
             self.assertIs(quality["kotobukiya_movic_missing_image_search"]["auto_apply_enabled"], False)
         if reports.JUMP_FURYU_TAITO_MISSING_IMAGE_SEARCH.exists():
-            self.assertEqual(quality["jump_furyu_taito_missing_image_search"]["missing_target_image_rows"], 59)
+            jump_furyu_taito_missing_image_search = reports.load_json(
+                reports.JUMP_FURYU_TAITO_MISSING_IMAGE_SEARCH
+            )
+            self.assertEqual(
+                quality["jump_furyu_taito_missing_image_search"]["missing_target_image_rows"],
+                jump_furyu_taito_missing_image_search["summary"]["missing_target_image_rows"],
+            )
             self.assertIs(quality["jump_furyu_taito_missing_image_search"]["auto_apply_enabled"], False)
         if reports.SECONDARY_OFFICIAL_MISSING_IMAGE_SEARCH.exists():
-            self.assertEqual(quality["secondary_official_missing_image_search"]["missing_target_image_rows"], 49)
+            secondary_official_missing_image_search = reports.load_json(
+                reports.SECONDARY_OFFICIAL_MISSING_IMAGE_SEARCH
+            )
+            self.assertEqual(
+                quality["secondary_official_missing_image_search"]["missing_target_image_rows"],
+                secondary_official_missing_image_search["summary"]["missing_target_image_rows"],
+            )
             self.assertIs(quality["secondary_official_missing_image_search"]["auto_apply_enabled"], False)
         if reports.MANUAL_MISSING_IMAGE_SOURCE_DISCOVERY.exists():
-            self.assertEqual(quality["manual_missing_image_source_discovery"]["manual_source_discovery_rows"], 112)
+            manual_missing_image_source_discovery = reports.load_json(
+                reports.MANUAL_MISSING_IMAGE_SOURCE_DISCOVERY
+            )
+            self.assertEqual(
+                quality["manual_missing_image_source_discovery"]["manual_source_discovery_rows"],
+                manual_missing_image_source_discovery["summary"]["manual_source_discovery_rows"],
+            )
             self.assertIs(quality["manual_missing_image_source_discovery"]["auto_apply_enabled"], False)
         if reports.GENERIC_STOREFRONT_MISSING_IMAGE_SOURCE.exists():
-            self.assertEqual(quality["generic_storefront_missing_image_source"]["generic_storefront_rows"], 5)
+            generic_storefront_missing_image_source = reports.load_json(
+                reports.GENERIC_STOREFRONT_MISSING_IMAGE_SOURCE
+            )
+            self.assertEqual(
+                quality["generic_storefront_missing_image_source"]["generic_storefront_rows"],
+                generic_storefront_missing_image_source["summary"]["generic_storefront_rows"],
+            )
             self.assertIs(quality["generic_storefront_missing_image_source"]["auto_apply_enabled"], False)
         if reports.MISSING_IMAGE_REPORT_COVERAGE.exists():
             self.assertEqual(quality["missing_image_report_coverage"]["missing_image_rows"], result["missing"]["image_url"])
@@ -1930,6 +1968,8 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertIs(quality["gotouchi_official_candidate_review_queue"]["auto_apply_enabled"], False)
         if reports.DEDUPLICATION_FAST_REVIEW.exists():
+            deduplication = reports.load_json(reports.DEDUPLICATION)
+            dedupe_summary = deduplication["summary"]
             dedupe_action = reports.load_json(reports.DEDUPLICATION_ACTION_QUEUE)
             dedupe_action_summary = dedupe_action["summary"]
             self.assertEqual(
@@ -1976,14 +2016,13 @@ class PublicCatalogReportTests(unittest.TestCase):
             )
             self.assertFalse(quality_dedupe_readiness["auto_merge_enabled"])
             self.assertFalse(quality_dedupe_readiness["auto_delete_enabled"])
+            dedupe_fast = reports.load_json(reports.DEDUPLICATION_FAST_REVIEW)
+            dedupe_fast_summary = dedupe_fast["summary"]
             dedupe_next_execution_summary = dedupe_action["next_execution_summary"]
             self.assertEqual(
                 quality["deduplication_action_queue"]["next_execution_summary"],
                 dedupe_next_execution_summary,
             )
-            self.assertEqual(dedupe_next_execution_summary["lane_count"], 5)
-            self.assertEqual(dedupe_next_execution_summary["open_rows"], 161)
-            self.assertEqual(dedupe_next_execution_summary["next_batch_rows"], 82)
             self.assertEqual(
                 dedupe_next_execution_summary["next_safe_phase"],
                 "same_barcode_fast_review",
@@ -2000,20 +2039,32 @@ class PublicCatalogReportTests(unittest.TestCase):
                 [lane["lane"] for lane in dedupe_lanes],
                 [
                     "same_barcode_fast_review",
-                    "visual_identity_review",
                     "shared_source_or_image_lineup_review",
                     "ichiban_reissue_identity_review",
                     "manual_keep_drop_import_template",
                 ],
             )
-            self.assertEqual(dedupe_lanes[0]["open_rows"], 42)
-            self.assertEqual(dedupe_lanes[0]["next_batch_rows"], 10)
-            self.assertEqual(dedupe_lanes[1]["open_rows"], 19)
-            self.assertEqual(dedupe_lanes[2]["open_rows"], 6)
-            self.assertEqual(dedupe_lanes[3]["open_rows"], 46)
-            self.assertEqual(dedupe_lanes[3]["next_batch_rows"], 20)
-            self.assertEqual(dedupe_lanes[4]["open_rows"], 48)
-            self.assertEqual(dedupe_lanes[4]["manual_decision_rows"], 42)
+            self.assertEqual(dedupe_next_execution_summary["lane_count"], len(dedupe_lanes))
+            self.assertEqual(
+                dedupe_next_execution_summary["open_rows"],
+                sum(lane["open_rows"] for lane in dedupe_lanes),
+            )
+            self.assertEqual(
+                dedupe_next_execution_summary["next_batch_rows"],
+                sum(lane["next_batch_rows"] for lane in dedupe_lanes),
+            )
+            self.assertEqual(
+                dedupe_lanes[0]["open_rows"],
+                dedupe_fast_summary["fast_review_groups"],
+            )
+            self.assertEqual(
+                dedupe_lanes[-1]["open_rows"],
+                dedupe_action_summary["queued_groups"],
+            )
+            self.assertEqual(
+                dedupe_lanes[-1]["manual_decision_rows"],
+                dedupe_fast_summary["fast_review_groups"],
+            )
             dedupe_handoff = dedupe_action.get("operator_handoff", {})
             self.assertEqual(
                 quality["deduplication_action_queue"]["operator_handoff"],
@@ -2049,26 +2100,44 @@ class PublicCatalogReportTests(unittest.TestCase):
                 dedupe_handoff.get("handoff_steps", [])[0].get("lane"),
                 "ichiban_reissue_campaign_review",
             )
-            self.assertEqual(quality["deduplication_fast_review"]["fast_review_groups"], 42)
+            self.assertEqual(
+                quality["deduplication_fast_review"]["fast_review_groups"],
+                dedupe_fast_summary["fast_review_groups"],
+            )
             self.assertEqual(
                 quality["deduplication_fast_review"]["image_url_only_same_identity_groups"],
-                19,
+                dedupe_fast_summary["image_url_only_same_identity_groups"],
             )
             self.assertEqual(
                 quality["deduplication_fast_review"][
                     "next_fast_review_batch_image_url_only_same_identity_groups"
                 ],
-                10,
+                dedupe_fast_summary["next_fast_review_batch_image_url_only_same_identity_groups"],
             )
-            self.assertEqual(quality["deduplication_fast_review"]["manual_confirmed_true"], 0)
+            self.assertEqual(
+                quality["deduplication_fast_review"]["manual_confirmed_true"],
+                dedupe_fast_summary["manual_confirmed_true"],
+            )
             self.assertIs(quality["deduplication_fast_review"]["auto_delete_enabled"], False)
             patch_template = quality["deduplication_fast_review"][
                 "manual_confirmation_patch_template"
             ]
-            self.assertEqual(patch_template["template_rows"], 10)
-            self.assertEqual(patch_template["drop_candidate_rows"], 10)
-            self.assertEqual(patch_template["ready_to_import_rows"], 0)
-            self.assertEqual(patch_template["blocked_rows"], 10)
+            self.assertEqual(
+                patch_template["template_rows"],
+                dedupe_fast_summary["manual_confirmation_patch_template_rows"],
+            )
+            self.assertEqual(
+                patch_template["drop_candidate_rows"],
+                dedupe_fast_summary["next_fast_review_batch_drop_candidate_rows"],
+            )
+            self.assertEqual(
+                patch_template["ready_to_import_rows"],
+                dedupe_fast_summary["manual_confirmation_patch_ready_to_import_rows"],
+            )
+            self.assertEqual(
+                patch_template["blocked_rows"],
+                dedupe_fast_summary["manual_confirmation_patch_blocked_rows"],
+            )
             self.assertFalse(patch_template["auto_merge_enabled"])
             self.assertFalse(patch_template["auto_delete_enabled"])
             self.assertEqual(
@@ -2081,12 +2150,15 @@ class PublicCatalogReportTests(unittest.TestCase):
             )
             self.assertTrue(patch_template["rows"][0]["primary_review_url"])
             alignment = quality["deduplication_queue_alignment"]
-            self.assertEqual(alignment["duplicate_review_groups"], 61)
-            self.assertEqual(alignment["actionable_groups"], 48)
-            self.assertEqual(alignment["queued_groups"], 48)
-            self.assertEqual(alignment["non_action_queue_groups"], 13)
-            self.assertEqual(alignment["fast_review_groups"], 42)
-            self.assertEqual(alignment["held_for_later_groups"], 6)
+            self.assertEqual(alignment["duplicate_review_groups"], dedupe_summary["duplicate_groups"])
+            self.assertEqual(alignment["actionable_groups"], dedupe_action_summary["actionable_groups"])
+            self.assertEqual(alignment["queued_groups"], dedupe_action_summary["queued_groups"])
+            self.assertEqual(
+                alignment["non_action_queue_groups"],
+                dedupe_summary["duplicate_groups"] - dedupe_action_summary["actionable_groups"],
+            )
+            self.assertEqual(alignment["fast_review_groups"], dedupe_fast_summary["fast_review_groups"])
+            self.assertEqual(alignment["held_for_later_groups"], dedupe_fast_summary["held_for_later_groups"])
             self.assertEqual(alignment["name_duplicate_protected_groups"], 508)
             self.assertEqual(
                 alignment["ichiban_campaign_or_reissue_protected_groups"],
@@ -2111,7 +2183,10 @@ class PublicCatalogReportTests(unittest.TestCase):
                 dedupe_dry_run["summary"]["template_items"],
             )
             self.assertEqual(quality["deduplication_template_import_dry_run"]["updated_rows"], 0)
-            self.assertEqual(quality["deduplication_template_import_dry_run"]["skipped_rows"], 42)
+            self.assertEqual(
+                quality["deduplication_template_import_dry_run"]["skipped_rows"],
+                dedupe_dry_run["summary"]["skipped_rows"],
+            )
             self.assertEqual(quality["deduplication_template_import_dry_run"]["manual_confirmed_rows"], 0)
             self.assertIs(quality["deduplication_template_import_dry_run"]["write"], False)
             self.assertIs(quality["deduplication_template_import_dry_run"]["auto_delete_enabled"], False)
@@ -2439,7 +2514,7 @@ class PublicCatalogReportTests(unittest.TestCase):
             quality["ichiban_kuji_historical_roadmap"][
                 "prize_name_image_patch_open_rows"
             ],
-            64,
+            quality["ichiban_kuji_prize_name_image_patch_candidates"]["open_candidate_rows"],
         )
         goal_gate = quality["catalog_goal_progress_gate"]
         self.assertEqual(goal_gate["status"], "manual_review_required")
@@ -2514,45 +2589,74 @@ class PublicCatalogReportTests(unittest.TestCase):
             20,
         )
         self.assertEqual(pillars["dedupe"]["status"], "blocked_until_manual_review")
-        self.assertEqual(pillars["dedupe"]["open_rows"], 48)
-        self.assertEqual(pillars["dedupe"]["manual_review_rows"], 48)
-        self.assertEqual(pillars["dedupe"]["queued_rows"], 48)
+        self.assertEqual(
+            pillars["dedupe"]["open_rows"],
+            quality["deduplication_action_queue"]["queued_groups"],
+        )
+        self.assertEqual(
+            pillars["dedupe"]["manual_review_rows"],
+            quality["deduplication_action_queue"]["queued_groups"],
+        )
+        self.assertEqual(
+            pillars["dedupe"]["queued_rows"],
+            quality["deduplication_action_queue"]["queued_groups"],
+        )
         self.assertEqual(pillars["dedupe"]["unqueued_rows"], 0)
         self.assertEqual(pillars["dedupe"]["queue_coverage"], 1.0)
-        self.assertEqual(pillars["dedupe"]["actionable_groups"], 48)
+        self.assertEqual(
+            pillars["dedupe"]["actionable_groups"],
+            quality["deduplication_action_queue"]["actionable_groups"],
+        )
         self.assertEqual(
             pillars["dedupe"]["explicit_keep_drop_required_groups"],
-            48,
+            quality["deduplication_action_queue"]["explicit_keep_drop_required_groups"],
         )
         self.assertEqual(pillars["dedupe"]["auto_apply_ready_rows"], 0)
         self.assertEqual(pillars["dedupe"]["auto_delete_ready_groups"], 0)
-        self.assertEqual(pillars["dedupe"]["fast_review_groups"], 42)
-        self.assertEqual(pillars["dedupe"]["image_url_only_same_identity_groups"], 19)
+        self.assertEqual(
+            pillars["dedupe"]["fast_review_groups"],
+            quality["deduplication_fast_review"]["fast_review_groups"],
+        )
+        self.assertEqual(
+            pillars["dedupe"]["image_url_only_same_identity_groups"],
+            quality["deduplication_fast_review"]["image_url_only_same_identity_groups"],
+        )
         self.assertEqual(
             pillars["dedupe"]["next_fast_review_image_url_only_same_identity_groups"],
-            10,
+            quality["deduplication_fast_review"][
+                "next_fast_review_batch_image_url_only_same_identity_groups"
+            ],
         )
-        self.assertEqual(pillars["dedupe"]["held_for_later_groups"], 6)
+        self.assertEqual(
+            pillars["dedupe"]["held_for_later_groups"],
+            quality["deduplication_fast_review"]["held_for_later_groups"],
+        )
         self.assertEqual(
             pillars["dedupe"]["next_fast_review_batch_groups"],
-            10,
+            quality["deduplication_fast_review"]["next_fast_review_batch_groups"],
         )
         self.assertEqual(
             pillars["dedupe"]["next_fast_review_batch_drop_candidate_rows"],
-            10,
+            quality["deduplication_fast_review"]["next_fast_review_batch_drop_candidate_rows"],
         )
         self.assertEqual(
             pillars["dedupe"]["next_fast_review_primary_review_url_groups"],
-            10,
+            quality["deduplication_fast_review"]["next_fast_review_batch_primary_review_url_groups"],
         )
         self.assertEqual(
             pillars["dedupe"]["next_fast_review_warning_counts"],
-            [["image_delta_requires_visual_check", 10]],
+            quality["deduplication_fast_review"]["next_fast_review_batch_warning_counts"],
         )
-        self.assertEqual(pillars["dedupe"]["confirmed_template_rows"], 42)
+        self.assertEqual(
+            pillars["dedupe"]["confirmed_template_rows"],
+            quality["deduplication_confirmed_template"]["template_items"],
+        )
         self.assertEqual(pillars["dedupe"]["confirmed_template_manual_rows"], 0)
         self.assertEqual(pillars["dedupe"]["dry_run_ready_decision_rows"], 0)
-        self.assertEqual(pillars["dedupe"]["dry_run_blocked_rows"], 42)
+        self.assertEqual(
+            pillars["dedupe"]["dry_run_blocked_rows"],
+            quality["deduplication_template_import_dry_run"]["blocked_rows"],
+        )
         self.assertEqual(pillars["dedupe"]["ichiban_reissue_review_groups"], 46)
         self.assertEqual(pillars["dedupe"]["ichiban_reissue_review_rows"], 92)
         self.assertEqual(pillars["dedupe"]["ichiban_reissue_work_order_rows"], 20)
@@ -2571,14 +2675,26 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(pillars["dedupe"]["next_queue_lane"], "same_barcode_fast_review")
         self.assertEqual(pillars["dedupe"]["next_queue_rows"], 10)
-        self.assertEqual(pillars["dedupe"]["next_execution_lane_count"], 5)
-        self.assertEqual(pillars["dedupe"]["next_execution_open_rows"], 161)
-        self.assertEqual(pillars["dedupe"]["next_execution_next_batch_rows"], 82)
+        self.assertEqual(
+            pillars["dedupe"]["next_execution_lane_count"],
+            quality["deduplication_action_queue"]["next_execution_summary"]["lane_count"],
+        )
+        self.assertEqual(
+            pillars["dedupe"]["next_execution_open_rows"],
+            quality["deduplication_action_queue"]["next_execution_summary"]["open_rows"],
+        )
+        self.assertEqual(
+            pillars["dedupe"]["next_execution_next_batch_rows"],
+            quality["deduplication_action_queue"]["next_execution_summary"]["next_batch_rows"],
+        )
         self.assertEqual(
             pillars["dedupe"]["first_next_execution_lane"],
             "same_barcode_fast_review",
         )
-        self.assertEqual(pillars["dedupe"]["first_next_execution_rows"], 42)
+        self.assertEqual(
+            pillars["dedupe"]["first_next_execution_rows"],
+            quality["deduplication_action_queue"]["next_execution_lanes"][0]["open_rows"],
+        )
         self.assertEqual(pillars["missing_images"]["open_rows"], result["missing"]["image_url"])
         self.assertEqual(
             pillars["missing_images"]["queued_rows"],
@@ -3130,13 +3246,22 @@ class PublicCatalogReportTests(unittest.TestCase):
                 "last_one_and_double_chance_zero_price_protected"
             ]
         )
-        self.assertEqual(pillars["ichiban_kuji_history"]["next_execution_lane_count"], 5)
-        self.assertEqual(pillars["ichiban_kuji_history"]["next_execution_open_rows"], 249)
+        self.assertEqual(
+            pillars["ichiban_kuji_history"]["next_execution_lane_count"],
+            quality["ichiban_kuji_historical_roadmap"]["next_execution_summary"]["lane_count"],
+        )
+        self.assertEqual(
+            pillars["ichiban_kuji_history"]["next_execution_open_rows"],
+            quality["ichiban_kuji_historical_roadmap"]["next_execution_summary"]["open_rows"],
+        )
         self.assertEqual(
             pillars["ichiban_kuji_history"]["first_next_execution_lane"],
             "campaign_metadata_confirmation",
         )
-        self.assertEqual(pillars["ichiban_kuji_history"]["first_next_execution_rows"], 41)
+        self.assertEqual(
+            pillars["ichiban_kuji_history"]["first_next_execution_rows"],
+            quality["ichiban_kuji_historical_roadmap"]["next_execution_lanes"][0]["open_rows"],
+        )
         readiness_dashboard = quality["goal_readiness_dashboard"]
         self.assertEqual(readiness_dashboard["status"], "manual_review_required")
         self.assertTrue(readiness_dashboard["manual_review_required"])
@@ -3178,8 +3303,14 @@ class PublicCatalogReportTests(unittest.TestCase):
             readiness_dashboard["next_blocking_pillar"]["pillar"],
             "dedupe",
         )
-        self.assertEqual(blocking_pillars["dedupe"]["manual_review_rows"], 48)
-        self.assertEqual(blocking_pillars["dedupe"]["next_execution_lane_count"], 5)
+        self.assertEqual(
+            blocking_pillars["dedupe"]["manual_review_rows"],
+            quality["deduplication_action_queue"]["queued_groups"],
+        )
+        self.assertEqual(
+            blocking_pillars["dedupe"]["next_execution_lane_count"],
+            quality["deduplication_action_queue"]["next_execution_summary"]["lane_count"],
+        )
         self.assertEqual(
             blocking_pillars["dedupe"]["first_next_execution_lane"],
             "same_barcode_fast_review",
@@ -5544,7 +5675,14 @@ class PublicCatalogReportTests(unittest.TestCase):
             source_discovery_starter_summary["next_review_batch_rows"],
         )
         self.assertGreater(len(source_discovery_starter_next_action["top_search_urls"]), 0)
-        self.assertGreater(len(source_discovery_starter_next_action["top_fallback_web_search_urls"]), 0)
+        self.assertEqual(
+            len(source_discovery_starter_next_action["top_fallback_web_search_urls"]),
+            source_discovery_starter_summary["groups_with_fallback_web_search_urls"],
+        )
+        self.assertGreater(
+            source_discovery_starter_summary["groups_with_any_search_url"],
+            0,
+        )
         self.assertEqual(
             source_discovery_starter_scorecard["next_step"],
             "find_exact_official_product_source_url",
