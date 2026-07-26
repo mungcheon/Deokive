@@ -1,17 +1,22 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T18:18:43Z",
+  "generated_at": "2026-07-26T19:55:06Z",
   "scope": "ichiban_kuji_prize_name_image_review",
   "summary": {
     "kuji_rows": 7902,
-    "review_rows": 0,
-    "name_structure_review_rows": 0,
+    "review_rows": 64,
+    "name_structure_review_rows": 64,
     "image_identity_review_rows": 0,
     "same_campaign_prize_rank_name_duplicate_rows": 0,
     "same_campaign_image_reused_different_name_rows": 0,
     "multi_item_prize_rank_groups": 417,
     "multi_item_prize_rank_catalog_rows": 2945,
-    "review_reason_counts": [],
+    "review_reason_counts": [
+      [
+        "display_name_does_not_match_series_and_prize_name",
+        64
+      ]
+    ],
     "auto_apply_enabled": false,
     "recommended_next_action": "confirm_ichiban_prize_names_and_images_against_official_campaign_lineups"
   },
@@ -26,7 +31,2888 @@
     "last_one_and_double_chance_price_jpy": 0,
     "auto_apply_enabled": false
   },
-  "review_rows": [],
+  "review_rows": [
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 16820,
+      "series_name": "一番くじドラゴンボールＺ限界突破編",
+      "prize_rank": "ソフビ貯金箱賞",
+      "prize_item_name": "ソフビ貯金箱賞",
+      "expected_prize_display_name": "ソフビ貯金箱賞",
+      "display_name_ko": "一番くじドラゴンボールＺ限界突破編 / ソフビ貯金箱賞 / ソフビ貯金箱賞 / 기타",
+      "expected_display_name_ko": "一番くじドラゴンボールＺ限界突破編 / ソフビ貯金箱賞 / 기타",
+      "category": "굿즈",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2008-06-04",
+      "source_url": "https://1kuji.com/products/10",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/40/d3bbe56b-4817-4526-8ebe-f20d9d50ff8c.png",
+      "local_image_path": "assets/catalog_images/9babb647c06275008c1f.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 16820,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/10",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 16821,
+      "series_name": "一番くじドラゴンボールＺ限界突破編",
+      "prize_rank": "ホイポイカプセルボールペン賞",
+      "prize_item_name": "ホイポイカプセルボールペン賞",
+      "expected_prize_display_name": "ホイポイカプセルボールペン賞",
+      "display_name_ko": "一番くじドラゴンボールＺ限界突破編 / ホイポイカプセルボールペン賞 / ホイポイカプセルボールペン賞 / 기타",
+      "expected_display_name_ko": "一番くじドラゴンボールＺ限界突破編 / ホイポイカプセルボールペン賞 / 기타",
+      "category": "굿즈",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2008-06-04",
+      "source_url": "https://1kuji.com/products/10",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/41/8c761336-e6b8-4272-8f30-ef69b994e63e.png",
+      "local_image_path": "assets/catalog_images/d5b35cb0b355ae316c8d.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 16821,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/10",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 16822,
+      "series_name": "一番くじドラゴンボールＺ限界突破編",
+      "prize_rank": "メモスタンド賞",
+      "prize_item_name": "メモスタンド賞",
+      "expected_prize_display_name": "メモスタンド賞",
+      "display_name_ko": "一番くじドラゴンボールＺ限界突破編 / メモスタンド賞 / メモスタンド賞 / 기타",
+      "expected_display_name_ko": "一番くじドラゴンボールＺ限界突破編 / メモスタンド賞 / 기타",
+      "category": "아크릴 스탠드",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2008-06-04",
+      "source_url": "https://1kuji.com/products/10",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/42/04647fd3-a06d-4446-ba64-557cde0039fe.png",
+      "local_image_path": "assets/catalog_images/cc0598725474e1576f45.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 16822,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/10",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 16816,
+      "series_name": "一番くじドラゴンボールＺ限界突破編",
+      "prize_rank": "大猿フィギュア賞",
+      "prize_item_name": "大猿フィギュア賞",
+      "expected_prize_display_name": "大猿フィギュア賞",
+      "display_name_ko": "一番くじドラゴンボールＺ限界突破編 / 大猿フィギュア賞 / 大猿フィギュア賞 / 기타",
+      "expected_display_name_ko": "一番くじドラゴンボールＺ限界突破編 / 大猿フィギュア賞 / 기타",
+      "category": "피규어",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2008-06-04",
+      "source_url": "https://1kuji.com/products/10",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/36/fdab7712-a0b0-4b66-90b6-af141d2436c1.png",
+      "local_image_path": "assets/catalog_images/8f2d2416eded54c07bf5.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 16816,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/10",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 16817,
+      "series_name": "一番くじドラゴンボールＺ限界突破編",
+      "prize_rank": "限界突破！フィギュア賞",
+      "prize_item_name": "限界突破！フィギュア賞",
+      "expected_prize_display_name": "限界突破！フィギュア賞",
+      "display_name_ko": "一番くじドラゴンボールＺ限界突破編 / 限界突破！フィギュア賞 / 限界突破！フィギュア賞 / 기타",
+      "expected_display_name_ko": "一番くじドラゴンボールＺ限界突破編 / 限界突破！フィギュア賞 / 기타",
+      "category": "피규어",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2008-06-04",
+      "source_url": "https://1kuji.com/products/10",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/37/05230400-bf2e-49c7-8930-4038f57463f9.png",
+      "local_image_path": "assets/catalog_images/d8a9bd7a562bfb17e8fa.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 16817,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/10",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 16818,
+      "series_name": "一番くじドラゴンボールＺ限界突破編",
+      "prize_rank": "飲茶セット賞",
+      "prize_item_name": "飲茶セット賞",
+      "expected_prize_display_name": "飲茶セット賞",
+      "display_name_ko": "一番くじドラゴンボールＺ限界突破編 / 飲茶セット賞 / 飲茶セット賞 / 기타",
+      "expected_display_name_ko": "一番くじドラゴンボールＺ限界突破編 / 飲茶セット賞 / 기타",
+      "category": "굿즈",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2008-06-04",
+      "source_url": "https://1kuji.com/products/10",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/38/90033d76-7fa9-497a-ab3b-fbbefa057683.png",
+      "local_image_path": "assets/catalog_images/9f7124f53ca5a846a681.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 16818,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/10",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 16819,
+      "series_name": "一番くじドラゴンボールＺ限界突破編",
+      "prize_rank": "魔封波小物入れ賞",
+      "prize_item_name": "魔封波小物入れ賞",
+      "expected_prize_display_name": "魔封波小物入れ賞",
+      "display_name_ko": "一番くじドラゴンボールＺ限界突破編 / 魔封波小物入れ賞 / 魔封波小物入れ賞 / 기타",
+      "expected_display_name_ko": "一番くじドラゴンボールＺ限界突破編 / 魔封波小物入れ賞 / 기타",
+      "category": "굿즈",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2008-06-04",
+      "source_url": "https://1kuji.com/products/10",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/39/7037f43e-69b2-4e5e-9a44-f8f77a77b519.png",
+      "local_image_path": "assets/catalog_images/e30aeab0c2ec34dc60e4.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 16819,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/10",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 17587,
+      "series_name": "一番くじ機動戦士ガンダム00",
+      "prize_rank": "タンブラー賞",
+      "prize_item_name": "タンブラー賞",
+      "expected_prize_display_name": "タンブラー賞",
+      "display_name_ko": "一番くじ機動戦士ガンダム00 / タンブラー賞 / タンブラー賞 / 기타",
+      "expected_display_name_ko": "一番くじ機動戦士ガンダム00 / タンブラー賞 / 기타",
+      "category": "생활잡화",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2008-06-18",
+      "source_url": "https://1kuji.com/products/38",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/5/59267840-9c79-4975-bbfa-10938eeb1029.png",
+      "local_image_path": "assets/catalog_images/e094a976df8ef4942904.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 17587,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/38",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 17589,
+      "series_name": "一番くじ機動戦士ガンダム00",
+      "prize_rank": "ネックペン賞",
+      "prize_item_name": "ネックペン賞",
+      "expected_prize_display_name": "ネックペン賞",
+      "display_name_ko": "一番くじ機動戦士ガンダム00 / ネックペン賞 / ネックペン賞 / 기타",
+      "expected_display_name_ko": "一番くじ機動戦士ガンダム00 / ネックペン賞 / 기타",
+      "category": "굿즈",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2008-06-18",
+      "source_url": "https://1kuji.com/products/38",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/7/0f651925-f423-4d4a-bec8-600e1186c1de.png",
+      "local_image_path": "assets/catalog_images/17b2915d0506eaf345a7.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 17589,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/38",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 17585,
+      "series_name": "一番くじ機動戦士ガンダム00",
+      "prize_rank": "ハロぬいぐるみ賞",
+      "prize_item_name": "ハロぬいぐるみ賞",
+      "expected_prize_display_name": "ハロぬいぐるみ賞",
+      "display_name_ko": "一番くじ機動戦士ガンダム00 / ハロぬいぐるみ賞 / ハロぬいぐるみ賞 / 하로",
+      "expected_display_name_ko": "一番くじ機動戦士ガンダム00 / ハロぬいぐるみ賞 / 하로",
+      "category": "인형",
+      "character_name": "하로",
+      "official_price_jpy": null,
+      "release_date": "2008-06-18",
+      "source_url": "https://1kuji.com/products/38",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/3/b7e8d810-8b40-47cd-80c1-b6a26dfcf8c2.png",
+      "local_image_path": "assets/catalog_images/1aaeb854691857e3c38c.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 17585,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/38",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 17586,
+      "series_name": "一番くじ機動戦士ガンダム00",
+      "prize_rank": "バスタオル賞",
+      "prize_item_name": "バスタオル賞",
+      "expected_prize_display_name": "バスタオル賞",
+      "display_name_ko": "一番くじ機動戦士ガンダム00 / バスタオル賞 / バスタオル賞 / 기타",
+      "expected_display_name_ko": "一番くじ機動戦士ガンダム00 / バスタオル賞 / 기타",
+      "category": "타월",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2008-06-18",
+      "source_url": "https://1kuji.com/products/38",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/4/3eeeb084-98c1-4280-91b2-e27653105972.png",
+      "local_image_path": "assets/catalog_images/f130799e475739975cdf.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 17586,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/38",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 17583,
+      "series_name": "一番くじ機動戦士ガンダム00",
+      "prize_rank": "ヘッドディスプレイ賞",
+      "prize_item_name": "ヘッドディスプレイ賞",
+      "expected_prize_display_name": "ヘッドディスプレイ賞",
+      "display_name_ko": "一番くじ機動戦士ガンダム00 / ヘッドディスプレイ賞 / ヘッドディスプレイ賞 / 기타",
+      "expected_display_name_ko": "一番くじ機動戦士ガンダム00 / ヘッドディスプレイ賞 / 기타",
+      "category": "굿즈",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2008-06-18",
+      "source_url": "https://1kuji.com/products/38",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/1/c8f54a51-601b-439b-88b9-e1411a836446.png",
+      "local_image_path": "assets/catalog_images/8d6fdac60d689289006d.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 17583,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/38",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 17588,
+      "series_name": "一番くじ機動戦士ガンダム00",
+      "prize_rank": "ポスター賞",
+      "prize_item_name": "ポスター賞",
+      "expected_prize_display_name": "ポスター賞",
+      "display_name_ko": "一番くじ機動戦士ガンダム00 / ポスター賞 / ポスター賞 / 기타",
+      "expected_display_name_ko": "一番くじ機動戦士ガンダム00 / ポスター賞 / 기타",
+      "category": "포스터",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2008-06-18",
+      "source_url": "https://1kuji.com/products/38",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/6/a9dbcc33-f9fb-4909-a25d-bedc6049ec95.png",
+      "local_image_path": "assets/catalog_images/d369291457dde40b54ed.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 17588,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/38",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 17584,
+      "series_name": "一番くじ機動戦士ガンダム00",
+      "prize_rank": "王 留美フィギュア賞",
+      "prize_item_name": "王 留美フィギュア賞",
+      "expected_prize_display_name": "王 留美フィギュア賞",
+      "display_name_ko": "一番くじ機動戦士ガンダム00 / 王 留美フィギュア賞 / 王 留美フィギュア賞 / 왕 류미",
+      "expected_display_name_ko": "一番くじ機動戦士ガンダム00 / 王 留美フィギュア賞 / 왕 류미",
+      "category": "피규어",
+      "character_name": "왕 류미",
+      "official_price_jpy": null,
+      "release_date": "2008-06-18",
+      "source_url": "https://1kuji.com/products/38",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/2/b9838f4a-ff80-41f7-acaf-7a48b2519619.png",
+      "local_image_path": "assets/catalog_images/59dbca25ad92b0d03e74.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 17584,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/38",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 16216,
+      "series_name": "一番くじテレビアニメ「ワンピース」",
+      "prize_rank": "サウザンド・サニー号賞",
+      "prize_item_name": "サウザンド・サニー号賞",
+      "expected_prize_display_name": "サウザンド・サニー号賞",
+      "display_name_ko": "一番くじテレビアニメ「ワンピース」 / サウザンド・サニー号賞 / サウザンド・サニー号賞 / 기타",
+      "expected_display_name_ko": "一番くじテレビアニメ「ワンピース」 / サウザンド・サニー号賞 / 기타",
+      "category": "굿즈",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2008-05",
+      "source_url": "https://1kuji.com/products/49",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/50/c305b325-eb3e-4cd3-805b-bf41b67a4f76.jpg",
+      "local_image_path": "assets/catalog_images/0b1670f9ebf0b8b3493c.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 16216,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/49",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 16219,
+      "series_name": "一番くじテレビアニメ「ワンピース」",
+      "prize_rank": "チョッパーぬいぐるみ賞",
+      "prize_item_name": "チョッパーぬいぐるみ賞",
+      "expected_prize_display_name": "チョッパーぬいぐるみ賞",
+      "display_name_ko": "一番くじテレビアニメ「ワンピース」 / チョッパーぬいぐるみ賞 / チョッパーぬいぐるみ賞 / 토니토니 쵸파",
+      "expected_display_name_ko": "一番くじテレビアニメ「ワンピース」 / チョッパーぬいぐるみ賞 / 토니토니 쵸파",
+      "category": "인형",
+      "character_name": "토니토니 쵸파",
+      "official_price_jpy": null,
+      "release_date": "2008-05",
+      "source_url": "https://1kuji.com/products/49",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/53/b7ef5055-f055-4e7b-8b97-d779557dc852.jpg",
+      "local_image_path": "assets/catalog_images/ef030ee07d0f63d6b855.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 16219,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/49",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 16222,
+      "series_name": "一番くじテレビアニメ「ワンピース」",
+      "prize_rank": "チョッパーペン賞",
+      "prize_item_name": "チョッパーペン賞",
+      "expected_prize_display_name": "チョッパーペン賞",
+      "display_name_ko": "一番くじテレビアニメ「ワンピース」 / チョッパーペン賞 / チョッパーペン賞 / 토니토니 쵸파",
+      "expected_display_name_ko": "一番くじテレビアニメ「ワンピース」 / チョッパーペン賞 / 토니토니 쵸파",
+      "category": "굿즈",
+      "character_name": "토니토니 쵸파",
+      "official_price_jpy": null,
+      "release_date": "2008-05",
+      "source_url": "https://1kuji.com/products/49",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/56/907c0048-8f6b-4685-9e77-2b6c8a33a210.jpg",
+      "local_image_path": "assets/catalog_images/1913649e4f434baede7d.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 16222,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/49",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 16220,
+      "series_name": "一番くじテレビアニメ「ワンピース」",
+      "prize_rank": "ファスナー付きクリアケース賞",
+      "prize_item_name": "ファスナー付きクリアケース賞",
+      "expected_prize_display_name": "ファスナー付きクリアケース賞",
+      "display_name_ko": "一番くじテレビアニメ「ワンピース」 / ファスナー付きクリアケース賞 / ファスナー付きクリアケース賞 / 기타",
+      "expected_display_name_ko": "一番くじテレビアニメ「ワンピース」 / ファスナー付きクリアケース賞 / 기타",
+      "category": "굿즈",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2008-05",
+      "source_url": "https://1kuji.com/products/49",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/54/a69068de-b2af-49aa-8380-1c9694fb5015.jpg",
+      "local_image_path": "assets/catalog_images/129068f4afa5ad067b39.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 16220,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/49",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 16218,
+      "series_name": "一番くじテレビアニメ「ワンピース」",
+      "prize_rank": "フランキーフィギュア賞",
+      "prize_item_name": "フランキーフィギュア賞",
+      "expected_prize_display_name": "フランキーフィギュア賞",
+      "display_name_ko": "一番くじテレビアニメ「ワンピース」 / フランキーフィギュア賞 / フランキーフィギュア賞 / 프랑키",
+      "expected_display_name_ko": "一番くじテレビアニメ「ワンピース」 / フランキーフィギュア賞 / 프랑키",
+      "category": "피규어",
+      "character_name": "프랑키",
+      "official_price_jpy": null,
+      "release_date": "2008-05",
+      "source_url": "https://1kuji.com/products/49",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/52/58157ff8-6ac0-4995-a76c-40b61b92f5a9.jpg",
+      "local_image_path": "assets/catalog_images/9b495467dc484b9d0c68.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 16218,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/49",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 16223,
+      "series_name": "一番くじテレビアニメ「ワンピース」",
+      "prize_rank": "ボールチェーン付きマスコット賞",
+      "prize_item_name": "ボールチェーン付きマスコット賞",
+      "expected_prize_display_name": "ボールチェーン付きマスコット賞",
+      "display_name_ko": "一番くじテレビアニメ「ワンピース」 / ボールチェーン付きマスコット賞 / ボールチェーン付きマスコット賞 / 기타",
+      "expected_display_name_ko": "一番くじテレビアニメ「ワンピース」 / ボールチェーン付きマスコット賞 / 기타",
+      "category": "마스코트",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2008-05",
+      "source_url": "https://1kuji.com/products/49",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/57/d3b98be3-6cd0-4871-934b-fb58731397aa.jpg",
+      "local_image_path": "assets/catalog_images/92b0a418a2e0a56f664f.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 16223,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/49",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 16217,
+      "series_name": "一番くじテレビアニメ「ワンピース」",
+      "prize_rank": "ルフィフィギュア賞",
+      "prize_item_name": "ルフィフィギュア賞",
+      "expected_prize_display_name": "ルフィフィギュア賞",
+      "display_name_ko": "一番くじテレビアニメ「ワンピース」 / ルフィフィギュア賞 / ルフィフィギュア賞 / 몽키 D. 루피",
+      "expected_display_name_ko": "一番くじテレビアニメ「ワンピース」 / ルフィフィギュア賞 / 몽키 D. 루피",
+      "category": "피규어",
+      "character_name": "몽키 D. 루피",
+      "official_price_jpy": null,
+      "release_date": "2008-05",
+      "source_url": "https://1kuji.com/products/49",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/51/58bca8d9-36f8-4879-8db2-e4b1834f3bf4.jpg",
+      "local_image_path": "assets/catalog_images/6985d2ae20048e62a272.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 16217,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/49",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 16221,
+      "series_name": "一番くじテレビアニメ「ワンピース」",
+      "prize_rank": "レリーフ名刺ケース賞",
+      "prize_item_name": "レリーフ名刺ケース賞",
+      "expected_prize_display_name": "レリーフ名刺ケース賞",
+      "display_name_ko": "一番くじテレビアニメ「ワンピース」 / レリーフ名刺ケース賞 / レリーフ名刺ケース賞 / 기타",
+      "expected_display_name_ko": "一番くじテレビアニメ「ワンピース」 / レリーフ名刺ケース賞 / 기타",
+      "category": "굿즈",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2008-05",
+      "source_url": "https://1kuji.com/products/49",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/55/e98e69df-0ae5-4795-8984-5a9eb00defb3.jpg",
+      "local_image_path": "assets/catalog_images/00b57e8eb8a026ea791d.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 16221,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/49",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 16797,
+      "series_name": "一番くじドラゴンボールZ～ナメック星編～",
+      "prize_rank": "べジータフィギュア賞",
+      "prize_item_name": "べジータフィギュア賞",
+      "expected_prize_display_name": "べジータフィギュア賞",
+      "display_name_ko": "一番くじドラゴンボールZ～ナメック星編～ / べジータフィギュア賞 / べジータフィギュア賞 / 베지터",
+      "expected_display_name_ko": "一番くじドラゴンボールZ～ナメック星編～ / べジータフィギュア賞 / 베지터",
+      "category": "피규어",
+      "character_name": "베지터",
+      "official_price_jpy": null,
+      "release_date": "2009-06-26",
+      "source_url": "https://1kuji.com/products/89",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/236/915ada9b-bfe0-4af4-9a13-08805df78981.jpg",
+      "local_image_path": "assets/catalog_images/9ce5c852c79f47bc7a7f.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 16797,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/89",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 16801,
+      "series_name": "一番くじドラゴンボールZ～ナメック星編～",
+      "prize_rank": "ギニュー特戦隊フィギュア賞",
+      "prize_item_name": "ギニュー特戦隊フィギュア賞",
+      "expected_prize_display_name": "ギニュー特戦隊フィギュア賞",
+      "display_name_ko": "一番くじドラゴンボールZ～ナメック星編～ / ギニュー特戦隊フィギュア賞 / ギニュー特戦隊フィギュア賞 / 기뉴",
+      "expected_display_name_ko": "一番くじドラゴンボールZ～ナメック星編～ / ギニュー特戦隊フィギュア賞 / 기뉴",
+      "category": "피규어",
+      "character_name": "기뉴",
+      "official_price_jpy": null,
+      "release_date": "2009-06-26",
+      "source_url": "https://1kuji.com/products/89",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/240/2ce5440e-c566-4701-8b0e-01301550c579.jpg",
+      "local_image_path": "assets/catalog_images/80505fb42d6ce5a0fee3.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 16801,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/89",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 16800,
+      "series_name": "一番くじドラゴンボールZ～ナメック星編～",
+      "prize_rank": "グラス賞",
+      "prize_item_name": "グラス賞",
+      "expected_prize_display_name": "グラス賞",
+      "display_name_ko": "一番くじドラゴンボールZ～ナメック星編～ / グラス賞 / グラス賞 / 기타",
+      "expected_display_name_ko": "一番くじドラゴンボールZ～ナメック星編～ / グラス賞 / 기타",
+      "category": "머그컵",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2009-06-26",
+      "source_url": "https://1kuji.com/products/89",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/239/375406bb-aa5a-445f-88ce-ec78c361bd5d.jpg",
+      "local_image_path": "assets/catalog_images/22423f304f4bb9a8a720.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 16800,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/89",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 16798,
+      "series_name": "一番くじドラゴンボールZ～ナメック星編～",
+      "prize_rank": "スカウター型メジャー賞",
+      "prize_item_name": "スカウター型メジャー賞",
+      "expected_prize_display_name": "スカウター型メジャー賞",
+      "display_name_ko": "一番くじドラゴンボールZ～ナメック星編～ / スカウター型メジャー賞 / スカウター型メジャー賞 / 기타",
+      "expected_display_name_ko": "一番くじドラゴンボールZ～ナメック星編～ / スカウター型メジャー賞 / 기타",
+      "category": "굿즈",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2009-06-26",
+      "source_url": "https://1kuji.com/products/89",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/237/d0d13086-0faa-4a95-923a-428dc22d82f0.jpg",
+      "local_image_path": "assets/catalog_images/58bd36172e34e19a5868.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 16798,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/89",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 16799,
+      "series_name": "一番くじドラゴンボールZ～ナメック星編～",
+      "prize_rank": "ソフビ貯金箱賞",
+      "prize_item_name": "ソフビ貯金箱賞",
+      "expected_prize_display_name": "ソフビ貯金箱賞",
+      "display_name_ko": "一番くじドラゴンボールZ～ナメック星編～ / ソフビ貯金箱賞 / ソフビ貯金箱賞 / 기타",
+      "expected_display_name_ko": "一番くじドラゴンボールZ～ナメック星編～ / ソフビ貯金箱賞 / 기타",
+      "category": "굿즈",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2009-06-26",
+      "source_url": "https://1kuji.com/products/89",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/238/e845d332-9d89-4698-bea0-63d85d6ea4e5.jpg",
+      "local_image_path": "assets/catalog_images/ab1a380f2b395c3d2c51.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 16799,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/89",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 16795,
+      "series_name": "一番くじドラゴンボールZ～ナメック星編～",
+      "prize_rank": "フリーザフィギュア賞",
+      "prize_item_name": "フリーザフィギュア賞",
+      "expected_prize_display_name": "フリーザフィギュア賞",
+      "display_name_ko": "一番くじドラゴンボールZ～ナメック星編～ / フリーザフィギュア賞 / フリーザフィギュア賞 / 프리저",
+      "expected_display_name_ko": "一番くじドラゴンボールZ～ナメック星編～ / フリーザフィギュア賞 / 프리저",
+      "category": "피규어",
+      "character_name": "프리저",
+      "official_price_jpy": null,
+      "release_date": "2009-06-26",
+      "source_url": "https://1kuji.com/products/89",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/234/6cc39242-7f71-45c4-9145-24961c123e42.jpg",
+      "local_image_path": "assets/catalog_images/82c7022e2d4339619628.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 16795,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/89",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 16796,
+      "series_name": "一番くじドラゴンボールZ～ナメック星編～",
+      "prize_rank": "悟空フィギュア賞",
+      "prize_item_name": "悟空フィギュア賞",
+      "expected_prize_display_name": "悟空フィギュア賞",
+      "display_name_ko": "一番くじドラゴンボールZ～ナメック星編～ / 悟空フィギュア賞 / 悟空フィギュア賞 / 손오공",
+      "expected_display_name_ko": "一番くじドラゴンボールZ～ナメック星編～ / 悟空フィギュア賞 / 손오공",
+      "category": "피규어",
+      "character_name": "손오공",
+      "official_price_jpy": null,
+      "release_date": "2009-06-26",
+      "source_url": "https://1kuji.com/products/89",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/235/33817add-5602-480c-b11a-0198ec4f7372.jpg",
+      "local_image_path": "assets/catalog_images/5da34446eff625061274.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 16796,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/89",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 16629,
+      "series_name": "一番くじ ドラゴンボール THE ANDROID BATTLE with ドラゴンボール ファイターズ",
+      "prize_rank": "ダブルチャンスキャンペーン",
+      "prize_item_name": "ダブルチャンスキャンペーン 人造人間21号 フィギュア",
+      "expected_prize_display_name": "ダブルチャンスキャンペーン 人造人間21号 フィギュア",
+      "display_name_ko": "一番くじ ドラゴンボール THE ANDROID BATTLE with ドラゴンボール ファイターズ / ダブルチャンスキャンペーン / ダブルチャンスキャンペーン 人造人間21号 フィギュア / 인조인간 21호",
+      "expected_display_name_ko": "一番くじ ドラゴンボール THE ANDROID BATTLE with ドラゴンボール ファイターズ / ダブルチャンスキャンペーン / 人造人間21号 フィギュア / 인조인간 21호",
+      "category": "굿즈",
+      "character_name": "인조인간 21호",
+      "official_price_jpy": 0,
+      "release_date": "2019-03-29",
+      "source_url": "https://1kuji.com/products/db_android",
+      "image_url": "https://sn.bpnavi.jp/db_android/w_cp_pc.png",
+      "local_image_path": "assets/catalog_images/4fd2d12e730f692df813.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 16629,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/db_android",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 17669,
+      "series_name": "一番くじ ドラゴンボールDAIMA",
+      "prize_rank": "ダブルチャンスキャンペーン",
+      "prize_item_name": "ダブルチャンスキャンペーン",
+      "expected_prize_display_name": "ダブルチャンスキャンペーン",
+      "display_name_ko": "一番くじ ドラゴンボールDAIMA / ダブルチャンスキャンペーン / ダブルチャンスキャンペーン / 기타",
+      "expected_display_name_ko": "一番くじ ドラゴンボールDAIMA / ダブルチャンスキャンペーン / 기타",
+      "category": "굿즈",
+      "character_name": "기타",
+      "official_price_jpy": 0,
+      "release_date": "2024-11-02",
+      "source_url": "https://1kuji.com/products/db_d",
+      "image_url": "https://sf.1kuji.com/1kuji_db/db_d/images/lineup/img_w_pc.jpg",
+      "local_image_path": "assets/catalog_images/b9e40fa842578bcf480e.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 17669,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/db_d",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 17657,
+      "series_name": "一番くじ ドラゴンボールDAIMA 第2弾",
+      "prize_rank": "ダブルチャンスキャンペーン",
+      "prize_item_name": "ダブルチャンスキャンペーン",
+      "expected_prize_display_name": "ダブルチャンスキャンペーン",
+      "display_name_ko": "一番くじ ドラゴンボールDAIMA 第2弾 / ダブルチャンスキャンペーン / ダブルチャンスキャンペーン / 기타",
+      "expected_display_name_ko": "一番くじ ドラゴンボールDAIMA 第2弾 / ダブルチャンスキャンペーン / 기타",
+      "category": "굿즈",
+      "character_name": "기타",
+      "official_price_jpy": 0,
+      "release_date": "2025-03-14",
+      "source_url": "https://1kuji.com/products/db_d2",
+      "image_url": "https://sf.1kuji.com/1kuji_db/db_d2/images/lineup/img_w_pc.webp",
+      "local_image_path": "assets/catalog_images/0a199d8cd30927d2da47.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 17657,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/db_d2",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 17569,
+      "series_name": "機動戦士ガンダム 30th ANNIVERSARY 一番くじ",
+      "prize_rank": "ガンダムフィギュア賞",
+      "prize_item_name": "ガンダムフィギュア賞",
+      "expected_prize_display_name": "ガンダムフィギュア賞",
+      "display_name_ko": "機動戦士ガンダム 30th ANNIVERSARY 一番くじ / ガンダムフィギュア賞 / ガンダムフィギュア賞 / 기동전사 건담",
+      "expected_display_name_ko": "機動戦士ガンダム 30th ANNIVERSARY 一番くじ / ガンダムフィギュア賞 / 기동전사 건담",
+      "category": "피규어",
+      "character_name": "기동전사 건담",
+      "official_price_jpy": null,
+      "release_date": "2010-02-06",
+      "source_url": "https://1kuji.com/products/gundam30th",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/614/ed037584-dbdc-42bb-acf5-9e5c02218b0e.jpg",
+      "local_image_path": "assets/catalog_images/fe40c73ee7b03af4fc45.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 17569,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/gundam30th",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 17568,
+      "series_name": "機動戦士ガンダム 30th ANNIVERSARY 一番くじ",
+      "prize_rank": "ガンダムヘッドバンク賞",
+      "prize_item_name": "ガンダムヘッドバンク賞",
+      "expected_prize_display_name": "ガンダムヘッドバンク賞",
+      "display_name_ko": "機動戦士ガンダム 30th ANNIVERSARY 一番くじ / ガンダムヘッドバンク賞 / ガンダムヘッドバンク賞 / 기동전사 건담",
+      "expected_display_name_ko": "機動戦士ガンダム 30th ANNIVERSARY 一番くじ / ガンダムヘッドバンク賞 / 기동전사 건담",
+      "category": "굿즈",
+      "character_name": "기동전사 건담",
+      "official_price_jpy": null,
+      "release_date": "2010-02-06",
+      "source_url": "https://1kuji.com/products/gundam30th",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/613/9fde5c7b-ca5f-456f-a611-2148130540fc.jpg",
+      "local_image_path": "assets/catalog_images/f726ce3f41b0ba1fe404.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 17568,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/gundam30th",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 17575,
+      "series_name": "機動戦士ガンダム 30th ANNIVERSARY 一番くじ",
+      "prize_rank": "ジオラマフィギュア賞",
+      "prize_item_name": "ジオラマフィギュア賞",
+      "expected_prize_display_name": "ジオラマフィギュア賞",
+      "display_name_ko": "機動戦士ガンダム 30th ANNIVERSARY 一番くじ / ジオラマフィギュア賞 / ジオラマフィギュア賞 / 기타",
+      "expected_display_name_ko": "機動戦士ガンダム 30th ANNIVERSARY 一番くじ / ジオラマフィギュア賞 / 기타",
+      "category": "피규어",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2010-02-06",
+      "source_url": "https://1kuji.com/products/gundam30th",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/620/bfdfdbe3-28e9-4de0-ab23-0608aebc6d36.jpg",
+      "local_image_path": "assets/catalog_images/75cd2ab6bf2f4e411232.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 17575,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/gundam30th",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 17573,
+      "series_name": "機動戦士ガンダム 30th ANNIVERSARY 一番くじ",
+      "prize_rank": "ソフビ貯金箱賞",
+      "prize_item_name": "ソフビ貯金箱賞",
+      "expected_prize_display_name": "ソフビ貯金箱賞",
+      "display_name_ko": "機動戦士ガンダム 30th ANNIVERSARY 一番くじ / ソフビ貯金箱賞 / ソフビ貯金箱賞 / 기타",
+      "expected_display_name_ko": "機動戦士ガンダム 30th ANNIVERSARY 一番くじ / ソフビ貯金箱賞 / 기타",
+      "category": "굿즈",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2010-02-06",
+      "source_url": "https://1kuji.com/products/gundam30th",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/618/60b7a73e-5aa0-469e-95a9-fb5fe12ccaf4.jpg",
+      "local_image_path": "assets/catalog_images/92ab15f20c2bed0433ee.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 17573,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/gundam30th",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 17571,
+      "series_name": "機動戦士ガンダム 30th ANNIVERSARY 一番くじ",
+      "prize_rank": "タオル賞",
+      "prize_item_name": "タオル賞",
+      "expected_prize_display_name": "タオル賞",
+      "display_name_ko": "機動戦士ガンダム 30th ANNIVERSARY 一番くじ / タオル賞 / タオル賞 / 기타",
+      "expected_display_name_ko": "機動戦士ガンダム 30th ANNIVERSARY 一番くじ / タオル賞 / 기타",
+      "category": "타월",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2010-02-06",
+      "source_url": "https://1kuji.com/products/gundam30th",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/616/9d609a28-b135-4498-b903-be77f5f94091.jpg",
+      "local_image_path": "assets/catalog_images/1f5c587f5429fde04ab6.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 17571,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/gundam30th",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 17570,
+      "series_name": "機動戦士ガンダム 30th ANNIVERSARY 一番くじ",
+      "prize_rank": "ハロぬいぐるみ賞",
+      "prize_item_name": "ハロぬいぐるみ賞",
+      "expected_prize_display_name": "ハロぬいぐるみ賞",
+      "display_name_ko": "機動戦士ガンダム 30th ANNIVERSARY 一番くじ / ハロぬいぐるみ賞 / ハロぬいぐるみ賞 / 하로",
+      "expected_display_name_ko": "機動戦士ガンダム 30th ANNIVERSARY 一番くじ / ハロぬいぐるみ賞 / 하로",
+      "category": "인형",
+      "character_name": "하로",
+      "official_price_jpy": null,
+      "release_date": "2010-02-06",
+      "source_url": "https://1kuji.com/products/gundam30th",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/615/afd60fbf-119a-4602-a80b-46d32d1c5bc4.jpg",
+      "local_image_path": "assets/catalog_images/6b141f0221485c5ce60c.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 17570,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/gundam30th",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 17574,
+      "series_name": "機動戦士ガンダム 30th ANNIVERSARY 一番くじ",
+      "prize_rank": "ボールペン賞",
+      "prize_item_name": "ボールペン賞",
+      "expected_prize_display_name": "ボールペン賞",
+      "display_name_ko": "機動戦士ガンダム 30th ANNIVERSARY 一番くじ / ボールペン賞 / ボールペン賞 / 기타",
+      "expected_display_name_ko": "機動戦士ガンダム 30th ANNIVERSARY 一番くじ / ボールペン賞 / 기타",
+      "category": "굿즈",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2010-02-06",
+      "source_url": "https://1kuji.com/products/gundam30th",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/619/92f3e6c1-6a02-4e88-9b08-8093ce84d49a.jpg",
+      "local_image_path": "assets/catalog_images/7666d7b1f3ee7819eede.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 17574,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/gundam30th",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 17572,
+      "series_name": "機動戦士ガンダム 30th ANNIVERSARY 一番くじ",
+      "prize_rank": "湯のみ賞",
+      "prize_item_name": "湯のみ賞",
+      "expected_prize_display_name": "湯のみ賞",
+      "display_name_ko": "機動戦士ガンダム 30th ANNIVERSARY 一番くじ / 湯のみ賞 / 湯のみ賞 / 기타",
+      "expected_display_name_ko": "機動戦士ガンダム 30th ANNIVERSARY 一番くじ / 湯のみ賞 / 기타",
+      "category": "굿즈",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2010-02-06",
+      "source_url": "https://1kuji.com/products/gundam30th",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/617/aaa034cc-e1de-4d7d-8186-5fde370492fc.jpg",
+      "local_image_path": "assets/catalog_images/dbeb502f43decc4e6c50.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 17572,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/gundam30th",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 17556,
+      "series_name": "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～",
+      "prize_rank": "ちびきゅんｷｬﾗ賞",
+      "prize_item_name": "ちびきゅんｷｬﾗ賞",
+      "expected_prize_display_name": "ちびきゅんｷｬﾗ賞",
+      "display_name_ko": "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～ / ちびきゅんｷｬﾗ賞 / ちびきゅんｷｬﾗ賞 / 기타",
+      "expected_display_name_ko": "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～ / ちびきゅんｷｬﾗ賞 / 기타",
+      "category": "굿즈",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2011-12-23",
+      "source_url": "https://1kuji.com/products/gundam_uc",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/1792/15ce4ae5-352a-40f6-8267-620638558115.jpg",
+      "local_image_path": "assets/catalog_images/671692210f37e5b29992.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 17556,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/gundam_uc",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 17557,
+      "series_name": "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～",
+      "prize_rank": "コレクションストラップ賞",
+      "prize_item_name": "コレクションストラップ賞",
+      "expected_prize_display_name": "コレクションストラップ賞",
+      "display_name_ko": "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～ / コレクションストラップ賞 / コレクションストラップ賞 / 기타",
+      "expected_display_name_ko": "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～ / コレクションストラップ賞 / 기타",
+      "category": "키링",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2011-12-23",
+      "source_url": "https://1kuji.com/products/gundam_uc",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/1804/3876b675-6fb4-4614-a690-79af4c63c41a.jpg",
+      "local_image_path": "assets/catalog_images/0805ba0253daad7325e4.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 17557,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/gundam_uc",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 17554,
+      "series_name": "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～",
+      "prize_rank": "マスクデザインタオル賞",
+      "prize_item_name": "マスクデザインタオル賞",
+      "expected_prize_display_name": "マスクデザインタオル賞",
+      "display_name_ko": "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～ / マスクデザインタオル賞 / マスクデザインタオル賞 / 기타",
+      "expected_display_name_ko": "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～ / マスクデザインタオル賞 / 기타",
+      "category": "타월",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2011-12-23",
+      "source_url": "https://1kuji.com/products/gundam_uc",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/1790/421045f9-bc83-45f3-b5f1-db3e5202e12c.jpg",
+      "local_image_path": "assets/catalog_images/06688a039bdcaacbc773.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 17554,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/gundam_uc",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 17553,
+      "series_name": "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～",
+      "prize_rank": "モビルスーツデフォルメフィギュア賞",
+      "prize_item_name": "モビルスーツデフォルメフィギュア賞",
+      "expected_prize_display_name": "モビルスーツデフォルメフィギュア賞",
+      "display_name_ko": "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～ / モビルスーツデフォルメフィギュア賞 / モビルスーツデフォルメフィギュア賞 / 기타",
+      "expected_display_name_ko": "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～ / モビルスーツデフォルメフィギュア賞 / 기타",
+      "category": "피규어",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2011-12-23",
+      "source_url": "https://1kuji.com/products/gundam_uc",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/1789/e047bdd7-0b34-4a1f-83a6-a72dda3247c1.jpg",
+      "local_image_path": "assets/catalog_images/57f9c0c5bc8dcc09c349.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 17553,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/gundam_uc",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 17555,
+      "series_name": "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～",
+      "prize_rank": "宇宙世紀湯のみ賞",
+      "prize_item_name": "宇宙世紀湯のみ賞",
+      "expected_prize_display_name": "宇宙世紀湯のみ賞",
+      "display_name_ko": "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～ / 宇宙世紀湯のみ賞 / 宇宙世紀湯のみ賞 / 기타",
+      "expected_display_name_ko": "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～ / 宇宙世紀湯のみ賞 / 기타",
+      "category": "굿즈",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2011-12-23",
+      "source_url": "https://1kuji.com/products/gundam_uc",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/1791/4a72f3d9-50c6-4b12-8436-888d7d1fabe0.jpg",
+      "local_image_path": "assets/catalog_images/7eb0050561df6d46a227.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 17555,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/gundam_uc",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 17552,
+      "series_name": "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～",
+      "prize_rank": "赤い彗星ﾊﾛぬいぐるみ賞",
+      "prize_item_name": "赤い彗星ﾊﾛぬいぐるみ賞",
+      "expected_prize_display_name": "赤い彗星ﾊﾛぬいぐるみ賞",
+      "display_name_ko": "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～ / 赤い彗星ﾊﾛぬいぐるみ賞 / 赤い彗星ﾊﾛぬいぐるみ賞 / 기타",
+      "expected_display_name_ko": "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～ / 赤い彗星ﾊﾛぬいぐるみ賞 / 기타",
+      "category": "인형",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2011-12-23",
+      "source_url": "https://1kuji.com/products/gundam_uc",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/1788/6fd7cc05-af82-4a21-b590-d9327f9800d4.jpg",
+      "local_image_path": "assets/catalog_images/153c8b3f4f3469caf4ba.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 17552,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/gundam_uc",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 17550,
+      "series_name": "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～",
+      "prize_rank": "ｼｬｱ専用ｻﾞｸﾋﾞｯｸﾞｿﾌﾋﾞ賞",
+      "prize_item_name": "ｼｬｱ専用ｻﾞｸﾋﾞｯｸﾞｿﾌﾋﾞ賞",
+      "expected_prize_display_name": "ｼｬｱ専用ｻﾞｸﾋﾞｯｸﾞｿﾌﾋﾞ賞",
+      "display_name_ko": "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～ / ｼｬｱ専用ｻﾞｸﾋﾞｯｸﾞｿﾌﾋﾞ賞 / ｼｬｱ専用ｻﾞｸﾋﾞｯｸﾞｿﾌﾋﾞ賞 / 기타",
+      "expected_display_name_ko": "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～ / ｼｬｱ専用ｻﾞｸﾋﾞｯｸﾞｿﾌﾋﾞ賞 / 기타",
+      "category": "굿즈",
+      "character_name": "기타",
+      "official_price_jpy": null,
+      "release_date": "2011-12-23",
+      "source_url": "https://1kuji.com/products/gundam_uc",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/1786/011cac1c-f6d7-433d-adcf-39d3c54ebc68.jpg",
+      "local_image_path": "assets/catalog_images/ec673cd2ddb8b6732cdf.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 17550,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/gundam_uc",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 17551,
+      "series_name": "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～",
+      "prize_rank": "ﾕﾆｺｰﾝｶﾞﾝﾀﾞﾑﾍｯﾄﾞﾃﾞｨｽﾌﾟﾚｲ賞",
+      "prize_item_name": "ﾕﾆｺｰﾝｶﾞﾝﾀﾞﾑﾍｯﾄﾞﾃﾞｨｽﾌﾟﾚｲ賞",
+      "expected_prize_display_name": "ﾕﾆｺｰﾝｶﾞﾝﾀﾞﾑﾍｯﾄﾞﾃﾞｨｽﾌﾟﾚｲ賞",
+      "display_name_ko": "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～ / ﾕﾆｺｰﾝｶﾞﾝﾀﾞﾑﾍｯﾄﾞﾃﾞｨｽﾌﾟﾚｲ賞 / ﾕﾆｺｰﾝｶﾞﾝﾀﾞﾑﾍｯﾄﾞﾃﾞｨｽﾌﾟﾚｲ賞 / 유니콘 건담",
+      "expected_display_name_ko": "一番くじ 機動戦士ガンダム＆機動戦士ガンダムUC ～赤い彗星の再来～ / ﾕﾆｺｰﾝｶﾞﾝﾀﾞﾑﾍｯﾄﾞﾃﾞｨｽﾌﾟﾚｲ賞 / 유니콘 건담",
+      "category": "굿즈",
+      "character_name": "유니콘 건담",
+      "official_price_jpy": null,
+      "release_date": "2011-12-23",
+      "source_url": "https://1kuji.com/products/gundam_uc",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/1787/a0854bb6-2944-4b4c-8e16-b8004bedb53e.jpg",
+      "local_image_path": "assets/catalog_images/3c028d2800605eeebb18.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 17551,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/gundam_uc",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 13956,
+      "series_name": "一番くじ ホロライブ ちょこのっこコレクション",
+      "prize_rank": "ラプラス・ダークネス賞",
+      "prize_item_name": "ラプラス・ダークネス賞",
+      "expected_prize_display_name": "ラプラス・ダークネス賞",
+      "display_name_ko": "一番くじ ホロライブ ちょこのっこコレクション / ラプラス・ダークネス賞 / ラプラス・ダークネス賞 / 라플라스 다크네스",
+      "expected_display_name_ko": "一番くじ ホロライブ ちょこのっこコレクション / ラプラス・ダークネス賞 / 라플라스 다크네스",
+      "category": "피규어",
+      "character_name": "라플라스 다크네스",
+      "official_price_jpy": 900,
+      "release_date": "2024-12-02",
+      "source_url": "https://1kuji.com/products/hololive-ck",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/103318/7bb72e85-b3ca-447b-a18b-2dc818062803.jpg",
+      "local_image_path": "assets/catalog_images/959a6482c1939eaf2c04.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 13956,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/hololive-ck",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 14327,
+      "series_name": "一番くじ NARUTO-ナルト- 疾風伝 ～受け継がれる絆～",
+      "prize_rank": "クリアファイル賞",
+      "prize_item_name": "クリアファイル賞",
+      "expected_prize_display_name": "クリアファイル賞",
+      "display_name_ko": "一番くじ NARUTO-ナルト- 疾風伝 ～受け継がれる絆～ / クリアファイル賞 / クリアファイル賞 / 기타",
+      "expected_display_name_ko": "一番くじ NARUTO-ナルト- 疾風伝 ～受け継がれる絆～ / クリアファイル賞 / 기타",
+      "category": "클리어파일",
+      "character_name": "기타",
+      "official_price_jpy": 500,
+      "release_date": "2012-10-28",
+      "source_url": "https://1kuji.com/products/naruto",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/2464/e9b4a712-e467-4aa5-b6a0-ea3cc0e61bd5.jpg",
+      "local_image_path": "assets/catalog_images/02f9a77694a71da6aef8.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 14327,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/naruto",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 14326,
+      "series_name": "一番くじ NARUTO-ナルト- 疾風伝 ～受け継がれる絆～",
+      "prize_rank": "グラス賞",
+      "prize_item_name": "グラス賞",
+      "expected_prize_display_name": "グラス賞",
+      "display_name_ko": "一番くじ NARUTO-ナルト- 疾風伝 ～受け継がれる絆～ / グラス賞 / グラス賞 / 기타",
+      "expected_display_name_ko": "一番くじ NARUTO-ナルト- 疾風伝 ～受け継がれる絆～ / グラス賞 / 기타",
+      "category": "머그컵",
+      "character_name": "기타",
+      "official_price_jpy": 500,
+      "release_date": "2012-10-28",
+      "source_url": "https://1kuji.com/products/naruto",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/2463/dd990df9-443a-4ee3-9375-6d5668535f95.jpg",
+      "local_image_path": "assets/catalog_images/0187c73d4a701e8b1e61.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 14326,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/naruto",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 14325,
+      "series_name": "一番くじ NARUTO-ナルト- 疾風伝 ～受け継がれる絆～",
+      "prize_rank": "フィギュア賞",
+      "prize_item_name": "フィギュア賞",
+      "expected_prize_display_name": "フィギュア賞",
+      "display_name_ko": "一番くじ NARUTO-ナルト- 疾風伝 ～受け継がれる絆～ / フィギュア賞 / フィギュア賞 / 기타",
+      "expected_display_name_ko": "一番くじ NARUTO-ナルト- 疾風伝 ～受け継がれる絆～ / フィギュア賞 / 기타",
+      "category": "피규어",
+      "character_name": "기타",
+      "official_price_jpy": 500,
+      "release_date": "2012-10-28",
+      "source_url": "https://1kuji.com/products/naruto",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/2462/b0c58f52-6047-494f-b729-6f621edc8b56.jpg",
+      "local_image_path": "assets/catalog_images/630cb207f089f7a5c4a5.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 14325,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/naruto",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 15701,
+      "series_name": "一番くじ ワンピース 20th anniversary",
+      "prize_rank": "ダブルチャンス",
+      "prize_item_name": "ダブルチャンスキャンペーンルフィ記念フィギュア",
+      "expected_prize_display_name": "ダブルチャンスキャンペーンルフィ記念フィギュア",
+      "display_name_ko": "一番くじ ワンピース 20th anniversary / ダブルチャンス / ダブルチャンスキャンペーンルフィ記念フィギュア / 몽키 D. 루피",
+      "expected_display_name_ko": "一番くじ ワンピース 20th anniversary / ダブルチャンス / キャンペーンルフィ記念フィギュア / 몽키 D. 루피",
+      "category": "굿즈",
+      "character_name": "몽키 D. 루피",
+      "official_price_jpy": 0,
+      "release_date": "2017-12-09",
+      "source_url": "https://1kuji.com/products/onep42",
+      "image_url": "https://sn.bpnavi.jp/onep42/images/w.png",
+      "local_image_path": "assets/catalog_images/d672ad715e94c4c7ea30.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 15701,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/onep42",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 15855,
+      "series_name": "一番くじ ワンピース～アニメ15周年感謝祭～",
+      "prize_rank": "アニメ15周年クリアポスター賞",
+      "prize_item_name": "アニメ15周年クリアポスター賞",
+      "expected_prize_display_name": "アニメ15周年クリアポスター賞",
+      "display_name_ko": "一番くじ ワンピース～アニメ15周年感謝祭～ / アニメ15周年クリアポスター賞 / アニメ15周年クリアポスター賞 / 기타",
+      "expected_display_name_ko": "一番くじ ワンピース～アニメ15周年感謝祭～ / アニメ15周年クリアポスター賞 / 기타",
+      "category": "포스터",
+      "character_name": "기타",
+      "official_price_jpy": 600,
+      "release_date": "2014-11-23",
+      "source_url": "https://1kuji.com/products/onep_15th",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/4953/b90dac6c-67f9-4f8d-a310-e41357d0bba4.jpg",
+      "local_image_path": "assets/catalog_images/c3816ef0532aa4623aea.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 15855,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/onep_15th",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 15860,
+      "series_name": "一番くじ ワンピース～アニメ15周年感謝祭～",
+      "prize_rank": "エース賞",
+      "prize_item_name": "エース賞",
+      "expected_prize_display_name": "エース賞",
+      "display_name_ko": "一番くじ ワンピース～アニメ15周年感謝祭～ / エース賞 / エース賞 / 포트거스 D. 에이스",
+      "expected_display_name_ko": "一番くじ ワンピース～アニメ15周年感謝祭～ / エース賞 / 포트거스 D. 에이스",
+      "category": "굿즈",
+      "character_name": "포트거스 D. 에이스",
+      "official_price_jpy": 600,
+      "release_date": "2014-11-23",
+      "source_url": "https://1kuji.com/products/onep_15th",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/4958/9bf2e029-7586-46de-aed5-02c148ef9aff.jpg",
+      "local_image_path": "assets/catalog_images/00eddff4b904b2dffe58.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 15860,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/onep_15th",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 15864,
+      "series_name": "一番くじ ワンピース～アニメ15周年感謝祭～",
+      "prize_rank": "サンジ賞",
+      "prize_item_name": "サンジ賞",
+      "expected_prize_display_name": "サンジ賞",
+      "display_name_ko": "一番くじ ワンピース～アニメ15周年感謝祭～ / サンジ賞 / サンジ賞 / 상디",
+      "expected_display_name_ko": "一番くじ ワンピース～アニメ15周年感謝祭～ / サンジ賞 / 상디",
+      "category": "굿즈",
+      "character_name": "상디",
+      "official_price_jpy": 600,
+      "release_date": "2014-11-23",
+      "source_url": "https://1kuji.com/products/onep_15th",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/4962/d8be5c16-152d-43d6-b834-a0ab8bc5770b.jpg",
+      "local_image_path": "assets/catalog_images/3182bc64ce4b5b5ab0ac.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 15864,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/onep_15th",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 15857,
+      "series_name": "一番くじ ワンピース～アニメ15周年感謝祭～",
+      "prize_rank": "シャンクス賞",
+      "prize_item_name": "シャンクス賞",
+      "expected_prize_display_name": "シャンクス賞",
+      "display_name_ko": "一番くじ ワンピース～アニメ15周年感謝祭～ / シャンクス賞 / シャンクス賞 / 샹크스",
+      "expected_display_name_ko": "一番くじ ワンピース～アニメ15周年感謝祭～ / シャンクス賞 / 샹크스",
+      "category": "굿즈",
+      "character_name": "샹크스",
+      "official_price_jpy": 600,
+      "release_date": "2014-11-23",
+      "source_url": "https://1kuji.com/products/onep_15th",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/4955/13a6f165-b198-450d-a2e2-7a9dcc98cd57.jpg",
+      "local_image_path": "assets/catalog_images/861dd13d4e3c9793ba85.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 15857,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/onep_15th",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 15861,
+      "series_name": "一番くじ ワンピース～アニメ15周年感謝祭～",
+      "prize_rank": "ゾロ賞",
+      "prize_item_name": "ゾロ賞",
+      "expected_prize_display_name": "ゾロ賞",
+      "display_name_ko": "一番くじ ワンピース～アニメ15周年感謝祭～ / ゾロ賞 / ゾロ賞 / 롤로노아 조로",
+      "expected_display_name_ko": "一番くじ ワンピース～アニメ15周年感謝祭～ / ゾロ賞 / 롤로노아 조로",
+      "category": "굿즈",
+      "character_name": "롤로노아 조로",
+      "official_price_jpy": 600,
+      "release_date": "2014-11-23",
+      "source_url": "https://1kuji.com/products/onep_15th",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/4959/227710e7-def0-4cb0-bed8-f2f8a4bf872a.jpg",
+      "local_image_path": "assets/catalog_images/bf7522fe4c244542f6da.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 15861,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/onep_15th",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 15863,
+      "series_name": "一番くじ ワンピース～アニメ15周年感謝祭～",
+      "prize_rank": "マルコ賞",
+      "prize_item_name": "マルコ賞",
+      "expected_prize_display_name": "マルコ賞",
+      "display_name_ko": "一番くじ ワンピース～アニメ15周年感謝祭～ / マルコ賞 / マルコ賞 / 마르코",
+      "expected_display_name_ko": "一番くじ ワンピース～アニメ15周年感謝祭～ / マルコ賞 / 마르코",
+      "category": "굿즈",
+      "character_name": "마르코",
+      "official_price_jpy": 600,
+      "release_date": "2014-11-23",
+      "source_url": "https://1kuji.com/products/onep_15th",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/4961/45b33ac6-9789-47fa-80f4-9a2b57686eb7.jpg",
+      "local_image_path": "assets/catalog_images/903a46f17194630eafda.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 15863,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/onep_15th",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 15862,
+      "series_name": "一番くじ ワンピース～アニメ15周年感謝祭～",
+      "prize_rank": "ミホーク賞",
+      "prize_item_name": "ミホーク賞",
+      "expected_prize_display_name": "ミホーク賞",
+      "display_name_ko": "一番くじ ワンピース～アニメ15周年感謝祭～ / ミホーク賞 / ミホーク賞 / 쥬라큐르 미호크",
+      "expected_display_name_ko": "一番くじ ワンピース～アニメ15周年感謝祭～ / ミホーク賞 / 쥬라큐르 미호크",
+      "category": "굿즈",
+      "character_name": "쥬라큐르 미호크",
+      "official_price_jpy": 600,
+      "release_date": "2014-11-23",
+      "source_url": "https://1kuji.com/products/onep_15th",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/4960/eadcc079-86bb-482f-a695-321acd21ea12.jpg",
+      "local_image_path": "assets/catalog_images/23b0d4f4880560c1f41c.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 15862,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/onep_15th",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 15856,
+      "series_name": "一番くじ ワンピース～アニメ15周年感謝祭～",
+      "prize_rank": "ルフィ賞",
+      "prize_item_name": "ルフィ賞",
+      "expected_prize_display_name": "ルフィ賞",
+      "display_name_ko": "一番くじ ワンピース～アニメ15周年感謝祭～ / ルフィ賞 / ルフィ賞 / 몽키 D. 루피",
+      "expected_display_name_ko": "一番くじ ワンピース～アニメ15周年感謝祭～ / ルフィ賞 / 몽키 D. 루피",
+      "category": "굿즈",
+      "character_name": "몽키 D. 루피",
+      "official_price_jpy": 600,
+      "release_date": "2014-11-23",
+      "source_url": "https://1kuji.com/products/onep_15th",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/4954/418b82f7-ef99-4c53-bd07-58b482253ca8.jpg",
+      "local_image_path": "assets/catalog_images/58466fd174188df32155.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 15856,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/onep_15th",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 15865,
+      "series_name": "一番くじ ワンピース～アニメ15周年感謝祭～",
+      "prize_rank": "レイリー賞",
+      "prize_item_name": "レイリー賞",
+      "expected_prize_display_name": "レイリー賞",
+      "display_name_ko": "一番くじ ワンピース～アニメ15周年感謝祭～ / レイリー賞 / レイリー賞 / 실버즈 레일리",
+      "expected_display_name_ko": "一番くじ ワンピース～アニメ15周年感謝祭～ / レイリー賞 / 실버즈 레일리",
+      "category": "굿즈",
+      "character_name": "실버즈 레일리",
+      "official_price_jpy": 600,
+      "release_date": "2014-11-23",
+      "source_url": "https://1kuji.com/products/onep_15th",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/4963/0bbe1fbe-6d62-4708-b2b7-db3df5b58e24.jpg",
+      "local_image_path": "assets/catalog_images/31b6d9740f4800b08b7e.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 15865,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/onep_15th",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 15858,
+      "series_name": "一番くじ ワンピース～アニメ15周年感謝祭～",
+      "prize_rank": "ロジャー賞",
+      "prize_item_name": "ロジャー賞",
+      "expected_prize_display_name": "ロジャー賞",
+      "display_name_ko": "一番くじ ワンピース～アニメ15周年感謝祭～ / ロジャー賞 / ロジャー賞 / 골 D. 로저",
+      "expected_display_name_ko": "一番くじ ワンピース～アニメ15周年感謝祭～ / ロジャー賞 / 골 D. 로저",
+      "category": "굿즈",
+      "character_name": "골 D. 로저",
+      "official_price_jpy": 600,
+      "release_date": "2014-11-23",
+      "source_url": "https://1kuji.com/products/onep_15th",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/4956/2f17c7af-5e55-46f9-ad64-bf77f1a338ec.jpg",
+      "local_image_path": "assets/catalog_images/85292f624eda6d11d1f4.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 15858,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/onep_15th",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed": false,
+      "catalog_index": 15859,
+      "series_name": "一番くじ ワンピース～アニメ15周年感謝祭～",
+      "prize_rank": "ロー賞",
+      "prize_item_name": "ロー賞",
+      "expected_prize_display_name": "ロー賞",
+      "display_name_ko": "一番くじ ワンピース～アニメ15周年感謝祭～ / ロー賞 / ロー賞 / 트라팔가 로",
+      "expected_display_name_ko": "一番くじ ワンピース～アニメ15周年感謝祭～ / ロー賞 / 트라팔가 로",
+      "category": "굿즈",
+      "character_name": "트라팔가 로",
+      "official_price_jpy": 600,
+      "release_date": "2014-11-23",
+      "source_url": "https://1kuji.com/products/onep_15th",
+      "image_url": "https://assets.1kuji.com/uploads/product_item/image/4957/6a686a67-e5dd-4b39-a3e7-e28f05f06d5e.jpg",
+      "local_image_path": "assets/catalog_images/420beb5a34de9fa2cd45.webp",
+      "review_reason": "display_name_does_not_match_series_and_prize_name",
+      "name_policy": {
+        "required_components": [
+          "ichiban_release_name(series_name)",
+          "prize_rank(sub_series)",
+          "prize_item_name(name_ja)",
+          "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+        ],
+        "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
+        "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+      },
+      "image_review_policy": {
+        "requires_same_campaign": true,
+        "requires_same_prize_rank": true,
+        "requires_same_variant_or_item": true,
+        "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+      },
+      "manual_fix_template": {
+        "catalog_index": 15859,
+        "name_ko": "<confirmed_display_name_or_blank>",
+        "name_ja": "<confirmed_prize_item_name_or_blank>",
+        "sub_series": "<confirmed_prize_rank_or_blank>",
+        "image_url": "<confirmed_official_image_url_or_blank>",
+        "evidence_url": "https://1kuji.com/products/onep_15th",
+        "manual_confirmed": false
+      },
+      "auto_apply_enabled": false
+    }
+  ],
   "multi_item_prize_rank_groups": [
     {
       "source_url": "https://1kuji.com/products/p5r",

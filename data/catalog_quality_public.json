@@ -3559,9 +3559,9 @@
     "animation_category_unmatched_keyword_rows": 0,
     "animation_category_unmatched_keyword_candidates": 0,
     "animation_category_unmatched_keyword_product_type_candidates": 0,
-    "ichiban_prize_name_image_review_rows": 0,
+    "ichiban_prize_name_image_review_rows": 64,
     "ichiban_prize_multi_item_rank_groups": 417,
-    "ichiban_prize_name_image_patch_candidate_rows": 0,
+    "ichiban_prize_name_image_patch_candidate_rows": 64,
     "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
     "ichiban_prize_name_image_patch_blocked_rows": 0,
     "catalog_goal_manual_review_pillars": 5,
@@ -3585,7 +3585,7 @@
     "public_report": "data/catalog_agent_work_queue_public.json",
     "batch_count": 160,
     "max_published_batches": 160,
-    "summed_batch_rows": 20641,
+    "summed_batch_rows": 20765,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -3629,12 +3629,12 @@
         8
       ],
       [
-        "deduplication_review",
-        8
-      ],
-      [
         "ichiban_kuji_metadata_action_queue",
         7
+      ],
+      [
+        "deduplication_review",
+        6
       ],
       [
         "image_attachment_action_queue",
@@ -3691,6 +3691,14 @@
       [
         "source_discovery_next_focus_detail_candidates",
         1
+      ],
+      [
+        "ichiban_kuji_prize_name_image_review",
+        1
+      ],
+      [
+        "ichiban_kuji_prize_name_image_patch_candidates",
+        1
       ]
     ],
     "by_agent": [
@@ -3740,7 +3748,7 @@
       ],
       [
         "agent-dedupe",
-        8
+        6
       ],
       [
         "agent-image-action",
@@ -3772,6 +3780,10 @@
       ],
       [
         "agent-image-existing-source",
+        2
+      ],
+      [
+        "agent-ichiban-prize-name-image",
         2
       ],
       [
@@ -3876,9 +3888,9 @@
       "animation_category_unmatched_keyword_rows": 0,
       "animation_category_unmatched_keyword_candidates": 0,
       "animation_category_unmatched_keyword_product_type_candidates": 0,
-      "ichiban_prize_name_image_review_rows": 0,
+      "ichiban_prize_name_image_review_rows": 64,
       "ichiban_prize_multi_item_rank_groups": 417,
-      "ichiban_prize_name_image_patch_candidate_rows": 0,
+      "ichiban_prize_name_image_patch_candidate_rows": 64,
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
       "ichiban_prize_name_image_patch_blocked_rows": 0,
       "catalog_goal_manual_review_pillars": 5,
@@ -4915,11 +4927,11 @@
   },
   "execution_plan": {
     "public_report": "data/catalog_execution_plan_public.json",
-    "action_count": 24,
+    "action_count": 26,
     "blocked_action_count": 0,
-    "manual_review_action_count": 21,
+    "manual_review_action_count": 23,
     "pending_import_action_count": 0,
-    "total_action_rows": 33364,
+    "total_action_rows": 33492,
     "open_review_queues": {
       "source_discovery_rows": 763,
       "image_missing_rows": 788,
@@ -5009,9 +5021,9 @@
       "animation_category_unmatched_keyword_rows": 0,
       "animation_category_unmatched_keyword_candidates": 0,
       "animation_category_unmatched_keyword_product_type_candidates": 0,
-      "ichiban_prize_name_image_review_rows": 0,
+      "ichiban_prize_name_image_review_rows": 64,
       "ichiban_prize_multi_item_rank_groups": 417,
-      "ichiban_prize_name_image_patch_candidate_rows": 0,
+      "ichiban_prize_name_image_patch_candidate_rows": 64,
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
       "ichiban_prize_name_image_patch_blocked_rows": 0,
       "catalog_goal_manual_review_pillars": 5,
@@ -5102,11 +5114,11 @@
     "ichiban_probable_reissue_review_groups": 20,
     "ichiban_probable_reissue_work_order_rows": 20,
     "ichiban_campaign_first_review_plan_rows": 4,
-    "ichiban_prize_name_image_review_rows": 0,
-    "ichiban_prize_name_image_name_structure_review_rows": 0,
+    "ichiban_prize_name_image_review_rows": 64,
+    "ichiban_prize_name_image_name_structure_review_rows": 64,
     "ichiban_prize_name_image_image_identity_review_rows": 0,
     "ichiban_prize_name_image_multi_item_groups": 417,
-    "ichiban_prize_name_image_patch_candidate_rows": 0,
+    "ichiban_prize_name_image_patch_candidate_rows": 64,
     "ichiban_prize_name_image_patch_blocked_rows": 0,
     "dedupe_fast_review_groups": 42,
     "dedupe_duplicate_groups": 61,
@@ -11498,26 +11510,31 @@
   "ichiban_kuji_prize_name_image_review": {
     "public_report": "data/ichiban_kuji_prize_name_image_review_public.json",
     "kuji_rows": 7902,
-    "review_rows": 0,
-    "name_structure_review_rows": 0,
+    "review_rows": 64,
+    "name_structure_review_rows": 64,
     "image_identity_review_rows": 0,
     "same_campaign_prize_rank_name_duplicate_rows": 0,
     "same_campaign_image_reused_different_name_rows": 0,
     "multi_item_prize_rank_groups": 417,
     "multi_item_prize_rank_catalog_rows": 2945,
-    "review_reason_counts": [],
+    "review_reason_counts": [
+      [
+        "display_name_does_not_match_series_and_prize_name",
+        64
+      ]
+    ],
     "auto_apply_enabled": false,
     "recommended_next_action": "confirm_ichiban_prize_names_and_images_against_official_campaign_lineups"
   },
   "ichiban_kuji_prize_name_image_patch_candidates": {
     "public_report": "data/ichiban_kuji_prize_name_image_patch_candidates_public.json",
-    "review_rows": 0,
-    "source_urls": 0,
-    "fetched_source_urls": 0,
+    "review_rows": 64,
+    "source_urls": 13,
+    "fetched_source_urls": 13,
     "fetch_failure_urls": 0,
-    "candidate_rows": 0,
-    "exact_image_match_rows": 0,
-    "strong_name_match_rows": 0,
+    "candidate_rows": 64,
+    "exact_image_match_rows": 62,
+    "strong_name_match_rows": 2,
     "blocked_rows": 0,
     "blocked_reason_counts": [],
     "blocked_review_reason_counts": [],
@@ -11525,7 +11542,7 @@
     "auto_apply_enabled": false,
     "recommended_next_action": "manual_confirm_exact_official_patch_candidates_or_fill_blocked_manual_templates",
     "manual_confirmed_rows": 0,
-    "open_candidate_rows": 0
+    "open_candidate_rows": 64
   },
   "source_discovery_next_focus_fallback_queue": {
     "public_report": "data/source_discovery_next_focus_fallback_queue_public.json",
@@ -12609,21 +12626,21 @@
   "name_duplicate_audit": {
     "public_report": "data/catalog_name_duplicate_audit_public.json",
     "catalog_rows": 20313,
-    "name_duplicate_groups": 574,
-    "name_duplicate_rows": 1817,
+    "name_duplicate_groups": 577,
+    "name_duplicate_rows": 1823,
     "published_groups": 120,
     "manual_review_groups": 69,
-    "protected_groups": 505,
-    "ichiban_campaign_or_reissue_protected_groups": 479,
+    "protected_groups": 508,
+    "ichiban_campaign_or_reissue_protected_groups": 481,
     "same_barcode_name_review_groups": 10,
     "same_name_distinct_barcode_variant_protected_groups": 17,
-    "same_name_variant_risk_review_groups": 9,
+    "same_name_variant_risk_review_groups": 10,
     "same_name_multi_source_review_groups": 58,
     "same_name_manual_review_groups": 1,
     "lane_counts": [
       [
         "ichiban_campaign_or_reissue_protected",
-        479
+        481
       ],
       [
         "same_name_multi_source_review",
@@ -12639,7 +12656,7 @@
       ],
       [
         "same_name_variant_risk_review",
-        9
+        10
       ],
       [
         "same_name_manual_review",
@@ -12880,19 +12897,19 @@
     "dedupe_ichiban_reissue_review_groups": 46,
     "dedupe_ichiban_reissue_work_order_rows": 20,
     "repeated_name_different_source_groups": 46,
-    "name_duplicate_ichiban_protected_groups": 479,
+    "name_duplicate_ichiban_protected_groups": 481,
     "prize_policy_issue_rows": 20,
     "zero_price_violation_rows": 0,
     "zero_price_exception_policy_pass": true,
     "numbered_variant_coverage_policy_pass": true,
-    "prize_name_image_review_rows": 0,
-    "prize_name_image_patch_open_rows": 0,
+    "prize_name_image_review_rows": 64,
+    "prize_name_image_patch_open_rows": 64,
     "roadmap_phase_count": 5,
     "completion_readiness": {
       "status": "manual_review_required",
       "manual_metadata_campaigns": 41,
       "manual_reissue_review_groups": 20,
-      "manual_prize_name_image_patch_rows": 0,
+      "manual_prize_name_image_patch_rows": 128,
       "zero_price_policy_ready": true,
       "numbered_variant_policy_ready": true,
       "blocked_auto_apply_reasons": [
@@ -12920,10 +12937,10 @@
     },
     "price_and_prize_policy_gate_status": "reissue_review_required",
     "next_execution_summary": {
-      "lane_count": 4,
-      "open_rows": 121,
-      "queued_rows": 121,
-      "next_batch_rows": 80,
+      "lane_count": 5,
+      "open_rows": 249,
+      "queued_rows": 249,
+      "next_batch_rows": 208,
       "next_safe_phase": "confirm_ichiban_campaign_metadata",
       "auto_apply_enabled": false,
       "manual_official_confirmation_required": true
@@ -12960,6 +12977,14 @@
         "queued_rows": 20,
         "next_batch_rows": 0,
         "next_action": "keep Last One and Double Chance at 0 JPY and preserve same-rank numbered variants"
+      },
+      {
+        "lane": "prize_name_image_patch_review",
+        "status": "manual_lineup_confirmation_required",
+        "open_rows": 128,
+        "queued_rows": 128,
+        "next_batch_rows": 128,
+        "next_action": "attach prize images only when official campaign, rank, item, and variant all match"
       }
     ],
     "operator_handoff": {
@@ -13024,6 +13049,22 @@
           "unblocks": "safe_dedupe_keep_drop_review",
           "auto_merge_enabled": false,
           "auto_delete_enabled": false
+        },
+        {
+          "step": 4,
+          "lane": "prize_name_image_patch_review",
+          "status": "manual_lineup_confirmation_required",
+          "next_batch_rows": 128,
+          "open_rows": 128,
+          "review_section": "ichiban_kuji_prize_name_image_patch_candidates",
+          "write_template_section": "prize name/image patch template",
+          "required_before_write": [
+            "official campaign lineup confirms rank and prize name",
+            "same rank with multiple kinds keeps visible variant wording",
+            "image URL matches the exact campaign, rank, prize, and variant"
+          ],
+          "unblocks": "public_prize_image_and_name_quality",
+          "auto_apply_enabled": false
         }
       ],
       "safety_policy": {
@@ -13101,8 +13142,8 @@
     "fast_review_groups": 42,
     "held_for_later_groups": 6,
     "manual_confirmed_true": 0,
-    "name_duplicate_protected_groups": 505,
-    "ichiban_campaign_or_reissue_protected_groups": 479,
+    "name_duplicate_protected_groups": 508,
+    "ichiban_campaign_or_reissue_protected_groups": 481,
     "queue_coverage": 1.0,
     "next_step": "review_fast_same_barcode_groups_before_held_variant_groups",
     "blocked_reason": "dedupe_requires_explicit_same_sellable_product_confirmation",
@@ -16839,8 +16880,8 @@
         "ichiban_reissue_work_order_rows": 20,
         "ichiban_reissue_decision_template_rows": 20,
         "ichiban_reissue_work_orders_with_evidence_urls": 20,
-        "name_duplicate_protected_groups": 505,
-        "name_duplicate_ichiban_protected_groups": 479,
+        "name_duplicate_protected_groups": 508,
+        "name_duplicate_ichiban_protected_groups": 481,
         "next_queue_lane": "same_barcode_fast_review",
         "next_queue_rows": 10,
         "next_safe_phase": "verify_ichiban_campaign_pages_before_dedupe",
@@ -17367,17 +17408,17 @@
         "next_safe_phase": "confirm_campaign_prices_then_review_reissue_identity",
         "public_report": "data/ichiban_kuji_historical_roadmap_public.json",
         "next_execution_summary": {
-          "lane_count": 4,
-          "open_rows": 121,
-          "queued_rows": 121,
-          "next_batch_rows": 80,
+          "lane_count": 5,
+          "open_rows": 249,
+          "queued_rows": 249,
+          "next_batch_rows": 208,
           "next_safe_phase": "confirm_ichiban_campaign_metadata",
           "auto_apply_enabled": false,
           "manual_official_confirmation_required": true
         },
-        "next_execution_lane_count": 4,
-        "next_execution_open_rows": 121,
-        "next_execution_next_batch_rows": 80,
+        "next_execution_lane_count": 5,
+        "next_execution_open_rows": 249,
+        "next_execution_next_batch_rows": 208,
         "first_next_execution_lane": "campaign_metadata_confirmation",
         "first_next_execution_status": "next",
         "first_next_execution_rows": 41,
@@ -17444,6 +17485,22 @@
               "unblocks": "safe_dedupe_keep_drop_review",
               "auto_merge_enabled": false,
               "auto_delete_enabled": false
+            },
+            {
+              "step": 4,
+              "lane": "prize_name_image_patch_review",
+              "status": "manual_lineup_confirmation_required",
+              "next_batch_rows": 128,
+              "open_rows": 128,
+              "review_section": "ichiban_kuji_prize_name_image_patch_candidates",
+              "write_template_section": "prize name/image patch template",
+              "required_before_write": [
+                "official campaign lineup confirms rank and prize name",
+                "same rank with multiple kinds keeps visible variant wording",
+                "image URL matches the exact campaign, rank, prize, and variant"
+              ],
+              "unblocks": "public_prize_image_and_name_quality",
+              "auto_apply_enabled": false
             }
           ],
           "safety_policy": {
@@ -17459,7 +17516,7 @@
         "handoff_status": "manual_review_required",
         "handoff_current_lane": "campaign_metadata_confirmation",
         "handoff_current_review_section": "ichiban_kuji_metadata_action_queue",
-        "handoff_step_count": 3,
+        "handoff_step_count": 4,
         "handoff_first_step_lane": "campaign_metadata_confirmation",
         "handoff_first_step_status": "manual_official_campaign_metadata_required",
         "handoff_first_step_rows": 20
@@ -17601,9 +17658,9 @@
         "next_safe_phase": "confirm_campaign_prices_then_review_reissue_identity",
         "next_queue_lane": null,
         "next_queue_rows": 0,
-        "next_execution_lane_count": 4,
-        "next_execution_open_rows": 121,
-        "next_execution_next_batch_rows": 80,
+        "next_execution_lane_count": 5,
+        "next_execution_open_rows": 249,
+        "next_execution_next_batch_rows": 208,
         "first_next_execution_lane": "campaign_metadata_confirmation",
         "first_next_execution_status": "next",
         "first_next_execution_rows": 41,
@@ -17611,7 +17668,7 @@
         "handoff_status": "manual_review_required",
         "handoff_current_lane": "campaign_metadata_confirmation",
         "handoff_current_review_section": "ichiban_kuji_metadata_action_queue",
-        "handoff_step_count": 3,
+        "handoff_step_count": 4,
         "handoff_first_step_lane": "campaign_metadata_confirmation",
         "handoff_first_step_status": "manual_official_campaign_metadata_required",
         "handoff_first_step_rows": 20,

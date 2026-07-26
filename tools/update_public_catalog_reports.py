@@ -6985,6 +6985,13 @@ def build_agent_work_queue_public(
         if row.get("recommended_next_action") == "use_domain_limited_web_search_url"
         or row.get("broad_result_page") is True
     ]
+    exact_url_fallback_rows.sort(
+        key=lambda row: (
+            row.get("broad_result_page") is not True,
+            not bool(row.get("sample_product_detail_links")),
+            int(row.get("catalog_index") or 0),
+        )
+    )
     if exact_url_fallback_rows:
         add_batch(
             agent_id="agent-source-fallback",

@@ -16,13 +16,25 @@ ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_CATALOG = ROOT / "data" / "catalog_public.json"
 DEFAULT_REPORT = ROOT / "data" / "catalog_character_name_policy_public.json"
 
-ICHIBAN_PREFIX = "一番くじ"
-LAST_ONE_LABEL = "ラストワン賞"
-DOUBLE_CHANCE_LABELS = ("ダブルチャンス", "Wチャンス")
+ICHIBAN_PREFIX = "\u4e00\u756a\u304f\u3058"
+LAST_ONE_LABEL = "\u30e9\u30b9\u30c8\u30ef\u30f3\u8cde"
+DOUBLE_CHANCE_LABELS = ("\u30c0\u30d6\u30eb\u30c1\u30e3\u30f3\u30b9", "W\u30c1\u30e3\u30f3\u30b9")
+ICHIBAN_PRIZE_LABEL_SUFFIXES = (
+    "\u8cde",
+    "\u7b49",
+    "\u30ad\u30e3\u30f3\u30da\u30fc\u30f3",
+    "\u95a2\u9023\u5546\u54c1",
+)
+ICHIBAN_PRIZE_LABEL_EXACT = {
+    "\u30c0\u30d6\u30eb\u30c1\u30e3\u30f3\u30b9",
+    "\u306c\u3044\u3050\u308b\u307f",
+    "\u4ed8\u7b8b",
+    "\u3081\u3061\u3083\u3067\u304b\u30b7\u30e7\u30c3\u30d1\u30fc",
+}
 
 CHARACTER_MOJIBAKE_OR_ALIAS_FINDINGS = {
-    "펀": {
-        "expected": "페른",
+    "\ud38c": {
+        "expected": "\ud398\ub978",
         "fields": ("character_name", "affiliation"),
         "reason": "likely_korean_frieren_character_typo",
     },
@@ -73,7 +85,9 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
 
         name_ko = str(row.get("name_ko") or "")
         parts = [part.strip() for part in name_ko.split(" / ")]
-        if len(parts) != 4 or not parts[0].startswith(ICHIBAN_PREFIX) or not parts[1].endswith("賞"):
+        prize_label = parts[1] if len(parts) > 1 else ""
+        valid_prize_label = prize_label.endswith(ICHIBAN_PRIZE_LABEL_SUFFIXES) or prize_label in ICHIBAN_PRIZE_LABEL_EXACT
+        if len(parts) != 4 or ICHIBAN_PREFIX not in parts[0] or not valid_prize_label:
             ichiban_display_name_violations.append(
                 {
                     "catalog_index": catalog_index,
@@ -89,8 +103,8 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
         if (
             LAST_ONE_LABEL in sub_series
             or any(label in sub_series for label in DOUBLE_CHANCE_LABELS)
-            or "라스트원" in name_ko
-            or "더블찬스" in name_ko
+            or "\ub77c\uc2a4\ud2b8\uc6d0" in name_ko
+            or "\ub354\ube14\ucc2c\uc2a4" in name_ko
         ) and row.get("official_price_jpy") not in (0, None):
             zero_price_violations.append(
                 {
@@ -122,7 +136,7 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
         },
         "policy": {
             "character_name_aliases": CHARACTER_MOJIBAKE_OR_ALIAS_FINDINGS,
-            "ichiban_display_name_format": "一番くじ 발매명 / ?賞 / 상품이름 / 캐릭터명",
+            "ichiban_display_name_format": "\u4e00\u756a\u304f\u3058 \ubc1c\ub9e4\uba85 / ?\u8cde / \uc0c1\ud488\uc774\ub984 / \uce90\ub9ad\ud130\uba85",
             "last_one_and_double_chance_price_jpy": 0,
         },
         "character_alias_violations": character_alias_violations,

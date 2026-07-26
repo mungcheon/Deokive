@@ -2087,10 +2087,10 @@ class PublicCatalogReportTests(unittest.TestCase):
             self.assertEqual(alignment["non_action_queue_groups"], 13)
             self.assertEqual(alignment["fast_review_groups"], 42)
             self.assertEqual(alignment["held_for_later_groups"], 6)
-            self.assertEqual(alignment["name_duplicate_protected_groups"], 505)
+            self.assertEqual(alignment["name_duplicate_protected_groups"], 508)
             self.assertEqual(
                 alignment["ichiban_campaign_or_reissue_protected_groups"],
-                479,
+                481,
             )
             self.assertEqual(alignment["queue_coverage"], 1.0)
             self.assertFalse(alignment["auto_merge_enabled"])
@@ -2432,13 +2432,14 @@ class PublicCatalogReportTests(unittest.TestCase):
                 "campaign_metadata_confirmation",
                 "campaign_price_confirmation",
                 "reissue_identity_review",
+                "prize_name_image_patch_review",
             ],
         )
         self.assertEqual(
             quality["ichiban_kuji_historical_roadmap"][
                 "prize_name_image_patch_open_rows"
             ],
-            0,
+            64,
         )
         goal_gate = quality["catalog_goal_progress_gate"]
         self.assertEqual(goal_gate["status"], "manual_review_required")
@@ -2563,10 +2564,10 @@ class PublicCatalogReportTests(unittest.TestCase):
             pillars["dedupe"]["ichiban_reissue_work_orders_with_evidence_urls"],
             20,
         )
-        self.assertEqual(pillars["dedupe"]["name_duplicate_protected_groups"], 505)
+        self.assertEqual(pillars["dedupe"]["name_duplicate_protected_groups"], 508)
         self.assertEqual(
             pillars["dedupe"]["name_duplicate_ichiban_protected_groups"],
-            479,
+            481,
         )
         self.assertEqual(pillars["dedupe"]["next_queue_lane"], "same_barcode_fast_review")
         self.assertEqual(pillars["dedupe"]["next_queue_rows"], 10)
@@ -3129,8 +3130,8 @@ class PublicCatalogReportTests(unittest.TestCase):
                 "last_one_and_double_chance_zero_price_protected"
             ]
         )
-        self.assertEqual(pillars["ichiban_kuji_history"]["next_execution_lane_count"], 4)
-        self.assertEqual(pillars["ichiban_kuji_history"]["next_execution_open_rows"], 121)
+        self.assertEqual(pillars["ichiban_kuji_history"]["next_execution_lane_count"], 5)
+        self.assertEqual(pillars["ichiban_kuji_history"]["next_execution_open_rows"], 249)
         self.assertEqual(
             pillars["ichiban_kuji_history"]["first_next_execution_lane"],
             "campaign_metadata_confirmation",
