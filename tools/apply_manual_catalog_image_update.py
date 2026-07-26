@@ -15,12 +15,18 @@ from urllib.parse import urlparse
 from PIL import Image, ImageOps
 
 try:
+    from generate_seed_catalog_dart import generate
+except ModuleNotFoundError:
+    from tools.generate_seed_catalog_dart import generate
+
+try:
     sys.stdout.reconfigure(encoding="utf-8")
 except Exception:
     pass
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_CATALOG = ROOT / "data" / "catalog_public.json"
+DEFAULT_SEED_OUTPUT = ROOT / "lib" / "data" / "catalog" / "seed_catalog.dart"
 APP_ASSET_DIR = ROOT / "assets" / "catalog_images"
 WEB_ASSET_DIR = ROOT / "assets" / "assets" / "catalog_images"
 ASSET_PREFIX = "assets/catalog_images"
@@ -108,6 +114,22 @@ def _replace_one_line_json_object(text: str, catalog_index: int, updates: dict[s
     return text[: match.start()] + encoded + text[match.end() :]
 
 
+def _sync_flutter_seed(catalog: Path, output: Path) -> None:
+    payload = json.loads(catalog.read_text(encoding="utf-8-sig"))
+    rows = payload.get("items") if isinstance(payload, dict) else payload
+    if not isinstance(rows, list):
+        raise SystemExit(f"{catalog} must contain a JSON list or an object with items")
+    try:
+        source_label = catalog.resolve().relative_to(ROOT).as_posix()
+    except ValueError:
+        source_label = catalog.resolve().as_posix()
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(
+        generate([row for row in rows if isinstance(row, dict)], source_label=source_label),
+        encoding="utf-8",
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Update one public catalog image and cache it locally."
@@ -123,6 +145,12 @@ def main() -> int:
         help="Abort if the current Korean/Japanese/English name does not contain this text.",
     )
     parser.add_argument("--catalog", type=Path, default=DEFAULT_CATALOG)
+    parser.add_argument("--seed-output", type=Path, default=DEFAULT_SEED_OUTPUT)
+    parser.add_argument(
+        "--skip-seed-sync",
+        action="store_true",
+        help="Do not regenerate Flutter's bundled public catalog seed after --write.",
+    )
     parser.add_argument("--max-size", type=int, default=900)
     parser.add_argument("--quality", type=int, default=84)
     parser.add_argument("--write", action="store_true")
@@ -162,6 +190,8 @@ def main() -> int:
     updated_text = _replace_one_line_json_object(text, args.catalog_index, updates)
     if args.write:
         args.catalog.write_text(updated_text, encoding="utf-8")
+        if not args.skip_seed_sync:
+            _sync_flutter_seed(args.catalog, args.seed_output)
 
     print(
         json.dumps(
@@ -171,6 +201,10 @@ def main() -> int:
                 "local_image_path": local_path,
                 "asset_files": [str(target.relative_to(ROOT)) for target in targets],
                 "source_url": updates["source_url"],
+                "flutter_seed_synced": bool(args.write and not args.skip_seed_sync),
+                "seed_output": str(args.seed_output.relative_to(ROOT))
+                if args.seed_output.is_relative_to(ROOT)
+                else str(args.seed_output),
                 "write": args.write,
             },
             ensure_ascii=False,

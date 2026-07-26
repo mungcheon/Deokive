@@ -47,6 +47,7 @@ python -X utf8 tools\apply_manual_catalog_image_update.py 920 "이미지URL" --s
 - `data/catalog_public.json`의 `image_url`, `source_url`, `local_image_path` 갱신
 - 앱용 이미지 저장: `assets/catalog_images/`
 - GitHub Pages용 이미지 저장: `assets/assets/catalog_images/`
+- Flutter 앱 번들 DB 갱신: `lib/data/catalog/seed_catalog.dart`
 
 상품명도 같이 고쳐야 할 때:
 
@@ -58,6 +59,7 @@ python -X utf8 tools\apply_manual_catalog_image_update.py 920 "이미지URL" --s
 
 ```powershell
 python -X utf8 tools\update_public_catalog_reports.py --write
+python -X utf8 tools\audit_flutter_seed_matches_public.py
 python -X utf8 tools\audit_public_catalog_image_assets.py
 python -X utf8 tools\audit_public_catalog_safety.py
 ```
