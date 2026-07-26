@@ -593,6 +593,12 @@ def write_report(report: dict[str, Any], path: Path = REPORT) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def write_starter_queue_report(report: dict[str, Any], path: Path = STARTER_QUEUE_REPORT) -> dict[str, Any]:
+    starter_report = build_starter_queue_report(report)
+    path.write_text(json.dumps(starter_report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return starter_report
+
+
 def main() -> None:
     import argparse
 
@@ -601,9 +607,22 @@ def main() -> None:
     args = parser.parse_args()
 
     report = build_report(load_json(CATALOG), load_json(WORK_QUEUE))
+    starter_report = build_starter_queue_report(report)
     if args.write:
         write_report(report)
+        starter_report = write_starter_queue_report(report)
     print(json.dumps(report["summary"], ensure_ascii=False, indent=2))
+    if args.write:
+        print(
+            json.dumps(
+                {
+                    "starter_queue_json": str(STARTER_QUEUE_REPORT),
+                    **starter_report["summary"],
+                },
+                ensure_ascii=False,
+                indent=2,
+            )
+        )
 
 
 if __name__ == "__main__":

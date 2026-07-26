@@ -1,19 +1,19 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T20:54:43Z",
+  "generated_at": "2026-07-26T21:38:56Z",
   "scope": "public_catalog_missing_image_priority",
   "summary": {
     "missing_image_rows": 786,
-    "work_queue_rows": 710,
-    "queue_matched_rows": 704,
+    "work_queue_rows": 786,
+    "queue_matched_rows": 786,
     "stale_queue_index_matches": 0,
-    "unmatched_catalog_missing_rows": 82,
+    "unmatched_catalog_missing_rows": 0,
     "missing_source_url_rows": 762,
     "generic_source_url_rows": 0,
     "product_source_url_rows": 0,
-    "high_priority_rows": 518,
+    "high_priority_rows": 599,
     "safe_existing_image_reuse_candidate_rows": 0,
-    "source_discovery_starter_queue_groups": 391,
+    "source_discovery_starter_queue_groups": 384,
     "source_discovery_starter_queue_rows": 762,
     "auto_apply_enabled": false
   },
@@ -463,15 +463,15 @@
     "by_strategy": [
       {
         "strategy": "official_search",
-        "rows": 452
+        "rows": 532
       },
       {
         "strategy": "manual_review",
-        "rows": 194
+        "rows": 112
       },
       {
         "strategy": "manual_official_search_review",
-        "rows": 66
+        "rows": 67
       },
       {
         "strategy": "source_url_generic_storefront",
@@ -479,7 +479,7 @@
       },
       {
         "strategy": "source_url_manual_review",
-        "rows": 23
+        "rows": 24
       },
       {
         "strategy": "prize_detail_validation",
@@ -489,7 +489,7 @@
     "by_automation_safety": [
       {
         "automation_safety": "candidate_provider_script_required",
-        "rows": 452
+        "rows": 532
       },
       {
         "automation_safety": "manual_research_required",
@@ -497,11 +497,7 @@
       },
       {
         "automation_safety": "manual_confirmation_required",
-        "rows": 89
-      },
-      {
-        "automation_safety": "not_in_work_queue",
-        "rows": 82
+        "rows": 91
       },
       {
         "automation_safety": "blocked_until_exact_product_url",
@@ -720,6 +716,117 @@
     }
   ],
   "source_discovery_starter_queue": [
+    {
+      "source_store": "엔스카이",
+      "affiliation": "원피스",
+      "category": "키링",
+      "primary_strategy": "official_search",
+      "priority": 10,
+      "rows": 10,
+      "first_search_url": "https://www.enskyshop.com/search?q=%E3%83%8A%E3%83%9F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+      "search_urls": [
+        "https://www.enskyshop.com/search?q=%E3%83%8A%E3%83%9F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+        "https://www.enskyshop.com/search?q=%E3%82%B5%E3%83%B3%E3%82%B8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+        "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+        "https://www.enskyshop.com/products/list?name=%E3%83%8B%E3%82%B3%E3%83%BB%E3%83%AD%E3%83%93%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+        "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+      ],
+      "search_url_count": 5,
+      "first_fallback_web_search_url": null,
+      "fallback_web_search_urls": [],
+      "fallback_web_search_url_count": 0,
+      "sample_items": [
+        {
+          "catalog_index": 1583,
+          "name_ko": "나미 러버 스트랩",
+          "name_ja": "ナミ ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "원피스",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ナミ ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/search?q=%E3%83%8A%E3%83%9F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1584,
+          "name_ko": "상디 러버 스트랩",
+          "name_ja": "サンジ ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "원피스",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "サンジ ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/search?q=%E3%82%B5%E3%83%B3%E3%82%B8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1585,
+          "name_ko": "우솝 러버 스트랩",
+          "name_ja": "ウソップ ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "원피스",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ウソップ ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1587,
+          "name_ko": "니코 로빈 러버 스트랩",
+          "name_ja": "ニコ・ロビン ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "원피스",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ニコ・ロビン ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%8B%E3%82%B3%E3%83%BB%E3%83%AD%E3%83%93%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1588,
+          "name_ko": "프랑키 러버 스트랩",
+          "name_ja": "フランキー ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "원피스",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "フランキー ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "recommended_workflow": "official_storefront_search_then_exact_detail_match",
+      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
+      "blocked_until": "exact_source_url_and_image_url_confirmed",
+      "auto_apply_enabled": false
+    },
     {
       "source_store": "엔스카이",
       "affiliation": "장송의 프리렌",
@@ -943,117 +1050,6 @@
       "auto_apply_enabled": false
     },
     {
-      "source_store": "엔스카이",
-      "affiliation": "원피스",
-      "category": "키링",
-      "primary_strategy": "official_search",
-      "priority": 10,
-      "rows": 8,
-      "first_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "search_urls": [
-        "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-        "https://www.enskyshop.com/products/list?name=%E3%83%8B%E3%82%B3%E3%83%BB%E3%83%AD%E3%83%93%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-        "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-        "https://www.enskyshop.com/products/list?name=%E3%83%96%E3%83%AB%E3%83%83%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-        "https://www.enskyshop.com/products/list?name=%E3%82%B8%E3%83%B3%E3%83%99%E3%82%A8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
-      ],
-      "search_url_count": 5,
-      "first_fallback_web_search_url": null,
-      "fallback_web_search_urls": [],
-      "fallback_web_search_url_count": 0,
-      "sample_items": [
-        {
-          "catalog_index": 1585,
-          "name_ko": "우솝 러버 스트랩",
-          "name_ja": "ウソップ ラバーストラップ",
-          "source_store": "엔스카이",
-          "affiliation": "원피스",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ウソップ ラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1587,
-          "name_ko": "니코 로빈 러버 스트랩",
-          "name_ja": "ニコ・ロビン ラバーストラップ",
-          "source_store": "엔스카이",
-          "affiliation": "원피스",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ニコ・ロビン ラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%8B%E3%82%B3%E3%83%BB%E3%83%AD%E3%83%93%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1588,
-          "name_ko": "프랑키 러버 스트랩",
-          "name_ja": "フランキー ラバーストラップ",
-          "source_store": "엔스카이",
-          "affiliation": "원피스",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "フランキー ラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1589,
-          "name_ko": "브룩 러버 스트랩",
-          "name_ja": "ブルック ラバーストラップ",
-          "source_store": "엔스카이",
-          "affiliation": "원피스",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ブルック ラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%96%E3%83%AB%E3%83%83%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1590,
-          "name_ko": "징베 러버 스트랩",
-          "name_ja": "ジンベエ ラバーストラップ",
-          "source_store": "엔스카이",
-          "affiliation": "원피스",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ジンベエ ラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%82%B8%E3%83%B3%E3%83%99%E3%82%A8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        }
-      ],
-      "recommended_workflow": "official_storefront_search_then_exact_detail_match",
-      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
-      "blocked_until": "exact_source_url_and_image_url_confirmed",
-      "auto_apply_enabled": false
-    },
-    {
       "source_store": "굿스마일컴퍼니",
       "affiliation": "원피스",
       "category": "피규어",
@@ -1160,6 +1156,339 @@
         }
       ],
       "recommended_workflow": "manual_exact_image_research",
+      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
+      "blocked_until": "exact_source_url_and_image_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "source_store": "엔스카이",
+      "affiliation": "주술회전",
+      "category": "키링",
+      "primary_strategy": "official_search",
+      "priority": 10,
+      "rows": 7,
+      "first_search_url": "https://www.enskyshop.com/products/list?name=%E8%99%8E%E6%9D%96%E6%82%A0%E4%BB%81%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+      "search_urls": [
+        "https://www.enskyshop.com/products/list?name=%E8%99%8E%E6%9D%96%E6%82%A0%E4%BB%81%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+        "https://www.enskyshop.com/products/list?name=%E4%BC%8F%E9%BB%92%E6%81%B5%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+        "https://www.enskyshop.com/products/list?name=%E9%87%98%E5%B4%8E%E9%87%8E%E8%96%94%E8%96%87%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+        "https://www.enskyshop.com/products/list?name=%E4%BA%94%E6%9D%A1%E6%82%9F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+        "https://www.enskyshop.com/search?q=%E4%B8%83%E6%B5%B7%E5%BB%BA%E4%BA%BA%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+      ],
+      "search_url_count": 5,
+      "first_fallback_web_search_url": null,
+      "fallback_web_search_urls": [],
+      "fallback_web_search_url_count": 0,
+      "sample_items": [
+        {
+          "catalog_index": 1549,
+          "name_ko": "이타도리 유지 러버 스트랩",
+          "name_ja": "虎杖悠仁 ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "주술회전",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "虎杖悠仁 ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E8%99%8E%E6%9D%96%E6%82%A0%E4%BB%81%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1550,
+          "name_ko": "후시구로 메구미 러버 스트랩",
+          "name_ja": "伏黒恵 ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "주술회전",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "伏黒恵 ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E4%BC%8F%E9%BB%92%E6%81%B5%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1551,
+          "name_ko": "쿠기사키 노바라 러버 스트랩",
+          "name_ja": "釘崎野薔薇 ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "주술회전",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "釘崎野薔薇 ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E9%87%98%E5%B4%8E%E9%87%8E%E8%96%94%E8%96%87%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1552,
+          "name_ko": "고죠 사토루 러버 스트랩",
+          "name_ja": "五条悟 ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "주술회전",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "五条悟 ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E4%BA%94%E6%9D%A1%E6%82%9F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1553,
+          "name_ko": "나나미 켄토 러버 스트랩",
+          "name_ja": "七海建人 ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "주술회전",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "七海建人 ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/search?q=%E4%B8%83%E6%B5%B7%E5%BB%BA%E4%BA%BA%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "recommended_workflow": "official_storefront_search_then_exact_detail_match",
+      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
+      "blocked_until": "exact_source_url_and_image_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "source_store": "엔스카이",
+      "affiliation": "체인소 맨",
+      "category": "키링",
+      "primary_strategy": "official_search",
+      "priority": 10,
+      "rows": 7,
+      "first_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%87%E3%83%B3%E3%82%B8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+      "search_urls": [
+        "https://www.enskyshop.com/products/list?name=%E3%83%87%E3%83%B3%E3%82%B8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+        "https://www.enskyshop.com/products/list?name=%E3%83%91%E3%83%AF%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+        "https://www.enskyshop.com/search?q=%E6%97%A9%E5%B7%9D%E3%82%A2%E3%82%AD%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+        "https://www.enskyshop.com/search?q=%E3%82%B3%E3%83%99%E3%83%8B%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+        "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%87%E3%83%B3%E3%82%B8%29"
+      ],
+      "search_url_count": 5,
+      "first_fallback_web_search_url": null,
+      "fallback_web_search_urls": [],
+      "fallback_web_search_url_count": 0,
+      "sample_items": [
+        {
+          "catalog_index": 1594,
+          "name_ko": "덴지 러버 스트랩",
+          "name_ja": "デンジ ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "체인소 맨",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "デンジ ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%87%E3%83%B3%E3%82%B8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1595,
+          "name_ko": "파워 러버 스트랩",
+          "name_ja": "パワー ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "체인소 맨",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "パワー ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%91%E3%83%AF%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1596,
+          "name_ko": "하야카와 아키 러버 스트랩",
+          "name_ja": "早川アキ ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "체인소 맨",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "早川アキ ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/search?q=%E6%97%A9%E5%B7%9D%E3%82%A2%E3%82%AD%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1598,
+          "name_ko": "코베니 러버 스트랩",
+          "name_ja": "コベニ ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "체인소 맨",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "コベニ ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/search?q=%E3%82%B3%E3%83%99%E3%83%8B%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1600,
+          "name_ko": "체인소 맨 메탈릭 러버 스트랩 (덴지)",
+          "name_ja": "チェンソーマン メタリックラバーストラップ (デンジ)",
+          "source_store": "엔스카이",
+          "affiliation": "체인소 맨",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "チェンソーマン メタリックラバーストラップ (デンジ)",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%87%E3%83%B3%E3%82%B8%29",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "recommended_workflow": "official_storefront_search_then_exact_detail_match",
+      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
+      "blocked_until": "exact_source_url_and_image_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "source_store": "엔스카이",
+      "affiliation": "치이카와",
+      "category": "키링",
+      "primary_strategy": "official_search",
+      "priority": 10,
+      "rows": 7,
+      "first_search_url": "https://www.enskyshop.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
+      "search_urls": [
+        "https://www.enskyshop.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
+        "https://www.enskyshop.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29",
+        "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
+        "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29",
+        "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29"
+      ],
+      "search_url_count": 5,
+      "first_fallback_web_search_url": null,
+      "fallback_web_search_urls": [],
+      "fallback_web_search_url_count": 0,
+      "sample_items": [
+        {
+          "catalog_index": 920,
+          "name_ko": "치이카와 러버 스트랩 (치이카와)",
+          "name_ja": "ちいかわ ラバーストラップ (ちいかわ)",
+          "source_store": "엔스카이",
+          "affiliation": "치이카와",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちいかわ ラバーストラップ (ちいかわ)",
+          "search_url": "https://www.enskyshop.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 921,
+          "name_ko": "치이카와 러버 스트랩 (하치와레)",
+          "name_ja": "ちいかわ ラバーストラップ (ハチワレ)",
+          "source_store": "엔스카이",
+          "affiliation": "치이카와",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちいかわ ラバーストラップ (ハチワレ)",
+          "search_url": "https://www.enskyshop.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 922,
+          "name_ko": "치이카와 러버 스트랩 (우사기)",
+          "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
+          "source_store": "엔스카이",
+          "affiliation": "치이카와",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちいかわ ラバーストラップ (うさぎ)",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 923,
+          "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
+          "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+          "source_store": "엔스카이",
+          "affiliation": "치이카와",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 924,
+          "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
+          "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+          "source_store": "엔스카이",
+          "affiliation": "치이카와",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "recommended_workflow": "official_storefront_search_then_exact_detail_match",
       "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
       "blocked_until": "exact_source_url_and_image_url_confirmed",
       "auto_apply_enabled": false
@@ -1499,6 +1828,228 @@
     },
     {
       "source_store": "엔스카이",
+      "affiliation": "나의 히어로 아카데미아",
+      "category": "키링",
+      "primary_strategy": "official_search",
+      "priority": 10,
+      "rows": 6,
+      "first_search_url": "https://www.enskyshop.com/search?q=%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+      "search_urls": [
+        "https://www.enskyshop.com/search?q=%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+        "https://www.enskyshop.com/search?q=%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+        "https://www.enskyshop.com/products/list?name=%E8%BD%9F%E7%84%A6%E5%87%8D%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+        "https://www.enskyshop.com/search?q=%E6%AD%BB%E6%9F%84%E6%9C%A8%E5%BC%94%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+        "https://www.enskyshop.com/products/list?name=%E8%8D%BC%E6%AF%98%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+      ],
+      "search_url_count": 5,
+      "first_fallback_web_search_url": null,
+      "fallback_web_search_urls": [],
+      "fallback_web_search_url_count": 0,
+      "sample_items": [
+        {
+          "catalog_index": 1537,
+          "name_ko": "미도리야 이즈쿠 러버 스트랩",
+          "name_ja": "緑谷出久 ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "나의 히어로 아카데미아",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "緑谷出久 ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/search?q=%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1538,
+          "name_ko": "바쿠고 카츠키 러버 스트랩",
+          "name_ja": "爆豪勝己 ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "나의 히어로 아카데미아",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "爆豪勝己 ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/search?q=%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1539,
+          "name_ko": "토도로키 쇼토 러버 스트랩",
+          "name_ja": "轟焦凍 ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "나의 히어로 아카데미아",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "轟焦凍 ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E8%BD%9F%E7%84%A6%E5%87%8D%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1540,
+          "name_ko": "시가라키 토무라 러버 스트랩",
+          "name_ja": "死柄木弔 ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "나의 히어로 아카데미아",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "死柄木弔 ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/search?q=%E6%AD%BB%E6%9F%84%E6%9C%A8%E5%BC%94%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1541,
+          "name_ko": "다비 메탈릭 러버 스트랩",
+          "name_ja": "荼毘 メタリックラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "나의 히어로 아카데미아",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "荼毘 メタリックラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E8%8D%BC%E6%AF%98%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "recommended_workflow": "official_storefront_search_then_exact_detail_match",
+      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
+      "blocked_until": "exact_source_url_and_image_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "source_store": "엔스카이",
+      "affiliation": "치이카와",
+      "category": "아크릴 스탠드",
+      "primary_strategy": "official_search",
+      "priority": 10,
+      "rows": 6,
+      "first_search_url": "https://www.enskyshop.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
+      "search_urls": [
+        "https://www.enskyshop.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
+        "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29",
+        "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
+        "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
+        "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9F%E3%83%8B%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29"
+      ],
+      "search_url_count": 5,
+      "first_fallback_web_search_url": null,
+      "fallback_web_search_urls": [],
+      "fallback_web_search_url_count": 0,
+      "sample_items": [
+        {
+          "catalog_index": 927,
+          "name_ko": "치이카와 아크릴 스탠드 (치이카와)",
+          "name_ja": "ちいかわ アクリルスタンド (ちいかわ)",
+          "source_store": "엔스카이",
+          "affiliation": "치이카와",
+          "category": "아크릴 스탠드",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちいかわ アクリルスタンド (ちいかわ)",
+          "search_url": "https://www.enskyshop.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 928,
+          "name_ko": "치이카와 아크릴 스탠드 (하치와레)",
+          "name_ja": "ちいかわ アクリルスタンド (ハチワレ)",
+          "source_store": "엔스카이",
+          "affiliation": "치이카와",
+          "category": "아크릴 스탠드",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちいかわ アクリルスタンド (ハチワレ)",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 929,
+          "name_ko": "치이카와 아크릴 스탠드 (우사기)",
+          "name_ja": "ちいかわ アクリルスタンド (うさぎ)",
+          "source_store": "엔스카이",
+          "affiliation": "치이카와",
+          "category": "아크릴 스탠드",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちいかわ アクリルスタンド (うさぎ)",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 930,
+          "name_ko": "치이카와 빅 아크릴 스탠드 (치이카와)",
+          "name_ja": "ちいかわ ビッグアクリルスタンド (ちいかわ)",
+          "source_store": "엔스카이",
+          "affiliation": "치이카와",
+          "category": "아크릴 스탠드",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちいかわ ビッグアクリルスタンド (ちいかわ)",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 931,
+          "name_ko": "치이카와 스탠드 미니 (모몽가)",
+          "name_ja": "ちいかわ スタンドミニ (モモンガ)",
+          "source_store": "엔스카이",
+          "affiliation": "치이카와",
+          "category": "아크릴 스탠드",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちいかわ スタンドミニ (モモンガ)",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9F%E3%83%8B%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "recommended_workflow": "official_storefront_search_then_exact_detail_match",
+      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
+      "blocked_until": "exact_source_url_and_image_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "source_store": "엔스카이",
       "affiliation": "헌터X헌터",
       "category": "인형",
       "primary_strategy": "official_search",
@@ -1831,6 +2382,228 @@
       "auto_apply_enabled": false
     },
     {
+      "source_store": "Banpresto",
+      "affiliation": "장송의 프리렌",
+      "category": "피규어",
+      "primary_strategy": "official_search",
+      "priority": 10,
+      "rows": 5,
+      "first_search_url": "https://bsp-prize.jp/search/?q=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+      "search_urls": [
+        "https://bsp-prize.jp/search/?q=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+        "https://bsp-prize.jp/search/?q=Q%20posket%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+        "https://bsp-prize.jp/search/?q=Q%20posket%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB",
+        "https://bsp-prize.jp/search/?q=Break%20Time%20Collection%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+        "https://bsp-prize.jp/search/?q=Break%20Time%20Collection%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3"
+      ],
+      "search_url_count": 5,
+      "first_fallback_web_search_url": null,
+      "fallback_web_search_urls": [],
+      "fallback_web_search_url_count": 0,
+      "sample_items": [
+        {
+          "catalog_index": 1493,
+          "name_ko": "Q posket 프리렌",
+          "name_ja": "Q posket フリーレン",
+          "source_store": "Banpresto",
+          "affiliation": "장송의 프리렌",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "Q posket フリーレン",
+          "search_url": "https://bsp-prize.jp/search/?q=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1494,
+          "name_ko": "Q posket 페른",
+          "name_ja": "Q posket フェルン",
+          "source_store": "Banpresto",
+          "affiliation": "장송의 프리렌",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "Q posket フェルン",
+          "search_url": "https://bsp-prize.jp/search/?q=Q%20posket%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1496,
+          "name_ko": "Q posket 히멜",
+          "name_ja": "Q posket ヒンメル",
+          "source_store": "Banpresto",
+          "affiliation": "장송의 프리렌",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "Q posket ヒンメル",
+          "search_url": "https://bsp-prize.jp/search/?q=Q%20posket%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1497,
+          "name_ko": "Break Time Collection 프리렌",
+          "name_ja": "Break Time Collection フリーレン",
+          "source_store": "Banpresto",
+          "affiliation": "장송의 프리렌",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "Break Time Collection フリーレン",
+          "search_url": "https://bsp-prize.jp/search/?q=Break%20Time%20Collection%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1498,
+          "name_ko": "Break Time Collection 페른",
+          "name_ja": "Break Time Collection フェルン",
+          "source_store": "Banpresto",
+          "affiliation": "장송의 프리렌",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "Break Time Collection フェルン",
+          "search_url": "https://bsp-prize.jp/search/?q=Break%20Time%20Collection%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "recommended_workflow": "official_prize_provider_search_then_exact_detail_match",
+      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
+      "blocked_until": "exact_source_url_and_image_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "source_store": "엔스카이",
+      "affiliation": "나의 히어로 아카데미아",
+      "category": "인형",
+      "primary_strategy": "official_search",
+      "priority": 10,
+      "rows": 5,
+      "first_search_url": "https://www.enskyshop.com/search?q=%E3%81%AC%E3%81%84%E3%81%B7%E3%81%BA%20%E5%88%BA%E7%B9%8D%E3%83%87%E3%83%8B%E3%83%A0%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85",
+      "search_urls": [
+        "https://www.enskyshop.com/search?q=%E3%81%AC%E3%81%84%E3%81%B7%E3%81%BA%20%E5%88%BA%E7%B9%8D%E3%83%87%E3%83%8B%E3%83%A0%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85",
+        "https://www.enskyshop.com/search?q=%E3%81%AC%E3%81%84%E3%81%B7%E3%81%BA%20%E5%88%BA%E7%B9%8D%E3%83%87%E3%83%8B%E3%83%A0%20%E9%A3%AF%E7%94%B0%E5%A4%A9%E5%93%89",
+        "https://www.enskyshop.com/search?q=%E3%81%AC%E3%81%84%E3%81%B7%E3%81%BA%20%E5%88%BA%E7%B9%8D%E3%83%87%E3%83%8B%E3%83%A0%20%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1",
+        "https://www.enskyshop.com/search?q=%E3%81%AC%E3%81%84%E3%81%B7%E3%81%BA%20%E5%88%BA%E7%B9%8D%E3%83%87%E3%83%8B%E3%83%A0%20%E5%88%87%E5%B3%B6%E9%8B%AD%E5%85%90%E9%83%8E",
+        "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20Vol.2%20%E5%88%87%E5%B3%B6%E9%8B%AD%E5%85%90%E9%83%8E"
+      ],
+      "search_url_count": 5,
+      "first_fallback_web_search_url": null,
+      "fallback_web_search_urls": [],
+      "fallback_web_search_url_count": 0,
+      "sample_items": [
+        {
+          "catalog_index": 1269,
+          "name_ko": "누이푸페 자수 데님 미도리야 이즈쿠",
+          "name_ja": "ぬいぷぺ 刺繍デニム 緑谷出久",
+          "source_store": "엔스카이",
+          "affiliation": "나의 히어로 아카데미아",
+          "category": "인형",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ぬいぷぺ 刺繍デニム 緑谷出久",
+          "search_url": "https://www.enskyshop.com/search?q=%E3%81%AC%E3%81%84%E3%81%B7%E3%81%BA%20%E5%88%BA%E7%B9%8D%E3%83%87%E3%83%8B%E3%83%A0%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1270,
+          "name_ko": "누이푸페 자수 데님 이이다 텐야",
+          "name_ja": "ぬいぷぺ 刺繍デニム 飯田天哉",
+          "source_store": "엔스카이",
+          "affiliation": "나의 히어로 아카데미아",
+          "category": "인형",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ぬいぷぺ 刺繍デニム 飯田天哉",
+          "search_url": "https://www.enskyshop.com/search?q=%E3%81%AC%E3%81%84%E3%81%B7%E3%81%BA%20%E5%88%BA%E7%B9%8D%E3%83%87%E3%83%8B%E3%83%A0%20%E9%A3%AF%E7%94%B0%E5%A4%A9%E5%93%89",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1272,
+          "name_ko": "누이푸페 자수 데님 바쿠고 카츠키",
+          "name_ja": "ぬいぷぺ 刺繍デニム 爆豪勝己",
+          "source_store": "엔스카이",
+          "affiliation": "나의 히어로 아카데미아",
+          "category": "인형",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ぬいぷぺ 刺繍デニム 爆豪勝己",
+          "search_url": "https://www.enskyshop.com/search?q=%E3%81%AC%E3%81%84%E3%81%B7%E3%81%BA%20%E5%88%BA%E7%B9%8D%E3%83%87%E3%83%8B%E3%83%A0%20%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1273,
+          "name_ko": "누이푸페 자수 데님 키리시마 에이지로",
+          "name_ja": "ぬいぷぺ 刺繍デニム 切島鋭児郎",
+          "source_store": "엔스카이",
+          "affiliation": "나의 히어로 아카데미아",
+          "category": "인형",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ぬいぷぺ 刺繍デニム 切島鋭児郎",
+          "search_url": "https://www.enskyshop.com/search?q=%E3%81%AC%E3%81%84%E3%81%B7%E3%81%BA%20%E5%88%BA%E7%B9%8D%E3%83%87%E3%83%8B%E3%83%A0%20%E5%88%87%E5%B3%B6%E9%8B%AD%E5%85%90%E9%83%8E",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1277,
+          "name_ko": "치비누이 Vol.2 키리시마 에이지로",
+          "name_ja": "ちびぬいマスコット Vol.2 切島鋭児郎",
+          "source_store": "엔스카이",
+          "affiliation": "나의 히어로 아카데미아",
+          "category": "인형",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ちびぬいマスコット Vol.2 切島鋭児郎",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20Vol.2%20%E5%88%87%E5%B3%B6%E9%8B%AD%E5%85%90%E9%83%8E",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "recommended_workflow": "official_storefront_search_then_exact_detail_match",
+      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
+      "blocked_until": "exact_source_url_and_image_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
       "source_store": "엔스카이",
       "affiliation": "원피스",
       "category": "아크릴 스탠드",
@@ -1929,339 +2702,6 @@
           "strategy": "official_search",
           "search_query": "ONE PIECE ビッグアクリルスタンド (ルフィ ギア5)",
           "search_url": "https://www.enskyshop.com/products/list?name=ONE%20PIECE%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%AB%E3%83%95%E3%82%A3%20%E3%82%AE%E3%82%A25%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        }
-      ],
-      "recommended_workflow": "official_storefront_search_then_exact_detail_match",
-      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
-      "blocked_until": "exact_source_url_and_image_url_confirmed",
-      "auto_apply_enabled": false
-    },
-    {
-      "source_store": "엔스카이",
-      "affiliation": "주술회전",
-      "category": "키링",
-      "primary_strategy": "official_search",
-      "priority": 10,
-      "rows": 5,
-      "first_search_url": "https://www.enskyshop.com/products/list?name=%E8%99%8E%E6%9D%96%E6%82%A0%E4%BB%81%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "search_urls": [
-        "https://www.enskyshop.com/products/list?name=%E8%99%8E%E6%9D%96%E6%82%A0%E4%BB%81%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-        "https://www.enskyshop.com/products/list?name=%E4%BC%8F%E9%BB%92%E6%81%B5%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-        "https://www.enskyshop.com/products/list?name=%E9%87%98%E5%B4%8E%E9%87%8E%E8%96%94%E8%96%87%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-        "https://www.enskyshop.com/products/list?name=%E4%BA%94%E6%9D%A1%E6%82%9F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-        "https://www.enskyshop.com/products/list?name=%E4%B8%A1%E9%9D%A2%E5%AE%BF%E5%84%BA%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
-      ],
-      "search_url_count": 5,
-      "first_fallback_web_search_url": null,
-      "fallback_web_search_urls": [],
-      "fallback_web_search_url_count": 0,
-      "sample_items": [
-        {
-          "catalog_index": 1549,
-          "name_ko": "이타도리 유지 러버 스트랩",
-          "name_ja": "虎杖悠仁 ラバーストラップ",
-          "source_store": "엔스카이",
-          "affiliation": "주술회전",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "虎杖悠仁 ラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E8%99%8E%E6%9D%96%E6%82%A0%E4%BB%81%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1550,
-          "name_ko": "후시구로 메구미 러버 스트랩",
-          "name_ja": "伏黒恵 ラバーストラップ",
-          "source_store": "엔스카이",
-          "affiliation": "주술회전",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "伏黒恵 ラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E4%BC%8F%E9%BB%92%E6%81%B5%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1551,
-          "name_ko": "쿠기사키 노바라 러버 스트랩",
-          "name_ja": "釘崎野薔薇 ラバーストラップ",
-          "source_store": "엔스카이",
-          "affiliation": "주술회전",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "釘崎野薔薇 ラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E9%87%98%E5%B4%8E%E9%87%8E%E8%96%94%E8%96%87%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1552,
-          "name_ko": "고죠 사토루 러버 스트랩",
-          "name_ja": "五条悟 ラバーストラップ",
-          "source_store": "엔스카이",
-          "affiliation": "주술회전",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "五条悟 ラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E4%BA%94%E6%9D%A1%E6%82%9F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1554,
-          "name_ko": "료멘 스쿠나 메탈릭 러버 스트랩",
-          "name_ja": "両面宿儺 メタリックラバーストラップ",
-          "source_store": "엔스카이",
-          "affiliation": "주술회전",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "両面宿儺 メタリックラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E4%B8%A1%E9%9D%A2%E5%AE%BF%E5%84%BA%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        }
-      ],
-      "recommended_workflow": "official_storefront_search_then_exact_detail_match",
-      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
-      "blocked_until": "exact_source_url_and_image_url_confirmed",
-      "auto_apply_enabled": false
-    },
-    {
-      "source_store": "엔스카이",
-      "affiliation": "치이카와",
-      "category": "아크릴 스탠드",
-      "primary_strategy": "official_search",
-      "priority": 10,
-      "rows": 5,
-      "first_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29",
-      "search_urls": [
-        "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29",
-        "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
-        "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
-        "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9F%E3%83%8B%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29",
-        "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%28%E3%82%89%E3%81%B6%E3%82%89%E3%81%B6%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%29"
-      ],
-      "search_url_count": 5,
-      "first_fallback_web_search_url": null,
-      "fallback_web_search_urls": [],
-      "fallback_web_search_url_count": 0,
-      "sample_items": [
-        {
-          "catalog_index": 928,
-          "name_ko": "치이카와 아크릴 스탠드 (하치와레)",
-          "name_ja": "ちいかわ アクリルスタンド (ハチワレ)",
-          "source_store": "엔스카이",
-          "affiliation": "치이카와",
-          "category": "아크릴 스탠드",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ちいかわ アクリルスタンド (ハチワレ)",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 929,
-          "name_ko": "치이카와 아크릴 스탠드 (우사기)",
-          "name_ja": "ちいかわ アクリルスタンド (うさぎ)",
-          "source_store": "엔스카이",
-          "affiliation": "치이카와",
-          "category": "아크릴 스탠드",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ちいかわ アクリルスタンド (うさぎ)",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 930,
-          "name_ko": "치이카와 빅 아크릴 스탠드 (치이카와)",
-          "name_ja": "ちいかわ ビッグアクリルスタンド (ちいかわ)",
-          "source_store": "엔스카이",
-          "affiliation": "치이카와",
-          "category": "아크릴 스탠드",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ちいかわ ビッグアクリルスタンド (ちいかわ)",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 931,
-          "name_ko": "치이카와 스탠드 미니 (모몽가)",
-          "name_ja": "ちいかわ スタンドミニ (モモンガ)",
-          "source_store": "엔스카이",
-          "affiliation": "치이카와",
-          "category": "아크릴 스탠드",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ちいかわ スタンドミニ (モモンガ)",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9F%E3%83%8B%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 933,
-          "name_ko": "치이카와 아크릴 피규어 (라부라부 시리즈)",
-          "name_ja": "ちいかわ アクリルフィギュア (らぶらぶシリーズ)",
-          "source_store": "엔스카이",
-          "affiliation": "치이카와",
-          "category": "아크릴 스탠드",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ちいかわ アクリルフィギュア (らぶらぶシリーズ)",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%28%E3%82%89%E3%81%B6%E3%82%89%E3%81%B6%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        }
-      ],
-      "recommended_workflow": "official_storefront_search_then_exact_detail_match",
-      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
-      "blocked_until": "exact_source_url_and_image_url_confirmed",
-      "auto_apply_enabled": false
-    },
-    {
-      "source_store": "엔스카이",
-      "affiliation": "치이카와",
-      "category": "키링",
-      "primary_strategy": "official_search",
-      "priority": 10,
-      "rows": 5,
-      "first_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
-      "search_urls": [
-        "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
-        "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29",
-        "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29",
-        "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
-        "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29"
-      ],
-      "search_url_count": 5,
-      "first_fallback_web_search_url": null,
-      "fallback_web_search_urls": [],
-      "fallback_web_search_url_count": 0,
-      "sample_items": [
-        {
-          "catalog_index": 922,
-          "name_ko": "치이카와 러버 스트랩 (우사기)",
-          "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
-          "source_store": "엔스카이",
-          "affiliation": "치이카와",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ちいかわ ラバーストラップ (うさぎ)",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 923,
-          "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
-          "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
-          "source_store": "엔스카이",
-          "affiliation": "치이카와",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ちいかわ もちぷにラバーストラップ (モモンガ)",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 924,
-          "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
-          "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
-          "source_store": "엔스카이",
-          "affiliation": "치이카와",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 925,
-          "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
-          "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
-          "source_store": "엔스카이",
-          "affiliation": "치이카와",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 926,
-          "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
-          "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
-          "source_store": "엔스카이",
-          "affiliation": "치이카와",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29",
           "required_evidence": [
             "exact_product_source_url",
             "title_character_variant_type_match",
@@ -2381,6 +2821,192 @@
         }
       ],
       "recommended_workflow": "official_storefront_search_then_exact_detail_match",
+      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
+      "blocked_until": "exact_source_url_and_image_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "source_store": "Banpresto",
+      "affiliation": "리제로",
+      "category": "피규어",
+      "primary_strategy": "official_search",
+      "priority": 10,
+      "rows": 4,
+      "first_search_url": "https://bsp-prize.jp/search/?q=Q%20posket%20%E3%83%AC%E3%83%A0",
+      "search_urls": [
+        "https://bsp-prize.jp/search/?q=Q%20posket%20%E3%83%AC%E3%83%A0",
+        "https://bsp-prize.jp/search/?q=Q%20posket%20%E3%83%A9%E3%83%A0",
+        "https://bsp-prize.jp/search/?q=Q%20posket%20%E3%82%A8%E3%83%9F%E3%83%AA%E3%82%A2",
+        "https://bsp-prize.jp/search/?q=%E3%82%A8%E3%82%B9%E3%83%97%E3%83%AC%E3%82%B9%E3%83%88%20%E3%83%AC%E3%83%A0"
+      ],
+      "search_url_count": 4,
+      "first_fallback_web_search_url": null,
+      "fallback_web_search_urls": [],
+      "fallback_web_search_url_count": 0,
+      "sample_items": [
+        {
+          "catalog_index": 2014,
+          "name_ko": "Q posket 렘",
+          "name_ja": "Q posket レム",
+          "source_store": "Banpresto",
+          "affiliation": "리제로",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "Q posket レム",
+          "search_url": "https://bsp-prize.jp/search/?q=Q%20posket%20%E3%83%AC%E3%83%A0",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 2015,
+          "name_ko": "Q posket 람",
+          "name_ja": "Q posket ラム",
+          "source_store": "Banpresto",
+          "affiliation": "리제로",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "Q posket ラム",
+          "search_url": "https://bsp-prize.jp/search/?q=Q%20posket%20%E3%83%A9%E3%83%A0",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 2016,
+          "name_ko": "Q posket 에밀리아",
+          "name_ja": "Q posket エミリア",
+          "source_store": "Banpresto",
+          "affiliation": "리제로",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "Q posket エミリア",
+          "search_url": "https://bsp-prize.jp/search/?q=Q%20posket%20%E3%82%A8%E3%83%9F%E3%83%AA%E3%82%A2",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 2017,
+          "name_ko": "Espresto 렘",
+          "name_ja": "エスプレスト レム",
+          "source_store": "Banpresto",
+          "affiliation": "리제로",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "エスプレスト レム",
+          "search_url": "https://bsp-prize.jp/search/?q=%E3%82%A8%E3%82%B9%E3%83%97%E3%83%AC%E3%82%B9%E3%83%88%20%E3%83%AC%E3%83%A0",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "recommended_workflow": "official_prize_provider_search_then_exact_detail_match",
+      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
+      "blocked_until": "exact_source_url_and_image_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "source_store": "Banpresto",
+      "affiliation": "메이드 인 어비스",
+      "category": "피규어",
+      "primary_strategy": "official_search",
+      "priority": 10,
+      "rows": 4,
+      "first_search_url": "https://bsp-prize.jp/search/?q=Q%20posket%20%E3%83%AA%E3%82%B3",
+      "search_urls": [
+        "https://bsp-prize.jp/search/?q=Q%20posket%20%E3%83%AA%E3%82%B3",
+        "https://bsp-prize.jp/search/?q=Q%20posket%20%E3%83%AC%E3%82%B0",
+        "https://bsp-prize.jp/search/?q=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81",
+        "https://bsp-prize.jp/search/?q=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81"
+      ],
+      "search_url_count": 4,
+      "first_fallback_web_search_url": null,
+      "fallback_web_search_urls": [],
+      "fallback_web_search_url_count": 0,
+      "sample_items": [
+        {
+          "catalog_index": 1415,
+          "name_ko": "Q posket 리코",
+          "name_ja": "Q posket リコ",
+          "source_store": "Banpresto",
+          "affiliation": "메이드 인 어비스",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "Q posket リコ",
+          "search_url": "https://bsp-prize.jp/search/?q=Q%20posket%20%E3%83%AA%E3%82%B3",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1416,
+          "name_ko": "Q posket 레그",
+          "name_ja": "Q posket レグ",
+          "source_store": "Banpresto",
+          "affiliation": "메이드 인 어비스",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "Q posket レグ",
+          "search_url": "https://bsp-prize.jp/search/?q=Q%20posket%20%E3%83%AC%E3%82%B0",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1417,
+          "name_ko": "Q posket 나나치",
+          "name_ja": "Q posket ナナチ",
+          "source_store": "Banpresto",
+          "affiliation": "메이드 인 어비스",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "Q posket ナナチ",
+          "search_url": "https://bsp-prize.jp/search/?q=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1418,
+          "name_ko": "Break Time Collection 나나치",
+          "name_ja": "ブレイクタイムコレクション ナナチ",
+          "source_store": "Banpresto",
+          "affiliation": "메이드 인 어비스",
+          "category": "피규어",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ブレイクタイムコレクション ナナチ",
+          "search_url": "https://bsp-prize.jp/search/?q=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "recommended_workflow": "official_prize_provider_search_then_exact_detail_match",
       "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
       "blocked_until": "exact_source_url_and_image_url_confirmed",
       "auto_apply_enabled": false
@@ -2945,6 +3571,192 @@
     },
     {
       "source_store": "엔스카이",
+      "affiliation": "귀멸의 칼날",
+      "category": "캔뱃지",
+      "primary_strategy": "official_search",
+      "priority": 10,
+      "rows": 4,
+      "first_search_url": "https://www.enskyshop.com/search?q=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E",
+      "search_urls": [
+        "https://www.enskyshop.com/search?q=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E",
+        "https://www.enskyshop.com/search?q=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E7%AB%88%E9%96%80%E7%A6%B0%E8%B1%86%E5%AD%90",
+        "https://www.enskyshop.com/search?q=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E6%88%91%E5%A6%BB%E5%96%84%E9%80%B8",
+        "https://www.enskyshop.com/search?q=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E5%98%B4%E5%B9%B3%E4%BC%8A%E4%B9%8B%E5%8A%A9"
+      ],
+      "search_url_count": 4,
+      "first_fallback_web_search_url": null,
+      "fallback_web_search_urls": [],
+      "fallback_web_search_url_count": 0,
+      "sample_items": [
+        {
+          "catalog_index": 1724,
+          "name_ko": "귀멸의 칼날 트레이딩 캔뱃지 카마도 탄지로",
+          "name_ja": "鬼滅の刃 トレーディング缶バッジ 竈門炭治郎",
+          "source_store": "엔스카이",
+          "affiliation": "귀멸의 칼날",
+          "category": "캔뱃지",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "鬼滅の刃 トレーディング缶バッジ 竈門炭治郎",
+          "search_url": "https://www.enskyshop.com/search?q=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1725,
+          "name_ko": "귀멸의 칼날 트레이딩 캔뱃지 카마도 네즈코",
+          "name_ja": "鬼滅の刃 トレーディング缶バッジ 竈門禰豆子",
+          "source_store": "엔스카이",
+          "affiliation": "귀멸의 칼날",
+          "category": "캔뱃지",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "鬼滅の刃 トレーディング缶バッジ 竈門禰豆子",
+          "search_url": "https://www.enskyshop.com/search?q=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E7%AB%88%E9%96%80%E7%A6%B0%E8%B1%86%E5%AD%90",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1726,
+          "name_ko": "귀멸의 칼날 트레이딩 캔뱃지 아가츠마 젠이츠",
+          "name_ja": "鬼滅の刃 トレーディング缶バッジ 我妻善逸",
+          "source_store": "엔스카이",
+          "affiliation": "귀멸의 칼날",
+          "category": "캔뱃지",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "鬼滅の刃 トレーディング缶バッジ 我妻善逸",
+          "search_url": "https://www.enskyshop.com/search?q=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E6%88%91%E5%A6%BB%E5%96%84%E9%80%B8",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1727,
+          "name_ko": "귀멸의 칼날 트레이딩 캔뱃지 하시비라 이노스케",
+          "name_ja": "鬼滅の刃 トレーディング缶バッジ 嘴平伊之助",
+          "source_store": "엔스카이",
+          "affiliation": "귀멸의 칼날",
+          "category": "캔뱃지",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "鬼滅の刃 トレーディング缶バッジ 嘴平伊之助",
+          "search_url": "https://www.enskyshop.com/search?q=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E5%98%B4%E5%B9%B3%E4%BC%8A%E4%B9%8B%E5%8A%A9",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "recommended_workflow": "official_storefront_search_then_exact_detail_match",
+      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
+      "blocked_until": "exact_source_url_and_image_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "source_store": "엔스카이",
+      "affiliation": "나의 히어로 아카데미아",
+      "category": "마스코트",
+      "primary_strategy": "official_search",
+      "priority": 10,
+      "rows": 4,
+      "first_search_url": "https://www.enskyshop.com/search?q=%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85",
+      "search_urls": [
+        "https://www.enskyshop.com/search?q=%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85",
+        "https://www.enskyshop.com/search?q=%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1",
+        "https://www.enskyshop.com/search?q=%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E8%BD%9F%E7%84%A6%E5%87%8D",
+        "https://www.enskyshop.com/search?q=%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88"
+      ],
+      "search_url_count": 4,
+      "first_fallback_web_search_url": null,
+      "fallback_web_search_urls": [],
+      "fallback_web_search_url_count": 0,
+      "sample_items": [
+        {
+          "catalog_index": 1281,
+          "name_ko": "오만쥬 니기니기 마스코트 미도리야 이즈쿠",
+          "name_ja": "おまんじゅうにぎにぎマスコット 緑谷出久",
+          "source_store": "엔스카이",
+          "affiliation": "나의 히어로 아카데미아",
+          "category": "마스코트",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "おまんじゅうにぎにぎマスコット 緑谷出久",
+          "search_url": "https://www.enskyshop.com/search?q=%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1283,
+          "name_ko": "오만쥬 니기니기 마스코트 바쿠고 카츠키",
+          "name_ja": "おまんじゅうにぎにぎマスコット 爆豪勝己",
+          "source_store": "엔스카이",
+          "affiliation": "나의 히어로 아카데미아",
+          "category": "마스코트",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "おまんじゅうにぎにぎマスコット 爆豪勝己",
+          "search_url": "https://www.enskyshop.com/search?q=%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1284,
+          "name_ko": "오만쥬 니기니기 마스코트 토도로키 쇼토",
+          "name_ja": "おまんじゅうにぎにぎマスコット 轟焦凍",
+          "source_store": "엔스카이",
+          "affiliation": "나의 히어로 아카데미아",
+          "category": "마스코트",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "おまんじゅうにぎにぎマスコット 轟焦凍",
+          "search_url": "https://www.enskyshop.com/search?q=%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E8%BD%9F%E7%84%A6%E5%87%8D",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1285,
+          "name_ko": "오만쥬 니기니기 마스코트 올마이트",
+          "name_ja": "おまんじゅうにぎにぎマスコット オールマイト",
+          "source_store": "엔스카이",
+          "affiliation": "나의 히어로 아카데미아",
+          "category": "마스코트",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "おまんじゅうにぎにぎマスコット オールマイト",
+          "search_url": "https://www.enskyshop.com/search?q=%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "recommended_workflow": "official_storefront_search_then_exact_detail_match",
+      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
+      "blocked_until": "exact_source_url_and_image_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "source_store": "엔스카이",
       "affiliation": "단간론파",
       "category": "마스코트",
       "primary_strategy": "official_search",
@@ -3035,699 +3847,31 @@
       "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
       "blocked_until": "exact_source_url_and_image_url_confirmed",
       "auto_apply_enabled": false
-    },
-    {
-      "source_store": "엔스카이",
-      "affiliation": "장송의 프리렌",
-      "category": "아크릴 스탠드",
-      "primary_strategy": "official_search",
-      "priority": 10,
-      "rows": 4,
-      "first_search_url": "https://www.enskyshop.com/products/list?name=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%29",
-      "search_urls": [
-        "https://www.enskyshop.com/products/list?name=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%29",
-        "https://www.enskyshop.com/products/list?name=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF%29",
-        "https://www.enskyshop.com/products/list?name=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%29",
-        "https://www.enskyshop.com/products/list?name=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%29"
-      ],
-      "search_url_count": 4,
-      "first_fallback_web_search_url": null,
-      "fallback_web_search_urls": [],
-      "fallback_web_search_url_count": 0,
-      "sample_items": [
-        {
-          "catalog_index": 1645,
-          "name_ko": "장송의 프리렌 아크릴 스탠드 (페른)",
-          "name_ja": "葬送のフリーレン アクリルスタンド (フェルン)",
-          "source_store": "엔스카이",
-          "affiliation": "장송의 프리렌",
-          "category": "아크릴 스탠드",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "葬送のフリーレン アクリルスタンド (フェルン)",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1646,
-          "name_ko": "장송의 프리렌 아크릴 스탠드 (슈타르크)",
-          "name_ja": "葬送のフリーレン アクリルスタンド (シュタルク)",
-          "source_store": "엔스카이",
-          "affiliation": "장송의 프리렌",
-          "category": "아크릴 스탠드",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "葬送のフリーレン アクリルスタンド (シュタルク)",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1647,
-          "name_ko": "장송의 프리렌 아크릴 스탠드 (히멜)",
-          "name_ja": "葬送のフリーレン アクリルスタンド (ヒンメル)",
-          "source_store": "엔스카이",
-          "affiliation": "장송의 프리렌",
-          "category": "아크릴 스탠드",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "葬送のフリーレン アクリルスタンド (ヒンメル)",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1648,
-          "name_ko": "장송의 프리렌 빅 아크릴 스탠드 (프리렌)",
-          "name_ja": "葬送のフリーレン ビッグアクリルスタンド (フリーレン)",
-          "source_store": "엔스카이",
-          "affiliation": "장송의 프리렌",
-          "category": "아크릴 스탠드",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "葬送のフリーレン ビッグアクリルスタンド (フリーレン)",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        }
-      ],
-      "recommended_workflow": "official_storefront_search_then_exact_detail_match",
-      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
-      "blocked_until": "exact_source_url_and_image_url_confirmed",
-      "auto_apply_enabled": false
-    },
-    {
-      "source_store": "엔스카이",
-      "affiliation": "주술회전",
-      "category": "아크릴 스탠드",
-      "primary_strategy": "official_search",
-      "priority": 10,
-      "rows": 4,
-      "first_search_url": "https://www.enskyshop.com/products/list?name=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E4%BA%94%E6%9D%A1%E6%82%9F%29",
-      "search_urls": [
-        "https://www.enskyshop.com/products/list?name=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E4%BA%94%E6%9D%A1%E6%82%9F%29",
-        "https://www.enskyshop.com/products/list?name=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E4%BC%8F%E9%BB%92%E6%81%B5%29",
-        "https://www.enskyshop.com/products/list?name=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E5%A4%8F%E6%B2%B9%E5%82%91%29",
-        "https://www.enskyshop.com/products/list?name=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9F%E3%83%8B%20%28%E8%99%8E%E6%9D%96%20%E6%97%A5%E5%B8%B8ver.%29"
-      ],
-      "search_url_count": 4,
-      "first_fallback_web_search_url": null,
-      "fallback_web_search_urls": [],
-      "fallback_web_search_url_count": 0,
-      "sample_items": [
-        {
-          "catalog_index": 1625,
-          "name_ko": "주술회전 아크릴 스탠드 (고죠 사토루)",
-          "name_ja": "呪術廻戦 アクリルスタンド (五条悟)",
-          "source_store": "엔스카이",
-          "affiliation": "주술회전",
-          "category": "아크릴 스탠드",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "呪術廻戦 アクリルスタンド (五条悟)",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E4%BA%94%E6%9D%A1%E6%82%9F%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1626,
-          "name_ko": "주술회전 아크릴 스탠드 (후시구로 메구미)",
-          "name_ja": "呪術廻戦 アクリルスタンド (伏黒恵)",
-          "source_store": "엔스카이",
-          "affiliation": "주술회전",
-          "category": "아크릴 스탠드",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "呪術廻戦 アクリルスタンド (伏黒恵)",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E4%BC%8F%E9%BB%92%E6%81%B5%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1630,
-          "name_ko": "주술회전 빅 아크릴 스탠드 (게토 스구루)",
-          "name_ja": "呪術廻戦 ビッグアクリルスタンド (夏油傑)",
-          "source_store": "엔스카이",
-          "affiliation": "주술회전",
-          "category": "아크릴 스탠드",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "呪術廻戦 ビッグアクリルスタンド (夏油傑)",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E5%A4%8F%E6%B2%B9%E5%82%91%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1633,
-          "name_ko": "주술회전 스탠드 미니 (이타도리 일상)",
-          "name_ja": "呪術廻戦 スタンドミニ (虎杖 日常ver.)",
-          "source_store": "엔스카이",
-          "affiliation": "주술회전",
-          "category": "아크릴 스탠드",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "呪術廻戦 スタンドミニ (虎杖 日常ver.)",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9F%E3%83%8B%20%28%E8%99%8E%E6%9D%96%20%E6%97%A5%E5%B8%B8ver.%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        }
-      ],
-      "recommended_workflow": "official_storefront_search_then_exact_detail_match",
-      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
-      "blocked_until": "exact_source_url_and_image_url_confirmed",
-      "auto_apply_enabled": false
-    },
-    {
-      "source_store": "엔스카이",
-      "affiliation": "체인소 맨",
-      "category": "아크릴 스탠드",
-      "primary_strategy": "official_search",
-      "priority": 10,
-      "rows": 4,
-      "first_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%9E%E3%82%AD%E3%83%9E%29",
-      "search_urls": [
-        "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%9E%E3%82%AD%E3%83%9E%29",
-        "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%91%E3%83%AF%E3%83%BC%29",
-        "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%97%A9%E5%B7%9D%E3%82%A2%E3%82%AD%29",
-        "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%91%E3%83%AF%E3%83%BC%29"
-      ],
-      "search_url_count": 4,
-      "first_fallback_web_search_url": null,
-      "fallback_web_search_urls": [],
-      "fallback_web_search_url_count": 0,
-      "sample_items": [
-        {
-          "catalog_index": 1667,
-          "name_ko": "체인소 맨 아크릴 스탠드 (마키마)",
-          "name_ja": "チェンソーマン アクリルスタンド (マキマ)",
-          "source_store": "엔스카이",
-          "affiliation": "체인소 맨",
-          "category": "아크릴 스탠드",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "チェンソーマン アクリルスタンド (マキマ)",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%9E%E3%82%AD%E3%83%9E%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1668,
-          "name_ko": "체인소 맨 아크릴 스탠드 (파워)",
-          "name_ja": "チェンソーマン アクリルスタンド (パワー)",
-          "source_store": "엔스카이",
-          "affiliation": "체인소 맨",
-          "category": "아크릴 스탠드",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "チェンソーマン アクリルスタンド (パワー)",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%91%E3%83%AF%E3%83%BC%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1669,
-          "name_ko": "체인소 맨 아크릴 스탠드 (아키)",
-          "name_ja": "チェンソーマン アクリルスタンド (早川アキ)",
-          "source_store": "엔스카이",
-          "affiliation": "체인소 맨",
-          "category": "아크릴 스탠드",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "チェンソーマン アクリルスタンド (早川アキ)",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E6%97%A9%E5%B7%9D%E3%82%A2%E3%82%AD%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1672,
-          "name_ko": "체인소 맨 빅 아크릴 스탠드 (파워)",
-          "name_ja": "チェンソーマン ビッグアクリルスタンド (パワー)",
-          "source_store": "엔스카이",
-          "affiliation": "체인소 맨",
-          "category": "아크릴 스탠드",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "チェンソーマン ビッグアクリルスタンド (パワー)",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%91%E3%83%AF%E3%83%BC%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        }
-      ],
-      "recommended_workflow": "official_storefront_search_then_exact_detail_match",
-      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
-      "blocked_until": "exact_source_url_and_image_url_confirmed",
-      "auto_apply_enabled": false
-    },
-    {
-      "source_store": "엔스카이",
-      "affiliation": "체인소 맨",
-      "category": "키링",
-      "primary_strategy": "official_search",
-      "priority": 10,
-      "rows": 4,
-      "first_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%87%E3%83%B3%E3%82%B8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "search_urls": [
-        "https://www.enskyshop.com/products/list?name=%E3%83%87%E3%83%B3%E3%82%B8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-        "https://www.enskyshop.com/products/list?name=%E3%83%91%E3%83%AF%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-        "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%87%E3%83%B3%E3%82%B8%29",
-        "https://www.enskyshop.com/products/list?name=%E5%B2%B8%E8%BE%BA%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
-      ],
-      "search_url_count": 4,
-      "first_fallback_web_search_url": null,
-      "fallback_web_search_urls": [],
-      "fallback_web_search_url_count": 0,
-      "sample_items": [
-        {
-          "catalog_index": 1594,
-          "name_ko": "덴지 러버 스트랩",
-          "name_ja": "デンジ ラバーストラップ",
-          "source_store": "엔스카이",
-          "affiliation": "체인소 맨",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "デンジ ラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%87%E3%83%B3%E3%82%B8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1595,
-          "name_ko": "파워 러버 스트랩",
-          "name_ja": "パワー ラバーストラップ",
-          "source_store": "엔스카이",
-          "affiliation": "체인소 맨",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "パワー ラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%91%E3%83%AF%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1600,
-          "name_ko": "체인소 맨 메탈릭 러버 스트랩 (덴지)",
-          "name_ja": "チェンソーマン メタリックラバーストラップ (デンジ)",
-          "source_store": "엔스카이",
-          "affiliation": "체인소 맨",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "チェンソーマン メタリックラバーストラップ (デンジ)",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%87%E3%83%B3%E3%82%B8%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1602,
-          "name_ko": "키시베 러버 스트랩",
-          "name_ja": "岸辺 ラバーストラップ",
-          "source_store": "엔스카이",
-          "affiliation": "체인소 맨",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "岸辺 ラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E5%B2%B8%E8%BE%BA%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        }
-      ],
-      "recommended_workflow": "official_storefront_search_then_exact_detail_match",
-      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
-      "blocked_until": "exact_source_url_and_image_url_confirmed",
-      "auto_apply_enabled": false
-    },
-    {
-      "source_store": "엔스카이",
-      "affiliation": "헌터X헌터",
-      "category": "아크릴 스탠드",
-      "primary_strategy": "official_search",
-      "priority": 10,
-      "rows": 4,
-      "first_search_url": "https://www.enskyshop.com/products/list?name=HUNTER%C3%97HUNTER%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%82%AD%E3%83%AB%E3%82%A2%3D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF%29",
-      "search_urls": [
-        "https://www.enskyshop.com/products/list?name=HUNTER%C3%97HUNTER%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%82%AD%E3%83%AB%E3%82%A2%3D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF%29",
-        "https://www.enskyshop.com/products/list?name=HUNTER%C3%97HUNTER%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB%29",
-        "https://www.enskyshop.com/products/list?name=HUNTER%C3%97HUNTER%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%AC%E3%82%AA%E3%83%AA%E3%82%AA%29",
-        "https://www.enskyshop.com/products/list?name=HUNTER%C3%97HUNTER%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%82%AD%E3%83%AB%E3%82%A2%29"
-      ],
-      "search_url_count": 4,
-      "first_fallback_web_search_url": null,
-      "fallback_web_search_urls": [],
-      "fallback_web_search_url_count": 0,
-      "sample_items": [
-        {
-          "catalog_index": 1618,
-          "name_ko": "헌터X헌터 아크릴 스탠드 (키루아 조르딕)",
-          "name_ja": "HUNTER×HUNTER アクリルスタンド (キルア=ゾルディック)",
-          "source_store": "엔스카이",
-          "affiliation": "헌터X헌터",
-          "category": "아크릴 스탠드",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "HUNTER×HUNTER アクリルスタンド (キルア=ゾルディック)",
-          "search_url": "https://www.enskyshop.com/products/list?name=HUNTER%C3%97HUNTER%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%82%AD%E3%83%AB%E3%82%A2%3D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1619,
-          "name_ko": "헌터X헌터 아크릴 스탠드 (쿠라피카)",
-          "name_ja": "HUNTER×HUNTER アクリルスタンド (クラピカ)",
-          "source_store": "엔스카이",
-          "affiliation": "헌터X헌터",
-          "category": "아크릴 스탠드",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "HUNTER×HUNTER アクリルスタンド (クラピカ)",
-          "search_url": "https://www.enskyshop.com/products/list?name=HUNTER%C3%97HUNTER%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1620,
-          "name_ko": "헌터X헌터 아크릴 스탠드 (레오리오)",
-          "name_ja": "HUNTER×HUNTER アクリルスタンド (レオリオ)",
-          "source_store": "엔스카이",
-          "affiliation": "헌터X헌터",
-          "category": "아크릴 스탠드",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "HUNTER×HUNTER アクリルスタンド (レオリオ)",
-          "search_url": "https://www.enskyshop.com/products/list?name=HUNTER%C3%97HUNTER%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%AC%E3%82%AA%E3%83%AA%E3%82%AA%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1623,
-          "name_ko": "헌터X헌터 빅 아크릴 스탠드 (키루아)",
-          "name_ja": "HUNTER×HUNTER ビッグアクリルスタンド (キルア)",
-          "source_store": "엔스카이",
-          "affiliation": "헌터X헌터",
-          "category": "아크릴 스탠드",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "HUNTER×HUNTER ビッグアクリルスタンド (キルア)",
-          "search_url": "https://www.enskyshop.com/products/list?name=HUNTER%C3%97HUNTER%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%82%AD%E3%83%AB%E3%82%A2%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        }
-      ],
-      "recommended_workflow": "official_storefront_search_then_exact_detail_match",
-      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
-      "blocked_until": "exact_source_url_and_image_url_confirmed",
-      "auto_apply_enabled": false
-    },
-    {
-      "source_store": "FuRyu",
-      "affiliation": "단간론파",
-      "category": "피규어",
-      "primary_strategy": "official_search",
-      "priority": 10,
-      "rows": 3,
-      "first_search_url": "https://furyuprize.com/search?keyword=%E3%83%8C%E3%83%BC%E3%83%89%E3%83%AB%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
-      "search_urls": [
-        "https://furyuprize.com/search?keyword=%E3%83%8C%E3%83%BC%E3%83%89%E3%83%AB%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
-        "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%20%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97",
-        "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%20%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%20%E6%97%A5%E5%90%91%E5%89%B5"
-      ],
-      "search_url_count": 3,
-      "first_fallback_web_search_url": null,
-      "fallback_web_search_urls": [],
-      "fallback_web_search_url_count": 0,
-      "sample_items": [
-        {
-          "catalog_index": 1470,
-          "name_ko": "Noodle Stopper 모노쿠마",
-          "name_ja": "ヌードルストッパー モノクマ",
-          "source_store": "FuRyu",
-          "affiliation": "단간론파",
-          "category": "피규어",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ヌードルストッパー モノクマ",
-          "search_url": "https://furyuprize.com/search?keyword=%E3%83%8C%E3%83%BC%E3%83%89%E3%83%AB%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1471,
-          "name_ko": "Chokonose Premium 코마에다 나기토",
-          "name_ja": "ちょこのせ プレミアム 狛枝凪斗",
-          "source_store": "FuRyu",
-          "affiliation": "단간론파",
-          "category": "피규어",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ちょこのせ プレミアム 狛枝凪斗",
-          "search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%20%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1472,
-          "name_ko": "Chokonose Premium 히나타 하지메",
-          "name_ja": "ちょこのせ プレミアム 日向創",
-          "source_store": "FuRyu",
-          "affiliation": "단간론파",
-          "category": "피규어",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ちょこのせ プレミアム 日向創",
-          "search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%20%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%20%E6%97%A5%E5%90%91%E5%89%B5",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        }
-      ],
-      "recommended_workflow": "official_prize_provider_search_then_exact_detail_match",
-      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
-      "blocked_until": "exact_source_url_and_image_url_confirmed",
-      "auto_apply_enabled": false
-    },
-    {
-      "source_store": "FuRyu",
-      "affiliation": "메이드 인 어비스",
-      "category": "피규어",
-      "primary_strategy": "official_search",
-      "priority": 10,
-      "rows": 3,
-      "first_search_url": "https://furyuprize.com/search?keyword=%E3%83%8C%E3%83%BC%E3%83%89%E3%83%AB%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%83%AA%E3%82%B3",
-      "search_urls": [
-        "https://furyuprize.com/search?keyword=%E3%83%8C%E3%83%BC%E3%83%89%E3%83%AB%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%83%AA%E3%82%B3",
-        "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%83%8A%E3%83%8A%E3%83%81",
-        "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%83%9F%E3%83%BC%E3%83%86%E3%82%A3"
-      ],
-      "search_url_count": 3,
-      "first_fallback_web_search_url": null,
-      "fallback_web_search_urls": [],
-      "fallback_web_search_url_count": 0,
-      "sample_items": [
-        {
-          "catalog_index": 1425,
-          "name_ko": "누들 스토퍼 리코",
-          "name_ja": "ヌードルストッパーフィギュア リコ",
-          "source_store": "FuRyu",
-          "affiliation": "메이드 인 어비스",
-          "category": "피규어",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ヌードルストッパーフィギュア リコ",
-          "search_url": "https://furyuprize.com/search?keyword=%E3%83%8C%E3%83%BC%E3%83%89%E3%83%AB%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%83%AA%E3%82%B3",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1426,
-          "name_ko": "쵸코노세 프리미엄 피규어 나나치",
-          "name_ja": "ちょこのせプレミアムフィギュア ナナチ",
-          "source_store": "FuRyu",
-          "affiliation": "메이드 인 어비스",
-          "category": "피규어",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ちょこのせプレミアムフィギュア ナナチ",
-          "search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%83%8A%E3%83%8A%E3%83%81",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1427,
-          "name_ko": "쵸코노세 프리미엄 피규어 미티",
-          "name_ja": "ちょこのせプレミアムフィギュア ミーティ",
-          "source_store": "FuRyu",
-          "affiliation": "메이드 인 어비스",
-          "category": "피규어",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ちょこのせプレミアムフィギュア ミーティ",
-          "search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%83%9F%E3%83%BC%E3%83%86%E3%82%A3",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        }
-      ],
-      "recommended_workflow": "official_prize_provider_search_then_exact_detail_match",
-      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
-      "blocked_until": "exact_source_url_and_image_url_confirmed",
-      "auto_apply_enabled": false
-    },
-    {
-      "source_store": "Movic",
-      "affiliation": "귀멸의 칼날",
-      "category": "캔뱃지",
-      "primary_strategy": "official_search",
-      "priority": 10,
-      "rows": 3,
-      "first_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E7%85%89%E7%8D%84%E6%9D%8F%E5%AF%BF%E9%83%8E",
-      "search_urls": [
-        "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E7%85%89%E7%8D%84%E6%9D%8F%E5%AF%BF%E9%83%8E",
-        "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E5%86%A8%E5%B2%A1%E7%BE%A9%E5%8B%87",
-        "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20BIG%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E7%82%AD%E6%B2%BB%E9%83%8E"
-      ],
-      "search_url_count": 3,
-      "first_fallback_web_search_url": null,
-      "fallback_web_search_urls": [],
-      "fallback_web_search_url_count": 0,
-      "sample_items": [
-        {
-          "catalog_index": 1728,
-          "name_ko": "귀멸의 칼날 메탈릭 캔뱃지 렌고쿠 쿄쥬로",
-          "name_ja": "鬼滅の刃 メタリック缶バッジ 煉獄杏寿郎",
-          "source_store": "Movic",
-          "affiliation": "귀멸의 칼날",
-          "category": "캔뱃지",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "鬼滅の刃 メタリック缶バッジ 煉獄杏寿郎",
-          "search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E7%85%89%E7%8D%84%E6%9D%8F%E5%AF%BF%E9%83%8E",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1729,
-          "name_ko": "귀멸의 칼날 메탈릭 캔뱃지 토미오카 기유",
-          "name_ja": "鬼滅の刃 メタリック缶バッジ 冨岡義勇",
-          "source_store": "Movic",
-          "affiliation": "귀멸의 칼날",
-          "category": "캔뱃지",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "鬼滅の刃 メタリック缶バッジ 冨岡義勇",
-          "search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E5%86%A8%E5%B2%A1%E7%BE%A9%E5%8B%87",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1730,
-          "name_ko": "귀멸의 칼날 빅 캔뱃지 탄지로",
-          "name_ja": "鬼滅の刃 BIG缶バッジ 炭治郎",
-          "source_store": "Movic",
-          "affiliation": "귀멸의 칼날",
-          "category": "캔뱃지",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "鬼滅の刃 BIG缶バッジ 炭治郎",
-          "search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20BIG%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E7%82%AD%E6%B2%BB%E9%83%8E",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        }
-      ],
-      "recommended_workflow": "official_storefront_search_then_exact_detail_match",
-      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
-      "blocked_until": "exact_source_url_and_image_url_confirmed",
-      "auto_apply_enabled": false
     }
   ],
   "high_priority_samples": [
+    {
+      "catalog_index": 920,
+      "name_ko": "치이카와 러버 스트랩 (치이카와)",
+      "name_ja": "ちいかわ ラバーストラップ (ちいかわ)",
+      "source_store": "엔스카이",
+      "affiliation": "치이카와",
+      "category": "키링",
+      "priority": 10,
+      "strategy": "official_search",
+      "search_url": "https://www.enskyshop.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29"
+    },
+    {
+      "catalog_index": 921,
+      "name_ko": "치이카와 러버 스트랩 (하치와레)",
+      "name_ja": "ちいかわ ラバーストラップ (ハチワレ)",
+      "source_store": "엔스카이",
+      "affiliation": "치이카와",
+      "category": "키링",
+      "priority": 10,
+      "strategy": "official_search",
+      "search_url": "https://www.enskyshop.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29"
+    },
     {
       "catalog_index": 922,
       "name_ko": "치이카와 러버 스트랩 (우사기)",
@@ -3782,6 +3926,17 @@
       "priority": 10,
       "strategy": "official_search",
       "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29"
+    },
+    {
+      "catalog_index": 927,
+      "name_ko": "치이카와 아크릴 스탠드 (치이카와)",
+      "name_ja": "ちいかわ アクリルスタンド (ちいかわ)",
+      "source_store": "엔스카이",
+      "affiliation": "치이카와",
+      "category": "아크릴 스탠드",
+      "priority": 10,
+      "strategy": "official_search",
+      "search_url": "https://www.enskyshop.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29"
     },
     {
       "catalog_index": 928,
@@ -3850,6 +4005,39 @@
       "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%28%E3%82%89%E3%81%B6%E3%82%89%E3%81%B6%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%29"
     },
     {
+      "catalog_index": 963,
+      "name_ko": "쿠리만쥬 ご当地 마스코트 (센다이 즌다)",
+      "name_ja": "くりまんじゅう ご当地マスコット (仙台 ずんだ)",
+      "source_store": "엔스카이",
+      "affiliation": "치이카와",
+      "category": "마스코트",
+      "priority": 10,
+      "strategy": "official_search",
+      "search_url": "https://www.enskyshop.com/search?q=%E3%81%8F%E3%82%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%20%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%28%E4%BB%99%E5%8F%B0%20%E3%81%9A%E3%82%93%E3%81%A0%29"
+    },
+    {
+      "catalog_index": 1024,
+      "name_ko": "귀멸의 칼날 봉제 인형 (탄지로)",
+      "name_ja": null,
+      "source_store": "애니메이트",
+      "affiliation": "귀멸의 칼날",
+      "category": "인형",
+      "priority": 10,
+      "strategy": "official_search",
+      "search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EA%B7%80%EB%A9%B8%EC%9D%98%20%EC%B9%BC%EB%82%A0%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%ED%83%84%EC%A7%80%EB%A1%9C%29"
+    },
+    {
+      "catalog_index": 1025,
+      "name_ko": "귀멸의 칼날 봉제 인형 (네즈코)",
+      "name_ja": null,
+      "source_store": "애니메이트",
+      "affiliation": "귀멸의 칼날",
+      "category": "인형",
+      "priority": 10,
+      "strategy": "official_search",
+      "search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EA%B7%80%EB%A9%B8%EC%9D%98%20%EC%B9%BC%EB%82%A0%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%EB%84%A4%EC%A6%88%EC%BD%94%29"
+    },
+    {
       "catalog_index": 1031,
       "name_ko": "원피스 봉제 인형 (토니토니 쵸파)",
       "name_ja": null,
@@ -3859,6 +4047,17 @@
       "priority": 10,
       "strategy": "official_search",
       "search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%AF%E3%83%B3%E3%83%94%E3%83%BC%E3%82%B9%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC"
+    },
+    {
+      "catalog_index": 1032,
+      "name_ko": "원피스 아크릴 키링 (루피)",
+      "name_ja": null,
+      "source_store": "애니메이트",
+      "affiliation": "원피스",
+      "category": "키링",
+      "priority": 10,
+      "strategy": "official_search",
+      "search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%9B%90%ED%94%BC%EC%8A%A4%20%EC%95%84%ED%81%AC%EB%A6%B4%20%ED%82%A4%EB%A7%81%20%28%EB%A3%A8%ED%94%BC%29"
     },
     {
       "catalog_index": 1033,
@@ -3881,6 +4080,17 @@
       "priority": 10,
       "strategy": "official_search",
       "search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%AF%E3%83%B3%E3%83%94%E3%83%BC%E3%82%B9%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8"
+    },
+    {
+      "catalog_index": 1036,
+      "name_ko": "주술회전 봉제 인형 (고죠 사토루)",
+      "name_ja": null,
+      "source_store": "애니메이트",
+      "affiliation": "주술회전",
+      "category": "인형",
+      "priority": 10,
+      "strategy": "official_search",
+      "search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%A3%BC%EC%88%A0%ED%9A%8C%EC%A0%84%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%EA%B3%A0%EC%A3%A0%20%EC%82%AC%ED%86%A0%EB%A3%A8%29"
     },
     {
       "catalog_index": 1037,
@@ -3916,6 +4126,28 @@
       "search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97"
     },
     {
+      "catalog_index": 1041,
+      "name_ko": "체인소맨 아크릴 스탠드 (파워)",
+      "name_ja": null,
+      "source_store": "애니메이트",
+      "affiliation": "체인소맨",
+      "category": "아크릴 스탠드",
+      "priority": 10,
+      "strategy": "official_search",
+      "search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%B2%B4%EC%9D%B8%EC%86%8C%EB%A7%A8%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%ED%8C%8C%EC%9B%8C%29"
+    },
+    {
+      "catalog_index": 1042,
+      "name_ko": "체인소맨 아크릴 스탠드 (마키마)",
+      "name_ja": null,
+      "source_store": "애니메이트",
+      "affiliation": "체인소맨",
+      "category": "아크릴 스탠드",
+      "priority": 10,
+      "strategy": "official_search",
+      "search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%B2%B4%EC%9D%B8%EC%86%8C%EB%A7%A8%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EB%A7%88%ED%82%A4%EB%A7%88%29"
+    },
+    {
       "catalog_index": 1043,
       "name_ko": "체인소맨 봉제 인형 (포치타)",
       "name_ja": null,
@@ -3949,6 +4181,39 @@
       "search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB"
     },
     {
+      "catalog_index": 1047,
+      "name_ko": "진격의 거인 아크릴 스탠드 (미카사)",
+      "name_ja": null,
+      "source_store": "애니메이트",
+      "affiliation": "진격의 거인",
+      "category": "아크릴 스탠드",
+      "priority": 10,
+      "strategy": "official_search",
+      "search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%A7%84%EA%B2%A9%EC%9D%98%20%EA%B1%B0%EC%9D%B8%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EB%AF%B8%EC%B9%B4%EC%82%AC%29"
+    },
+    {
+      "catalog_index": 1048,
+      "name_ko": "진격의 거인 아크릴 스탠드 (리바이)",
+      "name_ja": null,
+      "source_store": "애니메이트",
+      "affiliation": "진격의 거인",
+      "category": "아크릴 스탠드",
+      "priority": 10,
+      "strategy": "official_search",
+      "search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%A7%84%EA%B2%A9%EC%9D%98%20%EA%B1%B0%EC%9D%B8%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EB%A6%AC%EB%B0%94%EC%9D%B4%29"
+    },
+    {
+      "catalog_index": 1049,
+      "name_ko": "진격의 거인 피규어 (리바이)",
+      "name_ja": null,
+      "source_store": "애니메이트",
+      "affiliation": "진격의 거인",
+      "category": "피규어",
+      "priority": 10,
+      "strategy": "official_search",
+      "search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%A7%84%EA%B2%A9%EC%9D%98%20%EA%B1%B0%EC%9D%B8%20%ED%94%BC%EA%B7%9C%EC%96%B4%20%28%EB%A6%AC%EB%B0%94%EC%9D%B4%29"
+    },
+    {
       "catalog_index": 1050,
       "name_ko": "진격의 거인 캔뱃지 (랜덤)",
       "name_ja": null,
@@ -3969,6 +4234,39 @@
       "priority": 10,
       "strategy": "official_search",
       "search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E9%80%B2%E6%92%83%E3%81%AE%E5%B7%A8%E4%BA%BA%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB"
+    },
+    {
+      "catalog_index": 1052,
+      "name_ko": "나의 히어로 아카데미아 아크릴 스탠드 (데쿠)",
+      "name_ja": null,
+      "source_store": "애니메이트",
+      "affiliation": "나의 히어로 아카데미아",
+      "category": "아크릴 스탠드",
+      "priority": 10,
+      "strategy": "official_search",
+      "search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EB%82%98%EC%9D%98%20%ED%9E%88%EC%96%B4%EB%A1%9C%20%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8%EC%95%84%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EB%8D%B0%EC%BF%A0%29"
+    },
+    {
+      "catalog_index": 1053,
+      "name_ko": "나의 히어로 아카데미아 아크릴 스탠드 (바쿠고)",
+      "name_ja": null,
+      "source_store": "애니메이트",
+      "affiliation": "나의 히어로 아카데미아",
+      "category": "아크릴 스탠드",
+      "priority": 10,
+      "strategy": "official_search",
+      "search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EB%82%98%EC%9D%98%20%ED%9E%88%EC%96%B4%EB%A1%9C%20%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8%EC%95%84%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EB%B0%94%EC%BF%A0%EA%B3%A0%29"
+    },
+    {
+      "catalog_index": 1054,
+      "name_ko": "나의 히어로 아카데미아 아크릴 스탠드 (토도로키)",
+      "name_ja": null,
+      "source_store": "애니메이트",
+      "affiliation": "나의 히어로 아카데미아",
+      "category": "아크릴 스탠드",
+      "priority": 10,
+      "strategy": "official_search",
+      "search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EB%82%98%EC%9D%98%20%ED%9E%88%EC%96%B4%EB%A1%9C%20%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8%EC%95%84%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%ED%86%A0%EB%8F%84%EB%A1%9C%ED%82%A4%29"
     },
     {
       "catalog_index": 1061,
@@ -4101,327 +4399,10 @@
       "priority": 10,
       "strategy": "official_search",
       "search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=HUNTER%C3%97HUNTER%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF"
-    },
-    {
-      "catalog_index": 1090,
-      "name_ko": "명탐정 코난 봉제 인형 (코난)",
-      "name_ja": null,
-      "source_store": "애니메이트",
-      "affiliation": "명탐정 코난",
-      "category": "인형",
-      "priority": 10,
-      "strategy": "official_search",
-      "search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E5%90%8D%E6%8E%A2%E5%81%B5%E3%82%B3%E3%83%8A%E3%83%B3%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%82%B3%E3%83%8A%E3%83%B3"
-    },
-    {
-      "catalog_index": 1113,
-      "name_ko": "짱구는 못말려 봉제 인형 (시로)",
-      "name_ja": null,
-      "source_store": "애니메이트",
-      "affiliation": "짱구는 못말려",
-      "category": "인형",
-      "priority": 10,
-      "strategy": "official_search",
-      "search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%82%B7%E3%83%AD"
-    },
-    {
-      "catalog_index": 1114,
-      "name_ko": "짱구는 못말려 아크릴 키링 (짱구)",
-      "name_ja": null,
-      "source_store": "애니메이트",
-      "affiliation": "짱구는 못말려",
-      "category": "키링",
-      "priority": 10,
-      "strategy": "official_search",
-      "search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%E9%87%8E%E5%8E%9F%E3%81%97%E3%82%93%E3%81%AE%E3%81%99%E3%81%91"
-    },
-    {
-      "catalog_index": 1115,
-      "name_ko": "도라에몽 봉제 인형",
-      "name_ja": null,
-      "source_store": "애니메이트",
-      "affiliation": "도라에몽",
-      "category": "인형",
-      "priority": 10,
-      "strategy": "official_search",
-      "search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%89%E3%83%A9%E3%81%88%E3%82%82%E3%82%93%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF"
-    },
-    {
-      "catalog_index": 1117,
-      "name_ko": "카드캡터 체리 아크릴 스탠드 (사쿠라)",
-      "name_ja": null,
-      "source_store": "애니메이트",
-      "affiliation": "카드캡터 체리",
-      "category": "아크릴 스탠드",
-      "priority": 10,
-      "strategy": "official_search",
-      "search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AB%E3%83%BC%E3%83%89%E3%82%AD%E3%83%A3%E3%83%97%E3%82%BF%E3%83%BC%E3%81%95%E3%81%8F%E3%82%89%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%E6%9C%A8%E4%B9%8B%E6%9C%AC%E6%A1%9C"
-    },
-    {
-      "catalog_index": 1118,
-      "name_ko": "카드캡터 체리 봉제 인형 (케로짱)",
-      "name_ja": null,
-      "source_store": "애니메이트",
-      "affiliation": "카드캡터 체리",
-      "category": "인형",
-      "priority": 10,
-      "strategy": "official_search",
-      "search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AB%E3%83%BC%E3%83%89%E3%82%AD%E3%83%A3%E3%83%97%E3%82%BF%E3%83%BC%E3%81%95%E3%81%8F%E3%82%89%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%82%B1%E3%83%AB%E3%83%99%E3%83%AD%E3%82%B9"
-    },
-    {
-      "catalog_index": 1119,
-      "name_ko": "세일러문 아크릴 스탠드 (세일러문)",
-      "name_ja": null,
-      "source_store": "애니메이트",
-      "affiliation": "세일러문",
-      "category": "아크릴 스탠드",
-      "priority": 10,
-      "strategy": "official_search",
-      "search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%E3%82%BB%E3%83%BC%E3%83%A9%E3%83%BC%E3%83%A0%E3%83%BC%E3%83%B3"
-    },
-    {
-      "catalog_index": 1121,
-      "name_ko": "신세기 에반게리온 피규어 (아야나미 레이)",
-      "name_ja": null,
-      "source_store": "애니메이트",
-      "affiliation": "신세기 에반게리온",
-      "category": "피규어",
-      "priority": 10,
-      "strategy": "official_search",
-      "search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%96%B0%E4%B8%96%E7%B4%80%E3%82%A8%E3%83%B4%E3%82%A1%E3%83%B3%E3%82%B2%E3%83%AA%E3%82%AA%E3%83%B3%20%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%B6%BE%E6%B3%A2%E3%83%AC%E3%82%A4"
-    },
-    {
-      "catalog_index": 1123,
-      "name_ko": "신세기 에반게리온 아크릴 스탠드",
-      "name_ja": null,
-      "source_store": "애니메이트",
-      "affiliation": "신세기 에반게리온",
-      "category": "아크릴 스탠드",
-      "priority": 10,
-      "strategy": "official_search",
-      "search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%96%B0%E4%B8%96%E7%B4%80%E3%82%A8%E3%83%B4%E3%82%A1%E3%83%B3%E3%82%B2%E3%83%AA%E3%82%AA%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89"
-    },
-    {
-      "catalog_index": 1184,
-      "name_ko": "브레이크 타임 컬렉션 하츠네 미쿠",
-      "name_ja": "ブレイクタイムコレクション 初音ミク",
-      "source_store": "FuRyu",
-      "affiliation": "하츠네 미쿠",
-      "category": "피규어",
-      "priority": 10,
-      "strategy": "official_search",
-      "search_url": "https://furyuprize.com/search?keyword=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF"
-    },
-    {
-      "catalog_index": 1190,
-      "name_ko": "치비누이 카가미네 린",
-      "name_ja": "ちびぬい 鏡音リン",
-      "source_store": "엔스카이",
-      "affiliation": "하츠네 미쿠",
-      "category": "인형",
-      "priority": 10,
-      "strategy": "official_search",
-      "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%AC%E3%81%84%20%E9%8F%A1%E9%9F%B3%E3%83%AA%E3%83%B3"
-    },
-    {
-      "catalog_index": 1191,
-      "name_ko": "타피누이 하츠네 미쿠",
-      "name_ja": "たぴぬい 初音ミク",
-      "source_store": "엔스카이",
-      "affiliation": "하츠네 미쿠",
-      "category": "인형",
-      "priority": 10,
-      "strategy": "official_search",
-      "search_url": "https://www.enskyshop.com/products/list?name=%E3%81%9F%E3%81%B4%E3%81%AC%E3%81%84%20%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF"
-    },
-    {
-      "catalog_index": 1253,
-      "name_ko": "쵸코노세 프리미엄 피규어 미도리야 이즈쿠",
-      "name_ja": "ちょこのせプレミアムフィギュア 緑谷出久",
-      "source_store": "FuRyu",
-      "affiliation": "나의 히어로 아카데미아",
-      "category": "피규어",
-      "priority": 10,
-      "strategy": "official_search",
-      "search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85"
-    },
-    {
-      "catalog_index": 1254,
-      "name_ko": "쵸코노세 프리미엄 피규어 바쿠고 카츠키",
-      "name_ja": "ちょこのせプレミアムフィギュア 爆豪勝己",
-      "source_store": "FuRyu",
-      "affiliation": "나의 히어로 아카데미아",
-      "category": "피규어",
-      "priority": 10,
-      "strategy": "official_search",
-      "search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1"
-    },
-    {
-      "catalog_index": 1255,
-      "name_ko": "쵸코노세 프리미엄 피규어 토도로키 쇼토",
-      "name_ja": "ちょこのせプレミアムフィギュア 轟焦凍",
-      "source_store": "FuRyu",
-      "affiliation": "나의 히어로 아카데미아",
-      "category": "피규어",
-      "priority": 10,
-      "strategy": "official_search",
-      "search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E8%BD%9F%E7%84%A6%E5%87%8D"
-    },
-    {
-      "catalog_index": 1256,
-      "name_ko": "누들 스토퍼 피규어 미도리야 이즈쿠",
-      "name_ja": "ぬーどるストッパーフィギュア 緑谷出久",
-      "source_store": "FuRyu",
-      "affiliation": "나의 히어로 아카데미아",
-      "category": "피규어",
-      "priority": 10,
-      "strategy": "official_search",
-      "search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85"
     }
   ],
   "stale_queue_index_samples": [],
-  "unmatched_catalog_missing_samples": [
-    {
-      "catalog_index": 657,
-      "name_ko": "C상: 인형 포셰트",
-      "source_store": "치이카와 온라인 쿠지",
-      "affiliation": "치이카와",
-      "category": "인형"
-    },
-    {
-      "catalog_index": 920,
-      "name_ko": "치이카와 러버 스트랩 (치이카와)",
-      "source_store": "엔스카이",
-      "affiliation": "치이카와",
-      "category": "키링"
-    },
-    {
-      "catalog_index": 921,
-      "name_ko": "치이카와 러버 스트랩 (하치와레)",
-      "source_store": "엔스카이",
-      "affiliation": "치이카와",
-      "category": "키링"
-    },
-    {
-      "catalog_index": 927,
-      "name_ko": "치이카와 아크릴 스탠드 (치이카와)",
-      "source_store": "엔스카이",
-      "affiliation": "치이카와",
-      "category": "아크릴 스탠드"
-    },
-    {
-      "catalog_index": 963,
-      "name_ko": "쿠리만쥬 ご当地 마스코트 (센다이 즌다)",
-      "source_store": "엔스카이",
-      "affiliation": "치이카와",
-      "category": "마스코트"
-    },
-    {
-      "catalog_index": 1024,
-      "name_ko": "귀멸의 칼날 봉제 인형 (탄지로)",
-      "source_store": "애니메이트",
-      "affiliation": "귀멸의 칼날",
-      "category": "인형"
-    },
-    {
-      "catalog_index": 1025,
-      "name_ko": "귀멸의 칼날 봉제 인형 (네즈코)",
-      "source_store": "애니메이트",
-      "affiliation": "귀멸의 칼날",
-      "category": "인형"
-    },
-    {
-      "catalog_index": 1032,
-      "name_ko": "원피스 아크릴 키링 (루피)",
-      "source_store": "애니메이트",
-      "affiliation": "원피스",
-      "category": "키링"
-    },
-    {
-      "catalog_index": 1036,
-      "name_ko": "주술회전 봉제 인형 (고죠 사토루)",
-      "source_store": "애니메이트",
-      "affiliation": "주술회전",
-      "category": "인형"
-    },
-    {
-      "catalog_index": 1041,
-      "name_ko": "체인소맨 아크릴 스탠드 (파워)",
-      "source_store": "애니메이트",
-      "affiliation": "체인소맨",
-      "category": "아크릴 스탠드"
-    },
-    {
-      "catalog_index": 1042,
-      "name_ko": "체인소맨 아크릴 스탠드 (마키마)",
-      "source_store": "애니메이트",
-      "affiliation": "체인소맨",
-      "category": "아크릴 스탠드"
-    },
-    {
-      "catalog_index": 1047,
-      "name_ko": "진격의 거인 아크릴 스탠드 (미카사)",
-      "source_store": "애니메이트",
-      "affiliation": "진격의 거인",
-      "category": "아크릴 스탠드"
-    },
-    {
-      "catalog_index": 1048,
-      "name_ko": "진격의 거인 아크릴 스탠드 (리바이)",
-      "source_store": "애니메이트",
-      "affiliation": "진격의 거인",
-      "category": "아크릴 스탠드"
-    },
-    {
-      "catalog_index": 1049,
-      "name_ko": "진격의 거인 피규어 (리바이)",
-      "source_store": "애니메이트",
-      "affiliation": "진격의 거인",
-      "category": "피규어"
-    },
-    {
-      "catalog_index": 1052,
-      "name_ko": "나의 히어로 아카데미아 아크릴 스탠드 (데쿠)",
-      "source_store": "애니메이트",
-      "affiliation": "나의 히어로 아카데미아",
-      "category": "아크릴 스탠드"
-    },
-    {
-      "catalog_index": 1053,
-      "name_ko": "나의 히어로 아카데미아 아크릴 스탠드 (바쿠고)",
-      "source_store": "애니메이트",
-      "affiliation": "나의 히어로 아카데미아",
-      "category": "아크릴 스탠드"
-    },
-    {
-      "catalog_index": 1054,
-      "name_ko": "나의 히어로 아카데미아 아크릴 스탠드 (토도로키)",
-      "source_store": "애니메이트",
-      "affiliation": "나의 히어로 아카데미아",
-      "category": "아크릴 스탠드"
-    },
-    {
-      "catalog_index": 1269,
-      "name_ko": "누이푸페 자수 데님 미도리야 이즈쿠",
-      "source_store": "엔스카이",
-      "affiliation": "나의 히어로 아카데미아",
-      "category": "인형"
-    },
-    {
-      "catalog_index": 1270,
-      "name_ko": "누이푸페 자수 데님 이이다 텐야",
-      "source_store": "엔스카이",
-      "affiliation": "나의 히어로 아카데미아",
-      "category": "인형"
-    },
-    {
-      "catalog_index": 1272,
-      "name_ko": "누이푸페 자수 데님 바쿠고 카츠키",
-      "source_store": "엔스카이",
-      "affiliation": "나의 히어로 아카데미아",
-      "category": "인형"
-    }
-  ],
+  "unmatched_catalog_missing_samples": [],
   "existing_image_reuse_candidates": [],
   "automation_policy": {
     "auto_apply_catalog_changes": false,

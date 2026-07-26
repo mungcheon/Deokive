@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -82,6 +83,42 @@ class MissingImagePriorityPublicTests(unittest.TestCase):
         self.assertTrue(
             starter_queue_report["automation_policy"]["requires_exact_product_source_url"]
         )
+
+    def test_write_starter_queue_report_writes_actionable_queue_file(self) -> None:
+        catalog = {
+            "items": [
+                {
+                    "catalog_index": 1,
+                    "name_ko": "Hunter Charm A",
+                    "name_ja": "HUNTER チャーム A",
+                    "source_store": "엔스카이",
+                    "affiliation": "헌터X헌터",
+                    "category": "키링",
+                }
+            ]
+        }
+        queue = {
+            "items": [
+                {
+                    "row_index": 1,
+                    "source_store": "엔스카이",
+                    "strategy": "official_search",
+                    "priority": 10,
+                    "query": "HUNTER チャーム A",
+                    "search_url": "https://www.enskyshop.com/search?q=HUNTER",
+                }
+            ]
+        }
+        report = target.build_report(catalog, queue, generated_at="2026-01-01T00:00:00Z")
+
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / "starter.json"
+            written = target.write_starter_queue_report(report, output)
+            payload = target.load_json(output)
+
+        self.assertEqual(written["summary"]["starter_queue_rows"], 1)
+        self.assertEqual(payload["summary"]["starter_queue_rows"], 1)
+        self.assertEqual(payload["next_review_batch"][0]["catalog_index"], 1)
 
     def test_build_report_counts_focus_groups_and_priority_samples(self) -> None:
         catalog = {
