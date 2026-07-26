@@ -1,36 +1,32 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T19:02:03Z",
+  "generated_at": "2026-07-26T20:54:43Z",
   "scope": "catalog_image_attachment_confirmed_template",
   "summary": {
-    "template_items": 25,
+    "template_items": 24,
     "manual_confirmed_rows": 0,
     "source_url_update_required_rows": 0,
     "representative_image_review_required_rows": 23,
-    "image_url_ready_rows": 2,
-    "image_url_review_ready_rows": 2,
+    "image_url_ready_rows": 1,
+    "image_url_review_ready_rows": 1,
     "prefilled_image_url_rows": 0,
     "candidate_image_url_hint_rows": 0,
     "candidate_source_url_hint_rows": 0,
-    "manual_value_missing_rows": 25,
-    "ready_but_unconfirmed_rows": 2,
+    "manual_value_missing_rows": 24,
+    "ready_but_unconfirmed_rows": 1,
     "source_url_candidate_prefilled_rows": 0,
-    "batch_count": 4,
+    "batch_count": 3,
     "by_batch": [
       [
-        "image-attachment-action-003",
+        "image-attachment-action-002",
         20
       ],
       [
-        "image-attachment-action-004",
+        "image-attachment-action-003",
         3
       ],
       [
         "image-attachment-action-001",
-        1
-      ],
-      [
-        "image-attachment-action-002",
         1
       ]
     ],
@@ -41,17 +37,13 @@
       ],
       [
         "extract_from_existing_source_url",
-        2
+        1
       ]
     ],
     "by_source_store": [
       [
         "ご当地ちいかわ 공식(API)",
         23
-      ],
-      [
-        "밀짚모자 스토어",
-        1
       ],
       [
         "치이카와 온라인 쿠지",
@@ -80,10 +72,6 @@
         2
       ],
       [
-        "아크릴 스탠드",
-        1
-      ],
-      [
         "인형",
         1
       ]
@@ -95,7 +83,7 @@
       ],
       [
         "image_url_review_ready",
-        2
+        1
       ]
     ],
     "by_image_import_blocker": [
@@ -109,7 +97,7 @@
       ],
       [
         "manual_image_url_confirmation",
-        2
+        1
       ]
     ],
     "by_source_url_review_lane": [],
@@ -126,53 +114,6 @@
     "Dry-run tools/import_confirmed_image_attachment_rows.py before any --write import."
   ],
   "items": [
-    {
-      "manual_confirmed": false,
-      "manual_note": "",
-      "row_index": 2268,
-      "field": "image_url",
-      "manual_value": "",
-      "evidence_url": "",
-      "candidate_source_url": "",
-      "source_store": "밀짚모자 스토어",
-      "name_ko": "원피스 생일 한정 아크릴 액세서리 스탠드 (루피 5.5)",
-      "name_ja": "『ワンピース』ハッピーバースデーアクリルアクセサリースタンド［5.5 ルフィ］",
-      "category": "아크릴 스탠드",
-      "affiliation": "원피스",
-      "source_search_url": null,
-      "workflow": "extract_from_existing_source_url",
-      "requires_exact_source_url": false,
-      "requires_representative_image_flag": false,
-      "blocked_until": "manual_confirmed_image_url",
-      "suggested_local_image_path": "assets/catalog_images/catalog_2268.webp",
-      "local_image_path_field": "local_image_path",
-      "review_lane": "image_url_review_ready",
-      "candidate_image_url": "",
-      "candidate_title": "",
-      "source_url_review_lane": "",
-      "source_url_review_blockers": [],
-      "catalog_index": 2268,
-      "series_name": null,
-      "current_source_url": "https://store.toei-anim.co.jp/shop/g/gMOVONP962162/",
-      "official_search_url": "",
-      "batch_id": "image-attachment-action-001",
-      "required_before_image_import": [
-        "confirm_product_page_image_url"
-      ],
-      "image_import_blockers": [
-        "manual_image_url_confirmation"
-      ],
-      "manual_confirmation_requirements": [
-        "Open source_url.",
-        "Confirm the page is for the exact catalog item.",
-        "Copy the primary product image URL into the image attachment template."
-      ],
-      "source_url_update_required": false,
-      "representative_image": false,
-      "representative_image_review_required": false,
-      "image_url_ready": true,
-      "auto_apply_enabled": false
-    },
     {
       "manual_confirmed": false,
       "manual_note": "",
@@ -202,7 +143,7 @@
       "series_name": "ちいかわ うさぎだらけくじ",
       "current_source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
       "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=C%E8%B3%9E%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%83%9D%E3%82%B7%E3%82%A7%E3%83%83%E3%83%88",
-      "batch_id": "image-attachment-action-002",
+      "batch_id": "image-attachment-action-001",
       "required_before_image_import": [
         "confirm_product_page_image_url"
       ],
@@ -249,7 +190,7 @@
       "series_name": "ご当地",
       "current_source_url": "https://www.jp-api.com/contents/NOD62/",
       "official_search_url": "",
-      "batch_id": "image-attachment-action-003",
+      "batch_id": "image-attachment-action-002",
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
@@ -298,7 +239,7 @@
       "series_name": "ご当地",
       "current_source_url": "https://www.jp-api.com/contents/NOD62/",
       "official_search_url": "",
-      "batch_id": "image-attachment-action-003",
+      "batch_id": "image-attachment-action-002",
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
@@ -347,7 +288,7 @@
       "series_name": "ご当地",
       "current_source_url": "https://www.jp-api.com/contents/NOD62/",
       "official_search_url": "",
-      "batch_id": "image-attachment-action-003",
+      "batch_id": "image-attachment-action-002",
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
@@ -396,7 +337,7 @@
       "series_name": "ご当地",
       "current_source_url": "https://www.jp-api.com/contents/NOD62/",
       "official_search_url": "",
-      "batch_id": "image-attachment-action-003",
+      "batch_id": "image-attachment-action-002",
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
@@ -445,7 +386,7 @@
       "series_name": "ご当地",
       "current_source_url": "https://www.jp-api.com/contents/NOD62/",
       "official_search_url": "",
-      "batch_id": "image-attachment-action-003",
+      "batch_id": "image-attachment-action-002",
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
@@ -494,7 +435,7 @@
       "series_name": "ご当地",
       "current_source_url": "https://www.jp-api.com/contents/NOD62/",
       "official_search_url": "",
-      "batch_id": "image-attachment-action-003",
+      "batch_id": "image-attachment-action-002",
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
@@ -543,7 +484,7 @@
       "series_name": "ご当地",
       "current_source_url": "https://www.jp-api.com/contents/NOD62/",
       "official_search_url": "",
-      "batch_id": "image-attachment-action-003",
+      "batch_id": "image-attachment-action-002",
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
@@ -592,7 +533,7 @@
       "series_name": "ご当地",
       "current_source_url": "https://www.jp-api.com/contents/NOD62/",
       "official_search_url": "",
-      "batch_id": "image-attachment-action-003",
+      "batch_id": "image-attachment-action-002",
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
@@ -641,7 +582,7 @@
       "series_name": "ご当地",
       "current_source_url": "https://www.jp-api.com/contents/NOD62/",
       "official_search_url": "",
-      "batch_id": "image-attachment-action-003",
+      "batch_id": "image-attachment-action-002",
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
@@ -690,7 +631,7 @@
       "series_name": "ご当地",
       "current_source_url": "https://www.jp-api.com/contents/NOD62/",
       "official_search_url": "",
-      "batch_id": "image-attachment-action-003",
+      "batch_id": "image-attachment-action-002",
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
@@ -739,7 +680,7 @@
       "series_name": "ご当地",
       "current_source_url": "https://www.jp-api.com/contents/NOD62/",
       "official_search_url": "",
-      "batch_id": "image-attachment-action-003",
+      "batch_id": "image-attachment-action-002",
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
@@ -788,7 +729,7 @@
       "series_name": "ご当地",
       "current_source_url": "https://www.jp-api.com/contents/NOD62/",
       "official_search_url": "",
-      "batch_id": "image-attachment-action-003",
+      "batch_id": "image-attachment-action-002",
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
@@ -837,7 +778,7 @@
       "series_name": "ご当地",
       "current_source_url": "https://www.jp-api.com/contents/NOD62/",
       "official_search_url": "",
-      "batch_id": "image-attachment-action-003",
+      "batch_id": "image-attachment-action-002",
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
@@ -886,7 +827,7 @@
       "series_name": "ご当地",
       "current_source_url": "https://www.jp-api.com/contents/NOD62/",
       "official_search_url": "",
-      "batch_id": "image-attachment-action-003",
+      "batch_id": "image-attachment-action-002",
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
@@ -935,7 +876,7 @@
       "series_name": "ご当地",
       "current_source_url": "https://www.jp-api.com/contents/NOD62/",
       "official_search_url": "",
-      "batch_id": "image-attachment-action-003",
+      "batch_id": "image-attachment-action-002",
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
@@ -984,7 +925,7 @@
       "series_name": "ご当地",
       "current_source_url": "https://www.jp-api.com/contents/NOD62/",
       "official_search_url": "",
-      "batch_id": "image-attachment-action-003",
+      "batch_id": "image-attachment-action-002",
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
@@ -1033,7 +974,7 @@
       "series_name": "ご当地",
       "current_source_url": "https://www.jp-api.com/contents/NOD62/",
       "official_search_url": "",
-      "batch_id": "image-attachment-action-003",
+      "batch_id": "image-attachment-action-002",
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
@@ -1082,7 +1023,7 @@
       "series_name": "ご当地",
       "current_source_url": "https://www.jp-api.com/contents/NOD62/",
       "official_search_url": "",
-      "batch_id": "image-attachment-action-003",
+      "batch_id": "image-attachment-action-002",
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
@@ -1131,7 +1072,7 @@
       "series_name": "ご当地",
       "current_source_url": "https://www.jp-api.com/contents/NOD62/",
       "official_search_url": "",
-      "batch_id": "image-attachment-action-003",
+      "batch_id": "image-attachment-action-002",
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
@@ -1180,7 +1121,7 @@
       "series_name": "ご当地",
       "current_source_url": "https://www.jp-api.com/contents/NOD62/",
       "official_search_url": "",
-      "batch_id": "image-attachment-action-003",
+      "batch_id": "image-attachment-action-002",
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
@@ -1229,7 +1170,7 @@
       "series_name": "ご当地",
       "current_source_url": "https://www.jp-api.com/contents/NOD62/",
       "official_search_url": "",
-      "batch_id": "image-attachment-action-004",
+      "batch_id": "image-attachment-action-003",
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
@@ -1278,7 +1219,7 @@
       "series_name": "ご当地",
       "current_source_url": "https://www.jp-api.com/contents/NOD62/",
       "official_search_url": "",
-      "batch_id": "image-attachment-action-004",
+      "batch_id": "image-attachment-action-003",
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"
@@ -1327,7 +1268,7 @@
       "series_name": "ご当地",
       "current_source_url": "https://www.jp-api.com/contents/NOD62/",
       "official_search_url": "",
-      "batch_id": "image-attachment-action-004",
+      "batch_id": "image-attachment-action-003",
       "required_before_image_import": [
         "confirm_exact_product_type",
         "confirm_representative_image_is_acceptable"

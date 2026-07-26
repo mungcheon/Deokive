@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T20:22:05Z",
+  "generated_at": "2026-07-26T20:54:43Z",
   "catalog_generated_at": "2026-07-21T15:58:17Z",
   "row_count": 20313,
   "missing": {
     "source_url": 762,
-    "image_url": 787,
+    "image_url": 786,
     "release_date": 1342,
     "barcode": 10048,
     "series_name": 1801,
@@ -2624,10 +2624,10 @@
     "contains_server_tokens": false
   },
   "image_backlog": {
-    "missing_images": 787,
+    "missing_images": 786,
     "provider_candidate_items": 496,
     "manual_or_blocked_items": 228,
-    "missing_with_generic_source_url": 25,
+    "missing_with_generic_source_url": 24,
     "top_strategy": [
       [
         "official_search",
@@ -2678,13 +2678,13 @@
       "pilot_store_count": 4,
       "pilot_processed_rows": 101,
       "pilot_filled_rows": 0,
-      "missing_images": 787,
+      "missing_images": 786,
       "provider_candidate_items": 496,
       "manual_or_blocked_items": 228,
       "rows": 20313,
-      "missing_with_source_url": 25,
+      "missing_with_source_url": 24,
       "missing_with_exact_source_url": 0,
-      "missing_with_generic_source_url": 25
+      "missing_with_generic_source_url": 24
     },
     "next_execution_summary": {
       "lane_count": 3,
@@ -3149,7 +3149,7 @@
       "release_date": 1342,
       "barcode": 10048,
       "official_price_jpy": 553,
-      "image_url": 787,
+      "image_url": 786,
       "source_url": 762
     },
     "store_rows_with_any_missing_metadata": [
@@ -3319,15 +3319,15 @@
   },
   "image_enrichment_batches": {
     "public_report": "data/catalog_image_enrichment_batches_public.json",
-    "missing_image_rows": 787,
-    "source_url_ready_rows": 2,
+    "missing_image_rows": 786,
+    "source_url_ready_rows": 1,
     "generic_source_url_rows": 0,
     "gotouchi_official_review_rows": 23,
     "needs_source_discovery_rows": 752,
     "manual_image_research_rows": 10,
-    "published_group_rows": 49,
+    "published_group_rows": 48,
     "review_batch_count": 9,
-    "sample_image_import_template_count": 649,
+    "sample_image_import_template_count": 648,
     "top_source_stores": [
       [
         "엔스카이",
@@ -3465,14 +3465,14 @@
       ],
       [
         "extract_from_existing_source_url",
-        2
+        1
       ]
     ]
   },
   "operations": {
     "public_report": "data/catalog_operations_public.json",
     "source_discovery_rows": 762,
-    "image_missing_rows": 787,
+    "image_missing_rows": 786,
     "dedupe_groups": 61,
     "animation_unknown_categories": 0,
     "ichiban_missing_release_date_rows": 8,
@@ -3525,8 +3525,8 @@
     "official_detail_review_manual_confirmed_rows": 0,
     "ensky_cache_candidate_action_rows": 39,
     "ensky_cache_candidate_manual_confirmed_rows": 0,
-    "image_attachment_action_rows": 25,
-    "image_attachment_actionable_rows": 25,
+    "image_attachment_action_rows": 24,
+    "image_attachment_actionable_rows": 24,
     "image_attachment_unqueued_actionable_rows": 0,
     "image_attachment_source_url_search_hint_rows": 0,
     "image_attachment_source_url_missing_search_hint_rows": 0,
@@ -3535,7 +3535,7 @@
     "image_attachment_source_url_missing_any_search_hint_rows": 0,
     "image_attachment_source_url_primary_review_url_rows": 0,
     "image_attachment_source_url_missing_primary_review_url_rows": 0,
-    "image_attachment_local_download_ready_rows": 25,
+    "image_attachment_local_download_ready_rows": 24,
     "ichiban_metadata_action_campaigns": 41,
     "ichiban_metadata_actionable_campaigns": 41,
     "ichiban_metadata_unqueued_action_campaigns": 0,
@@ -3565,10 +3565,10 @@
     "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
     "ichiban_prize_name_image_patch_blocked_rows": 0,
     "catalog_goal_manual_review_pillars": 5,
-    "catalog_goal_manual_review_rows": 896,
+    "catalog_goal_manual_review_rows": 895,
     "catalog_goal_auto_apply_ready_rows": 0,
     "catalog_goal_dedupe_manual_review_rows": 48,
-    "catalog_goal_missing_image_rows": 787,
+    "catalog_goal_missing_image_rows": 786,
     "catalog_goal_source_url_update_rows": 0,
     "catalog_goal_animation_category_rows": 0,
     "catalog_goal_ichiban_manual_review_rows": 61,
@@ -3585,7 +3585,7 @@
     "public_report": "data/catalog_agent_work_queue_public.json",
     "batch_count": 160,
     "max_published_batches": 160,
-    "summed_batch_rows": 20759,
+    "summed_batch_rows": 20776,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -3634,11 +3634,7 @@
       ],
       [
         "deduplication_review",
-        6
-      ],
-      [
-        "image_attachment_action_queue",
-        5
+        7
       ],
       [
         "ichiban_kuji_prize_policy_audit",
@@ -3650,6 +3646,10 @@
       ],
       [
         "requested_focus_enrichment",
+        4
+      ],
+      [
+        "image_attachment_action_queue",
         4
       ],
       [
@@ -3727,15 +3727,15 @@
         10
       ],
       [
+        "agent-source-image",
+        10
+      ],
+      [
         "agent-source-action",
         10
       ],
       [
         "agent-ichiban-action",
-        9
-      ],
-      [
-        "agent-source-image",
         9
       ],
       [
@@ -3748,11 +3748,7 @@
       ],
       [
         "agent-dedupe",
-        6
-      ],
-      [
-        "agent-image-action",
-        5
+        7
       ],
       [
         "agent-ichiban-prize-policy",
@@ -3764,6 +3760,10 @@
       ],
       [
         "agent-requested-focus",
+        4
+      ],
+      [
+        "agent-image-action",
         4
       ],
       [
@@ -3779,12 +3779,12 @@
         3
       ],
       [
-        "agent-image-existing-source",
+        "agent-ichiban-prize-name-image",
         2
       ],
       [
-        "agent-ichiban-prize-name-image",
-        2
+        "agent-image-existing-source",
+        1
       ],
       [
         "agent-gotouchi-review",
@@ -3801,7 +3801,7 @@
     ],
     "open_review_queues": {
       "source_discovery_rows": 762,
-      "image_missing_rows": 787,
+      "image_missing_rows": 786,
       "dedupe_groups": 61,
       "animation_unknown_categories": 0,
       "ichiban_missing_release_date_rows": 8,
@@ -3854,8 +3854,8 @@
       "official_detail_review_manual_confirmed_rows": 0,
       "ensky_cache_candidate_action_rows": 39,
       "ensky_cache_candidate_manual_confirmed_rows": 0,
-      "image_attachment_action_rows": 25,
-      "image_attachment_actionable_rows": 25,
+      "image_attachment_action_rows": 24,
+      "image_attachment_actionable_rows": 24,
       "image_attachment_unqueued_actionable_rows": 0,
       "image_attachment_source_url_search_hint_rows": 0,
       "image_attachment_source_url_missing_search_hint_rows": 0,
@@ -3864,7 +3864,7 @@
       "image_attachment_source_url_missing_any_search_hint_rows": 0,
       "image_attachment_source_url_primary_review_url_rows": 0,
       "image_attachment_source_url_missing_primary_review_url_rows": 0,
-      "image_attachment_local_download_ready_rows": 25,
+      "image_attachment_local_download_ready_rows": 24,
       "ichiban_metadata_action_campaigns": 41,
       "ichiban_metadata_actionable_campaigns": 41,
       "ichiban_metadata_unqueued_action_campaigns": 0,
@@ -3894,10 +3894,10 @@
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
       "ichiban_prize_name_image_patch_blocked_rows": 0,
       "catalog_goal_manual_review_pillars": 5,
-      "catalog_goal_manual_review_rows": 896,
+      "catalog_goal_manual_review_rows": 895,
       "catalog_goal_auto_apply_ready_rows": 0,
       "catalog_goal_dedupe_manual_review_rows": 48,
-      "catalog_goal_missing_image_rows": 787,
+      "catalog_goal_missing_image_rows": 786,
       "catalog_goal_source_url_update_rows": 0,
       "catalog_goal_animation_category_rows": 0,
       "catalog_goal_ichiban_manual_review_rows": 61,
@@ -3923,7 +3923,7 @@
     "confirmed_import_top_work_order_lane": "confirm_template_rows",
     "confirmed_import_top_work_order_workflow": "source_discovery",
     "confirmed_import_top_work_order_row_count": 641,
-    "image_rows_still_requiring_url_evidence": 787,
+    "image_rows_still_requiring_url_evidence": 786,
     "image_missing_evidence_top_source_stores": [
       [
         "엔스카이",
@@ -3965,7 +3965,7 @@
       ],
       [
         "아크릴 스탠드",
-        124
+        123
       ],
       [
         "캔뱃지",
@@ -4931,10 +4931,10 @@
     "blocked_action_count": 0,
     "manual_review_action_count": 23,
     "pending_import_action_count": 0,
-    "total_action_rows": 33485,
+    "total_action_rows": 33482,
     "open_review_queues": {
       "source_discovery_rows": 762,
-      "image_missing_rows": 787,
+      "image_missing_rows": 786,
       "dedupe_groups": 61,
       "animation_unknown_categories": 0,
       "ichiban_missing_release_date_rows": 8,
@@ -4987,8 +4987,8 @@
       "official_detail_review_manual_confirmed_rows": 0,
       "ensky_cache_candidate_action_rows": 39,
       "ensky_cache_candidate_manual_confirmed_rows": 0,
-      "image_attachment_action_rows": 25,
-      "image_attachment_actionable_rows": 25,
+      "image_attachment_action_rows": 24,
+      "image_attachment_actionable_rows": 24,
       "image_attachment_unqueued_actionable_rows": 0,
       "image_attachment_source_url_search_hint_rows": 0,
       "image_attachment_source_url_missing_search_hint_rows": 0,
@@ -4997,7 +4997,7 @@
       "image_attachment_source_url_missing_any_search_hint_rows": 0,
       "image_attachment_source_url_primary_review_url_rows": 0,
       "image_attachment_source_url_missing_primary_review_url_rows": 0,
-      "image_attachment_local_download_ready_rows": 25,
+      "image_attachment_local_download_ready_rows": 24,
       "ichiban_metadata_action_campaigns": 41,
       "ichiban_metadata_actionable_campaigns": 41,
       "ichiban_metadata_unqueued_action_campaigns": 0,
@@ -5027,10 +5027,10 @@
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
       "ichiban_prize_name_image_patch_blocked_rows": 0,
       "catalog_goal_manual_review_pillars": 5,
-      "catalog_goal_manual_review_rows": 896,
+      "catalog_goal_manual_review_rows": 895,
       "catalog_goal_auto_apply_ready_rows": 0,
       "catalog_goal_dedupe_manual_review_rows": 48,
-      "catalog_goal_missing_image_rows": 787,
+      "catalog_goal_missing_image_rows": 786,
       "catalog_goal_source_url_update_rows": 0,
       "catalog_goal_animation_category_rows": 0,
       "catalog_goal_ichiban_manual_review_rows": 61,
@@ -5140,8 +5140,8 @@
     "image_candidate_manual_or_blocked_items": 228,
     "image_action_source_url_update_template_rows": 0,
     "image_action_source_url_update_template_batch_count": 0,
-    "image_action_image_url_ready_rows": 2,
-    "image_action_workstream_count": 3,
+    "image_action_image_url_ready_rows": 1,
+    "image_action_workstream_count": 2,
     "image_known_asset_status": "pass",
     "image_download_readiness_status": "known_image_assets_complete",
     "image_url_without_local_path_rows": 0,
@@ -5702,12 +5702,12 @@
   },
   "image_attachment_action_queue": {
     "public_report": "data/catalog_image_attachment_action_queue_public.json",
-    "actionable_image_rows": 25,
-    "queued_image_rows": 25,
+    "actionable_image_rows": 24,
+    "queued_image_rows": 24,
     "unqueued_actionable_image_rows": 0,
     "sample_queue_coverage": 1.0,
-    "action_batch_count": 4,
-    "sample_action_item_rows": 25,
+    "action_batch_count": 3,
+    "sample_action_item_rows": 24,
     "skipped_already_has_image_rows": 0,
     "batch_size": 20,
     "max_batches": 18,
@@ -5718,17 +5718,13 @@
       ],
       [
         "extract_from_existing_source_url",
-        2
+        1
       ]
     ],
     "by_source_store": [
       [
         "ご当地ちいかわ 공식(API)",
         23
-      ],
-      [
-        "밀짚모자 스토어",
-        1
       ],
       [
         "치이카와 온라인 쿠지",
@@ -5742,7 +5738,7 @@
       ],
       [
         "image_url_review_ready",
-        2
+        1
       ]
     ],
     "image_import_blocker_counts": [
@@ -5756,7 +5752,7 @@
       ],
       [
         "manual_image_url_confirmation",
-        2
+        1
       ]
     ],
     "source_url_update_required_rows": 0,
@@ -5779,15 +5775,15 @@
     "next_source_url_review_batch_candidate_hint_rows": 0,
     "next_source_url_review_batch_no_candidate_rows": 0,
     "next_source_url_review_batch_manual_search_rows": 0,
-    "primary_review_url_rows": 25,
+    "primary_review_url_rows": 24,
     "primary_review_url_kind_counts": [
       [
         "current_source_url",
-        25
+        24
       ]
     ],
     "primary_review_url_missing_rows": 0,
-    "first_primary_review_url": "https://store.toei-anim.co.jp/shop/g/gMOVONP962162/",
+    "first_primary_review_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
     "first_primary_review_url_kind": "current_source_url",
     "representative_image_review_required_rows": 23,
     "representative_candidate_status_counts": [
@@ -5848,15 +5844,15 @@
         "auto_apply_allowed": false
       }
     ],
-    "image_url_ready_rows": 2,
-    "can_import_image_urls_now_rows": 2,
+    "image_url_ready_rows": 1,
+    "can_import_image_urls_now_rows": 1,
     "blocked_before_image_import_rows": 23,
     "manual_confirmation_required_rows": 23,
     "image_import_gate_status": "ready_to_import_confirmed_image_urls",
-    "download_ready_after_manual_image_url_rows": 25,
-    "suggested_local_image_path_rows": 25,
-    "local_image_download_instruction_ready_rows": 25,
-    "workstream_count": 3,
+    "download_ready_after_manual_image_url_rows": 24,
+    "suggested_local_image_path_rows": 24,
+    "local_image_download_instruction_ready_rows": 24,
+    "workstream_count": 2,
     "source_url_update_workstream_count": 0,
     "source_url_update_work_order_count": 0,
     "source_url_update_template_batch_count": 0,
@@ -5933,13 +5929,13 @@
       "blocked_before_image_import_rows": 23,
       "source_url_update_required_rows": 0,
       "representative_image_review_required_rows": 23,
-      "image_url_ready_rows": 2,
+      "image_url_ready_rows": 1,
       "manual_confirmation_required_rows": 23,
-      "local_download_ready_after_manual_image_url_rows": 25,
+      "local_download_ready_after_manual_image_url_rows": 24,
       "next_safe_phase": "review_representative_image_candidates",
       "next_source_url_review_batch_rows": 0,
       "next_representative_image_review_batch_rows": 10,
-      "primary_review_url_rows": 25,
+      "primary_review_url_rows": 24,
       "primary_review_url_missing_rows": 0,
       "source_url_review_start_coverage": 0,
       "top_blockers": [
@@ -5953,7 +5949,7 @@
         ],
         [
           "manual_image_url_confirmation",
-          2
+          1
         ]
       ],
       "source_url_candidate_status_counts": [],
@@ -5996,17 +5992,17 @@
       "manual_review_required_before_import": true
     },
     "attachment_readiness": {
-      "row_count": 25,
-      "local_image_download_instruction_ready_rows": 25,
-      "suggested_local_image_path_rows": 25,
-      "primary_review_url_rows": 25,
+      "row_count": 24,
+      "local_image_download_instruction_ready_rows": 24,
+      "suggested_local_image_path_rows": 24,
+      "primary_review_url_rows": 24,
       "primary_review_url_missing_rows": 0,
       "blocked_by_source_url_rows": 0,
       "blocked_by_representative_review_rows": 23,
-      "image_url_review_ready_rows": 2,
+      "image_url_review_ready_rows": 1,
       "blocked_before_image_import_rows": 23,
-      "can_import_image_urls_now_rows": 2,
-      "download_ready_after_manual_image_url_rows": 25,
+      "can_import_image_urls_now_rows": 1,
+      "download_ready_after_manual_image_url_rows": 24,
       "readiness_lane_counts": [
         [
           "source_url_replacement_first",
@@ -6018,7 +6014,7 @@
         ],
         [
           "image_url_review_ready",
-          2
+          1
         ]
       ],
       "manual_confirmation_required": true,
@@ -6028,10 +6024,10 @@
       "status": "image_url_review_ready",
       "current_lane": "image_url_review_ready",
       "current_batch_id": "image-attachment-action-001",
-      "current_first_primary_review_url": "https://store.toei-anim.co.jp/shop/g/gMOVONP962162/",
+      "current_first_primary_review_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
       "blocked_before_image_import_rows": 23,
-      "ready_to_import_image_url_rows": 2,
-      "local_download_ready_after_confirmation_rows": 25,
+      "ready_to_import_image_url_rows": 1,
+      "local_download_ready_after_confirmation_rows": 24,
       "manual_review_required": true,
       "handoff_steps": [
         {
@@ -6057,7 +6053,7 @@
           "step": 2,
           "lane": "local_image_download_after_confirmation",
           "status": "waiting_for_confirmed_image_urls",
-          "next_batch_rows": 25,
+          "next_batch_rows": 24,
           "review_section": "catalog_image_attachment_confirmed_template_public.json",
           "write_template_section": "local_image_download_instruction",
           "import_tool": "tools/import_confirmed_image_attachment_rows.py",
@@ -8368,13 +8364,13 @@
   "image_asset_audit": {
     "public_report": "data/catalog_image_asset_audit_public.json",
     "rows": 20313,
-    "image_url_rows": 19526,
-    "missing_image_url_rows": 787,
-    "local_image_path_rows": 19526,
-    "image_url_with_local_path_rows": 19526,
+    "image_url_rows": 19527,
+    "missing_image_url_rows": 786,
+    "local_image_path_rows": 19527,
+    "image_url_with_local_path_rows": 19527,
     "image_url_without_local_path_rows": 0,
     "local_path_without_image_url_rows": 0,
-    "unique_local_image_paths": 19446,
+    "unique_local_image_paths": 19447,
     "reused_local_image_paths": 57,
     "missing_local_image_files": 0,
     "missing_web_public_asset_files": 0,
@@ -8384,21 +8380,21 @@
     "status": "pass",
     "download_readiness_status": "known_image_assets_complete",
     "known_image_download_blocker_rows": 0,
-    "rows_still_requiring_image_url_evidence": 787,
+    "rows_still_requiring_image_url_evidence": 786,
     "auto_download_ready_rows": 0,
     "download_readiness": {
       "status": "known_image_assets_complete",
-      "known_image_url_rows": 19526,
+      "known_image_url_rows": 19527,
       "known_image_download_blocker_rows": 0,
       "image_url_without_local_path_rows": 0,
       "missing_local_image_files": 0,
       "missing_web_public_asset_files": 0,
       "invalid_local_image_paths": 0,
-      "missing_image_url_rows": 787,
-      "rows_still_requiring_image_url_evidence": 787,
+      "missing_image_url_rows": 786,
+      "rows_still_requiring_image_url_evidence": 786,
       "download_complete_for_known_image_urls": true,
       "missing_image_evidence_priority": {
-        "rows": 787,
+        "rows": 786,
         "by_source_store": [
           [
             "엔스카이",
@@ -8488,7 +8484,7 @@
           ],
           [
             "아크릴 스탠드",
-            124
+            123
           ],
           [
             "캔뱃지",
@@ -8566,7 +8562,7 @@
         "by_affiliation": [
           [
             "원피스",
-            83
+            82
           ],
           [
             "치이카와",
@@ -8648,7 +8644,7 @@
         "by_series_name": [
           [
             "(blank)",
-            735
+            734
           ],
           [
             "ご当地",
@@ -9014,11 +9010,11 @@
   },
   "missing_image_priority": {
     "public_report": "data/catalog_missing_image_priority_public.json",
-    "missing_image_rows": 787,
+    "missing_image_rows": 786,
     "work_queue_rows": 710,
     "queue_matched_rows": 704,
     "stale_queue_index_matches": 0,
-    "unmatched_catalog_missing_rows": 83,
+    "unmatched_catalog_missing_rows": 82,
     "missing_source_url_rows": 762,
     "generic_source_url_rows": 0,
     "product_source_url_rows": 0,
@@ -9195,8 +9191,8 @@
   },
   "missing_image_report_coverage": {
     "public_report": "data/catalog_missing_image_report_coverage_public.json",
-    "missing_image_rows": 787,
-    "assigned_report_rows": 787,
+    "missing_image_rows": 786,
+    "assigned_report_rows": 786,
     "unassigned_missing_image_rows": 0,
     "report_count": 11,
     "auto_apply_enabled": false
@@ -9813,10 +9809,10 @@
   },
   "missing_image_actionability": {
     "public_report": "data/catalog_missing_image_actionability_public.json",
-    "missing_image_rows": 787,
-    "readiness_classified_rows": 787,
+    "missing_image_rows": 786,
+    "readiness_classified_rows": 786,
     "unclassified_rows": 0,
-    "exact_source_ready_rows": 2,
+    "exact_source_ready_rows": 1,
     "source_first_rows": 752,
     "review_before_attach_rows": 23,
     "source_detail_candidate_review_rows": 0,
@@ -9847,13 +9843,13 @@
     "source_discovery_focus_template_dry_run_skipped_rows": 752,
     "source_discovery_focus_coverage": 1.0,
     "source_discovery_non_focus_rows": 0,
-    "action_queue_rows": 25,
-    "direct_image_action_queue_rows": 25,
-    "direct_image_action_primary_review_url_rows": 25,
+    "action_queue_rows": 24,
+    "direct_image_action_queue_rows": 24,
+    "direct_image_action_primary_review_url_rows": 24,
     "direct_image_action_primary_review_url_kind_counts": [
       [
         "current_source_url",
-        25
+        24
       ]
     ],
     "direct_image_action_next_representative_review_batch_rows": 10,
@@ -9870,13 +9866,13 @@
     "manual_image_research_review_start_kind": "fallback_web_search",
     "source_discovery_review_start_rows": 20,
     "source_discovery_review_start_kind": "domain_limited_web_search",
-    "image_attachment_template_rows": 25,
+    "image_attachment_template_rows": 24,
     "image_attachment_template_confirmed_rows": 0,
     "image_attachment_template_source_update_required_rows": 0,
     "image_attachment_template_representative_review_rows": 23,
     "image_attachment_template_dry_run_updated_rows": 0,
-    "image_attachment_template_dry_run_skipped_rows": 25,
-    "actionable_image_rows": 25,
+    "image_attachment_template_dry_run_skipped_rows": 24,
+    "actionable_image_rows": 24,
     "source_discovery_work_pack_count": 16,
     "source_discovery_work_pack_rows": 673,
     "by_blocked_reason": [
@@ -9898,7 +9894,7 @@
       },
       {
         "blocked_reason": "candidate_image_requires_manual_review",
-        "rows": 2
+        "rows": 1
       }
     ],
     "by_blocked_until": [
@@ -9920,11 +9916,11 @@
       },
       {
         "blocked_until": "manual_image_url_confirmed_from_exact_source",
-        "rows": 2
+        "rows": 1
       }
     ],
     "auto_apply_enabled": false,
-    "completion_plan_total_open_rows": 787,
+    "completion_plan_total_open_rows": 786,
     "completion_plan_phase_rows_total": 785,
     "completion_plan_phase_count": 3,
     "completion_plan_status": "needs_review",
@@ -9937,7 +9933,7 @@
     "blocking_dashboard_queue_coverage": 1.0,
     "manual_validation_focus": {
       "auto_import_ready_rows": 0,
-      "manual_validation_required_rows": 787,
+      "manual_validation_required_rows": 786,
       "next_focus_lane": "discover_exact_source_urls",
       "next_focus_row_count": 752,
       "next_focus_source": "source_discovery_action_queue_public.json",
@@ -10264,7 +10260,7 @@
           "current_focus_pack": {},
           "review_start": {
             "workflow": "review_gotouchi_official_candidates",
-            "batch_id": "image-attachment-action-003",
+            "batch_id": "image-attachment-action-002",
             "source_store": "ご当地ちいかわ 공식(API)",
             "row_count": 20,
             "primary_review_url_rows": 20,
@@ -10455,12 +10451,12 @@
       }
     },
     "execution_queue_summary": {
-      "open_missing_image_rows": 787,
+      "open_missing_image_rows": 786,
       "auto_import_ready_rows": 0,
       "queue_count": 4,
-      "queued_rows_total": 787,
+      "queued_rows_total": 786,
       "raw_queued_rows_total": 797,
-      "overlapping_queue_rows": 10,
+      "overlapping_queue_rows": 11,
       "not_yet_queued_rows": 0,
       "not_yet_queued_rows_explained": 0,
       "unqueued_phase_rows_total": 0,
@@ -10639,7 +10635,7 @@
           ],
           "review_start": {
             "workflow": "review_gotouchi_official_candidates",
-            "batch_id": "image-attachment-action-003",
+            "batch_id": "image-attachment-action-002",
             "source_store": "ご当地ちいかわ 공식(API)",
             "row_count": 20,
             "primary_review_url_rows": 20,
@@ -10864,10 +10860,10 @@
     },
     "blocking_dashboard": {
       "status": "manual_evidence_required",
-      "total_open_rows": 787,
+      "total_open_rows": 786,
       "auto_import_ready_rows": 0,
-      "manual_validation_required_rows": 787,
-      "queued_rows_total": 787,
+      "manual_validation_required_rows": 786,
+      "queued_rows_total": 786,
       "not_yet_queued_rows": 0,
       "queue_coverage": 1.0,
       "top_blocked_reason": {
@@ -10927,11 +10923,11 @@
       ],
       "image_evidence_bottleneck_summary": {
         "status": "source_or_image_evidence_required",
-        "missing_image_rows": 787,
+        "missing_image_rows": 786,
         "known_image_download_problem_rows": 0,
-        "image_url_evidence_missing_rows": 787,
+        "image_url_evidence_missing_rows": 786,
         "auto_import_ready_rows": 0,
-        "manual_confirmation_required_rows": 787,
+        "manual_confirmation_required_rows": 786,
         "source_first_rows": 752,
         "representative_review_rows": 23,
         "manual_image_research_rows": 10,
@@ -12560,30 +12556,30 @@
   },
   "image_attachment_template_import_dry_run": {
     "public_report": "data/catalog_image_attachment_template_import_dry_run_public.json",
-    "template_items": 25,
+    "template_items": 24,
     "manual_confirmed_rows": 0,
     "ready_image_rows": 0,
     "source_url_update_required_rows": 0,
     "representative_image_review_required_rows": 23,
-    "image_url_ready_rows": 2,
+    "image_url_ready_rows": 1,
     "updated_rows": 0,
-    "skipped_rows": 25,
-    "blocked_rows": 25,
+    "skipped_rows": 24,
+    "blocked_rows": 24,
     "skip_reason_counts": [
       [
         "manual_confirmed_false",
-        25
+        24
       ]
     ],
     "auto_apply_enabled": false,
     "write": false,
     "import_readiness": {
       "status": "blocked_until_manual_image_evidence",
-      "template_items": 25,
+      "template_items": 24,
       "manual_confirmed_rows": 0,
       "ready_image_rows": 0,
       "ready_to_import_rows": 0,
-      "blocked_rows": 25,
+      "blocked_rows": 24,
       "blocked_reason_count": 1,
       "source_url_update_required_rows": 0,
       "representative_image_review_required_rows": 23,
@@ -12676,7 +12672,7 @@
   },
   "source_discovery_completion_roadmap": {
     "public_report": "data/source_discovery_completion_roadmap_public.json",
-    "missing_image_rows": 787,
+    "missing_image_rows": 786,
     "source_first_rows": 752,
     "queued_source_rows": 752,
     "focus_source_rows": 752,
@@ -12691,7 +12687,7 @@
     "manual_source_search_rows": 0,
     "provider_missing_rows": 0,
     "candidate_source_review_rows": 0,
-    "direct_image_action_rows": 25,
+    "direct_image_action_rows": 24,
     "roadmap_phase_count": 5,
     "next_execution_lane_count": 4,
     "auto_apply_enabled": false,
@@ -12746,8 +12742,8 @@
     },
     "next_execution_summary": {
       "lane_count": 4,
-      "open_rows": 800,
-      "next_batch_rows": 68,
+      "open_rows": 799,
+      "next_batch_rows": 67,
       "next_safe_phase": "exact_source_url_review",
       "auto_apply_enabled": false,
       "manual_evidence_required": true
@@ -12786,10 +12782,10 @@
       {
         "lane": "image_attachment_after_source_confirmation",
         "status": "blocked_until_source_or_image_evidence_confirmed",
-        "open_rows": 25,
-        "next_batch_rows": 25,
-        "review_start_rows": 25,
-        "manual_decision_rows": 25,
+        "open_rows": 24,
+        "next_batch_rows": 24,
+        "review_start_rows": 24,
+        "manual_decision_rows": 24,
         "public_report": "data/catalog_image_attachment_action_queue_public.json",
         "next_action": "attach image URLs only after exact source page and image identity are confirmed"
       }
@@ -12863,7 +12859,7 @@
           "step": 3,
           "lane": "image_attachment_after_source_confirmation",
           "status": "blocked_until_source_or_image_evidence_confirmed",
-          "next_batch_rows": 25,
+          "next_batch_rows": 24,
           "review_section": "catalog_image_attachment_action_queue",
           "write_template_section": "image_attachment_confirmed_template",
           "required_before_write": [
@@ -13099,7 +13095,7 @@
       "duplicate_groups": 0,
       "duplicate_rows": 0,
       "missing_enrichment": {
-        "image_url": 787,
+        "image_url": 786,
         "source_url": 762,
         "release_date": 1342,
         "barcode": 10048,
@@ -13125,14 +13121,14 @@
       "row_delta": 20313,
       "missing_enrichment_delta": {
         "barcode": 10048,
-        "image_url": 787,
+        "image_url": 786,
         "official_price_jpy": 553,
         "release_date": 1342,
         "source_url": 762
       },
-      "public_image_missing_rows": 787,
+      "public_image_missing_rows": 786,
       "seed_image_missing_rows": 0,
-      "image_missing_delta": 787,
+      "image_missing_delta": 786,
       "note": "data/catalog_public.json is the GitHub Pages source of truth. If --seed points to the same file, deltas should be zero."
     }
   },
@@ -13168,35 +13164,35 @@
       "data/catalog_image_attachment_template_import_dry_run_public.json",
       "data/catalog_missing_image_actionability_public.json"
     ],
-    "missing_image_rows": 787,
-    "actionable_image_rows": 25,
-    "queued_image_rows": 25,
+    "missing_image_rows": 786,
+    "actionable_image_rows": 24,
+    "queued_image_rows": 24,
     "unqueued_actionable_image_rows": 0,
     "source_url_update_required_rows": 0,
     "source_url_update_template_rows": 0,
     "source_url_update_template_batch_count": 0,
     "representative_image_review_required_rows": 23,
-    "image_url_ready_rows": 2,
+    "image_url_ready_rows": 1,
     "primary_review_url_missing_rows": 0,
     "blocked_before_image_import_rows": 23,
-    "download_ready_after_manual_image_url_rows": 25,
-    "template_rows": 25,
+    "download_ready_after_manual_image_url_rows": 24,
+    "template_rows": 24,
     "template_confirmed_rows": 0,
     "dry_run_updated_rows": 0,
-    "dry_run_skipped_rows": 25,
+    "dry_run_skipped_rows": 24,
     "sample_queue_coverage": 1.0,
     "attachment_readiness": {
-      "row_count": 25,
-      "local_image_download_instruction_ready_rows": 25,
-      "suggested_local_image_path_rows": 25,
-      "primary_review_url_rows": 25,
+      "row_count": 24,
+      "local_image_download_instruction_ready_rows": 24,
+      "suggested_local_image_path_rows": 24,
+      "primary_review_url_rows": 24,
       "primary_review_url_missing_rows": 0,
       "blocked_by_source_url_rows": 0,
       "blocked_by_representative_review_rows": 23,
-      "image_url_review_ready_rows": 2,
+      "image_url_review_ready_rows": 1,
       "blocked_before_image_import_rows": 23,
-      "can_import_image_urls_now_rows": 2,
-      "download_ready_after_manual_image_url_rows": 25,
+      "can_import_image_urls_now_rows": 1,
+      "download_ready_after_manual_image_url_rows": 24,
       "readiness_lane_counts": [
         [
           "source_url_replacement_first",
@@ -13208,7 +13204,7 @@
         ],
         [
           "image_url_review_ready",
-          2
+          1
         ]
       ],
       "manual_confirmation_required": true,
@@ -16809,10 +16805,10 @@
       "data/catalog_missing_image_report_coverage_public.json"
     ],
     "status": "manual_evidence_required",
-    "missing_image_rows": 787,
-    "assigned_report_rows": 787,
+    "missing_image_rows": 786,
+    "assigned_report_rows": 786,
     "unassigned_missing_image_rows": 0,
-    "action_queue_rows": 25,
+    "action_queue_rows": 24,
     "source_first_rows": 752,
     "review_before_attach_rows": 23,
     "manual_image_research_rows": 10,
@@ -16822,9 +16818,9 @@
     "next_queue_lane": "discover_exact_source_urls",
     "next_queue_rows": 752,
     "next_queue_template": "source_discovery_focus_confirmed_template_public.json",
-    "image_url_ready_rows": 2,
+    "image_url_ready_rows": 1,
     "blocked_before_image_import_rows": 23,
-    "download_ready_after_manual_image_url_rows": 25,
+    "download_ready_after_manual_image_url_rows": 24,
     "known_image_assets_complete": true,
     "known_image_download_blocker_rows": 0,
     "auto_apply_ready_rows": 0,
@@ -16873,7 +16869,7 @@
     "source_url_update_review_start_coverage": 0,
     "ready_to_import_rows": 0,
     "dry_run_updated_rows": 0,
-    "dry_run_skipped_rows": 25,
+    "dry_run_skipped_rows": 24,
     "auto_apply_ready_rows": 0,
     "auto_apply_enabled": false,
     "manual_confirmation_required": true,
@@ -16888,7 +16884,7 @@
     "pillar_count": 5,
     "manual_review_pillar_count": 5,
     "auto_apply_ready_rows": 0,
-    "manual_review_rows": 896,
+    "manual_review_rows": 895,
     "next_safe_phase": "review_candidate_source_urls",
     "pillars": [
       {
@@ -17042,16 +17038,16 @@
         "pillar": "missing_images",
         "label": "Resolve missing catalog images",
         "status": "manual_evidence_required",
-        "open_rows": 787,
-        "manual_review_rows": 787,
+        "open_rows": 786,
+        "manual_review_rows": 786,
         "auto_apply_ready_rows": 0,
-        "queued_rows": 787,
+        "queued_rows": 786,
         "unqueued_rows": 0,
         "queue_coverage": 1.0,
         "next_queue_lane": "discover_exact_source_urls",
         "next_queue_rows": 752,
         "execution_queue_count": 4,
-        "manual_validation_required_rows": 787,
+        "manual_validation_required_rows": 786,
         "source_first_rows": 752,
         "review_before_attach_rows": 23,
         "manual_image_research_rows": 10,
@@ -17069,20 +17065,20 @@
         "source_discovery_not_started_focus_pack_count": 67,
         "source_discovery_focus_coverage": 1.0,
         "source_discovery_non_focus_rows": 0,
-        "action_queue_rows": 25,
-        "direct_image_action_rows": 25,
+        "action_queue_rows": 24,
+        "direct_image_action_rows": 24,
         "source_url_update_required_rows": 0,
         "source_url_update_primary_review_url_rows": 0,
         "source_url_update_review_start_coverage": 0,
         "representative_image_review_required_rows": 23,
         "next_representative_review_batch_rows": 10,
         "next_representative_review_primary_url_rows": 10,
-        "local_download_ready_rows": 25,
-        "attachment_template_rows": 25,
+        "local_download_ready_rows": 24,
+        "attachment_template_rows": 24,
         "attachment_template_manual_rows": 0,
         "attachment_dry_run_ready_rows": 0,
-        "attachment_dry_run_blocked_rows": 25,
-        "assigned_report_rows": 787,
+        "attachment_dry_run_blocked_rows": 24,
+        "assigned_report_rows": 786,
         "unassigned_missing_image_rows": 0,
         "known_image_assets_complete": true,
         "known_image_download_blocker_rows": 0,
@@ -17105,7 +17101,7 @@
           },
           {
             "blocked_reason": "candidate_image_requires_manual_review",
-            "rows": 2
+            "rows": 1
           }
         ],
         "next_safe_phase": "discover_exact_source_urls",
@@ -17129,10 +17125,10 @@
           "status": "image_url_review_ready",
           "current_lane": "image_url_review_ready",
           "current_batch_id": "image-attachment-action-001",
-          "current_first_primary_review_url": "https://store.toei-anim.co.jp/shop/g/gMOVONP962162/",
+          "current_first_primary_review_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
           "blocked_before_image_import_rows": 23,
-          "ready_to_import_image_url_rows": 2,
-          "local_download_ready_after_confirmation_rows": 25,
+          "ready_to_import_image_url_rows": 1,
+          "local_download_ready_after_confirmation_rows": 24,
           "manual_review_required": true,
           "handoff_steps": [
             {
@@ -17158,7 +17154,7 @@
               "step": 2,
               "lane": "local_image_download_after_confirmation",
               "status": "waiting_for_confirmed_image_urls",
-              "next_batch_rows": 25,
+              "next_batch_rows": 24,
               "review_section": "catalog_image_attachment_confirmed_template_public.json",
               "write_template_section": "local_image_download_instruction",
               "import_tool": "tools/import_confirmed_image_attachment_rows.py",
@@ -17229,7 +17225,7 @@
         "source_url_update_review_start_coverage": 0,
         "ready_to_import_rows": 0,
         "dry_run_updated_rows": 0,
-        "dry_run_skipped_rows": 25,
+        "dry_run_skipped_rows": 24,
         "manual_confirmation_required": true,
         "blocked_until": "manual_exact_source_url_confirmation",
         "blocked_reasons": [
@@ -17239,15 +17235,15 @@
         "public_report": "data/catalog_image_source_url_confirmed_template_public.json",
         "next_execution_summary": {
           "lane_count": 4,
-          "open_rows": 800,
-          "next_batch_rows": 68,
+          "open_rows": 799,
+          "next_batch_rows": 67,
           "next_safe_phase": "exact_source_url_review",
           "auto_apply_enabled": false,
           "manual_evidence_required": true
         },
         "next_execution_lane_count": 4,
-        "next_execution_open_rows": 800,
-        "next_execution_next_batch_rows": 68,
+        "next_execution_open_rows": 799,
+        "next_execution_next_batch_rows": 67,
         "first_next_execution_lane": "exact_source_url_review",
         "first_next_execution_status": "manual_cache_miss_research_required",
         "first_next_execution_rows": 20,
@@ -17321,7 +17317,7 @@
               "step": 3,
               "lane": "image_attachment_after_source_confirmation",
               "status": "blocked_until_source_or_image_evidence_confirmed",
-              "next_batch_rows": 25,
+              "next_batch_rows": 24,
               "review_section": "catalog_image_attachment_action_queue",
               "write_template_section": "image_attachment_confirmed_template",
               "required_before_write": [
@@ -17584,7 +17580,7 @@
     "manual_review_required": true,
     "pillar_count": 5,
     "blocking_pillar_count": 5,
-    "manual_review_rows": 896,
+    "manual_review_rows": 895,
     "auto_apply_ready_rows": 0,
     "next_safe_phase": "review_candidate_source_urls",
     "blocked_reasons": [
@@ -17624,7 +17620,7 @@
         "pillar": "missing_images",
         "label": "Resolve missing catalog images",
         "status": "manual_evidence_required",
-        "manual_review_rows": 787,
+        "manual_review_rows": 786,
         "auto_apply_ready_rows": 0,
         "next_safe_phase": "discover_exact_source_urls",
         "next_queue_lane": "discover_exact_source_urls",
@@ -17655,8 +17651,8 @@
         "next_queue_lane": "manual_search_required",
         "next_queue_rows": 0,
         "next_execution_lane_count": 4,
-        "next_execution_open_rows": 800,
-        "next_execution_next_batch_rows": 68,
+        "next_execution_open_rows": 799,
+        "next_execution_next_batch_rows": 67,
         "first_next_execution_lane": "exact_source_url_review",
         "first_next_execution_status": "manual_cache_miss_research_required",
         "first_next_execution_rows": 20,

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T20:42:11Z",
+  "generated_at": "2026-07-26T20:54:43Z",
   "summary": {
     "catalog_rows": 20313,
     "coverage": {
@@ -10,7 +10,7 @@
     },
     "missing": {
       "source_url": 762,
-      "image_url": 787,
+      "image_url": 786,
       "release_date": 1342,
       "official_price_jpy": 553,
       "barcode": 10048,
@@ -18,7 +18,7 @@
     },
     "open_review_queues": {
       "source_discovery_rows": 762,
-      "image_missing_rows": 787,
+      "image_missing_rows": 786,
       "dedupe_groups": 61,
       "animation_unknown_categories": 0,
       "ichiban_missing_release_date_rows": 8,
@@ -71,8 +71,8 @@
       "official_detail_review_manual_confirmed_rows": 0,
       "ensky_cache_candidate_action_rows": 39,
       "ensky_cache_candidate_manual_confirmed_rows": 0,
-      "image_attachment_action_rows": 25,
-      "image_attachment_actionable_rows": 25,
+      "image_attachment_action_rows": 24,
+      "image_attachment_actionable_rows": 24,
       "image_attachment_unqueued_actionable_rows": 0,
       "image_attachment_source_url_search_hint_rows": 0,
       "image_attachment_source_url_missing_search_hint_rows": 0,
@@ -81,7 +81,7 @@
       "image_attachment_source_url_missing_any_search_hint_rows": 0,
       "image_attachment_source_url_primary_review_url_rows": 0,
       "image_attachment_source_url_missing_primary_review_url_rows": 0,
-      "image_attachment_local_download_ready_rows": 25,
+      "image_attachment_local_download_ready_rows": 24,
       "ichiban_metadata_action_campaigns": 41,
       "ichiban_metadata_actionable_campaigns": 41,
       "ichiban_metadata_unqueued_action_campaigns": 0,
@@ -111,10 +111,10 @@
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
       "ichiban_prize_name_image_patch_blocked_rows": 0,
       "catalog_goal_manual_review_pillars": 5,
-      "catalog_goal_manual_review_rows": 896,
+      "catalog_goal_manual_review_rows": 895,
       "catalog_goal_auto_apply_ready_rows": 0,
       "catalog_goal_dedupe_manual_review_rows": 48,
-      "catalog_goal_missing_image_rows": 787,
+      "catalog_goal_missing_image_rows": 786,
       "catalog_goal_source_url_update_rows": 0,
       "catalog_goal_animation_category_rows": 0,
       "catalog_goal_ichiban_manual_review_rows": 61,
@@ -147,8 +147,8 @@
       "status": "pass",
       "value": 1.0,
       "target": 1,
-      "image_url_rows": 19526,
-      "local_image_path_rows": 19526,
+      "image_url_rows": 19527,
+      "local_image_path_rows": 19527,
       "image_url_without_local_path_rows": 0,
       "missing_local_image_files": 0,
       "missing_web_public_asset_files": 0,
@@ -1227,7 +1227,7 @@
     {
       "workstream": "image_enrichment",
       "status": "blocked",
-      "open_rows": 787,
+      "open_rows": 786,
       "primary_report": "data/catalog_image_enrichment_batches_public.json",
       "next_step": "resolve_blocker_summary_before_image_import",
       "auto_apply_enabled": false
@@ -1235,8 +1235,8 @@
     {
       "workstream": "image_attachment_action_queue",
       "status": "manual_review",
-      "open_rows": 25,
-      "actionable_image_rows": 25,
+      "open_rows": 24,
+      "actionable_image_rows": 24,
       "unqueued_actionable_image_rows": 0,
       "sample_queue_coverage": 1.0,
       "source_url_update_search_hint_rows": 0,
@@ -1244,12 +1244,12 @@
       "source_url_update_primary_review_url_rows": 0,
       "source_url_update_missing_primary_review_url_rows": 0,
       "source_url_update_review_start_coverage": 0,
-      "primary_review_url_rows": 25,
+      "primary_review_url_rows": 24,
       "primary_review_url_missing_rows": 0,
       "primary_review_url_kind_counts": [
         [
           "current_source_url",
-          25
+          24
         ]
       ],
       "by_review_lane": [
@@ -1259,7 +1259,7 @@
         ],
         [
           "image_url_review_ready",
-          2
+          1
         ]
       ],
       "image_import_blocker_counts": [
@@ -1273,13 +1273,13 @@
         ],
         [
           "manual_image_url_confirmation",
-          2
+          1
         ]
       ],
-      "suggested_local_image_path_rows": 25,
-      "local_image_download_instruction_ready_rows": 25,
+      "suggested_local_image_path_rows": 24,
+      "local_image_download_instruction_ready_rows": 24,
       "blocked_before_image_import_rows": 23,
-      "download_ready_after_manual_image_url_rows": 25,
+      "download_ready_after_manual_image_url_rows": 24,
       "by_workflow": [
         [
           "review_gotouchi_official_candidates",
@@ -1287,17 +1287,13 @@
         ],
         [
           "extract_from_existing_source_url",
-          2
+          1
         ]
       ],
       "by_source_store": [
         [
           "ご当地ちいかわ 공식(API)",
           23
-        ],
-        [
-          "밀짚모자 스토어",
-          1
         ],
         [
           "치이카와 온라인 쿠지",
@@ -1307,35 +1303,13 @@
       "top_image_attachment_workstreams": [
         {
           "workflow": "extract_from_existing_source_url",
-          "source_store": "밀짚모자 스토어",
+          "source_store": "치이카와 온라인 쿠지",
           "priority": 10,
           "queued_image_rows": 1,
           "batch_count": 1,
           "next_batch_id": "image-attachment-action-001",
           "batch_ids": [
             "image-attachment-action-001"
-          ],
-          "next_machine_step": "extract_product_image_from_existing_exact_source_url",
-          "source_url_update_template_rows": 0,
-          "representative_image_review_rows": 0,
-          "image_url_ready_rows": 1,
-          "category_rows": [
-            [
-              "아크릴 스탠드",
-              1
-            ]
-          ],
-          "auto_apply_enabled": false
-        },
-        {
-          "workflow": "extract_from_existing_source_url",
-          "source_store": "치이카와 온라인 쿠지",
-          "priority": 10,
-          "queued_image_rows": 1,
-          "batch_count": 1,
-          "next_batch_id": "image-attachment-action-002",
-          "batch_ids": [
-            "image-attachment-action-002"
           ],
           "next_machine_step": "extract_product_image_from_existing_exact_source_url",
           "source_url_update_template_rows": 0,
@@ -1355,10 +1329,10 @@
           "priority": 30,
           "queued_image_rows": 23,
           "batch_count": 2,
-          "next_batch_id": "image-attachment-action-003",
+          "next_batch_id": "image-attachment-action-002",
           "batch_ids": [
-            "image-attachment-action-003",
-            "image-attachment-action-004"
+            "image-attachment-action-002",
+            "image-attachment-action-003"
           ],
           "next_machine_step": "confirm_exact_gotouchi_product_type_then_attach_image",
           "source_url_update_template_rows": 0,
@@ -1400,17 +1374,17 @@
         ]
       ],
       "attachment_readiness": {
-        "row_count": 25,
-        "local_image_download_instruction_ready_rows": 25,
-        "suggested_local_image_path_rows": 25,
-        "primary_review_url_rows": 25,
+        "row_count": 24,
+        "local_image_download_instruction_ready_rows": 24,
+        "suggested_local_image_path_rows": 24,
+        "primary_review_url_rows": 24,
         "primary_review_url_missing_rows": 0,
         "blocked_by_source_url_rows": 0,
         "blocked_by_representative_review_rows": 23,
-        "image_url_review_ready_rows": 2,
+        "image_url_review_ready_rows": 1,
         "blocked_before_image_import_rows": 23,
-        "can_import_image_urls_now_rows": 2,
-        "download_ready_after_manual_image_url_rows": 25,
+        "can_import_image_urls_now_rows": 1,
+        "download_ready_after_manual_image_url_rows": 24,
         "readiness_lane_counts": [
           [
             "source_url_replacement_first",
@@ -1422,7 +1396,7 @@
           ],
           [
             "image_url_review_ready",
-            2
+            1
           ]
         ],
         "manual_confirmation_required": true,
@@ -1435,7 +1409,7 @@
     {
       "workstream": "metadata_backlog",
       "status": "open",
-      "open_rows": 14018,
+      "open_rows": 14017,
       "primary_report": "data/catalog_metadata_backlog_public.json",
       "next_step": "review_field_evidence_policy",
       "auto_apply_enabled": false
@@ -1443,7 +1417,7 @@
     {
       "workstream": "metadata_review_batches",
       "status": "manual_review",
-      "open_rows": 14018,
+      "open_rows": 14017,
       "primary_report": "data/catalog_metadata_review_batches_public.json",
       "next_step": "work_full_metadata_review_batches",
       "auto_apply_enabled": false
@@ -2795,7 +2769,7 @@
       "priority": 19,
       "workstream": "image_url_attachment",
       "public_report": "data/catalog_image_enrichment_batches_public.json",
-      "ready_rows": 2,
+      "ready_rows": 1,
       "generic_source_url_rows": 0,
       "gotouchi_official_review_rows": 23,
       "blocked_rows": 752,
@@ -2805,16 +2779,16 @@
       "priority": 19,
       "workstream": "local_image_asset_audit",
       "public_report": "data/catalog_image_asset_audit_public.json",
-      "image_url_rows": 19526,
-      "local_image_path_rows": 19526,
+      "image_url_rows": 19527,
+      "local_image_path_rows": 19527,
       "image_url_without_local_path_rows": 0,
       "missing_local_image_files": 0,
       "missing_web_public_asset_files": 0,
       "local_asset_coverage": 1.0,
       "web_public_asset_coverage": 1.0,
-      "rows_still_requiring_image_url_evidence": 787,
+      "rows_still_requiring_image_url_evidence": 786,
       "missing_image_evidence_priority": {
-        "rows": 787,
+        "rows": 786,
         "by_source_store": [
           [
             "엔스카이",
@@ -2904,7 +2878,7 @@
           ],
           [
             "아크릴 스탠드",
-            124
+            123
           ],
           [
             "캔뱃지",
@@ -2982,7 +2956,7 @@
         "by_affiliation": [
           [
             "원피스",
-            83
+            82
           ],
           [
             "치이카와",
@@ -3064,7 +3038,7 @@
         "by_series_name": [
           [
             "(blank)",
-            735
+            734
           ],
           [
             "ご当地",
@@ -3428,11 +3402,11 @@
       "priority": 20,
       "workstream": "image_attachment_action_queue",
       "public_report": "data/catalog_image_attachment_action_queue_public.json",
-      "actionable_image_rows": 25,
-      "queued_image_rows": 25,
+      "actionable_image_rows": 24,
+      "queued_image_rows": 24,
       "unqueued_actionable_image_rows": 0,
       "sample_queue_coverage": 1.0,
-      "action_batch_count": 4,
+      "action_batch_count": 3,
       "source_url_update_required_rows": 0,
       "source_url_update_template_rows": 0,
       "source_url_update_search_hint_rows": 0,
@@ -3440,12 +3414,12 @@
       "source_url_update_primary_review_url_rows": 0,
       "source_url_update_missing_primary_review_url_rows": 0,
       "source_url_update_review_start_coverage": 0,
-      "primary_review_url_rows": 25,
+      "primary_review_url_rows": 24,
       "primary_review_url_missing_rows": 0,
       "primary_review_url_kind_counts": [
         [
           "current_source_url",
-          25
+          24
         ]
       ],
       "by_review_lane": [
@@ -3455,7 +3429,7 @@
         ],
         [
           "image_url_review_ready",
-          2
+          1
         ]
       ],
       "image_import_blocker_counts": [
@@ -3469,14 +3443,14 @@
         ],
         [
           "manual_image_url_confirmation",
-          2
+          1
         ]
       ],
-      "suggested_local_image_path_rows": 25,
-      "local_image_download_instruction_ready_rows": 25,
+      "suggested_local_image_path_rows": 24,
+      "local_image_download_instruction_ready_rows": 24,
       "blocked_before_image_import_rows": 23,
-      "download_ready_after_manual_image_url_rows": 25,
-      "workstream_count": 3,
+      "download_ready_after_manual_image_url_rows": 24,
+      "workstream_count": 2,
       "source_url_update_workstream_count": 0,
       "representative_image_review_workstream_count": 1,
       "by_workflow": [
@@ -3486,17 +3460,13 @@
         ],
         [
           "extract_from_existing_source_url",
-          2
+          1
         ]
       ],
       "by_source_store": [
         [
           "ご当地ちいかわ 공식(API)",
           23
-        ],
-        [
-          "밀짚모자 스토어",
-          1
         ],
         [
           "치이카와 온라인 쿠지",
@@ -3506,35 +3476,13 @@
       "top_image_attachment_workstreams": [
         {
           "workflow": "extract_from_existing_source_url",
-          "source_store": "밀짚모자 스토어",
+          "source_store": "치이카와 온라인 쿠지",
           "priority": 10,
           "queued_image_rows": 1,
           "batch_count": 1,
           "next_batch_id": "image-attachment-action-001",
           "batch_ids": [
             "image-attachment-action-001"
-          ],
-          "next_machine_step": "extract_product_image_from_existing_exact_source_url",
-          "source_url_update_template_rows": 0,
-          "representative_image_review_rows": 0,
-          "image_url_ready_rows": 1,
-          "category_rows": [
-            [
-              "아크릴 스탠드",
-              1
-            ]
-          ],
-          "auto_apply_enabled": false
-        },
-        {
-          "workflow": "extract_from_existing_source_url",
-          "source_store": "치이카와 온라인 쿠지",
-          "priority": 10,
-          "queued_image_rows": 1,
-          "batch_count": 1,
-          "next_batch_id": "image-attachment-action-002",
-          "batch_ids": [
-            "image-attachment-action-002"
           ],
           "next_machine_step": "extract_product_image_from_existing_exact_source_url",
           "source_url_update_template_rows": 0,
@@ -3554,10 +3502,10 @@
           "priority": 30,
           "queued_image_rows": 23,
           "batch_count": 2,
-          "next_batch_id": "image-attachment-action-003",
+          "next_batch_id": "image-attachment-action-002",
           "batch_ids": [
-            "image-attachment-action-003",
-            "image-attachment-action-004"
+            "image-attachment-action-002",
+            "image-attachment-action-003"
           ],
           "next_machine_step": "confirm_exact_gotouchi_product_type_then_attach_image",
           "source_url_update_template_rows": 0,
@@ -4872,17 +4820,17 @@
         ]
       ],
       "attachment_readiness": {
-        "row_count": 25,
-        "local_image_download_instruction_ready_rows": 25,
-        "suggested_local_image_path_rows": 25,
-        "primary_review_url_rows": 25,
+        "row_count": 24,
+        "local_image_download_instruction_ready_rows": 24,
+        "suggested_local_image_path_rows": 24,
+        "primary_review_url_rows": 24,
         "primary_review_url_missing_rows": 0,
         "blocked_by_source_url_rows": 0,
         "blocked_by_representative_review_rows": 23,
-        "image_url_review_ready_rows": 2,
+        "image_url_review_ready_rows": 1,
         "blocked_before_image_import_rows": 23,
-        "can_import_image_urls_now_rows": 2,
-        "download_ready_after_manual_image_url_rows": 25,
+        "can_import_image_urls_now_rows": 1,
+        "download_ready_after_manual_image_url_rows": 24,
         "readiness_lane_counts": [
           [
             "source_url_replacement_first",
@@ -4894,7 +4842,7 @@
           ],
           [
             "image_url_review_ready",
-            2
+            1
           ]
         ],
         "manual_confirmation_required": true,
@@ -6615,8 +6563,8 @@
       "workstream": "metadata_review_batches",
       "public_report": "data/catalog_metadata_review_batches_public.json",
       "batch_count": 30,
-      "field_store_group_count": 356,
-      "missing_cell_count": 14018,
+      "field_store_group_count": 355,
+      "missing_cell_count": 14017,
       "recommended_next_action": "Use full field/store metadata batches for title, barcode, date, price, source, and image cleanup."
     },
     {
@@ -9544,7 +9492,7 @@
     "manual_review_required": true,
     "pillar_count": 5,
     "blocking_pillar_count": 5,
-    "manual_review_rows": 896,
+    "manual_review_rows": 895,
     "auto_apply_ready_rows": 0,
     "next_safe_phase": "review_candidate_source_urls",
     "blocked_reasons": [
@@ -9584,7 +9532,7 @@
         "pillar": "missing_images",
         "label": "Resolve missing catalog images",
         "status": "manual_evidence_required",
-        "manual_review_rows": 787,
+        "manual_review_rows": 786,
         "auto_apply_ready_rows": 0,
         "next_safe_phase": "discover_exact_source_urls",
         "next_queue_lane": "discover_exact_source_urls",
@@ -9615,8 +9563,8 @@
         "next_queue_lane": "manual_search_required",
         "next_queue_rows": 0,
         "next_execution_lane_count": 4,
-        "next_execution_open_rows": 800,
-        "next_execution_next_batch_rows": 68,
+        "next_execution_open_rows": 799,
+        "next_execution_next_batch_rows": 67,
         "first_next_execution_lane": "exact_source_url_review",
         "first_next_execution_status": "manual_cache_miss_research_required",
         "first_next_execution_rows": 20,

@@ -1,7 +1,7 @@
 # Catalog Image Attachment Review Board
 
-- Review rows: `25`
-- Exact image URL review rows: `2`
+- Review rows: `24`
+- Exact image URL review rows: `1`
 - Representative image review rows: `23`
 - Gate: `blocked_until_manual_image_confirmation`
 
@@ -12,15 +12,6 @@
 `python tools/import_confirmed_image_attachment_rows.py --queue server/catalog_image_attachment_confirmed_rows.json --report server/catalog_image_attachment_confirmed_import_report.json --write`
 
 ## Items
-
-### 2268 원피스 생일 한정 아크릴 액세서리 스탠드 (루피 5.5)
-
-- Lane: `image_url_review_ready`
-- Store: `밀짚모자 스토어`
-- Category: `아크릴 스탠드`
-- Blockers: `manual_image_url_confirmation`
-- Review URL: https://store.toei-anim.co.jp/shop/g/gMOVONP962162/
-- Suggested local path: `assets/catalog_images/catalog_2268.webp`
 
 ### 657 C상: 인형 포셰트
 

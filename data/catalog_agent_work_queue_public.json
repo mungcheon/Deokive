@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T20:42:11Z",
+  "generated_at": "2026-07-26T20:54:43Z",
   "summary": {
     "batch_count": 160,
     "max_published_batches": 160,
-    "summed_batch_rows": 20759,
+    "summed_batch_rows": 20776,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -53,11 +53,7 @@
       ],
       [
         "deduplication_review",
-        6
-      ],
-      [
-        "image_attachment_action_queue",
-        5
+        7
       ],
       [
         "ichiban_kuji_prize_policy_audit",
@@ -69,6 +65,10 @@
       ],
       [
         "requested_focus_enrichment",
+        4
+      ],
+      [
+        "image_attachment_action_queue",
         4
       ],
       [
@@ -146,15 +146,15 @@
         10
       ],
       [
+        "agent-source-image",
+        10
+      ],
+      [
         "agent-source-action",
         10
       ],
       [
         "agent-ichiban-action",
-        9
-      ],
-      [
-        "agent-source-image",
         9
       ],
       [
@@ -167,11 +167,7 @@
       ],
       [
         "agent-dedupe",
-        6
-      ],
-      [
-        "agent-image-action",
-        5
+        7
       ],
       [
         "agent-ichiban-prize-policy",
@@ -183,6 +179,10 @@
       ],
       [
         "agent-requested-focus",
+        4
+      ],
+      [
+        "agent-image-action",
         4
       ],
       [
@@ -198,12 +198,12 @@
         3
       ],
       [
-        "agent-image-existing-source",
+        "agent-ichiban-prize-name-image",
         2
       ],
       [
-        "agent-ichiban-prize-name-image",
-        2
+        "agent-image-existing-source",
+        1
       ],
       [
         "agent-gotouchi-review",
@@ -220,7 +220,7 @@
     ],
     "open_review_queues": {
       "source_discovery_rows": 762,
-      "image_missing_rows": 787,
+      "image_missing_rows": 786,
       "dedupe_groups": 61,
       "animation_unknown_categories": 0,
       "ichiban_missing_release_date_rows": 8,
@@ -273,8 +273,8 @@
       "official_detail_review_manual_confirmed_rows": 0,
       "ensky_cache_candidate_action_rows": 39,
       "ensky_cache_candidate_manual_confirmed_rows": 0,
-      "image_attachment_action_rows": 25,
-      "image_attachment_actionable_rows": 25,
+      "image_attachment_action_rows": 24,
+      "image_attachment_actionable_rows": 24,
       "image_attachment_unqueued_actionable_rows": 0,
       "image_attachment_source_url_search_hint_rows": 0,
       "image_attachment_source_url_missing_search_hint_rows": 0,
@@ -283,7 +283,7 @@
       "image_attachment_source_url_missing_any_search_hint_rows": 0,
       "image_attachment_source_url_primary_review_url_rows": 0,
       "image_attachment_source_url_missing_primary_review_url_rows": 0,
-      "image_attachment_local_download_ready_rows": 25,
+      "image_attachment_local_download_ready_rows": 24,
       "ichiban_metadata_action_campaigns": 41,
       "ichiban_metadata_actionable_campaigns": 41,
       "ichiban_metadata_unqueued_action_campaigns": 0,
@@ -313,10 +313,10 @@
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
       "ichiban_prize_name_image_patch_blocked_rows": 0,
       "catalog_goal_manual_review_pillars": 5,
-      "catalog_goal_manual_review_rows": 896,
+      "catalog_goal_manual_review_rows": 895,
       "catalog_goal_auto_apply_ready_rows": 0,
       "catalog_goal_dedupe_manual_review_rows": 48,
-      "catalog_goal_missing_image_rows": 787,
+      "catalog_goal_missing_image_rows": 786,
       "catalog_goal_source_url_update_rows": 0,
       "catalog_goal_animation_category_rows": 0,
       "catalog_goal_ichiban_manual_review_rows": 61,
@@ -342,7 +342,7 @@
     "confirmed_import_top_work_order_lane": "confirm_template_rows",
     "confirmed_import_top_work_order_workflow": "source_discovery",
     "confirmed_import_top_work_order_row_count": 641,
-    "image_rows_still_requiring_url_evidence": 787,
+    "image_rows_still_requiring_url_evidence": 786,
     "image_missing_evidence_top_source_stores": [
       [
         "엔스카이",
@@ -384,7 +384,7 @@
       ],
       [
         "아크릴 스탠드",
-        124
+        123
       ],
       [
         "캔뱃지",
@@ -559,70 +559,6 @@
       "workstream": "image_attachment_action_queue",
       "priority": 10,
       "rows": 1,
-      "title": "밀짚모자 스토어 image attachment action",
-      "public_report": "data/catalog_image_attachment_action_queue_public.json",
-      "review_state": "image_evidence_confirmation_required",
-      "next_machine_step": "confirm_source_then_fill_image_url_templates",
-      "review_summary": {
-        "action_batch_rows": 1,
-        "primary_review_url_rows": 1,
-        "first_primary_review_url": "https://store.toei-anim.co.jp/shop/g/gMOVONP962162/",
-        "first_primary_review_url_kind": "current_source_url",
-        "review_lane_counts": [
-          [
-            "image_url_review_ready",
-            1
-          ]
-        ],
-        "image_import_blocker_counts": [
-          [
-            "manual_image_url_confirmation",
-            1
-          ]
-        ],
-        "suggested_local_image_path_rows": 1,
-        "local_image_download_instruction_ready_rows": 1,
-        "blocked_before_image_import_rows": 0,
-        "can_import_image_urls_now_rows": 1,
-        "attachment_readiness": {
-          "row_count": 1,
-          "local_image_download_instruction_ready_rows": 1,
-          "suggested_local_image_path_rows": 1,
-          "primary_review_url_rows": 1,
-          "primary_review_url_missing_rows": 0,
-          "blocked_by_source_url_rows": 0,
-          "blocked_by_representative_review_rows": 0,
-          "image_url_review_ready_rows": 1,
-          "blocked_before_image_import_rows": 0,
-          "can_import_image_urls_now_rows": 1,
-          "download_ready_after_manual_image_url_rows": 1,
-          "readiness_lane_counts": [
-            [
-              "source_url_replacement_first",
-              0
-            ],
-            [
-              "representative_image_candidate_review",
-              0
-            ],
-            [
-              "image_url_review_ready",
-              1
-            ]
-          ],
-          "manual_confirmation_required": true,
-          "auto_apply_enabled": false
-        },
-        "workflow": "extract_from_existing_source_url",
-        "source_store": "밀짚모자 스토어"
-      }
-    },
-    {
-      "batch_id": "010-agent-image-action-45",
-      "agent_id": "agent-image-action",
-      "workstream": "image_attachment_action_queue",
-      "priority": 10,
-      "rows": 1,
       "title": "치이카와 온라인 쿠지 image attachment action",
       "public_report": "data/catalog_image_attachment_action_queue_public.json",
       "review_state": "image_evidence_confirmation_required",
@@ -680,6 +616,17 @@
         "workflow": "extract_from_existing_source_url",
         "source_store": "치이카와 온라인 쿠지"
       }
+    },
+    {
+      "batch_id": "010-agent-image-existing-source-53",
+      "agent_id": "agent-image-existing-source",
+      "workstream": "image_url_attachment",
+      "priority": 10,
+      "rows": 1,
+      "title": "치이카와 온라인 쿠지 이미지 보강 (extract_from_existing_source_url)",
+      "public_report": "data/catalog_image_enrichment_batches_public.json",
+      "review_state": "source_discovery_then_image_attachment",
+      "next_machine_step": "find_source_url_before_image_import"
     }
   ],
   "instructions": [
@@ -2414,160 +2361,6 @@
       "agent_id": "agent-image-action",
       "workstream": "image_attachment_action_queue",
       "priority": 10,
-      "title": "밀짚모자 스토어 image attachment action",
-      "public_report": "data/catalog_image_attachment_action_queue_public.json",
-      "rows": 1,
-      "recommended_action": "Review product page image and fill manual image_url.",
-      "acceptance_criteria": [
-        "Confirm exact product identity before filling image_url.",
-        "For generic storefront rows, fill source_url_import_template before image_url.",
-        "Use official or trusted product image evidence, not resale or generic listing images.",
-        "Prepare reviewed image templates only; auto-apply remains disabled."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 2268,
-          "workflow": "extract_from_existing_source_url",
-          "review_lane": "image_url_review_ready",
-          "source_store": "밀짚모자 스토어",
-          "name_ko": "원피스 생일 한정 아크릴 액세서리 스탠드 (루피 5.5)",
-          "name_ja": "『ワンピース』ハッピーバースデーアクリルアクセサリースタンド［5.5 ルフィ］",
-          "series_name": null,
-          "category": "아크릴 스탠드",
-          "source_url": "https://store.toei-anim.co.jp/shop/g/gMOVONP962162/",
-          "official_search_url": "",
-          "source_search_url": "",
-          "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Astore.toei-anim.co.jp+%E3%80%8E%E3%83%AF%E3%83%B3%E3%83%94%E3%83%BC%E3%82%B9%E3%80%8F%E3%83%8F%E3%83%83%E3%83%94%E3%83%BC%E3%83%90%E3%83%BC%E3%82%B9%E3%83%87%E3%83%BC%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B5%E3%83%AA%E3%83%BC%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%EF%BC%BB5.5+%E3%83%AB%E3%83%95%E3%82%A3%EF%BC%BD+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C",
-          "fallback_web_search_urls": [
-            "https://www.google.com/search?q=site%3Astore.toei-anim.co.jp+%E3%80%8E%E3%83%AF%E3%83%B3%E3%83%94%E3%83%BC%E3%82%B9%E3%80%8F%E3%83%8F%E3%83%83%E3%83%94%E3%83%BC%E3%83%90%E3%83%BC%E3%82%B9%E3%83%87%E3%83%BC%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B5%E3%83%AA%E3%83%BC%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%EF%BC%BB5.5+%E3%83%AB%E3%83%95%E3%82%A3%EF%BC%BD+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C",
-            "https://www.google.com/search?q=%EB%B0%80%EC%A7%9A%EB%AA%A8%EC%9E%90+%EC%8A%A4%ED%86%A0%EC%96%B4+%E3%80%8E%E3%83%AF%E3%83%B3%E3%83%94%E3%83%BC%E3%82%B9%E3%80%8F%E3%83%8F%E3%83%83%E3%83%94%E3%83%BC%E3%83%90%E3%83%BC%E3%82%B9%E3%83%87%E3%83%BC%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B5%E3%83%AA%E3%83%BC%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%EF%BC%BB5.5+%E3%83%AB%E3%83%95%E3%82%A3%EF%BC%BD+%EC%95%84%ED%81%AC%EB%A6%B4+%EC%8A%A4%ED%83%A0%EB%93%9C"
-          ],
-          "source_url_update_required": false,
-          "representative_image_review_required": false,
-          "image_url_ready": true,
-          "required_before_image_import": [
-            "confirm_product_page_image_url"
-          ],
-          "image_import_blockers": [
-            "manual_image_url_confirmation"
-          ],
-          "manual_confirmation_requirements": [
-            "Open source_url.",
-            "Confirm the page is for the exact catalog item.",
-            "Copy the primary product image URL into the image attachment template."
-          ],
-          "source_url_import_template": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 2268,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "https://store.toei-anim.co.jp/shop/g/gMOVONP962162/",
-            "candidate_source_url": "https://store.toei-anim.co.jp/shop/g/gMOVONP962162/",
-            "source_store": "밀짚모자 스토어",
-            "name_ko": "원피스 생일 한정 아크릴 액세서리 스탠드 (루피 5.5)",
-            "name_ja": "『ワンピース』ハッピーバースデーアクリルアクセサリースタンド［5.5 ルフィ］",
-            "category": "아크릴 스탠드",
-            "affiliation": "원피스",
-            "source_search_url": null,
-            "workflow": "extract_from_existing_source_url",
-            "requires_exact_source_url": false,
-            "requires_representative_image_flag": false,
-            "blocked_until": "manual_image_url_confirmed",
-            "suggested_local_image_path": "assets/catalog_images/catalog_2268.webp",
-            "local_image_path_field": "local_image_path"
-          },
-          "representative_candidate_status": null,
-          "representative_candidate_review_guidance": {},
-          "representative_top_candidates": [],
-          "source_url_review_lane": null,
-          "source_url_review_blockers": [],
-          "candidate_status": null,
-          "candidate_score": null,
-          "candidate_count": null,
-          "candidate_options": [],
-          "match_diagnostics": {},
-          "fallback_search_queries": [],
-          "store_search_hints": {},
-          "suggested_local_image_path": "assets/catalog_images/catalog_2268.webp",
-          "local_image_download_instruction": {
-            "status": "ready_after_manual_image_url_confirmation",
-            "target_local_image_path": "assets/catalog_images/catalog_2268.webp",
-            "target_public_asset_path": "assets/assets/catalog_images/catalog_2268.webp",
-            "after_manual_image_url_confirmed": [
-              "download_confirmed_image_url_to_target_local_image_path",
-              "write_local_image_path_with_image_url_import",
-              "verify_file_exists_in_assets_and_web_public_assets"
-            ]
-          },
-          "review_state": "exact_product_image_confirmation_required",
-          "auto_apply_enabled": false,
-          "primary_review_url": "https://store.toei-anim.co.jp/shop/g/gMOVONP962162/",
-          "primary_review_url_kind": "current_source_url"
-        }
-      ],
-      "review_summary": {
-        "action_batch_rows": 1,
-        "primary_review_url_rows": 1,
-        "first_primary_review_url": "https://store.toei-anim.co.jp/shop/g/gMOVONP962162/",
-        "first_primary_review_url_kind": "current_source_url",
-        "review_lane_counts": [
-          [
-            "image_url_review_ready",
-            1
-          ]
-        ],
-        "image_import_blocker_counts": [
-          [
-            "manual_image_url_confirmation",
-            1
-          ]
-        ],
-        "suggested_local_image_path_rows": 1,
-        "local_image_download_instruction_ready_rows": 1,
-        "blocked_before_image_import_rows": 0,
-        "can_import_image_urls_now_rows": 1,
-        "attachment_readiness": {
-          "row_count": 1,
-          "local_image_download_instruction_ready_rows": 1,
-          "suggested_local_image_path_rows": 1,
-          "primary_review_url_rows": 1,
-          "primary_review_url_missing_rows": 0,
-          "blocked_by_source_url_rows": 0,
-          "blocked_by_representative_review_rows": 0,
-          "image_url_review_ready_rows": 1,
-          "blocked_before_image_import_rows": 0,
-          "can_import_image_urls_now_rows": 1,
-          "download_ready_after_manual_image_url_rows": 1,
-          "readiness_lane_counts": [
-            [
-              "source_url_replacement_first",
-              0
-            ],
-            [
-              "representative_image_candidate_review",
-              0
-            ],
-            [
-              "image_url_review_ready",
-              1
-            ]
-          ],
-          "manual_confirmation_required": true,
-          "auto_apply_enabled": false
-        },
-        "workflow": "extract_from_existing_source_url",
-        "source_store": "밀짚모자 스토어"
-      },
-      "review_state": "image_evidence_confirmation_required",
-      "next_machine_step": "confirm_source_then_fill_image_url_templates"
-    },
-    {
-      "batch_id": "010-agent-image-action-45",
-      "agent_id": "agent-image-action",
-      "workstream": "image_attachment_action_queue",
-      "priority": 10,
       "title": "치이카와 온라인 쿠지 image attachment action",
       "public_report": "data/catalog_image_attachment_action_queue_public.json",
       "rows": 1,
@@ -2718,36 +2511,7 @@
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "010-agent-image-existing-source-54",
-      "agent_id": "agent-image-existing-source",
-      "workstream": "image_url_attachment",
-      "priority": 10,
-      "title": "밀짚모자 스토어 이미지 보강 (extract_from_existing_source_url)",
-      "public_report": "data/catalog_image_enrichment_batches_public.json",
-      "rows": 1,
-      "recommended_action": "crawl verified source_url and review extracted product image",
-      "acceptance_criteria": [
-        "Exact product identity is verified before importing image_url.",
-        "Rows without source_url must receive an exact source_url before image_url is accepted.",
-        "No marketplace or unrelated stock image is imported without matching product evidence."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 2268,
-          "name_ko": "원피스 생일 한정 아크릴 액세서리 스탠드 (루피 5.5)",
-          "name_ja": "『ワンピース』ハッピーバースデーアクリルアクセサリースタンド［5.5 ルフィ］",
-          "series_name": null,
-          "category": "아크릴 스탠드",
-          "source_store": null,
-          "source_url": "https://store.toei-anim.co.jp/shop/g/gMOVONP962162/",
-          "official_search_url": ""
-        }
-      ],
-      "review_state": "source_discovery_then_image_attachment",
-      "next_machine_step": "find_source_url_before_image_import"
-    },
-    {
-      "batch_id": "010-agent-image-existing-source-55",
+      "batch_id": "010-agent-image-existing-source-53",
       "agent_id": "agent-image-existing-source",
       "workstream": "image_url_attachment",
       "priority": 10,
@@ -4285,7 +4049,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "018-agent-gotouchi-review-56",
+      "batch_id": "018-agent-gotouchi-review-54",
       "agent_id": "agent-gotouchi-review",
       "workstream": "gotouchi_official_candidate_review",
       "priority": 18,
@@ -4392,7 +4156,7 @@
       "next_machine_step": "review_official_candidates_before_import"
     },
     {
-      "batch_id": "018-agent-ichiban-action-138",
+      "batch_id": "018-agent-ichiban-action-137",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 18,
@@ -5601,7 +5365,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "019-agent-confirmed-import-53",
+      "batch_id": "019-agent-confirmed-import-52",
       "agent_id": "agent-confirmed-import",
       "workstream": "confirmed_import_readiness",
       "priority": 19,
@@ -5819,7 +5583,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "019-agent-source-fallback-49",
+      "batch_id": "019-agent-source-fallback-48",
       "agent_id": "agent-source-fallback",
       "workstream": "source_discovery_next_focus_fallback_queue",
       "priority": 19,
@@ -7516,7 +7280,7 @@
       "next_machine_step": "confirm_source_then_fill_image_url_templates"
     },
     {
-      "batch_id": "020-agent-source-focus-pack-48",
+      "batch_id": "020-agent-source-focus-pack-47",
       "agent_id": "agent-source-focus-pack",
       "workstream": "source_discovery_next_focus_pack",
       "priority": 20,
@@ -7747,7 +7511,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-source-image-57",
+      "batch_id": "020-agent-source-image-55",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -7846,7 +7610,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-58",
+      "batch_id": "020-agent-source-image-56",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -8044,7 +7808,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-source-image-59",
+      "batch_id": "020-agent-source-image-57",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -8143,7 +7907,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-60",
+      "batch_id": "020-agent-source-image-58",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -8242,7 +8006,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-61",
+      "batch_id": "020-agent-source-image-59",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -8341,7 +8105,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-62",
+      "batch_id": "020-agent-source-image-60",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -8440,7 +8204,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-63",
+      "batch_id": "020-agent-source-image-61",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -8539,7 +8303,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-image-64",
+      "batch_id": "020-agent-source-image-62",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -8638,7 +8402,7 @@
       "next_machine_step": "find_source_url_before_image_import"
     },
     {
-      "batch_id": "020-agent-source-fallback-50",
+      "batch_id": "020-agent-source-fallback-49",
       "agent_id": "agent-source-fallback",
       "workstream": "source_discovery_next_focus_fallback_queue",
       "priority": 20,
@@ -9064,7 +8828,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "020-agent-source-fallback-51",
+      "batch_id": "020-agent-source-fallback-50",
       "agent_id": "agent-source-fallback",
       "workstream": "source_discovery_next_focus_exact_url_candidate_audit",
       "priority": 20,
@@ -9797,7 +9561,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "020-agent-source-starter-160",
+      "batch_id": "020-agent-source-starter-159",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_next_review_batch",
       "priority": 20,
@@ -10402,7 +10166,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-source-image-65",
+      "batch_id": "020-agent-source-image-63",
       "agent_id": "agent-source-image",
       "workstream": "image_url_attachment",
       "priority": 20,
@@ -10495,6 +10259,105 @@
           "source_store": null,
           "source_url": null,
           "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3"
+        }
+      ],
+      "review_state": "source_discovery_then_image_attachment",
+      "next_machine_step": "find_source_url_before_image_import"
+    },
+    {
+      "batch_id": "020-agent-source-image-64",
+      "agent_id": "agent-source-image",
+      "workstream": "image_url_attachment",
+      "priority": 20,
+      "title": "Taito 이미지 보강 (find_source_then_extract_image)",
+      "public_report": "data/catalog_image_enrichment_batches_public.json",
+      "rows": 15,
+      "recommended_action": "find exact official product page, then attach source_url and image_url",
+      "acceptance_criteria": [
+        "Exact product identity is verified before importing image_url.",
+        "Rows without source_url must receive an exact source_url before image_url is accepted.",
+        "No marketplace or unrelated stock image is imported without matching product evidence."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1265,
+          "name_ko": "데스크탑 큐트 피규어 우라라카 오챠코",
+          "name_ja": "Desktop Cuteフィギュア 麗日お茶子",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": "https://www.taito.co.jp/prize?keyword=Desktop%20Cute%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E9%BA%97%E6%97%A5%E3%81%8A%E8%8C%B6%E5%AD%90"
+        },
+        {
+          "catalog_index": 1266,
+          "name_ko": "데스크탑 큐트 피규어 토가 히미코",
+          "name_ja": "Desktop Cuteフィギュア トガヒミコ",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": "https://www.taito.co.jp/prize?keyword=Desktop%20Cute%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%83%88%E3%82%AC%E3%83%92%E3%83%9F%E3%82%B3"
+        },
+        {
+          "catalog_index": 1267,
+          "name_ko": "데스크탑 큐트 피규어 야오요로즈 모모",
+          "name_ja": "Desktop Cuteフィギュア 八百万百",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": "https://www.taito.co.jp/prize?keyword=Desktop%20Cute%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E5%85%AB%E7%99%BE%E4%B8%87%E7%99%BE"
+        },
+        {
+          "catalog_index": 1319,
+          "name_ko": "Desktop Cute 곤 프릭스",
+          "name_ja": "デスクトップキューティーフィギュア ゴン＝フリークス",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%B4%E3%83%B3%EF%BC%9D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9"
+        },
+        {
+          "catalog_index": 1320,
+          "name_ko": "Desktop Cute 키루아 조르딕",
+          "name_ja": "デスクトップキューティーフィギュア キルア＝ゾルディック",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%AD%E3%83%AB%E3%82%A2%EF%BC%9D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF"
+        },
+        {
+          "catalog_index": 1321,
+          "name_ko": "Desktop Cute 쿠라피카",
+          "name_ja": "デスクトップキューティーフィギュア クラピカ",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB"
+        },
+        {
+          "catalog_index": 1376,
+          "name_ko": "Desktop Cute 고죠 사토루",
+          "name_ja": "デスクトップキューティーフィギュア 五条悟",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E4%BA%94%E6%9D%A1%E6%82%9F"
+        },
+        {
+          "catalog_index": 1377,
+          "name_ko": "Desktop Cute 이타도리 유지",
+          "name_ja": "デスクトップキューティーフィギュア 虎杖悠仁",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E8%99%8E%E6%9D%96%E6%82%A0%E4%BB%81"
         }
       ],
       "review_state": "source_discovery_then_image_attachment",
@@ -11685,7 +11548,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "020-agent-ichiban-action-139",
+      "batch_id": "020-agent-ichiban-action-138",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_work_order",
       "priority": 20,
@@ -11712,7 +11575,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "020-agent-source-detail-candidate-52",
+      "batch_id": "020-agent-source-detail-candidate-51",
       "agent_id": "agent-source-detail-candidate",
       "workstream": "source_discovery_next_focus_detail_candidates",
       "priority": 20,
@@ -11808,7 +11671,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "022-agent-source-detail-candidate-76",
+      "batch_id": "022-agent-source-detail-candidate-75",
       "agent_id": "agent-source-detail-candidate",
       "workstream": "source_detail_candidate_action_queue",
       "priority": 22,
@@ -12260,7 +12123,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "028-agent-source-action-66",
+      "batch_id": "028-agent-source-action-65",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -12631,7 +12494,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-67",
+      "batch_id": "028-agent-source-action-66",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -13002,7 +12865,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-68",
+      "batch_id": "028-agent-source-action-67",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -13373,7 +13236,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-69",
+      "batch_id": "028-agent-source-action-68",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -13744,7 +13607,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-70",
+      "batch_id": "028-agent-source-action-69",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -14115,7 +13978,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-71",
+      "batch_id": "028-agent-source-action-70",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -14486,7 +14349,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-72",
+      "batch_id": "028-agent-source-action-71",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -14857,7 +14720,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-73",
+      "batch_id": "028-agent-source-action-72",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -15228,7 +15091,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-74",
+      "batch_id": "028-agent-source-action-73",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -15599,7 +15462,7 @@
       "next_machine_step": "confirm_exact_source_url_then_fill_source_templates"
     },
     {
-      "batch_id": "028-agent-source-action-75",
+      "batch_id": "028-agent-source-action-74",
       "agent_id": "agent-source-action",
       "workstream": "source_discovery_action_queue",
       "priority": 28,
@@ -15761,7 +15624,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "030-agent-ichiban-action-140",
+      "batch_id": "030-agent-ichiban-action-139",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_work_order",
       "priority": 30,
@@ -15820,7 +15683,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "030-agent-source-discovery-78",
+      "batch_id": "030-agent-source-discovery-77",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -15919,7 +15782,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-79",
+      "batch_id": "030-agent-source-discovery-78",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -16018,7 +15881,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-80",
+      "batch_id": "030-agent-source-discovery-79",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -16117,7 +15980,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-81",
+      "batch_id": "030-agent-source-discovery-80",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -16216,7 +16079,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-82",
+      "batch_id": "030-agent-source-discovery-81",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -16315,7 +16178,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-83",
+      "batch_id": "030-agent-source-discovery-82",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -16414,7 +16277,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-84",
+      "batch_id": "030-agent-source-discovery-83",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -16513,7 +16376,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-86",
+      "batch_id": "030-agent-source-discovery-85",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -16612,7 +16475,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-87",
+      "batch_id": "030-agent-source-discovery-86",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -16711,7 +16574,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-88",
+      "batch_id": "030-agent-source-discovery-87",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -16810,7 +16673,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-source-discovery-89",
+      "batch_id": "030-agent-source-discovery-88",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -16909,7 +16772,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-image-action-46",
+      "batch_id": "030-agent-image-action-45",
       "agent_id": "agent-image-action",
       "workstream": "image_attachment_action_queue",
       "priority": 30,
@@ -18714,7 +18577,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "030-agent-source-discovery-85",
+      "batch_id": "030-agent-source-discovery-84",
       "agent_id": "agent-source-discovery",
       "workstream": "source_url_discovery",
       "priority": 30,
@@ -18793,7 +18656,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "030-agent-image-action-47",
+      "batch_id": "030-agent-image-action-46",
       "agent_id": "agent-image-action",
       "workstream": "image_attachment_action_queue",
       "priority": 30,
@@ -19673,7 +19536,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "031-agent-source-starter-161",
+      "batch_id": "031-agent-source-starter-160",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -19782,7 +19645,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-162",
+      "batch_id": "031-agent-source-starter-161",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -19891,7 +19754,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-163",
+      "batch_id": "031-agent-source-starter-162",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -20000,7 +19863,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-164",
+      "batch_id": "031-agent-source-starter-163",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -20109,7 +19972,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-165",
+      "batch_id": "031-agent-source-starter-164",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -20218,7 +20081,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-166",
+      "batch_id": "031-agent-source-starter-165",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -20327,7 +20190,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-167",
+      "batch_id": "031-agent-source-starter-166",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -20436,7 +20299,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-168",
+      "batch_id": "031-agent-source-starter-167",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -20545,7 +20408,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-169",
+      "batch_id": "031-agent-source-starter-168",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -20654,7 +20517,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-170",
+      "batch_id": "031-agent-source-starter-169",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -20763,7 +20626,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "032-agent-source-detail-candidate-77",
+      "batch_id": "032-agent-source-detail-candidate-76",
       "agent_id": "agent-source-detail-candidate",
       "workstream": "source_detail_candidate_action_queue",
       "priority": 32,
@@ -21080,7 +20943,7 @@
       "next_machine_step": "open_candidate_report_and_verify_exact_product_identity"
     },
     {
-      "batch_id": "038-agent-ichiban-action-141",
+      "batch_id": "038-agent-ichiban-action-140",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 38,
@@ -23090,7 +22953,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "045-agent-metadata-action-90",
+      "batch_id": "045-agent-metadata-action-89",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -23206,7 +23069,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-96",
+      "batch_id": "045-agent-metadata-action-95",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -23322,7 +23185,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-91",
+      "batch_id": "045-agent-metadata-action-90",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -23438,7 +23301,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-92",
+      "batch_id": "045-agent-metadata-action-91",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -23554,7 +23417,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-93",
+      "batch_id": "045-agent-metadata-action-92",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -23670,7 +23533,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-94",
+      "batch_id": "045-agent-metadata-action-93",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -23786,7 +23649,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "045-agent-metadata-action-95",
+      "batch_id": "045-agent-metadata-action-94",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 45,
@@ -23902,7 +23765,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-142",
+      "batch_id": "048-agent-ichiban-action-141",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -24875,7 +24738,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-143",
+      "batch_id": "048-agent-ichiban-action-142",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -25848,7 +25711,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-144",
+      "batch_id": "048-agent-ichiban-action-143",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -26821,7 +26684,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-145",
+      "batch_id": "048-agent-ichiban-action-144",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -27797,7 +27660,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "048-agent-ichiban-action-146",
+      "batch_id": "048-agent-ichiban-action-145",
       "agent_id": "agent-ichiban-action",
       "workstream": "ichiban_kuji_metadata_action_queue",
       "priority": 48,
@@ -27936,7 +27799,7 @@
       "next_machine_step": "fill_confirmed_ichiban_campaign_patch_templates"
     },
     {
-      "batch_id": "050-agent-metadata-98",
+      "batch_id": "050-agent-metadata-97",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -28035,7 +27898,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "050-agent-metadata-101",
+      "batch_id": "050-agent-metadata-100",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -28134,7 +27997,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "050-agent-metadata-99",
+      "batch_id": "050-agent-metadata-98",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -28233,7 +28096,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "050-agent-metadata-100",
+      "batch_id": "050-agent-metadata-99",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 50,
@@ -28431,7 +28294,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "051-agent-ichiban-campaign-first-119",
+      "batch_id": "051-agent-ichiban-campaign-first-118",
       "agent_id": "agent-ichiban-campaign-first",
       "workstream": "ichiban_kuji_campaign_first_reissue_review",
       "priority": 51,
@@ -28532,7 +28395,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "052-agent-ichiban-campaign-first-120",
+      "batch_id": "052-agent-ichiban-campaign-first-119",
       "agent_id": "agent-ichiban-campaign-first",
       "workstream": "ichiban_kuji_campaign_first_reissue_review",
       "priority": 52,
@@ -28627,7 +28490,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "053-agent-ichiban-campaign-first-121",
+      "batch_id": "053-agent-ichiban-campaign-first-120",
       "agent_id": "agent-ichiban-campaign-first",
       "workstream": "ichiban_kuji_campaign_first_reissue_review",
       "priority": 53,
@@ -28702,7 +28565,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "054-agent-ichiban-reissue-dedupe-110",
+      "batch_id": "054-agent-ichiban-reissue-dedupe-109",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 54,
@@ -30765,7 +30628,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "054-agent-ichiban-campaign-first-122",
+      "batch_id": "054-agent-ichiban-campaign-first-121",
       "agent_id": "agent-ichiban-campaign-first",
       "workstream": "ichiban_kuji_campaign_first_reissue_review",
       "priority": 54,
@@ -30836,7 +30699,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "055-agent-metadata-action-97",
+      "batch_id": "055-agent-metadata-action-96",
       "agent_id": "agent-metadata-action",
       "workstream": "metadata_action_queue",
       "priority": 55,
@@ -30952,7 +30815,7 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "056-agent-ichiban-prize-name-image-158",
+      "batch_id": "056-agent-ichiban-prize-name-image-157",
       "agent_id": "agent-ichiban-prize-name-image",
       "workstream": "ichiban_kuji_prize_name_image_review",
       "priority": 56,
@@ -31349,7 +31212,7 @@
       "next_machine_step": "confirm_ichiban_prize_name_structure_templates"
     },
     {
-      "batch_id": "056-agent-ichiban-reissue-dedupe-111",
+      "batch_id": "056-agent-ichiban-reissue-dedupe-110",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 56,
@@ -31450,7 +31313,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "057-agent-ichiban-prize-name-image-159",
+      "batch_id": "057-agent-ichiban-prize-name-image-158",
       "agent_id": "agent-ichiban-prize-name-image",
       "workstream": "ichiban_kuji_prize_name_image_patch_candidates",
       "priority": 57,
@@ -31758,7 +31621,7 @@
       "next_machine_step": "confirm_ichiban_prize_image_patch_templates"
     },
     {
-      "batch_id": "057-agent-ichiban-reissue-dedupe-112",
+      "batch_id": "057-agent-ichiban-reissue-dedupe-111",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 57,
@@ -31859,7 +31722,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "058-agent-ichiban-reissue-dedupe-113",
+      "batch_id": "058-agent-ichiban-reissue-dedupe-112",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 58,
@@ -31960,7 +31823,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "059-agent-ichiban-reissue-dedupe-114",
+      "batch_id": "059-agent-ichiban-reissue-dedupe-113",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 59,
@@ -32061,7 +31924,106 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "060-agent-metadata-102",
+      "batch_id": "060-agent-metadata-104",
+      "agent_id": "agent-metadata",
+      "workstream": "metadata_backlog",
+      "priority": 60,
+      "title": "메타데이터 검수: metadata-review-008",
+      "public_report": "data/catalog_metadata_review_batches_public.json",
+      "rows": 410,
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "acceptance_criteria": [
+        "Dates, prices, names, barcodes, source URLs, and images are copied only from official or trusted evidence.",
+        "Every proposed update includes catalog_index and source evidence.",
+        "Unverified inferred metadata remains in the review queue."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1443,
+          "name_ko": "1/7 스케일 리코",
+          "name_ja": "1/7スケール リコ",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 2290,
+          "name_ko": "(여자)아이들 포토카드 (랜덤)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "포토카드",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 1437,
+          "name_ko": "1/6 스케일 나나치 & 미티",
+          "name_ja": "1/6スケール ナナチ & ミーティ",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 2334,
+          "name_ko": "홀로라이브 아크릴 스탠드 (코바야시 코토네)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 2305,
+          "name_ko": "THE BOYZ 포토카드 (랜덤)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "포토카드",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 2303,
+          "name_ko": "ATEEZ 포토카드 (랜덤)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "포토카드",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 1183,
+          "name_ko": "쵸코노세 프리미엄 피규어 카가미네 린",
+          "name_ja": "ちょこのせプレミアムフィギュア 鏡音リン",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 2284,
+          "name_ko": "IVE 포토카드 (랜덤)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "포토카드",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": ""
+        }
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence"
+    },
+    {
+      "batch_id": "060-agent-metadata-101",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -32160,106 +32122,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-105",
-      "agent_id": "agent-metadata",
-      "workstream": "metadata_backlog",
-      "priority": 60,
-      "title": "메타데이터 검수: metadata-review-008",
-      "public_report": "data/catalog_metadata_review_batches_public.json",
-      "rows": 225,
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "acceptance_criteria": [
-        "Dates, prices, names, barcodes, source URLs, and images are copied only from official or trusted evidence.",
-        "Every proposed update includes catalog_index and source evidence.",
-        "Unverified inferred metadata remains in the review queue."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 1443,
-          "name_ko": "1/7 스케일 리코",
-          "name_ja": "1/7スケール リコ",
-          "series_name": null,
-          "category": "피규어",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 2290,
-          "name_ko": "(여자)아이들 포토카드 (랜덤)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "포토카드",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 1437,
-          "name_ko": "1/6 스케일 나나치 & 미티",
-          "name_ja": "1/6スケール ナナチ & ミーティ",
-          "series_name": null,
-          "category": "피규어",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 2334,
-          "name_ko": "홀로라이브 아크릴 스탠드 (코바야시 코토네)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "아크릴 스탠드",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 2305,
-          "name_ko": "THE BOYZ 포토카드 (랜덤)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "포토카드",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 2303,
-          "name_ko": "ATEEZ 포토카드 (랜덤)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "포토카드",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 1183,
-          "name_ko": "쵸코노세 프리미엄 피규어 카가미네 린",
-          "name_ja": "ちょこのせプレミアムフィギュア 鏡音リン",
-          "series_name": null,
-          "category": "피규어",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 2284,
-          "name_ko": "IVE 포토카드 (랜덤)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "포토카드",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        }
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence"
-    },
-    {
-      "batch_id": "060-agent-metadata-103",
+      "batch_id": "060-agent-metadata-102",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -32358,7 +32221,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-metadata-104",
+      "batch_id": "060-agent-metadata-103",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 60,
@@ -32457,7 +32320,7 @@
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "060-agent-ichiban-reissue-dedupe-115",
+      "batch_id": "060-agent-ichiban-reissue-dedupe-114",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 60,
@@ -32558,7 +32421,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "061-agent-ichiban-reissue-dedupe-116",
+      "batch_id": "061-agent-ichiban-reissue-dedupe-115",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 61,
@@ -32656,7 +32519,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "062-agent-ichiban-reissue-dedupe-117",
+      "batch_id": "062-agent-ichiban-reissue-dedupe-116",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 62,
@@ -32754,7 +32617,7 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "063-agent-ichiban-reissue-dedupe-118",
+      "batch_id": "063-agent-ichiban-reissue-dedupe-117",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
       "priority": 63,
@@ -32852,13 +32715,13 @@
       "next_machine_step": "verify_ichiban_campaign_page"
     },
     {
-      "batch_id": "070-agent-metadata-106",
+      "batch_id": "070-agent-metadata-105",
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
       "title": "메타데이터 검수: metadata-review-009",
       "public_report": "data/catalog_metadata_review_batches_public.json",
-      "rows": 736,
+      "rows": 569,
       "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
       "acceptance_criteria": [
         "Dates, prices, names, barcodes, source URLs, and images are copied only from official or trusted evidence.",
@@ -32867,83 +32730,182 @@
       ],
       "sample_items": [
         {
-          "catalog_index": 1024,
-          "name_ko": "귀멸의 칼날 봉제 인형 (탄지로)",
+          "catalog_index": 1137,
+          "name_ko": "넨도로이드 하츠네 미쿠 3.0",
+          "name_ja": "ねんどろいど 初音ミク 3.0",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": "https://www.goodsmile.info/ja/product/13483/",
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 1138,
+          "name_ko": "넨도로이드 하츠네 미쿠 3.0 베이직",
+          "name_ja": "ねんどろいど 初音ミク 3.0 べーしっく",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": "https://www.goodsmile.com/ja/product/1136133/",
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 1141,
+          "name_ko": "넨도로이드 하츠네 미쿠 100번째 어드벤처 Ver.",
+          "name_ja": "ねんどろいど 初音ミク 100番目の冒険Ver.",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": "https://www.goodsmile.com/ja/product/60607/",
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 1142,
+          "name_ko": "넨도로이드 하츠네 미쿠 인피니티 Ver.",
+          "name_ja": "ねんどろいど 初音ミク ∞Ver.",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": "https://www.goodsmile.com/ja/product/36228/",
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 1144,
+          "name_ko": "넨도로이드 하츠네 미쿠 V3",
+          "name_ja": "ねんどろいど 初音ミク V3",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": "https://www.goodsmile.com/ja/product/56346/",
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 1145,
+          "name_ko": "넨도로이드 라지 하츠네 미쿠",
+          "name_ja": "ねんどろいどらーじ 初音ミク",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": "https://www.goodsmile.com/ja/product/1137062/",
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 1146,
+          "name_ko": "넨도로이드 플라모 하츠네 미쿠",
+          "name_ja": "ねんどろいどぷらも 初音ミク",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": "https://www.goodsmile.com/ja/product/1138045/",
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 1147,
+          "name_ko": "넨도로이드 카가미네 린 2.0",
+          "name_ja": "ねんどろいど 鏡音リン 2.0",
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": "https://www.goodsmile.com/ja/product/1136471/",
+          "official_search_url": ""
+        }
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence"
+    },
+    {
+      "batch_id": "070-agent-metadata-106",
+      "agent_id": "agent-metadata",
+      "workstream": "metadata_backlog",
+      "priority": 70,
+      "title": "메타데이터 검수: metadata-review-010",
+      "public_report": "data/catalog_metadata_review_batches_public.json",
+      "rows": 179,
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "acceptance_criteria": [
+        "Dates, prices, names, barcodes, source URLs, and images are copied only from official or trusted evidence.",
+        "Every proposed update includes catalog_index and source evidence.",
+        "Unverified inferred metadata remains in the review queue."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 2474,
+          "name_ko": "슈퍼마리오 봉제 인형 (마리오)",
+          "name_ja": "スーパーマリオ ぬいぐるみ (マリオ)",
+          "series_name": null,
+          "category": "인형",
+          "source_store": null,
+          "source_url": "https://www.nintendo.com/jp/character/",
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 17628,
+          "name_ko": "슈퍼마리오 봉제 인형 (루이지)",
           "name_ja": null,
           "series_name": null,
           "category": "인형",
           "source_store": null,
-          "source_url": null,
+          "source_url": "https://www.nintendo.com/jp/character/",
           "official_search_url": ""
         },
         {
-          "catalog_index": 1025,
-          "name_ko": "귀멸의 칼날 봉제 인형 (네즈코)",
+          "catalog_index": 17629,
+          "name_ko": "슈퍼마리오 봉제 인형 (피치공주)",
           "name_ja": null,
           "series_name": null,
           "category": "인형",
           "source_store": null,
-          "source_url": null,
+          "source_url": "https://www.nintendo.com/jp/character/",
           "official_search_url": ""
         },
         {
-          "catalog_index": 1031,
-          "name_ko": "원피스 봉제 인형 (토니토니 쵸파)",
+          "catalog_index": 17630,
+          "name_ko": "슈퍼마리오 봉제 인형 (요시)",
           "name_ja": null,
           "series_name": null,
           "category": "인형",
           "source_store": null,
-          "source_url": null,
+          "source_url": "https://www.nintendo.com/jp/character/",
           "official_search_url": ""
         },
         {
-          "catalog_index": 1032,
-          "name_ko": "원피스 아크릴 키링 (루피)",
+          "catalog_index": 17631,
+          "name_ko": "슈퍼마리오 봉제 인형 (쿠파)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "source_store": null,
+          "source_url": "https://www.nintendo.com/jp/character/",
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 17632,
+          "name_ko": "슈퍼마리오 amiibo",
+          "name_ja": null,
+          "series_name": null,
+          "category": "피규어",
+          "source_store": null,
+          "source_url": "https://www.nintendo.com/jp/character/",
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 17633,
+          "name_ko": "슈퍼마리오 키링 (랜덤)",
           "name_ja": null,
           "series_name": null,
           "category": "키링",
           "source_store": null,
-          "source_url": null,
+          "source_url": "https://www.nintendo.com/jp/character/",
           "official_search_url": ""
         },
         {
-          "catalog_index": 1033,
-          "name_ko": "원피스 클리어 파일 (밀짚모자 일당)",
-          "name_ja": null,
+          "catalog_index": 17634,
+          "name_ko": "젤다의 전설 amiibo (링크)",
+          "name_ja": "ゼルダの伝説 amiibo (リンク)",
           "series_name": null,
-          "category": "문구",
+          "category": "피규어",
           "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 1034,
-          "name_ko": "원피스 캔뱃지 (랜덤 1팩)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "캔뱃지",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 1036,
-          "name_ko": "주술회전 봉제 인형 (고죠 사토루)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "인형",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 1037,
-          "name_ko": "주술회전 캔뱃지 (랜덤)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "캔뱃지",
-          "source_store": null,
-          "source_url": null,
+          "source_url": "https://www.nintendo.com/jp/character/",
           "official_search_url": ""
         }
       ],
@@ -32955,9 +32917,9 @@
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
-      "title": "메타데이터 검수: metadata-review-010",
+      "title": "메타데이터 검수: metadata-review-011",
       "public_report": "data/catalog_metadata_review_batches_public.json",
-      "rows": 187,
+      "rows": 105,
       "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
       "acceptance_criteria": [
         "Dates, prices, names, barcodes, source URLs, and images are copied only from official or trusted evidence.",
@@ -32966,83 +32928,83 @@
       ],
       "sample_items": [
         {
-          "catalog_index": 2328,
-          "name_ko": "홀로라이브 봉제 인형 (토키노 소라)",
-          "name_ja": "ホロライブ ぬいぐるみ (ときのそら)",
+          "catalog_index": 2341,
+          "name_ko": "니지산지 봉제 인형 (츠키노 미토)",
+          "name_ja": "にじさんじ ぬいぐるみ (月ノ美兎)",
           "series_name": null,
           "category": "인형",
           "source_store": null,
-          "source_url": "https://shop.hololivepro.com/products/hololivefriendswithu_tokinosora",
+          "source_url": "https://nijisanji-store.com/products/nijisanji-5th-anniversary-goods-niji-nui-tsukino-mito",
           "official_search_url": ""
         },
         {
-          "catalog_index": 2329,
-          "name_ko": "홀로라이브 봉제 인형 (시라카미 후부키)",
+          "catalog_index": 2342,
+          "name_ko": "니지산지 봉제 인형 (산고 안주)",
           "name_ja": null,
           "series_name": null,
           "category": "인형",
           "source_store": null,
-          "source_url": "https://shop.hololivepro.com/products/hololivefriendswithu_shirakamifubuki",
+          "source_url": "https://nijisanji-store.com/products/nijisanji-5th-anniversary-goods-niji-nui-ange-katrina",
           "official_search_url": ""
         },
         {
-          "catalog_index": 2330,
-          "name_ko": "홀로라이브 봉제 인형 (호쇼 마린)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "인형",
+          "catalog_index": 2343,
+          "name_ko": "니지산지 트레이딩 아크릴 카드 제2탄",
+          "name_ja": "にじさんじ トレーディングアクリルカード第2弾",
+          "series_name": "트레이딩 아크릴 카드 제2탄",
+          "category": "카드",
           "source_store": null,
-          "source_url": "https://shop.hololivepro.com/products/hololivefriendswithu_houshoumarine",
+          "source_url": "https://shop.nijisanji.jp/SSZS-24303.html",
           "official_search_url": ""
         },
         {
-          "catalog_index": 2331,
-          "name_ko": "홀로라이브 봉제 인형 (페코라)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "인형",
-          "source_store": null,
-          "source_url": "https://shop.hololivepro.com/products/hololivefriendswithu_usadapekora",
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 2332,
-          "name_ko": "홀로라이브 봉제 인형 (코로네)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "인형",
-          "source_store": null,
-          "source_url": "https://shop.hololivepro.com/products/hololivefriendswithu_inugamikorone",
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 2333,
-          "name_ko": "홀로라이브 봉제 인형 (호시마치 스이세이)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "인형",
-          "source_store": null,
-          "source_url": "https://shop.hololivepro.com/products/hololivefriendswithu_hoshimachisuisei",
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 2334,
-          "name_ko": "홀로라이브 아크릴 스탠드 (코바야시 코토네)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "아크릴 스탠드",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 2335,
-          "name_ko": "홀로라이브 캔뱃지 (랜덤)",
+          "catalog_index": 2344,
+          "name_ko": "니지산지 캔뱃지 (랜덤)",
           "name_ja": null,
           "series_name": null,
           "category": "캔뱃지",
           "source_store": null,
-          "source_url": "https://shop.hololivepro.com/products/hololive_randomfoilstampedbuttonbadge_newyearoutfitver",
+          "source_url": "https://nijisanji-store.com/products/random-hologram-badge-luxiem",
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 2345,
+          "name_ko": "니지산지 EN 봉제 인형 (Vox Akuma)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "source_store": null,
+          "source_url": "https://nijisanji-store.com/products/first-step-goods-vox-akuma",
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 2346,
+          "name_ko": "니지산지 원 1기생 5주년 기념 니지파펫 (츠키노 미토)",
+          "name_ja": "〖元1期生5周年記念〗にじぱぺっと（月ノ美兎）",
+          "series_name": "원 1기생 5주년 기념 굿즈",
+          "category": "인형",
+          "source_store": null,
+          "source_url": "https://shop.nijisanji.jp/SSZS-19991.html",
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 2392,
+          "name_ko": "니지산지 아크릴 스탠드 (쿠즈하)",
+          "name_ja": "にじさんじ アクリルスタンド (葛葉)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_store": null,
+          "source_url": "https://nijisanji-store.com/products/aim-higher-acrylic-stand-ar-specification-kuzuha",
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 2393,
+          "name_ko": "사쿠유이 4주년 기념 니지파펫",
+          "name_ja": "〖さくゆい4周年記念グッズ〗にじぱぺっと",
+          "series_name": "사쿠유이 4주년 기념 굿즈",
+          "category": "인형",
+          "source_store": null,
+          "source_url": "https://shop.nijisanji.jp/SSZS-18872.html",
           "official_search_url": ""
         }
       ],
@@ -33054,108 +33016,9 @@
       "agent_id": "agent-metadata",
       "workstream": "metadata_backlog",
       "priority": 70,
-      "title": "메타데이터 검수: metadata-review-011",
-      "public_report": "data/catalog_metadata_review_batches_public.json",
-      "rows": 109,
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "acceptance_criteria": [
-        "Dates, prices, names, barcodes, source URLs, and images are copied only from official or trusted evidence.",
-        "Every proposed update includes catalog_index and source evidence.",
-        "Unverified inferred metadata remains in the review queue."
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 1026,
-          "name_ko": "원피스 피규어 (몽키 D 루피)",
-          "name_ja": "ONE PIECE フィギュア (モンキー・D・ルフィ)",
-          "series_name": null,
-          "category": "피규어",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 1027,
-          "name_ko": "원피스 피규어 (로로노아 조로)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "피규어",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 1028,
-          "name_ko": "원피스 피규어 (나미)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "피규어",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 1029,
-          "name_ko": "원피스 피규어 (상디)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "피규어",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 1030,
-          "name_ko": "원피스 피규어 (니코 로빈)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "피규어",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 1057,
-          "name_ko": "나루토 피규어 (우즈마키 나루토)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "피규어",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 1058,
-          "name_ko": "나루토 피규어 (우치하 사스케)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "피규어",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 1059,
-          "name_ko": "나루토 피규어 (하타케 카카시)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "피규어",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        }
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence"
-    },
-    {
-      "batch_id": "070-agent-metadata-109",
-      "agent_id": "agent-metadata",
-      "workstream": "metadata_backlog",
-      "priority": 70,
       "title": "메타데이터 검수: metadata-review-012",
       "public_report": "data/catalog_metadata_review_batches_public.json",
-      "rows": 46,
+      "rows": 42,
       "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
       "acceptance_criteria": [
         "Dates, prices, names, barcodes, source URLs, and images are copied only from official or trusted evidence.",
@@ -33163,76 +33026,6 @@
         "Unverified inferred metadata remains in the review queue."
       ],
       "sample_items": [
-        {
-          "catalog_index": 1091,
-          "name_ko": "산리오 봉제 인형 (헬로키티)",
-          "name_ja": "サンリオ ぬいぐるみ (ハローキティ)",
-          "series_name": null,
-          "category": "인형",
-          "source_store": null,
-          "source_url": "https://www.sanrio.co.jp/character/",
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 1092,
-          "name_ko": "산리오 봉제 인형 (시나모롤)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "인형",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 1093,
-          "name_ko": "산리오 봉제 인형 (쿠로미)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "인형",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 1094,
-          "name_ko": "산리오 봉제 인형 (마이멜로디)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "인형",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 1095,
-          "name_ko": "산리오 봉제 인형 (폼폼푸린)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "인형",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 1096,
-          "name_ko": "산리오 마스코트 키링 (시나모롤)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "키링",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 1097,
-          "name_ko": "산리오 마스코트 키링 (쿠로미)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "키링",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
         {
           "catalog_index": 994,
           "name_ko": "치이카와 용산샵 오픈 기념 한정 마스코트",
@@ -33242,13 +33035,83 @@
           "source_store": null,
           "source_url": null,
           "official_search_url": ""
+        },
+        {
+          "catalog_index": 995,
+          "name_ko": "하치와레 용산샵 오픈 기념 한정 마스코트",
+          "name_ja": "ハチワレ 龍山ショップ オープン記念マスコット",
+          "series_name": "한국 한정",
+          "category": "마스코트",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 996,
+          "name_ko": "우사기 용산샵 오픈 기념 한정 마스코트",
+          "name_ja": "うさぎ 龍山ショップ オープン記念マスコット",
+          "series_name": "한국 한정",
+          "category": "마스코트",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 997,
+          "name_ko": "치이카와 용산샵 한정 아크릴 키링",
+          "name_ja": "ちいかわ 龍山ショップ限定アクリルキーホルダー",
+          "series_name": "한국 한정",
+          "category": "아크릴 키링",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 998,
+          "name_ko": "치이카와 용산샵 한정 에코백",
+          "name_ja": "ちいかわ 龍山ショップ限定エコバッグ",
+          "series_name": "한국 한정",
+          "category": "가방",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 2337,
+          "name_ko": "홀로라이브 EN 봉제 인형 (모리 칼리오페)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "source_store": null,
+          "source_url": "https://shop.geekjack.net/products/hololive-friends-with-u-mori-calliope-re",
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 2338,
+          "name_ko": "홀로라이브 EN 봉제 인형 (왓슨 아멜리아)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "source_store": null,
+          "source_url": "https://shop.geekjack.net/products/hololive-friends-with-u-watson-amelia-re",
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 2339,
+          "name_ko": "홀로라이브 EN 봉제 인형 (이로후스 이나니스)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "source_store": null,
+          "source_url": "https://shop.geekjack.net/products/hololive-friends-with-u-ninomae-inanis-re",
+          "official_search_url": ""
         }
       ],
       "review_state": "metadata_evidence_required",
       "next_machine_step": "collect_official_metadata_evidence"
     },
     {
-      "batch_id": "085-agent-ichiban-prize-policy-154",
+      "batch_id": "085-agent-ichiban-prize-policy-153",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 85,
@@ -33565,7 +33428,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "085-agent-ichiban-prize-policy-153",
+      "batch_id": "085-agent-ichiban-prize-policy-152",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 85,
@@ -33787,7 +33650,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "085-agent-dedupe-action-123",
+      "batch_id": "085-agent-dedupe-action-122",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -34810,7 +34673,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-124",
+      "batch_id": "085-agent-dedupe-action-123",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -35831,7 +35694,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-125",
+      "batch_id": "085-agent-dedupe-action-124",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -36854,7 +36717,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-126",
+      "batch_id": "085-agent-dedupe-action-125",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -37869,7 +37732,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "085-agent-dedupe-action-127",
+      "batch_id": "085-agent-dedupe-action-126",
       "agent_id": "agent-dedupe-action",
       "workstream": "deduplication_action_queue",
       "priority": 85,
@@ -38837,7 +38700,7 @@
       "next_machine_step": "confirm_manual_keep_drop_dedupe_decisions"
     },
     {
-      "batch_id": "086-agent-ichiban-prize-policy-155",
+      "batch_id": "086-agent-ichiban-prize-policy-154",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 86,
@@ -39149,7 +39012,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "087-agent-ichiban-prize-policy-156",
+      "batch_id": "087-agent-ichiban-prize-policy-155",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 87,
@@ -39469,7 +39332,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "088-agent-ichiban-prize-policy-157",
+      "batch_id": "088-agent-ichiban-prize-policy-156",
       "agent_id": "agent-ichiban-prize-policy",
       "workstream": "ichiban_kuji_prize_policy_audit",
       "priority": 88,
@@ -39784,7 +39647,7 @@
       "next_machine_step": "verify_ichiban_prize_variants_against_campaign_lineup"
     },
     {
-      "batch_id": "090-agent-dedupe-128",
+      "batch_id": "090-agent-dedupe-127",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -39823,7 +39686,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-129",
+      "batch_id": "090-agent-dedupe-128",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -39862,7 +39725,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-130",
+      "batch_id": "090-agent-dedupe-129",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -39901,7 +39764,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-131",
+      "batch_id": "090-agent-dedupe-130",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -39940,7 +39803,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-132",
+      "batch_id": "090-agent-dedupe-131",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -39979,7 +39842,7 @@
       "next_machine_step": "compare_duplicate_group_evidence"
     },
     {
-      "batch_id": "090-agent-dedupe-133",
+      "batch_id": "090-agent-dedupe-132",
       "agent_id": "agent-dedupe",
       "workstream": "deduplication_review",
       "priority": 90,
@@ -40016,6 +39879,45 @@
       ],
       "review_state": "manual_dedupe_review_required",
       "next_machine_step": "compare_duplicate_group_evidence"
+    },
+    {
+      "batch_id": "090-agent-dedupe-133",
+      "agent_id": "agent-dedupe",
+      "workstream": "deduplication_review",
+      "priority": 90,
+      "title": "중복 후보 검토: barcode",
+      "public_report": "data/catalog_deduplication_public.json",
+      "rows": 2,
+      "recommended_action": "Review keep/drop suggestions and prepare a manual-only dedupe decision.",
+      "acceptance_criteria": [
+        "Variants, alternate prizes, and campaign-specific rows are preserved.",
+        "Only evidence-backed exact duplicates are proposed for merge/delete.",
+        "Auto-delete remains disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 582,
+          "name_ko": "치이카와 파크 푸와코로 인형 S (하치와레)",
+          "name_ja": "ちいかわパーク ふわころ人形 S (ハチワレ)",
+          "series_name": null,
+          "category": "인형",
+          "source_store": "치이카와 파크",
+          "source_url": "https://chiikawamarket.jp/ko/products/4571609359081",
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 3644,
+          "name_ko": "치이카와 파크 푸와코로 인형 S (가르마)",
+          "name_ja": "ちいかわ ちいかわパーク ぷわころぬいぐるみS（ハチワレ）",
+          "series_name": null,
+          "category": "인형",
+          "source_store": "치이카와 마켓",
+          "source_url": "https://chiikawamarket.jp/ko/products/4571609359081",
+          "official_search_url": ""
+        }
+      ],
+      "review_state": "manual_dedupe_review_required",
+      "next_machine_step": "compare_duplicate_group_evidence"
     }
   ],
   "automation_policy": {
@@ -40029,7 +39931,7 @@
     "manual_review_required": true,
     "pillar_count": 5,
     "blocking_pillar_count": 5,
-    "manual_review_rows": 896,
+    "manual_review_rows": 895,
     "auto_apply_ready_rows": 0,
     "next_safe_phase": "review_candidate_source_urls",
     "blocked_reasons": [
@@ -40069,7 +39971,7 @@
         "pillar": "missing_images",
         "label": "Resolve missing catalog images",
         "status": "manual_evidence_required",
-        "manual_review_rows": 787,
+        "manual_review_rows": 786,
         "auto_apply_ready_rows": 0,
         "next_safe_phase": "discover_exact_source_urls",
         "next_queue_lane": "discover_exact_source_urls",
@@ -40100,8 +40002,8 @@
         "next_queue_lane": "manual_search_required",
         "next_queue_rows": 0,
         "next_execution_lane_count": 4,
-        "next_execution_open_rows": 800,
-        "next_execution_next_batch_rows": 68,
+        "next_execution_open_rows": 799,
+        "next_execution_next_batch_rows": 67,
         "first_next_execution_lane": "exact_source_url_review",
         "first_next_execution_status": "manual_cache_miss_research_required",
         "first_next_execution_rows": 20,

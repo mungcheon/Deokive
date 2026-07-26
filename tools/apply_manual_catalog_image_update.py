@@ -40,6 +40,7 @@ REFERER_BY_HOST = {
     "chiikawamarket.jp": "https://chiikawamarket.jp/",
     "images.goodsmile.info": "https://www.goodsmile.info/",
     "images-goodsmile-info.s3-ap-northeast-1.amazonaws.com": "https://www.goodsmile.com/",
+    "one-piece.com": "https://one-piece.com/",
     "shop.kotobukiya.co.jp": "https://shop.kotobukiya.co.jp/",
     "tc-animate.techorus-cdn.com": "https://www.animate-onlineshop.jp/",
     "www.bandai.co.jp": "https://www.bandai.co.jp/",

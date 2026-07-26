@@ -29385,6 +29385,8 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '원피스',
     subSeries: '생일 한정',
     officialPriceJpy: 1650,
+    imageUrl: 'https://one-piece.com/o/assets/uploads/news/20220411/a659107020ab72d5b7637590b58294a3.jpg',
+    localImagePath: 'assets/catalog_images/5c5d6cd0d63441b315a2.webp',
     sourceUrl: 'https://store.toei-anim.co.jp/shop/g/gMOVONP962162/',
     sourceStore: '밀짚모자 스토어',
   ),
