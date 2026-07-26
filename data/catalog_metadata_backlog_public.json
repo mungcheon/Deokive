@@ -36,7 +36,7 @@
       ],
       [
         "애니메이트",
-        205
+        204
       ],
       [
         "Banpresto",
@@ -159,6 +159,10 @@
         10
       ],
       [
+        "Nijisanji Official Store",
+        10
+      ],
+      [
         "Square Enix e-STORE",
         9
       ],
@@ -168,10 +172,6 @@
       ],
       [
         "SM STORE",
-        9
-      ],
-      [
-        "Nijisanji Official Store",
         9
       ],
       [
@@ -211,7 +211,7 @@
         },
         {
           "source_store": "애니메이트",
-          "missing_rows": 177
+          "missing_rows": 176
         },
         {
           "source_store": "Banpresto",
@@ -259,7 +259,7 @@
         },
         {
           "source_store": "애니메이트",
-          "missing_rows": 182
+          "missing_rows": 181
         },
         {
           "source_store": "굿스마일컴퍼니",
@@ -1313,8 +1313,8 @@
     {
       "field": "release_date",
       "source_store": "애니메이트",
-      "missing_rows": 182,
-      "priority_score": 182,
+      "missing_rows": 181,
+      "priority_score": 181,
       "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
       "evidence_required": "official product or campaign page showing release/sale date",
       "auto_apply_enabled": false,
@@ -1408,8 +1408,8 @@
     {
       "field": "barcode",
       "source_store": "애니메이트",
-      "missing_rows": 177,
-      "priority_score": 177,
+      "missing_rows": 176,
+      "priority_score": 176,
       "recommended_action": "Fill only when barcode is shown by official or trusted retailer data.",
       "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
       "auto_apply_enabled": false,
@@ -10052,6 +10052,101 @@
     },
     {
       "field": "barcode",
+      "source_store": "Nijisanji Official Store",
+      "missing_rows": 10,
+      "priority_score": 10,
+      "recommended_action": "Fill only when barcode is shown by official or trusted retailer data.",
+      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+      "auto_apply_enabled": false,
+      "next_step": "barcode_evidence_review",
+      "risk": "shared_variant_or_box_barcode",
+      "sample_catalog_indexes": [
+        2341,
+        2342,
+        2343,
+        2344,
+        2345,
+        2346,
+        2392,
+        2393
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 2341,
+          "name_ko": "니지산지 봉제 인형 (츠키노 미토)",
+          "name_ja": "にじさんじ ぬいぐるみ (月ノ美兎)",
+          "series_name": null,
+          "category": "인형",
+          "source_url": "https://nijisanji-store.com/products/nijisanji-5th-anniversary-goods-niji-nui-tsukino-mito",
+          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/files/3NsPZykuMRAayEJ.jpg?v=1687324119"
+        },
+        {
+          "catalog_index": 2342,
+          "name_ko": "니지산지 봉제 인형 (산고 안주)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "source_url": "https://nijisanji-store.com/products/nijisanji-5th-anniversary-goods-niji-nui-ange-katrina",
+          "image_url": "https://cdn.shopify.com/s/files/1/0549/5105/1336/files/Gh52sZWTcWtrzxe.jpg?v=1687324808"
+        },
+        {
+          "catalog_index": 2343,
+          "name_ko": "니지산지 트레이딩 아크릴 카드 제2탄",
+          "name_ja": "にじさんじ トレーディングアクリルカード第2弾",
+          "series_name": "트레이딩 아크릴 카드 제2탄",
+          "category": "카드",
+          "source_url": "https://shop.nijisanji.jp/SSZS-24303.html",
+          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/files/YUIQSbqvTCcNR7lY.jpg?v=1693459142"
+        },
+        {
+          "catalog_index": 2344,
+          "name_ko": "니지산지 캔뱃지 (랜덤)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "캔뱃지",
+          "source_url": "https://nijisanji-store.com/products/random-hologram-badge-luxiem",
+          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/products/4UkQ4fbfw6EhntpL5RcyHk.jpg?v=1667378777"
+        },
+        {
+          "catalog_index": 2345,
+          "name_ko": "니지산지 EN 봉제 인형 (Vox Akuma)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "source_url": "https://nijisanji-store.com/products/first-step-goods-vox-akuma",
+          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/products/KJNEM8URM6MssfNUCeLkX55g.jpg?v=1669013365"
+        },
+        {
+          "catalog_index": 2346,
+          "name_ko": "니지산지 원 1기생 5주년 기념 니지파펫 (츠키노 미토)",
+          "name_ja": "〖元1期生5周年記念〗にじぱぺっと（月ノ美兎）",
+          "series_name": "원 1기생 5주년 기념 굿즈",
+          "category": "인형",
+          "source_url": "https://shop.nijisanji.jp/SSZS-19991.html",
+          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/files/ujamsmTzA6eLr9C5Nf5WQGNurr.jpg?v=1683674755"
+        },
+        {
+          "catalog_index": 2392,
+          "name_ko": "니지산지 아크릴 스탠드 (쿠즈하)",
+          "name_ja": "にじさんじ アクリルスタンド (葛葉)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_url": "https://nijisanji-store.com/products/aim-higher-acrylic-stand-ar-specification-kuzuha",
+          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/products/G-GN6aU7aVMCbshaAu73m6TgLpz.jpg?v=1659576638"
+        },
+        {
+          "catalog_index": 2393,
+          "name_ko": "사쿠유이 4주년 기념 니지파펫",
+          "name_ja": "〖さくゆい4周年記念グッズ〗にじぱぺっと",
+          "series_name": "사쿠유이 4주년 기념 굿즈",
+          "category": "인형",
+          "source_url": "https://shop.nijisanji.jp/SSZS-18872.html",
+          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/files/Xd-wcDsZSV9mkbd5VncrPzCGE5_b4f9e3fb-ba4a-4763-86c1-3d7ee6b21379.jpg?v=1683674347"
+        }
+      ]
+    },
+    {
+      "field": "barcode",
       "source_store": "YG SELECT",
       "missing_rows": 10,
       "priority_score": 10,
@@ -10432,6 +10527,101 @@
     },
     {
       "field": "release_date",
+      "source_store": "Nijisanji Official Store",
+      "missing_rows": 10,
+      "priority_score": 10,
+      "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+      "evidence_required": "official product or campaign page showing release/sale date",
+      "auto_apply_enabled": false,
+      "next_step": "official_metadata_extraction",
+      "risk": "campaign_or_reissue_date_confusion",
+      "sample_catalog_indexes": [
+        2341,
+        2342,
+        2343,
+        2344,
+        2345,
+        2346,
+        2392,
+        2393
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 2341,
+          "name_ko": "니지산지 봉제 인형 (츠키노 미토)",
+          "name_ja": "にじさんじ ぬいぐるみ (月ノ美兎)",
+          "series_name": null,
+          "category": "인형",
+          "source_url": "https://nijisanji-store.com/products/nijisanji-5th-anniversary-goods-niji-nui-tsukino-mito",
+          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/files/3NsPZykuMRAayEJ.jpg?v=1687324119"
+        },
+        {
+          "catalog_index": 2342,
+          "name_ko": "니지산지 봉제 인형 (산고 안주)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "source_url": "https://nijisanji-store.com/products/nijisanji-5th-anniversary-goods-niji-nui-ange-katrina",
+          "image_url": "https://cdn.shopify.com/s/files/1/0549/5105/1336/files/Gh52sZWTcWtrzxe.jpg?v=1687324808"
+        },
+        {
+          "catalog_index": 2343,
+          "name_ko": "니지산지 트레이딩 아크릴 카드 제2탄",
+          "name_ja": "にじさんじ トレーディングアクリルカード第2弾",
+          "series_name": "트레이딩 아크릴 카드 제2탄",
+          "category": "카드",
+          "source_url": "https://shop.nijisanji.jp/SSZS-24303.html",
+          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/files/YUIQSbqvTCcNR7lY.jpg?v=1693459142"
+        },
+        {
+          "catalog_index": 2344,
+          "name_ko": "니지산지 캔뱃지 (랜덤)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "캔뱃지",
+          "source_url": "https://nijisanji-store.com/products/random-hologram-badge-luxiem",
+          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/products/4UkQ4fbfw6EhntpL5RcyHk.jpg?v=1667378777"
+        },
+        {
+          "catalog_index": 2345,
+          "name_ko": "니지산지 EN 봉제 인형 (Vox Akuma)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "인형",
+          "source_url": "https://nijisanji-store.com/products/first-step-goods-vox-akuma",
+          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/products/KJNEM8URM6MssfNUCeLkX55g.jpg?v=1669013365"
+        },
+        {
+          "catalog_index": 2346,
+          "name_ko": "니지산지 원 1기생 5주년 기념 니지파펫 (츠키노 미토)",
+          "name_ja": "〖元1期生5周年記念〗にじぱぺっと（月ノ美兎）",
+          "series_name": "원 1기생 5주년 기념 굿즈",
+          "category": "인형",
+          "source_url": "https://shop.nijisanji.jp/SSZS-19991.html",
+          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/files/ujamsmTzA6eLr9C5Nf5WQGNurr.jpg?v=1683674755"
+        },
+        {
+          "catalog_index": 2392,
+          "name_ko": "니지산지 아크릴 스탠드 (쿠즈하)",
+          "name_ja": "にじさんじ アクリルスタンド (葛葉)",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_url": "https://nijisanji-store.com/products/aim-higher-acrylic-stand-ar-specification-kuzuha",
+          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/products/G-GN6aU7aVMCbshaAu73m6TgLpz.jpg?v=1659576638"
+        },
+        {
+          "catalog_index": 2393,
+          "name_ko": "사쿠유이 4주년 기념 니지파펫",
+          "name_ja": "〖さくゆい4周年記念グッズ〗にじぱぺっと",
+          "series_name": "사쿠유이 4주년 기념 굿즈",
+          "category": "인형",
+          "source_url": "https://shop.nijisanji.jp/SSZS-18872.html",
+          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/files/Xd-wcDsZSV9mkbd5VncrPzCGE5_b4f9e3fb-ba4a-4763-86c1-3d7ee6b21379.jpg?v=1683674347"
+        }
+      ]
+    },
+    {
+      "field": "release_date",
       "source_store": "YG SELECT",
       "missing_rows": 10,
       "priority_score": 10,
@@ -10617,101 +10807,6 @@
           "category": "식기",
           "source_url": "https://chiikawamogumogu.shop/",
           "image_url": "https://chiikawamogumogu.shop/cdn/shop/files/CMH055-06.jpg"
-        }
-      ]
-    },
-    {
-      "field": "barcode",
-      "source_store": "Nijisanji Official Store",
-      "missing_rows": 9,
-      "priority_score": 9,
-      "recommended_action": "Fill only when barcode is shown by official or trusted retailer data.",
-      "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
-      "auto_apply_enabled": false,
-      "next_step": "barcode_evidence_review",
-      "risk": "shared_variant_or_box_barcode",
-      "sample_catalog_indexes": [
-        2341,
-        2342,
-        2343,
-        2344,
-        2345,
-        2346,
-        2393,
-        2394
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 2341,
-          "name_ko": "니지산지 봉제 인형 (츠키노 미토)",
-          "name_ja": "にじさんじ ぬいぐるみ (月ノ美兎)",
-          "series_name": null,
-          "category": "인형",
-          "source_url": "https://nijisanji-store.com/products/nijisanji-5th-anniversary-goods-niji-nui-tsukino-mito",
-          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/files/3NsPZykuMRAayEJ.jpg?v=1687324119"
-        },
-        {
-          "catalog_index": 2342,
-          "name_ko": "니지산지 봉제 인형 (산고 안주)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "인형",
-          "source_url": "https://nijisanji-store.com/products/nijisanji-5th-anniversary-goods-niji-nui-ange-katrina",
-          "image_url": "https://cdn.shopify.com/s/files/1/0549/5105/1336/files/Gh52sZWTcWtrzxe.jpg?v=1687324808"
-        },
-        {
-          "catalog_index": 2343,
-          "name_ko": "니지산지 트레이딩 아크릴 카드 제2탄",
-          "name_ja": "にじさんじ トレーディングアクリルカード第2弾",
-          "series_name": "트레이딩 아크릴 카드 제2탄",
-          "category": "카드",
-          "source_url": "https://shop.nijisanji.jp/SSZS-24303.html",
-          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/files/YUIQSbqvTCcNR7lY.jpg?v=1693459142"
-        },
-        {
-          "catalog_index": 2344,
-          "name_ko": "니지산지 캔뱃지 (랜덤)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "캔뱃지",
-          "source_url": "https://nijisanji-store.com/products/random-hologram-badge-luxiem",
-          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/products/4UkQ4fbfw6EhntpL5RcyHk.jpg?v=1667378777"
-        },
-        {
-          "catalog_index": 2345,
-          "name_ko": "니지산지 EN 봉제 인형 (Vox Akuma)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "인형",
-          "source_url": "https://nijisanji-store.com/products/first-step-goods-vox-akuma",
-          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/products/KJNEM8URM6MssfNUCeLkX55g.jpg?v=1669013365"
-        },
-        {
-          "catalog_index": 2346,
-          "name_ko": "니지산지 원 1기생 5주년 기념 니지파펫 (츠키노 미토)",
-          "name_ja": "〖元1期生5周年記念〗にじぱぺっと（月ノ美兎）",
-          "series_name": "원 1기생 5주년 기념 굿즈",
-          "category": "인형",
-          "source_url": "https://shop.nijisanji.jp/SSZS-19991.html",
-          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/files/ujamsmTzA6eLr9C5Nf5WQGNurr.jpg?v=1683674755"
-        },
-        {
-          "catalog_index": 2393,
-          "name_ko": "사쿠유이 4주년 기념 니지파펫",
-          "name_ja": "〖さくゆい4周年記念グッズ〗にじぱぺっと",
-          "series_name": "사쿠유이 4주년 기념 굿즈",
-          "category": "인형",
-          "source_url": "https://shop.nijisanji.jp/SSZS-18872.html",
-          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/files/Xd-wcDsZSV9mkbd5VncrPzCGE5_b4f9e3fb-ba4a-4763-86c1-3d7ee6b21379.jpg?v=1683674347"
-        },
-        {
-          "catalog_index": 2394,
-          "name_ko": "니지산지 5th ANNIVERSARY 굿즈 니지누이 이브라힘",
-          "name_ja": "〖にじさんじ 5th ANNIVERSARYグッズ〗にじぬい イブラヒム",
-          "series_name": "니지산지 5th ANNIVERSARY 굿즈",
-          "category": "인형",
-          "source_url": "https://shop.nijisanji.jp/SSZS-20201.html",
-          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/files/rVG2eDjtRkhhgP8.jpg?v=1687325019"
         }
       ]
     },
@@ -11282,101 +11377,6 @@
           "category": "식기",
           "source_url": "https://chiikawamogumogu.shop/",
           "image_url": "https://chiikawamogumogu.shop/cdn/shop/files/CMH055-06.jpg"
-        }
-      ]
-    },
-    {
-      "field": "release_date",
-      "source_store": "Nijisanji Official Store",
-      "missing_rows": 9,
-      "priority_score": 9,
-      "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
-      "evidence_required": "official product or campaign page showing release/sale date",
-      "auto_apply_enabled": false,
-      "next_step": "official_metadata_extraction",
-      "risk": "campaign_or_reissue_date_confusion",
-      "sample_catalog_indexes": [
-        2341,
-        2342,
-        2343,
-        2344,
-        2345,
-        2346,
-        2393,
-        2394
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 2341,
-          "name_ko": "니지산지 봉제 인형 (츠키노 미토)",
-          "name_ja": "にじさんじ ぬいぐるみ (月ノ美兎)",
-          "series_name": null,
-          "category": "인형",
-          "source_url": "https://nijisanji-store.com/products/nijisanji-5th-anniversary-goods-niji-nui-tsukino-mito",
-          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/files/3NsPZykuMRAayEJ.jpg?v=1687324119"
-        },
-        {
-          "catalog_index": 2342,
-          "name_ko": "니지산지 봉제 인형 (산고 안주)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "인형",
-          "source_url": "https://nijisanji-store.com/products/nijisanji-5th-anniversary-goods-niji-nui-ange-katrina",
-          "image_url": "https://cdn.shopify.com/s/files/1/0549/5105/1336/files/Gh52sZWTcWtrzxe.jpg?v=1687324808"
-        },
-        {
-          "catalog_index": 2343,
-          "name_ko": "니지산지 트레이딩 아크릴 카드 제2탄",
-          "name_ja": "にじさんじ トレーディングアクリルカード第2弾",
-          "series_name": "트레이딩 아크릴 카드 제2탄",
-          "category": "카드",
-          "source_url": "https://shop.nijisanji.jp/SSZS-24303.html",
-          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/files/YUIQSbqvTCcNR7lY.jpg?v=1693459142"
-        },
-        {
-          "catalog_index": 2344,
-          "name_ko": "니지산지 캔뱃지 (랜덤)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "캔뱃지",
-          "source_url": "https://nijisanji-store.com/products/random-hologram-badge-luxiem",
-          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/products/4UkQ4fbfw6EhntpL5RcyHk.jpg?v=1667378777"
-        },
-        {
-          "catalog_index": 2345,
-          "name_ko": "니지산지 EN 봉제 인형 (Vox Akuma)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "인형",
-          "source_url": "https://nijisanji-store.com/products/first-step-goods-vox-akuma",
-          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/products/KJNEM8URM6MssfNUCeLkX55g.jpg?v=1669013365"
-        },
-        {
-          "catalog_index": 2346,
-          "name_ko": "니지산지 원 1기생 5주년 기념 니지파펫 (츠키노 미토)",
-          "name_ja": "〖元1期生5周年記念〗にじぱぺっと（月ノ美兎）",
-          "series_name": "원 1기생 5주년 기념 굿즈",
-          "category": "인형",
-          "source_url": "https://shop.nijisanji.jp/SSZS-19991.html",
-          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/files/ujamsmTzA6eLr9C5Nf5WQGNurr.jpg?v=1683674755"
-        },
-        {
-          "catalog_index": 2393,
-          "name_ko": "사쿠유이 4주년 기념 니지파펫",
-          "name_ja": "〖さくゆい4周年記念グッズ〗にじぱぺっと",
-          "series_name": "사쿠유이 4주년 기념 굿즈",
-          "category": "인형",
-          "source_url": "https://shop.nijisanji.jp/SSZS-18872.html",
-          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/files/Xd-wcDsZSV9mkbd5VncrPzCGE5_b4f9e3fb-ba4a-4763-86c1-3d7ee6b21379.jpg?v=1683674347"
-        },
-        {
-          "catalog_index": 2394,
-          "name_ko": "니지산지 5th ANNIVERSARY 굿즈 니지누이 이브라힘",
-          "name_ja": "〖にじさんじ 5th ANNIVERSARYグッズ〗にじぬい イブラヒム",
-          "series_name": "니지산지 5th ANNIVERSARY 굿즈",
-          "category": "인형",
-          "source_url": "https://shop.nijisanji.jp/SSZS-20201.html",
-          "image_url": "https://cdn.shopify.com/s/files/1/0577/1254/1891/files/rVG2eDjtRkhhgP8.jpg?v=1687325019"
         }
       ]
     },
