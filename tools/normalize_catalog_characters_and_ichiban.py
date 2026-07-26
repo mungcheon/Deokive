@@ -16,8 +16,10 @@ except Exception:
 
 try:
     from generate_seed_catalog_dart import generate
+    from audit_catalog_character_names import ICHIBAN_PRODUCT_CHARACTER_TOKENS, product_token_matches
 except ModuleNotFoundError:
     from tools.generate_seed_catalog_dart import generate
+    from tools.audit_catalog_character_names import ICHIBAN_PRODUCT_CHARACTER_TOKENS, product_token_matches
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_CATALOG = ROOT / "data" / "catalog_public.json"
@@ -95,6 +97,7 @@ ICHIBAN_CHARACTER_RULES: dict[str, list[tuple[str, str]]] = {
         ("ジンベエ", "징베"),
         ("トラファルガー・ロー", "트라팔가 로"),
         ("トラファルガー・D・ワーテル・ロー", "트라팔가 로"),
+        ("ペローナ", "페로나"),
         ("ロー", "트라팔가 로"),
         ("ポートガス・D・エース", "포트거스 D. 에이스"),
         ("エース", "포트거스 D. 에이스"),
@@ -372,7 +375,7 @@ def _normalize_ichiban_direct_character_rules(
             continue
         matches: list[str] = []
         for alias, character in rules:
-            if alias in item_name and character not in matches:
+            if product_token_matches(item_name, alias) and character not in matches:
                 matches.append(character)
         if len(matches) != 1:
             continue
@@ -393,6 +396,37 @@ def _normalize_ichiban_direct_character_rules(
         )
         if write:
             row["character_name"] = character
+            row["name_ko"] = new_name
+    return changes
+
+
+def _normalize_ichiban_multi_character_sets(
+    rows: list[dict[str, Any]], *, write: bool
+) -> list[dict[str, Any]]:
+    changes: list[dict[str, Any]] = []
+    for row in rows:
+        if not _is_ichiban(row) or _text(row.get("character_name")) != "기타":
+            continue
+        item_name = _prize_item_name(row)
+        matched_characters: list[str] = []
+        for token, character in ICHIBAN_PRODUCT_CHARACTER_TOKENS:
+            if product_token_matches(item_name, token) and character not in matched_characters:
+                matched_characters.append(character)
+        if len(matched_characters) <= 1:
+            continue
+        new_name = _ichiban_display_name(row, "혼합")
+        changes.append(
+            {
+                "catalog_index": row.get("catalog_index"),
+                "matched_characters": matched_characters,
+                "field_changes": {
+                    "character_name": {"from": row.get("character_name"), "to": "혼합"},
+                    "name_ko": {"from": row.get("name_ko"), "to": new_name},
+                },
+            }
+        )
+        if write:
+            row["character_name"] = "혼합"
             row["name_ko"] = new_name
     return changes
 
@@ -615,6 +649,9 @@ def main() -> int:
     ichiban_direct_character_changes = _normalize_ichiban_direct_character_rules(
         rows, write=args.write
     )
+    ichiban_multi_character_set_changes = _normalize_ichiban_multi_character_sets(
+        rows, write=args.write
+    )
     last_one_price_changes = _normalize_last_one_prices(rows, write=args.write)
     frieren_ichiban = _split_frieren_ichiban(rows, write=args.write)
 
@@ -645,6 +682,7 @@ def main() -> int:
             "global_character_alias_changes": len(global_character_alias_changes),
             "character_alias_changes": len(character_alias_changes),
             "ichiban_direct_character_changes": len(ichiban_direct_character_changes),
+            "ichiban_multi_character_set_changes": len(ichiban_multi_character_set_changes),
             "last_one_price_changes": len(last_one_price_changes),
             "frieren_ichiban_updated_rows": len(frieren_ichiban["updated"]),
             "frieren_ichiban_created_rows": len(frieren_ichiban["created"]),
@@ -653,6 +691,7 @@ def main() -> int:
         "global_character_alias_changes": global_character_alias_changes,
         "character_alias_changes": character_alias_changes,
         "ichiban_direct_character_changes": ichiban_direct_character_changes,
+        "ichiban_multi_character_set_changes": ichiban_multi_character_set_changes,
         "last_one_price_changes": last_one_price_changes,
         "frieren_ichiban": frieren_ichiban,
         "ichiban_audit_after": audit,
