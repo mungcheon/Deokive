@@ -17,14 +17,14 @@ except Exception:
     pass
 
 ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_SEED = ROOT / "server" / "catalog_seed_from_local.json"
-DEFAULT_QUALITY = ROOT / "server" / "catalog_quality_report.json"
+DEFAULT_PUBLIC_CATALOG = ROOT / "data" / "catalog_public.json"
+DEFAULT_SEED = DEFAULT_PUBLIC_CATALOG
+DEFAULT_QUALITY = ROOT / "data" / "catalog_quality_public.json"
 DEFAULT_QUEUE = ROOT / "server" / "catalog_field_enrichment_queue.json"
 DEFAULT_QUEUE_MD = ROOT / "server" / "catalog_field_enrichment_queue.md"
 DEFAULT_JSON_REPORT = ROOT / "server" / "catalog_public_safety_audit.json"
 DEFAULT_MD_REPORT = ROOT / "server" / "catalog_public_safety_audit.md"
 DEFAULT_DB = ROOT / "server" / "deokive_dev.db"
-DEFAULT_PUBLIC_CATALOG = ROOT / "data" / "catalog_public.json"
 
 CATALOG_FIELDS = {
     "name_ko",
@@ -181,7 +181,7 @@ def compare_public_catalog(public_summary: dict[str, Any], seed_summary: dict[st
         "public_image_missing_rows": int(public_missing.get("image_url") or 0),
         "seed_image_missing_rows": int(seed_missing.get("image_url") or 0),
         "image_missing_delta": int(public_missing.get("image_url") or 0) - int(seed_missing.get("image_url") or 0),
-        "note": "data/catalog_public.json is the GitHub Pages source of truth; server/catalog_seed_from_local.json is the local DB export safety source.",
+        "note": "data/catalog_public.json is the GitHub Pages source of truth. If --seed points to the same file, deltas should be zero.",
     }
 
 
@@ -262,6 +262,8 @@ def classify_text_match(path: Path, kind: str, match: str, text: str, start: int
     relative = _relative_path(path)
     context = text[max(0, start - 80) : min(len(text), end + 80)].lower()
     is_catalog_public_data = relative in {
+        "data/catalog_public.json",
+        "data/catalog_quality_public.json",
         "server/catalog_seed_from_local.json",
         "server/catalog_quality_report.json",
         "server/catalog_field_enrichment_queue.json",
@@ -401,9 +403,10 @@ def main() -> int:
     parser.add_argument("--md-report", type=Path, default=DEFAULT_MD_REPORT)
     args = parser.parse_args()
 
-    seed_rows = load_json(args.seed)
+    seed_payload = load_json(args.seed)
+    seed_rows = seed_payload.get("items") if isinstance(seed_payload, dict) else seed_payload
     if not isinstance(seed_rows, list):
-        raise SystemExit(f"{args.seed} must contain a JSON list")
+        raise SystemExit(f"{args.seed} must contain a JSON list or an object with items")
     seed_summary = summarize_seed([row for row in seed_rows if isinstance(row, dict)])
     public_catalog_summary = summarize_public_catalog(args.public_catalog)
     quality_report = load_json(args.quality_report)

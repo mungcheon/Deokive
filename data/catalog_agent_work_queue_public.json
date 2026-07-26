@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T17:22:48Z",
+  "generated_at": "2026-07-26T17:32:31Z",
   "summary": {
     "batch_count": 160,
     "max_published_batches": 160,
-    "summed_batch_rows": 21392,
+    "summed_batch_rows": 21401,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -4928,10 +4928,10 @@
             14200
           ],
           "sample_names": [
-            "一番くじ 呪術廻戦 －オンライン－ - A賞 虎杖悠仁ビジュアルクロス",
-            "一番くじ 呪術廻戦 －オンライン－ - B賞 伏黒恵ビジュアルクロス",
-            "一番くじ 呪術廻戦 －オンライン－ - C賞 釘崎野薔薇ビジュアルクロス",
-            "一番くじ 呪術廻戦 －オンライン－ - D賞 五条悟ビジュアルクロス",
+            "一番くじ 呪術廻戦 －オンライン－ / A賞 / 虎杖悠仁ビジュアルクロス / 이타도리 유지",
+            "一番くじ 呪術廻戦 －オンライン－ / B賞 / 伏黒恵ビジュアルクロス / 후시구로 메구미",
+            "一番くじ 呪術廻戦 －オンライン－ / C賞 / 釘崎野薔薇ビジュアルクロス / 쿠기사키 노바라",
+            "一番くじ 呪術廻戦 －オンライン－ / D賞 / 五条悟ビジュアルクロス / 고죠 사토루",
             "一番くじ 呪術廻戦 －オンライン－ - E賞 クリアボトル",
             "一番くじ 呪術廻戦 －オンライン－ - F賞 アクリルスタンド",
             "一番くじ 呪術廻戦 －オンライン－ - G賞 アクリッツ",
@@ -21536,10 +21536,10 @@
             14200
           ],
           "sample_names": [
-            "一番くじ 呪術廻戦 －オンライン－ - A賞 虎杖悠仁ビジュアルクロス",
-            "一番くじ 呪術廻戦 －オンライン－ - B賞 伏黒恵ビジュアルクロス",
-            "一番くじ 呪術廻戦 －オンライン－ - C賞 釘崎野薔薇ビジュアルクロス",
-            "一番くじ 呪術廻戦 －オンライン－ - D賞 五条悟ビジュアルクロス",
+            "一番くじ 呪術廻戦 －オンライン－ / A賞 / 虎杖悠仁ビジュアルクロス / 이타도리 유지",
+            "一番くじ 呪術廻戦 －オンライン－ / B賞 / 伏黒恵ビジュアルクロス / 후시구로 메구미",
+            "一番くじ 呪術廻戦 －オンライン－ / C賞 / 釘崎野薔薇ビジュアルクロス / 쿠기사키 노바라",
+            "一番くじ 呪術廻戦 －オンライン－ / D賞 / 五条悟ビジュアルクロス / 고죠 사토루",
             "一番くじ 呪術廻戦 －オンライン－ - E賞 クリアボトル",
             "一番くじ 呪術廻戦 －オンライン－ - F賞 アクリルスタンド",
             "一番くじ 呪術廻戦 －オンライン－ - G賞 アクリッツ",
@@ -31441,6 +31441,186 @@
         {
           "manual_review_status": "not_started",
           "manual_confirmed": false,
+          "catalog_index": 12303,
+          "series_name": "一番くじ BLEACH Stirring Souls vol.4",
+          "prize_rank": "A賞",
+          "prize_item_name": "A賞 日番谷冬獅郎 MASTERLISE",
+          "expected_prize_display_name": "A賞 日番谷冬獅郎 MASTERLISE",
+          "display_name_ko": "一番くじ BLEACH Stirring Souls vol.4 / A賞 / 日番谷冬獅郎 MASTERLISE / 히츠가야 토시로",
+          "expected_display_name_ko": "一番くじ BLEACH Stirring Souls vol.4 - A賞 日番谷冬獅郎 MASTERLISE",
+          "category": "피규어",
+          "character_name": "히츠가야 토시로",
+          "official_price_jpy": 850,
+          "release_date": "2026-05-22",
+          "source_url": "https://1kuji.com/products/bleach7",
+          "image_url": "https://assets.1kuji.com/uploads/product_item/image/105713/9480b036-bbd7-4fa3-8054-4c5dbfefdf46.webp",
+          "local_image_path": "assets/catalog_images/080729a365d880d73ede.webp",
+          "review_reason": "display_name_does_not_match_series_and_prize_name",
+          "name_policy": {
+            "required_components": [
+              "ichiban_release_name(series_name)",
+              "prize_rank(sub_series)",
+              "prize_item_name(name_ja)",
+              "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+            ],
+            "display_name_ko_format": "<series_name> - <sub_series/prize item name>",
+            "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+          },
+          "image_review_policy": {
+            "requires_same_campaign": true,
+            "requires_same_prize_rank": true,
+            "requires_same_variant_or_item": true,
+            "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+          },
+          "manual_fix_template": {
+            "catalog_index": 12303,
+            "name_ko": "<confirmed_display_name_or_blank>",
+            "name_ja": "<confirmed_prize_item_name_or_blank>",
+            "sub_series": "<confirmed_prize_rank_or_blank>",
+            "image_url": "<confirmed_official_image_url_or_blank>",
+            "evidence_url": "https://1kuji.com/products/bleach7",
+            "manual_confirmed": false
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "manual_review_status": "not_started",
+          "manual_confirmed": false,
+          "catalog_index": 12304,
+          "series_name": "一番くじ BLEACH Stirring Souls vol.4",
+          "prize_rank": "B賞",
+          "prize_item_name": "B賞 平子真子 MASTERLISE",
+          "expected_prize_display_name": "B賞 平子真子 MASTERLISE",
+          "display_name_ko": "一番くじ BLEACH Stirring Souls vol.4 / B賞 / 平子真子 MASTERLISE / 히라코 신지",
+          "expected_display_name_ko": "一番くじ BLEACH Stirring Souls vol.4 - B賞 平子真子 MASTERLISE",
+          "category": "피규어",
+          "character_name": "히라코 신지",
+          "official_price_jpy": 850,
+          "release_date": "2026-05-22",
+          "source_url": "https://1kuji.com/products/bleach7",
+          "image_url": "https://assets.1kuji.com/uploads/product_item/image/105714/30f4bd32-ea6d-4bd0-83c6-9655c63d42f3.webp",
+          "local_image_path": "assets/catalog_images/377b0d808fe23fc4d23f.webp",
+          "review_reason": "display_name_does_not_match_series_and_prize_name",
+          "name_policy": {
+            "required_components": [
+              "ichiban_release_name(series_name)",
+              "prize_rank(sub_series)",
+              "prize_item_name(name_ja)",
+              "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+            ],
+            "display_name_ko_format": "<series_name> - <sub_series/prize item name>",
+            "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+          },
+          "image_review_policy": {
+            "requires_same_campaign": true,
+            "requires_same_prize_rank": true,
+            "requires_same_variant_or_item": true,
+            "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+          },
+          "manual_fix_template": {
+            "catalog_index": 12304,
+            "name_ko": "<confirmed_display_name_or_blank>",
+            "name_ja": "<confirmed_prize_item_name_or_blank>",
+            "sub_series": "<confirmed_prize_rank_or_blank>",
+            "image_url": "<confirmed_official_image_url_or_blank>",
+            "evidence_url": "https://1kuji.com/products/bleach7",
+            "manual_confirmed": false
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "manual_review_status": "not_started",
+          "manual_confirmed": false,
+          "catalog_index": 12305,
+          "series_name": "一番くじ BLEACH Stirring Souls vol.4",
+          "prize_rank": "C賞",
+          "prize_item_name": "C賞 藍染惣右介 MASTERLISE",
+          "expected_prize_display_name": "C賞 藍染惣右介 MASTERLISE",
+          "display_name_ko": "一番くじ BLEACH Stirring Souls vol.4 / C賞 / 藍染惣右介 MASTERLISE / 아이젠 소스케",
+          "expected_display_name_ko": "一番くじ BLEACH Stirring Souls vol.4 - C賞 藍染惣右介 MASTERLISE",
+          "category": "피규어",
+          "character_name": "아이젠 소스케",
+          "official_price_jpy": 850,
+          "release_date": "2026-05-22",
+          "source_url": "https://1kuji.com/products/bleach7",
+          "image_url": "https://assets.1kuji.com/uploads/product_item/image/105715/e057084b-f221-485a-9b7a-149e576fc4bf.webp",
+          "local_image_path": "assets/catalog_images/3c842de9cfd8a1ba6373.webp",
+          "review_reason": "display_name_does_not_match_series_and_prize_name",
+          "name_policy": {
+            "required_components": [
+              "ichiban_release_name(series_name)",
+              "prize_rank(sub_series)",
+              "prize_item_name(name_ja)",
+              "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+            ],
+            "display_name_ko_format": "<series_name> - <sub_series/prize item name>",
+            "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+          },
+          "image_review_policy": {
+            "requires_same_campaign": true,
+            "requires_same_prize_rank": true,
+            "requires_same_variant_or_item": true,
+            "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+          },
+          "manual_fix_template": {
+            "catalog_index": 12305,
+            "name_ko": "<confirmed_display_name_or_blank>",
+            "name_ja": "<confirmed_prize_item_name_or_blank>",
+            "sub_series": "<confirmed_prize_rank_or_blank>",
+            "image_url": "<confirmed_official_image_url_or_blank>",
+            "evidence_url": "https://1kuji.com/products/bleach7",
+            "manual_confirmed": false
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "manual_review_status": "not_started",
+          "manual_confirmed": false,
+          "catalog_index": 12311,
+          "series_name": "一番くじ BLEACH Stirring Souls vol.4",
+          "prize_rank": "ラストワン賞",
+          "prize_item_name": "ラストワン賞 浦原喜助 MASTERLISE",
+          "expected_prize_display_name": "ラストワン賞 浦原喜助 MASTERLISE",
+          "display_name_ko": "一番くじ BLEACH Stirring Souls vol.4 / ラストワン賞 / 浦原喜助 MASTERLISE / 우라하라 키스케",
+          "expected_display_name_ko": "一番くじ BLEACH Stirring Souls vol.4 - ラストワン賞 浦原喜助 MASTERLISE",
+          "category": "피규어",
+          "character_name": "우라하라 키스케",
+          "official_price_jpy": 0,
+          "release_date": "2026-05-22",
+          "source_url": "https://1kuji.com/products/bleach7",
+          "image_url": "https://assets.1kuji.com/uploads/product_item/image/105716/7d515b33-c437-49e9-892c-a3298586f472.webp",
+          "local_image_path": "assets/catalog_images/767fc1ada03b54963424.webp",
+          "review_reason": "display_name_does_not_match_series_and_prize_name",
+          "name_policy": {
+            "required_components": [
+              "ichiban_release_name(series_name)",
+              "prize_rank(sub_series)",
+              "prize_item_name(name_ja)",
+              "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
+            ],
+            "display_name_ko_format": "<series_name> - <sub_series/prize item name>",
+            "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
+          },
+          "image_review_policy": {
+            "requires_same_campaign": true,
+            "requires_same_prize_rank": true,
+            "requires_same_variant_or_item": true,
+            "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
+          },
+          "manual_fix_template": {
+            "catalog_index": 12311,
+            "name_ko": "<confirmed_display_name_or_blank>",
+            "name_ja": "<confirmed_prize_item_name_or_blank>",
+            "sub_series": "<confirmed_prize_rank_or_blank>",
+            "image_url": "<confirmed_official_image_url_or_blank>",
+            "evidence_url": "https://1kuji.com/products/bleach7",
+            "manual_confirmed": false
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "manual_review_status": "not_started",
+          "manual_confirmed": false,
           "catalog_index": 12263,
           "series_name": "一番くじ ブルーロック あでぃしょなる・たいむ！",
           "prize_rank": "A賞",
@@ -31527,192 +31707,12 @@
             "manual_confirmed": false
           },
           "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 12265,
-          "series_name": "一番くじ ブルーロック あでぃしょなる・たいむ！",
-          "prize_rank": "C賞",
-          "prize_item_name": "C賞 メイド馬狼 フィギュア",
-          "expected_prize_display_name": "C賞 メイド馬狼 フィギュア",
-          "display_name_ko": "一番くじ ブルーロック あでぃしょなる・たいむ！ / C賞 / メイド馬狼 フィギュア / 바로 쇼에이",
-          "expected_display_name_ko": "一番くじ ブルーロック あでぃしょなる・たいむ！ - C賞 メイド馬狼 フィギュア",
-          "category": "피규어",
-          "character_name": "바로 쇼에이",
-          "official_price_jpy": 750,
-          "release_date": "2026-05-02",
-          "source_url": "https://1kuji.com/products/bluelock8",
-          "image_url": "https://assets.1kuji.com/uploads/product_item/image/105719/e0033270-ae5d-4b94-b18c-7b779b4fdb64.webp",
-          "local_image_path": "assets/catalog_images/656a8f29395dae167a5e.webp",
-          "review_reason": "display_name_does_not_match_series_and_prize_name",
-          "name_policy": {
-            "required_components": [
-              "ichiban_release_name(series_name)",
-              "prize_rank(sub_series)",
-              "prize_item_name(name_ja)",
-              "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
-            ],
-            "display_name_ko_format": "<series_name> - <sub_series/prize item name>",
-            "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
-          },
-          "image_review_policy": {
-            "requires_same_campaign": true,
-            "requires_same_prize_rank": true,
-            "requires_same_variant_or_item": true,
-            "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
-          },
-          "manual_fix_template": {
-            "catalog_index": 12265,
-            "name_ko": "<confirmed_display_name_or_blank>",
-            "name_ja": "<confirmed_prize_item_name_or_blank>",
-            "sub_series": "<confirmed_prize_rank_or_blank>",
-            "image_url": "<confirmed_official_image_url_or_blank>",
-            "evidence_url": "https://1kuji.com/products/bluelock8",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 12272,
-          "series_name": "一番くじ ブルーロック あでぃしょなる・たいむ！",
-          "prize_rank": "ラストワン賞",
-          "prize_item_name": "ラストワン賞 凪 誠士郎 フィギュア-すやすやver.-",
-          "expected_prize_display_name": "ラストワン賞 凪 誠士郎 フィギュア-すやすやver.-",
-          "display_name_ko": "一番くじ ブルーロック あでぃしょなる・たいむ！ / ラストワン賞 / 凪 誠士郎 フィギュア-すやすやver.- / 나기 세이시로",
-          "expected_display_name_ko": "一番くじ ブルーロック あでぃしょなる・たいむ！ - ラストワン賞 凪 誠士郎 フィギュア-すやすやver.-",
-          "category": "피규어",
-          "character_name": "나기 세이시로",
-          "official_price_jpy": 0,
-          "release_date": "2026-05-02",
-          "source_url": "https://1kuji.com/products/bluelock8",
-          "image_url": "https://assets.1kuji.com/uploads/product_item/image/106218/544328be-1e59-4738-b625-f1c2849e8a1c.webp",
-          "local_image_path": "assets/catalog_images/a86a443b39ce6fff61e4.webp",
-          "review_reason": "display_name_does_not_match_series_and_prize_name",
-          "name_policy": {
-            "required_components": [
-              "ichiban_release_name(series_name)",
-              "prize_rank(sub_series)",
-              "prize_item_name(name_ja)",
-              "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
-            ],
-            "display_name_ko_format": "<series_name> - <sub_series/prize item name>",
-            "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
-          },
-          "image_review_policy": {
-            "requires_same_campaign": true,
-            "requires_same_prize_rank": true,
-            "requires_same_variant_or_item": true,
-            "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
-          },
-          "manual_fix_template": {
-            "catalog_index": 12272,
-            "name_ko": "<confirmed_display_name_or_blank>",
-            "name_ja": "<confirmed_prize_item_name_or_blank>",
-            "sub_series": "<confirmed_prize_rank_or_blank>",
-            "image_url": "<confirmed_official_image_url_or_blank>",
-            "evidence_url": "https://1kuji.com/products/bluelock8",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 16170,
-          "series_name": "一番くじ ハッピーバースデー チョッパー",
-          "prize_rank": "関連商品",
-          "prize_item_name": "菓子商品 ワンピース ハッピーバースデーチョッパー キャラメルポップコーン",
-          "expected_prize_display_name": "関連商品 菓子商品 ワンピース ハッピーバースデーチョッパー キャラメルポップコーン",
-          "display_name_ko": "一番くじ ハッピーバースデー チョッパー / 関連商品 / 菓子商品 ワンピース ハッピーバースデーチョッパー キャラメルポップコーン / 토니토니 쵸파",
-          "expected_display_name_ko": "一番くじ ハッピーバースデー チョッパー - 関連商品 菓子商品 ワンピース ハッピーバースデーチョッパー キャラメルポップコーン",
-          "category": "굿즈",
-          "character_name": "토니토니 쵸파",
-          "official_price_jpy": 500,
-          "release_date": "2011-03-10",
-          "source_url": "https://1kuji.com/products/cho-birth",
-          "image_url": "https://assets.1kuji.com/uploads/product_item/image/1367/919da83d-8dea-4084-80b1-e411d513690b.jpg",
-          "local_image_path": "assets/catalog_images/aa5d59b88be7439f2b03.webp",
-          "review_reason": "display_name_does_not_match_series_and_prize_name",
-          "name_policy": {
-            "required_components": [
-              "ichiban_release_name(series_name)",
-              "prize_rank(sub_series)",
-              "prize_item_name(name_ja)",
-              "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
-            ],
-            "display_name_ko_format": "<series_name> - <sub_series/prize item name>",
-            "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
-          },
-          "image_review_policy": {
-            "requires_same_campaign": true,
-            "requires_same_prize_rank": true,
-            "requires_same_variant_or_item": true,
-            "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
-          },
-          "manual_fix_template": {
-            "catalog_index": 16170,
-            "name_ko": "<confirmed_display_name_or_blank>",
-            "name_ja": "<confirmed_prize_item_name_or_blank>",
-            "sub_series": "<confirmed_prize_rank_or_blank>",
-            "image_url": "<confirmed_official_image_url_or_blank>",
-            "evidence_url": "https://1kuji.com/products/cho-birth",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 16171,
-          "series_name": "一番くじ ハッピーバースデー チョッパー",
-          "prize_rank": "関連商品",
-          "prize_item_name": "玩具菓子 HAPPYBIRTHDAYCHOPPER おきがえチョッパーキーチェーンSP",
-          "expected_prize_display_name": "関連商品 玩具菓子 HAPPYBIRTHDAYCHOPPER おきがえチョッパーキーチェーンSP",
-          "display_name_ko": "一番くじ ハッピーバースデー チョッパー / 関連商品 / 玩具菓子 HAPPYBIRTHDAYCHOPPER おきがえチョッパーキーチェーンSP / 토니토니 쵸파",
-          "expected_display_name_ko": "一番くじ ハッピーバースデー チョッパー - 関連商品 玩具菓子 HAPPYBIRTHDAYCHOPPER おきがえチョッパーキーチェーンSP",
-          "category": "굿즈",
-          "character_name": "토니토니 쵸파",
-          "official_price_jpy": 500,
-          "release_date": "2011-03-10",
-          "source_url": "https://1kuji.com/products/cho-birth",
-          "image_url": "https://assets.1kuji.com/uploads/product_item/image/1368/f05afcd7-f161-4f78-92b3-63c1c00f9fe4.jpg",
-          "local_image_path": "assets/catalog_images/80913716a28b59157760.webp",
-          "review_reason": "display_name_does_not_match_series_and_prize_name",
-          "name_policy": {
-            "required_components": [
-              "ichiban_release_name(series_name)",
-              "prize_rank(sub_series)",
-              "prize_item_name(name_ja)",
-              "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
-            ],
-            "display_name_ko_format": "<series_name> - <sub_series/prize item name>",
-            "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
-          },
-          "image_review_policy": {
-            "requires_same_campaign": true,
-            "requires_same_prize_rank": true,
-            "requires_same_variant_or_item": true,
-            "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
-          },
-          "manual_fix_template": {
-            "catalog_index": 16171,
-            "name_ko": "<confirmed_display_name_or_blank>",
-            "name_ja": "<confirmed_prize_item_name_or_blank>",
-            "sub_series": "<confirmed_prize_rank_or_blank>",
-            "image_url": "<confirmed_official_image_url_or_blank>",
-            "evidence_url": "https://1kuji.com/products/cho-birth",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
         }
       ],
       "review_summary": {
         "kuji_rows": 7902,
-        "review_rows": 420,
-        "name_structure_review_rows": 420,
+        "review_rows": 886,
+        "name_structure_review_rows": 886,
         "image_identity_review_rows": 6,
         "same_campaign_prize_rank_name_duplicate_rows": 0,
         "same_campaign_image_reused_different_name_rows": 6,
@@ -31721,7 +31721,7 @@
         "review_reason_counts": [
           [
             "display_name_does_not_match_series_and_prize_name",
-            420
+            886
           ]
         ],
         "auto_apply_enabled": false,
@@ -31838,7 +31838,7 @@
       "priority": 57,
       "title": "Ichiban Kuji prize image/name patch candidates",
       "public_report": "data/ichiban_kuji_prize_name_image_patch_candidates_public.json",
-      "rows": 391,
+      "rows": 400,
       "recommended_action": "Review exact image matches and confirm only safe catalog patch templates.",
       "acceptance_criteria": [
         "candidate image URL must match the same official campaign prize and item variant.",
@@ -31917,6 +31917,142 @@
         {
           "manual_review_status": "not_started",
           "manual_confirmed": false,
+          "catalog_index": 12303,
+          "source_url": "https://1kuji.com/products/bleach7",
+          "match_type": "exact_image_match",
+          "match_score": 1.0,
+          "series_name": "一番くじ BLEACH Stirring Souls vol.4",
+          "current_prize_rank": "A賞",
+          "current_name_ja": "A賞 日番谷冬獅郎 MASTERLISE",
+          "current_display_name_ko": "一番くじ BLEACH Stirring Souls vol.4 / A賞 / 日番谷冬獅郎 MASTERLISE / 히츠가야 토시로",
+          "current_image_url": "https://assets.1kuji.com/uploads/product_item/image/105713/9480b036-bbd7-4fa3-8054-4c5dbfefdf46.webp",
+          "official_prize_rank": "A賞",
+          "official_name_ja": "A賞 日番谷冬獅郎 MASTERLISE",
+          "official_prize_display_name": "A賞 日番谷冬獅郎 MASTERLISE",
+          "suggested_display_name_ko": "一番くじ BLEACH Stirring Souls vol.4 - A賞 日番谷冬獅郎 MASTERLISE",
+          "official_image_url": "https://assets.1kuji.com/uploads/product_item/image/105713/9480b036-bbd7-4fa3-8054-4c5dbfefdf46.webp",
+          "field_changes": {
+            "name_ko": {
+              "from": "一番くじ BLEACH Stirring Souls vol.4 / A賞 / 日番谷冬獅郎 MASTERLISE / 히츠가야 토시로",
+              "to": "一番くじ BLEACH Stirring Souls vol.4 - A賞 日番谷冬獅郎 MASTERLISE"
+            }
+          },
+          "catalog_patch_template": {
+            "catalog_index": 12303,
+            "name_ko": "一番くじ BLEACH Stirring Souls vol.4 - A賞 日番谷冬獅郎 MASTERLISE",
+            "name_ja": "",
+            "sub_series": "",
+            "image_url": "",
+            "evidence_url": "https://1kuji.com/products/bleach7",
+            "manual_confirmed": false
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "manual_review_status": "not_started",
+          "manual_confirmed": false,
+          "catalog_index": 12304,
+          "source_url": "https://1kuji.com/products/bleach7",
+          "match_type": "exact_image_match",
+          "match_score": 1.0,
+          "series_name": "一番くじ BLEACH Stirring Souls vol.4",
+          "current_prize_rank": "B賞",
+          "current_name_ja": "B賞 平子真子 MASTERLISE",
+          "current_display_name_ko": "一番くじ BLEACH Stirring Souls vol.4 / B賞 / 平子真子 MASTERLISE / 히라코 신지",
+          "current_image_url": "https://assets.1kuji.com/uploads/product_item/image/105714/30f4bd32-ea6d-4bd0-83c6-9655c63d42f3.webp",
+          "official_prize_rank": "B賞",
+          "official_name_ja": "B賞 平子真子 MASTERLISE",
+          "official_prize_display_name": "B賞 平子真子 MASTERLISE",
+          "suggested_display_name_ko": "一番くじ BLEACH Stirring Souls vol.4 - B賞 平子真子 MASTERLISE",
+          "official_image_url": "https://assets.1kuji.com/uploads/product_item/image/105714/30f4bd32-ea6d-4bd0-83c6-9655c63d42f3.webp",
+          "field_changes": {
+            "name_ko": {
+              "from": "一番くじ BLEACH Stirring Souls vol.4 / B賞 / 平子真子 MASTERLISE / 히라코 신지",
+              "to": "一番くじ BLEACH Stirring Souls vol.4 - B賞 平子真子 MASTERLISE"
+            }
+          },
+          "catalog_patch_template": {
+            "catalog_index": 12304,
+            "name_ko": "一番くじ BLEACH Stirring Souls vol.4 - B賞 平子真子 MASTERLISE",
+            "name_ja": "",
+            "sub_series": "",
+            "image_url": "",
+            "evidence_url": "https://1kuji.com/products/bleach7",
+            "manual_confirmed": false
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "manual_review_status": "not_started",
+          "manual_confirmed": false,
+          "catalog_index": 12305,
+          "source_url": "https://1kuji.com/products/bleach7",
+          "match_type": "exact_image_match",
+          "match_score": 1.0,
+          "series_name": "一番くじ BLEACH Stirring Souls vol.4",
+          "current_prize_rank": "C賞",
+          "current_name_ja": "C賞 藍染惣右介 MASTERLISE",
+          "current_display_name_ko": "一番くじ BLEACH Stirring Souls vol.4 / C賞 / 藍染惣右介 MASTERLISE / 아이젠 소스케",
+          "current_image_url": "https://assets.1kuji.com/uploads/product_item/image/105715/e057084b-f221-485a-9b7a-149e576fc4bf.webp",
+          "official_prize_rank": "C賞",
+          "official_name_ja": "C賞 藍染惣右介 MASTERLISE",
+          "official_prize_display_name": "C賞 藍染惣右介 MASTERLISE",
+          "suggested_display_name_ko": "一番くじ BLEACH Stirring Souls vol.4 - C賞 藍染惣右介 MASTERLISE",
+          "official_image_url": "https://assets.1kuji.com/uploads/product_item/image/105715/e057084b-f221-485a-9b7a-149e576fc4bf.webp",
+          "field_changes": {
+            "name_ko": {
+              "from": "一番くじ BLEACH Stirring Souls vol.4 / C賞 / 藍染惣右介 MASTERLISE / 아이젠 소스케",
+              "to": "一番くじ BLEACH Stirring Souls vol.4 - C賞 藍染惣右介 MASTERLISE"
+            }
+          },
+          "catalog_patch_template": {
+            "catalog_index": 12305,
+            "name_ko": "一番くじ BLEACH Stirring Souls vol.4 - C賞 藍染惣右介 MASTERLISE",
+            "name_ja": "",
+            "sub_series": "",
+            "image_url": "",
+            "evidence_url": "https://1kuji.com/products/bleach7",
+            "manual_confirmed": false
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "manual_review_status": "not_started",
+          "manual_confirmed": false,
+          "catalog_index": 12311,
+          "source_url": "https://1kuji.com/products/bleach7",
+          "match_type": "exact_image_match",
+          "match_score": 1.0,
+          "series_name": "一番くじ BLEACH Stirring Souls vol.4",
+          "current_prize_rank": "ラストワン賞",
+          "current_name_ja": "ラストワン賞 浦原喜助 MASTERLISE",
+          "current_display_name_ko": "一番くじ BLEACH Stirring Souls vol.4 / ラストワン賞 / 浦原喜助 MASTERLISE / 우라하라 키스케",
+          "current_image_url": "https://assets.1kuji.com/uploads/product_item/image/105716/7d515b33-c437-49e9-892c-a3298586f472.webp",
+          "official_prize_rank": "ラストワン賞",
+          "official_name_ja": "ラストワン賞 浦原喜助 MASTERLISE",
+          "official_prize_display_name": "ラストワン賞 浦原喜助 MASTERLISE",
+          "suggested_display_name_ko": "一番くじ BLEACH Stirring Souls vol.4 - ラストワン賞 浦原喜助 MASTERLISE",
+          "official_image_url": "https://assets.1kuji.com/uploads/product_item/image/105716/7d515b33-c437-49e9-892c-a3298586f472.webp",
+          "field_changes": {
+            "name_ko": {
+              "from": "一番くじ BLEACH Stirring Souls vol.4 / ラストワン賞 / 浦原喜助 MASTERLISE / 우라하라 키스케",
+              "to": "一番くじ BLEACH Stirring Souls vol.4 - ラストワン賞 浦原喜助 MASTERLISE"
+            }
+          },
+          "catalog_patch_template": {
+            "catalog_index": 12311,
+            "name_ko": "一番くじ BLEACH Stirring Souls vol.4 - ラストワン賞 浦原喜助 MASTERLISE",
+            "name_ja": "",
+            "sub_series": "",
+            "image_url": "",
+            "evidence_url": "https://1kuji.com/products/bleach7",
+            "manual_confirmed": false
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "manual_review_status": "not_started",
+          "manual_confirmed": false,
           "catalog_index": 12263,
           "source_url": "https://1kuji.com/products/bluelock8",
           "match_type": "exact_image_match",
@@ -31981,170 +32117,24 @@
             "manual_confirmed": false
           },
           "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 12265,
-          "source_url": "https://1kuji.com/products/bluelock8",
-          "match_type": "exact_image_match",
-          "match_score": 1.0,
-          "series_name": "一番くじ ブルーロック あでぃしょなる・たいむ！",
-          "current_prize_rank": "C賞",
-          "current_name_ja": "C賞 メイド馬狼 フィギュア",
-          "current_display_name_ko": "一番くじ ブルーロック あでぃしょなる・たいむ！ / C賞 / メイド馬狼 フィギュア / 바로 쇼에이",
-          "current_image_url": "https://assets.1kuji.com/uploads/product_item/image/105719/e0033270-ae5d-4b94-b18c-7b779b4fdb64.webp",
-          "official_prize_rank": "C賞",
-          "official_name_ja": "C賞 メイド馬狼 フィギュア",
-          "official_prize_display_name": "C賞 メイド馬狼 フィギュア",
-          "suggested_display_name_ko": "一番くじ ブルーロック あでぃしょなる・たいむ！ - C賞 メイド馬狼 フィギュア",
-          "official_image_url": "https://assets.1kuji.com/uploads/product_item/image/105719/e0033270-ae5d-4b94-b18c-7b779b4fdb64.webp",
-          "field_changes": {
-            "name_ko": {
-              "from": "一番くじ ブルーロック あでぃしょなる・たいむ！ / C賞 / メイド馬狼 フィギュア / 바로 쇼에이",
-              "to": "一番くじ ブルーロック あでぃしょなる・たいむ！ - C賞 メイド馬狼 フィギュア"
-            }
-          },
-          "catalog_patch_template": {
-            "catalog_index": 12265,
-            "name_ko": "一番くじ ブルーロック あでぃしょなる・たいむ！ - C賞 メイド馬狼 フィギュア",
-            "name_ja": "",
-            "sub_series": "",
-            "image_url": "",
-            "evidence_url": "https://1kuji.com/products/bluelock8",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 12272,
-          "source_url": "https://1kuji.com/products/bluelock8",
-          "match_type": "exact_image_match",
-          "match_score": 1.0,
-          "series_name": "一番くじ ブルーロック あでぃしょなる・たいむ！",
-          "current_prize_rank": "ラストワン賞",
-          "current_name_ja": "ラストワン賞 凪 誠士郎 フィギュア-すやすやver.-",
-          "current_display_name_ko": "一番くじ ブルーロック あでぃしょなる・たいむ！ / ラストワン賞 / 凪 誠士郎 フィギュア-すやすやver.- / 나기 세이시로",
-          "current_image_url": "https://assets.1kuji.com/uploads/product_item/image/106218/544328be-1e59-4738-b625-f1c2849e8a1c.webp",
-          "official_prize_rank": "ラストワン賞",
-          "official_name_ja": "ラストワン賞 凪 誠士郎 フィギュア-すやすやver.-",
-          "official_prize_display_name": "ラストワン賞 凪 誠士郎 フィギュア-すやすやver.-",
-          "suggested_display_name_ko": "一番くじ ブルーロック あでぃしょなる・たいむ！ - ラストワン賞 凪 誠士郎 フィギュア-すやすやver.-",
-          "official_image_url": "https://assets.1kuji.com/uploads/product_item/image/106218/544328be-1e59-4738-b625-f1c2849e8a1c.webp",
-          "field_changes": {
-            "name_ko": {
-              "from": "一番くじ ブルーロック あでぃしょなる・たいむ！ / ラストワン賞 / 凪 誠士郎 フィギュア-すやすやver.- / 나기 세이시로",
-              "to": "一番くじ ブルーロック あでぃしょなる・たいむ！ - ラストワン賞 凪 誠士郎 フィギュア-すやすやver.-"
-            }
-          },
-          "catalog_patch_template": {
-            "catalog_index": 12272,
-            "name_ko": "一番くじ ブルーロック あでぃしょなる・たいむ！ - ラストワン賞 凪 誠士郎 フィギュア-すやすやver.-",
-            "name_ja": "",
-            "sub_series": "",
-            "image_url": "",
-            "evidence_url": "https://1kuji.com/products/bluelock8",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 16170,
-          "source_url": "https://1kuji.com/products/cho-birth",
-          "match_type": "exact_image_match",
-          "match_score": 1.0,
-          "series_name": "一番くじ ハッピーバースデー チョッパー",
-          "current_prize_rank": "関連商品",
-          "current_name_ja": "菓子商品 ワンピース ハッピーバースデーチョッパー キャラメルポップコーン",
-          "current_display_name_ko": "一番くじ ハッピーバースデー チョッパー / 関連商品 / 菓子商品 ワンピース ハッピーバースデーチョッパー キャラメルポップコーン / 토니토니 쵸파",
-          "current_image_url": "https://assets.1kuji.com/uploads/product_item/image/1367/919da83d-8dea-4084-80b1-e411d513690b.jpg",
-          "official_prize_rank": "",
-          "official_name_ja": "菓子商品 ワンピース ハッピーバースデーチョッパー キャラメルポップコーン",
-          "official_prize_display_name": "菓子商品 ワンピース ハッピーバースデーチョッパー キャラメルポップコーン",
-          "suggested_display_name_ko": "一番くじ ハッピーバースデー チョッパー - 菓子商品 ワンピース ハッピーバースデーチョッパー キャラメルポップコーン",
-          "official_image_url": "https://assets.1kuji.com/uploads/product_item/image/1367/919da83d-8dea-4084-80b1-e411d513690b.jpg",
-          "field_changes": {
-            "name_ko": {
-              "from": "一番くじ ハッピーバースデー チョッパー / 関連商品 / 菓子商品 ワンピース ハッピーバースデーチョッパー キャラメルポップコーン / 토니토니 쵸파",
-              "to": "一番くじ ハッピーバースデー チョッパー - 菓子商品 ワンピース ハッピーバースデーチョッパー キャラメルポップコーン"
-            }
-          },
-          "catalog_patch_template": {
-            "catalog_index": 16170,
-            "name_ko": "一番くじ ハッピーバースデー チョッパー - 菓子商品 ワンピース ハッピーバースデーチョッパー キャラメルポップコーン",
-            "name_ja": "",
-            "sub_series": "",
-            "image_url": "",
-            "evidence_url": "https://1kuji.com/products/cho-birth",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 16171,
-          "source_url": "https://1kuji.com/products/cho-birth",
-          "match_type": "exact_image_match",
-          "match_score": 1.0,
-          "series_name": "一番くじ ハッピーバースデー チョッパー",
-          "current_prize_rank": "関連商品",
-          "current_name_ja": "玩具菓子 HAPPYBIRTHDAYCHOPPER おきがえチョッパーキーチェーンSP",
-          "current_display_name_ko": "一番くじ ハッピーバースデー チョッパー / 関連商品 / 玩具菓子 HAPPYBIRTHDAYCHOPPER おきがえチョッパーキーチェーンSP / 토니토니 쵸파",
-          "current_image_url": "https://assets.1kuji.com/uploads/product_item/image/1368/f05afcd7-f161-4f78-92b3-63c1c00f9fe4.jpg",
-          "official_prize_rank": "",
-          "official_name_ja": "玩具菓子 HAPPYBIRTHDAYCHOPPER おきがえチョッパーキーチェーンSP",
-          "official_prize_display_name": "玩具菓子 HAPPYBIRTHDAYCHOPPER おきがえチョッパーキーチェーンSP",
-          "suggested_display_name_ko": "一番くじ ハッピーバースデー チョッパー - 玩具菓子 HAPPYBIRTHDAYCHOPPER おきがえチョッパーキーチェーンSP",
-          "official_image_url": "https://assets.1kuji.com/uploads/product_item/image/1368/f05afcd7-f161-4f78-92b3-63c1c00f9fe4.jpg",
-          "field_changes": {
-            "name_ko": {
-              "from": "一番くじ ハッピーバースデー チョッパー / 関連商品 / 玩具菓子 HAPPYBIRTHDAYCHOPPER おきがえチョッパーキーチェーンSP / 토니토니 쵸파",
-              "to": "一番くじ ハッピーバースデー チョッパー - 玩具菓子 HAPPYBIRTHDAYCHOPPER おきがえチョッパーキーチェーンSP"
-            }
-          },
-          "catalog_patch_template": {
-            "catalog_index": 16171,
-            "name_ko": "一番くじ ハッピーバースデー チョッパー - 玩具菓子 HAPPYBIRTHDAYCHOPPER おきがえチョッパーキーチェーンSP",
-            "name_ja": "",
-            "sub_series": "",
-            "image_url": "",
-            "evidence_url": "https://1kuji.com/products/cho-birth",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
         }
       ],
       "review_summary": {
         "review_rows": 400,
-        "source_urls": 106,
-        "fetched_source_urls": 106,
+        "source_urls": 84,
+        "fetched_source_urls": 84,
         "fetch_failure_urls": 0,
-        "candidate_rows": 391,
-        "exact_image_match_rows": 388,
-        "strong_name_match_rows": 3,
-        "blocked_rows": 9,
-        "blocked_reason_counts": [
-          [
-            "no_safe_official_name_or_image_match",
-            9
-          ]
-        ],
-        "blocked_review_reason_counts": [
-          [
-            "display_name_does_not_match_series_and_prize_name",
-            9
-          ]
-        ],
-        "blocked_rows_with_manual_fix_template": 9,
+        "candidate_rows": 400,
+        "exact_image_match_rows": 400,
+        "strong_name_match_rows": 0,
+        "blocked_rows": 0,
+        "blocked_reason_counts": [],
+        "blocked_review_reason_counts": [],
+        "blocked_rows_with_manual_fix_template": 0,
         "auto_apply_enabled": false,
         "recommended_next_action": "manual_confirm_exact_official_patch_candidates_or_fill_blocked_manual_templates",
         "manual_confirmed_rows": 0,
-        "open_candidate_rows": 391
+        "open_candidate_rows": 400
       },
       "review_state": "manual_prize_image_patch_confirmation_required",
       "next_machine_step": "confirm_ichiban_prize_image_patch_templates"

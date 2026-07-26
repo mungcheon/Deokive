@@ -3585,7 +3585,7 @@
     "public_report": "data/catalog_agent_work_queue_public.json",
     "batch_count": 160,
     "max_published_batches": 160,
-    "summed_batch_rows": 21392,
+    "summed_batch_rows": 21401,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -11518,8 +11518,8 @@
   "ichiban_kuji_prize_name_image_review": {
     "public_report": "data/ichiban_kuji_prize_name_image_review_public.json",
     "kuji_rows": 7902,
-    "review_rows": 420,
-    "name_structure_review_rows": 420,
+    "review_rows": 886,
+    "name_structure_review_rows": 886,
     "image_identity_review_rows": 6,
     "same_campaign_prize_rank_name_duplicate_rows": 0,
     "same_campaign_image_reused_different_name_rows": 6,
@@ -11528,7 +11528,7 @@
     "review_reason_counts": [
       [
         "display_name_does_not_match_series_and_prize_name",
-        420
+        886
       ]
     ],
     "auto_apply_enabled": false,
@@ -11537,30 +11537,20 @@
   "ichiban_kuji_prize_name_image_patch_candidates": {
     "public_report": "data/ichiban_kuji_prize_name_image_patch_candidates_public.json",
     "review_rows": 400,
-    "source_urls": 106,
-    "fetched_source_urls": 106,
+    "source_urls": 84,
+    "fetched_source_urls": 84,
     "fetch_failure_urls": 0,
-    "candidate_rows": 391,
-    "exact_image_match_rows": 388,
-    "strong_name_match_rows": 3,
-    "blocked_rows": 9,
-    "blocked_reason_counts": [
-      [
-        "no_safe_official_name_or_image_match",
-        9
-      ]
-    ],
-    "blocked_review_reason_counts": [
-      [
-        "display_name_does_not_match_series_and_prize_name",
-        9
-      ]
-    ],
-    "blocked_rows_with_manual_fix_template": 9,
+    "candidate_rows": 400,
+    "exact_image_match_rows": 400,
+    "strong_name_match_rows": 0,
+    "blocked_rows": 0,
+    "blocked_reason_counts": [],
+    "blocked_review_reason_counts": [],
+    "blocked_rows_with_manual_fix_template": 0,
     "auto_apply_enabled": false,
     "recommended_next_action": "manual_confirm_exact_official_patch_candidates_or_fill_blocked_manual_templates",
     "manual_confirmed_rows": 0,
-    "open_candidate_rows": 391
+    "open_candidate_rows": 400
   },
   "source_discovery_next_focus_fallback_queue": {
     "public_report": "data/source_discovery_next_focus_fallback_queue_public.json",
@@ -13117,33 +13107,33 @@
       }
     },
     "seed_catalog": {
-      "path": "server/catalog_seed_from_local.json",
+      "path": "data/catalog_public.json",
       "exists": true,
-      "rows": 18040,
+      "rows": 0,
       "duplicate_groups": 0,
       "duplicate_rows": 0,
       "missing_enrichment": {
-        "image_url": 715,
-        "source_url": 739,
-        "release_date": 1434,
-        "barcode": 7747,
-        "official_price_jpy": 579
+        "image_url": 0,
+        "source_url": 0,
+        "release_date": 0,
+        "barcode": 0,
+        "official_price_jpy": 0
       }
     },
     "comparison": {
       "same_row_count": false,
-      "row_delta": 2273,
+      "row_delta": 20313,
       "missing_enrichment_delta": {
-        "barcode": 2301,
-        "image_url": 77,
-        "official_price_jpy": -26,
-        "release_date": -92,
-        "source_url": 24
+        "barcode": 10048,
+        "image_url": 792,
+        "official_price_jpy": 553,
+        "release_date": 1342,
+        "source_url": 763
       },
       "public_image_missing_rows": 792,
-      "seed_image_missing_rows": 715,
-      "image_missing_delta": 77,
-      "note": "data/catalog_public.json is the GitHub Pages source of truth; server/catalog_seed_from_local.json is the local DB export safety source."
+      "seed_image_missing_rows": 0,
+      "image_missing_delta": 792,
+      "note": "data/catalog_public.json is the GitHub Pages source of truth. If --seed points to the same file, deltas should be zero."
     }
   },
   "deduplication_queue_alignment": {
