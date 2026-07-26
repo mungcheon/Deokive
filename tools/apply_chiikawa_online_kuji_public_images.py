@@ -34,6 +34,44 @@ CHARACTER_TOKENS = (
     "古本屋",
 )
 
+MANUAL_EXACT_MATCHES = {
+    674: {
+        "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/chiikawa",
+        "candidate_name_ja": "A ピース",
+        "note": "ちいかわだらけくじ A賞 BIGぬいぐるみ ピース",
+    },
+    675: {
+        "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/chiikawa",
+        "candidate_name_ja": "A ヤダッ",
+        "note": "ちいかわだらけくじ A賞 BIGぬいぐるみ ヤダ",
+    },
+    676: {
+        "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/chiikawa",
+        "candidate_name_ja": "B 磁石でぴたっと！なかよしぬいぐるみ （ちいかわとカブトムシ）",
+        "note": "ちいかわだらけくじ B賞 マグネット付きおとも人形",
+    },
+    678: {
+        "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/hachiware",
+        "candidate_name_ja": "A 撮るよーッ!!!",
+        "note": "ハチワレだらけくじ A賞 BIGぬいぐるみ 撮るよーッ!!!",
+    },
+    679: {
+        "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/hachiware",
+        "candidate_name_ja": "A ピース",
+        "note": "ハチワレだらけくじ A賞 BIGぬいぐるみ 照れピース",
+    },
+    680: {
+        "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/hachiware",
+        "candidate_name_ja": "B 下剋上",
+        "note": "ハチワレだらけくじ B賞 フェイスクッション 下剋上",
+    },
+    681: {
+        "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/hachiware",
+        "candidate_name_ja": "B …ってコト！？",
+        "note": "ハチワレだらけくじ B賞 フェイスクッション …ってコト!?",
+    },
+}
+
 
 def load_catalog(path: Path) -> tuple[Any, list[dict[str, Any]]]:
     payload = json.loads(path.read_text(encoding="utf-8-sig"))
@@ -110,15 +148,74 @@ def build_candidate_lookup(urls: list[str]) -> tuple[dict[str, list[dict[str, An
     return by_url, failures
 
 
+def _manual_exact_candidate(
+    index: int,
+    row: dict[str, Any],
+    by_url: dict[str, list[dict[str, Any]]],
+) -> tuple[dict[str, Any] | None, dict[str, Any] | None]:
+    catalog_index = row.get("catalog_index", index)
+    if not isinstance(catalog_index, int):
+        return None, None
+    rule = MANUAL_EXACT_MATCHES.get(catalog_index)
+    if not rule:
+        return None, None
+    source_url = str(rule["source_url"])
+    expected = str(rule["candidate_name_ja"])
+    for candidate in by_url.get(source_url, []):
+        if candidate.get("name_ja") == expected and candidate.get("image_url"):
+            return candidate, rule
+    return None, rule
+
+
 def repair(rows: list[dict[str, Any]], *, write: bool) -> dict[str, Any]:
     targets = missing_online_rows(rows)
-    urls = sorted({str(row.get("source_url") or "") for _, row in targets})
+    urls = {
+        str(row.get("source_url") or "")
+        for _, row in targets
+        if str(row.get("source_url") or "").rstrip("/") != "https://online-kuji.chiikawamarket.jp"
+    }
+    urls.update(str(rule["source_url"]) for rule in MANUAL_EXACT_MATCHES.values())
+    urls = sorted(urls)
     by_url, failures = build_candidate_lookup(urls)
     used_by_url: dict[str, set[int]] = defaultdict(set)
     repaired: list[dict[str, Any]] = []
     skipped: list[dict[str, Any]] = []
 
     for index, row in targets:
+        manual_candidate, manual_rule = _manual_exact_candidate(index, row, by_url)
+        if manual_candidate and manual_rule:
+            if write:
+                row["source_url"] = manual_rule["source_url"]
+                row["image_url"] = manual_candidate["image_url"]
+            repaired.append(
+                {
+                    "catalog_index": row.get("catalog_index", index),
+                    "row_index": index,
+                    "name_ko": row.get("name_ko"),
+                    "name_ja": row.get("name_ja"),
+                    "source_url": manual_rule["source_url"],
+                    "previous_source_url": row.get("source_url"),
+                    "matched_candidate_name_ja": manual_candidate.get("name_ja"),
+                    "image_url": manual_candidate.get("image_url"),
+                    "match_method": "manual_exact_campaign_mapping",
+                    "manual_note": manual_rule.get("note"),
+                }
+            )
+            continue
+        if manual_rule:
+            skipped.append(
+                {
+                    "catalog_index": row.get("catalog_index", index),
+                    "row_index": index,
+                    "name_ko": row.get("name_ko"),
+                    "name_ja": row.get("name_ja"),
+                    "source_url": manual_rule["source_url"],
+                    "previous_source_url": row.get("source_url"),
+                    "reason": "manual_exact_candidate_not_found",
+                    "expected_candidate_name_ja": manual_rule["candidate_name_ja"],
+                }
+            )
+            continue
         source_url = str(row.get("source_url") or "")
         candidates = by_url.get(source_url) or []
         matches = [

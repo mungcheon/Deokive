@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T13:36:36Z",
+  "generated_at": "2026-07-26T14:20:39Z",
   "scope": "catalog_missing_image_actionability",
   "summary": {
-    "missing_image_rows": 812,
-    "readiness_classified_rows": 812,
+    "missing_image_rows": 805,
+    "readiness_classified_rows": 805,
     "unclassified_rows": 0,
-    "exact_source_ready_rows": 22,
+    "exact_source_ready_rows": 15,
     "source_first_rows": 758,
     "review_before_attach_rows": 22,
     "source_detail_candidate_review_rows": 0,
@@ -37,13 +37,13 @@
     "source_discovery_focus_template_dry_run_skipped_rows": 758,
     "source_discovery_focus_coverage": 1.0,
     "source_discovery_non_focus_rows": 0,
-    "action_queue_rows": 44,
-    "direct_image_action_queue_rows": 44,
-    "direct_image_action_primary_review_url_rows": 44,
+    "action_queue_rows": 37,
+    "direct_image_action_queue_rows": 37,
+    "direct_image_action_primary_review_url_rows": 37,
     "direct_image_action_primary_review_url_kind_counts": [
       [
         "current_source_url",
-        44
+        37
       ]
     ],
     "direct_image_action_next_representative_review_batch_rows": 10,
@@ -60,13 +60,13 @@
     "manual_image_research_review_start_kind": "fallback_web_search",
     "source_discovery_review_start_rows": 20,
     "source_discovery_review_start_kind": "domain_limited_web_search",
-    "image_attachment_template_rows": 44,
+    "image_attachment_template_rows": 37,
     "image_attachment_template_confirmed_rows": 0,
     "image_attachment_template_source_update_required_rows": 0,
     "image_attachment_template_representative_review_rows": 22,
     "image_attachment_template_dry_run_updated_rows": 0,
-    "image_attachment_template_dry_run_skipped_rows": 44,
-    "actionable_image_rows": 44,
+    "image_attachment_template_dry_run_skipped_rows": 37,
+    "actionable_image_rows": 37,
     "source_discovery_work_pack_count": 16,
     "source_discovery_work_pack_rows": 679,
     "by_blocked_reason": [
@@ -75,12 +75,12 @@
         "rows": 758
       },
       {
-        "blocked_reason": "candidate_image_requires_manual_review",
+        "blocked_reason": "representative_image_requires_product_type_review",
         "rows": 22
       },
       {
-        "blocked_reason": "representative_image_requires_product_type_review",
-        "rows": 22
+        "blocked_reason": "candidate_image_requires_manual_review",
+        "rows": 15
       },
       {
         "blocked_reason": "candidate_identity_warning_requires_recheck",
@@ -97,12 +97,12 @@
         "rows": 758
       },
       {
-        "blocked_until": "manual_image_url_confirmed_from_exact_source",
+        "blocked_until": "representative_image_exact_product_type_confirmed",
         "rows": 22
       },
       {
-        "blocked_until": "representative_image_exact_product_type_confirmed",
-        "rows": 22
+        "blocked_until": "manual_image_url_confirmed_from_exact_source",
+        "rows": 15
       },
       {
         "blocked_until": "candidate_identity_rechecked_or_replaced",
@@ -114,7 +114,7 @@
       }
     ],
     "auto_apply_enabled": false,
-    "completion_plan_total_open_rows": 812,
+    "completion_plan_total_open_rows": 805,
     "completion_plan_phase_rows_total": 790,
     "completion_plan_phase_count": 3,
     "completion_plan_status": "needs_review",
@@ -124,25 +124,25 @@
     "completion_plan_rows_with_review_start": 790,
     "completion_plan_rows_missing_review_start": 0,
     "blocking_dashboard_status": "manual_evidence_required",
-    "blocking_dashboard_queue_coverage": 0.9877
+    "blocking_dashboard_queue_coverage": 0.9963
   },
   "readiness": [
     {
       "readiness": "image_url_candidate_review",
       "priority": 10,
-      "rows": 22,
+      "rows": 15,
       "workflow_rows": [
         {
           "workflow": "extract_from_existing_source_url",
           "label": "이미 확인된 상세 source_url에서 image_url 추출",
-          "rows": 22,
+          "rows": 15,
           "next_step": "extract_product_image_from_existing_exact_source_url"
         }
       ],
       "by_source_store": [
         {
           "source_store": "치이카와 온라인 쿠지",
-          "rows": 18
+          "rows": 11
         },
         {
           "source_store": "TOHO animation STORE",
@@ -262,36 +262,36 @@
           "workflow": "extract_from_existing_source_url"
         },
         {
-          "catalog_index": 674,
-          "name_ko": "A상: 빅 인형 피스",
-          "name_ja": "A賞 BIGぬいぐるみ ピース",
+          "catalog_index": 677,
+          "name_ko": "D상: 친구 마스코트",
+          "name_ja": "D賞 おともだちマスコット",
           "source_store": "치이카와 온라인 쿠지",
           "affiliation": null,
-          "category": "인형",
+          "category": "마스코트",
           "source_url": "https://online-kuji.chiikawamarket.jp/",
-          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%83%94%E3%83%BC%E3%82%B9",
+          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=D%E8%B3%9E%20%E3%81%8A%E3%81%A8%E3%82%82%E3%81%A0%E3%81%A1%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88",
           "workflow": "extract_from_existing_source_url"
         },
         {
-          "catalog_index": 675,
-          "name_ko": "A상: 빅 인형 야다",
-          "name_ja": "A賞 BIGぬいぐるみ ヤダ",
+          "catalog_index": 682,
+          "name_ko": "D상: 하치와레 마스코트",
+          "name_ja": "D賞 マスコット",
           "source_store": "치이카와 온라인 쿠지",
           "affiliation": null,
-          "category": "인형",
+          "category": "마스코트",
           "source_url": "https://online-kuji.chiikawamarket.jp/",
-          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%83%A4%E3%83%80",
+          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=D%E8%B3%9E%20%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88",
           "workflow": "extract_from_existing_source_url"
         },
         {
-          "catalog_index": 676,
-          "name_ko": "B상: 자석 동반 인형",
-          "name_ja": "B賞 マグネット付きおとも人形",
-          "source_store": "치이카와 온라인 쿠지",
+          "catalog_index": 2270,
+          "name_ko": "하이큐!! 10주년 이벤트 트레이딩 캔뱃지",
+          "name_ja": "ハイキュー!! 10th イベント -NEXT STEP- トレーディング缶バッジ",
+          "source_store": "TOHO animation STORE",
           "affiliation": null,
-          "category": "인형",
-          "source_url": "https://online-kuji.chiikawamarket.jp/",
-          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E3%83%9E%E3%82%B0%E3%83%8D%E3%83%83%E3%83%88%E4%BB%98%E3%81%8D%E3%81%8A%E3%81%A8%E3%82%82%E4%BA%BA%E5%BD%A2",
+          "category": "캔뱃지",
+          "source_url": "https://haikyu.jp/10thevent/",
+          "official_search_url": null,
           "workflow": "extract_from_existing_source_url"
         }
       ],
@@ -1095,7 +1095,7 @@
     {
       "source_store": "치이카와 온라인 쿠지",
       "priority": 10,
-      "missing_image_rows": 18,
+      "missing_image_rows": 11,
       "primary_workflow": "extract_from_existing_source_url",
       "recommended_next_step": "extract_product_image_from_existing_exact_source_url",
       "blocked_until": "manual_image_url_confirmed_from_exact_source",
@@ -1108,14 +1108,14 @@
       "readiness_rows": [
         {
           "readiness": "image_url_candidate_review",
-          "rows": 18
+          "rows": 11
         }
       ],
       "workflow_rows": [
         {
           "workflow": "extract_from_existing_source_url",
           "label": "이미 확인된 상세 source_url에서 image_url 추출",
-          "rows": 18,
+          "rows": 11,
           "next_step": "extract_product_image_from_existing_exact_source_url"
         }
       ],
@@ -8178,11 +8178,11 @@
       "workflow": "extract_from_existing_source_url",
       "batch_id": "image-attachment-action-001",
       "source_store": "치이카와 온라인 쿠지",
-      "row_count": 18,
-      "primary_review_url_rows": 18,
+      "row_count": 11,
+      "primary_review_url_rows": 11,
       "first_primary_review_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
       "first_primary_review_url_kind": "current_source_url",
-      "sample_items_with_primary_review_url": 18,
+      "sample_items_with_primary_review_url": 11,
       "sample_primary_review_items": [
         {
           "catalog_index": 631,
@@ -11107,7 +11107,7 @@
   ],
   "manual_validation_focus": {
     "auto_import_ready_rows": 0,
-    "manual_validation_required_rows": 812,
+    "manual_validation_required_rows": 805,
     "next_focus_lane": "discover_exact_source_urls",
     "next_focus_row_count": 758,
     "next_focus_source": "source_discovery_action_queue_public.json",
@@ -11625,13 +11625,13 @@
     }
   },
   "execution_queue_summary": {
-    "open_missing_image_rows": 812,
+    "open_missing_image_rows": 805,
     "auto_import_ready_rows": 0,
     "queue_count": 4,
     "queued_rows_total": 802,
     "raw_queued_rows_total": 802,
     "overlapping_queue_rows": 0,
-    "not_yet_queued_rows": 10,
+    "not_yet_queued_rows": 3,
     "not_yet_queued_rows_explained": 0,
     "unqueued_phase_rows_total": 0,
     "overlay_queue_rows": 12,
@@ -12034,12 +12034,12 @@
   },
   "blocking_dashboard": {
     "status": "manual_evidence_required",
-    "total_open_rows": 812,
+    "total_open_rows": 805,
     "auto_import_ready_rows": 0,
-    "manual_validation_required_rows": 812,
+    "manual_validation_required_rows": 805,
     "queued_rows_total": 802,
-    "not_yet_queued_rows": 10,
-    "queue_coverage": 0.9877,
+    "not_yet_queued_rows": 3,
+    "queue_coverage": 0.9963,
     "top_blocked_reason": {
       "blocked_reason": "missing_exact_source_url",
       "rows": 758
@@ -12097,11 +12097,11 @@
     ],
     "image_evidence_bottleneck_summary": {
       "status": "source_or_image_evidence_required",
-      "missing_image_rows": 812,
+      "missing_image_rows": 805,
       "known_image_download_problem_rows": 0,
-      "image_url_evidence_missing_rows": 812,
+      "image_url_evidence_missing_rows": 805,
       "auto_import_ready_rows": 0,
-      "manual_confirmation_required_rows": 812,
+      "manual_confirmation_required_rows": 805,
       "source_first_rows": 758,
       "representative_review_rows": 22,
       "manual_image_research_rows": 10,
@@ -12135,7 +12135,7 @@
     "operator_message": "No missing-image DB row can be imported automatically yet; fill the next confirmation template with exact product source/image evidence first."
   },
   "completion_plan": {
-    "total_open_rows": 812,
+    "total_open_rows": 805,
     "phase_rows_total": 790,
     "phase_count": 3,
     "status": "needs_review",

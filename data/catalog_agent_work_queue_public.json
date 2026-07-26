@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T13:41:31Z",
+  "generated_at": "2026-07-26T14:24:41Z",
   "summary": {
     "batch_count": 160,
     "max_published_batches": 160,
-    "summed_batch_rows": 20668,
+    "summed_batch_rows": 20647,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -208,7 +208,7 @@
     ],
     "open_review_queues": {
       "source_discovery_rows": 768,
-      "image_missing_rows": 812,
+      "image_missing_rows": 805,
       "dedupe_groups": 61,
       "animation_unknown_categories": 0,
       "ichiban_missing_release_date_rows": 8,
@@ -261,8 +261,8 @@
       "official_detail_review_manual_confirmed_rows": 0,
       "ensky_cache_candidate_action_rows": 39,
       "ensky_cache_candidate_manual_confirmed_rows": 0,
-      "image_attachment_action_rows": 44,
-      "image_attachment_actionable_rows": 44,
+      "image_attachment_action_rows": 37,
+      "image_attachment_actionable_rows": 37,
       "image_attachment_unqueued_actionable_rows": 0,
       "image_attachment_source_url_search_hint_rows": 0,
       "image_attachment_source_url_missing_search_hint_rows": 0,
@@ -271,7 +271,7 @@
       "image_attachment_source_url_missing_any_search_hint_rows": 0,
       "image_attachment_source_url_primary_review_url_rows": 0,
       "image_attachment_source_url_missing_primary_review_url_rows": 0,
-      "image_attachment_local_download_ready_rows": 44,
+      "image_attachment_local_download_ready_rows": 37,
       "ichiban_metadata_action_campaigns": 41,
       "ichiban_metadata_actionable_campaigns": 41,
       "ichiban_metadata_unqueued_action_campaigns": 0,
@@ -301,10 +301,10 @@
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
       "ichiban_prize_name_image_patch_blocked_rows": 0,
       "catalog_goal_manual_review_pillars": 5,
-      "catalog_goal_manual_review_rows": 921,
+      "catalog_goal_manual_review_rows": 914,
       "catalog_goal_auto_apply_ready_rows": 0,
       "catalog_goal_dedupe_manual_review_rows": 48,
-      "catalog_goal_missing_image_rows": 812,
+      "catalog_goal_missing_image_rows": 805,
       "catalog_goal_source_url_update_rows": 0,
       "catalog_goal_animation_category_rows": 0,
       "catalog_goal_ichiban_manual_review_rows": 61,
@@ -330,7 +330,7 @@
     "confirmed_import_top_work_order_lane": "confirm_template_rows",
     "confirmed_import_top_work_order_workflow": "source_discovery",
     "confirmed_import_top_work_order_row_count": 641,
-    "image_rows_still_requiring_url_evidence": 812,
+    "image_rows_still_requiring_url_evidence": 805,
     "image_missing_evidence_top_source_stores": [
       [
         "엔스카이",
@@ -375,12 +375,12 @@
         125
       ],
       [
-        "인형",
-        102
-      ],
-      [
         "캔뱃지",
         97
+      ],
+      [
+        "인형",
+        95
       ],
       [
         "키링",
@@ -420,44 +420,44 @@
       "agent_id": "agent-image-action",
       "workstream": "image_attachment_action_queue",
       "priority": 10,
-      "rows": 18,
+      "rows": 11,
       "title": "치이카와 온라인 쿠지 image attachment action",
       "public_report": "data/catalog_image_attachment_action_queue_public.json",
       "review_state": "image_evidence_confirmation_required",
       "next_machine_step": "confirm_source_then_fill_image_url_templates",
       "review_summary": {
-        "action_batch_rows": 18,
-        "primary_review_url_rows": 18,
+        "action_batch_rows": 11,
+        "primary_review_url_rows": 11,
         "first_primary_review_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
         "first_primary_review_url_kind": "current_source_url",
         "review_lane_counts": [
           [
             "image_url_review_ready",
-            18
+            11
           ]
         ],
         "image_import_blocker_counts": [
           [
             "manual_image_url_confirmation",
-            18
+            11
           ]
         ],
-        "suggested_local_image_path_rows": 18,
-        "local_image_download_instruction_ready_rows": 18,
+        "suggested_local_image_path_rows": 11,
+        "local_image_download_instruction_ready_rows": 11,
         "blocked_before_image_import_rows": 0,
-        "can_import_image_urls_now_rows": 18,
+        "can_import_image_urls_now_rows": 11,
         "attachment_readiness": {
-          "row_count": 18,
-          "local_image_download_instruction_ready_rows": 18,
-          "suggested_local_image_path_rows": 18,
-          "primary_review_url_rows": 18,
+          "row_count": 11,
+          "local_image_download_instruction_ready_rows": 11,
+          "suggested_local_image_path_rows": 11,
+          "primary_review_url_rows": 11,
           "primary_review_url_missing_rows": 0,
           "blocked_by_source_url_rows": 0,
           "blocked_by_representative_review_rows": 0,
-          "image_url_review_ready_rows": 18,
+          "image_url_review_ready_rows": 11,
           "blocked_before_image_import_rows": 0,
-          "can_import_image_urls_now_rows": 18,
-          "download_ready_after_manual_image_url_rows": 18,
+          "can_import_image_urls_now_rows": 11,
+          "download_ready_after_manual_image_url_rows": 11,
           "readiness_lane_counts": [
             [
               "source_url_replacement_first",
@@ -469,7 +469,7 @@
             ],
             [
               "image_url_review_ready",
-              18
+              11
             ]
           ],
           "manual_confirmation_required": true,
@@ -484,7 +484,7 @@
       "agent_id": "agent-image-existing-source",
       "workstream": "image_url_attachment",
       "priority": 10,
-      "rows": 18,
+      "rows": 11,
       "title": "치이카와 온라인 쿠지 이미지 보강 (extract_from_existing_source_url)",
       "public_report": "data/catalog_image_enrichment_batches_public.json",
       "review_state": "source_discovery_then_image_attachment",
@@ -729,7 +729,7 @@
       "priority": 10,
       "title": "치이카와 온라인 쿠지 image attachment action",
       "public_report": "data/catalog_image_attachment_action_queue_public.json",
-      "rows": 18,
+      "rows": 11,
       "recommended_action": "Review product page image and fill manual image_url.",
       "acceptance_criteria": [
         "Confirm exact product identity before filling image_url.",
@@ -1388,38 +1388,38 @@
         }
       ],
       "review_summary": {
-        "action_batch_rows": 18,
-        "primary_review_url_rows": 18,
+        "action_batch_rows": 11,
+        "primary_review_url_rows": 11,
         "first_primary_review_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
         "first_primary_review_url_kind": "current_source_url",
         "review_lane_counts": [
           [
             "image_url_review_ready",
-            18
+            11
           ]
         ],
         "image_import_blocker_counts": [
           [
             "manual_image_url_confirmation",
-            18
+            11
           ]
         ],
-        "suggested_local_image_path_rows": 18,
-        "local_image_download_instruction_ready_rows": 18,
+        "suggested_local_image_path_rows": 11,
+        "local_image_download_instruction_ready_rows": 11,
         "blocked_before_image_import_rows": 0,
-        "can_import_image_urls_now_rows": 18,
+        "can_import_image_urls_now_rows": 11,
         "attachment_readiness": {
-          "row_count": 18,
-          "local_image_download_instruction_ready_rows": 18,
-          "suggested_local_image_path_rows": 18,
-          "primary_review_url_rows": 18,
+          "row_count": 11,
+          "local_image_download_instruction_ready_rows": 11,
+          "suggested_local_image_path_rows": 11,
+          "primary_review_url_rows": 11,
           "primary_review_url_missing_rows": 0,
           "blocked_by_source_url_rows": 0,
           "blocked_by_representative_review_rows": 0,
-          "image_url_review_ready_rows": 18,
+          "image_url_review_ready_rows": 11,
           "blocked_before_image_import_rows": 0,
-          "can_import_image_urls_now_rows": 18,
-          "download_ready_after_manual_image_url_rows": 18,
+          "can_import_image_urls_now_rows": 11,
+          "download_ready_after_manual_image_url_rows": 11,
           "readiness_lane_counts": [
             [
               "source_url_replacement_first",
@@ -1431,7 +1431,7 @@
             ],
             [
               "image_url_review_ready",
-              18
+              11
             ]
           ],
           "manual_confirmation_required": true,
@@ -1450,7 +1450,7 @@
       "priority": 10,
       "title": "치이카와 온라인 쿠지 이미지 보강 (extract_from_existing_source_url)",
       "public_report": "data/catalog_image_enrichment_batches_public.json",
-      "rows": 18,
+      "rows": 11,
       "recommended_action": "crawl verified source_url and review extracted product image",
       "acceptance_criteria": [
         "Exact product identity is verified before importing image_url.",
@@ -32718,7 +32718,7 @@
       "priority": 60,
       "title": "메타데이터 검수: metadata-review-005",
       "public_report": "data/catalog_metadata_review_batches_public.json",
-      "rows": 327,
+      "rows": 322,
       "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
       "acceptance_criteria": [
         "Dates, prices, names, barcodes, source URLs, and images are copied only from official or trusted evidence.",
@@ -32817,7 +32817,7 @@
       "priority": 60,
       "title": "메타데이터 검수: metadata-review-006",
       "public_report": "data/catalog_metadata_review_batches_public.json",
-      "rows": 93,
+      "rows": 91,
       "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
       "acceptance_criteria": [
         "Dates, prices, names, barcodes, source URLs, and images are copied only from official or trusted evidence.",
@@ -32826,69 +32826,9 @@
       ],
       "sample_items": [
         {
-          "catalog_index": 1016,
-          "name_ko": "귀멸의 칼날 디포르메 아크릴 마스코트 (네즈코)",
-          "name_ja": "鬼滅の刃 デフォルメアクリルマスコット (禰豆子)",
-          "series_name": null,
-          "category": "마스코트",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 1017,
-          "name_ko": "귀멸의 칼날 디포르메 아크릴 마스코트 (젠이츠)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "마스코트",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 1018,
-          "name_ko": "귀멸의 칼날 디포르메 아크릴 마스코트 (이노스케)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "마스코트",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 1019,
-          "name_ko": "귀멸의 칼날 디포르메 아크릴 마스코트 (카나오)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "마스코트",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 1020,
-          "name_ko": "귀멸의 칼날 디포르메 아크릴 마스코트 (시노부)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "마스코트",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 1021,
-          "name_ko": "귀멸의 칼날 디포르메 아크릴 마스코트 (기유)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "마스코트",
-          "source_store": null,
-          "source_url": null,
-          "official_search_url": ""
-        },
-        {
-          "catalog_index": 1022,
-          "name_ko": "귀멸의 칼날 랜덤 홀로그램 캔뱃지 (7종)",
-          "name_ja": null,
+          "catalog_index": 1680,
+          "name_ko": "헌터X헌터 학원 시리즈 캔뱃지 곤",
+          "name_ja": "HUNTER×HUNTER 学園シリーズ缶バッジ ゴン",
           "series_name": null,
           "category": "캔뱃지",
           "source_store": null,
@@ -32896,9 +32836,69 @@
           "official_search_url": ""
         },
         {
-          "catalog_index": 1023,
-          "name_ko": "귀멸의 칼날 메탈릭 클리어 파일",
-          "name_ja": null,
+          "catalog_index": 1690,
+          "name_ko": "주술회전 학원 시리즈 캔뱃지 후시구로",
+          "name_ja": "呪術廻戦 学園シリーズ缶バッジ 伏黒",
+          "series_name": null,
+          "category": "캔뱃지",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 1696,
+          "name_ko": "메이드 인 어비스 일러스트 카드 컬렉션 나나치",
+          "name_ja": "メイドインアビス イラストカードコレクション ナナチ",
+          "series_name": null,
+          "category": "문구",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 1704,
+          "name_ko": "단간론파 일러스트 카드 컬렉션 코마에다",
+          "name_ja": "ダンガンロンパ イラストカードコレクション 狛枝",
+          "series_name": null,
+          "category": "문구",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 1712,
+          "name_ko": "장송의 프리렌 일러스트 카드 컬렉션 펀",
+          "name_ja": "葬送のフリーレン イラストカードコレクション フェルン",
+          "series_name": null,
+          "category": "문구",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 1723,
+          "name_ko": "나의 히어로 아카데미아 학원 시리즈 캔뱃지 토도로키",
+          "name_ja": "僕のヒーローアカデミア 学園シリーズ缶バッジ 轟",
+          "series_name": null,
+          "category": "캔뱃지",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 1736,
+          "name_ko": "귀멸의 칼날 일러스트 카드 컬렉션 토미오카",
+          "name_ja": "鬼滅の刃 イラストカードコレクション 冨岡",
+          "series_name": null,
+          "category": "문구",
+          "source_store": null,
+          "source_url": null,
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 1749,
+          "name_ko": "원피스 일러스트 카드 컬렉션 에이스&사보&루피",
+          "name_ja": "ONE PIECE イラストカードコレクション エース＆サボ＆ルフィ",
           "series_name": null,
           "category": "문구",
           "source_store": null,
@@ -40542,7 +40542,7 @@
     "manual_review_required": true,
     "pillar_count": 5,
     "blocking_pillar_count": 5,
-    "manual_review_rows": 921,
+    "manual_review_rows": 914,
     "auto_apply_ready_rows": 0,
     "next_safe_phase": "review_candidate_source_urls",
     "blocked_reasons": [
@@ -40582,7 +40582,7 @@
         "pillar": "missing_images",
         "label": "Resolve missing catalog images",
         "status": "manual_evidence_required",
-        "manual_review_rows": 812,
+        "manual_review_rows": 805,
         "auto_apply_ready_rows": 0,
         "next_safe_phase": "discover_exact_source_urls",
         "next_queue_lane": "discover_exact_source_urls",
@@ -40613,8 +40613,8 @@
         "next_queue_lane": "manual_search_required",
         "next_queue_rows": 0,
         "next_execution_lane_count": 4,
-        "next_execution_open_rows": 840,
-        "next_execution_next_batch_rows": 102,
+        "next_execution_open_rows": 833,
+        "next_execution_next_batch_rows": 95,
         "first_next_execution_lane": "exact_source_url_review",
         "first_next_execution_status": "manual_cache_miss_research_required",
         "first_next_execution_rows": 20,

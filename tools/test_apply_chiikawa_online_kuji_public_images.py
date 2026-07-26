@@ -47,6 +47,28 @@ class ApplyChiikawaOnlineKujiPublicImagesTest(unittest.TestCase):
         self.assertEqual(rows[0]["image_url"], "https://example.com/a.jpg")
         self.assertNotIn("image_url", rows[1])
 
+    def test_repairs_manual_exact_root_source_mapping(self) -> None:
+        rows = [
+            {
+                "catalog_index": 674,
+                "name_ja": "A賞 BIGぬいぐるみ ピース",
+                "source_url": "https://online-kuji.chiikawamarket.jp/",
+            }
+        ]
+
+        with patch(
+            "tools.apply_chiikawa_online_kuji_public_images.extract_campaign",
+            return_value=[
+                {"name_ja": "A ピース", "image_url": "https://example.com/chiikawa-peace.jpg"},
+            ],
+        ):
+            report = repair(rows, write=True)
+
+        self.assertEqual(report["summary"]["repaired_rows"], 1)
+        self.assertEqual(rows[0]["source_url"], "https://online-kuji.chiikawamarket.jp/store/lottery/chiikawa")
+        self.assertEqual(rows[0]["image_url"], "https://example.com/chiikawa-peace.jpg")
+        self.assertEqual(report["repaired"][0]["match_method"], "manual_exact_campaign_mapping")
+
 
 if __name__ == "__main__":
     unittest.main()

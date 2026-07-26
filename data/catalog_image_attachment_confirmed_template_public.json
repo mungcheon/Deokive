@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T13:36:36Z",
+  "generated_at": "2026-07-26T14:20:39Z",
   "scope": "catalog_image_attachment_confirmed_template",
   "summary": {
-    "template_items": 44,
+    "template_items": 37,
     "manual_confirmed_rows": 0,
     "source_url_update_required_rows": 0,
     "representative_image_review_required_rows": 22,
-    "image_url_ready_rows": 22,
+    "image_url_ready_rows": 15,
     "source_url_candidate_prefilled_rows": 0,
     "batch_count": 7,
     "by_batch": [
@@ -17,7 +17,7 @@
       ],
       [
         "image-attachment-action-001",
-        18
+        11
       ],
       [
         "image-attachment-action-007",
@@ -42,12 +42,12 @@
     ],
     "by_workflow": [
       [
-        "extract_from_existing_source_url",
+        "review_gotouchi_official_candidates",
         22
       ],
       [
-        "review_gotouchi_official_candidates",
-        22
+        "extract_from_existing_source_url",
+        15
       ]
     ],
     "by_source_store": [
@@ -57,7 +57,7 @@
       ],
       [
         "치이카와 온라인 쿠지",
-        18
+        11
       ],
       [
         "TOHO animation STORE",
@@ -78,12 +78,12 @@
     ],
     "by_category": [
       [
-        "인형",
-        15
-      ],
-      [
         "마스코트",
         14
+      ],
+      [
+        "인형",
+        8
       ],
       [
         "캔뱃지",
@@ -108,19 +108,15 @@
     ],
     "by_review_lane": [
       [
-        "image_url_review_ready",
+        "representative_image_candidate_review",
         22
       ],
       [
-        "representative_image_candidate_review",
-        22
+        "image_url_review_ready",
+        15
       ]
     ],
     "by_image_import_blocker": [
-      [
-        "manual_image_url_confirmation",
-        22
-      ],
       [
         "representative_image_may_not_match_exact_variant",
         22
@@ -128,6 +124,10 @@
       [
         "product_type_confirmation_required",
         22
+      ],
+      [
+        "manual_image_url_confirmation",
+        15
       ]
     ],
     "by_source_url_review_lane": [],
@@ -569,147 +569,6 @@
     {
       "manual_confirmed": false,
       "manual_note": "",
-      "row_index": 674,
-      "field": "image_url",
-      "manual_value": "",
-      "evidence_url": "",
-      "candidate_source_url": "",
-      "source_store": "치이카와 온라인 쿠지",
-      "name_ko": "A상: 빅 인형 피스",
-      "name_ja": "A賞 BIGぬいぐるみ ピース",
-      "category": "인형",
-      "affiliation": "치이카와",
-      "source_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%83%94%E3%83%BC%E3%82%B9",
-      "workflow": "extract_from_existing_source_url",
-      "requires_exact_source_url": false,
-      "requires_representative_image_flag": false,
-      "blocked_until": "manual_confirmed_image_url",
-      "suggested_local_image_path": "assets/catalog_images/catalog_674.webp",
-      "local_image_path_field": "local_image_path",
-      "review_lane": "image_url_review_ready",
-      "candidate_image_url": "",
-      "candidate_title": "",
-      "source_url_review_lane": "",
-      "source_url_review_blockers": [],
-      "catalog_index": 674,
-      "series_name": null,
-      "current_source_url": "https://online-kuji.chiikawamarket.jp/",
-      "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%83%94%E3%83%BC%E3%82%B9",
-      "batch_id": "image-attachment-action-001",
-      "required_before_image_import": [
-        "confirm_product_page_image_url"
-      ],
-      "image_import_blockers": [
-        "manual_image_url_confirmation"
-      ],
-      "manual_confirmation_requirements": [
-        "Open source_url.",
-        "Confirm the page is for the exact catalog item.",
-        "Copy the primary product image URL into the image attachment template."
-      ],
-      "source_url_update_required": false,
-      "representative_image": false,
-      "representative_image_review_required": false,
-      "image_url_ready": true,
-      "auto_apply_enabled": false
-    },
-    {
-      "manual_confirmed": false,
-      "manual_note": "",
-      "row_index": 675,
-      "field": "image_url",
-      "manual_value": "",
-      "evidence_url": "",
-      "candidate_source_url": "",
-      "source_store": "치이카와 온라인 쿠지",
-      "name_ko": "A상: 빅 인형 야다",
-      "name_ja": "A賞 BIGぬいぐるみ ヤダ",
-      "category": "인형",
-      "affiliation": "치이카와",
-      "source_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%83%A4%E3%83%80",
-      "workflow": "extract_from_existing_source_url",
-      "requires_exact_source_url": false,
-      "requires_representative_image_flag": false,
-      "blocked_until": "manual_confirmed_image_url",
-      "suggested_local_image_path": "assets/catalog_images/catalog_675.webp",
-      "local_image_path_field": "local_image_path",
-      "review_lane": "image_url_review_ready",
-      "candidate_image_url": "",
-      "candidate_title": "",
-      "source_url_review_lane": "",
-      "source_url_review_blockers": [],
-      "catalog_index": 675,
-      "series_name": null,
-      "current_source_url": "https://online-kuji.chiikawamarket.jp/",
-      "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%83%A4%E3%83%80",
-      "batch_id": "image-attachment-action-001",
-      "required_before_image_import": [
-        "confirm_product_page_image_url"
-      ],
-      "image_import_blockers": [
-        "manual_image_url_confirmation"
-      ],
-      "manual_confirmation_requirements": [
-        "Open source_url.",
-        "Confirm the page is for the exact catalog item.",
-        "Copy the primary product image URL into the image attachment template."
-      ],
-      "source_url_update_required": false,
-      "representative_image": false,
-      "representative_image_review_required": false,
-      "image_url_ready": true,
-      "auto_apply_enabled": false
-    },
-    {
-      "manual_confirmed": false,
-      "manual_note": "",
-      "row_index": 676,
-      "field": "image_url",
-      "manual_value": "",
-      "evidence_url": "",
-      "candidate_source_url": "",
-      "source_store": "치이카와 온라인 쿠지",
-      "name_ko": "B상: 자석 동반 인형",
-      "name_ja": "B賞 マグネット付きおとも人形",
-      "category": "인형",
-      "affiliation": "치이카와",
-      "source_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E3%83%9E%E3%82%B0%E3%83%8D%E3%83%83%E3%83%88%E4%BB%98%E3%81%8D%E3%81%8A%E3%81%A8%E3%82%82%E4%BA%BA%E5%BD%A2",
-      "workflow": "extract_from_existing_source_url",
-      "requires_exact_source_url": false,
-      "requires_representative_image_flag": false,
-      "blocked_until": "manual_confirmed_image_url",
-      "suggested_local_image_path": "assets/catalog_images/catalog_676.webp",
-      "local_image_path_field": "local_image_path",
-      "review_lane": "image_url_review_ready",
-      "candidate_image_url": "",
-      "candidate_title": "",
-      "source_url_review_lane": "",
-      "source_url_review_blockers": [],
-      "catalog_index": 676,
-      "series_name": null,
-      "current_source_url": "https://online-kuji.chiikawamarket.jp/",
-      "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E3%83%9E%E3%82%B0%E3%83%8D%E3%83%83%E3%83%88%E4%BB%98%E3%81%8D%E3%81%8A%E3%81%A8%E3%82%82%E4%BA%BA%E5%BD%A2",
-      "batch_id": "image-attachment-action-001",
-      "required_before_image_import": [
-        "confirm_product_page_image_url"
-      ],
-      "image_import_blockers": [
-        "manual_image_url_confirmation"
-      ],
-      "manual_confirmation_requirements": [
-        "Open source_url.",
-        "Confirm the page is for the exact catalog item.",
-        "Copy the primary product image URL into the image attachment template."
-      ],
-      "source_url_update_required": false,
-      "representative_image": false,
-      "representative_image_review_required": false,
-      "image_url_ready": true,
-      "auto_apply_enabled": false
-    },
-    {
-      "manual_confirmed": false,
-      "manual_note": "",
       "row_index": 677,
       "field": "image_url",
       "manual_value": "",
@@ -736,194 +595,6 @@
       "series_name": null,
       "current_source_url": "https://online-kuji.chiikawamarket.jp/",
       "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=D%E8%B3%9E%20%E3%81%8A%E3%81%A8%E3%82%82%E3%81%A0%E3%81%A1%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88",
-      "batch_id": "image-attachment-action-001",
-      "required_before_image_import": [
-        "confirm_product_page_image_url"
-      ],
-      "image_import_blockers": [
-        "manual_image_url_confirmation"
-      ],
-      "manual_confirmation_requirements": [
-        "Open source_url.",
-        "Confirm the page is for the exact catalog item.",
-        "Copy the primary product image URL into the image attachment template."
-      ],
-      "source_url_update_required": false,
-      "representative_image": false,
-      "representative_image_review_required": false,
-      "image_url_ready": true,
-      "auto_apply_enabled": false
-    },
-    {
-      "manual_confirmed": false,
-      "manual_note": "",
-      "row_index": 678,
-      "field": "image_url",
-      "manual_value": "",
-      "evidence_url": "",
-      "candidate_source_url": "",
-      "source_store": "치이카와 온라인 쿠지",
-      "name_ko": "A상: 빅 인형 찍는다!!! (카메라)",
-      "name_ja": "A賞 BIGぬいぐるみ 撮るよーッ!!!",
-      "category": "인형",
-      "affiliation": "치이카와",
-      "source_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E6%92%AE%E3%82%8B%E3%82%88%E3%83%BC%E3%83%83%21%21%21",
-      "workflow": "extract_from_existing_source_url",
-      "requires_exact_source_url": false,
-      "requires_representative_image_flag": false,
-      "blocked_until": "manual_confirmed_image_url",
-      "suggested_local_image_path": "assets/catalog_images/catalog_678.webp",
-      "local_image_path_field": "local_image_path",
-      "review_lane": "image_url_review_ready",
-      "candidate_image_url": "",
-      "candidate_title": "",
-      "source_url_review_lane": "",
-      "source_url_review_blockers": [],
-      "catalog_index": 678,
-      "series_name": null,
-      "current_source_url": "https://online-kuji.chiikawamarket.jp/",
-      "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E6%92%AE%E3%82%8B%E3%82%88%E3%83%BC%E3%83%83%21%21%21",
-      "batch_id": "image-attachment-action-001",
-      "required_before_image_import": [
-        "confirm_product_page_image_url"
-      ],
-      "image_import_blockers": [
-        "manual_image_url_confirmation"
-      ],
-      "manual_confirmation_requirements": [
-        "Open source_url.",
-        "Confirm the page is for the exact catalog item.",
-        "Copy the primary product image URL into the image attachment template."
-      ],
-      "source_url_update_required": false,
-      "representative_image": false,
-      "representative_image_review_required": false,
-      "image_url_ready": true,
-      "auto_apply_enabled": false
-    },
-    {
-      "manual_confirmed": false,
-      "manual_note": "",
-      "row_index": 679,
-      "field": "image_url",
-      "manual_value": "",
-      "evidence_url": "",
-      "candidate_source_url": "",
-      "source_store": "치이카와 온라인 쿠지",
-      "name_ko": "A상: 빅 인형 부끄 피스",
-      "name_ja": "A賞 BIGぬいぐるみ 照れピース",
-      "category": "인형",
-      "affiliation": "치이카와",
-      "source_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E7%85%A7%E3%82%8C%E3%83%94%E3%83%BC%E3%82%B9",
-      "workflow": "extract_from_existing_source_url",
-      "requires_exact_source_url": false,
-      "requires_representative_image_flag": false,
-      "blocked_until": "manual_confirmed_image_url",
-      "suggested_local_image_path": "assets/catalog_images/catalog_679.webp",
-      "local_image_path_field": "local_image_path",
-      "review_lane": "image_url_review_ready",
-      "candidate_image_url": "",
-      "candidate_title": "",
-      "source_url_review_lane": "",
-      "source_url_review_blockers": [],
-      "catalog_index": 679,
-      "series_name": null,
-      "current_source_url": "https://online-kuji.chiikawamarket.jp/",
-      "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E7%85%A7%E3%82%8C%E3%83%94%E3%83%BC%E3%82%B9",
-      "batch_id": "image-attachment-action-001",
-      "required_before_image_import": [
-        "confirm_product_page_image_url"
-      ],
-      "image_import_blockers": [
-        "manual_image_url_confirmation"
-      ],
-      "manual_confirmation_requirements": [
-        "Open source_url.",
-        "Confirm the page is for the exact catalog item.",
-        "Copy the primary product image URL into the image attachment template."
-      ],
-      "source_url_update_required": false,
-      "representative_image": false,
-      "representative_image_review_required": false,
-      "image_url_ready": true,
-      "auto_apply_enabled": false
-    },
-    {
-      "manual_confirmed": false,
-      "manual_note": "",
-      "row_index": 680,
-      "field": "image_url",
-      "manual_value": "",
-      "evidence_url": "",
-      "candidate_source_url": "",
-      "source_store": "치이카와 온라인 쿠지",
-      "name_ko": "B상: 페이스 쿠션 하극상",
-      "name_ja": "B賞 フェイスクッション 下剋上",
-      "category": "인형",
-      "affiliation": "치이카와",
-      "source_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E3%83%95%E3%82%A7%E3%82%A4%E3%82%B9%E3%82%AF%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%20%E4%B8%8B%E5%89%8B%E4%B8%8A",
-      "workflow": "extract_from_existing_source_url",
-      "requires_exact_source_url": false,
-      "requires_representative_image_flag": false,
-      "blocked_until": "manual_confirmed_image_url",
-      "suggested_local_image_path": "assets/catalog_images/catalog_680.webp",
-      "local_image_path_field": "local_image_path",
-      "review_lane": "image_url_review_ready",
-      "candidate_image_url": "",
-      "candidate_title": "",
-      "source_url_review_lane": "",
-      "source_url_review_blockers": [],
-      "catalog_index": 680,
-      "series_name": null,
-      "current_source_url": "https://online-kuji.chiikawamarket.jp/",
-      "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E3%83%95%E3%82%A7%E3%82%A4%E3%82%B9%E3%82%AF%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%20%E4%B8%8B%E5%89%8B%E4%B8%8A",
-      "batch_id": "image-attachment-action-001",
-      "required_before_image_import": [
-        "confirm_product_page_image_url"
-      ],
-      "image_import_blockers": [
-        "manual_image_url_confirmation"
-      ],
-      "manual_confirmation_requirements": [
-        "Open source_url.",
-        "Confirm the page is for the exact catalog item.",
-        "Copy the primary product image URL into the image attachment template."
-      ],
-      "source_url_update_required": false,
-      "representative_image": false,
-      "representative_image_review_required": false,
-      "image_url_ready": true,
-      "auto_apply_enabled": false
-    },
-    {
-      "manual_confirmed": false,
-      "manual_note": "",
-      "row_index": 681,
-      "field": "image_url",
-      "manual_value": "",
-      "evidence_url": "",
-      "candidate_source_url": "",
-      "source_store": "치이카와 온라인 쿠지",
-      "name_ko": "B상: 페이스 쿠션 ...이라는 거?",
-      "name_ja": "B賞 フェイスクッション …ってコト!？",
-      "category": "인형",
-      "affiliation": "치이카와",
-      "source_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E3%83%95%E3%82%A7%E3%82%A4%E3%82%B9%E3%82%AF%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%20%E2%80%A6%E3%81%A3%E3%81%A6%E3%82%B3%E3%83%88%21%EF%BC%9F",
-      "workflow": "extract_from_existing_source_url",
-      "requires_exact_source_url": false,
-      "requires_representative_image_flag": false,
-      "blocked_until": "manual_confirmed_image_url",
-      "suggested_local_image_path": "assets/catalog_images/catalog_681.webp",
-      "local_image_path_field": "local_image_path",
-      "review_lane": "image_url_review_ready",
-      "candidate_image_url": "",
-      "candidate_title": "",
-      "source_url_review_lane": "",
-      "source_url_review_blockers": [],
-      "catalog_index": 681,
-      "series_name": null,
-      "current_source_url": "https://online-kuji.chiikawamarket.jp/",
-      "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E3%83%95%E3%82%A7%E3%82%A4%E3%82%B9%E3%82%AF%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%20%E2%80%A6%E3%81%A3%E3%81%A6%E3%82%B3%E3%83%88%21%EF%BC%9F",
       "batch_id": "image-attachment-action-001",
       "required_before_image_import": [
         "confirm_product_page_image_url"
