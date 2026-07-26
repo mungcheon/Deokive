@@ -114,6 +114,25 @@ class AuditCatalogCharacterNamesTest(unittest.TestCase):
             "\ud38c",
         )
 
+    def test_reports_frieren_romanized_aliases_in_korean_fields(self) -> None:
+        rows = [
+            {
+                "catalog_index": 6,
+                "name_ko": "OSHI WORKS Fern",
+                "character_name": "Pern",
+                "affiliation": "\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c",
+            }
+        ]
+
+        result = audit(rows)
+
+        self.assertEqual(result["summary"]["status"], "needs_review")
+        self.assertEqual(result["summary"]["character_alias_violations"], 2)
+        self.assertEqual(
+            [item["expected"] for item in result["character_alias_violations"]],
+            ["\ud398\ub978", "\ud398\ub978"],
+        )
+
     def test_reports_ichiban_product_character_mismatch_with_longest_token_priority(self) -> None:
         rows = [
             {

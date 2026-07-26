@@ -47,6 +47,20 @@ CHARACTER_MOJIBAKE_OR_ALIAS_FINDINGS = {
         "affiliation_scope": "\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c",
         "match": "contains",
     },
+    "Pern": {
+        "expected": "\ud398\ub978",
+        "fields": ("character_name", "name_ko"),
+        "reason": "likely_romanized_frieren_character_alias_in_korean_fields",
+        "affiliation_scope": "\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c",
+        "match": "contains",
+    },
+    "Fern": {
+        "expected": "\ud398\ub978",
+        "fields": ("character_name", "name_ko"),
+        "reason": "likely_romanized_frieren_character_alias_in_korean_fields",
+        "affiliation_scope": "\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c",
+        "match": "contains",
+    },
     "\ud6c4\ub9ac\ub80c": {
         "expected": "\ud504\ub9ac\ub80c",
         "fields": ("character_name", "affiliation", "name_ko"),
@@ -91,6 +105,7 @@ CHARACTER_ALIAS_MONITOR_TARGETS = {
             "\ud380": "\ud398\ub978",
             "\ud38c": "\ud398\ub978",
             "Pern": "\ud398\ub978",
+            "Fern": "\ud398\ub978",
             "\ud6c4\ub9ac\ub80c": "\ud504\ub9ac\ub80c",
             "\ud504\ub9ac\ub79c": "\ud504\ub9ac\ub80c",
         },

@@ -42,6 +42,14 @@ FRIEREN_JA_TO_KO = {
     "アイゼン": "아이젠",
 }
 FRIEREN_KO_TO_JA = {value: key for key, value in FRIEREN_JA_TO_KO.items()}
+FRIEREN_SCOPED_ALIAS_RULES = {
+    "펀": "페른",
+    "펌": "페른",
+    "Pern": "페른",
+    "Fern": "페른",
+    "후리렌": "프리렌",
+    "프리랜": "프리렌",
+}
 ICHIBAN_CHARACTER_RULES: dict[str, list[tuple[str, str]]] = {
     "블루록": [
         ("潔 世一", "이사기 요이치"),
@@ -316,10 +324,20 @@ def _normalize_frieren_aliases(rows: list[dict[str, Any]], *, write: bool) -> li
         before = {
             "name_ko": row.get("name_ko"),
             "character_name": row.get("character_name"),
+            "affiliation": row.get("affiliation"),
         }
-        after_name = _text(row.get("name_ko")).replace("펀", "페른")
-        after_character = _text(row.get("character_name")).replace("펀", "페른")
-        if before["name_ko"] == after_name and before["character_name"] == after_character:
+        after_name = _text(row.get("name_ko"))
+        after_character = _text(row.get("character_name"))
+        after_affiliation = _text(row.get("affiliation"))
+        for alias, canonical in FRIEREN_SCOPED_ALIAS_RULES.items():
+            after_name = after_name.replace(alias, canonical)
+            after_character = after_character.replace(alias, canonical)
+            after_affiliation = after_affiliation.replace(alias, canonical)
+        if (
+            before["name_ko"] == after_name
+            and before["character_name"] == after_character
+            and before["affiliation"] == after_affiliation
+        ):
             continue
         changes.append(
             {
@@ -327,12 +345,14 @@ def _normalize_frieren_aliases(rows: list[dict[str, Any]], *, write: bool) -> li
                 "field_changes": {
                     "name_ko": {"from": before["name_ko"], "to": after_name},
                     "character_name": {"from": before["character_name"], "to": after_character},
+                    "affiliation": {"from": before["affiliation"], "to": after_affiliation},
                 },
             }
         )
         if write:
             row["name_ko"] = after_name
             row["character_name"] = after_character
+            row["affiliation"] = after_affiliation
     return changes
 
 
@@ -671,7 +691,10 @@ def main() -> int:
         "generated_at": now,
         "write": args.write,
         "policy": {
-            "character_aliases": {"장송의 프리렌 フェルン": "페른"},
+            "character_aliases": {
+                "장송의 프리렌 scoped aliases": FRIEREN_SCOPED_ALIAS_RULES,
+                "global aliases": CHARACTER_ALIAS_RULES,
+            },
             "ichiban_display_name_format": "쿠지 발매명 / 상 / 상품이름 / 캐릭터명",
             "ichiban_multi_character_policy": "same prize rank with several character variants must be split into one row per character",
             "last_one_and_double_chance_price_jpy": 0,
