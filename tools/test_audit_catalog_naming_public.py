@@ -35,12 +35,28 @@ class AuditCatalogNamingPublicTest(unittest.TestCase):
                 "character_name": "\uce58\uc774\uce74\uc640",
                 "official_price_jpy": 0,
             },
+            {
+                "catalog_index": 4,
+                "name_ko": "FIGURE SPIRITS KUJI \u6a5f\u52d5\u6226\u58eb\u30ac\u30f3\u30c0\u30e0 / A\u8cde / MASTERLISE MECHANICS \u30ac\u30f3\u30c0\u30e0 / \uae30\ud0c0",
+                "source_store": "\uc774\uce58\ubc29\ucfe0\uc9c0",
+                "sub_series": "A\u8cde",
+                "character_name": "\uae30\ud0c0",
+                "official_price_jpy": 8500,
+            },
+            {
+                "catalog_index": 5,
+                "name_ko": "\u4e00\u756a\u304f\u3058 NARUTO -THE HISTORY- / 1\u7b49 / \u8907\u88fd\u8272\u7d19 / \uae30\ud0c0",
+                "source_store": "\uc774\uce58\ubc29\ucfe0\uc9c0",
+                "sub_series": "1\u7b49",
+                "character_name": "\uae30\ud0c0",
+                "official_price_jpy": 520,
+            },
         ]
 
         report = audit.build_report(rows, generated_at="2026-07-27T00:00:00Z")
 
         self.assertEqual(report["summary"]["status"], "pass")
-        self.assertEqual(report["summary"]["ichiban_rows"], 2)
+        self.assertEqual(report["summary"]["ichiban_rows"], 4)
         self.assertEqual(report["summary"]["total_issue_rows"], 0)
 
     def test_report_flags_fern_typo_and_ichiban_shape_errors(self) -> None:

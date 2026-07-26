@@ -20,6 +20,19 @@ FRIEREN_KO = "\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c"
 ICHIBAN_STORE = "\uc774\uce58\ubc29\ucfe0\uc9c0"
 LAST_ONE = "\u30e9\u30b9\u30c8\u30ef\u30f3\u8cde"
 DOUBLE_CHANCE = "\u30c0\u30d6\u30eb\u30c1\u30e3\u30f3\u30b9"
+VALID_KUJI_RELEASE_TOKENS = (
+    "\u4e00\u756a",
+    "\uc774\uce58\ubc29",
+    "\u304f\u3058",
+    "kuji",
+)
+VALID_NON_STANDARD_PRIZE_LABEL_TOKENS = (
+    "\u3081\u3061\u3083\u3067\u304b\u30b7\u30e7\u30c3\u30d1\u30fc",
+    "\u95a2\u9023\u5546\u54c1",
+    "\u306c\u3044\u3050\u308b\u307f",
+    "\u4ed8\u7b8b",
+    "\u7f36\u30d0\u30c3\u30b8",
+)
 
 
 def now_utc() -> str:
@@ -56,6 +69,23 @@ def compact_row(row: dict[str, Any], *, reason: str) -> dict[str, Any]:
         "official_price_jpy": row.get("official_price_jpy"),
         "source_url": row.get("source_url"),
     }
+
+
+def is_valid_prize_rank(value: str) -> bool:
+    rank = value.strip()
+    if not rank:
+        return False
+    if rank.endswith("\u8cde") or rank.endswith("\u7b49"):
+        return True
+    if DOUBLE_CHANCE in rank or "\u30c1\u30e3\u30f3\u30b9\u30ad\u30e3\u30f3\u30da\u30fc\u30f3" in rank:
+        return True
+    if "\u30ad\u30e3\u30f3\u30da\u30fc\u30f3" in rank:
+        return True
+    if "\u304f\u3058" in rank or "kuji" in rank.casefold():
+        return True
+    if any(token in rank for token in VALID_NON_STANDARD_PRIZE_LABEL_TOKENS):
+        return True
+    return False
 
 
 def audit_fern_names(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -96,9 +126,10 @@ def audit_ichiban_names(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
                     break
         prize_rank, character_part = parts[prize_index], parts[-1]
         item_name = " / ".join(parts[prize_index + 1 : -1]).strip()
-        if "\u4e00\u756a" not in release_name and "\uc774\uce58\ubc29" not in release_name:
+        release_name_key = release_name.casefold()
+        if not any(token in release_name_key for token in VALID_KUJI_RELEASE_TOKENS):
             issues.append(compact_row(row, reason="ichiban_release_name_missing_ichiban_prefix"))
-        if not prize_rank.endswith("\u8cde"):
+        if not is_valid_prize_rank(prize_rank):
             issues.append(compact_row(row, reason="ichiban_prize_rank_part_missing_sho_suffix"))
         if not item_name:
             issues.append(compact_row(row, reason="ichiban_item_name_part_empty"))
@@ -133,6 +164,7 @@ def build_report(rows: list[dict[str, Any]], *, generated_at: str | None = None)
             "fern_korean_character_name": FERN_GOOD_KO,
             "ichiban_name_ko_format": "\uc774\uce58\ubc29\ucfe0\uc9c0 \ubc1c\ub9e4\uba85 / ?\u8cde / \uc0c1\ud488\uc774\ub984 / \uce90\ub9ad\ud130\uba85",
             "ichiban_variant_rule": "\uac19\uc740 \uc0c1\uc5d0 \uce90\ub9ad\ud130\uac00 \uc5ec\ub7ec \uba85\uc774\uba74 \uce90\ub9ad\ud130\uba85\ub9cc \ub2e4\ub978 \ubcc4\ub3c4 \ud589\uc73c\ub85c \uc720\uc9c0",
+            "ichiban_non_standard_prize_labels": list(VALID_NON_STANDARD_PRIZE_LABEL_TOKENS),
             "ichiban_last_one_double_chance_price_jpy": 0,
         },
         "issues": issues[:200],
