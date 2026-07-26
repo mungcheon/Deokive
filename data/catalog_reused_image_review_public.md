@@ -1,10 +1,10 @@
 # Catalog Reused Image Review
 
-- Reused image groups: `59`
+- Reused image groups: `57`
 - High risk groups: `0`
 - Medium risk groups: `30`
-- Low risk groups: `29`
-- Review rows: `143`
+- Low risk groups: `27`
+- Review rows: `137`
 
 ## Groups
 
@@ -316,15 +316,6 @@
 - `1500` 치비구루미 페른 / ちびぐるみ フェルン (장송의 프리렌, 인형)
 - `1501` 치비구루미 슈타르크 / ちびぐるみ シュタルク (장송의 프리렌, 인형)
 
-### LOW - assets/catalog_images/870ca27701dffb483846.webp (3 rows)
-- Action: `likely_lineup_or_set_image_review_later`
-- Reasons: `shared_across_multiple_characters, lineup_or_trading_image_possible`
-- Affiliations: `장송의 프리렌`
-- Categories: `피규어`
-- `12544` 一番くじ 葬送のフリーレン / C賞 / ちょこのっこフィギュア フリーレン / 프리렌 / C賞 ちょこのっこフィギュア フリーレン (장송의 프리렌, 피규어)
-- `20558` 一番くじ 葬送のフリーレン / C賞 / ちょこのっこフィギュア フェルン / 페른 / C賞 ちょこのっこフィギュア フェルン (장송의 프리렌, 피규어)
-- `20559` 一番くじ 葬送のフリーレン / C賞 / ちょこのっこフィギュア シュタルク / 슈타르크 / C賞 ちょこのっこフィギュア シュタルク (장송의 프리렌, 피규어)
-
 ### LOW - assets/catalog_images/896a3e5618490413efb0.webp (3 rows)
 - Action: `likely_lineup_or_set_image_review_later`
 - Reasons: `shared_across_multiple_characters, lineup_or_trading_image_possible`
@@ -351,15 +342,6 @@
 - `1611` 나의 히어로 아카데미아 아크릴 스탠드 (미도리야 이즈쿠) / 僕のヒーローアカデミア アクリルスタンド (緑谷出久) (나의 히어로 아카데미아, 아크릴 스탠드)
 - `1612` 나의 히어로 아카데미아 아크릴 스탠드 (바쿠고 카츠키) / 僕のヒーローアカデミア アクリルスタンド (爆豪勝己) (나의 히어로 아카데미아, 아크릴 스탠드)
 - `1613` 나의 히어로 아카데미아 아크릴 스탠드 (토도로키 쇼토) / 僕のヒーローアカデミア アクリルスタンド (轟焦凍) (나의 히어로 아카데미아, 아크릴 스탠드)
-
-### LOW - assets/catalog_images/d49bcc8520c4dffd32ca.webp (3 rows)
-- Action: `likely_lineup_or_set_image_review_later`
-- Reasons: `shared_across_multiple_characters, lineup_or_trading_image_possible`
-- Affiliations: `장송의 프리렌`
-- Categories: `피규어`
-- `12545` 一番くじ 葬送のフリーレン / D賞 / ちょこのっこフィギュア ヒンメル / 히멜 / D賞 ちょこのっこフィギュア ヒンメル (장송의 프리렌, 피규어)
-- `20560` 一番くじ 葬送のフリーレン / D賞 / ちょこのっこフィギュア ハイター / 하이터 / D賞 ちょこのっこフィギュア ハイター (장송의 프리렌, 피규어)
-- `20561` 一番くじ 葬送のフリーレン / D賞 / ちょこのっこフィギュア アイゼン / 아이젠 / D賞 ちょこのっこフィギュア アイゼン (장송의 프리렌, 피규어)
 
 ### LOW - assets/catalog_images/05b2f7eca24345519030.webp (2 rows)
 - Action: `likely_lineup_or_set_image_review_later`
