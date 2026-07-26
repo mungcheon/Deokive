@@ -26,11 +26,11 @@ OFFICIAL_SEARCH_STORES = {
     "Taito": ("official_search", "search_only", "candidate_provider_script_required", 10, "https://www.taito.co.jp/prize/search?keyword={query}"),
     "Banpresto": ("official_search", "search_only", "candidate_provider_script_required", 10, "https://bsp-prize.jp/search/?q={query}"),
     "애니메이트": ("official_search", "search_only", "candidate_provider_script_required", 10, "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt={query}"),
-    "엔스카이": ("official_search", "search_only", "candidate_provider_script_required", 10, "https://www.enskyshop.com/search?q={query}"),
+    "엔스카이": ("official_search", "search_only", "candidate_provider_script_required", 10, "https://www.enskyshop.com/products/list?name={query}"),
     "Movic": ("official_search", "search_only", "candidate_provider_script_required", 10, "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword={query}"),
     "코토부키야": ("official_search", "search_only", "candidate_provider_script_required", 10, "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?search=x&keyword={query}"),
-    "굿스마일컴퍼니": ("official_search", "search_only", "candidate_provider_script_required", 10, "https://www.goodsmile.info/ja/search?q={query}"),
-    "굿스마일컴퍼니/Max Factory": ("official_search", "search_only", "candidate_provider_script_required", 10, "https://www.goodsmile.info/ja/search?q={query}"),
+    "굿스마일컴퍼니": ("official_search", "search_only", "candidate_provider_script_required", 10, "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D={query}"),
+    "굿스마일컴퍼니/Max Factory": ("official_search", "search_only", "candidate_provider_script_required", 10, "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D={query}"),
     "점프 캐릭터즈 스토어": ("manual_official_search_review", "search_only_manual", "manual_confirmation_required", 20, "https://jumpcs.shueisha.co.jp/shop/goods/search.aspx?search=x&keyword={query}"),
     "반다이": ("manual_official_search_review", "search_only_manual", "manual_confirmation_required", 20, "https://p-bandai.jp/search/?q={query}"),
     "AmiAmi": ("manual_official_search_review", "search_only_manual", "manual_confirmation_required", 20, "https://www.amiami.jp/top/search/list?s_keywords={query}"),
@@ -162,8 +162,11 @@ def _refresh_existing_item(item: dict[str, Any], row: dict[str, Any]) -> dict[st
     refreshed["source_url_is_product_detail"] = bool(refreshed.get("source_url_is_product_detail")) and bool(source_url)
     if not refreshed.get("query"):
         refreshed["query"] = _query(row)
-    if not refreshed.get("search_url"):
-        refreshed["search_url"] = _search_url(row, str(refreshed.get("query") or ""))
+    expected_search_url = _search_url(row, str(refreshed.get("query") or ""))
+    if expected_search_url and refreshed.get("strategy") in {"official_search", "manual_official_search_review"}:
+        refreshed["search_url"] = expected_search_url
+    elif not refreshed.get("search_url"):
+        refreshed["search_url"] = expected_search_url
     return refreshed
 
 

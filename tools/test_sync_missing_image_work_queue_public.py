@@ -91,6 +91,38 @@ class SyncMissingImageWorkQueuePublicTests(unittest.TestCase):
         self.assertEqual(item["automation_safety"], "manual_research_required")
         self.assertIn("google.com/search", item["search_url"])
 
+    def test_refreshes_official_search_url_template(self) -> None:
+        catalog = {
+            "items": [
+                {
+                    "catalog_index": 4,
+                    "name_ko": "치비누이 페른",
+                    "name_ja": "ちびぬい フェルン",
+                    "category": "인형",
+                    "affiliation": "장송의 프리렌",
+                    "source_store": "엔스카이",
+                }
+            ]
+        }
+        queue = {
+            "items": [
+                {
+                    "row_index": 4,
+                    "strategy": "official_search",
+                    "provider_status": "search_only",
+                    "automation_safety": "candidate_provider_script_required",
+                    "priority": 10,
+                    "query": "ちびぬい フェルン",
+                    "search_url": "https://www.enskyshop.com/search?q=old",
+                }
+            ]
+        }
+        result = sync_queue(catalog, queue)
+
+        item = result["queue"]["items"][0]
+        self.assertIn("www.enskyshop.com/products/list?name=", item["search_url"])
+        self.assertNotIn("/search?q=old", item["search_url"])
+
 
 if __name__ == "__main__":
     unittest.main()
