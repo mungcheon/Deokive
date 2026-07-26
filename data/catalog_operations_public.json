@@ -1,19 +1,19 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T16:08:31Z",
+  "generated_at": "2026-07-26T16:24:56Z",
   "summary": {
-    "catalog_rows": 20346,
+    "catalog_rows": 20309,
     "coverage": {
-      "source_url": 0.9623,
-      "image_url": 0.9608,
-      "release_date": 0.9338
+      "source_url": 0.9622,
+      "image_url": 0.9607,
+      "release_date": 0.9339
     },
     "missing": {
       "source_url": 768,
       "image_url": 798,
-      "release_date": 1347,
-      "official_price_jpy": 558,
-      "barcode": 10081,
+      "release_date": 1342,
+      "official_price_jpy": 553,
+      "barcode": 10044,
       "name_ja": 526
     },
     "open_review_queues": {
@@ -89,10 +89,10 @@
       "ichiban_metadata_next_campaign_patch_review_batch_rows": 8,
       "ichiban_metadata_next_campaign_patch_review_batch_template_rows": 8,
       "ichiban_metadata_next_campaign_patch_review_batch_primary_review_url_rows": 8,
-      "metadata_action_missing_cells": 2431,
+      "metadata_action_missing_cells": 2421,
       "metadata_actionable_groups": 164,
       "metadata_unqueued_actionable_groups": 0,
-      "metadata_actionable_missing_cells": 2431,
+      "metadata_actionable_missing_cells": 2421,
       "metadata_unqueued_actionable_missing_cells": 0,
       "metadata_primary_review_url_groups": 125,
       "animation_category_review_rows": 0,
@@ -133,13 +133,13 @@
     {
       "key": "source_url_coverage",
       "status": "pass",
-      "value": 0.9623,
+      "value": 0.9622,
       "target": 0.95
     },
     {
       "key": "image_url_coverage",
       "status": "pass",
-      "value": 0.9608,
+      "value": 0.9607,
       "target": 0.95
     },
     {
@@ -147,8 +147,8 @@
       "status": "pass",
       "value": 1.0,
       "target": 1,
-      "image_url_rows": 19548,
-      "local_image_path_rows": 19548,
+      "image_url_rows": 19511,
+      "local_image_path_rows": 19511,
       "image_url_without_local_path_rows": 0,
       "missing_local_image_files": 0,
       "missing_web_public_asset_files": 0,
@@ -157,7 +157,7 @@
     {
       "key": "release_date_coverage",
       "status": "pass",
-      "value": 0.9338,
+      "value": 0.9339,
       "target": 0.9
     },
     {
@@ -1517,7 +1517,7 @@
     {
       "workstream": "metadata_backlog",
       "status": "open",
-      "open_rows": 14078,
+      "open_rows": 14031,
       "primary_report": "data/catalog_metadata_backlog_public.json",
       "next_step": "review_field_evidence_policy",
       "auto_apply_enabled": false
@@ -1525,7 +1525,7 @@
     {
       "workstream": "metadata_review_batches",
       "status": "manual_review",
-      "open_rows": 14078,
+      "open_rows": 14031,
       "primary_report": "data/catalog_metadata_review_batches_public.json",
       "next_step": "work_full_metadata_review_batches",
       "auto_apply_enabled": false
@@ -1533,10 +1533,10 @@
     {
       "workstream": "metadata_action_queue",
       "status": "manual_review",
-      "open_rows": 2431,
+      "open_rows": 2421,
       "actionable_group_count": 164,
       "unqueued_actionable_group_count": 0,
-      "actionable_missing_cells": 2431,
+      "actionable_missing_cells": 2421,
       "unqueued_actionable_missing_cells": 0,
       "group_queue_coverage": 1.0,
       "missing_cell_queue_coverage": 1.0,
@@ -1558,11 +1558,11 @@
       "missing_cells_by_field": [
         [
           "release_date",
-          1347
+          1342
         ],
         [
           "official_price_jpy",
-          558
+          553
         ],
         [
           "name_ja",
@@ -1643,10 +1643,6 @@
           28
         ],
         [
-          "치이카와 온라인 쿠지",
-          28
-        ],
-        [
           "JYP SHOP",
           26
         ],
@@ -1680,6 +1676,10 @@
         ],
         [
           "SM STORE",
+          18
+        ],
+        [
+          "치이카와 온라인 쿠지",
           18
         ],
         [
@@ -2297,17 +2297,6 @@
       "recommended_first_action": "source_and_image_enrichment"
     },
     {
-      "source_store": "치이카와 온라인 쿠지",
-      "priority_score": 154.0,
-      "rows": 677,
-      "missing_source_url": 0,
-      "missing_image_url": 3,
-      "missing_release_date": 14,
-      "missing_price_jpy": 14,
-      "missing_barcode": 677,
-      "recommended_first_action": "source_and_image_enrichment"
-    },
-    {
       "source_store": "귀멸의 칼날 공식",
       "priority_score": 152.0,
       "rows": 14,
@@ -2338,6 +2327,17 @@
       "missing_release_date": 14,
       "missing_price_jpy": 0,
       "missing_barcode": 14,
+      "recommended_first_action": "source_and_image_enrichment"
+    },
+    {
+      "source_store": "치이카와 온라인 쿠지",
+      "priority_score": 139.0,
+      "rows": 640,
+      "missing_source_url": 0,
+      "missing_image_url": 3,
+      "missing_release_date": 9,
+      "missing_price_jpy": 9,
+      "missing_barcode": 640,
       "recommended_first_action": "source_and_image_enrichment"
     },
     {
@@ -2887,8 +2887,8 @@
       "priority": 19,
       "workstream": "local_image_asset_audit",
       "public_report": "data/catalog_image_asset_audit_public.json",
-      "image_url_rows": 19548,
-      "local_image_path_rows": 19548,
+      "image_url_rows": 19511,
+      "local_image_path_rows": 19511,
       "image_url_without_local_path_rows": 0,
       "missing_local_image_files": 0,
       "missing_web_public_asset_files": 0,
@@ -6780,7 +6780,7 @@
       "public_report": "data/catalog_metadata_review_batches_public.json",
       "batch_count": 30,
       "field_store_group_count": 359,
-      "missing_cell_count": 14078,
+      "missing_cell_count": 14031,
       "recommended_next_action": "Use full field/store metadata batches for title, barcode, date, price, source, and image cleanup."
     },
     {
@@ -6790,8 +6790,8 @@
       "actionable_group_count": 164,
       "queued_group_count": 164,
       "unqueued_actionable_group_count": 0,
-      "actionable_missing_cells": 2431,
-      "queued_missing_cells": 2431,
+      "actionable_missing_cells": 2421,
+      "queued_missing_cells": 2421,
       "unqueued_actionable_missing_cells": 0,
       "group_queue_coverage": 1.0,
       "missing_cell_queue_coverage": 1.0,
@@ -6812,11 +6812,11 @@
       "missing_cells_by_field": [
         [
           "release_date",
-          1347
+          1342
         ],
         [
           "official_price_jpy",
-          558
+          553
         ],
         [
           "name_ja",
@@ -6897,10 +6897,6 @@
           28
         ],
         [
-          "치이카와 온라인 쿠지",
-          28
-        ],
-        [
           "JYP SHOP",
           26
         ],
@@ -6934,6 +6930,10 @@
         ],
         [
           "SM STORE",
+          18
+        ],
+        [
+          "치이카와 온라인 쿠지",
           18
         ],
         [
