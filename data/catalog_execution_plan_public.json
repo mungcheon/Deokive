@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T19:55:55Z",
+  "generated_at": "2026-07-26T20:27:27Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 26,
     "blocked_action_count": 0,
     "manual_review_action_count": 23,
     "pending_import_action_count": 0,
-    "total_action_rows": 33492,
+    "total_action_rows": 33485,
     "open_review_queues": {
-      "source_discovery_rows": 763,
-      "image_missing_rows": 788,
+      "source_discovery_rows": 762,
+      "image_missing_rows": 787,
       "dedupe_groups": 61,
       "animation_unknown_categories": 0,
       "ichiban_missing_release_date_rows": 8,
@@ -34,22 +34,22 @@
       "requested_focus_actionable_rows": 600,
       "requested_focus_unqueued_actionable_rows": 0,
       "requested_focus_barcode_template_rows_excluded": 5674,
-      "source_discovery_action_rows": 753,
-      "source_discovery_actionable_rows": 753,
+      "source_discovery_action_rows": 752,
+      "source_discovery_actionable_rows": 752,
       "source_discovery_unqueued_actionable_rows": 0,
       "source_discovery_manual_research_backlog_rows": 10,
       "source_discovery_manual_identity_backfill_required_rows": 3,
       "source_discovery_manual_official_lookup_rows": 7,
-      "source_discovery_focus_template_rows": 753,
+      "source_discovery_focus_template_rows": 752,
       "source_discovery_focus_template_work_order_packs": 67,
-      "source_discovery_focus_template_dry_run_skipped_rows": 753,
+      "source_discovery_focus_template_dry_run_skipped_rows": 752,
       "source_discovery_next_focus_pack_rows": 20,
       "source_discovery_next_focus_pack_manual_quarantine": true,
       "source_discovery_next_focus_pack_quarantine_reason": "official_cache_safe_exact_match_absent",
       "source_discovery_recommended_active_focus_pack_id": "source-discovery-focus-002",
       "source_discovery_focus_pack_progress_queues": 67,
-      "source_discovery_focus_pack_progress_remaining_rows": 753,
-      "source_discovery_starter_queue_rows": 763,
+      "source_discovery_focus_pack_progress_remaining_rows": 752,
+      "source_discovery_starter_queue_rows": 762,
       "source_discovery_starter_queue_groups": 391,
       "source_discovery_next_focus_fallback_rows": 20,
       "source_discovery_next_focus_fallback_manual_confirmed_rows": 0,
@@ -103,10 +103,10 @@
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
       "ichiban_prize_name_image_patch_blocked_rows": 0,
       "catalog_goal_manual_review_pillars": 5,
-      "catalog_goal_manual_review_rows": 897,
+      "catalog_goal_manual_review_rows": 896,
       "catalog_goal_auto_apply_ready_rows": 0,
       "catalog_goal_dedupe_manual_review_rows": 48,
-      "catalog_goal_missing_image_rows": 788,
+      "catalog_goal_missing_image_rows": 787,
       "catalog_goal_source_url_update_rows": 0,
       "catalog_goal_animation_category_rows": 0,
       "catalog_goal_ichiban_manual_review_rows": 61,
@@ -222,11 +222,11 @@
     "image_download_readiness_status": "known_image_assets_complete",
     "image_url_without_local_path_rows": 0,
     "image_missing_local_image_files": 0,
-    "image_rows_still_requiring_url_evidence": 788,
+    "image_rows_still_requiring_url_evidence": 787,
     "image_missing_evidence_top_source_stores": [
       [
         "엔스카이",
-        182
+        181
       ],
       [
         "애니메이트",
@@ -276,7 +276,7 @@
       ],
       [
         "키링",
-        75
+        74
       ],
       [
         "마스코트",
@@ -295,7 +295,7 @@
     "image_attachment_template_rows": 25,
     "image_attachment_template_confirmed_rows": 0,
     "image_attachment_template_dry_run_skipped_rows": 25,
-    "source_focus_template_rows": 753,
+    "source_focus_template_rows": 752,
     "source_focus_template_work_order_pack_count": 67,
     "source_focus_template_next_pack_rows": 20,
     "source_next_focus_detail_pack_items": 20,
@@ -325,14 +325,14 @@
     "source_next_focus_identity_candidate_review_candidate_rows": 0,
     "source_next_focus_fallback_import_dry_run_updated_rows": 0,
     "source_next_focus_fallback_import_dry_run_skipped_rows": 20,
-    "source_discovery_starter_queue_rows": 763,
+    "source_discovery_starter_queue_rows": 762,
     "source_discovery_starter_queue_groups": 391,
     "source_discovery_starter_next_review_batch_rows": 20,
     "source_discovery_starter_next_review_batch_group_count": 4,
     "source_discovery_starter_next_review_batch_primary_source_store": "엔스카이",
-    "source_discovery_action_rows": 753,
-    "source_discovery_actionable_rows": 753,
-    "source_discovery_template_rows": 753,
+    "source_discovery_action_rows": 752,
+    "source_discovery_actionable_rows": 752,
+    "source_discovery_template_rows": 752,
     "source_discovery_template_batch_count": 42,
     "source_discovery_unqueued_actionable_rows": 0,
     "source_discovery_manual_research_backlog_rows": 10,
@@ -815,13 +815,13 @@
       "workstream": "source_discovery_focus_template",
       "public_report": "data/source_discovery_focus_confirmed_template_public.json",
       "status": "manual_review",
-      "rows": 753,
+      "rows": 752,
       "command": "Open the focus template work_order and confirm exact product source URLs for the next store/category pack.",
       "next_step": "work_source_focus_template_work_order_top_to_bottom",
       "blocker": "Imports stay dry-run only until exact product URLs are manually confirmed.",
       "auto_apply_enabled": false,
       "evidence": {
-        "template_items": 753,
+        "template_items": 752,
         "work_order_pack_count": 67,
         "next_focus_pack_id": "source-discovery-focus-001",
         "next_source_store": "엔스카이",
@@ -947,7 +947,7 @@
               "source_page_has_verifiable_product_image_before_image_url_import"
             ],
             "review_status": "not_started",
-            "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%87%E3%83%B3%E3%82%B8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+            "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%91%E3%83%AF%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
           },
           {
             "priority": 4,
@@ -971,7 +971,7 @@
               "source_page_has_verifiable_product_image_before_image_url_import"
             ],
             "review_status": "not_started",
-            "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%AC%E3%81%84%E3%81%BA%E3%81%BA%20%E3%82%B4%E3%83%B3%EF%BC%9D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9"
+            "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%AC%E3%81%84%E3%81%BA%E3%81%BA%20%E3%82%AD%E3%83%AB%E3%82%A2%EF%BC%9D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF"
           },
           {
             "priority": 5,
@@ -995,7 +995,7 @@
               "source_page_has_verifiable_product_image_before_image_url_import"
             ],
             "review_status": "not_started",
-            "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%90%E3%82%8B%E3%81%BF%20%E5%BE%8C%E8%97%A4%E3%81%B2%E3%81%A8%E3%82%8A"
+            "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%B3%E3%81%90%E3%82%8B%E3%81%BF%20%E5%96%9C%E5%A4%9A%E9%83%81%E4%BB%A3"
           },
           {
             "priority": 6,
@@ -1019,7 +1019,7 @@
               "source_page_has_verifiable_product_image_before_image_url_import"
             ],
             "review_status": "not_started",
-            "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%29"
+            "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF%29"
           },
           {
             "priority": 7,
@@ -1043,7 +1043,7 @@
               "source_page_has_verifiable_product_image_before_image_url_import"
             ],
             "review_status": "not_started",
-            "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E8%BD%9F%E7%84%A6%E5%87%8D"
+            "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88"
           },
           {
             "priority": 8,
@@ -1067,12 +1067,12 @@
               "source_page_has_verifiable_product_image_before_image_url_import"
             ],
             "review_status": "not_started",
-            "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%82%E3%81%A1%E3%81%93%E3%82%8D%E3%82%8A%E3%82%93%20%E3%81%BC%E3%81%A3%E3%81%A1%E3%83%BB%E3%81%96%E3%83%BB%E3%82%8D%E3%81%A3%E3%81%8F%21"
+            "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20ONE%20PIECE"
           }
         ],
         "manual_confirmed_rows": 0,
         "dry_run_updated_rows": 0,
-        "dry_run_skipped_rows": 753
+        "dry_run_skipped_rows": 752
       }
     },
     {
@@ -1089,7 +1089,7 @@
         "focus_pack_id": "source-discovery-focus-002",
         "pack_items": 20,
         "items_with_candidates": 1,
-        "candidate_rows": 5,
+        "candidate_rows": 2,
         "metadata_enrichment_template_rows": 1,
         "metadata_field_import_template_rows": 3,
         "metadata_field_import_supported_rows": 3,
@@ -1256,7 +1256,7 @@
       "workstream": "source_discovery_review_batches",
       "public_report": "data/source_discovery_review_batches_public.json",
       "status": "manual_review",
-      "rows": 763,
+      "rows": 762,
       "command": "Find exact official/detail source URLs for rows missing source_url.",
       "next_step": "attach_exact_source_url_before_image_import",
       "blocker": "Rows without exact source_url cannot safely import images.",
@@ -1266,7 +1266,7 @@
         "by_workflow": [
           [
             "official_search_url_available",
-            741
+            740
           ],
           [
             "licensed_retailer_search_review",
@@ -1284,13 +1284,13 @@
       "workstream": "source_discovery_starter_queue",
       "public_report": "data/source_discovery_starter_queue_public.json",
       "status": "manual_review",
-      "rows": 763,
+      "rows": 762,
       "command": "Open starter search URLs and confirm exact official product/detail source pages for every missing-source group before image imports.",
       "next_step": "find_exact_official_product_source_url",
       "blocker": "Auto source/image import is disabled until exact product evidence is manually confirmed.",
       "auto_apply_enabled": false,
       "evidence": {
-        "starter_queue_rows": 763,
+        "starter_queue_rows": 762,
         "starter_queue_groups": 391,
         "next_review_batch_rows": 20,
         "next_review_batch_group_count": 4,
@@ -2114,24 +2114,24 @@
       "workstream": "source_discovery_action_queue",
       "public_report": "data/source_discovery_action_queue_public.json",
       "status": "manual_review",
-      "rows": 753,
+      "rows": 752,
       "command": "Confirm exact product/detail URLs from official search paths before broad source research.",
       "next_step": "confirm_exact_source_url_then_fill_source_templates",
       "blocker": "Auto source import is disabled; every source_url needs exact product evidence.",
       "auto_apply_enabled": false,
       "evidence": {
-        "actionable_source_rows": 753,
-        "queued_source_rows": 753,
+        "actionable_source_rows": 752,
+        "queued_source_rows": 752,
         "action_batch_count": 67,
-        "source_discovery_template_rows": 753,
+        "source_discovery_template_rows": 752,
         "source_discovery_template_batch_count": 42,
-        "source_patch_template_count": 753,
-        "catalog_field_import_template_count": 753,
-        "primary_review_url_rows": 753,
+        "source_patch_template_count": 752,
+        "catalog_field_import_template_count": 752,
+        "primary_review_url_rows": 752,
         "primary_review_url_kind_counts": [
           [
             "official_search_url",
-            753
+            752
           ]
         ],
         "manual_research_backlog_rows": 10,
@@ -2162,7 +2162,7 @@
         "by_review_state": [
           [
             "official_search_review_required",
-            741
+            740
           ],
           [
             "licensed_retailer_review_required",
@@ -2172,7 +2172,7 @@
         "by_workflow": [
           [
             "official_search_url_available",
-            741
+            740
           ],
           [
             "licensed_retailer_search_review",
@@ -2182,7 +2182,7 @@
         "by_source_store": [
           [
             "엔스카이",
-            182
+            181
           ],
           [
             "애니메이트",
@@ -2508,7 +2508,7 @@
       "workstream": "image_url_attachment",
       "public_report": "data/catalog_image_enrichment_batches_public.json",
       "status": "ready",
-      "rows": 788,
+      "rows": 787,
       "command": "Extract images only after exact source_url evidence is confirmed.",
       "next_step": "resolve_source_url_blockers_then_extract_images",
       "blocker": null,
@@ -2516,20 +2516,20 @@
       "evidence": {
         "known_image_asset_status": "pass",
         "download_readiness_status": "known_image_assets_complete",
-        "image_url_rows": 19525,
-        "local_image_path_rows": 19525,
+        "image_url_rows": 19526,
+        "local_image_path_rows": 19526,
         "image_url_without_local_path_rows": 0,
         "missing_local_image_files": 0,
         "missing_web_public_asset_files": 0,
         "known_image_download_blocker_rows": 0,
         "auto_download_ready_rows": 0,
-        "rows_still_requiring_image_url_evidence": 788,
+        "rows_still_requiring_image_url_evidence": 787,
         "missing_image_evidence_priority": {
-          "rows": 788,
+          "rows": 787,
           "by_source_store": [
             [
               "엔스카이",
-              182
+              181
             ],
             [
               "애니메이트",
@@ -2627,7 +2627,7 @@
             ],
             [
               "키링",
-              75
+              74
             ],
             [
               "마스코트",
@@ -2717,7 +2717,7 @@
             ],
             [
               "귀멸의 칼날",
-              42
+              41
             ],
             [
               "스텔라이브",
@@ -2775,7 +2775,7 @@
           "by_series_name": [
             [
               "(blank)",
-              736
+              735
             ],
             [
               "ご当地",
@@ -2797,7 +2797,7 @@
           "top_source_store": [
             [
               "엔스카이",
-              182
+              181
             ]
           ],
           "sample_rows": [
@@ -3137,7 +3137,7 @@
         "provider_candidate_items": 496,
         "manual_or_blocked_items": 228,
         "generic_source_url_rows": 0,
-        "needs_source_discovery_rows": 753,
+        "needs_source_discovery_rows": 752,
         "gotouchi_official_review_rows": 23
       }
     },
@@ -3167,7 +3167,7 @@
         "image_attachment_template_confirmed_rows": 0,
         "image_attachment_template_dry_run_updated_rows": 0,
         "image_attachment_template_dry_run_skipped_rows": 25,
-        "source_discovery_focus_template_rows": 753,
+        "source_discovery_focus_template_rows": 752,
         "source_discovery_focus_template_confirmed_rows": 0,
         "workstream_count": 3,
         "source_url_update_workstream_count": 0,
@@ -4467,7 +4467,7 @@
         "excluded_workflow_rows": [
           [
             "find_source_then_extract_image",
-            753
+            752
           ],
           [
             "manual_image_research",
@@ -4491,7 +4491,7 @@
       "workstream": "metadata_review_batches",
       "public_report": "data/catalog_metadata_review_batches_public.json",
       "status": "manual_review",
-      "rows": 14020,
+      "rows": 14018,
       "command": "Fill titles, barcodes, dates, prices, sources, and images from reviewed evidence.",
       "next_step": "work_field_store_metadata_batches",
       "blocker": "Broad metadata updates require field-specific evidence policies.",
@@ -4503,8 +4503,8 @@
           "release_date": 1342,
           "barcode": 10048,
           "official_price_jpy": 553,
-          "image_url": 788,
-          "source_url": 763
+          "image_url": 787,
+          "source_url": 762
         }
       }
     },
@@ -7544,7 +7544,7 @@
     "manual_review_required": true,
     "pillar_count": 5,
     "blocking_pillar_count": 5,
-    "manual_review_rows": 897,
+    "manual_review_rows": 896,
     "auto_apply_ready_rows": 0,
     "next_safe_phase": "review_candidate_source_urls",
     "blocked_reasons": [
@@ -7584,13 +7584,13 @@
         "pillar": "missing_images",
         "label": "Resolve missing catalog images",
         "status": "manual_evidence_required",
-        "manual_review_rows": 788,
+        "manual_review_rows": 787,
         "auto_apply_ready_rows": 0,
         "next_safe_phase": "discover_exact_source_urls",
         "next_queue_lane": "discover_exact_source_urls",
-        "next_queue_rows": 753,
+        "next_queue_rows": 752,
         "next_execution_lane_count": 3,
-        "next_execution_open_rows": 786,
+        "next_execution_open_rows": 785,
         "next_execution_next_batch_rows": 30,
         "first_next_execution_lane": "representative_image_review",
         "first_next_execution_status": "manual_review_required",
@@ -7615,7 +7615,7 @@
         "next_queue_lane": "manual_search_required",
         "next_queue_rows": 0,
         "next_execution_lane_count": 4,
-        "next_execution_open_rows": 801,
+        "next_execution_open_rows": 800,
         "next_execution_next_batch_rows": 68,
         "first_next_execution_lane": "exact_source_url_review",
         "first_next_execution_status": "manual_cache_miss_research_required",

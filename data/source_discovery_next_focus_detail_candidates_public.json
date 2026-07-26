@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T16:51:16Z",
+  "generated_at": "2026-07-26T20:22:05Z",
   "scope": "source_discovery_next_focus_detail_candidates",
   "source_report": "data/source_discovery_next_focus_pack_public.json",
   "summary": {
@@ -11,15 +11,15 @@
     "items_with_candidates": 1,
     "items_with_candidates_from_official_no_results": 0,
     "candidate_rows_from_fallback_search": 0,
-    "candidate_rows": 5,
+    "candidate_rows": 2,
     "exact_candidate_review_rows": 0,
-    "manual_candidate_review_rows": 5,
+    "manual_candidate_review_rows": 2,
     "no_candidate_items": 19,
     "candidate_fetch_error_items": 0,
-    "candidate_confirmation_template_rows": 5,
+    "candidate_confirmation_template_rows": 2,
     "exact_candidate_confirmation_shortlist_rows": 0,
     "candidate_confirmation_exact_review_rows": 0,
-    "candidate_confirmation_manual_review_rows": 5,
+    "candidate_confirmation_manual_review_rows": 2,
     "candidate_confirmation_manual_confirmed_rows": 0,
     "metadata_enrichment_template_rows": 1,
     "metadata_field_import_template_rows": 3,
@@ -40,16 +40,20 @@
     ],
     "candidate_blocker_counts": [
       [
+        "token_overlap_below_2",
+        2
+      ],
+      [
         "broad_query_without_variant",
-        5
+        2
       ],
       [
         "rank_not_first",
-        4
+        1
       ],
       [
-        "token_overlap_below_2",
-        4
+        "distinctive_tokens_missing",
+        1
       ]
     ],
     "review_bucket_counts": [
@@ -82,6 +86,10 @@
         1
       ],
       [
+        "candidate_title_has_weak_token_overlap",
+        1
+      ],
+      [
         "multiple_variants_require_catalog_sub_series_or_character_detail",
         1
       ]
@@ -111,7 +119,7 @@
       ],
       [
         "manual_candidate_review",
-        5
+        2
       ]
     ],
     "official_search_audit_status_counts": [
@@ -128,7 +136,7 @@
     "auto_apply_enabled": false,
     "manual_confirmed_rows": 0,
     "pack_items": 20,
-    "candidate_rows": 5,
+    "candidate_rows": 2,
     "exact_candidate_confirmation_ready_items": 0,
     "fallback_bridge_rows": 19,
     "manual_candidate_identity_review_rows": 1,
@@ -699,187 +707,6 @@
         "name_ja": "夏油傑 ラバーストラップ",
         "category": "키링",
         "affiliation": "주술회전",
-        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed",
-        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
-        "required_evidence": [
-          "exact_product_detail_url_on_allowed_domain",
-          "page_is_not_search_or_category_result",
-          "product_title_series_character_variant_category_match",
-          "source_page_has_verifiable_product_image_before_image_url_import"
-        ],
-        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
-        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
-        "image_url_required_evidence": [
-          "product_image_visible_on_confirmed_source_page",
-          "image_url_from_allowed_domain_or_official_cdn",
-          "image_identity_matches_catalog_row"
-        ]
-      },
-      "auto_apply_enabled": false
-    },
-    {
-      "manual_review_status": "not_started",
-      "manual_confirmed_source_url": "",
-      "manual_confirmed_image_url": "",
-      "manual_note": "",
-      "focus_pack_id": "source-discovery-focus-002",
-      "catalog_index": 1578,
-      "source_store": "엔스카이",
-      "affiliation": "귀멸의 칼날",
-      "category": "키링",
-      "name_ko": "코쵸 시노부 러버 스트랩",
-      "name_ja": "胡蝶しのぶ ラバーストラップ",
-      "search_query": "胡蝶しのぶ ラバーストラップ",
-      "official_search_url": "https://www.enskyshop.com/products/list?name=%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "official_search_audit_status": "official_search_unavailable",
-      "official_search_no_results": false,
-      "needs_fallback_web_search": true,
-      "official_search_product_detail_link_count": 139,
-      "official_search_fetch_block_reason": "official_search_returned_broad_result_set",
-      "fetch_status": "ok",
-      "fetch_error": "",
-      "candidate_count": 5,
-      "candidates": [
-        {
-          "rank": 1,
-          "candidate_title": "【グッズ-ストラップ】鬼滅の刃 わちゃっと！ラバーストラップ C.伊黒小芭内 / 甘露寺蜜璃 / 胡蝶しのぶ",
-          "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%82%8F%E3%81%A1%E3%82%83%E3%81%A3%E3%81%A8%EF%BC%81%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+C.%E4%BC%8A%E9%BB%92%E5%B0%8F%E8%8A%AD%E5%86%85+/+%E7%94%98%E9%9C%B2%E5%AF%BA%E8%9C%9C%E7%92%83+/+%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6/pd/1723242/",
-          "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=11111642_5dc910ebd6ac8.jpg&width=400&height=400&square=1",
-          "token_overlap": 2,
-          "similarity": 1.0,
-          "type_compatible": true,
-          "all_distinctive_token_match": true,
-          "parenthetical_terms_match": true,
-          "product_source_url": true,
-          "safe_source_image_pair": true,
-          "exact_candidate_gate_passed": false,
-          "exact_candidate_blockers": [
-            "broad_query_without_variant"
-          ],
-          "review_status": "manual_candidate_review"
-        },
-        {
-          "rank": 2,
-          "candidate_title": "【グッズ-ストラップ】鬼滅の刃 でかラバーストラップ Vol.2 05 胡蝶しのぶ",
-          "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%81%A7%E3%81%8B%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+Vol.2+05+%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6/pd/1707799/",
-          "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4562480319554_1.jpg&width=400&height=400&square=1",
-          "token_overlap": 1,
-          "similarity": 1.0,
-          "type_compatible": true,
-          "all_distinctive_token_match": true,
-          "parenthetical_terms_match": true,
-          "product_source_url": true,
-          "safe_source_image_pair": true,
-          "exact_candidate_gate_passed": false,
-          "exact_candidate_blockers": [
-            "rank_not_first",
-            "token_overlap_below_2",
-            "broad_query_without_variant"
-          ],
-          "review_status": "manual_candidate_review"
-        },
-        {
-          "rank": 3,
-          "candidate_title": "【グッズ-ストラップ】にゃふぉるめシリーズ TVアニメ「鬼滅の刃」 ハイタッチラバーストラップ 胡蝶しのぶ",
-          "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E3%81%AB%E3%82%83%E3%81%B5%E3%81%89%E3%82%8B%E3%82%81%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA+TV%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8C%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%E3%80%8D+%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%83%E3%83%81%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6/pd/1900988/",
-          "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=05281805_60b0b23f41639.jpg&width=400&height=400&square=1",
-          "token_overlap": 1,
-          "similarity": 1.0,
-          "type_compatible": true,
-          "all_distinctive_token_match": true,
-          "parenthetical_terms_match": true,
-          "product_source_url": true,
-          "safe_source_image_pair": true,
-          "exact_candidate_gate_passed": false,
-          "exact_candidate_blockers": [
-            "rank_not_first",
-            "token_overlap_below_2",
-            "broad_query_without_variant"
-          ],
-          "review_status": "manual_candidate_review"
-        },
-        {
-          "rank": 4,
-          "candidate_title": "【グッズ-ストラップ】鬼滅の刃 ラバーストラップセット/ViVimus 胡蝶カナエ＆栗花落カナヲ＆胡蝶しのぶ",
-          "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%82%BB%E3%83%83%E3%83%88/ViVimus+%E8%83%A1%E8%9D%B6%E3%82%AB%E3%83%8A%E3%82%A8%EF%BC%86%E6%A0%97%E8%8A%B1%E8%90%BD%E3%82%AB%E3%83%8A%E3%83%B2%EF%BC%86%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6/pd/1810817/",
-          "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4549743383187_1.jpg&width=400&height=400&square=1",
-          "token_overlap": 0,
-          "similarity": 1.0,
-          "type_compatible": true,
-          "all_distinctive_token_match": true,
-          "parenthetical_terms_match": true,
-          "product_source_url": true,
-          "safe_source_image_pair": true,
-          "exact_candidate_gate_passed": false,
-          "exact_candidate_blockers": [
-            "rank_not_first",
-            "token_overlap_below_2",
-            "broad_query_without_variant"
-          ],
-          "review_status": "manual_candidate_review"
-        },
-        {
-          "rank": 5,
-          "candidate_title": "【グッズ-ストラップ】鬼滅の刃 ラバーストラップセット/ViVimus 胡蝶しのぶ＆栗花落カナヲ",
-          "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%82%BB%E3%83%83%E3%83%88/ViVimus+%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6%EF%BC%86%E6%A0%97%E8%8A%B1%E8%90%BD%E3%82%AB%E3%83%8A%E3%83%B2/pd/1810812/",
-          "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4549743383132_1.jpg&width=400&height=400&square=1",
-          "token_overlap": 0,
-          "similarity": 1.0,
-          "type_compatible": true,
-          "all_distinctive_token_match": true,
-          "parenthetical_terms_match": true,
-          "product_source_url": true,
-          "safe_source_image_pair": true,
-          "exact_candidate_gate_passed": false,
-          "exact_candidate_blockers": [
-            "rank_not_first",
-            "token_overlap_below_2",
-            "broad_query_without_variant"
-          ],
-          "review_status": "manual_candidate_review"
-        }
-      ],
-      "review_bucket": "manual_candidate_identity_review",
-      "review_decision": {
-        "decision": "catalog_variant_detail_required_before_import",
-        "severity": "metadata_required",
-        "recommended_next_step": "enrich_catalog_variant_or_sub_series_before_source_image_import",
-        "reasons": [
-          "catalog_row_is_too_broad_for_single_product_image",
-          "multiple_variants_require_catalog_sub_series_or_character_detail"
-        ]
-      },
-      "source_patch_template": {
-        "catalog_index": 1578,
-        "source_url": "<exact_product_detail_url>",
-        "image_url": "<official_product_image_url_optional_after_source_verification>",
-        "source_store": "엔스카이",
-        "evidence_url": "<official_or_trusted_evidence_url>",
-        "manual_confirmed": false,
-        "requires_exact_identity_match": true,
-        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
-        "blocked_until": "exact_product_detail_source_url_confirmed",
-        "required_evidence": [
-          "exact_product_detail_url_on_allowed_domain",
-          "page_is_not_search_or_category_result",
-          "product_title_series_character_variant_category_match",
-          "source_page_has_verifiable_product_image_before_image_url_import"
-        ]
-      },
-      "catalog_field_import_template": {
-        "manual_confirmed": false,
-        "manual_note": "",
-        "row_index": 1578,
-        "field": "source_url",
-        "manual_value": "",
-        "evidence_url": "https://www.enskyshop.com/products/list?name=%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-        "candidate_source_url": "",
-        "source_store": "엔스카이",
-        "name_ko": "코쵸 시노부 러버 스트랩",
-        "name_ja": "胡蝶しのぶ ラバーストラップ",
-        "category": "키링",
-        "affiliation": "귀멸의 칼날",
         "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
         "blocked_until": "exact_product_detail_source_url_confirmed",
         "blocked_reason": "exact_product_detail_source_url_not_confirmed",
@@ -1870,6 +1697,130 @@
         ]
       },
       "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_note": "",
+      "focus_pack_id": "source-discovery-focus-002",
+      "catalog_index": 1594,
+      "source_store": "엔스카이",
+      "affiliation": "체인소 맨",
+      "category": "키링",
+      "name_ko": "덴지 러버 스트랩",
+      "name_ja": "デンジ ラバーストラップ",
+      "search_query": "デンジ ラバーストラップ",
+      "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%87%E3%83%B3%E3%82%B8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+      "official_search_audit_status": "official_search_unavailable",
+      "official_search_no_results": false,
+      "needs_fallback_web_search": true,
+      "official_search_product_detail_link_count": 139,
+      "official_search_fetch_block_reason": "official_search_returned_broad_result_set",
+      "fetch_status": "ok",
+      "fetch_error": "",
+      "candidate_count": 2,
+      "candidates": [
+        {
+          "rank": 1,
+          "candidate_title": "【グッズ-ストラップ】チェンソーマン でかラバーストラップ 01 デンジ",
+          "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3+%E3%81%A7%E3%81%8B%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+01+%E3%83%87%E3%83%B3%E3%82%B8/pd/2174577/",
+          "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4562480355798_1.jpg&width=400&height=400&square=1",
+          "token_overlap": 1,
+          "similarity": 1.0,
+          "type_compatible": true,
+          "all_distinctive_token_match": true,
+          "parenthetical_terms_match": true,
+          "product_source_url": true,
+          "safe_source_image_pair": true,
+          "exact_candidate_gate_passed": false,
+          "exact_candidate_blockers": [
+            "token_overlap_below_2",
+            "broad_query_without_variant"
+          ],
+          "review_status": "manual_candidate_review"
+        },
+        {
+          "rank": 2,
+          "candidate_title": "【コミック】あたしゃ川尻こだまだよ(2) アニメBD&ラバーストラップ付き特装版",
+          "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B3%E3%83%9F%E3%83%83%E3%82%AF%E3%80%91%E3%81%82%E3%81%9F%E3%81%97%E3%82%83%E5%B7%9D%E5%B0%BB%E3%81%93%E3%81%A0%E3%81%BE%E3%81%A0%E3%82%88%282%29+%E3%82%A2%E3%83%8B%E3%83%A1BD%26%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E4%BB%98%E3%81%8D%E7%89%B9%E8%A3%85%E7%89%88/pd/2066525/",
+          "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=34368231.JPG&width=400&height=400&square=1",
+          "token_overlap": 0,
+          "similarity": 0.7,
+          "type_compatible": true,
+          "all_distinctive_token_match": false,
+          "parenthetical_terms_match": true,
+          "product_source_url": true,
+          "safe_source_image_pair": true,
+          "exact_candidate_gate_passed": false,
+          "exact_candidate_blockers": [
+            "rank_not_first",
+            "token_overlap_below_2",
+            "distinctive_tokens_missing",
+            "broad_query_without_variant"
+          ],
+          "review_status": "manual_candidate_review"
+        }
+      ],
+      "review_bucket": "manual_candidate_identity_review",
+      "review_decision": {
+        "decision": "catalog_variant_detail_required_before_import",
+        "severity": "metadata_required",
+        "recommended_next_step": "enrich_catalog_variant_or_sub_series_before_source_image_import",
+        "reasons": [
+          "catalog_row_is_too_broad_for_single_product_image",
+          "candidate_title_has_weak_token_overlap",
+          "multiple_variants_require_catalog_sub_series_or_character_detail"
+        ]
+      },
+      "source_patch_template": {
+        "catalog_index": 1594,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "엔스카이",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 1594,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%83%87%E3%83%B3%E3%82%B8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+        "candidate_source_url": "",
+        "source_store": "엔스카이",
+        "name_ko": "덴지 러버 스트랩",
+        "name_ja": "デンジ ラバーストラップ",
+        "category": "키링",
+        "affiliation": "체인소 맨",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
+      },
+      "auto_apply_enabled": false
     }
   ],
   "candidate_review_work_order": [
@@ -2099,41 +2050,6 @@
     },
     {
       "rank": 8,
-      "catalog_index": 1578,
-      "name_ko": "코쵸 시노부 러버 스트랩",
-      "name_ja": "胡蝶しのぶ ラバーストラップ",
-      "review_bucket": "manual_candidate_identity_review",
-      "candidate_count": 5,
-      "top_candidate_title": "【グッズ-ストラップ】鬼滅の刃 わちゃっと！ラバーストラップ C.伊黒小芭内 / 甘露寺蜜璃 / 胡蝶しのぶ",
-      "top_candidate_blockers": [
-        "broad_query_without_variant"
-      ],
-      "review_decision": {
-        "decision": "catalog_variant_detail_required_before_import",
-        "severity": "metadata_required",
-        "recommended_next_step": "enrich_catalog_variant_or_sub_series_before_source_image_import",
-        "reasons": [
-          "catalog_row_is_too_broad_for_single_product_image",
-          "multiple_variants_require_catalog_sub_series_or_character_detail"
-        ]
-      },
-      "official_search_audit_status": "official_search_unavailable",
-      "recommended_next_step": "enrich_catalog_variant_or_sub_series_before_source_image_import",
-      "fallback_queue_report": "data/source_discovery_next_focus_fallback_queue_public.json",
-      "domain_limited_web_search_url_count": 6,
-      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
-      "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "fallback_search_query_count": 6,
-      "fallback_search_terms": [
-        "胡蝶しのぶ ラバーストラップ",
-        "코쵸 시노부 러버 스트랩"
-      ],
-      "allowed_source_domains": [
-        "www.enskyshop.com"
-      ]
-    },
-    {
-      "rank": 9,
       "catalog_index": 1579,
       "name_ko": "렌고쿠 쿄쥬로 메탈릭 러버 스트랩",
       "name_ja": "煉獄杏寿郎 メタリックラバーストラップ",
@@ -2165,7 +2081,7 @@
       ]
     },
     {
-      "rank": 10,
+      "rank": 9,
       "catalog_index": 1580,
       "name_ko": "우즈이 텐겐 메탈릭 러버 스트랩",
       "name_ja": "宇髄天元 メタリックラバーストラップ",
@@ -2197,7 +2113,7 @@
       ]
     },
     {
-      "rank": 11,
+      "rank": 10,
       "catalog_index": 1583,
       "name_ko": "나미 러버 스트랩",
       "name_ja": "ナミ ラバーストラップ",
@@ -2229,7 +2145,7 @@
       ]
     },
     {
-      "rank": 12,
+      "rank": 11,
       "catalog_index": 1584,
       "name_ko": "상디 러버 스트랩",
       "name_ja": "サンジ ラバーストラップ",
@@ -2261,7 +2177,7 @@
       ]
     },
     {
-      "rank": 13,
+      "rank": 12,
       "catalog_index": 1585,
       "name_ko": "우솝 러버 스트랩",
       "name_ja": "ウソップ ラバーストラップ",
@@ -2293,7 +2209,7 @@
       ]
     },
     {
-      "rank": 14,
+      "rank": 13,
       "catalog_index": 1587,
       "name_ko": "니코 로빈 러버 스트랩",
       "name_ja": "ニコ・ロビン ラバーストラップ",
@@ -2325,7 +2241,7 @@
       ]
     },
     {
-      "rank": 15,
+      "rank": 14,
       "catalog_index": 1588,
       "name_ko": "프랑키 러버 스트랩",
       "name_ja": "フランキー ラバーストラップ",
@@ -2357,7 +2273,7 @@
       ]
     },
     {
-      "rank": 16,
+      "rank": 15,
       "catalog_index": 1589,
       "name_ko": "브룩 러버 스트랩",
       "name_ja": "ブルック ラバーストラップ",
@@ -2389,7 +2305,7 @@
       ]
     },
     {
-      "rank": 17,
+      "rank": 16,
       "catalog_index": 1590,
       "name_ko": "징베 러버 스트랩",
       "name_ja": "ジンベエ ラバーストラップ",
@@ -2421,7 +2337,7 @@
       ]
     },
     {
-      "rank": 18,
+      "rank": 17,
       "catalog_index": 1591,
       "name_ko": "포트가스 D 에이스 메탈릭 러버 스트랩",
       "name_ja": "ポートガス・D・エース メタリックラバーストラップ",
@@ -2453,7 +2369,7 @@
       ]
     },
     {
-      "rank": 19,
+      "rank": 18,
       "catalog_index": 1592,
       "name_ko": "사보 러버 스트랩",
       "name_ja": "サボ ラバーストラップ",
@@ -2485,7 +2401,7 @@
       ]
     },
     {
-      "rank": 20,
+      "rank": 19,
       "catalog_index": 1593,
       "name_ko": "트라팔가 로 카라비너 러버 스트랩",
       "name_ja": "トラファルガー・ロー カラビナ付きラバーストラップ",
@@ -2511,6 +2427,43 @@
       "fallback_search_terms": [
         "トラファルガー・ロー カラビナ付きラバーストラップ",
         "트라팔가 로 카라비너 러버 스트랩"
+      ],
+      "allowed_source_domains": [
+        "www.enskyshop.com"
+      ]
+    },
+    {
+      "rank": 20,
+      "catalog_index": 1594,
+      "name_ko": "덴지 러버 스트랩",
+      "name_ja": "デンジ ラバーストラップ",
+      "review_bucket": "manual_candidate_identity_review",
+      "candidate_count": 2,
+      "top_candidate_title": "【グッズ-ストラップ】チェンソーマン でかラバーストラップ 01 デンジ",
+      "top_candidate_blockers": [
+        "token_overlap_below_2",
+        "broad_query_without_variant"
+      ],
+      "review_decision": {
+        "decision": "catalog_variant_detail_required_before_import",
+        "severity": "metadata_required",
+        "recommended_next_step": "enrich_catalog_variant_or_sub_series_before_source_image_import",
+        "reasons": [
+          "catalog_row_is_too_broad_for_single_product_image",
+          "candidate_title_has_weak_token_overlap",
+          "multiple_variants_require_catalog_sub_series_or_character_detail"
+        ]
+      },
+      "official_search_audit_status": "official_search_unavailable",
+      "recommended_next_step": "enrich_catalog_variant_or_sub_series_before_source_image_import",
+      "fallback_queue_report": "data/source_discovery_next_focus_fallback_queue_public.json",
+      "domain_limited_web_search_url_count": 6,
+      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%87%E3%83%B3%E3%82%B8+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%87%E3%83%B3%E3%82%B8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+      "fallback_search_query_count": 6,
+      "fallback_search_terms": [
+        "デンジ ラバーストラップ",
+        "덴지 러버 스트랩"
       ],
       "allowed_source_domains": [
         "www.enskyshop.com"
@@ -2638,25 +2591,26 @@
       "lane": "catalog_variant_metadata_enrichment",
       "priority": 3,
       "row_count": 1,
-      "candidate_rows": 5,
+      "candidate_rows": 2,
       "fallback_search_url_count": 6,
-      "next_catalog_index": 1578,
+      "next_catalog_index": 1594,
       "recommended_next_step": "enrich_catalog_variant_or_sub_series_before_source_image_import",
       "sample_items": [
         {
-          "catalog_index": 1578,
-          "name_ko": "코쵸 시노부 러버 스트랩",
-          "name_ja": "胡蝶しのぶ ラバーストラップ",
-          "candidate_count": 5,
-          "top_candidate_title": "【グッズ-ストラップ】鬼滅の刃 わちゃっと！ラバーストラップ C.伊黒小芭内 / 甘露寺蜜璃 / 胡蝶しのぶ",
+          "catalog_index": 1594,
+          "name_ko": "덴지 러버 스트랩",
+          "name_ja": "デンジ ラバーストラップ",
+          "candidate_count": 2,
+          "top_candidate_title": "【グッズ-ストラップ】チェンソーマン でかラバーストラップ 01 デンジ",
           "top_candidate_blockers": [
+            "token_overlap_below_2",
             "broad_query_without_variant"
           ],
           "decision": "catalog_variant_detail_required_before_import",
           "recommended_next_step": "enrich_catalog_variant_or_sub_series_before_source_image_import",
           "domain_limited_web_search_url_count": 6,
-          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
-          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%87%E3%83%B3%E3%82%B8+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%87%E3%83%B3%E3%82%B8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
         }
       ],
       "auto_apply_enabled": false
@@ -3050,66 +3004,35 @@
       "manual_review_status": "not_started",
       "manual_note": "",
       "focus_pack_id": "source-discovery-focus-002",
-      "catalog_index": 1578,
+      "catalog_index": 1594,
       "source_store": "엔스카이",
       "category": "키링",
-      "current_name_ko": "코쵸 시노부 러버 스트랩",
-      "current_name_ja": "胡蝶しのぶ ラバーストラップ",
-      "search_query": "胡蝶しのぶ ラバーストラップ",
-      "top_candidate_title": "【グッズ-ストラップ】鬼滅の刃 わちゃっと！ラバーストラップ C.伊黒小芭内 / 甘露寺蜜璃 / 胡蝶しのぶ",
-      "top_candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%82%8F%E3%81%A1%E3%82%83%E3%81%A3%E3%81%A8%EF%BC%81%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+C.%E4%BC%8A%E9%BB%92%E5%B0%8F%E8%8A%AD%E5%86%85+/+%E7%94%98%E9%9C%B2%E5%AF%BA%E8%9C%9C%E7%92%83+/+%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6/pd/1723242/",
-      "top_candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=11111642_5dc910ebd6ac8.jpg&width=400&height=400&square=1",
+      "current_name_ko": "덴지 러버 스트랩",
+      "current_name_ja": "デンジ ラバーストラップ",
+      "search_query": "デンジ ラバーストラップ",
+      "top_candidate_title": "【グッズ-ストラップ】チェンソーマン でかラバーストラップ 01 デンジ",
+      "top_candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3+%E3%81%A7%E3%81%8B%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+01+%E3%83%87%E3%83%B3%E3%82%B8/pd/2174577/",
+      "top_candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4562480355798_1.jpg&width=400&height=400&square=1",
       "candidate_options": [
         {
           "rank": 1,
-          "candidate_title": "【グッズ-ストラップ】鬼滅の刃 わちゃっと！ラバーストラップ C.伊黒小芭内 / 甘露寺蜜璃 / 胡蝶しのぶ",
-          "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%82%8F%E3%81%A1%E3%82%83%E3%81%A3%E3%81%A8%EF%BC%81%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+C.%E4%BC%8A%E9%BB%92%E5%B0%8F%E8%8A%AD%E5%86%85+/+%E7%94%98%E9%9C%B2%E5%AF%BA%E8%9C%9C%E7%92%83+/+%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6/pd/1723242/",
-          "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=11111642_5dc910ebd6ac8.jpg&width=400&height=400&square=1",
+          "candidate_title": "【グッズ-ストラップ】チェンソーマン でかラバーストラップ 01 デンジ",
+          "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3+%E3%81%A7%E3%81%8B%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+01+%E3%83%87%E3%83%B3%E3%82%B8/pd/2174577/",
+          "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4562480355798_1.jpg&width=400&height=400&square=1",
           "exact_candidate_blockers": [
+            "token_overlap_below_2",
             "broad_query_without_variant"
           ]
         },
         {
           "rank": 2,
-          "candidate_title": "【グッズ-ストラップ】鬼滅の刃 でかラバーストラップ Vol.2 05 胡蝶しのぶ",
-          "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%81%A7%E3%81%8B%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+Vol.2+05+%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6/pd/1707799/",
-          "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4562480319554_1.jpg&width=400&height=400&square=1",
+          "candidate_title": "【コミック】あたしゃ川尻こだまだよ(2) アニメBD&ラバーストラップ付き特装版",
+          "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B3%E3%83%9F%E3%83%83%E3%82%AF%E3%80%91%E3%81%82%E3%81%9F%E3%81%97%E3%82%83%E5%B7%9D%E5%B0%BB%E3%81%93%E3%81%A0%E3%81%BE%E3%81%A0%E3%82%88%282%29+%E3%82%A2%E3%83%8B%E3%83%A1BD%26%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E4%BB%98%E3%81%8D%E7%89%B9%E8%A3%85%E7%89%88/pd/2066525/",
+          "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=34368231.JPG&width=400&height=400&square=1",
           "exact_candidate_blockers": [
             "rank_not_first",
             "token_overlap_below_2",
-            "broad_query_without_variant"
-          ]
-        },
-        {
-          "rank": 3,
-          "candidate_title": "【グッズ-ストラップ】にゃふぉるめシリーズ TVアニメ「鬼滅の刃」 ハイタッチラバーストラップ 胡蝶しのぶ",
-          "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E3%81%AB%E3%82%83%E3%81%B5%E3%81%89%E3%82%8B%E3%82%81%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA+TV%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8C%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%E3%80%8D+%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%83%E3%83%81%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6/pd/1900988/",
-          "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=05281805_60b0b23f41639.jpg&width=400&height=400&square=1",
-          "exact_candidate_blockers": [
-            "rank_not_first",
-            "token_overlap_below_2",
-            "broad_query_without_variant"
-          ]
-        },
-        {
-          "rank": 4,
-          "candidate_title": "【グッズ-ストラップ】鬼滅の刃 ラバーストラップセット/ViVimus 胡蝶カナエ＆栗花落カナヲ＆胡蝶しのぶ",
-          "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%82%BB%E3%83%83%E3%83%88/ViVimus+%E8%83%A1%E8%9D%B6%E3%82%AB%E3%83%8A%E3%82%A8%EF%BC%86%E6%A0%97%E8%8A%B1%E8%90%BD%E3%82%AB%E3%83%8A%E3%83%B2%EF%BC%86%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6/pd/1810817/",
-          "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4549743383187_1.jpg&width=400&height=400&square=1",
-          "exact_candidate_blockers": [
-            "rank_not_first",
-            "token_overlap_below_2",
-            "broad_query_without_variant"
-          ]
-        },
-        {
-          "rank": 5,
-          "candidate_title": "【グッズ-ストラップ】鬼滅の刃 ラバーストラップセット/ViVimus 胡蝶しのぶ＆栗花落カナヲ",
-          "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%82%BB%E3%83%83%E3%83%88/ViVimus+%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6%EF%BC%86%E6%A0%97%E8%8A%B1%E8%90%BD%E3%82%AB%E3%83%8A%E3%83%B2/pd/1810812/",
-          "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4549743383132_1.jpg&width=400&height=400&square=1",
-          "exact_candidate_blockers": [
-            "rank_not_first",
-            "token_overlap_below_2",
+            "distinctive_tokens_missing",
             "broad_query_without_variant"
           ]
         }
@@ -3118,7 +3041,7 @@
       "suggested_series_name": "",
       "suggested_sub_series": "",
       "suggested_character_name": "",
-      "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%82%8F%E3%81%A1%E3%82%83%E3%81%A3%E3%81%A8%EF%BC%81%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+C.%E4%BC%8A%E9%BB%92%E5%B0%8F%E8%8A%AD%E5%86%85+/+%E7%94%98%E9%9C%B2%E5%AF%BA%E8%9C%9C%E7%92%83+/+%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6/pd/1723242/",
+      "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3+%E3%81%A7%E3%81%8B%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+01+%E3%83%87%E3%83%B3%E3%82%B8/pd/2174577/",
       "blocked_until": "exact_catalog_variant_identity_confirmed",
       "required_evidence": [
         "exact_variant_or_character_name",
@@ -3134,17 +3057,17 @@
       "manual_review_status": "not_started",
       "manual_note": "",
       "focus_pack_id": "source-discovery-focus-002",
-      "catalog_index": 1578,
+      "catalog_index": 1594,
       "source_store": "엔스카이",
-      "affiliation": "귀멸의 칼날",
+      "affiliation": "체인소 맨",
       "category": "키링",
-      "name_ko": "코쵸 시노부 러버 스트랩",
-      "name_ja": "胡蝶しのぶ ラバーストラップ",
-      "search_query": "胡蝶しのぶ ラバーストラップ",
-      "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%82%8F%E3%81%A1%E3%82%83%E3%81%A3%E3%81%A8%EF%BC%81%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+C.%E4%BC%8A%E9%BB%92%E5%B0%8F%E8%8A%AD%E5%86%85+/+%E7%94%98%E9%9C%B2%E5%AF%BA%E8%9C%9C%E7%92%83+/+%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6/pd/1723242/",
-      "candidate_title": "【グッズ-ストラップ】鬼滅の刃 わちゃっと！ラバーストラップ C.伊黒小芭内 / 甘露寺蜜璃 / 胡蝶しのぶ",
-      "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%82%8F%E3%81%A1%E3%82%83%E3%81%A3%E3%81%A8%EF%BC%81%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+C.%E4%BC%8A%E9%BB%92%E5%B0%8F%E8%8A%AD%E5%86%85+/+%E7%94%98%E9%9C%B2%E5%AF%BA%E8%9C%9C%E7%92%83+/+%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6/pd/1723242/",
-      "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=11111642_5dc910ebd6ac8.jpg&width=400&height=400&square=1",
+      "name_ko": "덴지 러버 스트랩",
+      "name_ja": "デンジ ラバーストラップ",
+      "search_query": "デンジ ラバーストラップ",
+      "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3+%E3%81%A7%E3%81%8B%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+01+%E3%83%87%E3%83%B3%E3%82%B8/pd/2174577/",
+      "candidate_title": "【グッズ-ストラップ】チェンソーマン でかラバーストラップ 01 デンジ",
+      "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3+%E3%81%A7%E3%81%8B%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+01+%E3%83%87%E3%83%B3%E3%82%B8/pd/2174577/",
+      "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4562480355798_1.jpg&width=400&height=400&square=1",
       "manual_value": "",
       "blocked_until": "manual_confirmed_true",
       "required_evidence": [
@@ -3179,17 +3102,17 @@
       "manual_review_status": "not_started",
       "manual_note": "",
       "focus_pack_id": "source-discovery-focus-002",
-      "catalog_index": 1578,
+      "catalog_index": 1594,
       "source_store": "엔스카이",
-      "affiliation": "귀멸의 칼날",
+      "affiliation": "체인소 맨",
       "category": "키링",
-      "name_ko": "코쵸 시노부 러버 스트랩",
-      "name_ja": "胡蝶しのぶ ラバーストラップ",
-      "search_query": "胡蝶しのぶ ラバーストラップ",
-      "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%82%8F%E3%81%A1%E3%82%83%E3%81%A3%E3%81%A8%EF%BC%81%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+C.%E4%BC%8A%E9%BB%92%E5%B0%8F%E8%8A%AD%E5%86%85+/+%E7%94%98%E9%9C%B2%E5%AF%BA%E8%9C%9C%E7%92%83+/+%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6/pd/1723242/",
-      "candidate_title": "【グッズ-ストラップ】鬼滅の刃 わちゃっと！ラバーストラップ C.伊黒小芭内 / 甘露寺蜜璃 / 胡蝶しのぶ",
-      "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%82%8F%E3%81%A1%E3%82%83%E3%81%A3%E3%81%A8%EF%BC%81%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+C.%E4%BC%8A%E9%BB%92%E5%B0%8F%E8%8A%AD%E5%86%85+/+%E7%94%98%E9%9C%B2%E5%AF%BA%E8%9C%9C%E7%92%83+/+%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6/pd/1723242/",
-      "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=11111642_5dc910ebd6ac8.jpg&width=400&height=400&square=1",
+      "name_ko": "덴지 러버 스트랩",
+      "name_ja": "デンジ ラバーストラップ",
+      "search_query": "デンジ ラバーストラップ",
+      "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3+%E3%81%A7%E3%81%8B%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+01+%E3%83%87%E3%83%B3%E3%82%B8/pd/2174577/",
+      "candidate_title": "【グッズ-ストラップ】チェンソーマン でかラバーストラップ 01 デンジ",
+      "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3+%E3%81%A7%E3%81%8B%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+01+%E3%83%87%E3%83%B3%E3%82%B8/pd/2174577/",
+      "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4562480355798_1.jpg&width=400&height=400&square=1",
       "manual_value": "",
       "blocked_until": "manual_confirmed_true",
       "required_evidence": [
@@ -3224,17 +3147,17 @@
       "manual_review_status": "not_started",
       "manual_note": "",
       "focus_pack_id": "source-discovery-focus-002",
-      "catalog_index": 1578,
+      "catalog_index": 1594,
       "source_store": "엔스카이",
-      "affiliation": "귀멸의 칼날",
+      "affiliation": "체인소 맨",
       "category": "키링",
-      "name_ko": "코쵸 시노부 러버 스트랩",
-      "name_ja": "胡蝶しのぶ ラバーストラップ",
-      "search_query": "胡蝶しのぶ ラバーストラップ",
-      "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%82%8F%E3%81%A1%E3%82%83%E3%81%A3%E3%81%A8%EF%BC%81%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+C.%E4%BC%8A%E9%BB%92%E5%B0%8F%E8%8A%AD%E5%86%85+/+%E7%94%98%E9%9C%B2%E5%AF%BA%E8%9C%9C%E7%92%83+/+%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6/pd/1723242/",
-      "candidate_title": "【グッズ-ストラップ】鬼滅の刃 わちゃっと！ラバーストラップ C.伊黒小芭内 / 甘露寺蜜璃 / 胡蝶しのぶ",
-      "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%82%8F%E3%81%A1%E3%82%83%E3%81%A3%E3%81%A8%EF%BC%81%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+C.%E4%BC%8A%E9%BB%92%E5%B0%8F%E8%8A%AD%E5%86%85+/+%E7%94%98%E9%9C%B2%E5%AF%BA%E8%9C%9C%E7%92%83+/+%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6/pd/1723242/",
-      "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=11111642_5dc910ebd6ac8.jpg&width=400&height=400&square=1",
+      "name_ko": "덴지 러버 스트랩",
+      "name_ja": "デンジ ラバーストラップ",
+      "search_query": "デンジ ラバーストラップ",
+      "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3+%E3%81%A7%E3%81%8B%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+01+%E3%83%87%E3%83%B3%E3%82%B8/pd/2174577/",
+      "candidate_title": "【グッズ-ストラップ】チェンソーマン でかラバーストラップ 01 デンジ",
+      "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3+%E3%81%A7%E3%81%8B%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+01+%E3%83%87%E3%83%B3%E3%82%B8/pd/2174577/",
+      "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4562480355798_1.jpg&width=400&height=400&square=1",
       "manual_value": "",
       "blocked_until": "manual_confirmed_true",
       "required_evidence": [
@@ -3272,21 +3195,21 @@
       "manual_review_status": "not_started",
       "manual_note": "",
       "focus_pack_id": "source-discovery-focus-002",
-      "catalog_index": 1578,
+      "catalog_index": 1594,
       "source_store": "엔스카이",
-      "affiliation": "귀멸의 칼날",
+      "affiliation": "체인소 맨",
       "category": "키링",
-      "name_ko": "코쵸 시노부 러버 스트랩",
-      "name_ja": "胡蝶しのぶ ラバーストラップ",
-      "search_query": "胡蝶しのぶ ラバーストラップ",
+      "name_ko": "덴지 러버 스트랩",
+      "name_ja": "デンジ ラバーストラップ",
+      "search_query": "デンジ ラバーストラップ",
       "candidate_rank": 1,
       "candidate_review_status": "manual_candidate_review",
-      "candidate_title": "【グッズ-ストラップ】鬼滅の刃 わちゃっと！ラバーストラップ C.伊黒小芭内 / 甘露寺蜜璃 / 胡蝶しのぶ",
-      "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%82%8F%E3%81%A1%E3%82%83%E3%81%A3%E3%81%A8%EF%BC%81%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+C.%E4%BC%8A%E9%BB%92%E5%B0%8F%E8%8A%AD%E5%86%85+/+%E7%94%98%E9%9C%B2%E5%AF%BA%E8%9C%9C%E7%92%83+/+%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6/pd/1723242/",
-      "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=11111642_5dc910ebd6ac8.jpg&width=400&height=400&square=1",
+      "candidate_title": "【グッズ-ストラップ】チェンソーマン でかラバーストラップ 01 デンジ",
+      "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3+%E3%81%A7%E3%81%8B%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+01+%E3%83%87%E3%83%B3%E3%82%B8/pd/2174577/",
+      "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4562480355798_1.jpg&width=400&height=400&square=1",
       "manual_confirmed_source_url": "",
       "manual_confirmed_image_url": "",
-      "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%82%8F%E3%81%A1%E3%82%83%E3%81%A3%E3%81%A8%EF%BC%81%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+C.%E4%BC%8A%E9%BB%92%E5%B0%8F%E8%8A%AD%E5%86%85+/+%E7%94%98%E9%9C%B2%E5%AF%BA%E8%9C%9C%E7%92%83+/+%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6/pd/1723242/",
+      "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3+%E3%81%A7%E3%81%8B%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+01+%E3%83%87%E3%83%B3%E3%82%B8/pd/2174577/",
       "acceptance_criteria": "confirm exact product title, character/variant, category, source page, and image identity",
       "blocked_until": "manual_confirmed_true"
     },
@@ -3295,90 +3218,21 @@
       "manual_review_status": "not_started",
       "manual_note": "",
       "focus_pack_id": "source-discovery-focus-002",
-      "catalog_index": 1578,
+      "catalog_index": 1594,
       "source_store": "엔스카이",
-      "affiliation": "귀멸의 칼날",
+      "affiliation": "체인소 맨",
       "category": "키링",
-      "name_ko": "코쵸 시노부 러버 스트랩",
-      "name_ja": "胡蝶しのぶ ラバーストラップ",
-      "search_query": "胡蝶しのぶ ラバーストラップ",
+      "name_ko": "덴지 러버 스트랩",
+      "name_ja": "デンジ ラバーストラップ",
+      "search_query": "デンジ ラバーストラップ",
       "candidate_rank": 2,
       "candidate_review_status": "manual_candidate_review",
-      "candidate_title": "【グッズ-ストラップ】鬼滅の刃 でかラバーストラップ Vol.2 05 胡蝶しのぶ",
-      "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%81%A7%E3%81%8B%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+Vol.2+05+%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6/pd/1707799/",
-      "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4562480319554_1.jpg&width=400&height=400&square=1",
+      "candidate_title": "【コミック】あたしゃ川尻こだまだよ(2) アニメBD&ラバーストラップ付き特装版",
+      "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B3%E3%83%9F%E3%83%83%E3%82%AF%E3%80%91%E3%81%82%E3%81%9F%E3%81%97%E3%82%83%E5%B7%9D%E5%B0%BB%E3%81%93%E3%81%A0%E3%81%BE%E3%81%A0%E3%82%88%282%29+%E3%82%A2%E3%83%8B%E3%83%A1BD%26%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E4%BB%98%E3%81%8D%E7%89%B9%E8%A3%85%E7%89%88/pd/2066525/",
+      "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=34368231.JPG&width=400&height=400&square=1",
       "manual_confirmed_source_url": "",
       "manual_confirmed_image_url": "",
-      "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%81%A7%E3%81%8B%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+Vol.2+05+%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6/pd/1707799/",
-      "acceptance_criteria": "confirm exact product title, character/variant, category, source page, and image identity",
-      "blocked_until": "manual_confirmed_true"
-    },
-    {
-      "manual_confirmed": false,
-      "manual_review_status": "not_started",
-      "manual_note": "",
-      "focus_pack_id": "source-discovery-focus-002",
-      "catalog_index": 1578,
-      "source_store": "엔스카이",
-      "affiliation": "귀멸의 칼날",
-      "category": "키링",
-      "name_ko": "코쵸 시노부 러버 스트랩",
-      "name_ja": "胡蝶しのぶ ラバーストラップ",
-      "search_query": "胡蝶しのぶ ラバーストラップ",
-      "candidate_rank": 3,
-      "candidate_review_status": "manual_candidate_review",
-      "candidate_title": "【グッズ-ストラップ】にゃふぉるめシリーズ TVアニメ「鬼滅の刃」 ハイタッチラバーストラップ 胡蝶しのぶ",
-      "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E3%81%AB%E3%82%83%E3%81%B5%E3%81%89%E3%82%8B%E3%82%81%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA+TV%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8C%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%E3%80%8D+%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%83%E3%83%81%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6/pd/1900988/",
-      "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=05281805_60b0b23f41639.jpg&width=400&height=400&square=1",
-      "manual_confirmed_source_url": "",
-      "manual_confirmed_image_url": "",
-      "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E3%81%AB%E3%82%83%E3%81%B5%E3%81%89%E3%82%8B%E3%82%81%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA+TV%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8C%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%E3%80%8D+%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%83%E3%83%81%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6/pd/1900988/",
-      "acceptance_criteria": "confirm exact product title, character/variant, category, source page, and image identity",
-      "blocked_until": "manual_confirmed_true"
-    },
-    {
-      "manual_confirmed": false,
-      "manual_review_status": "not_started",
-      "manual_note": "",
-      "focus_pack_id": "source-discovery-focus-002",
-      "catalog_index": 1578,
-      "source_store": "엔스카이",
-      "affiliation": "귀멸의 칼날",
-      "category": "키링",
-      "name_ko": "코쵸 시노부 러버 스트랩",
-      "name_ja": "胡蝶しのぶ ラバーストラップ",
-      "search_query": "胡蝶しのぶ ラバーストラップ",
-      "candidate_rank": 4,
-      "candidate_review_status": "manual_candidate_review",
-      "candidate_title": "【グッズ-ストラップ】鬼滅の刃 ラバーストラップセット/ViVimus 胡蝶カナエ＆栗花落カナヲ＆胡蝶しのぶ",
-      "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%82%BB%E3%83%83%E3%83%88/ViVimus+%E8%83%A1%E8%9D%B6%E3%82%AB%E3%83%8A%E3%82%A8%EF%BC%86%E6%A0%97%E8%8A%B1%E8%90%BD%E3%82%AB%E3%83%8A%E3%83%B2%EF%BC%86%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6/pd/1810817/",
-      "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4549743383187_1.jpg&width=400&height=400&square=1",
-      "manual_confirmed_source_url": "",
-      "manual_confirmed_image_url": "",
-      "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%82%BB%E3%83%83%E3%83%88/ViVimus+%E8%83%A1%E8%9D%B6%E3%82%AB%E3%83%8A%E3%82%A8%EF%BC%86%E6%A0%97%E8%8A%B1%E8%90%BD%E3%82%AB%E3%83%8A%E3%83%B2%EF%BC%86%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6/pd/1810817/",
-      "acceptance_criteria": "confirm exact product title, character/variant, category, source page, and image identity",
-      "blocked_until": "manual_confirmed_true"
-    },
-    {
-      "manual_confirmed": false,
-      "manual_review_status": "not_started",
-      "manual_note": "",
-      "focus_pack_id": "source-discovery-focus-002",
-      "catalog_index": 1578,
-      "source_store": "엔스카이",
-      "affiliation": "귀멸의 칼날",
-      "category": "키링",
-      "name_ko": "코쵸 시노부 러버 스트랩",
-      "name_ja": "胡蝶しのぶ ラバーストラップ",
-      "search_query": "胡蝶しのぶ ラバーストラップ",
-      "candidate_rank": 5,
-      "candidate_review_status": "manual_candidate_review",
-      "candidate_title": "【グッズ-ストラップ】鬼滅の刃 ラバーストラップセット/ViVimus 胡蝶しのぶ＆栗花落カナヲ",
-      "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%82%BB%E3%83%83%E3%83%88/ViVimus+%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6%EF%BC%86%E6%A0%97%E8%8A%B1%E8%90%BD%E3%82%AB%E3%83%8A%E3%83%B2/pd/1810812/",
-      "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4549743383132_1.jpg&width=400&height=400&square=1",
-      "manual_confirmed_source_url": "",
-      "manual_confirmed_image_url": "",
-      "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%82%BB%E3%83%83%E3%83%88/ViVimus+%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6%EF%BC%86%E6%A0%97%E8%8A%B1%E8%90%BD%E3%82%AB%E3%83%8A%E3%83%B2/pd/1810812/",
+      "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B3%E3%83%9F%E3%83%83%E3%82%AF%E3%80%91%E3%81%82%E3%81%9F%E3%81%97%E3%82%83%E5%B7%9D%E5%B0%BB%E3%81%93%E3%81%A0%E3%81%BE%E3%81%A0%E3%82%88%282%29+%E3%82%A2%E3%83%8B%E3%83%A1BD%26%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E4%BB%98%E3%81%8D%E7%89%B9%E8%A3%85%E7%89%88/pd/2066525/",
       "acceptance_criteria": "confirm exact product title, character/variant, category, source page, and image identity",
       "blocked_until": "manual_confirmed_true"
     }

@@ -21516,6 +21516,9 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '귀멸의 칼날',
     subSeries: '트레이딩 러버 스트랩',
     officialPriceJpy: 660,
+    imageUrl: 'https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=11111642_5dc910ebd6ac8.jpg&width=400&height=400&square=1',
+    localImagePath: 'assets/catalog_images/e0a965744df7d325845f.webp',
+    sourceUrl: 'https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%82%8F%E3%81%A1%E3%82%83%E3%81%A3%E3%81%A8%EF%BC%81%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+C.%E4%BC%8A%E9%BB%92%E5%B0%8F%E8%8A%AD%E5%86%85+/+%E7%94%98%E9%9C%B2%E5%AF%BA%E8%9C%9C%E7%92%83+/+%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6/pd/1723242/',
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
