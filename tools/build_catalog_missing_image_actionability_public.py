@@ -30,6 +30,7 @@ DEFAULT_SOURCE_DISCOVERY_NEXT_FOCUS_IDENTITY_BACKFILL_QUEUE = (
     DATA / "source_discovery_next_focus_identity_backfill_queue_public.json"
 )
 DEFAULT_ENSKY_CACHE_CANDIDATE_ACTION_QUEUE = DATA / "ensky_cache_candidate_action_queue_public.json"
+DEFAULT_VARIANT_SIBLING_REVIEW = DATA / "missing_image_variant_sibling_review_public.json"
 DEFAULT_IMAGE_ATTACHMENT_TEMPLATE = DATA / "catalog_image_attachment_confirmed_template_public.json"
 DEFAULT_IMAGE_ATTACHMENT_TEMPLATE_DRY_RUN = DATA / "catalog_image_attachment_template_import_dry_run_public.json"
 DEFAULT_OUTPUT = DATA / "catalog_missing_image_actionability_public.json"
@@ -1756,6 +1757,7 @@ def build_report(
     source_discovery_next_focus_exact_url_queue: dict[str, Any] | None = None,
     source_discovery_next_focus_identity_backfill_queue: dict[str, Any] | None = None,
     ensky_cache_candidate_action_queue: dict[str, Any] | None = None,
+    variant_sibling_review: dict[str, Any] | None = None,
     *,
     generated_at: str | None = None,
 ) -> dict[str, Any]:
@@ -1805,6 +1807,12 @@ def build_report(
         ensky_cache_candidate_action_queue.get("summary")
         if isinstance(ensky_cache_candidate_action_queue, dict)
         and isinstance(ensky_cache_candidate_action_queue.get("summary"), dict)
+        else {}
+    )
+    variant_sibling_review_summary = (
+        variant_sibling_review.get("summary")
+        if isinstance(variant_sibling_review, dict)
+        and isinstance(variant_sibling_review.get("summary"), dict)
         else {}
     )
     groups = [group for group in enrichment.get("groups", []) if isinstance(group, dict)]
@@ -2014,6 +2022,12 @@ def build_report(
         "ensky_cache_candidate_can_import_now_rows": int(
             ensky_cache_candidate_summary.get("can_import_now_rows") or 0
         ),
+        "variant_sibling_review_rows": int(
+            variant_sibling_review_summary.get("review_rows") or 0
+        ),
+        "variant_sibling_review_status_counts": (
+            variant_sibling_review_summary.get("by_review_status") or []
+        ),
         "image_attachment_template_rows": int(image_attachment_template_summary.get("template_items") or 0),
         "image_attachment_template_confirmed_rows": int(
             image_attachment_template_summary.get("manual_confirmed_rows") or 0
@@ -2118,6 +2132,15 @@ def build_report(
         "manual_research_review_start": manual_research_review_start,
         "source_discovery_review_start": source_discovery_review_start,
         "ensky_cache_candidate_review_start": ensky_cache_review_start,
+        "variant_sibling_review": {
+            "summary": variant_sibling_review_summary,
+            "sample_items": (
+                variant_sibling_review.get("items", [])[:8]
+                if isinstance(variant_sibling_review, dict)
+                and isinstance(variant_sibling_review.get("items"), list)
+                else []
+            ),
+        },
         "next_source_discovery_focus_pack": next_source_discovery_focus_pack or {},
         "work_order": work_order,
         "manual_validation_focus": manual_validation_focus,
@@ -2143,6 +2166,7 @@ def build_report(
             "source_discovery_focus_template_rows is a blank public confirmation template; import remains dry-run safe until rows are manually confirmed.",
             "source_discovery_work_packs split the largest missing-image source discovery lane into practical store packs.",
             "image_attachment_template_rows is a blank public image confirmation template for the direct image action queue.",
+            "variant_sibling_review_rows marks missing-image rows that have imaged siblings but still require exact variant checks before image reuse.",
             "All image changes remain manual-review only until exact product identity is confirmed.",
         ],
         "automation_policy": {
@@ -2197,6 +2221,11 @@ def main() -> int:
         "--ensky-cache-candidate-action-queue",
         type=Path,
         default=DEFAULT_ENSKY_CACHE_CANDIDATE_ACTION_QUEUE,
+    )
+    parser.add_argument(
+        "--variant-sibling-review",
+        type=Path,
+        default=DEFAULT_VARIANT_SIBLING_REVIEW,
     )
     parser.add_argument("--image-attachment-template", type=Path, default=DEFAULT_IMAGE_ATTACHMENT_TEMPLATE)
     parser.add_argument(
@@ -2254,6 +2283,11 @@ def main() -> int:
         if args.ensky_cache_candidate_action_queue.exists()
         else None
     )
+    variant_sibling_review = (
+        load_json(args.variant_sibling_review)
+        if args.variant_sibling_review.exists()
+        else None
+    )
     report = build_report(
         load_json(args.enrichment),
         load_json(args.action_queue),
@@ -2268,6 +2302,7 @@ def main() -> int:
         source_discovery_next_focus_exact_url_queue=next_focus_exact_url_queue,
         source_discovery_next_focus_identity_backfill_queue=next_focus_identity_backfill_queue,
         ensky_cache_candidate_action_queue=ensky_cache_candidate_action_queue,
+        variant_sibling_review=variant_sibling_review,
     )
     if args.write:
         args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

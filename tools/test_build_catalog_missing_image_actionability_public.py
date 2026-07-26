@@ -254,6 +254,22 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
                 }
             ],
         }
+        variant_sibling_review = {
+            "summary": {
+                "review_rows": 2,
+                "by_review_status": [
+                    ["sibling_images_different_product_type", 1],
+                    ["sibling_images_different_character_or_variant", 1],
+                ],
+            },
+            "items": [
+                {
+                    "catalog_index": 44,
+                    "name_ko": "Sibling image blocked",
+                    "review_status": "sibling_images_different_product_type",
+                }
+            ],
+        }
         source_detail_queue = {
             "batches": [
                 {
@@ -325,6 +341,7 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
             source_discovery_next_focus_exact_url_queue=next_focus_exact_url_queue,
             source_discovery_next_focus_identity_backfill_queue=next_focus_identity_backfill_queue,
             ensky_cache_candidate_action_queue=ensky_cache_candidate_action_queue,
+            variant_sibling_review=variant_sibling_review,
             generated_at="2026-07-22T00:00:00Z",
         )
 
@@ -408,6 +425,18 @@ class BuildCatalogMissingImageActionabilityPublicTest(unittest.TestCase):
         )
         self.assertEqual(report["summary"]["ensky_cache_candidate_action_batch_count"], 1)
         self.assertEqual(report["summary"]["ensky_cache_candidate_can_import_now_rows"], 0)
+        self.assertEqual(report["summary"]["variant_sibling_review_rows"], 2)
+        self.assertEqual(
+            report["summary"]["variant_sibling_review_status_counts"],
+            [
+                ["sibling_images_different_product_type", 1],
+                ["sibling_images_different_character_or_variant", 1],
+            ],
+        )
+        self.assertEqual(
+            report["variant_sibling_review"]["sample_items"][0]["catalog_index"],
+            44,
+        )
         self.assertEqual(
             report["ensky_cache_candidate_review_start"]["first_primary_review_url"],
             "https://www.enskyshop.com/products/detail/123",
