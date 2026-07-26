@@ -24,6 +24,7 @@ import build_gotouchi_official_candidate_review_queue_public
 import build_image_attachment_action_queue_public
 import build_image_attachment_confirmed_template_public
 import build_image_source_url_confirmed_template_public
+import build_top_missing_image_manual_fix_queue_public
 import build_ichiban_prize_policy_issue_queue_public
 import build_ichiban_prize_name_image_patch_candidates_public
 import build_ichiban_prize_name_image_review_public
@@ -159,6 +160,7 @@ PROVIDER_MISSING_SOURCE_URL_QUEUE = DATA / "catalog_provider_missing_source_url_
 CANDIDATE_SOURCE_URL_REVIEW_QUEUE = DATA / "catalog_candidate_source_url_review_queue_public.json"
 IMAGE_ATTACHMENT_CONFIRMED_TEMPLATE = DATA / "catalog_image_attachment_confirmed_template_public.json"
 IMAGE_ATTACHMENT_TEMPLATE_IMPORT_DRY_RUN = DATA / "catalog_image_attachment_template_import_dry_run_public.json"
+TOP_MISSING_IMAGE_MANUAL_FIX_QUEUE = DATA / "top_missing_image_manual_fix_queue_public.json"
 MISSING_IMAGE_ACTIONABILITY = DATA / "catalog_missing_image_actionability_public.json"
 CONFIRMED_IMPORT_READINESS = DATA / "catalog_confirmed_import_readiness_public.json"
 EXECUTION_PLAN = DATA / "catalog_execution_plan_public.json"
@@ -11045,6 +11047,11 @@ def update_reports(write: bool) -> dict[str, Any]:
         catalog,
         generated_at,
     )
+    top_missing_image_manual_fix_queue = build_top_missing_image_manual_fix_queue_public.build_queue(
+        items,
+        limit=80,
+        generated_at=generated_at,
+    )
     manual_source_url_search_queue = build_manual_source_url_search_queue_public.build_queue(
         image_source_url_confirmed_template,
         generated_at=generated_at,
@@ -13599,6 +13606,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         write_json(IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE, image_source_url_confirmed_template)
         write_json(IMAGE_ATTACHMENT_CONFIRMED_TEMPLATE, image_attachment_confirmed_template)
         write_json(IMAGE_ATTACHMENT_TEMPLATE_IMPORT_DRY_RUN, image_attachment_template_import_dry_run)
+        write_json(TOP_MISSING_IMAGE_MANUAL_FIX_QUEUE, top_missing_image_manual_fix_queue)
         write_json(MANUAL_SOURCE_URL_SEARCH_QUEUE, manual_source_url_search_queue)
         write_json(PROVIDER_MISSING_SOURCE_URL_QUEUE, provider_missing_source_url_queue)
         write_json(CANDIDATE_SOURCE_URL_REVIEW_QUEUE, candidate_source_url_review_queue)
@@ -13678,6 +13686,8 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(IMAGE_ATTACHMENT_ACTION_QUEUE.relative_to(ROOT)),
             str(IMAGE_SOURCE_URL_CONFIRMED_TEMPLATE.relative_to(ROOT)),
             str(IMAGE_ATTACHMENT_CONFIRMED_TEMPLATE.relative_to(ROOT)),
+            str(IMAGE_ATTACHMENT_TEMPLATE_IMPORT_DRY_RUN.relative_to(ROOT)),
+            str(TOP_MISSING_IMAGE_MANUAL_FIX_QUEUE.relative_to(ROOT)),
             str(MANUAL_SOURCE_URL_SEARCH_QUEUE.relative_to(ROOT)),
             str(PROVIDER_MISSING_SOURCE_URL_QUEUE.relative_to(ROOT)),
             str(CANDIDATE_SOURCE_URL_REVIEW_QUEUE.relative_to(ROOT)),
