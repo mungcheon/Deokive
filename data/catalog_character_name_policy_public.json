@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T21:47:50Z",
+  "generated_at": "2026-07-26T22:23:28Z",
   "scope": "catalog_character_name_policy",
   "summary": {
     "rows": 20313,
@@ -11,6 +11,8 @@
     "ichiban_product_character_violations": 0,
     "ichiban_multi_character_product_review_candidates": 18,
     "zero_price_violations": 0,
+    "watched_alias_hits": 0,
+    "unknown_monitored_character_rows": 0,
     "findings": 0,
     "status": "pass"
   },
@@ -555,5 +557,53 @@
       "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
     }
   ],
-  "zero_price_violations": []
+  "zero_price_violations": [],
+  "character_alias_monitor": {
+    "scope": "character_alias_monitor",
+    "total_watched_alias_hits": 0,
+    "total_unknown_character_rows": 0,
+    "monitored_affiliations": {
+      "장송의 프리렌": {
+        "rows": 93,
+        "canonical_character_counts": [
+          [
+            "프리렌",
+            30
+          ],
+          [
+            "페른",
+            21
+          ],
+          [
+            "슈타르크",
+            12
+          ],
+          [
+            "히멜",
+            12
+          ],
+          [
+            "아이젠",
+            5
+          ],
+          [
+            "혼합",
+            5
+          ],
+          [
+            "기타",
+            4
+          ],
+          [
+            "하이터",
+            4
+          ]
+        ],
+        "watched_alias_hit_count": 0,
+        "watched_alias_samples": [],
+        "unknown_character_rows": 0,
+        "unknown_character_samples": []
+      }
+    }
+  }
 }

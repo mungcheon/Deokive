@@ -98,7 +98,7 @@ def audit_fern_names(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
             or str(row.get("character_name") or "") in {FERN_BAD_KO, FERN_GOOD_KO}
         )
         if is_fern_context and FERN_BAD_KO in serialized:
-            issues.append(compact_row(row, reason="fern_korean_name_should_be_페른"))
+            issues.append(compact_row(row, reason="fern_korean_name_should_be_peoreun"))
         if FERN_JA in serialized and str(row.get("character_name") or "") not in {"", FERN_GOOD_KO}:
             issues.append(compact_row(row, reason="fern_japanese_name_character_mismatch"))
     return issues

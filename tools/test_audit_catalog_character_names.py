@@ -193,6 +193,34 @@ class AuditCatalogCharacterNamesTest(unittest.TestCase):
 
         self.assertEqual(result["summary"]["character_alias_violations"], 0)
 
+    def test_character_alias_monitor_reports_counts_without_changing_pass_status(self) -> None:
+        rows = [
+            {
+                "catalog_index": 11,
+                "name_ko": "OSHI WORKS \ud398\ub978",
+                "name_ja": "OSHI WORKS \u30d5\u30a7\u30eb\u30f3",
+                "character_name": "\ud398\ub978",
+                "affiliation": "\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c",
+            },
+            {
+                "catalog_index": 12,
+                "name_ko": "\ud504\ub9ac\ub80c \uad7f\uc988",
+                "character_name": "\uc0c8 \uce90\ub9ad\ud130",
+                "affiliation": "\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c",
+            },
+        ]
+
+        result = audit(rows)
+        monitor = result["character_alias_monitor"]["monitored_affiliations"][
+            "\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c"
+        ]
+
+        self.assertEqual(result["summary"]["status"], "pass")
+        self.assertEqual(result["summary"]["watched_alias_hits"], 0)
+        self.assertEqual(result["summary"]["unknown_monitored_character_rows"], 1)
+        self.assertIn(("\ud398\ub978", 1), [tuple(item) for item in monitor["canonical_character_counts"]])
+        self.assertEqual(monitor["unknown_character_samples"][0]["character_name"], "\uc0c8 \uce90\ub9ad\ud130")
+
     def test_main_only_fails_on_findings_when_requested(self) -> None:
         with mock.patch(
             "sys.argv",

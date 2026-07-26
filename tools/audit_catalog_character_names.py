@@ -63,6 +63,28 @@ CHARACTER_MOJIBAKE_OR_ALIAS_FINDINGS = {
     },
 }
 
+CHARACTER_ALIAS_MONITOR_TARGETS = {
+    "\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c": {
+        "canonical_characters": (
+            "\ud504\ub9ac\ub80c",
+            "\ud398\ub978",
+            "\uc288\ud0c0\ub974\ud06c",
+            "\ud788\uba5c",
+            "\uc544\uc774\uc820",
+            "\ud558\uc774\ud130",
+            "\ud63c\ud569",
+            "\uae30\ud0c0",
+        ),
+        "watched_aliases": {
+            "\ud380": "\ud398\ub978",
+            "\ud38c": "\ud398\ub978",
+            "Pern": "\ud398\ub978",
+            "\ud6c4\ub9ac\ub80c": "\ud504\ub9ac\ub80c",
+            "\ud504\ub9ac\ub79c": "\ud504\ub9ac\ub80c",
+        },
+    }
+}
+
 ICHIBAN_PRODUCT_CHARACTER_TOKENS = (
     ("\u30c1\u30e7\u30c3\u30d1\u30fc", "\ud1a0\ub2c8\ud1a0\ub2c8 \ucd78\ud30c"),
     ("\u30cf\u30f3\u30b3\u30c3\u30af", "\ubcf4\uc544 \ud578\ucf55"),
@@ -124,6 +146,71 @@ def is_ichiban_row(row: dict[str, Any]) -> bool:
     return str(row.get("series_name") or "").startswith(ICHIBAN_PREFIX) or ICHIBAN_PREFIX in str(
         row.get("name_ko") or ""
     )
+
+
+def _compact_alias_sample(row: dict[str, Any], *, field: str, value: Any, expected: str) -> dict[str, Any]:
+    return {
+        "catalog_index": row.get("catalog_index"),
+        "field": field,
+        "value": value,
+        "expected": expected,
+        "name_ko": row.get("name_ko"),
+        "name_ja": row.get("name_ja"),
+        "character_name": row.get("character_name"),
+        "affiliation": row.get("affiliation"),
+        "source_url": row.get("source_url"),
+    }
+
+
+def build_character_alias_monitor(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    monitored_affiliations: dict[str, Any] = {}
+    total_alias_hits = 0
+    total_unknown_character_rows = 0
+
+    for affiliation, policy in CHARACTER_ALIAS_MONITOR_TARGETS.items():
+        scoped_rows = [row for row in rows if str(row.get("affiliation") or "") == affiliation]
+        canonical = set(policy.get("canonical_characters") or ())
+        watched_aliases: dict[str, str] = dict(policy.get("watched_aliases") or {})
+        character_counts: dict[str, int] = {}
+        unknown_character_rows: list[dict[str, Any]] = []
+        alias_hits: list[dict[str, Any]] = []
+
+        for row in scoped_rows:
+            character_name = str(row.get("character_name") or "")
+            character_counts[character_name] = character_counts.get(character_name, 0) + 1
+            if character_name not in canonical:
+                total_unknown_character_rows += 1
+                unknown_character_rows.append(
+                    {
+                        "catalog_index": row.get("catalog_index"),
+                        "character_name": row.get("character_name"),
+                        "name_ko": row.get("name_ko"),
+                        "name_ja": row.get("name_ja"),
+                    }
+                )
+
+            for alias, expected in watched_aliases.items():
+                for field in ("character_name", "name_ko", "name_ja"):
+                    value = row.get(field)
+                    if alias and alias in str(value or ""):
+                        total_alias_hits += 1
+                        alias_hits.append(_compact_alias_sample(row, field=field, value=value, expected=expected))
+
+        monitored_affiliations[affiliation] = {
+            "rows": len(scoped_rows),
+            "canonical_character_counts": sorted(character_counts.items(), key=lambda item: (-item[1], item[0])),
+            "watched_alias_hit_count": len(alias_hits),
+            "watched_alias_samples": alias_hits[:40],
+            "unknown_character_rows": len(unknown_character_rows),
+            "unknown_character_samples": unknown_character_rows[:40],
+        }
+
+    return {
+        "scope": "character_alias_monitor",
+        "total_watched_alias_hits": total_alias_hits,
+        "total_unknown_character_rows": total_unknown_character_rows,
+        "monitored_affiliations": monitored_affiliations,
+    }
 
 
 def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
@@ -256,6 +343,8 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
         + len(ichiban_product_character_violations)
         + len(zero_price_violations)
     )
+    alias_monitor = build_character_alias_monitor(rows)
+
     return {
         "schema_version": 1,
         "generated_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
@@ -271,6 +360,8 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
                 ichiban_multi_character_product_review_candidates
             ),
             "zero_price_violations": len(zero_price_violations),
+            "watched_alias_hits": alias_monitor["total_watched_alias_hits"],
+            "unknown_monitored_character_rows": alias_monitor["total_unknown_character_rows"],
             "findings": findings,
             "status": "pass" if findings == 0 else "needs_review",
         },
@@ -290,6 +381,7 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "ichiban_product_character_violations": ichiban_product_character_violations,
         "ichiban_multi_character_product_review_candidates": ichiban_multi_character_product_review_candidates,
         "zero_price_violations": zero_price_violations,
+        "character_alias_monitor": alias_monitor,
     }
 
 

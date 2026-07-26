@@ -89,7 +89,7 @@ class AuditCatalogNamingPublicTest(unittest.TestCase):
         reasons = dict(report["summary"]["by_reason"])
 
         self.assertEqual(report["summary"]["status"], "needs_review")
-        self.assertEqual(reasons["fern_korean_name_should_be_페른"], 1)
+        self.assertEqual(reasons["fern_korean_name_should_be_peoreun"], 1)
         self.assertEqual(reasons["fern_japanese_name_character_mismatch"], 1)
         self.assertEqual(reasons["ichiban_name_missing_release_prize_item_character_parts"], 1)
         self.assertEqual(reasons["ichiban_last_one_or_double_chance_price_should_be_zero"], 1)
