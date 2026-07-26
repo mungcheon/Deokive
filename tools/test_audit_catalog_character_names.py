@@ -227,6 +227,31 @@ class AuditCatalogCharacterNamesTest(unittest.TestCase):
 
         self.assertEqual(result["summary"]["character_alias_violations"], 0)
 
+    def test_reports_global_spacing_aliases_for_affiliation_and_character(self) -> None:
+        rows = [
+            {
+                "catalog_index": 30,
+                "name_ko": "\ub371\uc9c0 \ub7ec\ubc84 \uc2a4\ud2b8\ub7a9",
+                "character_name": "\ub371\uc9c0",
+                "affiliation": "\uccb4\uc778\uc18c \ub9e8",
+            },
+            {
+                "catalog_index": 31,
+                "name_ko": "\uce58\uc774\uce74\uc640 \uac11\uc637 \uc528 \ub9c8\uc2a4\ucf54\ud2b8",
+                "character_name": "\uac11\uc637 \uc528",
+                "affiliation": "\uce58\uc774\uce74\uc640",
+            },
+        ]
+
+        result = audit(rows)
+
+        self.assertEqual(result["summary"]["status"], "needs_review")
+        self.assertEqual(result["summary"]["character_alias_violations"], 2)
+        self.assertEqual(
+            [item["expected"] for item in result["character_alias_violations"]],
+            ["\uccb4\uc778\uc18c\ub9e8", "\uac11\uc637\uc528"],
+        )
+
     def test_character_alias_monitor_reports_counts_without_changing_pass_status(self) -> None:
         rows = [
             {

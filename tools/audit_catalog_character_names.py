@@ -61,6 +61,18 @@ CHARACTER_MOJIBAKE_OR_ALIAS_FINDINGS = {
         "affiliation_scope": "\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c",
         "match": "contains",
     },
+    "\uccb4\uc778\uc18c \ub9e8": {
+        "expected": "\uccb4\uc778\uc18c\ub9e8",
+        "fields": ("affiliation",),
+        "reason": "korean_affiliation_spacing_alias",
+        "match": "exact",
+    },
+    "\uac11\uc637 \uc528": {
+        "expected": "\uac11\uc637\uc528",
+        "fields": ("character_name",),
+        "reason": "korean_character_spacing_alias",
+        "match": "exact",
+    },
 }
 
 CHARACTER_ALIAS_MONITOR_TARGETS = {

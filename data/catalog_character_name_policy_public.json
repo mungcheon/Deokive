@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T23:09:45Z",
+  "generated_at": "2026-07-26T23:13:55Z",
   "scope": "catalog_character_name_policy",
   "summary": {
     "rows": 20313,
@@ -62,6 +62,22 @@
         "reason": "likely_korean_frieren_title_or_character_typo",
         "affiliation_scope": "장송의 프리렌",
         "match": "contains"
+      },
+      "체인소 맨": {
+        "expected": "체인소맨",
+        "fields": [
+          "affiliation"
+        ],
+        "reason": "korean_affiliation_spacing_alias",
+        "match": "exact"
+      },
+      "갑옷 씨": {
+        "expected": "갑옷씨",
+        "fields": [
+          "character_name"
+        ],
+        "reason": "korean_character_spacing_alias",
+        "match": "exact"
       }
     },
     "ichiban_product_character_tokens": [
