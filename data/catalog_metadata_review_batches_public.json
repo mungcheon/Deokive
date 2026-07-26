@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T10:47:48Z",
+  "generated_at": "2026-07-26T11:11:42Z",
   "summary": {
     "catalog_rows": 20347,
     "tracked_fields": [
@@ -14,13 +14,13 @@
     "field_store_group_count": 351,
     "batch_count": 30,
     "batch_size": 12,
-    "missing_cell_count": 13988,
+    "missing_cell_count": 13987,
     "field_missing_totals": {
       "name_ja": 526,
       "release_date": 1348,
       "barcode": 10082,
       "official_price_jpy": 559,
-      "image_url": 773,
+      "image_url": 772,
       "source_url": 700
     },
     "top_source_stores_with_missing_metadata": [
@@ -66,7 +66,7 @@
       ],
       [
         "ご当地ちいかわ 공식(API)",
-        103
+        102
       ],
       [
         "Weverse Shop",
@@ -3451,7 +3451,7 @@
       "batch_id": "metadata-review-005",
       "priority": 20,
       "group_count": 12,
-      "missing_cell_count": 176,
+      "missing_cell_count": 175,
       "field_counts": [
         [
           "image_url",
@@ -3468,101 +3468,6 @@
       "next_machine_step": "collect_official_metadata_evidence",
       "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
       "groups": [
-        {
-          "field": "image_url",
-          "source_store": "ご当地ちいかわ 공식(API)",
-          "missing_rows": 23,
-          "priority": 20,
-          "workflow": "source_then_image_import",
-          "evidence_required": "product image from exact source_url after identity verification",
-          "next_machine_step": "source_then_image_import",
-          "risk": "wrong_product_image",
-          "recommended_action": "Find exact official product page and attach source_url/image_url together.",
-          "sample_catalog_indexes": [
-            936,
-            937,
-            938,
-            941,
-            942,
-            943,
-            944,
-            945
-          ],
-          "sample_items": [
-            {
-              "catalog_index": 936,
-              "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
-              "name_ja": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
-              "series_name": "ご当地",
-              "category": "아크릴 키링",
-              "source_url": "https://www.jp-api.com/contents/NOD62/",
-              "image_url": null
-            },
-            {
-              "catalog_index": 937,
-              "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
-              "name_ja": "うさぎ ご当地マスコット (浅草)",
-              "series_name": "ご当地",
-              "category": "마스코트",
-              "source_url": "https://www.jp-api.com/contents/NOD62/",
-              "image_url": null
-            },
-            {
-              "catalog_index": 938,
-              "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
-              "name_ja": "ちいかわ ご当地ミニタオル (東京)",
-              "series_name": "ご当地",
-              "category": "타월",
-              "source_url": "https://www.jp-api.com/contents/NOD62/",
-              "image_url": null
-            },
-            {
-              "catalog_index": 941,
-              "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
-              "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
-              "series_name": "ご当地",
-              "category": "마스코트",
-              "source_url": "https://www.jp-api.com/contents/NOD62/",
-              "image_url": null
-            },
-            {
-              "catalog_index": 942,
-              "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
-              "name_ja": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
-              "series_name": "ご当地",
-              "category": "아크릴 키링",
-              "source_url": "https://www.jp-api.com/contents/NOD62/",
-              "image_url": null
-            },
-            {
-              "catalog_index": 943,
-              "name_ko": "치이카와 ご当地 미니 타올 (오사카)",
-              "name_ja": "ちいかわ ご当地ミニタオル (大阪)",
-              "series_name": "ご当地",
-              "category": "타월",
-              "source_url": "https://www.jp-api.com/contents/NOD62/",
-              "image_url": null
-            },
-            {
-              "catalog_index": 944,
-              "name_ko": "치이카와 ご当地 마스코트 (교토 마이코)",
-              "name_ja": "ちいかわ ご当地マスコット (京都 舞妓)",
-              "series_name": "ご当地",
-              "category": "마스코트",
-              "source_url": "https://www.jp-api.com/contents/NOD62/",
-              "image_url": null
-            },
-            {
-              "catalog_index": 945,
-              "name_ko": "하치와레 ご当地 마스코트 (교토 마이코)",
-              "name_ja": "ハチワレ ご当地マスコット (京都 舞妓)",
-              "series_name": "ご当地",
-              "category": "마스코트",
-              "source_url": "https://www.jp-api.com/contents/NOD62/",
-              "image_url": null
-            }
-          ]
-        },
         {
           "field": "image_url",
           "source_store": "점프 캐릭터즈 스토어",
@@ -3654,6 +3559,101 @@
               "series_name": null,
               "category": "캔뱃지",
               "source_url": null,
+              "image_url": null
+            }
+          ]
+        },
+        {
+          "field": "image_url",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "missing_rows": 22,
+          "priority": 20,
+          "workflow": "source_then_image_import",
+          "evidence_required": "product image from exact source_url after identity verification",
+          "next_machine_step": "source_then_image_import",
+          "risk": "wrong_product_image",
+          "recommended_action": "Find exact official product page and attach source_url/image_url together.",
+          "sample_catalog_indexes": [
+            936,
+            937,
+            938,
+            941,
+            942,
+            943,
+            944,
+            945
+          ],
+          "sample_items": [
+            {
+              "catalog_index": 936,
+              "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
+              "name_ja": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
+              "series_name": "ご当地",
+              "category": "아크릴 키링",
+              "source_url": "https://www.jp-api.com/contents/NOD62/",
+              "image_url": null
+            },
+            {
+              "catalog_index": 937,
+              "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
+              "name_ja": "うさぎ ご当地マスコット (浅草)",
+              "series_name": "ご当地",
+              "category": "마스코트",
+              "source_url": "https://www.jp-api.com/contents/NOD62/",
+              "image_url": null
+            },
+            {
+              "catalog_index": 938,
+              "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
+              "name_ja": "ちいかわ ご当地ミニタオル (東京)",
+              "series_name": "ご当地",
+              "category": "타월",
+              "source_url": "https://www.jp-api.com/contents/NOD62/",
+              "image_url": null
+            },
+            {
+              "catalog_index": 941,
+              "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
+              "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
+              "series_name": "ご当地",
+              "category": "마스코트",
+              "source_url": "https://www.jp-api.com/contents/NOD62/",
+              "image_url": null
+            },
+            {
+              "catalog_index": 942,
+              "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
+              "name_ja": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
+              "series_name": "ご当地",
+              "category": "아크릴 키링",
+              "source_url": "https://www.jp-api.com/contents/NOD62/",
+              "image_url": null
+            },
+            {
+              "catalog_index": 943,
+              "name_ko": "치이카와 ご当地 미니 타올 (오사카)",
+              "name_ja": "ちいかわ ご当地ミニタオル (大阪)",
+              "series_name": "ご当地",
+              "category": "타월",
+              "source_url": "https://www.jp-api.com/contents/NOD62/",
+              "image_url": null
+            },
+            {
+              "catalog_index": 944,
+              "name_ko": "치이카와 ご当地 마스코트 (교토 마이코)",
+              "name_ja": "ちいかわ ご当地マスコット (京都 舞妓)",
+              "series_name": "ご当地",
+              "category": "마스코트",
+              "source_url": "https://www.jp-api.com/contents/NOD62/",
+              "image_url": null
+            },
+            {
+              "catalog_index": 945,
+              "name_ko": "하치와레 ご当地 마스코트 (교토 마이코)",
+              "name_ja": "ハチワレ ご当地マスコット (京都 舞妓)",
+              "series_name": "ご当地",
+              "category": "마스코트",
+              "source_url": "https://www.jp-api.com/contents/NOD62/",
               "image_url": null
             }
           ]

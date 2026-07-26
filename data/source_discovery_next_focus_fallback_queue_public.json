@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T10:47:48Z",
+  "generated_at": "2026-07-26T11:11:42Z",
   "scope": "source_discovery_next_focus_fallback_queue",
   "source_reports": [
     "data/source_discovery_next_focus_pack_public.json",
@@ -10,16 +10,16 @@
     "focus_pack_id": "source-discovery-focus-001",
     "queue_rows": 20,
     "manual_confirmed_rows": 0,
-    "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
+    "fallback_reason": "official_search_fetch_http_error",
     "by_fallback_reason": [
       [
-        "broad_official_search_result_requires_exact_detail_url",
+        "official_search_fetch_http_error",
         20
       ]
     ],
     "by_http_status": [
       [
-        "200",
+        "429",
         20
       ]
     ],
@@ -1147,8 +1147,8 @@
       "review_state": "official_search_review_required",
       "workflow": "official_search_url_available",
       "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
-      "official_search_fetch_status": "ok",
-      "official_search_http_status": 200,
+      "official_search_fetch_status": "http_error",
+      "official_search_http_status": 429,
       "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
       "fallback_search_terms": [
@@ -1205,7 +1205,7 @@
         "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
       ],
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
+      "fallback_reason": "official_search_fetch_http_error",
       "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -1298,8 +1298,8 @@
       "review_state": "official_search_review_required",
       "workflow": "official_search_url_available",
       "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29",
-      "official_search_fetch_status": "ok",
-      "official_search_http_status": 200,
+      "official_search_fetch_status": "http_error",
+      "official_search_http_status": 429,
       "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29",
       "fallback_search_terms": [
@@ -1356,7 +1356,7 @@
         "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
       ],
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
+      "fallback_reason": "official_search_fetch_http_error",
       "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -1449,8 +1449,8 @@
       "review_state": "official_search_review_required",
       "workflow": "official_search_url_available",
       "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
-      "official_search_fetch_status": "ok",
-      "official_search_http_status": 200,
+      "official_search_fetch_status": "http_error",
+      "official_search_http_status": 429,
       "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
       "fallback_search_terms": [
@@ -1507,7 +1507,7 @@
         "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
       ],
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
+      "fallback_reason": "official_search_fetch_http_error",
       "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -1600,8 +1600,8 @@
       "review_state": "official_search_review_required",
       "workflow": "official_search_url_available",
       "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29",
-      "official_search_fetch_status": "ok",
-      "official_search_http_status": 200,
+      "official_search_fetch_status": "http_error",
+      "official_search_http_status": 429,
       "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%29",
       "fallback_search_terms": [
@@ -1658,7 +1658,7 @@
         "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
       ],
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
+      "fallback_reason": "official_search_fetch_http_error",
       "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -1751,8 +1751,8 @@
       "review_state": "official_search_review_required",
       "workflow": "official_search_url_available",
       "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29",
-      "official_search_fetch_status": "ok",
-      "official_search_http_status": 200,
+      "official_search_fetch_status": "http_error",
+      "official_search_http_status": 429,
       "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%82%E3%81%A1%E3%81%B7%E3%81%AB%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E6%A0%97%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%29",
       "fallback_search_terms": [
@@ -1809,7 +1809,7 @@
         "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
       ],
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
+      "fallback_reason": "official_search_fetch_http_error",
       "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -1902,8 +1902,8 @@
       "review_state": "official_search_review_required",
       "workflow": "official_search_url_available",
       "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
-      "official_search_fetch_status": "ok",
-      "official_search_http_status": 200,
+      "official_search_fetch_status": "http_error",
+      "official_search_http_status": 429,
       "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
       "fallback_search_terms": [
@@ -1960,7 +1960,7 @@
         "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
       ],
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
+      "fallback_reason": "official_search_fetch_http_error",
       "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -2053,8 +2053,8 @@
       "review_state": "official_search_review_required",
       "workflow": "official_search_url_available",
       "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29",
-      "official_search_fetch_status": "ok",
-      "official_search_http_status": 200,
+      "official_search_fetch_status": "http_error",
+      "official_search_http_status": 429,
       "web_search_url": "https://www.google.com/search?q=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%29",
       "fallback_search_terms": [
@@ -2111,7 +2111,7 @@
         "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
       ],
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
+      "fallback_reason": "official_search_fetch_http_error",
       "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -2204,8 +2204,8 @@
       "review_state": "official_search_review_required",
       "workflow": "official_search_url_available",
       "official_search_url": "https://www.enskyshop.com/products/list?name=%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "official_search_fetch_status": "ok",
-      "official_search_http_status": 200,
+      "official_search_fetch_status": "http_error",
+      "official_search_http_status": 429,
       "web_search_url": "https://www.google.com/search?q=%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
       "fallback_search_terms": [
@@ -2262,7 +2262,7 @@
         "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
       ],
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
+      "fallback_reason": "official_search_fetch_http_error",
       "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -2355,8 +2355,8 @@
       "review_state": "official_search_review_required",
       "workflow": "official_search_url_available",
       "official_search_url": "https://www.enskyshop.com/products/list?name=%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "official_search_fetch_status": "ok",
-      "official_search_http_status": 200,
+      "official_search_fetch_status": "http_error",
+      "official_search_http_status": 429,
       "web_search_url": "https://www.google.com/search?q=%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
       "fallback_search_terms": [
@@ -2413,7 +2413,7 @@
         "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
       ],
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
+      "fallback_reason": "official_search_fetch_http_error",
       "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -2506,8 +2506,8 @@
       "review_state": "official_search_review_required",
       "workflow": "official_search_url_available",
       "official_search_url": "https://www.enskyshop.com/products/list?name=%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "official_search_fetch_status": "ok",
-      "official_search_http_status": 200,
+      "official_search_fetch_status": "http_error",
+      "official_search_http_status": 429,
       "web_search_url": "https://www.google.com/search?q=%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
       "fallback_search_terms": [
@@ -2564,7 +2564,7 @@
         "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
       ],
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
+      "fallback_reason": "official_search_fetch_http_error",
       "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -2657,8 +2657,8 @@
       "review_state": "official_search_review_required",
       "workflow": "official_search_url_available",
       "official_search_url": "https://www.enskyshop.com/products/list?name=%E8%BD%9F%E7%84%A6%E5%87%8D%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "official_search_fetch_status": "ok",
-      "official_search_http_status": 200,
+      "official_search_fetch_status": "http_error",
+      "official_search_http_status": 429,
       "web_search_url": "https://www.google.com/search?q=%E8%BD%9F%E7%84%A6%E5%87%8D%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E8%BD%9F%E7%84%A6%E5%87%8D%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
       "fallback_search_terms": [
@@ -2715,7 +2715,7 @@
         "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
       ],
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
+      "fallback_reason": "official_search_fetch_http_error",
       "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -2808,8 +2808,8 @@
       "review_state": "official_search_review_required",
       "workflow": "official_search_url_available",
       "official_search_url": "https://www.enskyshop.com/products/list?name=%E6%AD%BB%E6%9F%84%E6%9C%A8%E5%BC%94%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "official_search_fetch_status": "ok",
-      "official_search_http_status": 200,
+      "official_search_fetch_status": "http_error",
+      "official_search_http_status": 429,
       "web_search_url": "https://www.google.com/search?q=%E6%AD%BB%E6%9F%84%E6%9C%A8%E5%BC%94%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E6%AD%BB%E6%9F%84%E6%9C%A8%E5%BC%94%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
       "fallback_search_terms": [
@@ -2866,7 +2866,7 @@
         "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
       ],
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
+      "fallback_reason": "official_search_fetch_http_error",
       "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -2959,8 +2959,8 @@
       "review_state": "official_search_review_required",
       "workflow": "official_search_url_available",
       "official_search_url": "https://www.enskyshop.com/products/list?name=%E8%8D%BC%E6%AF%98%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "official_search_fetch_status": "ok",
-      "official_search_http_status": 200,
+      "official_search_fetch_status": "http_error",
+      "official_search_http_status": 429,
       "web_search_url": "https://www.google.com/search?q=%E8%8D%BC%E6%AF%98%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E8%8D%BC%E6%AF%98%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
       "fallback_search_terms": [
@@ -3017,7 +3017,7 @@
         "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
       ],
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
+      "fallback_reason": "official_search_fetch_http_error",
       "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -3110,8 +3110,8 @@
       "review_state": "official_search_review_required",
       "workflow": "official_search_url_available",
       "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "official_search_fetch_status": "ok",
-      "official_search_http_status": 200,
+      "official_search_fetch_status": "http_error",
+      "official_search_http_status": 429,
       "web_search_url": "https://www.google.com/search?q=%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
       "fallback_search_terms": [
@@ -3168,7 +3168,7 @@
         "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
       ],
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
+      "fallback_reason": "official_search_fetch_http_error",
       "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -3261,8 +3261,8 @@
       "review_state": "official_search_review_required",
       "workflow": "official_search_url_available",
       "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%B4%E3%83%B3%3D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "official_search_fetch_status": "ok",
-      "official_search_http_status": 200,
+      "official_search_fetch_status": "http_error",
+      "official_search_http_status": 429,
       "web_search_url": "https://www.google.com/search?q=%E3%82%B4%E3%83%B3%3D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%B4%E3%83%B3%3D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
       "fallback_search_terms": [
@@ -3319,7 +3319,7 @@
         "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
       ],
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
+      "fallback_reason": "official_search_fetch_http_error",
       "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -3412,8 +3412,8 @@
       "review_state": "official_search_review_required",
       "workflow": "official_search_url_available",
       "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%AD%E3%83%AB%E3%82%A2%3D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "official_search_fetch_status": "ok",
-      "official_search_http_status": 200,
+      "official_search_fetch_status": "http_error",
+      "official_search_http_status": 429,
       "web_search_url": "https://www.google.com/search?q=%E3%82%AD%E3%83%AB%E3%82%A2%3D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%AD%E3%83%AB%E3%82%A2%3D%E3%82%BE%E3%83%AB%E3%83%87%E3%82%A3%E3%83%83%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
       "fallback_search_terms": [
@@ -3470,7 +3470,7 @@
         "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
       ],
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
+      "fallback_reason": "official_search_fetch_http_error",
       "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -3563,8 +3563,8 @@
       "review_state": "official_search_review_required",
       "workflow": "official_search_url_available",
       "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "official_search_fetch_status": "ok",
-      "official_search_http_status": 200,
+      "official_search_fetch_status": "http_error",
+      "official_search_http_status": 429,
       "web_search_url": "https://www.google.com/search?q=%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
       "fallback_search_terms": [
@@ -3621,7 +3621,7 @@
         "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
       ],
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
+      "fallback_reason": "official_search_fetch_http_error",
       "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -3714,8 +3714,8 @@
       "review_state": "official_search_review_required",
       "workflow": "official_search_url_available",
       "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%AC%E3%82%AA%E3%83%AA%E3%82%AA%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "official_search_fetch_status": "ok",
-      "official_search_http_status": 200,
+      "official_search_fetch_status": "http_error",
+      "official_search_http_status": 429,
       "web_search_url": "https://www.google.com/search?q=%E3%83%AC%E3%82%AA%E3%83%AA%E3%82%AA%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%AC%E3%82%AA%E3%83%AA%E3%82%AA%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
       "fallback_search_terms": [
@@ -3772,7 +3772,7 @@
         "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
       ],
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
+      "fallback_reason": "official_search_fetch_http_error",
       "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -3865,8 +3865,8 @@
       "review_state": "official_search_review_required",
       "workflow": "official_search_url_available",
       "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%92%E3%82%BD%E3%82%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "official_search_fetch_status": "ok",
-      "official_search_http_status": 200,
+      "official_search_fetch_status": "http_error",
+      "official_search_http_status": 429,
       "web_search_url": "https://www.google.com/search?q=%E3%83%92%E3%82%BD%E3%82%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%92%E3%82%BD%E3%82%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
       "fallback_search_terms": [
@@ -3923,7 +3923,7 @@
         "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
       ],
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
+      "fallback_reason": "official_search_fetch_http_error",
       "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -4016,8 +4016,8 @@
       "review_state": "official_search_review_required",
       "workflow": "official_search_url_available",
       "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%AF%E3%83%AD%E3%83%AD%3D%E3%83%AB%E3%82%B7%E3%83%AB%E3%83%95%E3%83%AB%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "official_search_fetch_status": "ok",
-      "official_search_http_status": 200,
+      "official_search_fetch_status": "http_error",
+      "official_search_http_status": 429,
       "web_search_url": "https://www.google.com/search?q=%E3%82%AF%E3%83%AD%E3%83%AD%3D%E3%83%AB%E3%82%B7%E3%83%AB%E3%83%95%E3%83%AB%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%AF%E3%83%AD%E3%83%AD%3D%E3%83%AB%E3%82%B7%E3%83%AB%E3%83%95%E3%83%AB%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
       "fallback_search_terms": [
@@ -4074,7 +4074,7 @@
         "Only then fill manual_confirmed_source_url; attach image_url only if the product image is verified from the accepted source."
       ],
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
+      "fallback_reason": "official_search_fetch_http_error",
       "review_instruction": "Find an exact product/detail page through web search, archived store pages, or alternate official store entry points. Only fill manual_confirmed_source_url when title, product type, and character/variant match.",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
