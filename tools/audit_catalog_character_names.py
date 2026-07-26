@@ -386,6 +386,11 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
             "character_name_aliases": CHARACTER_MOJIBAKE_OR_ALIAS_FINDINGS,
             "ichiban_product_character_tokens": ICHIBAN_PRODUCT_CHARACTER_TOKENS,
             "ichiban_display_name_format": "\u4e00\u756a\u304f\u3058 \ubc1c\ub9e4\uba85 / ?\u8cde / \uc0c1\ud488\uc774\ub984 / \uce90\ub9ad\ud130\uba85",
+            "ichiban_variant_split_rule": (
+                "If an official Ichiban Kuji prize rank has separate character variants, keep one catalog row per "
+                "character. Example: the same prize rank with three characters must become three rows whose display "
+                "names only differ by the final character segment."
+            ),
             "last_one_and_double_chance_price_jpy": 0,
             "multi_character_product_review": (
                 "Rows whose product name contains multiple character tokens but no combined-goods marker are "

@@ -61,6 +61,7 @@ class AuditCatalogCharacterNamesTest(unittest.TestCase):
         self.assertEqual(result["summary"]["findings"], 0)
         self.assertEqual(result["summary"]["ichiban_product_character_violations"], 0)
         self.assertEqual(result["summary"]["ichiban_display_character_mismatches"], 0)
+        self.assertIn("one catalog row per character", result["policy"]["ichiban_variant_split_rule"])
 
     def test_reports_character_alias_display_name_and_zero_price_violations(self) -> None:
         rows = [
@@ -210,6 +211,7 @@ class AuditCatalogCharacterNamesTest(unittest.TestCase):
             result["ichiban_multi_character_product_review_candidates"][0]["matched_characters"],
             ["\uce74\ub9c8\ub3c4 \ub124\uc988\ucf54", "\uce74\ub9c8\ub3c4 \ud0c4\uc9c0\ub85c"],
         )
+        self.assertIn("three rows", result["policy"]["ichiban_variant_split_rule"])
 
     def test_character_alias_rules_are_scoped_to_frieren(self) -> None:
         rows = [
