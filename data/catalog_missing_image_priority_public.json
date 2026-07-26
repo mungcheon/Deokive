@@ -1,27 +1,27 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T09:55:24Z",
+  "generated_at": "2026-07-26T10:16:16Z",
   "scope": "public_catalog_missing_image_priority",
   "summary": {
-    "missing_image_rows": 773,
+    "missing_image_rows": 772,
     "work_queue_rows": 710,
-    "queue_matched_rows": 705,
+    "queue_matched_rows": 704,
     "stale_queue_index_matches": 0,
     "unmatched_catalog_missing_rows": 68,
-    "missing_source_url_rows": 700,
+    "missing_source_url_rows": 699,
     "generic_source_url_rows": 50,
     "product_source_url_rows": 0,
-    "high_priority_rows": 519,
+    "high_priority_rows": 518,
     "safe_existing_image_reuse_candidate_rows": 0,
     "source_discovery_starter_queue_groups": 372,
-    "source_discovery_starter_queue_rows": 700,
+    "source_discovery_starter_queue_rows": 699,
     "auto_apply_enabled": false
   },
   "breakdowns": {
     "by_source_store": [
       {
         "source_store": "엔스카이",
-        "rows": 187
+        "rows": 186
       },
       {
         "source_store": "애니메이트",
@@ -183,7 +183,7 @@
     "by_affiliation": [
       {
         "affiliation": "원피스",
-        "rows": 82
+        "rows": 81
       },
       {
         "affiliation": "치이카와",
@@ -361,7 +361,7 @@
       },
       {
         "category": "키링",
-        "rows": 80
+        "rows": 79
       },
       {
         "category": "마스코트",
@@ -463,7 +463,7 @@
     "by_strategy": [
       {
         "strategy": "official_search",
-        "rows": 453
+        "rows": 452
       },
       {
         "strategy": "manual_review",
@@ -489,7 +489,7 @@
     "by_automation_safety": [
       {
         "automation_safety": "candidate_provider_script_required",
-        "rows": 453
+        "rows": 452
       },
       {
         "automation_safety": "manual_research_required",
@@ -515,7 +515,7 @@
     "by_source_url_state": [
       {
         "source_url_state": "missing_source_url",
-        "rows": 700
+        "rows": 699
       },
       {
         "source_url_state": "generic_source_url",
@@ -529,7 +529,7 @@
   },
   "next_action_queues": {
     "source_discovery_first": {
-      "rows": 700,
+      "rows": 699,
       "reason": "Attach exact product source URLs before image candidates can be trusted."
     },
     "replace_generic_source_then_attach_image": {
@@ -585,14 +585,14 @@
       "recommended_workflow": "official_storefront_search_then_exact_detail_match"
     },
     {
-      "source_store": "엔스카이",
-      "affiliation": "원피스",
-      "rows": 19,
+      "source_store": "애니메이트",
+      "affiliation": "짱구는 못말려",
+      "rows": 18,
       "recommended_workflow": "official_storefront_search_then_exact_detail_match"
     },
     {
-      "source_store": "애니메이트",
-      "affiliation": "짱구는 못말려",
+      "source_store": "엔스카이",
+      "affiliation": "원피스",
       "rows": 18,
       "recommended_workflow": "official_storefront_search_then_exact_detail_match"
     },
@@ -724,117 +724,6 @@
     }
   ],
   "source_discovery_starter_queue": [
-    {
-      "source_store": "엔스카이",
-      "affiliation": "원피스",
-      "category": "키링",
-      "primary_strategy": "official_search",
-      "priority": 10,
-      "rows": 9,
-      "first_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "search_urls": [
-        "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-        "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-        "https://www.enskyshop.com/products/list?name=%E3%83%8B%E3%82%B3%E3%83%BB%E3%83%AD%E3%83%93%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-        "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-        "https://www.enskyshop.com/products/list?name=%E3%83%96%E3%83%AB%E3%83%83%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
-      ],
-      "search_url_count": 5,
-      "first_fallback_web_search_url": null,
-      "fallback_web_search_urls": [],
-      "fallback_web_search_url_count": 0,
-      "sample_items": [
-        {
-          "catalog_index": 1585,
-          "name_ko": "우솝 러버 스트랩",
-          "name_ja": "ウソップ ラバーストラップ",
-          "source_store": "엔스카이",
-          "affiliation": "원피스",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ウソップ ラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1586,
-          "name_ko": "토니토니 쵸파 러버 스트랩",
-          "name_ja": "チョッパー ラバーストラップ",
-          "source_store": "엔스카이",
-          "affiliation": "원피스",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "チョッパー ラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1587,
-          "name_ko": "니코 로빈 러버 스트랩",
-          "name_ja": "ニコ・ロビン ラバーストラップ",
-          "source_store": "엔스카이",
-          "affiliation": "원피스",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ニコ・ロビン ラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%8B%E3%82%B3%E3%83%BB%E3%83%AD%E3%83%93%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1588,
-          "name_ko": "프랑키 러버 스트랩",
-          "name_ja": "フランキー ラバーストラップ",
-          "source_store": "엔스카이",
-          "affiliation": "원피스",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "フランキー ラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1589,
-          "name_ko": "브룩 러버 스트랩",
-          "name_ja": "ブルック ラバーストラップ",
-          "source_store": "엔스카이",
-          "affiliation": "원피스",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ブルック ラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%96%E3%83%AB%E3%83%83%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        }
-      ],
-      "recommended_workflow": "official_storefront_search_then_exact_detail_match",
-      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
-      "blocked_until": "exact_source_url_and_image_url_confirmed",
-      "auto_apply_enabled": false
-    },
     {
       "source_store": "엔스카이",
       "affiliation": "장송의 프리렌",
@@ -1053,6 +942,117 @@
         }
       ],
       "recommended_workflow": "official_prize_provider_search_then_exact_detail_match",
+      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
+      "blocked_until": "exact_source_url_and_image_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "source_store": "엔스카이",
+      "affiliation": "원피스",
+      "category": "키링",
+      "primary_strategy": "official_search",
+      "priority": 10,
+      "rows": 8,
+      "first_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+      "search_urls": [
+        "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+        "https://www.enskyshop.com/products/list?name=%E3%83%8B%E3%82%B3%E3%83%BB%E3%83%AD%E3%83%93%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+        "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+        "https://www.enskyshop.com/products/list?name=%E3%83%96%E3%83%AB%E3%83%83%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+        "https://www.enskyshop.com/products/list?name=%E3%82%B8%E3%83%B3%E3%83%99%E3%82%A8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+      ],
+      "search_url_count": 5,
+      "first_fallback_web_search_url": null,
+      "fallback_web_search_urls": [],
+      "fallback_web_search_url_count": 0,
+      "sample_items": [
+        {
+          "catalog_index": 1585,
+          "name_ko": "우솝 러버 스트랩",
+          "name_ja": "ウソップ ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "원피스",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ウソップ ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1587,
+          "name_ko": "니코 로빈 러버 스트랩",
+          "name_ja": "ニコ・ロビン ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "원피스",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ニコ・ロビン ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%8B%E3%82%B3%E3%83%BB%E3%83%AD%E3%83%93%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1588,
+          "name_ko": "프랑키 러버 스트랩",
+          "name_ja": "フランキー ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "원피스",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "フランキー ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1589,
+          "name_ko": "브룩 러버 스트랩",
+          "name_ja": "ブルック ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "원피스",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ブルック ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%96%E3%83%AB%E3%83%83%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1590,
+          "name_ko": "징베 러버 스트랩",
+          "name_ja": "ジンベエ ラバーストラップ",
+          "source_store": "엔스카이",
+          "affiliation": "원피스",
+          "category": "키링",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "ジンベエ ラバーストラップ",
+          "search_url": "https://www.enskyshop.com/products/list?name=%E3%82%B8%E3%83%B3%E3%83%99%E3%82%A8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "recommended_workflow": "official_storefront_search_then_exact_detail_match",
       "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
       "blocked_until": "exact_source_url_and_image_url_confirmed",
       "auto_apply_enabled": false

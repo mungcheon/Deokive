@@ -1,25 +1,25 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T09:55:27Z",
+  "generated_at": "2026-07-26T10:16:19Z",
   "scope": "source_discovery_action_queue",
   "summary": {
-    "actionable_source_rows": 695,
-    "queued_source_rows": 695,
+    "actionable_source_rows": 694,
+    "queued_source_rows": 694,
     "unqueued_actionable_source_rows": 0,
     "queue_coverage": 1.0,
     "action_batch_count": 63,
     "batch_size": 20,
     "max_rows": 1000,
-    "source_patch_template_count": 695,
-    "catalog_field_import_template_count": 695,
-    "source_discovery_template_rows": 695,
+    "source_patch_template_count": 694,
+    "catalog_field_import_template_count": 694,
+    "source_discovery_template_rows": 694,
     "source_discovery_template_batch_count": 40,
     "missing_template_item_count": 0,
     "missing_template_sample_catalog_indexes": [],
     "by_review_state": [
       [
         "official_search_review_required",
-        683
+        682
       ],
       [
         "licensed_retailer_review_required",
@@ -29,7 +29,7 @@
     "by_workflow": [
       [
         "official_search_url_available",
-        683
+        682
       ],
       [
         "licensed_retailer_search_review",
@@ -39,7 +39,7 @@
     "by_source_store": [
       [
         "엔스카이",
-        187
+        186
       ],
       [
         "애니메이트",
@@ -198,11 +198,11 @@
         1
       ]
     ],
-    "primary_review_url_rows": 695,
+    "primary_review_url_rows": 694,
     "primary_review_url_kind_counts": [
       [
         "official_search_url",
-        695
+        694
       ]
     ],
     "first_primary_review_url": "https://www.google.com/search?q=site%3Aalter-web.jp%201/7%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AB%20%E3%83%AA%E3%82%B3",
@@ -240,7 +240,7 @@
     ],
     "source_store_workstream_count": 40,
     "high_volume_source_store_workstream_count": 7,
-    "largest_source_store_workstream_rows": 187,
+    "largest_source_store_workstream_rows": 186,
     "auto_apply_enabled": false
   },
   "instructions": [
@@ -252,7 +252,7 @@
     {
       "source_store": "엔스카이",
       "priority": 10,
-      "queued_source_rows": 187,
+      "queued_source_rows": 186,
       "batch_count": 10,
       "next_batch_id": "source-discovery-action-001",
       "batch_ids": [
@@ -270,26 +270,26 @@
       "allowed_source_domains": [
         "www.enskyshop.com"
       ],
-      "official_search_url_count": 187,
+      "official_search_url_count": 186,
       "fallback_web_search_url_count": 0,
       "first_primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
       "first_primary_review_url_kind": "official_search_url",
       "workflow_rows": [
         [
           "official_search_url_available",
-          187
+          186
         ]
       ],
       "review_state_rows": [
         [
           "official_search_review_required",
-          187
+          186
         ]
       ],
       "category_rows": [
         [
           "키링",
-          54
+          53
         ],
         [
           "인형",
@@ -29843,56 +29843,6 @@
       "auto_apply_enabled": false
     },
     {
-      "catalog_index": 1586,
-      "source_store": "엔스카이",
-      "category": "키링",
-      "name_ko": "토니토니 쵸파 러버 스트랩",
-      "name_ja": "チョッパー ラバーストラップ",
-      "name_en": null,
-      "character_name": null,
-      "affiliation": null,
-      "series_name": null,
-      "sub_series": null,
-      "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "web_search_url": "https://www.google.com/search?q=%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-      "primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "primary_review_url_kind": "official_search_url",
-      "allowed_source_domains": [
-        "www.enskyshop.com"
-      ],
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "source_patch_template": {
-        "catalog_index": 1586,
-        "source_url": "<exact_product_detail_url>",
-        "image_url": "<official_product_image_url_optional_after_source_verification>",
-        "source_store": "엔스카이",
-        "evidence_url": "<official_or_trusted_evidence_url>",
-        "manual_confirmed": false,
-        "requires_exact_identity_match": true
-      },
-      "catalog_field_import_template": {
-        "manual_confirmed": false,
-        "manual_note": "",
-        "row_index": 1586,
-        "field": "source_url",
-        "manual_value": "",
-        "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-        "candidate_source_url": "",
-        "source_store": "엔스카이",
-        "name_ko": "토니토니 쵸파 러버 스트랩",
-        "name_ja": "チョッパー ラバーストラップ",
-        "category": "키링",
-        "affiliation": "원피스",
-        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed"
-      },
-      "manual_value": "",
-      "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "manual_confirmed": false,
-      "blocked_until": "exact_product_detail_source_url_confirmed",
-      "auto_apply_enabled": false
-    },
-    {
       "catalog_index": 1587,
       "source_store": "엔스카이",
       "category": "키링",
@@ -39397,8 +39347,8 @@
     {
       "template_batch_id": "source-discovery-template-001",
       "source_store": "엔스카이",
-      "row_count": 187,
-      "official_search_url_rows": 187,
+      "row_count": 186,
+      "official_search_url_rows": 186,
       "fallback_web_search_url_rows": 0,
       "allowed_source_domains": [
         "www.enskyshop.com"
@@ -44050,56 +44000,6 @@
           },
           "manual_value": "",
           "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "manual_confirmed": false,
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1586,
-          "source_store": "엔스카이",
-          "category": "키링",
-          "name_ko": "토니토니 쵸파 러버 스트랩",
-          "name_ja": "チョッパー ラバーストラップ",
-          "name_en": null,
-          "character_name": null,
-          "affiliation": null,
-          "series_name": null,
-          "sub_series": null,
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "web_search_url": "https://www.google.com/search?q=%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "primary_review_url_kind": "official_search_url",
-          "allowed_source_domains": [
-            "www.enskyshop.com"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 1586,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "엔스카이",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1586,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-            "candidate_source_url": "",
-            "source_store": "엔스카이",
-            "name_ko": "토니토니 쵸파 러버 스트랩",
-            "name_ja": "チョッパー ラバーストラップ",
-            "category": "키링",
-            "affiliation": "원피스",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "manual_value": "",
-          "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
           "manual_confirmed": false,
           "blocked_until": "exact_product_detail_source_url_confirmed",
           "auto_apply_enabled": false
@@ -79061,50 +78961,6 @@
           "auto_apply_enabled": false
         },
         {
-          "catalog_index": 1586,
-          "workflow": "official_search_url_available",
-          "review_state": "official_search_review_required",
-          "source_store": "엔스카이",
-          "category": "키링",
-          "name_ko": "토니토니 쵸파 러버 스트랩",
-          "name_ja": "チョッパー ラバーストラップ",
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "web_search_url": "https://www.google.com/search?q=%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "primary_review_url_kind": "official_search_url",
-          "allowed_source_domains": [
-            "www.enskyshop.com"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 1586,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "엔스카이",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1586,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-            "candidate_source_url": "",
-            "source_store": "엔스카이",
-            "name_ko": "토니토니 쵸파 러버 스트랩",
-            "name_ja": "チョッパー ラバーストラップ",
-            "category": "키링",
-            "affiliation": "원피스",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
-          "auto_apply_enabled": false
-        },
-        {
           "catalog_index": 1587,
           "workflow": "official_search_url_available",
           "review_state": "official_search_review_required",
@@ -79367,38 +79223,7 @@
           },
           "next_machine_step": "open_official_search_and_verify_exact_product_detail",
           "auto_apply_enabled": false
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "source-discovery-action-006",
-      "priority": 10,
-      "workflow": "official_search_url_available",
-      "review_state": "official_search_review_required",
-      "source_store": "엔스카이",
-      "row_count": 20,
-      "offset": 100,
-      "next_machine_step": "confirm_exact_source_url_then_fill_source_templates",
-      "recommended_action": "Open official search candidates, confirm exact product detail URLs, then fill source_url templates.",
-      "category_counts": [
-        [
-          "아크릴 스탠드",
-          11
-        ],
-        [
-          "키링",
-          8
-        ],
-        [
-          "아크릴 키링",
-          1
-        ]
-      ],
-      "primary_review_url_rows": 20,
-      "first_primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%83%88%E3%83%A9%E3%83%95%E3%82%A1%E3%83%AB%E3%82%AC%E3%83%BC%E3%83%BB%E3%83%AD%E3%83%BC%20%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "first_primary_review_url_kind": "official_search_url",
-      "items": [
+        },
         {
           "catalog_index": 1593,
           "workflow": "official_search_url_available",
@@ -79442,7 +79267,38 @@
           },
           "next_machine_step": "open_official_search_and_verify_exact_product_detail",
           "auto_apply_enabled": false
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "source-discovery-action-006",
+      "priority": 10,
+      "workflow": "official_search_url_available",
+      "review_state": "official_search_review_required",
+      "source_store": "엔스카이",
+      "row_count": 20,
+      "offset": 100,
+      "next_machine_step": "confirm_exact_source_url_then_fill_source_templates",
+      "recommended_action": "Open official search candidates, confirm exact product detail URLs, then fill source_url templates.",
+      "category_counts": [
+        [
+          "아크릴 스탠드",
+          12
+        ],
+        [
+          "키링",
+          7
+        ],
+        [
+          "아크릴 키링",
+          1
+        ]
+      ],
+      "primary_review_url_rows": 20,
+      "first_primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%83%87%E3%83%B3%E3%82%B8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+      "first_primary_review_url_kind": "official_search_url",
+      "items": [
         {
           "catalog_index": 1594,
           "workflow": "official_search_url_available",
@@ -80278,38 +80134,7 @@
           },
           "next_machine_step": "open_official_search_and_verify_exact_product_detail",
           "auto_apply_enabled": false
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "source-discovery-action-007",
-      "priority": 10,
-      "workflow": "official_search_url_available",
-      "review_state": "official_search_review_required",
-      "source_store": "엔스카이",
-      "row_count": 20,
-      "offset": 120,
-      "next_machine_step": "confirm_exact_source_url_then_fill_source_templates",
-      "recommended_action": "Open official search candidates, confirm exact product detail URLs, then fill source_url templates.",
-      "category_counts": [
-        [
-          "아크릴 스탠드",
-          14
-        ],
-        [
-          "캔뱃지",
-          4
-        ],
-        [
-          "문구",
-          2
-        ]
-      ],
-      "primary_review_url_rows": 20,
-      "first_primary_review_url": "https://www.enskyshop.com/products/list?name=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF%29",
-      "first_primary_review_url_kind": "official_search_url",
-      "items": [
+        },
         {
           "catalog_index": 1646,
           "workflow": "official_search_url_available",
@@ -80353,7 +80178,38 @@
           },
           "next_machine_step": "open_official_search_and_verify_exact_product_detail",
           "auto_apply_enabled": false
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "source-discovery-action-007",
+      "priority": 10,
+      "workflow": "official_search_url_available",
+      "review_state": "official_search_review_required",
+      "source_store": "엔스카이",
+      "row_count": 20,
+      "offset": 120,
+      "next_machine_step": "confirm_exact_source_url_then_fill_source_templates",
+      "recommended_action": "Open official search candidates, confirm exact product detail URLs, then fill source_url templates.",
+      "category_counts": [
+        [
+          "아크릴 스탠드",
+          13
+        ],
+        [
+          "캔뱃지",
+          4
+        ],
+        [
+          "문구",
+          3
+        ]
+      ],
+      "primary_review_url_rows": 20,
+      "first_primary_review_url": "https://www.enskyshop.com/products/list?name=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%29",
+      "first_primary_review_url_kind": "official_search_url",
+      "items": [
         {
           "catalog_index": 1647,
           "workflow": "official_search_url_available",
@@ -81189,42 +81045,7 @@
           },
           "next_machine_step": "open_official_search_and_verify_exact_product_detail",
           "auto_apply_enabled": false
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "source-discovery-action-008",
-      "priority": 10,
-      "workflow": "official_search_url_available",
-      "review_state": "official_search_review_required",
-      "source_store": "엔스카이",
-      "row_count": 20,
-      "offset": 140,
-      "next_machine_step": "confirm_exact_source_url_then_fill_source_templates",
-      "recommended_action": "Open official search candidates, confirm exact product detail URLs, then fill source_url templates.",
-      "category_counts": [
-        [
-          "문구",
-          7
-        ],
-        [
-          "캔뱃지",
-          7
-        ],
-        [
-          "머그컵",
-          5
-        ],
-        [
-          "응원용품",
-          1
-        ]
-      ],
-      "primary_review_url_rows": 20,
-      "first_primary_review_url": "https://www.enskyshop.com/products/list?name=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%82%AF%E3%83%AA%E3%82%A2%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABA4%20%E4%BA%94%E6%9D%A1%E6%82%9F",
-      "first_primary_review_url_kind": "official_search_url",
-      "items": [
+        },
         {
           "catalog_index": 1687,
           "workflow": "official_search_url_available",
@@ -81268,7 +81089,42 @@
           },
           "next_machine_step": "open_official_search_and_verify_exact_product_detail",
           "auto_apply_enabled": false
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "source-discovery-action-008",
+      "priority": 10,
+      "workflow": "official_search_url_available",
+      "review_state": "official_search_review_required",
+      "source_store": "엔스카이",
+      "row_count": 20,
+      "offset": 140,
+      "next_machine_step": "confirm_exact_source_url_then_fill_source_templates",
+      "recommended_action": "Open official search candidates, confirm exact product detail URLs, then fill source_url templates.",
+      "category_counts": [
+        [
+          "캔뱃지",
+          7
+        ],
+        [
+          "문구",
+          6
+        ],
+        [
+          "머그컵",
+          6
+        ],
+        [
+          "응원용품",
+          1
+        ]
+      ],
+      "primary_review_url_rows": 20,
+      "first_primary_review_url": "https://www.enskyshop.com/products/list?name=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%E3%82%AB%E3%83%BC%E3%83%89%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E4%BA%94%E6%9D%A1",
+      "first_primary_review_url_kind": "official_search_url",
+      "items": [
         {
           "catalog_index": 1689,
           "workflow": "official_search_url_available",
@@ -82104,54 +81960,7 @@
           },
           "next_machine_step": "open_official_search_and_verify_exact_product_detail",
           "auto_apply_enabled": false
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "source-discovery-action-009",
-      "priority": 10,
-      "workflow": "official_search_url_available",
-      "review_state": "official_search_review_required",
-      "source_store": "엔스카이",
-      "row_count": 20,
-      "offset": 160,
-      "next_machine_step": "confirm_exact_source_url_then_fill_source_templates",
-      "recommended_action": "Open official search candidates, confirm exact product detail URLs, then fill source_url templates.",
-      "category_counts": [
-        [
-          "마스코트",
-          5
-        ],
-        [
-          "머그컵",
-          4
-        ],
-        [
-          "인형",
-          4
-        ],
-        [
-          "응원용품",
-          3
-        ],
-        [
-          "캔뱃지",
-          2
-        ],
-        [
-          "아크릴 스탠드",
-          1
-        ],
-        [
-          "키링",
-          1
-        ]
-      ],
-      "primary_review_url_rows": 20,
-      "first_primary_review_url": "https://www.enskyshop.com/products/list?name=%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97",
-      "first_primary_review_url_kind": "official_search_url",
-      "items": [
+        },
         {
           "catalog_index": 1818,
           "workflow": "official_search_url_available",
@@ -82195,7 +82004,54 @@
           },
           "next_machine_step": "open_official_search_and_verify_exact_product_detail",
           "auto_apply_enabled": false
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "source-discovery-action-009",
+      "priority": 10,
+      "workflow": "official_search_url_available",
+      "review_state": "official_search_review_required",
+      "source_store": "엔스카이",
+      "row_count": 20,
+      "offset": 160,
+      "next_machine_step": "confirm_exact_source_url_then_fill_source_templates",
+      "recommended_action": "Open official search candidates, confirm exact product detail URLs, then fill source_url templates.",
+      "category_counts": [
+        [
+          "마스코트",
+          5
+        ],
+        [
+          "인형",
+          4
+        ],
+        [
+          "응원용품",
+          3
+        ],
+        [
+          "머그컵",
+          3
+        ],
+        [
+          "아크릴 스탠드",
+          2
+        ],
+        [
+          "캔뱃지",
+          2
+        ],
+        [
+          "키링",
+          1
+        ]
+      ],
+      "primary_review_url_rows": 20,
+      "first_primary_review_url": "https://www.enskyshop.com/products/list?name=%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20%E9%BA%97%E6%97%A5%E3%81%8A%E8%8C%B6%E5%AD%90%20%E3%81%86%E3%81%A1%E3%82%8F",
+      "first_primary_review_url_kind": "official_search_url",
+      "items": [
         {
           "catalog_index": 1821,
           "workflow": "official_search_url_available",
@@ -83031,46 +82887,7 @@
           },
           "next_machine_step": "open_official_search_and_verify_exact_product_detail",
           "auto_apply_enabled": false
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "source-discovery-action-010",
-      "priority": 10,
-      "workflow": "official_search_url_available",
-      "review_state": "official_search_review_required",
-      "source_store": "엔스카이",
-      "row_count": 7,
-      "offset": 180,
-      "next_machine_step": "confirm_exact_source_url_then_fill_source_templates",
-      "recommended_action": "Open official search candidates, confirm exact product detail URLs, then fill source_url templates.",
-      "category_counts": [
-        [
-          "인형",
-          2
-        ],
-        [
-          "마스코트",
-          2
-        ],
-        [
-          "아크릴 스탠드",
-          1
-        ],
-        [
-          "키링",
-          1
-        ],
-        [
-          "캔뱃지",
-          1
-        ]
-      ],
-      "primary_review_url_rows": 7,
-      "first_primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%E5%BE%8C%E8%97%A4%E3%81%B2%E3%81%A8%E3%82%8A",
-      "first_primary_review_url_kind": "official_search_url",
-      "items": [
+        },
         {
           "catalog_index": 1914,
           "workflow": "official_search_url_available",
@@ -83114,7 +82931,42 @@
           },
           "next_machine_step": "open_official_search_and_verify_exact_product_detail",
           "auto_apply_enabled": false
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "source-discovery-action-010",
+      "priority": 10,
+      "workflow": "official_search_url_available",
+      "review_state": "official_search_review_required",
+      "source_store": "엔스카이",
+      "row_count": 6,
+      "offset": 180,
+      "next_machine_step": "confirm_exact_source_url_then_fill_source_templates",
+      "recommended_action": "Open official search candidates, confirm exact product detail URLs, then fill source_url templates.",
+      "category_counts": [
+        [
+          "인형",
+          2
+        ],
+        [
+          "마스코트",
+          2
+        ],
+        [
+          "키링",
+          1
+        ],
+        [
+          "캔뱃지",
+          1
+        ]
+      ],
+      "primary_review_url_rows": 6,
+      "first_primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%E7%B5%90%E6%9D%9F%E3%83%90%E3%83%B3%E3%83%89%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3",
+      "first_primary_review_url_kind": "official_search_url",
+      "items": [
         {
           "catalog_index": 1915,
           "workflow": "official_search_url_available",
