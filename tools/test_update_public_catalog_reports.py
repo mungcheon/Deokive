@@ -279,6 +279,8 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/catalog_operations_public.json", updated_files)
         self.assertIn("data/catalog_agent_work_queue_public.json", updated_files)
         self.assertIn("data/catalog_image_asset_audit_public.json", updated_files)
+        self.assertIn("data/catalog_reused_image_review_public.json", updated_files)
+        self.assertIn("data/catalog_reused_image_review_public.md", updated_files)
         self.assertIn("data/catalog_missing_image_priority_public.json", updated_files)
         self.assertIn("data/source_discovery_starter_queue_public.json", updated_files)
         self.assertIn("data/animate_missing_image_search_public.json", updated_files)
@@ -411,6 +413,15 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             quality["image_backlog"]["candidate_review_summary"]["missing_images"],
             result["missing"]["image_url"],
+        )
+        reused_image_review = reports.load_json(reports.REUSED_IMAGE_REVIEW)
+        self.assertEqual(
+            quality["catalog_reused_image_review"]["reused_image_groups"],
+            reused_image_review["summary"]["reused_image_groups"],
+        )
+        self.assertEqual(
+            quality["catalog_reused_image_review"]["review_rows"],
+            reused_image_review["summary"]["review_rows"],
         )
         if reports.ANIMATE_MISSING_IMAGE_SEARCH.exists():
             self.assertEqual(quality["animate_missing_image_search"]["missing_animate_image_rows"], 148)
@@ -1870,10 +1881,24 @@ class PublicCatalogReportTests(unittest.TestCase):
             )
             self.assertEqual(quality["gotouchi_representative_image_attachment"]["manual_confirmed_true"], 0)
             self.assertIs(quality["gotouchi_representative_image_attachment"]["auto_apply_enabled"], False)
-        self.assertEqual(quality["gotouchi_official_candidate_review_queue"]["review_rows"], 22)
-        self.assertEqual(quality["gotouchi_official_candidate_review_queue"]["with_candidate_options"], 0)
-        self.assertEqual(quality["gotouchi_official_candidate_review_queue"]["without_candidate_options"], 22)
-        self.assertEqual(quality["gotouchi_official_candidate_review_queue"]["with_rejected_candidate_options"], 16)
+        gotouchi_review = reports.load_json(reports.GOTOUCHI_OFFICIAL_CANDIDATE_REVIEW_QUEUE)
+        gotouchi_review_summary = gotouchi_review["summary"]
+        self.assertEqual(
+            quality["gotouchi_official_candidate_review_queue"]["review_rows"],
+            gotouchi_review_summary["review_rows"],
+        )
+        self.assertEqual(
+            quality["gotouchi_official_candidate_review_queue"]["with_candidate_options"],
+            gotouchi_review_summary["with_candidate_options"],
+        )
+        self.assertEqual(
+            quality["gotouchi_official_candidate_review_queue"]["without_candidate_options"],
+            gotouchi_review_summary["without_candidate_options"],
+        )
+        self.assertEqual(
+            quality["gotouchi_official_candidate_review_queue"]["with_rejected_candidate_options"],
+            gotouchi_review_summary["with_rejected_candidate_options"],
+        )
         self.assertIs(quality["gotouchi_official_candidate_review_queue"]["auto_apply_enabled"], False)
         if reports.DEDUPLICATION_FAST_REVIEW.exists():
             dedupe_action = reports.load_json(reports.DEDUPLICATION_ACTION_QUEUE)

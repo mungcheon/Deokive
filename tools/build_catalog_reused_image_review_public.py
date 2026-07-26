@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
@@ -63,6 +64,20 @@ def _unique(rows: list[dict[str, Any]], field: str) -> list[str]:
     return sorted({_present(row.get(field)) for row in rows if _present(row.get(field))})
 
 
+def _normalized_name(value: Any) -> str:
+    return re.sub(r"[\W_]+", "", _present(value).lower())
+
+
+def _unique_names(rows: list[dict[str, Any]]) -> list[str]:
+    names = set()
+    for row in rows:
+        name = row.get("name_ja") or row.get("name_ko") or row.get("name_en")
+        normalized = _normalized_name(name)
+        if normalized:
+            names.add(normalized)
+    return sorted(names)
+
+
 def _haystack(rows: list[dict[str, Any]], local_image_path: str) -> str:
     parts = [local_image_path]
     for row in rows:
@@ -88,6 +103,7 @@ def _risk_for_group(local_image_path: str, rows: list[dict[str, Any]]) -> tuple[
     affiliations = _unique(rows, "affiliation")
     categories = _unique(rows, "category")
     characters = _unique(rows, "character_name")
+    names = _unique_names(rows)
     source_urls = _unique(rows, "source_url")
     image_urls = _unique(rows, "image_url")
     text = _haystack(rows, local_image_path)
@@ -103,6 +119,8 @@ def _risk_for_group(local_image_path: str, rows: list[dict[str, Any]]) -> tuple[
         reasons.append("shared_across_multiple_source_urls")
     if len(characters) > 1:
         reasons.append("shared_across_multiple_characters")
+    if len(names) > 1 and len(characters) <= 1:
+        reasons.append("same_character_image_reused_for_distinct_names")
     if len(image_urls) == 1 and len(source_urls) > 1:
         reasons.append("same_image_url_used_for_distinct_source_urls")
 
@@ -112,8 +130,10 @@ def _risk_for_group(local_image_path: str, rows: list[dict[str, Any]]) -> tuple[
 
     if "placeholder_or_non_product_image_hint" in reasons or len(affiliations) > 1:
         return "high", reasons, "clear_or_replace_after_manual_identity_review"
-    if len(categories) > 1 and not lineup_like:
+    if len(categories) > 1:
         return "medium", reasons, "review_category_mismatch_before_keep"
+    if "same_character_image_reused_for_distinct_names" in reasons:
+        return "medium", reasons, "review_possible_duplicate_or_reissue_before_keep"
     if len(characters) > 1 and len(source_urls) > 1 and not lineup_like:
         return "medium", reasons, "review_shared_character_images_before_keep"
     return "low", reasons, "likely_lineup_or_set_image_review_later"
