@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "summary": {
-    "missing_image_rows": 803,
-    "source_url_ready_rows": 13,
+    "missing_image_rows": 797,
+    "source_url_ready_rows": 7,
     "generic_source_url_rows": 0,
     "gotouchi_official_review_rows": 22,
     "needs_source_discovery_rows": 758,
     "manual_image_research_rows": 10,
     "published_group_rows": 52,
     "review_batch_count": 9,
-    "sample_image_import_template_count": 659,
+    "sample_image_import_template_count": 653,
     "top_source_stores": [
       [
         "엔스카이",
@@ -80,10 +80,6 @@
         11
       ],
       [
-        "치이카와 온라인 쿠지",
-        9
-      ],
-      [
         "메가하우스",
         9
       ],
@@ -124,6 +120,10 @@
         4
       ],
       [
+        "치이카와 온라인 쿠지",
+        3
+      ],
+      [
         "Bandai Premium",
         3
       ],
@@ -142,12 +142,12 @@
         22
       ],
       [
-        "extract_from_existing_source_url",
-        13
-      ],
-      [
         "manual_image_research",
         10
+      ],
+      [
+        "extract_from_existing_source_url",
+        7
       ]
     ]
   },
@@ -186,7 +186,7 @@
   "blocker_summary": [
     {
       "workflow": "extract_from_existing_source_url",
-      "rows": 13,
+      "rows": 7,
       "state": "ready_for_source_image_extraction",
       "blocking_reason": null,
       "next_step": "extract_product_image_from_existing_exact_source_url",
@@ -231,7 +231,7 @@
       "top_source_stores": [
         [
           "치이카와 온라인 쿠지",
-          9
+          3
         ],
         [
           "TOHO animation STORE",
@@ -251,7 +251,7 @@
         ]
       ],
       "group_count": 5,
-      "missing_image_rows": 13,
+      "missing_image_rows": 7,
       "blocked_until": "ready_for_source_image_extraction",
       "next_machine_step": "extract_product_image_from_existing_exact_source_url",
       "public_report": "data/catalog_image_enrichment_batches_public.json",
@@ -274,180 +274,12 @@
         {
           "workflow": "extract_from_existing_source_url",
           "source_store": "치이카와 온라인 쿠지",
-          "missing_image_rows": 9,
+          "missing_image_rows": 3,
           "priority": 10,
           "recommended_action": "crawl verified source_url and review extracted product image",
           "official_search_available": true,
           "candidate_review_report": null,
           "sample_items": [
-            {
-              "catalog_index": 631,
-              "name_ko": "A상: 빅 사이즈 쿠션 (치이카와)",
-              "name_ja": "A賞 BIGサイズクッション ちいかわ",
-              "series_name": null,
-              "category": "인형",
-              "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-              "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%82%B5%E3%82%A4%E3%82%BA%E3%82%AF%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F",
-              "catalog_field_import_template": {
-                "manual_confirmed": false,
-                "manual_note": "",
-                "row_index": 631,
-                "field": "image_url",
-                "manual_value": "",
-                "evidence_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-                "candidate_source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-                "source_store": "치이카와 온라인 쿠지",
-                "name_ko": "A상: 빅 사이즈 쿠션 (치이카와)",
-                "name_ja": "A賞 BIGサイズクッション ちいかわ",
-                "category": "인형",
-                "affiliation": "치이카와",
-                "source_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%82%B5%E3%82%A4%E3%82%BA%E3%82%AF%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F",
-                "workflow": "extract_from_existing_source_url",
-                "requires_exact_source_url": false,
-                "requires_representative_image_flag": false,
-                "blocked_until": "manual_image_url_confirmed"
-              }
-            },
-            {
-              "catalog_index": 632,
-              "name_ko": "A상: 빅 사이즈 쿠션 (하치와레)",
-              "name_ja": "A賞 BIGサイズクッション ハチワレ",
-              "series_name": null,
-              "category": "인형",
-              "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-              "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%82%B5%E3%82%A4%E3%82%BA%E3%82%AF%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC",
-              "catalog_field_import_template": {
-                "manual_confirmed": false,
-                "manual_note": "",
-                "row_index": 632,
-                "field": "image_url",
-                "manual_value": "",
-                "evidence_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-                "candidate_source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-                "source_store": "치이카와 온라인 쿠지",
-                "name_ko": "A상: 빅 사이즈 쿠션 (하치와레)",
-                "name_ja": "A賞 BIGサイズクッション ハチワレ",
-                "category": "인형",
-                "affiliation": "치이카와",
-                "source_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%82%B5%E3%82%A4%E3%82%BA%E3%82%AF%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC",
-                "workflow": "extract_from_existing_source_url",
-                "requires_exact_source_url": false,
-                "requires_representative_image_flag": false,
-                "blocked_until": "manual_image_url_confirmed"
-              }
-            },
-            {
-              "catalog_index": 633,
-              "name_ko": "B상: 누워있는 인형 (치이카와)",
-              "name_ja": "B賞 寝そべりぬいぐるみ ちいかわ",
-              "series_name": null,
-              "category": "인형",
-              "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-              "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E5%AF%9D%E3%81%9D%E3%81%B9%E3%82%8A%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F",
-              "catalog_field_import_template": {
-                "manual_confirmed": false,
-                "manual_note": "",
-                "row_index": 633,
-                "field": "image_url",
-                "manual_value": "",
-                "evidence_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-                "candidate_source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-                "source_store": "치이카와 온라인 쿠지",
-                "name_ko": "B상: 누워있는 인형 (치이카와)",
-                "name_ja": "B賞 寝そべりぬいぐるみ ちいかわ",
-                "category": "인형",
-                "affiliation": "치이카와",
-                "source_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E5%AF%9D%E3%81%9D%E3%81%B9%E3%82%8A%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F",
-                "workflow": "extract_from_existing_source_url",
-                "requires_exact_source_url": false,
-                "requires_representative_image_flag": false,
-                "blocked_until": "manual_image_url_confirmed"
-              }
-            },
-            {
-              "catalog_index": 634,
-              "name_ko": "B상: 누워있는 인형 (하치와레)",
-              "name_ja": "B賞 寝そべりぬいぐるみ ハチワレ",
-              "series_name": null,
-              "category": "인형",
-              "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-              "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E5%AF%9D%E3%81%9D%E3%81%B9%E3%82%8A%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC",
-              "catalog_field_import_template": {
-                "manual_confirmed": false,
-                "manual_note": "",
-                "row_index": 634,
-                "field": "image_url",
-                "manual_value": "",
-                "evidence_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-                "candidate_source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-                "source_store": "치이카와 온라인 쿠지",
-                "name_ko": "B상: 누워있는 인형 (하치와레)",
-                "name_ja": "B賞 寝そべりぬいぐるみ ハチワレ",
-                "category": "인형",
-                "affiliation": "치이카와",
-                "source_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E5%AF%9D%E3%81%9D%E3%81%B9%E3%82%8A%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC",
-                "workflow": "extract_from_existing_source_url",
-                "requires_exact_source_url": false,
-                "requires_representative_image_flag": false,
-                "blocked_until": "manual_image_url_confirmed"
-              }
-            },
-            {
-              "catalog_index": 635,
-              "name_ko": "B상: 누워있는 인형 (우사기)",
-              "name_ja": "B賞 寝そべりぬいぐるみ うさぎ",
-              "series_name": null,
-              "category": "인형",
-              "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-              "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E5%AF%9D%E3%81%9D%E3%81%B9%E3%82%8A%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%81%86%E3%81%95%E3%81%8E",
-              "catalog_field_import_template": {
-                "manual_confirmed": false,
-                "manual_note": "",
-                "row_index": 635,
-                "field": "image_url",
-                "manual_value": "",
-                "evidence_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-                "candidate_source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-                "source_store": "치이카와 온라인 쿠지",
-                "name_ko": "B상: 누워있는 인형 (우사기)",
-                "name_ja": "B賞 寝そべりぬいぐるみ うさぎ",
-                "category": "인형",
-                "affiliation": "치이카와",
-                "source_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E5%AF%9D%E3%81%9D%E3%81%B9%E3%82%8A%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%81%86%E3%81%95%E3%81%8E",
-                "workflow": "extract_from_existing_source_url",
-                "requires_exact_source_url": false,
-                "requires_representative_image_flag": false,
-                "blocked_until": "manual_image_url_confirmed"
-              }
-            },
-            {
-              "catalog_index": 655,
-              "name_ko": "B상: 페이스 쿠션 (귀 쫑긋)",
-              "name_ja": "B賞 フェイスクッション 耳ピン",
-              "series_name": "ちいかわ うさぎだらけくじ",
-              "category": "인형",
-              "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
-              "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E3%83%95%E3%82%A7%E3%82%A4%E3%82%B9%E3%82%AF%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%20%E8%80%B3%E3%83%94%E3%83%B3",
-              "catalog_field_import_template": {
-                "manual_confirmed": false,
-                "manual_note": "",
-                "row_index": 655,
-                "field": "image_url",
-                "manual_value": "",
-                "evidence_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
-                "candidate_source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
-                "source_store": "치이카와 온라인 쿠지",
-                "name_ko": "B상: 페이스 쿠션 (귀 쫑긋)",
-                "name_ja": "B賞 フェイスクッション 耳ピン",
-                "category": "인형",
-                "affiliation": "치이카와",
-                "source_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E3%83%95%E3%82%A7%E3%82%A4%E3%82%B9%E3%82%AF%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%20%E8%80%B3%E3%83%94%E3%83%B3",
-                "workflow": "extract_from_existing_source_url",
-                "requires_exact_source_url": false,
-                "requires_representative_image_flag": false,
-                "blocked_until": "manual_image_url_confirmed"
-              }
-            },
             {
               "catalog_index": 657,
               "name_ko": "C상: 인형 포셰트",
@@ -19777,180 +19609,12 @@
     {
       "workflow": "extract_from_existing_source_url",
       "source_store": "치이카와 온라인 쿠지",
-      "missing_image_rows": 9,
+      "missing_image_rows": 3,
       "priority": 10,
       "recommended_action": "crawl verified source_url and review extracted product image",
       "official_search_available": true,
       "candidate_review_report": null,
       "sample_items": [
-        {
-          "catalog_index": 631,
-          "name_ko": "A상: 빅 사이즈 쿠션 (치이카와)",
-          "name_ja": "A賞 BIGサイズクッション ちいかわ",
-          "series_name": null,
-          "category": "인형",
-          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%82%B5%E3%82%A4%E3%82%BA%E3%82%AF%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F",
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 631,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-            "candidate_source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-            "source_store": "치이카와 온라인 쿠지",
-            "name_ko": "A상: 빅 사이즈 쿠션 (치이카와)",
-            "name_ja": "A賞 BIGサイズクッション ちいかわ",
-            "category": "인형",
-            "affiliation": "치이카와",
-            "source_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%82%B5%E3%82%A4%E3%82%BA%E3%82%AF%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F",
-            "workflow": "extract_from_existing_source_url",
-            "requires_exact_source_url": false,
-            "requires_representative_image_flag": false,
-            "blocked_until": "manual_image_url_confirmed"
-          }
-        },
-        {
-          "catalog_index": 632,
-          "name_ko": "A상: 빅 사이즈 쿠션 (하치와레)",
-          "name_ja": "A賞 BIGサイズクッション ハチワレ",
-          "series_name": null,
-          "category": "인형",
-          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%82%B5%E3%82%A4%E3%82%BA%E3%82%AF%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC",
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 632,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-            "candidate_source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-            "source_store": "치이카와 온라인 쿠지",
-            "name_ko": "A상: 빅 사이즈 쿠션 (하치와레)",
-            "name_ja": "A賞 BIGサイズクッション ハチワレ",
-            "category": "인형",
-            "affiliation": "치이카와",
-            "source_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%82%B5%E3%82%A4%E3%82%BA%E3%82%AF%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC",
-            "workflow": "extract_from_existing_source_url",
-            "requires_exact_source_url": false,
-            "requires_representative_image_flag": false,
-            "blocked_until": "manual_image_url_confirmed"
-          }
-        },
-        {
-          "catalog_index": 633,
-          "name_ko": "B상: 누워있는 인형 (치이카와)",
-          "name_ja": "B賞 寝そべりぬいぐるみ ちいかわ",
-          "series_name": null,
-          "category": "인형",
-          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E5%AF%9D%E3%81%9D%E3%81%B9%E3%82%8A%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F",
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 633,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-            "candidate_source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-            "source_store": "치이카와 온라인 쿠지",
-            "name_ko": "B상: 누워있는 인형 (치이카와)",
-            "name_ja": "B賞 寝そべりぬいぐるみ ちいかわ",
-            "category": "인형",
-            "affiliation": "치이카와",
-            "source_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E5%AF%9D%E3%81%9D%E3%81%B9%E3%82%8A%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F",
-            "workflow": "extract_from_existing_source_url",
-            "requires_exact_source_url": false,
-            "requires_representative_image_flag": false,
-            "blocked_until": "manual_image_url_confirmed"
-          }
-        },
-        {
-          "catalog_index": 634,
-          "name_ko": "B상: 누워있는 인형 (하치와레)",
-          "name_ja": "B賞 寝そべりぬいぐるみ ハチワレ",
-          "series_name": null,
-          "category": "인형",
-          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E5%AF%9D%E3%81%9D%E3%81%B9%E3%82%8A%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC",
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 634,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-            "candidate_source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-            "source_store": "치이카와 온라인 쿠지",
-            "name_ko": "B상: 누워있는 인형 (하치와레)",
-            "name_ja": "B賞 寝そべりぬいぐるみ ハチワレ",
-            "category": "인형",
-            "affiliation": "치이카와",
-            "source_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E5%AF%9D%E3%81%9D%E3%81%B9%E3%82%8A%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC",
-            "workflow": "extract_from_existing_source_url",
-            "requires_exact_source_url": false,
-            "requires_representative_image_flag": false,
-            "blocked_until": "manual_image_url_confirmed"
-          }
-        },
-        {
-          "catalog_index": 635,
-          "name_ko": "B상: 누워있는 인형 (우사기)",
-          "name_ja": "B賞 寝そべりぬいぐるみ うさぎ",
-          "series_name": null,
-          "category": "인형",
-          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E5%AF%9D%E3%81%9D%E3%81%B9%E3%82%8A%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%81%86%E3%81%95%E3%81%8E",
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 635,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-            "candidate_source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
-            "source_store": "치이카와 온라인 쿠지",
-            "name_ko": "B상: 누워있는 인형 (우사기)",
-            "name_ja": "B賞 寝そべりぬいぐるみ うさぎ",
-            "category": "인형",
-            "affiliation": "치이카와",
-            "source_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E5%AF%9D%E3%81%9D%E3%81%B9%E3%82%8A%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%81%86%E3%81%95%E3%81%8E",
-            "workflow": "extract_from_existing_source_url",
-            "requires_exact_source_url": false,
-            "requires_representative_image_flag": false,
-            "blocked_until": "manual_image_url_confirmed"
-          }
-        },
-        {
-          "catalog_index": 655,
-          "name_ko": "B상: 페이스 쿠션 (귀 쫑긋)",
-          "name_ja": "B賞 フェイスクッション 耳ピン",
-          "series_name": "ちいかわ うさぎだらけくじ",
-          "category": "인형",
-          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
-          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E3%83%95%E3%82%A7%E3%82%A4%E3%82%B9%E3%82%AF%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%20%E8%80%B3%E3%83%94%E3%83%B3",
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 655,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
-            "candidate_source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
-            "source_store": "치이카와 온라인 쿠지",
-            "name_ko": "B상: 페이스 쿠션 (귀 쫑긋)",
-            "name_ja": "B賞 フェイスクッション 耳ピン",
-            "category": "인형",
-            "affiliation": "치이카와",
-            "source_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E3%83%95%E3%82%A7%E3%82%A4%E3%82%B9%E3%82%AF%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%20%E8%80%B3%E3%83%94%E3%83%B3",
-            "workflow": "extract_from_existing_source_url",
-            "requires_exact_source_url": false,
-            "requires_representative_image_flag": false,
-            "blocked_until": "manual_image_url_confirmed"
-          }
-        },
         {
           "catalog_index": 657,
           "name_ko": "C상: 인형 포셰트",
