@@ -20,11 +20,11 @@ PRODUCT_TYPE_HINTS = {
     "acrylic_stand": {
         "\u30a2\u30af\u30ea\u30eb\u30b9\u30bf\u30f3\u30c9",
         "\u30a2\u30af\u30b9\u30bf",
-        "\u30ab\u30d6\u30bb\u30eb\u30b9\u30bf\u30f3\u30c7\u30a3",
         "\u30b9\u30bf\u30f3\u30c9",
         "\u30b9\u30bf\u30f3\u30c7\u30a3",
         "acrylic stand",
     },
+    "capsule_standy": {"\u30ab\u30d6\u30bb\u30eb\u30b9\u30bf\u30f3\u30c7\u30a3"},
     "rubber_strap": {"\u30e9\u30d0\u30fc\u30b9\u30c8\u30e9\u30c3\u30d7", "rubber strap"},
     "keyholder": {"\u30ad\u30fc\u30db\u30eb\u30c0\u30fc", "\u30ad\u30fc\u30c1\u30a7\u30fc\u30f3", "\u30ab\u30e9\u30d3\u30ca", "keyholder", "keychain"},
     "can_badge": {"\u7f36\u30d0\u30c3\u30b8", "\u30d0\u30c3\u30c1", "can badge"},
@@ -106,6 +106,8 @@ def product_type_hints(value: Any) -> set[str]:
     for key, hints in PRODUCT_TYPE_HINTS.items():
         if any(normalize_text(hint) in text for hint in hints):
             matches.add(key)
+    if "capsule_standy" in matches:
+        matches.discard("acrylic_stand")
     return matches
 
 

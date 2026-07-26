@@ -113,6 +113,34 @@ class EnskyCacheCoveragePublicTests(unittest.TestCase):
         self.assertEqual(report["summary"]["no_cache_candidate_rows"], 1)
         self.assertEqual(report["items"][0]["top_candidates"], [])
 
+    def test_capsule_standy_candidate_is_not_acrylic_stand_match(self) -> None:
+        catalog = {
+            "items": [
+                {
+                    "catalog_index": 11,
+                    "name_ko": "원피스 아크릴 스탠드 (몽키 D 루피)",
+                    "name_ja": "ONE PIECE アクリルスタンド (モンキー・D・ルフィ)",
+                    "source_store": "엔스카이",
+                    "affiliation": "원피스",
+                    "category": "아크릴 스탠드",
+                    "image_url": None,
+                }
+            ]
+        }
+        products = [
+            {
+                "title": "ワンピース カブセルスタンディ / モンキー・D・ルフィ(エルバフ) CC-ST050",
+                "image_url": "https://www.enskyshop.com/html/upload/save_image/luffy.jpg",
+                "source_url": "https://www.enskyshop.com/products/detail/32268",
+            }
+        ]
+
+        report = target.build_report(catalog, products, generated_at="2026-01-01T00:00:00Z")
+
+        self.assertEqual(report["summary"]["broad_cache_candidate_rows"], 0)
+        self.assertEqual(report["summary"]["no_cache_candidate_rows"], 1)
+        self.assertEqual(report["items"][0]["top_candidates"], [])
+
     def test_affiliation_only_candidate_is_weak(self) -> None:
         catalog = {
             "items": [

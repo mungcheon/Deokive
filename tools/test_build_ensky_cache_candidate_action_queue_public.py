@@ -139,6 +139,20 @@ class BuildEnskyCacheCandidateActionQueuePublicTest(unittest.TestCase):
 
         self.assertIn("candidate_title_product_type_mismatch", flags)
 
+    def test_build_report_rejects_capsule_standy_for_acrylic_stand_rows(self) -> None:
+        flags = queue.candidate_identity_flags(
+            {
+                "affiliation": "\uc6d0\ud53c\uc2a4",
+                "name_ja": "ONE PIECE \u30a2\u30af\u30ea\u30eb\u30b9\u30bf\u30f3\u30c9 (\u30e2\u30f3\u30ad\u30fc\u30fbD\u30fb\u30eb\u30d5\u30a3)",
+                "category": "\uc544\ud06c\ub9b4 \uc2a4\ud0e0\ub4dc",
+            },
+            {
+                "title": "\u30ef\u30f3\u30d4\u30fc\u30b9 \u30ab\u30d6\u30bb\u30eb\u30b9\u30bf\u30f3\u30c7\u30a3 / \u30e2\u30f3\u30ad\u30fc\u30fbD\u30fb\u30eb\u30d5\u30a3(\u30a8\u30eb\u30d0\u30d5)",
+            },
+        )
+
+        self.assertIn("candidate_title_product_type_mismatch", flags)
+
     def test_build_report_treats_chibigumi_as_plush_type(self) -> None:
         flags = queue.candidate_identity_flags(
             {

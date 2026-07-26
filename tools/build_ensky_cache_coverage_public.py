@@ -19,6 +19,7 @@ REPORT = DATA / "ensky_missing_image_cache_coverage_public.json"
 
 PRODUCT_TYPE_HINTS = {
     "acrylic_stand": {"アクリルスタンド", "アクスタ", "acrylic stand", "아크릴스탠드", "아크릴 스탠드"},
+    "capsule_standy": {"カブセルスタンディ"},
     "rubber_strap": {"ラバーストラップ", "rubber strap", "러버스트랩", "러버 스트랩"},
     "keyholder": {"キーホルダー", "キーチェーン", "カラビナ", "keyholder", "keychain", "키홀더", "키링"},
     "can_badge": {"缶バッジ", "バッチ", "can badge", "캔뱃지", "캔배지"},
@@ -110,6 +111,8 @@ def product_type_hints(value: Any) -> set[str]:
     for key, hints in PRODUCT_TYPE_HINTS.items():
         if any(str(hint).casefold() in text for hint in hints):
             matches.add(key)
+    if "capsule_standy" in matches:
+        matches.discard("acrylic_stand")
     return matches
 
 
