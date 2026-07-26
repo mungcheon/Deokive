@@ -1,21 +1,21 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T15:10:42Z",
+  "generated_at": "2026-07-26T15:39:40Z",
   "scope": "catalog_image_attachment_action_queue",
   "summary": {
-    "actionable_image_rows": 29,
-    "queued_image_rows": 29,
+    "actionable_image_rows": 30,
+    "queued_image_rows": 30,
     "unqueued_actionable_image_rows": 0,
     "sample_queue_coverage": 1.0,
     "action_batch_count": 7,
-    "sample_action_item_rows": 29,
+    "sample_action_item_rows": 30,
     "skipped_already_has_image_rows": 0,
     "batch_size": 20,
     "max_batches": 18,
     "by_workflow": [
       [
         "review_gotouchi_official_candidates",
-        22
+        23
       ],
       [
         "extract_from_existing_source_url",
@@ -25,7 +25,7 @@
     "by_source_store": [
       [
         "ご当地ちいかわ 공식(API)",
-        22
+        23
       ],
       [
         "치이카와 온라인 쿠지",
@@ -51,7 +51,7 @@
     "by_review_lane": [
       [
         "representative_image_candidate_review",
-        22
+        23
       ],
       [
         "image_url_review_ready",
@@ -61,11 +61,11 @@
     "image_import_blocker_counts": [
       [
         "representative_image_may_not_match_exact_variant",
-        22
+        23
       ],
       [
         "product_type_confirmation_required",
-        22
+        23
       ],
       [
         "manual_image_url_confirmation",
@@ -92,17 +92,17 @@
     "next_source_url_review_batch_candidate_hint_rows": 0,
     "next_source_url_review_batch_no_candidate_rows": 0,
     "next_source_url_review_batch_manual_search_rows": 0,
-    "primary_review_url_rows": 29,
+    "primary_review_url_rows": 30,
     "primary_review_url_kind_counts": [
       [
         "current_source_url",
-        29
+        30
       ]
     ],
     "primary_review_url_missing_rows": 0,
     "first_primary_review_url": "https://haikyu.jp/10thevent/",
     "first_primary_review_url_kind": "current_source_url",
-    "representative_image_review_required_rows": 22,
+    "representative_image_review_required_rows": 23,
     "representative_candidate_status_counts": [
       [
         "motif_only_type_mismatch",
@@ -111,6 +111,10 @@
       [
         "no_official_candidate",
         6
+      ],
+      [
+        "rejected_visual_mismatch",
+        1
       ]
     ],
     "representative_candidate_review_guidance": [
@@ -141,16 +145,30 @@
         ],
         "manual_confirmed_allowed": false,
         "auto_apply_allowed": false
+      },
+      {
+        "status": "rejected_visual_mismatch",
+        "rows": 1,
+        "risk": "candidate_was_rejected_by_visual_or_identity_check",
+        "recommended_action": "do_not_reuse_rejected_candidate_search_new_evidence",
+        "required_evidence": [
+          "fresh image URL from exact product evidence",
+          "same character",
+          "same regional motif",
+          "same product type"
+        ],
+        "manual_confirmed_allowed": false,
+        "auto_apply_allowed": false
       }
     ],
     "image_url_ready_rows": 7,
     "can_import_image_urls_now_rows": 7,
-    "blocked_before_image_import_rows": 22,
-    "manual_confirmation_required_rows": 22,
+    "blocked_before_image_import_rows": 23,
+    "manual_confirmation_required_rows": 23,
     "image_import_gate_status": "ready_to_import_confirmed_image_urls",
-    "download_ready_after_manual_image_url_rows": 29,
-    "suggested_local_image_path_rows": 29,
-    "local_image_download_instruction_ready_rows": 29,
+    "download_ready_after_manual_image_url_rows": 30,
+    "suggested_local_image_path_rows": 30,
+    "local_image_download_instruction_ready_rows": 30,
     "workstream_count": 6,
     "source_url_update_workstream_count": 0,
     "source_url_update_work_order_count": 0,
@@ -225,17 +243,17 @@
     "auto_apply_enabled": false
   },
   "attachment_readiness": {
-    "row_count": 29,
-    "local_image_download_instruction_ready_rows": 29,
-    "suggested_local_image_path_rows": 29,
-    "primary_review_url_rows": 29,
+    "row_count": 30,
+    "local_image_download_instruction_ready_rows": 30,
+    "suggested_local_image_path_rows": 30,
+    "primary_review_url_rows": 30,
     "primary_review_url_missing_rows": 0,
     "blocked_by_source_url_rows": 0,
-    "blocked_by_representative_review_rows": 22,
+    "blocked_by_representative_review_rows": 23,
     "image_url_review_ready_rows": 7,
-    "blocked_before_image_import_rows": 22,
+    "blocked_before_image_import_rows": 23,
     "can_import_image_urls_now_rows": 7,
-    "download_ready_after_manual_image_url_rows": 29,
+    "download_ready_after_manual_image_url_rows": 30,
     "readiness_lane_counts": [
       [
         "source_url_replacement_first",
@@ -243,7 +261,7 @@
       ],
       [
         "representative_image_candidate_review",
-        22
+        23
       ],
       [
         "image_url_review_ready",
@@ -268,8 +286,8 @@
     "image_url_ready_rows": 7,
     "source_url_replacement_required_rows": 0,
     "source_url_update_work_order_count": 0,
-    "representative_image_review_required_rows": 22,
-    "blocked_before_image_import_rows": 22,
+    "representative_image_review_required_rows": 23,
+    "blocked_before_image_import_rows": 23,
     "recommended_first_workstream": "extract_from_existing_source_url",
     "recommended_first_batch_id": "image-attachment-action-001",
     "blocking_reason": "Image URL rows are ready for manual evidence review before import.",
@@ -290,9 +308,9 @@
     "current_lane": "image_url_review_ready",
     "current_batch_id": "image-attachment-action-001",
     "current_first_primary_review_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
-    "blocked_before_image_import_rows": 22,
+    "blocked_before_image_import_rows": 23,
     "ready_to_import_image_url_rows": 7,
-    "local_download_ready_after_confirmation_rows": 29,
+    "local_download_ready_after_confirmation_rows": 30,
     "manual_review_required": true,
     "handoff_steps": [
       {
@@ -318,7 +336,7 @@
         "step": 2,
         "lane": "local_image_download_after_confirmation",
         "status": "waiting_for_confirmed_image_urls",
-        "next_batch_rows": 29,
+        "next_batch_rows": 30,
         "review_section": "catalog_image_attachment_confirmed_template_public.json",
         "write_template_section": "local_image_download_instruction",
         "import_tool": "tools/import_confirmed_image_attachment_rows.py",
@@ -1073,7 +1091,7 @@
       "workflow": "review_gotouchi_official_candidates",
       "source_store": "ご当地ちいかわ 공식(API)",
       "priority": 30,
-      "queued_image_rows": 22,
+      "queued_image_rows": 23,
       "batch_count": 2,
       "next_batch_id": "image-attachment-action-006",
       "batch_ids": [
@@ -1082,15 +1100,15 @@
       ],
       "next_machine_step": "confirm_exact_gotouchi_product_type_then_attach_image",
       "source_url_update_template_rows": 0,
-      "representative_image_review_rows": 22,
+      "representative_image_review_rows": 23,
       "image_url_ready_rows": 0,
-      "primary_review_url_rows": 22,
+      "primary_review_url_rows": 23,
       "first_primary_review_url": "https://www.jp-api.com/contents/NOD62/",
       "first_primary_review_url_kind": "current_source_url",
       "category_rows": [
         [
           "마스코트",
-          11
+          12
         ],
         [
           "아크릴 키링",
@@ -1110,17 +1128,17 @@
         ]
       ],
       "attachment_readiness": {
-        "row_count": 22,
-        "local_image_download_instruction_ready_rows": 22,
-        "suggested_local_image_path_rows": 22,
-        "primary_review_url_rows": 22,
+        "row_count": 23,
+        "local_image_download_instruction_ready_rows": 23,
+        "suggested_local_image_path_rows": 23,
+        "primary_review_url_rows": 23,
         "primary_review_url_missing_rows": 0,
         "blocked_by_source_url_rows": 0,
-        "blocked_by_representative_review_rows": 22,
+        "blocked_by_representative_review_rows": 23,
         "image_url_review_ready_rows": 0,
-        "blocked_before_image_import_rows": 22,
+        "blocked_before_image_import_rows": 23,
         "can_import_image_urls_now_rows": 0,
-        "download_ready_after_manual_image_url_rows": 22,
+        "download_ready_after_manual_image_url_rows": 23,
         "readiness_lane_counts": [
           [
             "source_url_replacement_first",
@@ -1128,7 +1146,7 @@
           ],
           [
             "representative_image_candidate_review",
-            22
+            23
           ],
           [
             "image_url_review_ready",
@@ -1140,11 +1158,11 @@
       },
       "review_summary": {
         "review_lane": "representative_image_candidate_review",
-        "queued_rows": 22,
+        "queued_rows": 23,
         "source_url_update_required_rows": 0,
-        "representative_image_review_rows": 22,
+        "representative_image_review_rows": 23,
         "image_url_ready_rows": 0,
-        "primary_review_url_rows": 22,
+        "primary_review_url_rows": 23,
         "first_primary_review_url": "https://www.jp-api.com/contents/NOD62/",
         "first_primary_review_url_kind": "current_source_url",
         "primary_blockers": [
@@ -1152,17 +1170,17 @@
           "product_type_confirmation_required"
         ],
         "attachment_readiness": {
-          "row_count": 22,
-          "local_image_download_instruction_ready_rows": 22,
-          "suggested_local_image_path_rows": 22,
-          "primary_review_url_rows": 22,
+          "row_count": 23,
+          "local_image_download_instruction_ready_rows": 23,
+          "suggested_local_image_path_rows": 23,
+          "primary_review_url_rows": 23,
           "primary_review_url_missing_rows": 0,
           "blocked_by_source_url_rows": 0,
-          "blocked_by_representative_review_rows": 22,
+          "blocked_by_representative_review_rows": 23,
           "image_url_review_ready_rows": 0,
-          "blocked_before_image_import_rows": 22,
+          "blocked_before_image_import_rows": 23,
           "can_import_image_urls_now_rows": 0,
-          "download_ready_after_manual_image_url_rows": 22,
+          "download_ready_after_manual_image_url_rows": 23,
           "readiness_lane_counts": [
             [
               "source_url_replacement_first",
@@ -1170,7 +1188,7 @@
             ],
             [
               "representative_image_candidate_review",
-              22
+              23
             ],
             [
               "image_url_review_ready",
@@ -3091,7 +3109,7 @@
       "priority": 3,
       "lane": "representative_image_candidate_review",
       "workflow": "review_gotouchi_official_candidates",
-      "rows": 22,
+      "rows": 23,
       "next_batch_id": "image-attachment-action-006",
       "first_primary_review_url": "https://www.jp-api.com/contents/NOD62/",
       "first_primary_review_url_kind": "current_source_url",
@@ -3155,7 +3173,7 @@
     {
       "priority": 2,
       "workstream": "review_representative_image_candidates",
-      "rows": 22,
+      "rows": 23,
       "workstream_count": 1,
       "next_batch_id": "image-attachment-action-006",
       "first_primary_review_url": "https://www.jp-api.com/contents/NOD62/",
@@ -4078,7 +4096,7 @@
       "category_counts": [
         [
           "마스코트",
-          11
+          12
         ],
         [
           "아크릴 키링",
@@ -4090,7 +4108,7 @@
         ],
         [
           "마그넷",
-          2
+          1
         ]
       ],
       "review_lane_counts": [
@@ -6348,6 +6366,138 @@
           "primary_review_url_kind": "current_source_url"
         },
         {
+          "catalog_index": 967,
+          "workflow": "review_gotouchi_official_candidates",
+          "review_lane": "representative_image_candidate_review",
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "랏코 ご当地 마스코트 (홋카이도)",
+          "name_ja": "ラッコ ご当地マスコット (北海道)",
+          "series_name": "ご当地",
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": "",
+          "source_search_url": "",
+          "first_fallback_web_search_url": "https://www.google.com/search?q=site%3Ajp-api.com+%E3%83%A9%E3%83%83%E3%82%B3+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E5%8C%97%E6%B5%B7%E9%81%93%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8",
+          "fallback_web_search_urls": [
+            "https://www.google.com/search?q=site%3Ajp-api.com+%E3%83%A9%E3%83%83%E3%82%B3+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E5%8C%97%E6%B5%B7%E9%81%93%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8",
+            "https://www.google.com/search?q=%E3%81%94%E5%BD%93%E5%9C%B0%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%EA%B3%B5%EC%8B%9D%28API%29+%E3%83%A9%E3%83%83%E3%82%B3+%E3%81%94%E5%BD%93%E5%9C%B0%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88+%28%E5%8C%97%E6%B5%B7%E9%81%93%29+%E3%81%94%E5%BD%93%E5%9C%B0+%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8"
+          ],
+          "source_url_update_required": false,
+          "representative_image_review_required": true,
+          "image_url_ready": false,
+          "required_before_image_import": [
+            "confirm_exact_product_type",
+            "confirm_representative_image_is_acceptable"
+          ],
+          "image_import_blockers": [
+            "representative_image_may_not_match_exact_variant",
+            "product_type_confirmation_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Confirm character, regional motif, product type, and variant.",
+            "Use representative images only when the exact variant cannot be separated safely.",
+            "Do not auto-apply if the official candidate shows a different product type."
+          ],
+          "source_url_import_template": null,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 967,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "name_ko": "랏코 ご当地 마스코트 (홋카이도)",
+            "name_ja": "ラッコ ご当地マスコット (北海道)",
+            "category": "마스코트",
+            "affiliation": "치이카와",
+            "source_search_url": null,
+            "workflow": "review_gotouchi_official_candidates",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": true,
+            "blocked_until": "exact_product_source_url_confirmed",
+            "suggested_local_image_path": "assets/catalog_images/catalog_967.webp",
+            "local_image_path_field": "local_image_path"
+          },
+          "representative_candidate_status": "rejected_visual_mismatch",
+          "representative_candidate_review_guidance": {
+            "status": "rejected_visual_mismatch",
+            "risk": "candidate_was_rejected_by_visual_or_identity_check",
+            "recommended_action": "do_not_reuse_rejected_candidate_search_new_evidence",
+            "required_evidence": [
+              "fresh image URL from exact product evidence",
+              "same character",
+              "same regional motif",
+              "same product type"
+            ],
+            "manual_confirmed_allowed": false,
+            "auto_apply_allowed": false
+          },
+          "representative_top_candidates": [
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+              "alt": "北海道 ぬいぐるみキーチェーン",
+              "type": "plush_keychain",
+              "matched_motifs": [
+                "北海道"
+              ],
+              "row_type": "plush_keychain",
+              "type_match": true,
+              "score": 5
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE3/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550248_0_b.png",
+              "alt": "北海道 キャラットソックス",
+              "type": "socks",
+              "matched_motifs": [
+                "北海道"
+              ],
+              "row_type": "plush_keychain",
+              "type_match": false,
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE6/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550118_0_b.png",
+              "alt": "北海道 ダイカットキーホルダー",
+              "type": "diecut_keyholder",
+              "matched_motifs": [
+                "北海道"
+              ],
+              "row_type": "plush_keychain",
+              "type_match": false,
+              "score": 2
+            }
+          ],
+          "source_url_review_lane": null,
+          "source_url_review_blockers": [],
+          "candidate_status": "rejected_visual_mismatch",
+          "candidate_score": null,
+          "candidate_count": null,
+          "candidate_options": [],
+          "match_diagnostics": {},
+          "fallback_search_queries": [],
+          "store_search_hints": {},
+          "suggested_local_image_path": "assets/catalog_images/catalog_967.webp",
+          "local_image_download_instruction": {
+            "status": "ready_after_manual_image_url_confirmation",
+            "target_local_image_path": "assets/catalog_images/catalog_967.webp",
+            "target_public_asset_path": "assets/assets/catalog_images/catalog_967.webp",
+            "after_manual_image_url_confirmed": [
+              "download_confirmed_image_url_to_target_local_image_path",
+              "write_local_image_path_with_image_url_import",
+              "verify_file_exists_in_assets_and_web_public_assets"
+            ]
+          },
+          "review_state": "exact_product_image_confirmation_required",
+          "auto_apply_enabled": false,
+          "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+          "primary_review_url_kind": "current_source_url"
+        },
+        {
           "catalog_index": 968,
           "workflow": "review_gotouchi_official_candidates",
           "review_lane": "representative_image_candidate_review",
@@ -6502,7 +6652,81 @@
           "auto_apply_enabled": false,
           "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
           "primary_review_url_kind": "current_source_url"
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "image-attachment-action-007",
+      "priority": 30,
+      "workflow": "review_gotouchi_official_candidates",
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "row_count": 3,
+      "offset": 20,
+      "review_state": "exact_product_image_confirmation_required",
+      "next_machine_step": "confirm_exact_gotouchi_product_type_then_attach_image",
+      "recommended_action": "Confirm motif candidate matches product type before image import.",
+      "category_counts": [
+        [
+          "캔뱃지",
+          2
+        ],
+        [
+          "마그넷",
+          1
+        ]
+      ],
+      "review_lane_counts": [
+        [
+          "representative_image_candidate_review",
+          3
+        ]
+      ],
+      "image_import_blocker_counts": [
+        [
+          "representative_image_may_not_match_exact_variant",
+          3
+        ],
+        [
+          "product_type_confirmation_required",
+          3
+        ]
+      ],
+      "attachment_readiness": {
+        "row_count": 3,
+        "local_image_download_instruction_ready_rows": 3,
+        "suggested_local_image_path_rows": 3,
+        "primary_review_url_rows": 3,
+        "primary_review_url_missing_rows": 0,
+        "blocked_by_source_url_rows": 0,
+        "blocked_by_representative_review_rows": 3,
+        "image_url_review_ready_rows": 0,
+        "blocked_before_image_import_rows": 3,
+        "can_import_image_urls_now_rows": 0,
+        "download_ready_after_manual_image_url_rows": 3,
+        "readiness_lane_counts": [
+          [
+            "source_url_replacement_first",
+            0
+          ],
+          [
+            "representative_image_candidate_review",
+            3
+          ],
+          [
+            "image_url_review_ready",
+            0
+          ]
+        ],
+        "manual_confirmation_required": true,
+        "auto_apply_enabled": false
+      },
+      "suggested_local_image_path_rows": 3,
+      "local_image_download_instruction_ready_rows": 3,
+      "primary_review_url_rows": 3,
+      "first_primary_review_url": "https://www.jp-api.com/contents/NOD62/",
+      "first_primary_review_url_kind": "current_source_url",
+      "items": [
         {
           "catalog_index": 969,
           "workflow": "review_gotouchi_official_candidates",
@@ -6634,77 +6858,7 @@
           "auto_apply_enabled": false,
           "primary_review_url": "https://www.jp-api.com/contents/NOD62/",
           "primary_review_url_kind": "current_source_url"
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "image-attachment-action-007",
-      "priority": 30,
-      "workflow": "review_gotouchi_official_candidates",
-      "source_store": "ご当地ちいかわ 공식(API)",
-      "row_count": 2,
-      "offset": 20,
-      "review_state": "exact_product_image_confirmation_required",
-      "next_machine_step": "confirm_exact_gotouchi_product_type_then_attach_image",
-      "recommended_action": "Confirm motif candidate matches product type before image import.",
-      "category_counts": [
-        [
-          "캔뱃지",
-          2
-        ]
-      ],
-      "review_lane_counts": [
-        [
-          "representative_image_candidate_review",
-          2
-        ]
-      ],
-      "image_import_blocker_counts": [
-        [
-          "representative_image_may_not_match_exact_variant",
-          2
-        ],
-        [
-          "product_type_confirmation_required",
-          2
-        ]
-      ],
-      "attachment_readiness": {
-        "row_count": 2,
-        "local_image_download_instruction_ready_rows": 2,
-        "suggested_local_image_path_rows": 2,
-        "primary_review_url_rows": 2,
-        "primary_review_url_missing_rows": 0,
-        "blocked_by_source_url_rows": 0,
-        "blocked_by_representative_review_rows": 2,
-        "image_url_review_ready_rows": 0,
-        "blocked_before_image_import_rows": 2,
-        "can_import_image_urls_now_rows": 0,
-        "download_ready_after_manual_image_url_rows": 2,
-        "readiness_lane_counts": [
-          [
-            "source_url_replacement_first",
-            0
-          ],
-          [
-            "representative_image_candidate_review",
-            2
-          ],
-          [
-            "image_url_review_ready",
-            0
-          ]
-        ],
-        "manual_confirmation_required": true,
-        "auto_apply_enabled": false
-      },
-      "suggested_local_image_path_rows": 2,
-      "local_image_download_instruction_ready_rows": 2,
-      "primary_review_url_rows": 2,
-      "first_primary_review_url": "https://www.jp-api.com/contents/NOD62/",
-      "first_primary_review_url_kind": "current_source_url",
-      "items": [
+        },
         {
           "catalog_index": 970,
           "workflow": "review_gotouchi_official_candidates",
@@ -6968,26 +7122,26 @@
   },
   "blocking_dashboard": {
     "status": "blocked_until_manual_source_or_image_confirmation",
-    "blocked_before_image_import_rows": 22,
+    "blocked_before_image_import_rows": 23,
     "source_url_update_required_rows": 0,
-    "representative_image_review_required_rows": 22,
+    "representative_image_review_required_rows": 23,
     "image_url_ready_rows": 7,
-    "manual_confirmation_required_rows": 22,
-    "local_download_ready_after_manual_image_url_rows": 29,
+    "manual_confirmation_required_rows": 23,
+    "local_download_ready_after_manual_image_url_rows": 30,
     "next_safe_phase": "review_representative_image_candidates",
     "next_source_url_review_batch_rows": 0,
     "next_representative_image_review_batch_rows": 10,
-    "primary_review_url_rows": 29,
+    "primary_review_url_rows": 30,
     "primary_review_url_missing_rows": 0,
     "source_url_review_start_coverage": 0,
     "top_blockers": [
       [
         "representative_image_may_not_match_exact_variant",
-        22
+        23
       ],
       [
         "product_type_confirmation_required",
-        22
+        23
       ],
       [
         "manual_image_url_confirmation",
@@ -7015,6 +7169,10 @@
       [
         "no_official_candidate",
         6
+      ],
+      [
+        "rejected_visual_mismatch",
+        1
       ]
     ],
     "first_source_url_review": {},

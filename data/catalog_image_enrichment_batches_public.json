@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "summary": {
-    "missing_image_rows": 797,
+    "missing_image_rows": 798,
     "source_url_ready_rows": 7,
     "generic_source_url_rows": 0,
-    "gotouchi_official_review_rows": 22,
+    "gotouchi_official_review_rows": 23,
     "needs_source_discovery_rows": 758,
     "manual_image_research_rows": 10,
     "published_group_rows": 52,
     "review_batch_count": 9,
-    "sample_image_import_template_count": 653,
+    "sample_image_import_template_count": 654,
     "top_source_stores": [
       [
         "엔스카이",
@@ -36,12 +36,12 @@
         36
       ],
       [
-        "점프 캐릭터즈 스토어",
+        "ご当地ちいかわ 공식(API)",
         23
       ],
       [
-        "ご当地ちいかわ 공식(API)",
-        22
+        "점프 캐릭터즈 스토어",
+        23
       ],
       [
         "FuRyu",
@@ -139,7 +139,7 @@
       ],
       [
         "review_gotouchi_official_candidates",
-        22
+        23
       ],
       [
         "manual_image_research",
@@ -194,7 +194,7 @@
     },
     {
       "workflow": "review_gotouchi_official_candidates",
-      "rows": 22,
+      "rows": 23,
       "state": "blocked_by_candidate_type_review",
       "blocking_reason": "official motif candidates may not match row product type",
       "next_step": "review_gotouchi_official_candidate_report",
@@ -537,11 +537,11 @@
       "top_source_stores": [
         [
           "ご当地ちいかわ 공식(API)",
-          22
+          23
         ]
       ],
       "group_count": 1,
-      "missing_image_rows": 22,
+      "missing_image_rows": 23,
       "blocked_until": "blocked_by_candidate_type_review",
       "next_machine_step": "review_gotouchi_official_candidate_report",
       "public_report": "data/gotouchi_chiikawa_image_candidates_public.json",
@@ -564,7 +564,7 @@
         {
           "workflow": "review_gotouchi_official_candidates",
           "source_store": "ご当地ちいかわ 공식(API)",
-          "missing_image_rows": 22,
+          "missing_image_rows": 23,
           "priority": 18,
           "recommended_action": "review gotouchi official motif candidates; do not import motif-only type mismatches",
           "official_search_available": false,
@@ -1065,6 +1065,34 @@
                 "source_store": "ご当地ちいかわ 공식(API)",
                 "name_ko": "치이카와 ご当地 마스코트 (카와고에 토키노카네)",
                 "name_ja": "ちいかわ ご当地マスコット (川越 時の鐘)",
+                "category": "마스코트",
+                "affiliation": "치이카와",
+                "source_search_url": null,
+                "workflow": "review_gotouchi_official_candidates",
+                "requires_exact_source_url": true,
+                "requires_representative_image_flag": true,
+                "blocked_until": "exact_product_source_url_confirmed"
+              }
+            },
+            {
+              "catalog_index": 967,
+              "name_ko": "랏코 ご当地 마스코트 (홋카이도)",
+              "name_ja": "ラッコ ご当地マスコット (北海道)",
+              "series_name": "ご当地",
+              "category": "마스코트",
+              "source_url": "https://www.jp-api.com/contents/NOD62/",
+              "official_search_url": null,
+              "catalog_field_import_template": {
+                "manual_confirmed": false,
+                "manual_note": "",
+                "row_index": 967,
+                "field": "image_url",
+                "manual_value": "",
+                "evidence_url": "",
+                "candidate_source_url": "",
+                "source_store": "ご当地ちいかわ 공식(API)",
+                "name_ko": "랏코 ご当地 마스코트 (홋카이도)",
+                "name_ja": "ラッコ ご当地マスコット (北海道)",
                 "category": "마스코트",
                 "affiliation": "치이카와",
                 "source_search_url": null,
@@ -19860,7 +19888,7 @@
     {
       "workflow": "review_gotouchi_official_candidates",
       "source_store": "ご当地ちいかわ 공식(API)",
-      "missing_image_rows": 22,
+      "missing_image_rows": 23,
       "priority": 18,
       "recommended_action": "review gotouchi official motif candidates; do not import motif-only type mismatches",
       "official_search_available": false,
@@ -20361,6 +20389,34 @@
             "source_store": "ご当地ちいかわ 공식(API)",
             "name_ko": "치이카와 ご当地 마스코트 (카와고에 토키노카네)",
             "name_ja": "ちいかわ ご当地マスコット (川越 時の鐘)",
+            "category": "마스코트",
+            "affiliation": "치이카와",
+            "source_search_url": null,
+            "workflow": "review_gotouchi_official_candidates",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": true,
+            "blocked_until": "exact_product_source_url_confirmed"
+          }
+        },
+        {
+          "catalog_index": 967,
+          "name_ko": "랏코 ご当地 마스코트 (홋카이도)",
+          "name_ja": "ラッコ ご当地マスコット (北海道)",
+          "series_name": "ご当地",
+          "category": "마스코트",
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "official_search_url": null,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 967,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "ご当地ちいかわ 공식(API)",
+            "name_ko": "랏코 ご当地 마스코트 (홋카이도)",
+            "name_ja": "ラッコ ご当地マスコット (北海道)",
             "category": "마스코트",
             "affiliation": "치이카와",
             "source_search_url": null,

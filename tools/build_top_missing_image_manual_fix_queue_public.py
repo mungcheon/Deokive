@@ -16,6 +16,7 @@ DEFAULT_ONLINE_KUJI_REPAIR = DATA / "chiikawa_online_kuji_public_image_repair_re
 DEFAULT_ENSKY_CACHE_COVERAGE = DATA / "ensky_missing_image_cache_coverage_public.json"
 DEFAULT_ENSKY_SEARCH_PROBE = DATA / "ensky_search_page_probe_public.json"
 DEFAULT_OUTPUT = DATA / "top_missing_image_manual_fix_queue_public.json"
+DEFAULT_REVIEW_OUTPUT = DATA / "catalog_image_top_review_public.json"
 
 
 def now_utc() -> str:
@@ -269,6 +270,81 @@ def build_queue(
     }
 
 
+def review_note(item: dict[str, Any]) -> str:
+    source = str(item.get("source_store") or "")
+    status = str(item.get("candidate_status") or "")
+    blockers = item.get("review_blockers") or []
+    if "엔스카이" in source:
+        return (
+            "Ensky official exact product/detail page was not confirmed; "
+            "broad search/image guesses were skipped."
+        )
+    if "ご当地ちいかわ" in source:
+        return (
+            "Gotouchi API theme page exists, but exact character/type image pair is not "
+            "confirmed in current official API audit."
+        )
+    if "치이카와 온라인 쿠지" in source:
+        return (
+            "Online kuji campaign needs exact prize-rank and variant image confirmation "
+            "before import."
+        )
+    if status:
+        return f"Candidate status is {status}; manual visual identity review is still required."
+    if blockers:
+        return f"Blocked by {', '.join(str(blocker) for blocker in blockers)}."
+    return "No safe exact product image was confirmed yet."
+
+
+def build_top_review(
+    queue: dict[str, Any],
+    *,
+    limit: int = 24,
+    generated_at: str | None = None,
+) -> dict[str, Any]:
+    items = queue.get("items") if isinstance(queue.get("items"), list) else []
+    reviewed_items: list[dict[str, Any]] = []
+    for item in items[:limit]:
+        if not isinstance(item, dict):
+            continue
+        reviewed_items.append(
+            {
+                "catalog_index": item.get("catalog_index"),
+                "name_ko": item.get("name_ko"),
+                "name_ja": item.get("name_ja"),
+                "source_store": item.get("source_store"),
+                "review_lane": item.get("review_lane"),
+                "candidate_status": item.get("candidate_status") or "no_confirmed_candidate",
+                "status": "reviewed_no_safe_import",
+                "note": review_note(item),
+                "next_manual_action": (
+                    "Paste a confirmed exact product image URL into manual_image_url, "
+                    "then run safe_apply_command."
+                ),
+            }
+        )
+    summary = queue.get("summary") if isinstance(queue.get("summary"), dict) else {}
+    return {
+        "schema_version": 1,
+        "generated_at": generated_at or queue.get("generated_at") or now_utc(),
+        "scope": "top_missing_image_rows_after_restart",
+        "summary": {
+            "total_catalog_rows": summary.get("catalog_rows"),
+            "missing_image_rows": summary.get("missing_image_rows"),
+            "queue_rows": summary.get("queue_rows"),
+            "reviewed_rows": len(reviewed_items),
+            "reviewed_no_safe_import_rows": len(reviewed_items),
+            "auto_apply_enabled": False,
+        },
+        "instructions": [
+            "This file records the top missing-image rows that were reviewed but not imported.",
+            "Do not treat reviewed_no_safe_import as finished image repair.",
+            "Import only after exact product image evidence is confirmed.",
+        ],
+        "items": reviewed_items,
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--catalog", type=Path, default=DEFAULT_CATALOG)
@@ -277,7 +353,9 @@ def main() -> int:
     parser.add_argument("--ensky-cache-coverage", type=Path, default=DEFAULT_ENSKY_CACHE_COVERAGE)
     parser.add_argument("--ensky-search-probe", type=Path, default=DEFAULT_ENSKY_SEARCH_PROBE)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--review-output", type=Path, default=DEFAULT_REVIEW_OUTPUT)
     parser.add_argument("--limit", type=int, default=80)
+    parser.add_argument("--review-limit", type=int, default=24)
     parser.add_argument("--write", action="store_true")
     args = parser.parse_args()
 
@@ -291,8 +369,13 @@ def main() -> int:
             ensky_search_probe=load_report(args.ensky_search_probe),
         ),
     )
+    review_report = build_top_review(report, limit=args.review_limit)
     if args.write:
         args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        args.review_output.write_text(
+            json.dumps(review_report, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
     print(json.dumps(report["summary"], ensure_ascii=False, indent=2))
     return 0
 

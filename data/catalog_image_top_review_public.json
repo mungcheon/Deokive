@@ -1,200 +1,284 @@
 {
-  "scope": "top missing image rows after restart",
-  "total_catalog_rows": 20347,
-  "missing_image_rows": 773,
-  "reviewed_rows": 24,
+  "schema_version": 1,
+  "generated_at": "2026-07-26T15:40:39Z",
+  "scope": "top_missing_image_rows_after_restart",
+  "summary": {
+    "total_catalog_rows": 20346,
+    "missing_image_rows": 798,
+    "queue_rows": 80,
+    "reviewed_rows": 24,
+    "reviewed_no_safe_import_rows": 24,
+    "auto_apply_enabled": false
+  },
+  "instructions": [
+    "This file records the top missing-image rows that were reviewed but not imported.",
+    "Do not treat reviewed_no_safe_import as finished image repair.",
+    "Import only after exact product image evidence is confirmed."
+  ],
   "items": [
+    {
+      "catalog_index": 657,
+      "name_ko": "C상: 인형 포셰트",
+      "name_ja": "C賞 ぬいぐるみポシェット",
+      "source_store": "치이카와 온라인 쿠지",
+      "review_lane": "open_existing_source_url",
+      "candidate_status": "blocked",
+      "status": "reviewed_no_safe_import",
+      "note": "Online kuji campaign needs exact prize-rank and variant image confirmation before import.",
+      "next_manual_action": "Paste a confirmed exact product image URL into manual_image_url, then run safe_apply_command."
+    },
+    {
+      "catalog_index": 677,
+      "name_ko": "D상: 친구 마스코트",
+      "name_ja": "D賞 おともだちマスコット",
+      "source_store": "치이카와 온라인 쿠지",
+      "review_lane": "official_campaign_identity_review",
+      "candidate_status": "blocked",
+      "status": "reviewed_no_safe_import",
+      "note": "Online kuji campaign needs exact prize-rank and variant image confirmation before import.",
+      "next_manual_action": "Paste a confirmed exact product image URL into manual_image_url, then run safe_apply_command."
+    },
+    {
+      "catalog_index": 682,
+      "name_ko": "D상: 하치와레 마스코트",
+      "name_ja": "D賞 マスコット",
+      "source_store": "치이카와 온라인 쿠지",
+      "review_lane": "official_campaign_identity_review",
+      "candidate_status": "blocked",
+      "status": "reviewed_no_safe_import",
+      "note": "Online kuji campaign needs exact prize-rank and variant image confirmation before import.",
+      "next_manual_action": "Paste a confirmed exact product image URL into manual_image_url, then run safe_apply_command."
+    },
     {
       "catalog_index": 920,
       "name_ko": "치이카와 러버 스트랩 (치이카와)",
       "name_ja": "ちいかわ ラバーストラップ (ちいかわ)",
       "source_store": "엔스카이",
+      "review_lane": "official_store_search",
+      "candidate_status": "weak_cache_candidate",
       "status": "reviewed_no_safe_import",
-      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped."
+      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped.",
+      "next_manual_action": "Paste a confirmed exact product image URL into manual_image_url, then run safe_apply_command."
     },
     {
       "catalog_index": 921,
       "name_ko": "치이카와 러버 스트랩 (하치와레)",
       "name_ja": "ちいかわ ラバーストラップ (ハチワレ)",
       "source_store": "엔스카이",
+      "review_lane": "official_store_search",
+      "candidate_status": "no_cache_candidate",
       "status": "reviewed_no_safe_import",
-      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped."
+      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped.",
+      "next_manual_action": "Paste a confirmed exact product image URL into manual_image_url, then run safe_apply_command."
     },
     {
       "catalog_index": 922,
       "name_ko": "치이카와 러버 스트랩 (우사기)",
       "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
       "source_store": "엔스카이",
+      "review_lane": "official_store_search",
+      "candidate_status": "no_cache_candidate",
       "status": "reviewed_no_safe_import",
-      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped."
+      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped.",
+      "next_manual_action": "Paste a confirmed exact product image URL into manual_image_url, then run safe_apply_command."
     },
     {
       "catalog_index": 923,
       "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
       "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
       "source_store": "엔스카이",
+      "review_lane": "official_store_search",
+      "candidate_status": "no_cache_candidate",
       "status": "reviewed_no_safe_import",
-      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped."
+      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped.",
+      "next_manual_action": "Paste a confirmed exact product image URL into manual_image_url, then run safe_apply_command."
     },
     {
       "catalog_index": 924,
       "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
       "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
       "source_store": "엔스카이",
+      "review_lane": "official_store_search",
+      "candidate_status": "no_cache_candidate",
       "status": "reviewed_no_safe_import",
-      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped."
+      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped.",
+      "next_manual_action": "Paste a confirmed exact product image URL into manual_image_url, then run safe_apply_command."
     },
     {
       "catalog_index": 925,
       "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
       "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
       "source_store": "엔스카이",
+      "review_lane": "official_store_search",
+      "candidate_status": "weak_cache_candidate",
       "status": "reviewed_no_safe_import",
-      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped."
+      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped.",
+      "next_manual_action": "Paste a confirmed exact product image URL into manual_image_url, then run safe_apply_command."
     },
     {
       "catalog_index": 926,
       "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
       "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
       "source_store": "엔스카이",
+      "review_lane": "official_store_search",
+      "candidate_status": "no_cache_candidate",
       "status": "reviewed_no_safe_import",
-      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped."
+      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped.",
+      "next_manual_action": "Paste a confirmed exact product image URL into manual_image_url, then run safe_apply_command."
     },
     {
       "catalog_index": 927,
       "name_ko": "치이카와 아크릴 스탠드 (치이카와)",
       "name_ja": "ちいかわ アクリルスタンド (ちいかわ)",
       "source_store": "엔스카이",
+      "review_lane": "official_store_search",
+      "candidate_status": "weak_cache_candidate",
       "status": "reviewed_no_safe_import",
-      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped."
+      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped.",
+      "next_manual_action": "Paste a confirmed exact product image URL into manual_image_url, then run safe_apply_command."
     },
     {
       "catalog_index": 928,
       "name_ko": "치이카와 아크릴 스탠드 (하치와레)",
       "name_ja": "ちいかわ アクリルスタンド (ハチワレ)",
       "source_store": "엔스카이",
+      "review_lane": "official_store_search",
+      "candidate_status": "no_cache_candidate",
       "status": "reviewed_no_safe_import",
-      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped."
+      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped.",
+      "next_manual_action": "Paste a confirmed exact product image URL into manual_image_url, then run safe_apply_command."
     },
     {
       "catalog_index": 929,
       "name_ko": "치이카와 아크릴 스탠드 (우사기)",
       "name_ja": "ちいかわ アクリルスタンド (うさぎ)",
       "source_store": "엔스카이",
+      "review_lane": "official_store_search",
+      "candidate_status": "no_cache_candidate",
       "status": "reviewed_no_safe_import",
-      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped."
+      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped.",
+      "next_manual_action": "Paste a confirmed exact product image URL into manual_image_url, then run safe_apply_command."
     },
     {
       "catalog_index": 930,
       "name_ko": "치이카와 빅 아크릴 스탠드 (치이카와)",
       "name_ja": "ちいかわ ビッグアクリルスタンド (ちいかわ)",
       "source_store": "엔스카이",
+      "review_lane": "official_store_search",
+      "candidate_status": "weak_cache_candidate",
       "status": "reviewed_no_safe_import",
-      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped."
+      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped.",
+      "next_manual_action": "Paste a confirmed exact product image URL into manual_image_url, then run safe_apply_command."
     },
     {
       "catalog_index": 931,
       "name_ko": "치이카와 스탠드 미니 (모몽가)",
       "name_ja": "ちいかわ スタンドミニ (モモンガ)",
       "source_store": "엔스카이",
+      "review_lane": "official_store_search",
+      "candidate_status": "no_cache_candidate",
       "status": "reviewed_no_safe_import",
-      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped."
+      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped.",
+      "next_manual_action": "Paste a confirmed exact product image URL into manual_image_url, then run safe_apply_command."
     },
     {
       "catalog_index": 932,
       "name_ko": "치이카와 트레이딩 아크릴 키홀더 (라부라부)",
       "name_ja": "ちいかわ トレーディングアクリルキーホルダー (らぶらぶシリーズ)",
       "source_store": "엔스카이",
+      "review_lane": "official_store_search",
+      "candidate_status": "no_cache_candidate",
       "status": "reviewed_no_safe_import",
-      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped."
+      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped.",
+      "next_manual_action": "Paste a confirmed exact product image URL into manual_image_url, then run safe_apply_command."
     },
     {
       "catalog_index": 933,
       "name_ko": "치이카와 아크릴 피규어 (라부라부 시리즈)",
       "name_ja": "ちいかわ アクリルフィギュア (らぶらぶシリーズ)",
       "source_store": "엔스카이",
+      "review_lane": "official_store_search",
+      "candidate_status": "no_cache_candidate",
       "status": "reviewed_no_safe_import",
-      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped."
+      "note": "Ensky official exact product/detail page was not confirmed; broad search/image guesses were skipped.",
+      "next_manual_action": "Paste a confirmed exact product image URL into manual_image_url, then run safe_apply_command."
     },
     {
       "catalog_index": 936,
       "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
       "name_ja": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
       "source_store": "ご当地ちいかわ 공식(API)",
+      "review_lane": "open_existing_source_url",
+      "candidate_status": "motif_only_type_mismatch",
       "status": "reviewed_no_safe_import",
-      "note": "Gotouchi API theme page exists, but exact character/type image pair is not confirmed in current official API audit."
+      "note": "Gotouchi API theme page exists, but exact character/type image pair is not confirmed in current official API audit.",
+      "next_manual_action": "Paste a confirmed exact product image URL into manual_image_url, then run safe_apply_command."
     },
     {
       "catalog_index": 937,
       "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
       "name_ja": "うさぎ ご当地マスコット (浅草)",
       "source_store": "ご当地ちいかわ 공식(API)",
+      "review_lane": "open_existing_source_url",
+      "candidate_status": "no_official_candidate",
       "status": "reviewed_no_safe_import",
-      "note": "Gotouchi API theme page exists, but exact character/type image pair is not confirmed in current official API audit."
+      "note": "Gotouchi API theme page exists, but exact character/type image pair is not confirmed in current official API audit.",
+      "next_manual_action": "Paste a confirmed exact product image URL into manual_image_url, then run safe_apply_command."
     },
     {
       "catalog_index": 938,
       "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
       "name_ja": "ちいかわ ご当地ミニタオル (東京)",
       "source_store": "ご当地ちいかわ 공식(API)",
+      "review_lane": "open_existing_source_url",
+      "candidate_status": "motif_only_type_mismatch",
       "status": "reviewed_no_safe_import",
-      "note": "Gotouchi API theme page exists, but exact character/type image pair is not confirmed in current official API audit."
+      "note": "Gotouchi API theme page exists, but exact character/type image pair is not confirmed in current official API audit.",
+      "next_manual_action": "Paste a confirmed exact product image URL into manual_image_url, then run safe_apply_command."
     },
     {
       "catalog_index": 941,
       "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
       "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
       "source_store": "ご当地ちいかわ 공식(API)",
+      "review_lane": "open_existing_source_url",
+      "candidate_status": "motif_only_type_mismatch",
       "status": "reviewed_no_safe_import",
-      "note": "Gotouchi API theme page exists, but exact character/type image pair is not confirmed in current official API audit."
+      "note": "Gotouchi API theme page exists, but exact character/type image pair is not confirmed in current official API audit.",
+      "next_manual_action": "Paste a confirmed exact product image URL into manual_image_url, then run safe_apply_command."
     },
     {
       "catalog_index": 942,
       "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
       "name_ja": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
       "source_store": "ご当地ちいかわ 공식(API)",
+      "review_lane": "open_existing_source_url",
+      "candidate_status": "motif_only_type_mismatch",
       "status": "reviewed_no_safe_import",
-      "note": "Gotouchi API theme page exists, but exact character/type image pair is not confirmed in current official API audit."
+      "note": "Gotouchi API theme page exists, but exact character/type image pair is not confirmed in current official API audit.",
+      "next_manual_action": "Paste a confirmed exact product image URL into manual_image_url, then run safe_apply_command."
     },
     {
       "catalog_index": 943,
       "name_ko": "치이카와 ご当地 미니 타올 (오사카)",
       "name_ja": "ちいかわ ご当地ミニタオル (大阪)",
       "source_store": "ご当地ちいかわ 공식(API)",
+      "review_lane": "open_existing_source_url",
+      "candidate_status": "motif_only_type_mismatch",
       "status": "reviewed_no_safe_import",
-      "note": "Gotouchi API theme page exists, but exact character/type image pair is not confirmed in current official API audit."
+      "note": "Gotouchi API theme page exists, but exact character/type image pair is not confirmed in current official API audit.",
+      "next_manual_action": "Paste a confirmed exact product image URL into manual_image_url, then run safe_apply_command."
     },
     {
       "catalog_index": 944,
       "name_ko": "치이카와 ご当地 마스코트 (교토 마이코)",
       "name_ja": "ちいかわ ご当地マスコット (京都 舞妓)",
       "source_store": "ご当地ちいかわ 공식(API)",
+      "review_lane": "open_existing_source_url",
+      "candidate_status": "motif_only_type_mismatch",
       "status": "reviewed_no_safe_import",
-      "note": "Gotouchi API theme page exists, but exact character/type image pair is not confirmed in current official API audit."
-    },
-    {
-      "catalog_index": 945,
-      "name_ko": "하치와레 ご当地 마스코트 (교토 마이코)",
-      "name_ja": "ハチワレ ご当地マスコット (京都 舞妓)",
-      "source_store": "ご当地ちいかわ 공식(API)",
-      "status": "reviewed_no_safe_import",
-      "note": "Gotouchi API theme page exists, but exact character/type image pair is not confirmed in current official API audit."
-    },
-    {
-      "catalog_index": 946,
-      "name_ko": "우사기 ご当地 아크릴 키홀더 (교토 키요미즈데라)",
-      "name_ja": "うさぎ ご当地アクリルキーホルダー (京都 清水寺)",
-      "source_store": "ご当地ちいかわ 공식(API)",
-      "status": "reviewed_no_safe_import",
-      "note": "Gotouchi API theme page exists, but exact character/type image pair is not confirmed in current official API audit."
-    },
-    {
-      "catalog_index": 950,
-      "name_ko": "치이카와 ご当地 미니 타올 (홋카이도)",
-      "name_ja": "ちいかわ ご当地ミニタオル (北海道)",
-      "source_store": "ご当地ちいかわ 공식(API)",
-      "status": "reviewed_no_safe_import",
-      "note": "Gotouchi API theme page exists, but exact character/type image pair is not confirmed in current official API audit."
+      "note": "Gotouchi API theme page exists, but exact character/type image pair is not confirmed in current official API audit.",
+      "next_manual_action": "Paste a confirmed exact product image URL into manual_image_url, then run safe_apply_command."
     }
   ]
 }

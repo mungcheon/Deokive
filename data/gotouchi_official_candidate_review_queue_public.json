@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T13:36:36Z",
+  "generated_at": "2026-07-26T15:39:37Z",
   "scope": "gotouchi_official_candidate_review_queue",
   "summary": {
-    "review_rows": 22,
-    "workstream_count": 2,
+    "review_rows": 23,
+    "workstream_count": 3,
     "by_candidate_status": [
       [
         "motif_only_type_mismatch",
@@ -13,12 +13,16 @@
       [
         "no_official_candidate",
         6
+      ],
+      [
+        "rejected_visual_mismatch",
+        1
       ]
     ],
     "by_category": [
       [
         "마스코트",
-        11
+        12
       ],
       [
         "아크릴 키링",
@@ -38,9 +42,9 @@
       ]
     ],
     "by_character_name": [],
-    "with_candidate_options": 0,
+    "with_candidate_options": 1,
     "without_candidate_options": 22,
-    "with_rejected_candidate_options": 16,
+    "with_rejected_candidate_options": 17,
     "manual_confirmed_true": 0,
     "auto_apply_enabled": false
   },
@@ -1506,7 +1510,7 @@
             "Type-mismatch images are listed under rejected_candidate_options and must not be imported.",
             "If no exact or acceptable representative image exists, leave manual_confirmed=false."
           ],
-          "batch_id": "image-attachment-action-006",
+          "batch_id": "image-attachment-action-007",
           "auto_apply_enabled": false
         },
         {
@@ -1990,6 +1994,134 @@
           "review_blockers": [
             "no_official_candidate_image",
             "manual_external_official_search_required"
+          ],
+          "manual_confirmation_requirements": [
+            "Open candidate page and image when candidates exist.",
+            "Confirm character, place/motif, product type, and variant visually.",
+            "Type-mismatch images are listed under rejected_candidate_options and must not be imported.",
+            "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+          ],
+          "batch_id": "image-attachment-action-006",
+          "auto_apply_enabled": false
+        }
+      ],
+      "recommended_review_order": [
+        "Review motif-only/type-mismatch rows before rows with no candidates.",
+        "Do not import image_url unless manual visual identity review passes.",
+        "Use representative_image=true only for acceptable representative display images."
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "candidate_status": "rejected_visual_mismatch",
+      "row_count": 1,
+      "by_category": [
+        [
+          "마스코트",
+          1
+        ]
+      ],
+      "by_character_name": [],
+      "candidate_rows": 1,
+      "rejected_candidate_rows": 1,
+      "rows": [
+        {
+          "row_index": 967,
+          "catalog_index": 967,
+          "source_store": "ご当地ちいかわ 공식(API)",
+          "name_ko": "랏코 ご当地 마스코트 (홋카이도)",
+          "name_ja": "ラッコ ご当地マスコット (北海道)",
+          "category": "마스코트",
+          "character_name": null,
+          "source_url": "https://www.jp-api.com/contents/NOD62/",
+          "review_lane": "representative_image_candidate_review",
+          "candidate_status": "rejected_visual_mismatch",
+          "row_type": "plush_keychain",
+          "motifs": [
+            "北海道"
+          ],
+          "candidate_count": 1,
+          "rejected_candidate_count": 2,
+          "candidate_options": [
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+              "alt": "北海道 ぬいぐるみキーチェーン",
+              "type": "plush_keychain",
+              "row_type": "plush_keychain",
+              "type_match": true,
+              "matched_motifs": [
+                "北海道"
+              ],
+              "score": 5
+            }
+          ],
+          "rejected_candidate_options": [
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE3/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550248_0_b.png",
+              "alt": "北海道 キャラットソックス",
+              "type": "socks",
+              "row_type": "plush_keychain",
+              "type_match": false,
+              "matched_motifs": [
+                "北海道"
+              ],
+              "score": 2
+            },
+            {
+              "page": "https://www.jp-api.com/contents/NOD62/PGE6/",
+              "image_url": "https://www.jp-api.com/images/tphoto_550118_0_b.png",
+              "alt": "北海道 ダイカットキーホルダー",
+              "type": "diecut_keyholder",
+              "row_type": "plush_keychain",
+              "type_match": false,
+              "matched_motifs": [
+                "北海道"
+              ],
+              "score": 2
+            }
+          ],
+          "top_candidate": {
+            "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+            "image_url": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+            "alt": "北海道 ぬいぐるみキーチェーン",
+            "type": "plush_keychain",
+            "row_type": "plush_keychain",
+            "type_match": true,
+            "matched_motifs": [
+              "北海道"
+            ],
+            "score": 5
+          },
+          "top_rejected_candidate": {
+            "page": "https://www.jp-api.com/contents/NOD62/PGE3/",
+            "image_url": "https://www.jp-api.com/images/tphoto_550248_0_b.png",
+            "alt": "北海道 キャラットソックス",
+            "type": "socks",
+            "row_type": "plush_keychain",
+            "type_match": false,
+            "matched_motifs": [
+              "北海道"
+            ],
+            "score": 2
+          },
+          "image_url_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 967,
+            "catalog_index": 967,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+            "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+            "candidate_image_url": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+            "representative_image": true,
+            "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+          },
+          "review_blockers": [
+            "visual_mismatch",
+            "do_not_import_without_stronger_evidence"
           ],
           "manual_confirmation_requirements": [
             "Open candidate page and image when candidates exist.",
@@ -3509,6 +3641,113 @@
       "auto_apply_enabled": false
     },
     {
+      "row_index": 967,
+      "catalog_index": 967,
+      "source_store": "ご当地ちいかわ 공식(API)",
+      "name_ko": "랏코 ご当地 마스코트 (홋카이도)",
+      "name_ja": "ラッコ ご当地マスコット (北海道)",
+      "category": "마스코트",
+      "character_name": null,
+      "source_url": "https://www.jp-api.com/contents/NOD62/",
+      "review_lane": "representative_image_candidate_review",
+      "candidate_status": "rejected_visual_mismatch",
+      "row_type": "plush_keychain",
+      "motifs": [
+        "北海道"
+      ],
+      "candidate_count": 1,
+      "rejected_candidate_count": 2,
+      "candidate_options": [
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+          "alt": "北海道 ぬいぐるみキーチェーン",
+          "type": "plush_keychain",
+          "row_type": "plush_keychain",
+          "type_match": true,
+          "matched_motifs": [
+            "北海道"
+          ],
+          "score": 5
+        }
+      ],
+      "rejected_candidate_options": [
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE3/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550248_0_b.png",
+          "alt": "北海道 キャラットソックス",
+          "type": "socks",
+          "row_type": "plush_keychain",
+          "type_match": false,
+          "matched_motifs": [
+            "北海道"
+          ],
+          "score": 2
+        },
+        {
+          "page": "https://www.jp-api.com/contents/NOD62/PGE6/",
+          "image_url": "https://www.jp-api.com/images/tphoto_550118_0_b.png",
+          "alt": "北海道 ダイカットキーホルダー",
+          "type": "diecut_keyholder",
+          "row_type": "plush_keychain",
+          "type_match": false,
+          "matched_motifs": [
+            "北海道"
+          ],
+          "score": 2
+        }
+      ],
+      "top_candidate": {
+        "page": "https://www.jp-api.com/contents/NOD62/PGE4/",
+        "image_url": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+        "alt": "北海道 ぬいぐるみキーチェーン",
+        "type": "plush_keychain",
+        "row_type": "plush_keychain",
+        "type_match": true,
+        "matched_motifs": [
+          "北海道"
+        ],
+        "score": 5
+      },
+      "top_rejected_candidate": {
+        "page": "https://www.jp-api.com/contents/NOD62/PGE3/",
+        "image_url": "https://www.jp-api.com/images/tphoto_550248_0_b.png",
+        "alt": "北海道 キャラットソックス",
+        "type": "socks",
+        "row_type": "plush_keychain",
+        "type_match": false,
+        "matched_motifs": [
+          "北海道"
+        ],
+        "score": 2
+      },
+      "image_url_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 967,
+        "catalog_index": 967,
+        "field": "image_url",
+        "manual_value": "",
+        "evidence_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+        "candidate_source_url": "https://www.jp-api.com/contents/NOD62/PGE4/",
+        "candidate_image_url": "https://www.jp-api.com/images/tphoto_550202_0_b.png",
+        "representative_image": true,
+        "blocked_until": "manual_confirmed_true_after_visual_identity_review"
+      },
+      "review_blockers": [
+        "visual_mismatch",
+        "do_not_import_without_stronger_evidence"
+      ],
+      "manual_confirmation_requirements": [
+        "Open candidate page and image when candidates exist.",
+        "Confirm character, place/motif, product type, and variant visually.",
+        "Type-mismatch images are listed under rejected_candidate_options and must not be imported.",
+        "If no exact or acceptable representative image exists, leave manual_confirmed=false."
+      ],
+      "batch_id": "image-attachment-action-006",
+      "auto_apply_enabled": false
+    },
+    {
       "row_index": 968,
       "catalog_index": 968,
       "source_store": "ご当地ちいかわ 공식(API)",
@@ -3721,7 +3960,7 @@
         "Type-mismatch images are listed under rejected_candidate_options and must not be imported.",
         "If no exact or acceptable representative image exists, leave manual_confirmed=false."
       ],
-      "batch_id": "image-attachment-action-006",
+      "batch_id": "image-attachment-action-007",
       "auto_apply_enabled": false
     },
     {

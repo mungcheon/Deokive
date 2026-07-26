@@ -6,7 +6,11 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from tools.build_top_missing_image_manual_fix_queue_public import build_candidate_context, build_queue
+from tools.build_top_missing_image_manual_fix_queue_public import (
+    build_candidate_context,
+    build_queue,
+    build_top_review,
+)
 
 
 class BuildTopMissingImageManualFixQueuePublicTest(unittest.TestCase):
@@ -164,6 +168,44 @@ class BuildTopMissingImageManualFixQueuePublicTest(unittest.TestCase):
             "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup.",
             ensky["confirmation_checklist"],
         )
+
+    def test_build_top_review_uses_current_queue_summary(self) -> None:
+        queue = {
+            "generated_at": "2026-07-22T00:00:00Z",
+            "summary": {
+                "catalog_rows": 10,
+                "missing_image_rows": 2,
+                "queue_rows": 2,
+            },
+            "items": [
+                {
+                    "catalog_index": 920,
+                    "name_ko": "치이카와 러버 스트랩",
+                    "name_ja": "ちいかわ ラバーストラップ",
+                    "source_store": "엔스카이",
+                    "review_lane": "official_store_search",
+                    "candidate_status": "weak_cache_candidate",
+                },
+                {
+                    "catalog_index": 936,
+                    "name_ko": "치이카와 ご当地 아크릴 키홀더",
+                    "name_ja": "ちいかわ ご当地アクリルキーホルダー",
+                    "source_store": "ご当地ちいかわ 공식(API)",
+                    "review_lane": "representative_image_candidate_review",
+                    "candidate_status": "motif_only_type_mismatch",
+                },
+            ],
+        }
+
+        report = build_top_review(queue, limit=1)
+
+        self.assertEqual(report["generated_at"], "2026-07-22T00:00:00Z")
+        self.assertEqual(report["summary"]["total_catalog_rows"], 10)
+        self.assertEqual(report["summary"]["missing_image_rows"], 2)
+        self.assertEqual(report["summary"]["reviewed_rows"], 1)
+        self.assertEqual(report["items"][0]["catalog_index"], 920)
+        self.assertEqual(report["items"][0]["status"], "reviewed_no_safe_import")
+        self.assertIn("Ensky official exact product", report["items"][0]["note"])
 
 
 if __name__ == "__main__":
