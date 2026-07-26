@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T09:39:29Z",
+  "generated_at": "2026-07-26T09:55:24Z",
   "scope": "source_discovery_next_focus_detail_candidates",
   "source_report": "data/source_discovery_next_focus_pack_public.json",
   "summary": {
@@ -8,17 +8,17 @@
     "source_store": "엔스카이",
     "target_category": "키링",
     "pack_items": 20,
-    "items_with_candidates": 8,
+    "items_with_candidates": 7,
     "items_with_candidates_from_official_no_results": 0,
     "candidate_rows_from_fallback_search": 0,
-    "candidate_rows": 17,
-    "exact_candidate_review_rows": 1,
+    "candidate_rows": 16,
+    "exact_candidate_review_rows": 0,
     "manual_candidate_review_rows": 16,
-    "no_candidate_items": 12,
+    "no_candidate_items": 13,
     "candidate_fetch_error_items": 0,
-    "candidate_confirmation_template_rows": 17,
-    "exact_candidate_confirmation_shortlist_rows": 1,
-    "candidate_confirmation_exact_review_rows": 1,
+    "candidate_confirmation_template_rows": 16,
+    "exact_candidate_confirmation_shortlist_rows": 0,
+    "candidate_confirmation_exact_review_rows": 0,
     "candidate_confirmation_manual_review_rows": 16,
     "candidate_confirmation_manual_confirmed_rows": 0,
     "metadata_enrichment_template_rows": 7,
@@ -55,35 +55,27 @@
     "review_bucket_counts": [
       [
         "fallback_search_required",
-        12
+        13
       ],
       [
         "manual_candidate_identity_review",
         7
-      ],
-      [
-        "exact_candidate_shortlist_review",
-        1
       ]
     ],
     "review_decision_counts": [
       [
         "fallback_search_required",
-        12
+        13
       ],
       [
         "catalog_variant_detail_required_before_import",
         7
-      ],
-      [
-        "exact_candidate_confirmation_ready",
-        1
       ]
     ],
     "review_decision_reason_counts": [
       [
         "no_candidate_returned_from_provider_search",
-        12
+        13
       ],
       [
         "catalog_row_is_too_broad_for_single_product_image",
@@ -98,27 +90,23 @@
         4
       ]
     ],
-    "next_action_lane_count": 3,
+    "next_action_lane_count": 2,
     "next_action_lanes": [
       [
-        "confirm_exact_candidate_identity",
-        1
-      ],
-      [
         "fallback_source_search",
-        12
+        13
       ],
       [
         "catalog_variant_metadata_enrichment",
         7
       ]
     ],
-    "fallback_bridge_rows": 12,
+    "fallback_bridge_rows": 13,
     "manual_review_item_rows": 7,
     "variant_detail_required_rows": 7,
-    "exact_candidate_confirmation_ready_items": 1,
+    "exact_candidate_confirmation_ready_items": 0,
     "blocked_candidate_research_item_rows": 0,
-    "completion_readiness_status": "exact_candidate_confirmation_ready",
+    "completion_readiness_status": "fallback_search_required",
     "auto_apply_ready_rows": 0,
     "status_counts": [
       [
@@ -127,11 +115,7 @@
       ],
       [
         "no_candidates_found",
-        12
-      ],
-      [
-        "exact_candidate_review",
-        1
+        13
       ]
     ],
     "official_search_audit_status_counts": [
@@ -143,25 +127,25 @@
     "auto_apply_enabled": false
   },
   "completion_readiness": {
-    "status": "exact_candidate_confirmation_ready",
+    "status": "fallback_search_required",
     "auto_apply_ready_rows": 0,
     "auto_apply_enabled": false,
     "manual_confirmed_rows": 0,
     "pack_items": 20,
-    "candidate_rows": 17,
-    "exact_candidate_confirmation_ready_items": 1,
-    "fallback_bridge_rows": 12,
+    "candidate_rows": 16,
+    "exact_candidate_confirmation_ready_items": 0,
+    "fallback_bridge_rows": 13,
     "manual_candidate_identity_review_rows": 7,
     "variant_detail_required_rows": 7,
     "blocked_candidate_research_item_rows": 0,
-    "no_candidate_items": 12,
+    "no_candidate_items": 13,
     "candidate_fetch_error_items": 0,
     "blocked_reasons": [
       "fallback_search_required",
       "candidate_identity_review_required",
       "catalog_variant_detail_required_before_import"
     ],
-    "next_safe_phase": "confirm_exact_candidate_identity",
+    "next_safe_phase": "use_fallback_queue_to_find_exact_source_url",
     "safety_note": "Candidate rows are review-only. Source and image URLs require exact product, variant, category, and image identity confirmation before import."
   },
   "instructions": [
@@ -1700,102 +1684,6 @@
       "manual_confirmed_image_url": "",
       "manual_note": "",
       "focus_pack_id": "source-discovery-focus-002",
-      "catalog_index": 1581,
-      "source_store": "엔스카이",
-      "affiliation": "원피스",
-      "category": "키링",
-      "name_ko": "몽키 D. 루피 러버 스트랩",
-      "name_ja": "モンキー・D・ルフィ ラバーストラップ",
-      "search_query": "モンキー・D・ルフィ ラバーストラップ",
-      "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%A2%E3%83%B3%E3%82%AD%E3%83%BC%E3%83%BBD%E3%83%BB%E3%83%AB%E3%83%95%E3%82%A3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "official_search_audit_status": "official_search_unavailable",
-      "official_search_no_results": false,
-      "needs_fallback_web_search": true,
-      "official_search_product_detail_link_count": 139,
-      "official_search_fetch_block_reason": "official_search_returned_broad_result_set",
-      "fetch_status": "ok",
-      "fetch_error": "",
-      "candidate_count": 1,
-      "candidates": [
-        {
-          "rank": 1,
-          "candidate_title": "【グッズ-ストラップ】ONE PIECE KirieArt ラバーストラップ モンキー・D・ルフィ",
-          "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91ONE+PIECE+KirieArt+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%E3%83%A2%E3%83%B3%E3%82%AD%E3%83%BC%E3%83%BBD%E3%83%BB%E3%83%AB%E3%83%95%E3%82%A3/pd/1821320/",
-          "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4562378245767_1.jpg&width=400&height=400&square=1",
-          "token_overlap": 3,
-          "similarity": 1.0,
-          "type_compatible": true,
-          "all_distinctive_token_match": true,
-          "parenthetical_terms_match": true,
-          "product_source_url": true,
-          "safe_source_image_pair": true,
-          "exact_candidate_gate_passed": true,
-          "exact_candidate_blockers": [],
-          "review_status": "exact_candidate_review"
-        }
-      ],
-      "review_bucket": "exact_candidate_shortlist_review",
-      "review_decision": {
-        "decision": "exact_candidate_confirmation_ready",
-        "severity": "review_ready",
-        "recommended_next_step": "confirm_exact_candidate_identity",
-        "reasons": []
-      },
-      "source_patch_template": {
-        "catalog_index": 1581,
-        "source_url": "<exact_product_detail_url>",
-        "image_url": "<official_product_image_url_optional_after_source_verification>",
-        "source_store": "엔스카이",
-        "evidence_url": "<official_or_trusted_evidence_url>",
-        "manual_confirmed": false,
-        "requires_exact_identity_match": true,
-        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
-        "blocked_until": "exact_product_detail_source_url_confirmed",
-        "required_evidence": [
-          "exact_product_detail_url_on_allowed_domain",
-          "page_is_not_search_or_category_result",
-          "product_title_series_character_variant_category_match",
-          "source_page_has_verifiable_product_image_before_image_url_import"
-        ]
-      },
-      "catalog_field_import_template": {
-        "manual_confirmed": false,
-        "manual_note": "",
-        "row_index": 1581,
-        "field": "source_url",
-        "manual_value": "",
-        "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%83%A2%E3%83%B3%E3%82%AD%E3%83%BC%E3%83%BBD%E3%83%BB%E3%83%AB%E3%83%95%E3%82%A3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-        "candidate_source_url": "",
-        "source_store": "엔스카이",
-        "name_ko": "몽키 D. 루피 러버 스트랩",
-        "name_ja": "モンキー・D・ルフィ ラバーストラップ",
-        "category": "키링",
-        "affiliation": "원피스",
-        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed",
-        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
-        "required_evidence": [
-          "exact_product_detail_url_on_allowed_domain",
-          "page_is_not_search_or_category_result",
-          "product_title_series_character_variant_category_match",
-          "source_page_has_verifiable_product_image_before_image_url_import"
-        ],
-        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
-        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
-        "image_url_required_evidence": [
-          "product_image_visible_on_confirmed_source_page",
-          "image_url_from_allowed_domain_or_official_cdn",
-          "image_identity_matches_catalog_row"
-        ]
-      },
-      "auto_apply_enabled": false
-    },
-    {
-      "manual_review_status": "not_started",
-      "manual_confirmed_source_url": "",
-      "manual_confirmed_image_url": "",
-      "manual_note": "",
-      "focus_pack_id": "source-discovery-focus-002",
       "catalog_index": 1583,
       "source_store": "엔스카이",
       "affiliation": "원피스",
@@ -2112,6 +2000,87 @@
         "source_store": "엔스카이",
         "name_ko": "니코 로빈 러버 스트랩",
         "name_ja": "ニコ・ロビン ラバーストラップ",
+        "category": "키링",
+        "affiliation": "원피스",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ],
+        "image_url_blocked_reason": "image_url_requires_verified_exact_source_product_image",
+        "image_url_blocked_until": "exact_source_page_product_image_confirmed",
+        "image_url_required_evidence": [
+          "product_image_visible_on_confirmed_source_page",
+          "image_url_from_allowed_domain_or_official_cdn",
+          "image_identity_matches_catalog_row"
+        ]
+      },
+      "auto_apply_enabled": false
+    },
+    {
+      "manual_review_status": "not_started",
+      "manual_confirmed_source_url": "",
+      "manual_confirmed_image_url": "",
+      "manual_note": "",
+      "focus_pack_id": "source-discovery-focus-002",
+      "catalog_index": 1588,
+      "source_store": "엔스카이",
+      "affiliation": "원피스",
+      "category": "키링",
+      "name_ko": "프랑키 러버 스트랩",
+      "name_ja": "フランキー ラバーストラップ",
+      "search_query": "フランキー ラバーストラップ",
+      "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+      "official_search_audit_status": "official_search_unavailable",
+      "official_search_no_results": false,
+      "needs_fallback_web_search": true,
+      "official_search_product_detail_link_count": 139,
+      "official_search_fetch_block_reason": "official_search_returned_broad_result_set",
+      "fetch_status": "ok",
+      "fetch_error": "",
+      "candidate_count": 0,
+      "candidates": [],
+      "review_bucket": "fallback_search_required",
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
+      "source_patch_template": {
+        "catalog_index": 1588,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "엔스카이",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true,
+        "blocked_reason": "exact_product_detail_source_url_not_confirmed",
+        "blocked_until": "exact_product_detail_source_url_confirmed",
+        "required_evidence": [
+          "exact_product_detail_url_on_allowed_domain",
+          "page_is_not_search_or_category_result",
+          "product_title_series_character_variant_category_match",
+          "source_page_has_verifiable_product_image_before_image_url_import"
+        ]
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 1588,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+        "candidate_source_url": "",
+        "source_store": "엔스카이",
+        "name_ko": "프랑키 러버 스트랩",
+        "name_ja": "フランキー ラバーストラップ",
         "category": "키링",
         "affiliation": "원피스",
         "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
@@ -2643,36 +2612,6 @@
     },
     {
       "rank": 16,
-      "catalog_index": 1581,
-      "name_ko": "몽키 D. 루피 러버 스트랩",
-      "name_ja": "モンキー・D・ルフィ ラバーストラップ",
-      "review_bucket": "exact_candidate_shortlist_review",
-      "candidate_count": 1,
-      "top_candidate_title": "【グッズ-ストラップ】ONE PIECE KirieArt ラバーストラップ モンキー・D・ルフィ",
-      "top_candidate_blockers": [],
-      "review_decision": {
-        "decision": "exact_candidate_confirmation_ready",
-        "severity": "review_ready",
-        "recommended_next_step": "confirm_exact_candidate_identity",
-        "reasons": []
-      },
-      "official_search_audit_status": "official_search_unavailable",
-      "recommended_next_step": "confirm_exact_candidate_identity",
-      "fallback_queue_report": "data/source_discovery_next_focus_fallback_queue_public.json",
-      "domain_limited_web_search_url_count": 6,
-      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%A2%E3%83%B3%E3%82%AD%E3%83%BC%E3%83%BBD%E3%83%BB%E3%83%AB%E3%83%95%E3%82%A3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
-      "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%A2%E3%83%B3%E3%82%AD%E3%83%BC%E3%83%BBD%E3%83%BB%E3%83%AB%E3%83%95%E3%82%A3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "fallback_search_query_count": 6,
-      "fallback_search_terms": [
-        "モンキー・D・ルフィ ラバーストラップ",
-        "몽키 D. 루피 러버 스트랩"
-      ],
-      "allowed_source_domains": [
-        "www.enskyshop.com"
-      ]
-    },
-    {
-      "rank": 17,
       "catalog_index": 1583,
       "name_ko": "나미 러버 스트랩",
       "name_ja": "ナミ ラバーストラップ",
@@ -2704,7 +2643,7 @@
       ]
     },
     {
-      "rank": 18,
+      "rank": 17,
       "catalog_index": 1585,
       "name_ko": "우솝 러버 스트랩",
       "name_ja": "ウソップ ラバーストラップ",
@@ -2736,7 +2675,7 @@
       ]
     },
     {
-      "rank": 19,
+      "rank": 18,
       "catalog_index": 1586,
       "name_ko": "토니토니 쵸파 러버 스트랩",
       "name_ja": "チョッパー ラバーストラップ",
@@ -2770,7 +2709,7 @@
       ]
     },
     {
-      "rank": 20,
+      "rank": 19,
       "catalog_index": 1587,
       "name_ko": "니코 로빈 러버 스트랩",
       "name_ja": "ニコ・ロビン ラバーストラップ",
@@ -2800,40 +2739,47 @@
       "allowed_source_domains": [
         "www.enskyshop.com"
       ]
+    },
+    {
+      "rank": 20,
+      "catalog_index": 1588,
+      "name_ko": "프랑키 러버 스트랩",
+      "name_ja": "フランキー ラバーストラップ",
+      "review_bucket": "fallback_search_required",
+      "candidate_count": 0,
+      "top_candidate_title": "",
+      "top_candidate_blockers": [],
+      "review_decision": {
+        "decision": "fallback_search_required",
+        "severity": "source_missing",
+        "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+        "reasons": [
+          "no_candidate_returned_from_provider_search"
+        ]
+      },
+      "official_search_audit_status": "official_search_unavailable",
+      "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
+      "fallback_queue_report": "data/source_discovery_next_focus_fallback_queue_public.json",
+      "domain_limited_web_search_url_count": 6,
+      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%BC+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+      "fallback_search_query_count": 6,
+      "fallback_search_terms": [
+        "フランキー ラバーストラップ",
+        "프랑키 러버 스트랩"
+      ],
+      "allowed_source_domains": [
+        "www.enskyshop.com"
+      ]
     }
   ],
   "next_action_lanes": [
     {
-      "lane": "confirm_exact_candidate_identity",
-      "priority": 1,
-      "row_count": 1,
-      "candidate_rows": 1,
-      "fallback_search_url_count": 6,
-      "next_catalog_index": 1581,
-      "recommended_next_step": "confirm_exact_candidate_identity",
-      "sample_items": [
-        {
-          "catalog_index": 1581,
-          "name_ko": "몽키 D. 루피 러버 스트랩",
-          "name_ja": "モンキー・D・ルフィ ラバーストラップ",
-          "candidate_count": 1,
-          "top_candidate_title": "【グッズ-ストラップ】ONE PIECE KirieArt ラバーストラップ モンキー・D・ルフィ",
-          "top_candidate_blockers": [],
-          "decision": "exact_candidate_confirmation_ready",
-          "recommended_next_step": "confirm_exact_candidate_identity",
-          "domain_limited_web_search_url_count": 6,
-          "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%A2%E3%83%B3%E3%82%AD%E3%83%BC%E3%83%BBD%E3%83%BB%E3%83%AB%E3%83%95%E3%82%A3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
-          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%A2%E3%83%B3%E3%82%AD%E3%83%BC%E3%83%BBD%E3%83%BB%E3%83%AB%E3%83%95%E3%82%A3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
       "lane": "fallback_source_search",
       "priority": 2,
-      "row_count": 12,
+      "row_count": 13,
       "candidate_rows": 0,
-      "fallback_search_url_count": 72,
+      "fallback_search_url_count": 78,
       "next_catalog_index": 1549,
       "recommended_next_step": "use_fallback_queue_to_find_exact_source_url",
       "sample_items": [
@@ -3303,6 +3249,26 @@
       "fallback_search_terms": [
         "ニコ・ロビン ラバーストラップ",
         "니코 로빈 러버 스트랩"
+      ],
+      "allowed_source_domains": [
+        "www.enskyshop.com"
+      ]
+    },
+    {
+      "catalog_index": 1588,
+      "name_ko": "프랑키 러버 스트랩",
+      "name_ja": "フランキー ラバーストラップ",
+      "search_query": "フランキー ラバーストラップ",
+      "official_search_audit_status": "official_search_unavailable",
+      "fallback_queue_report": "data/source_discovery_next_focus_fallback_queue_public.json",
+      "recommended_next_step": "review_domain_limited_or_legacy_store_fallback_search",
+      "domain_limited_web_search_url_count": 6,
+      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%BC+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+      "fallback_search_query_count": 6,
+      "fallback_search_terms": [
+        "フランキー ラバーストラップ",
+        "프랑키 러버 스트랩"
       ],
       "allowed_source_domains": [
         "www.enskyshop.com"
@@ -4628,33 +4594,7 @@
       "review_note": "Copy confirmed rows to server/catalog_field_confirmed_rows.json; existing importer supports this field."
     }
   ],
-  "exact_candidate_confirmation_shortlist": [
-    {
-      "manual_confirmed": false,
-      "manual_review_status": "not_started",
-      "manual_note": "",
-      "focus_pack_id": "source-discovery-focus-002",
-      "catalog_index": 1581,
-      "source_store": "엔스카이",
-      "affiliation": "원피스",
-      "category": "키링",
-      "name_ko": "몽키 D. 루피 러버 스트랩",
-      "name_ja": "モンキー・D・ルフィ ラバーストラップ",
-      "search_query": "モンキー・D・ルフィ ラバーストラップ",
-      "candidate_rank": 1,
-      "candidate_review_status": "exact_candidate_review",
-      "candidate_title": "【グッズ-ストラップ】ONE PIECE KirieArt ラバーストラップ モンキー・D・ルフィ",
-      "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91ONE+PIECE+KirieArt+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%E3%83%A2%E3%83%B3%E3%82%AD%E3%83%BC%E3%83%BBD%E3%83%BB%E3%83%AB%E3%83%95%E3%82%A3/pd/1821320/",
-      "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4562378245767_1.jpg&width=400&height=400&square=1",
-      "manual_confirmed_source_url": "",
-      "manual_confirmed_image_url": "",
-      "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91ONE+PIECE+KirieArt+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%E3%83%A2%E3%83%B3%E3%82%AD%E3%83%BC%E3%83%BBD%E3%83%BB%E3%83%AB%E3%83%95%E3%82%A3/pd/1821320/",
-      "acceptance_criteria": "confirm exact product title, character/variant, category, source page, and image identity",
-      "blocked_until": "manual_confirmed_true",
-      "shortlist_reason": "exact_candidate_gate_passed",
-      "recommended_next_step": "Open candidate_source_url and confirm the product image/variant before copying to manual_confirmed_* fields."
-    }
-  ],
+  "exact_candidate_confirmation_shortlist": [],
   "candidate_confirmation_template": [
     {
       "manual_confirmed": false,
@@ -4998,29 +4938,6 @@
       "manual_confirmed_source_url": "",
       "manual_confirmed_image_url": "",
       "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%82%BB%E3%83%83%E3%83%88/ViVimus+%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6%EF%BC%86%E6%A0%97%E8%8A%B1%E8%90%BD%E3%82%AB%E3%83%8A%E3%83%B2/pd/1810812/",
-      "acceptance_criteria": "confirm exact product title, character/variant, category, source page, and image identity",
-      "blocked_until": "manual_confirmed_true"
-    },
-    {
-      "manual_confirmed": false,
-      "manual_review_status": "not_started",
-      "manual_note": "",
-      "focus_pack_id": "source-discovery-focus-002",
-      "catalog_index": 1581,
-      "source_store": "엔스카이",
-      "affiliation": "원피스",
-      "category": "키링",
-      "name_ko": "몽키 D. 루피 러버 스트랩",
-      "name_ja": "モンキー・D・ルフィ ラバーストラップ",
-      "search_query": "モンキー・D・ルフィ ラバーストラップ",
-      "candidate_rank": 1,
-      "candidate_review_status": "exact_candidate_review",
-      "candidate_title": "【グッズ-ストラップ】ONE PIECE KirieArt ラバーストラップ モンキー・D・ルフィ",
-      "candidate_source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91ONE+PIECE+KirieArt+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%E3%83%A2%E3%83%B3%E3%82%AD%E3%83%BC%E3%83%BBD%E3%83%BB%E3%83%AB%E3%83%95%E3%82%A3/pd/1821320/",
-      "candidate_image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4562378245767_1.jpg&width=400&height=400&square=1",
-      "manual_confirmed_source_url": "",
-      "manual_confirmed_image_url": "",
-      "evidence_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91ONE+PIECE+KirieArt+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%E3%83%A2%E3%83%B3%E3%82%AD%E3%83%BC%E3%83%BBD%E3%83%BB%E3%83%AB%E3%83%95%E3%82%A3/pd/1821320/",
       "acceptance_criteria": "confirm exact product title, character/variant, category, source page, and image identity",
       "blocked_until": "manual_confirmed_true"
     },

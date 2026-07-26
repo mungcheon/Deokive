@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T09:39:29Z",
+  "generated_at": "2026-07-26T09:55:24Z",
   "scope": "source_discovery_completion_roadmap",
   "summary": {
-    "missing_image_rows": 774,
-    "source_first_rows": 746,
-    "queued_source_rows": 696,
-    "focus_source_rows": 696,
+    "missing_image_rows": 773,
+    "source_first_rows": 745,
+    "queued_source_rows": 695,
+    "focus_source_rows": 695,
     "focus_coverage": 1.0,
-    "top_10_store_rows": 569,
-    "top_10_store_coverage": 0.8175,
+    "top_10_store_rows": 568,
+    "top_10_store_coverage": 0.8173,
     "current_focus_pack_rows": 20,
     "current_focus_fallback_rows": 20,
     "completion_readiness_status": "current_focus_fallback_review_required",
@@ -28,9 +28,9 @@
     "auto_apply_ready_rows": 0,
     "auto_apply_enabled": false,
     "manual_confirmed_rows": 0,
-    "queued_source_rows": 696,
-    "focus_source_rows": 696,
-    "remaining_focus_review_rows": 696,
+    "queued_source_rows": 695,
+    "focus_source_rows": 695,
+    "remaining_focus_review_rows": 695,
     "current_focus_pack_id": "source-discovery-focus-002",
     "current_focus_pack_rows": 20,
     "current_focus_remaining_rows": 20,
@@ -40,16 +40,12 @@
     "current_focus_cache_cross_check": {
       "cross_checked_rows": 20,
       "safe_exact_match_rows": 0,
-      "broad_candidate_rows": 1,
-      "no_candidate_rows": 19,
+      "broad_candidate_rows": 0,
+      "no_candidate_rows": 20,
       "status_counts": [
         [
           "no_cache_candidate",
-          19
-        ],
-        [
-          "broad_cache_candidate",
-          1
+          20
         ]
       ],
       "auto_apply_enabled": false
@@ -78,7 +74,7 @@
   },
   "next_execution_summary": {
     "lane_count": 5,
-    "open_rows": 860,
+    "open_rows": 859,
     "next_batch_rows": 184,
     "next_safe_phase": "exact_source_url_review",
     "auto_apply_enabled": false,
@@ -108,7 +104,7 @@
     {
       "lane": "focus_pack_rotation",
       "status": "queued_after_current_focus",
-      "open_rows": 696,
+      "open_rows": 695,
       "next_batch_rows": 20,
       "review_start_rows": 20,
       "manual_decision_rows": 20,
@@ -141,7 +137,7 @@
     "current_lane": "exact_source_url_review",
     "current_review_section": "source_discovery_next_focus_exact_url_review_queue",
     "current_focus_pack_id": "source-discovery-focus-002",
-    "queued_source_rows": 696,
+    "queued_source_rows": 695,
     "current_focus_remaining_rows": 20,
     "safe_candidate_detail_link_rows": 0,
     "all_sample_candidates_rejected_rows": 20,
@@ -154,16 +150,12 @@
     "current_focus_cache_cross_check": {
       "cross_checked_rows": 20,
       "safe_exact_match_rows": 0,
-      "broad_candidate_rows": 1,
-      "no_candidate_rows": 19,
+      "broad_candidate_rows": 0,
+      "no_candidate_rows": 20,
       "status_counts": [
         [
           "no_cache_candidate",
-          19
-        ],
-        [
-          "broad_cache_candidate",
-          1
+          20
         ]
       ],
       "auto_apply_enabled": false
@@ -247,16 +239,12 @@
     "cache_cross_check": {
       "cross_checked_rows": 20,
       "safe_exact_match_rows": 0,
-      "broad_candidate_rows": 1,
-      "no_candidate_rows": 19,
+      "broad_candidate_rows": 0,
+      "no_candidate_rows": 20,
       "status_counts": [
         [
           "no_cache_candidate",
-          19
-        ],
-        [
-          "broad_cache_candidate",
-          1
+          20
         ]
       ],
       "auto_apply_enabled": false
@@ -269,15 +257,15 @@
     {
       "rank": 1,
       "source_store": "엔스카이",
-      "rows": 188,
-      "estimated_image_rows_unblocked_after_source_confirmation": 188,
+      "rows": 187,
+      "estimated_image_rows_unblocked_after_source_confirmation": 187,
       "pack_count": 0,
       "top_category": "키링",
       "top_allowed_source_domain": "www.enskyshop.com",
       "first_batch_id": "source-discovery-action-001",
       "first_primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
       "first_primary_review_url_kind": "official_search_url",
-      "official_search_url_count": 188,
+      "official_search_url_count": 187,
       "fallback_web_search_url_count": 0,
       "next_step": "open_official_search_and_confirm_exact_product_source_url",
       "auto_apply_enabled": false
@@ -439,7 +427,7 @@
     {
       "phase": 2,
       "name": "top_store_source_confirmation",
-      "rows": 696,
+      "rows": 695,
       "public_report": "data/source_discovery_focus_packs_public.json",
       "blocked_until": "exact_product_detail_source_url_confirmed",
       "next_machine_step": "rotate_focus_packs_until_current_focus_stores_are_confirmed"
