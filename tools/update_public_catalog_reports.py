@@ -41,6 +41,7 @@ import build_missing_image_priority_public
 import build_provider_missing_source_url_queue_public
 import build_requested_focus_action_queue_public
 import build_requested_focus_next_work_public
+import build_reused_image_deduplication_review_public
 import build_source_discovery_next_focus_detail_candidates_public
 import build_source_discovery_next_focus_exact_url_candidate_audit_public
 import build_source_discovery_next_focus_fallback_queue_public
@@ -66,6 +67,7 @@ IMAGE_CANDIDATES = DATA / "catalog_image_candidate_review_public.json"
 IMAGE_ASSET_AUDIT = DATA / "catalog_image_asset_audit_public.json"
 REUSED_IMAGE_REVIEW = DATA / "catalog_reused_image_review_public.json"
 REUSED_IMAGE_REVIEW_MD = DATA / "catalog_reused_image_review_public.md"
+REUSED_IMAGE_DEDUPLICATION_REVIEW = DATA / "catalog_reused_image_deduplication_review_public.json"
 MISSING_IMAGE_PRIORITY = DATA / "catalog_missing_image_priority_public.json"
 SOURCE_DISCOVERY_STARTER_QUEUE = DATA / "source_discovery_starter_queue_public.json"
 ANIMATE_MISSING_IMAGE_SEARCH = DATA / "animate_missing_image_search_public.json"
@@ -10989,6 +10991,12 @@ def update_reports(write: bool) -> dict[str, Any]:
         items,
         generated_at=generated_at,
     )
+    reused_image_deduplication_review = (
+        build_reused_image_deduplication_review_public.build_report(
+            reused_image_review,
+            generated_at=generated_at,
+        )
+    )
     missing_image_priority = build_missing_image_priority_public.build_report(
         catalog,
         load_json(DATA / "catalog_missing_image_work_queue_public.json", {"items": []}),
@@ -11595,6 +11603,10 @@ def update_reports(write: bool) -> dict[str, Any]:
             "public_report": f"data/{REUSED_IMAGE_REVIEW.name}",
             "markdown_report": f"data/{REUSED_IMAGE_REVIEW_MD.name}",
             **reused_image_review["summary"],
+        }
+        target["catalog_reused_image_deduplication_review"] = {
+            "public_report": f"data/{REUSED_IMAGE_DEDUPLICATION_REVIEW.name}",
+            **reused_image_deduplication_review["summary"],
         }
         target["missing_image_priority"] = {
             "public_report": f"data/{MISSING_IMAGE_PRIORITY.name}",
@@ -13626,6 +13638,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             reused_image_review,
             REUSED_IMAGE_REVIEW_MD,
         )
+        write_json(REUSED_IMAGE_DEDUPLICATION_REVIEW, reused_image_deduplication_review)
         missing_image_priority_public = dict(missing_image_priority)
         missing_image_priority_public.pop("_source_discovery_starter_queue_full", None)
         write_json(MISSING_IMAGE_PRIORITY, missing_image_priority_public)
@@ -13699,6 +13712,7 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(IMAGE_ASSET_AUDIT.relative_to(ROOT)),
             str(REUSED_IMAGE_REVIEW.relative_to(ROOT)),
             str(REUSED_IMAGE_REVIEW_MD.relative_to(ROOT)),
+            str(REUSED_IMAGE_DEDUPLICATION_REVIEW.relative_to(ROOT)),
             str(MISSING_IMAGE_PRIORITY.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_STARTER_QUEUE.relative_to(ROOT)),
             str(ANIMATE_MISSING_IMAGE_SEARCH.relative_to(ROOT)),
