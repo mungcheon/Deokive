@@ -36,6 +36,38 @@ class BuildCatalogReusedImageReviewPublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["high_risk_groups"], 1)
         self.assertEqual(report["groups"][0]["risk"], "high")
         self.assertIn("shared_across_multiple_affiliations", report["groups"][0]["reasons"])
+        self.assertEqual(report["summary"]["recommended_next_action"], "review_high_risk_groups_first")
+
+    def test_different_image_urls_sharing_one_local_path_is_high_risk(self) -> None:
+        report = build_report(
+            [
+                {
+                    "catalog_index": 1,
+                    "name_ko": "A 피규어",
+                    "affiliation": "A작품",
+                    "category": "피규어",
+                    "character_name": "A",
+                    "image_url": "https://example.com/a.jpg",
+                    "local_image_path": "assets/catalog_images/shared.webp",
+                    "source_url": "https://example.com/a",
+                },
+                {
+                    "catalog_index": 2,
+                    "name_ko": "A 피규어 재판",
+                    "affiliation": "A작품",
+                    "category": "피규어",
+                    "character_name": "A",
+                    "image_url": "https://example.com/b.jpg",
+                    "local_image_path": "assets/catalog_images/shared.webp",
+                    "source_url": "https://example.com/b",
+                },
+            ],
+            generated_at="2026-07-26T00:00:00Z",
+        )
+
+        self.assertEqual(report["summary"]["high_risk_groups"], 1)
+        self.assertEqual(report["groups"][0]["risk"], "high")
+        self.assertIn("different_image_urls_share_one_local_path", report["groups"][0]["reasons"])
 
     def test_lineup_like_same_affiliation_group_is_low_risk(self) -> None:
         report = build_report(
@@ -96,6 +128,10 @@ class BuildCatalogReusedImageReviewPublicTest(unittest.TestCase):
         )
 
         self.assertEqual(report["summary"]["medium_risk_groups"], 1)
+        self.assertEqual(
+            report["summary"]["recommended_next_action"],
+            "review_medium_risk_groups_before_next_image_import",
+        )
         self.assertEqual(report["groups"][0]["risk"], "medium")
         self.assertEqual(
             report["groups"][0]["recommended_action"],

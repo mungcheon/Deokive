@@ -119,6 +119,8 @@ def _risk_for_group(local_image_path: str, rows: list[dict[str, Any]]) -> tuple[
         reasons.append("shared_across_multiple_source_urls")
     if len(characters) > 1:
         reasons.append("shared_across_multiple_characters")
+    if len(image_urls) > 1:
+        reasons.append("different_image_urls_share_one_local_path")
     if len(names) > 1 and len(characters) <= 1:
         reasons.append("same_character_image_reused_for_distinct_names")
     if len(image_urls) == 1 and len(source_urls) > 1:
@@ -128,7 +130,11 @@ def _risk_for_group(local_image_path: str, rows: list[dict[str, Any]]) -> tuple[
     if lineup_like:
         reasons.append("lineup_or_trading_image_possible")
 
-    if "placeholder_or_non_product_image_hint" in reasons or len(affiliations) > 1:
+    if (
+        "placeholder_or_non_product_image_hint" in reasons
+        or "different_image_urls_share_one_local_path" in reasons
+        or len(affiliations) > 1
+    ):
         return "high", reasons, "clear_or_replace_after_manual_identity_review"
     if len(categories) > 1:
         return "medium", reasons, "review_category_mismatch_before_keep"
@@ -187,6 +193,13 @@ def build_report(items: list[dict[str, Any]], generated_at: str | None = None) -
     risk_order = {"high": 0, "medium": 1, "low": 2}
     groups.sort(key=lambda group: (risk_order[group["risk"]], -group["row_count"], group["local_image_path"]))
     risk_counts = Counter(group["risk"] for group in groups)
+    recommended_next_action = "archive_reused_image_review_clean"
+    if risk_counts.get("high", 0):
+        recommended_next_action = "review_high_risk_groups_first"
+    elif risk_counts.get("medium", 0):
+        recommended_next_action = "review_medium_risk_groups_before_next_image_import"
+    elif risk_counts.get("low", 0):
+        recommended_next_action = "review_low_risk_lineup_or_set_images_later"
     return {
         "schema_version": 1,
         "generated_at": generated_at or _now_utc(),
@@ -198,7 +211,7 @@ def build_report(items: list[dict[str, Any]], generated_at: str | None = None) -
             "medium_risk_groups": risk_counts.get("medium", 0),
             "low_risk_groups": risk_counts.get("low", 0),
             "review_rows": sum(group["row_count"] for group in groups),
-            "recommended_next_action": "review_high_risk_groups_first",
+            "recommended_next_action": recommended_next_action,
         },
         "groups": groups,
     }
