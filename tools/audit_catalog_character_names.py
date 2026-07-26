@@ -114,6 +114,8 @@ ICHIBAN_PRODUCT_CHARACTER_TOKENS = (
     ("\u609f\u7a7a", "\uc190\uc624\uacf5"),
 )
 
+ICHIBAN_COMBINED_PRODUCT_MARKERS = ("&", "\uff06", "\u00d7", "VS", "vs", "\u30fb")
+
 KATAKANA = set("".join(chr(codepoint) for codepoint in range(0x30A0, 0x30FF + 1)))
 
 
@@ -219,6 +221,7 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
     ichiban_display_character_mismatches: list[dict[str, Any]] = []
     ichiban_product_character_violations: list[dict[str, Any]] = []
     ichiban_multi_character_product_review_candidates: list[dict[str, Any]] = []
+    ichiban_multi_character_combined_goods_exceptions: list[dict[str, Any]] = []
     zero_price_violations: list[dict[str, Any]] = []
 
     for row in rows:
@@ -291,17 +294,28 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
             {item["expected_character"] for item in matched_product_characters}
         )
         if len(unique_matched_characters) > 1:
-            ichiban_multi_character_product_review_candidates.append(
-                {
-                    "catalog_index": catalog_index,
-                    "name_ko": row.get("name_ko"),
-                    "product_name": product_name,
-                    "character_name": row.get("character_name"),
-                    "matched_characters": unique_matched_characters,
-                    "matched_tokens": matched_product_characters,
-                    "reason": "product_name_contains_multiple_character_tokens_review_before_splitting",
-                }
-            )
+            multi_character_record = {
+                "catalog_index": catalog_index,
+                "name_ko": row.get("name_ko"),
+                "product_name": product_name,
+                "character_name": row.get("character_name"),
+                "matched_characters": unique_matched_characters,
+                "matched_tokens": matched_product_characters,
+            }
+            if any(marker in product_name for marker in ICHIBAN_COMBINED_PRODUCT_MARKERS):
+                ichiban_multi_character_combined_goods_exceptions.append(
+                    {
+                        **multi_character_record,
+                        "reason": "product_name_is_combined_goods_preserve_as_mixed_row",
+                    }
+                )
+            else:
+                ichiban_multi_character_product_review_candidates.append(
+                    {
+                        **multi_character_record,
+                        "reason": "product_name_contains_multiple_character_tokens_review_before_splitting",
+                    }
+                )
         if character_name not in ("", "\uae30\ud0c0", "\ud63c\ud569"):
             for item in matched_product_characters:
                 expected_character = item["expected_character"]
@@ -359,6 +373,9 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
             "ichiban_multi_character_product_review_candidates": len(
                 ichiban_multi_character_product_review_candidates
             ),
+            "ichiban_multi_character_combined_goods_exceptions": len(
+                ichiban_multi_character_combined_goods_exceptions
+            ),
             "zero_price_violations": len(zero_price_violations),
             "watched_alias_hits": alias_monitor["total_watched_alias_hits"],
             "unknown_monitored_character_rows": alias_monitor["total_unknown_character_rows"],
@@ -371,8 +388,9 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
             "ichiban_display_name_format": "\u4e00\u756a\u304f\u3058 \ubc1c\ub9e4\uba85 / ?\u8cde / \uc0c1\ud488\uc774\ub984 / \uce90\ub9ad\ud130\uba85",
             "last_one_and_double_chance_price_jpy": 0,
             "multi_character_product_review": (
-                "Rows whose product name contains multiple character tokens are reported for manual review. "
-                "Some are true combined goods, while same-prize variants should be split into one row per character."
+                "Rows whose product name contains multiple character tokens but no combined-goods marker are "
+                "reported for manual split review. True pair/team goods using &, ＆, ×, VS, or ・ are preserved "
+                "as mixed rows unless official source evidence lists separate prize items."
             ),
         },
         "character_alias_violations": character_alias_violations,
@@ -380,6 +398,7 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "ichiban_display_character_mismatches": ichiban_display_character_mismatches,
         "ichiban_product_character_violations": ichiban_product_character_violations,
         "ichiban_multi_character_product_review_candidates": ichiban_multi_character_product_review_candidates,
+        "ichiban_multi_character_combined_goods_exceptions": ichiban_multi_character_combined_goods_exceptions,
         "zero_price_violations": zero_price_violations,
         "character_alias_monitor": alias_monitor,
     }

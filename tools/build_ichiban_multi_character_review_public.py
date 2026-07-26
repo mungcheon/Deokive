@@ -137,7 +137,15 @@ def build_review(
             by_prize_key.setdefault(_same_prize_key(row), []).append(row)
 
     review_rows: list[dict[str, Any]] = []
+    policy_candidates = []
     for candidate in policy_report.get("ichiban_multi_character_product_review_candidates") or []:
+        if isinstance(candidate, dict):
+            policy_candidates.append(candidate)
+    for candidate in policy_report.get("ichiban_multi_character_combined_goods_exceptions") or []:
+        if isinstance(candidate, dict):
+            policy_candidates.append(candidate)
+
+    for candidate in policy_candidates:
         if not isinstance(candidate, dict):
             continue
         index = _catalog_index(candidate.get("catalog_index"))
@@ -162,7 +170,11 @@ def build_review(
         sibling_rows = by_prize_key.get(_same_prize_key(catalog_row), [])
         priority, classification, action = _classification(candidate, sibling_rows)
         matched_characters = [str(value) for value in candidate.get("matched_characters") or []]
-        split_name_templates = [
+        is_combined_exception = (
+            candidate.get("reason") == "product_name_is_combined_goods_preserve_as_mixed_row"
+            or classification == "likely_combined_goods"
+        )
+        split_name_templates = [] if is_combined_exception else [
             f"{campaign_name} / {prize_rank} / {product_name} / {character}"
             for character in matched_characters
         ]
@@ -186,6 +198,11 @@ def build_review(
                 "same_prize_row_count": len(sibling_rows),
                 "same_prize_rows": [_row_summary(row) for row in sibling_rows[:24]],
                 "split_name_templates": split_name_templates,
+                "preserve_name_template": (
+                    f"{campaign_name} / {prize_rank} / {product_name} / {display_character_name}"
+                    if is_combined_exception
+                    else ""
+                ),
                 "recommended_action": action,
             }
         )
@@ -193,11 +210,17 @@ def build_review(
     review_rows.sort(key=lambda row: (int(row.get("priority") or 99), int(row.get("catalog_index") or 10**9)))
     by_classification: dict[str, int] = {}
     by_priority: dict[str, int] = {}
+    actionable_split_review_rows = 0
+    combined_goods_exception_rows = 0
     for row in review_rows:
         key = _text(row.get("classification"))
         by_classification[key] = by_classification.get(key, 0) + 1
         priority_key = str(row.get("priority"))
         by_priority[priority_key] = by_priority.get(priority_key, 0) + 1
+        if key == "likely_combined_goods":
+            combined_goods_exception_rows += 1
+        else:
+            actionable_split_review_rows += 1
 
     return {
         "schema_version": 1,
@@ -210,8 +233,10 @@ def build_review(
             "by_classification": sorted(by_classification.items(), key=lambda item: (-item[1], item[0])),
             "by_priority": sorted(by_priority.items(), key=lambda item: (int(item[0]), item[0])),
             "safe_auto_split_rows": 0,
-            "requires_official_source_review_rows": len(review_rows),
-            "policy": "Never auto-split multi-character Ichiban rows without official source evidence.",
+            "combined_goods_exception_rows": combined_goods_exception_rows,
+            "actionable_split_review_rows": actionable_split_review_rows,
+            "requires_official_source_review_rows": actionable_split_review_rows,
+            "policy": "Never auto-split multi-character Ichiban rows without official source evidence. Pair/team goods are kept as one mixed row.",
         },
         "review_rows": review_rows,
     }
@@ -233,6 +258,7 @@ def write_csv(report: dict[str, Any], path: Path) -> None:
         "image_url",
         "recommended_action",
         "split_name_templates",
+        "preserve_name_template",
     ]
     with path.open("w", encoding="utf-8-sig", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fields)
@@ -241,6 +267,7 @@ def write_csv(report: dict[str, Any], path: Path) -> None:
             out = dict(row)
             out["matched_characters"] = " | ".join(row.get("matched_characters") or [])
             out["split_name_templates"] = "\n".join(row.get("split_name_templates") or [])
+            out["preserve_name_template"] = row.get("preserve_name_template") or ""
             writer.writerow({field: out.get(field) for field in fields})
 
 
@@ -250,6 +277,8 @@ def write_markdown(report: dict[str, Any], path: Path) -> None:
         "",
         f"- Review rows: `{report['summary']['review_rows']}`",
         f"- Safe auto-split rows: `{report['summary']['safe_auto_split_rows']}`",
+        f"- Combined goods exceptions: `{report['summary']['combined_goods_exception_rows']}`",
+        f"- Actionable split review rows: `{report['summary']['actionable_split_review_rows']}`",
         f"- Requires official source review: `{report['summary']['requires_official_source_review_rows']}`",
         "",
         "## By Classification",
@@ -265,6 +294,8 @@ def write_markdown(report: dict[str, Any], path: Path) -> None:
         lines.append(f"- Same prize rows: {row.get('same_prize_row_count')}")
         lines.append(f"- Source: {row.get('source_url')}")
         lines.append(f"- Action: {row.get('recommended_action')}")
+        if row.get("preserve_name_template"):
+            lines.append(f"- Preserve as: {row.get('preserve_name_template')}")
         lines.append("")
     path.write_text("\n".join(lines), encoding="utf-8")
 
@@ -282,6 +313,7 @@ def _image(row: dict[str, Any]) -> str:
 
 def _card(row: dict[str, Any]) -> str:
     templates = "".join(f"<li>{_escape(item)}</li>" for item in row.get("split_name_templates") or [])
+    preserve = _text(row.get("preserve_name_template"))
     siblings = "".join(
         f"<li>#{_escape(item.get('catalog_index'))} {_escape(item.get('name_ko'))}</li>"
         for item in row.get("same_prize_rows") or []
@@ -315,9 +347,10 @@ def _card(row: dict[str, Any]) -> str:
           <dt>same prize</dt><dd>{_escape(row.get('same_prize_row_count'))} rows</dd>
           <dt>action</dt><dd>{_escape(row.get('recommended_action'))}</dd>
         </dl>
+        {'<p class="preserve">Preserve as: ' + _escape(preserve) + '</p>' if preserve else ''}
         <details>
           <summary>Split name templates</summary>
-          <ul>{templates}</ul>
+          <ul>{templates or '<li>No split template for combined goods exceptions.</li>'}</ul>
         </details>
         <details>
           <summary>Same prize rows</summary>

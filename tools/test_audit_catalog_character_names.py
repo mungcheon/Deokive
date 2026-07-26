@@ -155,7 +155,7 @@ class AuditCatalogCharacterNamesTest(unittest.TestCase):
             0,
         )
 
-    def test_reports_multi_character_ichiban_product_review_candidates(self) -> None:
+    def test_reports_multi_character_combined_goods_exceptions(self) -> None:
         rows = [
             {
                 "catalog_index": 22,
@@ -172,7 +172,39 @@ class AuditCatalogCharacterNamesTest(unittest.TestCase):
         self.assertEqual(result["summary"]["status"], "pass")
         self.assertEqual(
             result["summary"]["ichiban_multi_character_product_review_candidates"],
+            0,
+        )
+        self.assertEqual(
+            result["summary"]["ichiban_multi_character_combined_goods_exceptions"],
             1,
+        )
+        self.assertEqual(
+            result["ichiban_multi_character_combined_goods_exceptions"][0]["matched_characters"],
+            ["\uce74\ub9c8\ub3c4 \ub124\uc988\ucf54", "\uce74\ub9c8\ub3c4 \ud0c4\uc9c0\ub85c"],
+        )
+
+    def test_reports_multi_character_rows_without_combined_marker_as_split_review_candidates(self) -> None:
+        rows = [
+            {
+                "catalog_index": 23,
+                "name_ko": "\u4e00\u756a\u304f\u3058 \u9b3c\u6ec5\u306e\u5203 / H\u8cde / \u7ac8\u9580\u70ad\u6cbb\u90ce \u7ac8\u9580\u79b0\u8c46\u5b50 \u30a2\u30bd\u30fc\u30c8 / \uae30\ud0c0",
+                "series_name": "\u4e00\u756a\u304f\u3058 \u9b3c\u6ec5\u306e\u5203",
+                "sub_series": "H\u8cde",
+                "character_name": "\uae30\ud0c0",
+                "official_price_jpy": 790,
+            }
+        ]
+
+        result = audit(rows)
+
+        self.assertEqual(result["summary"]["status"], "pass")
+        self.assertEqual(
+            result["summary"]["ichiban_multi_character_product_review_candidates"],
+            1,
+        )
+        self.assertEqual(
+            result["summary"]["ichiban_multi_character_combined_goods_exceptions"],
+            0,
         )
         self.assertEqual(
             result["ichiban_multi_character_product_review_candidates"][0]["matched_characters"],

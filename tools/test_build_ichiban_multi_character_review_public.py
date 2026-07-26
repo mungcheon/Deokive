@@ -36,8 +36,12 @@ class BuildIchibanMultiCharacterReviewPublicTest(unittest.TestCase):
 
         self.assertEqual(report["summary"]["review_rows"], 1)
         self.assertEqual(report["summary"]["safe_auto_split_rows"], 0)
+        self.assertEqual(report["summary"]["combined_goods_exception_rows"], 1)
+        self.assertEqual(report["summary"]["actionable_split_review_rows"], 0)
+        self.assertEqual(report["summary"]["requires_official_source_review_rows"], 0)
         self.assertEqual(report["review_rows"][0]["classification"], "likely_combined_goods")
-        self.assertEqual(len(report["review_rows"][0]["split_name_templates"]), 2)
+        self.assertEqual(report["review_rows"][0]["split_name_templates"], [])
+        self.assertIn("\ud63c\ud569", report["review_rows"][0]["preserve_name_template"])
 
     def test_prioritizes_rows_with_existing_individual_same_prize_context(self) -> None:
         rows = [
@@ -74,6 +78,7 @@ class BuildIchibanMultiCharacterReviewPublicTest(unittest.TestCase):
         self.assertEqual(report["review_rows"][0]["priority"], 1)
         self.assertEqual(report["review_rows"][0]["classification"], "split_context_review")
         self.assertEqual(report["review_rows"][0]["same_prize_row_count"], 2)
+        self.assertEqual(report["summary"]["actionable_split_review_rows"], 1)
 
 
 if __name__ == "__main__":

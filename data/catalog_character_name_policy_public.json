@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T22:23:28Z",
+  "generated_at": "2026-07-26T22:51:38Z",
   "scope": "catalog_character_name_policy",
   "summary": {
     "rows": 20313,
@@ -9,7 +9,8 @@
     "ichiban_display_name_violations": 0,
     "ichiban_display_character_mismatches": 0,
     "ichiban_product_character_violations": 0,
-    "ichiban_multi_character_product_review_candidates": 18,
+    "ichiban_multi_character_product_review_candidates": 0,
+    "ichiban_multi_character_combined_goods_exceptions": 18,
     "zero_price_violations": 0,
     "watched_alias_hits": 0,
     "unknown_monitored_character_rows": 0,
@@ -171,13 +172,14 @@
     ],
     "ichiban_display_name_format": "一番くじ 발매명 / ?賞 / 상품이름 / 캐릭터명",
     "last_one_and_double_chance_price_jpy": 0,
-    "multi_character_product_review": "Rows whose product name contains multiple character tokens are reported for manual review. Some are true combined goods, while same-prize variants should be split into one row per character."
+    "multi_character_product_review": "Rows whose product name contains multiple character tokens but no combined-goods marker are reported for manual split review. True pair/team goods using &, ＆, ×, VS, or ・ are preserved as mixed rows unless official source evidence lists separate prize items."
   },
   "character_alias_violations": [],
   "ichiban_display_name_violations": [],
   "ichiban_display_character_mismatches": [],
   "ichiban_product_character_violations": [],
-  "ichiban_multi_character_product_review_candidates": [
+  "ichiban_multi_character_product_review_candidates": [],
+  "ichiban_multi_character_combined_goods_exceptions": [
     {
       "catalog_index": 13203,
       "name_ko": "一番くじ ドラゴンボール スペクタクルバトル / E賞 / 孫悟空＆孫悟飯 フィギュア / 혼합",
@@ -197,7 +199,7 @@
           "expected_character": "손오공"
         }
       ],
-      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+      "reason": "product_name_is_combined_goods_preserve_as_mixed_row"
     },
     {
       "catalog_index": 13574,
@@ -218,7 +220,7 @@
           "expected_character": "카마도 네즈코"
         }
       ],
-      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+      "reason": "product_name_is_combined_goods_preserve_as_mixed_row"
     },
     {
       "catalog_index": 13575,
@@ -239,7 +241,7 @@
           "expected_character": "렌고쿠 쿄쥬로"
         }
       ],
-      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+      "reason": "product_name_is_combined_goods_preserve_as_mixed_row"
     },
     {
       "catalog_index": 13582,
@@ -260,7 +262,7 @@
           "expected_character": "렌고쿠 쿄쥬로"
         }
       ],
-      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+      "reason": "product_name_is_combined_goods_preserve_as_mixed_row"
     },
     {
       "catalog_index": 13762,
@@ -281,7 +283,7 @@
           "expected_character": "카마도 네즈코"
         }
       ],
-      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+      "reason": "product_name_is_combined_goods_preserve_as_mixed_row"
     },
     {
       "catalog_index": 13763,
@@ -302,7 +304,7 @@
           "expected_character": "하시비라 이노스케"
         }
       ],
-      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+      "reason": "product_name_is_combined_goods_preserve_as_mixed_row"
     },
     {
       "catalog_index": 16054,
@@ -323,7 +325,7 @@
           "expected_character": "우솝"
         }
       ],
-      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+      "reason": "product_name_is_combined_goods_preserve_as_mixed_row"
     },
     {
       "catalog_index": 16190,
@@ -344,7 +346,7 @@
           "expected_character": "우솝"
         }
       ],
-      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+      "reason": "product_name_is_combined_goods_preserve_as_mixed_row"
     },
     {
       "catalog_index": 16254,
@@ -365,7 +367,7 @@
           "expected_character": "손오공"
         }
       ],
-      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+      "reason": "product_name_is_combined_goods_preserve_as_mixed_row"
     },
     {
       "catalog_index": 16281,
@@ -386,7 +388,7 @@
           "expected_character": "손오공"
         }
       ],
-      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+      "reason": "product_name_is_combined_goods_preserve_as_mixed_row"
     },
     {
       "catalog_index": 16324,
@@ -407,7 +409,7 @@
           "expected_character": "손오공"
         }
       ],
-      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+      "reason": "product_name_is_combined_goods_preserve_as_mixed_row"
     },
     {
       "catalog_index": 16341,
@@ -428,7 +430,7 @@
           "expected_character": "손오공"
         }
       ],
-      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+      "reason": "product_name_is_combined_goods_preserve_as_mixed_row"
     },
     {
       "catalog_index": 16513,
@@ -449,7 +451,7 @@
           "expected_character": "손오공"
         }
       ],
-      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+      "reason": "product_name_is_combined_goods_preserve_as_mixed_row"
     },
     {
       "catalog_index": 16661,
@@ -470,7 +472,7 @@
           "expected_character": "손오공"
         }
       ],
-      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+      "reason": "product_name_is_combined_goods_preserve_as_mixed_row"
     },
     {
       "catalog_index": 16665,
@@ -491,7 +493,7 @@
           "expected_character": "손오공"
         }
       ],
-      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+      "reason": "product_name_is_combined_goods_preserve_as_mixed_row"
     },
     {
       "catalog_index": 17662,
@@ -512,7 +514,7 @@
           "expected_character": "손오공"
         }
       ],
-      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+      "reason": "product_name_is_combined_goods_preserve_as_mixed_row"
     },
     {
       "catalog_index": 17680,
@@ -533,7 +535,7 @@
           "expected_character": "손오공"
         }
       ],
-      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+      "reason": "product_name_is_combined_goods_preserve_as_mixed_row"
     },
     {
       "catalog_index": 17689,
@@ -554,7 +556,7 @@
           "expected_character": "손오공"
         }
       ],
-      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+      "reason": "product_name_is_combined_goods_preserve_as_mixed_row"
     }
   ],
   "zero_price_violations": [],
