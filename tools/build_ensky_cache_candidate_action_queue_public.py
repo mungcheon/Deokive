@@ -148,6 +148,19 @@ def compact_candidate(candidate: dict[str, Any], item: dict[str, Any]) -> dict[s
     }
 
 
+def candidate_review_risk(flags: list[str]) -> str:
+    flag_set = set(flags)
+    if "candidate_title_affiliation_mismatch" in flag_set or "candidate_title_product_type_mismatch" in flag_set:
+        return "high"
+    if "candidate_title_box_or_assortment" in flag_set:
+        return "medium"
+    if flag_set == {"candidate_title_multi_variant_or_lineup"}:
+        return "low"
+    if flag_set:
+        return "medium"
+    return "low"
+
+
 def compact_item(item: dict[str, Any]) -> dict[str, Any]:
     candidates = [
         compact_candidate(candidate, item)
@@ -162,6 +175,7 @@ def compact_item(item: dict[str, Any]) -> dict[str, Any]:
             for flag in candidate.get("candidate_identity_flags") or []
         }
     )
+    review_risk = candidate_review_risk(identity_flags)
     return {
         "manual_confirmed": False,
         "catalog_index": item.get("catalog_index"),
@@ -174,6 +188,7 @@ def compact_item(item: dict[str, Any]) -> dict[str, Any]:
         "candidate_status": item.get("status"),
         "candidate_count": item.get("candidate_count"),
         "candidate_identity_flags": identity_flags,
+        "candidate_review_risk": review_risk,
         "top_candidate_has_source_url": bool(top_candidate.get("candidate_source_url")),
         "top_candidate_has_image_url": bool(top_candidate.get("candidate_image_url")),
         "top_candidate_safe_exact_match": top_candidate.get("safe_exact_match") is True,
@@ -182,6 +197,7 @@ def compact_item(item: dict[str, Any]) -> dict[str, Any]:
             "candidate_source_url_ready": bool(top_candidate.get("candidate_source_url")),
             "candidate_image_url_ready": bool(top_candidate.get("candidate_image_url")),
             "candidate_identity_warning": bool(identity_flags),
+            "candidate_review_risk": review_risk,
             "manual_confirmed_required": True,
             "can_import_now": False,
             "blocked_reason": "manual_confirmed_false"
@@ -232,6 +248,7 @@ def build_report(cache_coverage: dict[str, Any], *, generated_at: str | None = N
     ]
     items.sort(
         key=lambda row: (
+            {"low": 0, "medium": 1, "high": 2}.get(str(row.get("candidate_review_risk") or ""), 9),
             "candidate_title_affiliation_mismatch" in (row.get("candidate_identity_flags") or []),
             len(row.get("candidate_identity_flags") or []),
             "candidate_title_product_type_mismatch" in (row.get("candidate_identity_flags") or []),
@@ -256,6 +273,7 @@ def build_report(cache_coverage: dict[str, Any], *, generated_at: str | None = N
                 "recommended_action": "Review broad Ensky cache candidates and confirm only exact product matches.",
                 "by_affiliation": counter_rows(chunk, "affiliation"),
                 "by_category": counter_rows(chunk, "category"),
+                "by_candidate_review_risk": counter_rows(chunk, "candidate_review_risk"),
                 "by_candidate_identity_flag": counter_list_values(chunk, "candidate_identity_flags"),
                 "candidate_source_url_ready_rows": sum(
                     1 for item in chunk if item.get("top_candidate_has_source_url")
@@ -288,6 +306,9 @@ def build_report(cache_coverage: dict[str, Any], *, generated_at: str | None = N
             1 for item in items if item.get("top_candidate_safe_exact_match")
         ),
         "identity_warning_rows": sum(1 for item in items if item.get("candidate_identity_flags")),
+        "low_risk_review_rows": sum(1 for item in items if item.get("candidate_review_risk") == "low"),
+        "medium_risk_review_rows": sum(1 for item in items if item.get("candidate_review_risk") == "medium"),
+        "high_risk_review_rows": sum(1 for item in items if item.get("candidate_review_risk") == "high"),
         "can_import_now_rows": sum(
             1 for item in items if (item.get("import_readiness") or {}).get("can_import_now")
         ),
@@ -309,10 +330,14 @@ def build_report(cache_coverage: dict[str, Any], *, generated_at: str | None = N
             "candidate_source_url_ready_rows": import_readiness["candidate_source_url_ready_rows"],
             "candidate_image_url_ready_rows": import_readiness["candidate_image_url_ready_rows"],
             "safe_exact_top_candidate_rows": import_readiness["safe_exact_top_candidate_rows"],
+            "low_risk_review_rows": import_readiness["low_risk_review_rows"],
+            "medium_risk_review_rows": import_readiness["medium_risk_review_rows"],
+            "high_risk_review_rows": import_readiness["high_risk_review_rows"],
             "can_import_now_rows": import_readiness["can_import_now_rows"],
             "blocked_manual_review_rows": import_readiness["blocked_manual_review_rows"],
             "by_affiliation": counter_rows(items, "affiliation"),
             "by_category": counter_rows(items, "category"),
+            "by_candidate_review_risk": counter_rows(items, "candidate_review_risk"),
             "by_candidate_identity_flag": counter_list_values(items, "candidate_identity_flags"),
             "auto_apply_enabled": False,
         },

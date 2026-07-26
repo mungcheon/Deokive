@@ -51,6 +51,7 @@ class BuildEnskyCacheCandidateActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["manual_confirmed_true"], 0)
         self.assertEqual(report["summary"]["candidate_source_url_ready_rows"], 1)
         self.assertEqual(report["summary"]["candidate_image_url_ready_rows"], 1)
+        self.assertEqual(report["summary"]["low_risk_review_rows"], 1)
         self.assertEqual(report["summary"]["can_import_now_rows"], 0)
         self.assertEqual(report["summary"]["blocked_manual_review_rows"], 1)
         self.assertEqual(report["import_readiness"]["candidate_rows"], 1)
@@ -60,6 +61,7 @@ class BuildEnskyCacheCandidateActionQueuePublicTest(unittest.TestCase):
         self.assertTrue(item["top_candidate_has_source_url"])
         self.assertTrue(item["top_candidate_has_image_url"])
         self.assertFalse(item["import_readiness"]["can_import_now"])
+        self.assertEqual(item["candidate_review_risk"], "low")
         self.assertEqual(item["source_patch_template"]["field"], "source_url")
         self.assertEqual(item["image_patch_template"]["field"], "image_url")
         self.assertFalse(item["source_patch_template"]["manual_confirmed"])
@@ -96,6 +98,7 @@ class BuildEnskyCacheCandidateActionQueuePublicTest(unittest.TestCase):
 
         item = report["batches"][0]["items"][0]
         self.assertEqual(report["summary"]["identity_warning_rows"], 1)
+        self.assertEqual(report["summary"]["high_risk_review_rows"], 1)
         self.assertEqual(report["summary"]["safe_exact_top_candidate_rows"], 0)
         self.assertEqual(report["batches"][0]["identity_warning_rows"], 1)
         self.assertEqual(report["batches"][0]["can_import_now_rows"], 0)
@@ -110,6 +113,7 @@ class BuildEnskyCacheCandidateActionQueuePublicTest(unittest.TestCase):
             item["recommended_action"],
             "recheck_ensky_candidate_identity_before_source_or_image_patch",
         )
+        self.assertEqual(item["candidate_review_risk"], "high")
         self.assertEqual(
             item["import_readiness"]["blocked_reason"],
             "candidate_identity_warning_requires_review",
@@ -207,9 +211,24 @@ class BuildEnskyCacheCandidateActionQueuePublicTest(unittest.TestCase):
 
         first_item = report["batches"][0]["items"][0]
         self.assertEqual(first_item["catalog_index"], 11)
+        self.assertEqual(first_item["candidate_review_risk"], "low")
         self.assertLessEqual(
             len(first_item["candidate_identity_flags"]),
             len(report["batches"][0]["items"][1]["candidate_identity_flags"]),
+        )
+
+    def test_review_risk_only_multi_variant_flag_is_low(self) -> None:
+        self.assertEqual(
+            queue.candidate_review_risk(["candidate_title_multi_variant_or_lineup"]),
+            "low",
+        )
+        self.assertEqual(
+            queue.candidate_review_risk(["candidate_title_box_or_assortment"]),
+            "medium",
+        )
+        self.assertEqual(
+            queue.candidate_review_risk(["candidate_title_product_type_mismatch"]),
+            "high",
         )
 
 
