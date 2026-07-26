@@ -105,6 +105,7 @@ ICHIIBAN_KUJI_REISSUE_DECISION_TEMPLATE = DATA / "ichiban_kuji_reissue_decision_
 GOTOUCHI = DATA / "gotouchi_chiikawa_image_candidates_public.json"
 GOTOUCHI_REPRESENTATIVE_IMAGE_ATTACHMENT = DATA / "gotouchi_representative_image_attachment_public.json"
 GOTOUCHI_OFFICIAL_CANDIDATE_REVIEW_QUEUE = DATA / "gotouchi_official_candidate_review_queue_public.json"
+CHIIKAWA_ONLINE_KUJI_IMAGE_REPAIR_REPORT = DATA / "chiikawa_online_kuji_public_image_repair_report.json"
 REQUESTED = DATA / "requested_special_goods_public.json"
 REQUESTED_FOCUS = DATA / "requested_focus_enrichment_public.json"
 REQUESTED_FOCUS_REVIEW_BATCHES = DATA / "requested_focus_review_batches_public.json"
@@ -11047,11 +11048,6 @@ def update_reports(write: bool) -> dict[str, Any]:
         catalog,
         generated_at,
     )
-    top_missing_image_manual_fix_queue = build_top_missing_image_manual_fix_queue_public.build_queue(
-        items,
-        limit=80,
-        generated_at=generated_at,
-    )
     manual_source_url_search_queue = build_manual_source_url_search_queue_public.build_queue(
         image_source_url_confirmed_template,
         generated_at=generated_at,
@@ -11070,6 +11066,17 @@ def update_reports(write: bool) -> dict[str, Any]:
             load_json(GOTOUCHI, {}) if GOTOUCHI.exists() else {"items": []},
             generated_at=generated_at,
         )
+    )
+    top_missing_image_manual_fix_queue = build_top_missing_image_manual_fix_queue_public.build_queue(
+        items,
+        limit=80,
+        candidate_context=build_top_missing_image_manual_fix_queue_public.build_candidate_context(
+            gotouchi_queue=gotouchi_official_candidate_review_queue,
+            online_kuji_repair=load_json(CHIIKAWA_ONLINE_KUJI_IMAGE_REPAIR_REPORT, {})
+            if CHIIKAWA_ONLINE_KUJI_IMAGE_REPAIR_REPORT.exists()
+            else {},
+        ),
+        generated_at=generated_at,
     )
     ichiban_prize_policy_audit_source = (
         load_json(ICHIIBAN_KUJI_PRIZE_POLICY_AUDIT, {})
