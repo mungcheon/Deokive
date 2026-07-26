@@ -29374,6 +29374,8 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '원피스',
     subSeries: '지역 한정',
     officialPriceJpy: 1320,
+    imageUrl: 'https://store.toei-anim.co.jp/img/goods/L/ONP03019O1-l.jpg',
+    localImagePath: 'assets/catalog_images/a3a1d61326750c4ed1ed.webp',
     sourceUrl: 'https://store.toei-anim.co.jp/shop/g/gONP03019O1/',
     sourceStore: '밀짚모자 스토어 상하이',
   ),
