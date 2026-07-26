@@ -923,7 +923,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertIs(quality["candidate_source_url_review_queue"]["auto_apply_enabled"], False)
         self.assertEqual(quality["source_discovery_next_focus_pack"]["pack_items"], 20)
-        self.assertEqual(quality["source_discovery_next_focus_pack"]["focus_pack_id"], "source-discovery-focus-002")
+        self.assertEqual(quality["source_discovery_next_focus_pack"]["focus_pack_id"], "source-discovery-focus-001")
         self.assertEqual(
             quality["source_discovery_next_focus_pack"]["current_focus_pack_id"],
             "source-discovery-focus-001",
@@ -1619,7 +1619,7 @@ class PublicCatalogReportTests(unittest.TestCase):
             source_roadmap["completion_readiness"]["status"],
         )
         self.assertEqual(source_handoff["current_lane"], "exact_source_url_review")
-        self.assertEqual(source_handoff["current_focus_pack_id"], "source-discovery-focus-002")
+        self.assertEqual(source_handoff["current_focus_pack_id"], "source-discovery-focus-001")
         self.assertEqual(source_handoff["current_focus_remaining_rows"], 20)
         self.assertEqual(source_handoff["safe_candidate_detail_link_rows"], 0)
         self.assertLessEqual(
@@ -1644,7 +1644,16 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(source_handoff["handoff_steps"][0]["next_batch_rows"], 20)
         self.assertGreaterEqual(quality["source_discovery_completion_roadmap"]["top_10_store_coverage"], 0.8)
         self.assertIs(quality["source_discovery_completion_roadmap"]["auto_apply_enabled"], False)
-        self.assertEqual(quality["ensky_cache_coverage"]["missing_ensky_image_rows"], 193)
+        public_catalog = reports.load_json(reports.PUBLIC_CATALOG)
+        expected_ensky_missing = sum(
+            1
+            for item in public_catalog["items"]
+            if item.get("source_store") == "엔스카이" and not item.get("image_url")
+        )
+        self.assertEqual(
+            quality["ensky_cache_coverage"]["missing_ensky_image_rows"],
+            expected_ensky_missing,
+        )
         self.assertIs(quality["ensky_cache_coverage"]["auto_apply_enabled"], False)
         if reports.ENSKY_SEARCH_PAGE_PROBE.exists():
             self.assertEqual(quality["ensky_search_page_probe"]["processed_rows"], 30)
@@ -2409,7 +2418,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             pillars["missing_images"]["source_discovery_next_focus_pack_id"],
-            "source-discovery-focus-002",
+            "source-discovery-focus-001",
         )
         self.assertEqual(
             pillars["missing_images"]["source_discovery_next_focus_action_lanes"],

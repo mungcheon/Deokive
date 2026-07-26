@@ -36,6 +36,21 @@ PRODUCT_TYPE_HINTS = {
     "card": {"カード", "card", "카드"},
 }
 
+WEAK_BROAD_MATCH_TOKENS = {
+    "ちいかわ",
+    "アニメ",
+    "tvアニメ",
+    "おまんじゅう",
+    "おまんじゅうにぎにぎ",
+    "おまんじゅうにぎにぎマスコット",
+    "ぬいぐるみ",
+    "マスコット",
+    "アクリル",
+    "アクリルスタンド",
+    "キーホルダー",
+    "ラバーストラップ",
+}
+
 
 def now_utc() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
@@ -119,6 +134,13 @@ def broad_candidate_score(
     return score, sorted(set(matched_tokens))
 
 
+def weak_broad_match(matched_tokens: list[str]) -> bool:
+    if not matched_tokens:
+        return False
+    weak = {_squash(token) for token in WEAK_BROAD_MATCH_TOKENS}
+    return all(_squash(token) in weak for token in matched_tokens)
+
+
 def candidate_products(row: dict[str, Any], products: list[dict[str, Any]]) -> list[dict[str, Any]]:
     query = query_text(row)
     tokens = query_tokens(row)
@@ -149,11 +171,19 @@ def candidate_products(row: dict[str, Any], products: list[dict[str, Any]]) -> l
                 "source_url": product.get("source_url"),
                 "image_url": product.get("image_url"),
                 "safe_exact_match": safe,
+                "weak_broad_match": False if safe else weak_broad_match(matched_tokens),
                 "score": 999 if safe else score,
                 "matched_tokens": matched_tokens,
             }
         )
-    candidates.sort(key=lambda item: (-int(item["safe_exact_match"]), -int(item["score"]), str(item["title"])))
+    candidates.sort(
+        key=lambda item: (
+            -int(item["safe_exact_match"]),
+            int(item["weak_broad_match"]),
+            -int(item["score"]),
+            str(item["title"]),
+        )
+    )
     return candidates
 
 
@@ -174,6 +204,7 @@ def build_report(
 
     exact_safe_match_rows = 0
     broad_candidate_rows = 0
+    weak_cache_candidate_rows = 0
     no_candidate_rows = 0
 
     for fallback_index, row in rows:
@@ -186,8 +217,12 @@ def build_report(
             status = "exact_safe_match"
             exact_safe_match_rows += 1
         elif candidates:
-            status = "broad_cache_candidate"
-            broad_candidate_rows += 1
+            if all(candidate.get("weak_broad_match") for candidate in candidates):
+                status = "weak_cache_candidate"
+                weak_cache_candidate_rows += 1
+            else:
+                status = "broad_cache_candidate"
+                broad_candidate_rows += 1
         else:
             status = "no_cache_candidate"
             no_candidate_rows += 1
@@ -217,6 +252,7 @@ def build_report(
             "cache_products": len(cache_products),
             "exact_safe_match_rows": exact_safe_match_rows,
             "broad_cache_candidate_rows": broad_candidate_rows,
+            "weak_cache_candidate_rows": weak_cache_candidate_rows,
             "no_cache_candidate_rows": no_candidate_rows,
             "manual_review_rows": len(rows),
             "auto_apply_enabled": False,

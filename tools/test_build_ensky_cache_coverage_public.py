@@ -61,6 +61,7 @@ class EnskyCacheCoveragePublicTests(unittest.TestCase):
         self.assertEqual(report["summary"]["missing_ensky_image_rows"], 3)
         self.assertEqual(report["summary"]["exact_safe_match_rows"], 1)
         self.assertEqual(report["summary"]["broad_cache_candidate_rows"], 1)
+        self.assertEqual(report["summary"]["weak_cache_candidate_rows"], 0)
         self.assertEqual(report["summary"]["no_cache_candidate_rows"], 1)
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertEqual(statuses[1], "exact_safe_match")
@@ -111,6 +112,36 @@ class EnskyCacheCoveragePublicTests(unittest.TestCase):
         self.assertEqual(report["summary"]["broad_cache_candidate_rows"], 0)
         self.assertEqual(report["summary"]["no_cache_candidate_rows"], 1)
         self.assertEqual(report["items"][0]["top_candidates"], [])
+
+    def test_affiliation_only_candidate_is_weak(self) -> None:
+        catalog = {
+            "items": [
+                {
+                    "catalog_index": 20,
+                    "name_ko": "치이카와 러버 스트랩 (치이카와)",
+                    "name_ja": "ちいかわ ラバーストラップ (ちいかわ)",
+                    "source_store": "엔스카이",
+                    "affiliation": "치이카와",
+                    "category": "키링",
+                    "image_url": None,
+                }
+            ]
+        }
+        products = [
+            {
+                "title": "ちいかわ お絵かきボードセット",
+                "image_url": "https://example.com/board.jpg",
+                "source_url": "https://www.enskyshop.com/products/detail/26056",
+            }
+        ]
+
+        report = target.build_report(catalog, products, generated_at="2026-01-01T00:00:00Z")
+
+        self.assertEqual(report["summary"]["broad_cache_candidate_rows"], 0)
+        self.assertEqual(report["summary"]["weak_cache_candidate_rows"], 1)
+        self.assertEqual(report["summary"]["no_cache_candidate_rows"], 0)
+        self.assertEqual(report["items"][0]["status"], "weak_cache_candidate")
+        self.assertTrue(report["items"][0]["top_candidates"][0]["weak_broad_match"])
 
 
 if __name__ == "__main__":
