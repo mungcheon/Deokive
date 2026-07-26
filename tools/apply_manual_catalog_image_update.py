@@ -117,6 +117,11 @@ def main() -> int:
     parser.add_argument("--source-url", default=None)
     parser.add_argument("--name-ko", default=None)
     parser.add_argument("--name-ja", default=None)
+    parser.add_argument(
+        "--expect-name",
+        default=None,
+        help="Abort if the current Korean/Japanese/English name does not contain this text.",
+    )
     parser.add_argument("--catalog", type=Path, default=DEFAULT_CATALOG)
     parser.add_argument("--max-size", type=int, default=900)
     parser.add_argument("--quality", type=int, default=84)
@@ -140,6 +145,20 @@ def main() -> int:
         "name_ja": args.name_ja.strip() if args.name_ja else None,
     }
     text = args.catalog.read_text(encoding="utf-8")
+    if args.expect_name:
+        match = re.search(rf'\{{"catalog_index":{args.catalog_index},[^{{}}]*\}}', text)
+        if not match:
+            raise SystemExit(f"catalog_index {args.catalog_index} was not found")
+        current_row = json.loads(match.group(0))
+        current_name = " ".join(
+            str(current_row.get(key) or "")
+            for key in ("name_ko", "name_ja", "name_en")
+        )
+        if args.expect_name not in current_name:
+            raise SystemExit(
+                f"catalog_index {args.catalog_index} name mismatch: "
+                f"expected to contain {args.expect_name!r}, got {current_name!r}"
+            )
     updated_text = _replace_one_line_json_object(text, args.catalog_index, updates)
     if args.write:
         args.catalog.write_text(updated_text, encoding="utf-8")
