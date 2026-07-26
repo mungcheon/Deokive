@@ -398,15 +398,15 @@ class _CatalogImportActionButton extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final enabled = onPressed != null;
     final backgroundColor = enabled
-        ? colorScheme.primary.withValues(alpha: 0.10)
+        ? colorScheme.primary.withValues(alpha: 0.12)
         : colorScheme.surfaceContainerHighest;
     final foregroundColor = enabled
         ? colorScheme.primary
         : colorScheme.onSurfaceVariant.withValues(alpha: 0.72);
     return SizedBox(
       width: double.infinity,
-      height: 40,
-      child: ElevatedButton.icon(
+      height: 42,
+      child: FilledButton.icon(
         onPressed: onPressed,
         icon: Icon(icon, size: 16),
         label: FittedBox(
@@ -430,7 +430,7 @@ class _CatalogImportActionButton extends StatelessWidget {
             ),
           ),
         ),
-        style: ElevatedButton.styleFrom(
+        style: FilledButton.styleFrom(
           backgroundColor: backgroundColor,
           foregroundColor: foregroundColor,
           disabledBackgroundColor: colorScheme.surfaceContainerHighest,
@@ -438,7 +438,7 @@ class _CatalogImportActionButton extends StatelessWidget {
               colorScheme.onSurfaceVariant.withValues(alpha: 0.72),
           elevation: 0,
           shadowColor: Colors.transparent,
-          padding: const EdgeInsets.symmetric(horizontal: 14),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           shape: const StadiumBorder(),
           side: BorderSide(
             color: enabled

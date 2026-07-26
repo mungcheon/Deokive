@@ -308,26 +308,29 @@ class _CatalogDatabaseScreenState extends State<CatalogDatabaseScreen> {
                         ),
                       ),
                       const SizedBox(width: 10),
-                      Expanded(
+                      Flexible(
                         flex: 2,
-                        child: _CatalogAddButton(
-                          key: const Key('catalog-add-sheet-button'),
-                          label: '내 굿즈에 추가',
-                          icon: Icons.add_rounded,
-                          expanded: true,
-                          onPressed: () async {
-                            Navigator.pop(sheetContext);
-                            if (!parentContext.mounted) return;
-                            final added =
-                                await showCatalogGoodsImportFlowForEntry(
-                              parentContext,
-                              entry: entry,
-                              initialFolder: widget.initialFolder,
-                            );
-                            if (added && mounted) {
-                              setState(() {});
-                            }
-                          },
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: _CatalogAddButton(
+                            key: const Key('catalog-add-sheet-button'),
+                            label: '내 굿즈에 추가',
+                            icon: Icons.add_rounded,
+                            expanded: true,
+                            onPressed: () async {
+                              Navigator.pop(sheetContext);
+                              if (!parentContext.mounted) return;
+                              final added =
+                                  await showCatalogGoodsImportFlowForEntry(
+                                parentContext,
+                                entry: entry,
+                                initialFolder: widget.initialFolder,
+                              );
+                              if (added && mounted) {
+                                setState(() {});
+                              }
+                            },
+                          ),
                         ),
                       ),
                     ],
@@ -576,14 +579,14 @@ class _CatalogAddButton extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final background = disabled
         ? colorScheme.surfaceContainerHighest
-        : colorScheme.primary.withValues(alpha: 0.10);
+        : colorScheme.primary.withValues(alpha: 0.12);
     final foreground = disabled
         ? colorScheme.onSurfaceVariant.withValues(alpha: 0.72)
         : colorScheme.primary;
     return SizedBox(
-      height: expanded ? 38 : 32,
-      width: expanded ? double.infinity : 84,
-      child: ElevatedButton.icon(
+      height: expanded ? 40 : 34,
+      width: expanded ? 156 : 82,
+      child: FilledButton.icon(
         onPressed: disabled || onPressed == null ? null : () => onPressed!(),
         icon: Icon(icon, size: expanded ? 16 : 14),
         label: FittedBox(
@@ -596,7 +599,7 @@ class _CatalogAddButton extends StatelessWidget {
             style: TextStyle(
               color: foreground,
               fontSize: expanded ? 13 : 11.5,
-              fontWeight: FontWeight.w800,
+              fontWeight: FontWeight.w900,
               height: 1,
               letterSpacing: 0,
               fontFamilyFallback: const [
@@ -607,7 +610,7 @@ class _CatalogAddButton extends StatelessWidget {
             ),
           ),
         ),
-        style: ElevatedButton.styleFrom(
+        style: FilledButton.styleFrom(
           backgroundColor: background,
           foregroundColor: foreground,
           disabledBackgroundColor: colorScheme.surfaceContainerHighest,
@@ -615,12 +618,12 @@ class _CatalogAddButton extends StatelessWidget {
               colorScheme.onSurfaceVariant.withValues(alpha: 0.72),
           elevation: 0,
           shadowColor: Colors.transparent,
-          padding: EdgeInsets.symmetric(horizontal: expanded ? 14 : 8),
+          padding: EdgeInsets.symmetric(horizontal: expanded ? 14 : 9),
           shape: const StadiumBorder(),
           side: BorderSide(
             color: disabled
                 ? colorScheme.outlineVariant
-                : colorScheme.primary.withValues(alpha: 0.22),
+                : colorScheme.primary.withValues(alpha: 0.24),
           ),
           textStyle: TextStyle(
             fontSize: expanded ? 13 : 12,

@@ -107,7 +107,7 @@ class _FolderEditorScreenState extends State<FolderEditorScreen> {
     return Scaffold(
       appBar: AppBar(title: Text(title)),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 12, 16, 104),
+        padding: const EdgeInsets.fromLTRB(16, 12, 16, 132),
         children: [
           _PreviewCard(
             name: _nameController.text.trim().isEmpty
@@ -248,11 +248,18 @@ class _FolderVisualPickerState extends State<_FolderVisualPicker>
           ),
         ),
         const SizedBox(height: 16),
-        AnimatedSwitcher(
+        AnimatedSize(
           duration: const Duration(milliseconds: 180),
-          child: KeyedSubtree(
-            key: ValueKey(_tabController.index),
-            child: tabContent,
+          curve: Curves.easeOutCubic,
+          alignment: Alignment.topCenter,
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 160),
+            switchInCurve: Curves.easeOutCubic,
+            switchOutCurve: Curves.easeOutCubic,
+            child: KeyedSubtree(
+              key: ValueKey(_tabController.index),
+              child: tabContent,
+            ),
           ),
         ),
       ],
@@ -402,8 +409,8 @@ class _IconChoice extends StatelessWidget {
         : theme.colorScheme.onSurface.withValues(alpha: 0.78);
     return Tooltip(
       message: option.label,
-      child: InkResponse(
-        radius: 28,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
         onTap: onTap,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 140),
