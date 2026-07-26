@@ -9921,6 +9921,8 @@ def validate_report_consistency(
     source_discovery_focus_template_import_override: dict[str, Any] | None = None,
     source_discovery_next_focus_pack_override: dict[str, Any] | None = None,
     image_attachment_action_queue_override: dict[str, Any] | None = None,
+    ichiban_prize_name_image_review_override: dict[str, Any] | None = None,
+    ichiban_prize_name_image_patch_candidates_override: dict[str, Any] | None = None,
 ) -> list[str]:
     findings: list[str] = []
     source_summary = source_discovery["summary"]
@@ -10413,11 +10415,13 @@ def validate_report_consistency(
                 "next_campaign_patch_review_batch_primary_review_url_rows", 0
             )
         )
-    ichiban_prize_name_image_review = (
-        load_json(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW, {})
-        if ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW.exists()
-        else {}
-    )
+    ichiban_prize_name_image_review = ichiban_prize_name_image_review_override
+    if ichiban_prize_name_image_review is None:
+        ichiban_prize_name_image_review = (
+            load_json(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW, {})
+            if ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_REVIEW.exists()
+            else {}
+        )
     ichiban_prize_name_image_summary = ichiban_prize_name_image_review.get("summary", {})
     if ichiban_prize_name_image_summary:
         expected_open_queues["ichiban_prize_name_image_review_rows"] = (
@@ -10427,10 +10431,14 @@ def validate_report_consistency(
             ichiban_prize_name_image_summary.get("multi_item_prize_rank_groups", 0)
         )
     ichiban_prize_name_image_patch_candidates = (
-        load_json(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES, {})
-        if ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES.exists()
-        else {}
+        ichiban_prize_name_image_patch_candidates_override
     )
+    if ichiban_prize_name_image_patch_candidates is None:
+        ichiban_prize_name_image_patch_candidates = (
+            load_json(ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES, {})
+            if ICHIIBAN_KUJI_PRIZE_NAME_IMAGE_PATCH_CANDIDATES.exists()
+            else {}
+        )
     ichiban_prize_name_image_patch_summary = normalize_ichiban_prize_patch_candidate_summary(
         ichiban_prize_name_image_patch_candidates
     )
@@ -13620,6 +13628,8 @@ def update_reports(write: bool) -> dict[str, Any]:
         source_discovery_focus_template_import_override=source_discovery_focus_template_import,
         source_discovery_next_focus_pack_override=source_discovery_next_focus_pack,
         image_attachment_action_queue_override=image_attachment_action_queue,
+        ichiban_prize_name_image_review_override=ichiban_kuji_prize_name_image_review,
+        ichiban_prize_name_image_patch_candidates_override=ichiban_kuji_prize_name_image_patch_candidates,
     )
     if consistency_findings:
         raise ValueError("public report consistency validation failed: " + "; ".join(consistency_findings))

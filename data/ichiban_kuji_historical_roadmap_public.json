@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-25T06:55:43Z",
+  "generated_at": "2026-07-26T17:03:42Z",
   "summary": {
-    "catalog_ichiban_rows": 7898,
+    "catalog_ichiban_rows": 7902,
     "campaign_rows": 614,
     "campaign_metadata_review_queue_rows": 41,
     "metadata_actionable_campaigns": 41,
@@ -25,14 +25,14 @@
     "zero_price_violation_rows": 0,
     "zero_price_exception_policy_pass": true,
     "numbered_variant_coverage_policy_pass": true,
-    "prize_name_image_review_rows": 0,
-    "prize_name_image_patch_open_rows": 0,
+    "prize_name_image_review_rows": 13,
+    "prize_name_image_patch_open_rows": 13,
     "roadmap_phase_count": 5,
     "completion_readiness": {
       "status": "manual_review_required",
       "manual_metadata_campaigns": 41,
       "manual_reissue_review_groups": 20,
-      "manual_prize_name_image_patch_rows": 0,
+      "manual_prize_name_image_patch_rows": 26,
       "zero_price_policy_ready": true,
       "numbered_variant_policy_ready": true,
       "blocked_auto_apply_reasons": [
@@ -60,10 +60,10 @@
     },
     "price_and_prize_policy_gate_status": "reissue_review_required",
     "next_execution_summary": {
-      "lane_count": 4,
-      "open_rows": 121,
-      "queued_rows": 121,
-      "next_batch_rows": 80,
+      "lane_count": 5,
+      "open_rows": 147,
+      "queued_rows": 147,
+      "next_batch_rows": 106,
       "next_safe_phase": "confirm_ichiban_campaign_metadata",
       "auto_apply_enabled": false,
       "manual_official_confirmation_required": true
@@ -100,6 +100,14 @@
         "queued_rows": 20,
         "next_batch_rows": 0,
         "next_action": "keep Last One and Double Chance at 0 JPY and preserve same-rank numbered variants"
+      },
+      {
+        "lane": "prize_name_image_patch_review",
+        "status": "manual_lineup_confirmation_required",
+        "open_rows": 26,
+        "queued_rows": 26,
+        "next_batch_rows": 26,
+        "next_action": "attach prize images only when official campaign, rank, item, and variant all match"
       }
     ],
     "operator_handoff": {
@@ -164,6 +172,22 @@
           "unblocks": "safe_dedupe_keep_drop_review",
           "auto_merge_enabled": false,
           "auto_delete_enabled": false
+        },
+        {
+          "step": 4,
+          "lane": "prize_name_image_patch_review",
+          "status": "manual_lineup_confirmation_required",
+          "next_batch_rows": 26,
+          "open_rows": 26,
+          "review_section": "ichiban_kuji_prize_name_image_patch_candidates",
+          "write_template_section": "prize name/image patch template",
+          "required_before_write": [
+            "official campaign lineup confirms rank and prize name",
+            "same rank with multiple kinds keeps visible variant wording",
+            "image URL matches the exact campaign, rank, prize, and variant"
+          ],
+          "unblocks": "public_prize_image_and_name_quality",
+          "auto_apply_enabled": false
         }
       ],
       "safety_policy": {
@@ -183,10 +207,10 @@
     "auto_delete_enabled": false
   },
   "next_execution_summary": {
-    "lane_count": 4,
-    "open_rows": 121,
-    "queued_rows": 121,
-    "next_batch_rows": 80,
+    "lane_count": 5,
+    "open_rows": 147,
+    "queued_rows": 147,
+    "next_batch_rows": 106,
     "next_safe_phase": "confirm_ichiban_campaign_metadata",
     "auto_apply_enabled": false,
     "manual_official_confirmation_required": true
@@ -223,6 +247,14 @@
       "queued_rows": 20,
       "next_batch_rows": 0,
       "next_action": "keep Last One and Double Chance at 0 JPY and preserve same-rank numbered variants"
+    },
+    {
+      "lane": "prize_name_image_patch_review",
+      "status": "manual_lineup_confirmation_required",
+      "open_rows": 26,
+      "queued_rows": 26,
+      "next_batch_rows": 26,
+      "next_action": "attach prize images only when official campaign, rank, item, and variant all match"
     }
   ],
   "operator_handoff": {
@@ -287,6 +319,22 @@
         "unblocks": "safe_dedupe_keep_drop_review",
         "auto_merge_enabled": false,
         "auto_delete_enabled": false
+      },
+      {
+        "step": 4,
+        "lane": "prize_name_image_patch_review",
+        "status": "manual_lineup_confirmation_required",
+        "next_batch_rows": 26,
+        "open_rows": 26,
+        "review_section": "ichiban_kuji_prize_name_image_patch_candidates",
+        "write_template_section": "prize name/image patch template",
+        "required_before_write": [
+          "official campaign lineup confirms rank and prize name",
+          "same rank with multiple kinds keeps visible variant wording",
+          "image URL matches the exact campaign, rank, prize, and variant"
+        ],
+        "unblocks": "public_prize_image_and_name_quality",
+        "auto_apply_enabled": false
       }
     ],
     "safety_policy": {
@@ -355,8 +403,8 @@
     {
       "phase": "review_prize_name_image_patches",
       "label": "Review prize name and image patch candidates",
-      "rows": 0,
-      "multi_item_prize_rank_groups": 415,
+      "rows": 26,
+      "multi_item_prize_rank_groups": 417,
       "blocking_reason": "Prize names and images must match official campaign lineup cards before any patch is applied.",
       "public_reports": [
         "data/ichiban_kuji_prize_name_image_review_public.json",

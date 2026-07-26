@@ -3,7 +3,7 @@
 - Focus pack: `source-discovery-focus-002`
 - Store/category: `엔스카이` / `키링`
 - Pack items: `20`
-- Remaining source-discovery rows: `754`
+- Remaining source-discovery rows: `753`
 - Auto-apply ready rows: `0`
 - Status: `fallback_search_required`
 
@@ -35,9 +35,6 @@
   - Decision: confirm exact detail URL or leave blank
 - `1555` 게토 스구루 러버 스트랩 / 夏油傑 ラバーストラップ (주술회전, 키링)
   - Review: https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%A4%8F%E6%B2%B9%E5%82%91+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22
-  - Decision: confirm exact detail URL or leave blank
-- `1577` 토미오카 기유 러버 스트랩 / 冨岡義勇 ラバーストラップ (귀멸의 칼날, 키링)
-  - Review: https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%86%A8%E5%B2%A1%E7%BE%A9%E5%8B%87+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22
   - Decision: confirm exact detail URL or leave blank
 - `1578` 코쵸 시노부 러버 스트랩 / 胡蝶しのぶ ラバーストラップ (귀멸의 칼날, 키링)
   - Review: https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%83%A1%E8%9D%B6%E3%81%97%E3%81%AE%E3%81%B6+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22
@@ -74,4 +71,7 @@
   - Decision: confirm exact detail URL or leave blank
 - `1592` 사보 러버 스트랩 / サボ ラバーストラップ (원피스, 키링)
   - Review: https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%B5%E3%83%9C+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22
+  - Decision: confirm exact detail URL or leave blank
+- `1593` 트라팔가 로 카라비너 러버 스트랩 / トラファルガー・ロー カラビナ付きラバーストラップ (원피스, 키링)
+  - Review: https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%88%E3%83%A9%E3%83%95%E3%82%A1%E3%83%AB%E3%82%AC%E3%83%BC%E3%83%BB%E3%83%AD%E3%83%BC+%E3%82%AB%E3%83%A9%E3%83%93%E3%83%8A%E4%BB%98%E3%81%8D%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22
   - Decision: confirm exact detail URL or leave blank

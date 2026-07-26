@@ -140,6 +140,7 @@ def main() -> int:
     parser.add_argument("--source-store", default=None)
     parser.add_argument("--name-ko", default=None)
     parser.add_argument("--name-ja", default=None)
+    parser.add_argument("--character-name", default=None)
     parser.add_argument(
         "--expect-name",
         default=None,
@@ -173,6 +174,7 @@ def main() -> int:
         "source_store": args.source_store.strip() if args.source_store else None,
         "name_ko": args.name_ko.strip() if args.name_ko else None,
         "name_ja": args.name_ja.strip() if args.name_ja else None,
+        "character_name": args.character_name.strip() if args.character_name else None,
     }
     text = args.catalog.read_text(encoding="utf-8")
     if args.expect_name:
@@ -204,6 +206,7 @@ def main() -> int:
                 "asset_files": [str(target.relative_to(ROOT)) for target in targets],
                 "source_url": updates["source_url"],
                 "source_store": updates["source_store"],
+                "character_name": updates["character_name"],
                 "flutter_seed_synced": bool(args.write and not args.skip_seed_sync),
                 "seed_output": str(args.seed_output.relative_to(ROOT))
                 if args.seed_output.is_relative_to(ROOT)
