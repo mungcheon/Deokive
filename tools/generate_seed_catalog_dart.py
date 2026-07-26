@@ -73,11 +73,15 @@ def _entry_lines(row: dict[str, Any]) -> list[str]:
     return lines
 
 
-def generate(rows: list[dict[str, Any]]) -> str:
+def generate(
+    rows: list[dict[str, Any]],
+    *,
+    source_label: str = "server/catalog_seed_from_local.json",
+) -> str:
     lines = [
         "import '../../models/goods_catalog_entry.dart';",
         "",
-        "/// Auto-generated from server/catalog_seed_from_local.json.",
+        f"/// Auto-generated from {source_label}.",
         "/// Do not edit by hand; run tools/generate_seed_catalog_dart.py.",
         "const List<GoodsCatalogEntry> kSeedCatalog = [",
     ]
@@ -145,7 +149,11 @@ def main() -> int:
         allow_row_count_drop=args.allow_row_count_drop,
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(generate(rows), encoding="utf-8")
+    try:
+        source_label = args.input.relative_to(ROOT).as_posix()
+    except ValueError:
+        source_label = str(args.input)
+    args.output.write_text(generate(rows, source_label=source_label), encoding="utf-8")
     print(json.dumps({"rows": len(rows), "output": str(args.output)}, ensure_ascii=False, indent=2))
     return 0
 

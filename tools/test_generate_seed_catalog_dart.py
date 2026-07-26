@@ -25,9 +25,15 @@ class GenerateSeedCatalogDartTest(unittest.TestCase):
         )
 
         self.assertIn("const List<GoodsCatalogEntry> kSeedCatalog", dart)
+        self.assertIn("Auto-generated from server/catalog_seed_from_local.json", dart)
         self.assertIn("nameKo: 'Sample goods'", dart)
         self.assertIn("officialPriceJpy: 1200", dart)
         self.assertIn("imageUrl: 'https://example.test/image.jpg'", dart)
+
+    def test_generate_can_label_public_catalog_source(self) -> None:
+        dart = generate([], source_label="data/catalog_public.json")
+
+        self.assertIn("Auto-generated from data/catalog_public.json", dart)
 
     def test_validate_row_count_rejects_unintentional_regression(self) -> None:
         with tempfile.TemporaryDirectory() as raw_tmp:

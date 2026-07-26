@@ -1,6 +1,6 @@
 import '../../models/goods_catalog_entry.dart';
 
-/// Auto-generated from server/catalog_seed_from_local.json.
+/// Auto-generated from data\catalog_public.json.
 /// Do not edit by hand; run tools/generate_seed_catalog_dart.py.
 const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
@@ -2462,8 +2462,8 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     subSeries: 'PUN.',
     officialPriceJpy: 1540,
     barcode: '4571609339762',
-    imageUrl: 'https://chiikawamarket.jp/cdn/shop/files/4571609339755_1.jpg',
-    localImagePath: 'assets/catalog_images/261812257b6152ec81bd.webp',
+    imageUrl: 'https://chiikawamarket.jp/cdn/shop/files/4571609339762_1.jpg',
+    localImagePath: 'assets/catalog_images/62f193dbaa289cca5487.webp',
     sourceUrl: 'https://chiikawamarket.jp/ko/products/4571609339762',
     sourceStore: '치이카와 마켓',
     releaseDate: '2025-01-17',
@@ -2478,8 +2478,8 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     subSeries: 'PUN.',
     officialPriceJpy: 1540,
     barcode: '4571609339755',
-    imageUrl: 'https://chiikawamarket.jp/cdn/shop/files/4571609339762_1.jpg',
-    localImagePath: 'assets/catalog_images/62f193dbaa289cca5487.webp',
+    imageUrl: 'https://chiikawamarket.jp/cdn/shop/files/4571609339755_1.jpg',
+    localImagePath: 'assets/catalog_images/261812257b6152ec81bd.webp',
     sourceUrl: 'https://chiikawamarket.jp/ko/products/4571609339755',
     sourceStore: '치이카와 마켓',
     releaseDate: '2025-01-17',
@@ -7451,8 +7451,8 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     subSeries: '포근한 의상',
     officialPriceJpy: 1870,
     barcode: '4582662920224',
-    imageUrl: 'https://chiikawamarket.jp/cdn/shop/files/4571609346166_1.jpg',
-    localImagePath: 'assets/catalog_images/d00bb20b58ab892ec3a9.webp',
+    imageUrl: 'https://chiikawamarket.jp/cdn/shop/files/4582662920224_1.jpg?v=1765860197',
+    localImagePath: 'assets/catalog_images/92ca9c835a6df5316d2b.webp',
     sourceUrl: 'https://chiikawamarket.jp/ko/products/4582662920224',
     sourceStore: '치이카와 마켓',
     releaseDate: '2022-12-09',
@@ -7979,8 +7979,8 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     subSeries: '쁘띠 미니',
     officialPriceJpy: 1320,
     barcode: '4589468437031',
-    imageUrl: 'https://chiikawamarket.jp/cdn/shop/products/4582662917910_1.jpg',
-    localImagePath: 'assets/catalog_images/906bb4a114a23d7e8e16.webp',
+    imageUrl: 'https://chiikawamarket.jp/cdn/shop/products/000000000266_1.jpg?v=1655032996&width=416',
+    localImagePath: 'assets/catalog_images/35cb673e8671c3c5df21.webp',
     sourceUrl: 'https://chiikawamarket.jp/ko/products/4589468437031',
     sourceStore: '치이카와 마켓',
     releaseDate: '2022-06-17',
@@ -7995,8 +7995,8 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     subSeries: '쁘띠 미니',
     officialPriceJpy: 1320,
     barcode: '4589468437024',
-    imageUrl: 'https://chiikawamarket.jp/cdn/shop/products/4582662917903_1.jpg',
-    localImagePath: 'assets/catalog_images/e9bfda79342639221186.webp',
+    imageUrl: 'https://chiikawamarket.jp/cdn/shop/products/000000000265_1.jpg?v=1655032995&width=416',
+    localImagePath: 'assets/catalog_images/e171982595fa2cd4a3f0.webp',
     sourceUrl: 'https://chiikawamarket.jp/ko/products/4589468437024',
     sourceStore: '치이카와 마켓',
     releaseDate: '2022-06-17',
@@ -8107,8 +8107,8 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     subSeries: '파자마 쁘띠 미니',
     officialPriceJpy: 1430,
     barcode: '4589468435389',
-    imageUrl: 'https://chiikawamarket.jp/cdn/shop/products/4582662929371_1.jpg',
-    localImagePath: 'assets/catalog_images/71236bc38c520cd2e5d1.webp',
+    imageUrl: 'https://chiikawamarket.jp/cdn/shop/products/000000000079_1.jpg?v=1655032757&width=416',
+    localImagePath: 'assets/catalog_images/cb14b40b920e48c94f69.webp',
     sourceUrl: 'https://chiikawamarket.jp/ko/products/4589468435389',
     sourceStore: '치이카와 마켓',
     releaseDate: '2022-06-17',
@@ -8123,8 +8123,8 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     subSeries: '파자마 쁘띠 미니',
     officialPriceJpy: 1430,
     barcode: '4589468435372',
-    imageUrl: 'https://chiikawamarket.jp/cdn/shop/products/4582662929364_1.jpg',
-    localImagePath: 'assets/catalog_images/2d7e86ecd79afe1d80fa.webp',
+    imageUrl: 'https://chiikawamarket.jp/cdn/shop/products/000000000078_1.jpg?v=1655032756&width=416',
+    localImagePath: 'assets/catalog_images/e1464ab99bf9fe2ad75f.webp',
     sourceUrl: 'https://chiikawamarket.jp/ko/products/4589468435372',
     sourceStore: '치이카와 마켓',
     releaseDate: '2022-06-17',
@@ -8139,8 +8139,8 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     subSeries: '파자마 쁘띠 미니',
     officialPriceJpy: 1430,
     barcode: '4589468435365',
-    imageUrl: 'https://chiikawamarket.jp/cdn/shop/products/4582662929357_1.jpg',
-    localImagePath: 'assets/catalog_images/dadc95d28e0459361087.webp',
+    imageUrl: 'https://chiikawamarket.jp/cdn/shop/products/000000000077_1.jpg?v=1655032755&width=416',
+    localImagePath: 'assets/catalog_images/6c506655d49a73cf9c25.webp',
     sourceUrl: 'https://chiikawamarket.jp/ko/products/4589468435365',
     sourceStore: '치이카와 마켓',
     releaseDate: '2022-06-17',
@@ -14115,9 +14115,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '치이카와',
     subSeries: '러버 스트랩',
     officialPriceJpy: 660,
-    imageUrl: 'https://www.enskyshop.com/html/upload/save_image/1009115056_6705ef9038c9b.jpg',
-    localImagePath: 'assets/catalog_images/d33d9cee4e1a928c5089.webp',
-    sourceUrl: 'https://www.enskyshop.com/products/detail/24195',
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
@@ -14128,9 +14125,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '치이카와',
     subSeries: '러버 스트랩',
     officialPriceJpy: 660,
-    imageUrl: 'https://www.enskyshop.com/html/upload/save_image/0827104242_68ae629247650.jpg',
-    localImagePath: 'assets/catalog_images/59c8fd646ee1d0be5787.webp',
-    sourceUrl: 'https://www.enskyshop.com/products/detail/29520',
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
@@ -14191,9 +14185,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '치이카와',
     subSeries: '아크릴 스탠드',
     officialPriceJpy: 1100,
-    imageUrl: 'https://www.enskyshop.com/html/upload/save_image/0212101825_698d2a616d61e.jpg',
-    localImagePath: 'assets/catalog_images/1cd4cbf1655c444c04c2.webp',
-    sourceUrl: 'https://www.enskyshop.com/products/detail/31151',
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
@@ -14635,9 +14626,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     seriesName: 'ご当地',
     subSeries: '센다이 한정',
     officialPriceJpy: 1430,
-    imageUrl: 'https://www.enskyshop.com/html/upload/save_image/0827104242_68ae629247650.jpg',
-    localImagePath: 'assets/catalog_images/59c8fd646ee1d0be5787.webp',
-    sourceUrl: 'https://www.enskyshop.com/products/detail/29520',
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
@@ -14691,6 +14679,8 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     seriesName: 'ご当地',
     subSeries: '홋카이도 한정',
     officialPriceJpy: 1430,
+    imageUrl: 'https://www.jp-api.com/images/tphoto_550202_0_b.png',
+    localImagePath: 'assets/catalog_images/10ad5a50bc5062f41ee3.webp',
     sourceUrl: 'https://www.jp-api.com/contents/NOD62/',
     sourceStore: 'ご当地ちいかわ 공식(API)',
   ),
@@ -15275,9 +15265,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '카마도 탄지로',
     affiliation: '귀멸의 칼날',
     officialPriceJpy: 3300,
-    imageUrl: 'https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=10378023_1.jpg&width=400&height=400&square=1',
-    localImagePath: 'assets/catalog_images/a68246f268eb8957f411.webp',
-    sourceUrl: 'https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%81%B4%E3%81%9F%E3%81%AC%E3%81%84+%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/1992397/',
     sourceStore: '애니메이트',
   ),
   GoodsCatalogEntry(
@@ -15286,9 +15273,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '카마도 네즈코',
     affiliation: '귀멸의 칼날',
     officialPriceJpy: 3300,
-    imageUrl: 'https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=10365688_1.jpg&width=400&height=400&square=1',
-    localImagePath: 'assets/catalog_images/1720a484de6bccf1c119.webp',
-    sourceUrl: 'https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%81%B5%E3%82%8F%E3%82%B3%E3%83%AD%E3%82%8A%E3%82%93BIG+B%EF%BC%9A%E7%AB%88%E9%96%80%E7%A6%B0%E8%B1%86%E5%AD%90%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/1968353/',
     sourceStore: '애니메이트',
   ),
   GoodsCatalogEntry(
@@ -15346,9 +15330,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '몽키 D 루피',
     affiliation: '원피스',
     officialPriceJpy: 770,
-    imageUrl: 'https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4589795628072_1.jpg',
-    localImagePath: 'assets/catalog_images/05d26f22cafe01e7c3ed.webp',
-    sourceUrl: 'https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%E3%80%91ONE+PIECE+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%AD%E3%83%BC%E3%83%81%E3%82%A7%E3%83%BC%E3%83%B3+%E3%83%AB%E3%83%95%E3%82%A3/pd/1668273/',
     sourceStore: '애니메이트',
   ),
   GoodsCatalogEntry(
@@ -15388,9 +15369,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '주술회전',
     officialPriceJpy: 3300,
     barcode: '4595989255337',
-    imageUrl: 'https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4595989255337_1_1774955107.jpg&width=400&height=400&square=1',
-    localImagePath: 'assets/catalog_images/2dc5cfa8b41be279dc38.webp',
-    sourceUrl: 'https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6+%E3%82%82%E3%81%A3%E3%81%A1%E3%81%B3+%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF+%E4%BA%94%E6%9D%A1%E6%82%9F/pd/3442322/',
     sourceStore: '애니메이트',
   ),
   GoodsCatalogEntry(
@@ -15439,9 +15417,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '체인소맨',
     officialPriceJpy: 1320,
     barcode: '4550432284210',
-    imageUrl: 'https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4550432284210_1_1751601907.jpg&width=400&height=400&square=1',
-    localImagePath: 'assets/catalog_images/c67bb52cd51de49efae4.webp',
-    sourceUrl: 'https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E3%83%91%E3%83%AF%E3%83%BC/pd/3167771/',
     sourceStore: '애니메이트',
     releaseDate: '2025-09',
   ),
@@ -15452,9 +15427,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '체인소맨',
     officialPriceJpy: 1320,
     barcode: '4550432341852',
-    imageUrl: 'https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4550432341852_1_1781694309.jpg&width=400&height=400&square=1',
-    localImagePath: 'assets/catalog_images/4f3167dccd7dffc06b67.webp',
-    sourceUrl: 'https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E5%8A%87%E5%A0%B4%E7%89%88%E3%80%8E%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3+%E3%83%AC%E3%82%BC%E7%AF%87%E3%80%8F+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E3%83%9E%E3%82%AD%E3%83%9E/%E6%B5%AE%E9%81%8A%E6%84%9F/%E3%82%AB%E3%83%9F%E3%82%A2%E3%83%8BTOUCH/pd/3513310/',
     sourceStore: '애니메이트',
     releaseDate: '2026-08',
   ),
@@ -15503,9 +15475,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '진격의 거인',
     officialPriceJpy: 1320,
     barcode: '4573643372309',
-    imageUrl: 'https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4573643372309_2_1782903904.jpg&width=400&height=400&square=1',
-    localImagePath: 'assets/catalog_images/d638ec65dad3d82c822e.webp',
-    sourceUrl: 'https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91TV%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8E%E9%80%B2%E6%92%83%E3%81%AE%E5%B7%A8%E4%BA%BA%E3%80%8F+%E3%83%9F%E3%82%AB%E3%82%B5+%E3%81%A1%E3%81%B3%E3%81%A8%E3%81%93+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%80%90%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%A4%E3%83%88%E5%85%88%E8%A1%8C%E8%B2%A9%E5%A3%B2%E3%80%91/pd/3527347/',
     sourceStore: '애니메이트',
     releaseDate: '2026-07-26',
   ),
@@ -15515,9 +15484,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '리바이',
     affiliation: '진격의 거인',
     officialPriceJpy: 1320,
-    imageUrl: 'https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=10962472_1_1770609911.jpg&width=400&height=400&square=1',
-    localImagePath: 'assets/catalog_images/387f234ee3a5e16bb268.webp',
-    sourceUrl: 'https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E9%80%B2%E6%92%83%E3%81%AE%E5%B7%A8%E4%BA%BA+%E5%9B%9B%E9%87%8D%E5%A5%8Fver.+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+/03+%E3%83%AA%E3%83%B4%E3%82%A1%E3%82%A4%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/3397323/',
     sourceStore: '애니메이트',
   ),
   GoodsCatalogEntry(
@@ -15527,9 +15493,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '진격의 거인',
     officialPriceJpy: 9900,
     barcode: '4535123845062',
-    imageUrl: 'https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4535123845062_1_1748923505.jpg&width=400&height=400&square=1',
-    localImagePath: 'assets/catalog_images/6385fb8c5625b9f970a6.webp',
-    sourceUrl: 'https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%E3%80%91%E3%82%8B%E3%81%8B%E3%81%A3%E3%81%B7+%E9%80%B2%E6%92%83%E3%81%AE%E5%B7%A8%E4%BA%BA+%E3%83%AA%E3%83%B4%E3%82%A1%E3%82%A4/pd/3144040/',
     sourceStore: '애니메이트',
   ),
   GoodsCatalogEntry(
@@ -15555,9 +15518,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '나의 히어로 아카데미아',
     officialPriceJpy: 1320,
     barcode: '4571691880012',
-    imageUrl: 'https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4571691880012_1_1780632310.jpg&width=400&height=400&square=1',
-    localImagePath: 'assets/catalog_images/5a8a5a28f814bb82461a.webp',
-    sourceUrl: 'https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2+10%E5%91%A8%E5%B9%B4%E8%A8%98%E5%BF%B5+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85+B/pd/3501968/',
     sourceStore: '애니메이트',
     releaseDate: '2026-09',
   ),
@@ -15568,9 +15528,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '나의 히어로 아카데미아',
     officialPriceJpy: 1320,
     barcode: '4571691880029',
-    imageUrl: 'https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4571691880029_1_1780632309.jpg&width=400&height=400&square=1',
-    localImagePath: 'assets/catalog_images/2ad4aa0e9d8599308de2.webp',
-    sourceUrl: 'https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2+10%E5%91%A8%E5%B9%B4%E8%A8%98%E5%BF%B5+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E7%88%86%E8%B1%AA%E5%8B%9D%E5%B7%B1+A/pd/3501969/',
     sourceStore: '애니메이트',
     releaseDate: '2026-09',
   ),
@@ -15581,9 +15538,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '나의 히어로 아카데미아',
     officialPriceJpy: 1320,
     barcode: '4580869783949',
-    imageUrl: 'https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4580869783949_1_1778731505.jpg&width=400&height=400&square=1',
-    localImagePath: 'assets/catalog_images/1d57571057b3ac190933.webp',
-    sourceUrl: 'https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2+TV%E3%82%A2%E3%83%8B%E3%83%A110%E5%91%A8%E5%B9%B4%E3%82%AD%E3%83%BC%E3%83%93%E3%82%B8%E3%83%A5%E3%82%A2%E3%83%AB+%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89+%E8%BD%9F%E7%84%A6%E5%87%8D/pd/3482564/',
     sourceStore: '애니메이트',
     releaseDate: '2026-07',
   ),
@@ -16026,7 +15980,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '피카츄',
     affiliation: '포켓몬',
     officialPriceJpy: 2200,
-    sourceUrl: 'https://www.pokemoncenter-online.com/',
     sourceStore: '포켓몬 센터',
   ),
   GoodsCatalogEntry(
@@ -16402,7 +16355,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '강철의 연금술사',
     officialPriceJpy: 1320,
     imageUrl: 'https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4573641979944_2_1740489032.jpg&width=400&height=400&square=1',
-    localImagePath: 'assets/catalog_images/f0100dad1e1d1ba63ae5.jpg',
+    localImagePath: 'assets/catalog_images/243249945e378f171149.webp',
     sourceUrl: 'https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E9%8B%BC%E3%81%AE%E9%8C%AC%E9%87%91%E8%A1%93%E5%B8%AB+%E3%82%A8%E3%83%89%E3%83%AF%E3%83%BC%E3%83%89%E3%83%BB%E3%82%A8%E3%83%AB%E3%83%AA%E3%83%83%E3%82%AF%EF%BC%88%E5%B9%BC%E5%B0%91%E6%9C%9F%EF%BC%89+%E3%81%A1%E3%81%B3%E3%82%AD%E3%83%A3%E3%83%A9+BIG%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89/pd/3071437',
     sourceStore: '애니메이트',
   ),
@@ -16413,7 +16366,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '강철의 연금술사',
     officialPriceJpy: 1320,
     imageUrl: 'https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4573641979951_2_1740488967.jpg&width=400&height=400&square=1',
-    localImagePath: 'assets/catalog_images/313887615a4e51129975.jpg',
+    localImagePath: 'assets/catalog_images/80790e1c41d34507e124.webp',
     sourceUrl: 'https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%E3%83%9D%E3%83%83%E3%83%97%E3%80%91%E9%8B%BC%E3%81%AE%E9%8C%AC%E9%87%91%E8%A1%93%E5%B8%AB+%E3%82%A2%E3%83%AB%E3%83%95%E3%82%A9%E3%83%B3%E3%82%B9%E3%83%BB%E3%82%A8%E3%83%AB%E3%83%AA%E3%83%83%E3%82%AF%EF%BC%88%E5%B9%BC%E5%B0%91%E6%9C%9F%EF%BC%89+%E3%81%A1%E3%81%B3%E3%82%AD%E3%83%A3%E3%83%A9+BIG%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89/pd/3071438',
     sourceStore: '애니메이트',
   ),
@@ -16718,8 +16671,8 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     subSeries: '프레임 뮤직 걸 그란데',
     officialPriceJpy: 11000,
     barcode: '4934054084944',
-    imageUrl: 'https://www.kotobukiya.co.jp/files/uploads/2018/03/1d29d8a7e477abe85d94b4aaaf5f5f36cd9211f4.jpg',
-    localImagePath: 'assets/catalog_images/8317f41c2eaedd3342e1.webp',
+    imageUrl: 'https://shop.kotobukiya.co.jp/img/goods/S/FG199_GRANDE_FMG_HatsuneMiku_eye.jpg',
+    localImagePath: 'assets/catalog_images/b0d0650cb55aee95958e.webp',
     sourceUrl: 'https://www.kotobukiya.co.jp/product/detail/p4934054084944/',
     sourceStore: '코토부키야',
     releaseDate: '2026-09',
@@ -17091,7 +17044,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     imageUrl: 'https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=06101313_6847b0cc5d286.jpg&width=1200&height=630',
     localImagePath: 'assets/catalog_images/338d3c06dea9e3d118ef.webp',
     sourceUrl: 'https://www.animate-onlineshop.jp/sphone/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%E3%80%91%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20%E3%81%8A%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%E3%81%AB%E3%81%8E%E3%81%AB%E3%81%8E%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88/pd/3149849/',
-    sourceStore: '엔스카이',
+    sourceStore: '애니메이트',
   ),
   GoodsCatalogEntry(
     nameKo: '오만쥬 니기니기 마스코트 카가미네 린',
@@ -18313,9 +18266,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '나의 히어로 아카데미아',
     subSeries: '니기니기 마스코트',
     officialPriceJpy: 880,
-    imageUrl: 'https://www.enskyshop.com/html/upload/save_image/0703152149_6a4754fde4d31.jpg',
-    localImagePath: 'assets/catalog_images/d29f6059b5f84f6c7d55.webp',
-    sourceUrl: 'https://www.enskyshop.com/products/detail/32328',
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
@@ -18341,9 +18291,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '나의 히어로 아카데미아',
     subSeries: '니기니기 마스코트',
     officialPriceJpy: 880,
-    imageUrl: 'https://www.enskyshop.com/html/upload/save_image/0703152149_6a4754fde4d31.jpg',
-    localImagePath: 'assets/catalog_images/d29f6059b5f84f6c7d55.webp',
-    sourceUrl: 'https://www.enskyshop.com/products/detail/32328',
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
@@ -18354,9 +18301,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '나의 히어로 아카데미아',
     subSeries: '니기니기 마스코트',
     officialPriceJpy: 880,
-    imageUrl: 'https://www.enskyshop.com/html/upload/save_image/0703152149_6a4754fde4d31.jpg',
-    localImagePath: 'assets/catalog_images/d29f6059b5f84f6c7d55.webp',
-    sourceUrl: 'https://www.enskyshop.com/products/detail/32328',
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
@@ -18367,9 +18311,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '나의 히어로 아카데미아',
     subSeries: '니기니기 마스코트',
     officialPriceJpy: 880,
-    imageUrl: 'https://www.enskyshop.com/html/upload/save_image/0703152149_6a4754fde4d31.jpg',
-    localImagePath: 'assets/catalog_images/d29f6059b5f84f6c7d55.webp',
-    sourceUrl: 'https://www.enskyshop.com/products/detail/32328',
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
@@ -18861,9 +18802,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '헌터X헌터',
     subSeries: '쵸코노세',
     officialPriceJpy: 2200,
-    imageUrl: 'https://www.enskyshop.com/html/upload/save_image/0403130301_69cf3bf5a09b2.jpg',
-    localImagePath: 'assets/catalog_images/1119c00e152d3bedb951.webp',
-    sourceUrl: 'https://www.enskyshop.com/products/detail/31659',
     sourceStore: '엔스카이',
     releaseDate: '2026-07',
   ),
@@ -21453,9 +21391,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '나의 히어로 아카데미아',
     subSeries: '트레이딩 러버 스트랩',
     officialPriceJpy: 660,
-    imageUrl: 'https://www.enskyshop.com/html/upload/save_image/0403115052_69cf2b0c5b6a1.jpg',
-    localImagePath: 'assets/catalog_images/9cc229c900575def390d.webp',
-    sourceUrl: 'https://www.enskyshop.com/products/detail/31654',
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
@@ -21466,9 +21401,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '나의 히어로 아카데미아',
     subSeries: '트레이딩 러버 스트랩',
     officialPriceJpy: 660,
-    imageUrl: 'https://www.enskyshop.com/html/upload/save_image/0403130201_69cf3bb994147.jpg',
-    localImagePath: 'assets/catalog_images/79c5bcf9f1919738f104.webp',
-    sourceUrl: 'https://www.enskyshop.com/products/detail/31655',
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
@@ -21489,9 +21421,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '나의 히어로 아카데미아',
     subSeries: '트레이딩 러버 스트랩',
     officialPriceJpy: 660,
-    imageUrl: 'https://www.enskyshop.com/html/upload/save_image/0403130231_69cf3bd7545f8.jpg',
-    localImagePath: 'assets/catalog_images/1eceafeacb2feffe1f16.webp',
-    sourceUrl: 'https://www.enskyshop.com/products/detail/31657',
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
@@ -21622,9 +21551,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '주술회전',
     subSeries: '트레이딩 러버 스트랩',
     officialPriceJpy: 660,
-    imageUrl: 'https://www.enskyshop.com/html/upload/save_image/0731141142_66a9c78e2b09d.jpg',
-    localImagePath: 'assets/catalog_images/16af6995a526355aa7ab.webp',
-    sourceUrl: 'https://www.enskyshop.com/products/detail/26185',
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
@@ -21645,9 +21571,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '주술회전',
     subSeries: '트레이딩 러버 스트랩',
     officialPriceJpy: 660,
-    imageUrl: 'https://www.enskyshop.com/html/upload/save_image/0731141206_66a9c7a60bf65.jpg',
-    localImagePath: 'assets/catalog_images/dfa577d6cfcc756e1d2b.webp',
-    sourceUrl: 'https://www.enskyshop.com/products/detail/26186',
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
@@ -21803,6 +21726,9 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '장송의 프리렌',
     subSeries: '트레이딩 러버 스트랩',
     officialPriceJpy: 660,
+    imageUrl: 'https://frieren-anime.jp/wp-content/themes/frieren_2023/assets/img/goods/goodsimages/20240215_13.jpg',
+    localImagePath: 'assets/catalog_images/3f39466a08acbd83b268.webp',
+    sourceUrl: 'https://frieren-anime.jp/goods/toy/2234/',
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
@@ -21813,6 +21739,9 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '장송의 프리렌',
     subSeries: '트레이딩 러버 스트랩',
     officialPriceJpy: 660,
+    imageUrl: 'https://frieren-anime.jp/wp-content/themes/frieren_2023/assets/img/goods/goodsimages/20240215_13.jpg',
+    localImagePath: 'assets/catalog_images/3f39466a08acbd83b268.webp',
+    sourceUrl: 'https://frieren-anime.jp/goods/toy/2234/',
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
@@ -21823,6 +21752,9 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '장송의 프리렌',
     subSeries: '트레이딩 러버 스트랩',
     officialPriceJpy: 660,
+    imageUrl: 'https://frieren-anime.jp/wp-content/themes/frieren_2023/assets/img/goods/goodsimages/20240215_13.jpg',
+    localImagePath: 'assets/catalog_images/3f39466a08acbd83b268.webp',
+    sourceUrl: 'https://frieren-anime.jp/goods/toy/2234/',
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
@@ -21833,6 +21765,9 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '장송의 프리렌',
     subSeries: '트레이딩 러버 스트랩',
     officialPriceJpy: 660,
+    imageUrl: 'https://frieren-anime.jp/wp-content/themes/frieren_2023/assets/img/goods/goodsimages/20240215_13.jpg',
+    localImagePath: 'assets/catalog_images/3f39466a08acbd83b268.webp',
+    sourceUrl: 'https://frieren-anime.jp/goods/toy/2234/',
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
@@ -21843,6 +21778,9 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '장송의 프리렌',
     subSeries: '트레이딩 러버 스트랩',
     officialPriceJpy: 660,
+    imageUrl: 'https://frieren-anime.jp/wp-content/themes/frieren_2023/assets/img/goods/goodsimages/20240215_13.jpg',
+    localImagePath: 'assets/catalog_images/3f39466a08acbd83b268.webp',
+    sourceUrl: 'https://frieren-anime.jp/goods/toy/2234/',
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
@@ -21933,7 +21871,10 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '원피스',
     subSeries: '트레이딩 러버 스트랩',
     officialPriceJpy: 660,
-    sourceStore: '엔스카이',
+    imageUrl: 'https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4562378245767_1.jpg&width=400&height=400&square=1',
+    localImagePath: 'assets/catalog_images/2c6af9471eeff855ba47.webp',
+    sourceUrl: 'https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%80%91ONE+PIECE+KirieArt+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%E3%83%A2%E3%83%B3%E3%82%AD%E3%83%BC%E3%83%BBD%E3%83%BB%E3%83%AB%E3%83%95%E3%82%A3/pd/1821320/',
+    sourceStore: '애니메이트',
   ),
   GoodsCatalogEntry(
     nameKo: '롤로노아 조로 러버 스트랩',
@@ -21943,10 +21884,10 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '원피스',
     subSeries: '트레이딩 러버 스트랩',
     officialPriceJpy: 660,
-    imageUrl: 'https://www.enskyshop.com/html/upload/save_image/0403130201_69cf3bb994147.jpg',
-    localImagePath: 'assets/catalog_images/79c5bcf9f1919738f104.webp',
-    sourceUrl: 'https://www.enskyshop.com/products/detail/31655',
-    sourceStore: '엔스카이',
+    imageUrl: 'https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4562378245774_1.jpg&width=400&height=400&square=1',
+    localImagePath: 'assets/catalog_images/7e1aee7c15196723370f.webp',
+    sourceUrl: 'https://www.animate-onlineshop.jp/products/detail.php?product_id=1821321',
+    sourceStore: '애니메이트',
   ),
   GoodsCatalogEntry(
     nameKo: '나미 러버 스트랩',
@@ -21966,9 +21907,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '원피스',
     subSeries: '트레이딩 러버 스트랩',
     officialPriceJpy: 660,
-    imageUrl: 'https://www.enskyshop.com/html/upload/save_image/0403130231_69cf3bd7545f8.jpg',
-    localImagePath: 'assets/catalog_images/1eceafeacb2feffe1f16.webp',
-    sourceUrl: 'https://www.enskyshop.com/products/detail/31657',
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
@@ -21989,7 +21927,10 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '원피스',
     subSeries: '트레이딩 러버 스트랩',
     officialPriceJpy: 660,
-    sourceStore: '엔스카이',
+    imageUrl: 'https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4562378245798_1.jpg&width=400&height=400&square=1',
+    localImagePath: 'assets/catalog_images/af27bc5cdb699351b5e9.webp',
+    sourceUrl: 'https://www.animate-onlineshop.jp/products/detail.php?product_id=1821323',
+    sourceStore: '애니메이트',
   ),
   GoodsCatalogEntry(
     nameKo: '니코 로빈 러버 스트랩',
@@ -22145,9 +22086,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '체인소 맨',
     subSeries: '트레이딩 러버 스트랩',
     officialPriceJpy: 660,
-    imageUrl: 'https://www.enskyshop.com/html/upload/save_image/0519091746_6a0bac2a72c97.jpg',
-    localImagePath: 'assets/catalog_images/11260db6bbde67537e5a.webp',
-    sourceUrl: 'https://www.enskyshop.com/products/detail/31886',
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
@@ -22310,9 +22248,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '나의 히어로 아카데미아',
     subSeries: '의상 변경 시리즈',
     officialPriceJpy: 1540,
-    imageUrl: 'https://www.enskyshop.com/html/upload/save_image/03311539_60641931383d0.jpg',
-    localImagePath: 'assets/catalog_images/3c1e7cdc05537a843125.webp',
-    sourceUrl: 'https://www.enskyshop.com/products/detail/18138',
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
@@ -22323,9 +22258,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '나의 히어로 아카데미아',
     subSeries: '학원 시리즈',
     officialPriceJpy: 770,
-    imageUrl: 'https://www.enskyshop.com/html/upload/save_image/03311542_606419ee4dcae.jpg',
-    localImagePath: 'assets/catalog_images/8cd31d48ea43e73c189b.webp',
-    sourceUrl: 'https://www.enskyshop.com/products/detail/18139',
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
@@ -22611,9 +22543,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '단간론파',
     subSeries: '빅 아크릴 스탠드',
     officialPriceJpy: 3520,
-    imageUrl: 'https://www.enskyshop.com/html/upload/save_image/0519091746_6a0bac2a72c97.jpg',
-    localImagePath: 'assets/catalog_images/11260db6bbde67537e5a.webp',
-    sourceUrl: 'https://www.enskyshop.com/products/detail/31886',
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
@@ -22729,9 +22658,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '귀멸의 칼날',
     subSeries: '아크릴 스탠드',
     officialPriceJpy: 1430,
-    imageUrl: 'https://www.enskyshop.com/html/upload/save_image/0217140118_6993f61e4a831.jpg',
-    localImagePath: 'assets/catalog_images/c7c4ae7a77aeaac403b0.webp',
-    sourceUrl: 'https://www.enskyshop.com/products/detail/31191',
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
@@ -22742,9 +22668,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '귀멸의 칼날',
     subSeries: '아크릴 스탠드',
     officialPriceJpy: 1430,
-    imageUrl: 'https://www.enskyshop.com/html/upload/save_image/0217140118_6993f61e4a831.jpg',
-    localImagePath: 'assets/catalog_images/c7c4ae7a77aeaac403b0.webp',
-    sourceUrl: 'https://www.enskyshop.com/products/detail/31191',
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
@@ -24115,8 +24038,8 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     subSeries: 'DAISO 콜라보',
     officialPriceJpy: 100,
     barcode: '4582138607536',
-    imageUrl: 'https://www.daiso-sangyo.co.jp/wp-content/uploads/2023/06/daiso_smn1.jpg',
-    localImagePath: 'assets/catalog_images/c45842a5dec5c8f25ffc.webp',
+    imageUrl: 'https://www.daiso-sangyo.co.jp/wp-content/uploads/2023/06/daiso_smn4.jpg',
+    localImagePath: 'assets/catalog_images/f88ff28a931a129d1e2c.webp',
     sourceUrl: 'https://www.daiso-sangyo.co.jp/item/24515',
     sourceStore: 'DAISO',
   ),
@@ -24129,8 +24052,8 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     subSeries: 'DAISO 콜라보',
     officialPriceJpy: 100,
     barcode: '4582138607543',
-    imageUrl: 'https://www.daiso-sangyo.co.jp/wp-content/uploads/2023/06/daiso_smn1.jpg',
-    localImagePath: 'assets/catalog_images/c45842a5dec5c8f25ffc.webp',
+    imageUrl: 'https://www.daiso-sangyo.co.jp/wp-content/uploads/2023/06/daiso_smn2.jpg',
+    localImagePath: 'assets/catalog_images/0b7aa03d7a5b32417085.webp',
     sourceUrl: 'https://www.daiso-sangyo.co.jp/item/24515',
     sourceStore: 'DAISO',
   ),
@@ -24143,8 +24066,8 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     subSeries: 'DAISO 콜라보',
     officialPriceJpy: 100,
     barcode: '4582138607550',
-    imageUrl: 'https://www.daiso-sangyo.co.jp/wp-content/uploads/2023/06/daiso_smn1.jpg',
-    localImagePath: 'assets/catalog_images/c45842a5dec5c8f25ffc.webp',
+    imageUrl: 'https://www.daiso-sangyo.co.jp/wp-content/uploads/2023/06/daiso_smn3.jpg',
+    localImagePath: 'assets/catalog_images/fc576eb7786b85cd4425.webp',
     sourceUrl: 'https://www.daiso-sangyo.co.jp/item/24515',
     sourceStore: 'DAISO',
   ),
@@ -24232,9 +24155,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '단간론파',
     subSeries: '일상 시리즈',
     officialPriceJpy: 2200,
-    imageUrl: 'https://www.cospa.com/images/items/pc/96459.jpg',
-    localImagePath: 'assets/catalog_images/c5d60002341ef14eb517.webp',
-    sourceUrl: 'https://www.cospa.com/cospa/detail/id/00000052958',
     sourceStore: 'Cospa',
   ),
   GoodsCatalogEntry(
@@ -25061,9 +24981,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: 'SPY×FAMILY',
     subSeries: '아크릴 스탠드',
     officialPriceJpy: 1100,
-    imageUrl: 'https://www.enskyshop.com/html/upload/save_image/0217140118_6993f61e4a831.jpg',
-    localImagePath: 'assets/catalog_images/c7c4ae7a77aeaac403b0.webp',
-    sourceUrl: 'https://www.enskyshop.com/products/detail/31191',
     sourceStore: '엔스카이',
   ),
   GoodsCatalogEntry(
@@ -27451,9 +27368,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '모노쿠마',
     affiliation: '단간론파',
     officialPriceJpy: 3300,
-    imageUrl: 'https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=08151628_66bdae362e798.jpg&width=400&height=400&square=1',
-    localImagePath: 'assets/catalog_images/a1f9e0b807500ae835b4.webp',
-    sourceUrl: 'https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%83%87%E3%83%BC%E3%82%BF%E8%B2%A9%E5%A3%B2%E3%80%91%E3%80%90Steam%E3%80%91%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%EF%BC%B6%EF%BC%93+%E3%81%BF%E3%82%93%E3%81%AA%E3%81%AE%E3%82%B3%E3%83%AD%E3%82%B7%E3%82%A2%E3%82%A4%E6%96%B0%E5%AD%A6%E6%9C%9F/%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E3%82%B3%E3%83%BC%E3%83%89%E7%89%88%EF%BC%9CPC%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89%EF%BC%9E%28%E3%82%B9%E3%83%91%E3%82%A4%E3%82%AF%E3%83%BB%E3%83%81%E3%83%A5%E3%83%B3%E3%82%BD%E3%83%95%E3%83%88%29/pd/2934036/',
     sourceStore: '애니메이트',
   ),
   GoodsCatalogEntry(
@@ -30376,7 +30290,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '스텔라이브 단체',
     affiliation: '스텔라이브',
     subSeries: '1주년',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -30676,7 +30589,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '강지',
     affiliation: '스텔라이브',
     subSeries: '마스코트 시리즈',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -30707,7 +30619,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '아이리 칸나',
     affiliation: '(전) 스텔라이브',
     subSeries: '생일 굿즈',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -30716,7 +30627,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '아이리 칸나',
     affiliation: '(전) 스텔라이브',
     subSeries: '마스코트 시리즈',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -30725,7 +30635,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '아이리 칸나',
     affiliation: '(전) 스텔라이브',
     subSeries: '키링 컬렉션',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -30768,7 +30677,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '쿠루미 노아',
     affiliation: '스텔라이브',
     subSeries: '데뷔 기념',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -30777,7 +30685,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '쿠루미 노아',
     affiliation: '스텔라이브',
     subSeries: '생일 굿즈',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -30786,7 +30693,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '쿠루미 노아',
     affiliation: '스텔라이브',
     subSeries: '마스코트 시리즈',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -30884,7 +30790,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '하나코 코코나',
     affiliation: '스텔라이브',
     subSeries: '마스코트 시리즈',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -30893,7 +30798,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '비비',
     affiliation: '스텔라이브',
     subSeries: '데뷔 기념',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -30902,7 +30806,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '비비',
     affiliation: '스텔라이브',
     subSeries: '마스코트 시리즈',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -30911,7 +30814,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '린',
     affiliation: '스텔라이브',
     subSeries: '데뷔 기념',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -30920,7 +30822,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '린',
     affiliation: '스텔라이브',
     subSeries: '마스코트 시리즈',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31106,7 +31007,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     imageUrl: 'https://cdn.shopify.com/s/files/1/0577/1254/1891/products/G-GN6aU7aVMCbshaAu73m6TgLpz.jpg?v=1659576638',
     localImagePath: 'assets/catalog_images/602563dce35836455b60.webp',
     sourceUrl: 'https://nijisanji-store.com/products/aim-higher-acrylic-stand-ar-specification-kuzuha',
-    sourceStore: '애니메이트',
+    sourceStore: 'Nijisanji Official Store',
   ),
   GoodsCatalogEntry(
     nameKo: '사쿠유이 4주년 기념 니지파펫',
@@ -31189,7 +31090,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '강지',
     affiliation: '스텔라이브',
     subSeries: '마스코트 시리즈',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31211,7 +31111,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '강지',
     affiliation: '스텔라이브',
     subSeries: '데뷔 1주년',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31242,7 +31141,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '아이리 칸나',
     affiliation: '(전) 스텔라이브',
     subSeries: '마스코트 시리즈',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31251,7 +31149,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '아이리 칸나',
     affiliation: '(전) 스텔라이브',
     subSeries: '데뷔 굿즈',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31260,7 +31157,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '아이리 칸나',
     affiliation: '(전) 스텔라이브',
     subSeries: '생일 굿즈 2024',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31269,7 +31165,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '아카네 리제',
     affiliation: '스텔라이브',
     subSeries: '데뷔 2주년',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31323,7 +31218,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '쿠루미 노아',
     affiliation: '스텔라이브',
     subSeries: '데뷔 1주년',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31332,7 +31226,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '쿠루미 노아',
     affiliation: '스텔라이브',
     subSeries: '생일 굿즈 2024',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31341,7 +31234,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '쿠루미 노아',
     affiliation: '스텔라이브',
     subSeries: '마스코트 시리즈',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31358,7 +31250,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '쿠루미 노아',
     affiliation: '스텔라이브',
     subSeries: '데뷔 2주년',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31420,7 +31311,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '네네코 마시로',
     affiliation: '스텔라이브',
     subSeries: '데뷔 1주년',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31539,7 +31429,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '하나코 코코나',
     affiliation: '스텔라이브',
     subSeries: '생일 굿즈 2024',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31548,7 +31437,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '하나코 코코나',
     affiliation: '스텔라이브',
     subSeries: '마스코트 시리즈',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31557,7 +31445,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '하나코 코코나',
     affiliation: '스텔라이브',
     subSeries: '생일 굿즈 2025',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31566,7 +31453,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '하나코 코코나',
     affiliation: '스텔라이브',
     subSeries: '데뷔 1주년',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31575,7 +31461,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '비비',
     affiliation: '스텔라이브',
     subSeries: '데뷔 굿즈',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31584,7 +31469,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '비비',
     affiliation: '스텔라이브',
     subSeries: '생일 굿즈 2024',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31593,7 +31477,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '비비',
     affiliation: '스텔라이브',
     subSeries: '마스코트 시리즈',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31602,7 +31485,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '비비',
     affiliation: '스텔라이브',
     subSeries: '데뷔 굿즈',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31634,7 +31516,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '린',
     affiliation: '스텔라이브',
     subSeries: '마스코트 시리즈',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31654,7 +31535,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '마유',
     affiliation: '스텔라이브',
     subSeries: '데뷔 굿즈',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31663,7 +31543,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '마유',
     affiliation: '스텔라이브',
     subSeries: '데뷔 굿즈',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31672,7 +31551,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '마유',
     affiliation: '스텔라이브',
     subSeries: '마스코트 시리즈',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31681,7 +31559,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '마유',
     affiliation: '스텔라이브',
     subSeries: '데뷔 굿즈',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31742,7 +31619,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '스텔라이브 단체',
     affiliation: '스텔라이브',
     subSeries: '스텔라이브 1주년',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31751,7 +31627,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '스텔라이브 단체',
     affiliation: '스텔라이브',
     subSeries: '스텔라이브 2주년',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31793,7 +31668,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '후야',
     affiliation: '스텔라이브',
     subSeries: '데뷔 굿즈',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31802,7 +31676,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '후야',
     affiliation: '스텔라이브',
     subSeries: '데뷔 굿즈',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31811,7 +31684,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '후야',
     affiliation: '스텔라이브',
     subSeries: '생일 굿즈 2025',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31820,7 +31692,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '후야',
     affiliation: '스텔라이브',
     subSeries: '마스코트 시리즈',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31829,7 +31700,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '후야',
     affiliation: '스텔라이브',
     subSeries: '데뷔 굿즈',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -31849,7 +31719,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '후야',
     affiliation: '스텔라이브',
     subSeries: '데뷔 굿즈',
-    sourceUrl: 'https://fanding.kr/@stellive/shop',
     sourceStore: 'Stellive Store',
   ),
   GoodsCatalogEntry(
@@ -191404,7 +191273,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 葬送のフリーレン - H賞 繋がるポストカード',
     nameJa: 'H賞 繋がるポストカード',
-    category: '카드',
+    category: '문구',
     characterName: '기타',
     affiliation: '장송의 프리렌',
     seriesName: '一番くじ 葬送のフリーレン',
@@ -192784,7 +192653,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 呪術廻戦 死滅回游 ～弐～ - M賞 マグネット＆ステッカーセット',
     nameJa: 'M賞 マグネット＆ステッカーセット',
-    category: '스티커',
+    category: '문구',
     characterName: '기타',
     affiliation: '주술회전',
     seriesName: '一番くじ 呪術廻戦 死滅回游 ～弐～',
@@ -193684,7 +193553,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 呪術廻戦 死滅回游 ～壱～ - N賞 ステッカーセット',
     nameJa: 'N賞 ステッカーセット',
-    category: '스티커',
+    category: '문구',
     characterName: '기타',
     affiliation: '주술회전',
     seriesName: '一番くじ 呪術廻戦 死滅回游 ～壱～',
@@ -194239,7 +194108,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ ヴィジランテ -僕のヒーローアカデミア ILLEGALS- - H賞 ジッパーバッグ＆ステッカーセット',
     nameJa: 'H賞 ジッパーバッグ＆ステッカーセット',
-    category: '스티커',
+    category: '문구',
     characterName: '기타',
     affiliation: '나의 히어로 아카데미아',
     seriesName: '一番くじ ヴィジランテ -僕のヒーローアカデミア ILLEGALS-',
@@ -212689,7 +212558,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 劇場版 呪術廻戦 ０ ー1224ー - E賞 クリアファイル・ステッカーセット',
     nameJa: 'E賞 クリアファイル・ステッカーセット',
-    category: '스티커',
+    category: '문구',
     characterName: '기타',
     affiliation: '주술회전',
     seriesName: '一番くじ 劇場版 呪術廻戦 ０ ー1224ー',
@@ -212899,7 +212768,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 呪術廻戦 5th anniversary - K賞 クリアファイル・ステッカーセット',
     nameJa: 'K賞 クリアファイル・ステッカーセット',
-    category: '스티커',
+    category: '문구',
     characterName: '기타',
     affiliation: '주술회전',
     seriesName: '一番くじ 呪術廻戦 5th anniversary',
@@ -213139,7 +213008,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 呪術廻戦 渋谷事変 ～参～ - D賞 クリアファイル・ステッカーセット',
     nameJa: 'D賞 クリアファイル・ステッカーセット',
-    category: '스티커',
+    category: '문구',
     characterName: '기타',
     affiliation: '주술회전',
     seriesName: '一番くじ 呪術廻戦 渋谷事変 ～参～',
@@ -213529,7 +213398,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 呪術廻戦 渋谷事変 ～弐～ - N賞 クリアファイル・ステッカーセット',
     nameJa: 'N賞 クリアファイル・ステッカーセット',
-    category: '스티커',
+    category: '문구',
     characterName: '기타',
     affiliation: '주술회전',
     seriesName: '一番くじ 呪術廻戦 渋谷事変 ～弐～',
@@ -213889,7 +213758,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 呪術廻戦 懐玉・玉折 ～弐～ - F賞 クリアファイル2枚セット',
     nameJa: 'F賞 クリアファイル2枚セット',
-    category: '클리어파일',
+    category: '문구',
     characterName: '기타',
     affiliation: '주술회전',
     seriesName: '一番くじ 呪術廻戦 懐玉・玉折 ～弐～',
@@ -214309,7 +214178,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 劇場版 呪術廻戦 0 ～宣戦布告～ - J賞 クリアファイル2枚セット',
     nameJa: 'J賞 クリアファイル2枚セット',
-    category: '클리어파일',
+    category: '문구',
     characterName: '기타',
     affiliation: '주술회전',
     seriesName: '一番くじ 劇場版 呪術廻戦 0 ～宣戦布告～',
@@ -214594,7 +214463,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 劇場版 呪術廻戦 0 - I賞 クリアファイルセット',
     nameJa: 'I賞 クリアファイルセット',
-    category: '클리어파일',
+    category: '문구',
     characterName: '기타',
     affiliation: '주술회전',
     seriesName: '一番くじ 劇場版 呪術廻戦 0',
@@ -214879,7 +214748,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 呪術廻戦 ～弐～ - F賞 クリアファイルセット',
     nameJa: 'F賞 クリアファイルセット',
-    category: '클리어파일',
+    category: '문구',
     characterName: '기타',
     affiliation: '주술회전',
     seriesName: '一番くじ 呪術廻戦 ～弐～',
@@ -243189,6 +243058,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '원피스',
     seriesName: '一番くじ ワンピース ～マリンフォード最終決戦編～',
     subSeries: 'A賞',
+    officialPriceJpy: 500,
     imageUrl: 'https://assets.1kuji.com/uploads/product_item/image/1496/9957ecc1-7554-432d-a085-c2c02bbd3719.jpg',
     localImagePath: 'assets/catalog_images/2959b263d8b9c0c003df.webp',
     sourceUrl: 'https://1kuji.com/products/onep6',
@@ -243203,6 +243073,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '원피스',
     seriesName: '一番くじ ワンピース ～マリンフォード最終決戦編～',
     subSeries: 'B賞',
+    officialPriceJpy: 500,
     imageUrl: 'https://assets.1kuji.com/uploads/product_item/image/1497/3f89a343-8c36-4165-a6cf-9d4970b1729a.jpg',
     localImagePath: 'assets/catalog_images/a23de30d042256048c7e.webp',
     sourceUrl: 'https://1kuji.com/products/onep6',
@@ -243217,6 +243088,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '원피스',
     seriesName: '一番くじ ワンピース ～マリンフォード最終決戦編～',
     subSeries: 'C賞',
+    officialPriceJpy: 500,
     imageUrl: 'https://assets.1kuji.com/uploads/product_item/image/1498/fd2ddbc3-b888-4bbe-bb05-a80e3c3630dd.jpg',
     localImagePath: 'assets/catalog_images/8e7482c2e7d19347790e.webp',
     sourceUrl: 'https://1kuji.com/products/onep6',
@@ -243231,6 +243103,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '원피스',
     seriesName: '一番くじ ワンピース ～マリンフォード最終決戦編～',
     subSeries: 'D賞',
+    officialPriceJpy: 500,
     imageUrl: 'https://assets.1kuji.com/uploads/product_item/image/1499/252f3961-f356-4479-a855-bfc878def810.jpg',
     localImagePath: 'assets/catalog_images/1bec553292dc8a4f1d04.webp',
     sourceUrl: 'https://1kuji.com/products/onep6',
@@ -243245,6 +243118,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '원피스',
     seriesName: '一番くじ ワンピース ～マリンフォード最終決戦編～',
     subSeries: 'E賞',
+    officialPriceJpy: 500,
     imageUrl: 'https://assets.1kuji.com/uploads/product_item/image/1500/5993be1f-93a5-468b-b256-ccfae05502e4.jpg',
     localImagePath: 'assets/catalog_images/580f3043ddc4fb97b060.webp',
     sourceUrl: 'https://1kuji.com/products/onep6',
@@ -243259,6 +243133,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '원피스',
     seriesName: '一番くじ ワンピース ～マリンフォード最終決戦編～',
     subSeries: 'F賞',
+    officialPriceJpy: 500,
     imageUrl: 'https://assets.1kuji.com/uploads/product_item/image/1501/97c5eea0-12be-478b-8daf-aa8207fc92f8.jpg',
     localImagePath: 'assets/catalog_images/64355cedd5eeddc991c8.webp',
     sourceUrl: 'https://1kuji.com/products/onep6',
@@ -243273,6 +243148,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '원피스',
     seriesName: '一番くじ ワンピース ～マリンフォード最終決戦編～',
     subSeries: 'G賞',
+    officialPriceJpy: 500,
     imageUrl: 'https://assets.1kuji.com/uploads/product_item/image/1502/90379135-4a60-4585-8849-b2253c61d985.jpg',
     localImagePath: 'assets/catalog_images/24332e6d757fdff4381f.webp',
     sourceUrl: 'https://1kuji.com/products/onep6',
@@ -243287,6 +243163,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     affiliation: '원피스',
     seriesName: '一番くじ ワンピース ～マリンフォード最終決戦編～',
     subSeries: 'H賞',
+    officialPriceJpy: 500,
     imageUrl: 'https://assets.1kuji.com/uploads/product_item/image/1503/ee53bb59-694e-4707-845e-d16816253260.jpg',
     localImagePath: 'assets/catalog_images/2907a6b6075e030e4e18.webp',
     sourceUrl: 'https://1kuji.com/products/onep6',
@@ -253439,7 +253316,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 僕のヒーローアカデミア -更に向こうへ- - K賞 カードホルダー',
     nameJa: 'K賞 カードホルダー',
-    category: '카드',
+    category: '문구',
     characterName: '기타',
     affiliation: '나의 히어로 아카데미아',
     seriesName: '一番くじ 僕のヒーローアカデミア -更に向こうへ-',
@@ -253454,7 +253331,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 僕のヒーローアカデミア -更に向こうへ- - L賞 ステッカーセット',
     nameJa: 'L賞 ステッカーセット',
-    category: '스티커',
+    category: '문구',
     characterName: '기타',
     affiliation: '나의 히어로 아카데미아',
     seriesName: '一番くじ 僕のヒーローアカデミア -更に向こうへ-',
@@ -253784,7 +253661,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 僕のヒーローアカデミア 相反する思い - J賞 ステッカーセット（1/8）',
     nameJa: 'J賞 ステッカーセット（1/8）',
-    category: '스티커',
+    category: '문구',
     characterName: '기타',
     affiliation: '나의 히어로 아카데미아',
     seriesName: '一番くじ 僕のヒーローアカデミア 相反する思い',
@@ -253904,7 +253781,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 僕のヒーローアカデミア －紡ぐ力－ - G賞 バラエティステッカー',
     nameJa: 'G賞 バラエティステッカー',
-    category: '스티커',
+    category: '문구',
     characterName: '기타',
     affiliation: '나의 히어로 아카데미아',
     seriesName: '一番くじ 僕のヒーローアカデミア －紡ぐ力－',
@@ -254159,7 +254036,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 僕のヒーローアカデミア ーYOU’RE NEXTー - H賞 キャンバス風イラストボード＆ステッカー',
     nameJa: 'H賞 キャンバス風イラストボード＆ステッカー',
-    category: '스티커',
+    category: '문구',
     characterName: '기타',
     affiliation: '나의 히어로 아카데미아',
     seriesName: '一番くじ 僕のヒーローアカデミア ーYOU’RE NEXTー',
@@ -254549,7 +254426,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 僕のヒーローアカデミア 開催文化祭!! - I賞 カードホルダー',
     nameJa: 'I賞 カードホルダー',
-    category: '카드',
+    category: '문구',
     characterName: '기타',
     affiliation: '나의 히어로 아카데미아',
     seriesName: '一番くじ 僕のヒーローアカデミア 開催文化祭!!',
@@ -254699,7 +254576,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 僕のヒーローアカデミア -連なる星霜- - H賞 クリアファイル＆ステッカー',
     nameJa: 'H賞 クリアファイル＆ステッカー',
-    category: '스티커',
+    category: '문구',
     characterName: '기타',
     affiliation: '나의 히어로 아카데미아',
     seriesName: '一番くじ 僕のヒーローアカデミア -連なる星霜-',
@@ -255059,7 +254936,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 僕のヒーローアカデミア －二人のあこがれ－ - G賞 クリアファイルセット',
     nameJa: 'G賞 クリアファイルセット',
-    category: '클리어파일',
+    category: '문구',
     characterName: '기타',
     affiliation: '나의 히어로 아카데미아',
     seriesName: '一番くじ 僕のヒーローアカデミア －二人のあこがれ－',
@@ -255224,7 +255101,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 僕のヒーローアカデミア 垂れ流せ！文化祭！ - I賞 クリアファイル＆ステッカー',
     nameJa: 'I賞 クリアファイル＆ステッカー',
-    category: '스티커',
+    category: '문구',
     characterName: '기타',
     affiliation: '나의 히어로 아카데미아',
     seriesName: '一番くじ 僕のヒーローアカデミア 垂れ流せ！文化祭！',
@@ -256139,7 +256016,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 僕のヒーローアカデミア ー意志ー - G賞 クリアファイルセット',
     nameJa: 'G賞 クリアファイルセット',
-    category: '클리어파일',
+    category: '문구',
     characterName: '기타',
     affiliation: '나의 히어로 아카데미아',
     seriesName: '一番くじ 僕のヒーローアカデミア ー意志ー',
@@ -256484,7 +256361,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 僕のヒーローアカデミア ～突入～ - J賞 クリアファイル・ステッカーセット',
     nameJa: 'J賞 クリアファイル・ステッカーセット',
-    category: '스티커',
+    category: '문구',
     characterName: '기타',
     affiliation: '나의 히어로 아카데미아',
     seriesName: '一番くじ 僕のヒーローアカデミア ～突入～',
@@ -257654,7 +257531,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 僕のヒーローアカデミア HERO VS VILLAINS - I賞 クリアファイル・ステッカーセット',
     nameJa: 'I賞 クリアファイル・ステッカーセット',
-    category: '스티커',
+    category: '문구',
     characterName: '기타',
     affiliation: '나의 히어로 아카데미아',
     seriesName: '一番くじ 僕のヒーローアカデミア HERO VS VILLAINS',
@@ -257819,7 +257696,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 僕のヒーローアカデミア Get A Chance! - H賞 クリアファイル・ステッカーセット',
     nameJa: 'H賞 クリアファイル・ステッカーセット',
-    category: '스티커',
+    category: '문구',
     characterName: '기타',
     affiliation: '나의 히어로 아카데미아',
     seriesName: '一番くじ 僕のヒーローアカデミア Get A Chance!',
@@ -258254,7 +258131,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 僕のヒーローアカデミア FIGHTING HEROES feat. One\'s Justice - OJコラボ賞② クリアファイルセット feat. One\'s Justice',
     nameJa: 'OJコラボ賞② クリアファイルセット feat. One\'s Justice',
-    category: '클리어파일',
+    category: '문구',
     characterName: '기타',
     affiliation: '나의 히어로 아카데미아',
     seriesName: '一番くじ 僕のヒーローアカデミア FIGHTING HEROES feat. One\'s Justice',
@@ -258614,7 +258491,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 僕のヒーローアカデミア FIGHTING HEROES feat. SMASH RISING - E賞 クリアファイルセット feat. SMASH RISING',
     nameJa: 'E賞 クリアファイルセット feat. SMASH RISING',
-    category: '클리어파일',
+    category: '문구',
     characterName: '기타',
     affiliation: '나의 히어로 아카데미아',
     seriesName: '一番くじ 僕のヒーローアカデミア FIGHTING HEROES feat. SMASH RISING',
@@ -259094,7 +258971,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 僕のヒーローアカデミア～休み時間！～ - E賞 1-A教室ポーチ',
     nameJa: 'E賞 1-A教室ポーチ',
-    category: '파우치',
+    category: '가방',
     characterName: '기타',
     affiliation: '나의 히어로 아카데미아',
     seriesName: '一番くじ 僕のヒーローアカデミア～休み時間！～',
@@ -264285,7 +264162,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: '혼합',
     affiliation: '포켓몬',
     officialPriceJpy: 165,
-    sourceUrl: 'https://www.pokemoncenter-online.com/',
     sourceStore: '포켓몬 센터',
   ),
   GoodsCatalogEntry(
@@ -264509,7 +264385,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: 'SEVENTEEN',
     affiliation: 'SEVENTEEN',
     officialPriceJpy: 770,
-    sourceUrl: 'https://shop.weverse.io/home',
     sourceStore: 'Weverse Shop',
   ),
   GoodsCatalogEntry(
@@ -264606,7 +264481,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: 'ZEROBASEONE',
     affiliation: 'ZEROBASEONE',
     officialPriceJpy: 770,
-    sourceUrl: 'https://shop.weverse.io/home',
     sourceStore: 'Weverse Shop',
   ),
   GoodsCatalogEntry(
@@ -264615,7 +264489,6 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     characterName: 'ILLIT',
     affiliation: 'ILLIT',
     officialPriceJpy: 770,
-    sourceUrl: 'https://shop.weverse.io/home',
     sourceStore: 'Weverse Shop',
   ),
   GoodsCatalogEntry(
@@ -266699,7 +266572,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 僕のヒーローアカデミア I\'m Ready! - G賞 クリアファイル・ステッカーセット',
     nameJa: 'G賞 クリアファイル・ステッカーセット',
-    category: '스티커',
+    category: '문구',
     characterName: '기타',
     affiliation: '나의 히어로 아카데미아',
     seriesName: '一番くじ 僕のヒーローアカデミア I\'m Ready!',
@@ -267288,7 +267161,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     imageUrl: 'https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4580831925254_1_1764821109.jpg&width=1200&height=630',
     localImagePath: 'assets/catalog_images/f527604c4976bf55f0a8.webp',
     sourceUrl: 'https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%911%E3%83%BB2%2BReload%2B%E3%81%8F%E3%82%8B%E3%81%BF%E3%81%9F%E3%81%B4%E3%81%AC%E3%81%84%2BVol.1/pd/3339418/',
-    sourceStore: 'TAPIOCA online shop',
+    sourceStore: '애니메이트',
   ),
   GoodsCatalogEntry(
     nameKo: '단간론파 쿠루미타피누이 Vol.2',
@@ -292741,7 +292614,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 僕のヒーローアカデミア 相反する思い - J賞 ステッカーセット（2/8）',
     nameJa: 'J賞 ステッカーセット（2/8）',
-    category: '스티커',
+    category: '문구',
     characterName: '기타',
     affiliation: '나의 히어로 아카데미아',
     seriesName: '一番くじ 僕のヒーローアカデミア 相反する思い',
@@ -292756,7 +292629,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 僕のヒーローアカデミア 相反する思い - J賞 ステッカーセット（3/8）',
     nameJa: 'J賞 ステッカーセット（3/8）',
-    category: '스티커',
+    category: '문구',
     characterName: '기타',
     affiliation: '나의 히어로 아카데미아',
     seriesName: '一番くじ 僕のヒーローアカデミア 相反する思い',
@@ -292771,7 +292644,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 僕のヒーローアカデミア 相反する思い - J賞 ステッカーセット（4/8）',
     nameJa: 'J賞 ステッカーセット（4/8）',
-    category: '스티커',
+    category: '문구',
     characterName: '기타',
     affiliation: '나의 히어로 아카데미아',
     seriesName: '一番くじ 僕のヒーローアカデミア 相反する思い',
@@ -292786,7 +292659,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 僕のヒーローアカデミア 相反する思い - J賞 ステッカーセット（5/8）',
     nameJa: 'J賞 ステッカーセット（5/8）',
-    category: '스티커',
+    category: '문구',
     characterName: '기타',
     affiliation: '나의 히어로 아카데미아',
     seriesName: '一番くじ 僕のヒーローアカデミア 相反する思い',
@@ -292801,7 +292674,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 僕のヒーローアカデミア 相反する思い - J賞 ステッカーセット（6/8）',
     nameJa: 'J賞 ステッカーセット（6/8）',
-    category: '스티커',
+    category: '문구',
     characterName: '기타',
     affiliation: '나의 히어로 아카데미아',
     seriesName: '一番くじ 僕のヒーローアカデミア 相反する思い',
@@ -292816,7 +292689,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 僕のヒーローアカデミア 相反する思い - J賞 ステッカーセット（7/8）',
     nameJa: 'J賞 ステッカーセット（7/8）',
-    category: '스티커',
+    category: '문구',
     characterName: '기타',
     affiliation: '나의 히어로 아카데미아',
     seriesName: '一番くじ 僕のヒーローアカデミア 相反する思い',
@@ -292831,7 +292704,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(
     nameKo: '一番くじ 僕のヒーローアカデミア 相反する思い - J賞 ステッカーセット（8/8）',
     nameJa: 'J賞 ステッカーセット（8/8）',
-    category: '스티커',
+    category: '문구',
     characterName: '기타',
     affiliation: '나의 히어로 아카데미아',
     seriesName: '一番くじ 僕のヒーローアカデミア 相反する思い',
