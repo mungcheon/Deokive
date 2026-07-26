@@ -282,6 +282,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIn("data/catalog_reused_image_review_public.json", updated_files)
         self.assertIn("data/catalog_reused_image_review_public.md", updated_files)
         self.assertIn("data/catalog_reused_image_deduplication_review_public.json", updated_files)
+        self.assertIn("data/catalog_reused_image_deduplication_import_dry_run_public.json", updated_files)
         self.assertIn("data/catalog_missing_image_priority_public.json", updated_files)
         self.assertIn("data/source_discovery_starter_queue_public.json", updated_files)
         self.assertIn("data/animate_missing_image_search_public.json", updated_files)
@@ -436,6 +437,20 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertFalse(
             quality["catalog_reused_image_deduplication_review"]["auto_merge_enabled"]
+        )
+        reused_image_deduplication_import = reports.load_json(
+            reports.REUSED_IMAGE_DEDUPLICATION_IMPORT_DRY_RUN
+        )
+        self.assertEqual(
+            quality["catalog_reused_image_deduplication_import_dry_run"]["template_groups"],
+            reused_image_deduplication_import["template_groups"],
+        )
+        self.assertEqual(
+            quality["catalog_reused_image_deduplication_import_dry_run"]["updated_rows"],
+            reused_image_deduplication_import["updated_rows"],
+        )
+        self.assertFalse(
+            quality["catalog_reused_image_deduplication_import_dry_run"]["auto_delete_enabled"]
         )
         if reports.ANIMATE_MISSING_IMAGE_SEARCH.exists():
             self.assertEqual(quality["animate_missing_image_search"]["missing_animate_image_rows"], 148)
