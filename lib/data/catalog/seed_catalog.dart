@@ -1,6 +1,6 @@
 import '../../models/goods_catalog_entry.dart';
 
-/// Auto-generated from data\catalog_public.json.
+/// Auto-generated from data/catalog_public.json.
 /// Do not edit by hand; run tools/generate_seed_catalog_dart.py.
 const List<GoodsCatalogEntry> kSeedCatalog = [
   GoodsCatalogEntry(

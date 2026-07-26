@@ -149,10 +149,11 @@ def main() -> int:
         allow_row_count_drop=args.allow_row_count_drop,
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)
+    input_path = args.input.resolve()
     try:
-        source_label = args.input.relative_to(ROOT).as_posix()
+        source_label = input_path.relative_to(ROOT).as_posix()
     except ValueError:
-        source_label = str(args.input)
+        source_label = input_path.as_posix()
     args.output.write_text(generate(rows, source_label=source_label), encoding="utf-8")
     print(json.dumps({"rows": len(rows), "output": str(args.output)}, ensure_ascii=False, indent=2))
     return 0
