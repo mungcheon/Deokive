@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T18:33:07Z",
+  "generated_at": "2026-07-26T19:02:03Z",
   "scope": "catalog_missing_image_actionability",
   "summary": {
-    "missing_image_rows": 790,
-    "readiness_classified_rows": 790,
+    "missing_image_rows": 788,
+    "readiness_classified_rows": 788,
     "unclassified_rows": 0,
-    "exact_source_ready_rows": 4,
+    "exact_source_ready_rows": 2,
     "source_first_rows": 753,
     "review_before_attach_rows": 23,
     "source_detail_candidate_review_rows": 0,
@@ -37,13 +37,13 @@
     "source_discovery_focus_template_dry_run_skipped_rows": 753,
     "source_discovery_focus_coverage": 1.0,
     "source_discovery_non_focus_rows": 0,
-    "action_queue_rows": 27,
-    "direct_image_action_queue_rows": 27,
-    "direct_image_action_primary_review_url_rows": 27,
+    "action_queue_rows": 25,
+    "direct_image_action_queue_rows": 25,
+    "direct_image_action_primary_review_url_rows": 25,
     "direct_image_action_primary_review_url_kind_counts": [
       [
         "current_source_url",
-        27
+        25
       ]
     ],
     "direct_image_action_next_representative_review_batch_rows": 10,
@@ -60,13 +60,13 @@
     "manual_image_research_review_start_kind": "fallback_web_search",
     "source_discovery_review_start_rows": 20,
     "source_discovery_review_start_kind": "domain_limited_web_search",
-    "image_attachment_template_rows": 27,
+    "image_attachment_template_rows": 25,
     "image_attachment_template_confirmed_rows": 0,
     "image_attachment_template_source_update_required_rows": 0,
     "image_attachment_template_representative_review_rows": 23,
     "image_attachment_template_dry_run_updated_rows": 0,
-    "image_attachment_template_dry_run_skipped_rows": 27,
-    "actionable_image_rows": 27,
+    "image_attachment_template_dry_run_skipped_rows": 25,
+    "actionable_image_rows": 25,
     "source_discovery_work_pack_count": 16,
     "source_discovery_work_pack_rows": 674,
     "by_blocked_reason": [
@@ -88,7 +88,7 @@
       },
       {
         "blocked_reason": "candidate_image_requires_manual_review",
-        "rows": 4
+        "rows": 2
       }
     ],
     "by_blocked_until": [
@@ -110,11 +110,11 @@
       },
       {
         "blocked_until": "manual_image_url_confirmed_from_exact_source",
-        "rows": 4
+        "rows": 2
       }
     ],
     "auto_apply_enabled": false,
-    "completion_plan_total_open_rows": 790,
+    "completion_plan_total_open_rows": 788,
     "completion_plan_phase_rows_total": 786,
     "completion_plan_phase_count": 3,
     "completion_plan_status": "needs_review",
@@ -130,59 +130,26 @@
     {
       "readiness": "image_url_candidate_review",
       "priority": 10,
-      "rows": 4,
+      "rows": 2,
       "workflow_rows": [
         {
           "workflow": "extract_from_existing_source_url",
           "label": "이미 확인된 상세 source_url에서 image_url 추출",
-          "rows": 4,
+          "rows": 2,
           "next_step": "extract_product_image_from_existing_exact_source_url"
         }
       ],
       "by_source_store": [
         {
-          "source_store": "치이카와 온라인 쿠지",
-          "rows": 3
+          "source_store": "밀짚모자 스토어",
+          "rows": 1
         },
         {
-          "source_store": "밀짚모자 스토어",
+          "source_store": "치이카와 온라인 쿠지",
           "rows": 1
         }
       ],
       "sample_items": [
-        {
-          "catalog_index": 657,
-          "name_ko": "C상: 인형 포셰트",
-          "name_ja": "C賞 ぬいぐるみポシェット",
-          "source_store": "치이카와 온라인 쿠지",
-          "affiliation": null,
-          "category": "인형",
-          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
-          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=C%E8%B3%9E%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%83%9D%E3%82%B7%E3%82%A7%E3%83%83%E3%83%88",
-          "workflow": "extract_from_existing_source_url"
-        },
-        {
-          "catalog_index": 677,
-          "name_ko": "D상: 친구 마스코트",
-          "name_ja": "D賞 おともだちマスコット",
-          "source_store": "치이카와 온라인 쿠지",
-          "affiliation": null,
-          "category": "마스코트",
-          "source_url": "https://online-kuji.chiikawamarket.jp/",
-          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=D%E8%B3%9E%20%E3%81%8A%E3%81%A8%E3%82%82%E3%81%A0%E3%81%A1%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88",
-          "workflow": "extract_from_existing_source_url"
-        },
-        {
-          "catalog_index": 682,
-          "name_ko": "D상: 하치와레 마스코트",
-          "name_ja": "D賞 マスコット",
-          "source_store": "치이카와 온라인 쿠지",
-          "affiliation": null,
-          "category": "마스코트",
-          "source_url": "https://online-kuji.chiikawamarket.jp/",
-          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=D%E8%B3%9E%20%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88",
-          "workflow": "extract_from_existing_source_url"
-        },
         {
           "catalog_index": 2268,
           "name_ko": "원피스 생일 한정 아크릴 액세서리 스탠드 (루피 5.5)",
@@ -192,6 +159,17 @@
           "category": "아크릴 스탠드",
           "source_url": "https://store.toei-anim.co.jp/shop/g/gMOVONP962162/",
           "official_search_url": null,
+          "workflow": "extract_from_existing_source_url"
+        },
+        {
+          "catalog_index": 657,
+          "name_ko": "C상: 인형 포셰트",
+          "name_ja": "C賞 ぬいぐるみポシェット",
+          "source_store": "치이카와 온라인 쿠지",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
+          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=C%E8%B3%9E%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%83%9D%E3%82%B7%E3%82%A7%E3%83%83%E3%83%88",
           "workflow": "extract_from_existing_source_url"
         }
       ],
@@ -993,73 +971,6 @@
   ],
   "source_store_priority": [
     {
-      "source_store": "치이카와 온라인 쿠지",
-      "priority": 10,
-      "missing_image_rows": 3,
-      "primary_workflow": "extract_from_existing_source_url",
-      "recommended_next_step": "extract_product_image_from_existing_exact_source_url",
-      "blocked_until": "manual_image_url_confirmed_from_exact_source",
-      "blocked_reason": "candidate_image_requires_manual_review",
-      "required_evidence": [
-        "exact_product_source_url",
-        "image_url_from_accepted_source_or_trusted_official_cdn",
-        "same_product_title_character_variant_type_confirmed"
-      ],
-      "readiness_rows": [
-        {
-          "readiness": "image_url_candidate_review",
-          "rows": 3
-        }
-      ],
-      "workflow_rows": [
-        {
-          "workflow": "extract_from_existing_source_url",
-          "label": "이미 확인된 상세 source_url에서 image_url 추출",
-          "rows": 3,
-          "next_step": "extract_product_image_from_existing_exact_source_url"
-        }
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 657,
-          "name_ko": "C상: 인형 포셰트",
-          "name_ja": "C賞 ぬいぐるみポシェット",
-          "source_store": "치이카와 온라인 쿠지",
-          "affiliation": null,
-          "category": "인형",
-          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
-          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=C%E8%B3%9E%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%83%9D%E3%82%B7%E3%82%A7%E3%83%83%E3%83%88",
-          "workflow": "extract_from_existing_source_url",
-          "readiness": "image_url_candidate_review"
-        },
-        {
-          "catalog_index": 677,
-          "name_ko": "D상: 친구 마스코트",
-          "name_ja": "D賞 おともだちマスコット",
-          "source_store": "치이카와 온라인 쿠지",
-          "affiliation": null,
-          "category": "마스코트",
-          "source_url": "https://online-kuji.chiikawamarket.jp/",
-          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=D%E8%B3%9E%20%E3%81%8A%E3%81%A8%E3%82%82%E3%81%A0%E3%81%A1%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88",
-          "workflow": "extract_from_existing_source_url",
-          "readiness": "image_url_candidate_review"
-        },
-        {
-          "catalog_index": 682,
-          "name_ko": "D상: 하치와레 마스코트",
-          "name_ja": "D賞 マスコット",
-          "source_store": "치이카와 온라인 쿠지",
-          "affiliation": null,
-          "category": "마스코트",
-          "source_url": "https://online-kuji.chiikawamarket.jp/",
-          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=D%E8%B3%9E%20%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88",
-          "workflow": "extract_from_existing_source_url",
-          "readiness": "image_url_candidate_review"
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
       "source_store": "밀짚모자 스토어",
       "priority": 10,
       "missing_image_rows": 1,
@@ -1096,6 +1007,49 @@
           "category": "아크릴 스탠드",
           "source_url": "https://store.toei-anim.co.jp/shop/g/gMOVONP962162/",
           "official_search_url": null,
+          "workflow": "extract_from_existing_source_url",
+          "readiness": "image_url_candidate_review"
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "source_store": "치이카와 온라인 쿠지",
+      "priority": 10,
+      "missing_image_rows": 1,
+      "primary_workflow": "extract_from_existing_source_url",
+      "recommended_next_step": "extract_product_image_from_existing_exact_source_url",
+      "blocked_until": "manual_image_url_confirmed_from_exact_source",
+      "blocked_reason": "candidate_image_requires_manual_review",
+      "required_evidence": [
+        "exact_product_source_url",
+        "image_url_from_accepted_source_or_trusted_official_cdn",
+        "same_product_title_character_variant_type_confirmed"
+      ],
+      "readiness_rows": [
+        {
+          "readiness": "image_url_candidate_review",
+          "rows": 1
+        }
+      ],
+      "workflow_rows": [
+        {
+          "workflow": "extract_from_existing_source_url",
+          "label": "이미 확인된 상세 source_url에서 image_url 추출",
+          "rows": 1,
+          "next_step": "extract_product_image_from_existing_exact_source_url"
+        }
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 657,
+          "name_ko": "C상: 인형 포셰트",
+          "name_ja": "C賞 ぬいぐるみポシェット",
+          "source_store": "치이카와 온라인 쿠지",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
+          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=C%E8%B3%9E%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%83%9D%E3%82%B7%E3%82%A7%E3%83%83%E3%83%88",
           "workflow": "extract_from_existing_source_url",
           "readiness": "image_url_candidate_review"
         }
@@ -8113,32 +8067,18 @@
     "extract_from_existing_source_url": {
       "workflow": "extract_from_existing_source_url",
       "batch_id": "image-attachment-action-001",
-      "source_store": "치이카와 온라인 쿠지",
-      "row_count": 3,
-      "primary_review_url_rows": 3,
-      "first_primary_review_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
+      "source_store": "밀짚모자 스토어",
+      "row_count": 1,
+      "primary_review_url_rows": 1,
+      "first_primary_review_url": "https://store.toei-anim.co.jp/shop/g/gMOVONP962162/",
       "first_primary_review_url_kind": "current_source_url",
-      "sample_items_with_primary_review_url": 3,
+      "sample_items_with_primary_review_url": 1,
       "sample_primary_review_items": [
         {
-          "catalog_index": 657,
-          "name_ko": "C상: 인형 포셰트",
-          "name_ja": "C賞 ぬいぐるみポシェット",
-          "primary_review_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
-          "primary_review_url_kind": "current_source_url"
-        },
-        {
-          "catalog_index": 677,
-          "name_ko": "D상: 친구 마스코트",
-          "name_ja": "D賞 おともだちマスコット",
-          "primary_review_url": "https://online-kuji.chiikawamarket.jp/",
-          "primary_review_url_kind": "current_source_url"
-        },
-        {
-          "catalog_index": 682,
-          "name_ko": "D상: 하치와레 마스코트",
-          "name_ja": "D賞 マスコット",
-          "primary_review_url": "https://online-kuji.chiikawamarket.jp/",
+          "catalog_index": 2268,
+          "name_ko": "원피스 생일 한정 아크릴 액세서리 스탠드 (루피 5.5)",
+          "name_ja": "『ワンピース』ハッピーバースデーアクリルアクセサリースタンド［5.5 ルフィ］",
+          "primary_review_url": "https://store.toei-anim.co.jp/shop/g/gMOVONP962162/",
           "primary_review_url_kind": "current_source_url"
         }
       ]
@@ -11029,7 +10969,7 @@
   ],
   "manual_validation_focus": {
     "auto_import_ready_rows": 0,
-    "manual_validation_required_rows": 790,
+    "manual_validation_required_rows": 788,
     "next_focus_lane": "discover_exact_source_urls",
     "next_focus_row_count": 753,
     "next_focus_source": "source_discovery_action_queue_public.json",
@@ -11547,12 +11487,12 @@
     }
   },
   "execution_queue_summary": {
-    "open_missing_image_rows": 790,
+    "open_missing_image_rows": 788,
     "auto_import_ready_rows": 0,
     "queue_count": 4,
-    "queued_rows_total": 790,
+    "queued_rows_total": 788,
     "raw_queued_rows_total": 798,
-    "overlapping_queue_rows": 8,
+    "overlapping_queue_rows": 10,
     "not_yet_queued_rows": 0,
     "not_yet_queued_rows_explained": 0,
     "unqueued_phase_rows_total": 0,
@@ -11956,10 +11896,10 @@
   },
   "blocking_dashboard": {
     "status": "manual_evidence_required",
-    "total_open_rows": 790,
+    "total_open_rows": 788,
     "auto_import_ready_rows": 0,
-    "manual_validation_required_rows": 790,
-    "queued_rows_total": 790,
+    "manual_validation_required_rows": 788,
+    "queued_rows_total": 788,
     "not_yet_queued_rows": 0,
     "queue_coverage": 1.0,
     "top_blocked_reason": {
@@ -12019,11 +11959,11 @@
     ],
     "image_evidence_bottleneck_summary": {
       "status": "source_or_image_evidence_required",
-      "missing_image_rows": 790,
+      "missing_image_rows": 788,
       "known_image_download_problem_rows": 0,
-      "image_url_evidence_missing_rows": 790,
+      "image_url_evidence_missing_rows": 788,
       "auto_import_ready_rows": 0,
-      "manual_confirmation_required_rows": 790,
+      "manual_confirmation_required_rows": 788,
       "source_first_rows": 753,
       "representative_review_rows": 23,
       "manual_image_research_rows": 10,
@@ -12057,7 +11997,7 @@
     "operator_message": "No missing-image DB row can be imported automatically yet; fill the next confirmation template with exact product source/image evidence first."
   },
   "completion_plan": {
-    "total_open_rows": 790,
+    "total_open_rows": 788,
     "phase_rows_total": 786,
     "phase_count": 3,
     "status": "needs_review",

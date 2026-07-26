@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T18:33:07Z",
+  "generated_at": "2026-07-26T19:02:03Z",
   "scope": "top_missing_image_manual_fix_queue",
   "summary": {
     "catalog_rows": 20313,
-    "missing_image_rows": 790,
+    "missing_image_rows": 788,
     "queue_rows": 80,
     "limit": 80,
     "manual_confirmed_rows": 0,
-    "candidate_context_rows": 41,
+    "candidate_context_rows": 39,
     "candidate_option_rows": 1,
     "rejected_candidate_option_rows": 21,
     "by_source_store": [
@@ -37,30 +37,26 @@
         5
       ],
       [
-        "치이카와 온라인 쿠지",
-        3
+        "반다이",
+        4
       ],
       [
         "애니메이트",
         2
       ],
       [
-        "반다이",
-        2
+        "치이카와 온라인 쿠지",
+        1
       ]
     ],
     "by_review_lane": [
       [
         "official_store_search",
-        54
+        56
       ],
       [
         "open_existing_source_url",
         24
-      ],
-      [
-        "official_campaign_identity_review",
-        2
       ]
     ],
     "auto_apply_enabled": false
@@ -90,72 +86,6 @@
       "manual_source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
       "manual_note": "",
       "safe_apply_command": "python -X utf8 tools\\apply_manual_catalog_image_update.py 657 \"IMAGE_URL\" --source-url \"SOURCE_URL\" --expect-name \"C賞 ぬいぐるみポシェット\" --write",
-      "confirmation_checklist": [
-        "Image URL opens as an actual image.",
-        "Source URL is official or clearly identifies the exact product/campaign.",
-        "Product name, prize rank, goods type, and variant match this row.",
-        "Do not use storefront, search result, logo, banner, or unrelated sample images.",
-        "Run cache/report/audit commands after applying confirmed rows."
-      ],
-      "candidate_context_source": "chiikawa_online_kuji_public_image_repair_report.json",
-      "candidate_status": "blocked",
-      "review_blockers": [
-        "no_unique_safe_candidate"
-      ],
-      "repair_candidate_count": 0,
-      "repair_skip_reason": "no_unique_safe_candidate"
-    },
-    {
-      "manual_confirmed": false,
-      "row_index": 658,
-      "catalog_index": 677,
-      "name_ko": "D상: 친구 마스코트",
-      "name_ja": "D賞 おともだちマスコット",
-      "category": "마스코트",
-      "character_name": "치이카와",
-      "affiliation": "치이카와",
-      "series_name": null,
-      "sub_series": "치이카와다라케 쿠지",
-      "source_store": "치이카와 온라인 쿠지",
-      "current_source_url": "https://online-kuji.chiikawamarket.jp/",
-      "review_lane": "official_campaign_identity_review",
-      "manual_image_url": "",
-      "manual_source_url": "https://online-kuji.chiikawamarket.jp/",
-      "manual_note": "",
-      "safe_apply_command": "python -X utf8 tools\\apply_manual_catalog_image_update.py 677 \"IMAGE_URL\" --source-url \"SOURCE_URL\" --expect-name \"D賞 おともだちマスコット\" --write",
-      "confirmation_checklist": [
-        "Image URL opens as an actual image.",
-        "Source URL is official or clearly identifies the exact product/campaign.",
-        "Product name, prize rank, goods type, and variant match this row.",
-        "Do not use storefront, search result, logo, banner, or unrelated sample images.",
-        "Run cache/report/audit commands after applying confirmed rows."
-      ],
-      "candidate_context_source": "chiikawa_online_kuji_public_image_repair_report.json",
-      "candidate_status": "blocked",
-      "review_blockers": [
-        "no_unique_safe_candidate"
-      ],
-      "repair_candidate_count": 0,
-      "repair_skip_reason": "no_unique_safe_candidate"
-    },
-    {
-      "manual_confirmed": false,
-      "row_index": 661,
-      "catalog_index": 682,
-      "name_ko": "D상: 하치와레 마스코트",
-      "name_ja": "D賞 マスコット",
-      "category": "마스코트",
-      "character_name": "하치와레",
-      "affiliation": "치이카와",
-      "series_name": null,
-      "sub_series": "하치와레다라케 쿠지",
-      "source_store": "치이카와 온라인 쿠지",
-      "current_source_url": "https://online-kuji.chiikawamarket.jp/",
-      "review_lane": "official_campaign_identity_review",
-      "manual_image_url": "",
-      "manual_source_url": "https://online-kuji.chiikawamarket.jp/",
-      "manual_note": "",
-      "safe_apply_command": "python -X utf8 tools\\apply_manual_catalog_image_update.py 682 \"IMAGE_URL\" --source-url \"SOURCE_URL\" --expect-name \"D賞 マスコット\" --write",
       "confirmation_checklist": [
         "Image URL opens as an actual image.",
         "Source URL is official or clearly identifies the exact product/campaign.",
@@ -4182,6 +4112,58 @@
       "manual_source_url": "",
       "manual_note": "",
       "safe_apply_command": "python -X utf8 tools\\apply_manual_catalog_image_update.py 1027 \"IMAGE_URL\" --source-url \"SOURCE_URL\" --expect-name \"원피스 피규어 (로로노아 조로)\" --write",
+      "confirmation_checklist": [
+        "Image URL opens as an actual image.",
+        "Source URL is official or clearly identifies the exact product/campaign.",
+        "Product name, prize rank, goods type, and variant match this row.",
+        "Do not use storefront, search result, logo, banner, or unrelated sample images.",
+        "Run cache/report/audit commands after applying confirmed rows."
+      ]
+    },
+    {
+      "manual_confirmed": false,
+      "row_index": 1005,
+      "catalog_index": 1028,
+      "name_ko": "원피스 피규어 (나미)",
+      "name_ja": null,
+      "category": "피규어",
+      "character_name": "나미",
+      "affiliation": "원피스",
+      "series_name": null,
+      "sub_series": null,
+      "source_store": "반다이",
+      "current_source_url": null,
+      "review_lane": "official_store_search",
+      "manual_image_url": "",
+      "manual_source_url": "",
+      "manual_note": "",
+      "safe_apply_command": "python -X utf8 tools\\apply_manual_catalog_image_update.py 1028 \"IMAGE_URL\" --source-url \"SOURCE_URL\" --expect-name \"원피스 피규어 (나미)\" --write",
+      "confirmation_checklist": [
+        "Image URL opens as an actual image.",
+        "Source URL is official or clearly identifies the exact product/campaign.",
+        "Product name, prize rank, goods type, and variant match this row.",
+        "Do not use storefront, search result, logo, banner, or unrelated sample images.",
+        "Run cache/report/audit commands after applying confirmed rows."
+      ]
+    },
+    {
+      "manual_confirmed": false,
+      "row_index": 1006,
+      "catalog_index": 1029,
+      "name_ko": "원피스 피규어 (상디)",
+      "name_ja": null,
+      "category": "피규어",
+      "character_name": "상디",
+      "affiliation": "원피스",
+      "series_name": null,
+      "sub_series": null,
+      "source_store": "반다이",
+      "current_source_url": null,
+      "review_lane": "official_store_search",
+      "manual_image_url": "",
+      "manual_source_url": "",
+      "manual_note": "",
+      "safe_apply_command": "python -X utf8 tools\\apply_manual_catalog_image_update.py 1029 \"IMAGE_URL\" --source-url \"SOURCE_URL\" --expect-name \"원피스 피규어 (상디)\" --write",
       "confirmation_checklist": [
         "Image URL opens as an actual image.",
         "Source URL is official or clearly identifies the exact product/campaign.",

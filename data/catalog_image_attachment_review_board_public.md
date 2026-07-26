@@ -1,7 +1,7 @@
 # Catalog Image Attachment Review Board
 
-- Review rows: `27`
-- Exact image URL review rows: `4`
+- Review rows: `25`
+- Exact image URL review rows: `2`
 - Representative image review rows: `23`
 - Gate: `blocked_until_manual_image_confirmation`
 
@@ -30,24 +30,6 @@
 - Blockers: `manual_image_url_confirmation`
 - Review URL: https://online-kuji.chiikawamarket.jp/store/lottery/usagi
 - Suggested local path: `assets/catalog_images/catalog_657.webp`
-
-### 677 D상: 친구 마스코트
-
-- Lane: `image_url_review_ready`
-- Store: `치이카와 온라인 쿠지`
-- Category: `마스코트`
-- Blockers: `manual_image_url_confirmation`
-- Review URL: https://online-kuji.chiikawamarket.jp/
-- Suggested local path: `assets/catalog_images/catalog_677.webp`
-
-### 682 D상: 하치와레 마스코트
-
-- Lane: `image_url_review_ready`
-- Store: `치이카와 온라인 쿠지`
-- Category: `마스코트`
-- Blockers: `manual_image_url_confirmation`
-- Review URL: https://online-kuji.chiikawamarket.jp/
-- Suggested local path: `assets/catalog_images/catalog_682.webp`
 
 ### 936 치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)
 

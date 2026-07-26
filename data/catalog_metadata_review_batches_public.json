@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T18:53:03Z",
+  "generated_at": "2026-07-26T19:07:06Z",
   "summary": {
     "catalog_rows": 20313,
     "tracked_fields": [
@@ -14,13 +14,13 @@
     "field_store_group_count": 356,
     "batch_count": 30,
     "batch_size": 12,
-    "missing_cell_count": 14022,
+    "missing_cell_count": 14020,
     "field_missing_totals": {
       "name_ja": 526,
       "release_date": 1342,
       "barcode": 10048,
       "official_price_jpy": 553,
-      "image_url": 790,
+      "image_url": 788,
       "source_url": 763
     },
     "top_source_stores_with_missing_metadata": [
@@ -38,7 +38,7 @@
       ],
       [
         "치이카와 온라인 쿠지",
-        661
+        659
       ],
       [
         "Stellive Store",
@@ -5429,7 +5429,7 @@
       "batch_id": "metadata-review-007",
       "priority": 20,
       "group_count": 12,
-      "missing_cell_count": 32,
+      "missing_cell_count": 31,
       "field_counts": [
         [
           "image_url",
@@ -5683,51 +5683,6 @@
         },
         {
           "field": "image_url",
-          "source_store": "치이카와 온라인 쿠지",
-          "missing_rows": 3,
-          "priority": 20,
-          "workflow": "source_then_image_import",
-          "evidence_required": "product image from exact source_url after identity verification",
-          "next_machine_step": "source_then_image_import",
-          "risk": "wrong_product_image",
-          "recommended_action": "Find exact official product page and attach source_url/image_url together.",
-          "sample_catalog_indexes": [
-            657,
-            677,
-            682
-          ],
-          "sample_items": [
-            {
-              "catalog_index": 657,
-              "name_ko": "C상: 인형 포셰트",
-              "name_ja": "C賞 ぬいぐるみポシェット",
-              "series_name": "ちいかわ うさぎだらけくじ",
-              "category": "인형",
-              "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
-              "image_url": null
-            },
-            {
-              "catalog_index": 677,
-              "name_ko": "D상: 친구 마스코트",
-              "name_ja": "D賞 おともだちマスコット",
-              "series_name": null,
-              "category": "마스코트",
-              "source_url": "https://online-kuji.chiikawamarket.jp/",
-              "image_url": null
-            },
-            {
-              "catalog_index": 682,
-              "name_ko": "D상: 하치와레 마스코트",
-              "name_ja": "D賞 マスコット",
-              "series_name": null,
-              "category": "마스코트",
-              "source_url": "https://online-kuji.chiikawamarket.jp/",
-              "image_url": null
-            }
-          ]
-        },
-        {
-          "field": "image_url",
           "source_store": "카도카와",
           "missing_rows": 3,
           "priority": 20,
@@ -5945,39 +5900,7 @@
               "image_url": null
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-008",
-      "priority": 20,
-      "group_count": 12,
-      "missing_cell_count": 226,
-      "field_counts": [
-        [
-          "image_url",
-          11
-        ],
-        [
-          "release_date",
-          1
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "source_then_image_import",
-          11
-        ],
-        [
-          "official_metadata_review",
-          1
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "image_url",
           "source_store": "포켓몬 센터",
@@ -6012,7 +5935,39 @@
               "image_url": null
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-008",
+      "priority": 20,
+      "group_count": 12,
+      "missing_cell_count": 225,
+      "field_counts": [
+        [
+          "image_url",
+          11
+        ],
+        [
+          "release_date",
+          1
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "source_then_image_import",
+          11
+        ],
+        [
+          "official_metadata_review",
+          1
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "image_url",
           "source_store": "ALTER",
@@ -6259,6 +6214,31 @@
               "series_name": null,
               "category": "문구",
               "source_url": null,
+              "image_url": null
+            }
+          ]
+        },
+        {
+          "field": "image_url",
+          "source_store": "치이카와 온라인 쿠지",
+          "missing_rows": 1,
+          "priority": 20,
+          "workflow": "source_then_image_import",
+          "evidence_required": "product image from exact source_url after identity verification",
+          "next_machine_step": "source_then_image_import",
+          "risk": "wrong_product_image",
+          "recommended_action": "Find exact official product page and attach source_url/image_url together.",
+          "sample_catalog_indexes": [
+            657
+          ],
+          "sample_items": [
+            {
+              "catalog_index": 657,
+              "name_ko": "C상: 인형 포셰트",
+              "name_ja": "C賞 ぬいぐるみポシェット",
+              "series_name": "ちいかわ うさぎだらけくじ",
+              "category": "인형",
+              "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
               "image_url": null
             }
           ]
@@ -9542,8 +9522,8 @@
               "name_ja": "D賞 おともだちマスコット",
               "series_name": null,
               "category": "마스코트",
-              "source_url": "https://online-kuji.chiikawamarket.jp/",
-              "image_url": null
+              "source_url": "https://prtimes.jp/main/html/rd/p/000000038.000168561.html",
+              "image_url": "https://prcdn.freetls.fastly.net/release_image/168561/38/168561-38-24d1c66f297e4388d7a93b85d2a14c02-1900x1000.jpg?width=1950&height=1350&quality=85%2C65&format=jpeg&auto=webp&fit=bounds&bg-color=fff"
             },
             {
               "catalog_index": 680,
@@ -12051,8 +12031,8 @@
               "name_ja": "D賞 おともだちマスコット",
               "series_name": null,
               "category": "마스코트",
-              "source_url": "https://online-kuji.chiikawamarket.jp/",
-              "image_url": null
+              "source_url": "https://prtimes.jp/main/html/rd/p/000000038.000168561.html",
+              "image_url": "https://prcdn.freetls.fastly.net/release_image/168561/38/168561-38-24d1c66f297e4388d7a93b85d2a14c02-1900x1000.jpg?width=1950&height=1350&quality=85%2C65&format=jpeg&auto=webp&fit=bounds&bg-color=fff"
             },
             {
               "catalog_index": 680,
@@ -13436,7 +13416,7 @@
             },
             {
               "catalog_index": 11580,
-              "name_ko": "一番くじ ちいかわ / B賞 / ハチワレ ぬいぐるみ / 치이카와",
+              "name_ko": "一番くじ ちいかわ / B賞 / ハチワレ ぬいぐるみ / 하치와레",
               "name_ja": "B賞 ハチワレ ぬいぐるみ",
               "series_name": "一番くじ ちいかわ",
               "category": "인형",
@@ -13445,7 +13425,7 @@
             },
             {
               "catalog_index": 11581,
-              "name_ko": "一番くじ ちいかわ / C賞 / うさぎ ぬいぐるみ / 치이카와",
+              "name_ko": "一番くじ ちいかわ / C賞 / うさぎ ぬいぐるみ / 우사기",
               "name_ja": "C賞 うさぎ ぬいぐるみ",
               "series_name": "一番くじ ちいかわ",
               "category": "인형",
