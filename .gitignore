@@ -1,0 +1,68 @@
+# Local editor/agent settings
+.claude/settings.local.json
+.idea/
+*.iml
+
+# Flutter and local browser/dev-server state
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+.last_build_id
+
+# Generated local browser profiles can include cookies, history, and storage.
+chrome-device/
+
+# Local databases and screenshots
+*.db
+tmp-*.png
+
+# Keep the two intentional catalog asset roots tracked:
+#   assets/catalog_images/
+#   assets/assets/catalog_images/
+# Ignore accidental nested copies from repeated asset mirroring.
+assets/assets/assets/
+
+# Flutter web build duplicates generated under already-tracked public roots.
+assets/assets/AssetManifest.*
+assets/assets/FontManifest.json
+assets/assets/NOTICES
+assets/assets/fonts/
+assets/assets/lib/
+assets/assets/shaders/
+canvaskit/canvaskit/
+icons/icons/
+
+# Generated iOS/Flutter platform glue
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh
+ios/Flutter/ephemeral/
+ios/Runner/GeneratedPluginRegistrant.*
+
+# Local-only source/image discovery caches and dry-run scratch reports
+server/.catalog_image_cache/
+server/agent_*
+server/*_dryrun.json
+server/*_probe.json
+server/*_recheck*.json
+server/*_candidates*.json
+server/*_audit.json
+server/*_audit.md
+server/*_current*.json
+server/*_current*.md
+server/*_report*.json
+server/*_report*.md
+server/*_queue*.csv
+server/*_queue*.html
+server/*_queue*.json
+server/*_queue*.md
+server/*_write.json
+server/*_write.md
+server/chiikawa_gotouchi_jp_api_image_report.json
+server/store_source_netloc_audit.json
+server/store_source_netloc_audit.md
+
+# Python caches
+__pycache__/
+*.py[cod]
