@@ -59,10 +59,18 @@ def expected_prize_display_name(row: dict[str, Any]) -> str:
     return f"{prize_rank} {prize_item_name}"
 
 
+def expected_prize_item_name(row: dict[str, Any]) -> str:
+    prize_rank = str(row.get("sub_series") or "").strip()
+    prize_item_name = str(row.get("name_ja") or "").strip()
+    if prize_rank and prize_item_name.startswith(prize_rank):
+        return prize_item_name[len(prize_rank) :].strip()
+    return prize_item_name
+
+
 def expected_name_ko(row: dict[str, Any]) -> str:
     series_name = str(row.get("series_name") or "").strip()
     prize_rank = str(row.get("sub_series") or "").strip()
-    prize_item_name = str(row.get("name_ja") or "").strip()
+    prize_item_name = expected_prize_item_name(row)
     character_name = str(row.get("character_name") or "").strip()
     parts = [series_name, prize_rank, prize_item_name]
     if character_name and character_name != "혼합":
