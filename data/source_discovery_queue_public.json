@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "summary": {
-    "source_discovery_rows": 672,
+    "source_discovery_rows": 692,
     "published_sample_rows": 120,
     "stale_excluded_rows": 0,
     "by_workflow": [
       [
         "official_search_url_available",
-        655
+        675
       ],
       [
         "licensed_retailer_search_review",
@@ -21,7 +21,7 @@
     "by_confidence": [
       [
         "official_search",
-        655
+        675
       ],
       [
         "licensed_retailer_review",
@@ -37,11 +37,11 @@
     "top_source_stores": [
       [
         "엔스카이",
-        172
+        179
       ],
       [
         "애니메이트",
-        144
+        156
       ],
       [
         "굿스마일컴퍼니",
@@ -80,12 +80,12 @@
         13
       ],
       [
-        "AmiAmi",
+        "Cospa",
         12
       ],
       [
-        "Cospa",
-        11
+        "AmiAmi",
+        12
       ],
       [
         "반다이",
@@ -315,6 +315,26 @@
       "name_ja": "僕のヒーローアカデミア オールマイト トートバッグ",
       "official_search_url": "https://www.cospa.com/cospa/itemlist/keyword/%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88%20%E3%83%88%E3%83%BC%E3%83%88%E3%83%90%E3%83%83%E3%82%B0",
       "web_search_url": "https://www.google.com/search?q=%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88%20%E3%83%88%E3%83%BC%E3%83%88%E3%83%90%E3%83%83%E3%82%B0%20Cospa%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "allowed_source_domains": [
+        "www.cospa.com"
+      ],
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "auto_apply_enabled": false,
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "recommended_next_action": "find_exact_product_detail_url_then_import_image"
+    },
+    {
+      "priority": 10,
+      "workflow": "official_search_url_available",
+      "confidence": "official_search",
+      "row_index": 1800,
+      "source_store": "Cospa",
+      "affiliation": "단간론파",
+      "category": "가방",
+      "name_ko": "단간론파 모노쿠마 토트백",
+      "name_ja": "ダンガンロンパ モノクマ トートバッグ",
+      "official_search_url": "https://www.cospa.com/cospa/itemlist/keyword/%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%20%E3%83%88%E3%83%BC%E3%83%88%E3%83%90%E3%83%83%E3%82%B0",
+      "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%20%E3%83%88%E3%83%BC%E3%83%88%E3%83%90%E3%83%83%E3%82%B0%20Cospa%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
       "allowed_source_domains": [
         "www.cospa.com"
       ],
@@ -2555,26 +2575,6 @@
       "name_ja": "デスクトップキューティーフィギュア クラピカ",
       "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB",
       "web_search_url": "https://www.google.com/search?q=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%AF%E3%83%A9%E3%83%94%E3%82%AB%20Taito%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-      "allowed_source_domains": [
-        "www.taito.co.jp"
-      ],
-      "evidence_required": "exact official product detail URL on the expected official domain",
-      "auto_apply_enabled": false,
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "recommended_next_action": "find_exact_product_detail_url_then_import_image"
-    },
-    {
-      "priority": 10,
-      "workflow": "official_search_url_available",
-      "confidence": "official_search",
-      "row_index": 1319,
-      "source_store": "Taito",
-      "affiliation": "헌터X헌터",
-      "category": "피규어",
-      "name_ko": "Desktop Cute 곤 프릭스",
-      "name_ja": "デスクトップキューティーフィギュア ゴン＝フリークス",
-      "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%B4%E3%83%B3%EF%BC%9D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9",
-      "web_search_url": "https://www.google.com/search?q=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%B4%E3%83%B3%EF%BC%9D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9%20Taito%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
       "allowed_source_domains": [
         "www.taito.co.jp"
       ],

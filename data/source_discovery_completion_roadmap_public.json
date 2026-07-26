@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-25T09:13:00Z",
+  "generated_at": "2026-07-26T08:16:15Z",
   "scope": "source_discovery_completion_roadmap",
   "summary": {
-    "missing_image_rows": 745,
-    "source_first_rows": 717,
-    "queued_source_rows": 667,
-    "focus_source_rows": 667,
+    "missing_image_rows": 765,
+    "source_first_rows": 737,
+    "queued_source_rows": 687,
+    "focus_source_rows": 687,
     "focus_coverage": 1.0,
-    "top_10_store_rows": 541,
-    "top_10_store_coverage": 0.8111,
+    "top_10_store_rows": 560,
+    "top_10_store_coverage": 0.8151,
     "current_focus_pack_rows": 20,
     "current_focus_fallback_rows": 20,
     "completion_readiness_status": "current_focus_fallback_review_required",
@@ -28,9 +28,9 @@
     "auto_apply_ready_rows": 0,
     "auto_apply_enabled": false,
     "manual_confirmed_rows": 0,
-    "queued_source_rows": 667,
-    "focus_source_rows": 667,
-    "remaining_focus_review_rows": 667,
+    "queued_source_rows": 687,
+    "focus_source_rows": 687,
+    "remaining_focus_review_rows": 687,
     "current_focus_pack_id": "source-discovery-focus-002",
     "current_focus_pack_rows": 20,
     "current_focus_remaining_rows": 20,
@@ -38,14 +38,14 @@
     "next_pack_after_current": "source-discovery-focus-002",
     "current_focus_resolution_status": "manual_exact_source_url_review_required",
     "current_focus_cache_cross_check": {
-      "cross_checked_rows": 10,
+      "cross_checked_rows": 9,
       "safe_exact_match_rows": 0,
       "broad_candidate_rows": 1,
-      "no_candidate_rows": 9,
+      "no_candidate_rows": 8,
       "status_counts": [
         [
           "no_cache_candidate",
-          9
+          8
         ],
         [
           "broad_cache_candidate",
@@ -55,29 +55,29 @@
       "auto_apply_enabled": false
     },
     "recommended_next_focus_pack_id": null,
-    "all_sample_candidates_rejected_rows": 18,
+    "all_sample_candidates_rejected_rows": 20,
     "safe_candidate_detail_link_rows": 0,
-    "next_safe_phase": "review_fallback_queue_and_fill_exact_manual_confirmed_source_urls",
+    "next_safe_phase": "ignore_rejected_samples_and_run_exact_source_search",
     "next_queue": {
-      "source": "data/source_discovery_next_focus_fallback_queue_public.json",
+      "source": "data/source_discovery_next_focus_exact_url_review_queue_public.json",
       "queue_rows": 20,
-      "fallback_reason": "official_search_fetch_http_error",
-      "all_sample_candidates_rejected_rows": 18,
+      "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
+      "all_sample_candidates_rejected_rows": 20,
       "safe_candidate_detail_link_rows": 0,
-      "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%A4%8F%E6%B2%B9%E5%82%91+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
       "first_primary_review_url_kind": "domain_limited_web_search",
-      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
-      "first_fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%A4%8F%E6%B2%B9%E5%82%91+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "first_fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E5%A4%8F%E6%B2%B9%E5%82%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
     },
     "blocked_until": "exact_product_detail_source_url_confirmed",
     "blocked_reasons": [
-      "fallback_search_required"
+      "sample_candidate_links_rejected"
     ],
     "safety_note": "Source discovery queues are review-only. Confirm exact official product detail URLs before image attachment."
   },
   "next_execution_summary": {
     "lane_count": 5,
-    "open_rows": 831,
+    "open_rows": 851,
     "next_batch_rows": 184,
     "next_safe_phase": "exact_source_url_review",
     "auto_apply_enabled": false,
@@ -86,12 +86,12 @@
   "next_execution_lanes": [
     {
       "lane": "exact_source_url_review",
-      "status": "manual_fallback_review_required",
+      "status": "next",
       "open_rows": 20,
       "next_batch_rows": 20,
       "review_start_rows": 20,
       "manual_decision_rows": 20,
-      "public_report": "data/source_discovery_next_focus_fallback_queue_public.json",
+      "public_report": "data/source_discovery_next_focus_exact_url_review_queue_public.json",
       "next_action": "ignore broad/rejected samples and confirm exact product detail URLs"
     },
     {
@@ -107,7 +107,7 @@
     {
       "lane": "focus_pack_rotation",
       "status": "queued_after_current_focus",
-      "open_rows": 667,
+      "open_rows": 687,
       "next_batch_rows": 20,
       "review_start_rows": 20,
       "manual_decision_rows": 20,
@@ -140,24 +140,24 @@
     "current_lane": "exact_source_url_review",
     "current_review_section": "source_discovery_next_focus_exact_url_review_queue",
     "current_focus_pack_id": "source-discovery-focus-002",
-    "queued_source_rows": 667,
+    "queued_source_rows": 687,
     "current_focus_remaining_rows": 20,
     "safe_candidate_detail_link_rows": 0,
-    "all_sample_candidates_rejected_rows": 18,
-    "next_safe_phase": "review_fallback_queue_and_fill_exact_manual_confirmed_source_urls",
+    "all_sample_candidates_rejected_rows": 20,
+    "next_safe_phase": "ignore_rejected_samples_and_run_exact_source_search",
     "blocked_reasons": [
-      "fallback_search_required"
+      "sample_candidate_links_rejected"
     ],
     "current_focus_resolution_status": "manual_exact_source_url_review_required",
     "current_focus_cache_cross_check": {
-      "cross_checked_rows": 10,
+      "cross_checked_rows": 9,
       "safe_exact_match_rows": 0,
       "broad_candidate_rows": 1,
-      "no_candidate_rows": 9,
+      "no_candidate_rows": 8,
       "status_counts": [
         [
           "no_cache_candidate",
-          9
+          8
         ],
         [
           "broad_cache_candidate",
@@ -175,7 +175,7 @@
         "next_batch_rows": 20,
         "review_section": "source_discovery_next_focus_exact_url_review_queue",
         "write_template_section": "source_url_confirmation_patch_template.rows",
-        "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+        "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%A4%8F%E6%B2%B9%E5%82%91+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
         "first_primary_review_url_kind": "domain_limited_web_search",
         "template_rows": 10,
         "rediscovery_work_order_rows": 20,
@@ -236,21 +236,21 @@
     "remaining_review_rows": 20,
     "blocked_rows": 20,
     "fallback_queue_rows": 20,
-    "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-    "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+    "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E5%A4%8F%E6%B2%B9%E5%82%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+    "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%A4%8F%E6%B2%B9%E5%82%91+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
     "first_primary_review_url_kind": "domain_limited_web_search",
-    "first_fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-    "all_sample_candidates_rejected_rows": 18,
+    "first_fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E5%A4%8F%E6%B2%B9%E5%82%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+    "all_sample_candidates_rejected_rows": 20,
     "safe_candidate_detail_link_rows": 0,
     "cache_cross_check": {
-      "cross_checked_rows": 10,
+      "cross_checked_rows": 9,
       "safe_exact_match_rows": 0,
       "broad_candidate_rows": 1,
-      "no_candidate_rows": 9,
+      "no_candidate_rows": 8,
       "status_counts": [
         [
           "no_cache_candidate",
-          9
+          8
         ],
         [
           "broad_cache_candidate",
@@ -261,21 +261,21 @@
     },
     "resolution_status": "manual_exact_source_url_review_required",
     "recommended_next_focus_pack_id": null,
-    "recommended_action": "confirm current focus pack source URLs before image attachment"
+    "recommended_action": "ignore rejected sample links and run exact source search from the primary review URLs"
   },
   "top_store_steps": [
     {
       "rank": 1,
       "source_store": "엔스카이",
-      "rows": 172,
-      "estimated_image_rows_unblocked_after_source_confirmation": 172,
+      "rows": 179,
+      "estimated_image_rows_unblocked_after_source_confirmation": 179,
       "pack_count": 0,
       "top_category": "키링",
       "top_allowed_source_domain": "www.enskyshop.com",
       "first_batch_id": "source-discovery-action-001",
       "first_primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
       "first_primary_review_url_kind": "official_search_url",
-      "official_search_url_count": 172,
+      "official_search_url_count": 179,
       "fallback_web_search_url_count": 0,
       "next_step": "open_official_search_and_confirm_exact_product_source_url",
       "auto_apply_enabled": false
@@ -283,15 +283,15 @@
     {
       "rank": 2,
       "source_store": "애니메이트",
-      "rows": 144,
-      "estimated_image_rows_unblocked_after_source_confirmation": 144,
+      "rows": 156,
+      "estimated_image_rows_unblocked_after_source_confirmation": 156,
       "pack_count": 0,
       "top_category": "아크릴 스탠드",
       "top_allowed_source_domain": "www.animate-onlineshop.jp",
       "first_batch_id": "source-discovery-action-010",
-      "first_primary_review_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%9B%90%ED%94%BC%EC%8A%A4%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%ED%86%A0%EB%8B%88%ED%86%A0%EB%8B%88%20%EC%B5%B8%ED%8C%8C%29",
+      "first_primary_review_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EA%B7%80%EB%A9%B8%EC%9D%98%20%EC%B9%BC%EB%82%A0%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%ED%83%84%EC%A7%80%EB%A1%9C%29",
       "first_primary_review_url_kind": "official_search_url",
-      "official_search_url_count": 144,
+      "official_search_url_count": 156,
       "fallback_web_search_url_count": 0,
       "next_step": "open_official_search_and_confirm_exact_product_source_url",
       "auto_apply_enabled": false
@@ -437,7 +437,7 @@
     {
       "phase": 2,
       "name": "top_store_source_confirmation",
-      "rows": 667,
+      "rows": 687,
       "public_report": "data/source_discovery_focus_packs_public.json",
       "blocked_until": "exact_product_detail_source_url_confirmed",
       "next_machine_step": "rotate_focus_packs_until_current_focus_stores_are_confirmed"

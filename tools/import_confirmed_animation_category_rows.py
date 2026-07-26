@@ -152,8 +152,16 @@ def import_rows(
             skipped.append({"source_category": source_category, "target_category": target_category, "reason": "source_category_not_found"})
             continue
 
+        preserve_source_as_sub_series = _confirmed(
+            item.get("preserve_source_category_as_sub_series")
+        )
         for index in matched_indexes:
             row = normalized_seed[index]
+            previous_sub_series = row.get("sub_series")
+            sub_series_preserved = False
+            if preserve_source_as_sub_series and not str(previous_sub_series or "").strip():
+                row["sub_series"] = source_category
+                sub_series_preserved = True
             row["category"] = target_category
             updated.append(
                 {
@@ -168,6 +176,10 @@ def import_rows(
                     "folder_color_hex": item.get("folder_color_hex"),
                     "folder_icon_key": item.get("folder_icon_key"),
                     "match_keywords": keywords,
+                    "preserve_source_category_as_sub_series": preserve_source_as_sub_series,
+                    "previous_sub_series": previous_sub_series,
+                    "sub_series": row.get("sub_series"),
+                    "sub_series_preserved": sub_series_preserved,
                 }
             )
 

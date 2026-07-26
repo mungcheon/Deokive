@@ -1,32 +1,32 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-25T09:13:00Z",
+  "generated_at": "2026-07-26T08:16:15Z",
   "summary": {
     "catalog_rows": 20347,
     "coverage": {
-      "source_url": 0.967,
-      "image_url": 0.9634,
+      "source_url": 0.966,
+      "image_url": 0.9624,
       "release_date": 0.9337
     },
     "missing": {
-      "source_url": 672,
-      "image_url": 745,
+      "source_url": 692,
+      "image_url": 765,
       "release_date": 1348,
       "official_price_jpy": 559,
       "barcode": 10082,
       "name_ja": 526
     },
     "open_review_queues": {
-      "source_discovery_rows": 672,
-      "image_missing_rows": 745,
+      "source_discovery_rows": 692,
+      "image_missing_rows": 765,
       "dedupe_groups": 61,
       "animation_unknown_categories": 0,
       "ichiban_missing_release_date_rows": 8,
       "ichiban_missing_price_rows": 342,
       "generic_source_patch_candidate_rows": 3,
       "requested_focus_open_rows": 8033,
-      "danganronpa_missing_media_rows": 34,
-      "danganronpa_patch_template_pending_rows": 34,
+      "danganronpa_missing_media_rows": 36,
+      "danganronpa_patch_template_pending_rows": 36,
       "danganronpa_patch_template_ready_rows": 0,
       "confirmed_import_template_rows": 1160,
       "confirmed_import_action_queue_rows": 4252,
@@ -42,23 +42,23 @@
       "requested_focus_actionable_rows": 600,
       "requested_focus_unqueued_actionable_rows": 0,
       "requested_focus_barcode_template_rows_excluded": 5674,
-      "source_discovery_action_rows": 667,
-      "source_discovery_actionable_rows": 667,
+      "source_discovery_action_rows": 687,
+      "source_discovery_actionable_rows": 687,
       "source_discovery_unqueued_actionable_rows": 0,
       "source_discovery_manual_research_backlog_rows": 5,
       "source_discovery_manual_identity_backfill_required_rows": 3,
       "source_discovery_manual_official_lookup_rows": 2,
-      "source_discovery_focus_template_rows": 667,
+      "source_discovery_focus_template_rows": 687,
       "source_discovery_focus_template_work_order_packs": 62,
-      "source_discovery_focus_template_dry_run_skipped_rows": 667,
+      "source_discovery_focus_template_dry_run_skipped_rows": 687,
       "source_discovery_next_focus_pack_rows": 20,
       "source_discovery_next_focus_pack_manual_quarantine": true,
       "source_discovery_next_focus_pack_quarantine_reason": "official_cache_safe_exact_match_absent",
       "source_discovery_recommended_active_focus_pack_id": "source-discovery-focus-002",
       "source_discovery_focus_pack_progress_queues": 62,
-      "source_discovery_focus_pack_progress_remaining_rows": 667,
-      "source_discovery_starter_queue_rows": 672,
-      "source_discovery_starter_queue_groups": 353,
+      "source_discovery_focus_pack_progress_remaining_rows": 687,
+      "source_discovery_starter_queue_rows": 692,
+      "source_discovery_starter_queue_groups": 367,
       "source_discovery_next_focus_fallback_rows": 20,
       "source_discovery_next_focus_fallback_manual_confirmed_rows": 0,
       "source_detail_candidate_action_rows": 15,
@@ -94,7 +94,7 @@
       "metadata_unqueued_actionable_groups": 0,
       "metadata_actionable_missing_cells": 2433,
       "metadata_unqueued_actionable_missing_cells": 0,
-      "metadata_primary_review_url_groups": 130,
+      "metadata_primary_review_url_groups": 128,
       "animation_category_review_rows": 0,
       "animation_category_action_rows": 36,
       "animation_category_split_review_categories": 0,
@@ -111,10 +111,10 @@
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
       "ichiban_prize_name_image_patch_blocked_rows": 0,
       "catalog_goal_manual_review_pillars": 5,
-      "catalog_goal_manual_review_rows": 940,
+      "catalog_goal_manual_review_rows": 960,
       "catalog_goal_auto_apply_ready_rows": 0,
       "catalog_goal_dedupe_manual_review_rows": 48,
-      "catalog_goal_missing_image_rows": 745,
+      "catalog_goal_missing_image_rows": 765,
       "catalog_goal_source_url_update_rows": 50,
       "catalog_goal_animation_category_rows": 36,
       "catalog_goal_ichiban_manual_review_rows": 61,
@@ -127,19 +127,19 @@
       "catalog_goal_animation_category_handoff_first_step_rows": 4,
       "catalog_goal_ichiban_handoff_first_step_rows": 20
     },
-    "top_store_priority_score": 2094.0
+    "top_store_priority_score": 2157.0
   },
   "quality_gates": [
     {
       "key": "source_url_coverage",
       "status": "pass",
-      "value": 0.967,
+      "value": 0.966,
       "target": 0.95
     },
     {
       "key": "image_url_coverage",
       "status": "pass",
-      "value": 0.9634,
+      "value": 0.9624,
       "target": 0.95
     },
     {
@@ -147,8 +147,8 @@
       "status": "pass",
       "value": 1.0,
       "target": 1,
-      "image_url_rows": 19602,
-      "local_image_path_rows": 19602,
+      "image_url_rows": 19582,
+      "local_image_path_rows": 19582,
       "image_url_without_local_path_rows": 0,
       "missing_local_image_files": 0,
       "missing_web_public_asset_files": 0,
@@ -163,7 +163,7 @@
     {
       "key": "source_discovery_backlog",
       "status": "warn",
-      "value": 672,
+      "value": 692,
       "target": 0
     },
     {
@@ -206,7 +206,7 @@
     {
       "workstream": "source_discovery",
       "status": "open",
-      "open_rows": 672,
+      "open_rows": 692,
       "primary_report": "data/source_discovery_queue_public.json",
       "next_step": "find_exact_official_source_url",
       "auto_apply_enabled": false
@@ -214,7 +214,7 @@
     {
       "workstream": "source_discovery_focus_template",
       "status": "manual_review",
-      "open_rows": 667,
+      "open_rows": 687,
       "work_order_pack_count": 62,
       "next_focus_pack_id": "source-discovery-focus-001",
       "next_source_store": "엔스카이",
@@ -223,7 +223,7 @@
       "next_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
       "template_confirmed_rows": 0,
       "dry_run_updated_rows": 0,
-      "dry_run_skipped_rows": 667,
+      "dry_run_skipped_rows": 687,
       "primary_report": "data/source_discovery_focus_confirmed_template_public.json",
       "next_step": "work_source_focus_template_work_order_top_to_bottom",
       "auto_apply_enabled": false
@@ -238,7 +238,7 @@
       "official_search_unavailable_rows": 20,
       "status_counts": [
         [
-          "http_error_429",
+          "ok_200_broad_result_set",
           20
         ]
       ],
@@ -289,7 +289,7 @@
       "status": "manual_review",
       "open_rows": 20,
       "manual_confirmed_rows": 0,
-      "fallback_reason": "official_search_fetch_http_error",
+      "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
       "by_source_store": [
         [
           "엔스카이",
@@ -309,15 +309,15 @@
         "legacy_mobile_store_search",
         "evidence_fill_and_dry_run"
       ],
-      "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%A4%8F%E6%B2%B9%E5%82%91+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
       "first_primary_review_url_kind": "domain_limited_web_search",
       "auto_apply_enabled": false
     },
     {
       "workstream": "source_discovery_starter_queue",
       "status": "manual_review",
-      "open_rows": 672,
-      "starter_queue_groups": 353,
+      "open_rows": 692,
+      "starter_queue_groups": 367,
       "coverage_matches_missing_source_url_rows": true,
       "primary_report": "data/source_discovery_starter_queue_public.json",
       "next_step": "find_exact_official_product_source_url",
@@ -334,14 +334,14 @@
     {
       "workstream": "source_discovery_action_queue",
       "status": "manual_review",
-      "open_rows": 667,
-      "actionable_source_rows": 667,
+      "open_rows": 687,
+      "actionable_source_rows": 687,
       "unqueued_actionable_source_rows": 0,
       "queue_coverage": 1.0,
       "by_review_state": [
         [
           "official_search_review_required",
-          655
+          675
         ],
         [
           "licensed_retailer_review_required",
@@ -351,7 +351,7 @@
       "by_workflow": [
         [
           "official_search_url_available",
-          655
+          675
         ],
         [
           "licensed_retailer_search_review",
@@ -361,11 +361,11 @@
       "by_source_store": [
         [
           "엔스카이",
-          172
+          179
         ],
         [
           "애니메이트",
-          144
+          156
         ],
         [
           "굿스마일컴퍼니",
@@ -404,12 +404,12 @@
           13
         ],
         [
-          "AmiAmi",
+          "Cospa",
           12
         ],
         [
-          "Cospa",
-          11
+          "AmiAmi",
+          12
         ],
         [
           "반다이",
@@ -524,7 +524,7 @@
         {
           "source_store": "엔스카이",
           "priority": 10,
-          "queued_source_rows": 172,
+          "queued_source_rows": 179,
           "batch_count": 9,
           "next_batch_id": "source-discovery-action-001",
           "batch_ids": [
@@ -541,23 +541,23 @@
           "allowed_source_domains": [
             "www.enskyshop.com"
           ],
-          "official_search_url_count": 172,
+          "official_search_url_count": 179,
           "workflow_rows": [
             [
               "official_search_url_available",
-              172
+              179
             ]
           ],
           "review_state_rows": [
             [
               "official_search_review_required",
-              172
+              179
             ]
           ],
           "category_rows": [
             [
               "키링",
-              52
+              54
             ],
             [
               "인형",
@@ -565,11 +565,11 @@
             ],
             [
               "아크릴 스탠드",
-              27
+              29
             ],
             [
               "마스코트",
-              21
+              22
             ],
             [
               "캔뱃지",
@@ -589,6 +589,10 @@
             ],
             [
               "아크릴 키링",
+              2
+            ],
+            [
+              "피규어",
               1
             ]
           ],
@@ -598,7 +602,7 @@
         {
           "source_store": "애니메이트",
           "priority": 10,
-          "queued_source_rows": 144,
+          "queued_source_rows": 156,
           "batch_count": 8,
           "next_batch_id": "source-discovery-action-010",
           "batch_ids": [
@@ -614,23 +618,23 @@
           "allowed_source_domains": [
             "www.animate-onlineshop.jp"
           ],
-          "official_search_url_count": 144,
+          "official_search_url_count": 156,
           "workflow_rows": [
             [
               "official_search_url_available",
-              144
+              156
             ]
           ],
           "review_state_rows": [
             [
               "official_search_review_required",
-              144
+              156
             ]
           ],
           "category_rows": [
             [
               "아크릴 스탠드",
-              30
+              37
             ],
             [
               "문구",
@@ -642,11 +646,11 @@
             ],
             [
               "인형",
-              15
+              18
             ],
             [
               "키링",
-              14
+              15
             ],
             [
               "생활잡화",
@@ -661,11 +665,11 @@
               7
             ],
             [
-              "아크릴 키링",
-              2
+              "피규어",
+              3
             ],
             [
-              "피규어",
+              "아크릴 키링",
               2
             ],
             [
@@ -1186,7 +1190,7 @@
     {
       "workstream": "danganronpa_missing_media",
       "status": "open",
-      "open_rows": 34,
+      "open_rows": 36,
       "primary_report": "data/danganronpa_missing_media_public.json",
       "next_step": "verify_danganronpa_exact_source_pages",
       "auto_apply_enabled": false
@@ -1194,7 +1198,7 @@
     {
       "workstream": "danganronpa_patch_template_dry_run",
       "status": "pending_confirmation",
-      "open_rows": 34,
+      "open_rows": 36,
       "ready_rows": 0,
       "blocked_rows": 0,
       "primary_report": "data/danganronpa_patch_template_dry_run_public.json",
@@ -1204,7 +1208,7 @@
     {
       "workstream": "image_enrichment",
       "status": "blocked",
-      "open_rows": 745,
+      "open_rows": 765,
       "primary_report": "data/catalog_image_enrichment_batches_public.json",
       "next_step": "resolve_blocker_summary_before_image_import",
       "auto_apply_enabled": false
@@ -1433,7 +1437,7 @@
       "excluded_workflow_rows": [
         [
           "find_source_then_extract_image",
-          667
+          687
         ],
         [
           "manual_image_research",
@@ -1476,7 +1480,7 @@
     {
       "workstream": "metadata_backlog",
       "status": "open",
-      "open_rows": 13932,
+      "open_rows": 13972,
       "primary_report": "data/catalog_metadata_backlog_public.json",
       "next_step": "review_field_evidence_policy",
       "auto_apply_enabled": false
@@ -1484,7 +1488,7 @@
     {
       "workstream": "metadata_review_batches",
       "status": "manual_review",
-      "open_rows": 13932,
+      "open_rows": 13972,
       "primary_report": "data/catalog_metadata_review_batches_public.json",
       "next_step": "work_full_metadata_review_batches",
       "auto_apply_enabled": false
@@ -1499,17 +1503,17 @@
       "unqueued_actionable_missing_cells": 0,
       "group_queue_coverage": 1.0,
       "missing_cell_queue_coverage": 1.0,
-      "primary_review_url_groups": 130,
+      "primary_review_url_groups": 128,
       "first_primary_review_url": "https://www.enskyshop.com/products/detail/24195",
       "first_primary_review_url_kind": "sample_source_url",
       "primary_review_url_kind_counts": [
         [
           "sample_source_url",
-          130
+          128
         ],
         [
           "manual_lookup_required",
-          36
+          38
         ]
       ],
       "primary_report": "data/catalog_metadata_action_queue_public.json",
@@ -1717,8 +1721,8 @@
           "missing_rows": 177,
           "priority": 10,
           "workflow": "official_metadata_review",
-          "primary_review_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%81%B4%E3%81%9F%E3%81%AC%E3%81%84+%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/1992397/",
-          "primary_review_url_kind": "sample_source_url",
+          "primary_review_url": null,
+          "primary_review_url_kind": "manual_lookup_required",
           "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
         },
         {
@@ -1787,8 +1791,8 @@
           "missing_rows": 63,
           "priority": 30,
           "workflow": "official_title_review",
-          "primary_review_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%81%B4%E3%81%9F%E3%81%AC%E3%81%84+%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/1992397/",
-          "primary_review_url_kind": "sample_source_url",
+          "primary_review_url": null,
+          "primary_review_url_kind": "manual_lookup_required",
           "recommended_action": "Verify original Japanese product titles from official listings."
         },
         {
@@ -2105,10 +2109,10 @@
   "store_priority_matrix": [
     {
       "source_store": "엔스카이",
-      "priority_score": 2094.0,
+      "priority_score": 2157.0,
       "rows": 230,
-      "missing_source_url": 172,
-      "missing_image_url": 172,
+      "missing_source_url": 179,
+      "missing_image_url": 179,
       "missing_release_date": 223,
       "missing_price_jpy": 0,
       "missing_barcode": 225,
@@ -2116,10 +2120,10 @@
     },
     {
       "source_store": "애니메이트",
-      "priority_score": 1738.0,
+      "priority_score": 1846.0,
       "rows": 470,
-      "missing_source_url": 144,
-      "missing_image_url": 144,
+      "missing_source_url": 156,
+      "missing_image_url": 156,
       "missing_release_date": 177,
       "missing_price_jpy": 2,
       "missing_barcode": 172,
@@ -2280,6 +2284,17 @@
       "recommended_first_action": "source_and_image_enrichment"
     },
     {
+      "source_store": "Cospa",
+      "priority_score": 143.0,
+      "rows": 14,
+      "missing_source_url": 12,
+      "missing_image_url": 12,
+      "missing_release_date": 14,
+      "missing_price_jpy": 0,
+      "missing_barcode": 14,
+      "recommended_first_action": "source_and_image_enrichment"
+    },
+    {
       "source_store": "치이카와 온라인 쿠지",
       "priority_score": 142.0,
       "rows": 677,
@@ -2289,17 +2304,6 @@
       "missing_price_jpy": 14,
       "missing_barcode": 677,
       "recommended_first_action": "release_date_enrichment"
-    },
-    {
-      "source_store": "Cospa",
-      "priority_score": 134.0,
-      "rows": 14,
-      "missing_source_url": 11,
-      "missing_image_url": 11,
-      "missing_release_date": 14,
-      "missing_price_jpy": 0,
-      "missing_barcode": 14,
-      "recommended_first_action": "source_and_image_enrichment"
     },
     {
       "source_store": "반다이",
@@ -2795,17 +2799,17 @@
       "priority": 15,
       "workstream": "danganronpa_missing_media",
       "public_report": "data/danganronpa_missing_media_public.json",
-      "open_rows": 34,
-      "official_search_rows": 18,
+      "open_rows": 36,
+      "official_search_rows": 19,
       "recommended_next_action": "Verify exact Danganronpa source pages and attach source_url/image_url patches."
     },
     {
       "priority": 15,
       "workstream": "danganronpa_patch_template_dry_run",
       "public_report": "data/danganronpa_patch_template_dry_run_public.json",
-      "template_rows": 34,
+      "template_rows": 36,
       "ready_rows": 0,
-      "skipped_rows": 34,
+      "skipped_rows": 36,
       "blocked_rows": 0,
       "recommended_next_action": "Review filled Danganronpa template rows here before any catalog patch."
     },
@@ -2841,31 +2845,31 @@
       "ready_rows": 0,
       "generic_source_url_rows": 50,
       "gotouchi_official_review_rows": 23,
-      "blocked_rows": 667,
+      "blocked_rows": 687,
       "recommended_next_action": "Process exact source_url-ready image rows first; review gotouchi motif candidates and replace generic storefront URLs before image import."
     },
     {
       "priority": 19,
       "workstream": "local_image_asset_audit",
       "public_report": "data/catalog_image_asset_audit_public.json",
-      "image_url_rows": 19602,
-      "local_image_path_rows": 19602,
+      "image_url_rows": 19582,
+      "local_image_path_rows": 19582,
       "image_url_without_local_path_rows": 0,
       "missing_local_image_files": 0,
       "missing_web_public_asset_files": 0,
       "local_asset_coverage": 1.0,
       "web_public_asset_coverage": 1.0,
-      "rows_still_requiring_image_url_evidence": 745,
+      "rows_still_requiring_image_url_evidence": 765,
       "missing_image_evidence_priority": {
-        "rows": 745,
+        "rows": 765,
         "by_source_store": [
           [
             "엔스카이",
-            172
+            179
           ],
           [
             "애니메이트",
-            144
+            156
           ],
           [
             "굿스마일컴퍼니",
@@ -2912,15 +2916,15 @@
             13
           ],
           [
+            "Cospa",
+            12
+          ],
+          [
             "AmiAmi",
             12
           ],
           [
             "반다이",
-            11
-          ],
-          [
-            "Cospa",
             11
           ],
           [
@@ -2943,11 +2947,11 @@
         "by_category": [
           [
             "피규어",
-            125
+            127
           ],
           [
             "아크릴 스탠드",
-            110
+            119
           ],
           [
             "캔뱃지",
@@ -2955,15 +2959,15 @@
           ],
           [
             "인형",
-            83
+            86
           ],
           [
             "키링",
-            77
+            80
           ],
           [
             "마스코트",
-            63
+            64
           ],
           [
             "문구",
@@ -2987,15 +2991,15 @@
           ],
           [
             "아크릴 키링",
-            11
+            12
+          ],
+          [
+            "가방",
+            10
           ],
           [
             "생활잡화",
             10
-          ],
-          [
-            "가방",
-            9
           ],
           [
             "응원용품",
@@ -3025,27 +3029,27 @@
         "by_affiliation": [
           [
             "원피스",
-            82
+            83
           ],
           [
             "치이카와",
-            61
-          ],
-          [
-            "헌터X헌터",
-            51
+            62
           ],
           [
             "주술회전",
-            50
+            52
+          ],
+          [
+            "헌터X헌터",
+            52
           ],
           [
             "나의 히어로 아카데미아",
-            45
+            50
           ],
           [
             "귀멸의 칼날",
-            43
+            45
           ],
           [
             "메이드 인 어비스",
@@ -3056,15 +3060,15 @@
             41
           ],
           [
-            "하츠네 미쿠",
-            34
-          ],
-          [
             "단간론파",
-            34
+            36
           ],
           [
             "체인소 맨",
+            35
+          ],
+          [
+            "하츠네 미쿠",
             34
           ],
           [
@@ -3078,6 +3082,10 @@
           [
             "슈타인즈게이트",
             17
+          ],
+          [
+            "진격의 거인",
+            13
           ],
           [
             "블루록",
@@ -3096,10 +3104,6 @@
             11
           ],
           [
-            "진격의 거인",
-            10
-          ],
-          [
             "SPY×FAMILY",
             10
           ]
@@ -3107,11 +3111,11 @@
         "by_series_name": [
           [
             "(blank)",
-            695
+            714
           ],
           [
             "ご当地",
-            23
+            24
           ],
           [
             "中国限定",
@@ -3125,7 +3129,7 @@
         "top_source_store": [
           [
             "엔스카이",
-            172
+            179
           ]
         ],
         "sample_rows": [
@@ -3449,12 +3453,12 @@
             "series_name": "ご当地"
           },
           {
-            "catalog_index": 967,
-            "name_ko": "랏코 ご当地 마스코트 (홋카이도)",
-            "name_ja": "ラッコ ご当地マスコット (北海道)",
+            "catalog_index": 963,
+            "name_ko": "쿠리만쥬 ご当地 마스코트 (센다이 즌다)",
+            "name_ja": "くりまんじゅう ご当地マスコット (仙台 ずんだ)",
             "image_url": null,
             "local_image_path": null,
-            "source_store": "ご当地ちいかわ 공식(API)",
+            "source_store": "엔스카이",
             "category": "마스코트",
             "affiliation": "치이카와",
             "series_name": "ご当地"
@@ -6365,7 +6369,7 @@
       "excluded_workflow_rows": [
         [
           "find_source_then_extract_image",
-          667
+          687
         ],
         [
           "manual_image_research",
@@ -6427,8 +6431,8 @@
       "priority": 20,
       "workstream": "source_discovery_starter_queue",
       "public_report": "data/source_discovery_starter_queue_public.json",
-      "starter_queue_rows": 672,
-      "starter_queue_groups": 353,
+      "starter_queue_rows": 692,
+      "starter_queue_groups": 367,
       "next_review_batch_rows": 20,
       "next_review_batch_group_count": 4,
       "next_review_batch_primary_source_store": "엔스카이",
@@ -7042,14 +7046,14 @@
       "priority": 20,
       "workstream": "source_discovery",
       "public_report": "data/source_discovery_queue_public.json",
-      "ready_rows": 672,
+      "ready_rows": 692,
       "recommended_next_action": "Find exact official detail pages for rows missing source_url."
     },
     {
       "priority": 20,
       "workstream": "source_discovery_focus_template",
       "public_report": "data/source_discovery_focus_confirmed_template_public.json",
-      "template_items": 667,
+      "template_items": 687,
       "work_order_pack_count": 62,
       "next_focus_pack_id": "source-discovery-focus-001",
       "next_source_store": "엔스카이",
@@ -7083,11 +7087,11 @@
           "source_page_has_verifiable_product_image_before_image_url_import"
         ],
         "review_status": "not_started",
-        "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+        "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E5%A4%8F%E6%B2%B9%E5%82%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
         "next_action": "open this focus pack next while the previous pack is quarantined"
       },
       "dry_run_updated_rows": 0,
-      "dry_run_skipped_rows": 667,
+      "dry_run_skipped_rows": 687,
       "recommended_next_action": "Hold the cache-miss current pack for manual source research and open the recommended active pack next."
     },
     {
@@ -7122,13 +7126,13 @@
           "source_page_has_verifiable_product_image_before_image_url_import"
         ],
         "review_status": "not_started",
-        "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+        "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E5%A4%8F%E6%B2%B9%E5%82%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
         "next_action": "open this focus pack next while the previous pack is quarantined"
       },
       "focus_pack_progress_queue_count": 62,
-      "focus_pack_progress_remaining_rows": 667,
+      "focus_pack_progress_remaining_rows": 687,
       "current_remaining_review_rows": 20,
-      "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+      "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E5%A4%8F%E6%B2%B9%E5%82%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
       "recommended_next_action": "Skip automatic work on the quarantined current pack; open the recommended active pack and keep exact-source review manual."
     },
     {
@@ -7188,7 +7192,7 @@
       "focus_pack_id": "source-discovery-focus-002",
       "queue_rows": 20,
       "manual_confirmed_rows": 0,
-      "fallback_reason": "official_search_fetch_http_error",
+      "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
       "by_source_store": [
         [
           "엔스카이",
@@ -7207,8 +7211,8 @@
         "legacy_mobile_store_search",
         "evidence_fill_and_dry_run"
       ],
-      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
-      "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%A4%8F%E6%B2%B9%E5%82%91+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%A4%8F%E6%B2%B9%E5%82%91+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
       "first_primary_review_url_kind": "domain_limited_web_search",
       "auto_apply_enabled": false,
       "recommended_next_action": "Review fallback rows and fill exact manual_confirmed_source_url values before source import."
@@ -7225,15 +7229,15 @@
       "priority": 22,
       "workstream": "source_discovery_action_queue",
       "public_report": "data/source_discovery_action_queue_public.json",
-      "actionable_source_rows": 667,
-      "queued_source_rows": 667,
+      "actionable_source_rows": 687,
+      "queued_source_rows": 687,
       "unqueued_actionable_source_rows": 0,
       "queue_coverage": 1.0,
       "action_batch_count": 62,
       "by_review_state": [
         [
           "official_search_review_required",
-          655
+          675
         ],
         [
           "licensed_retailer_review_required",
@@ -7243,7 +7247,7 @@
       "by_workflow": [
         [
           "official_search_url_available",
-          655
+          675
         ],
         [
           "licensed_retailer_search_review",
@@ -7253,11 +7257,11 @@
       "by_source_store": [
         [
           "엔스카이",
-          172
+          179
         ],
         [
           "애니메이트",
-          144
+          156
         ],
         [
           "굿스마일컴퍼니",
@@ -7296,12 +7300,12 @@
           13
         ],
         [
-          "AmiAmi",
+          "Cospa",
           12
         ],
         [
-          "Cospa",
-          11
+          "AmiAmi",
+          12
         ],
         [
           "반다이",
@@ -7416,7 +7420,7 @@
         {
           "source_store": "엔스카이",
           "priority": 10,
-          "queued_source_rows": 172,
+          "queued_source_rows": 179,
           "batch_count": 9,
           "next_batch_id": "source-discovery-action-001",
           "batch_ids": [
@@ -7433,23 +7437,23 @@
           "allowed_source_domains": [
             "www.enskyshop.com"
           ],
-          "official_search_url_count": 172,
+          "official_search_url_count": 179,
           "workflow_rows": [
             [
               "official_search_url_available",
-              172
+              179
             ]
           ],
           "review_state_rows": [
             [
               "official_search_review_required",
-              172
+              179
             ]
           ],
           "category_rows": [
             [
               "키링",
-              52
+              54
             ],
             [
               "인형",
@@ -7457,11 +7461,11 @@
             ],
             [
               "아크릴 스탠드",
-              27
+              29
             ],
             [
               "마스코트",
-              21
+              22
             ],
             [
               "캔뱃지",
@@ -7481,6 +7485,10 @@
             ],
             [
               "아크릴 키링",
+              2
+            ],
+            [
+              "피규어",
               1
             ]
           ],
@@ -7490,7 +7498,7 @@
         {
           "source_store": "애니메이트",
           "priority": 10,
-          "queued_source_rows": 144,
+          "queued_source_rows": 156,
           "batch_count": 8,
           "next_batch_id": "source-discovery-action-010",
           "batch_ids": [
@@ -7506,23 +7514,23 @@
           "allowed_source_domains": [
             "www.animate-onlineshop.jp"
           ],
-          "official_search_url_count": 144,
+          "official_search_url_count": 156,
           "workflow_rows": [
             [
               "official_search_url_available",
-              144
+              156
             ]
           ],
           "review_state_rows": [
             [
               "official_search_review_required",
-              144
+              156
             ]
           ],
           "category_rows": [
             [
               "아크릴 스탠드",
-              30
+              37
             ],
             [
               "문구",
@@ -7534,11 +7542,11 @@
             ],
             [
               "인형",
-              15
+              18
             ],
             [
               "키링",
-              14
+              15
             ],
             [
               "생활잡화",
@@ -7553,11 +7561,11 @@
               7
             ],
             [
-              "아크릴 키링",
-              2
+              "피규어",
+              3
             ],
             [
-              "피규어",
+              "아크릴 키링",
               2
             ],
             [
@@ -8094,7 +8102,7 @@
       "public_report": "data/catalog_metadata_review_batches_public.json",
       "batch_count": 30,
       "field_store_group_count": 351,
-      "missing_cell_count": 13932,
+      "missing_cell_count": 13972,
       "recommended_next_action": "Use full field/store metadata batches for title, barcode, date, price, source, and image cleanup."
     },
     {
@@ -8110,17 +8118,17 @@
       "group_queue_coverage": 1.0,
       "missing_cell_queue_coverage": 1.0,
       "action_batch_count": 14,
-      "primary_review_url_groups": 130,
+      "primary_review_url_groups": 128,
       "first_primary_review_url": "https://www.enskyshop.com/products/detail/24195",
       "first_primary_review_url_kind": "sample_source_url",
       "primary_review_url_kind_counts": [
         [
           "sample_source_url",
-          130
+          128
         ],
         [
           "manual_lookup_required",
-          36
+          38
         ]
       ],
       "missing_cells_by_field": [
@@ -8326,8 +8334,8 @@
           "missing_rows": 177,
           "priority": 10,
           "workflow": "official_metadata_review",
-          "primary_review_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%81%B4%E3%81%9F%E3%81%AC%E3%81%84+%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/1992397/",
-          "primary_review_url_kind": "sample_source_url",
+          "primary_review_url": null,
+          "primary_review_url_kind": "manual_lookup_required",
           "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
         },
         {
@@ -8396,8 +8404,8 @@
           "missing_rows": 63,
           "priority": 30,
           "workflow": "official_title_review",
-          "primary_review_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83+%E3%81%B4%E3%81%9F%E3%81%AC%E3%81%84+%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E%E3%80%90%E5%86%8D%E8%B2%A9%E3%80%91/pd/1992397/",
-          "primary_review_url_kind": "sample_source_url",
+          "primary_review_url": null,
+          "primary_review_url_kind": "manual_lookup_required",
           "recommended_action": "Verify original Japanese product titles from official listings."
         },
         {
@@ -11092,7 +11100,7 @@
     "manual_review_required": true,
     "pillar_count": 5,
     "blocking_pillar_count": 5,
-    "manual_review_rows": 940,
+    "manual_review_rows": 960,
     "auto_apply_ready_rows": 0,
     "next_safe_phase": "review_candidate_source_urls",
     "blocked_reasons": [
@@ -11132,13 +11140,13 @@
         "pillar": "missing_images",
         "label": "Resolve missing catalog images",
         "status": "manual_evidence_required",
-        "manual_review_rows": 745,
+        "manual_review_rows": 765,
         "auto_apply_ready_rows": 0,
         "next_safe_phase": "replace_generic_source_urls",
         "next_queue_lane": "replace_generic_source_urls",
         "next_queue_rows": 50,
         "next_execution_lane_count": 4,
-        "next_execution_open_rows": 745,
+        "next_execution_open_rows": 765,
         "next_execution_next_batch_rows": 75,
         "first_next_execution_lane": "replace_generic_source_urls",
         "first_next_execution_status": "next",
@@ -11163,12 +11171,12 @@
         "next_queue_lane": "candidate_review_required",
         "next_queue_rows": 3,
         "next_execution_lane_count": 5,
-        "next_execution_open_rows": 831,
+        "next_execution_open_rows": 851,
         "next_execution_next_batch_rows": 184,
         "first_next_execution_lane": "exact_source_url_review",
-        "first_next_execution_status": "manual_fallback_review_required",
+        "first_next_execution_status": "next",
         "first_next_execution_rows": 20,
-        "first_next_execution_public_report": "data/source_discovery_next_focus_fallback_queue_public.json",
+        "first_next_execution_public_report": "data/source_discovery_next_focus_exact_url_review_queue_public.json",
         "handoff_status": "current_focus_fallback_review_required",
         "handoff_current_lane": "exact_source_url_review",
         "handoff_current_review_section": "source_discovery_next_focus_exact_url_review_queue",
@@ -11316,7 +11324,7 @@
       "write_template_section": "source_url_confirmation_patch_template.rows",
       "public_report": "data/source_discovery_completion_roadmap_public.json",
       "next_safe_phase": "review_candidate_source_urls",
-      "first_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "first_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%A4%8F%E6%B2%B9%E5%82%91+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
       "auto_apply_enabled": false,
       "auto_merge_enabled": false,
       "auto_delete_enabled": false,

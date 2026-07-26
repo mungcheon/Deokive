@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T16:22:12Z",
+  "generated_at": "2026-07-26T08:16:15Z",
   "scope": "source_discovery_store_bottlenecks",
   "summary": {
-    "actionable_source_rows": 667,
-    "queued_source_rows": 667,
+    "actionable_source_rows": 687,
+    "queued_source_rows": 687,
     "store_count": 40,
-    "top_store_rows": 172,
+    "top_store_rows": 179,
     "top_store": "엔스카이",
-    "top_5_store_rows": 452,
-    "top_5_store_coverage": 0.6777,
-    "top_10_store_rows": 541,
-    "top_10_store_coverage": 0.8111,
+    "top_5_store_rows": 471,
+    "top_5_store_coverage": 0.6856,
+    "top_10_store_rows": 560,
+    "top_10_store_coverage": 0.8151,
     "domainless_store_rows": 0,
     "stores_without_allowed_domain": 0,
     "auto_apply_enabled": false
@@ -19,8 +19,8 @@
   "stores": [
     {
       "source_store": "엔스카이",
-      "rows": 172,
-      "impact_rank_hint": 172,
+      "rows": 179,
+      "impact_rank_hint": 179,
       "first_batch_id": "source-discovery-action-001",
       "top_category": "키링",
       "top_allowed_source_domain": "www.enskyshop.com",
@@ -39,19 +39,19 @@
       "workflow_rows": [
         {
           "workflow": "official_search_url_available",
-          "rows": 172
+          "rows": 179
         }
       ],
       "review_state_rows": [
         {
           "review_state": "official_search_review_required",
-          "rows": 172
+          "rows": 179
         }
       ],
       "by_category": [
         {
           "category": "키링",
-          "rows": 52
+          "rows": 54
         },
         {
           "category": "인형",
@@ -59,11 +59,11 @@
         },
         {
           "category": "아크릴 스탠드",
-          "rows": 27
+          "rows": 29
         },
         {
           "category": "마스코트",
-          "rows": 21
+          "rows": 22
         },
         {
           "category": "캔뱃지",
@@ -83,13 +83,17 @@
         },
         {
           "category": "아크릴 키링",
+          "rows": 2
+        },
+        {
+          "category": "피규어",
           "rows": 1
         }
       ],
       "allowed_source_domains": [
         {
           "domain": "www.enskyshop.com",
-          "rows": 172
+          "rows": 179
         }
       ],
       "has_allowed_source_domain": true,
@@ -270,8 +274,8 @@
     },
     {
       "source_store": "애니메이트",
-      "rows": 144,
-      "impact_rank_hint": 144,
+      "rows": 156,
+      "impact_rank_hint": 156,
       "first_batch_id": "source-discovery-action-010",
       "top_category": "아크릴 스탠드",
       "top_allowed_source_domain": "www.animate-onlineshop.jp",
@@ -289,19 +293,19 @@
       "workflow_rows": [
         {
           "workflow": "official_search_url_available",
-          "rows": 144
+          "rows": 156
         }
       ],
       "review_state_rows": [
         {
           "review_state": "official_search_review_required",
-          "rows": 144
+          "rows": 156
         }
       ],
       "by_category": [
         {
           "category": "아크릴 스탠드",
-          "rows": 30
+          "rows": 37
         },
         {
           "category": "문구",
@@ -313,11 +317,11 @@
         },
         {
           "category": "인형",
-          "rows": 15
+          "rows": 18
         },
         {
           "category": "키링",
-          "rows": 14
+          "rows": 15
         },
         {
           "category": "생활잡화",
@@ -333,7 +337,7 @@
         },
         {
           "category": "피규어",
-          "rows": 2
+          "rows": 3
         },
         {
           "category": "아크릴 키링",
@@ -351,7 +355,7 @@
       "allowed_source_domains": [
         {
           "domain": "www.animate-onlineshop.jp",
-          "rows": 144
+          "rows": 156
         }
       ],
       "has_allowed_source_domain": true,
@@ -359,6 +363,48 @@
       "recommended_work_mode": "single_store_batch_review",
       "recommended_batch_focus": "애니메이트 / 아크릴 스탠드",
       "sample_items": [
+        {
+          "catalog_index": 1024,
+          "name_ko": "귀멸의 칼날 봉제 인형 (탄지로)",
+          "name_ja": null,
+          "category": "인형",
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EA%B7%80%EB%A9%B8%EC%9D%98%20%EC%B9%BC%EB%82%A0%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%ED%83%84%EC%A7%80%EB%A1%9C%29",
+          "web_search_url": "https://www.google.com/search?q=%EA%B7%80%EB%A9%B8%EC%9D%98%20%EC%B9%BC%EB%82%A0%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%ED%83%84%EC%A7%80%EB%A1%9C%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "www.animate-onlineshop.jp"
+          ],
+          "source_patch_template": {
+            "catalog_index": 1024,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "애니메이트",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1025,
+          "name_ko": "귀멸의 칼날 봉제 인형 (네즈코)",
+          "name_ja": null,
+          "category": "인형",
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EA%B7%80%EB%A9%B8%EC%9D%98%20%EC%B9%BC%EB%82%A0%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%EB%84%A4%EC%A6%88%EC%BD%94%29",
+          "web_search_url": "https://www.google.com/search?q=%EA%B7%80%EB%A9%B8%EC%9D%98%20%EC%B9%BC%EB%82%A0%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%EB%84%A4%EC%A6%88%EC%BD%94%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "www.animate-onlineshop.jp"
+          ],
+          "source_patch_template": {
+            "catalog_index": 1025,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "애니메이트",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "auto_apply_enabled": false
+        },
         {
           "catalog_index": 1031,
           "name_ko": "원피스 봉제 인형 (토니토니 쵸파)",
@@ -371,6 +417,27 @@
           ],
           "source_patch_template": {
             "catalog_index": 1031,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "애니메이트",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1032,
+          "name_ko": "원피스 아크릴 키링 (루피)",
+          "name_ja": null,
+          "category": "키링",
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%9B%90%ED%94%BC%EC%8A%A4%20%EC%95%84%ED%81%AC%EB%A6%B4%20%ED%82%A4%EB%A7%81%20%28%EB%A3%A8%ED%94%BC%29",
+          "web_search_url": "https://www.google.com/search?q=%EC%9B%90%ED%94%BC%EC%8A%A4%20%EC%95%84%ED%81%AC%EB%A6%B4%20%ED%82%A4%EB%A7%81%20%28%EB%A3%A8%ED%94%BC%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "www.animate-onlineshop.jp"
+          ],
+          "source_patch_template": {
+            "catalog_index": 1032,
             "source_url": "<exact_product_detail_url>",
             "image_url": "<official_product_image_url_optional_after_source_verification>",
             "source_store": "애니메이트",
@@ -423,6 +490,27 @@
           "auto_apply_enabled": false
         },
         {
+          "catalog_index": 1036,
+          "name_ko": "주술회전 봉제 인형 (고죠 사토루)",
+          "name_ja": null,
+          "category": "인형",
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%A3%BC%EC%88%A0%ED%9A%8C%EC%A0%84%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%EA%B3%A0%EC%A3%A0%20%EC%82%AC%ED%86%A0%EB%A3%A8%29",
+          "web_search_url": "https://www.google.com/search?q=%EC%A3%BC%EC%88%A0%ED%9A%8C%EC%A0%84%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%EA%B3%A0%EC%A3%A0%20%EC%82%AC%ED%86%A0%EB%A3%A8%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "www.animate-onlineshop.jp"
+          ],
+          "source_patch_template": {
+            "catalog_index": 1036,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "애니메이트",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "auto_apply_enabled": false
+        },
+        {
           "catalog_index": 1037,
           "name_ko": "주술회전 캔뱃지 (랜덤)",
           "name_ja": null,
@@ -434,90 +522,6 @@
           ],
           "source_patch_template": {
             "catalog_index": 1037,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "애니메이트",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1038,
-          "name_ko": "주술회전 클리어 파일 (메인 비주얼)",
-          "name_ja": null,
-          "category": "문구",
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%A3%BC%EC%88%A0%ED%9A%8C%EC%A0%84%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%28%EB%A9%94%EC%9D%B8%20%EB%B9%84%EC%A3%BC%EC%96%BC%29",
-          "web_search_url": "https://www.google.com/search?q=%EC%A3%BC%EC%88%A0%ED%9A%8C%EC%A0%84%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%28%EB%A9%94%EC%9D%B8%20%EB%B9%84%EC%A3%BC%EC%96%BC%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.animate-onlineshop.jp"
-          ],
-          "source_patch_template": {
-            "catalog_index": 1038,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "애니메이트",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1039,
-          "name_ko": "주술회전 머그컵",
-          "name_ja": null,
-          "category": "머그컵",
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%A3%BC%EC%88%A0%ED%9A%8C%EC%A0%84%20%EB%A8%B8%EA%B7%B8%EC%BB%B5",
-          "web_search_url": "https://www.google.com/search?q=%EC%A3%BC%EC%88%A0%ED%9A%8C%EC%A0%84%20%EB%A8%B8%EA%B7%B8%EC%BB%B5%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.animate-onlineshop.jp"
-          ],
-          "source_patch_template": {
-            "catalog_index": 1039,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "애니메이트",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1043,
-          "name_ko": "체인소맨 봉제 인형 (포치타)",
-          "name_ja": null,
-          "category": "인형",
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%B2%B4%EC%9D%B8%EC%86%8C%EB%A7%A8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%ED%8F%AC%EC%B9%98%ED%83%80%29",
-          "web_search_url": "https://www.google.com/search?q=%EC%B2%B4%EC%9D%B8%EC%86%8C%EB%A7%A8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%ED%8F%AC%EC%B9%98%ED%83%80%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.animate-onlineshop.jp"
-          ],
-          "source_patch_template": {
-            "catalog_index": 1043,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "애니메이트",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1044,
-          "name_ko": "체인소맨 캔뱃지 (랜덤)",
-          "name_ja": null,
-          "category": "캔뱃지",
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EC%B2%B4%EC%9D%B8%EC%86%8C%EB%A7%A8%20%EC%BA%94%EB%B1%83%EC%A7%80%20%28%EB%9E%9C%EB%8D%A4%29",
-          "web_search_url": "https://www.google.com/search?q=%EC%B2%B4%EC%9D%B8%EC%86%8C%EB%A7%A8%20%EC%BA%94%EB%B1%83%EC%A7%80%20%28%EB%9E%9C%EB%8D%A4%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.animate-onlineshop.jp"
-          ],
-          "source_patch_template": {
-            "catalog_index": 1044,
             "source_url": "<exact_product_detail_url>",
             "image_url": "<official_product_image_url_optional_after_source_verification>",
             "source_store": "애니메이트",
@@ -2817,10 +2821,10 @@
     },
     {
       "source_store": "Cospa",
-      "rows": 11,
-      "impact_rank_hint": 11,
+      "rows": 12,
+      "impact_rank_hint": 12,
       "first_batch_id": "source-discovery-action-034",
-      "top_category": "아크릴 스탠드",
+      "top_category": "가방",
       "top_allowed_source_domain": "www.cospa.com",
       "batch_count": 1,
       "batch_ids": [
@@ -2829,22 +2833,22 @@
       "workflow_rows": [
         {
           "workflow": "official_search_url_available",
-          "rows": 11
+          "rows": 12
         }
       ],
       "review_state_rows": [
         {
           "review_state": "official_search_review_required",
-          "rows": 11
+          "rows": 12
         }
       ],
       "by_category": [
         {
-          "category": "아크릴 스탠드",
-          "rows": 4
+          "category": "가방",
+          "rows": 5
         },
         {
-          "category": "가방",
+          "category": "아크릴 스탠드",
           "rows": 4
         },
         {
@@ -2855,13 +2859,13 @@
       "allowed_source_domains": [
         {
           "domain": "www.cospa.com",
-          "rows": 11
+          "rows": 12
         }
       ],
       "has_allowed_source_domain": true,
       "next_step": "open_official_search_and_confirm_exact_product_source_url",
       "recommended_work_mode": "single_store_batch_review",
-      "recommended_batch_focus": "Cospa / 아크릴 스탠드",
+      "recommended_batch_focus": "Cospa / 가방",
       "sample_items": [
         {
           "catalog_index": 1631,
@@ -3011,17 +3015,17 @@
           "auto_apply_enabled": false
         },
         {
-          "catalog_index": 1806,
-          "name_ko": "장송의 프리렌 히멜 토트백",
-          "name_ja": "葬送のフリーレン ヒンメル トートバッグ",
+          "catalog_index": 1800,
+          "name_ko": "단간론파 모노쿠마 토트백",
+          "name_ja": "ダンガンロンパ モノクマ トートバッグ",
           "category": "가방",
-          "official_search_url": "https://www.cospa.com/cospa/itemlist/keyword/%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20%E3%83%88%E3%83%BC%E3%83%88%E3%83%90%E3%83%83%E3%82%B0",
-          "web_search_url": "https://www.google.com/search?q=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20%E3%83%88%E3%83%BC%E3%83%88%E3%83%90%E3%83%83%E3%82%B0%20Cospa%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "official_search_url": "https://www.cospa.com/cospa/itemlist/keyword/%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%20%E3%83%88%E3%83%BC%E3%83%88%E3%83%90%E3%83%83%E3%82%B0",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%20%E3%83%88%E3%83%BC%E3%83%88%E3%83%90%E3%83%83%E3%82%B0%20Cospa%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
           "allowed_source_domains": [
             "www.cospa.com"
           ],
           "source_patch_template": {
-            "catalog_index": 1806,
+            "catalog_index": 1800,
             "source_url": "<exact_product_detail_url>",
             "image_url": "<official_product_image_url_optional_after_source_verification>",
             "source_store": "Cospa",

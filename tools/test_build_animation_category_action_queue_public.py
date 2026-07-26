@@ -261,6 +261,13 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(normalization_template["affected_catalog_rows"], 8)
         self.assertEqual(normalization_template["manual_confirmed_rows"], 0)
         self.assertEqual(normalization_template["ready_to_import_rows"], 0)
+        self.assertEqual(normalization_template["prefilled_confirmation_rows"], 1)
+        self.assertEqual(
+            normalization_template[
+                "prefilled_confirmation_rows_requiring_only_manual_confirmed"
+            ],
+            1,
+        )
         self.assertEqual(normalization_template["preserve_sub_series_rows"], 1)
         self.assertEqual(normalization_template["sample_keyword_supported_rows"], 1)
         self.assertEqual(normalization_template["sample_keyword_review_required_rows"], 0)
@@ -276,6 +283,15 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
             "normalize_to_target_category_preserve_source_sub_series",
             normalization_template_row["allowed_manual_decisions"],
         )
+        suggested_row = normalization_template_row["suggested_confirmation_row"]
+        self.assertFalse(suggested_row["manual_confirmed"])
+        self.assertEqual(
+            suggested_row["manual_decision"],
+            "normalize_to_target_category_preserve_source_sub_series",
+        )
+        self.assertEqual(suggested_row["expected_update_rows"], 8)
+        self.assertTrue(suggested_row["preserve_source_category_as_sub_series"])
+        self.assertEqual(suggested_row["suggested_sub_series_value"], "Clear File")
         self.assertEqual(
             normalization_template_row["sample_evidence_summary"]["review_signal"],
             "sample_keywords_support_normalization",

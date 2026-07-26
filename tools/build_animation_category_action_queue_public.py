@@ -506,6 +506,46 @@ def _next_normalization_review_batch(
     return batch
 
 
+def _suggested_normalization_confirmation_row(row: dict[str, Any]) -> dict[str, Any]:
+    mapping_template = (
+        row.get("category_mapping_template")
+        if isinstance(row.get("category_mapping_template"), dict)
+        else {}
+    )
+    source_category = str(row.get("source_category") or "").strip()
+    target_category = str(row.get("target_category") or "").strip()
+    preserve_source = bool(row.get("preserve_source_category_as_sub_series"))
+    decision = (
+        "normalize_to_target_category_preserve_source_sub_series"
+        if preserve_source
+        else "normalize_to_target_category"
+    )
+    return {
+        "manual_confirmed": False,
+        "manual_decision": decision,
+        "source_category": source_category,
+        "target_category": target_category,
+        "target_family": mapping_template.get("target_family"),
+        "folder_name": mapping_template.get("folder_name"),
+        "folder_color_hex": mapping_template.get("folder_color_hex"),
+        "folder_color_hint": mapping_template.get("folder_color_hint"),
+        "folder_color_group": mapping_template.get("folder_color_group"),
+        "folder_color_sort_order": mapping_template.get("folder_color_sort_order"),
+        "folder_icon_key": mapping_template.get("folder_icon_key"),
+        "folder_icon_options": mapping_template.get("folder_icon_options", []),
+        "preserve_source_category_as_sub_series": preserve_source,
+        "suggested_sub_series_value": source_category if preserve_source else "",
+        "affected_catalog_rows": int(row.get("affected_catalog_rows") or 0),
+        "expected_update_rows": int(row.get("affected_catalog_rows") or 0),
+        "match_keywords": [],
+        "manual_note": (
+            f"Normalize {source_category} into {target_category}; preserve {source_category} as sub_series on rows that do not already have a sub_series."
+            if preserve_source and source_category and target_category
+            else f"Normalize {source_category} into {target_category}."
+        ),
+    }
+
+
 def _compact_normalization(
     row: dict[str, Any],
     review_priority: int,
@@ -870,6 +910,7 @@ def _normalization_confirmation_template(
                 "manual_confirmed": False,
                 "manual_decision": "",
                 "manual_note": "",
+                "suggested_confirmation_row": _suggested_normalization_confirmation_row(row),
                 "allowed_manual_decisions": [
                     "normalize_to_target_category_preserve_source_sub_series",
                     "keep_source_category_as_primary_category",
@@ -890,6 +931,14 @@ def _normalization_confirmation_template(
         ),
         "manual_confirmed_rows": 0,
         "ready_to_import_rows": 0,
+        "prefilled_confirmation_rows": len(rows),
+        "prefilled_confirmation_rows_requiring_only_manual_confirmed": sum(
+            1
+            for row in rows
+            if (row.get("sample_evidence_summary") or {}).get("review_signal")
+            == "sample_keywords_support_normalization"
+            and (row.get("suggested_confirmation_row") or {}).get("manual_decision")
+        ),
         "preserve_sub_series_rows": sum(
             1 for row in rows if row.get("preserve_source_category_as_sub_series")
         ),
