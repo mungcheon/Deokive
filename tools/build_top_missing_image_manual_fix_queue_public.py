@@ -13,6 +13,8 @@ DATA = ROOT / "data"
 DEFAULT_CATALOG = DATA / "catalog_public.json"
 DEFAULT_GOTOUCHI_QUEUE = DATA / "gotouchi_official_candidate_review_queue_public.json"
 DEFAULT_ONLINE_KUJI_REPAIR = DATA / "chiikawa_online_kuji_public_image_repair_report.json"
+DEFAULT_ENSKY_CACHE_COVERAGE = DATA / "ensky_missing_image_cache_coverage_public.json"
+DEFAULT_ENSKY_SEARCH_PROBE = DATA / "ensky_search_page_probe_public.json"
 DEFAULT_OUTPUT = DATA / "top_missing_image_manual_fix_queue_public.json"
 
 
@@ -85,6 +87,8 @@ def build_candidate_context(
     *,
     gotouchi_queue: dict[str, Any] | None = None,
     online_kuji_repair: dict[str, Any] | None = None,
+    ensky_cache_coverage: dict[str, Any] | None = None,
+    ensky_search_probe: dict[str, Any] | None = None,
 ) -> dict[int, dict[str, Any]]:
     context: dict[int, dict[str, Any]] = {}
     for item in (gotouchi_queue or {}).get("items") or []:
@@ -119,6 +123,65 @@ def build_candidate_context(
             "review_blockers": [item.get("reason") or "manual_review_required"],
             "repair_candidate_count": item.get("candidate_count"),
             "repair_skip_reason": item.get("reason"),
+        }
+
+    for item in (ensky_cache_coverage or {}).get("items") or []:
+        if not isinstance(item, dict):
+            continue
+        catalog_index = _index_value(item)
+        if catalog_index is None:
+            continue
+        top_candidates = item.get("top_candidates") or []
+        context[catalog_index] = {
+            **context.get(catalog_index, {}),
+            "candidate_context_source": "ensky_missing_image_cache_coverage_public.json",
+            "candidate_status": item.get("status"),
+            "candidate_count": item.get("candidate_count"),
+            "top_candidate": top_candidates[0] if top_candidates else {},
+            "candidate_options": [
+                candidate
+                for candidate in top_candidates
+                if isinstance(candidate, dict) and candidate.get("safe_exact_match")
+            ],
+            "rejected_candidate_options": [
+                candidate
+                for candidate in top_candidates
+                if isinstance(candidate, dict) and not candidate.get("safe_exact_match")
+            ],
+            "review_blockers": [
+                "ensky_exact_product_page_not_confirmed",
+                "do_not_import_weak_or_broad_cache_candidates",
+            ],
+            "manual_confirmation_requirements": [
+                "Open the Ensky detail page and confirm the page title exactly names this product.",
+                "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup.",
+            ],
+        }
+
+    for item in (ensky_search_probe or {}).get("items") or []:
+        if not isinstance(item, dict):
+            continue
+        catalog_index = _index_value(item)
+        if catalog_index is None:
+            continue
+        search_results = item.get("top_search_results") or []
+        previous = context.get(catalog_index, {})
+        context[catalog_index] = {
+            **previous,
+            "candidate_context_source": previous.get("candidate_context_source")
+            or "ensky_search_page_probe_public.json",
+            "official_search_status": item.get("status"),
+            "official_search_query": item.get("query"),
+            "official_search_result_count": item.get("search_result_count"),
+            "official_search_top_results": search_results[:5] if isinstance(search_results, list) else [],
+            "review_blockers": list(
+                dict.fromkeys(
+                    [
+                        *(previous.get("review_blockers") or []),
+                        "ensky_official_search_requires_manual_exact_match",
+                    ]
+                )
+            ),
         }
     return context
 
@@ -211,6 +274,8 @@ def main() -> int:
     parser.add_argument("--catalog", type=Path, default=DEFAULT_CATALOG)
     parser.add_argument("--gotouchi-queue", type=Path, default=DEFAULT_GOTOUCHI_QUEUE)
     parser.add_argument("--online-kuji-repair", type=Path, default=DEFAULT_ONLINE_KUJI_REPAIR)
+    parser.add_argument("--ensky-cache-coverage", type=Path, default=DEFAULT_ENSKY_CACHE_COVERAGE)
+    parser.add_argument("--ensky-search-probe", type=Path, default=DEFAULT_ENSKY_SEARCH_PROBE)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--limit", type=int, default=80)
     parser.add_argument("--write", action="store_true")
@@ -222,6 +287,8 @@ def main() -> int:
         candidate_context=build_candidate_context(
             gotouchi_queue=load_report(args.gotouchi_queue),
             online_kuji_repair=load_report(args.online_kuji_repair),
+            ensky_cache_coverage=load_report(args.ensky_cache_coverage),
+            ensky_search_probe=load_report(args.ensky_search_probe),
         ),
     )
     if args.write:

@@ -11075,6 +11075,12 @@ def update_reports(write: bool) -> dict[str, Any]:
             online_kuji_repair=load_json(CHIIKAWA_ONLINE_KUJI_IMAGE_REPAIR_REPORT, {})
             if CHIIKAWA_ONLINE_KUJI_IMAGE_REPAIR_REPORT.exists()
             else {},
+            ensky_cache_coverage=load_json(ENSKY_CACHE_COVERAGE, {})
+            if ENSKY_CACHE_COVERAGE.exists()
+            else {},
+            ensky_search_probe=load_json(ENSKY_SEARCH_PAGE_PROBE, {})
+            if ENSKY_SEARCH_PAGE_PROBE.exists()
+            else {},
         ),
         generated_at=generated_at,
     )

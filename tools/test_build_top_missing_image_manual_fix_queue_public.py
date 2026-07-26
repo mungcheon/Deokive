@@ -103,17 +103,52 @@ class BuildTopMissingImageManualFixQueuePublicTest(unittest.TestCase):
                     }
                 ]
             },
+            ensky_cache_coverage={
+                "items": [
+                    {
+                        "catalog_index": 40,
+                        "status": "weak_cache_candidate",
+                        "candidate_count": 1,
+                        "top_candidates": [
+                            {
+                                "title": "Different sticker product",
+                                "source_url": "https://www.enskyshop.com/products/detail/1",
+                                "image_url": "https://www.enskyshop.com/html/upload/save_image/wrong.jpg",
+                                "safe_exact_match": False,
+                            }
+                        ],
+                    }
+                ]
+            },
+            ensky_search_probe={
+                "items": [
+                    {
+                        "catalog_index": 40,
+                        "query": "Target product",
+                        "status": "no_search_results",
+                        "search_result_count": 0,
+                        "top_search_results": [],
+                    }
+                ]
+            },
         )
 
         report = build_queue(
-            rows,
+            [
+                *rows,
+                {
+                    "catalog_index": 40,
+                    "name_ja": "Ensky item",
+                    "source_store": "엔스카이",
+                },
+            ],
             limit=10,
             candidate_context=context,
             generated_at="2026-07-22T00:00:00Z",
         )
 
-        self.assertEqual(report["summary"]["candidate_context_rows"], 2)
-        self.assertEqual(report["summary"]["rejected_candidate_option_rows"], 1)
+        self.assertEqual(report["summary"]["candidate_context_rows"], 3)
+        self.assertEqual(report["summary"]["rejected_candidate_option_rows"], 2)
         gotouchi = report["items"][0]
         self.assertEqual(gotouchi["candidate_status"], "motif_only_type_mismatch")
         self.assertEqual(gotouchi["rejected_candidate_count"], 1)
@@ -121,6 +156,14 @@ class BuildTopMissingImageManualFixQueuePublicTest(unittest.TestCase):
         kuji = report["items"][1]
         self.assertEqual(kuji["candidate_status"], "blocked")
         self.assertEqual(kuji["repair_skip_reason"], "no_unique_safe_candidate")
+        ensky = report["items"][2]
+        self.assertEqual(ensky["candidate_status"], "weak_cache_candidate")
+        self.assertEqual(ensky["official_search_status"], "no_search_results")
+        self.assertEqual(ensky["rejected_candidate_options"][0]["title"], "Different sticker product")
+        self.assertIn(
+            "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup.",
+            ensky["confirmation_checklist"],
+        )
 
 
 if __name__ == "__main__":

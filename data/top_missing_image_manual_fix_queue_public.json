@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T15:10:39Z",
+  "generated_at": "2026-07-26T15:22:19Z",
   "scope": "top_missing_image_manual_fix_queue",
   "summary": {
     "catalog_rows": 20346,
@@ -8,9 +8,9 @@
     "queue_rows": 80,
     "limit": 80,
     "manual_confirmed_rows": 0,
-    "candidate_context_rows": 25,
+    "candidate_context_rows": 40,
     "candidate_option_rows": 0,
-    "rejected_candidate_option_rows": 16,
+    "rejected_candidate_option_rows": 20,
     "by_source_store": [
       [
         "ご当地ちいかわ 공식(API)",
@@ -194,8 +194,95 @@
         "Source URL is official or clearly identifies the exact product/campaign.",
         "Product name, prize rank, goods type, and variant match this row.",
         "Do not use storefront, search result, logo, banner, or unrelated sample images.",
-        "Run cache/report/audit commands after applying confirmed rows."
-      ]
+        "Run cache/report/audit commands after applying confirmed rows.",
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "candidate_context_source": "ensky_missing_image_cache_coverage_public.json",
+      "candidate_status": "weak_cache_candidate",
+      "candidate_count": 14,
+      "top_candidate": {
+        "title": "ちいかわ えらべる!ヘアクリップ アクリル【1BOX ケース48個】",
+        "source_url": "https://www.enskyshop.com/products/detail/28675",
+        "image_url": "https://www.enskyshop.com/html/upload/save_image/0514141409_682426a1ce61d.jpg",
+        "safe_exact_match": false,
+        "weak_broad_match": true,
+        "score": 20,
+        "matched_tokens": [
+          "ちいかわ"
+        ]
+      },
+      "candidate_options": [],
+      "rejected_candidate_options": [
+        {
+          "title": "ちいかわ えらべる!ヘアクリップ アクリル【1BOX ケース48個】",
+          "source_url": "https://www.enskyshop.com/products/detail/28675",
+          "image_url": "https://www.enskyshop.com/html/upload/save_image/0514141409_682426a1ce61d.jpg",
+          "safe_exact_match": false,
+          "weak_broad_match": true,
+          "score": 20,
+          "matched_tokens": [
+            "ちいかわ"
+          ]
+        },
+        {
+          "title": "ちいかわ お絵かきボードセット",
+          "source_url": "https://www.enskyshop.com/products/detail/26056",
+          "image_url": "https://www.enskyshop.com/html/upload/save_image/0717132620_669747ec5183e.jpg",
+          "safe_exact_match": false,
+          "weak_broad_match": true,
+          "score": 20,
+          "matched_tokens": [
+            "ちいかわ"
+          ]
+        },
+        {
+          "title": "ちいかわ つめつめ消しゴム2【1BOX ボトル36本入り】",
+          "source_url": "https://www.enskyshop.com/products/detail/27937",
+          "image_url": "https://www.enskyshop.com/html/upload/save_image/0114130634_6785e2ca731c9.jpg",
+          "safe_exact_match": false,
+          "weak_broad_match": true,
+          "score": 20,
+          "matched_tokens": [
+            "ちいかわ"
+          ]
+        },
+        {
+          "title": "ちいかわ スタンプセット",
+          "source_url": "https://www.enskyshop.com/products/detail/23049",
+          "image_url": "https://www.enskyshop.com/html/upload/save_image/0301144118_63fee57e75229.jpg",
+          "safe_exact_match": false,
+          "weak_broad_match": true,
+          "score": 20,
+          "matched_tokens": [
+            "ちいかわ"
+          ]
+        },
+        {
+          "title": "ちいかわ スナップマイド3【1BOX 16パック入り】",
+          "source_url": "https://www.enskyshop.com/products/detail/29014",
+          "image_url": "https://www.enskyshop.com/html/upload/save_image/0625135250_685b80a239126.jpg",
+          "safe_exact_match": false,
+          "weak_broad_match": true,
+          "score": 20,
+          "matched_tokens": [
+            "ちいかわ"
+          ]
+        }
+      ],
+      "review_blockers": [
+        "ensky_exact_product_page_not_confirmed",
+        "do_not_import_weak_or_broad_cache_candidates",
+        "ensky_official_search_requires_manual_exact_match"
+      ],
+      "manual_confirmation_requirements": [
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "official_search_status": "no_search_results",
+      "official_search_query": "ちいかわ ラバーストラップ (ちいかわ)",
+      "official_search_result_count": 0,
+      "official_search_top_results": []
     },
     {
       "manual_confirmed": false,
@@ -220,8 +307,29 @@
         "Source URL is official or clearly identifies the exact product/campaign.",
         "Product name, prize rank, goods type, and variant match this row.",
         "Do not use storefront, search result, logo, banner, or unrelated sample images.",
-        "Run cache/report/audit commands after applying confirmed rows."
-      ]
+        "Run cache/report/audit commands after applying confirmed rows.",
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "candidate_context_source": "ensky_missing_image_cache_coverage_public.json",
+      "candidate_status": "no_cache_candidate",
+      "candidate_count": 0,
+      "top_candidate": {},
+      "candidate_options": [],
+      "rejected_candidate_options": [],
+      "review_blockers": [
+        "ensky_exact_product_page_not_confirmed",
+        "do_not_import_weak_or_broad_cache_candidates",
+        "ensky_official_search_requires_manual_exact_match"
+      ],
+      "manual_confirmation_requirements": [
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "official_search_status": "no_search_results",
+      "official_search_query": "ちいかわ ラバーストラップ (ハチワレ)",
+      "official_search_result_count": 0,
+      "official_search_top_results": []
     },
     {
       "manual_confirmed": false,
@@ -246,8 +354,29 @@
         "Source URL is official or clearly identifies the exact product/campaign.",
         "Product name, prize rank, goods type, and variant match this row.",
         "Do not use storefront, search result, logo, banner, or unrelated sample images.",
-        "Run cache/report/audit commands after applying confirmed rows."
-      ]
+        "Run cache/report/audit commands after applying confirmed rows.",
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "candidate_context_source": "ensky_missing_image_cache_coverage_public.json",
+      "candidate_status": "no_cache_candidate",
+      "candidate_count": 0,
+      "top_candidate": {},
+      "candidate_options": [],
+      "rejected_candidate_options": [],
+      "review_blockers": [
+        "ensky_exact_product_page_not_confirmed",
+        "do_not_import_weak_or_broad_cache_candidates",
+        "ensky_official_search_requires_manual_exact_match"
+      ],
+      "manual_confirmation_requirements": [
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "official_search_status": "no_search_results",
+      "official_search_query": "ちいかわ ラバーストラップ (うさぎ)",
+      "official_search_result_count": 0,
+      "official_search_top_results": []
     },
     {
       "manual_confirmed": false,
@@ -272,8 +401,29 @@
         "Source URL is official or clearly identifies the exact product/campaign.",
         "Product name, prize rank, goods type, and variant match this row.",
         "Do not use storefront, search result, logo, banner, or unrelated sample images.",
-        "Run cache/report/audit commands after applying confirmed rows."
-      ]
+        "Run cache/report/audit commands after applying confirmed rows.",
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "candidate_context_source": "ensky_missing_image_cache_coverage_public.json",
+      "candidate_status": "no_cache_candidate",
+      "candidate_count": 0,
+      "top_candidate": {},
+      "candidate_options": [],
+      "rejected_candidate_options": [],
+      "review_blockers": [
+        "ensky_exact_product_page_not_confirmed",
+        "do_not_import_weak_or_broad_cache_candidates",
+        "ensky_official_search_requires_manual_exact_match"
+      ],
+      "manual_confirmation_requirements": [
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "official_search_status": "no_search_results",
+      "official_search_query": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+      "official_search_result_count": 0,
+      "official_search_top_results": []
     },
     {
       "manual_confirmed": false,
@@ -298,8 +448,29 @@
         "Source URL is official or clearly identifies the exact product/campaign.",
         "Product name, prize rank, goods type, and variant match this row.",
         "Do not use storefront, search result, logo, banner, or unrelated sample images.",
-        "Run cache/report/audit commands after applying confirmed rows."
-      ]
+        "Run cache/report/audit commands after applying confirmed rows.",
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "candidate_context_source": "ensky_missing_image_cache_coverage_public.json",
+      "candidate_status": "no_cache_candidate",
+      "candidate_count": 0,
+      "top_candidate": {},
+      "candidate_options": [],
+      "rejected_candidate_options": [],
+      "review_blockers": [
+        "ensky_exact_product_page_not_confirmed",
+        "do_not_import_weak_or_broad_cache_candidates",
+        "ensky_official_search_requires_manual_exact_match"
+      ],
+      "manual_confirmation_requirements": [
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "official_search_status": "no_search_results",
+      "official_search_query": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+      "official_search_result_count": 0,
+      "official_search_top_results": []
     },
     {
       "manual_confirmed": false,
@@ -324,8 +495,95 @@
         "Source URL is official or clearly identifies the exact product/campaign.",
         "Product name, prize rank, goods type, and variant match this row.",
         "Do not use storefront, search result, logo, banner, or unrelated sample images.",
-        "Run cache/report/audit commands after applying confirmed rows."
-      ]
+        "Run cache/report/audit commands after applying confirmed rows.",
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "candidate_context_source": "ensky_missing_image_cache_coverage_public.json",
+      "candidate_status": "weak_cache_candidate",
+      "candidate_count": 14,
+      "top_candidate": {
+        "title": "ちいかわ えらべる!ヘアクリップ アクリル【1BOX ケース48個】",
+        "source_url": "https://www.enskyshop.com/products/detail/28675",
+        "image_url": "https://www.enskyshop.com/html/upload/save_image/0514141409_682426a1ce61d.jpg",
+        "safe_exact_match": false,
+        "weak_broad_match": true,
+        "score": 20,
+        "matched_tokens": [
+          "ちいかわ"
+        ]
+      },
+      "candidate_options": [],
+      "rejected_candidate_options": [
+        {
+          "title": "ちいかわ えらべる!ヘアクリップ アクリル【1BOX ケース48個】",
+          "source_url": "https://www.enskyshop.com/products/detail/28675",
+          "image_url": "https://www.enskyshop.com/html/upload/save_image/0514141409_682426a1ce61d.jpg",
+          "safe_exact_match": false,
+          "weak_broad_match": true,
+          "score": 20,
+          "matched_tokens": [
+            "ちいかわ"
+          ]
+        },
+        {
+          "title": "ちいかわ お絵かきボードセット",
+          "source_url": "https://www.enskyshop.com/products/detail/26056",
+          "image_url": "https://www.enskyshop.com/html/upload/save_image/0717132620_669747ec5183e.jpg",
+          "safe_exact_match": false,
+          "weak_broad_match": true,
+          "score": 20,
+          "matched_tokens": [
+            "ちいかわ"
+          ]
+        },
+        {
+          "title": "ちいかわ つめつめ消しゴム2【1BOX ボトル36本入り】",
+          "source_url": "https://www.enskyshop.com/products/detail/27937",
+          "image_url": "https://www.enskyshop.com/html/upload/save_image/0114130634_6785e2ca731c9.jpg",
+          "safe_exact_match": false,
+          "weak_broad_match": true,
+          "score": 20,
+          "matched_tokens": [
+            "ちいかわ"
+          ]
+        },
+        {
+          "title": "ちいかわ スタンプセット",
+          "source_url": "https://www.enskyshop.com/products/detail/23049",
+          "image_url": "https://www.enskyshop.com/html/upload/save_image/0301144118_63fee57e75229.jpg",
+          "safe_exact_match": false,
+          "weak_broad_match": true,
+          "score": 20,
+          "matched_tokens": [
+            "ちいかわ"
+          ]
+        },
+        {
+          "title": "ちいかわ スナップマイド3【1BOX 16パック入り】",
+          "source_url": "https://www.enskyshop.com/products/detail/29014",
+          "image_url": "https://www.enskyshop.com/html/upload/save_image/0625135250_685b80a239126.jpg",
+          "safe_exact_match": false,
+          "weak_broad_match": true,
+          "score": 20,
+          "matched_tokens": [
+            "ちいかわ"
+          ]
+        }
+      ],
+      "review_blockers": [
+        "ensky_exact_product_page_not_confirmed",
+        "do_not_import_weak_or_broad_cache_candidates",
+        "ensky_official_search_requires_manual_exact_match"
+      ],
+      "manual_confirmation_requirements": [
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "official_search_status": "no_search_results",
+      "official_search_query": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+      "official_search_result_count": 0,
+      "official_search_top_results": []
     },
     {
       "manual_confirmed": false,
@@ -350,8 +608,29 @@
         "Source URL is official or clearly identifies the exact product/campaign.",
         "Product name, prize rank, goods type, and variant match this row.",
         "Do not use storefront, search result, logo, banner, or unrelated sample images.",
-        "Run cache/report/audit commands after applying confirmed rows."
-      ]
+        "Run cache/report/audit commands after applying confirmed rows.",
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "candidate_context_source": "ensky_missing_image_cache_coverage_public.json",
+      "candidate_status": "no_cache_candidate",
+      "candidate_count": 0,
+      "top_candidate": {},
+      "candidate_options": [],
+      "rejected_candidate_options": [],
+      "review_blockers": [
+        "ensky_exact_product_page_not_confirmed",
+        "do_not_import_weak_or_broad_cache_candidates",
+        "ensky_official_search_requires_manual_exact_match"
+      ],
+      "manual_confirmation_requirements": [
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "official_search_status": "no_search_results",
+      "official_search_query": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
+      "official_search_result_count": 0,
+      "official_search_top_results": []
     },
     {
       "manual_confirmed": false,
@@ -376,8 +655,95 @@
         "Source URL is official or clearly identifies the exact product/campaign.",
         "Product name, prize rank, goods type, and variant match this row.",
         "Do not use storefront, search result, logo, banner, or unrelated sample images.",
-        "Run cache/report/audit commands after applying confirmed rows."
-      ]
+        "Run cache/report/audit commands after applying confirmed rows.",
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "candidate_context_source": "ensky_missing_image_cache_coverage_public.json",
+      "candidate_status": "weak_cache_candidate",
+      "candidate_count": 13,
+      "top_candidate": {
+        "title": "ちいかわ えらべる!ヘアクリップ アクリル【1BOX ケース48個】",
+        "source_url": "https://www.enskyshop.com/products/detail/28675",
+        "image_url": "https://www.enskyshop.com/html/upload/save_image/0514141409_682426a1ce61d.jpg",
+        "safe_exact_match": false,
+        "weak_broad_match": true,
+        "score": 20,
+        "matched_tokens": [
+          "ちいかわ"
+        ]
+      },
+      "candidate_options": [],
+      "rejected_candidate_options": [
+        {
+          "title": "ちいかわ えらべる!ヘアクリップ アクリル【1BOX ケース48個】",
+          "source_url": "https://www.enskyshop.com/products/detail/28675",
+          "image_url": "https://www.enskyshop.com/html/upload/save_image/0514141409_682426a1ce61d.jpg",
+          "safe_exact_match": false,
+          "weak_broad_match": true,
+          "score": 20,
+          "matched_tokens": [
+            "ちいかわ"
+          ]
+        },
+        {
+          "title": "ちいかわ お絵かきボードセット",
+          "source_url": "https://www.enskyshop.com/products/detail/26056",
+          "image_url": "https://www.enskyshop.com/html/upload/save_image/0717132620_669747ec5183e.jpg",
+          "safe_exact_match": false,
+          "weak_broad_match": true,
+          "score": 20,
+          "matched_tokens": [
+            "ちいかわ"
+          ]
+        },
+        {
+          "title": "ちいかわ つめつめ消しゴム2【1BOX ボトル36本入り】",
+          "source_url": "https://www.enskyshop.com/products/detail/27937",
+          "image_url": "https://www.enskyshop.com/html/upload/save_image/0114130634_6785e2ca731c9.jpg",
+          "safe_exact_match": false,
+          "weak_broad_match": true,
+          "score": 20,
+          "matched_tokens": [
+            "ちいかわ"
+          ]
+        },
+        {
+          "title": "ちいかわ スタンプセット",
+          "source_url": "https://www.enskyshop.com/products/detail/23049",
+          "image_url": "https://www.enskyshop.com/html/upload/save_image/0301144118_63fee57e75229.jpg",
+          "safe_exact_match": false,
+          "weak_broad_match": true,
+          "score": 20,
+          "matched_tokens": [
+            "ちいかわ"
+          ]
+        },
+        {
+          "title": "ちいかわ スナップマイド3【1BOX 16パック入り】",
+          "source_url": "https://www.enskyshop.com/products/detail/29014",
+          "image_url": "https://www.enskyshop.com/html/upload/save_image/0625135250_685b80a239126.jpg",
+          "safe_exact_match": false,
+          "weak_broad_match": true,
+          "score": 20,
+          "matched_tokens": [
+            "ちいかわ"
+          ]
+        }
+      ],
+      "review_blockers": [
+        "ensky_exact_product_page_not_confirmed",
+        "do_not_import_weak_or_broad_cache_candidates",
+        "ensky_official_search_requires_manual_exact_match"
+      ],
+      "manual_confirmation_requirements": [
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "official_search_status": "no_search_results",
+      "official_search_query": "ちいかわ アクリルスタンド (ちいかわ)",
+      "official_search_result_count": 0,
+      "official_search_top_results": []
     },
     {
       "manual_confirmed": false,
@@ -402,8 +768,29 @@
         "Source URL is official or clearly identifies the exact product/campaign.",
         "Product name, prize rank, goods type, and variant match this row.",
         "Do not use storefront, search result, logo, banner, or unrelated sample images.",
-        "Run cache/report/audit commands after applying confirmed rows."
-      ]
+        "Run cache/report/audit commands after applying confirmed rows.",
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "candidate_context_source": "ensky_missing_image_cache_coverage_public.json",
+      "candidate_status": "no_cache_candidate",
+      "candidate_count": 0,
+      "top_candidate": {},
+      "candidate_options": [],
+      "rejected_candidate_options": [],
+      "review_blockers": [
+        "ensky_exact_product_page_not_confirmed",
+        "do_not_import_weak_or_broad_cache_candidates",
+        "ensky_official_search_requires_manual_exact_match"
+      ],
+      "manual_confirmation_requirements": [
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "official_search_status": "no_search_results",
+      "official_search_query": "ちいかわ アクリルスタンド (ハチワレ)",
+      "official_search_result_count": 0,
+      "official_search_top_results": []
     },
     {
       "manual_confirmed": false,
@@ -428,8 +815,29 @@
         "Source URL is official or clearly identifies the exact product/campaign.",
         "Product name, prize rank, goods type, and variant match this row.",
         "Do not use storefront, search result, logo, banner, or unrelated sample images.",
-        "Run cache/report/audit commands after applying confirmed rows."
-      ]
+        "Run cache/report/audit commands after applying confirmed rows.",
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "candidate_context_source": "ensky_missing_image_cache_coverage_public.json",
+      "candidate_status": "no_cache_candidate",
+      "candidate_count": 0,
+      "top_candidate": {},
+      "candidate_options": [],
+      "rejected_candidate_options": [],
+      "review_blockers": [
+        "ensky_exact_product_page_not_confirmed",
+        "do_not_import_weak_or_broad_cache_candidates",
+        "ensky_official_search_requires_manual_exact_match"
+      ],
+      "manual_confirmation_requirements": [
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "official_search_status": "no_search_results",
+      "official_search_query": "ちいかわ アクリルスタンド (うさぎ)",
+      "official_search_result_count": 0,
+      "official_search_top_results": []
     },
     {
       "manual_confirmed": false,
@@ -454,8 +862,95 @@
         "Source URL is official or clearly identifies the exact product/campaign.",
         "Product name, prize rank, goods type, and variant match this row.",
         "Do not use storefront, search result, logo, banner, or unrelated sample images.",
-        "Run cache/report/audit commands after applying confirmed rows."
-      ]
+        "Run cache/report/audit commands after applying confirmed rows.",
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "candidate_context_source": "ensky_missing_image_cache_coverage_public.json",
+      "candidate_status": "weak_cache_candidate",
+      "candidate_count": 13,
+      "top_candidate": {
+        "title": "ちいかわ えらべる!ヘアクリップ アクリル【1BOX ケース48個】",
+        "source_url": "https://www.enskyshop.com/products/detail/28675",
+        "image_url": "https://www.enskyshop.com/html/upload/save_image/0514141409_682426a1ce61d.jpg",
+        "safe_exact_match": false,
+        "weak_broad_match": true,
+        "score": 20,
+        "matched_tokens": [
+          "ちいかわ"
+        ]
+      },
+      "candidate_options": [],
+      "rejected_candidate_options": [
+        {
+          "title": "ちいかわ えらべる!ヘアクリップ アクリル【1BOX ケース48個】",
+          "source_url": "https://www.enskyshop.com/products/detail/28675",
+          "image_url": "https://www.enskyshop.com/html/upload/save_image/0514141409_682426a1ce61d.jpg",
+          "safe_exact_match": false,
+          "weak_broad_match": true,
+          "score": 20,
+          "matched_tokens": [
+            "ちいかわ"
+          ]
+        },
+        {
+          "title": "ちいかわ お絵かきボードセット",
+          "source_url": "https://www.enskyshop.com/products/detail/26056",
+          "image_url": "https://www.enskyshop.com/html/upload/save_image/0717132620_669747ec5183e.jpg",
+          "safe_exact_match": false,
+          "weak_broad_match": true,
+          "score": 20,
+          "matched_tokens": [
+            "ちいかわ"
+          ]
+        },
+        {
+          "title": "ちいかわ つめつめ消しゴム2【1BOX ボトル36本入り】",
+          "source_url": "https://www.enskyshop.com/products/detail/27937",
+          "image_url": "https://www.enskyshop.com/html/upload/save_image/0114130634_6785e2ca731c9.jpg",
+          "safe_exact_match": false,
+          "weak_broad_match": true,
+          "score": 20,
+          "matched_tokens": [
+            "ちいかわ"
+          ]
+        },
+        {
+          "title": "ちいかわ スタンプセット",
+          "source_url": "https://www.enskyshop.com/products/detail/23049",
+          "image_url": "https://www.enskyshop.com/html/upload/save_image/0301144118_63fee57e75229.jpg",
+          "safe_exact_match": false,
+          "weak_broad_match": true,
+          "score": 20,
+          "matched_tokens": [
+            "ちいかわ"
+          ]
+        },
+        {
+          "title": "ちいかわ スナップマイド3【1BOX 16パック入り】",
+          "source_url": "https://www.enskyshop.com/products/detail/29014",
+          "image_url": "https://www.enskyshop.com/html/upload/save_image/0625135250_685b80a239126.jpg",
+          "safe_exact_match": false,
+          "weak_broad_match": true,
+          "score": 20,
+          "matched_tokens": [
+            "ちいかわ"
+          ]
+        }
+      ],
+      "review_blockers": [
+        "ensky_exact_product_page_not_confirmed",
+        "do_not_import_weak_or_broad_cache_candidates",
+        "ensky_official_search_requires_manual_exact_match"
+      ],
+      "manual_confirmation_requirements": [
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "official_search_status": "no_search_results",
+      "official_search_query": "ちいかわ ビッグアクリルスタンド (ちいかわ)",
+      "official_search_result_count": 0,
+      "official_search_top_results": []
     },
     {
       "manual_confirmed": false,
@@ -480,7 +975,54 @@
         "Source URL is official or clearly identifies the exact product/campaign.",
         "Product name, prize rank, goods type, and variant match this row.",
         "Do not use storefront, search result, logo, banner, or unrelated sample images.",
-        "Run cache/report/audit commands after applying confirmed rows."
+        "Run cache/report/audit commands after applying confirmed rows.",
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "candidate_context_source": "ensky_missing_image_cache_coverage_public.json",
+      "candidate_status": "no_cache_candidate",
+      "candidate_count": 0,
+      "top_candidate": {},
+      "candidate_options": [],
+      "rejected_candidate_options": [],
+      "review_blockers": [
+        "ensky_exact_product_page_not_confirmed",
+        "do_not_import_weak_or_broad_cache_candidates",
+        "ensky_official_search_requires_manual_exact_match"
+      ],
+      "manual_confirmation_requirements": [
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "official_search_status": "rejected_search_results",
+      "official_search_query": "ちいかわ スタンドミニ (モモンガ)",
+      "official_search_result_count": 9,
+      "official_search_top_results": [
+        {
+          "title": "ちいかわ キラキラクリアカードコレクションガム ◆通常版◆【1BOX 16パック入り】",
+          "source_url": "https://www.enskyshop.com/products/detail/31151",
+          "image_url": "https://www.enskyshop.com/html/upload/save_image/0212101825_698d2a616d61e.jpg"
+        },
+        {
+          "title": "ちいかわ あつめてシールガム4【1BOX 20パック入り】",
+          "source_url": "https://www.enskyshop.com/products/detail/30859",
+          "image_url": "https://www.enskyshop.com/html/upload/save_image/0107114118_695dc7cee912d.jpg"
+        },
+        {
+          "title": "ちいかわ マグネットコレクションガム2【1BOX 14パック入り】",
+          "source_url": "https://www.enskyshop.com/products/detail/30726",
+          "image_url": "https://www.enskyshop.com/html/upload/save_image/1210094551_6938c2bfcd299.jpg"
+        },
+        {
+          "title": "ちいかわ 色紙コレクション3【1BOX 16パック入り】",
+          "source_url": "https://www.enskyshop.com/products/detail/30864",
+          "image_url": "https://www.enskyshop.com/html/upload/save_image/0107151206_695df936d059f.jpg"
+        },
+        {
+          "title": "ちいかわ バラエティカード ガムつき【1BOX 16パック入り】",
+          "source_url": "https://www.enskyshop.com/products/detail/24195",
+          "image_url": "https://www.enskyshop.com/html/upload/save_image/1009115056_6705ef9038c9b.jpg"
+        }
       ]
     },
     {
@@ -506,8 +1048,29 @@
         "Source URL is official or clearly identifies the exact product/campaign.",
         "Product name, prize rank, goods type, and variant match this row.",
         "Do not use storefront, search result, logo, banner, or unrelated sample images.",
-        "Run cache/report/audit commands after applying confirmed rows."
-      ]
+        "Run cache/report/audit commands after applying confirmed rows.",
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "candidate_context_source": "ensky_missing_image_cache_coverage_public.json",
+      "candidate_status": "no_cache_candidate",
+      "candidate_count": 0,
+      "top_candidate": {},
+      "candidate_options": [],
+      "rejected_candidate_options": [],
+      "review_blockers": [
+        "ensky_exact_product_page_not_confirmed",
+        "do_not_import_weak_or_broad_cache_candidates",
+        "ensky_official_search_requires_manual_exact_match"
+      ],
+      "manual_confirmation_requirements": [
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "official_search_status": "no_search_results",
+      "official_search_query": "ちいかわ トレーディングアクリルキーホルダー (らぶらぶシリーズ)",
+      "official_search_result_count": 0,
+      "official_search_top_results": []
     },
     {
       "manual_confirmed": false,
@@ -532,8 +1095,29 @@
         "Source URL is official or clearly identifies the exact product/campaign.",
         "Product name, prize rank, goods type, and variant match this row.",
         "Do not use storefront, search result, logo, banner, or unrelated sample images.",
-        "Run cache/report/audit commands after applying confirmed rows."
-      ]
+        "Run cache/report/audit commands after applying confirmed rows.",
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "candidate_context_source": "ensky_missing_image_cache_coverage_public.json",
+      "candidate_status": "no_cache_candidate",
+      "candidate_count": 0,
+      "top_candidate": {},
+      "candidate_options": [],
+      "rejected_candidate_options": [],
+      "review_blockers": [
+        "ensky_exact_product_page_not_confirmed",
+        "do_not_import_weak_or_broad_cache_candidates",
+        "ensky_official_search_requires_manual_exact_match"
+      ],
+      "manual_confirmation_requirements": [
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "official_search_status": "no_search_results",
+      "official_search_query": "ちいかわ アクリルフィギュア (らぶらぶシリーズ)",
+      "official_search_result_count": 0,
+      "official_search_top_results": []
     },
     {
       "manual_confirmed": false,
@@ -2060,8 +2644,29 @@
         "Source URL is official or clearly identifies the exact product/campaign.",
         "Product name, prize rank, goods type, and variant match this row.",
         "Do not use storefront, search result, logo, banner, or unrelated sample images.",
-        "Run cache/report/audit commands after applying confirmed rows."
-      ]
+        "Run cache/report/audit commands after applying confirmed rows.",
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "candidate_context_source": "ensky_missing_image_cache_coverage_public.json",
+      "candidate_status": "no_cache_candidate",
+      "candidate_count": 0,
+      "top_candidate": {},
+      "candidate_options": [],
+      "rejected_candidate_options": [],
+      "review_blockers": [
+        "ensky_exact_product_page_not_confirmed",
+        "do_not_import_weak_or_broad_cache_candidates",
+        "ensky_official_search_requires_manual_exact_match"
+      ],
+      "manual_confirmation_requirements": [
+        "Open the Ensky detail page and confirm the page title exactly names this product.",
+        "Reject candidates whose title is a different product type, assortment, card, sticker, gum, or lineup."
+      ],
+      "official_search_status": "no_search_results",
+      "official_search_query": "くりまんじゅう ご当地マスコット (仙台 ずんだ)",
+      "official_search_result_count": 0,
+      "official_search_top_results": []
     },
     {
       "manual_confirmed": false,
