@@ -2654,7 +2654,7 @@
     "public_report": "data/catalog_agent_work_queue_public.json",
     "batch_count": 160,
     "max_published_batches": 160,
-    "summed_batch_rows": 20613,
+    "summed_batch_rows": 20605,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -2706,6 +2706,10 @@
         7
       ],
       [
+        "deduplication_review",
+        6
+      ],
+      [
         "ichiban_kuji_prize_policy_audit",
         5
       ],
@@ -2719,10 +2723,6 @@
       ],
       [
         "ichiban_kuji_campaign_first_reissue_review",
-        4
-      ],
-      [
-        "deduplication_review",
         4
       ],
       [
@@ -2759,14 +2759,6 @@
       ],
       [
         "source_discovery_next_focus_detail_candidates",
-        1
-      ],
-      [
-        "ichiban_kuji_prize_name_image_review",
-        1
-      ],
-      [
-        "ichiban_kuji_prize_name_image_patch_candidates",
         1
       ]
     ],
@@ -2820,6 +2812,10 @@
         7
       ],
       [
+        "agent-dedupe",
+        6
+      ],
+      [
         "agent-ichiban-prize-policy",
         5
       ],
@@ -2840,20 +2836,12 @@
         4
       ],
       [
-        "agent-dedupe",
-        4
-      ],
-      [
         "agent-source-fallback",
         3
       ],
       [
         "agent-source-detail-candidate",
         3
-      ],
-      [
-        "agent-ichiban-prize-name-image",
-        2
       ],
       [
         "agent-gotouchi-review",
@@ -8107,24 +8095,24 @@
   },
   "ensky_cache_coverage": {
     "public_report": "data/ensky_missing_image_cache_coverage_public.json",
-    "missing_ensky_image_rows": 187,
+    "missing_ensky_image_rows": 182,
     "cache_products": 3153,
     "exact_safe_match_rows": 0,
     "broad_cache_candidate_rows": 39,
     "weak_cache_candidate_rows": 4,
-    "no_cache_candidate_rows": 144,
-    "manual_review_rows": 187,
+    "no_cache_candidate_rows": 139,
+    "manual_review_rows": 182,
     "auto_apply_enabled": false,
     "cache_source": "server/.catalog_image_cache/ensky_sitemap_index.json"
   },
   "ensky_search_page_probe": {
     "public_report": "data/ensky_search_page_probe_public.json",
-    "missing_ensky_image_rows": 187,
-    "processed_rows": 60,
-    "limit": 60,
+    "missing_ensky_image_rows": 182,
+    "processed_rows": 40,
+    "limit": 40,
     "safe_match_rows": 0,
     "rejected_search_result_rows": 2,
-    "no_search_result_rows": 58,
+    "no_search_result_rows": 38,
     "auto_apply_enabled": false,
     "search_page": "https://www.enskyshop.com/products/list?name={query}"
   },
@@ -10587,30 +10575,25 @@
   "ichiban_kuji_prize_name_image_review": {
     "public_report": "data/ichiban_kuji_prize_name_image_review_public.json",
     "kuji_rows": 7902,
-    "review_rows": 6,
+    "review_rows": 0,
     "name_structure_review_rows": 0,
-    "image_identity_review_rows": 6,
+    "image_identity_review_rows": 0,
     "same_campaign_prize_rank_name_duplicate_rows": 0,
-    "same_campaign_image_reused_different_name_rows": 6,
+    "same_campaign_image_reused_different_name_rows": 0,
     "multi_item_prize_rank_groups": 417,
     "multi_item_prize_rank_catalog_rows": 2945,
-    "review_reason_counts": [
-      [
-        "same_campaign_image_used_by_different_prize_names",
-        6
-      ]
-    ],
+    "review_reason_counts": [],
     "auto_apply_enabled": false,
     "recommended_next_action": "confirm_ichiban_prize_names_and_images_against_official_campaign_lineups"
   },
   "ichiban_kuji_prize_name_image_patch_candidates": {
     "public_report": "data/ichiban_kuji_prize_name_image_patch_candidates_public.json",
-    "review_rows": 6,
-    "source_urls": 1,
-    "fetched_source_urls": 1,
+    "review_rows": 0,
+    "source_urls": 0,
+    "fetched_source_urls": 0,
     "fetch_failure_urls": 0,
-    "candidate_rows": 6,
-    "exact_image_match_rows": 6,
+    "candidate_rows": 0,
+    "exact_image_match_rows": 0,
     "strong_name_match_rows": 0,
     "blocked_rows": 0,
     "blocked_reason_counts": [],
@@ -10619,7 +10602,7 @@
     "auto_apply_enabled": false,
     "recommended_next_action": "manual_confirm_exact_official_patch_candidates_or_fill_blocked_manual_templates",
     "manual_confirmed_rows": 0,
-    "open_candidate_rows": 6
+    "open_candidate_rows": 0
   },
   "source_discovery_next_focus_fallback_queue": {
     "public_report": "data/source_discovery_next_focus_fallback_queue_public.json",

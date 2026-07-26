@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T18:08:21Z",
+  "generated_at": "2026-07-26T18:25:08Z",
   "summary": {
     "batch_count": 160,
     "max_published_batches": 160,
-    "summed_batch_rows": 20613,
+    "summed_batch_rows": 20605,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -56,6 +56,10 @@
         7
       ],
       [
+        "deduplication_review",
+        6
+      ],
+      [
         "ichiban_kuji_prize_policy_audit",
         5
       ],
@@ -69,10 +73,6 @@
       ],
       [
         "ichiban_kuji_campaign_first_reissue_review",
-        4
-      ],
-      [
-        "deduplication_review",
         4
       ],
       [
@@ -109,14 +109,6 @@
       ],
       [
         "source_discovery_next_focus_detail_candidates",
-        1
-      ],
-      [
-        "ichiban_kuji_prize_name_image_review",
-        1
-      ],
-      [
-        "ichiban_kuji_prize_name_image_patch_candidates",
         1
       ]
     ],
@@ -170,6 +162,10 @@
         7
       ],
       [
+        "agent-dedupe",
+        6
+      ],
+      [
         "agent-ichiban-prize-policy",
         5
       ],
@@ -190,20 +186,12 @@
         4
       ],
       [
-        "agent-dedupe",
-        4
-      ],
-      [
         "agent-source-fallback",
         3
       ],
       [
         "agent-source-detail-candidate",
         3
-      ],
-      [
-        "agent-ichiban-prize-name-image",
-        2
       ],
       [
         "agent-gotouchi-review",
@@ -10193,7 +10181,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "020-agent-source-starter-162",
+      "batch_id": "020-agent-source-starter-160",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_next_review_batch",
       "priority": 20,
@@ -20055,7 +20043,7 @@
       "next_machine_step": "manual_review"
     },
     {
-      "batch_id": "031-agent-source-starter-163",
+      "batch_id": "031-agent-source-starter-161",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -20164,7 +20152,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-164",
+      "batch_id": "031-agent-source-starter-162",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -20273,7 +20261,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-165",
+      "batch_id": "031-agent-source-starter-163",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -20382,7 +20370,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-166",
+      "batch_id": "031-agent-source-starter-164",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -20491,7 +20479,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-167",
+      "batch_id": "031-agent-source-starter-165",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -20600,7 +20588,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-168",
+      "batch_id": "031-agent-source-starter-166",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -20709,7 +20697,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-169",
+      "batch_id": "031-agent-source-starter-167",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -20818,7 +20806,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-170",
+      "batch_id": "031-agent-source-starter-168",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -20927,7 +20915,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-171",
+      "batch_id": "031-agent-source-starter-169",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -21036,7 +21024,7 @@
       "next_machine_step": "find_exact_official_product_source_url"
     },
     {
-      "batch_id": "031-agent-source-starter-172",
+      "batch_id": "031-agent-source-starter-170",
       "agent_id": "agent-source-starter",
       "workstream": "source_discovery_starter_queue",
       "priority": 31,
@@ -31334,313 +31322,6 @@
       "next_machine_step": "fill_confirmed_metadata_patch_templates"
     },
     {
-      "batch_id": "056-agent-ichiban-prize-name-image-160",
-      "agent_id": "agent-ichiban-prize-name-image",
-      "workstream": "ichiban_kuji_prize_name_image_review",
-      "priority": 56,
-      "title": "Ichiban Kuji prize name/image structure review",
-      "public_report": "data/ichiban_kuji_prize_name_image_review_public.json",
-      "rows": 6,
-      "recommended_action": "Confirm each prize display name includes campaign, prize rank, prize item, and variant detail.",
-      "acceptance_criteria": [
-        "Display names include the release name, prize rank, and prize item name.",
-        "Same-prize multi-item rows include numbering, character, color, or item-type detail.",
-        "Images are only changed when same campaign, prize rank, and variant identity all match."
-      ],
-      "sample_items": [
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 12544,
-          "series_name": "一番くじ 葬送のフリーレン",
-          "prize_rank": "C賞",
-          "prize_item_name": "C賞 ちょこのっこフィギュア フリーレン",
-          "expected_prize_display_name": "C賞 ちょこのっこフィギュア フリーレン",
-          "display_name_ko": "一番くじ 葬送のフリーレン / C賞 / ちょこのっこフィギュア フリーレン / 프리렌",
-          "expected_display_name_ko": "一番くじ 葬送のフリーレン / C賞 / ちょこのっこフィギュア フリーレン / 프리렌",
-          "category": "피규어",
-          "character_name": "프리렌",
-          "official_price_jpy": 860,
-          "release_date": "2026-04-10",
-          "source_url": "https://1kuji.com/products/frieren",
-          "image_url": "https://assets.1kuji.com/uploads/product_item/image/106119/8b473cb4-368e-4827-924a-5920f7f35ede.webp",
-          "local_image_path": "assets/catalog_images/870ca27701dffb483846.webp",
-          "review_reason": "same_campaign_image_used_by_different_prize_names",
-          "name_policy": {
-            "required_components": [
-              "ichiban_release_name(series_name)",
-              "prize_rank(sub_series)",
-              "prize_item_name(name_ja)",
-              "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
-            ],
-            "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
-            "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
-          },
-          "image_review_policy": {
-            "requires_same_campaign": true,
-            "requires_same_prize_rank": true,
-            "requires_same_variant_or_item": true,
-            "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
-          },
-          "manual_fix_template": {
-            "catalog_index": 12544,
-            "name_ko": "<confirmed_display_name_or_blank>",
-            "name_ja": "<confirmed_prize_item_name_or_blank>",
-            "sub_series": "<confirmed_prize_rank_or_blank>",
-            "image_url": "<confirmed_official_image_url_or_blank>",
-            "evidence_url": "https://1kuji.com/products/frieren",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 20558,
-          "series_name": "一番くじ 葬送のフリーレン",
-          "prize_rank": "C賞",
-          "prize_item_name": "C賞 ちょこのっこフィギュア フェルン",
-          "expected_prize_display_name": "C賞 ちょこのっこフィギュア フェルン",
-          "display_name_ko": "一番くじ 葬送のフリーレン / C賞 / ちょこのっこフィギュア フェルン / 페른",
-          "expected_display_name_ko": "一番くじ 葬送のフリーレン / C賞 / ちょこのっこフィギュア フェルン / 페른",
-          "category": "피규어",
-          "character_name": "페른",
-          "official_price_jpy": 860,
-          "release_date": "2026-04-10",
-          "source_url": "https://1kuji.com/products/frieren",
-          "image_url": "https://assets.1kuji.com/uploads/product_item/image/106119/8b473cb4-368e-4827-924a-5920f7f35ede.webp",
-          "local_image_path": "assets/catalog_images/870ca27701dffb483846.webp",
-          "review_reason": "same_campaign_image_used_by_different_prize_names",
-          "name_policy": {
-            "required_components": [
-              "ichiban_release_name(series_name)",
-              "prize_rank(sub_series)",
-              "prize_item_name(name_ja)",
-              "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
-            ],
-            "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
-            "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
-          },
-          "image_review_policy": {
-            "requires_same_campaign": true,
-            "requires_same_prize_rank": true,
-            "requires_same_variant_or_item": true,
-            "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
-          },
-          "manual_fix_template": {
-            "catalog_index": 20558,
-            "name_ko": "<confirmed_display_name_or_blank>",
-            "name_ja": "<confirmed_prize_item_name_or_blank>",
-            "sub_series": "<confirmed_prize_rank_or_blank>",
-            "image_url": "<confirmed_official_image_url_or_blank>",
-            "evidence_url": "https://1kuji.com/products/frieren",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 20559,
-          "series_name": "一番くじ 葬送のフリーレン",
-          "prize_rank": "C賞",
-          "prize_item_name": "C賞 ちょこのっこフィギュア シュタルク",
-          "expected_prize_display_name": "C賞 ちょこのっこフィギュア シュタルク",
-          "display_name_ko": "一番くじ 葬送のフリーレン / C賞 / ちょこのっこフィギュア シュタルク / 슈타르크",
-          "expected_display_name_ko": "一番くじ 葬送のフリーレン / C賞 / ちょこのっこフィギュア シュタルク / 슈타르크",
-          "category": "피규어",
-          "character_name": "슈타르크",
-          "official_price_jpy": 860,
-          "release_date": "2026-04-10",
-          "source_url": "https://1kuji.com/products/frieren",
-          "image_url": "https://assets.1kuji.com/uploads/product_item/image/106119/8b473cb4-368e-4827-924a-5920f7f35ede.webp",
-          "local_image_path": "assets/catalog_images/870ca27701dffb483846.webp",
-          "review_reason": "same_campaign_image_used_by_different_prize_names",
-          "name_policy": {
-            "required_components": [
-              "ichiban_release_name(series_name)",
-              "prize_rank(sub_series)",
-              "prize_item_name(name_ja)",
-              "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
-            ],
-            "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
-            "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
-          },
-          "image_review_policy": {
-            "requires_same_campaign": true,
-            "requires_same_prize_rank": true,
-            "requires_same_variant_or_item": true,
-            "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
-          },
-          "manual_fix_template": {
-            "catalog_index": 20559,
-            "name_ko": "<confirmed_display_name_or_blank>",
-            "name_ja": "<confirmed_prize_item_name_or_blank>",
-            "sub_series": "<confirmed_prize_rank_or_blank>",
-            "image_url": "<confirmed_official_image_url_or_blank>",
-            "evidence_url": "https://1kuji.com/products/frieren",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 12545,
-          "series_name": "一番くじ 葬送のフリーレン",
-          "prize_rank": "D賞",
-          "prize_item_name": "D賞 ちょこのっこフィギュア ヒンメル",
-          "expected_prize_display_name": "D賞 ちょこのっこフィギュア ヒンメル",
-          "display_name_ko": "一番くじ 葬送のフリーレン / D賞 / ちょこのっこフィギュア ヒンメル / 히멜",
-          "expected_display_name_ko": "一番くじ 葬送のフリーレン / D賞 / ちょこのっこフィギュア ヒンメル / 히멜",
-          "category": "피규어",
-          "character_name": "히멜",
-          "official_price_jpy": 860,
-          "release_date": "2026-04-10",
-          "source_url": "https://1kuji.com/products/frieren",
-          "image_url": "https://assets.1kuji.com/uploads/product_item/image/106120/ffe901a0-ea93-4860-9279-189ad2d975b4.webp",
-          "local_image_path": "assets/catalog_images/d49bcc8520c4dffd32ca.webp",
-          "review_reason": "same_campaign_image_used_by_different_prize_names",
-          "name_policy": {
-            "required_components": [
-              "ichiban_release_name(series_name)",
-              "prize_rank(sub_series)",
-              "prize_item_name(name_ja)",
-              "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
-            ],
-            "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
-            "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
-          },
-          "image_review_policy": {
-            "requires_same_campaign": true,
-            "requires_same_prize_rank": true,
-            "requires_same_variant_or_item": true,
-            "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
-          },
-          "manual_fix_template": {
-            "catalog_index": 12545,
-            "name_ko": "<confirmed_display_name_or_blank>",
-            "name_ja": "<confirmed_prize_item_name_or_blank>",
-            "sub_series": "<confirmed_prize_rank_or_blank>",
-            "image_url": "<confirmed_official_image_url_or_blank>",
-            "evidence_url": "https://1kuji.com/products/frieren",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 20560,
-          "series_name": "一番くじ 葬送のフリーレン",
-          "prize_rank": "D賞",
-          "prize_item_name": "D賞 ちょこのっこフィギュア ハイター",
-          "expected_prize_display_name": "D賞 ちょこのっこフィギュア ハイター",
-          "display_name_ko": "一番くじ 葬送のフリーレン / D賞 / ちょこのっこフィギュア ハイター / 하이터",
-          "expected_display_name_ko": "一番くじ 葬送のフリーレン / D賞 / ちょこのっこフィギュア ハイター / 하이터",
-          "category": "피규어",
-          "character_name": "하이터",
-          "official_price_jpy": 860,
-          "release_date": "2026-04-10",
-          "source_url": "https://1kuji.com/products/frieren",
-          "image_url": "https://assets.1kuji.com/uploads/product_item/image/106120/ffe901a0-ea93-4860-9279-189ad2d975b4.webp",
-          "local_image_path": "assets/catalog_images/d49bcc8520c4dffd32ca.webp",
-          "review_reason": "same_campaign_image_used_by_different_prize_names",
-          "name_policy": {
-            "required_components": [
-              "ichiban_release_name(series_name)",
-              "prize_rank(sub_series)",
-              "prize_item_name(name_ja)",
-              "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
-            ],
-            "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
-            "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
-          },
-          "image_review_policy": {
-            "requires_same_campaign": true,
-            "requires_same_prize_rank": true,
-            "requires_same_variant_or_item": true,
-            "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
-          },
-          "manual_fix_template": {
-            "catalog_index": 20560,
-            "name_ko": "<confirmed_display_name_or_blank>",
-            "name_ja": "<confirmed_prize_item_name_or_blank>",
-            "sub_series": "<confirmed_prize_rank_or_blank>",
-            "image_url": "<confirmed_official_image_url_or_blank>",
-            "evidence_url": "https://1kuji.com/products/frieren",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 20561,
-          "series_name": "一番くじ 葬送のフリーレン",
-          "prize_rank": "D賞",
-          "prize_item_name": "D賞 ちょこのっこフィギュア アイゼン",
-          "expected_prize_display_name": "D賞 ちょこのっこフィギュア アイゼン",
-          "display_name_ko": "一番くじ 葬送のフリーレン / D賞 / ちょこのっこフィギュア アイゼン / 아이젠",
-          "expected_display_name_ko": "一番くじ 葬送のフリーレン / D賞 / ちょこのっこフィギュア アイゼン / 아이젠",
-          "category": "피규어",
-          "character_name": "아이젠",
-          "official_price_jpy": 860,
-          "release_date": "2026-04-10",
-          "source_url": "https://1kuji.com/products/frieren",
-          "image_url": "https://assets.1kuji.com/uploads/product_item/image/106120/ffe901a0-ea93-4860-9279-189ad2d975b4.webp",
-          "local_image_path": "assets/catalog_images/d49bcc8520c4dffd32ca.webp",
-          "review_reason": "same_campaign_image_used_by_different_prize_names",
-          "name_policy": {
-            "required_components": [
-              "ichiban_release_name(series_name)",
-              "prize_rank(sub_series)",
-              "prize_item_name(name_ja)",
-              "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank"
-            ],
-            "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
-            "same_prize_multiple_items_rule": "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
-          },
-          "image_review_policy": {
-            "requires_same_campaign": true,
-            "requires_same_prize_rank": true,
-            "requires_same_variant_or_item": true,
-            "do_not_reuse_neighbor_prize_image_without_official_lineup_match": true
-          },
-          "manual_fix_template": {
-            "catalog_index": 20561,
-            "name_ko": "<confirmed_display_name_or_blank>",
-            "name_ja": "<confirmed_prize_item_name_or_blank>",
-            "sub_series": "<confirmed_prize_rank_or_blank>",
-            "image_url": "<confirmed_official_image_url_or_blank>",
-            "evidence_url": "https://1kuji.com/products/frieren",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        }
-      ],
-      "review_summary": {
-        "kuji_rows": 7902,
-        "review_rows": 6,
-        "name_structure_review_rows": 0,
-        "image_identity_review_rows": 6,
-        "same_campaign_prize_rank_name_duplicate_rows": 0,
-        "same_campaign_image_reused_different_name_rows": 6,
-        "multi_item_prize_rank_groups": 417,
-        "multi_item_prize_rank_catalog_rows": 2945,
-        "review_reason_counts": [
-          [
-            "same_campaign_image_used_by_different_prize_names",
-            6
-          ]
-        ],
-        "auto_apply_enabled": false,
-        "recommended_next_action": "confirm_ichiban_prize_names_and_images_against_official_campaign_lineups"
-      },
-      "review_state": "manual_prize_name_structure_confirmation_required",
-      "next_machine_step": "confirm_ichiban_prize_name_structure_templates"
-    },
-    {
       "batch_id": "056-agent-ichiban-reissue-dedupe-113",
       "agent_id": "agent-ichiban-reissue-dedupe",
       "workstream": "ichiban_kuji_reissue_dedupe_review",
@@ -31740,270 +31421,6 @@
       },
       "review_state": "official_campaign_evidence_required",
       "next_machine_step": "verify_ichiban_campaign_page"
-    },
-    {
-      "batch_id": "057-agent-ichiban-prize-name-image-161",
-      "agent_id": "agent-ichiban-prize-name-image",
-      "workstream": "ichiban_kuji_prize_name_image_patch_candidates",
-      "priority": 57,
-      "title": "Ichiban Kuji prize image/name patch candidates",
-      "public_report": "data/ichiban_kuji_prize_name_image_patch_candidates_public.json",
-      "rows": 6,
-      "recommended_action": "Review exact image matches and confirm only safe catalog patch templates.",
-      "acceptance_criteria": [
-        "candidate image URL must match the same official campaign prize and item variant.",
-        "field_changes must not erase variant details or collapse distinct prize rows.",
-        "catalog_patch_template stays manual_confirmed=false until reviewed."
-      ],
-      "sample_items": [
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 12544,
-          "source_url": "https://1kuji.com/products/frieren",
-          "match_type": "exact_image_match",
-          "match_score": 1.0,
-          "series_name": "一番くじ 葬送のフリーレン",
-          "current_prize_rank": "C賞",
-          "current_name_ja": "C賞 ちょこのっこフィギュア フリーレン",
-          "current_display_name_ko": "一番くじ 葬送のフリーレン / C賞 / ちょこのっこフィギュア フリーレン / 프리렌",
-          "current_image_url": "https://assets.1kuji.com/uploads/product_item/image/106119/8b473cb4-368e-4827-924a-5920f7f35ede.webp",
-          "official_prize_rank": "C賞",
-          "official_name_ja": "C賞 ちょこのっこフィギュア フリーレン、フェルン、シュタルク",
-          "official_prize_display_name": "C賞 ちょこのっこフィギュア フリーレン、フェルン、シュタルク",
-          "suggested_display_name_ko": "一番くじ 葬送のフリーレン - C賞 ちょこのっこフィギュア フリーレン、フェルン、シュタルク",
-          "official_image_url": "https://assets.1kuji.com/uploads/product_item/image/106119/8b473cb4-368e-4827-924a-5920f7f35ede.webp",
-          "field_changes": {
-            "name_ja": {
-              "from": "C賞 ちょこのっこフィギュア フリーレン",
-              "to": "C賞 ちょこのっこフィギュア フリーレン、フェルン、シュタルク"
-            },
-            "name_ko": {
-              "from": "一番くじ 葬送のフリーレン / C賞 / ちょこのっこフィギュア フリーレン / 프리렌",
-              "to": "一番くじ 葬送のフリーレン - C賞 ちょこのっこフィギュア フリーレン、フェルン、シュタルク"
-            }
-          },
-          "catalog_patch_template": {
-            "catalog_index": 12544,
-            "name_ko": "一番くじ 葬送のフリーレン - C賞 ちょこのっこフィギュア フリーレン、フェルン、シュタルク",
-            "name_ja": "C賞 ちょこのっこフィギュア フリーレン、フェルン、シュタルク",
-            "sub_series": "",
-            "image_url": "",
-            "evidence_url": "https://1kuji.com/products/frieren",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 12545,
-          "source_url": "https://1kuji.com/products/frieren",
-          "match_type": "exact_image_match",
-          "match_score": 1.0,
-          "series_name": "一番くじ 葬送のフリーレン",
-          "current_prize_rank": "D賞",
-          "current_name_ja": "D賞 ちょこのっこフィギュア ヒンメル",
-          "current_display_name_ko": "一番くじ 葬送のフリーレン / D賞 / ちょこのっこフィギュア ヒンメル / 히멜",
-          "current_image_url": "https://assets.1kuji.com/uploads/product_item/image/106120/ffe901a0-ea93-4860-9279-189ad2d975b4.webp",
-          "official_prize_rank": "D賞",
-          "official_name_ja": "D賞 ちょこのっこフィギュア ヒンメル、ハイター、アイゼン",
-          "official_prize_display_name": "D賞 ちょこのっこフィギュア ヒンメル、ハイター、アイゼン",
-          "suggested_display_name_ko": "一番くじ 葬送のフリーレン - D賞 ちょこのっこフィギュア ヒンメル、ハイター、アイゼン",
-          "official_image_url": "https://assets.1kuji.com/uploads/product_item/image/106120/ffe901a0-ea93-4860-9279-189ad2d975b4.webp",
-          "field_changes": {
-            "name_ja": {
-              "from": "D賞 ちょこのっこフィギュア ヒンメル",
-              "to": "D賞 ちょこのっこフィギュア ヒンメル、ハイター、アイゼン"
-            },
-            "name_ko": {
-              "from": "一番くじ 葬送のフリーレン / D賞 / ちょこのっこフィギュア ヒンメル / 히멜",
-              "to": "一番くじ 葬送のフリーレン - D賞 ちょこのっこフィギュア ヒンメル、ハイター、アイゼン"
-            }
-          },
-          "catalog_patch_template": {
-            "catalog_index": 12545,
-            "name_ko": "一番くじ 葬送のフリーレン - D賞 ちょこのっこフィギュア ヒンメル、ハイター、アイゼン",
-            "name_ja": "D賞 ちょこのっこフィギュア ヒンメル、ハイター、アイゼン",
-            "sub_series": "",
-            "image_url": "",
-            "evidence_url": "https://1kuji.com/products/frieren",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 20558,
-          "source_url": "https://1kuji.com/products/frieren",
-          "match_type": "exact_image_match",
-          "match_score": 1.0,
-          "series_name": "一番くじ 葬送のフリーレン",
-          "current_prize_rank": "C賞",
-          "current_name_ja": "C賞 ちょこのっこフィギュア フェルン",
-          "current_display_name_ko": "一番くじ 葬送のフリーレン / C賞 / ちょこのっこフィギュア フェルン / 페른",
-          "current_image_url": "https://assets.1kuji.com/uploads/product_item/image/106119/8b473cb4-368e-4827-924a-5920f7f35ede.webp",
-          "official_prize_rank": "C賞",
-          "official_name_ja": "C賞 ちょこのっこフィギュア フリーレン、フェルン、シュタルク",
-          "official_prize_display_name": "C賞 ちょこのっこフィギュア フリーレン、フェルン、シュタルク",
-          "suggested_display_name_ko": "一番くじ 葬送のフリーレン - C賞 ちょこのっこフィギュア フリーレン、フェルン、シュタルク",
-          "official_image_url": "https://assets.1kuji.com/uploads/product_item/image/106119/8b473cb4-368e-4827-924a-5920f7f35ede.webp",
-          "field_changes": {
-            "name_ja": {
-              "from": "C賞 ちょこのっこフィギュア フェルン",
-              "to": "C賞 ちょこのっこフィギュア フリーレン、フェルン、シュタルク"
-            },
-            "name_ko": {
-              "from": "一番くじ 葬送のフリーレン / C賞 / ちょこのっこフィギュア フェルン / 페른",
-              "to": "一番くじ 葬送のフリーレン - C賞 ちょこのっこフィギュア フリーレン、フェルン、シュタルク"
-            }
-          },
-          "catalog_patch_template": {
-            "catalog_index": 20558,
-            "name_ko": "一番くじ 葬送のフリーレン - C賞 ちょこのっこフィギュア フリーレン、フェルン、シュタルク",
-            "name_ja": "C賞 ちょこのっこフィギュア フリーレン、フェルン、シュタルク",
-            "sub_series": "",
-            "image_url": "",
-            "evidence_url": "https://1kuji.com/products/frieren",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 20559,
-          "source_url": "https://1kuji.com/products/frieren",
-          "match_type": "exact_image_match",
-          "match_score": 1.0,
-          "series_name": "一番くじ 葬送のフリーレン",
-          "current_prize_rank": "C賞",
-          "current_name_ja": "C賞 ちょこのっこフィギュア シュタルク",
-          "current_display_name_ko": "一番くじ 葬送のフリーレン / C賞 / ちょこのっこフィギュア シュタルク / 슈타르크",
-          "current_image_url": "https://assets.1kuji.com/uploads/product_item/image/106119/8b473cb4-368e-4827-924a-5920f7f35ede.webp",
-          "official_prize_rank": "C賞",
-          "official_name_ja": "C賞 ちょこのっこフィギュア フリーレン、フェルン、シュタルク",
-          "official_prize_display_name": "C賞 ちょこのっこフィギュア フリーレン、フェルン、シュタルク",
-          "suggested_display_name_ko": "一番くじ 葬送のフリーレン - C賞 ちょこのっこフィギュア フリーレン、フェルン、シュタルク",
-          "official_image_url": "https://assets.1kuji.com/uploads/product_item/image/106119/8b473cb4-368e-4827-924a-5920f7f35ede.webp",
-          "field_changes": {
-            "name_ja": {
-              "from": "C賞 ちょこのっこフィギュア シュタルク",
-              "to": "C賞 ちょこのっこフィギュア フリーレン、フェルン、シュタルク"
-            },
-            "name_ko": {
-              "from": "一番くじ 葬送のフリーレン / C賞 / ちょこのっこフィギュア シュタルク / 슈타르크",
-              "to": "一番くじ 葬送のフリーレン - C賞 ちょこのっこフィギュア フリーレン、フェルン、シュタルク"
-            }
-          },
-          "catalog_patch_template": {
-            "catalog_index": 20559,
-            "name_ko": "一番くじ 葬送のフリーレン - C賞 ちょこのっこフィギュア フリーレン、フェルン、シュタルク",
-            "name_ja": "C賞 ちょこのっこフィギュア フリーレン、フェルン、シュタルク",
-            "sub_series": "",
-            "image_url": "",
-            "evidence_url": "https://1kuji.com/products/frieren",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 20560,
-          "source_url": "https://1kuji.com/products/frieren",
-          "match_type": "exact_image_match",
-          "match_score": 1.0,
-          "series_name": "一番くじ 葬送のフリーレン",
-          "current_prize_rank": "D賞",
-          "current_name_ja": "D賞 ちょこのっこフィギュア ハイター",
-          "current_display_name_ko": "一番くじ 葬送のフリーレン / D賞 / ちょこのっこフィギュア ハイター / 하이터",
-          "current_image_url": "https://assets.1kuji.com/uploads/product_item/image/106120/ffe901a0-ea93-4860-9279-189ad2d975b4.webp",
-          "official_prize_rank": "D賞",
-          "official_name_ja": "D賞 ちょこのっこフィギュア ヒンメル、ハイター、アイゼン",
-          "official_prize_display_name": "D賞 ちょこのっこフィギュア ヒンメル、ハイター、アイゼン",
-          "suggested_display_name_ko": "一番くじ 葬送のフリーレン - D賞 ちょこのっこフィギュア ヒンメル、ハイター、アイゼン",
-          "official_image_url": "https://assets.1kuji.com/uploads/product_item/image/106120/ffe901a0-ea93-4860-9279-189ad2d975b4.webp",
-          "field_changes": {
-            "name_ja": {
-              "from": "D賞 ちょこのっこフィギュア ハイター",
-              "to": "D賞 ちょこのっこフィギュア ヒンメル、ハイター、アイゼン"
-            },
-            "name_ko": {
-              "from": "一番くじ 葬送のフリーレン / D賞 / ちょこのっこフィギュア ハイター / 하이터",
-              "to": "一番くじ 葬送のフリーレン - D賞 ちょこのっこフィギュア ヒンメル、ハイター、アイゼン"
-            }
-          },
-          "catalog_patch_template": {
-            "catalog_index": 20560,
-            "name_ko": "一番くじ 葬送のフリーレン - D賞 ちょこのっこフィギュア ヒンメル、ハイター、アイゼン",
-            "name_ja": "D賞 ちょこのっこフィギュア ヒンメル、ハイター、アイゼン",
-            "sub_series": "",
-            "image_url": "",
-            "evidence_url": "https://1kuji.com/products/frieren",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        },
-        {
-          "manual_review_status": "not_started",
-          "manual_confirmed": false,
-          "catalog_index": 20561,
-          "source_url": "https://1kuji.com/products/frieren",
-          "match_type": "exact_image_match",
-          "match_score": 1.0,
-          "series_name": "一番くじ 葬送のフリーレン",
-          "current_prize_rank": "D賞",
-          "current_name_ja": "D賞 ちょこのっこフィギュア アイゼン",
-          "current_display_name_ko": "一番くじ 葬送のフリーレン / D賞 / ちょこのっこフィギュア アイゼン / 아이젠",
-          "current_image_url": "https://assets.1kuji.com/uploads/product_item/image/106120/ffe901a0-ea93-4860-9279-189ad2d975b4.webp",
-          "official_prize_rank": "D賞",
-          "official_name_ja": "D賞 ちょこのっこフィギュア ヒンメル、ハイター、アイゼン",
-          "official_prize_display_name": "D賞 ちょこのっこフィギュア ヒンメル、ハイター、アイゼン",
-          "suggested_display_name_ko": "一番くじ 葬送のフリーレン - D賞 ちょこのっこフィギュア ヒンメル、ハイター、アイゼン",
-          "official_image_url": "https://assets.1kuji.com/uploads/product_item/image/106120/ffe901a0-ea93-4860-9279-189ad2d975b4.webp",
-          "field_changes": {
-            "name_ja": {
-              "from": "D賞 ちょこのっこフィギュア アイゼン",
-              "to": "D賞 ちょこのっこフィギュア ヒンメル、ハイター、アイゼン"
-            },
-            "name_ko": {
-              "from": "一番くじ 葬送のフリーレン / D賞 / ちょこのっこフィギュア アイゼン / 아이젠",
-              "to": "一番くじ 葬送のフリーレン - D賞 ちょこのっこフィギュア ヒンメル、ハイター、アイゼン"
-            }
-          },
-          "catalog_patch_template": {
-            "catalog_index": 20561,
-            "name_ko": "一番くじ 葬送のフリーレン - D賞 ちょこのっこフィギュア ヒンメル、ハイター、アイゼン",
-            "name_ja": "D賞 ちょこのっこフィギュア ヒンメル、ハイター、アイゼン",
-            "sub_series": "",
-            "image_url": "",
-            "evidence_url": "https://1kuji.com/products/frieren",
-            "manual_confirmed": false
-          },
-          "auto_apply_enabled": false
-        }
-      ],
-      "review_summary": {
-        "review_rows": 6,
-        "source_urls": 1,
-        "fetched_source_urls": 1,
-        "fetch_failure_urls": 0,
-        "candidate_rows": 6,
-        "exact_image_match_rows": 6,
-        "strong_name_match_rows": 0,
-        "blocked_rows": 0,
-        "blocked_reason_counts": [],
-        "blocked_review_reason_counts": [],
-        "blocked_rows_with_manual_fix_template": 0,
-        "auto_apply_enabled": false,
-        "recommended_next_action": "manual_confirm_exact_official_patch_candidates_or_fill_blocked_manual_templates",
-        "manual_confirmed_rows": 0,
-        "open_candidate_rows": 6
-      },
-      "review_state": "manual_prize_image_patch_confirmation_required",
-      "next_machine_step": "confirm_ichiban_prize_image_patch_templates"
     },
     {
       "batch_id": "057-agent-ichiban-reissue-dedupe-114",
@@ -40181,6 +39598,84 @@
           "category": "의류",
           "source_store": "치이카와 마켓",
           "source_url": "https://chiikawamarket.jp/ko/products/4570189195898",
+          "official_search_url": ""
+        }
+      ],
+      "review_state": "manual_dedupe_review_required",
+      "next_machine_step": "compare_duplicate_group_evidence"
+    },
+    {
+      "batch_id": "090-agent-dedupe-134",
+      "agent_id": "agent-dedupe",
+      "workstream": "deduplication_review",
+      "priority": 90,
+      "title": "중복 후보 검토: barcode",
+      "public_report": "data/catalog_deduplication_public.json",
+      "rows": 2,
+      "recommended_action": "Review keep/drop suggestions and prepare a manual-only dedupe decision.",
+      "acceptance_criteria": [
+        "Variants, alternate prizes, and campaign-specific rows are preserved.",
+        "Only evidence-backed exact duplicates are proposed for merge/delete.",
+        "Auto-delete remains disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 366,
+          "name_ko": "치이카와 파크 스니커즈 양말 (시사/오렌지)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "의류",
+          "source_store": "치이카와 파크",
+          "source_url": "https://chiikawamarket.jp/ko/products/4570189195942",
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 3714,
+          "name_ko": "치이카와 파크 스니커즈 양말 (시사 / 오렌지)",
+          "name_ja": "ちいかわ ちいかわパーク スニーカーソックス シーサー オレンジ",
+          "series_name": null,
+          "category": "의류",
+          "source_store": "치이카와 마켓",
+          "source_url": "https://chiikawamarket.jp/ko/products/4570189195942",
+          "official_search_url": ""
+        }
+      ],
+      "review_state": "manual_dedupe_review_required",
+      "next_machine_step": "compare_duplicate_group_evidence"
+    },
+    {
+      "batch_id": "090-agent-dedupe-135",
+      "agent_id": "agent-dedupe",
+      "workstream": "deduplication_review",
+      "priority": 90,
+      "title": "중복 후보 검토: barcode",
+      "public_report": "data/catalog_deduplication_public.json",
+      "rows": 2,
+      "recommended_action": "Review keep/drop suggestions and prepare a manual-only dedupe decision.",
+      "acceptance_criteria": [
+        "Variants, alternate prizes, and campaign-specific rows are preserved.",
+        "Only evidence-backed exact duplicates are proposed for merge/delete.",
+        "Auto-delete remains disabled."
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 365,
+          "name_ko": "치이카와 파크 키즈 T셔츠 (화이트)",
+          "name_ja": null,
+          "series_name": null,
+          "category": "의류",
+          "source_store": "치이카와 파크",
+          "source_url": "https://chiikawamarket.jp/ko/products/4570189201551",
+          "official_search_url": ""
+        },
+        {
+          "catalog_index": 3722,
+          "name_ko": "치이카와 파크 키즈 T셔츠 (집합 / 화이트)",
+          "name_ja": "ちいかわ ちいかわパーク キッズTシャツ 集合 ホワイト",
+          "series_name": null,
+          "category": "의류",
+          "source_store": "치이카와 마켓",
+          "source_url": "https://chiikawamarket.jp/ko/products/4570189201551",
           "official_search_url": ""
         }
       ],

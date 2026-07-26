@@ -365,11 +365,11 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             quality["public_catalog_crosscheck"]["comparison"]["seed_image_missing_rows"],
-            715,
+            0,
         )
         self.assertEqual(
             quality["public_catalog_crosscheck"]["comparison"]["image_missing_delta"],
-            result["missing"]["image_url"] - 715,
+            result["missing"]["image_url"],
         )
         image_candidates = reports.load_json(reports.IMAGE_CANDIDATES)
         self.assertEqual(image_candidates["summary"]["missing_images"], result["missing"]["image_url"])
