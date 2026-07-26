@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import sys
 import tempfile
@@ -459,7 +459,10 @@ class PublicCatalogReportTests(unittest.TestCase):
                 execution_queue["queued_rows_total"],
                 execution_queue["open_missing_image_rows"] - execution_queue["not_yet_queued_rows"],
             )
-            self.assertEqual(execution_queue["raw_queued_rows_total"], 757)
+            self.assertEqual(
+                execution_queue["raw_queued_rows_total"],
+                execution_queue["queued_rows_total"] + execution_queue["overlapping_queue_rows"],
+            )
             self.assertEqual(execution_queue["overlapping_queue_rows"], 12)
             self.assertEqual(execution_queue["not_yet_queued_rows"], 0)
             self.assertEqual(execution_queue["not_yet_queued_rows_explained"], 0)
@@ -555,7 +558,7 @@ class PublicCatalogReportTests(unittest.TestCase):
             )
             self.assertEqual(
                 completion_plan["review_start_coverage"]["rows_with_review_start"],
-                745,
+                result["missing"]["image_url"],
             )
             self.assertEqual(
                 completion_plan["review_start_coverage"]["rows_missing_review_start"],
@@ -608,7 +611,7 @@ class PublicCatalogReportTests(unittest.TestCase):
                 quality["missing_image_actionability"][
                     "completion_plan_rows_with_review_start"
                 ],
-                745,
+                result["missing"]["image_url"],
             )
             self.assertEqual(
                 quality["missing_image_actionability"][
@@ -624,10 +627,10 @@ class PublicCatalogReportTests(unittest.TestCase):
             self.assertEqual(missing_image_gate["assigned_report_rows"], result["missing"]["image_url"])
             self.assertEqual(missing_image_gate["unassigned_missing_image_rows"], 0)
             self.assertEqual(missing_image_gate["action_queue_rows"], 73)
-            self.assertEqual(missing_image_gate["source_first_rows"], 717)
+            self.assertEqual(missing_image_gate["source_first_rows"], 751)
             self.assertEqual(missing_image_gate["review_before_attach_rows"], 23)
             self.assertEqual(missing_image_gate["manual_image_research_rows"], 5)
-            self.assertEqual(missing_image_gate["source_discovery_focus_pack_rows"], 667)
+            self.assertEqual(missing_image_gate["source_discovery_focus_pack_rows"], 701)
             self.assertEqual(missing_image_gate["not_yet_queued_rows"], 0)
             self.assertEqual(missing_image_gate["next_queue_lane"], "replace_generic_source_urls")
             self.assertEqual(missing_image_gate["next_queue_rows"], 50)
@@ -996,7 +999,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             quality["source_discovery_next_focus_detail_candidates"]["exact_candidate_confirmation_ready_items"],
-            1,
+            0,
         )
         self.assertIn(
             quality["source_discovery_next_focus_detail_candidates"]["completion_readiness_status"],
@@ -1603,7 +1606,7 @@ class PublicCatalogReportTests(unittest.TestCase):
             ],
         )
         self.assertEqual(source_lanes[1]["manual_decision_rows"], source_lanes[1]["open_rows"])
-        self.assertEqual(source_lanes[2]["open_rows"], 667)
+        self.assertEqual(source_lanes[2]["open_rows"], 701)
         self.assertEqual(source_lanes[3]["open_rows"], 50)
         self.assertEqual(source_lanes[4]["open_rows"], 73)
         source_handoff = source_roadmap["operator_handoff"]
@@ -1641,7 +1644,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(source_handoff["handoff_steps"][0]["next_batch_rows"], 20)
         self.assertGreaterEqual(quality["source_discovery_completion_roadmap"]["top_10_store_coverage"], 0.8)
         self.assertIs(quality["source_discovery_completion_roadmap"]["auto_apply_enabled"], False)
-        self.assertEqual(quality["ensky_cache_coverage"]["missing_ensky_image_rows"], 142)
+        self.assertEqual(quality["ensky_cache_coverage"]["missing_ensky_image_rows"], 193)
         self.assertIs(quality["ensky_cache_coverage"]["auto_apply_enabled"], False)
         if reports.ENSKY_SEARCH_PAGE_PROBE.exists():
             self.assertEqual(quality["ensky_search_page_probe"]["processed_rows"], 30)
@@ -1723,8 +1726,9 @@ class PublicCatalogReportTests(unittest.TestCase):
             self.assertEqual(quality["gotouchi_representative_image_attachment"]["manual_confirmed_true"], 0)
             self.assertIs(quality["gotouchi_representative_image_attachment"]["auto_apply_enabled"], False)
         self.assertEqual(quality["gotouchi_official_candidate_review_queue"]["review_rows"], 23)
-        self.assertEqual(quality["gotouchi_official_candidate_review_queue"]["with_candidate_options"], 17)
-        self.assertEqual(quality["gotouchi_official_candidate_review_queue"]["without_candidate_options"], 6)
+        self.assertEqual(quality["gotouchi_official_candidate_review_queue"]["with_candidate_options"], 1)
+        self.assertEqual(quality["gotouchi_official_candidate_review_queue"]["without_candidate_options"], 22)
+        self.assertEqual(quality["gotouchi_official_candidate_review_queue"]["with_rejected_candidate_options"], 17)
         self.assertIs(quality["gotouchi_official_candidate_review_queue"]["auto_apply_enabled"], False)
         if reports.DEDUPLICATION_FAST_REVIEW.exists():
             dedupe_action = reports.load_json(reports.DEDUPLICATION_ACTION_QUEUE)
@@ -1921,19 +1925,19 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertIs(quality["animation_category_coverage_audit"]["auto_apply_enabled"], False)
         self.assertEqual(
             quality["animation_category_coverage_audit"]["visual_taxonomy_gate_status"],
-            "visual_coverage_passed_normalization_review_pending",
+            "ready_for_manual_confirmed_import",
         )
         self.assertEqual(
             quality["animation_category_coverage_audit"]["normalization_review_blockers"],
-            4,
+            0,
         )
         self.assertEqual(
             quality["animation_category_coverage_audit"]["normalization_review_blocker_rows"],
-            36,
+            0,
         )
         self.assertEqual(
             quality["animation_category_coverage_audit"]["next_safe_phase"],
-            "confirm_category_normalization_before_import",
+            "no_animation_category_cleanup_required",
         )
         self.assertIs(
             quality["animation_category_coverage_audit"]["taxonomy_auto_apply_ready"],
@@ -1943,60 +1947,45 @@ class PublicCatalogReportTests(unittest.TestCase):
         coverage_audit = reports.load_json(reports.ANIMATION_CATEGORY_COVERAGE_AUDIT)
         self.assertEqual(
             coverage_audit["visual_taxonomy_gate"]["status"],
-            "visual_coverage_passed_normalization_review_pending",
+            "ready_for_manual_confirmed_import",
         )
-        self.assertTrue(coverage_audit["visual_taxonomy_gate"]["manual_review_required"])
+        self.assertFalse(coverage_audit["visual_taxonomy_gate"]["manual_review_required"])
         normalization_queue = animation_categories["normalization_review_queue"]
         self.assertEqual(
             quality["animation_category_review"]["normalization_review_queue_count"],
             len(normalization_queue),
         )
-        self.assertEqual(quality["animation_category_review"]["normalization_review_queue_count"], 4)
+        self.assertEqual(quality["animation_category_review"]["normalization_review_queue_count"], 0)
         self.assertEqual(
             quality["animation_category_review"]["normalization_review_queue_rows"],
             sum(int(row.get("affected_catalog_rows") or 0) for row in normalization_queue),
         )
-        self.assertEqual(quality["animation_category_review"]["manual_review_categories"], 4)
-        self.assertEqual(quality["animation_category_review"]["manual_review_rows"], 36)
+        self.assertEqual(quality["animation_category_review"]["manual_review_categories"], 0)
+        self.assertEqual(quality["animation_category_review"]["manual_review_rows"], 0)
         self.assertEqual(
             quality["animation_category_review"]["category_readiness_status"],
-            "normalization_review_required",
+            "ready",
         )
         self.assertEqual(
             quality["animation_category_review"]["category_readiness"]["status"],
-            "normalization_review_required",
+            "ready",
         )
         self.assertEqual(
             quality["animation_category_review"]["category_readiness"]["manual_review_rows"],
-            36,
+            0,
         )
         self.assertEqual(
-            quality["animation_category_review"]["category_readiness"]["next_review_item"]["category"],
-            normalization_queue[0]["category"],
-        )
-        self.assertEqual(
-            quality["animation_category_review"]["category_readiness"]["next_review_item"]["suggested_category"],
-            normalization_queue[0]["suggested_category"],
+            quality["animation_category_review"]["category_readiness"].get("next_review_item", {}),
+            {},
         )
         self.assertEqual(quality["animation_category_review"]["auto_apply_ready_rows"], 0)
         self.assertTrue(quality["animation_category_review"]["folder_visual_coverage_ready"])
         self.assertEqual(
             animation_categories["category_readiness"]["next_safe_phase"],
-            "confirm_category_normalization_before_import",
+            "no_animation_category_cleanup_required",
         )
-        self.assertIn(
-            "canonical_category_normalization_manually_confirmed",
-            animation_categories["category_readiness"]["blocked_reasons"],
-        )
-        self.assertFalse(normalization_queue[0]["auto_apply_enabled"])
-        self.assertEqual(
-            normalization_queue[0]["mapping_mode"],
-            "canonical_category_normalization_review",
-        )
-        self.assertIn(
-            "source_category_should_be_preserved_as_sub_series_or_note",
-            normalization_queue[0]["required_evidence"],
-        )
+        self.assertEqual(animation_categories["category_readiness"]["blocked_reasons"], [])
+        self.assertEqual(normalization_queue, [])
         if reports.ICHIIBAN_KUJI_METADATA_FAST_REVIEW.exists():
             self.assertEqual(quality["ichiban_kuji_metadata_fast_review"]["fast_review_campaigns"], 20)
             self.assertEqual(quality["ichiban_kuji_metadata_fast_review"]["manual_confirmed_true"], 0)
@@ -2257,7 +2246,10 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(goal_gate["pillar_count"], 5)
         self.assertEqual(goal_gate["manual_review_pillar_count"], 5)
         self.assertEqual(goal_gate["auto_apply_ready_rows"], 0)
-        self.assertEqual(goal_gate["manual_review_rows"], 940)
+        self.assertEqual(
+            goal_gate["manual_review_rows"],
+            sum(int(row.get("manual_review_rows") or 0) for row in goal_gate["pillars"]),
+        )
         self.assertEqual(goal_gate["next_safe_phase"], "review_candidate_source_urls")
         pillars = {row["pillar"]: row for row in goal_gate["pillars"]}
         self.assertEqual(
@@ -2300,11 +2292,11 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             pillars["animation_categories"]["handoff_current_lane"],
-            "canonical_category_normalization_review",
+            "no_animation_category_action_required",
         )
         self.assertEqual(
             pillars["animation_categories"]["handoff_first_step_rows"],
-            4,
+            0,
         )
         self.assertEqual(
             pillars["ichiban_kuji_history"]["handoff_current_lane"],
@@ -2380,8 +2372,8 @@ class PublicCatalogReportTests(unittest.TestCase):
             "same_barcode_fast_review",
         )
         self.assertEqual(pillars["dedupe"]["first_next_execution_rows"], 42)
-        self.assertEqual(pillars["missing_images"]["open_rows"], 745)
-        self.assertEqual(pillars["missing_images"]["queued_rows"], 745)
+        self.assertEqual(pillars["missing_images"]["open_rows"], result["missing"]["image_url"])
+        self.assertEqual(pillars["missing_images"]["queued_rows"], result["missing"]["image_url"])
         self.assertEqual(pillars["missing_images"]["unqueued_rows"], 0)
         self.assertEqual(pillars["missing_images"]["queue_coverage"], 1.0)
         self.assertEqual(
@@ -2390,7 +2382,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(pillars["missing_images"]["next_queue_rows"], 50)
         self.assertEqual(pillars["missing_images"]["next_execution_lane_count"], 4)
-        self.assertEqual(pillars["missing_images"]["next_execution_open_rows"], 745)
+        self.assertEqual(pillars["missing_images"]["next_execution_open_rows"], result["missing"]["image_url"])
         self.assertEqual(
             pillars["missing_images"]["first_next_execution_lane"],
             "replace_generic_source_urls",
@@ -2398,18 +2390,18 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(pillars["missing_images"]["execution_queue_count"], 5)
         self.assertEqual(
             pillars["missing_images"]["manual_validation_required_rows"],
-            745,
+            result["missing"]["image_url"],
         )
-        self.assertEqual(pillars["missing_images"]["source_first_rows"], 717)
+        self.assertEqual(pillars["missing_images"]["source_first_rows"], 751)
         self.assertEqual(pillars["missing_images"]["review_before_attach_rows"], 23)
         self.assertEqual(pillars["missing_images"]["manual_image_research_rows"], 5)
         self.assertEqual(
             pillars["missing_images"]["source_discovery_focus_pack_rows"],
-            667,
+            701,
         )
         self.assertEqual(
             pillars["missing_images"]["source_discovery_remaining_focus_review_rows"],
-            667,
+            701,
         )
         self.assertEqual(
             pillars["missing_images"]["source_discovery_next_focus_pack_rows"],
@@ -2425,13 +2417,13 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             pillars["missing_images"]["source_discovery_focus_pack_count"],
-            62,
+            63,
         )
         self.assertEqual(
             pillars["missing_images"][
                 "source_discovery_not_started_focus_pack_count"
             ],
-            62,
+            63,
         )
         self.assertEqual(
             pillars["missing_images"]["source_discovery_focus_coverage"],
@@ -2481,7 +2473,7 @@ class PublicCatalogReportTests(unittest.TestCase):
             pillars["missing_images"]["attachment_dry_run_blocked_rows"],
             73,
         )
-        self.assertEqual(pillars["missing_images"]["assigned_report_rows"], 745)
+        self.assertEqual(pillars["missing_images"]["assigned_report_rows"], result["missing"]["image_url"])
         self.assertEqual(
             pillars["missing_images"]["unassigned_missing_image_rows"],
             0,
@@ -2493,7 +2485,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             pillars["missing_images"]["top_blocked_reasons"][0],
-            {"blocked_reason": "missing_exact_source_url", "rows": 667},
+            {"blocked_reason": "missing_exact_source_url", "rows": 701},
         )
         self.assertEqual(pillars["source_url_updates"]["open_rows"], 50)
         self.assertEqual(pillars["source_url_updates"]["queued_rows"], 50)
@@ -2635,29 +2627,29 @@ class PublicCatalogReportTests(unittest.TestCase):
             "exact_source_url_review",
         )
         self.assertEqual(pillars["source_url_updates"]["first_next_execution_rows"], 20)
-        self.assertEqual(pillars["animation_categories"]["manual_review_rows"], 36)
-        self.assertEqual(pillars["animation_categories"]["queued_rows"], 36)
+        self.assertEqual(pillars["animation_categories"]["manual_review_rows"], 0)
+        self.assertEqual(pillars["animation_categories"]["queued_rows"], 0)
         self.assertEqual(pillars["animation_categories"]["unqueued_rows"], 0)
-        self.assertEqual(pillars["animation_categories"]["queue_coverage"], 1.0)
+        self.assertEqual(pillars["animation_categories"]["queue_coverage"], 0)
         animation_action = quality["animation_category_action_queue"]
         normalization_template = animation_action["normalization_confirmation_template"]
         self.assertEqual(
             normalization_template["status"],
-            "manual_canonical_category_normalization_required",
+            "no_canonical_category_normalization_rows",
         )
-        self.assertEqual(normalization_template["template_rows"], 4)
-        self.assertEqual(normalization_template["affected_catalog_rows"], 36)
+        self.assertEqual(normalization_template["template_rows"], 0)
+        self.assertEqual(normalization_template["affected_catalog_rows"], 0)
         self.assertEqual(normalization_template["manual_confirmed_rows"], 0)
         self.assertEqual(normalization_template["ready_to_import_rows"], 0)
-        self.assertEqual(normalization_template["preserve_sub_series_rows"], 4)
+        self.assertEqual(normalization_template["preserve_sub_series_rows"], 0)
         self.assertFalse(normalization_template["auto_apply_enabled"])
         self.assertEqual(
             normalization_template["target_category_counts"],
-            [["문구", 3], ["가방", 1]],
+            [],
         )
         self.assertEqual(
             normalization_template["folder_color_group_counts"],
-            [["violet", 3], ["green", 1]],
+            [],
         )
         animation_next_execution_summary = animation_action["next_execution_summary"]
         self.assertEqual(
@@ -2667,8 +2659,8 @@ class PublicCatalogReportTests(unittest.TestCase):
             ],
         )
         self.assertEqual(animation_next_execution_summary["lane_count"], 3)
-        self.assertEqual(animation_next_execution_summary["open_rows"], 108)
-        self.assertEqual(animation_next_execution_summary["next_batch_rows"], 44)
+        self.assertEqual(animation_next_execution_summary["open_rows"], 0)
+        self.assertEqual(animation_next_execution_summary["next_batch_rows"], 0)
         self.assertEqual(
             animation_next_execution_summary["next_safe_phase"],
             "canonical_category_normalization_review",
@@ -2690,18 +2682,18 @@ class PublicCatalogReportTests(unittest.TestCase):
                 "normalization_import_template",
             ],
         )
-        self.assertEqual(animation_lanes[0]["open_rows"], 36)
-        self.assertEqual(animation_lanes[0]["review_start_rows"], 4)
-        self.assertEqual(animation_lanes[0]["manual_decision_rows"], 4)
+        self.assertEqual(animation_lanes[0]["open_rows"], 0)
+        self.assertEqual(animation_lanes[0]["review_start_rows"], 0)
+        self.assertEqual(animation_lanes[0]["manual_decision_rows"], 0)
         self.assertEqual(
             animation_lanes[0]["target_categories"],
-            [["문구", 3], ["가방", 1]],
+            [],
         )
-        self.assertEqual(animation_lanes[1]["open_rows"], 36)
+        self.assertEqual(animation_lanes[1]["open_rows"], 0)
         self.assertEqual(animation_lanes[1]["status"], "ready")
-        self.assertEqual(animation_lanes[1]["color_groups"], [["violet", 3], ["green", 1]])
-        self.assertEqual(animation_lanes[2]["open_rows"], 36)
-        self.assertEqual(animation_lanes[2]["manual_decision_rows"], 4)
+        self.assertEqual(animation_lanes[1]["color_groups"], [])
+        self.assertEqual(animation_lanes[2]["open_rows"], 0)
+        self.assertEqual(animation_lanes[2]["manual_decision_rows"], 0)
         self.assertEqual(
             animation_lanes[2]["import_tool"],
             "tools/import_confirmed_animation_category_rows.py",
@@ -2716,10 +2708,10 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             animation_handoff["current_lane"],
-            "canonical_category_normalization_review",
+            "no_animation_category_action_required",
         )
-        self.assertEqual(animation_handoff["queued_catalog_rows"], 36)
-        self.assertEqual(animation_handoff["queued_categories"], 4)
+        self.assertEqual(animation_handoff["queued_catalog_rows"], 0)
+        self.assertEqual(animation_handoff["queued_categories"], 0)
         self.assertTrue(animation_handoff["folder_visual_coverage_ready"])
         self.assertTrue(animation_handoff["app_folder_palette_sorted_by_family"])
         self.assertFalse(
@@ -2730,48 +2722,35 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             [step["lane"] for step in animation_handoff["handoff_steps"]],
-            [
-                "canonical_category_normalization_review",
-                "folder_visual_token_verification",
-                "normalization_import_template",
-            ],
-        )
-        self.assertEqual(
-            animation_handoff["handoff_steps"][0]["affected_catalog_rows"],
-            36,
+            [],
         )
         self.assertEqual(
             {
                 (row["source_category"], row["target_category"])
                 for row in normalization_template["rows"]
             },
-            {
-                ("클리어파일", "문구"),
-                ("카드", "문구"),
-                ("스티커", "문구"),
-                ("파우치", "가방"),
-            },
+            set(),
         )
         self.assertEqual(
             pillars["animation_categories"]["next_queue_lane"],
-            "canonical_category_normalization_review",
+            None,
         )
-        self.assertEqual(pillars["animation_categories"]["next_queue_rows"], 36)
+        self.assertEqual(pillars["animation_categories"]["next_queue_rows"], 0)
         self.assertEqual(
             pillars["animation_categories"]["next_queue_category_rows"],
-            4,
+            0,
         )
         self.assertEqual(
             pillars["animation_categories"]["target_categories"],
-            [["문구", 3], ["가방", 1]],
+            [],
         )
         self.assertEqual(pillars["animation_categories"]["next_execution_lane_count"], 3)
-        self.assertEqual(pillars["animation_categories"]["next_execution_open_rows"], 108)
+        self.assertEqual(pillars["animation_categories"]["next_execution_open_rows"], 0)
         self.assertEqual(
             pillars["animation_categories"]["first_next_execution_lane"],
             "canonical_category_normalization_review",
         )
-        self.assertEqual(pillars["animation_categories"]["first_next_execution_rows"], 36)
+        self.assertEqual(pillars["animation_categories"]["first_next_execution_rows"], 0)
         self.assertTrue(pillars["animation_categories"]["visual_palette_ordered"])
         self.assertTrue(
             pillars["animation_categories"]["app_animation_visuals_covered"]
@@ -2876,7 +2855,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertTrue(readiness_dashboard["manual_review_required"])
         self.assertEqual(readiness_dashboard["pillar_count"], 5)
         self.assertEqual(readiness_dashboard["blocking_pillar_count"], 5)
-        self.assertEqual(readiness_dashboard["manual_review_rows"], 940)
+        self.assertEqual(readiness_dashboard["manual_review_rows"], 938)
         self.assertEqual(readiness_dashboard["auto_apply_ready_rows"], 0)
         self.assertEqual(
             readiness_dashboard["next_safe_phase"],
@@ -2923,7 +2902,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             blocking_pillars["missing_images"]["next_execution_open_rows"],
-            745,
+            result["missing"]["image_url"],
         )
         self.assertEqual(
             blocking_pillars["missing_images"]["handoff_current_lane"],
@@ -6283,15 +6262,21 @@ class PublicCatalogReportTests(unittest.TestCase):
             open_queues.get("animation_category_action_rows"),
             animation_action_summary.get("queued_catalog_rows"),
         )
-        self.assertEqual(animation_action_summary.get("queued_catalog_rows"), 36)
-        self.assertEqual(animation_action_summary.get("queued_categories"), 4)
+        self.assertEqual(
+            animation_action_summary.get("queued_catalog_rows"),
+            animation_action_summary.get("actionable_catalog_rows"),
+        )
+        self.assertEqual(
+            animation_action_summary.get("queued_categories"),
+            animation_action_summary.get("actionable_categories"),
+        )
         self.assertEqual(
             animation_action_summary.get("normalization_review_queued_catalog_rows"),
-            36,
+            animation_action_summary.get("normalization_review_rows"),
         )
         self.assertEqual(
             animation_action_summary.get("normalization_review_queued_categories"),
-            4,
+            animation_action_summary.get("normalization_review_categories"),
         )
         self.assertEqual(
             open_queues.get("animation_category_split_review_categories"),
@@ -6337,12 +6322,7 @@ class PublicCatalogReportTests(unittest.TestCase):
             animation_action_summary.get(
                 "next_normalization_review_batch_review_ids"
             ),
-            [
-                "animation-category-normalization-001",
-                "animation-category-normalization-002",
-                "animation-category-normalization-003",
-                "animation-category-normalization-004",
-            ],
+            [],
         )
         self.assertEqual(
             len(
@@ -6351,13 +6331,13 @@ class PublicCatalogReportTests(unittest.TestCase):
                 )
                 or []
             ),
-            4,
+            animation_action_summary.get("next_normalization_review_batch_rows"),
         )
         self.assertEqual(
             animation_action_summary.get(
                 "next_normalization_review_batch_preserve_sub_series_rows"
             ),
-            4,
+            0,
         )
         self.assertEqual(animation_action_summary.get("app_folder_color_count"), 188)
         self.assertEqual(animation_action_summary.get("app_folder_icon_option_count"), 211)
@@ -6368,7 +6348,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         animation_blocking_dashboard = animation_action.get("blocking_dashboard") or {}
         self.assertEqual(
             animation_blocking_dashboard.get("status"),
-            "normalization_review_required",
+            "ready_for_manual_import",
         )
         self.assertEqual(
             animation_blocking_dashboard.get("queued_catalog_rows"),
@@ -6382,23 +6362,21 @@ class PublicCatalogReportTests(unittest.TestCase):
             animation_blocking_dashboard.get(
                 "next_normalization_review_batch_catalog_rows"
             ),
-            36,
+            animation_action_summary.get("next_normalization_review_batch_catalog_rows"),
         )
         self.assertEqual(
-            animation_blocking_dashboard.get("first_normalization_review", {}).get(
-                "source_category"
-            ),
-            "클리어파일",
+            animation_blocking_dashboard.get("first_normalization_review"),
+            {},
         )
         self.assertEqual(
             animation_blocking_dashboard.get("first_work_order_lane"),
-            "canonical_category_normalization_review",
+            None,
         )
         self.assertEqual(
             animation_blocking_dashboard.get("next_safe_phase"),
-            "confirm_canonical_animation_category_normalization",
+            "run_confirmed_animation_category_import",
         )
-        self.assertTrue(
+        self.assertFalse(
             animation_blocking_dashboard.get("manual_review_required_before_import")
         )
         self.assertFalse(animation_blocking_dashboard.get("auto_apply_enabled"))

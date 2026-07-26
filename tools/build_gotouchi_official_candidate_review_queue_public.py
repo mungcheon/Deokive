@@ -84,8 +84,16 @@ def _candidate_options(candidate_row: dict[str, Any] | None) -> list[dict[str, A
     return out
 
 
+def _importable_candidate_options(candidate_row: dict[str, Any] | None) -> list[dict[str, Any]]:
+    return [candidate for candidate in _candidate_options(candidate_row) if candidate.get("type_match") is True]
+
+
+def _rejected_candidate_options(candidate_row: dict[str, Any] | None) -> list[dict[str, Any]]:
+    return [candidate for candidate in _candidate_options(candidate_row) if candidate.get("type_match") is not True]
+
+
 def _manual_image_template(action_item: dict[str, Any], candidate_row: dict[str, Any] | None) -> dict[str, Any]:
-    candidate = _candidate_options(candidate_row)
+    candidate = _importable_candidate_options(candidate_row)
     top = candidate[0] if candidate else {}
     return {
         "manual_confirmed": False,
@@ -106,7 +114,8 @@ def _review_item(action_item: dict[str, Any], candidate_row: dict[str, Any] | No
     candidate_status = (
         candidate_row.get("candidate_status") if isinstance(candidate_row, dict) else "missing_candidate_report"
     )
-    candidates = _candidate_options(candidate_row)
+    candidates = _importable_candidate_options(candidate_row)
+    rejected_candidates = _rejected_candidate_options(candidate_row)
     return {
         "row_index": action_item.get("catalog_index"),
         "catalog_index": action_item.get("catalog_index"),
@@ -121,14 +130,17 @@ def _review_item(action_item: dict[str, Any], candidate_row: dict[str, Any] | No
         "row_type": candidate_row.get("row_type") if isinstance(candidate_row, dict) else None,
         "motifs": candidate_row.get("motifs") if isinstance(candidate_row, dict) else [],
         "candidate_count": len(candidates),
+        "rejected_candidate_count": len(rejected_candidates),
         "candidate_options": candidates,
+        "rejected_candidate_options": rejected_candidates,
         "top_candidate": candidates[0] if candidates else {},
+        "top_rejected_candidate": rejected_candidates[0] if rejected_candidates else {},
         "image_url_import_template": _manual_image_template(action_item, candidate_row),
         "review_blockers": _review_blockers(str(candidate_status or "")),
         "manual_confirmation_requirements": [
             "Open candidate page and image when candidates exist.",
             "Confirm character, place/motif, product type, and variant visually.",
-            "Representative images are allowed only when the product type mismatch is acceptable for catalog display.",
+            "Type-mismatch images are listed under rejected_candidate_options and must not be imported.",
             "If no exact or acceptable representative image exists, leave manual_confirmed=false.",
         ],
         "batch_id": action_item.get("batch_id"),
@@ -163,6 +175,7 @@ def _build_status_workstreams(items: list[dict[str, Any]]) -> list[dict[str, Any
                 "by_category": _counter_pairs(rows, "category"),
                 "by_character_name": _counter_pairs(rows, "character_name"),
                 "candidate_rows": sum(1 for row in rows if row.get("candidate_options")),
+                "rejected_candidate_rows": sum(1 for row in rows if row.get("rejected_candidate_options")),
                 "rows": rows,
                 "recommended_review_order": [
                     "Review motif-only/type-mismatch rows before rows with no candidates.",
@@ -201,12 +214,14 @@ def build_queue(
             "by_character_name": _counter_pairs(items, "character_name"),
             "with_candidate_options": sum(1 for item in items if item.get("candidate_options")),
             "without_candidate_options": sum(1 for item in items if not item.get("candidate_options")),
+            "with_rejected_candidate_options": sum(1 for item in items if item.get("rejected_candidate_options")),
             "manual_confirmed_true": 0,
             "auto_apply_enabled": False,
         },
         "instructions": [
             "This queue covers Gotouchi rows that require official candidate visual review.",
             "Candidate images are review hints only and must not be imported automatically.",
+            "Type-mismatch candidates stay in rejected_candidate_options and are never prefilled into import templates.",
             "Set image_url_import_template.manual_confirmed=true only after visual identity review.",
             "Use tools/import_confirmed_image_attachment_rows.py as a dry-run before write imports.",
         ],

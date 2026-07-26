@@ -67,8 +67,9 @@ class BuildGotouchiOfficialCandidateReviewQueuePublicTest(unittest.TestCase):
 
         self.assertEqual(report["generated_at"], "2026-07-23T00:00:00Z")
         self.assertEqual(report["summary"]["review_rows"], 1)
-        self.assertEqual(report["summary"]["with_candidate_options"], 1)
-        self.assertEqual(report["summary"]["without_candidate_options"], 0)
+        self.assertEqual(report["summary"]["with_candidate_options"], 0)
+        self.assertEqual(report["summary"]["without_candidate_options"], 1)
+        self.assertEqual(report["summary"]["with_rejected_candidate_options"], 1)
         self.assertEqual(report["summary"]["by_candidate_status"], [["motif_only_type_mismatch", 1]])
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertFalse(report["automation_policy"]["auto_apply_image_url"])
@@ -76,14 +77,52 @@ class BuildGotouchiOfficialCandidateReviewQueuePublicTest(unittest.TestCase):
         item = report["items"][0]
         self.assertEqual(item["catalog_index"], 100)
         self.assertEqual(item["candidate_status"], "motif_only_type_mismatch")
-        self.assertEqual(item["top_candidate"]["image_url"], "https://www.jp-api.com/images/sample.png")
+        self.assertEqual(item["top_candidate"], {})
+        self.assertEqual(item["top_rejected_candidate"]["image_url"], "https://www.jp-api.com/images/sample.png")
+        self.assertEqual(item["rejected_candidate_count"], 1)
         self.assertIn("product_type_mismatch", item["review_blockers"])
         template = item["image_url_import_template"]
         self.assertEqual(template["field"], "image_url")
         self.assertEqual(template["manual_value"], "")
-        self.assertEqual(template["candidate_image_url"], "https://www.jp-api.com/images/sample.png")
+        self.assertEqual(template["candidate_image_url"], "")
         self.assertTrue(template["representative_image"])
         self.assertFalse(template["manual_confirmed"])
+
+    def test_type_matching_candidate_can_prefill_import_template(self) -> None:
+        action_queue = {
+            "batches": [
+                {
+                    "batch_id": "image-attachment-action-006",
+                    "workflow": "review_gotouchi_official_candidates",
+                    "items": [{"catalog_index": 103, "source_url": "https://www.jp-api.com/contents/NOD62/"}],
+                }
+            ]
+        }
+        candidate_report = {
+            "items": [
+                {
+                    "catalog_index": 103,
+                    "candidate_status": "exact_type_candidate",
+                    "top_candidates": [
+                        {
+                            "page": "https://www.jp-api.com/contents/NOD62/PGE9/",
+                            "image_url": "https://www.jp-api.com/images/exact.png",
+                            "type_match": True,
+                        }
+                    ],
+                }
+            ]
+        }
+
+        report = queue.build_queue(action_queue, candidate_report)
+
+        item = report["items"][0]
+        self.assertEqual(item["candidate_count"], 1)
+        self.assertEqual(item["rejected_candidate_count"], 0)
+        self.assertEqual(
+            item["image_url_import_template"]["candidate_image_url"],
+            "https://www.jp-api.com/images/exact.png",
+        )
 
     def test_missing_candidate_report_row_still_gets_review_item(self) -> None:
         action_queue = {
