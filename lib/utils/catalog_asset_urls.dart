@@ -1,4 +1,4 @@
-const catalogAssetVersion = '20260726-imagefix1';
+const catalogAssetVersion = '20260726-imagefix2';
 
 List<String> publicCatalogAssetUrls(String assetPath) {
   final normalizedPath = assetPath.replaceFirst(RegExp(r'^/+'), '');
