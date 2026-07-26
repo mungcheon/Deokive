@@ -21,6 +21,11 @@ class BuildIchibanVariantLineupSplitTemplatePublicTest(unittest.TestCase):
                     "official_detail": "\u25a0\u51683\u7a2e",
                     "expected_variant_count": 3,
                     "choice_policy": "blind",
+                    "official_images": [
+                        "https://example.test/a.jpg",
+                        "https://example.test/b.jpg",
+                        "https://example.test/c.jpg",
+                    ],
                 },
                 {
                     "catalog_index": 11,
@@ -33,13 +38,38 @@ class BuildIchibanVariantLineupSplitTemplatePublicTest(unittest.TestCase):
         template = build_template(probe)
 
         self.assertEqual(template["summary"]["template_rows"], 1)
+        self.assertEqual(template["summary"]["image_prefilled_rows"], 1)
         item = template["items"][0]
         self.assertFalse(item["manual_confirmed"])
         self.assertFalse(item["representative_image_ok"])
+        self.assertEqual(item["image_prefill_source"], "official_images_exact_count")
         self.assertEqual(item["source_catalog_index"], 10)
         self.assertEqual(item["expected_variant_count"], 3)
         self.assertEqual(len(item["variants"]), 3)
         self.assertEqual(item["variants"][0]["character_name"], "\uae30\ud0c0")
+        self.assertEqual(item["variants"][2]["image_url"], "https://example.test/c.jpg")
+
+    def test_leaves_images_blank_when_official_image_count_does_not_match(self) -> None:
+        probe = {
+            "candidates": [
+                {
+                    "catalog_index": 20,
+                    "status": "matched",
+                    "source_url": "https://1kuji.com/products/test",
+                    "official_name": "F\u8cde \u30bf\u30aa\u30eb\u30a2\u30bd\u30fc\u30c8",
+                    "official_detail": "\u25a0\u51684\u7a2e",
+                    "expected_variant_count": 4,
+                    "choice_policy": "unknown",
+                    "official_images": ["https://example.test/lineup.jpg"],
+                }
+            ]
+        }
+
+        template = build_template(probe)
+
+        self.assertEqual(template["summary"]["image_prefilled_rows"], 0)
+        self.assertEqual(template["items"][0]["image_prefill_source"], "")
+        self.assertEqual([variant["image_url"] for variant in template["items"][0]["variants"]], ["", "", "", ""])
 
 
 if __name__ == "__main__":
