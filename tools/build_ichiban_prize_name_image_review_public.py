@@ -61,10 +61,13 @@ def expected_prize_display_name(row: dict[str, Any]) -> str:
 
 def expected_name_ko(row: dict[str, Any]) -> str:
     series_name = str(row.get("series_name") or "").strip()
-    prize_display_name = expected_prize_display_name(row)
-    if series_name and prize_display_name:
-        return f"{series_name} - {prize_display_name}"
-    return series_name or prize_display_name
+    prize_rank = str(row.get("sub_series") or "").strip()
+    prize_item_name = str(row.get("name_ja") or "").strip()
+    character_name = str(row.get("character_name") or "").strip()
+    parts = [series_name, prize_rank, prize_item_name]
+    if character_name and character_name != "혼합":
+        parts.append(character_name)
+    return " / ".join(part for part in parts if part)
 
 
 def prize_label_matches_name(row: dict[str, Any]) -> bool:
@@ -107,7 +110,7 @@ def compact_row(row: dict[str, Any], *, review_reason: str) -> dict[str, Any]:
                 "prize_item_name(name_ja)",
                 "variant_or_character_detail_when_multiple_items_share_the_same_prize_rank",
             ],
-            "display_name_ko_format": "<series_name> - <sub_series/prize item name>",
+            "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
             "same_prize_multiple_items_rule": (
                 "Keep each official item as a separate row and include numbering, character, color, or item-type detail in name_ja."
             ),
@@ -218,7 +221,7 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
             "recommended_next_action": "confirm_ichiban_prize_names_and_images_against_official_campaign_lineups",
         },
         "name_policy": {
-            "display_name_ko_format": "<ichiban_release_name> - <prize_rank> <prize_item_name_or_variant>",
+            "display_name_ko_format": "<ichiban_release_name> / <prize_rank> / <prize_item_name> / <character_name_when_single_character>",
             "fields": {
                 "ichiban_release_name": "series_name",
                 "prize_rank": "sub_series",

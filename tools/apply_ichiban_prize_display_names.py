@@ -36,14 +36,16 @@ def _should_apply(row: dict[str, Any]) -> bool:
         return False
     if current == expected:
         return False
-    if " - " not in expected:
+    if " / " not in expected:
         return False
 
-    expected_tail = expected.split(" - ", 1)[1]
-    if not expected_tail.startswith(prize_rank):
+    expected_parts = [part.strip() for part in expected.split(" / ")]
+    if len(expected_parts) < 3:
+        return False
+    if expected_parts[1] != prize_rank:
         return False
 
-    return prize_item_name in expected_tail
+    return expected_parts[2] == prize_item_name
 
 
 def build_fix_report(
