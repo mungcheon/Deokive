@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T11:30:55Z",
+  "generated_at": "2026-07-26T12:25:56Z",
   "scope": "source_discovery_full_review_batches",
   "summary": {
-    "source_discovery_rows": 700,
-    "batch_count": 59,
+    "source_discovery_rows": 751,
+    "batch_count": 63,
     "batch_size": 25,
     "by_workflow": [
       [
         "official_search_url_available",
-        683
+        729
       ],
       [
         "licensed_retailer_search_review",
@@ -17,7 +17,7 @@
       ],
       [
         "manual_official_research",
-        5
+        10
       ]
     ],
     "by_source_store": [
@@ -27,11 +27,15 @@
       ],
       [
         "애니메이트",
-        156
+        157
       ],
       [
         "굿스마일컴퍼니",
         56
+      ],
+      [
+        "Stellive Store",
+        45
       ],
       [
         "코토부키야",
@@ -130,6 +134,10 @@
         3
       ],
       [
+        "Weverse Shop",
+        3
+      ],
+      [
         "아이돌 공식",
         3
       ],
@@ -154,6 +162,10 @@
         2
       ],
       [
+        "포켓몬 센터",
+        2
+      ],
+      [
         "ALTER",
         1
       ],
@@ -168,28 +180,16 @@
       [
         "Hololive Production Official Shop",
         1
-      ],
-      [
-        "IST STORE",
-        1
-      ],
-      [
-        "KQ FELLAZ",
-        1
-      ],
-      [
-        "SEGA",
-        1
       ]
     ],
     "by_review_state": [
       [
         "official_search_review_required",
-        56
+        58
       ],
       [
         "manual_official_research_required",
-        2
+        4
       ],
       [
         "licensed_retailer_review_required",
@@ -8238,7 +8238,7 @@
         ],
         [
           "인형",
-          2
+          3
         ],
         [
           "머그컵",
@@ -8254,10 +8254,6 @@
         ],
         [
           "키링",
-          1
-        ],
-        [
-          "태피스트리",
           1
         ]
       ],
@@ -9160,6 +9156,46 @@
           "auto_apply_enabled": false
         },
         {
+          "catalog_index": 2074,
+          "source_store": "애니메이트",
+          "category": "인형",
+          "name_ko": "단간론파 봉제 인형 (모노쿠마)",
+          "name_ja": "ダンガンロンパ ぬいぐるみ (モノクマ)",
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "www.animate-onlineshop.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2074,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "애니메이트",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2074,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%91%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%29",
+            "candidate_source_url": "",
+            "source_store": "애니메이트",
+            "name_ko": "단간론파 봉제 인형 (모노쿠마)",
+            "name_ja": "ダンガンロンパ ぬいぐるみ (モノクマ)",
+            "category": "인형",
+            "affiliation": "단간론파",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
           "catalog_index": 2077,
           "source_store": "애니메이트",
           "category": "캔뱃지",
@@ -9238,7 +9274,85 @@
           },
           "blocked_until": "exact_product_detail_source_url_confirmed",
           "auto_apply_enabled": false
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "source-discovery-010",
+      "priority": 10,
+      "workflow": "official_search_url_available",
+      "source_store": "애니메이트",
+      "row_count": 25,
+      "offset": 25,
+      "review_state": "official_search_review_required",
+      "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+      "confidence": "official_search",
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "allowed_source_domains": [
+        "www.animate-onlineshop.jp"
+      ],
+      "category_counts": [
+        [
+          "아크릴 스탠드",
+          6
+        ],
+        [
+          "문구",
+          5
+        ],
+        [
+          "인형",
+          4
+        ],
+        [
+          "캔뱃지",
+          3
+        ],
+        [
+          "머그컵",
+          2
+        ],
+        [
+          "태피스트리",
+          1
+        ],
+        [
+          "생활잡화",
+          1
+        ],
+        [
+          "타월",
+          1
+        ],
+        [
+          "키링",
+          1
+        ],
+        [
+          "의류",
+          1
+        ]
+      ],
+      "source_patch_template_fields": [
+        "catalog_index",
+        "source_url",
+        "image_url",
+        "evidence_url",
+        "manual_confirmed"
+      ],
+      "catalog_field_import_template_fields": [
+        "manual_confirmed",
+        "row_index",
+        "field",
+        "manual_value",
+        "evidence_url",
+        "candidate_source_url"
+      ],
+      "blocked_until": "exact_product_detail_source_url_confirmed",
+      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
+      "items": [
         {
           "catalog_index": 2085,
           "source_store": "애니메이트",
@@ -9278,81 +9392,7 @@
           },
           "blocked_until": "exact_product_detail_source_url_confirmed",
           "auto_apply_enabled": false
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "source-discovery-010",
-      "priority": 10,
-      "workflow": "official_search_url_available",
-      "source_store": "애니메이트",
-      "row_count": 25,
-      "offset": 25,
-      "review_state": "official_search_review_required",
-      "next_machine_step": "open_official_search_and_verify_exact_product_detail",
-      "confidence": "official_search",
-      "evidence_required": "exact official product detail URL on the expected official domain",
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "allowed_source_domains": [
-        "www.animate-onlineshop.jp"
-      ],
-      "category_counts": [
-        [
-          "아크릴 스탠드",
-          6
-        ],
-        [
-          "문구",
-          5
-        ],
-        [
-          "캔뱃지",
-          4
-        ],
-        [
-          "인형",
-          4
-        ],
-        [
-          "머그컵",
-          2
-        ],
-        [
-          "생활잡화",
-          1
-        ],
-        [
-          "타월",
-          1
-        ],
-        [
-          "키링",
-          1
-        ],
-        [
-          "의류",
-          1
-        ]
-      ],
-      "source_patch_template_fields": [
-        "catalog_index",
-        "source_url",
-        "image_url",
-        "evidence_url",
-        "manual_confirmed"
-      ],
-      "catalog_field_import_template_fields": [
-        "manual_confirmed",
-        "row_index",
-        "field",
-        "manual_value",
-        "evidence_url",
-        "candidate_source_url"
-      ],
-      "blocked_until": "exact_product_detail_source_url_confirmed",
-      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
-      "items": [
+        },
         {
           "catalog_index": 1079,
           "source_store": "애니메이트",
@@ -10312,46 +10352,6 @@
           },
           "blocked_until": "exact_product_detail_source_url_confirmed",
           "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 2095,
-          "source_store": "애니메이트",
-          "category": "캔뱃지",
-          "name_ko": "슈타인즈게이트 캔뱃지 (오카베)",
-          "name_ja": "シュタインズ・ゲート 缶バッジ (岡部)",
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%28%E5%B2%A1%E9%83%A8%29",
-          "web_search_url": "https://www.google.com/search?q=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%28%E5%B2%A1%E9%83%A8%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.animate-onlineshop.jp"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 2095,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "애니메이트",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 2095,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%28%E5%B2%A1%E9%83%A8%29",
-            "candidate_source_url": "",
-            "source_store": "애니메이트",
-            "name_ko": "슈타인즈게이트 캔뱃지 (오카베)",
-            "name_ja": "シュタインズ・ゲート 缶バッジ (岡部)",
-            "category": "캔뱃지",
-            "affiliation": "슈타인즈게이트",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "auto_apply_enabled": false
         }
       ],
       "auto_apply_enabled": false
@@ -10419,6 +10419,46 @@
       "blocked_until": "exact_product_detail_source_url_confirmed",
       "recommended_action": "Find exact product/detail source URLs before any image_url import.",
       "items": [
+        {
+          "catalog_index": 2095,
+          "source_store": "애니메이트",
+          "category": "캔뱃지",
+          "name_ko": "슈타인즈게이트 캔뱃지 (오카베)",
+          "name_ja": "シュタインズ・ゲート 缶バッジ (岡部)",
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%28%E5%B2%A1%E9%83%A8%29",
+          "web_search_url": "https://www.google.com/search?q=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%28%E5%B2%A1%E9%83%A8%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "www.animate-onlineshop.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2095,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "애니메이트",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2095,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%B7%E3%83%A5%E3%82%BF%E3%82%A4%E3%83%B3%E3%82%BA%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%88%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%28%E5%B2%A1%E9%83%A8%29",
+            "candidate_source_url": "",
+            "source_store": "애니메이트",
+            "name_ko": "슈타인즈게이트 캔뱃지 (오카베)",
+            "name_ja": "シュタインズ・ゲート 缶バッジ (岡部)",
+            "category": "캔뱃지",
+            "affiliation": "슈타인즈게이트",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
         {
           "catalog_index": 2096,
           "source_store": "애니메이트",
@@ -11378,7 +11418,81 @@
           },
           "blocked_until": "exact_product_detail_source_url_confirmed",
           "auto_apply_enabled": false
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "source-discovery-012",
+      "priority": 10,
+      "workflow": "official_search_url_available",
+      "source_store": "애니메이트",
+      "row_count": 25,
+      "offset": 75,
+      "review_state": "official_search_review_required",
+      "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+      "confidence": "official_search",
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "allowed_source_domains": [
+        "www.animate-onlineshop.jp"
+      ],
+      "category_counts": [
+        [
+          "문구",
+          5
+        ],
+        [
+          "아크릴 스탠드",
+          5
+        ],
+        [
+          "키링",
+          3
+        ],
+        [
+          "마스코트",
+          3
+        ],
+        [
+          "인형",
+          3
+        ],
+        [
+          "캔뱃지",
+          2
+        ],
+        [
+          "생활잡화",
+          2
+        ],
+        [
+          "아크릴 키링",
+          1
+        ],
+        [
+          "머그컵",
+          1
+        ]
+      ],
+      "source_patch_template_fields": [
+        "catalog_index",
+        "source_url",
+        "image_url",
+        "evidence_url",
+        "manual_confirmed"
+      ],
+      "catalog_field_import_template_fields": [
+        "manual_confirmed",
+        "row_index",
+        "field",
+        "manual_value",
+        "evidence_url",
+        "candidate_source_url"
+      ],
+      "blocked_until": "exact_product_detail_source_url_confirmed",
+      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
+      "items": [
         {
           "catalog_index": 1034,
           "source_store": "애니메이트",
@@ -11418,81 +11532,7 @@
           },
           "blocked_until": "exact_product_detail_source_url_confirmed",
           "auto_apply_enabled": false
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "source-discovery-012",
-      "priority": 10,
-      "workflow": "official_search_url_available",
-      "source_store": "애니메이트",
-      "row_count": 25,
-      "offset": 75,
-      "review_state": "official_search_review_required",
-      "next_machine_step": "open_official_search_and_verify_exact_product_detail",
-      "confidence": "official_search",
-      "evidence_required": "exact official product detail URL on the expected official domain",
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "allowed_source_domains": [
-        "www.animate-onlineshop.jp"
-      ],
-      "category_counts": [
-        [
-          "아크릴 스탠드",
-          6
-        ],
-        [
-          "문구",
-          5
-        ],
-        [
-          "키링",
-          3
-        ],
-        [
-          "마스코트",
-          3
-        ],
-        [
-          "인형",
-          3
-        ],
-        [
-          "생활잡화",
-          2
-        ],
-        [
-          "아크릴 키링",
-          1
-        ],
-        [
-          "캔뱃지",
-          1
-        ],
-        [
-          "머그컵",
-          1
-        ]
-      ],
-      "source_patch_template_fields": [
-        "catalog_index",
-        "source_url",
-        "image_url",
-        "evidence_url",
-        "manual_confirmed"
-      ],
-      "catalog_field_import_template_fields": [
-        "manual_confirmed",
-        "row_index",
-        "field",
-        "manual_value",
-        "evidence_url",
-        "candidate_source_url"
-      ],
-      "blocked_until": "exact_product_detail_source_url_confirmed",
-      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
-      "items": [
+        },
         {
           "catalog_index": 1032,
           "source_store": "애니메이트",
@@ -12452,46 +12492,6 @@
           },
           "blocked_until": "exact_product_detail_source_url_confirmed",
           "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1632,
-          "source_store": "애니메이트",
-          "category": "아크릴 스탠드",
-          "name_ko": "주술회전 학원 시리즈 아크릴 스탠드 (이타도리)",
-          "name_ja": "呪術廻戦 学園シリーズ アクリルスタンド (虎杖)",
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E8%99%8E%E6%9D%96%29",
-          "web_search_url": "https://www.google.com/search?q=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E8%99%8E%E6%9D%96%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.animate-onlineshop.jp"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 1632,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "애니메이트",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1632,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E8%99%8E%E6%9D%96%29",
-            "candidate_source_url": "",
-            "source_store": "애니메이트",
-            "name_ko": "주술회전 학원 시리즈 아크릴 스탠드 (이타도리)",
-            "name_ja": "呪術廻戦 学園シリーズ アクリルスタンド (虎杖)",
-            "category": "아크릴 스탠드",
-            "affiliation": "주술회전",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "auto_apply_enabled": false
         }
       ],
       "auto_apply_enabled": false
@@ -12513,12 +12513,12 @@
       ],
       "category_counts": [
         [
-          "캔뱃지",
-          6
+          "아크릴 스탠드",
+          7
         ],
         [
-          "아크릴 스탠드",
-          6
+          "캔뱃지",
+          5
         ],
         [
           "인형",
@@ -12567,6 +12567,46 @@
       "blocked_until": "exact_product_detail_source_url_confirmed",
       "recommended_action": "Find exact product/detail source URLs before any image_url import.",
       "items": [
+        {
+          "catalog_index": 1632,
+          "source_store": "애니메이트",
+          "category": "아크릴 스탠드",
+          "name_ko": "주술회전 학원 시리즈 아크릴 스탠드 (이타도리)",
+          "name_ja": "呪術廻戦 学園シリーズ アクリルスタンド (虎杖)",
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E8%99%8E%E6%9D%96%29",
+          "web_search_url": "https://www.google.com/search?q=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E8%99%8E%E6%9D%96%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "www.animate-onlineshop.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1632,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "애니메이트",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1632,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E8%99%8E%E6%9D%96%29",
+            "candidate_source_url": "",
+            "source_store": "애니메이트",
+            "name_ko": "주술회전 학원 시리즈 아크릴 스탠드 (이타도리)",
+            "name_ja": "呪術廻戦 学園シリーズ アクリルスタンド (虎杖)",
+            "category": "아크릴 스탠드",
+            "affiliation": "주술회전",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
         {
           "catalog_index": 1036,
           "source_store": "애니메이트",
@@ -13526,46 +13566,6 @@
           },
           "blocked_until": "exact_product_detail_source_url_confirmed",
           "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 2224,
-          "source_store": "애니메이트",
-          "category": "캔뱃지",
-          "name_ko": "짱구는 못말려 캔뱃지 (짱아)",
-          "name_ja": "クレヨンしんちゃん 缶バッジ (ひまわり)",
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%28%E3%81%B2%E3%81%BE%E3%82%8F%E3%82%8A%29",
-          "web_search_url": "https://www.google.com/search?q=%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%28%E3%81%B2%E3%81%BE%E3%82%8F%E3%82%8A%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.animate-onlineshop.jp"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 2224,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "애니메이트",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 2224,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%28%E3%81%B2%E3%81%BE%E3%82%8F%E3%82%8A%29",
-            "candidate_source_url": "",
-            "source_store": "애니메이트",
-            "name_ko": "짱구는 못말려 캔뱃지 (짱아)",
-            "name_ja": "クレヨンしんちゃん 缶バッジ (ひまわり)",
-            "category": "캔뱃지",
-            "affiliation": "짱구는 못말려",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "auto_apply_enabled": false
         }
       ],
       "auto_apply_enabled": false
@@ -13591,6 +13591,10 @@
           6
         ],
         [
+          "캔뱃지",
+          4
+        ],
+        [
           "키링",
           4
         ],
@@ -13599,12 +13603,8 @@
           3
         ],
         [
-          "캔뱃지",
-          3
-        ],
-        [
           "인형",
-          3
+          2
         ],
         [
           "타월",
@@ -13649,6 +13649,46 @@
       "blocked_until": "exact_product_detail_source_url_confirmed",
       "recommended_action": "Find exact product/detail source URLs before any image_url import.",
       "items": [
+        {
+          "catalog_index": 2224,
+          "source_store": "애니메이트",
+          "category": "캔뱃지",
+          "name_ko": "짱구는 못말려 캔뱃지 (짱아)",
+          "name_ja": "クレヨンしんちゃん 缶バッジ (ひまわり)",
+          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%28%E3%81%B2%E3%81%BE%E3%82%8F%E3%82%8A%29",
+          "web_search_url": "https://www.google.com/search?q=%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%28%E3%81%B2%E3%81%BE%E3%82%8F%E3%82%8A%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "www.animate-onlineshop.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2224,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "애니메이트",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2224,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E3%82%AF%E3%83%AC%E3%83%A8%E3%83%B3%E3%81%97%E3%82%93%E3%81%A1%E3%82%83%E3%82%93%20%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%28%E3%81%B2%E3%81%BE%E3%82%8F%E3%82%8A%29",
+            "candidate_source_url": "",
+            "source_store": "애니메이트",
+            "name_ko": "짱구는 못말려 캔뱃지 (짱아)",
+            "name_ja": "クレヨンしんちゃん 缶バッジ (ひまわり)",
+            "category": "캔뱃지",
+            "affiliation": "짱구는 못말려",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
         {
           "catalog_index": 2227,
           "source_store": "애니메이트",
@@ -14608,7 +14648,61 @@
           },
           "blocked_until": "exact_product_detail_source_url_confirmed",
           "auto_apply_enabled": false
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "source-discovery-015",
+      "priority": 10,
+      "workflow": "official_search_url_available",
+      "source_store": "애니메이트",
+      "row_count": 7,
+      "offset": 150,
+      "review_state": "official_search_review_required",
+      "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+      "confidence": "official_search",
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "allowed_source_domains": [
+        "www.animate-onlineshop.jp"
+      ],
+      "category_counts": [
+        [
+          "문구",
+          3
+        ],
+        [
+          "인형",
+          2
+        ],
+        [
+          "캔뱃지",
+          1
+        ],
+        [
+          "생활잡화",
+          1
+        ]
+      ],
+      "source_patch_template_fields": [
+        "catalog_index",
+        "source_url",
+        "image_url",
+        "evidence_url",
+        "manual_confirmed"
+      ],
+      "catalog_field_import_template_fields": [
+        "manual_confirmed",
+        "row_index",
+        "field",
+        "manual_value",
+        "evidence_url",
+        "candidate_source_url"
+      ],
+      "blocked_until": "exact_product_detail_source_url_confirmed",
+      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
+      "items": [
         {
           "catalog_index": 1118,
           "source_store": "애니메이트",
@@ -14648,61 +14742,7 @@
           },
           "blocked_until": "exact_product_detail_source_url_confirmed",
           "auto_apply_enabled": false
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "source-discovery-015",
-      "priority": 10,
-      "workflow": "official_search_url_available",
-      "source_store": "애니메이트",
-      "row_count": 6,
-      "offset": 150,
-      "review_state": "official_search_review_required",
-      "next_machine_step": "open_official_search_and_verify_exact_product_detail",
-      "confidence": "official_search",
-      "evidence_required": "exact official product detail URL on the expected official domain",
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "allowed_source_domains": [
-        "www.animate-onlineshop.jp"
-      ],
-      "category_counts": [
-        [
-          "문구",
-          3
-        ],
-        [
-          "캔뱃지",
-          1
-        ],
-        [
-          "생활잡화",
-          1
-        ],
-        [
-          "인형",
-          1
-        ]
-      ],
-      "source_patch_template_fields": [
-        "catalog_index",
-        "source_url",
-        "image_url",
-        "evidence_url",
-        "manual_confirmed"
-      ],
-      "catalog_field_import_template_fields": [
-        "manual_confirmed",
-        "row_index",
-        "field",
-        "manual_value",
-        "evidence_url",
-        "candidate_source_url"
-      ],
-      "blocked_until": "exact_product_detail_source_url_confirmed",
-      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
-      "items": [
+        },
         {
           "catalog_index": 2264,
           "source_store": "애니메이트",
@@ -17360,6 +17400,1914 @@
       "batch_id": "source-discovery-019",
       "priority": 10,
       "workflow": "official_search_url_available",
+      "source_store": "Stellive Store",
+      "row_count": 25,
+      "offset": 0,
+      "review_state": "official_search_review_required",
+      "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+      "confidence": "official_search",
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "allowed_source_domains": [
+        "stellive.fanding.kr"
+      ],
+      "category_counts": [
+        [
+          "액세서리",
+          11
+        ],
+        [
+          "아크릴 스탠드",
+          11
+        ],
+        [
+          "인형",
+          2
+        ],
+        [
+          "머그컵",
+          1
+        ]
+      ],
+      "source_patch_template_fields": [
+        "catalog_index",
+        "source_url",
+        "image_url",
+        "evidence_url",
+        "manual_confirmed"
+      ],
+      "catalog_field_import_template_fields": [
+        "manual_confirmed",
+        "row_index",
+        "field",
+        "manual_value",
+        "evidence_url",
+        "candidate_source_url"
+      ],
+      "blocked_until": "exact_product_detail_source_url_confirmed",
+      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
+      "items": [
+        {
+          "catalog_index": 2406,
+          "source_store": "Stellive Store",
+          "category": "머그컵",
+          "name_ko": "아이리 칸나 머그컵",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A8%B8%EA%B7%B8%EC%BB%B5",
+          "web_search_url": "https://www.google.com/search?q=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A8%B8%EA%B7%B8%EC%BB%B5%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2406,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2406,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A8%B8%EA%B7%B8%EC%BB%B5",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "아이리 칸나 머그컵",
+            "name_ja": null,
+            "category": "머그컵",
+            "affiliation": "(전) 스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2355,
+          "source_store": "Stellive Store",
+          "category": "액세서리",
+          "name_ko": "아이리 칸나 생일 기념 굿즈 박스",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+          "web_search_url": "https://www.google.com/search?q=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2355,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2355,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "아이리 칸나 생일 기념 굿즈 박스",
+            "name_ja": null,
+            "category": "액세서리",
+            "affiliation": "(전) 스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2405,
+          "source_store": "Stellive Store",
+          "category": "액세서리",
+          "name_ko": "아이리 칸나 아크릴 키링",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%95%84%ED%81%AC%EB%A6%B4%20%ED%82%A4%EB%A7%81",
+          "web_search_url": "https://www.google.com/search?q=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%95%84%ED%81%AC%EB%A6%B4%20%ED%82%A4%EB%A7%81%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2405,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2405,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EC%95%84%ED%81%AC%EB%A6%B4%20%ED%82%A4%EB%A7%81",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "아이리 칸나 아크릴 키링",
+            "name_ja": null,
+            "category": "액세서리",
+            "affiliation": "(전) 스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2357,
+          "source_store": "Stellive Store",
+          "category": "액세서리",
+          "name_ko": "아이리 칸나 키링 세트",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%ED%82%A4%EB%A7%81%20%EC%84%B8%ED%8A%B8",
+          "web_search_url": "https://www.google.com/search?q=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%ED%82%A4%EB%A7%81%20%EC%84%B8%ED%8A%B8%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2357,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2357,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%ED%82%A4%EB%A7%81%20%EC%84%B8%ED%8A%B8",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "아이리 칸나 키링 세트",
+            "name_ja": null,
+            "category": "액세서리",
+            "affiliation": "(전) 스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2356,
+          "source_store": "Stellive Store",
+          "category": "인형",
+          "name_ko": "아이리 칸나 마스코트 인형",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "web_search_url": "https://www.google.com/search?q=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2356,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2356,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "아이리 칸나 마스코트 인형",
+            "name_ja": null,
+            "category": "인형",
+            "affiliation": "(전) 스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2404,
+          "source_store": "Stellive Store",
+          "category": "인형",
+          "name_ko": "아이리 칸나 봉제 인형 (천사 ver.)",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%EC%B2%9C%EC%82%AC%20ver.%29",
+          "web_search_url": "https://www.google.com/search?q=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%EC%B2%9C%EC%82%AC%20ver.%29%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2404,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2404,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%9D%B4%EB%A6%AC%20%EC%B9%B8%EB%82%98%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%EC%B2%9C%EC%82%AC%20ver.%29",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "아이리 칸나 봉제 인형 (천사 ver.)",
+            "name_ja": null,
+            "category": "인형",
+            "affiliation": "(전) 스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2422,
+          "source_store": "Stellive Store",
+          "category": "아크릴 스탠드",
+          "name_ko": "네네코 마시로 데뷔 1주년 아크릴 스탠드",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EB%84%A4%EB%84%A4%EC%BD%94%20%EB%A7%88%EC%8B%9C%EB%A1%9C%20%EB%8D%B0%EB%B7%94%201%EC%A3%BC%EB%85%84%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "web_search_url": "https://www.google.com/search?q=%EB%84%A4%EB%84%A4%EC%BD%94%20%EB%A7%88%EC%8B%9C%EB%A1%9C%20%EB%8D%B0%EB%B7%94%201%EC%A3%BC%EB%85%84%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2422,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2422,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EB%84%A4%EB%84%A4%EC%BD%94%20%EB%A7%88%EC%8B%9C%EB%A1%9C%20%EB%8D%B0%EB%B7%94%201%EC%A3%BC%EB%85%84%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "네네코 마시로 데뷔 1주년 아크릴 스탠드",
+            "name_ja": null,
+            "category": "아크릴 스탠드",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2375,
+          "source_store": "Stellive Store",
+          "category": "아크릴 스탠드",
+          "name_ko": "린 데뷔 기념 아크릴 스탠드",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EB%A6%B0%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "web_search_url": "https://www.google.com/search?q=%EB%A6%B0%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2375,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2375,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EB%A6%B0%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "린 데뷔 기념 아크릴 스탠드",
+            "name_ja": null,
+            "category": "아크릴 스탠드",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2445,
+          "source_store": "Stellive Store",
+          "category": "아크릴 스탠드",
+          "name_ko": "마유 데뷔 기념 아크릴 스탠드",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EB%A7%88%EC%9C%A0%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "web_search_url": "https://www.google.com/search?q=%EB%A7%88%EC%9C%A0%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2445,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2445,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EB%A7%88%EC%9C%A0%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "마유 데뷔 기념 아크릴 스탠드",
+            "name_ja": null,
+            "category": "아크릴 스탠드",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2373,
+          "source_store": "Stellive Store",
+          "category": "아크릴 스탠드",
+          "name_ko": "비비 데뷔 기념 아크릴 스탠드",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EB%B9%84%EB%B9%84%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "web_search_url": "https://www.google.com/search?q=%EB%B9%84%EB%B9%84%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2373,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2373,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EB%B9%84%EB%B9%84%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "비비 데뷔 기념 아크릴 스탠드",
+            "name_ja": null,
+            "category": "아크릴 스탠드",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2438,
+          "source_store": "Stellive Store",
+          "category": "아크릴 스탠드",
+          "name_ko": "비비 생일 아크릴 스탠드",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EB%B9%84%EB%B9%84%20%EC%83%9D%EC%9D%BC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "web_search_url": "https://www.google.com/search?q=%EB%B9%84%EB%B9%84%20%EC%83%9D%EC%9D%BC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2438,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2438,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EB%B9%84%EB%B9%84%20%EC%83%9D%EC%9D%BC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "비비 생일 아크릴 스탠드",
+            "name_ja": null,
+            "category": "아크릴 스탠드",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2407,
+          "source_store": "Stellive Store",
+          "category": "아크릴 스탠드",
+          "name_ko": "아카네 리제 데뷔 2주년 아크릴 스탠드",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%B9%B4%EB%84%A4%20%EB%A6%AC%EC%A0%9C%20%EB%8D%B0%EB%B7%94%202%EC%A3%BC%EB%85%84%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "web_search_url": "https://www.google.com/search?q=%EC%95%84%EC%B9%B4%EB%84%A4%20%EB%A6%AC%EC%A0%9C%20%EB%8D%B0%EB%B7%94%202%EC%A3%BC%EB%85%84%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2407,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2407,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EC%95%84%EC%B9%B4%EB%84%A4%20%EB%A6%AC%EC%A0%9C%20%EB%8D%B0%EB%B7%94%202%EC%A3%BC%EB%85%84%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "아카네 리제 데뷔 2주년 아크릴 스탠드",
+            "name_ja": null,
+            "category": "아크릴 스탠드",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2412,
+          "source_store": "Stellive Store",
+          "category": "아크릴 스탠드",
+          "name_ko": "쿠루미 노아 데뷔 1주년 아크릴 스탠드",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%8D%B0%EB%B7%94%201%EC%A3%BC%EB%85%84%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "web_search_url": "https://www.google.com/search?q=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%8D%B0%EB%B7%94%201%EC%A3%BC%EB%85%84%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2412,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2412,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%8D%B0%EB%B7%94%201%EC%A3%BC%EB%85%84%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "쿠루미 노아 데뷔 1주년 아크릴 스탠드",
+            "name_ja": null,
+            "category": "아크릴 스탠드",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2361,
+          "source_store": "Stellive Store",
+          "category": "아크릴 스탠드",
+          "name_ko": "쿠루미 노아 데뷔 기념 아크릴 스탠드",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "web_search_url": "https://www.google.com/search?q=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2361,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2361,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "쿠루미 노아 데뷔 기념 아크릴 스탠드",
+            "name_ja": null,
+            "category": "아크릴 스탠드",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2413,
+          "source_store": "Stellive Store",
+          "category": "아크릴 스탠드",
+          "name_ko": "쿠루미 노아 생일 아크릴 스탠드 (드레스 ver.)",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EC%83%9D%EC%9D%BC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EB%93%9C%EB%A0%88%EC%8A%A4%20ver.%29",
+          "web_search_url": "https://www.google.com/search?q=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EC%83%9D%EC%9D%BC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EB%93%9C%EB%A0%88%EC%8A%A4%20ver.%29%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2413,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2413,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EC%83%9D%EC%9D%BC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20%28%EB%93%9C%EB%A0%88%EC%8A%A4%20ver.%29",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "쿠루미 노아 생일 아크릴 스탠드 (드레스 ver.)",
+            "name_ja": null,
+            "category": "아크릴 스탠드",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2458,
+          "source_store": "Stellive Store",
+          "category": "아크릴 스탠드",
+          "name_ko": "후야 데뷔 기념 아크릴 스탠드",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "web_search_url": "https://www.google.com/search?q=%ED%9B%84%EC%95%BC%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2458,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2458,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%EB%8D%B0%EB%B7%94%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "후야 데뷔 기념 아크릴 스탠드",
+            "name_ja": null,
+            "category": "아크릴 스탠드",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2460,
+          "source_store": "Stellive Store",
+          "category": "아크릴 스탠드",
+          "name_ko": "후야 첫 생일 기념 아크릴 스탠드",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%EC%B2%AB%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "web_search_url": "https://www.google.com/search?q=%ED%9B%84%EC%95%BC%20%EC%B2%AB%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2460,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2460,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%EC%B2%AB%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "후야 첫 생일 기념 아크릴 스탠드",
+            "name_ja": null,
+            "category": "아크릴 스탠드",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2401,
+          "source_store": "Stellive Store",
+          "category": "액세서리",
+          "name_ko": "강지 클리어 파일 세트",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EA%B0%95%EC%A7%80%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
+          "web_search_url": "https://www.google.com/search?q=%EA%B0%95%EC%A7%80%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2401,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2401,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EA%B0%95%EC%A7%80%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "강지 클리어 파일 세트",
+            "name_ja": null,
+            "category": "액세서리",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2446,
+          "source_store": "Stellive Store",
+          "category": "액세서리",
+          "name_ko": "마유 데뷔 굿즈 박스",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EB%A7%88%EC%9C%A0%20%EB%8D%B0%EB%B7%94%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+          "web_search_url": "https://www.google.com/search?q=%EB%A7%88%EC%9C%A0%20%EB%8D%B0%EB%B7%94%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2446,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2446,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EB%A7%88%EC%9C%A0%20%EB%8D%B0%EB%B7%94%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "마유 데뷔 굿즈 박스",
+            "name_ja": null,
+            "category": "액세서리",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2448,
+          "source_store": "Stellive Store",
+          "category": "액세서리",
+          "name_ko": "마유 아크릴 키링",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EB%A7%88%EC%9C%A0%20%EC%95%84%ED%81%AC%EB%A6%B4%20%ED%82%A4%EB%A7%81",
+          "web_search_url": "https://www.google.com/search?q=%EB%A7%88%EC%9C%A0%20%EC%95%84%ED%81%AC%EB%A6%B4%20%ED%82%A4%EB%A7%81%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2448,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2448,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EB%A7%88%EC%9C%A0%20%EC%95%84%ED%81%AC%EB%A6%B4%20%ED%82%A4%EB%A7%81",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "마유 아크릴 키링",
+            "name_ja": null,
+            "category": "액세서리",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2437,
+          "source_store": "Stellive Store",
+          "category": "액세서리",
+          "name_ko": "비비 데뷔 굿즈 박스",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EB%B9%84%EB%B9%84%20%EB%8D%B0%EB%B7%94%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+          "web_search_url": "https://www.google.com/search?q=%EB%B9%84%EB%B9%84%20%EB%8D%B0%EB%B7%94%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2437,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2437,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EB%B9%84%EB%B9%84%20%EB%8D%B0%EB%B7%94%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "비비 데뷔 굿즈 박스",
+            "name_ja": null,
+            "category": "액세서리",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2440,
+          "source_store": "Stellive Store",
+          "category": "액세서리",
+          "name_ko": "비비 아크릴 키링",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EB%B9%84%EB%B9%84%20%EC%95%84%ED%81%AC%EB%A6%B4%20%ED%82%A4%EB%A7%81",
+          "web_search_url": "https://www.google.com/search?q=%EB%B9%84%EB%B9%84%20%EC%95%84%ED%81%AC%EB%A6%B4%20%ED%82%A4%EB%A7%81%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2440,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2440,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EB%B9%84%EB%B9%84%20%EC%95%84%ED%81%AC%EB%A6%B4%20%ED%82%A4%EB%A7%81",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "비비 아크릴 키링",
+            "name_ja": null,
+            "category": "액세서리",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2453,
+          "source_store": "Stellive Store",
+          "category": "액세서리",
+          "name_ko": "스텔라이브 1주년 단체 클리어 파일 세트",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%8B%A8%EC%B2%B4%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
+          "web_search_url": "https://www.google.com/search?q=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%8B%A8%EC%B2%B4%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2453,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2453,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%8B%A8%EC%B2%B4%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "스텔라이브 1주년 단체 클리어 파일 세트",
+            "name_ja": null,
+            "category": "액세서리",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2454,
+          "source_store": "Stellive Store",
+          "category": "액세서리",
+          "name_ko": "스텔라이브 2주년 단체 굿즈 박스",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%202%EC%A3%BC%EB%85%84%20%EB%8B%A8%EC%B2%B4%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+          "web_search_url": "https://www.google.com/search?q=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%202%EC%A3%BC%EB%85%84%20%EB%8B%A8%EC%B2%B4%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2454,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2454,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%202%EC%A3%BC%EB%85%84%20%EB%8B%A8%EC%B2%B4%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "스텔라이브 2주년 단체 굿즈 박스",
+            "name_ja": null,
+            "category": "액세서리",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2362,
+          "source_store": "Stellive Store",
+          "category": "액세서리",
+          "name_ko": "쿠루미 노아 생일 기념 굿즈",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88",
+          "web_search_url": "https://www.google.com/search?q=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2362,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2362,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EC%83%9D%EC%9D%BC%20%EA%B8%B0%EB%85%90%20%EA%B5%BF%EC%A6%88",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "쿠루미 노아 생일 기념 굿즈",
+            "name_ja": null,
+            "category": "액세서리",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "source-discovery-020",
+      "priority": 10,
+      "workflow": "official_search_url_available",
+      "source_store": "Stellive Store",
+      "row_count": 20,
+      "offset": 25,
+      "review_state": "official_search_review_required",
+      "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+      "confidence": "official_search",
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "allowed_source_domains": [
+        "stellive.fanding.kr"
+      ],
+      "category_counts": [
+        [
+          "인형",
+          12
+        ],
+        [
+          "액세서리",
+          6
+        ],
+        [
+          "의류",
+          1
+        ],
+        [
+          "캔뱃지",
+          1
+        ]
+      ],
+      "source_patch_template_fields": [
+        "catalog_index",
+        "source_url",
+        "image_url",
+        "evidence_url",
+        "manual_confirmed"
+      ],
+      "catalog_field_import_template_fields": [
+        "manual_confirmed",
+        "row_index",
+        "field",
+        "manual_value",
+        "evidence_url",
+        "candidate_source_url"
+      ],
+      "blocked_until": "exact_product_detail_source_url_confirmed",
+      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
+      "items": [
+        {
+          "catalog_index": 2416,
+          "source_store": "Stellive Store",
+          "category": "액세서리",
+          "name_ko": "쿠루미 노아 클리어 파일 세트",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
+          "web_search_url": "https://www.google.com/search?q=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2416,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2416,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "쿠루미 노아 클리어 파일 세트",
+            "name_ja": null,
+            "category": "액세서리",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2433,
+          "source_store": "Stellive Store",
+          "category": "액세서리",
+          "name_ko": "하나코 코코나 생일 굿즈 박스",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+          "web_search_url": "https://www.google.com/search?q=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2433,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2433,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EC%83%9D%EC%9D%BC%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "하나코 코코나 생일 굿즈 박스",
+            "name_ja": null,
+            "category": "액세서리",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2436,
+          "source_store": "Stellive Store",
+          "category": "액세서리",
+          "name_ko": "하나코 코코나 클리어 파일 세트",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
+          "web_search_url": "https://www.google.com/search?q=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2436,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2436,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "하나코 코코나 클리어 파일 세트",
+            "name_ja": null,
+            "category": "액세서리",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2459,
+          "source_store": "Stellive Store",
+          "category": "액세서리",
+          "name_ko": "후야 데뷔 굿즈 박스",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%EB%8D%B0%EB%B7%94%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+          "web_search_url": "https://www.google.com/search?q=%ED%9B%84%EC%95%BC%20%EB%8D%B0%EB%B7%94%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2459,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2459,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%EB%8D%B0%EB%B7%94%20%EA%B5%BF%EC%A6%88%20%EB%B0%95%EC%8A%A4",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "후야 데뷔 굿즈 박스",
+            "name_ja": null,
+            "category": "액세서리",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2462,
+          "source_store": "Stellive Store",
+          "category": "액세서리",
+          "name_ko": "후야 아크릴 키링",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%ED%82%A4%EB%A7%81",
+          "web_search_url": "https://www.google.com/search?q=%ED%9B%84%EC%95%BC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%ED%82%A4%EB%A7%81%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2462,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2462,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%EC%95%84%ED%81%AC%EB%A6%B4%20%ED%82%A4%EB%A7%81",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "후야 아크릴 키링",
+            "name_ja": null,
+            "category": "액세서리",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2464,
+          "source_store": "Stellive Store",
+          "category": "액세서리",
+          "name_ko": "후야 클리어 파일 세트",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
+          "web_search_url": "https://www.google.com/search?q=%ED%9B%84%EC%95%BC%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2464,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2464,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%ED%81%B4%EB%A6%AC%EC%96%B4%20%ED%8C%8C%EC%9D%BC%20%EC%84%B8%ED%8A%B8",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "후야 클리어 파일 세트",
+            "name_ja": null,
+            "category": "액세서리",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2435,
+          "source_store": "Stellive Store",
+          "category": "의류",
+          "name_ko": "하나코 코코나 토트백",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%ED%86%A0%ED%8A%B8%EB%B0%B1",
+          "web_search_url": "https://www.google.com/search?q=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%ED%86%A0%ED%8A%B8%EB%B0%B1%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2435,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2435,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%ED%86%A0%ED%8A%B8%EB%B0%B1",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "하나코 코코나 토트백",
+            "name_ja": null,
+            "category": "의류",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2399,
+          "source_store": "Stellive Store",
+          "category": "인형",
+          "name_ko": "강지 마스코트 봉제 인형",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+          "web_search_url": "https://www.google.com/search?q=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2399,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2399,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "강지 마스코트 봉제 인형",
+            "name_ja": null,
+            "category": "인형",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2352,
+          "source_store": "Stellive Store",
+          "category": "인형",
+          "name_ko": "강지 마스코트 인형",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "web_search_url": "https://www.google.com/search?q=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2352,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2352,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EA%B0%95%EC%A7%80%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "강지 마스코트 인형",
+            "name_ja": null,
+            "category": "인형",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2376,
+          "source_store": "Stellive Store",
+          "category": "인형",
+          "name_ko": "린 마스코트 인형",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EB%A6%B0%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "web_search_url": "https://www.google.com/search?q=%EB%A6%B0%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2376,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2376,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EB%A6%B0%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "린 마스코트 인형",
+            "name_ja": null,
+            "category": "인형",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2443,
+          "source_store": "Stellive Store",
+          "category": "인형",
+          "name_ko": "린 봉제 인형",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EB%A6%B0%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+          "web_search_url": "https://www.google.com/search?q=%EB%A6%B0%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2443,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2443,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EB%A6%B0%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "린 봉제 인형",
+            "name_ja": null,
+            "category": "인형",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2447,
+          "source_store": "Stellive Store",
+          "category": "인형",
+          "name_ko": "마유 봉제 인형",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EB%A7%88%EC%9C%A0%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+          "web_search_url": "https://www.google.com/search?q=%EB%A7%88%EC%9C%A0%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2447,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2447,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EB%A7%88%EC%9C%A0%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "마유 봉제 인형",
+            "name_ja": null,
+            "category": "인형",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2374,
+          "source_store": "Stellive Store",
+          "category": "인형",
+          "name_ko": "비비 마스코트 인형",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EB%B9%84%EB%B9%84%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "web_search_url": "https://www.google.com/search?q=%EB%B9%84%EB%B9%84%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2374,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2374,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EB%B9%84%EB%B9%84%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "비비 마스코트 인형",
+            "name_ja": null,
+            "category": "인형",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2439,
+          "source_store": "Stellive Store",
+          "category": "인형",
+          "name_ko": "비비 봉제 인형",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EB%B9%84%EB%B9%84%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+          "web_search_url": "https://www.google.com/search?q=%EB%B9%84%EB%B9%84%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2439,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2439,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EB%B9%84%EB%B9%84%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "비비 봉제 인형",
+            "name_ja": null,
+            "category": "인형",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2363,
+          "source_store": "Stellive Store",
+          "category": "인형",
+          "name_ko": "쿠루미 노아 마스코트 인형",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "web_search_url": "https://www.google.com/search?q=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2363,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2363,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "쿠루미 노아 마스코트 인형",
+            "name_ja": null,
+            "category": "인형",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2414,
+          "source_store": "Stellive Store",
+          "category": "인형",
+          "name_ko": "쿠루미 노아 봉제 인형",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+          "web_search_url": "https://www.google.com/search?q=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2414,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2414,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EC%BF%A0%EB%A3%A8%EB%AF%B8%20%EB%85%B8%EC%95%84%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "쿠루미 노아 봉제 인형",
+            "name_ja": null,
+            "category": "인형",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2434,
+          "source_store": "Stellive Store",
+          "category": "인형",
+          "name_ko": "하나코 코코나 마스코트 봉제 인형",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+          "web_search_url": "https://www.google.com/search?q=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2434,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2434,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "하나코 코코나 마스코트 봉제 인형",
+            "name_ja": null,
+            "category": "인형",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2372,
+          "source_store": "Stellive Store",
+          "category": "인형",
+          "name_ko": "하나코 코코나 마스코트 인형",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+          "web_search_url": "https://www.google.com/search?q=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2372,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2372,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%ED%95%98%EB%82%98%EC%BD%94%20%EC%BD%94%EC%BD%94%EB%82%98%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EC%9D%B8%ED%98%95",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "하나코 코코나 마스코트 인형",
+            "name_ja": null,
+            "category": "인형",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2461,
+          "source_store": "Stellive Store",
+          "category": "인형",
+          "name_ko": "후야 마스코트 봉제 인형",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+          "web_search_url": "https://www.google.com/search?q=%ED%9B%84%EC%95%BC%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2461,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2461,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%ED%9B%84%EC%95%BC%20%EB%A7%88%EC%8A%A4%EC%BD%94%ED%8A%B8%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "후야 마스코트 봉제 인형",
+            "name_ja": null,
+            "category": "인형",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2325,
+          "source_store": "Stellive Store",
+          "category": "캔뱃지",
+          "name_ko": "스텔라이브 1주년 뱃지 세트",
+          "name_ja": null,
+          "official_search_url": "https://stellive.fanding.kr/search?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+          "web_search_url": "https://www.google.com/search?q=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8%20Stellive%20Store%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "stellive.fanding.kr"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2325,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Stellive Store",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2325,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://stellive.fanding.kr/search?keyword=%EC%8A%A4%ED%85%94%EB%9D%BC%EC%9D%B4%EB%B8%8C%201%EC%A3%BC%EB%85%84%20%EB%B1%83%EC%A7%80%20%EC%84%B8%ED%8A%B8",
+            "candidate_source_url": "",
+            "source_store": "Stellive Store",
+            "name_ko": "스텔라이브 1주년 뱃지 세트",
+            "name_ja": null,
+            "category": "캔뱃지",
+            "affiliation": "스텔라이브",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "source-discovery-021",
+      "priority": 10,
+      "workflow": "official_search_url_available",
       "source_store": "코토부키야",
       "row_count": 25,
       "offset": 0,
@@ -18411,7 +20359,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-020",
+      "batch_id": "source-discovery-022",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "코토부키야",
@@ -19221,7 +21169,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-021",
+      "batch_id": "source-discovery-023",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "Movic",
@@ -20283,7 +22231,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-022",
+      "batch_id": "source-discovery-024",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "Movic",
@@ -20781,7 +22729,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-023",
+      "batch_id": "source-discovery-025",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "점프 캐릭터즈 스토어",
@@ -21759,7 +23707,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-024",
+      "batch_id": "source-discovery-026",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "FuRyu",
@@ -22641,7 +24589,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-025",
+      "batch_id": "source-discovery-027",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "Taito",
@@ -23287,7 +25235,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-026",
+      "batch_id": "source-discovery-028",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "무기와라스토어",
@@ -23949,7 +25897,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-027",
+      "batch_id": "source-discovery-029",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "치이카와 중국 팝업스토어",
@@ -24603,7 +26551,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-028",
+      "batch_id": "source-discovery-030",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "귀멸의 칼날 공식",
@@ -25177,7 +27125,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-029",
+      "batch_id": "source-discovery-031",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "Cospa",
@@ -25707,7 +27655,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-030",
+      "batch_id": "source-discovery-032",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "반다이",
@@ -26193,7 +28141,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-031",
+      "batch_id": "source-discovery-033",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "메가하우스",
@@ -26595,7 +28543,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-032",
+      "batch_id": "source-discovery-034",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "MINISO 중국",
@@ -26925,7 +28873,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-033",
+      "batch_id": "source-discovery-035",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "산리오",
@@ -27211,7 +29159,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-034",
+      "batch_id": "source-discovery-036",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "JYP SHOP",
@@ -27457,7 +29405,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-035",
+      "batch_id": "source-discovery-037",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "Re-ment",
@@ -27699,7 +29647,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-036",
+      "batch_id": "source-discovery-038",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "치이카와샵 용산",
@@ -27949,7 +29897,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-037",
+      "batch_id": "source-discovery-039",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "MINISO",
@@ -28163,7 +30111,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-038",
+      "batch_id": "source-discovery-040",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "가샤폰",
@@ -28369,7 +30317,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-039",
+      "batch_id": "source-discovery-041",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "디즈니 스토어",
@@ -28571,7 +30519,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-040",
+      "batch_id": "source-discovery-042",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "이세계아이돌 공식 굿즈",
@@ -28781,7 +30729,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-041",
+      "batch_id": "source-discovery-043",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "Bandai Premium",
@@ -28951,7 +30899,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-042",
+      "batch_id": "source-discovery-044",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "SM STORE",
@@ -29113,7 +31061,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-043",
+      "batch_id": "source-discovery-045",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "카도카와",
@@ -29275,7 +31223,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-044",
+      "batch_id": "source-discovery-046",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "Phat! Company",
@@ -29397,7 +31345,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-045",
+      "batch_id": "source-discovery-047",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "YG SELECT",
@@ -29519,7 +31467,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-046",
+      "batch_id": "source-discovery-048",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "롯데웰푸드",
@@ -29645,7 +31593,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-047",
+      "batch_id": "source-discovery-049",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "이세계아이돌 팝업스토어",
@@ -29767,7 +31715,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-048",
+      "batch_id": "source-discovery-050",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "ALTER",
@@ -29849,7 +31797,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-049",
+      "batch_id": "source-discovery-051",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "CUBE STORE",
@@ -29931,7 +31879,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-050",
+      "batch_id": "source-discovery-052",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "Hobby Max International",
@@ -30013,7 +31961,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-051",
+      "batch_id": "source-discovery-053",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "Hololive Production Official Shop",
@@ -30095,7 +32043,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-052",
+      "batch_id": "source-discovery-054",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "IST STORE",
@@ -30177,7 +32125,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-053",
+      "batch_id": "source-discovery-055",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "KQ FELLAZ",
@@ -30259,7 +32207,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-054",
+      "batch_id": "source-discovery-056",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "SEGA",
@@ -30341,7 +32289,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-055",
+      "batch_id": "source-discovery-057",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "STARSHIP STORE",
@@ -30423,7 +32371,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-056",
+      "batch_id": "source-discovery-058",
       "priority": 10,
       "workflow": "official_search_url_available",
       "source_store": "점프 숍",
@@ -30505,7 +32453,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-057",
+      "batch_id": "source-discovery-059",
       "priority": 20,
       "workflow": "licensed_retailer_search_review",
       "source_store": "AmiAmi",
@@ -31057,7 +33005,161 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-058",
+      "batch_id": "source-discovery-060",
+      "priority": 40,
+      "workflow": "manual_official_research",
+      "source_store": "Weverse Shop",
+      "row_count": 3,
+      "offset": 0,
+      "review_state": "manual_official_research_required",
+      "next_machine_step": "record_manual_official_source_evidence",
+      "confidence": "manual_research",
+      "evidence_required": "manual official or rights-holder source confirmation",
+      "acceptance_rule": "manual result must be recorded with exact URL and visible product evidence",
+      "allowed_source_domains": [],
+      "category_counts": [
+        [
+          "포토카드",
+          3
+        ]
+      ],
+      "source_patch_template_fields": [
+        "catalog_index",
+        "source_url",
+        "image_url",
+        "evidence_url",
+        "manual_confirmed"
+      ],
+      "catalog_field_import_template_fields": [
+        "manual_confirmed",
+        "row_index",
+        "field",
+        "manual_value",
+        "evidence_url",
+        "candidate_source_url"
+      ],
+      "blocked_until": "exact_product_detail_source_url_confirmed",
+      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
+      "items": [
+        {
+          "catalog_index": 17623,
+          "source_store": "Weverse Shop",
+          "category": "포토카드",
+          "name_ko": "ILLIT 포토카드 (랜덤)",
+          "name_ja": null,
+          "official_search_url": null,
+          "web_search_url": "https://www.google.com/search?q=ILLIT%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29%20Weverse%20Shop%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [],
+          "acceptance_rule": "manual result must be recorded with exact URL and visible product evidence",
+          "source_patch_template": {
+            "catalog_index": 17623,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Weverse Shop",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 17623,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://www.google.com/search?q=ILLIT%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29%20Weverse%20Shop%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+            "candidate_source_url": "",
+            "source_store": "Weverse Shop",
+            "name_ko": "ILLIT 포토카드 (랜덤)",
+            "name_ja": null,
+            "category": "포토카드",
+            "affiliation": "ILLIT",
+            "acceptance_criteria": "manual result must be recorded with exact URL and visible product evidence",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 17613,
+          "source_store": "Weverse Shop",
+          "category": "포토카드",
+          "name_ko": "SEVENTEEN 포토카드 (랜덤)",
+          "name_ja": null,
+          "official_search_url": null,
+          "web_search_url": "https://www.google.com/search?q=SEVENTEEN%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29%20Weverse%20Shop%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [],
+          "acceptance_rule": "manual result must be recorded with exact URL and visible product evidence",
+          "source_patch_template": {
+            "catalog_index": 17613,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Weverse Shop",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 17613,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://www.google.com/search?q=SEVENTEEN%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29%20Weverse%20Shop%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+            "candidate_source_url": "",
+            "source_store": "Weverse Shop",
+            "name_ko": "SEVENTEEN 포토카드 (랜덤)",
+            "name_ja": null,
+            "category": "포토카드",
+            "affiliation": "SEVENTEEN",
+            "acceptance_criteria": "manual result must be recorded with exact URL and visible product evidence",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 17622,
+          "source_store": "Weverse Shop",
+          "category": "포토카드",
+          "name_ko": "ZEROBASEONE 포토카드 (랜덤)",
+          "name_ja": null,
+          "official_search_url": null,
+          "web_search_url": "https://www.google.com/search?q=ZEROBASEONE%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29%20Weverse%20Shop%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [],
+          "acceptance_rule": "manual result must be recorded with exact URL and visible product evidence",
+          "source_patch_template": {
+            "catalog_index": 17622,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Weverse Shop",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 17622,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://www.google.com/search?q=ZEROBASEONE%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29%20Weverse%20Shop%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+            "candidate_source_url": "",
+            "source_store": "Weverse Shop",
+            "name_ko": "ZEROBASEONE 포토카드 (랜덤)",
+            "name_ja": null,
+            "category": "포토카드",
+            "affiliation": "ZEROBASEONE",
+            "acceptance_criteria": "manual result must be recorded with exact URL and visible product evidence",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "source-discovery-061",
       "priority": 40,
       "workflow": "manual_official_research",
       "source_store": "아이돌 공식",
@@ -31219,7 +33321,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-059",
+      "batch_id": "source-discovery-062",
       "priority": 40,
       "workflow": "manual_official_research",
       "source_store": "SVC 공식",
@@ -31329,6 +33431,126 @@
             "name_ja": null,
             "category": "타월",
             "affiliation": "스텔라이브",
+            "acceptance_criteria": "manual result must be recorded with exact URL and visible product evidence",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "source-discovery-063",
+      "priority": 40,
+      "workflow": "manual_official_research",
+      "source_store": "포켓몬 센터",
+      "row_count": 2,
+      "offset": 0,
+      "review_state": "manual_official_research_required",
+      "next_machine_step": "record_manual_official_source_evidence",
+      "confidence": "manual_research",
+      "evidence_required": "manual official or rights-holder source confirmation",
+      "acceptance_rule": "manual result must be recorded with exact URL and visible product evidence",
+      "allowed_source_domains": [],
+      "category_counts": [
+        [
+          "인형",
+          1
+        ],
+        [
+          "트레이딩 카드",
+          1
+        ]
+      ],
+      "source_patch_template_fields": [
+        "catalog_index",
+        "source_url",
+        "image_url",
+        "evidence_url",
+        "manual_confirmed"
+      ],
+      "catalog_field_import_template_fields": [
+        "manual_confirmed",
+        "row_index",
+        "field",
+        "manual_value",
+        "evidence_url",
+        "candidate_source_url"
+      ],
+      "blocked_until": "exact_product_detail_source_url_confirmed",
+      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
+      "items": [
+        {
+          "catalog_index": 1098,
+          "source_store": "포켓몬 센터",
+          "category": "인형",
+          "name_ko": "포켓몬 봉제 인형 (피카츄)",
+          "name_ja": "ポケモン ぬいぐるみ (ピカチュウ)",
+          "official_search_url": null,
+          "web_search_url": "https://www.google.com/search?q=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E3%83%94%E3%82%AB%E3%83%81%E3%83%A5%E3%82%A6%29%20%ED%8F%AC%EC%BC%93%EB%AA%AC%20%EC%84%BC%ED%84%B0%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [],
+          "acceptance_rule": "manual result must be recorded with exact URL and visible product evidence",
+          "source_patch_template": {
+            "catalog_index": 1098,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "포켓몬 센터",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1098,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://www.google.com/search?q=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%28%E3%83%94%E3%82%AB%E3%83%81%E3%83%A5%E3%82%A6%29%20%ED%8F%AC%EC%BC%93%EB%AA%AC%20%EC%84%BC%ED%84%B0%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+            "candidate_source_url": "",
+            "source_store": "포켓몬 센터",
+            "name_ko": "포켓몬 봉제 인형 (피카츄)",
+            "name_ja": "ポケモン ぬいぐるみ (ピカチュウ)",
+            "category": "인형",
+            "affiliation": "포켓몬",
+            "acceptance_criteria": "manual result must be recorded with exact URL and visible product evidence",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 17593,
+          "source_store": "포켓몬 센터",
+          "category": "트레이딩 카드",
+          "name_ko": "포켓몬 카드 게임 부스터 팩",
+          "name_ja": null,
+          "official_search_url": null,
+          "web_search_url": "https://www.google.com/search?q=%ED%8F%AC%EC%BC%93%EB%AA%AC%20%EC%B9%B4%EB%93%9C%20%EA%B2%8C%EC%9E%84%20%EB%B6%80%EC%8A%A4%ED%84%B0%20%ED%8C%A9%20%ED%8F%AC%EC%BC%93%EB%AA%AC%20%EC%84%BC%ED%84%B0%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [],
+          "acceptance_rule": "manual result must be recorded with exact URL and visible product evidence",
+          "source_patch_template": {
+            "catalog_index": 17593,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "포켓몬 센터",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 17593,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://www.google.com/search?q=%ED%8F%AC%EC%BC%93%EB%AA%AC%20%EC%B9%B4%EB%93%9C%20%EA%B2%8C%EC%9E%84%20%EB%B6%80%EC%8A%A4%ED%84%B0%20%ED%8C%A9%20%ED%8F%AC%EC%BC%93%EB%AA%AC%20%EC%84%BC%ED%84%B0%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+            "candidate_source_url": "",
+            "source_store": "포켓몬 센터",
+            "name_ko": "포켓몬 카드 게임 부스터 팩",
+            "name_ja": null,
+            "category": "트레이딩 카드",
+            "affiliation": "포켓몬",
             "acceptance_criteria": "manual result must be recorded with exact URL and visible product evidence",
             "blocked_until": "exact_product_detail_source_url_confirmed"
           },

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T11:30:52Z",
+  "generated_at": "2026-07-26T12:25:53Z",
   "summary": {
     "catalog_rows": 20347,
     "tracked_fields": [
@@ -11,17 +11,17 @@
       "source_url",
       "official_price_jpy"
     ],
-    "field_store_group_count": 351,
+    "field_store_group_count": 354,
     "batch_count": 30,
     "batch_size": 12,
-    "missing_cell_count": 13987,
+    "missing_cell_count": 14039,
     "field_missing_totals": {
       "name_ja": 526,
       "release_date": 1348,
       "barcode": 10082,
       "official_price_jpy": 559,
-      "image_url": 772,
-      "source_url": 700
+      "image_url": 773,
+      "source_url": 751
     },
     "top_source_stores_with_missing_metadata": [
       [
@@ -34,19 +34,19 @@
       ],
       [
         "애니메이트",
-        735
+        737
       ],
       [
         "치이카와 온라인 쿠지",
         705
       ],
       [
-        "굿스마일컴퍼니",
-        440
+        "Stellive Store",
+        476
       ],
       [
-        "Stellive Store",
-        431
+        "굿스마일컴퍼니",
+        440
       ],
       [
         "Banpresto",
@@ -65,11 +65,11 @@
         112
       ],
       [
-        "ご当地ちいかわ 공식(API)",
-        102
+        "Weverse Shop",
+        105
       ],
       [
-        "Weverse Shop",
+        "ご当地ちいかわ 공식(API)",
         102
       ],
       [
@@ -158,7 +158,7 @@
       ],
       [
         "포켓몬 센터",
-        28
+        30
       ],
       [
         "Square Enix e-STORE",
@@ -197,7 +197,7 @@
       "batch_id": "metadata-review-001",
       "priority": 10,
       "group_count": 12,
-      "missing_cell_count": 593,
+      "missing_cell_count": 627,
       "field_counts": [
         [
           "source_url",
@@ -312,7 +312,7 @@
         {
           "field": "source_url",
           "source_store": "애니메이트",
-          "missing_rows": 156,
+          "missing_rows": 157,
           "priority": 10,
           "workflow": "source_url_discovery",
           "evidence_required": "exact official or trusted licensed product detail page",
@@ -494,6 +494,101 @@
               "name_ja": "POP UP PARADE シュタルク",
               "series_name": null,
               "category": "피규어",
+              "source_url": null,
+              "image_url": null
+            }
+          ]
+        },
+        {
+          "field": "source_url",
+          "source_store": "Stellive Store",
+          "missing_rows": 45,
+          "priority": 10,
+          "workflow": "source_url_discovery",
+          "evidence_required": "exact official or trusted licensed product detail page",
+          "next_machine_step": "source_url_discovery",
+          "risk": "identity_mismatch",
+          "recommended_action": "Find exact official product page and attach source_url/image_url together.",
+          "sample_catalog_indexes": [
+            2325,
+            2352,
+            2355,
+            2356,
+            2357,
+            2361,
+            2362,
+            2363
+          ],
+          "sample_items": [
+            {
+              "catalog_index": 2325,
+              "name_ko": "스텔라이브 1주년 뱃지 세트",
+              "name_ja": null,
+              "series_name": null,
+              "category": "캔뱃지",
+              "source_url": null,
+              "image_url": null
+            },
+            {
+              "catalog_index": 2352,
+              "name_ko": "강지 마스코트 인형",
+              "name_ja": null,
+              "series_name": null,
+              "category": "인형",
+              "source_url": null,
+              "image_url": null
+            },
+            {
+              "catalog_index": 2355,
+              "name_ko": "아이리 칸나 생일 기념 굿즈 박스",
+              "name_ja": null,
+              "series_name": null,
+              "category": "액세서리",
+              "source_url": null,
+              "image_url": null
+            },
+            {
+              "catalog_index": 2356,
+              "name_ko": "아이리 칸나 마스코트 인형",
+              "name_ja": null,
+              "series_name": null,
+              "category": "인형",
+              "source_url": null,
+              "image_url": null
+            },
+            {
+              "catalog_index": 2357,
+              "name_ko": "아이리 칸나 키링 세트",
+              "name_ja": null,
+              "series_name": null,
+              "category": "액세서리",
+              "source_url": null,
+              "image_url": null
+            },
+            {
+              "catalog_index": 2361,
+              "name_ko": "쿠루미 노아 데뷔 기념 아크릴 스탠드",
+              "name_ja": null,
+              "series_name": null,
+              "category": "아크릴 스탠드",
+              "source_url": null,
+              "image_url": null
+            },
+            {
+              "catalog_index": 2362,
+              "name_ko": "쿠루미 노아 생일 기념 굿즈",
+              "name_ja": null,
+              "series_name": null,
+              "category": "액세서리",
+              "source_url": null,
+              "image_url": null
+            },
+            {
+              "catalog_index": 2363,
+              "name_ko": "쿠루미 노아 마스코트 인형",
+              "name_ja": null,
+              "series_name": null,
+              "category": "인형",
               "source_url": null,
               "image_url": null
             }
@@ -1258,7 +1353,31 @@
               "image_url": null
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-002",
+      "priority": 10,
+      "group_count": 12,
+      "missing_cell_count": 84,
+      "field_counts": [
+        [
+          "source_url",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "source_url_discovery",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "source_url",
           "source_store": "AmiAmi",
@@ -1353,31 +1472,7 @@
               "image_url": null
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-002",
-      "priority": 10,
-      "group_count": 12,
-      "missing_cell_count": 76,
-      "field_counts": [
-        [
-          "source_url",
-          12
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "source_url_discovery",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "source_url",
           "source_store": "Cospa",
@@ -2182,7 +2277,31 @@
               "image_url": null
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-003",
+      "priority": 10,
+      "group_count": 12,
+      "missing_cell_count": 31,
+      "field_counts": [
+        [
+          "source_url",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "source_url_discovery",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "source_url",
           "source_store": "이세계아이돌 공식 굿즈",
@@ -2237,31 +2356,7 @@
               "image_url": null
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-003",
-      "priority": 10,
-      "group_count": 12,
-      "missing_cell_count": 25,
-      "field_counts": [
-        [
-          "source_url",
-          12
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "source_url_discovery",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "source_url",
           "source_store": "Bandai Premium",
@@ -2344,6 +2439,51 @@
             {
               "catalog_index": 2314,
               "name_ko": "Red Velvet 포토카드 (랜덤)",
+              "name_ja": null,
+              "series_name": null,
+              "category": "포토카드",
+              "source_url": null,
+              "image_url": null
+            }
+          ]
+        },
+        {
+          "field": "source_url",
+          "source_store": "Weverse Shop",
+          "missing_rows": 3,
+          "priority": 10,
+          "workflow": "source_url_discovery",
+          "evidence_required": "exact official or trusted licensed product detail page",
+          "next_machine_step": "source_url_discovery",
+          "risk": "identity_mismatch",
+          "recommended_action": "Find exact official product page and attach source_url/image_url together.",
+          "sample_catalog_indexes": [
+            17613,
+            17622,
+            17623
+          ],
+          "sample_items": [
+            {
+              "catalog_index": 17613,
+              "name_ko": "SEVENTEEN 포토카드 (랜덤)",
+              "name_ja": null,
+              "series_name": null,
+              "category": "포토카드",
+              "source_url": null,
+              "image_url": null
+            },
+            {
+              "catalog_index": 17622,
+              "name_ko": "ZEROBASEONE 포토카드 (랜덤)",
+              "name_ja": null,
+              "series_name": null,
+              "category": "포토카드",
+              "source_url": null,
+              "image_url": null
+            },
+            {
+              "catalog_index": 17623,
+              "name_ko": "ILLIT 포토카드 (랜덤)",
               "name_ja": null,
               "series_name": null,
               "category": "포토카드",
@@ -2619,6 +2759,73 @@
         },
         {
           "field": "source_url",
+          "source_store": "포켓몬 센터",
+          "missing_rows": 2,
+          "priority": 10,
+          "workflow": "source_url_discovery",
+          "evidence_required": "exact official or trusted licensed product detail page",
+          "next_machine_step": "source_url_discovery",
+          "risk": "identity_mismatch",
+          "recommended_action": "Find exact official product page and attach source_url/image_url together.",
+          "sample_catalog_indexes": [
+            1098,
+            17593
+          ],
+          "sample_items": [
+            {
+              "catalog_index": 1098,
+              "name_ko": "포켓몬 봉제 인형 (피카츄)",
+              "name_ja": "ポケモン ぬいぐるみ (ピカチュウ)",
+              "series_name": null,
+              "category": "인형",
+              "source_url": null,
+              "image_url": null
+            },
+            {
+              "catalog_index": 17593,
+              "name_ko": "포켓몬 카드 게임 부스터 팩",
+              "name_ja": null,
+              "series_name": null,
+              "category": "트레이딩 카드",
+              "source_url": null,
+              "image_url": null
+            }
+          ]
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-004",
+      "priority": 10,
+      "group_count": 12,
+      "missing_cell_count": 409,
+      "field_counts": [
+        [
+          "source_url",
+          9
+        ],
+        [
+          "image_url",
+          3
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "source_url_discovery",
+          9
+        ],
+        [
+          "source_then_image_import",
+          3
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
+        {
+          "field": "source_url",
           "source_store": "ALTER",
           "missing_rows": 1,
           "priority": 10,
@@ -2691,39 +2898,7 @@
               "image_url": null
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-004",
-      "priority": 10,
-      "group_count": 12,
-      "missing_cell_count": 530,
-      "field_counts": [
-        [
-          "source_url",
-          6
-        ],
-        [
-          "image_url",
-          6
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "source_url_discovery",
-          6
-        ],
-        [
-          "source_then_image_import",
-          6
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "source_url",
           "source_store": "Hololive Production Official Shop",
@@ -2972,7 +3147,7 @@
         {
           "field": "image_url",
           "source_store": "애니메이트",
-          "missing_rows": 156,
+          "missing_rows": 157,
           "priority": 20,
           "workflow": "source_then_image_import",
           "evidence_required": "product image from exact source_url after identity verification",
@@ -3158,7 +3333,31 @@
               "image_url": null
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-005",
+      "priority": 20,
+      "group_count": 12,
+      "missing_cell_count": 273,
+      "field_counts": [
+        [
+          "image_url",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "source_then_image_import",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "image_url",
           "source_store": "Stellive Store",
@@ -3186,7 +3385,7 @@
               "name_ja": null,
               "series_name": null,
               "category": "캔뱃지",
-              "source_url": "https://fanding.kr/@stellive/shop",
+              "source_url": null,
               "image_url": null
             },
             {
@@ -3195,7 +3394,7 @@
               "name_ja": null,
               "series_name": null,
               "category": "인형",
-              "source_url": "https://fanding.kr/@stellive/shop",
+              "source_url": null,
               "image_url": null
             },
             {
@@ -3204,7 +3403,7 @@
               "name_ja": null,
               "series_name": null,
               "category": "액세서리",
-              "source_url": "https://fanding.kr/@stellive/shop",
+              "source_url": null,
               "image_url": null
             },
             {
@@ -3213,7 +3412,7 @@
               "name_ja": null,
               "series_name": null,
               "category": "인형",
-              "source_url": "https://fanding.kr/@stellive/shop",
+              "source_url": null,
               "image_url": null
             },
             {
@@ -3222,7 +3421,7 @@
               "name_ja": null,
               "series_name": null,
               "category": "액세서리",
-              "source_url": "https://fanding.kr/@stellive/shop",
+              "source_url": null,
               "image_url": null
             },
             {
@@ -3231,7 +3430,7 @@
               "name_ja": null,
               "series_name": null,
               "category": "아크릴 스탠드",
-              "source_url": "https://fanding.kr/@stellive/shop",
+              "source_url": null,
               "image_url": null
             },
             {
@@ -3240,7 +3439,7 @@
               "name_ja": null,
               "series_name": null,
               "category": "액세서리",
-              "source_url": "https://fanding.kr/@stellive/shop",
+              "source_url": null,
               "image_url": null
             },
             {
@@ -3249,7 +3448,7 @@
               "name_ja": null,
               "series_name": null,
               "category": "인형",
-              "source_url": "https://fanding.kr/@stellive/shop",
+              "source_url": null,
               "image_url": null
             }
           ]
@@ -3443,31 +3642,7 @@
               "image_url": null
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-005",
-      "priority": 20,
-      "group_count": 12,
-      "missing_cell_count": 175,
-      "field_counts": [
-        [
-          "image_url",
-          12
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "source_then_image_import",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "image_url",
           "source_store": "점프 캐릭터즈 스토어",
@@ -4322,7 +4497,31 @@
               "image_url": null
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-006",
+      "priority": 20,
+      "group_count": 12,
+      "missing_cell_count": 67,
+      "field_counts": [
+        [
+          "image_url",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "source_then_image_import",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "image_url",
           "source_store": "반다이",
@@ -4597,31 +4796,7 @@
               "image_url": null
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-006",
-      "priority": 20,
-      "group_count": 12,
-      "missing_cell_count": 49,
-      "field_counts": [
-        [
-          "image_url",
-          12
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "source_then_image_import",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "image_url",
           "source_store": "산리오",
@@ -5156,7 +5331,31 @@
               "image_url": null
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-007",
+      "priority": 20,
+      "group_count": 12,
+      "missing_cell_count": 26,
+      "field_counts": [
+        [
+          "image_url",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "source_then_image_import",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "image_url",
           "source_store": "SM STORE",
@@ -5224,7 +5423,7 @@
               "name_ja": null,
               "series_name": null,
               "category": "포토카드",
-              "source_url": "https://shop.weverse.io/home",
+              "source_url": null,
               "image_url": null
             },
             {
@@ -5233,7 +5432,7 @@
               "name_ja": null,
               "series_name": null,
               "category": "포토카드",
-              "source_url": "https://shop.weverse.io/home",
+              "source_url": null,
               "image_url": null
             },
             {
@@ -5242,7 +5441,7 @@
               "name_ja": null,
               "series_name": null,
               "category": "포토카드",
-              "source_url": "https://shop.weverse.io/home",
+              "source_url": null,
               "image_url": null
             }
           ]
@@ -5291,31 +5490,7 @@
               "image_url": null
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-007",
-      "priority": 20,
-      "group_count": 12,
-      "missing_cell_count": 20,
-      "field_counts": [
-        [
-          "image_url",
-          12
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "source_then_image_import",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "image_url",
           "source_store": "카도카와",
@@ -5557,7 +5732,7 @@
               "name_ja": "ポケモン ぬいぐるみ (ピカチュウ)",
               "series_name": null,
               "category": "인형",
-              "source_url": "https://www.pokemoncenter-online.com/",
+              "source_url": null,
               "image_url": null
             },
             {
@@ -5566,7 +5741,7 @@
               "name_ja": null,
               "series_name": null,
               "category": "트레이딩 카드",
-              "source_url": "https://www.pokemoncenter-online.com/",
+              "source_url": null,
               "image_url": null
             }
           ]
@@ -5620,7 +5795,39 @@
               "image_url": null
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-008",
+      "priority": 20,
+      "group_count": 12,
+      "missing_cell_count": 698,
+      "field_counts": [
+        [
+          "image_url",
+          7
+        ],
+        [
+          "release_date",
+          5
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "source_then_image_import",
+          7
+        ],
+        [
+          "official_metadata_review",
+          5
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "image_url",
           "source_store": "Hobby Max International",
@@ -5695,39 +5902,7 @@
               "image_url": null
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-008",
-      "priority": 20,
-      "group_count": 12,
-      "missing_cell_count": 818,
-      "field_counts": [
-        [
-          "release_date",
-          8
-        ],
-        [
-          "image_url",
-          4
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "official_metadata_review",
-          8
-        ],
-        [
-          "source_then_image_import",
-          4
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "image_url",
           "source_store": "KQ FELLAZ",
@@ -6149,7 +6324,7 @@
               "name_ja": null,
               "series_name": null,
               "category": "캔뱃지",
-              "source_url": "https://fanding.kr/@stellive/shop",
+              "source_url": null,
               "image_url": null
             },
             {
@@ -6194,7 +6369,7 @@
               "name_ja": null,
               "series_name": null,
               "category": "인형",
-              "source_url": "https://fanding.kr/@stellive/shop",
+              "source_url": null,
               "image_url": null
             },
             {
@@ -6302,7 +6477,31 @@
               "image_url": "https://bsp-prize.jp/files_thumbnail/%E5%85%B1%E6%9C%89%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80/item/2026.06/2814993_m.jpg/500w_500h.jpg"
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-009",
+      "priority": 30,
+      "group_count": 12,
+      "missing_cell_count": 331,
+      "field_counts": [
+        [
+          "release_date",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "official_metadata_review",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "release_date",
           "source_store": "코토부키야",
@@ -6587,31 +6786,7 @@
               "image_url": null
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-009",
-      "priority": 30,
-      "group_count": 12,
-      "missing_cell_count": 254,
-      "field_counts": [
-        [
-          "release_date",
-          12
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "official_metadata_review",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "release_date",
           "source_store": "FuRyu",
@@ -7466,7 +7641,31 @@
               "image_url": null
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-010",
+      "priority": 30,
+      "group_count": 12,
+      "missing_cell_count": 160,
+      "field_counts": [
+        [
+          "release_date",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "official_metadata_review",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "release_date",
           "source_store": "포켓몬 센터",
@@ -7494,7 +7693,7 @@
               "name_ja": "ポケモン ぬいぐるみ (ピカチュウ)",
               "series_name": null,
               "category": "인형",
-              "source_url": "https://www.pokemoncenter-online.com/",
+              "source_url": null,
               "image_url": null
             },
             {
@@ -7751,31 +7950,7 @@
               "image_url": null
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-010",
-      "priority": 30,
-      "group_count": 12,
-      "missing_cell_count": 142,
-      "field_counts": [
-        [
-          "release_date",
-          12
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "official_metadata_review",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "release_date",
           "source_store": "치이카와 중국 팝업스토어",
@@ -8630,7 +8805,31 @@
               "image_url": "https://media.ktown4u.com/products/resize/thumbnail/2025/09/26/o3Y088.png"
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-011",
+      "priority": 30,
+      "group_count": 12,
+      "missing_cell_count": 89,
+      "field_counts": [
+        [
+          "release_date",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "official_metadata_review",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "release_date",
           "source_store": "치이카와 모구모구 혼포",
@@ -8915,31 +9114,7 @@
               "image_url": null
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-011",
-      "priority": 30,
-      "group_count": 12,
-      "missing_cell_count": 72,
-      "field_counts": [
-        [
-          "release_date",
-          12
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "official_metadata_review",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "release_date",
           "source_store": "Square Enix e-STORE",
@@ -9158,7 +9333,7 @@
               "series_name": null,
               "category": "문구",
               "source_url": "https://www.daiso-sangyo.co.jp/item/24515",
-              "image_url": "https://www.daiso-sangyo.co.jp/wp-content/uploads/2023/06/daiso_smn1.jpg"
+              "image_url": "https://www.daiso-sangyo.co.jp/wp-content/uploads/2023/06/daiso_smn4.jpg"
             },
             {
               "catalog_index": 1791,
@@ -9167,7 +9342,7 @@
               "series_name": null,
               "category": "문구",
               "source_url": "https://www.daiso-sangyo.co.jp/item/24515",
-              "image_url": "https://www.daiso-sangyo.co.jp/wp-content/uploads/2023/06/daiso_smn1.jpg"
+              "image_url": "https://www.daiso-sangyo.co.jp/wp-content/uploads/2023/06/daiso_smn2.jpg"
             },
             {
               "catalog_index": 1792,
@@ -9176,7 +9351,7 @@
               "series_name": null,
               "category": "문구",
               "source_url": "https://www.daiso-sangyo.co.jp/item/24515",
-              "image_url": "https://www.daiso-sangyo.co.jp/wp-content/uploads/2023/06/daiso_smn1.jpg"
+              "image_url": "https://www.daiso-sangyo.co.jp/wp-content/uploads/2023/06/daiso_smn3.jpg"
             },
             {
               "catalog_index": 1845,
@@ -9664,7 +9839,31 @@
               "image_url": null
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-012",
+      "priority": 30,
+      "group_count": 12,
+      "missing_cell_count": 36,
+      "field_counts": [
+        [
+          "release_date",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "official_metadata_review",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "release_date",
           "source_store": "디즈니 스토어",
@@ -9819,31 +10018,7 @@
               "image_url": "https://shop.asobistore.jp/simages/product_image_large/4582698665731.jpg?202607141411"
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-012",
-      "priority": 30,
-      "group_count": 12,
-      "missing_cell_count": 31,
-      "field_counts": [
-        [
-          "release_date",
-          12
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "official_metadata_review",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "release_date",
           "source_store": "Bandai Premium",
@@ -10228,7 +10403,31 @@
               "image_url": "https://images.goodsmile.info/cgm/images/product/20131202/4143/27281/large/9dfc9eb5ce0df965f15092e0a6b1e706.jpg"
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-013",
+      "priority": 30,
+      "group_count": 12,
+      "missing_cell_count": 23,
+      "field_counts": [
+        [
+          "release_date",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "official_metadata_review",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "release_date",
           "source_store": "CAPCOM STORE",
@@ -10333,31 +10532,7 @@
               "image_url": "https://images.goodsmile.info/cgm/images/product/20210322/10953/82473/large/09b3e4f65c033e0ca27036d25c950223.jpg"
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-013",
-      "priority": 30,
-      "group_count": 12,
-      "missing_cell_count": 20,
-      "field_counts": [
-        [
-          "release_date",
-          12
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "official_metadata_review",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "release_date",
           "source_store": "IST STORE",
@@ -10662,7 +10837,31 @@
               "image_url": null
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-014",
+      "priority": 30,
+      "group_count": 12,
+      "missing_cell_count": 12,
+      "field_counts": [
+        [
+          "release_date",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "official_metadata_review",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "release_date",
           "source_store": "Bushiroad Creative",
@@ -10737,31 +10936,7 @@
               "image_url": "https://www.1999.co.jp/itbig142/11426949b.jpg"
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-014",
-      "priority": 30,
-      "group_count": 12,
-      "missing_cell_count": 12,
-      "field_counts": [
-        [
-          "release_date",
-          12
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "official_metadata_review",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "release_date",
           "source_store": "Max Limited",
@@ -10986,7 +11161,35 @@
               "image_url": "https://store.toei-anim.co.jp/img/usr/img-ogp.jpg"
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-015",
+      "priority": 30,
+      "group_count": 12,
+      "missing_cell_count": 500,
+      "field_counts": [
+        [
+          "release_date",
+          6
+        ],
+        [
+          "official_price_jpy",
+          6
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "official_metadata_review",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "release_date",
           "source_store": "반다이 캔디",
@@ -11061,35 +11264,7 @@
               "image_url": "https://www.waktaverse.app/_next/image?q=75&url=%2Fthumbs%2Fjingburger.png&w=3840"
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-015",
-      "priority": 30,
-      "group_count": 12,
-      "missing_cell_count": 511,
-      "field_counts": [
-        [
-          "official_price_jpy",
-          9
-        ],
-        [
-          "release_date",
-          3
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "official_metadata_review",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "release_date",
           "source_store": "점프 숍",
@@ -11296,7 +11471,7 @@
               "name_ja": null,
               "series_name": null,
               "category": "캔뱃지",
-              "source_url": "https://fanding.kr/@stellive/shop",
+              "source_url": null,
               "image_url": null
             },
             {
@@ -11341,7 +11516,7 @@
               "name_ja": null,
               "series_name": null,
               "category": "인형",
-              "source_url": "https://fanding.kr/@stellive/shop",
+              "source_url": null,
               "image_url": null
             },
             {
@@ -11724,7 +11899,31 @@
               "image_url": null
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-016",
+      "priority": 40,
+      "group_count": 12,
+      "missing_cell_count": 36,
+      "field_counts": [
+        [
+          "official_price_jpy",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "official_metadata_review",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "official_price_jpy",
           "source_store": "Fanding",
@@ -11909,31 +12108,7 @@
               "image_url": null
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-016",
-      "priority": 40,
-      "group_count": 12,
-      "missing_cell_count": 28,
-      "field_counts": [
-        [
-          "official_price_jpy",
-          12
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "official_metadata_review",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "official_price_jpy",
           "source_store": "EDITH",
@@ -12288,7 +12463,31 @@
               "image_url": "https://www.taito.co.jp/Content/images/zone/2/item/201407/5add8e44-01e4-40de-8d1b-c413920308b2_p_01_ja.jpg"
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-017",
+      "priority": 40,
+      "group_count": 12,
+      "missing_cell_count": 17,
+      "field_counts": [
+        [
+          "official_price_jpy",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "official_metadata_review",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "official_price_jpy",
           "source_store": "ご当地ちいかわ 공식(API)",
@@ -12393,31 +12592,7 @@
               "image_url": null
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-017",
-      "priority": 40,
-      "group_count": 12,
-      "missing_cell_count": 14,
-      "field_counts": [
-        [
-          "official_price_jpy",
-          12
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "official_metadata_review",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "official_price_jpy",
           "source_store": "메가하우스",
@@ -12662,7 +12837,31 @@
               "image_url": "https://www.re-ment.co.jp/data/photo/product/t/1118948602.jpg"
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-018",
+      "priority": 40,
+      "group_count": 12,
+      "missing_cell_count": 12,
+      "field_counts": [
+        [
+          "official_price_jpy",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "official_metadata_review",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "official_price_jpy",
           "source_store": "Weverse Shop",
@@ -12737,39 +12936,7 @@
               "image_url": "https://media.ktown4u.com/products/resize/thumbnail/2024/07/26/jx6tIM.jpg"
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-018",
-      "priority": 40,
-      "group_count": 12,
-      "missing_cell_count": 8805,
-      "field_counts": [
-        [
-          "official_price_jpy",
-          9
-        ],
-        [
-          "barcode",
-          3
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "official_metadata_review",
-          9
-        ],
-        [
-          "barcode_evidence_review",
-          3
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "official_price_jpy",
           "source_store": "aespa Official Store",
@@ -12994,7 +13161,31 @@
               "image_url": "https://www.waktaverse.app/_next/image?q=75&url=%2Fthumbs%2Fgosegu.png&w=3840"
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-019",
+      "priority": 50,
+      "group_count": 12,
+      "missing_cell_count": 9575,
+      "field_counts": [
+        [
+          "barcode",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "barcode_evidence_review",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "barcode",
           "source_store": "이치방쿠지",
@@ -13279,31 +13470,7 @@
               "image_url": null
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-019",
-      "priority": 50,
-      "group_count": 12,
-      "missing_cell_count": 861,
-      "field_counts": [
-        [
-          "barcode",
-          12
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "barcode_evidence_review",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "barcode",
           "source_store": "굿스마일컴퍼니",
@@ -13625,7 +13792,7 @@
               "name_ja": null,
               "series_name": null,
               "category": "캔뱃지",
-              "source_url": "https://fanding.kr/@stellive/shop",
+              "source_url": null,
               "image_url": null
             },
             {
@@ -13670,7 +13837,7 @@
               "name_ja": null,
               "series_name": null,
               "category": "인형",
-              "source_url": "https://fanding.kr/@stellive/shop",
+              "source_url": null,
               "image_url": null
             },
             {
@@ -14158,7 +14325,31 @@
               "image_url": null
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-020",
+      "priority": 50,
+      "group_count": 12,
+      "missing_cell_count": 243,
+      "field_counts": [
+        [
+          "barcode",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "barcode_evidence_review",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "barcode",
           "source_store": "Weverse Shop",
@@ -14443,31 +14634,7 @@
               "image_url": null
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-020",
-      "priority": 50,
-      "group_count": 12,
-      "missing_cell_count": 202,
-      "field_counts": [
-        [
-          "barcode",
-          12
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "barcode_evidence_review",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "barcode",
           "source_store": "메가하우스",
@@ -15322,7 +15489,31 @@
               "image_url": null
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-021",
+      "priority": 50,
+      "group_count": 12,
+      "missing_cell_count": 126,
+      "field_counts": [
+        [
+          "barcode",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "barcode_evidence_review",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "barcode",
           "source_store": "Cospa",
@@ -15607,31 +15798,7 @@
               "image_url": "https://media.ktown4u.com/products/resize/thumbnail/2023/09/08/U6op3L.jpg"
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-021",
-      "priority": 50,
-      "group_count": 12,
-      "missing_cell_count": 100,
-      "field_counts": [
-        [
-          "barcode",
-          12
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "barcode_evidence_review",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "barcode",
           "source_store": "Re-ment",
@@ -16466,7 +16633,31 @@
               "image_url": null
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-022",
+      "priority": 50,
+      "group_count": 12,
+      "missing_cell_count": 52,
+      "field_counts": [
+        [
+          "barcode",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "barcode_evidence_review",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "barcode",
           "source_store": "DAISO",
@@ -16661,31 +16852,7 @@
               "image_url": "https://cdn.shopify.com/s/files/1/0525/9585/1443/files/uw0zwWxoSS09wNOX_dd15623c-135e-41bf-87ea-bc0456a50cea.jpg?v=1713833408"
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-022",
-      "priority": 50,
-      "group_count": 12,
-      "missing_cell_count": 46,
-      "field_counts": [
-        [
-          "barcode",
-          12
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "barcode_evidence_review",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "barcode",
           "source_store": "PR TIMES / empty",
@@ -17190,7 +17357,31 @@
               "image_url": null
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-023",
+      "priority": 50,
+      "group_count": 12,
+      "missing_cell_count": 34,
+      "field_counts": [
+        [
+          "barcode",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "barcode_evidence_review",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "barcode",
           "source_store": "EDITH",
@@ -17325,31 +17516,7 @@
               "image_url": "https://media.ktown4u.com/products/resize/thumbnail/2025/01/15/wIwEJs.jpg"
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-023",
-      "priority": 50,
-      "group_count": 12,
-      "missing_cell_count": 31,
-      "field_counts": [
-        [
-          "barcode",
-          12
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "barcode_evidence_review",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "barcode",
           "source_store": "Spike Chunsoft",
@@ -17642,7 +17809,7 @@
               "name_ja": "ポケモン ぬいぐるみ (ピカチュウ)",
               "series_name": null,
               "category": "인형",
-              "source_url": "https://www.pokemoncenter-online.com/",
+              "source_url": null,
               "image_url": null
             },
             {
@@ -17651,7 +17818,7 @@
               "name_ja": null,
               "series_name": null,
               "category": "트레이딩 카드",
-              "source_url": "https://www.pokemoncenter-online.com/",
+              "source_url": null,
               "image_url": null
             },
             {
@@ -17734,7 +17901,31 @@
               "image_url": "https://images.goodsmile.info/cgm/images/product/20131202/4143/27281/large/9dfc9eb5ce0df965f15092e0a6b1e706.jpg"
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-024",
+      "priority": 50,
+      "group_count": 12,
+      "missing_cell_count": 24,
+      "field_counts": [
+        [
+          "barcode",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "barcode_evidence_review",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "barcode",
           "source_store": "CAPCOM STORE",
@@ -17839,31 +18030,7 @@
               "image_url": "https://images.goodsmile.info/cgm/images/product/20210322/10953/82473/large/09b3e4f65c033e0ca27036d25c950223.jpg"
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-024",
-      "priority": 50,
-      "group_count": 12,
-      "missing_cell_count": 24,
-      "field_counts": [
-        [
-          "barcode",
-          12
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "barcode_evidence_review",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "barcode",
           "source_store": "IST STORE",
@@ -18178,7 +18345,31 @@
               "image_url": null
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-025",
+      "priority": 50,
+      "group_count": 12,
+      "missing_cell_count": 15,
+      "field_counts": [
+        [
+          "barcode",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "barcode_evidence_review",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "barcode",
           "source_store": "스파이크 춘소프트 스토어",
@@ -18283,31 +18474,7 @@
               "image_url": "http://chiikawamogumogu.shop/cdn/shop/files/og-image.jpg?v=1703234795"
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-025",
-      "priority": 50,
-      "group_count": 12,
-      "missing_cell_count": 12,
-      "field_counts": [
-        [
-          "barcode",
-          12
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "barcode_evidence_review",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "barcode",
           "source_store": "ALTER",
@@ -18532,7 +18699,31 @@
               "image_url": "https://www.waktaverse.app/_next/image?q=75&url=%2Fthumbs%2Fviichan.png&w=3840"
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-026",
+      "priority": 50,
+      "group_count": 12,
+      "missing_cell_count": 12,
+      "field_counts": [
+        [
+          "barcode",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "barcode_evidence_review",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "barcode",
           "source_store": "aespa Official Store",
@@ -18607,39 +18798,7 @@
               "image_url": "https://kimetsu.com/hashiraten/ogp.png"
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-026",
-      "priority": 50,
-      "group_count": 12,
-      "missing_cell_count": 186,
-      "field_counts": [
-        [
-          "barcode",
-          10
-        ],
-        [
-          "name_ja",
-          2
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "barcode_evidence_review",
-          10
-        ],
-        [
-          "official_title_review",
-          2
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "barcode",
           "source_store": "芥見下々『呪術廻戦』展",
@@ -18864,7 +19023,39 @@
               "image_url": "https://www.waktaverse.app/_next/image?q=75&url=%2Fthumbs%2Fgosegu.png&w=3840"
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-027",
+      "priority": 50,
+      "group_count": 12,
+      "missing_cell_count": 418,
+      "field_counts": [
+        [
+          "name_ja",
+          11
+        ],
+        [
+          "barcode",
+          1
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "official_title_review",
+          11
+        ],
+        [
+          "barcode_evidence_review",
+          1
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "barcode",
           "source_store": "하이큐!! 10주년 기념전",
@@ -18926,7 +19117,7 @@
               "name_ja": null,
               "series_name": null,
               "category": "캔뱃지",
-              "source_url": "https://fanding.kr/@stellive/shop",
+              "source_url": null,
               "image_url": null
             },
             {
@@ -18971,7 +19162,7 @@
               "name_ja": null,
               "series_name": null,
               "category": "인형",
-              "source_url": "https://fanding.kr/@stellive/shop",
+              "source_url": null,
               "image_url": null
             },
             {
@@ -19079,31 +19270,7 @@
               "image_url": "https://nagano-market.jp/cdn/shop/files/4571609352396_1.jpg"
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-027",
-      "priority": 60,
-      "group_count": 12,
-      "missing_cell_count": 269,
-      "field_counts": [
-        [
-          "name_ja",
-          12
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "official_title_review",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "name_ja",
           "source_store": "애니메이트",
@@ -19958,7 +20125,31 @@
               "image_url": "https://media.ktown4u.com/products/resize/thumbnail/2025/09/26/o3Y088.png"
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-028",
+      "priority": 60,
+      "group_count": 12,
+      "missing_cell_count": 76,
+      "field_counts": [
+        [
+          "name_ja",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "official_title_review",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "name_ja",
           "source_store": "반다이",
@@ -20243,31 +20434,7 @@
               "image_url": "https://chiikawamogumogu.shop/cdn/shop/files/CMH055-06.jpg"
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-028",
-      "priority": 60,
-      "group_count": 12,
-      "missing_cell_count": 57,
-      "field_counts": [
-        [
-          "name_ja",
-          12
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "official_title_review",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "name_ja",
           "source_store": "Square Enix e-STORE",
@@ -20519,7 +20686,7 @@
               "name_ja": null,
               "series_name": null,
               "category": "트레이딩 카드",
-              "source_url": "https://www.pokemoncenter-online.com/",
+              "source_url": null,
               "image_url": null
             },
             {
@@ -20882,7 +21049,31 @@
               "image_url": "https://hoyoversemerch.com/wp-content/uploads/2024/09/O1CN01Ar84631fEbEA8h8gj_0-item_pic.webp"
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-029",
+      "priority": 60,
+      "group_count": 12,
+      "missing_cell_count": 27,
+      "field_counts": [
+        [
+          "name_ja",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "official_title_review",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "name_ja",
           "source_store": "Nijisanji Official Store",
@@ -21017,31 +21208,7 @@
               "image_url": null
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-029",
-      "priority": 60,
-      "group_count": 12,
-      "missing_cell_count": 21,
-      "field_counts": [
-        [
-          "name_ja",
-          12
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "official_title_review",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "name_ja",
           "source_store": "ATLUS STORE",
@@ -21356,7 +21523,31 @@
               "image_url": "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/en_US/products/merchandise/plush/mega-mocchi-plush-kirby/114228-tomy-mega-mocchi-plush-kirby-front-view-1200x675"
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-030",
+      "priority": 60,
+      "group_count": 6,
+      "missing_cell_count": 6,
+      "field_counts": [
+        [
+          "name_ja",
+          6
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "official_title_review",
+          6
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "name_ja",
           "source_store": "CAPCOM STORE",
@@ -21431,31 +21622,7 @@
               "image_url": "https://media.ktown4u.com/products/resize/thumbnail/2026/05/08/pO6zPM.jpg"
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-030",
-      "priority": 60,
-      "group_count": 3,
-      "missing_cell_count": 3,
-      "field_counts": [
-        [
-          "name_ja",
-          3
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "official_title_review",
-          3
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "name_ja",
           "source_store": "릴파 생일 카페",

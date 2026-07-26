@@ -1,20 +1,20 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T10:58:45Z",
+  "generated_at": "2026-07-26T12:25:53Z",
   "scope": "public_catalog_missing_image_priority",
   "summary": {
-    "missing_image_rows": 772,
+    "missing_image_rows": 773,
     "work_queue_rows": 710,
     "queue_matched_rows": 703,
     "stale_queue_index_matches": 0,
-    "unmatched_catalog_missing_rows": 69,
-    "missing_source_url_rows": 700,
-    "generic_source_url_rows": 50,
+    "unmatched_catalog_missing_rows": 70,
+    "missing_source_url_rows": 751,
+    "generic_source_url_rows": 0,
     "product_source_url_rows": 0,
     "high_priority_rows": 518,
     "safe_existing_image_reuse_candidate_rows": 0,
-    "source_discovery_starter_queue_groups": 372,
-    "source_discovery_starter_queue_rows": 700,
+    "source_discovery_starter_queue_groups": 386,
+    "source_discovery_starter_queue_rows": 751,
     "auto_apply_enabled": false
   },
   "breakdowns": {
@@ -25,7 +25,7 @@
       },
       {
         "source_store": "애니메이트",
-        "rows": 156
+        "rows": 157
       },
       {
         "source_store": "굿스마일컴퍼니",
@@ -215,7 +215,7 @@
       },
       {
         "affiliation": "단간론파",
-        "rows": 36
+        "rows": 37
       },
       {
         "affiliation": "체인소 맨",
@@ -357,7 +357,7 @@
       },
       {
         "category": "인형",
-        "rows": 86
+        "rows": 87
       },
       {
         "category": "키링",
@@ -467,7 +467,7 @@
       },
       {
         "strategy": "manual_review",
-        "rows": 181
+        "rows": 182
       },
       {
         "strategy": "manual_official_search_review",
@@ -501,7 +501,7 @@
       },
       {
         "automation_safety": "not_in_work_queue",
-        "rows": 69
+        "rows": 70
       },
       {
         "automation_safety": "blocked_until_exact_product_url",
@@ -515,11 +515,7 @@
     "by_source_url_state": [
       {
         "source_url_state": "missing_source_url",
-        "rows": 700
-      },
-      {
-        "source_url_state": "generic_source_url",
-        "rows": 50
+        "rows": 751
       },
       {
         "source_url_state": "unclassified_source_url",
@@ -529,11 +525,11 @@
   },
   "next_action_queues": {
     "source_discovery_first": {
-      "rows": 700,
+      "rows": 751,
       "reason": "Attach exact product source URLs before image candidates can be trusted."
     },
     "replace_generic_source_then_attach_image": {
-      "rows": 50,
+      "rows": 0,
       "reason": "Generic storefront URLs need exact product detail pages before image attachment."
     },
     "image_attachment_ready": {
@@ -646,6 +642,12 @@
     },
     {
       "source_store": "애니메이트",
+      "affiliation": "단간론파",
+      "rows": 10,
+      "recommended_workflow": "official_storefront_search_then_exact_detail_match"
+    },
+    {
+      "source_store": "애니메이트",
       "affiliation": "주술회전",
       "rows": 10,
       "recommended_workflow": "official_storefront_search_then_exact_detail_match"
@@ -654,12 +656,6 @@
       "source_store": "코토부키야",
       "affiliation": "메이드 인 어비스",
       "rows": 10,
-      "recommended_workflow": "official_storefront_search_then_exact_detail_match"
-    },
-    {
-      "source_store": "애니메이트",
-      "affiliation": "단간론파",
-      "rows": 9,
       "recommended_workflow": "official_storefront_search_then_exact_detail_match"
     },
     {
