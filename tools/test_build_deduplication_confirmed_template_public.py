@@ -25,6 +25,18 @@ class BuildDeduplicationConfirmedTemplatePublicTest(unittest.TestCase):
                     "evidence": ["same_barcode", "same_source_url"],
                     "merge_blockers": ["none"],
                     "fast_review_lane": "same_barcode_and_source_url",
+                    "fast_review_warning": "name_delta_requires_variant_check",
+                    "primary_review_url": "https://example.test/product",
+                    "primary_review_url_kind": "keep_source_url",
+                    "review_urls": [
+                        "https://example.test/product",
+                        "https://example.test/product-image.jpg",
+                    ],
+                    "identity_delta": {
+                        "name_differs": True,
+                        "image_url_differs": True,
+                    },
+                    "image_url_only_same_identity": False,
                     "dedupe_decision_template": {
                         "manual_confirmed": False,
                         "decision": "review_required",
@@ -49,6 +61,12 @@ class BuildDeduplicationConfirmedTemplatePublicTest(unittest.TestCase):
         self.assertEqual(template["summary"]["same_sellable_product_confirmed_rows"], 0)
         self.assertEqual(template["summary"]["drop_candidate_rows"], 1)
         self.assertEqual(template["summary"]["by_fast_review_lane"], [["same_barcode_and_source_url", 1]])
+        self.assertEqual(
+            template["summary"]["by_fast_review_warning"],
+            [["name_delta_requires_variant_check", 1]],
+        )
+        self.assertEqual(template["summary"]["primary_review_url_rows"], 1)
+        self.assertEqual(template["summary"]["identity_delta_rows"], 1)
         self.assertFalse(template["summary"]["auto_delete_enabled"])
         self.assertEqual(template["automation_policy"]["import_tool"], "tools/import_confirmed_deduplication_rows.py")
         item = template["items"][0]
@@ -58,6 +76,15 @@ class BuildDeduplicationConfirmedTemplatePublicTest(unittest.TestCase):
         self.assertEqual(item["keep_catalog_index"], 2)
         self.assertEqual(item["drop_catalog_indexes"], [1])
         self.assertEqual(item["rows"][0]["catalog_index"], 1)
+        self.assertEqual(item["fast_review_warning"], "name_delta_requires_variant_check")
+        self.assertEqual(
+            item["recommended_manual_action"],
+            "confirm_name_difference_is_not_a_variant_before_merging",
+        )
+        self.assertEqual(item["primary_review_url"], "https://example.test/product")
+        self.assertEqual(item["review_urls"][1], "https://example.test/product-image.jpg")
+        self.assertTrue(item["identity_delta"]["name_differs"])
+        self.assertIn("Open primary_review_url first", item["operator_checklist"][0])
 
 
 if __name__ == "__main__":

@@ -27,6 +27,15 @@ def load_json(path: Path) -> dict[str, Any]:
 
 def _template_item(group: dict[str, Any]) -> dict[str, Any]:
     template = dict(group.get("dedupe_decision_template") or {})
+    warning = group.get("fast_review_warning") or template.get("fast_review_warning") or ""
+    if warning == "no_identity_delta_detected":
+        recommended_manual_action = "confirm_and_remove_duplicate_if_review_urls_match"
+    elif warning == "image_delta_requires_visual_check":
+        recommended_manual_action = "compare_images_before_confirming_duplicate"
+    elif warning == "name_delta_requires_variant_check":
+        recommended_manual_action = "confirm_name_difference_is_not_a_variant_before_merging"
+    else:
+        recommended_manual_action = "manual_identity_review_required"
     return {
         **template,
         "manual_confirmed": False,
@@ -40,8 +49,27 @@ def _template_item(group: dict[str, Any]) -> dict[str, Any]:
         "keep_catalog_index": group.get("keep_catalog_index") or template.get("keep_catalog_index"),
         "drop_catalog_indexes": group.get("drop_catalog_indexes") or template.get("drop_catalog_indexes") or [],
         "fast_review_lane": group.get("fast_review_lane") or template.get("fast_review_lane"),
+        "fast_review_warning": warning,
+        "recommended_manual_action": recommended_manual_action,
+        "primary_review_url": group.get("primary_review_url") or template.get("primary_review_url") or "",
+        "primary_review_url_kind": group.get("primary_review_url_kind")
+        or template.get("primary_review_url_kind")
+        or "",
+        "review_urls": group.get("review_urls") or template.get("review_urls") or [],
+        "identity_delta": group.get("identity_delta") or template.get("identity_delta") or {},
+        "image_url_only_same_identity": bool(
+            group.get("image_url_only_same_identity")
+            or template.get("image_url_only_same_identity")
+        ),
         "requires_same_sellable_product": True,
         "requires_variant_difference_disproved": bool(template.get("requires_variant_difference_disproved")),
+        "operator_checklist": [
+            "Open primary_review_url first, then compare any image URLs listed in review_urls.",
+            "Confirm barcode, official product title, character/variant, goods type, and image identity.",
+            "If fast_review_warning is name_delta_requires_variant_check, do not merge until the name difference is proven harmless.",
+            "If fast_review_warning is image_delta_requires_visual_check, do not merge until the images are proven to show the same item.",
+            "Keep manual_confirmed=false for retailer mirrors, reissues, lineup images, or uncertain variants.",
+        ],
         "stores": group.get("stores") or [],
         "categories": group.get("categories") or [],
         "evidence": group.get("evidence") or [],
@@ -58,6 +86,8 @@ def build_template(fast_review: dict[str, Any], *, generated_at: str | None = No
     by_store: Counter[str] = Counter()
     by_category: Counter[str] = Counter()
     by_blocker: Counter[str] = Counter()
+    by_warning: Counter[str] = Counter()
+    by_recommended_action: Counter[str] = Counter()
 
     for group in fast_review.get("items") or []:
         if not isinstance(group, dict):
@@ -65,6 +95,8 @@ def build_template(fast_review: dict[str, Any], *, generated_at: str | None = No
         item = _template_item(group)
         items.append(item)
         by_lane[str(item.get("fast_review_lane") or "")] += 1
+        by_warning[str(item.get("fast_review_warning") or "")] += 1
+        by_recommended_action[str(item.get("recommended_manual_action") or "")] += 1
         for store in item.get("stores") or []:
             by_store[str(store)] += 1
         for category in item.get("categories") or []:
@@ -82,6 +114,15 @@ def build_template(fast_review: dict[str, Any], *, generated_at: str | None = No
             "same_sellable_product_confirmed_rows": 0,
             "drop_candidate_rows": sum(len(item.get("drop_catalog_indexes") or []) for item in items),
             "by_fast_review_lane": [[key, value] for key, value in by_lane.most_common(20) if key],
+            "by_fast_review_warning": [[key, value] for key, value in by_warning.most_common(20) if key],
+            "by_recommended_manual_action": [
+                [key, value] for key, value in by_recommended_action.most_common(20) if key
+            ],
+            "primary_review_url_rows": sum(1 for item in items if item.get("primary_review_url")),
+            "identity_delta_rows": sum(1 for item in items if item.get("identity_delta")),
+            "image_url_only_same_identity_rows": sum(
+                1 for item in items if item.get("image_url_only_same_identity")
+            ),
             "by_source_store": [[key, value] for key, value in by_store.most_common(20) if key],
             "by_category": [[key, value] for key, value in by_category.most_common(20) if key],
             "by_merge_blocker": [[key, value] for key, value in by_blocker.most_common(20) if key],

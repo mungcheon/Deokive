@@ -18,6 +18,7 @@ import build_animation_category_review_batches_public
 import build_animation_category_split_review_public
 import build_animation_category_unmatched_keyword_review_public
 import build_deduplication_action_queue_public
+import build_deduplication_confirmed_template_public
 import build_deduplication_fast_review_public
 import build_ensky_cache_candidate_action_queue_public
 import build_gotouchi_official_candidate_review_queue_public
@@ -10868,16 +10869,6 @@ def update_reports(write: bool) -> dict[str, Any]:
     image_enrichment_batches = build_image_enrichment_batches_public(items)
     deduplication = build_deduplication_public(items)
     name_duplicate_audit = build_name_duplicate_audit_public(items)
-    deduplication_confirmed_template = (
-        load_json(DEDUPLICATION_CONFIRMED_TEMPLATE, {})
-        if DEDUPLICATION_CONFIRMED_TEMPLATE.exists()
-        else {"items": []}
-    )
-    deduplication_template_import_dry_run = build_deduplication_template_import_dry_run_public(
-        deduplication_confirmed_template,
-        catalog,
-        generated_at,
-    )
     animation_categories = build_animation_categories_public(items)
     animation_category_coverage_audit = build_animation_category_coverage_audit_public(
         animation_categories,
@@ -11100,6 +11091,17 @@ def update_reports(write: bool) -> dict[str, Any]:
     deduplication_fast_review = build_deduplication_fast_review_public.build_report(
         deduplication_action_queue,
         generated_at=generated_at,
+    )
+    deduplication_confirmed_template = (
+        build_deduplication_confirmed_template_public.build_template(
+            deduplication_fast_review,
+            generated_at=generated_at,
+        )
+    )
+    deduplication_template_import_dry_run = build_deduplication_template_import_dry_run_public(
+        deduplication_confirmed_template,
+        catalog,
+        generated_at,
     )
     dedupe_next_execution_lanes = build_deduplication_next_execution_lanes(
         deduplication_action_queue.get("summary", {}),
