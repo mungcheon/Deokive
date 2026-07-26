@@ -627,10 +627,10 @@ class PublicCatalogReportTests(unittest.TestCase):
             self.assertEqual(missing_image_gate["assigned_report_rows"], result["missing"]["image_url"])
             self.assertEqual(missing_image_gate["unassigned_missing_image_rows"], 0)
             self.assertEqual(missing_image_gate["action_queue_rows"], 73)
-            self.assertEqual(missing_image_gate["source_first_rows"], 751)
+            self.assertEqual(missing_image_gate["source_first_rows"], 746)
             self.assertEqual(missing_image_gate["review_before_attach_rows"], 23)
             self.assertEqual(missing_image_gate["manual_image_research_rows"], 5)
-            self.assertEqual(missing_image_gate["source_discovery_focus_pack_rows"], 701)
+            self.assertEqual(missing_image_gate["source_discovery_focus_pack_rows"], 696)
             self.assertEqual(missing_image_gate["not_yet_queued_rows"], 0)
             self.assertEqual(missing_image_gate["next_queue_lane"], "replace_generic_source_urls")
             self.assertEqual(missing_image_gate["next_queue_rows"], 50)
@@ -999,7 +999,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             quality["source_discovery_next_focus_detail_candidates"]["exact_candidate_confirmation_ready_items"],
-            0,
+            1,
         )
         self.assertIn(
             quality["source_discovery_next_focus_detail_candidates"]["completion_readiness_status"],
@@ -1606,7 +1606,7 @@ class PublicCatalogReportTests(unittest.TestCase):
             ],
         )
         self.assertEqual(source_lanes[1]["manual_decision_rows"], source_lanes[1]["open_rows"])
-        self.assertEqual(source_lanes[2]["open_rows"], 701)
+        self.assertEqual(source_lanes[2]["open_rows"], 696)
         self.assertEqual(source_lanes[3]["open_rows"], 50)
         self.assertEqual(source_lanes[4]["open_rows"], 73)
         source_handoff = source_roadmap["operator_handoff"]
@@ -2392,16 +2392,16 @@ class PublicCatalogReportTests(unittest.TestCase):
             pillars["missing_images"]["manual_validation_required_rows"],
             result["missing"]["image_url"],
         )
-        self.assertEqual(pillars["missing_images"]["source_first_rows"], 751)
+        self.assertEqual(pillars["missing_images"]["source_first_rows"], 746)
         self.assertEqual(pillars["missing_images"]["review_before_attach_rows"], 23)
         self.assertEqual(pillars["missing_images"]["manual_image_research_rows"], 5)
         self.assertEqual(
             pillars["missing_images"]["source_discovery_focus_pack_rows"],
-            701,
+            696,
         )
         self.assertEqual(
             pillars["missing_images"]["source_discovery_remaining_focus_review_rows"],
-            701,
+            696,
         )
         self.assertEqual(
             pillars["missing_images"]["source_discovery_next_focus_pack_rows"],
@@ -2485,7 +2485,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             pillars["missing_images"]["top_blocked_reasons"][0],
-            {"blocked_reason": "missing_exact_source_url", "rows": 701},
+            {"blocked_reason": "missing_exact_source_url", "rows": 696},
         )
         self.assertEqual(pillars["source_url_updates"]["open_rows"], 50)
         self.assertEqual(pillars["source_url_updates"]["queued_rows"], 50)
@@ -2855,7 +2855,7 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertTrue(readiness_dashboard["manual_review_required"])
         self.assertEqual(readiness_dashboard["pillar_count"], 5)
         self.assertEqual(readiness_dashboard["blocking_pillar_count"], 5)
-        self.assertEqual(readiness_dashboard["manual_review_rows"], 938)
+        self.assertEqual(readiness_dashboard["manual_review_rows"], 933)
         self.assertEqual(readiness_dashboard["auto_apply_ready_rows"], 0)
         self.assertEqual(
             readiness_dashboard["next_safe_phase"],

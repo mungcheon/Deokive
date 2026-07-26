@@ -1,25 +1,25 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T08:22:14Z",
+  "generated_at": "2026-07-26T09:39:33Z",
   "scope": "source_discovery_action_queue",
   "summary": {
-    "actionable_source_rows": 701,
-    "queued_source_rows": 701,
+    "actionable_source_rows": 696,
+    "queued_source_rows": 696,
     "unqueued_actionable_source_rows": 0,
     "queue_coverage": 1.0,
     "action_batch_count": 63,
     "batch_size": 20,
     "max_rows": 1000,
-    "source_patch_template_count": 701,
-    "catalog_field_import_template_count": 701,
-    "source_discovery_template_rows": 701,
+    "source_patch_template_count": 696,
+    "catalog_field_import_template_count": 696,
+    "source_discovery_template_rows": 696,
     "source_discovery_template_batch_count": 40,
     "missing_template_item_count": 0,
     "missing_template_sample_catalog_indexes": [],
     "by_review_state": [
       [
         "official_search_review_required",
-        689
+        684
       ],
       [
         "licensed_retailer_review_required",
@@ -29,7 +29,7 @@
     "by_workflow": [
       [
         "official_search_url_available",
-        689
+        684
       ],
       [
         "licensed_retailer_search_review",
@@ -39,7 +39,7 @@
     "by_source_store": [
       [
         "엔스카이",
-        193
+        188
       ],
       [
         "애니메이트",
@@ -198,11 +198,11 @@
         1
       ]
     ],
-    "primary_review_url_rows": 701,
+    "primary_review_url_rows": 696,
     "primary_review_url_kind_counts": [
       [
         "official_search_url",
-        701
+        696
       ]
     ],
     "first_primary_review_url": "https://www.google.com/search?q=site%3Aalter-web.jp%201/7%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AB%20%E3%83%AA%E3%82%B3",
@@ -240,7 +240,7 @@
     ],
     "source_store_workstream_count": 40,
     "high_volume_source_store_workstream_count": 7,
-    "largest_source_store_workstream_rows": 193,
+    "largest_source_store_workstream_rows": 188,
     "auto_apply_enabled": false
   },
   "instructions": [
@@ -252,7 +252,7 @@
     {
       "source_store": "엔스카이",
       "priority": 10,
-      "queued_source_rows": 193,
+      "queued_source_rows": 188,
       "batch_count": 10,
       "next_batch_id": "source-discovery-action-001",
       "batch_ids": [
@@ -270,26 +270,26 @@
       "allowed_source_domains": [
         "www.enskyshop.com"
       ],
-      "official_search_url_count": 193,
+      "official_search_url_count": 188,
       "fallback_web_search_url_count": 0,
       "first_primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
       "first_primary_review_url_kind": "official_search_url",
       "workflow_rows": [
         [
           "official_search_url_available",
-          193
+          188
         ]
       ],
       "review_state_rows": [
         [
           "official_search_review_required",
-          193
+          188
         ]
       ],
       "category_rows": [
         [
           "키링",
-          60
+          55
         ],
         [
           "인형",
@@ -29343,256 +29343,6 @@
       "auto_apply_enabled": false
     },
     {
-      "catalog_index": 1568,
-      "source_store": "엔스카이",
-      "category": "키링",
-      "name_ko": "펀 러버 스트랩",
-      "name_ja": "フェルン ラバーストラップ",
-      "name_en": null,
-      "character_name": null,
-      "affiliation": null,
-      "series_name": null,
-      "sub_series": null,
-      "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "web_search_url": "https://www.google.com/search?q=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-      "primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "primary_review_url_kind": "official_search_url",
-      "allowed_source_domains": [
-        "www.enskyshop.com"
-      ],
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "source_patch_template": {
-        "catalog_index": 1568,
-        "source_url": "<exact_product_detail_url>",
-        "image_url": "<official_product_image_url_optional_after_source_verification>",
-        "source_store": "엔스카이",
-        "evidence_url": "<official_or_trusted_evidence_url>",
-        "manual_confirmed": false,
-        "requires_exact_identity_match": true
-      },
-      "catalog_field_import_template": {
-        "manual_confirmed": false,
-        "manual_note": "",
-        "row_index": 1568,
-        "field": "source_url",
-        "manual_value": "",
-        "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-        "candidate_source_url": "",
-        "source_store": "엔스카이",
-        "name_ko": "펀 러버 스트랩",
-        "name_ja": "フェルン ラバーストラップ",
-        "category": "키링",
-        "affiliation": "장송의 프리렌",
-        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed"
-      },
-      "manual_value": "",
-      "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "manual_confirmed": false,
-      "blocked_until": "exact_product_detail_source_url_confirmed",
-      "auto_apply_enabled": false
-    },
-    {
-      "catalog_index": 1569,
-      "source_store": "엔스카이",
-      "category": "키링",
-      "name_ko": "슈타르크 러버 스트랩",
-      "name_ja": "シュタルク ラバーストラップ",
-      "name_en": null,
-      "character_name": null,
-      "affiliation": null,
-      "series_name": null,
-      "sub_series": null,
-      "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "web_search_url": "https://www.google.com/search?q=%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-      "primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "primary_review_url_kind": "official_search_url",
-      "allowed_source_domains": [
-        "www.enskyshop.com"
-      ],
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "source_patch_template": {
-        "catalog_index": 1569,
-        "source_url": "<exact_product_detail_url>",
-        "image_url": "<official_product_image_url_optional_after_source_verification>",
-        "source_store": "엔스카이",
-        "evidence_url": "<official_or_trusted_evidence_url>",
-        "manual_confirmed": false,
-        "requires_exact_identity_match": true
-      },
-      "catalog_field_import_template": {
-        "manual_confirmed": false,
-        "manual_note": "",
-        "row_index": 1569,
-        "field": "source_url",
-        "manual_value": "",
-        "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-        "candidate_source_url": "",
-        "source_store": "엔스카이",
-        "name_ko": "슈타르크 러버 스트랩",
-        "name_ja": "シュタルク ラバーストラップ",
-        "category": "키링",
-        "affiliation": "장송의 프리렌",
-        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed"
-      },
-      "manual_value": "",
-      "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "manual_confirmed": false,
-      "blocked_until": "exact_product_detail_source_url_confirmed",
-      "auto_apply_enabled": false
-    },
-    {
-      "catalog_index": 1570,
-      "source_store": "엔스카이",
-      "category": "키링",
-      "name_ko": "히멜 러버 스트랩",
-      "name_ja": "ヒンメル ラバーストラップ",
-      "name_en": null,
-      "character_name": null,
-      "affiliation": null,
-      "series_name": null,
-      "sub_series": null,
-      "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "web_search_url": "https://www.google.com/search?q=%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-      "primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "primary_review_url_kind": "official_search_url",
-      "allowed_source_domains": [
-        "www.enskyshop.com"
-      ],
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "source_patch_template": {
-        "catalog_index": 1570,
-        "source_url": "<exact_product_detail_url>",
-        "image_url": "<official_product_image_url_optional_after_source_verification>",
-        "source_store": "엔스카이",
-        "evidence_url": "<official_or_trusted_evidence_url>",
-        "manual_confirmed": false,
-        "requires_exact_identity_match": true
-      },
-      "catalog_field_import_template": {
-        "manual_confirmed": false,
-        "manual_note": "",
-        "row_index": 1570,
-        "field": "source_url",
-        "manual_value": "",
-        "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-        "candidate_source_url": "",
-        "source_store": "엔스카이",
-        "name_ko": "히멜 러버 스트랩",
-        "name_ja": "ヒンメル ラバーストラップ",
-        "category": "키링",
-        "affiliation": "장송의 프리렌",
-        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed"
-      },
-      "manual_value": "",
-      "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "manual_confirmed": false,
-      "blocked_until": "exact_product_detail_source_url_confirmed",
-      "auto_apply_enabled": false
-    },
-    {
-      "catalog_index": 1571,
-      "source_store": "엔스카이",
-      "category": "키링",
-      "name_ko": "하이터 러버 스트랩",
-      "name_ja": "ハイター ラバーストラップ",
-      "name_en": null,
-      "character_name": null,
-      "affiliation": null,
-      "series_name": null,
-      "sub_series": null,
-      "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "web_search_url": "https://www.google.com/search?q=%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-      "primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "primary_review_url_kind": "official_search_url",
-      "allowed_source_domains": [
-        "www.enskyshop.com"
-      ],
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "source_patch_template": {
-        "catalog_index": 1571,
-        "source_url": "<exact_product_detail_url>",
-        "image_url": "<official_product_image_url_optional_after_source_verification>",
-        "source_store": "엔스카이",
-        "evidence_url": "<official_or_trusted_evidence_url>",
-        "manual_confirmed": false,
-        "requires_exact_identity_match": true
-      },
-      "catalog_field_import_template": {
-        "manual_confirmed": false,
-        "manual_note": "",
-        "row_index": 1571,
-        "field": "source_url",
-        "manual_value": "",
-        "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-        "candidate_source_url": "",
-        "source_store": "엔스카이",
-        "name_ko": "하이터 러버 스트랩",
-        "name_ja": "ハイター ラバーストラップ",
-        "category": "키링",
-        "affiliation": "장송의 프리렌",
-        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed"
-      },
-      "manual_value": "",
-      "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "manual_confirmed": false,
-      "blocked_until": "exact_product_detail_source_url_confirmed",
-      "auto_apply_enabled": false
-    },
-    {
-      "catalog_index": 1572,
-      "source_store": "엔스카이",
-      "category": "키링",
-      "name_ko": "아이젠 러버 스트랩",
-      "name_ja": "アイゼン ラバーストラップ",
-      "name_en": null,
-      "character_name": null,
-      "affiliation": null,
-      "series_name": null,
-      "sub_series": null,
-      "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "web_search_url": "https://www.google.com/search?q=%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-      "primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "primary_review_url_kind": "official_search_url",
-      "allowed_source_domains": [
-        "www.enskyshop.com"
-      ],
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "source_patch_template": {
-        "catalog_index": 1572,
-        "source_url": "<exact_product_detail_url>",
-        "image_url": "<official_product_image_url_optional_after_source_verification>",
-        "source_store": "엔스카이",
-        "evidence_url": "<official_or_trusted_evidence_url>",
-        "manual_confirmed": false,
-        "requires_exact_identity_match": true
-      },
-      "catalog_field_import_template": {
-        "manual_confirmed": false,
-        "manual_note": "",
-        "row_index": 1572,
-        "field": "source_url",
-        "manual_value": "",
-        "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-        "candidate_source_url": "",
-        "source_store": "엔스카이",
-        "name_ko": "아이젠 러버 스트랩",
-        "name_ja": "アイゼン ラバーストラップ",
-        "category": "키링",
-        "affiliation": "장송의 프리렌",
-        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-        "blocked_until": "exact_product_detail_source_url_confirmed"
-      },
-      "manual_value": "",
-      "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "manual_confirmed": false,
-      "blocked_until": "exact_product_detail_source_url_confirmed",
-      "auto_apply_enabled": false
-    },
-    {
       "catalog_index": 1573,
       "source_store": "엔스카이",
       "category": "키링",
@@ -39697,8 +39447,8 @@
     {
       "template_batch_id": "source-discovery-template-001",
       "source_store": "엔스카이",
-      "row_count": 193,
-      "official_search_url_rows": 193,
+      "row_count": 188,
+      "official_search_url_rows": 188,
       "fallback_web_search_url_rows": 0,
       "allowed_source_domains": [
         "www.enskyshop.com"
@@ -43850,256 +43600,6 @@
           },
           "manual_value": "",
           "evidence_url": "https://www.enskyshop.com/products/list?name=%E5%A4%8F%E6%B2%B9%E5%82%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "manual_confirmed": false,
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1568,
-          "source_store": "엔스카이",
-          "category": "키링",
-          "name_ko": "펀 러버 스트랩",
-          "name_ja": "フェルン ラバーストラップ",
-          "name_en": null,
-          "character_name": null,
-          "affiliation": null,
-          "series_name": null,
-          "sub_series": null,
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "web_search_url": "https://www.google.com/search?q=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "primary_review_url_kind": "official_search_url",
-          "allowed_source_domains": [
-            "www.enskyshop.com"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 1568,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "엔스카이",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1568,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-            "candidate_source_url": "",
-            "source_store": "엔스카이",
-            "name_ko": "펀 러버 스트랩",
-            "name_ja": "フェルン ラバーストラップ",
-            "category": "키링",
-            "affiliation": "장송의 프리렌",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "manual_value": "",
-          "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "manual_confirmed": false,
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1569,
-          "source_store": "엔스카이",
-          "category": "키링",
-          "name_ko": "슈타르크 러버 스트랩",
-          "name_ja": "シュタルク ラバーストラップ",
-          "name_en": null,
-          "character_name": null,
-          "affiliation": null,
-          "series_name": null,
-          "sub_series": null,
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "web_search_url": "https://www.google.com/search?q=%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "primary_review_url_kind": "official_search_url",
-          "allowed_source_domains": [
-            "www.enskyshop.com"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 1569,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "엔스카이",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1569,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-            "candidate_source_url": "",
-            "source_store": "엔스카이",
-            "name_ko": "슈타르크 러버 스트랩",
-            "name_ja": "シュタルク ラバーストラップ",
-            "category": "키링",
-            "affiliation": "장송의 프리렌",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "manual_value": "",
-          "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "manual_confirmed": false,
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1570,
-          "source_store": "엔스카이",
-          "category": "키링",
-          "name_ko": "히멜 러버 스트랩",
-          "name_ja": "ヒンメル ラバーストラップ",
-          "name_en": null,
-          "character_name": null,
-          "affiliation": null,
-          "series_name": null,
-          "sub_series": null,
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "web_search_url": "https://www.google.com/search?q=%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "primary_review_url_kind": "official_search_url",
-          "allowed_source_domains": [
-            "www.enskyshop.com"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 1570,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "엔스카이",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1570,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-            "candidate_source_url": "",
-            "source_store": "엔스카이",
-            "name_ko": "히멜 러버 스트랩",
-            "name_ja": "ヒンメル ラバーストラップ",
-            "category": "키링",
-            "affiliation": "장송의 프리렌",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "manual_value": "",
-          "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "manual_confirmed": false,
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1571,
-          "source_store": "엔스카이",
-          "category": "키링",
-          "name_ko": "하이터 러버 스트랩",
-          "name_ja": "ハイター ラバーストラップ",
-          "name_en": null,
-          "character_name": null,
-          "affiliation": null,
-          "series_name": null,
-          "sub_series": null,
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "web_search_url": "https://www.google.com/search?q=%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "primary_review_url_kind": "official_search_url",
-          "allowed_source_domains": [
-            "www.enskyshop.com"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 1571,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "엔스카이",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1571,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-            "candidate_source_url": "",
-            "source_store": "엔스카이",
-            "name_ko": "하이터 러버 스트랩",
-            "name_ja": "ハイター ラバーストラップ",
-            "category": "키링",
-            "affiliation": "장송의 프리렌",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "manual_value": "",
-          "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "manual_confirmed": false,
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1572,
-          "source_store": "엔스카이",
-          "category": "키링",
-          "name_ko": "아이젠 러버 스트랩",
-          "name_ja": "アイゼン ラバーストラップ",
-          "name_en": null,
-          "character_name": null,
-          "affiliation": null,
-          "series_name": null,
-          "sub_series": null,
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "web_search_url": "https://www.google.com/search?q=%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "primary_review_url_kind": "official_search_url",
-          "allowed_source_domains": [
-            "www.enskyshop.com"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 1572,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "엔스카이",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1572,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-            "candidate_source_url": "",
-            "source_store": "엔스카이",
-            "name_ko": "아이젠 러버 스트랩",
-            "name_ja": "アイゼン ラバーストラップ",
-            "category": "키링",
-            "affiliation": "장송의 프리렌",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "manual_value": "",
-          "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
           "manual_confirmed": false,
           "blocked_until": "exact_product_detail_source_url_confirmed",
           "auto_apply_enabled": false
@@ -79221,226 +78721,6 @@
           "auto_apply_enabled": false
         },
         {
-          "catalog_index": 1568,
-          "workflow": "official_search_url_available",
-          "review_state": "official_search_review_required",
-          "source_store": "엔스카이",
-          "category": "키링",
-          "name_ko": "펀 러버 스트랩",
-          "name_ja": "フェルン ラバーストラップ",
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "web_search_url": "https://www.google.com/search?q=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "primary_review_url_kind": "official_search_url",
-          "allowed_source_domains": [
-            "www.enskyshop.com"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 1568,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "엔스카이",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1568,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-            "candidate_source_url": "",
-            "source_store": "엔스카이",
-            "name_ko": "펀 러버 스트랩",
-            "name_ja": "フェルン ラバーストラップ",
-            "category": "키링",
-            "affiliation": "장송의 프리렌",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1569,
-          "workflow": "official_search_url_available",
-          "review_state": "official_search_review_required",
-          "source_store": "엔스카이",
-          "category": "키링",
-          "name_ko": "슈타르크 러버 스트랩",
-          "name_ja": "シュタルク ラバーストラップ",
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "web_search_url": "https://www.google.com/search?q=%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "primary_review_url_kind": "official_search_url",
-          "allowed_source_domains": [
-            "www.enskyshop.com"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 1569,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "엔스카이",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1569,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-            "candidate_source_url": "",
-            "source_store": "엔스카이",
-            "name_ko": "슈타르크 러버 스트랩",
-            "name_ja": "シュタルク ラバーストラップ",
-            "category": "키링",
-            "affiliation": "장송의 프리렌",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1570,
-          "workflow": "official_search_url_available",
-          "review_state": "official_search_review_required",
-          "source_store": "엔스카이",
-          "category": "키링",
-          "name_ko": "히멜 러버 스트랩",
-          "name_ja": "ヒンメル ラバーストラップ",
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "web_search_url": "https://www.google.com/search?q=%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "primary_review_url_kind": "official_search_url",
-          "allowed_source_domains": [
-            "www.enskyshop.com"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 1570,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "엔스카이",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1570,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-            "candidate_source_url": "",
-            "source_store": "엔스카이",
-            "name_ko": "히멜 러버 스트랩",
-            "name_ja": "ヒンメル ラバーストラップ",
-            "category": "키링",
-            "affiliation": "장송의 프리렌",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1571,
-          "workflow": "official_search_url_available",
-          "review_state": "official_search_review_required",
-          "source_store": "엔스카이",
-          "category": "키링",
-          "name_ko": "하이터 러버 스트랩",
-          "name_ja": "ハイター ラバーストラップ",
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "web_search_url": "https://www.google.com/search?q=%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "primary_review_url_kind": "official_search_url",
-          "allowed_source_domains": [
-            "www.enskyshop.com"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 1571,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "엔스카이",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1571,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-            "candidate_source_url": "",
-            "source_store": "엔스카이",
-            "name_ko": "하이터 러버 스트랩",
-            "name_ja": "ハイター ラバーストラップ",
-            "category": "키링",
-            "affiliation": "장송의 프리렌",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
-          "auto_apply_enabled": false
-        },
-        {
-          "catalog_index": 1572,
-          "workflow": "official_search_url_available",
-          "review_state": "official_search_review_required",
-          "source_store": "엔스카이",
-          "category": "키링",
-          "name_ko": "아이젠 러버 스트랩",
-          "name_ja": "アイゼン ラバーストラップ",
-          "official_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "web_search_url": "https://www.google.com/search?q=%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%EC%97%94%EC%8A%A4%EC%B9%B4%EC%9D%B4%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "primary_review_url_kind": "official_search_url",
-          "allowed_source_domains": [
-            "www.enskyshop.com"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 1572,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "엔스카이",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1572,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.enskyshop.com/products/list?name=%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-            "candidate_source_url": "",
-            "source_store": "엔스카이",
-            "name_ko": "아이젠 러버 스트랩",
-            "name_ja": "アイゼン ラバーストラップ",
-            "category": "키링",
-            "affiliation": "장송의 프리렌",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
-          "auto_apply_enabled": false
-        },
-        {
           "catalog_index": 1573,
           "workflow": "official_search_url_available",
           "review_state": "official_search_review_required",
@@ -79967,38 +79247,7 @@
           },
           "next_machine_step": "open_official_search_and_verify_exact_product_detail",
           "auto_apply_enabled": false
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "source-discovery-action-006",
-      "priority": 10,
-      "workflow": "official_search_url_available",
-      "review_state": "official_search_review_required",
-      "source_store": "엔스카이",
-      "row_count": 20,
-      "offset": 100,
-      "next_machine_step": "confirm_exact_source_url_then_fill_source_templates",
-      "recommended_action": "Open official search candidates, confirm exact product detail URLs, then fill source_url templates.",
-      "category_counts": [
-        [
-          "키링",
-          14
-        ],
-        [
-          "아크릴 스탠드",
-          5
-        ],
-        [
-          "아크릴 키링",
-          1
-        ]
-      ],
-      "primary_review_url_rows": 20,
-      "first_primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%83%8B%E3%82%B3%E3%83%BB%E3%83%AD%E3%83%93%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "first_primary_review_url_kind": "official_search_url",
-      "items": [
+        },
         {
           "catalog_index": 1587,
           "workflow": "official_search_url_available",
@@ -80218,7 +79467,38 @@
           },
           "next_machine_step": "open_official_search_and_verify_exact_product_detail",
           "auto_apply_enabled": false
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "source-discovery-action-006",
+      "priority": 10,
+      "workflow": "official_search_url_available",
+      "review_state": "official_search_review_required",
+      "source_store": "엔스카이",
+      "row_count": 20,
+      "offset": 100,
+      "next_machine_step": "confirm_exact_source_url_then_fill_source_templates",
+      "recommended_action": "Open official search candidates, confirm exact product detail URLs, then fill source_url templates.",
+      "category_counts": [
+        [
+          "아크릴 스탠드",
+          10
+        ],
+        [
+          "키링",
+          9
+        ],
+        [
+          "아크릴 키링",
+          1
+        ]
+      ],
+      "primary_review_url_rows": 20,
+      "first_primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%82%B5%E3%83%9C%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+      "first_primary_review_url_kind": "official_search_url",
+      "items": [
         {
           "catalog_index": 1592,
           "workflow": "official_search_url_available",
@@ -80878,30 +80158,7 @@
           },
           "next_machine_step": "open_official_search_and_verify_exact_product_detail",
           "auto_apply_enabled": false
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "source-discovery-action-007",
-      "priority": 10,
-      "workflow": "official_search_url_available",
-      "review_state": "official_search_review_required",
-      "source_store": "엔스카이",
-      "row_count": 20,
-      "offset": 120,
-      "next_machine_step": "confirm_exact_source_url_then_fill_source_templates",
-      "recommended_action": "Open official search candidates, confirm exact product detail URLs, then fill source_url templates.",
-      "category_counts": [
-        [
-          "아크릴 스탠드",
-          20
-        ]
-      ],
-      "primary_review_url_rows": 20,
-      "first_primary_review_url": "https://www.enskyshop.com/products/list?name=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E4%BA%94%E6%9D%A1%E6%82%9F%29",
-      "first_primary_review_url_kind": "official_search_url",
-      "items": [
+        },
         {
           "catalog_index": 1625,
           "workflow": "official_search_url_available",
@@ -81121,7 +80378,38 @@
           },
           "next_machine_step": "open_official_search_and_verify_exact_product_detail",
           "auto_apply_enabled": false
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "source-discovery-action-007",
+      "priority": 10,
+      "workflow": "official_search_url_available",
+      "review_state": "official_search_review_required",
+      "source_store": "엔스카이",
+      "row_count": 20,
+      "offset": 120,
+      "next_machine_step": "confirm_exact_source_url_then_fill_source_templates",
+      "recommended_action": "Open official search candidates, confirm exact product detail URLs, then fill source_url templates.",
+      "category_counts": [
+        [
+          "아크릴 스탠드",
+          15
+        ],
+        [
+          "캔뱃지",
+          3
+        ],
+        [
+          "문구",
+          2
+        ]
+      ],
+      "primary_review_url_rows": 20,
+      "first_primary_review_url": "https://www.enskyshop.com/products/list?name=%E8%91%AC%E9%80%81%E3%81%AE%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%29",
+      "first_primary_review_url_kind": "official_search_url",
+      "items": [
         {
           "catalog_index": 1645,
           "workflow": "official_search_url_available",
@@ -81781,34 +81069,7 @@
           },
           "next_machine_step": "open_official_search_and_verify_exact_product_detail",
           "auto_apply_enabled": false
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "source-discovery-action-008",
-      "priority": 10,
-      "workflow": "official_search_url_available",
-      "review_state": "official_search_review_required",
-      "source_store": "엔스카이",
-      "row_count": 20,
-      "offset": 140,
-      "next_machine_step": "confirm_exact_source_url_then_fill_source_templates",
-      "recommended_action": "Open official search candidates, confirm exact product detail URLs, then fill source_url templates.",
-      "category_counts": [
-        [
-          "캔뱃지",
-          11
-        ],
-        [
-          "문구",
-          9
-        ]
-      ],
-      "primary_review_url_rows": 20,
-      "first_primary_review_url": "https://www.enskyshop.com/products/list?name=HUNTER%C3%97HUNTER%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%82%B4%E3%83%B3%EF%BC%9D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9",
-      "first_primary_review_url_kind": "official_search_url",
-      "items": [
+        },
         {
           "catalog_index": 1673,
           "workflow": "official_search_url_available",
@@ -82028,7 +81289,42 @@
           },
           "next_machine_step": "open_official_search_and_verify_exact_product_detail",
           "auto_apply_enabled": false
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "source-discovery-action-008",
+      "priority": 10,
+      "workflow": "official_search_url_available",
+      "review_state": "official_search_review_required",
+      "source_store": "엔스카이",
+      "row_count": 20,
+      "offset": 140,
+      "next_machine_step": "confirm_exact_source_url_then_fill_source_templates",
+      "recommended_action": "Open official search candidates, confirm exact product detail URLs, then fill source_url templates.",
+      "category_counts": [
+        [
+          "캔뱃지",
+          8
+        ],
+        [
+          "문구",
+          7
+        ],
+        [
+          "머그컵",
+          4
+        ],
+        [
+          "응원용품",
+          1
+        ]
+      ],
+      "primary_review_url_rows": 20,
+      "first_primary_review_url": "https://www.enskyshop.com/products/list?name=%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%83%88%E3%83%AC%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E4%BC%8F%E9%BB%92%E6%81%B5",
+      "first_primary_review_url_kind": "official_search_url",
+      "items": [
         {
           "catalog_index": 1682,
           "workflow": "official_search_url_available",
@@ -82688,50 +81984,7 @@
           },
           "next_machine_step": "open_official_search_and_verify_exact_product_detail",
           "auto_apply_enabled": false
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "source-discovery-action-009",
-      "priority": 10,
-      "workflow": "official_search_url_available",
-      "review_state": "official_search_review_required",
-      "source_store": "엔스카이",
-      "row_count": 20,
-      "offset": 160,
-      "next_machine_step": "confirm_exact_source_url_then_fill_source_templates",
-      "recommended_action": "Open official search candidates, confirm exact product detail URLs, then fill source_url templates.",
-      "category_counts": [
-        [
-          "머그컵",
-          9
-        ],
-        [
-          "응원용품",
-          4
-        ],
-        [
-          "마스코트",
-          3
-        ],
-        [
-          "인형",
-          2
-        ],
-        [
-          "아크릴 스탠드",
-          1
-        ],
-        [
-          "캔뱃지",
-          1
-        ]
-      ],
-      "primary_review_url_rows": 20,
-      "first_primary_review_url": "https://www.enskyshop.com/products/list?name=HUNTER%C3%97HUNTER%20%E3%82%B4%E3%83%B3%3D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97",
-      "first_primary_review_url_kind": "official_search_url",
-      "items": [
+        },
         {
           "catalog_index": 1776,
           "workflow": "official_search_url_available",
@@ -82951,7 +82204,54 @@
           },
           "next_machine_step": "open_official_search_and_verify_exact_product_detail",
           "auto_apply_enabled": false
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "source-discovery-action-009",
+      "priority": 10,
+      "workflow": "official_search_url_available",
+      "review_state": "official_search_review_required",
+      "source_store": "엔스카이",
+      "row_count": 20,
+      "offset": 160,
+      "next_machine_step": "confirm_exact_source_url_then_fill_source_templates",
+      "recommended_action": "Open official search candidates, confirm exact product detail URLs, then fill source_url templates.",
+      "category_counts": [
+        [
+          "머그컵",
+          5
+        ],
+        [
+          "인형",
+          4
+        ],
+        [
+          "마스코트",
+          4
+        ],
+        [
+          "응원용품",
+          3
+        ],
+        [
+          "캔뱃지",
+          2
+        ],
+        [
+          "아크릴 스탠드",
+          1
+        ],
+        [
+          "키링",
+          1
+        ]
+      ],
+      "primary_review_url_rows": 20,
+      "first_primary_review_url": "https://www.enskyshop.com/products/list?name=%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20%E7%B7%91%E8%B0%B7%E5%87%BA%E4%B9%85%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97",
+      "first_primary_review_url_kind": "official_search_url",
+      "items": [
         {
           "catalog_index": 1817,
           "workflow": "official_search_url_available",
@@ -83611,46 +82911,7 @@
           },
           "next_machine_step": "open_official_search_and_verify_exact_product_detail",
           "auto_apply_enabled": false
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "source-discovery-action-010",
-      "priority": 10,
-      "workflow": "official_search_url_available",
-      "review_state": "official_search_review_required",
-      "source_store": "엔스카이",
-      "row_count": 13,
-      "offset": 180,
-      "next_machine_step": "confirm_exact_source_url_then_fill_source_templates",
-      "recommended_action": "Open official search candidates, confirm exact product detail URLs, then fill source_url templates.",
-      "category_counts": [
-        [
-          "인형",
-          4
-        ],
-        [
-          "마스코트",
-          4
-        ],
-        [
-          "키링",
-          2
-        ],
-        [
-          "캔뱃지",
-          2
-        ],
-        [
-          "아크릴 스탠드",
-          1
-        ]
-      ],
-      "primary_review_url_rows": 13,
-      "first_primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%E3%83%96%E3%83%AB%E3%83%BC%E3%83%AD%E3%83%83%E3%82%AF%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3",
-      "first_primary_review_url_kind": "official_search_url",
-      "items": [
+        },
         {
           "catalog_index": 1896,
           "workflow": "official_search_url_available",
@@ -83870,7 +83131,46 @@
           },
           "next_machine_step": "open_official_search_and_verify_exact_product_detail",
           "auto_apply_enabled": false
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "source-discovery-action-010",
+      "priority": 10,
+      "workflow": "official_search_url_available",
+      "review_state": "official_search_review_required",
+      "source_store": "엔스카이",
+      "row_count": 8,
+      "offset": 180,
+      "next_machine_step": "confirm_exact_source_url_then_fill_source_templates",
+      "recommended_action": "Open official search candidates, confirm exact product detail URLs, then fill source_url templates.",
+      "category_counts": [
+        [
+          "마스코트",
+          3
+        ],
+        [
+          "인형",
+          2
+        ],
+        [
+          "아크릴 스탠드",
+          1
+        ],
+        [
+          "키링",
+          1
+        ],
+        [
+          "캔뱃지",
+          1
+        ]
+      ],
+      "primary_review_url_rows": 8,
+      "first_primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%82%82%E3%81%A1%E3%81%93%E3%82%8D%E3%82%8A%E3%82%93%20%E3%81%BC%E3%81%A3%E3%81%A1%E3%83%BB%E3%81%96%E3%83%BB%E3%82%8D%E3%81%A3%E3%81%8F%21",
+      "first_primary_review_url_kind": "official_search_url",
+      "items": [
         {
           "catalog_index": 1913,
           "workflow": "official_search_url_available",

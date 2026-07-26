@@ -1,27 +1,27 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T08:22:10Z",
+  "generated_at": "2026-07-26T09:39:29Z",
   "scope": "public_catalog_missing_image_priority",
   "summary": {
-    "missing_image_rows": 779,
+    "missing_image_rows": 774,
     "work_queue_rows": 710,
-    "queue_matched_rows": 710,
+    "queue_matched_rows": 705,
     "stale_queue_index_matches": 0,
     "unmatched_catalog_missing_rows": 69,
-    "missing_source_url_rows": 706,
+    "missing_source_url_rows": 701,
     "generic_source_url_rows": 50,
     "product_source_url_rows": 0,
-    "high_priority_rows": 524,
+    "high_priority_rows": 519,
     "safe_existing_image_reuse_candidate_rows": 0,
-    "source_discovery_starter_queue_groups": 373,
-    "source_discovery_starter_queue_rows": 706,
+    "source_discovery_starter_queue_groups": 372,
+    "source_discovery_starter_queue_rows": 701,
     "auto_apply_enabled": false
   },
   "breakdowns": {
     "by_source_store": [
       {
         "source_store": "엔스카이",
-        "rows": 193
+        "rows": 188
       },
       {
         "source_store": "애니메이트",
@@ -227,7 +227,7 @@
       },
       {
         "affiliation": "장송의 프리렌",
-        "rows": 31
+        "rows": 26
       },
       {
         "affiliation": "짱구는 못말려",
@@ -356,12 +356,12 @@
         "rows": 95
       },
       {
-        "category": "키링",
+        "category": "인형",
         "rows": 86
       },
       {
-        "category": "인형",
-        "rows": 86
+        "category": "키링",
+        "rows": 81
       },
       {
         "category": "마스코트",
@@ -463,7 +463,7 @@
     "by_strategy": [
       {
         "strategy": "official_search",
-        "rows": 458
+        "rows": 453
       },
       {
         "strategy": "manual_review",
@@ -489,7 +489,7 @@
     "by_automation_safety": [
       {
         "automation_safety": "candidate_provider_script_required",
-        "rows": 458
+        "rows": 453
       },
       {
         "automation_safety": "manual_research_required",
@@ -515,7 +515,7 @@
     "by_source_url_state": [
       {
         "source_url_state": "missing_source_url",
-        "rows": 706
+        "rows": 701
       },
       {
         "source_url_state": "generic_source_url",
@@ -529,7 +529,7 @@
   },
   "next_action_queues": {
     "source_discovery_first": {
-      "rows": 706,
+      "rows": 701,
       "reason": "Attach exact product source URLs before image candidates can be trusted."
     },
     "replace_generic_source_then_attach_image": {
@@ -591,12 +591,6 @@
       "recommended_workflow": "official_storefront_search_then_exact_detail_match"
     },
     {
-      "source_store": "엔스카이",
-      "affiliation": "장송의 프리렌",
-      "rows": 19,
-      "recommended_workflow": "official_storefront_search_then_exact_detail_match"
-    },
-    {
       "source_store": "애니메이트",
       "affiliation": "짱구는 못말려",
       "rows": 18,
@@ -625,6 +619,12 @@
       "affiliation": "치이카와",
       "rows": 15,
       "recommended_workflow": "manual_exact_image_research"
+    },
+    {
+      "source_store": "엔스카이",
+      "affiliation": "장송의 프리렌",
+      "rows": 14,
+      "recommended_workflow": "official_storefront_search_then_exact_detail_match"
     },
     {
       "source_store": "귀멸의 칼날 공식",
@@ -1933,117 +1933,6 @@
           "strategy": "official_search",
           "search_query": "ONE PIECE ビッグアクリルスタンド (ルフィ ギア5)",
           "search_url": "https://www.enskyshop.com/products/list?name=ONE%20PIECE%20%E3%83%93%E3%83%83%E3%82%B0%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%AB%E3%83%95%E3%82%A3%20%E3%82%AE%E3%82%A25%29",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        }
-      ],
-      "recommended_workflow": "official_storefront_search_then_exact_detail_match",
-      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
-      "blocked_until": "exact_source_url_and_image_url_confirmed",
-      "auto_apply_enabled": false
-    },
-    {
-      "source_store": "엔스카이",
-      "affiliation": "장송의 프리렌",
-      "category": "키링",
-      "primary_strategy": "official_search",
-      "priority": 10,
-      "rows": 5,
-      "first_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-      "search_urls": [
-        "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-        "https://www.enskyshop.com/products/list?name=%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-        "https://www.enskyshop.com/products/list?name=%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-        "https://www.enskyshop.com/products/list?name=%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-        "https://www.enskyshop.com/products/list?name=%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
-      ],
-      "search_url_count": 5,
-      "first_fallback_web_search_url": null,
-      "fallback_web_search_urls": [],
-      "fallback_web_search_url_count": 0,
-      "sample_items": [
-        {
-          "catalog_index": 1568,
-          "name_ko": "펀 러버 스트랩",
-          "name_ja": "フェルン ラバーストラップ",
-          "source_store": "엔스카이",
-          "affiliation": "장송의 프리렌",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "フェルン ラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1569,
-          "name_ko": "슈타르크 러버 스트랩",
-          "name_ja": "シュタルク ラバーストラップ",
-          "source_store": "엔스카이",
-          "affiliation": "장송의 프리렌",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "シュタルク ラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%82%B7%E3%83%A5%E3%82%BF%E3%83%AB%E3%82%AF%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1570,
-          "name_ko": "히멜 러버 스트랩",
-          "name_ja": "ヒンメル ラバーストラップ",
-          "source_store": "엔스카이",
-          "affiliation": "장송의 프리렌",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ヒンメル ラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1571,
-          "name_ko": "하이터 러버 스트랩",
-          "name_ja": "ハイター ラバーストラップ",
-          "source_store": "엔스카이",
-          "affiliation": "장송의 프리렌",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "ハイター ラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%83%8F%E3%82%A4%E3%82%BF%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-          "required_evidence": [
-            "exact_product_source_url",
-            "title_character_variant_type_match",
-            "product_image_visible_on_confirmed_source"
-          ]
-        },
-        {
-          "catalog_index": 1572,
-          "name_ko": "아이젠 러버 스트랩",
-          "name_ja": "アイゼン ラバーストラップ",
-          "source_store": "엔스카이",
-          "affiliation": "장송의 프리렌",
-          "category": "키링",
-          "priority": 10,
-          "strategy": "official_search",
-          "search_query": "アイゼン ラバーストラップ",
-          "search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A2%E3%82%A4%E3%82%BC%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
           "required_evidence": [
             "exact_product_source_url",
             "title_character_variant_type_match",
@@ -3762,6 +3651,81 @@
         }
       ],
       "recommended_workflow": "official_prize_provider_search_then_exact_detail_match",
+      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
+      "blocked_until": "exact_source_url_and_image_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "source_store": "Movic",
+      "affiliation": "귀멸의 칼날",
+      "category": "캔뱃지",
+      "primary_strategy": "official_search",
+      "priority": 10,
+      "rows": 3,
+      "first_search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E7%85%89%E7%8D%84%E6%9D%8F%E5%AF%BF%E9%83%8E",
+      "search_urls": [
+        "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E7%85%89%E7%8D%84%E6%9D%8F%E5%AF%BF%E9%83%8E",
+        "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E5%86%A8%E5%B2%A1%E7%BE%A9%E5%8B%87",
+        "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20BIG%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E7%82%AD%E6%B2%BB%E9%83%8E"
+      ],
+      "search_url_count": 3,
+      "first_fallback_web_search_url": null,
+      "fallback_web_search_urls": [],
+      "fallback_web_search_url_count": 0,
+      "sample_items": [
+        {
+          "catalog_index": 1728,
+          "name_ko": "귀멸의 칼날 메탈릭 캔뱃지 렌고쿠 쿄쥬로",
+          "name_ja": "鬼滅の刃 メタリック缶バッジ 煉獄杏寿郎",
+          "source_store": "Movic",
+          "affiliation": "귀멸의 칼날",
+          "category": "캔뱃지",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "鬼滅の刃 メタリック缶バッジ 煉獄杏寿郎",
+          "search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E7%85%89%E7%8D%84%E6%9D%8F%E5%AF%BF%E9%83%8E",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1729,
+          "name_ko": "귀멸의 칼날 메탈릭 캔뱃지 토미오카 기유",
+          "name_ja": "鬼滅の刃 メタリック缶バッジ 冨岡義勇",
+          "source_store": "Movic",
+          "affiliation": "귀멸의 칼날",
+          "category": "캔뱃지",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "鬼滅の刃 メタリック缶バッジ 冨岡義勇",
+          "search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E5%86%A8%E5%B2%A1%E7%BE%A9%E5%8B%87",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1730,
+          "name_ko": "귀멸의 칼날 빅 캔뱃지 탄지로",
+          "name_ja": "鬼滅の刃 BIG缶バッジ 炭治郎",
+          "source_store": "Movic",
+          "affiliation": "귀멸의 칼날",
+          "category": "캔뱃지",
+          "priority": 10,
+          "strategy": "official_search",
+          "search_query": "鬼滅の刃 BIG缶バッジ 炭治郎",
+          "search_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20BIG%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E7%82%AD%E6%B2%BB%E9%83%8E",
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "recommended_workflow": "official_storefront_search_then_exact_detail_match",
       "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
       "blocked_until": "exact_source_url_and_image_url_confirmed",
       "auto_apply_enabled": false
