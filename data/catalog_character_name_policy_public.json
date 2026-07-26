@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T20:44:31Z",
+  "generated_at": "2026-07-26T21:19:38Z",
   "scope": "catalog_character_name_policy",
   "summary": {
     "rows": 20313,
@@ -8,6 +8,7 @@
     "character_alias_violations": 0,
     "ichiban_display_name_violations": 0,
     "ichiban_product_character_violations": 0,
+    "ichiban_multi_character_product_review_candidates": 18,
     "zero_price_violations": 0,
     "findings": 0,
     "status": "pass"
@@ -155,10 +156,391 @@
       ]
     ],
     "ichiban_display_name_format": "一番くじ 발매명 / ?賞 / 상품이름 / 캐릭터명",
-    "last_one_and_double_chance_price_jpy": 0
+    "last_one_and_double_chance_price_jpy": 0,
+    "multi_character_product_review": "Rows whose product name contains multiple character tokens are reported for manual review. Some are true combined goods, while same-prize variants should be split into one row per character."
   },
   "character_alias_violations": [],
   "ichiban_display_name_violations": [],
   "ichiban_product_character_violations": [],
+  "ichiban_multi_character_product_review_candidates": [
+    {
+      "catalog_index": 13203,
+      "name_ko": "一番くじ ドラゴンボール スペクタクルバトル / E賞 / 孫悟空＆孫悟飯 フィギュア / 기타",
+      "product_name": "孫悟空＆孫悟飯 フィギュア",
+      "character_name": "기타",
+      "matched_characters": [
+        "손오공",
+        "손오반"
+      ],
+      "matched_tokens": [
+        {
+          "matched_token": "悟飯",
+          "expected_character": "손오반"
+        },
+        {
+          "matched_token": "悟空",
+          "expected_character": "손오공"
+        }
+      ],
+      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+    },
+    {
+      "catalog_index": 13574,
+      "name_ko": "一番くじ 鬼滅の刃 ～繋いだ軌跡～ / A賞 / 竈門炭治郎&竈門禰豆子 ArtScale Memoria / 기타",
+      "product_name": "竈門炭治郎&竈門禰豆子 ArtScale Memoria",
+      "character_name": "기타",
+      "matched_characters": [
+        "카마도 네즈코",
+        "카마도 탄지로"
+      ],
+      "matched_tokens": [
+        {
+          "matched_token": "炭治郎",
+          "expected_character": "카마도 탄지로"
+        },
+        {
+          "matched_token": "禰豆子",
+          "expected_character": "카마도 네즈코"
+        }
+      ],
+      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+    },
+    {
+      "catalog_index": 13575,
+      "name_ko": "一番くじ 鬼滅の刃 ～繋いだ軌跡～ / B賞 / Revible Moment-竈門炭治郎&煉獄杏寿郎- / 기타",
+      "product_name": "Revible Moment-竈門炭治郎&煉獄杏寿郎-",
+      "character_name": "기타",
+      "matched_characters": [
+        "렌고쿠 쿄쥬로",
+        "카마도 탄지로"
+      ],
+      "matched_tokens": [
+        {
+          "matched_token": "炭治郎",
+          "expected_character": "카마도 탄지로"
+        },
+        {
+          "matched_token": "煉獄",
+          "expected_character": "렌고쿠 쿄쥬로"
+        }
+      ],
+      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+    },
+    {
+      "catalog_index": 13582,
+      "name_ko": "一番くじ 鬼滅の刃 ～繋いだ軌跡～ / ラストワン賞 / Revible Moment-竈門炭治郎&煉獄杏寿郎- ラストワンver. / 기타",
+      "product_name": "Revible Moment-竈門炭治郎&煉獄杏寿郎- ラストワンver.",
+      "character_name": "기타",
+      "matched_characters": [
+        "렌고쿠 쿄쥬로",
+        "카마도 탄지로"
+      ],
+      "matched_tokens": [
+        {
+          "matched_token": "炭治郎",
+          "expected_character": "카마도 탄지로"
+        },
+        {
+          "matched_token": "煉獄",
+          "expected_character": "렌고쿠 쿄쥬로"
+        }
+      ],
+      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+    },
+    {
+      "catalog_index": 13762,
+      "name_ko": "一番くじ 鬼滅の刃 ～弐～ / C賞 / ＜炭治郎・禰豆子＞ちょこのっこ フィギュア / 기타",
+      "product_name": "＜炭治郎・禰豆子＞ちょこのっこ フィギュア",
+      "character_name": "기타",
+      "matched_characters": [
+        "카마도 네즈코",
+        "카마도 탄지로"
+      ],
+      "matched_tokens": [
+        {
+          "matched_token": "炭治郎",
+          "expected_character": "카마도 탄지로"
+        },
+        {
+          "matched_token": "禰豆子",
+          "expected_character": "카마도 네즈코"
+        }
+      ],
+      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+    },
+    {
+      "catalog_index": 13763,
+      "name_ko": "一番くじ 鬼滅の刃 ～弐～ / D賞 / ＜善逸・伊之助＞ちょこのっこ フィギュア / 기타",
+      "product_name": "＜善逸・伊之助＞ちょこのっこ フィギュア",
+      "character_name": "기타",
+      "matched_characters": [
+        "아가츠마 젠이츠",
+        "하시비라 이노스케"
+      ],
+      "matched_tokens": [
+        {
+          "matched_token": "善逸",
+          "expected_character": "아가츠마 젠이츠"
+        },
+        {
+          "matched_token": "伊之助",
+          "expected_character": "하시비라 이노스케"
+        }
+      ],
+      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+    },
+    {
+      "catalog_index": 16054,
+      "name_ko": "一番くじ ワンピース ROMANCE DAWN for the new world～後編～ / E賞 / ウソップ＆チョッパーフィギュア / 기타",
+      "product_name": "ウソップ＆チョッパーフィギュア",
+      "character_name": "기타",
+      "matched_characters": [
+        "우솝",
+        "토니토니 쵸파"
+      ],
+      "matched_tokens": [
+        {
+          "matched_token": "チョッパー",
+          "expected_character": "토니토니 쵸파"
+        },
+        {
+          "matched_token": "ウソップ",
+          "expected_character": "우솝"
+        }
+      ],
+      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+    },
+    {
+      "catalog_index": 16190,
+      "name_ko": "一番くじワンピースフィルム～ストロングワールド～ / C賞 / ウソップ＆チョッパーフィギュア / 기타",
+      "product_name": "ウソップ＆チョッパーフィギュア",
+      "character_name": "기타",
+      "matched_characters": [
+        "우솝",
+        "토니토니 쵸파"
+      ],
+      "matched_tokens": [
+        {
+          "matched_token": "チョッパー",
+          "expected_character": "토니토니 쵸파"
+        },
+        {
+          "matched_token": "ウソップ",
+          "expected_character": "우솝"
+        }
+      ],
+      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+    },
+    {
+      "catalog_index": 16254,
+      "name_ko": "一番くじ ドラゴンボール ASSEMBLE COLLECTION ～孫悟空少年期編～ / A賞 / 孫悟空・占いババ・孫悟飯 ASSEMBLEフィギュア / 기타",
+      "product_name": "孫悟空・占いババ・孫悟飯 ASSEMBLEフィギュア",
+      "character_name": "기타",
+      "matched_characters": [
+        "손오공",
+        "손오반"
+      ],
+      "matched_tokens": [
+        {
+          "matched_token": "悟飯",
+          "expected_character": "손오반"
+        },
+        {
+          "matched_token": "悟空",
+          "expected_character": "손오공"
+        }
+      ],
+      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+    },
+    {
+      "catalog_index": 16281,
+      "name_ko": "一番くじ ドラゴンボール DRAGON HISTORY Ⅱ / ラストワン賞 / 孫悟空＆孫悟飯じいちゃん Revible Moment / 기타",
+      "product_name": "孫悟空＆孫悟飯じいちゃん Revible Moment",
+      "character_name": "기타",
+      "matched_characters": [
+        "손오공",
+        "손오반"
+      ],
+      "matched_tokens": [
+        {
+          "matched_token": "悟飯",
+          "expected_character": "손오반"
+        },
+        {
+          "matched_token": "悟空",
+          "expected_character": "손오공"
+        }
+      ],
+      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+    },
+    {
+      "catalog_index": 16324,
+      "name_ko": "一番くじ ドラゴンボール DRAGON HISTORY / B賞 / Revible Moment-孫悟空VSベジータ- / 기타",
+      "product_name": "Revible Moment-孫悟空VSベジータ-",
+      "character_name": "기타",
+      "matched_characters": [
+        "베지터",
+        "손오공"
+      ],
+      "matched_tokens": [
+        {
+          "matched_token": "ベジータ",
+          "expected_character": "베지터"
+        },
+        {
+          "matched_token": "悟空",
+          "expected_character": "손오공"
+        }
+      ],
+      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+    },
+    {
+      "catalog_index": 16341,
+      "name_ko": "一番くじ ドラゴンボール VSオムニバスアメイジング / A賞 / 孫悟空＆孫悟飯 MASTERLISE PLUS / 기타",
+      "product_name": "孫悟空＆孫悟飯 MASTERLISE PLUS",
+      "character_name": "기타",
+      "matched_characters": [
+        "손오공",
+        "손오반"
+      ],
+      "matched_tokens": [
+        {
+          "matched_token": "悟飯",
+          "expected_character": "손오반"
+        },
+        {
+          "matched_token": "悟空",
+          "expected_character": "손오공"
+        }
+      ],
+      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+    },
+    {
+      "catalog_index": 16513,
+      "name_ko": "一番くじ ドラゴンボール VSオムニバス超 / A賞 / 超サイヤ人ゴッド超サイヤ人孫悟空&超サイヤ人ゴッド超サイヤ人ベジータフィギュア / 기타",
+      "product_name": "超サイヤ人ゴッド超サイヤ人孫悟空&超サイヤ人ゴッド超サイヤ人ベジータフィギュア",
+      "character_name": "기타",
+      "matched_characters": [
+        "베지터",
+        "손오공"
+      ],
+      "matched_tokens": [
+        {
+          "matched_token": "ベジータ",
+          "expected_character": "베지터"
+        },
+        {
+          "matched_token": "悟空",
+          "expected_character": "손오공"
+        }
+      ],
+      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+    },
+    {
+      "catalog_index": 16661,
+      "name_ko": "一番くじ ドラゴンボール VS EXISTENCE / A賞 / 孫悟空&孫悟飯フィギュア / 기타",
+      "product_name": "孫悟空&孫悟飯フィギュア",
+      "character_name": "기타",
+      "matched_characters": [
+        "손오공",
+        "손오반"
+      ],
+      "matched_tokens": [
+        {
+          "matched_token": "悟飯",
+          "expected_character": "손오반"
+        },
+        {
+          "matched_token": "悟空",
+          "expected_character": "손오공"
+        }
+      ],
+      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+    },
+    {
+      "catalog_index": 16665,
+      "name_ko": "一番くじ ドラゴンボール VS EXISTENCE / ラストワン賞 / 孫悟空&孫悟飯フィギュアラストワンver. / 기타",
+      "product_name": "孫悟空&孫悟飯フィギュアラストワンver.",
+      "character_name": "기타",
+      "matched_characters": [
+        "손오공",
+        "손오반"
+      ],
+      "matched_tokens": [
+        {
+          "matched_token": "悟飯",
+          "expected_character": "손오반"
+        },
+        {
+          "matched_token": "悟空",
+          "expected_character": "손오공"
+        }
+      ],
+      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+    },
+    {
+      "catalog_index": 17662,
+      "name_ko": "一番くじ ドラゴンボールDAIMA / E賞 / 孫悟空&ベジータ フィギュア / 기타",
+      "product_name": "孫悟空&ベジータ フィギュア",
+      "character_name": "기타",
+      "matched_characters": [
+        "베지터",
+        "손오공"
+      ],
+      "matched_tokens": [
+        {
+          "matched_token": "ベジータ",
+          "expected_character": "베지터"
+        },
+        {
+          "matched_token": "悟空",
+          "expected_character": "손오공"
+        }
+      ],
+      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+    },
+    {
+      "catalog_index": 17680,
+      "name_ko": "一番くじ ドラゴンボール EX 地球を守る戦士たち / A賞 / MASTERLISE 孫悟空＆孫悟飯 / 기타",
+      "product_name": "MASTERLISE 孫悟空＆孫悟飯",
+      "character_name": "기타",
+      "matched_characters": [
+        "손오공",
+        "손오반"
+      ],
+      "matched_tokens": [
+        {
+          "matched_token": "悟飯",
+          "expected_character": "손오반"
+        },
+        {
+          "matched_token": "悟空",
+          "expected_character": "손오공"
+        }
+      ],
+      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+    },
+    {
+      "catalog_index": 17689,
+      "name_ko": "一番くじ ドラゴンボール EX 地球を守る戦士たち / ラストワン賞 / MASTERLISE 孫悟空＆孫悟飯（ラストワンカラー） / 기타",
+      "product_name": "MASTERLISE 孫悟空＆孫悟飯（ラストワンカラー）",
+      "character_name": "기타",
+      "matched_characters": [
+        "손오공",
+        "손오반"
+      ],
+      "matched_tokens": [
+        {
+          "matched_token": "悟飯",
+          "expected_character": "손오반"
+        },
+        {
+          "matched_token": "悟空",
+          "expected_character": "손오공"
+        }
+      ],
+      "reason": "product_name_contains_multiple_character_tokens_review_before_splitting"
+    }
+  ],
   "zero_price_violations": []
 }

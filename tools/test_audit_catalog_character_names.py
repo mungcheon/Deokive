@@ -86,7 +86,7 @@ class AuditCatalogCharacterNamesTest(unittest.TestCase):
         rows = [
             {
                 "catalog_index": 20,
-                "name_ko": "\u4e00\u756a\u304f\u3058 \u30ef\u30f3\u30d4\u30fc\u30b9 / C\u8cde / \u30da\u30ed\u30fc\u30ca\u30d5\u30a3\u30ae\u30e5\u30a2 / \ud2b8\ub77c\ud314\uac00 \ub85c",
+                "name_ko": "\u4e00\u756a\u304f\u3058 \u30ef\u30f3\u30d4\u30fc\u30b9 / C\u8cde / \u30c1\u30e7\u30c3\u30d1\u30fc\u30d5\u30a3\u30ae\u30e5\u30a2 / \ud2b8\ub77c\ud314\uac00 \ub85c",
                 "series_name": "\u4e00\u756a\u304f\u3058 \u30ef\u30f3\u30d4\u30fc\u30b9",
                 "sub_series": "C\u8cde",
                 "character_name": "\ud2b8\ub77c\ud314\uac00 \ub85c",
@@ -100,7 +100,52 @@ class AuditCatalogCharacterNamesTest(unittest.TestCase):
         self.assertEqual(result["summary"]["ichiban_product_character_violations"], 1)
         self.assertEqual(
             result["ichiban_product_character_violations"][0]["expected"],
-            "\ud398\ub85c\ub098",
+            "\ud1a0\ub2c8\ud1a0\ub2c8 \ucd78\ud30c",
+        )
+
+    def test_katakana_character_tokens_do_not_match_inside_longer_words(self) -> None:
+        rows = [
+            {
+                "catalog_index": 21,
+                "name_ko": "\u4e00\u756a\u304f\u3058 \u30ef\u30f3\u30d4\u30fc\u30b9 / C\u8cde / \u30da\u30ed\u30fc\u30ca\u30d5\u30a3\u30ae\u30e5\u30a2 / \ud398\ub85c\ub098",
+                "series_name": "\u4e00\u756a\u304f\u3058 \u30ef\u30f3\u30d4\u30fc\u30b9",
+                "sub_series": "C\u8cde",
+                "character_name": "\ud398\ub85c\ub098",
+                "official_price_jpy": 600,
+            }
+        ]
+
+        result = audit(rows)
+
+        self.assertEqual(result["summary"]["status"], "pass")
+        self.assertEqual(result["summary"]["ichiban_product_character_violations"], 0)
+        self.assertEqual(
+            result["summary"]["ichiban_multi_character_product_review_candidates"],
+            0,
+        )
+
+    def test_reports_multi_character_ichiban_product_review_candidates(self) -> None:
+        rows = [
+            {
+                "catalog_index": 22,
+                "name_ko": "\u4e00\u756a\u304f\u3058 \u9b3c\u6ec5\u306e\u5203 / A\u8cde / \u7ac8\u9580\u70ad\u6cbb\u90ce&\u7ac8\u9580\u79b0\u8c46\u5b50 ArtScale Memoria / \uae30\ud0c0",
+                "series_name": "\u4e00\u756a\u304f\u3058 \u9b3c\u6ec5\u306e\u5203",
+                "sub_series": "A\u8cde",
+                "character_name": "\uae30\ud0c0",
+                "official_price_jpy": 790,
+            }
+        ]
+
+        result = audit(rows)
+
+        self.assertEqual(result["summary"]["status"], "pass")
+        self.assertEqual(
+            result["summary"]["ichiban_multi_character_product_review_candidates"],
+            1,
+        )
+        self.assertEqual(
+            result["ichiban_multi_character_product_review_candidates"][0]["matched_characters"],
+            ["\uce74\ub9c8\ub3c4 \ub124\uc988\ucf54", "\uce74\ub9c8\ub3c4 \ud0c4\uc9c0\ub85c"],
         )
 
     def test_character_alias_rules_are_scoped_to_frieren(self) -> None:

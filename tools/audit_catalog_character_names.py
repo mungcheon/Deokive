@@ -89,14 +89,17 @@ KATAKANA = set("".join(chr(codepoint) for codepoint in range(0x30A0, 0x30FF + 1)
 
 
 def product_token_matches(product_name: str, japanese_token: str) -> bool:
-    index = product_name.find(japanese_token)
-    if index < 0:
-        return False
-    if japanese_token == "\u30eb\u30d5\u30a3" and index > 0:
-        previous = product_name[index - 1]
-        if previous in KATAKANA:
+    start = 0
+    token_is_katakana = any(char in KATAKANA for char in japanese_token)
+    while True:
+        index = product_name.find(japanese_token, start)
+        if index < 0:
             return False
-    return True
+        before = product_name[index - 1] if index > 0 else ""
+        if token_is_katakana and before in KATAKANA:
+            start = index + 1
+            continue
+        return True
 
 
 def load_catalog(path: Path) -> list[dict[str, Any]]:
@@ -120,6 +123,7 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
     character_alias_violations: list[dict[str, Any]] = []
     ichiban_display_name_violations: list[dict[str, Any]] = []
     ichiban_product_character_violations: list[dict[str, Any]] = []
+    ichiban_multi_character_product_review_candidates: list[dict[str, Any]] = []
     zero_price_violations: list[dict[str, Any]] = []
 
     for row in rows:
@@ -166,22 +170,46 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
                 }
             )
         character_name = str(row.get("character_name") or "")
+        matched_product_characters = []
+        for japanese_token, expected_character in ICHIBAN_PRODUCT_CHARACTER_TOKENS:
+            if product_token_matches(product_name, japanese_token):
+                matched_product_characters.append(
+                    {
+                        "matched_token": japanese_token,
+                        "expected_character": expected_character,
+                    }
+                )
+        unique_matched_characters = sorted(
+            {item["expected_character"] for item in matched_product_characters}
+        )
+        if len(unique_matched_characters) > 1:
+            ichiban_multi_character_product_review_candidates.append(
+                {
+                    "catalog_index": catalog_index,
+                    "name_ko": row.get("name_ko"),
+                    "product_name": product_name,
+                    "character_name": row.get("character_name"),
+                    "matched_characters": unique_matched_characters,
+                    "matched_tokens": matched_product_characters,
+                    "reason": "product_name_contains_multiple_character_tokens_review_before_splitting",
+                }
+            )
         if character_name not in ("", "\uae30\ud0c0", "\ud63c\ud569"):
-            for japanese_token, expected_character in ICHIBAN_PRODUCT_CHARACTER_TOKENS:
-                if product_token_matches(product_name, japanese_token):
-                    if expected_character not in character_name:
-                        ichiban_product_character_violations.append(
-                            {
-                                "catalog_index": catalog_index,
-                                "name_ko": row.get("name_ko"),
-                                "product_name": product_name,
-                                "character_name": row.get("character_name"),
-                                "expected": expected_character,
-                                "matched_token": japanese_token,
-                                "reason": "product_name_character_token_mismatch",
-                            }
-                        )
-                    break
+            for item in matched_product_characters:
+                expected_character = item["expected_character"]
+                if expected_character not in character_name:
+                    ichiban_product_character_violations.append(
+                        {
+                            "catalog_index": catalog_index,
+                            "name_ko": row.get("name_ko"),
+                            "product_name": product_name,
+                            "character_name": row.get("character_name"),
+                            "expected": expected_character,
+                            "matched_token": item["matched_token"],
+                            "reason": "product_name_character_token_mismatch",
+                        }
+                    )
+                break
 
         sub_series = str(row.get("sub_series") or "")
         if (
@@ -216,6 +244,9 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
             "character_alias_violations": len(character_alias_violations),
             "ichiban_display_name_violations": len(ichiban_display_name_violations),
             "ichiban_product_character_violations": len(ichiban_product_character_violations),
+            "ichiban_multi_character_product_review_candidates": len(
+                ichiban_multi_character_product_review_candidates
+            ),
             "zero_price_violations": len(zero_price_violations),
             "findings": findings,
             "status": "pass" if findings == 0 else "needs_review",
@@ -225,10 +256,15 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
             "ichiban_product_character_tokens": ICHIBAN_PRODUCT_CHARACTER_TOKENS,
             "ichiban_display_name_format": "\u4e00\u756a\u304f\u3058 \ubc1c\ub9e4\uba85 / ?\u8cde / \uc0c1\ud488\uc774\ub984 / \uce90\ub9ad\ud130\uba85",
             "last_one_and_double_chance_price_jpy": 0,
+            "multi_character_product_review": (
+                "Rows whose product name contains multiple character tokens are reported for manual review. "
+                "Some are true combined goods, while same-prize variants should be split into one row per character."
+            ),
         },
         "character_alias_violations": character_alias_violations,
         "ichiban_display_name_violations": ichiban_display_name_violations,
         "ichiban_product_character_violations": ichiban_product_character_violations,
+        "ichiban_multi_character_product_review_candidates": ichiban_multi_character_product_review_candidates,
         "zero_price_violations": zero_price_violations,
     }
 
