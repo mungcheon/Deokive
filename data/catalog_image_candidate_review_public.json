@@ -2188,7 +2188,7 @@
     "official_detail_review_rows": 3,
     "official_detail_review_candidate_rows": 3,
     "official_detail_review_manual_confirmed_rows": 0,
-    "ensky_cache_candidate_action_rows": 54,
+    "ensky_cache_candidate_action_rows": 44,
     "ensky_cache_candidate_manual_confirmed_rows": 0,
     "image_attachment_action_rows": 73,
     "image_attachment_actionable_rows": 73,
@@ -2513,7 +2513,7 @@
       "official_detail_review_rows": 3,
       "official_detail_review_candidate_rows": 3,
       "official_detail_review_manual_confirmed_rows": 0,
-      "ensky_cache_candidate_action_rows": 54,
+      "ensky_cache_candidate_action_rows": 44,
       "ensky_cache_candidate_manual_confirmed_rows": 0,
       "image_attachment_action_rows": 73,
       "image_attachment_actionable_rows": 73,
@@ -3020,7 +3020,7 @@
     "by_suggested_color": [],
     "by_suggested_color_group": [],
     "folder_color_palette_count": 32,
-    "folder_visual_token_count": 29,
+    "folder_visual_token_count": 25,
     "folder_template_count": 0,
     "folder_icon_family_count": 10,
     "folder_icon_option_count": 80,
@@ -3588,7 +3588,7 @@
     "blocked_action_count": 1,
     "manual_review_action_count": 21,
     "pending_import_action_count": 0,
-    "total_action_rows": 33188,
+    "total_action_rows": 33178,
     "open_review_queues": {
       "source_discovery_rows": 706,
       "image_missing_rows": 779,
@@ -3642,7 +3642,7 @@
       "official_detail_review_rows": 3,
       "official_detail_review_candidate_rows": 3,
       "official_detail_review_manual_confirmed_rows": 0,
-      "ensky_cache_candidate_action_rows": 54,
+      "ensky_cache_candidate_action_rows": 44,
       "ensky_cache_candidate_manual_confirmed_rows": 0,
       "image_attachment_action_rows": 73,
       "image_attachment_actionable_rows": 73,
@@ -3919,9 +3919,9 @@
     "source_discovery_manual_research_backlog_rows": 5,
     "animation_unknown_category_rows": 0,
     "animation_unknown_category_count": 0,
-    "animation_category_readiness_status": "normalization_review_required",
-    "animation_normalization_review_categories": 4,
-    "animation_normalization_review_rows": 36,
+    "animation_category_readiness_status": "ready",
+    "animation_normalization_review_categories": 0,
+    "animation_normalization_review_rows": 0,
     "animation_coverage_audit_status": "pass",
     "animation_missing_visual_token_categories": 0,
     "animation_failed_visual_check_count": 0,
@@ -8357,12 +8357,12 @@
   },
   "ensky_cache_coverage": {
     "public_report": "data/ensky_missing_image_cache_coverage_public.json",
-    "missing_ensky_image_rows": 142,
+    "missing_ensky_image_rows": 193,
     "cache_products": 3153,
     "exact_safe_match_rows": 0,
-    "broad_cache_candidate_rows": 54,
-    "no_cache_candidate_rows": 88,
-    "manual_review_rows": 142,
+    "broad_cache_candidate_rows": 44,
+    "no_cache_candidate_rows": 149,
+    "manual_review_rows": 193,
     "auto_apply_enabled": false,
     "cache_source": "server/.catalog_image_cache/ensky_sitemap_index.json"
   },
@@ -10565,35 +10565,35 @@
   },
   "ensky_cache_candidate_action_queue": {
     "public_report": "data/ensky_cache_candidate_action_queue_public.json",
-    "candidate_action_rows": 54,
-    "action_batch_count": 6,
+    "candidate_action_rows": 44,
+    "action_batch_count": 5,
     "batch_size": 10,
     "manual_confirmed_true": 0,
-    "identity_warning_rows": 54,
-    "candidate_source_url_ready_rows": 54,
-    "candidate_image_url_ready_rows": 54,
+    "identity_warning_rows": 44,
+    "candidate_source_url_ready_rows": 44,
+    "candidate_image_url_ready_rows": 44,
     "safe_exact_top_candidate_rows": 0,
     "can_import_now_rows": 0,
-    "blocked_manual_review_rows": 54,
+    "blocked_manual_review_rows": 44,
     "by_affiliation": [
-      [
-        "원피스",
-        13
-      ],
       [
         "주술회전",
         11
       ],
       [
-        "치이카와",
-        8
+        "귀멸의 칼날",
+        7
+      ],
+      [
+        "나의 히어로 아카데미아",
+        5
+      ],
+      [
+        "원피스",
+        5
       ],
       [
         "체인소 맨",
-        6
-      ],
-      [
-        "장송의 프리렌",
         5
       ],
       [
@@ -10601,12 +10601,12 @@
         4
       ],
       [
-        "나의 히어로 아카데미아",
-        3
+        "치이카와",
+        4
       ],
       [
-        "봇치 더 록",
-        3
+        "장송의 프리렌",
+        2
       ],
       [
         "헌터X헌터",
@@ -10616,60 +10616,60 @@
     "by_category": [
       [
         "아크릴 스탠드",
-        21
-      ],
-      [
-        "키링",
-        9
-      ],
-      [
-        "마스코트",
-        9
+        13
       ],
       [
         "캔뱃지",
-        6
-      ],
-      [
-        "문구",
-        3
+        8
       ],
       [
         "머그컵",
+        6
+      ],
+      [
+        "마스코트",
+        5
+      ],
+      [
+        "키링",
+        4
+      ],
+      [
+        "문구",
+        4
+      ],
+      [
+        "응원용품",
         2
       ],
       [
         "인형",
         2
-      ],
-      [
-        "응원용품",
-        2
       ]
     ],
     "by_candidate_identity_flag": [
       [
-        "candidate_title_product_type_mismatch",
-        45
+        "candidate_title_multi_variant_or_lineup",
+        39
       ],
       [
-        "candidate_title_multi_variant_or_lineup",
-        40
+        "candidate_title_product_type_mismatch",
+        22
       ],
       [
         "candidate_title_box_or_assortment",
-        12
+        11
       ]
     ],
     "auto_apply_enabled": false,
     "import_readiness": {
-      "candidate_rows": 54,
-      "candidate_source_url_ready_rows": 54,
-      "candidate_image_url_ready_rows": 54,
+      "candidate_rows": 44,
+      "candidate_source_url_ready_rows": 44,
+      "candidate_image_url_ready_rows": 44,
       "safe_exact_top_candidate_rows": 0,
-      "identity_warning_rows": 54,
+      "identity_warning_rows": 44,
       "can_import_now_rows": 0,
-      "blocked_manual_review_rows": 54,
+      "blocked_manual_review_rows": 44,
       "manual_confirmation_required": true,
       "auto_apply_enabled": false
     }
@@ -12387,28 +12387,28 @@
       "current_focus_remaining_rows": 20,
       "current_focus_fallback_rows": 20,
       "next_pack_after_current": "source-discovery-focus-002",
-      "current_focus_resolution_status": "manual_exact_source_url_review_required",
+      "current_focus_resolution_status": "manual_source_search_required_after_official_cache_miss",
       "current_focus_cache_cross_check": {
-        "cross_checked_rows": 15,
+        "cross_checked_rows": 20,
         "safe_exact_match_rows": 0,
-        "broad_candidate_rows": 4,
-        "no_candidate_rows": 11,
+        "broad_candidate_rows": 2,
+        "no_candidate_rows": 18,
         "status_counts": [
           [
             "no_cache_candidate",
-            11
+            18
           ],
           [
             "broad_cache_candidate",
-            4
+            2
           ]
         ],
         "auto_apply_enabled": false
       },
-      "recommended_next_focus_pack_id": null,
+      "recommended_next_focus_pack_id": "source-discovery-focus-002",
       "all_sample_candidates_rejected_rows": 20,
       "safe_candidate_detail_link_rows": 0,
-      "next_safe_phase": "ignore_rejected_samples_and_run_exact_source_search",
+      "next_safe_phase": "rotate_to_next_focus_pack_or_manual_source_research_current_pack",
       "next_queue": {
         "source": "data/source_discovery_next_focus_exact_url_review_queue_public.json",
         "queue_rows": 20,
@@ -12422,6 +12422,7 @@
       },
       "blocked_until": "exact_product_detail_source_url_confirmed",
       "blocked_reasons": [
+        "official_cache_safe_exact_match_absent",
         "sample_candidate_links_rejected"
       ],
       "safety_note": "Source discovery queues are review-only. Confirm exact official product detail URLs before image attachment."
@@ -12437,7 +12438,7 @@
     "next_execution_lanes": [
       {
         "lane": "exact_source_url_review",
-        "status": "next",
+        "status": "manual_cache_miss_research_required",
         "open_rows": 20,
         "next_batch_rows": 20,
         "review_start_rows": 20,
@@ -12463,7 +12464,7 @@
         "review_start_rows": 20,
         "manual_decision_rows": 20,
         "public_report": "data/source_discovery_focus_packs_public.json",
-        "next_action": "rotate through source discovery packs after the current exact URL review is resolved"
+        "next_action": "start the next focus pack while the current cache-miss pack waits for manual exact source research"
       },
       {
         "lane": "generic_source_replacement",
@@ -12495,29 +12496,30 @@
       "current_focus_remaining_rows": 20,
       "safe_candidate_detail_link_rows": 0,
       "all_sample_candidates_rejected_rows": 20,
-      "next_safe_phase": "ignore_rejected_samples_and_run_exact_source_search",
+      "next_safe_phase": "rotate_to_next_focus_pack_or_manual_source_research_current_pack",
       "blocked_reasons": [
+        "official_cache_safe_exact_match_absent",
         "sample_candidate_links_rejected"
       ],
-      "current_focus_resolution_status": "manual_exact_source_url_review_required",
+      "current_focus_resolution_status": "manual_source_search_required_after_official_cache_miss",
       "current_focus_cache_cross_check": {
-        "cross_checked_rows": 15,
+        "cross_checked_rows": 20,
         "safe_exact_match_rows": 0,
-        "broad_candidate_rows": 4,
-        "no_candidate_rows": 11,
+        "broad_candidate_rows": 2,
+        "no_candidate_rows": 18,
         "status_counts": [
           [
             "no_cache_candidate",
-            11
+            18
           ],
           [
             "broad_cache_candidate",
-            4
+            2
           ]
         ],
         "auto_apply_enabled": false
       },
-      "recommended_next_focus_pack_id": null,
+      "recommended_next_focus_pack_id": "source-discovery-focus-002",
       "handoff_steps": [
         {
           "step": 1,
@@ -16765,18 +16767,18 @@
         20
       ]
     ],
-    "ensky_cache_cross_checked_rows": 15,
+    "ensky_cache_cross_checked_rows": 20,
     "ensky_cache_safe_exact_match_rows": 0,
-    "ensky_cache_broad_candidate_rows": 4,
-    "ensky_cache_no_candidate_rows": 11,
+    "ensky_cache_broad_candidate_rows": 2,
+    "ensky_cache_no_candidate_rows": 18,
     "ensky_cache_status_counts": [
       [
         "no_cache_candidate",
-        11
+        18
       ],
       [
         "broad_cache_candidate",
-        4
+        2
       ]
     ],
     "auto_apply_enabled": false,
@@ -17355,7 +17357,7 @@
         "next_execution_open_rows": 856,
         "next_execution_next_batch_rows": 175,
         "first_next_execution_lane": "exact_source_url_review",
-        "first_next_execution_status": "next",
+        "first_next_execution_status": "manual_cache_miss_research_required",
         "first_next_execution_rows": 20,
         "first_next_execution_public_report": "data/source_discovery_next_focus_exact_url_review_queue_public.json",
         "operator_handoff": {
@@ -17367,29 +17369,30 @@
           "current_focus_remaining_rows": 20,
           "safe_candidate_detail_link_rows": 0,
           "all_sample_candidates_rejected_rows": 20,
-          "next_safe_phase": "ignore_rejected_samples_and_run_exact_source_search",
+          "next_safe_phase": "rotate_to_next_focus_pack_or_manual_source_research_current_pack",
           "blocked_reasons": [
+            "official_cache_safe_exact_match_absent",
             "sample_candidate_links_rejected"
           ],
-          "current_focus_resolution_status": "manual_exact_source_url_review_required",
+          "current_focus_resolution_status": "manual_source_search_required_after_official_cache_miss",
           "current_focus_cache_cross_check": {
-            "cross_checked_rows": 15,
+            "cross_checked_rows": 20,
             "safe_exact_match_rows": 0,
-            "broad_candidate_rows": 4,
-            "no_candidate_rows": 11,
+            "broad_candidate_rows": 2,
+            "no_candidate_rows": 18,
             "status_counts": [
               [
                 "no_cache_candidate",
-                11
+                18
               ],
               [
                 "broad_cache_candidate",
-                4
+                2
               ]
             ],
             "auto_apply_enabled": false
           },
-          "recommended_next_focus_pack_id": null,
+          "recommended_next_focus_pack_id": "source-discovery-focus-002",
           "handoff_steps": [
             {
               "step": 1,

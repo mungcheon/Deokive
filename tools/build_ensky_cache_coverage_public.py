@@ -17,6 +17,25 @@ CATALOG = DATA / "catalog_public.json"
 CACHE = ROOT / "server" / ".catalog_image_cache" / "ensky_sitemap_index.json"
 REPORT = DATA / "ensky_missing_image_cache_coverage_public.json"
 
+PRODUCT_TYPE_HINTS = {
+    "acrylic_stand": {"アクリルスタンド", "アクスタ", "acrylic stand", "아크릴스탠드", "아크릴 스탠드"},
+    "rubber_strap": {"ラバーストラップ", "rubber strap", "러버스트랩", "러버 스트랩"},
+    "keyholder": {"キーホルダー", "キーチェーン", "カラビナ", "keyholder", "keychain", "키홀더", "키링"},
+    "can_badge": {"缶バッジ", "バッチ", "can badge", "캔뱃지", "캔배지"},
+    "clear_file": {"クリアファイル", "clear file", "클리어파일", "클리어 파일"},
+    "mug": {"マグカップ", "マグ", "mug", "머그컵"},
+    "plush_mascot": {"ぬいぐるみ", "マスコット", "おまんじゅう", "もちころりん", "mascot", "마스코트", "인형", "누이"},
+    "towel": {"タオル", "towel", "타월", "타올"},
+    "uchiwa": {"うちわ", "응원용품", "부채"},
+    "ticket_file": {"チケットファイル", "티켓파일", "티켓 파일"},
+    "seal_gum": {"シールガム", "씰껌"},
+    "emoca": {"emoca"},
+    "jigsaw_puzzle": {"ジグソーパズル", "パズル", "puzzle", "퍼즐"},
+    "paper_theater": {"paper theater", "paper shadow art", "ペーパーシアター"},
+    "sticker": {"ステッカー", "シール", "sticker", "스티커"},
+    "card": {"カード", "card", "카드"},
+}
+
 
 def now_utc() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
@@ -70,6 +89,15 @@ def query_tokens(row: dict[str, Any]) -> list[str]:
     return [token for token in tokens if token and token not in common]
 
 
+def product_type_hints(value: Any) -> set[str]:
+    text = str(value or "").casefold()
+    matches: set[str] = set()
+    for key, hints in PRODUCT_TYPE_HINTS.items():
+        if any(str(hint).casefold() in text for hint in hints):
+            matches.add(key)
+    return matches
+
+
 def broad_candidate_score(
     *,
     title_key: str,
@@ -96,11 +124,17 @@ def candidate_products(row: dict[str, Any], products: list[dict[str, Any]]) -> l
     tokens = query_tokens(row)
     affiliation = _squash(str(row.get("affiliation") or ""))
     category = _squash(str(row.get("category") or ""))
+    row_types = product_type_hints(
+        " ".join(str(row.get(field) or "") for field in ("name_ko", "name_ja", "category"))
+    )
     candidates: list[dict[str, Any]] = []
     for product in products:
         title = str(product.get("title") or "")
         title_key = _squash(title)
         safe = ensky._safe_match(query, title)
+        title_types = product_type_hints(title)
+        if not safe and row_types and title_types and row_types.isdisjoint(title_types):
+            continue
         score, matched_tokens = broad_candidate_score(
             title_key=title_key,
             tokens=tokens,

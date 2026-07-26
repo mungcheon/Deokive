@@ -78,10 +78,39 @@ class EnskyCacheCoveragePublicTests(unittest.TestCase):
             generated_at="2026-01-01T00:00:00Z",
         )
 
-        self.assertEqual(report["summary"]["missing_ensky_image_rows"], 142)
+        expected_missing = len(target.missing_ensky_rows(target.catalog_items(target.load_json(target.CATALOG))))
+        self.assertEqual(report["summary"]["missing_ensky_image_rows"], expected_missing)
         self.assertEqual(report["summary"]["cache_products"], 3153)
         self.assertFalse(report["summary"]["auto_apply_enabled"])
-        self.assertEqual(len(report["items"]), 142)
+        self.assertEqual(len(report["items"]), expected_missing)
+
+    def test_wrong_product_type_broad_candidate_is_filtered(self) -> None:
+        catalog = {
+            "items": [
+                {
+                    "catalog_index": 10,
+                    "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
+                    "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+                    "source_store": "엔스카이",
+                    "affiliation": "치이카와",
+                    "category": "키링",
+                    "image_url": None,
+                }
+            ]
+        }
+        products = [
+            {
+                "title": "ちいかわ mitamemoチケットファイル2【1BOX 14個入り】",
+                "image_url": "https://example.com/ticket-file.jpg",
+                "source_url": "https://www.enskyshop.com/products/detail/28997",
+            }
+        ]
+
+        report = target.build_report(catalog, products, generated_at="2026-01-01T00:00:00Z")
+
+        self.assertEqual(report["summary"]["broad_cache_candidate_rows"], 0)
+        self.assertEqual(report["summary"]["no_cache_candidate_rows"], 1)
+        self.assertEqual(report["items"][0]["top_candidates"], [])
 
 
 if __name__ == "__main__":
