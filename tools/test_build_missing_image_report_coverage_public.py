@@ -63,10 +63,11 @@ class MissingImageReportCoveragePublicTests(unittest.TestCase):
         report_counts = {row["report_key"]: row["assigned_missing_image_rows"] for row in report["reports"]}
 
         self.assertEqual(report["summary"]["missing_image_rows"], 3)
-        self.assertEqual(report["summary"]["assigned_report_rows"], 2)
-        self.assertEqual(report["summary"]["unassigned_missing_image_rows"], 1)
+        self.assertEqual(report["summary"]["assigned_report_rows"], 3)
+        self.assertEqual(report["summary"]["unassigned_missing_image_rows"], 0)
         self.assertEqual(report_counts["animate_missing_image_search"], 1)
         self.assertEqual(report_counts["manual_missing_image_source_discovery"], 1)
+        self.assertEqual(report_counts["catalog_missing_image_actionability"], 1)
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertFalse(report["automation_policy"]["auto_apply_catalog_changes"])
 

@@ -168,6 +168,7 @@ def cache_images(
     delay_seconds: float,
     max_size: int,
     quality: int,
+    row_indexes: set[int] | None = None,
 ) -> dict[str, Any]:
     cache_dir.mkdir(parents=True, exist_ok=True)
     checked = 0
@@ -182,6 +183,8 @@ def cache_images(
         if max_rows is not None and checked >= max_rows:
             break
         if not isinstance(row, dict):
+            continue
+        if row_indexes is not None and index not in row_indexes and row.get("catalog_index") not in row_indexes:
             continue
 
         raw_url = row.get("image_url")
@@ -284,6 +287,13 @@ def main() -> int:
     parser.add_argument("--delay-seconds", type=float, default=0.02)
     parser.add_argument("--max-size", type=int, default=640)
     parser.add_argument("--quality", type=int, default=78)
+    parser.add_argument(
+        "--row-index",
+        type=int,
+        action="append",
+        default=None,
+        help="Cache only matching row index or catalog_index values. Can be repeated.",
+    )
     parser.add_argument("--write", action="store_true")
     args = parser.parse_args()
 
@@ -296,6 +306,7 @@ def main() -> int:
         delay_seconds=args.delay_seconds,
         max_size=args.max_size,
         quality=args.quality,
+        row_indexes=set(args.row_index) if args.row_index else None,
     )
     print(json.dumps(result, ensure_ascii=False, indent=2))
     if args.write:

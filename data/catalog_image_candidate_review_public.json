@@ -6,13 +6,13 @@
     "pilot_store_count": 4,
     "pilot_processed_rows": 101,
     "pilot_filled_rows": 0,
-    "missing_images": 846,
+    "missing_images": 812,
     "provider_candidate_items": 496,
     "manual_or_blocked_items": 228,
     "rows": 20346,
-    "missing_with_source_url": 78,
+    "missing_with_source_url": 44,
     "missing_with_exact_source_url": 0,
-    "missing_with_generic_source_url": 78
+    "missing_with_generic_source_url": 44
   },
   "pilots": [
     {
@@ -1813,7 +1813,7 @@
       "name_ja": 526,
       "release_date": 1347,
       "barcode": 10081,
-      "image_url": 846,
+      "image_url": 812,
       "official_price_jpy": 558,
       "source_url": 768
     },
@@ -1984,15 +1984,15 @@
   },
   "image_enrichment_batches": {
     "public_report": "data/catalog_image_enrichment_batches_public.json",
-    "missing_image_rows": 846,
-    "source_url_ready_rows": 56,
+    "missing_image_rows": 812,
+    "source_url_ready_rows": 22,
     "generic_source_url_rows": 0,
     "gotouchi_official_review_rows": 22,
     "needs_source_discovery_rows": 758,
     "manual_image_research_rows": 10,
     "published_group_rows": 52,
     "review_batch_count": 9,
-    "sample_image_import_template_count": 702,
+    "sample_image_import_template_count": 668,
     "top_source_stores": [
       [
         "엔스카이",
@@ -2005,10 +2005,6 @@
       [
         "굿스마일컴퍼니",
         56
-      ],
-      [
-        "치이카와 온라인 쿠지",
-        52
       ],
       [
         "Stellive Store",
@@ -2033,6 +2029,10 @@
       [
         "FuRyu",
         21
+      ],
+      [
+        "치이카와 온라인 쿠지",
+        18
       ],
       [
         "Banpresto",
@@ -2122,7 +2122,7 @@
       ],
       [
         "extract_from_existing_source_url",
-        56
+        22
       ],
       [
         "review_gotouchi_official_candidates",
@@ -2137,7 +2137,7 @@
   "operations": {
     "public_report": "data/catalog_operations_public.json",
     "source_discovery_rows": 768,
-    "image_missing_rows": 846,
+    "image_missing_rows": 812,
     "dedupe_groups": 61,
     "animation_unknown_categories": 0,
     "ichiban_missing_release_date_rows": 8,
@@ -2190,8 +2190,8 @@
     "official_detail_review_manual_confirmed_rows": 0,
     "ensky_cache_candidate_action_rows": 39,
     "ensky_cache_candidate_manual_confirmed_rows": 0,
-    "image_attachment_action_rows": 78,
-    "image_attachment_actionable_rows": 78,
+    "image_attachment_action_rows": 44,
+    "image_attachment_actionable_rows": 44,
     "image_attachment_unqueued_actionable_rows": 0,
     "image_attachment_source_url_search_hint_rows": 0,
     "image_attachment_source_url_missing_search_hint_rows": 0,
@@ -2200,7 +2200,7 @@
     "image_attachment_source_url_missing_any_search_hint_rows": 0,
     "image_attachment_source_url_primary_review_url_rows": 0,
     "image_attachment_source_url_missing_primary_review_url_rows": 0,
-    "image_attachment_local_download_ready_rows": 78,
+    "image_attachment_local_download_ready_rows": 44,
     "ichiban_metadata_action_campaigns": 41,
     "ichiban_metadata_actionable_campaigns": 41,
     "ichiban_metadata_unqueued_action_campaigns": 0,
@@ -2230,10 +2230,10 @@
     "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
     "ichiban_prize_name_image_patch_blocked_rows": 0,
     "catalog_goal_manual_review_pillars": 5,
-    "catalog_goal_manual_review_rows": 955,
+    "catalog_goal_manual_review_rows": 921,
     "catalog_goal_auto_apply_ready_rows": 0,
     "catalog_goal_dedupe_manual_review_rows": 48,
-    "catalog_goal_missing_image_rows": 846,
+    "catalog_goal_missing_image_rows": 812,
     "catalog_goal_source_url_update_rows": 0,
     "catalog_goal_animation_category_rows": 0,
     "catalog_goal_ichiban_manual_review_rows": 61,
@@ -2250,7 +2250,7 @@
     "public_report": "data/catalog_agent_work_queue_public.json",
     "batch_count": 160,
     "max_published_batches": 160,
-    "summed_batch_rows": 20766,
+    "summed_batch_rows": 20668,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -2274,10 +2274,6 @@
         11
       ],
       [
-        "image_attachment_action_queue",
-        10
-      ],
-      [
         "danganronpa_missing_media",
         10
       ],
@@ -2292,6 +2288,10 @@
       [
         "ichiban_kuji_reissue_dedupe_review",
         9
+      ],
+      [
+        "image_attachment_action_queue",
+        8
       ],
       [
         "metadata_action_queue",
@@ -2310,16 +2310,16 @@
         5
       ],
       [
+        "deduplication_review",
+        5
+      ],
+      [
         "requested_focus_enrichment",
         4
       ],
       [
         "ichiban_kuji_campaign_first_reissue_review",
         4
-      ],
-      [
-        "deduplication_review",
-        3
       ],
       [
         "source_discovery_next_focus_fallback_queue",
@@ -2380,10 +2380,6 @@
         11
       ],
       [
-        "agent-image-action",
-        10
-      ],
-      [
         "agent-danganronpa-media",
         10
       ],
@@ -2398,6 +2394,10 @@
       [
         "agent-ichiban-reissue-dedupe",
         9
+      ],
+      [
+        "agent-image-action",
+        8
       ],
       [
         "agent-metadata-action",
@@ -2420,6 +2420,10 @@
         5
       ],
       [
+        "agent-dedupe",
+        5
+      ],
+      [
         "agent-requested-focus",
         4
       ],
@@ -2433,10 +2437,6 @@
       ],
       [
         "agent-source-detail-candidate",
-        3
-      ],
-      [
-        "agent-dedupe",
         3
       ],
       [
@@ -2454,7 +2454,7 @@
     ],
     "open_review_queues": {
       "source_discovery_rows": 768,
-      "image_missing_rows": 846,
+      "image_missing_rows": 812,
       "dedupe_groups": 61,
       "animation_unknown_categories": 0,
       "ichiban_missing_release_date_rows": 8,
@@ -2507,8 +2507,8 @@
       "official_detail_review_manual_confirmed_rows": 0,
       "ensky_cache_candidate_action_rows": 39,
       "ensky_cache_candidate_manual_confirmed_rows": 0,
-      "image_attachment_action_rows": 78,
-      "image_attachment_actionable_rows": 78,
+      "image_attachment_action_rows": 44,
+      "image_attachment_actionable_rows": 44,
       "image_attachment_unqueued_actionable_rows": 0,
       "image_attachment_source_url_search_hint_rows": 0,
       "image_attachment_source_url_missing_search_hint_rows": 0,
@@ -2517,7 +2517,7 @@
       "image_attachment_source_url_missing_any_search_hint_rows": 0,
       "image_attachment_source_url_primary_review_url_rows": 0,
       "image_attachment_source_url_missing_primary_review_url_rows": 0,
-      "image_attachment_local_download_ready_rows": 78,
+      "image_attachment_local_download_ready_rows": 44,
       "ichiban_metadata_action_campaigns": 41,
       "ichiban_metadata_actionable_campaigns": 41,
       "ichiban_metadata_unqueued_action_campaigns": 0,
@@ -2547,10 +2547,10 @@
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
       "ichiban_prize_name_image_patch_blocked_rows": 0,
       "catalog_goal_manual_review_pillars": 5,
-      "catalog_goal_manual_review_rows": 955,
+      "catalog_goal_manual_review_rows": 921,
       "catalog_goal_auto_apply_ready_rows": 0,
       "catalog_goal_dedupe_manual_review_rows": 48,
-      "catalog_goal_missing_image_rows": 846,
+      "catalog_goal_missing_image_rows": 812,
       "catalog_goal_source_url_update_rows": 0,
       "catalog_goal_animation_category_rows": 0,
       "catalog_goal_ichiban_manual_review_rows": 61,
@@ -2576,7 +2576,7 @@
     "confirmed_import_top_work_order_lane": "confirm_template_rows",
     "confirmed_import_top_work_order_workflow": "source_discovery",
     "confirmed_import_top_work_order_row_count": 641,
-    "image_rows_still_requiring_url_evidence": 846,
+    "image_rows_still_requiring_url_evidence": 812,
     "image_missing_evidence_top_source_stores": [
       [
         "엔스카이",
@@ -2589,10 +2589,6 @@
       [
         "굿스마일컴퍼니",
         56
-      ],
-      [
-        "치이카와 온라인 쿠지",
-        52
       ],
       [
         "Stellive Store",
@@ -2609,6 +2605,10 @@
       [
         "점프 캐릭터즈 스토어",
         23
+      ],
+      [
+        "ご当地ちいかわ 공식(API)",
+        22
       ]
     ],
     "image_missing_evidence_top_categories": [
@@ -2617,24 +2617,24 @@
         144
       ],
       [
-        "인형",
-        126
-      ],
-      [
         "아크릴 스탠드",
         125
+      ],
+      [
+        "인형",
+        102
       ],
       [
         "캔뱃지",
         97
       ],
       [
-        "마스코트",
+        "키링",
         80
       ],
       [
-        "키링",
-        80
+        "마스코트",
+        70
       ],
       [
         "문구",
@@ -3268,7 +3268,7 @@
   },
   "metadata_review_batches": {
     "public_report": "data/catalog_metadata_review_batches_public.json",
-    "catalog_rows": 20347,
+    "catalog_rows": 20346,
     "tracked_fields": [
       "name_ja",
       "barcode",
@@ -3277,16 +3277,16 @@
       "source_url",
       "official_price_jpy"
     ],
-    "field_store_group_count": 361,
-    "batch_count": 31,
+    "field_store_group_count": 359,
+    "batch_count": 30,
     "batch_size": 12,
-    "missing_cell_count": 14129,
+    "missing_cell_count": 14092,
     "field_missing_totals": {
       "name_ja": 526,
-      "release_date": 1348,
-      "barcode": 10082,
-      "image_url": 846,
-      "official_price_jpy": 559,
+      "release_date": 1347,
+      "barcode": 10081,
+      "image_url": 812,
+      "official_price_jpy": 558,
       "source_url": 768
     },
     "top_source_stores_with_missing_metadata": [
@@ -3299,12 +3299,12 @@
         814
       ],
       [
-        "치이카와 온라인 쿠지",
-        757
-      ],
-      [
         "애니메이트",
         737
+      ],
+      [
+        "치이카와 온라인 쿠지",
+        723
       ],
       [
         "Stellive Store",
@@ -3584,10 +3584,10 @@
     "blocked_action_count": 0,
     "manual_review_action_count": 21,
     "pending_import_action_count": 0,
-    "total_action_rows": 33611,
+    "total_action_rows": 33509,
     "open_review_queues": {
       "source_discovery_rows": 768,
-      "image_missing_rows": 846,
+      "image_missing_rows": 812,
       "dedupe_groups": 61,
       "animation_unknown_categories": 0,
       "ichiban_missing_release_date_rows": 8,
@@ -3640,8 +3640,8 @@
       "official_detail_review_manual_confirmed_rows": 0,
       "ensky_cache_candidate_action_rows": 39,
       "ensky_cache_candidate_manual_confirmed_rows": 0,
-      "image_attachment_action_rows": 78,
-      "image_attachment_actionable_rows": 78,
+      "image_attachment_action_rows": 44,
+      "image_attachment_actionable_rows": 44,
       "image_attachment_unqueued_actionable_rows": 0,
       "image_attachment_source_url_search_hint_rows": 0,
       "image_attachment_source_url_missing_search_hint_rows": 0,
@@ -3650,7 +3650,7 @@
       "image_attachment_source_url_missing_any_search_hint_rows": 0,
       "image_attachment_source_url_primary_review_url_rows": 0,
       "image_attachment_source_url_missing_primary_review_url_rows": 0,
-      "image_attachment_local_download_ready_rows": 78,
+      "image_attachment_local_download_ready_rows": 44,
       "ichiban_metadata_action_campaigns": 41,
       "ichiban_metadata_actionable_campaigns": 41,
       "ichiban_metadata_unqueued_action_campaigns": 0,
@@ -3680,10 +3680,10 @@
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
       "ichiban_prize_name_image_patch_blocked_rows": 0,
       "catalog_goal_manual_review_pillars": 5,
-      "catalog_goal_manual_review_rows": 955,
+      "catalog_goal_manual_review_rows": 921,
       "catalog_goal_auto_apply_ready_rows": 0,
       "catalog_goal_dedupe_manual_review_rows": 48,
-      "catalog_goal_missing_image_rows": 846,
+      "catalog_goal_missing_image_rows": 812,
       "catalog_goal_source_url_update_rows": 0,
       "catalog_goal_animation_category_rows": 0,
       "catalog_goal_ichiban_manual_review_rows": 61,
@@ -3716,8 +3716,8 @@
     "requested_focus_topics_with_open_work": 4,
     "requested_focus_missing_image_rows": 40,
     "requested_focus_missing_source_url_rows": 40,
-    "requested_focus_missing_release_date_rows": 88,
-    "requested_focus_missing_official_price_jpy_rows": 375,
+    "requested_focus_missing_release_date_rows": 87,
+    "requested_focus_missing_official_price_jpy_rows": 374,
     "requested_focus_actionable_template_rows": 600,
     "requested_focus_barcode_template_rows": 5674,
     "requested_focus_queued_action_rows": 600,
@@ -3793,13 +3793,13 @@
     "image_candidate_manual_or_blocked_items": 228,
     "image_action_source_url_update_template_rows": 0,
     "image_action_source_url_update_template_batch_count": 0,
-    "image_action_image_url_ready_rows": 56,
+    "image_action_image_url_ready_rows": 22,
     "image_action_workstream_count": 6,
     "image_known_asset_status": "pass",
     "image_download_readiness_status": "known_image_assets_complete",
     "image_url_without_local_path_rows": 0,
     "image_missing_local_image_files": 0,
-    "image_rows_still_requiring_url_evidence": 846,
+    "image_rows_still_requiring_url_evidence": 812,
     "image_missing_evidence_top_source_stores": [
       [
         "엔스카이",
@@ -3812,10 +3812,6 @@
       [
         "굿스마일컴퍼니",
         56
-      ],
-      [
-        "치이카와 온라인 쿠지",
-        52
       ],
       [
         "Stellive Store",
@@ -3832,6 +3828,10 @@
       [
         "점프 캐릭터즈 스토어",
         23
+      ],
+      [
+        "ご当地ちいかわ 공식(API)",
+        22
       ]
     ],
     "image_missing_evidence_top_categories": [
@@ -3840,24 +3840,24 @@
         144
       ],
       [
-        "인형",
-        126
-      ],
-      [
         "아크릴 스탠드",
         125
+      ],
+      [
+        "인형",
+        102
       ],
       [
         "캔뱃지",
         97
       ],
       [
-        "마스코트",
+        "키링",
         80
       ],
       [
-        "키링",
-        80
+        "마스코트",
+        70
       ],
       [
         "문구",
@@ -3869,9 +3869,9 @@
       ]
     ],
     "image_auto_download_ready_rows": 0,
-    "image_attachment_template_rows": 78,
+    "image_attachment_template_rows": 44,
     "image_attachment_template_confirmed_rows": 0,
-    "image_attachment_template_dry_run_skipped_rows": 78,
+    "image_attachment_template_dry_run_skipped_rows": 44,
     "source_focus_template_rows": 758,
     "source_focus_template_work_order_pack_count": 67,
     "source_focus_template_next_pack_rows": 20,
@@ -4355,19 +4355,19 @@
   },
   "image_attachment_action_queue": {
     "public_report": "data/catalog_image_attachment_action_queue_public.json",
-    "actionable_image_rows": 78,
-    "queued_image_rows": 78,
+    "actionable_image_rows": 44,
+    "queued_image_rows": 44,
     "unqueued_actionable_image_rows": 0,
     "sample_queue_coverage": 1.0,
-    "action_batch_count": 9,
-    "sample_action_item_rows": 78,
+    "action_batch_count": 7,
+    "sample_action_item_rows": 44,
     "skipped_already_has_image_rows": 0,
     "batch_size": 20,
     "max_batches": 18,
     "by_workflow": [
       [
         "extract_from_existing_source_url",
-        56
+        22
       ],
       [
         "review_gotouchi_official_candidates",
@@ -4376,12 +4376,12 @@
     ],
     "by_source_store": [
       [
-        "치이카와 온라인 쿠지",
-        52
-      ],
-      [
         "ご当地ちいかわ 공식(API)",
         22
+      ],
+      [
+        "치이카와 온라인 쿠지",
+        18
       ],
       [
         "TOHO animation STORE",
@@ -4403,7 +4403,7 @@
     "by_review_lane": [
       [
         "image_url_review_ready",
-        56
+        22
       ],
       [
         "representative_image_candidate_review",
@@ -4413,7 +4413,7 @@
     "image_import_blocker_counts": [
       [
         "manual_image_url_confirmation",
-        56
+        22
       ],
       [
         "representative_image_may_not_match_exact_variant",
@@ -4444,11 +4444,11 @@
     "next_source_url_review_batch_candidate_hint_rows": 0,
     "next_source_url_review_batch_no_candidate_rows": 0,
     "next_source_url_review_batch_manual_search_rows": 0,
-    "primary_review_url_rows": 78,
+    "primary_review_url_rows": 44,
     "primary_review_url_kind_counts": [
       [
         "current_source_url",
-        78
+        44
       ]
     ],
     "primary_review_url_missing_rows": 0,
@@ -4495,14 +4495,14 @@
         "auto_apply_allowed": false
       }
     ],
-    "image_url_ready_rows": 56,
-    "can_import_image_urls_now_rows": 56,
+    "image_url_ready_rows": 22,
+    "can_import_image_urls_now_rows": 22,
     "blocked_before_image_import_rows": 22,
     "manual_confirmation_required_rows": 22,
     "image_import_gate_status": "ready_to_import_confirmed_image_urls",
-    "download_ready_after_manual_image_url_rows": 78,
-    "suggested_local_image_path_rows": 78,
-    "local_image_download_instruction_ready_rows": 78,
+    "download_ready_after_manual_image_url_rows": 44,
+    "suggested_local_image_path_rows": 44,
+    "local_image_download_instruction_ready_rows": 44,
     "workstream_count": 6,
     "source_url_update_workstream_count": 0,
     "source_url_update_work_order_count": 0,
@@ -4580,19 +4580,19 @@
       "blocked_before_image_import_rows": 22,
       "source_url_update_required_rows": 0,
       "representative_image_review_required_rows": 22,
-      "image_url_ready_rows": 56,
+      "image_url_ready_rows": 22,
       "manual_confirmation_required_rows": 22,
-      "local_download_ready_after_manual_image_url_rows": 78,
+      "local_download_ready_after_manual_image_url_rows": 44,
       "next_safe_phase": "review_representative_image_candidates",
       "next_source_url_review_batch_rows": 0,
       "next_representative_image_review_batch_rows": 10,
-      "primary_review_url_rows": 78,
+      "primary_review_url_rows": 44,
       "primary_review_url_missing_rows": 0,
       "source_url_review_start_coverage": 0,
       "top_blockers": [
         [
           "manual_image_url_confirmation",
-          56
+          22
         ],
         [
           "representative_image_may_not_match_exact_variant",
@@ -4639,17 +4639,17 @@
       "manual_review_required_before_import": true
     },
     "attachment_readiness": {
-      "row_count": 78,
-      "local_image_download_instruction_ready_rows": 78,
-      "suggested_local_image_path_rows": 78,
-      "primary_review_url_rows": 78,
+      "row_count": 44,
+      "local_image_download_instruction_ready_rows": 44,
+      "suggested_local_image_path_rows": 44,
+      "primary_review_url_rows": 44,
       "primary_review_url_missing_rows": 0,
       "blocked_by_source_url_rows": 0,
       "blocked_by_representative_review_rows": 22,
-      "image_url_review_ready_rows": 56,
+      "image_url_review_ready_rows": 22,
       "blocked_before_image_import_rows": 22,
-      "can_import_image_urls_now_rows": 56,
-      "download_ready_after_manual_image_url_rows": 78,
+      "can_import_image_urls_now_rows": 22,
+      "download_ready_after_manual_image_url_rows": 44,
       "readiness_lane_counts": [
         [
           "source_url_replacement_first",
@@ -4661,7 +4661,7 @@
         ],
         [
           "image_url_review_ready",
-          56
+          22
         ]
       ],
       "manual_confirmation_required": true,
@@ -4673,8 +4673,8 @@
       "current_batch_id": "image-attachment-action-001",
       "current_first_primary_review_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
       "blocked_before_image_import_rows": 22,
-      "ready_to_import_image_url_rows": 56,
-      "local_download_ready_after_confirmation_rows": 78,
+      "ready_to_import_image_url_rows": 22,
+      "local_download_ready_after_confirmation_rows": 44,
       "manual_review_required": true,
       "handoff_steps": [
         {
@@ -4700,7 +4700,7 @@
           "step": 2,
           "lane": "local_image_download_after_confirmation",
           "status": "waiting_for_confirmed_image_urls",
-          "next_batch_rows": 78,
+          "next_batch_rows": 44,
           "review_section": "catalog_image_attachment_confirmed_template_public.json",
           "write_template_section": "local_image_download_instruction",
           "import_tool": "tools/import_confirmed_image_attachment_rows.py",
@@ -6256,24 +6256,24 @@
   },
   "metadata_action_queue": {
     "public_report": "data/catalog_metadata_action_queue_public.json",
-    "actionable_group_count": 166,
-    "queued_group_count": 166,
+    "actionable_group_count": 164,
+    "queued_group_count": 164,
     "unqueued_actionable_group_count": 0,
-    "actionable_missing_cells": 2433,
-    "queued_missing_cells": 2433,
+    "actionable_missing_cells": 2431,
+    "queued_missing_cells": 2431,
     "unqueued_actionable_missing_cells": 0,
     "group_queue_coverage": 1.0,
     "missing_cell_queue_coverage": 1.0,
     "action_batch_count": 14,
     "batch_size": 12,
     "max_groups": 200,
-    "primary_review_url_groups": 127,
+    "primary_review_url_groups": 125,
     "first_primary_review_url": "https://www.goodsmile.info/ja/product/13483/",
     "first_primary_review_url_kind": "sample_source_url",
     "primary_review_url_kind_counts": [
       [
         "sample_source_url",
-        127
+        125
       ],
       [
         "manual_lookup_required",
@@ -6283,11 +6283,11 @@
     "field_counts": [
       [
         "release_date",
-        83
+        82
       ],
       [
         "official_price_jpy",
-        42
+        41
       ],
       [
         "name_ja",
@@ -6459,11 +6459,11 @@
     "missing_cells_by_field": [
       [
         "release_date",
-        1348
+        1347
       ],
       [
         "official_price_jpy",
-        559
+        558
       ],
       [
         "name_ja",
@@ -6837,11 +6837,11 @@
     "excluded_field_missing_cells": [
       [
         "barcode",
-        10082
+        10081
       ],
       [
         "image_url",
-        846
+        812
       ],
       [
         "source_url",
@@ -7011,14 +7011,14 @@
   "image_asset_audit": {
     "public_report": "data/catalog_image_asset_audit_public.json",
     "rows": 20346,
-    "image_url_rows": 19500,
-    "missing_image_url_rows": 846,
-    "local_image_path_rows": 19500,
-    "image_url_with_local_path_rows": 19500,
+    "image_url_rows": 19534,
+    "missing_image_url_rows": 812,
+    "local_image_path_rows": 19534,
+    "image_url_with_local_path_rows": 19534,
     "image_url_without_local_path_rows": 0,
     "local_path_without_image_url_rows": 0,
     "unique_local_image_paths": 19426,
-    "reused_local_image_paths": 50,
+    "reused_local_image_paths": 84,
     "missing_local_image_files": 0,
     "missing_web_public_asset_files": 0,
     "invalid_local_image_paths": 0,
@@ -7027,21 +7027,21 @@
     "status": "pass",
     "download_readiness_status": "known_image_assets_complete",
     "known_image_download_blocker_rows": 0,
-    "rows_still_requiring_image_url_evidence": 846,
+    "rows_still_requiring_image_url_evidence": 812,
     "auto_download_ready_rows": 0,
     "download_readiness": {
       "status": "known_image_assets_complete",
-      "known_image_url_rows": 19500,
+      "known_image_url_rows": 19534,
       "known_image_download_blocker_rows": 0,
       "image_url_without_local_path_rows": 0,
       "missing_local_image_files": 0,
       "missing_web_public_asset_files": 0,
       "invalid_local_image_paths": 0,
-      "missing_image_url_rows": 846,
-      "rows_still_requiring_image_url_evidence": 846,
+      "missing_image_url_rows": 812,
+      "rows_still_requiring_image_url_evidence": 812,
       "download_complete_for_known_image_urls": true,
       "missing_image_evidence_priority": {
-        "rows": 846,
+        "rows": 812,
         "by_source_store": [
           [
             "엔스카이",
@@ -7054,10 +7054,6 @@
           [
             "굿스마일컴퍼니",
             56
-          ],
-          [
-            "치이카와 온라인 쿠지",
-            52
           ],
           [
             "Stellive Store",
@@ -7082,6 +7078,10 @@
           [
             "FuRyu",
             21
+          ],
+          [
+            "치이카와 온라인 쿠지",
+            18
           ],
           [
             "Banpresto",
@@ -7130,24 +7130,24 @@
             144
           ],
           [
-            "인형",
-            126
-          ],
-          [
             "아크릴 스탠드",
             125
+          ],
+          [
+            "인형",
+            102
           ],
           [
             "캔뱃지",
             97
           ],
           [
-            "마스코트",
+            "키링",
             80
           ],
           [
-            "키링",
-            80
+            "마스코트",
+            70
           ],
           [
             "문구",
@@ -7208,12 +7208,12 @@
         ],
         "by_affiliation": [
           [
-            "치이카와",
-            116
-          ],
-          [
             "원피스",
             84
+          ],
+          [
+            "치이카와",
+            82
           ],
           [
             "나의 히어로 아카데미아",
@@ -7302,28 +7302,16 @@
             22
           ],
           [
-            "ちいかわ クレープくじ",
-            9
+            "한국 한정",
+            5
           ],
           [
             "ちいかわ うさぎだらけくじ",
-            9
-          ],
-          [
-            "ちいかわ たこイカくじ",
-            8
+            3
           ],
           [
             "ちいかわ たぬきだもんくじ",
-            7
-          ],
-          [
-            "ちいかわ 褒めろッ モモンガだらけくじ",
-            5
-          ],
-          [
-            "한국 한정",
-            5
+            1
           ]
         ],
         "top_source_store": [
@@ -7389,215 +7377,6 @@
             "series_name": null
           },
           {
-            "catalog_index": 636,
-            "name_ko": "A상: BIG 크레페 안기 인형 (치이카와)",
-            "name_ja": "A賞 BIGクレープな抱っこぬいぐるみ ちいかわ",
-            "image_url": null,
-            "local_image_path": null,
-            "source_store": "치이카와 온라인 쿠지",
-            "category": "인형",
-            "affiliation": "치이카와",
-            "series_name": "ちいかわ クレープくじ"
-          },
-          {
-            "catalog_index": 637,
-            "name_ko": "A상: BIG 크레페 안기 인형 (하치와레)",
-            "name_ja": "A賞 BIGクレープな抱っこぬいぐるみ ハチワレ",
-            "image_url": null,
-            "local_image_path": null,
-            "source_store": "치이카와 온라인 쿠지",
-            "category": "인형",
-            "affiliation": "치이카와",
-            "series_name": "ちいかわ クレープくじ"
-          },
-          {
-            "catalog_index": 638,
-            "name_ko": "A상: BIG 크레페 안기 인형 (우사기)",
-            "name_ja": "A賞 BIGクレープな抱っこぬいぐるみ うさぎ",
-            "image_url": null,
-            "local_image_path": null,
-            "source_store": "치이카와 온라인 쿠지",
-            "category": "인형",
-            "affiliation": "치이카와",
-            "series_name": "ちいかわ クレープくじ"
-          },
-          {
-            "catalog_index": 639,
-            "name_ko": "B상: 크레페 가게 인형 S (치이카와)",
-            "name_ja": "B賞 クレープ屋さんなぬいぐるみS ちいかわ",
-            "image_url": null,
-            "local_image_path": null,
-            "source_store": "치이카와 온라인 쿠지",
-            "category": "인형",
-            "affiliation": "치이카와",
-            "series_name": "ちいかわ クレープくじ"
-          },
-          {
-            "catalog_index": 640,
-            "name_ko": "B상: 크레페 가게 인형 S (하치와레)",
-            "name_ja": "B賞 クレープ屋さんなぬいぐるみS ハチワレ",
-            "image_url": null,
-            "local_image_path": null,
-            "source_store": "치이카와 온라인 쿠지",
-            "category": "인형",
-            "affiliation": "치이카와",
-            "series_name": "ちいかわ クレープくじ"
-          },
-          {
-            "catalog_index": 641,
-            "name_ko": "B상: 크레페 가게 인형 S (우사기)",
-            "name_ja": "B賞 クレープ屋さんなぬいぐるみS うさぎ",
-            "image_url": null,
-            "local_image_path": null,
-            "source_store": "치이카와 온라인 쿠지",
-            "category": "인형",
-            "affiliation": "치이카와",
-            "series_name": "ちいかわ クレープくじ"
-          },
-          {
-            "catalog_index": 642,
-            "name_ko": "C상: 크레페가 되어버렸어!! 마스코트 (치이카와)",
-            "name_ja": "C賞 クレープになっちゃった！！マスコット ちいかわ",
-            "image_url": null,
-            "local_image_path": null,
-            "source_store": "치이카와 온라인 쿠지",
-            "category": "마스코트",
-            "affiliation": "치이카와",
-            "series_name": "ちいかわ クレープくじ"
-          },
-          {
-            "catalog_index": 643,
-            "name_ko": "C상: 크레페가 되어버렸어!! 마스코트 (하치와레)",
-            "name_ja": "C賞 クレープになっちゃった！！マスコット ハチワレ",
-            "image_url": null,
-            "local_image_path": null,
-            "source_store": "치이카와 온라인 쿠지",
-            "category": "마스코트",
-            "affiliation": "치이카와",
-            "series_name": "ちいかわ クレープくじ"
-          },
-          {
-            "catalog_index": 644,
-            "name_ko": "C상: 크레페가 되어버렸어!! 마스코트 (우사기)",
-            "name_ja": "C賞 クレープになっちゃった！！マスコット うさぎ",
-            "image_url": null,
-            "local_image_path": null,
-            "source_store": "치이카와 온라인 쿠지",
-            "category": "마스코트",
-            "affiliation": "치이카와",
-            "series_name": "ちいかわ クレープくじ"
-          },
-          {
-            "catalog_index": 645,
-            "name_ko": "A상: 합석 사이즈 특대 문어 옷 인형 (치이카와)",
-            "name_ja": "A賞 相席サイズな特大たこ着ぬいぐるみ ちいかわ",
-            "image_url": null,
-            "local_image_path": null,
-            "source_store": "치이카와 온라인 쿠지",
-            "category": "인형",
-            "affiliation": "치이카와",
-            "series_name": "ちいかわ たこイカくじ"
-          },
-          {
-            "catalog_index": 646,
-            "name_ko": "A상: 합석 사이즈 특대 문어 옷 인형 (하치와레)",
-            "name_ja": "A賞 相席サイズな特大たこ着ぬいぐるみ ハチワレ",
-            "image_url": null,
-            "local_image_path": null,
-            "source_store": "치이카와 온라인 쿠지",
-            "category": "인형",
-            "affiliation": "치이카와",
-            "series_name": "ちいかわ たこイカくじ"
-          },
-          {
-            "catalog_index": 647,
-            "name_ko": "B상: BIG 오징어 쿠션 (우사기)",
-            "name_ja": "B賞 BIGイカクッション うさぎ",
-            "image_url": null,
-            "local_image_path": null,
-            "source_store": "치이카와 온라인 쿠지",
-            "category": "인형",
-            "affiliation": "치이카와",
-            "series_name": "ちいかわ たこイカくじ"
-          },
-          {
-            "catalog_index": 648,
-            "name_ko": "C상: 폭신폭신 타코이카 인형 S (치이카와)",
-            "name_ja": "C賞 ふわふわたこイカぬいぐるみS ちいかわ",
-            "image_url": null,
-            "local_image_path": null,
-            "source_store": "치이카와 온라인 쿠지",
-            "category": "인형",
-            "affiliation": "치이카와",
-            "series_name": "ちいかわ たこイカくじ"
-          },
-          {
-            "catalog_index": 649,
-            "name_ko": "C상: 폭신폭신 타코이카 인형 S (하치와레)",
-            "name_ja": "C賞 ふわふわたこイカぬいぐるみS ハチワレ",
-            "image_url": null,
-            "local_image_path": null,
-            "source_store": "치이카와 온라인 쿠지",
-            "category": "인형",
-            "affiliation": "치이카와",
-            "series_name": "ちいかわ たこイカくじ"
-          },
-          {
-            "catalog_index": 650,
-            "name_ko": "C상: 폭신폭신 타코이카 인형 S (우사기)",
-            "name_ja": "C賞 ふわふわたこイカぬいぐるみS うさぎ",
-            "image_url": null,
-            "local_image_path": null,
-            "source_store": "치이카와 온라인 쿠지",
-            "category": "인형",
-            "affiliation": "치이카와",
-            "series_name": "ちいかわ たこイカくじ"
-          },
-          {
-            "catalog_index": 651,
-            "name_ko": "D상: 타코이카 마스코트 (치이카와 문어)",
-            "name_ja": "D賞 たこイカマスコット ちいかわ・たこ",
-            "image_url": null,
-            "local_image_path": null,
-            "source_store": "치이카와 온라인 쿠지",
-            "category": "마스코트",
-            "affiliation": "치이카와",
-            "series_name": "ちいかわ たこイカくじ"
-          },
-          {
-            "catalog_index": 652,
-            "name_ko": "D상: 타코이카 마스코트 (하치와레 오징어)",
-            "name_ja": "D賞 たこイカマスコット ハチワレ・イカ",
-            "image_url": null,
-            "local_image_path": null,
-            "source_store": "치이카와 온라인 쿠지",
-            "category": "마스코트",
-            "affiliation": "치이카와",
-            "series_name": "ちいかわ たこイカくじ"
-          },
-          {
-            "catalog_index": 653,
-            "name_ko": "A상: 超BIG 인형 (팔짱)",
-            "name_ja": "A賞 超BIGぬいぐるみ 腕組み",
-            "image_url": null,
-            "local_image_path": null,
-            "source_store": "치이카와 온라인 쿠지",
-            "category": "인형",
-            "affiliation": "치이카와",
-            "series_name": "ちいかわ うさぎだらけくじ"
-          },
-          {
-            "catalog_index": 654,
-            "name_ko": "A상: 超BIG 인형 (점프)",
-            "name_ja": "A賞 超BIGぬいぐるみ ジャンプ",
-            "image_url": null,
-            "local_image_path": null,
-            "source_store": "치이카와 온라인 쿠지",
-            "category": "인형",
-            "affiliation": "치이카와",
-            "series_name": "ちいかわ うさぎだらけくじ"
-          },
-          {
             "catalog_index": 655,
             "name_ko": "B상: 페이스 쿠션 (귀 쫑긋)",
             "name_ja": "B賞 フェイスクッション 耳ピン",
@@ -7631,37 +7410,246 @@
             "series_name": "ちいかわ うさぎだらけくじ"
           },
           {
-            "catalog_index": 658,
-            "name_ko": "D상: 마스코트 도토리 DJ",
-            "name_ja": "D賞 マスコット どんぐりDJ",
+            "catalog_index": 673,
+            "name_ko": "C상: 절대 너구리인 마스코트",
+            "name_ja": "C賞 ぜったいたぬきなマスコット",
             "image_url": null,
             "local_image_path": null,
             "source_store": "치이카와 온라인 쿠지",
             "category": "마스코트",
             "affiliation": "치이카와",
-            "series_name": "ちいかわ うさぎだらけくじ"
+            "series_name": "ちいかわ たぬきだもんくじ"
           },
           {
-            "catalog_index": 659,
-            "name_ko": "D상: 마스코트 카눌레가 된 모습",
-            "name_ja": "D賞 マスコット カヌレになった姿",
+            "catalog_index": 674,
+            "name_ko": "A상: 빅 인형 피스",
+            "name_ja": "A賞 BIGぬいぐるみ ピース",
             "image_url": null,
             "local_image_path": null,
             "source_store": "치이카와 온라인 쿠지",
-            "category": "마스코트",
+            "category": "인형",
             "affiliation": "치이카와",
-            "series_name": "ちいかわ うさぎだらけくじ"
+            "series_name": null
           },
           {
-            "catalog_index": 660,
-            "name_ko": "D상: 마스코트 피자만",
-            "name_ja": "D賞 マスコット ピザまん",
+            "catalog_index": 675,
+            "name_ko": "A상: 빅 인형 야다",
+            "name_ja": "A賞 BIGぬいぐるみ ヤダ",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "치이카와 온라인 쿠지",
+            "category": "인형",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 676,
+            "name_ko": "B상: 자석 동반 인형",
+            "name_ja": "B賞 マグネット付きおとも人形",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "치이카와 온라인 쿠지",
+            "category": "인형",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 677,
+            "name_ko": "D상: 친구 마스코트",
+            "name_ja": "D賞 おともだちマスコット",
             "image_url": null,
             "local_image_path": null,
             "source_store": "치이카와 온라인 쿠지",
             "category": "마스코트",
             "affiliation": "치이카와",
-            "series_name": "ちいかわ うさぎだらけくじ"
+            "series_name": null
+          },
+          {
+            "catalog_index": 678,
+            "name_ko": "A상: 빅 인형 찍는다!!! (카메라)",
+            "name_ja": "A賞 BIGぬいぐるみ 撮るよーッ!!!",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "치이카와 온라인 쿠지",
+            "category": "인형",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 679,
+            "name_ko": "A상: 빅 인형 부끄 피스",
+            "name_ja": "A賞 BIGぬいぐるみ 照れピース",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "치이카와 온라인 쿠지",
+            "category": "인형",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 680,
+            "name_ko": "B상: 페이스 쿠션 하극상",
+            "name_ja": "B賞 フェイスクッション 下剋上",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "치이카와 온라인 쿠지",
+            "category": "인형",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 681,
+            "name_ko": "B상: 페이스 쿠션 ...이라는 거?",
+            "name_ja": "B賞 フェイスクッション …ってコト!？",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "치이카와 온라인 쿠지",
+            "category": "인형",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 682,
+            "name_ko": "D상: 하치와레 마스코트",
+            "name_ja": "D賞 マスコット",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "치이카와 온라인 쿠지",
+            "category": "마스코트",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 920,
+            "name_ko": "치이카와 러버 스트랩 (치이카와)",
+            "name_ja": "ちいかわ ラバーストラップ (ちいかわ)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "엔스카이",
+            "category": "키링",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 921,
+            "name_ko": "치이카와 러버 스트랩 (하치와레)",
+            "name_ja": "ちいかわ ラバーストラップ (ハチワレ)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "엔스카이",
+            "category": "키링",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 922,
+            "name_ko": "치이카와 러버 스트랩 (우사기)",
+            "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "엔스카이",
+            "category": "키링",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 923,
+            "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
+            "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "엔스카이",
+            "category": "키링",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 924,
+            "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
+            "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "엔스카이",
+            "category": "키링",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 925,
+            "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
+            "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "엔스카이",
+            "category": "키링",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 926,
+            "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
+            "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "엔스카이",
+            "category": "키링",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 927,
+            "name_ko": "치이카와 아크릴 스탠드 (치이카와)",
+            "name_ja": "ちいかわ アクリルスタンド (ちいかわ)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "엔스카이",
+            "category": "아크릴 스탠드",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 928,
+            "name_ko": "치이카와 아크릴 스탠드 (하치와레)",
+            "name_ja": "ちいかわ アクリルスタンド (ハチワレ)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "엔스카이",
+            "category": "아크릴 스탠드",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 929,
+            "name_ko": "치이카와 아크릴 스탠드 (우사기)",
+            "name_ja": "ちいかわ アクリルスタンド (うさぎ)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "엔스카이",
+            "category": "아크릴 스탠드",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 930,
+            "name_ko": "치이카와 빅 아크릴 스탠드 (치이카와)",
+            "name_ja": "ちいかわ ビッグアクリルスタンド (ちいかわ)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "엔스카이",
+            "category": "아크릴 스탠드",
+            "affiliation": "치이카와",
+            "series_name": null
+          },
+          {
+            "catalog_index": 931,
+            "name_ko": "치이카와 스탠드 미니 (모몽가)",
+            "name_ja": "ちいかわ スタンドミニ (モモンガ)",
+            "image_url": null,
+            "local_image_path": null,
+            "source_store": "엔스카이",
+            "category": "아크릴 스탠드",
+            "affiliation": "치이카와",
+            "series_name": null
           }
         ]
       },
@@ -7673,11 +7661,11 @@
   },
   "missing_image_priority": {
     "public_report": "data/catalog_missing_image_priority_public.json",
-    "missing_image_rows": 846,
+    "missing_image_rows": 812,
     "work_queue_rows": 710,
     "queue_matched_rows": 703,
     "stale_queue_index_matches": 0,
-    "unmatched_catalog_missing_rows": 143,
+    "unmatched_catalog_missing_rows": 109,
     "missing_source_url_rows": 768,
     "generic_source_url_rows": 0,
     "product_source_url_rows": 0,
@@ -7854,10 +7842,10 @@
   },
   "missing_image_report_coverage": {
     "public_report": "data/catalog_missing_image_report_coverage_public.json",
-    "missing_image_rows": 846,
-    "assigned_report_rows": 773,
-    "unassigned_missing_image_rows": 73,
-    "report_count": 10,
+    "missing_image_rows": 812,
+    "assigned_report_rows": 812,
+    "unassigned_missing_image_rows": 0,
+    "report_count": 11,
     "auto_apply_enabled": false
   },
   "generic_storefront_missing_image_source": {
@@ -7871,7 +7859,7 @@
   "gotouchi_representative_image_attachment": {
     "public_report": "data/gotouchi_representative_image_attachment_public.json",
     "representative_attachment_rows": 0,
-    "skipped_already_has_image_rows": 3,
+    "skipped_already_has_image_rows": 4,
     "manual_confirmed_true": 0,
     "auto_apply_enabled": false
   },
@@ -8472,10 +8460,10 @@
   },
   "missing_image_actionability": {
     "public_report": "data/catalog_missing_image_actionability_public.json",
-    "missing_image_rows": 846,
-    "readiness_classified_rows": 846,
+    "missing_image_rows": 812,
+    "readiness_classified_rows": 812,
     "unclassified_rows": 0,
-    "exact_source_ready_rows": 56,
+    "exact_source_ready_rows": 22,
     "source_first_rows": 758,
     "review_before_attach_rows": 22,
     "source_detail_candidate_review_rows": 0,
@@ -8506,13 +8494,13 @@
     "source_discovery_focus_template_dry_run_skipped_rows": 758,
     "source_discovery_focus_coverage": 1.0,
     "source_discovery_non_focus_rows": 0,
-    "action_queue_rows": 78,
-    "direct_image_action_queue_rows": 78,
-    "direct_image_action_primary_review_url_rows": 78,
+    "action_queue_rows": 44,
+    "direct_image_action_queue_rows": 44,
+    "direct_image_action_primary_review_url_rows": 44,
     "direct_image_action_primary_review_url_kind_counts": [
       [
         "current_source_url",
-        78
+        44
       ]
     ],
     "direct_image_action_next_representative_review_batch_rows": 10,
@@ -8529,13 +8517,13 @@
     "manual_image_research_review_start_kind": "fallback_web_search",
     "source_discovery_review_start_rows": 20,
     "source_discovery_review_start_kind": "domain_limited_web_search",
-    "image_attachment_template_rows": 78,
+    "image_attachment_template_rows": 44,
     "image_attachment_template_confirmed_rows": 0,
     "image_attachment_template_source_update_required_rows": 0,
     "image_attachment_template_representative_review_rows": 22,
     "image_attachment_template_dry_run_updated_rows": 0,
-    "image_attachment_template_dry_run_skipped_rows": 78,
-    "actionable_image_rows": 78,
+    "image_attachment_template_dry_run_skipped_rows": 44,
+    "actionable_image_rows": 44,
     "source_discovery_work_pack_count": 16,
     "source_discovery_work_pack_rows": 679,
     "by_blocked_reason": [
@@ -8545,7 +8533,7 @@
       },
       {
         "blocked_reason": "candidate_image_requires_manual_review",
-        "rows": 56
+        "rows": 22
       },
       {
         "blocked_reason": "representative_image_requires_product_type_review",
@@ -8567,7 +8555,7 @@
       },
       {
         "blocked_until": "manual_image_url_confirmed_from_exact_source",
-        "rows": 56
+        "rows": 22
       },
       {
         "blocked_until": "representative_image_exact_product_type_confirmed",
@@ -8583,7 +8571,7 @@
       }
     ],
     "auto_apply_enabled": false,
-    "completion_plan_total_open_rows": 846,
+    "completion_plan_total_open_rows": 812,
     "completion_plan_phase_rows_total": 790,
     "completion_plan_phase_count": 3,
     "completion_plan_status": "needs_review",
@@ -8593,10 +8581,10 @@
     "completion_plan_rows_with_review_start": 790,
     "completion_plan_rows_missing_review_start": 0,
     "blocking_dashboard_status": "manual_evidence_required",
-    "blocking_dashboard_queue_coverage": 0.948,
+    "blocking_dashboard_queue_coverage": 0.9877,
     "manual_validation_focus": {
       "auto_import_ready_rows": 0,
-      "manual_validation_required_rows": 846,
+      "manual_validation_required_rows": 812,
       "next_focus_lane": "discover_exact_source_urls",
       "next_focus_row_count": 758,
       "next_focus_source": "source_discovery_action_queue_public.json",
@@ -8923,7 +8911,7 @@
           "current_focus_pack": {},
           "review_start": {
             "workflow": "review_gotouchi_official_candidates",
-            "batch_id": "image-attachment-action-008",
+            "batch_id": "image-attachment-action-006",
             "source_store": "ご当地ちいかわ 공식(API)",
             "row_count": 20,
             "primary_review_url_rows": 20,
@@ -9114,13 +9102,13 @@
       }
     },
     "execution_queue_summary": {
-      "open_missing_image_rows": 846,
+      "open_missing_image_rows": 812,
       "auto_import_ready_rows": 0,
       "queue_count": 4,
       "queued_rows_total": 802,
       "raw_queued_rows_total": 802,
       "overlapping_queue_rows": 0,
-      "not_yet_queued_rows": 44,
+      "not_yet_queued_rows": 10,
       "not_yet_queued_rows_explained": 0,
       "unqueued_phase_rows_total": 0,
       "overlay_queue_rows": 12,
@@ -9298,7 +9286,7 @@
           ],
           "review_start": {
             "workflow": "review_gotouchi_official_candidates",
-            "batch_id": "image-attachment-action-008",
+            "batch_id": "image-attachment-action-006",
             "source_store": "ご当地ちいかわ 공식(API)",
             "row_count": 20,
             "primary_review_url_rows": 20,
@@ -9523,12 +9511,12 @@
     },
     "blocking_dashboard": {
       "status": "manual_evidence_required",
-      "total_open_rows": 846,
+      "total_open_rows": 812,
       "auto_import_ready_rows": 0,
-      "manual_validation_required_rows": 846,
+      "manual_validation_required_rows": 812,
       "queued_rows_total": 802,
-      "not_yet_queued_rows": 44,
-      "queue_coverage": 0.948,
+      "not_yet_queued_rows": 10,
+      "queue_coverage": 0.9877,
       "top_blocked_reason": {
         "blocked_reason": "missing_exact_source_url",
         "rows": 758
@@ -9586,11 +9574,11 @@
       ],
       "image_evidence_bottleneck_summary": {
         "status": "source_or_image_evidence_required",
-        "missing_image_rows": 846,
+        "missing_image_rows": 812,
         "known_image_download_problem_rows": 0,
-        "image_url_evidence_missing_rows": 846,
+        "image_url_evidence_missing_rows": 812,
         "auto_import_ready_rows": 0,
-        "manual_confirmation_required_rows": 846,
+        "manual_confirmation_required_rows": 812,
         "source_first_rows": 758,
         "representative_review_rows": 22,
         "manual_image_research_rows": 10,
@@ -11167,7 +11155,7 @@
   },
   "source_discovery_completion_roadmap": {
     "public_report": "data/source_discovery_completion_roadmap_public.json",
-    "missing_image_rows": 846,
+    "missing_image_rows": 812,
     "source_first_rows": 758,
     "queued_source_rows": 758,
     "focus_source_rows": 758,
@@ -11182,7 +11170,7 @@
     "manual_source_search_rows": 0,
     "provider_missing_rows": 0,
     "candidate_source_review_rows": 0,
-    "direct_image_action_rows": 78,
+    "direct_image_action_rows": 44,
     "roadmap_phase_count": 5,
     "next_execution_lane_count": 4,
     "auto_apply_enabled": false,
@@ -11237,8 +11225,8 @@
     },
     "next_execution_summary": {
       "lane_count": 4,
-      "open_rows": 874,
-      "next_batch_rows": 136,
+      "open_rows": 840,
+      "next_batch_rows": 102,
       "next_safe_phase": "exact_source_url_review",
       "auto_apply_enabled": false,
       "manual_evidence_required": true
@@ -11277,10 +11265,10 @@
       {
         "lane": "image_attachment_after_source_confirmation",
         "status": "blocked_until_source_or_image_evidence_confirmed",
-        "open_rows": 78,
-        "next_batch_rows": 78,
-        "review_start_rows": 78,
-        "manual_decision_rows": 78,
+        "open_rows": 44,
+        "next_batch_rows": 44,
+        "review_start_rows": 44,
+        "manual_decision_rows": 44,
         "public_report": "data/catalog_image_attachment_action_queue_public.json",
         "next_action": "attach image URLs only after exact source page and image identity are confirmed"
       }
@@ -11354,7 +11342,7 @@
           "step": 3,
           "lane": "image_attachment_after_source_confirmation",
           "status": "blocked_until_source_or_image_evidence_confirmed",
-          "next_batch_rows": 78,
+          "next_batch_rows": 44,
           "review_section": "catalog_image_attachment_action_queue",
           "write_template_section": "image_attachment_confirmed_template",
           "required_before_write": [
@@ -11378,30 +11366,30 @@
   },
   "image_attachment_template_import_dry_run": {
     "public_report": "data/catalog_image_attachment_template_import_dry_run_public.json",
-    "template_items": 78,
+    "template_items": 44,
     "manual_confirmed_rows": 0,
     "ready_image_rows": 0,
     "source_url_update_required_rows": 0,
     "representative_image_review_required_rows": 22,
-    "image_url_ready_rows": 56,
+    "image_url_ready_rows": 22,
     "updated_rows": 0,
-    "skipped_rows": 78,
-    "blocked_rows": 78,
+    "skipped_rows": 44,
+    "blocked_rows": 44,
     "skip_reason_counts": [
       [
         "manual_confirmed_false",
-        78
+        44
       ]
     ],
     "auto_apply_enabled": false,
     "write": false,
     "import_readiness": {
       "status": "blocked_until_manual_image_evidence",
-      "template_items": 78,
+      "template_items": 44,
       "manual_confirmed_rows": 0,
       "ready_image_rows": 0,
       "ready_to_import_rows": 0,
-      "blocked_rows": 78,
+      "blocked_rows": 44,
       "blocked_reason_count": 1,
       "source_url_update_required_rows": 0,
       "representative_image_review_required_rows": 22,
@@ -11431,35 +11419,35 @@
       "data/catalog_image_attachment_template_import_dry_run_public.json",
       "data/catalog_missing_image_actionability_public.json"
     ],
-    "missing_image_rows": 846,
-    "actionable_image_rows": 78,
-    "queued_image_rows": 78,
+    "missing_image_rows": 812,
+    "actionable_image_rows": 44,
+    "queued_image_rows": 44,
     "unqueued_actionable_image_rows": 0,
     "source_url_update_required_rows": 0,
     "source_url_update_template_rows": 0,
     "source_url_update_template_batch_count": 0,
     "representative_image_review_required_rows": 22,
-    "image_url_ready_rows": 56,
+    "image_url_ready_rows": 22,
     "primary_review_url_missing_rows": 0,
     "blocked_before_image_import_rows": 22,
-    "download_ready_after_manual_image_url_rows": 78,
-    "template_rows": 78,
+    "download_ready_after_manual_image_url_rows": 44,
+    "template_rows": 44,
     "template_confirmed_rows": 0,
     "dry_run_updated_rows": 0,
-    "dry_run_skipped_rows": 78,
+    "dry_run_skipped_rows": 44,
     "sample_queue_coverage": 1.0,
     "attachment_readiness": {
-      "row_count": 78,
-      "local_image_download_instruction_ready_rows": 78,
-      "suggested_local_image_path_rows": 78,
-      "primary_review_url_rows": 78,
+      "row_count": 44,
+      "local_image_download_instruction_ready_rows": 44,
+      "suggested_local_image_path_rows": 44,
+      "primary_review_url_rows": 44,
       "primary_review_url_missing_rows": 0,
       "blocked_by_source_url_rows": 0,
       "blocked_by_representative_review_rows": 22,
-      "image_url_review_ready_rows": 56,
+      "image_url_review_ready_rows": 22,
       "blocked_before_image_import_rows": 22,
-      "can_import_image_urls_now_rows": 56,
-      "download_ready_after_manual_image_url_rows": 78,
+      "can_import_image_urls_now_rows": 22,
+      "download_ready_after_manual_image_url_rows": 44,
       "readiness_lane_counts": [
         [
           "source_url_replacement_first",
@@ -11471,7 +11459,7 @@
         ],
         [
           "image_url_review_ready",
-          56
+          22
         ]
       ],
       "manual_confirmation_required": true,
@@ -15319,22 +15307,22 @@
       "data/catalog_missing_image_report_coverage_public.json"
     ],
     "status": "manual_evidence_required",
-    "missing_image_rows": 846,
-    "assigned_report_rows": 773,
-    "unassigned_missing_image_rows": 73,
-    "action_queue_rows": 78,
+    "missing_image_rows": 812,
+    "assigned_report_rows": 812,
+    "unassigned_missing_image_rows": 0,
+    "action_queue_rows": 44,
     "source_first_rows": 758,
     "review_before_attach_rows": 22,
     "manual_image_research_rows": 10,
     "source_discovery_focus_pack_rows": 758,
     "source_discovery_remaining_focus_review_rows": 758,
-    "not_yet_queued_rows": 44,
+    "not_yet_queued_rows": 10,
     "next_queue_lane": "discover_exact_source_urls",
     "next_queue_rows": 758,
     "next_queue_template": "source_discovery_focus_confirmed_template_public.json",
-    "image_url_ready_rows": 56,
+    "image_url_ready_rows": 22,
     "blocked_before_image_import_rows": 22,
-    "download_ready_after_manual_image_url_rows": 78,
+    "download_ready_after_manual_image_url_rows": 44,
     "known_image_assets_complete": true,
     "known_image_download_blocker_rows": 0,
     "auto_apply_ready_rows": 0,
@@ -15383,7 +15371,7 @@
     "source_url_update_review_start_coverage": 0,
     "ready_to_import_rows": 0,
     "dry_run_updated_rows": 0,
-    "dry_run_skipped_rows": 78,
+    "dry_run_skipped_rows": 44,
     "auto_apply_ready_rows": 0,
     "auto_apply_enabled": false,
     "manual_confirmation_required": true,
@@ -15398,7 +15386,7 @@
     "pillar_count": 5,
     "manual_review_pillar_count": 5,
     "auto_apply_ready_rows": 0,
-    "manual_review_rows": 955,
+    "manual_review_rows": 921,
     "next_safe_phase": "review_candidate_source_urls",
     "pillars": [
       {
@@ -15552,16 +15540,16 @@
         "pillar": "missing_images",
         "label": "Resolve missing catalog images",
         "status": "manual_evidence_required",
-        "open_rows": 846,
-        "manual_review_rows": 846,
+        "open_rows": 812,
+        "manual_review_rows": 812,
         "auto_apply_ready_rows": 0,
         "queued_rows": 802,
-        "unqueued_rows": 44,
-        "queue_coverage": 0.948,
+        "unqueued_rows": 10,
+        "queue_coverage": 0.9877,
         "next_queue_lane": "discover_exact_source_urls",
         "next_queue_rows": 758,
         "execution_queue_count": 4,
-        "manual_validation_required_rows": 846,
+        "manual_validation_required_rows": 812,
         "source_first_rows": 758,
         "review_before_attach_rows": 22,
         "manual_image_research_rows": 10,
@@ -15579,21 +15567,21 @@
         "source_discovery_not_started_focus_pack_count": 67,
         "source_discovery_focus_coverage": 1.0,
         "source_discovery_non_focus_rows": 0,
-        "action_queue_rows": 78,
-        "direct_image_action_rows": 78,
+        "action_queue_rows": 44,
+        "direct_image_action_rows": 44,
         "source_url_update_required_rows": 0,
         "source_url_update_primary_review_url_rows": 0,
         "source_url_update_review_start_coverage": 0,
         "representative_image_review_required_rows": 22,
         "next_representative_review_batch_rows": 10,
         "next_representative_review_primary_url_rows": 10,
-        "local_download_ready_rows": 78,
-        "attachment_template_rows": 78,
+        "local_download_ready_rows": 44,
+        "attachment_template_rows": 44,
         "attachment_template_manual_rows": 0,
         "attachment_dry_run_ready_rows": 0,
-        "attachment_dry_run_blocked_rows": 78,
-        "assigned_report_rows": 773,
-        "unassigned_missing_image_rows": 73,
+        "attachment_dry_run_blocked_rows": 44,
+        "assigned_report_rows": 812,
+        "unassigned_missing_image_rows": 0,
         "known_image_assets_complete": true,
         "known_image_download_blocker_rows": 0,
         "top_blocked_reasons": [
@@ -15603,7 +15591,7 @@
           },
           {
             "blocked_reason": "candidate_image_requires_manual_review",
-            "rows": 56
+            "rows": 22
           },
           {
             "blocked_reason": "representative_image_requires_product_type_review",
@@ -15634,8 +15622,8 @@
           "current_batch_id": "image-attachment-action-001",
           "current_first_primary_review_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
           "blocked_before_image_import_rows": 22,
-          "ready_to_import_image_url_rows": 56,
-          "local_download_ready_after_confirmation_rows": 78,
+          "ready_to_import_image_url_rows": 22,
+          "local_download_ready_after_confirmation_rows": 44,
           "manual_review_required": true,
           "handoff_steps": [
             {
@@ -15661,7 +15649,7 @@
               "step": 2,
               "lane": "local_image_download_after_confirmation",
               "status": "waiting_for_confirmed_image_urls",
-              "next_batch_rows": 78,
+              "next_batch_rows": 44,
               "review_section": "catalog_image_attachment_confirmed_template_public.json",
               "write_template_section": "local_image_download_instruction",
               "import_tool": "tools/import_confirmed_image_attachment_rows.py",
@@ -15732,7 +15720,7 @@
         "source_url_update_review_start_coverage": 0,
         "ready_to_import_rows": 0,
         "dry_run_updated_rows": 0,
-        "dry_run_skipped_rows": 78,
+        "dry_run_skipped_rows": 44,
         "manual_confirmation_required": true,
         "blocked_until": "manual_exact_source_url_confirmation",
         "blocked_reasons": [
@@ -15742,15 +15730,15 @@
         "public_report": "data/catalog_image_source_url_confirmed_template_public.json",
         "next_execution_summary": {
           "lane_count": 4,
-          "open_rows": 874,
-          "next_batch_rows": 136,
+          "open_rows": 840,
+          "next_batch_rows": 102,
           "next_safe_phase": "exact_source_url_review",
           "auto_apply_enabled": false,
           "manual_evidence_required": true
         },
         "next_execution_lane_count": 4,
-        "next_execution_open_rows": 874,
-        "next_execution_next_batch_rows": 136,
+        "next_execution_open_rows": 840,
+        "next_execution_next_batch_rows": 102,
         "first_next_execution_lane": "exact_source_url_review",
         "first_next_execution_status": "manual_cache_miss_research_required",
         "first_next_execution_rows": 20,
@@ -15824,7 +15812,7 @@
               "step": 3,
               "lane": "image_attachment_after_source_confirmation",
               "status": "blocked_until_source_or_image_evidence_confirmed",
-              "next_batch_rows": 78,
+              "next_batch_rows": 44,
               "review_section": "catalog_image_attachment_action_queue",
               "write_template_section": "image_attachment_confirmed_template",
               "required_before_write": [

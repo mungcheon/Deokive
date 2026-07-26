@@ -59,6 +59,12 @@ REPORT_RULES = [
         None,
         ("source_url_generic_storefront", "blocked_until_exact_product_url"),
     ),
+    (
+        "catalog_missing_image_actionability",
+        "data/catalog_missing_image_actionability_public.json",
+        None,
+        None,
+    ),
 ]
 
 
@@ -111,6 +117,8 @@ def rule_matches(
     stores: set[str] | None,
     strategy_safety: tuple[str, str] | None,
 ) -> bool:
+    if stores is None and strategy_safety is None:
+        return True
     if stores is not None and row.get("source_store") in stores:
         return True
     if strategy_safety and queue_row:
