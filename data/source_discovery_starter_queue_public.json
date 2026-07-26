@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T12:25:53Z",
+  "generated_at": "2026-07-26T13:20:45Z",
   "scope": "source_discovery_starter_queue",
   "source_report": "data/catalog_missing_image_priority_public.json",
   "summary": {
-    "starter_queue_groups": 386,
-    "starter_queue_rows": 751,
-    "sample_item_rows": 701,
+    "starter_queue_groups": 391,
+    "starter_queue_rows": 768,
+    "sample_item_rows": 718,
     "groups_with_search_urls": 275,
-    "groups_with_fallback_web_search_urls": 111,
-    "groups_with_any_search_url": 386,
-    "missing_source_url_rows": 751,
+    "groups_with_fallback_web_search_urls": 116,
+    "groups_with_any_search_url": 391,
+    "missing_source_url_rows": 768,
     "coverage_matches_missing_source_url_rows": true,
     "next_review_batch_rows": 20,
     "next_review_batch_group_count": 4,
@@ -19473,6 +19473,299 @@
       "auto_apply_enabled": false
     },
     {
+      "source_store": "Banpresto",
+      "affiliation": "장송의 프리렌",
+      "category": "피규어",
+      "primary_strategy": "manual_review",
+      "priority": 999,
+      "rows": 5,
+      "first_search_url": null,
+      "search_urls": [],
+      "search_url_count": 0,
+      "first_fallback_web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20Banpresto%20%EC%9E%A5%EC%86%A1%EC%9D%98%20%ED%94%84%EB%A6%AC%EB%A0%8C%20official%20goods",
+      "fallback_web_search_urls": [
+        "https://www.google.com/search?q=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20Banpresto%20%EC%9E%A5%EC%86%A1%EC%9D%98%20%ED%94%84%EB%A6%AC%EB%A0%8C%20official%20goods",
+        "https://www.google.com/search?q=Q%20posket%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20Banpresto%20%EC%9E%A5%EC%86%A1%EC%9D%98%20%ED%94%84%EB%A6%AC%EB%A0%8C%20official%20goods",
+        "https://www.google.com/search?q=Q%20posket%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20Banpresto%20%EC%9E%A5%EC%86%A1%EC%9D%98%20%ED%94%84%EB%A6%AC%EB%A0%8C%20official%20goods"
+      ],
+      "fallback_web_search_url_count": 3,
+      "sample_items": [
+        {
+          "catalog_index": 1493,
+          "name_ko": "Q posket 프리렌",
+          "name_ja": "Q posket フリーレン",
+          "source_store": "Banpresto",
+          "affiliation": "장송의 프리렌",
+          "category": "피규어",
+          "priority": null,
+          "strategy": null,
+          "search_query": "Q posket フリーレン",
+          "search_url": null,
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1494,
+          "name_ko": "Q posket 펀",
+          "name_ja": "Q posket フェルン",
+          "source_store": "Banpresto",
+          "affiliation": "장송의 프리렌",
+          "category": "피규어",
+          "priority": null,
+          "strategy": null,
+          "search_query": "Q posket フェルン",
+          "search_url": null,
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1496,
+          "name_ko": "Q posket 히멜",
+          "name_ja": "Q posket ヒンメル",
+          "source_store": "Banpresto",
+          "affiliation": "장송의 프리렌",
+          "category": "피규어",
+          "priority": null,
+          "strategy": null,
+          "search_query": "Q posket ヒンメル",
+          "search_url": null,
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1497,
+          "name_ko": "Break Time Collection 프리렌",
+          "name_ja": "Break Time Collection フリーレン",
+          "source_store": "Banpresto",
+          "affiliation": "장송의 프리렌",
+          "category": "피규어",
+          "priority": null,
+          "strategy": null,
+          "search_query": "Break Time Collection フリーレン",
+          "search_url": null,
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1498,
+          "name_ko": "Break Time Collection 펀",
+          "name_ja": "Break Time Collection フェルン",
+          "source_store": "Banpresto",
+          "affiliation": "장송의 프리렌",
+          "category": "피규어",
+          "priority": null,
+          "strategy": null,
+          "search_query": "Break Time Collection フェルン",
+          "search_url": null,
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "recommended_workflow": "official_prize_provider_search_then_exact_detail_match",
+      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
+      "blocked_until": "exact_source_url_and_image_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "source_store": "Banpresto",
+      "affiliation": "리제로",
+      "category": "피규어",
+      "primary_strategy": "manual_review",
+      "priority": 999,
+      "rows": 4,
+      "first_search_url": null,
+      "search_urls": [],
+      "search_url_count": 0,
+      "first_fallback_web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%AC%E3%83%A0%20Banpresto%20%EB%A6%AC%EC%A0%9C%EB%A1%9C%20official%20goods",
+      "fallback_web_search_urls": [
+        "https://www.google.com/search?q=Q%20posket%20%E3%83%AC%E3%83%A0%20Banpresto%20%EB%A6%AC%EC%A0%9C%EB%A1%9C%20official%20goods",
+        "https://www.google.com/search?q=Q%20posket%20%E3%83%A9%E3%83%A0%20Banpresto%20%EB%A6%AC%EC%A0%9C%EB%A1%9C%20official%20goods",
+        "https://www.google.com/search?q=Q%20posket%20%E3%82%A8%E3%83%9F%E3%83%AA%E3%82%A2%20Banpresto%20%EB%A6%AC%EC%A0%9C%EB%A1%9C%20official%20goods"
+      ],
+      "fallback_web_search_url_count": 3,
+      "sample_items": [
+        {
+          "catalog_index": 2014,
+          "name_ko": "Q posket 렘",
+          "name_ja": "Q posket レム",
+          "source_store": "Banpresto",
+          "affiliation": "리제로",
+          "category": "피규어",
+          "priority": null,
+          "strategy": null,
+          "search_query": "Q posket レム",
+          "search_url": null,
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 2015,
+          "name_ko": "Q posket 람",
+          "name_ja": "Q posket ラム",
+          "source_store": "Banpresto",
+          "affiliation": "리제로",
+          "category": "피규어",
+          "priority": null,
+          "strategy": null,
+          "search_query": "Q posket ラム",
+          "search_url": null,
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 2016,
+          "name_ko": "Q posket 에밀리아",
+          "name_ja": "Q posket エミリア",
+          "source_store": "Banpresto",
+          "affiliation": "리제로",
+          "category": "피규어",
+          "priority": null,
+          "strategy": null,
+          "search_query": "Q posket エミリア",
+          "search_url": null,
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 2017,
+          "name_ko": "Espresto 렘",
+          "name_ja": "エスプレスト レム",
+          "source_store": "Banpresto",
+          "affiliation": "리제로",
+          "category": "피규어",
+          "priority": null,
+          "strategy": null,
+          "search_query": "エスプレスト レム",
+          "search_url": null,
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "recommended_workflow": "official_prize_provider_search_then_exact_detail_match",
+      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
+      "blocked_until": "exact_source_url_and_image_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "source_store": "Banpresto",
+      "affiliation": "메이드 인 어비스",
+      "category": "피규어",
+      "primary_strategy": "manual_review",
+      "priority": 999,
+      "rows": 4,
+      "first_search_url": null,
+      "search_urls": [],
+      "search_url_count": 0,
+      "first_fallback_web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%AA%E3%82%B3%20Banpresto%20%EB%A9%94%EC%9D%B4%EB%93%9C%20%EC%9D%B8%20%EC%96%B4%EB%B9%84%EC%8A%A4%20official%20goods",
+      "fallback_web_search_urls": [
+        "https://www.google.com/search?q=Q%20posket%20%E3%83%AA%E3%82%B3%20Banpresto%20%EB%A9%94%EC%9D%B4%EB%93%9C%20%EC%9D%B8%20%EC%96%B4%EB%B9%84%EC%8A%A4%20official%20goods",
+        "https://www.google.com/search?q=Q%20posket%20%E3%83%AC%E3%82%B0%20Banpresto%20%EB%A9%94%EC%9D%B4%EB%93%9C%20%EC%9D%B8%20%EC%96%B4%EB%B9%84%EC%8A%A4%20official%20goods",
+        "https://www.google.com/search?q=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81%20Banpresto%20%EB%A9%94%EC%9D%B4%EB%93%9C%20%EC%9D%B8%20%EC%96%B4%EB%B9%84%EC%8A%A4%20official%20goods"
+      ],
+      "fallback_web_search_url_count": 3,
+      "sample_items": [
+        {
+          "catalog_index": 1415,
+          "name_ko": "Q posket 리코",
+          "name_ja": "Q posket リコ",
+          "source_store": "Banpresto",
+          "affiliation": "메이드 인 어비스",
+          "category": "피규어",
+          "priority": null,
+          "strategy": null,
+          "search_query": "Q posket リコ",
+          "search_url": null,
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1416,
+          "name_ko": "Q posket 레그",
+          "name_ja": "Q posket レグ",
+          "source_store": "Banpresto",
+          "affiliation": "메이드 인 어비스",
+          "category": "피규어",
+          "priority": null,
+          "strategy": null,
+          "search_query": "Q posket レグ",
+          "search_url": null,
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1417,
+          "name_ko": "Q posket 나나치",
+          "name_ja": "Q posket ナナチ",
+          "source_store": "Banpresto",
+          "affiliation": "메이드 인 어비스",
+          "category": "피규어",
+          "priority": null,
+          "strategy": null,
+          "search_query": "Q posket ナナチ",
+          "search_url": null,
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1418,
+          "name_ko": "Break Time Collection 나나치",
+          "name_ja": "ブレイクタイムコレクション ナナチ",
+          "source_store": "Banpresto",
+          "affiliation": "메이드 인 어비스",
+          "category": "피규어",
+          "priority": null,
+          "strategy": null,
+          "search_query": "ブレイクタイムコレクション ナナチ",
+          "search_url": null,
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "recommended_workflow": "official_prize_provider_search_then_exact_detail_match",
+      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
+      "blocked_until": "exact_source_url_and_image_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
       "source_store": "엔스카이",
       "affiliation": "귀멸의 칼날",
       "category": "캔뱃지",
@@ -19744,6 +20037,81 @@
         }
       ],
       "recommended_workflow": "official_storefront_search_then_exact_detail_match",
+      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
+      "blocked_until": "exact_source_url_and_image_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "source_store": "Banpresto",
+      "affiliation": "단간론파",
+      "category": "피규어",
+      "primary_strategy": "manual_review",
+      "priority": 999,
+      "rows": 3,
+      "first_search_url": null,
+      "search_urls": [],
+      "search_url_count": 0,
+      "first_fallback_web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%20Banpresto%20%EB%8B%A8%EA%B0%84%EB%A1%A0%ED%8C%8C%20official%20goods",
+      "fallback_web_search_urls": [
+        "https://www.google.com/search?q=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%20Banpresto%20%EB%8B%A8%EA%B0%84%EB%A1%A0%ED%8C%8C%20official%20goods",
+        "https://www.google.com/search?q=Break%20Time%20Collection%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97%20Banpresto%20%EB%8B%A8%EA%B0%84%EB%A1%A0%ED%8C%8C%20official%20goods",
+        "https://www.google.com/search?q=Break%20Time%20Collection%20%E6%97%A5%E5%90%91%E5%89%B5%20Banpresto%20%EB%8B%A8%EA%B0%84%EB%A1%A0%ED%8C%8C%20official%20goods"
+      ],
+      "fallback_web_search_url_count": 3,
+      "sample_items": [
+        {
+          "catalog_index": 1462,
+          "name_ko": "Q posket 모노쿠마",
+          "name_ja": "Q posket モノクマ",
+          "source_store": "Banpresto",
+          "affiliation": "단간론파",
+          "category": "피규어",
+          "priority": null,
+          "strategy": null,
+          "search_query": "Q posket モノクマ",
+          "search_url": null,
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1463,
+          "name_ko": "Break Time Collection 코마에다 나기토",
+          "name_ja": "Break Time Collection 狛枝凪斗",
+          "source_store": "Banpresto",
+          "affiliation": "단간론파",
+          "category": "피규어",
+          "priority": null,
+          "strategy": null,
+          "search_query": "Break Time Collection 狛枝凪斗",
+          "search_url": null,
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        },
+        {
+          "catalog_index": 1464,
+          "name_ko": "Break Time Collection 히나타 하지메",
+          "name_ja": "Break Time Collection 日向創",
+          "source_store": "Banpresto",
+          "affiliation": "단간론파",
+          "category": "피규어",
+          "priority": null,
+          "strategy": null,
+          "search_query": "Break Time Collection 日向創",
+          "search_url": null,
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "recommended_workflow": "official_prize_provider_search_then_exact_detail_match",
       "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
       "blocked_until": "exact_source_url_and_image_url_confirmed",
       "auto_apply_enabled": false
@@ -20660,6 +21028,45 @@
         }
       ],
       "recommended_workflow": "official_storefront_search_then_exact_detail_match",
+      "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
+      "blocked_until": "exact_source_url_and_image_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "source_store": "Banpresto",
+      "affiliation": "봇치 더 록",
+      "category": "피규어",
+      "primary_strategy": "manual_review",
+      "priority": 999,
+      "rows": 1,
+      "first_search_url": null,
+      "search_urls": [],
+      "search_url_count": 0,
+      "first_fallback_web_search_url": "https://www.google.com/search?q=Q%20posket%20%E5%BE%8C%E8%97%A4%E3%81%B2%E3%81%A8%E3%82%8A%20Banpresto%20%EB%B4%87%EC%B9%98%20%EB%8D%94%20%EB%A1%9D%20%ED%94%BC%EA%B7%9C%EC%96%B4%20official%20goods",
+      "fallback_web_search_urls": [
+        "https://www.google.com/search?q=Q%20posket%20%E5%BE%8C%E8%97%A4%E3%81%B2%E3%81%A8%E3%82%8A%20Banpresto%20%EB%B4%87%EC%B9%98%20%EB%8D%94%20%EB%A1%9D%20%ED%94%BC%EA%B7%9C%EC%96%B4%20official%20goods"
+      ],
+      "fallback_web_search_url_count": 1,
+      "sample_items": [
+        {
+          "catalog_index": 1909,
+          "name_ko": "Q posket 고토 히토리",
+          "name_ja": "Q posket 後藤ひとり",
+          "source_store": "Banpresto",
+          "affiliation": "봇치 더 록",
+          "category": "피규어",
+          "priority": null,
+          "strategy": null,
+          "search_query": "Q posket 後藤ひとり",
+          "search_url": null,
+          "required_evidence": [
+            "exact_product_source_url",
+            "title_character_variant_type_match",
+            "product_image_visible_on_confirmed_source"
+          ]
+        }
+      ],
+      "recommended_workflow": "official_prize_provider_search_then_exact_detail_match",
       "next_step": "open_search_urls_and_confirm_exact_product_source_pages",
       "blocked_until": "exact_source_url_and_image_url_confirmed",
       "auto_apply_enabled": false

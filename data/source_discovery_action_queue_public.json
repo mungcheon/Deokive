@@ -1,25 +1,25 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T12:25:56Z",
+  "generated_at": "2026-07-26T13:20:48Z",
   "scope": "source_discovery_action_queue",
   "summary": {
-    "actionable_source_rows": 741,
-    "queued_source_rows": 741,
+    "actionable_source_rows": 758,
+    "queued_source_rows": 758,
     "unqueued_actionable_source_rows": 0,
     "queue_coverage": 1.0,
-    "action_batch_count": 66,
+    "action_batch_count": 67,
     "batch_size": 20,
     "max_rows": 1000,
-    "source_patch_template_count": 741,
-    "catalog_field_import_template_count": 741,
-    "source_discovery_template_rows": 741,
-    "source_discovery_template_batch_count": 41,
+    "source_patch_template_count": 758,
+    "catalog_field_import_template_count": 758,
+    "source_discovery_template_rows": 758,
+    "source_discovery_template_batch_count": 42,
     "missing_template_item_count": 0,
     "missing_template_sample_catalog_indexes": [],
     "by_review_state": [
       [
         "official_search_review_required",
-        729
+        746
       ],
       [
         "licensed_retailer_review_required",
@@ -29,7 +29,7 @@
     "by_workflow": [
       [
         "official_search_url_available",
-        729
+        746
       ],
       [
         "licensed_retailer_search_review",
@@ -68,6 +68,10 @@
       [
         "FuRyu",
         21
+      ],
+      [
+        "Banpresto",
+        17
       ],
       [
         "Taito",
@@ -192,17 +196,13 @@
       [
         "SEGA",
         1
-      ],
-      [
-        "STARSHIP STORE",
-        1
       ]
     ],
-    "primary_review_url_rows": 741,
+    "primary_review_url_rows": 758,
     "primary_review_url_kind_counts": [
       [
         "official_search_url",
-        741
+        758
       ]
     ],
     "first_primary_review_url": "https://www.google.com/search?q=site%3Aalter-web.jp%201/7%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AB%20%E3%83%AA%E3%82%B3",
@@ -254,7 +254,7 @@
         2
       ]
     ],
-    "source_store_workstream_count": 41,
+    "source_store_workstream_count": 42,
     "high_volume_source_store_workstream_count": 8,
     "largest_source_store_workstream_rows": 187,
     "auto_apply_enabled": false
@@ -1627,13 +1627,156 @@
       "auto_apply_enabled": false
     },
     {
-      "source_store": "Taito",
+      "source_store": "Banpresto",
       "priority": 10,
-      "queued_source_rows": 15,
+      "queued_source_rows": 17,
       "batch_count": 1,
       "next_batch_id": "source-discovery-action-034",
       "batch_ids": [
         "source-discovery-action-034"
+      ],
+      "allowed_source_domains": [
+        "bsp-prize.jp"
+      ],
+      "official_search_url_count": 17,
+      "fallback_web_search_url_count": 0,
+      "first_primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AA%E3%82%B3",
+      "first_primary_review_url_kind": "official_search_url",
+      "workflow_rows": [
+        [
+          "official_search_url_available",
+          17
+        ]
+      ],
+      "review_state_rows": [
+        [
+          "official_search_review_required",
+          17
+        ]
+      ],
+      "category_rows": [
+        [
+          "피규어",
+          17
+        ]
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1415,
+          "name_ko": "Q posket 리코",
+          "name_ja": "Q posket リコ",
+          "category": "피규어",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AA%E3%82%B3",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%AA%E3%82%B3%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AA%E3%82%B3",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ]
+        },
+        {
+          "catalog_index": 1416,
+          "name_ko": "Q posket 레그",
+          "name_ja": "Q posket レグ",
+          "category": "피규어",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%82%B0",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%AC%E3%82%B0%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%82%B0",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ]
+        },
+        {
+          "catalog_index": 1417,
+          "name_ko": "Q posket 나나치",
+          "name_ja": "Q posket ナナチ",
+          "category": "피규어",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ]
+        },
+        {
+          "catalog_index": 1418,
+          "name_ko": "Break Time Collection 나나치",
+          "name_ja": "ブレイクタイムコレクション ナナチ",
+          "category": "피규어",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ]
+        },
+        {
+          "catalog_index": 1462,
+          "name_ko": "Q posket 모노쿠마",
+          "name_ja": "Q posket モノクマ",
+          "category": "피규어",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ]
+        },
+        {
+          "catalog_index": 1463,
+          "name_ko": "Break Time Collection 코마에다 나기토",
+          "name_ja": "Break Time Collection 狛枝凪斗",
+          "category": "피규어",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97",
+          "web_search_url": "https://www.google.com/search?q=Break%20Time%20Collection%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ]
+        },
+        {
+          "catalog_index": 1464,
+          "name_ko": "Break Time Collection 히나타 하지메",
+          "name_ja": "Break Time Collection 日向創",
+          "category": "피규어",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E6%97%A5%E5%90%91%E5%89%B5",
+          "web_search_url": "https://www.google.com/search?q=Break%20Time%20Collection%20%E6%97%A5%E5%90%91%E5%89%B5%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E6%97%A5%E5%90%91%E5%89%B5",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ]
+        },
+        {
+          "catalog_index": 1493,
+          "name_ko": "Q posket 프리렌",
+          "name_ja": "Q posket フリーレン",
+          "category": "피규어",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ]
+        }
+      ],
+      "recommended_next_step": "confirm_exact_source_url_then_fill_source_templates",
+      "auto_apply_enabled": false
+    },
+    {
+      "source_store": "Taito",
+      "priority": 10,
+      "queued_source_rows": 15,
+      "batch_count": 1,
+      "next_batch_id": "source-discovery-action-035",
+      "batch_ids": [
+        "source-discovery-action-035"
       ],
       "allowed_source_domains": [
         "www.taito.co.jp"
@@ -1778,9 +1921,9 @@
       "priority": 10,
       "queued_source_rows": 15,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-035",
+      "next_batch_id": "source-discovery-action-036",
       "batch_ids": [
-        "source-discovery-action-035"
+        "source-discovery-action-036"
       ],
       "allowed_source_domains": [
         "jumpcs.shueisha.co.jp"
@@ -1941,9 +2084,9 @@
       "priority": 10,
       "queued_source_rows": 15,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-036",
+      "next_batch_id": "source-discovery-action-037",
       "batch_ids": [
-        "source-discovery-action-036"
+        "source-discovery-action-037"
       ],
       "allowed_source_domains": [
         "x.com"
@@ -2096,9 +2239,9 @@
       "priority": 10,
       "queued_source_rows": 13,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-037",
+      "next_batch_id": "source-discovery-action-038",
       "batch_ids": [
-        "source-discovery-action-037"
+        "source-discovery-action-038"
       ],
       "allowed_source_domains": [
         "webshop-global.ufotable.co.jp"
@@ -2251,9 +2394,9 @@
       "priority": 10,
       "queued_source_rows": 12,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-038",
+      "next_batch_id": "source-discovery-action-039",
       "batch_ids": [
-        "source-discovery-action-038"
+        "source-discovery-action-039"
       ],
       "allowed_source_domains": [
         "www.cospa.com"
@@ -2402,9 +2545,9 @@
       "priority": 10,
       "queued_source_rows": 11,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-039",
+      "next_batch_id": "source-discovery-action-040",
       "batch_ids": [
-        "source-discovery-action-039"
+        "source-discovery-action-040"
       ],
       "allowed_source_domains": [
         "p-bandai.jp"
@@ -2549,9 +2692,9 @@
       "priority": 10,
       "queued_source_rows": 9,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-040",
+      "next_batch_id": "source-discovery-action-041",
       "batch_ids": [
-        "source-discovery-action-040"
+        "source-discovery-action-041"
       ],
       "allowed_source_domains": [
         "www.megahobby.jp"
@@ -2692,9 +2835,9 @@
       "priority": 10,
       "queued_source_rows": 7,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-041",
+      "next_batch_id": "source-discovery-action-042",
       "batch_ids": [
-        "source-discovery-action-041"
+        "source-discovery-action-042"
       ],
       "allowed_source_domains": [
         "www.miniso.com"
@@ -2830,9 +2973,9 @@
       "priority": 10,
       "queued_source_rows": 6,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-042",
+      "next_batch_id": "source-discovery-action-043",
       "batch_ids": [
-        "source-discovery-action-042"
+        "source-discovery-action-043"
       ],
       "allowed_source_domains": [
         "shop.sanrio.co.jp"
@@ -2951,9 +3094,9 @@
       "priority": 10,
       "queued_source_rows": 5,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-043",
+      "next_batch_id": "source-discovery-action-044",
       "batch_ids": [
-        "source-discovery-action-043"
+        "source-discovery-action-044"
       ],
       "allowed_source_domains": [
         "en.thejypshop.com"
@@ -3059,9 +3202,9 @@
       "priority": 10,
       "queued_source_rows": 5,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-044",
+      "next_batch_id": "source-discovery-action-045",
       "batch_ids": [
-        "source-discovery-action-044"
+        "source-discovery-action-045"
       ],
       "allowed_source_domains": [
         "www.re-ment.co.jp"
@@ -3163,9 +3306,9 @@
       "priority": 10,
       "queued_source_rows": 5,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-045",
+      "next_batch_id": "source-discovery-action-046",
       "batch_ids": [
-        "source-discovery-action-045"
+        "source-discovery-action-046"
       ],
       "allowed_source_domains": [
         "x.com"
@@ -3275,9 +3418,9 @@
       "priority": 10,
       "queued_source_rows": 4,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-046",
+      "next_batch_id": "source-discovery-action-047",
       "batch_ids": [
-        "source-discovery-action-046"
+        "source-discovery-action-047"
       ],
       "allowed_source_domains": [
         "www.miniso.com"
@@ -3378,9 +3521,9 @@
       "priority": 10,
       "queued_source_rows": 4,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-047",
+      "next_batch_id": "source-discovery-action-048",
       "batch_ids": [
-        "source-discovery-action-047"
+        "source-discovery-action-048"
       ],
       "allowed_source_domains": [
         "gashapon.jp"
@@ -3473,9 +3616,9 @@
       "priority": 10,
       "queued_source_rows": 4,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-048",
+      "next_batch_id": "source-discovery-action-049",
       "batch_ids": [
-        "source-discovery-action-048"
+        "source-discovery-action-049"
       ],
       "allowed_source_domains": [
         "store.disney.co.jp"
@@ -3564,9 +3707,9 @@
       "priority": 10,
       "queued_source_rows": 4,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-049",
+      "next_batch_id": "source-discovery-action-050",
       "batch_ids": [
-        "source-discovery-action-049"
+        "source-discovery-action-050"
       ],
       "allowed_source_domains": [
         "withmuulive.com"
@@ -3663,9 +3806,9 @@
       "priority": 10,
       "queued_source_rows": 3,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-050",
+      "next_batch_id": "source-discovery-action-051",
       "batch_ids": [
-        "source-discovery-action-050"
+        "source-discovery-action-051"
       ],
       "allowed_source_domains": [
         "p-bandai.jp"
@@ -3749,9 +3892,9 @@
       "priority": 10,
       "queued_source_rows": 3,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-051",
+      "next_batch_id": "source-discovery-action-052",
       "batch_ids": [
-        "source-discovery-action-051"
+        "source-discovery-action-052"
       ],
       "allowed_source_domains": [
         "global.shop.smtown.com"
@@ -3827,9 +3970,9 @@
       "priority": 10,
       "queued_source_rows": 3,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-052",
+      "next_batch_id": "source-discovery-action-053",
       "batch_ids": [
-        "source-discovery-action-052"
+        "source-discovery-action-053"
       ],
       "allowed_source_domains": [
         "www.amiami.com"
@@ -3905,9 +4048,9 @@
       "priority": 10,
       "queued_source_rows": 2,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-053",
+      "next_batch_id": "source-discovery-action-054",
       "batch_ids": [
-        "source-discovery-action-053"
+        "source-discovery-action-054"
       ],
       "allowed_source_domains": [
         "www.goodsmile.info"
@@ -3970,9 +4113,9 @@
       "priority": 10,
       "queued_source_rows": 2,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-054",
+      "next_batch_id": "source-discovery-action-055",
       "batch_ids": [
-        "source-discovery-action-054"
+        "source-discovery-action-055"
       ],
       "allowed_source_domains": [
         "en.ygselect.com"
@@ -4035,9 +4178,9 @@
       "priority": 10,
       "queued_source_rows": 2,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-055",
+      "next_batch_id": "source-discovery-action-056",
       "batch_ids": [
-        "source-discovery-action-055"
+        "source-discovery-action-056"
       ],
       "allowed_source_domains": [
         "lottewellfood.com"
@@ -4104,9 +4247,9 @@
       "priority": 10,
       "queued_source_rows": 2,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-056",
+      "next_batch_id": "source-discovery-action-057",
       "batch_ids": [
-        "source-discovery-action-056"
+        "source-discovery-action-057"
       ],
       "allowed_source_domains": [
         "withmuulive.com"
@@ -4169,9 +4312,9 @@
       "priority": 10,
       "queued_source_rows": 1,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-057",
+      "next_batch_id": "source-discovery-action-058",
       "batch_ids": [
-        "source-discovery-action-057"
+        "source-discovery-action-058"
       ],
       "allowed_source_domains": [
         "alter-web.jp"
@@ -4221,9 +4364,9 @@
       "priority": 10,
       "queued_source_rows": 1,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-058",
+      "next_batch_id": "source-discovery-action-059",
       "batch_ids": [
-        "source-discovery-action-058"
+        "source-discovery-action-059"
       ],
       "allowed_source_domains": [
         "cubee.co.kr"
@@ -4273,9 +4416,9 @@
       "priority": 10,
       "queued_source_rows": 1,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-059",
+      "next_batch_id": "source-discovery-action-060",
       "batch_ids": [
-        "source-discovery-action-059"
+        "source-discovery-action-060"
       ],
       "allowed_source_domains": [
         "www.amiami.com"
@@ -4325,9 +4468,9 @@
       "priority": 10,
       "queued_source_rows": 1,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-060",
+      "next_batch_id": "source-discovery-action-061",
       "batch_ids": [
-        "source-discovery-action-060"
+        "source-discovery-action-061"
       ],
       "allowed_source_domains": [
         "shop.hololivepro.com"
@@ -4377,9 +4520,9 @@
       "priority": 10,
       "queued_source_rows": 1,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-061",
+      "next_batch_id": "source-discovery-action-062",
       "batch_ids": [
-        "source-discovery-action-061"
+        "source-discovery-action-062"
       ],
       "allowed_source_domains": [
         "shop.weverse.io"
@@ -4429,9 +4572,9 @@
       "priority": 10,
       "queued_source_rows": 1,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-062",
+      "next_batch_id": "source-discovery-action-063",
       "batch_ids": [
-        "source-discovery-action-062"
+        "source-discovery-action-063"
       ],
       "allowed_source_domains": [
         "kqshop.kr"
@@ -4481,9 +4624,9 @@
       "priority": 10,
       "queued_source_rows": 1,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-063",
+      "next_batch_id": "source-discovery-action-064",
       "batch_ids": [
-        "source-discovery-action-063"
+        "source-discovery-action-064"
       ],
       "allowed_source_domains": [
         "segaplaza.jp"
@@ -4533,9 +4676,9 @@
       "priority": 10,
       "queued_source_rows": 1,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-064",
+      "next_batch_id": "source-discovery-action-065",
       "batch_ids": [
-        "source-discovery-action-064"
+        "source-discovery-action-065"
       ],
       "allowed_source_domains": [
         "www.starship-square.com"
@@ -4585,9 +4728,9 @@
       "priority": 10,
       "queued_source_rows": 1,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-065",
+      "next_batch_id": "source-discovery-action-066",
       "batch_ids": [
-        "source-discovery-action-065"
+        "source-discovery-action-066"
       ],
       "allowed_source_domains": [
         "jumpcs.shueisha.co.jp"
@@ -4637,9 +4780,9 @@
       "priority": 20,
       "queued_source_rows": 12,
       "batch_count": 1,
-      "next_batch_id": "source-discovery-action-066",
+      "next_batch_id": "source-discovery-action-067",
       "batch_ids": [
-        "source-discovery-action-066"
+        "source-discovery-action-067"
       ],
       "allowed_source_domains": [
         "amiami.com",
@@ -5619,6 +5762,856 @@
       },
       "manual_value": "",
       "evidence_url": "https://p-bandai.jp/search/?q=ONE%20PIECE%20%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97",
+      "manual_confirmed": false,
+      "blocked_until": "exact_product_detail_source_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1415,
+      "source_store": "Banpresto",
+      "category": "피규어",
+      "name_ko": "Q posket 리코",
+      "name_ja": "Q posket リコ",
+      "name_en": null,
+      "character_name": null,
+      "affiliation": null,
+      "series_name": null,
+      "sub_series": null,
+      "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AA%E3%82%B3",
+      "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%AA%E3%82%B3%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AA%E3%82%B3",
+      "primary_review_url_kind": "official_search_url",
+      "allowed_source_domains": [
+        "bsp-prize.jp"
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_patch_template": {
+        "catalog_index": 1415,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "Banpresto",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 1415,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AA%E3%82%B3",
+        "candidate_source_url": "",
+        "source_store": "Banpresto",
+        "name_ko": "Q posket 리코",
+        "name_ja": "Q posket リコ",
+        "category": "피규어",
+        "affiliation": "메이드 인 어비스",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed"
+      },
+      "manual_value": "",
+      "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AA%E3%82%B3",
+      "manual_confirmed": false,
+      "blocked_until": "exact_product_detail_source_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1416,
+      "source_store": "Banpresto",
+      "category": "피규어",
+      "name_ko": "Q posket 레그",
+      "name_ja": "Q posket レグ",
+      "name_en": null,
+      "character_name": null,
+      "affiliation": null,
+      "series_name": null,
+      "sub_series": null,
+      "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%82%B0",
+      "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%AC%E3%82%B0%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%82%B0",
+      "primary_review_url_kind": "official_search_url",
+      "allowed_source_domains": [
+        "bsp-prize.jp"
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_patch_template": {
+        "catalog_index": 1416,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "Banpresto",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 1416,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%82%B0",
+        "candidate_source_url": "",
+        "source_store": "Banpresto",
+        "name_ko": "Q posket 레그",
+        "name_ja": "Q posket レグ",
+        "category": "피규어",
+        "affiliation": "메이드 인 어비스",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed"
+      },
+      "manual_value": "",
+      "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%82%B0",
+      "manual_confirmed": false,
+      "blocked_until": "exact_product_detail_source_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1417,
+      "source_store": "Banpresto",
+      "category": "피규어",
+      "name_ko": "Q posket 나나치",
+      "name_ja": "Q posket ナナチ",
+      "name_en": null,
+      "character_name": null,
+      "affiliation": null,
+      "series_name": null,
+      "sub_series": null,
+      "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81",
+      "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81",
+      "primary_review_url_kind": "official_search_url",
+      "allowed_source_domains": [
+        "bsp-prize.jp"
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_patch_template": {
+        "catalog_index": 1417,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "Banpresto",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 1417,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81",
+        "candidate_source_url": "",
+        "source_store": "Banpresto",
+        "name_ko": "Q posket 나나치",
+        "name_ja": "Q posket ナナチ",
+        "category": "피규어",
+        "affiliation": "메이드 인 어비스",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed"
+      },
+      "manual_value": "",
+      "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81",
+      "manual_confirmed": false,
+      "blocked_until": "exact_product_detail_source_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1418,
+      "source_store": "Banpresto",
+      "category": "피규어",
+      "name_ko": "Break Time Collection 나나치",
+      "name_ja": "ブレイクタイムコレクション ナナチ",
+      "name_en": null,
+      "character_name": null,
+      "affiliation": null,
+      "series_name": null,
+      "sub_series": null,
+      "official_search_url": "https://bsp-prize.jp/search/?keyword=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81",
+      "web_search_url": "https://www.google.com/search?q=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "primary_review_url": "https://bsp-prize.jp/search/?keyword=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81",
+      "primary_review_url_kind": "official_search_url",
+      "allowed_source_domains": [
+        "bsp-prize.jp"
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_patch_template": {
+        "catalog_index": 1418,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "Banpresto",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 1418,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://bsp-prize.jp/search/?keyword=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81",
+        "candidate_source_url": "",
+        "source_store": "Banpresto",
+        "name_ko": "Break Time Collection 나나치",
+        "name_ja": "ブレイクタイムコレクション ナナチ",
+        "category": "피규어",
+        "affiliation": "메이드 인 어비스",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed"
+      },
+      "manual_value": "",
+      "evidence_url": "https://bsp-prize.jp/search/?keyword=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81",
+      "manual_confirmed": false,
+      "blocked_until": "exact_product_detail_source_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1462,
+      "source_store": "Banpresto",
+      "category": "피규어",
+      "name_ko": "Q posket 모노쿠마",
+      "name_ja": "Q posket モノクマ",
+      "name_en": null,
+      "character_name": null,
+      "affiliation": null,
+      "series_name": null,
+      "sub_series": null,
+      "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+      "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+      "primary_review_url_kind": "official_search_url",
+      "allowed_source_domains": [
+        "bsp-prize.jp"
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_patch_template": {
+        "catalog_index": 1462,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "Banpresto",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 1462,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+        "candidate_source_url": "",
+        "source_store": "Banpresto",
+        "name_ko": "Q posket 모노쿠마",
+        "name_ja": "Q posket モノクマ",
+        "category": "피규어",
+        "affiliation": "단간론파",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed"
+      },
+      "manual_value": "",
+      "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+      "manual_confirmed": false,
+      "blocked_until": "exact_product_detail_source_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1463,
+      "source_store": "Banpresto",
+      "category": "피규어",
+      "name_ko": "Break Time Collection 코마에다 나기토",
+      "name_ja": "Break Time Collection 狛枝凪斗",
+      "name_en": null,
+      "character_name": null,
+      "affiliation": null,
+      "series_name": null,
+      "sub_series": null,
+      "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97",
+      "web_search_url": "https://www.google.com/search?q=Break%20Time%20Collection%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "primary_review_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97",
+      "primary_review_url_kind": "official_search_url",
+      "allowed_source_domains": [
+        "bsp-prize.jp"
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_patch_template": {
+        "catalog_index": 1463,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "Banpresto",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 1463,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97",
+        "candidate_source_url": "",
+        "source_store": "Banpresto",
+        "name_ko": "Break Time Collection 코마에다 나기토",
+        "name_ja": "Break Time Collection 狛枝凪斗",
+        "category": "피규어",
+        "affiliation": "단간론파",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed"
+      },
+      "manual_value": "",
+      "evidence_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97",
+      "manual_confirmed": false,
+      "blocked_until": "exact_product_detail_source_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1464,
+      "source_store": "Banpresto",
+      "category": "피규어",
+      "name_ko": "Break Time Collection 히나타 하지메",
+      "name_ja": "Break Time Collection 日向創",
+      "name_en": null,
+      "character_name": null,
+      "affiliation": null,
+      "series_name": null,
+      "sub_series": null,
+      "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E6%97%A5%E5%90%91%E5%89%B5",
+      "web_search_url": "https://www.google.com/search?q=Break%20Time%20Collection%20%E6%97%A5%E5%90%91%E5%89%B5%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "primary_review_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E6%97%A5%E5%90%91%E5%89%B5",
+      "primary_review_url_kind": "official_search_url",
+      "allowed_source_domains": [
+        "bsp-prize.jp"
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_patch_template": {
+        "catalog_index": 1464,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "Banpresto",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 1464,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E6%97%A5%E5%90%91%E5%89%B5",
+        "candidate_source_url": "",
+        "source_store": "Banpresto",
+        "name_ko": "Break Time Collection 히나타 하지메",
+        "name_ja": "Break Time Collection 日向創",
+        "category": "피규어",
+        "affiliation": "단간론파",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed"
+      },
+      "manual_value": "",
+      "evidence_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E6%97%A5%E5%90%91%E5%89%B5",
+      "manual_confirmed": false,
+      "blocked_until": "exact_product_detail_source_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1493,
+      "source_store": "Banpresto",
+      "category": "피규어",
+      "name_ko": "Q posket 프리렌",
+      "name_ja": "Q posket フリーレン",
+      "name_en": null,
+      "character_name": null,
+      "affiliation": null,
+      "series_name": null,
+      "sub_series": null,
+      "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+      "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+      "primary_review_url_kind": "official_search_url",
+      "allowed_source_domains": [
+        "bsp-prize.jp"
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_patch_template": {
+        "catalog_index": 1493,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "Banpresto",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 1493,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+        "candidate_source_url": "",
+        "source_store": "Banpresto",
+        "name_ko": "Q posket 프리렌",
+        "name_ja": "Q posket フリーレン",
+        "category": "피규어",
+        "affiliation": "장송의 프리렌",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed"
+      },
+      "manual_value": "",
+      "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+      "manual_confirmed": false,
+      "blocked_until": "exact_product_detail_source_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1494,
+      "source_store": "Banpresto",
+      "category": "피규어",
+      "name_ko": "Q posket 펀",
+      "name_ja": "Q posket フェルン",
+      "name_en": null,
+      "character_name": null,
+      "affiliation": null,
+      "series_name": null,
+      "sub_series": null,
+      "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+      "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+      "primary_review_url_kind": "official_search_url",
+      "allowed_source_domains": [
+        "bsp-prize.jp"
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_patch_template": {
+        "catalog_index": 1494,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "Banpresto",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 1494,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+        "candidate_source_url": "",
+        "source_store": "Banpresto",
+        "name_ko": "Q posket 펀",
+        "name_ja": "Q posket フェルン",
+        "category": "피규어",
+        "affiliation": "장송의 프리렌",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed"
+      },
+      "manual_value": "",
+      "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+      "manual_confirmed": false,
+      "blocked_until": "exact_product_detail_source_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1496,
+      "source_store": "Banpresto",
+      "category": "피규어",
+      "name_ko": "Q posket 히멜",
+      "name_ja": "Q posket ヒンメル",
+      "name_en": null,
+      "character_name": null,
+      "affiliation": null,
+      "series_name": null,
+      "sub_series": null,
+      "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB",
+      "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB",
+      "primary_review_url_kind": "official_search_url",
+      "allowed_source_domains": [
+        "bsp-prize.jp"
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_patch_template": {
+        "catalog_index": 1496,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "Banpresto",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 1496,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB",
+        "candidate_source_url": "",
+        "source_store": "Banpresto",
+        "name_ko": "Q posket 히멜",
+        "name_ja": "Q posket ヒンメル",
+        "category": "피규어",
+        "affiliation": "장송의 프리렌",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed"
+      },
+      "manual_value": "",
+      "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB",
+      "manual_confirmed": false,
+      "blocked_until": "exact_product_detail_source_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1497,
+      "source_store": "Banpresto",
+      "category": "피규어",
+      "name_ko": "Break Time Collection 프리렌",
+      "name_ja": "Break Time Collection フリーレン",
+      "name_en": null,
+      "character_name": null,
+      "affiliation": null,
+      "series_name": null,
+      "sub_series": null,
+      "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+      "web_search_url": "https://www.google.com/search?q=Break%20Time%20Collection%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "primary_review_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+      "primary_review_url_kind": "official_search_url",
+      "allowed_source_domains": [
+        "bsp-prize.jp"
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_patch_template": {
+        "catalog_index": 1497,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "Banpresto",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 1497,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+        "candidate_source_url": "",
+        "source_store": "Banpresto",
+        "name_ko": "Break Time Collection 프리렌",
+        "name_ja": "Break Time Collection フリーレン",
+        "category": "피규어",
+        "affiliation": "장송의 프리렌",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed"
+      },
+      "manual_value": "",
+      "evidence_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+      "manual_confirmed": false,
+      "blocked_until": "exact_product_detail_source_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1498,
+      "source_store": "Banpresto",
+      "category": "피규어",
+      "name_ko": "Break Time Collection 펀",
+      "name_ja": "Break Time Collection フェルン",
+      "name_en": null,
+      "character_name": null,
+      "affiliation": null,
+      "series_name": null,
+      "sub_series": null,
+      "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+      "web_search_url": "https://www.google.com/search?q=Break%20Time%20Collection%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "primary_review_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+      "primary_review_url_kind": "official_search_url",
+      "allowed_source_domains": [
+        "bsp-prize.jp"
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_patch_template": {
+        "catalog_index": 1498,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "Banpresto",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 1498,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+        "candidate_source_url": "",
+        "source_store": "Banpresto",
+        "name_ko": "Break Time Collection 펀",
+        "name_ja": "Break Time Collection フェルン",
+        "category": "피규어",
+        "affiliation": "장송의 프리렌",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed"
+      },
+      "manual_value": "",
+      "evidence_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+      "manual_confirmed": false,
+      "blocked_until": "exact_product_detail_source_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 1909,
+      "source_store": "Banpresto",
+      "category": "피규어",
+      "name_ko": "Q posket 고토 히토리",
+      "name_ja": "Q posket 後藤ひとり",
+      "name_en": null,
+      "character_name": null,
+      "affiliation": null,
+      "series_name": null,
+      "sub_series": null,
+      "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E5%BE%8C%E8%97%A4%E3%81%B2%E3%81%A8%E3%82%8A",
+      "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E5%BE%8C%E8%97%A4%E3%81%B2%E3%81%A8%E3%82%8A%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E5%BE%8C%E8%97%A4%E3%81%B2%E3%81%A8%E3%82%8A",
+      "primary_review_url_kind": "official_search_url",
+      "allowed_source_domains": [
+        "bsp-prize.jp"
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_patch_template": {
+        "catalog_index": 1909,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "Banpresto",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 1909,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E5%BE%8C%E8%97%A4%E3%81%B2%E3%81%A8%E3%82%8A",
+        "candidate_source_url": "",
+        "source_store": "Banpresto",
+        "name_ko": "Q posket 고토 히토리",
+        "name_ja": "Q posket 後藤ひとり",
+        "category": "피규어",
+        "affiliation": "봇치 더 록",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed"
+      },
+      "manual_value": "",
+      "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E5%BE%8C%E8%97%A4%E3%81%B2%E3%81%A8%E3%82%8A",
+      "manual_confirmed": false,
+      "blocked_until": "exact_product_detail_source_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 2014,
+      "source_store": "Banpresto",
+      "category": "피규어",
+      "name_ko": "Q posket 렘",
+      "name_ja": "Q posket レム",
+      "name_en": null,
+      "character_name": null,
+      "affiliation": null,
+      "series_name": null,
+      "sub_series": null,
+      "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%83%A0",
+      "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%AC%E3%83%A0%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%83%A0",
+      "primary_review_url_kind": "official_search_url",
+      "allowed_source_domains": [
+        "bsp-prize.jp"
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_patch_template": {
+        "catalog_index": 2014,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "Banpresto",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 2014,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%83%A0",
+        "candidate_source_url": "",
+        "source_store": "Banpresto",
+        "name_ko": "Q posket 렘",
+        "name_ja": "Q posket レム",
+        "category": "피규어",
+        "affiliation": "리제로",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed"
+      },
+      "manual_value": "",
+      "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%83%A0",
+      "manual_confirmed": false,
+      "blocked_until": "exact_product_detail_source_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 2015,
+      "source_store": "Banpresto",
+      "category": "피규어",
+      "name_ko": "Q posket 람",
+      "name_ja": "Q posket ラム",
+      "name_en": null,
+      "character_name": null,
+      "affiliation": null,
+      "series_name": null,
+      "sub_series": null,
+      "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A9%E3%83%A0",
+      "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%A9%E3%83%A0%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A9%E3%83%A0",
+      "primary_review_url_kind": "official_search_url",
+      "allowed_source_domains": [
+        "bsp-prize.jp"
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_patch_template": {
+        "catalog_index": 2015,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "Banpresto",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 2015,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A9%E3%83%A0",
+        "candidate_source_url": "",
+        "source_store": "Banpresto",
+        "name_ko": "Q posket 람",
+        "name_ja": "Q posket ラム",
+        "category": "피규어",
+        "affiliation": "리제로",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed"
+      },
+      "manual_value": "",
+      "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A9%E3%83%A0",
+      "manual_confirmed": false,
+      "blocked_until": "exact_product_detail_source_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 2016,
+      "source_store": "Banpresto",
+      "category": "피규어",
+      "name_ko": "Q posket 에밀리아",
+      "name_ja": "Q posket エミリア",
+      "name_en": null,
+      "character_name": null,
+      "affiliation": null,
+      "series_name": null,
+      "sub_series": null,
+      "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%82%A8%E3%83%9F%E3%83%AA%E3%82%A2",
+      "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%82%A8%E3%83%9F%E3%83%AA%E3%82%A2%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%82%A8%E3%83%9F%E3%83%AA%E3%82%A2",
+      "primary_review_url_kind": "official_search_url",
+      "allowed_source_domains": [
+        "bsp-prize.jp"
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_patch_template": {
+        "catalog_index": 2016,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "Banpresto",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 2016,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%82%A8%E3%83%9F%E3%83%AA%E3%82%A2",
+        "candidate_source_url": "",
+        "source_store": "Banpresto",
+        "name_ko": "Q posket 에밀리아",
+        "name_ja": "Q posket エミリア",
+        "category": "피규어",
+        "affiliation": "리제로",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed"
+      },
+      "manual_value": "",
+      "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%82%A8%E3%83%9F%E3%83%AA%E3%82%A2",
+      "manual_confirmed": false,
+      "blocked_until": "exact_product_detail_source_url_confirmed",
+      "auto_apply_enabled": false
+    },
+    {
+      "catalog_index": 2017,
+      "source_store": "Banpresto",
+      "category": "피규어",
+      "name_ko": "Espresto 렘",
+      "name_ja": "エスプレスト レム",
+      "name_en": null,
+      "character_name": null,
+      "affiliation": null,
+      "series_name": null,
+      "sub_series": null,
+      "official_search_url": "https://bsp-prize.jp/search/?keyword=%E3%82%A8%E3%82%B9%E3%83%97%E3%83%AC%E3%82%B9%E3%83%88%20%E3%83%AC%E3%83%A0",
+      "web_search_url": "https://www.google.com/search?q=%E3%82%A8%E3%82%B9%E3%83%97%E3%83%AC%E3%82%B9%E3%83%88%20%E3%83%AC%E3%83%A0%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+      "primary_review_url": "https://bsp-prize.jp/search/?keyword=%E3%82%A8%E3%82%B9%E3%83%97%E3%83%AC%E3%82%B9%E3%83%88%20%E3%83%AC%E3%83%A0",
+      "primary_review_url_kind": "official_search_url",
+      "allowed_source_domains": [
+        "bsp-prize.jp"
+      ],
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "source_patch_template": {
+        "catalog_index": 2017,
+        "source_url": "<exact_product_detail_url>",
+        "image_url": "<official_product_image_url_optional_after_source_verification>",
+        "source_store": "Banpresto",
+        "evidence_url": "<official_or_trusted_evidence_url>",
+        "manual_confirmed": false,
+        "requires_exact_identity_match": true
+      },
+      "catalog_field_import_template": {
+        "manual_confirmed": false,
+        "manual_note": "",
+        "row_index": 2017,
+        "field": "source_url",
+        "manual_value": "",
+        "evidence_url": "https://bsp-prize.jp/search/?keyword=%E3%82%A8%E3%82%B9%E3%83%97%E3%83%AC%E3%82%B9%E3%83%88%20%E3%83%AC%E3%83%A0",
+        "candidate_source_url": "",
+        "source_store": "Banpresto",
+        "name_ko": "Espresto 렘",
+        "name_ja": "エスプレスト レム",
+        "category": "피규어",
+        "affiliation": "리제로",
+        "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+        "blocked_until": "exact_product_detail_source_url_confirmed"
+      },
+      "manual_value": "",
+      "evidence_url": "https://bsp-prize.jp/search/?keyword=%E3%82%A8%E3%82%B9%E3%83%97%E3%83%AC%E3%82%B9%E3%83%88%20%E3%83%AC%E3%83%A0",
       "manual_confirmed": false,
       "blocked_until": "exact_product_detail_source_url_confirmed",
       "auto_apply_enabled": false
@@ -70439,6 +71432,870 @@
     },
     {
       "template_batch_id": "source-discovery-template-009",
+      "source_store": "Banpresto",
+      "row_count": 17,
+      "official_search_url_rows": 17,
+      "fallback_web_search_url_rows": 0,
+      "allowed_source_domains": [
+        "bsp-prize.jp"
+      ],
+      "rows": [
+        {
+          "catalog_index": 1415,
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Q posket 리코",
+          "name_ja": "Q posket リコ",
+          "name_en": null,
+          "character_name": null,
+          "affiliation": null,
+          "series_name": null,
+          "sub_series": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AA%E3%82%B3",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%AA%E3%82%B3%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AA%E3%82%B3",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1415,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1415,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AA%E3%82%B3",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 리코",
+            "name_ja": "Q posket リコ",
+            "category": "피규어",
+            "affiliation": "메이드 인 어비스",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "manual_value": "",
+          "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AA%E3%82%B3",
+          "manual_confirmed": false,
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1416,
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Q posket 레그",
+          "name_ja": "Q posket レグ",
+          "name_en": null,
+          "character_name": null,
+          "affiliation": null,
+          "series_name": null,
+          "sub_series": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%82%B0",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%AC%E3%82%B0%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%82%B0",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1416,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1416,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%82%B0",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 레그",
+            "name_ja": "Q posket レグ",
+            "category": "피규어",
+            "affiliation": "메이드 인 어비스",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "manual_value": "",
+          "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%82%B0",
+          "manual_confirmed": false,
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1417,
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Q posket 나나치",
+          "name_ja": "Q posket ナナチ",
+          "name_en": null,
+          "character_name": null,
+          "affiliation": null,
+          "series_name": null,
+          "sub_series": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1417,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1417,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 나나치",
+            "name_ja": "Q posket ナナチ",
+            "category": "피규어",
+            "affiliation": "메이드 인 어비스",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "manual_value": "",
+          "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81",
+          "manual_confirmed": false,
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1418,
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Break Time Collection 나나치",
+          "name_ja": "ブレイクタイムコレクション ナナチ",
+          "name_en": null,
+          "character_name": null,
+          "affiliation": null,
+          "series_name": null,
+          "sub_series": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1418,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1418,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Break Time Collection 나나치",
+            "name_ja": "ブレイクタイムコレクション ナナチ",
+            "category": "피규어",
+            "affiliation": "메이드 인 어비스",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "manual_value": "",
+          "evidence_url": "https://bsp-prize.jp/search/?keyword=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81",
+          "manual_confirmed": false,
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1462,
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Q posket 모노쿠마",
+          "name_ja": "Q posket モノクマ",
+          "name_en": null,
+          "character_name": null,
+          "affiliation": null,
+          "series_name": null,
+          "sub_series": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1462,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1462,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 모노쿠마",
+            "name_ja": "Q posket モノクマ",
+            "category": "피규어",
+            "affiliation": "단간론파",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "manual_value": "",
+          "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+          "manual_confirmed": false,
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1463,
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Break Time Collection 코마에다 나기토",
+          "name_ja": "Break Time Collection 狛枝凪斗",
+          "name_en": null,
+          "character_name": null,
+          "affiliation": null,
+          "series_name": null,
+          "sub_series": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97",
+          "web_search_url": "https://www.google.com/search?q=Break%20Time%20Collection%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1463,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1463,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Break Time Collection 코마에다 나기토",
+            "name_ja": "Break Time Collection 狛枝凪斗",
+            "category": "피규어",
+            "affiliation": "단간론파",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "manual_value": "",
+          "evidence_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97",
+          "manual_confirmed": false,
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1464,
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Break Time Collection 히나타 하지메",
+          "name_ja": "Break Time Collection 日向創",
+          "name_en": null,
+          "character_name": null,
+          "affiliation": null,
+          "series_name": null,
+          "sub_series": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E6%97%A5%E5%90%91%E5%89%B5",
+          "web_search_url": "https://www.google.com/search?q=Break%20Time%20Collection%20%E6%97%A5%E5%90%91%E5%89%B5%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E6%97%A5%E5%90%91%E5%89%B5",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1464,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1464,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E6%97%A5%E5%90%91%E5%89%B5",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Break Time Collection 히나타 하지메",
+            "name_ja": "Break Time Collection 日向創",
+            "category": "피규어",
+            "affiliation": "단간론파",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "manual_value": "",
+          "evidence_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E6%97%A5%E5%90%91%E5%89%B5",
+          "manual_confirmed": false,
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1493,
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Q posket 프리렌",
+          "name_ja": "Q posket フリーレン",
+          "name_en": null,
+          "character_name": null,
+          "affiliation": null,
+          "series_name": null,
+          "sub_series": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1493,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1493,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 프리렌",
+            "name_ja": "Q posket フリーレン",
+            "category": "피규어",
+            "affiliation": "장송의 프리렌",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "manual_value": "",
+          "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+          "manual_confirmed": false,
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1494,
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Q posket 펀",
+          "name_ja": "Q posket フェルン",
+          "name_en": null,
+          "character_name": null,
+          "affiliation": null,
+          "series_name": null,
+          "sub_series": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1494,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1494,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 펀",
+            "name_ja": "Q posket フェルン",
+            "category": "피규어",
+            "affiliation": "장송의 프리렌",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "manual_value": "",
+          "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+          "manual_confirmed": false,
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1496,
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Q posket 히멜",
+          "name_ja": "Q posket ヒンメル",
+          "name_en": null,
+          "character_name": null,
+          "affiliation": null,
+          "series_name": null,
+          "sub_series": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1496,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1496,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 히멜",
+            "name_ja": "Q posket ヒンメル",
+            "category": "피규어",
+            "affiliation": "장송의 프리렌",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "manual_value": "",
+          "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB",
+          "manual_confirmed": false,
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1497,
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Break Time Collection 프리렌",
+          "name_ja": "Break Time Collection フリーレン",
+          "name_en": null,
+          "character_name": null,
+          "affiliation": null,
+          "series_name": null,
+          "sub_series": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+          "web_search_url": "https://www.google.com/search?q=Break%20Time%20Collection%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1497,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1497,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Break Time Collection 프리렌",
+            "name_ja": "Break Time Collection フリーレン",
+            "category": "피규어",
+            "affiliation": "장송의 프리렌",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "manual_value": "",
+          "evidence_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+          "manual_confirmed": false,
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1498,
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Break Time Collection 펀",
+          "name_ja": "Break Time Collection フェルン",
+          "name_en": null,
+          "character_name": null,
+          "affiliation": null,
+          "series_name": null,
+          "sub_series": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+          "web_search_url": "https://www.google.com/search?q=Break%20Time%20Collection%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1498,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1498,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Break Time Collection 펀",
+            "name_ja": "Break Time Collection フェルン",
+            "category": "피규어",
+            "affiliation": "장송의 프리렌",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "manual_value": "",
+          "evidence_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+          "manual_confirmed": false,
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1909,
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Q posket 고토 히토리",
+          "name_ja": "Q posket 後藤ひとり",
+          "name_en": null,
+          "character_name": null,
+          "affiliation": null,
+          "series_name": null,
+          "sub_series": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E5%BE%8C%E8%97%A4%E3%81%B2%E3%81%A8%E3%82%8A",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E5%BE%8C%E8%97%A4%E3%81%B2%E3%81%A8%E3%82%8A%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E5%BE%8C%E8%97%A4%E3%81%B2%E3%81%A8%E3%82%8A",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1909,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1909,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E5%BE%8C%E8%97%A4%E3%81%B2%E3%81%A8%E3%82%8A",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 고토 히토리",
+            "name_ja": "Q posket 後藤ひとり",
+            "category": "피규어",
+            "affiliation": "봇치 더 록",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "manual_value": "",
+          "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E5%BE%8C%E8%97%A4%E3%81%B2%E3%81%A8%E3%82%8A",
+          "manual_confirmed": false,
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2014,
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Q posket 렘",
+          "name_ja": "Q posket レム",
+          "name_en": null,
+          "character_name": null,
+          "affiliation": null,
+          "series_name": null,
+          "sub_series": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%83%A0",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%AC%E3%83%A0%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%83%A0",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2014,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2014,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%83%A0",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 렘",
+            "name_ja": "Q posket レム",
+            "category": "피규어",
+            "affiliation": "리제로",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "manual_value": "",
+          "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%83%A0",
+          "manual_confirmed": false,
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2015,
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Q posket 람",
+          "name_ja": "Q posket ラム",
+          "name_en": null,
+          "character_name": null,
+          "affiliation": null,
+          "series_name": null,
+          "sub_series": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A9%E3%83%A0",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%A9%E3%83%A0%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A9%E3%83%A0",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2015,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2015,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A9%E3%83%A0",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 람",
+            "name_ja": "Q posket ラム",
+            "category": "피규어",
+            "affiliation": "리제로",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "manual_value": "",
+          "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A9%E3%83%A0",
+          "manual_confirmed": false,
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2016,
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Q posket 에밀리아",
+          "name_ja": "Q posket エミリア",
+          "name_en": null,
+          "character_name": null,
+          "affiliation": null,
+          "series_name": null,
+          "sub_series": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%82%A8%E3%83%9F%E3%83%AA%E3%82%A2",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%82%A8%E3%83%9F%E3%83%AA%E3%82%A2%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%82%A8%E3%83%9F%E3%83%AA%E3%82%A2",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2016,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2016,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%82%A8%E3%83%9F%E3%83%AA%E3%82%A2",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 에밀리아",
+            "name_ja": "Q posket エミリア",
+            "category": "피규어",
+            "affiliation": "리제로",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "manual_value": "",
+          "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%82%A8%E3%83%9F%E3%83%AA%E3%82%A2",
+          "manual_confirmed": false,
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2017,
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Espresto 렘",
+          "name_ja": "エスプレスト レム",
+          "name_en": null,
+          "character_name": null,
+          "affiliation": null,
+          "series_name": null,
+          "sub_series": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=%E3%82%A8%E3%82%B9%E3%83%97%E3%83%AC%E3%82%B9%E3%83%88%20%E3%83%AC%E3%83%A0",
+          "web_search_url": "https://www.google.com/search?q=%E3%82%A8%E3%82%B9%E3%83%97%E3%83%AC%E3%82%B9%E3%83%88%20%E3%83%AC%E3%83%A0%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=%E3%82%A8%E3%82%B9%E3%83%97%E3%83%AC%E3%82%B9%E3%83%88%20%E3%83%AC%E3%83%A0",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2017,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2017,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=%E3%82%A8%E3%82%B9%E3%83%97%E3%83%AC%E3%82%B9%E3%83%88%20%E3%83%AC%E3%83%A0",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Espresto 렘",
+            "name_ja": "エスプレスト レム",
+            "category": "피규어",
+            "affiliation": "리제로",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "manual_value": "",
+          "evidence_url": "https://bsp-prize.jp/search/?keyword=%E3%82%A8%E3%82%B9%E3%83%97%E3%83%AC%E3%82%B9%E3%83%88%20%E3%83%AC%E3%83%A0",
+          "manual_confirmed": false,
+          "blocked_until": "exact_product_detail_source_url_confirmed",
+          "auto_apply_enabled": false
+        }
+      ],
+      "manual_review_required": true,
+      "auto_apply_enabled": false
+    },
+    {
+      "template_batch_id": "source-discovery-template-010",
       "source_store": "Taito",
       "row_count": 15,
       "official_search_url_rows": 15,
@@ -71202,7 +73059,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-010",
+      "template_batch_id": "source-discovery-template-011",
       "source_store": "무기와라스토어",
       "row_count": 15,
       "official_search_url_rows": 15,
@@ -71966,7 +73823,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-011",
+      "template_batch_id": "source-discovery-template-012",
       "source_store": "치이카와 중국 팝업스토어",
       "row_count": 15,
       "official_search_url_rows": 15,
@@ -72730,7 +74587,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-012",
+      "template_batch_id": "source-discovery-template-013",
       "source_store": "귀멸의 칼날 공식",
       "row_count": 13,
       "official_search_url_rows": 13,
@@ -73394,7 +75251,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-013",
+      "template_batch_id": "source-discovery-template-014",
       "source_store": "AmiAmi",
       "row_count": 12,
       "official_search_url_rows": 12,
@@ -74034,7 +75891,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-014",
+      "template_batch_id": "source-discovery-template-015",
       "source_store": "Cospa",
       "row_count": 12,
       "official_search_url_rows": 12,
@@ -74648,7 +76505,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-015",
+      "template_batch_id": "source-discovery-template-016",
       "source_store": "반다이",
       "row_count": 11,
       "official_search_url_rows": 11,
@@ -75212,7 +77069,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-016",
+      "template_batch_id": "source-discovery-template-017",
       "source_store": "메가하우스",
       "row_count": 9,
       "official_search_url_rows": 9,
@@ -75676,7 +77533,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-017",
+      "template_batch_id": "source-discovery-template-018",
       "source_store": "MINISO 중국",
       "row_count": 7,
       "official_search_url_rows": 7,
@@ -76040,7 +77897,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-018",
+      "template_batch_id": "source-discovery-template-019",
       "source_store": "산리오",
       "row_count": 6,
       "official_search_url_rows": 6,
@@ -76354,7 +78211,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-019",
+      "template_batch_id": "source-discovery-template-020",
       "source_store": "JYP SHOP",
       "row_count": 5,
       "official_search_url_rows": 5,
@@ -76618,7 +78475,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-020",
+      "template_batch_id": "source-discovery-template-021",
       "source_store": "Re-ment",
       "row_count": 5,
       "official_search_url_rows": 5,
@@ -76882,7 +78739,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-021",
+      "template_batch_id": "source-discovery-template-022",
       "source_store": "치이카와샵 용산",
       "row_count": 5,
       "official_search_url_rows": 5,
@@ -77146,7 +79003,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-022",
+      "template_batch_id": "source-discovery-template-023",
       "source_store": "MINISO",
       "row_count": 4,
       "official_search_url_rows": 4,
@@ -77360,7 +79217,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-023",
+      "template_batch_id": "source-discovery-template-024",
       "source_store": "가샤폰",
       "row_count": 4,
       "official_search_url_rows": 4,
@@ -77574,7 +79431,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-024",
+      "template_batch_id": "source-discovery-template-025",
       "source_store": "디즈니 스토어",
       "row_count": 4,
       "official_search_url_rows": 4,
@@ -77788,7 +79645,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-025",
+      "template_batch_id": "source-discovery-template-026",
       "source_store": "이세계아이돌 공식 굿즈",
       "row_count": 4,
       "official_search_url_rows": 4,
@@ -78002,7 +79859,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-026",
+      "template_batch_id": "source-discovery-template-027",
       "source_store": "Bandai Premium",
       "row_count": 3,
       "official_search_url_rows": 3,
@@ -78166,7 +80023,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-027",
+      "template_batch_id": "source-discovery-template-028",
       "source_store": "SM STORE",
       "row_count": 3,
       "official_search_url_rows": 3,
@@ -78330,7 +80187,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-028",
+      "template_batch_id": "source-discovery-template-029",
       "source_store": "카도카와",
       "row_count": 3,
       "official_search_url_rows": 3,
@@ -78494,7 +80351,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-029",
+      "template_batch_id": "source-discovery-template-030",
       "source_store": "Phat! Company",
       "row_count": 2,
       "official_search_url_rows": 2,
@@ -78608,7 +80465,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-030",
+      "template_batch_id": "source-discovery-template-031",
       "source_store": "YG SELECT",
       "row_count": 2,
       "official_search_url_rows": 2,
@@ -78722,7 +80579,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-031",
+      "template_batch_id": "source-discovery-template-032",
       "source_store": "롯데웰푸드",
       "row_count": 2,
       "official_search_url_rows": 2,
@@ -78836,7 +80693,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-032",
+      "template_batch_id": "source-discovery-template-033",
       "source_store": "이세계아이돌 팝업스토어",
       "row_count": 2,
       "official_search_url_rows": 2,
@@ -78950,7 +80807,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-033",
+      "template_batch_id": "source-discovery-template-034",
       "source_store": "ALTER",
       "row_count": 1,
       "official_search_url_rows": 1,
@@ -79014,7 +80871,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-034",
+      "template_batch_id": "source-discovery-template-035",
       "source_store": "CUBE STORE",
       "row_count": 1,
       "official_search_url_rows": 1,
@@ -79078,7 +80935,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-035",
+      "template_batch_id": "source-discovery-template-036",
       "source_store": "Hobby Max International",
       "row_count": 1,
       "official_search_url_rows": 1,
@@ -79142,7 +80999,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-036",
+      "template_batch_id": "source-discovery-template-037",
       "source_store": "Hololive Production Official Shop",
       "row_count": 1,
       "official_search_url_rows": 1,
@@ -79206,7 +81063,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-037",
+      "template_batch_id": "source-discovery-template-038",
       "source_store": "IST STORE",
       "row_count": 1,
       "official_search_url_rows": 1,
@@ -79270,7 +81127,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-038",
+      "template_batch_id": "source-discovery-template-039",
       "source_store": "KQ FELLAZ",
       "row_count": 1,
       "official_search_url_rows": 1,
@@ -79334,7 +81191,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-039",
+      "template_batch_id": "source-discovery-template-040",
       "source_store": "SEGA",
       "row_count": 1,
       "official_search_url_rows": 1,
@@ -79398,7 +81255,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-040",
+      "template_batch_id": "source-discovery-template-041",
       "source_store": "STARSHIP STORE",
       "row_count": 1,
       "official_search_url_rows": 1,
@@ -79462,7 +81319,7 @@
       "auto_apply_enabled": false
     },
     {
-      "template_batch_id": "source-discovery-template-041",
+      "template_batch_id": "source-discovery-template-042",
       "source_store": "점프 숍",
       "row_count": 1,
       "official_search_url_rows": 1,
@@ -105933,6 +107790,777 @@
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
+      "source_store": "Banpresto",
+      "row_count": 17,
+      "offset": 0,
+      "next_machine_step": "confirm_exact_source_url_then_fill_source_templates",
+      "recommended_action": "Open official search candidates, confirm exact product detail URLs, then fill source_url templates.",
+      "category_counts": [
+        [
+          "피규어",
+          17
+        ]
+      ],
+      "primary_review_url_rows": 17,
+      "first_primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AA%E3%82%B3",
+      "first_primary_review_url_kind": "official_search_url",
+      "items": [
+        {
+          "catalog_index": 1415,
+          "workflow": "official_search_url_available",
+          "review_state": "official_search_review_required",
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Q posket 리코",
+          "name_ja": "Q posket リコ",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AA%E3%82%B3",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%AA%E3%82%B3%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AA%E3%82%B3",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1415,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1415,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AA%E3%82%B3",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 리코",
+            "name_ja": "Q posket リコ",
+            "category": "피규어",
+            "affiliation": "메이드 인 어비스",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1416,
+          "workflow": "official_search_url_available",
+          "review_state": "official_search_review_required",
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Q posket 레그",
+          "name_ja": "Q posket レグ",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%82%B0",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%AC%E3%82%B0%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%82%B0",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1416,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1416,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%82%B0",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 레그",
+            "name_ja": "Q posket レグ",
+            "category": "피규어",
+            "affiliation": "메이드 인 어비스",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1417,
+          "workflow": "official_search_url_available",
+          "review_state": "official_search_review_required",
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Q posket 나나치",
+          "name_ja": "Q posket ナナチ",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1417,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1417,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 나나치",
+            "name_ja": "Q posket ナナチ",
+            "category": "피규어",
+            "affiliation": "메이드 인 어비스",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1418,
+          "workflow": "official_search_url_available",
+          "review_state": "official_search_review_required",
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Break Time Collection 나나치",
+          "name_ja": "ブレイクタイムコレクション ナナチ",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1418,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1418,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Break Time Collection 나나치",
+            "name_ja": "ブレイクタイムコレクション ナナチ",
+            "category": "피규어",
+            "affiliation": "메이드 인 어비스",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1462,
+          "workflow": "official_search_url_available",
+          "review_state": "official_search_review_required",
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Q posket 모노쿠마",
+          "name_ja": "Q posket モノクマ",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1462,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1462,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 모노쿠마",
+            "name_ja": "Q posket モノクマ",
+            "category": "피규어",
+            "affiliation": "단간론파",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1463,
+          "workflow": "official_search_url_available",
+          "review_state": "official_search_review_required",
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Break Time Collection 코마에다 나기토",
+          "name_ja": "Break Time Collection 狛枝凪斗",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97",
+          "web_search_url": "https://www.google.com/search?q=Break%20Time%20Collection%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1463,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1463,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Break Time Collection 코마에다 나기토",
+            "name_ja": "Break Time Collection 狛枝凪斗",
+            "category": "피규어",
+            "affiliation": "단간론파",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1464,
+          "workflow": "official_search_url_available",
+          "review_state": "official_search_review_required",
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Break Time Collection 히나타 하지메",
+          "name_ja": "Break Time Collection 日向創",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E6%97%A5%E5%90%91%E5%89%B5",
+          "web_search_url": "https://www.google.com/search?q=Break%20Time%20Collection%20%E6%97%A5%E5%90%91%E5%89%B5%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E6%97%A5%E5%90%91%E5%89%B5",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1464,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1464,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E6%97%A5%E5%90%91%E5%89%B5",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Break Time Collection 히나타 하지메",
+            "name_ja": "Break Time Collection 日向創",
+            "category": "피규어",
+            "affiliation": "단간론파",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1493,
+          "workflow": "official_search_url_available",
+          "review_state": "official_search_review_required",
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Q posket 프리렌",
+          "name_ja": "Q posket フリーレン",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1493,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1493,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 프리렌",
+            "name_ja": "Q posket フリーレン",
+            "category": "피규어",
+            "affiliation": "장송의 프리렌",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1494,
+          "workflow": "official_search_url_available",
+          "review_state": "official_search_review_required",
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Q posket 펀",
+          "name_ja": "Q posket フェルン",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1494,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1494,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 펀",
+            "name_ja": "Q posket フェルン",
+            "category": "피규어",
+            "affiliation": "장송의 프리렌",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1496,
+          "workflow": "official_search_url_available",
+          "review_state": "official_search_review_required",
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Q posket 히멜",
+          "name_ja": "Q posket ヒンメル",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1496,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1496,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 히멜",
+            "name_ja": "Q posket ヒンメル",
+            "category": "피규어",
+            "affiliation": "장송의 프리렌",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1497,
+          "workflow": "official_search_url_available",
+          "review_state": "official_search_review_required",
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Break Time Collection 프리렌",
+          "name_ja": "Break Time Collection フリーレン",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+          "web_search_url": "https://www.google.com/search?q=Break%20Time%20Collection%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1497,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1497,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Break Time Collection 프리렌",
+            "name_ja": "Break Time Collection フリーレン",
+            "category": "피규어",
+            "affiliation": "장송의 프리렌",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1498,
+          "workflow": "official_search_url_available",
+          "review_state": "official_search_review_required",
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Break Time Collection 펀",
+          "name_ja": "Break Time Collection フェルン",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+          "web_search_url": "https://www.google.com/search?q=Break%20Time%20Collection%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1498,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1498,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Break Time Collection 펀",
+            "name_ja": "Break Time Collection フェルン",
+            "category": "피규어",
+            "affiliation": "장송의 프리렌",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1909,
+          "workflow": "official_search_url_available",
+          "review_state": "official_search_review_required",
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Q posket 고토 히토리",
+          "name_ja": "Q posket 後藤ひとり",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E5%BE%8C%E8%97%A4%E3%81%B2%E3%81%A8%E3%82%8A",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E5%BE%8C%E8%97%A4%E3%81%B2%E3%81%A8%E3%82%8A%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E5%BE%8C%E8%97%A4%E3%81%B2%E3%81%A8%E3%82%8A",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 1909,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1909,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E5%BE%8C%E8%97%A4%E3%81%B2%E3%81%A8%E3%82%8A",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 고토 히토리",
+            "name_ja": "Q posket 後藤ひとり",
+            "category": "피규어",
+            "affiliation": "봇치 더 록",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2014,
+          "workflow": "official_search_url_available",
+          "review_state": "official_search_review_required",
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Q posket 렘",
+          "name_ja": "Q posket レム",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%83%A0",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%AC%E3%83%A0%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%83%A0",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2014,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2014,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%83%A0",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 렘",
+            "name_ja": "Q posket レム",
+            "category": "피규어",
+            "affiliation": "리제로",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2015,
+          "workflow": "official_search_url_available",
+          "review_state": "official_search_review_required",
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Q posket 람",
+          "name_ja": "Q posket ラム",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A9%E3%83%A0",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%A9%E3%83%A0%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A9%E3%83%A0",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2015,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2015,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A9%E3%83%A0",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 람",
+            "name_ja": "Q posket ラム",
+            "category": "피규어",
+            "affiliation": "리제로",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2016,
+          "workflow": "official_search_url_available",
+          "review_state": "official_search_review_required",
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Q posket 에밀리아",
+          "name_ja": "Q posket エミリア",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%82%A8%E3%83%9F%E3%83%AA%E3%82%A2",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%82%A8%E3%83%9F%E3%83%AA%E3%82%A2%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%82%A8%E3%83%9F%E3%83%AA%E3%82%A2",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2016,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2016,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%82%A8%E3%83%9F%E3%83%AA%E3%82%A2",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 에밀리아",
+            "name_ja": "Q posket エミリア",
+            "category": "피규어",
+            "affiliation": "리제로",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 2017,
+          "workflow": "official_search_url_available",
+          "review_state": "official_search_review_required",
+          "source_store": "Banpresto",
+          "category": "피규어",
+          "name_ko": "Espresto 렘",
+          "name_ja": "エスプレスト レム",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=%E3%82%A8%E3%82%B9%E3%83%97%E3%83%AC%E3%82%B9%E3%83%88%20%E3%83%AC%E3%83%A0",
+          "web_search_url": "https://www.google.com/search?q=%E3%82%A8%E3%82%B9%E3%83%97%E3%83%AC%E3%82%B9%E3%83%88%20%E3%83%AC%E3%83%A0%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "primary_review_url": "https://bsp-prize.jp/search/?keyword=%E3%82%A8%E3%82%B9%E3%83%97%E3%83%AC%E3%82%B9%E3%83%88%20%E3%83%AC%E3%83%A0",
+          "primary_review_url_kind": "official_search_url",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+          "source_patch_template": {
+            "catalog_index": 2017,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2017,
+            "field": "source_url",
+            "manual_value": "",
+            "evidence_url": "https://bsp-prize.jp/search/?keyword=%E3%82%A8%E3%82%B9%E3%83%97%E3%83%AC%E3%82%B9%E3%83%88%20%E3%83%AC%E3%83%A0",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Espresto 렘",
+            "name_ja": "エスプレスト レム",
+            "category": "피규어",
+            "affiliation": "리제로",
+            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
+            "blocked_until": "exact_product_detail_source_url_confirmed"
+          },
+          "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+          "auto_apply_enabled": false
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "source-discovery-action-035",
+      "priority": 10,
+      "workflow": "official_search_url_available",
+      "review_state": "official_search_review_required",
       "source_store": "Taito",
       "row_count": 15,
       "offset": 0,
@@ -106616,7 +109244,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-035",
+      "batch_id": "source-discovery-action-036",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -107319,7 +109947,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-036",
+      "batch_id": "source-discovery-action-037",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -108014,7 +110642,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-037",
+      "batch_id": "source-discovery-action-038",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -108621,7 +111249,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-038",
+      "batch_id": "source-discovery-action-039",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -109180,7 +111808,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-039",
+      "batch_id": "source-discovery-action-040",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -109691,7 +112319,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-040",
+      "batch_id": "source-discovery-action-041",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -110110,7 +112738,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-041",
+      "batch_id": "source-discovery-action-042",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -110449,7 +113077,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-042",
+      "batch_id": "source-discovery-action-043",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -110740,7 +113368,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-043",
+      "batch_id": "source-discovery-action-044",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -110987,7 +113615,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-044",
+      "batch_id": "source-discovery-action-045",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -111230,7 +113858,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-045",
+      "batch_id": "source-discovery-action-046",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -111481,7 +114109,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-046",
+      "batch_id": "source-discovery-action-047",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -111692,7 +114320,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-047",
+      "batch_id": "source-discovery-action-048",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -111895,7 +114523,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-048",
+      "batch_id": "source-discovery-action-049",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -112094,7 +114722,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-049",
+      "batch_id": "source-discovery-action-050",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -112301,7 +114929,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-050",
+      "batch_id": "source-discovery-action-051",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -112464,7 +115092,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-051",
+      "batch_id": "source-discovery-action-052",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -112619,7 +115247,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-052",
+      "batch_id": "source-discovery-action-053",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -112774,7 +115402,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-053",
+      "batch_id": "source-discovery-action-054",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -112885,7 +115513,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-054",
+      "batch_id": "source-discovery-action-055",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -112996,7 +115624,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-055",
+      "batch_id": "source-discovery-action-056",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -113111,7 +115739,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-056",
+      "batch_id": "source-discovery-action-057",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -113222,7 +115850,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-057",
+      "batch_id": "source-discovery-action-058",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -113289,7 +115917,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-058",
+      "batch_id": "source-discovery-action-059",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -113356,7 +115984,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-059",
+      "batch_id": "source-discovery-action-060",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -113423,7 +116051,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-060",
+      "batch_id": "source-discovery-action-061",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -113490,7 +116118,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-061",
+      "batch_id": "source-discovery-action-062",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -113557,7 +116185,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-062",
+      "batch_id": "source-discovery-action-063",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -113624,7 +116252,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-063",
+      "batch_id": "source-discovery-action-064",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -113691,7 +116319,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-064",
+      "batch_id": "source-discovery-action-065",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -113758,7 +116386,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-065",
+      "batch_id": "source-discovery-action-066",
       "priority": 10,
       "workflow": "official_search_url_available",
       "review_state": "official_search_review_required",
@@ -113825,7 +116453,7 @@
       "auto_apply_enabled": false
     },
     {
-      "batch_id": "source-discovery-action-066",
+      "batch_id": "source-discovery-action-067",
       "priority": 20,
       "workflow": "licensed_retailer_search_review",
       "review_state": "licensed_retailer_review_required",

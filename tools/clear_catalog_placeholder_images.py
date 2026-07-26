@@ -32,7 +32,12 @@ def _one_line_objects(text: str) -> list[tuple[int, int, dict[str, Any]]]:
     return rows
 
 
-def clear_placeholder_images(text: str, placeholder_urls: set[str]) -> tuple[str, list[dict[str, Any]]]:
+def clear_placeholder_images(
+    text: str,
+    placeholder_urls: set[str],
+    *,
+    clear_source_url: bool = False,
+) -> tuple[str, list[dict[str, Any]]]:
     replacements: list[tuple[int, int, str]] = []
     cleared: list[dict[str, Any]] = []
     for start, end, row in _one_line_objects(text):
@@ -48,6 +53,8 @@ def clear_placeholder_images(text: str, placeholder_urls: set[str]) -> tuple[str
         }
         row["image_url"] = None
         row["local_image_path"] = None
+        if clear_source_url:
+            row["source_url"] = None
         cleared.append(before)
         replacements.append((start, end, json.dumps(row, ensure_ascii=False, separators=(",", ":"))))
 
@@ -85,6 +92,11 @@ def main() -> int:
     parser.add_argument("--catalog", type=Path, default=DEFAULT_CATALOG)
     parser.add_argument("--seed-output", type=Path, default=DEFAULT_SEED_OUTPUT)
     parser.add_argument("--placeholder-url", action="append", default=[])
+    parser.add_argument(
+        "--clear-source-url",
+        action="store_true",
+        help="Also clear source_url for rows whose image URL is known to belong to the wrong product.",
+    )
     parser.add_argument("--skip-seed-sync", action="store_true")
     parser.add_argument("--write", action="store_true")
     args = parser.parse_args()
@@ -92,7 +104,11 @@ def main() -> int:
     placeholder_urls = set(DEFAULT_PLACEHOLDER_URLS)
     placeholder_urls.update(url.strip() for url in args.placeholder_url if url.strip())
     text = args.catalog.read_text(encoding="utf-8")
-    updated_text, cleared = clear_placeholder_images(text, placeholder_urls)
+    updated_text, cleared = clear_placeholder_images(
+        text,
+        placeholder_urls,
+        clear_source_url=args.clear_source_url,
+    )
 
     if args.write and cleared:
         args.catalog.write_text(updated_text, encoding="utf-8")
@@ -104,6 +120,7 @@ def main() -> int:
             {
                 "catalog": str(args.catalog.relative_to(ROOT)) if args.catalog.is_relative_to(ROOT) else str(args.catalog),
                 "placeholder_urls": sorted(placeholder_urls),
+                "clear_source_url": args.clear_source_url,
                 "cleared_rows": len(cleared),
                 "sample": cleared[:20],
                 "flutter_seed_synced": bool(args.write and cleared and not args.skip_seed_sync),

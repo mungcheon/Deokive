@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "summary": {
-    "missing_image_rows": 825,
-    "source_url_ready_rows": 52,
+    "missing_image_rows": 846,
+    "source_url_ready_rows": 56,
     "generic_source_url_rows": 0,
     "gotouchi_official_review_rows": 22,
-    "needs_source_discovery_rows": 741,
+    "needs_source_discovery_rows": 758,
     "manual_image_research_rows": 10,
-    "published_group_rows": 47,
+    "published_group_rows": 52,
     "review_batch_count": 9,
-    "sample_image_import_template_count": 681,
+    "sample_image_import_template_count": 702,
     "top_source_stores": [
       [
         "엔스카이",
@@ -50,6 +50,10 @@
       [
         "FuRyu",
         21
+      ],
+      [
+        "Banpresto",
+        17
       ],
       [
         "치이카와 중국 팝업스토어",
@@ -126,20 +130,16 @@
       [
         "카도카와",
         3
-      ],
-      [
-        "SM STORE",
-        3
       ]
     ],
     "by_workflow": [
       [
         "find_source_then_extract_image",
-        741
+        758
       ],
       [
         "extract_from_existing_source_url",
-        52
+        56
       ],
       [
         "review_gotouchi_official_candidates",
@@ -186,7 +186,7 @@
   "blocker_summary": [
     {
       "workflow": "extract_from_existing_source_url",
-      "rows": 52,
+      "rows": 56,
       "state": "ready_for_source_image_extraction",
       "blocking_reason": null,
       "next_step": "extract_product_image_from_existing_exact_source_url",
@@ -202,7 +202,7 @@
     },
     {
       "workflow": "find_source_then_extract_image",
-      "rows": 741,
+      "rows": 758,
       "state": "blocked_by_missing_source_url",
       "blocking_reason": "image import requires an exact source_url first",
       "next_step": "find_exact_official_source_url_then_extract_image",
@@ -225,17 +225,33 @@
       "workflow_counts": [
         [
           "extract_from_existing_source_url",
-          1
+          5
         ]
       ],
       "top_source_stores": [
         [
           "치이카와 온라인 쿠지",
           52
+        ],
+        [
+          "TOHO animation STORE",
+          1
+        ],
+        [
+          "밀짚모자 스토어",
+          1
+        ],
+        [
+          "밀짚모자 스토어 상하이",
+          1
+        ],
+        [
+          "하이큐!! 10주년 기념전",
+          1
         ]
       ],
-      "group_count": 1,
-      "missing_image_rows": 52,
+      "group_count": 5,
+      "missing_image_rows": 56,
       "blocked_until": "ready_for_source_image_extraction",
       "next_machine_step": "extract_product_image_from_existing_exact_source_url",
       "public_report": "data/catalog_image_enrichment_batches_public.json",
@@ -1714,6 +1730,162 @@
                 "category": "마스코트",
                 "affiliation": "치이카와",
                 "source_search_url": "https://online-kuji.chiikawamarket.jp/search?q=D%E8%B3%9E%20%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88",
+                "workflow": "extract_from_existing_source_url",
+                "requires_exact_source_url": false,
+                "requires_representative_image_flag": false,
+                "blocked_until": "manual_image_url_confirmed"
+              }
+            }
+          ]
+        },
+        {
+          "workflow": "extract_from_existing_source_url",
+          "source_store": "TOHO animation STORE",
+          "missing_image_rows": 1,
+          "priority": 10,
+          "recommended_action": "crawl verified source_url and review extracted product image",
+          "official_search_available": false,
+          "candidate_review_report": null,
+          "sample_items": [
+            {
+              "catalog_index": 2270,
+              "name_ko": "하이큐!! 10주년 이벤트 트레이딩 캔뱃지",
+              "name_ja": "ハイキュー!! 10th イベント -NEXT STEP- トレーディング缶バッジ",
+              "series_name": null,
+              "category": "캔뱃지",
+              "source_url": "https://haikyu.jp/10thevent/",
+              "official_search_url": null,
+              "catalog_field_import_template": {
+                "manual_confirmed": false,
+                "manual_note": "",
+                "row_index": 2270,
+                "field": "image_url",
+                "manual_value": "",
+                "evidence_url": "https://haikyu.jp/10thevent/",
+                "candidate_source_url": "https://haikyu.jp/10thevent/",
+                "source_store": "TOHO animation STORE",
+                "name_ko": "하이큐!! 10주년 이벤트 트레이딩 캔뱃지",
+                "name_ja": "ハイキュー!! 10th イベント -NEXT STEP- トレーディング缶バッジ",
+                "category": "캔뱃지",
+                "affiliation": "하이큐!!",
+                "source_search_url": null,
+                "workflow": "extract_from_existing_source_url",
+                "requires_exact_source_url": false,
+                "requires_representative_image_flag": false,
+                "blocked_until": "manual_image_url_confirmed"
+              }
+            }
+          ]
+        },
+        {
+          "workflow": "extract_from_existing_source_url",
+          "source_store": "밀짚모자 스토어",
+          "missing_image_rows": 1,
+          "priority": 10,
+          "recommended_action": "crawl verified source_url and review extracted product image",
+          "official_search_available": false,
+          "candidate_review_report": null,
+          "sample_items": [
+            {
+              "catalog_index": 2268,
+              "name_ko": "원피스 생일 한정 아크릴 액세서리 스탠드 (루피 5.5)",
+              "name_ja": "『ワンピース』ハッピーバースデーアクリルアクセサリースタンド［5.5 ルフィ］",
+              "series_name": null,
+              "category": "아크릴 스탠드",
+              "source_url": "https://store.toei-anim.co.jp/shop/g/gMOVONP962162/",
+              "official_search_url": null,
+              "catalog_field_import_template": {
+                "manual_confirmed": false,
+                "manual_note": "",
+                "row_index": 2268,
+                "field": "image_url",
+                "manual_value": "",
+                "evidence_url": "https://store.toei-anim.co.jp/shop/g/gMOVONP962162/",
+                "candidate_source_url": "https://store.toei-anim.co.jp/shop/g/gMOVONP962162/",
+                "source_store": "밀짚모자 스토어",
+                "name_ko": "원피스 생일 한정 아크릴 액세서리 스탠드 (루피 5.5)",
+                "name_ja": "『ワンピース』ハッピーバースデーアクリルアクセサリースタンド［5.5 ルフィ］",
+                "category": "아크릴 스탠드",
+                "affiliation": "원피스",
+                "source_search_url": null,
+                "workflow": "extract_from_existing_source_url",
+                "requires_exact_source_url": false,
+                "requires_representative_image_flag": false,
+                "blocked_until": "manual_image_url_confirmed"
+              }
+            }
+          ]
+        },
+        {
+          "workflow": "extract_from_existing_source_url",
+          "source_store": "밀짚모자 스토어 상하이",
+          "missing_image_rows": 1,
+          "priority": 10,
+          "recommended_action": "crawl verified source_url and review extracted product image",
+          "official_search_available": false,
+          "candidate_review_report": null,
+          "sample_items": [
+            {
+              "catalog_index": 2269,
+              "name_ko": "원피스 상하이 지역 한정 아크릴 스탠드 (루피)",
+              "name_ja": "『麦わらストア上海オリジナル』アクリルスタンド ルフィ",
+              "series_name": null,
+              "category": "아크릴 스탠드",
+              "source_url": "https://store.toei-anim.co.jp/shop/g/gONP03019O1/",
+              "official_search_url": null,
+              "catalog_field_import_template": {
+                "manual_confirmed": false,
+                "manual_note": "",
+                "row_index": 2269,
+                "field": "image_url",
+                "manual_value": "",
+                "evidence_url": "https://store.toei-anim.co.jp/shop/g/gONP03019O1/",
+                "candidate_source_url": "https://store.toei-anim.co.jp/shop/g/gONP03019O1/",
+                "source_store": "밀짚모자 스토어 상하이",
+                "name_ko": "원피스 상하이 지역 한정 아크릴 스탠드 (루피)",
+                "name_ja": "『麦わらストア上海オリジナル』アクリルスタンド ルフィ",
+                "category": "아크릴 스탠드",
+                "affiliation": "원피스",
+                "source_search_url": null,
+                "workflow": "extract_from_existing_source_url",
+                "requires_exact_source_url": false,
+                "requires_representative_image_flag": false,
+                "blocked_until": "manual_image_url_confirmed"
+              }
+            }
+          ]
+        },
+        {
+          "workflow": "extract_from_existing_source_url",
+          "source_store": "하이큐!! 10주년 기념전",
+          "missing_image_rows": 1,
+          "priority": 10,
+          "recommended_action": "crawl verified source_url and review extracted product image",
+          "official_search_available": false,
+          "candidate_review_report": null,
+          "sample_items": [
+            {
+              "catalog_index": 2271,
+              "name_ko": "하이큐!! 10주년 메모리얼 컬렉션 캔뱃지 SEASON.1~4",
+              "name_ja": "トレーディング缶バッジ メモリアルコレクション SEASON.1〜4",
+              "series_name": null,
+              "category": "캔뱃지",
+              "source_url": "https://haikyu.jp/10thevent/",
+              "official_search_url": null,
+              "catalog_field_import_template": {
+                "manual_confirmed": false,
+                "manual_note": "",
+                "row_index": 2271,
+                "field": "image_url",
+                "manual_value": "",
+                "evidence_url": "https://haikyu.jp/10thevent/",
+                "candidate_source_url": "https://haikyu.jp/10thevent/",
+                "source_store": "하이큐!! 10주년 기념전",
+                "name_ko": "하이큐!! 10주년 메모리얼 컬렉션 캔뱃지 SEASON.1~4",
+                "name_ja": "トレーディング缶バッジ メモリアルコレクション SEASON.1〜4",
+                "category": "캔뱃지",
+                "affiliation": "하이큐!!",
+                "source_search_url": null,
                 "workflow": "extract_from_existing_source_url",
                 "requires_exact_source_url": false,
                 "requires_representative_image_flag": false,
@@ -14457,6 +14629,10 @@
       ],
       "top_source_stores": [
         [
+          "Banpresto",
+          17
+        ],
+        [
           "Taito",
           15
         ],
@@ -14483,14 +14659,10 @@
         [
           "반다이",
           11
-        ],
-        [
-          "메가하우스",
-          9
         ]
       ],
       "group_count": 8,
-      "missing_image_rows": 102,
+      "missing_image_rows": 110,
       "blocked_until": "blocked_by_missing_source_url",
       "next_machine_step": "find_exact_official_source_url_then_extract_image",
       "public_report": "data/source_discovery_queue_public.json",
@@ -14510,6 +14682,493 @@
       ],
       "auto_apply_enabled": false,
       "groups": [
+        {
+          "workflow": "find_source_then_extract_image",
+          "source_store": "Banpresto",
+          "missing_image_rows": 17,
+          "priority": 20,
+          "recommended_action": "find exact official product page, then attach source_url and image_url",
+          "official_search_available": true,
+          "candidate_review_report": null,
+          "sample_items": [
+            {
+              "catalog_index": 1415,
+              "name_ko": "Q posket 리코",
+              "name_ja": "Q posket リコ",
+              "series_name": null,
+              "category": "피규어",
+              "source_url": null,
+              "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AA%E3%82%B3",
+              "catalog_field_import_template": {
+                "manual_confirmed": false,
+                "manual_note": "",
+                "row_index": 1415,
+                "field": "image_url",
+                "manual_value": "",
+                "evidence_url": "",
+                "candidate_source_url": "",
+                "source_store": "Banpresto",
+                "name_ko": "Q posket 리코",
+                "name_ja": "Q posket リコ",
+                "category": "피규어",
+                "affiliation": "메이드 인 어비스",
+                "source_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AA%E3%82%B3",
+                "workflow": "find_source_then_extract_image",
+                "requires_exact_source_url": true,
+                "requires_representative_image_flag": false,
+                "blocked_until": "exact_product_source_url_confirmed"
+              }
+            },
+            {
+              "catalog_index": 1416,
+              "name_ko": "Q posket 레그",
+              "name_ja": "Q posket レグ",
+              "series_name": null,
+              "category": "피규어",
+              "source_url": null,
+              "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%82%B0",
+              "catalog_field_import_template": {
+                "manual_confirmed": false,
+                "manual_note": "",
+                "row_index": 1416,
+                "field": "image_url",
+                "manual_value": "",
+                "evidence_url": "",
+                "candidate_source_url": "",
+                "source_store": "Banpresto",
+                "name_ko": "Q posket 레그",
+                "name_ja": "Q posket レグ",
+                "category": "피규어",
+                "affiliation": "메이드 인 어비스",
+                "source_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%82%B0",
+                "workflow": "find_source_then_extract_image",
+                "requires_exact_source_url": true,
+                "requires_representative_image_flag": false,
+                "blocked_until": "exact_product_source_url_confirmed"
+              }
+            },
+            {
+              "catalog_index": 1417,
+              "name_ko": "Q posket 나나치",
+              "name_ja": "Q posket ナナチ",
+              "series_name": null,
+              "category": "피규어",
+              "source_url": null,
+              "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81",
+              "catalog_field_import_template": {
+                "manual_confirmed": false,
+                "manual_note": "",
+                "row_index": 1417,
+                "field": "image_url",
+                "manual_value": "",
+                "evidence_url": "",
+                "candidate_source_url": "",
+                "source_store": "Banpresto",
+                "name_ko": "Q posket 나나치",
+                "name_ja": "Q posket ナナチ",
+                "category": "피규어",
+                "affiliation": "메이드 인 어비스",
+                "source_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81",
+                "workflow": "find_source_then_extract_image",
+                "requires_exact_source_url": true,
+                "requires_representative_image_flag": false,
+                "blocked_until": "exact_product_source_url_confirmed"
+              }
+            },
+            {
+              "catalog_index": 1418,
+              "name_ko": "Break Time Collection 나나치",
+              "name_ja": "ブレイクタイムコレクション ナナチ",
+              "series_name": null,
+              "category": "피규어",
+              "source_url": null,
+              "official_search_url": "https://bsp-prize.jp/search/?keyword=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81",
+              "catalog_field_import_template": {
+                "manual_confirmed": false,
+                "manual_note": "",
+                "row_index": 1418,
+                "field": "image_url",
+                "manual_value": "",
+                "evidence_url": "",
+                "candidate_source_url": "",
+                "source_store": "Banpresto",
+                "name_ko": "Break Time Collection 나나치",
+                "name_ja": "ブレイクタイムコレクション ナナチ",
+                "category": "피규어",
+                "affiliation": "메이드 인 어비스",
+                "source_search_url": "https://bsp-prize.jp/search/?keyword=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81",
+                "workflow": "find_source_then_extract_image",
+                "requires_exact_source_url": true,
+                "requires_representative_image_flag": false,
+                "blocked_until": "exact_product_source_url_confirmed"
+              }
+            },
+            {
+              "catalog_index": 1462,
+              "name_ko": "Q posket 모노쿠마",
+              "name_ja": "Q posket モノクマ",
+              "series_name": null,
+              "category": "피규어",
+              "source_url": null,
+              "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+              "catalog_field_import_template": {
+                "manual_confirmed": false,
+                "manual_note": "",
+                "row_index": 1462,
+                "field": "image_url",
+                "manual_value": "",
+                "evidence_url": "",
+                "candidate_source_url": "",
+                "source_store": "Banpresto",
+                "name_ko": "Q posket 모노쿠마",
+                "name_ja": "Q posket モノクマ",
+                "category": "피규어",
+                "affiliation": "단간론파",
+                "source_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+                "workflow": "find_source_then_extract_image",
+                "requires_exact_source_url": true,
+                "requires_representative_image_flag": false,
+                "blocked_until": "exact_product_source_url_confirmed"
+              }
+            },
+            {
+              "catalog_index": 1463,
+              "name_ko": "Break Time Collection 코마에다 나기토",
+              "name_ja": "Break Time Collection 狛枝凪斗",
+              "series_name": null,
+              "category": "피규어",
+              "source_url": null,
+              "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97",
+              "catalog_field_import_template": {
+                "manual_confirmed": false,
+                "manual_note": "",
+                "row_index": 1463,
+                "field": "image_url",
+                "manual_value": "",
+                "evidence_url": "",
+                "candidate_source_url": "",
+                "source_store": "Banpresto",
+                "name_ko": "Break Time Collection 코마에다 나기토",
+                "name_ja": "Break Time Collection 狛枝凪斗",
+                "category": "피규어",
+                "affiliation": "단간론파",
+                "source_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97",
+                "workflow": "find_source_then_extract_image",
+                "requires_exact_source_url": true,
+                "requires_representative_image_flag": false,
+                "blocked_until": "exact_product_source_url_confirmed"
+              }
+            },
+            {
+              "catalog_index": 1464,
+              "name_ko": "Break Time Collection 히나타 하지메",
+              "name_ja": "Break Time Collection 日向創",
+              "series_name": null,
+              "category": "피규어",
+              "source_url": null,
+              "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E6%97%A5%E5%90%91%E5%89%B5",
+              "catalog_field_import_template": {
+                "manual_confirmed": false,
+                "manual_note": "",
+                "row_index": 1464,
+                "field": "image_url",
+                "manual_value": "",
+                "evidence_url": "",
+                "candidate_source_url": "",
+                "source_store": "Banpresto",
+                "name_ko": "Break Time Collection 히나타 하지메",
+                "name_ja": "Break Time Collection 日向創",
+                "category": "피규어",
+                "affiliation": "단간론파",
+                "source_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E6%97%A5%E5%90%91%E5%89%B5",
+                "workflow": "find_source_then_extract_image",
+                "requires_exact_source_url": true,
+                "requires_representative_image_flag": false,
+                "blocked_until": "exact_product_source_url_confirmed"
+              }
+            },
+            {
+              "catalog_index": 1493,
+              "name_ko": "Q posket 프리렌",
+              "name_ja": "Q posket フリーレン",
+              "series_name": null,
+              "category": "피규어",
+              "source_url": null,
+              "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+              "catalog_field_import_template": {
+                "manual_confirmed": false,
+                "manual_note": "",
+                "row_index": 1493,
+                "field": "image_url",
+                "manual_value": "",
+                "evidence_url": "",
+                "candidate_source_url": "",
+                "source_store": "Banpresto",
+                "name_ko": "Q posket 프리렌",
+                "name_ja": "Q posket フリーレン",
+                "category": "피규어",
+                "affiliation": "장송의 프리렌",
+                "source_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+                "workflow": "find_source_then_extract_image",
+                "requires_exact_source_url": true,
+                "requires_representative_image_flag": false,
+                "blocked_until": "exact_product_source_url_confirmed"
+              }
+            },
+            {
+              "catalog_index": 1494,
+              "name_ko": "Q posket 펀",
+              "name_ja": "Q posket フェルン",
+              "series_name": null,
+              "category": "피규어",
+              "source_url": null,
+              "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+              "catalog_field_import_template": {
+                "manual_confirmed": false,
+                "manual_note": "",
+                "row_index": 1494,
+                "field": "image_url",
+                "manual_value": "",
+                "evidence_url": "",
+                "candidate_source_url": "",
+                "source_store": "Banpresto",
+                "name_ko": "Q posket 펀",
+                "name_ja": "Q posket フェルン",
+                "category": "피규어",
+                "affiliation": "장송의 프리렌",
+                "source_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+                "workflow": "find_source_then_extract_image",
+                "requires_exact_source_url": true,
+                "requires_representative_image_flag": false,
+                "blocked_until": "exact_product_source_url_confirmed"
+              }
+            },
+            {
+              "catalog_index": 1496,
+              "name_ko": "Q posket 히멜",
+              "name_ja": "Q posket ヒンメル",
+              "series_name": null,
+              "category": "피규어",
+              "source_url": null,
+              "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB",
+              "catalog_field_import_template": {
+                "manual_confirmed": false,
+                "manual_note": "",
+                "row_index": 1496,
+                "field": "image_url",
+                "manual_value": "",
+                "evidence_url": "",
+                "candidate_source_url": "",
+                "source_store": "Banpresto",
+                "name_ko": "Q posket 히멜",
+                "name_ja": "Q posket ヒンメル",
+                "category": "피규어",
+                "affiliation": "장송의 프리렌",
+                "source_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB",
+                "workflow": "find_source_then_extract_image",
+                "requires_exact_source_url": true,
+                "requires_representative_image_flag": false,
+                "blocked_until": "exact_product_source_url_confirmed"
+              }
+            },
+            {
+              "catalog_index": 1497,
+              "name_ko": "Break Time Collection 프리렌",
+              "name_ja": "Break Time Collection フリーレン",
+              "series_name": null,
+              "category": "피규어",
+              "source_url": null,
+              "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+              "catalog_field_import_template": {
+                "manual_confirmed": false,
+                "manual_note": "",
+                "row_index": 1497,
+                "field": "image_url",
+                "manual_value": "",
+                "evidence_url": "",
+                "candidate_source_url": "",
+                "source_store": "Banpresto",
+                "name_ko": "Break Time Collection 프리렌",
+                "name_ja": "Break Time Collection フリーレン",
+                "category": "피규어",
+                "affiliation": "장송의 프리렌",
+                "source_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+                "workflow": "find_source_then_extract_image",
+                "requires_exact_source_url": true,
+                "requires_representative_image_flag": false,
+                "blocked_until": "exact_product_source_url_confirmed"
+              }
+            },
+            {
+              "catalog_index": 1498,
+              "name_ko": "Break Time Collection 펀",
+              "name_ja": "Break Time Collection フェルン",
+              "series_name": null,
+              "category": "피규어",
+              "source_url": null,
+              "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+              "catalog_field_import_template": {
+                "manual_confirmed": false,
+                "manual_note": "",
+                "row_index": 1498,
+                "field": "image_url",
+                "manual_value": "",
+                "evidence_url": "",
+                "candidate_source_url": "",
+                "source_store": "Banpresto",
+                "name_ko": "Break Time Collection 펀",
+                "name_ja": "Break Time Collection フェルン",
+                "category": "피규어",
+                "affiliation": "장송의 프리렌",
+                "source_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+                "workflow": "find_source_then_extract_image",
+                "requires_exact_source_url": true,
+                "requires_representative_image_flag": false,
+                "blocked_until": "exact_product_source_url_confirmed"
+              }
+            },
+            {
+              "catalog_index": 1909,
+              "name_ko": "Q posket 고토 히토리",
+              "name_ja": "Q posket 後藤ひとり",
+              "series_name": null,
+              "category": "피규어",
+              "source_url": null,
+              "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E5%BE%8C%E8%97%A4%E3%81%B2%E3%81%A8%E3%82%8A",
+              "catalog_field_import_template": {
+                "manual_confirmed": false,
+                "manual_note": "",
+                "row_index": 1909,
+                "field": "image_url",
+                "manual_value": "",
+                "evidence_url": "",
+                "candidate_source_url": "",
+                "source_store": "Banpresto",
+                "name_ko": "Q posket 고토 히토리",
+                "name_ja": "Q posket 後藤ひとり",
+                "category": "피규어",
+                "affiliation": "봇치 더 록",
+                "source_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E5%BE%8C%E8%97%A4%E3%81%B2%E3%81%A8%E3%82%8A",
+                "workflow": "find_source_then_extract_image",
+                "requires_exact_source_url": true,
+                "requires_representative_image_flag": false,
+                "blocked_until": "exact_product_source_url_confirmed"
+              }
+            },
+            {
+              "catalog_index": 2014,
+              "name_ko": "Q posket 렘",
+              "name_ja": "Q posket レム",
+              "series_name": null,
+              "category": "피규어",
+              "source_url": null,
+              "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%83%A0",
+              "catalog_field_import_template": {
+                "manual_confirmed": false,
+                "manual_note": "",
+                "row_index": 2014,
+                "field": "image_url",
+                "manual_value": "",
+                "evidence_url": "",
+                "candidate_source_url": "",
+                "source_store": "Banpresto",
+                "name_ko": "Q posket 렘",
+                "name_ja": "Q posket レム",
+                "category": "피규어",
+                "affiliation": "리제로",
+                "source_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%83%A0",
+                "workflow": "find_source_then_extract_image",
+                "requires_exact_source_url": true,
+                "requires_representative_image_flag": false,
+                "blocked_until": "exact_product_source_url_confirmed"
+              }
+            },
+            {
+              "catalog_index": 2015,
+              "name_ko": "Q posket 람",
+              "name_ja": "Q posket ラム",
+              "series_name": null,
+              "category": "피규어",
+              "source_url": null,
+              "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A9%E3%83%A0",
+              "catalog_field_import_template": {
+                "manual_confirmed": false,
+                "manual_note": "",
+                "row_index": 2015,
+                "field": "image_url",
+                "manual_value": "",
+                "evidence_url": "",
+                "candidate_source_url": "",
+                "source_store": "Banpresto",
+                "name_ko": "Q posket 람",
+                "name_ja": "Q posket ラム",
+                "category": "피규어",
+                "affiliation": "리제로",
+                "source_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A9%E3%83%A0",
+                "workflow": "find_source_then_extract_image",
+                "requires_exact_source_url": true,
+                "requires_representative_image_flag": false,
+                "blocked_until": "exact_product_source_url_confirmed"
+              }
+            },
+            {
+              "catalog_index": 2016,
+              "name_ko": "Q posket 에밀리아",
+              "name_ja": "Q posket エミリア",
+              "series_name": null,
+              "category": "피규어",
+              "source_url": null,
+              "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%82%A8%E3%83%9F%E3%83%AA%E3%82%A2",
+              "catalog_field_import_template": {
+                "manual_confirmed": false,
+                "manual_note": "",
+                "row_index": 2016,
+                "field": "image_url",
+                "manual_value": "",
+                "evidence_url": "",
+                "candidate_source_url": "",
+                "source_store": "Banpresto",
+                "name_ko": "Q posket 에밀리아",
+                "name_ja": "Q posket エミリア",
+                "category": "피규어",
+                "affiliation": "리제로",
+                "source_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%82%A8%E3%83%9F%E3%83%AA%E3%82%A2",
+                "workflow": "find_source_then_extract_image",
+                "requires_exact_source_url": true,
+                "requires_representative_image_flag": false,
+                "blocked_until": "exact_product_source_url_confirmed"
+              }
+            },
+            {
+              "catalog_index": 2017,
+              "name_ko": "Espresto 렘",
+              "name_ja": "エスプレスト レム",
+              "series_name": null,
+              "category": "피규어",
+              "source_url": null,
+              "official_search_url": "https://bsp-prize.jp/search/?keyword=%E3%82%A8%E3%82%B9%E3%83%97%E3%83%AC%E3%82%B9%E3%83%88%20%E3%83%AC%E3%83%A0",
+              "catalog_field_import_template": {
+                "manual_confirmed": false,
+                "manual_note": "",
+                "row_index": 2017,
+                "field": "image_url",
+                "manual_value": "",
+                "evidence_url": "",
+                "candidate_source_url": "",
+                "source_store": "Banpresto",
+                "name_ko": "Espresto 렘",
+                "name_ja": "エスプレスト レム",
+                "category": "피규어",
+                "affiliation": "리제로",
+                "source_search_url": "https://bsp-prize.jp/search/?keyword=%E3%82%A8%E3%82%B9%E3%83%97%E3%83%AC%E3%82%B9%E3%83%88%20%E3%83%AC%E3%83%A0",
+                "workflow": "find_source_then_extract_image",
+                "requires_exact_source_url": true,
+                "requires_representative_image_flag": false,
+                "blocked_until": "exact_product_source_url_confirmed"
+              }
+            }
+          ]
+        },
         {
           "workflow": "find_source_then_extract_image",
           "source_store": "Taito",
@@ -17190,7 +17849,74 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "batch_id": "image-enrichment-review-005",
+      "priority": 20,
+      "workflow": "find_source_then_extract_image",
+      "workflow_counts": [
+        [
+          "find_source_then_extract_image",
+          8
+        ]
+      ],
+      "top_source_stores": [
+        [
+          "메가하우스",
+          9
+        ],
+        [
+          "MINISO 중국",
+          7
+        ],
+        [
+          "산리오",
+          6
+        ],
+        [
+          "JYP SHOP",
+          5
+        ],
+        [
+          "Re-ment",
+          5
+        ],
+        [
+          "치이카와샵 용산",
+          5
+        ],
+        [
+          "MINISO",
+          4
+        ],
+        [
+          "가샤폰",
+          4
+        ]
+      ],
+      "group_count": 8,
+      "missing_image_rows": 45,
+      "blocked_until": "blocked_by_missing_source_url",
+      "next_machine_step": "find_exact_official_source_url_then_extract_image",
+      "public_report": "data/source_discovery_queue_public.json",
+      "catalog_field_import_template_fields": [
+        "manual_confirmed",
+        "row_index",
+        "field",
+        "manual_value",
+        "evidence_url",
+        "candidate_source_url"
+      ],
+      "acceptance_criteria": [
+        "exact product source_url is available before importing image_url",
+        "image_url comes from the accepted source page or trusted official CDN",
+        "marketplace, blog, resale, and generic listing images stay out of public catalog imports",
+        "generic storefront URLs are replaced before image extraction"
+      ],
+      "auto_apply_enabled": false,
+      "groups": [
         {
           "workflow": "find_source_then_extract_image",
           "source_store": "메가하우스",
@@ -17453,74 +18179,7 @@
               }
             }
           ]
-        }
-      ]
-    },
-    {
-      "batch_id": "image-enrichment-review-005",
-      "priority": 20,
-      "workflow": "find_source_then_extract_image",
-      "workflow_counts": [
-        [
-          "find_source_then_extract_image",
-          8
-        ]
-      ],
-      "top_source_stores": [
-        [
-          "MINISO 중국",
-          7
-        ],
-        [
-          "산리오",
-          6
-        ],
-        [
-          "JYP SHOP",
-          5
-        ],
-        [
-          "Re-ment",
-          5
-        ],
-        [
-          "치이카와샵 용산",
-          5
-        ],
-        [
-          "MINISO",
-          4
-        ],
-        [
-          "가샤폰",
-          4
-        ],
-        [
-          "디즈니 스토어",
-          4
-        ]
-      ],
-      "group_count": 8,
-      "missing_image_rows": 40,
-      "blocked_until": "blocked_by_missing_source_url",
-      "next_machine_step": "find_exact_official_source_url_then_extract_image",
-      "public_report": "data/source_discovery_queue_public.json",
-      "catalog_field_import_template_fields": [
-        "manual_confirmed",
-        "row_index",
-        "field",
-        "manual_value",
-        "evidence_url",
-        "candidate_source_url"
-      ],
-      "acceptance_criteria": [
-        "exact product source_url is available before importing image_url",
-        "image_url comes from the accepted source page or trusted official CDN",
-        "marketplace, blog, resale, and generic listing images stay out of public catalog imports",
-        "generic storefront URLs are replaced before image extraction"
-      ],
-      "auto_apply_enabled": false,
-      "groups": [
+        },
         {
           "workflow": "find_source_then_extract_image",
           "source_store": "MINISO 중국",
@@ -18605,7 +19264,74 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "batch_id": "image-enrichment-review-006",
+      "priority": 20,
+      "workflow": "find_source_then_extract_image",
+      "workflow_counts": [
+        [
+          "find_source_then_extract_image",
+          8
+        ]
+      ],
+      "top_source_stores": [
+        [
+          "디즈니 스토어",
+          4
+        ],
+        [
+          "이세계아이돌 공식 굿즈",
+          4
+        ],
+        [
+          "Bandai Premium",
+          3
+        ],
+        [
+          "SM STORE",
+          3
+        ],
+        [
+          "카도카와",
+          3
+        ],
+        [
+          "Phat! Company",
+          2
+        ],
+        [
+          "YG SELECT",
+          2
+        ],
+        [
+          "롯데웰푸드",
+          2
+        ]
+      ],
+      "group_count": 8,
+      "missing_image_rows": 23,
+      "blocked_until": "blocked_by_missing_source_url",
+      "next_machine_step": "find_exact_official_source_url_then_extract_image",
+      "public_report": "data/source_discovery_queue_public.json",
+      "catalog_field_import_template_fields": [
+        "manual_confirmed",
+        "row_index",
+        "field",
+        "manual_value",
+        "evidence_url",
+        "candidate_source_url"
+      ],
+      "acceptance_criteria": [
+        "exact product source_url is available before importing image_url",
+        "image_url comes from the accepted source page or trusted official CDN",
+        "marketplace, blog, resale, and generic listing images stay out of public catalog imports",
+        "generic storefront URLs are replaced before image extraction"
+      ],
+      "auto_apply_enabled": false,
+      "groups": [
         {
           "workflow": "find_source_then_extract_image",
           "source_store": "디즈니 스토어",
@@ -18728,74 +19454,7 @@
               }
             }
           ]
-        }
-      ]
-    },
-    {
-      "batch_id": "image-enrichment-review-006",
-      "priority": 20,
-      "workflow": "find_source_then_extract_image",
-      "workflow_counts": [
-        [
-          "find_source_then_extract_image",
-          8
-        ]
-      ],
-      "top_source_stores": [
-        [
-          "이세계아이돌 공식 굿즈",
-          4
-        ],
-        [
-          "Bandai Premium",
-          3
-        ],
-        [
-          "SM STORE",
-          3
-        ],
-        [
-          "카도카와",
-          3
-        ],
-        [
-          "Phat! Company",
-          2
-        ],
-        [
-          "YG SELECT",
-          2
-        ],
-        [
-          "롯데웰푸드",
-          2
-        ],
-        [
-          "이세계아이돌 팝업스토어",
-          2
-        ]
-      ],
-      "group_count": 8,
-      "missing_image_rows": 21,
-      "blocked_until": "blocked_by_missing_source_url",
-      "next_machine_step": "find_exact_official_source_url_then_extract_image",
-      "public_report": "data/source_discovery_queue_public.json",
-      "catalog_field_import_template_fields": [
-        "manual_confirmed",
-        "row_index",
-        "field",
-        "manual_value",
-        "evidence_url",
-        "candidate_source_url"
-      ],
-      "acceptance_criteria": [
-        "exact product source_url is available before importing image_url",
-        "image_url comes from the accepted source page or trusted official CDN",
-        "marketplace, blog, resale, and generic listing images stay out of public catalog imports",
-        "generic storefront URLs are replaced before image extraction"
-      ],
-      "auto_apply_enabled": false,
-      "groups": [
+        },
         {
           "workflow": "find_source_then_extract_image",
           "source_store": "이세계아이돌 공식 굿즈",
@@ -19404,7 +20063,74 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "batch_id": "image-enrichment-review-007",
+      "priority": 20,
+      "workflow": "find_source_then_extract_image",
+      "workflow_counts": [
+        [
+          "find_source_then_extract_image",
+          8
+        ]
+      ],
+      "top_source_stores": [
+        [
+          "이세계아이돌 팝업스토어",
+          2
+        ],
+        [
+          "ALTER",
+          1
+        ],
+        [
+          "CUBE STORE",
+          1
+        ],
+        [
+          "Hobby Max International",
+          1
+        ],
+        [
+          "Hololive Production Official Shop",
+          1
+        ],
+        [
+          "IST STORE",
+          1
+        ],
+        [
+          "KQ FELLAZ",
+          1
+        ],
+        [
+          "SEGA",
+          1
+        ]
+      ],
+      "group_count": 8,
+      "missing_image_rows": 9,
+      "blocked_until": "blocked_by_missing_source_url",
+      "next_machine_step": "find_exact_official_source_url_then_extract_image",
+      "public_report": "data/source_discovery_queue_public.json",
+      "catalog_field_import_template_fields": [
+        "manual_confirmed",
+        "row_index",
+        "field",
+        "manual_value",
+        "evidence_url",
+        "candidate_source_url"
+      ],
+      "acceptance_criteria": [
+        "exact product source_url is available before importing image_url",
+        "image_url comes from the accepted source page or trusted official CDN",
+        "marketplace, blog, resale, and generic listing images stay out of public catalog imports",
+        "generic storefront URLs are replaced before image extraction"
+      ],
+      "auto_apply_enabled": false,
+      "groups": [
         {
           "workflow": "find_source_then_extract_image",
           "source_store": "이세계아이돌 팝업스토어",
@@ -19471,74 +20197,7 @@
               }
             }
           ]
-        }
-      ]
-    },
-    {
-      "batch_id": "image-enrichment-review-007",
-      "priority": 20,
-      "workflow": "find_source_then_extract_image",
-      "workflow_counts": [
-        [
-          "find_source_then_extract_image",
-          8
-        ]
-      ],
-      "top_source_stores": [
-        [
-          "ALTER",
-          1
-        ],
-        [
-          "CUBE STORE",
-          1
-        ],
-        [
-          "Hobby Max International",
-          1
-        ],
-        [
-          "Hololive Production Official Shop",
-          1
-        ],
-        [
-          "IST STORE",
-          1
-        ],
-        [
-          "KQ FELLAZ",
-          1
-        ],
-        [
-          "SEGA",
-          1
-        ],
-        [
-          "STARSHIP STORE",
-          1
-        ]
-      ],
-      "group_count": 8,
-      "missing_image_rows": 8,
-      "blocked_until": "blocked_by_missing_source_url",
-      "next_machine_step": "find_exact_official_source_url_then_extract_image",
-      "public_report": "data/source_discovery_queue_public.json",
-      "catalog_field_import_template_fields": [
-        "manual_confirmed",
-        "row_index",
-        "field",
-        "manual_value",
-        "evidence_url",
-        "candidate_source_url"
-      ],
-      "acceptance_criteria": [
-        "exact product source_url is available before importing image_url",
-        "image_url comes from the accepted source page or trusted official CDN",
-        "marketplace, blog, resale, and generic listing images stay out of public catalog imports",
-        "generic storefront URLs are replaced before image extraction"
-      ],
-      "auto_apply_enabled": false,
-      "groups": [
+        },
         {
           "workflow": "find_source_then_extract_image",
           "source_store": "ALTER",
@@ -19811,7 +20470,50 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "batch_id": "image-enrichment-review-008",
+      "priority": 20,
+      "workflow": "find_source_then_extract_image",
+      "workflow_counts": [
+        [
+          "find_source_then_extract_image",
+          2
+        ]
+      ],
+      "top_source_stores": [
+        [
+          "STARSHIP STORE",
+          1
+        ],
+        [
+          "점프 숍",
+          1
+        ]
+      ],
+      "group_count": 2,
+      "missing_image_rows": 2,
+      "blocked_until": "blocked_by_missing_source_url",
+      "next_machine_step": "find_exact_official_source_url_then_extract_image",
+      "public_report": "data/source_discovery_queue_public.json",
+      "catalog_field_import_template_fields": [
+        "manual_confirmed",
+        "row_index",
+        "field",
+        "manual_value",
+        "evidence_url",
+        "candidate_source_url"
+      ],
+      "acceptance_criteria": [
+        "exact product source_url is available before importing image_url",
+        "image_url comes from the accepted source page or trusted official CDN",
+        "marketplace, blog, resale, and generic listing images stay out of public catalog imports",
+        "generic storefront URLs are replaced before image extraction"
+      ],
+      "auto_apply_enabled": false,
+      "groups": [
         {
           "workflow": "find_source_then_extract_image",
           "source_store": "STARSHIP STORE",
@@ -19850,46 +20552,7 @@
               }
             }
           ]
-        }
-      ]
-    },
-    {
-      "batch_id": "image-enrichment-review-008",
-      "priority": 20,
-      "workflow": "find_source_then_extract_image",
-      "workflow_counts": [
-        [
-          "find_source_then_extract_image",
-          1
-        ]
-      ],
-      "top_source_stores": [
-        [
-          "점프 숍",
-          1
-        ]
-      ],
-      "group_count": 1,
-      "missing_image_rows": 1,
-      "blocked_until": "blocked_by_missing_source_url",
-      "next_machine_step": "find_exact_official_source_url_then_extract_image",
-      "public_report": "data/source_discovery_queue_public.json",
-      "catalog_field_import_template_fields": [
-        "manual_confirmed",
-        "row_index",
-        "field",
-        "manual_value",
-        "evidence_url",
-        "candidate_source_url"
-      ],
-      "acceptance_criteria": [
-        "exact product source_url is available before importing image_url",
-        "image_url comes from the accepted source page or trusted official CDN",
-        "marketplace, blog, resale, and generic listing images stay out of public catalog imports",
-        "generic storefront URLs are replaced before image extraction"
-      ],
-      "auto_apply_enabled": false,
-      "groups": [
+        },
         {
           "workflow": "find_source_then_extract_image",
           "source_store": "점프 숍",
@@ -21774,6 +22437,162 @@
             "category": "마스코트",
             "affiliation": "치이카와",
             "source_search_url": "https://online-kuji.chiikawamarket.jp/search?q=D%E8%B3%9E%20%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88",
+            "workflow": "extract_from_existing_source_url",
+            "requires_exact_source_url": false,
+            "requires_representative_image_flag": false,
+            "blocked_until": "manual_image_url_confirmed"
+          }
+        }
+      ]
+    },
+    {
+      "workflow": "extract_from_existing_source_url",
+      "source_store": "TOHO animation STORE",
+      "missing_image_rows": 1,
+      "priority": 10,
+      "recommended_action": "crawl verified source_url and review extracted product image",
+      "official_search_available": false,
+      "candidate_review_report": null,
+      "sample_items": [
+        {
+          "catalog_index": 2270,
+          "name_ko": "하이큐!! 10주년 이벤트 트레이딩 캔뱃지",
+          "name_ja": "ハイキュー!! 10th イベント -NEXT STEP- トレーディング缶バッジ",
+          "series_name": null,
+          "category": "캔뱃지",
+          "source_url": "https://haikyu.jp/10thevent/",
+          "official_search_url": null,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2270,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://haikyu.jp/10thevent/",
+            "candidate_source_url": "https://haikyu.jp/10thevent/",
+            "source_store": "TOHO animation STORE",
+            "name_ko": "하이큐!! 10주년 이벤트 트레이딩 캔뱃지",
+            "name_ja": "ハイキュー!! 10th イベント -NEXT STEP- トレーディング缶バッジ",
+            "category": "캔뱃지",
+            "affiliation": "하이큐!!",
+            "source_search_url": null,
+            "workflow": "extract_from_existing_source_url",
+            "requires_exact_source_url": false,
+            "requires_representative_image_flag": false,
+            "blocked_until": "manual_image_url_confirmed"
+          }
+        }
+      ]
+    },
+    {
+      "workflow": "extract_from_existing_source_url",
+      "source_store": "밀짚모자 스토어",
+      "missing_image_rows": 1,
+      "priority": 10,
+      "recommended_action": "crawl verified source_url and review extracted product image",
+      "official_search_available": false,
+      "candidate_review_report": null,
+      "sample_items": [
+        {
+          "catalog_index": 2268,
+          "name_ko": "원피스 생일 한정 아크릴 액세서리 스탠드 (루피 5.5)",
+          "name_ja": "『ワンピース』ハッピーバースデーアクリルアクセサリースタンド［5.5 ルフィ］",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_url": "https://store.toei-anim.co.jp/shop/g/gMOVONP962162/",
+          "official_search_url": null,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2268,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://store.toei-anim.co.jp/shop/g/gMOVONP962162/",
+            "candidate_source_url": "https://store.toei-anim.co.jp/shop/g/gMOVONP962162/",
+            "source_store": "밀짚모자 스토어",
+            "name_ko": "원피스 생일 한정 아크릴 액세서리 스탠드 (루피 5.5)",
+            "name_ja": "『ワンピース』ハッピーバースデーアクリルアクセサリースタンド［5.5 ルフィ］",
+            "category": "아크릴 스탠드",
+            "affiliation": "원피스",
+            "source_search_url": null,
+            "workflow": "extract_from_existing_source_url",
+            "requires_exact_source_url": false,
+            "requires_representative_image_flag": false,
+            "blocked_until": "manual_image_url_confirmed"
+          }
+        }
+      ]
+    },
+    {
+      "workflow": "extract_from_existing_source_url",
+      "source_store": "밀짚모자 스토어 상하이",
+      "missing_image_rows": 1,
+      "priority": 10,
+      "recommended_action": "crawl verified source_url and review extracted product image",
+      "official_search_available": false,
+      "candidate_review_report": null,
+      "sample_items": [
+        {
+          "catalog_index": 2269,
+          "name_ko": "원피스 상하이 지역 한정 아크릴 스탠드 (루피)",
+          "name_ja": "『麦わらストア上海オリジナル』アクリルスタンド ルフィ",
+          "series_name": null,
+          "category": "아크릴 스탠드",
+          "source_url": "https://store.toei-anim.co.jp/shop/g/gONP03019O1/",
+          "official_search_url": null,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2269,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://store.toei-anim.co.jp/shop/g/gONP03019O1/",
+            "candidate_source_url": "https://store.toei-anim.co.jp/shop/g/gONP03019O1/",
+            "source_store": "밀짚모자 스토어 상하이",
+            "name_ko": "원피스 상하이 지역 한정 아크릴 스탠드 (루피)",
+            "name_ja": "『麦わらストア上海オリジナル』アクリルスタンド ルフィ",
+            "category": "아크릴 스탠드",
+            "affiliation": "원피스",
+            "source_search_url": null,
+            "workflow": "extract_from_existing_source_url",
+            "requires_exact_source_url": false,
+            "requires_representative_image_flag": false,
+            "blocked_until": "manual_image_url_confirmed"
+          }
+        }
+      ]
+    },
+    {
+      "workflow": "extract_from_existing_source_url",
+      "source_store": "하이큐!! 10주년 기념전",
+      "missing_image_rows": 1,
+      "priority": 10,
+      "recommended_action": "crawl verified source_url and review extracted product image",
+      "official_search_available": false,
+      "candidate_review_report": null,
+      "sample_items": [
+        {
+          "catalog_index": 2271,
+          "name_ko": "하이큐!! 10주년 메모리얼 컬렉션 캔뱃지 SEASON.1~4",
+          "name_ja": "トレーディング缶バッジ メモリアルコレクション SEASON.1〜4",
+          "series_name": null,
+          "category": "캔뱃지",
+          "source_url": "https://haikyu.jp/10thevent/",
+          "official_search_url": null,
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2271,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "https://haikyu.jp/10thevent/",
+            "candidate_source_url": "https://haikyu.jp/10thevent/",
+            "source_store": "하이큐!! 10주년 기념전",
+            "name_ko": "하이큐!! 10주년 메모리얼 컬렉션 캔뱃지 SEASON.1~4",
+            "name_ja": "トレーディング缶バッジ メモリアルコレクション SEASON.1〜4",
+            "category": "캔뱃지",
+            "affiliation": "하이큐!!",
+            "source_search_url": null,
             "workflow": "extract_from_existing_source_url",
             "requires_exact_source_url": false,
             "requires_representative_image_flag": false,
@@ -34389,6 +35208,493 @@
             "category": "피규어",
             "affiliation": "체인소 맨",
             "source_search_url": "https://furyuprize.com/search?keyword=%E3%81%A1%E3%82%87%E3%81%93%E3%81%AE%E3%81%9B%E3%83%97%E3%83%AC%E3%83%9F%E3%82%A2%E3%83%A0%20%E6%A1%82%E6%9C%A8%E3%82%B5%E3%83%B3%E3%82%BF",
+            "workflow": "find_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          }
+        }
+      ]
+    },
+    {
+      "workflow": "find_source_then_extract_image",
+      "source_store": "Banpresto",
+      "missing_image_rows": 17,
+      "priority": 20,
+      "recommended_action": "find exact official product page, then attach source_url and image_url",
+      "official_search_available": true,
+      "candidate_review_report": null,
+      "sample_items": [
+        {
+          "catalog_index": 1415,
+          "name_ko": "Q posket 리코",
+          "name_ja": "Q posket リコ",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AA%E3%82%B3",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1415,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 리코",
+            "name_ja": "Q posket リコ",
+            "category": "피규어",
+            "affiliation": "메이드 인 어비스",
+            "source_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AA%E3%82%B3",
+            "workflow": "find_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          }
+        },
+        {
+          "catalog_index": 1416,
+          "name_ko": "Q posket 레그",
+          "name_ja": "Q posket レグ",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%82%B0",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1416,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 레그",
+            "name_ja": "Q posket レグ",
+            "category": "피규어",
+            "affiliation": "메이드 인 어비스",
+            "source_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%82%B0",
+            "workflow": "find_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          }
+        },
+        {
+          "catalog_index": 1417,
+          "name_ko": "Q posket 나나치",
+          "name_ja": "Q posket ナナチ",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1417,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 나나치",
+            "name_ja": "Q posket ナナチ",
+            "category": "피규어",
+            "affiliation": "메이드 인 어비스",
+            "source_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81",
+            "workflow": "find_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          }
+        },
+        {
+          "catalog_index": 1418,
+          "name_ko": "Break Time Collection 나나치",
+          "name_ja": "ブレイクタイムコレクション ナナチ",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1418,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Break Time Collection 나나치",
+            "name_ja": "ブレイクタイムコレクション ナナチ",
+            "category": "피규어",
+            "affiliation": "메이드 인 어비스",
+            "source_search_url": "https://bsp-prize.jp/search/?keyword=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81",
+            "workflow": "find_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          }
+        },
+        {
+          "catalog_index": 1462,
+          "name_ko": "Q posket 모노쿠마",
+          "name_ja": "Q posket モノクマ",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1462,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 모노쿠마",
+            "name_ja": "Q posket モノクマ",
+            "category": "피규어",
+            "affiliation": "단간론파",
+            "source_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+            "workflow": "find_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          }
+        },
+        {
+          "catalog_index": 1463,
+          "name_ko": "Break Time Collection 코마에다 나기토",
+          "name_ja": "Break Time Collection 狛枝凪斗",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1463,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Break Time Collection 코마에다 나기토",
+            "name_ja": "Break Time Collection 狛枝凪斗",
+            "category": "피규어",
+            "affiliation": "단간론파",
+            "source_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97",
+            "workflow": "find_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          }
+        },
+        {
+          "catalog_index": 1464,
+          "name_ko": "Break Time Collection 히나타 하지메",
+          "name_ja": "Break Time Collection 日向創",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E6%97%A5%E5%90%91%E5%89%B5",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1464,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Break Time Collection 히나타 하지메",
+            "name_ja": "Break Time Collection 日向創",
+            "category": "피규어",
+            "affiliation": "단간론파",
+            "source_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E6%97%A5%E5%90%91%E5%89%B5",
+            "workflow": "find_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          }
+        },
+        {
+          "catalog_index": 1493,
+          "name_ko": "Q posket 프리렌",
+          "name_ja": "Q posket フリーレン",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1493,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 프리렌",
+            "name_ja": "Q posket フリーレン",
+            "category": "피규어",
+            "affiliation": "장송의 프리렌",
+            "source_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+            "workflow": "find_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          }
+        },
+        {
+          "catalog_index": 1494,
+          "name_ko": "Q posket 펀",
+          "name_ja": "Q posket フェルン",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1494,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 펀",
+            "name_ja": "Q posket フェルン",
+            "category": "피규어",
+            "affiliation": "장송의 프리렌",
+            "source_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+            "workflow": "find_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          }
+        },
+        {
+          "catalog_index": 1496,
+          "name_ko": "Q posket 히멜",
+          "name_ja": "Q posket ヒンメル",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1496,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 히멜",
+            "name_ja": "Q posket ヒンメル",
+            "category": "피규어",
+            "affiliation": "장송의 프리렌",
+            "source_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB",
+            "workflow": "find_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          }
+        },
+        {
+          "catalog_index": 1497,
+          "name_ko": "Break Time Collection 프리렌",
+          "name_ja": "Break Time Collection フリーレン",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1497,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Break Time Collection 프리렌",
+            "name_ja": "Break Time Collection フリーレン",
+            "category": "피규어",
+            "affiliation": "장송의 프리렌",
+            "source_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+            "workflow": "find_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          }
+        },
+        {
+          "catalog_index": 1498,
+          "name_ko": "Break Time Collection 펀",
+          "name_ja": "Break Time Collection フェルン",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1498,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Break Time Collection 펀",
+            "name_ja": "Break Time Collection フェルン",
+            "category": "피규어",
+            "affiliation": "장송의 프리렌",
+            "source_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3",
+            "workflow": "find_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          }
+        },
+        {
+          "catalog_index": 1909,
+          "name_ko": "Q posket 고토 히토리",
+          "name_ja": "Q posket 後藤ひとり",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E5%BE%8C%E8%97%A4%E3%81%B2%E3%81%A8%E3%82%8A",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 1909,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 고토 히토리",
+            "name_ja": "Q posket 後藤ひとり",
+            "category": "피규어",
+            "affiliation": "봇치 더 록",
+            "source_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E5%BE%8C%E8%97%A4%E3%81%B2%E3%81%A8%E3%82%8A",
+            "workflow": "find_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          }
+        },
+        {
+          "catalog_index": 2014,
+          "name_ko": "Q posket 렘",
+          "name_ja": "Q posket レム",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%83%A0",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2014,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 렘",
+            "name_ja": "Q posket レム",
+            "category": "피규어",
+            "affiliation": "리제로",
+            "source_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%83%A0",
+            "workflow": "find_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          }
+        },
+        {
+          "catalog_index": 2015,
+          "name_ko": "Q posket 람",
+          "name_ja": "Q posket ラム",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A9%E3%83%A0",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2015,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 람",
+            "name_ja": "Q posket ラム",
+            "category": "피규어",
+            "affiliation": "리제로",
+            "source_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A9%E3%83%A0",
+            "workflow": "find_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          }
+        },
+        {
+          "catalog_index": 2016,
+          "name_ko": "Q posket 에밀리아",
+          "name_ja": "Q posket エミリア",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%82%A8%E3%83%9F%E3%83%AA%E3%82%A2",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2016,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Q posket 에밀리아",
+            "name_ja": "Q posket エミリア",
+            "category": "피규어",
+            "affiliation": "리제로",
+            "source_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%82%A8%E3%83%9F%E3%83%AA%E3%82%A2",
+            "workflow": "find_source_then_extract_image",
+            "requires_exact_source_url": true,
+            "requires_representative_image_flag": false,
+            "blocked_until": "exact_product_source_url_confirmed"
+          }
+        },
+        {
+          "catalog_index": 2017,
+          "name_ko": "Espresto 렘",
+          "name_ja": "エスプレスト レム",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=%E3%82%A8%E3%82%B9%E3%83%97%E3%83%AC%E3%82%B9%E3%83%88%20%E3%83%AC%E3%83%A0",
+          "catalog_field_import_template": {
+            "manual_confirmed": false,
+            "manual_note": "",
+            "row_index": 2017,
+            "field": "image_url",
+            "manual_value": "",
+            "evidence_url": "",
+            "candidate_source_url": "",
+            "source_store": "Banpresto",
+            "name_ko": "Espresto 렘",
+            "name_ja": "エスプレスト レム",
+            "category": "피규어",
+            "affiliation": "리제로",
+            "source_search_url": "https://bsp-prize.jp/search/?keyword=%E3%82%A8%E3%82%B9%E3%83%97%E3%83%AC%E3%82%B9%E3%83%88%20%E3%83%AC%E3%83%A0",
             "workflow": "find_source_then_extract_image",
             "requires_exact_source_url": true,
             "requires_representative_image_flag": false,

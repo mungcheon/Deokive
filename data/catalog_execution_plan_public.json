@@ -1,24 +1,24 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T13:14:56Z",
+  "generated_at": "2026-07-26T13:21:30Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 24,
     "blocked_action_count": 0,
     "manual_review_action_count": 21,
     "pending_import_action_count": 0,
-    "total_action_rows": 33482,
+    "total_action_rows": 33613,
     "open_review_queues": {
-      "source_discovery_rows": 751,
-      "image_missing_rows": 825,
+      "source_discovery_rows": 768,
+      "image_missing_rows": 846,
       "dedupe_groups": 61,
       "animation_unknown_categories": 0,
       "ichiban_missing_release_date_rows": 8,
       "ichiban_missing_price_rows": 342,
       "generic_source_patch_candidate_rows": 3,
       "requested_focus_open_rows": 8033,
-      "danganronpa_missing_media_rows": 37,
-      "danganronpa_patch_template_pending_rows": 37,
+      "danganronpa_missing_media_rows": 40,
+      "danganronpa_patch_template_pending_rows": 40,
       "danganronpa_patch_template_ready_rows": 0,
       "confirmed_import_template_rows": 1160,
       "confirmed_import_action_queue_rows": 4252,
@@ -34,23 +34,23 @@
       "requested_focus_actionable_rows": 600,
       "requested_focus_unqueued_actionable_rows": 0,
       "requested_focus_barcode_template_rows_excluded": 5674,
-      "source_discovery_action_rows": 741,
-      "source_discovery_actionable_rows": 741,
+      "source_discovery_action_rows": 758,
+      "source_discovery_actionable_rows": 758,
       "source_discovery_unqueued_actionable_rows": 0,
       "source_discovery_manual_research_backlog_rows": 10,
       "source_discovery_manual_identity_backfill_required_rows": 3,
       "source_discovery_manual_official_lookup_rows": 7,
-      "source_discovery_focus_template_rows": 741,
-      "source_discovery_focus_template_work_order_packs": 66,
-      "source_discovery_focus_template_dry_run_skipped_rows": 741,
+      "source_discovery_focus_template_rows": 758,
+      "source_discovery_focus_template_work_order_packs": 67,
+      "source_discovery_focus_template_dry_run_skipped_rows": 758,
       "source_discovery_next_focus_pack_rows": 20,
       "source_discovery_next_focus_pack_manual_quarantine": true,
       "source_discovery_next_focus_pack_quarantine_reason": "official_cache_safe_exact_match_absent",
       "source_discovery_recommended_active_focus_pack_id": "source-discovery-focus-002",
-      "source_discovery_focus_pack_progress_queues": 66,
-      "source_discovery_focus_pack_progress_remaining_rows": 741,
-      "source_discovery_starter_queue_rows": 751,
-      "source_discovery_starter_queue_groups": 386,
+      "source_discovery_focus_pack_progress_queues": 67,
+      "source_discovery_focus_pack_progress_remaining_rows": 758,
+      "source_discovery_starter_queue_rows": 768,
+      "source_discovery_starter_queue_groups": 391,
       "source_discovery_next_focus_fallback_rows": 20,
       "source_discovery_next_focus_fallback_manual_confirmed_rows": 0,
       "source_detail_candidate_action_rows": 15,
@@ -63,8 +63,8 @@
       "official_detail_review_manual_confirmed_rows": 0,
       "ensky_cache_candidate_action_rows": 39,
       "ensky_cache_candidate_manual_confirmed_rows": 0,
-      "image_attachment_action_rows": 74,
-      "image_attachment_actionable_rows": 74,
+      "image_attachment_action_rows": 78,
+      "image_attachment_actionable_rows": 78,
       "image_attachment_unqueued_actionable_rows": 0,
       "image_attachment_source_url_search_hint_rows": 0,
       "image_attachment_source_url_missing_search_hint_rows": 0,
@@ -73,7 +73,7 @@
       "image_attachment_source_url_missing_any_search_hint_rows": 0,
       "image_attachment_source_url_primary_review_url_rows": 0,
       "image_attachment_source_url_missing_primary_review_url_rows": 0,
-      "image_attachment_local_download_ready_rows": 74,
+      "image_attachment_local_download_ready_rows": 78,
       "ichiban_metadata_action_campaigns": 41,
       "ichiban_metadata_actionable_campaigns": 41,
       "ichiban_metadata_unqueued_action_campaigns": 0,
@@ -103,10 +103,10 @@
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
       "ichiban_prize_name_image_patch_blocked_rows": 0,
       "catalog_goal_manual_review_pillars": 5,
-      "catalog_goal_manual_review_rows": 934,
+      "catalog_goal_manual_review_rows": 955,
       "catalog_goal_auto_apply_ready_rows": 0,
       "catalog_goal_dedupe_manual_review_rows": 48,
-      "catalog_goal_missing_image_rows": 825,
+      "catalog_goal_missing_image_rows": 846,
       "catalog_goal_source_url_update_rows": 0,
       "catalog_goal_animation_category_rows": 0,
       "catalog_goal_ichiban_manual_review_rows": 61,
@@ -216,13 +216,13 @@
     "image_candidate_manual_or_blocked_items": 228,
     "image_action_source_url_update_template_rows": 0,
     "image_action_source_url_update_template_batch_count": 0,
-    "image_action_image_url_ready_rows": 52,
-    "image_action_workstream_count": 2,
+    "image_action_image_url_ready_rows": 56,
+    "image_action_workstream_count": 6,
     "image_known_asset_status": "pass",
     "image_download_readiness_status": "known_image_assets_complete",
     "image_url_without_local_path_rows": 0,
     "image_missing_local_image_files": 0,
-    "image_rows_still_requiring_url_evidence": 773,
+    "image_rows_still_requiring_url_evidence": 825,
     "image_missing_evidence_top_source_stores": [
       [
         "엔스카이",
@@ -235,6 +235,10 @@
       [
         "굿스마일컴퍼니",
         56
+      ],
+      [
+        "치이카와 온라인 쿠지",
+        52
       ],
       [
         "Stellive Store",
@@ -251,16 +255,16 @@
       [
         "점프 캐릭터즈 스토어",
         23
-      ],
-      [
-        "ご当地ちいかわ 공식(API)",
-        22
       ]
     ],
     "image_missing_evidence_top_categories": [
       [
         "피규어",
         127
+      ],
+      [
+        "인형",
+        126
       ],
       [
         "아크릴 스탠드",
@@ -271,16 +275,12 @@
         95
       ],
       [
-        "인형",
-        87
+        "마스코트",
+        80
       ],
       [
         "키링",
         80
-      ],
-      [
-        "마스코트",
-        67
       ],
       [
         "문구",
@@ -292,11 +292,11 @@
       ]
     ],
     "image_auto_download_ready_rows": 0,
-    "image_attachment_template_rows": 22,
+    "image_attachment_template_rows": 74,
     "image_attachment_template_confirmed_rows": 0,
-    "image_attachment_template_dry_run_skipped_rows": 22,
-    "source_focus_template_rows": 741,
-    "source_focus_template_work_order_pack_count": 66,
+    "image_attachment_template_dry_run_skipped_rows": 74,
+    "source_focus_template_rows": 758,
+    "source_focus_template_work_order_pack_count": 67,
     "source_focus_template_next_pack_rows": 20,
     "source_next_focus_detail_pack_items": 20,
     "source_next_focus_detail_action_lane_count": 2,
@@ -325,15 +325,15 @@
     "source_next_focus_identity_candidate_review_candidate_rows": 0,
     "source_next_focus_fallback_import_dry_run_updated_rows": 0,
     "source_next_focus_fallback_import_dry_run_skipped_rows": 20,
-    "source_discovery_starter_queue_rows": 751,
-    "source_discovery_starter_queue_groups": 386,
+    "source_discovery_starter_queue_rows": 768,
+    "source_discovery_starter_queue_groups": 391,
     "source_discovery_starter_next_review_batch_rows": 20,
     "source_discovery_starter_next_review_batch_group_count": 4,
     "source_discovery_starter_next_review_batch_primary_source_store": "엔스카이",
-    "source_discovery_action_rows": 741,
-    "source_discovery_actionable_rows": 741,
-    "source_discovery_template_rows": 741,
-    "source_discovery_template_batch_count": 41,
+    "source_discovery_action_rows": 758,
+    "source_discovery_actionable_rows": 758,
+    "source_discovery_template_rows": 758,
+    "source_discovery_template_batch_count": 42,
     "source_discovery_unqueued_actionable_rows": 0,
     "source_discovery_manual_research_backlog_rows": 10,
     "animation_unknown_category_rows": 0,
@@ -811,14 +811,14 @@
       "workstream": "source_discovery_focus_template",
       "public_report": "data/source_discovery_focus_confirmed_template_public.json",
       "status": "manual_review",
-      "rows": 741,
+      "rows": 758,
       "command": "Open the focus template work_order and confirm exact product source URLs for the next store/category pack.",
       "next_step": "work_source_focus_template_work_order_top_to_bottom",
       "blocker": "Imports stay dry-run only until exact product URLs are manually confirmed.",
       "auto_apply_enabled": false,
       "evidence": {
-        "template_items": 741,
-        "work_order_pack_count": 66,
+        "template_items": 758,
+        "work_order_pack_count": 67,
         "next_focus_pack_id": "source-discovery-focus-001",
         "next_source_store": "엔스카이",
         "next_target_category": "키링",
@@ -1068,7 +1068,7 @@
         ],
         "manual_confirmed_rows": 0,
         "dry_run_updated_rows": 0,
-        "dry_run_skipped_rows": 741
+        "dry_run_skipped_rows": 758
       }
     },
     {
@@ -1252,17 +1252,17 @@
       "workstream": "source_discovery_review_batches",
       "public_report": "data/source_discovery_review_batches_public.json",
       "status": "manual_review",
-      "rows": 751,
+      "rows": 768,
       "command": "Find exact official/detail source URLs for rows missing source_url.",
       "next_step": "attach_exact_source_url_before_image_import",
       "blocker": "Rows without exact source_url cannot safely import images.",
       "auto_apply_enabled": false,
       "evidence": {
-        "batch_count": 63,
+        "batch_count": 64,
         "by_workflow": [
           [
             "official_search_url_available",
-            729
+            746
           ],
           [
             "licensed_retailer_search_review",
@@ -1280,14 +1280,14 @@
       "workstream": "source_discovery_starter_queue",
       "public_report": "data/source_discovery_starter_queue_public.json",
       "status": "manual_review",
-      "rows": 751,
+      "rows": 768,
       "command": "Open starter search URLs and confirm exact official product/detail source pages for every missing-source group before image imports.",
       "next_step": "find_exact_official_product_source_url",
       "blocker": "Auto source/image import is disabled until exact product evidence is manually confirmed.",
       "auto_apply_enabled": false,
       "evidence": {
-        "starter_queue_rows": 751,
-        "starter_queue_groups": 386,
+        "starter_queue_rows": 768,
+        "starter_queue_groups": 391,
         "next_review_batch_rows": 20,
         "next_review_batch_group_count": 4,
         "next_review_batch_primary_source_store": "엔스카이",
@@ -2110,24 +2110,24 @@
       "workstream": "source_discovery_action_queue",
       "public_report": "data/source_discovery_action_queue_public.json",
       "status": "manual_review",
-      "rows": 741,
+      "rows": 758,
       "command": "Confirm exact product/detail URLs from official search paths before broad source research.",
       "next_step": "confirm_exact_source_url_then_fill_source_templates",
       "blocker": "Auto source import is disabled; every source_url needs exact product evidence.",
       "auto_apply_enabled": false,
       "evidence": {
-        "actionable_source_rows": 741,
-        "queued_source_rows": 741,
-        "action_batch_count": 66,
-        "source_discovery_template_rows": 741,
-        "source_discovery_template_batch_count": 41,
-        "source_patch_template_count": 741,
-        "catalog_field_import_template_count": 741,
-        "primary_review_url_rows": 741,
+        "actionable_source_rows": 758,
+        "queued_source_rows": 758,
+        "action_batch_count": 67,
+        "source_discovery_template_rows": 758,
+        "source_discovery_template_batch_count": 42,
+        "source_patch_template_count": 758,
+        "catalog_field_import_template_count": 758,
+        "primary_review_url_rows": 758,
         "primary_review_url_kind_counts": [
           [
             "official_search_url",
-            741
+            758
           ]
         ],
         "manual_research_backlog_rows": 10,
@@ -2158,7 +2158,7 @@
         "by_review_state": [
           [
             "official_search_review_required",
-            729
+            746
           ],
           [
             "licensed_retailer_review_required",
@@ -2168,7 +2168,7 @@
         "by_workflow": [
           [
             "official_search_url_available",
-            729
+            746
           ],
           [
             "licensed_retailer_search_review",
@@ -2207,6 +2207,10 @@
           [
             "FuRyu",
             21
+          ],
+          [
+            "Banpresto",
+            17
           ],
           [
             "Taito",
@@ -2330,10 +2334,6 @@
           ],
           [
             "SEGA",
-            1
-          ],
-          [
-            "STARSHIP STORE",
             1
           ]
         ],
@@ -2504,7 +2504,7 @@
       "workstream": "image_url_attachment",
       "public_report": "data/catalog_image_enrichment_batches_public.json",
       "status": "ready",
-      "rows": 825,
+      "rows": 846,
       "command": "Extract images only after exact source_url evidence is confirmed.",
       "next_step": "resolve_source_url_blockers_then_extract_images",
       "blocker": null,
@@ -2512,16 +2512,16 @@
       "evidence": {
         "known_image_asset_status": "pass",
         "download_readiness_status": "known_image_assets_complete",
-        "image_url_rows": 19574,
-        "local_image_path_rows": 19574,
+        "image_url_rows": 19522,
+        "local_image_path_rows": 19522,
         "image_url_without_local_path_rows": 0,
         "missing_local_image_files": 0,
         "missing_web_public_asset_files": 0,
         "known_image_download_blocker_rows": 0,
         "auto_download_ready_rows": 0,
-        "rows_still_requiring_image_url_evidence": 773,
+        "rows_still_requiring_image_url_evidence": 825,
         "missing_image_evidence_priority": {
-          "rows": 773,
+          "rows": 825,
           "by_source_store": [
             [
               "엔스카이",
@@ -2534,6 +2534,10 @@
             [
               "굿스마일컴퍼니",
               56
+            ],
+            [
+              "치이카와 온라인 쿠지",
+              52
             ],
             [
               "Stellive Store",
@@ -2598,16 +2602,16 @@
             [
               "산리오",
               6
-            ],
-            [
-              "치이카와샵 용산",
-              5
             ]
           ],
           "by_category": [
             [
               "피규어",
               127
+            ],
+            [
+              "인형",
+              126
             ],
             [
               "아크릴 스탠드",
@@ -2618,16 +2622,12 @@
               95
             ],
             [
-              "인형",
-              87
+              "마스코트",
+              80
             ],
             [
               "키링",
               80
-            ],
-            [
-              "마스코트",
-              67
             ],
             [
               "문구",
@@ -2688,12 +2688,12 @@
           ],
           "by_affiliation": [
             [
-              "원피스",
-              82
+              "치이카와",
+              116
             ],
             [
-              "치이카와",
-              64
+              "원피스",
+              82
             ],
             [
               "나의 히어로 아카데미아",
@@ -2771,7 +2771,7 @@
           "by_series_name": [
             [
               "(blank)",
-              723
+              737
             ],
             [
               "ご当地",
@@ -2780,6 +2780,26 @@
             [
               "中国限定",
               22
+            ],
+            [
+              "ちいかわ クレープくじ",
+              9
+            ],
+            [
+              "ちいかわ うさぎだらけくじ",
+              9
+            ],
+            [
+              "ちいかわ たこイカくじ",
+              8
+            ],
+            [
+              "ちいかわ たぬきだもんくじ",
+              7
+            ],
+            [
+              "ちいかわ 褒めろッ モモンガだらけくじ",
+              5
             ],
             [
               "한국 한정",
@@ -2794,342 +2814,342 @@
           ],
           "sample_rows": [
             {
-              "catalog_index": 920,
-              "name_ko": "치이카와 러버 스트랩 (치이카와)",
-              "name_ja": "ちいかわ ラバーストラップ (ちいかわ)",
+              "catalog_index": 631,
+              "name_ko": "A상: 빅 사이즈 쿠션 (치이카와)",
+              "name_ja": "A賞 BIGサイズクッション ちいかわ",
               "image_url": null,
               "local_image_path": null,
-              "source_store": "엔스카이",
-              "category": "키링",
+              "source_store": "치이카와 온라인 쿠지",
+              "category": "인형",
               "affiliation": "치이카와",
               "series_name": null
             },
             {
-              "catalog_index": 921,
-              "name_ko": "치이카와 러버 스트랩 (하치와레)",
-              "name_ja": "ちいかわ ラバーストラップ (ハチワレ)",
+              "catalog_index": 632,
+              "name_ko": "A상: 빅 사이즈 쿠션 (하치와레)",
+              "name_ja": "A賞 BIGサイズクッション ハチワレ",
               "image_url": null,
               "local_image_path": null,
-              "source_store": "엔스카이",
-              "category": "키링",
+              "source_store": "치이카와 온라인 쿠지",
+              "category": "인형",
               "affiliation": "치이카와",
               "series_name": null
             },
             {
-              "catalog_index": 922,
-              "name_ko": "치이카와 러버 스트랩 (우사기)",
-              "name_ja": "ちいかわ ラバーストラップ (うさぎ)",
+              "catalog_index": 633,
+              "name_ko": "B상: 누워있는 인형 (치이카와)",
+              "name_ja": "B賞 寝そべりぬいぐるみ ちいかわ",
               "image_url": null,
               "local_image_path": null,
-              "source_store": "엔스카이",
-              "category": "키링",
+              "source_store": "치이카와 온라인 쿠지",
+              "category": "인형",
               "affiliation": "치이카와",
               "series_name": null
             },
             {
-              "catalog_index": 923,
-              "name_ko": "치이카와 모치푸니 러버 스트랩 (모몽가)",
-              "name_ja": "ちいかわ もちぷにラバーストラップ (モモンガ)",
+              "catalog_index": 634,
+              "name_ko": "B상: 누워있는 인형 (하치와레)",
+              "name_ja": "B賞 寝そべりぬいぐるみ ハチワレ",
               "image_url": null,
               "local_image_path": null,
-              "source_store": "엔스카이",
-              "category": "키링",
+              "source_store": "치이카와 온라인 쿠지",
+              "category": "인형",
               "affiliation": "치이카와",
               "series_name": null
             },
             {
-              "catalog_index": 924,
-              "name_ko": "치이카와 모치푸니 러버 스트랩 (쿠리만쥬)",
-              "name_ja": "ちいかわ もちぷにラバーストラップ (栗まんじゅう)",
+              "catalog_index": 635,
+              "name_ko": "B상: 누워있는 인형 (우사기)",
+              "name_ja": "B賞 寝そべりぬいぐるみ うさぎ",
               "image_url": null,
               "local_image_path": null,
-              "source_store": "엔스카이",
-              "category": "키링",
+              "source_store": "치이카와 온라인 쿠지",
+              "category": "인형",
               "affiliation": "치이카와",
               "series_name": null
             },
             {
-              "catalog_index": 925,
-              "name_ko": "치이카와 카라비너 러버 스트랩 (치이카와)",
-              "name_ja": "ちいかわ カラビナ付きラバーストラップ (ちいかわ)",
+              "catalog_index": 636,
+              "name_ko": "A상: BIG 크레페 안기 인형 (치이카와)",
+              "name_ja": "A賞 BIGクレープな抱っこぬいぐるみ ちいかわ",
               "image_url": null,
               "local_image_path": null,
-              "source_store": "엔스카이",
-              "category": "키링",
+              "source_store": "치이카와 온라인 쿠지",
+              "category": "인형",
               "affiliation": "치이카와",
-              "series_name": null
+              "series_name": "ちいかわ クレープくじ"
             },
             {
-              "catalog_index": 926,
-              "name_ko": "치이카와 카라비너 러버 스트랩 (하치와레)",
-              "name_ja": "ちいかわ カラビナ付きラバーストラップ (ハチワレ)",
+              "catalog_index": 637,
+              "name_ko": "A상: BIG 크레페 안기 인형 (하치와레)",
+              "name_ja": "A賞 BIGクレープな抱っこぬいぐるみ ハチワレ",
               "image_url": null,
               "local_image_path": null,
-              "source_store": "엔스카이",
-              "category": "키링",
+              "source_store": "치이카와 온라인 쿠지",
+              "category": "인형",
               "affiliation": "치이카와",
-              "series_name": null
+              "series_name": "ちいかわ クレープくじ"
             },
             {
-              "catalog_index": 927,
-              "name_ko": "치이카와 아크릴 스탠드 (치이카와)",
-              "name_ja": "ちいかわ アクリルスタンド (ちいかわ)",
+              "catalog_index": 638,
+              "name_ko": "A상: BIG 크레페 안기 인형 (우사기)",
+              "name_ja": "A賞 BIGクレープな抱っこぬいぐるみ うさぎ",
               "image_url": null,
               "local_image_path": null,
-              "source_store": "엔스카이",
-              "category": "아크릴 스탠드",
+              "source_store": "치이카와 온라인 쿠지",
+              "category": "인형",
               "affiliation": "치이카와",
-              "series_name": null
+              "series_name": "ちいかわ クレープくじ"
             },
             {
-              "catalog_index": 928,
-              "name_ko": "치이카와 아크릴 스탠드 (하치와레)",
-              "name_ja": "ちいかわ アクリルスタンド (ハチワレ)",
+              "catalog_index": 639,
+              "name_ko": "B상: 크레페 가게 인형 S (치이카와)",
+              "name_ja": "B賞 クレープ屋さんなぬいぐるみS ちいかわ",
               "image_url": null,
               "local_image_path": null,
-              "source_store": "엔스카이",
-              "category": "아크릴 스탠드",
+              "source_store": "치이카와 온라인 쿠지",
+              "category": "인형",
               "affiliation": "치이카와",
-              "series_name": null
+              "series_name": "ちいかわ クレープくじ"
             },
             {
-              "catalog_index": 929,
-              "name_ko": "치이카와 아크릴 스탠드 (우사기)",
-              "name_ja": "ちいかわ アクリルスタンド (うさぎ)",
+              "catalog_index": 640,
+              "name_ko": "B상: 크레페 가게 인형 S (하치와레)",
+              "name_ja": "B賞 クレープ屋さんなぬいぐるみS ハチワレ",
               "image_url": null,
               "local_image_path": null,
-              "source_store": "엔스카이",
-              "category": "아크릴 스탠드",
+              "source_store": "치이카와 온라인 쿠지",
+              "category": "인형",
               "affiliation": "치이카와",
-              "series_name": null
+              "series_name": "ちいかわ クレープくじ"
             },
             {
-              "catalog_index": 930,
-              "name_ko": "치이카와 빅 아크릴 스탠드 (치이카와)",
-              "name_ja": "ちいかわ ビッグアクリルスタンド (ちいかわ)",
+              "catalog_index": 641,
+              "name_ko": "B상: 크레페 가게 인형 S (우사기)",
+              "name_ja": "B賞 クレープ屋さんなぬいぐるみS うさぎ",
               "image_url": null,
               "local_image_path": null,
-              "source_store": "엔스카이",
-              "category": "아크릴 스탠드",
+              "source_store": "치이카와 온라인 쿠지",
+              "category": "인형",
               "affiliation": "치이카와",
-              "series_name": null
+              "series_name": "ちいかわ クレープくじ"
             },
             {
-              "catalog_index": 931,
-              "name_ko": "치이카와 스탠드 미니 (모몽가)",
-              "name_ja": "ちいかわ スタンドミニ (モモンガ)",
+              "catalog_index": 642,
+              "name_ko": "C상: 크레페가 되어버렸어!! 마스코트 (치이카와)",
+              "name_ja": "C賞 クレープになっちゃった！！マスコット ちいかわ",
               "image_url": null,
               "local_image_path": null,
-              "source_store": "엔스카이",
-              "category": "아크릴 스탠드",
-              "affiliation": "치이카와",
-              "series_name": null
-            },
-            {
-              "catalog_index": 932,
-              "name_ko": "치이카와 트레이딩 아크릴 키홀더 (라부라부)",
-              "name_ja": "ちいかわ トレーディングアクリルキーホルダー (らぶらぶシリーズ)",
-              "image_url": null,
-              "local_image_path": null,
-              "source_store": "엔스카이",
-              "category": "아크릴 키링",
-              "affiliation": "치이카와",
-              "series_name": null
-            },
-            {
-              "catalog_index": 933,
-              "name_ko": "치이카와 아크릴 피규어 (라부라부 시리즈)",
-              "name_ja": "ちいかわ アクリルフィギュア (らぶらぶシリーズ)",
-              "image_url": null,
-              "local_image_path": null,
-              "source_store": "엔스카이",
-              "category": "아크릴 스탠드",
-              "affiliation": "치이카와",
-              "series_name": null
-            },
-            {
-              "catalog_index": 936,
-              "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
-              "name_ja": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
-              "image_url": null,
-              "local_image_path": null,
-              "source_store": "ご当地ちいかわ 공식(API)",
-              "category": "아크릴 키링",
-              "affiliation": "치이카와",
-              "series_name": "ご当地"
-            },
-            {
-              "catalog_index": 937,
-              "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
-              "name_ja": "うさぎ ご当地マスコット (浅草)",
-              "image_url": null,
-              "local_image_path": null,
-              "source_store": "ご当地ちいかわ 공식(API)",
+              "source_store": "치이카와 온라인 쿠지",
               "category": "마스코트",
               "affiliation": "치이카와",
-              "series_name": "ご当地"
+              "series_name": "ちいかわ クレープくじ"
             },
             {
-              "catalog_index": 938,
-              "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
-              "name_ja": "ちいかわ ご当地ミニタオル (東京)",
+              "catalog_index": 643,
+              "name_ko": "C상: 크레페가 되어버렸어!! 마스코트 (하치와레)",
+              "name_ja": "C賞 クレープになっちゃった！！マスコット ハチワレ",
               "image_url": null,
               "local_image_path": null,
-              "source_store": "ご当地ちいかわ 공식(API)",
-              "category": "타월",
-              "affiliation": "치이카와",
-              "series_name": "ご当地"
-            },
-            {
-              "catalog_index": 941,
-              "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
-              "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
-              "image_url": null,
-              "local_image_path": null,
-              "source_store": "ご当地ちいかわ 공식(API)",
+              "source_store": "치이카와 온라인 쿠지",
               "category": "마스코트",
               "affiliation": "치이카와",
-              "series_name": "ご当地"
+              "series_name": "ちいかわ クレープくじ"
             },
             {
-              "catalog_index": 942,
-              "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
-              "name_ja": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
+              "catalog_index": 644,
+              "name_ko": "C상: 크레페가 되어버렸어!! 마스코트 (우사기)",
+              "name_ja": "C賞 クレープになっちゃった！！マスコット うさぎ",
               "image_url": null,
               "local_image_path": null,
-              "source_store": "ご当地ちいかわ 공식(API)",
-              "category": "아크릴 키링",
-              "affiliation": "치이카와",
-              "series_name": "ご当地"
-            },
-            {
-              "catalog_index": 943,
-              "name_ko": "치이카와 ご当地 미니 타올 (오사카)",
-              "name_ja": "ちいかわ ご当地ミニタオル (大阪)",
-              "image_url": null,
-              "local_image_path": null,
-              "source_store": "ご当地ちいかわ 공식(API)",
-              "category": "타월",
-              "affiliation": "치이카와",
-              "series_name": "ご当地"
-            },
-            {
-              "catalog_index": 944,
-              "name_ko": "치이카와 ご当地 마스코트 (교토 마이코)",
-              "name_ja": "ちいかわ ご当地マスコット (京都 舞妓)",
-              "image_url": null,
-              "local_image_path": null,
-              "source_store": "ご当地ちいかわ 공식(API)",
+              "source_store": "치이카와 온라인 쿠지",
               "category": "마스코트",
               "affiliation": "치이카와",
-              "series_name": "ご当地"
+              "series_name": "ちいかわ クレープくじ"
             },
             {
-              "catalog_index": 945,
-              "name_ko": "하치와레 ご当地 마스코트 (교토 마이코)",
-              "name_ja": "ハチワレ ご当地マスコット (京都 舞妓)",
+              "catalog_index": 645,
+              "name_ko": "A상: 합석 사이즈 특대 문어 옷 인형 (치이카와)",
+              "name_ja": "A賞 相席サイズな特大たこ着ぬいぐるみ ちいかわ",
               "image_url": null,
               "local_image_path": null,
-              "source_store": "ご当地ちいかわ 공식(API)",
+              "source_store": "치이카와 온라인 쿠지",
+              "category": "인형",
+              "affiliation": "치이카와",
+              "series_name": "ちいかわ たこイカくじ"
+            },
+            {
+              "catalog_index": 646,
+              "name_ko": "A상: 합석 사이즈 특대 문어 옷 인형 (하치와레)",
+              "name_ja": "A賞 相席サイズな特大たこ着ぬいぐるみ ハチワレ",
+              "image_url": null,
+              "local_image_path": null,
+              "source_store": "치이카와 온라인 쿠지",
+              "category": "인형",
+              "affiliation": "치이카와",
+              "series_name": "ちいかわ たこイカくじ"
+            },
+            {
+              "catalog_index": 647,
+              "name_ko": "B상: BIG 오징어 쿠션 (우사기)",
+              "name_ja": "B賞 BIGイカクッション うさぎ",
+              "image_url": null,
+              "local_image_path": null,
+              "source_store": "치이카와 온라인 쿠지",
+              "category": "인형",
+              "affiliation": "치이카와",
+              "series_name": "ちいかわ たこイカくじ"
+            },
+            {
+              "catalog_index": 648,
+              "name_ko": "C상: 폭신폭신 타코이카 인형 S (치이카와)",
+              "name_ja": "C賞 ふわふわたこイカぬいぐるみS ちいかわ",
+              "image_url": null,
+              "local_image_path": null,
+              "source_store": "치이카와 온라인 쿠지",
+              "category": "인형",
+              "affiliation": "치이카와",
+              "series_name": "ちいかわ たこイカくじ"
+            },
+            {
+              "catalog_index": 649,
+              "name_ko": "C상: 폭신폭신 타코이카 인형 S (하치와레)",
+              "name_ja": "C賞 ふわふわたこイカぬいぐるみS ハチワレ",
+              "image_url": null,
+              "local_image_path": null,
+              "source_store": "치이카와 온라인 쿠지",
+              "category": "인형",
+              "affiliation": "치이카와",
+              "series_name": "ちいかわ たこイカくじ"
+            },
+            {
+              "catalog_index": 650,
+              "name_ko": "C상: 폭신폭신 타코이카 인형 S (우사기)",
+              "name_ja": "C賞 ふわふわたこイカぬいぐるみS うさぎ",
+              "image_url": null,
+              "local_image_path": null,
+              "source_store": "치이카와 온라인 쿠지",
+              "category": "인형",
+              "affiliation": "치이카와",
+              "series_name": "ちいかわ たこイカくじ"
+            },
+            {
+              "catalog_index": 651,
+              "name_ko": "D상: 타코이카 마스코트 (치이카와 문어)",
+              "name_ja": "D賞 たこイカマスコット ちいかわ・たこ",
+              "image_url": null,
+              "local_image_path": null,
+              "source_store": "치이카와 온라인 쿠지",
               "category": "마스코트",
               "affiliation": "치이카와",
-              "series_name": "ご当地"
+              "series_name": "ちいかわ たこイカくじ"
             },
             {
-              "catalog_index": 946,
-              "name_ko": "우사기 ご当地 아크릴 키홀더 (교토 키요미즈데라)",
-              "name_ja": "うさぎ ご当地アクリルキーホルダー (京都 清水寺)",
+              "catalog_index": 652,
+              "name_ko": "D상: 타코이카 마스코트 (하치와레 오징어)",
+              "name_ja": "D賞 たこイカマスコット ハチワレ・イカ",
               "image_url": null,
               "local_image_path": null,
-              "source_store": "ご当地ちいかわ 공식(API)",
-              "category": "아크릴 키링",
-              "affiliation": "치이카와",
-              "series_name": "ご当地"
-            },
-            {
-              "catalog_index": 950,
-              "name_ko": "치이카와 ご当地 미니 타올 (홋카이도)",
-              "name_ja": "ちいかわ ご当地ミニタオル (北海道)",
-              "image_url": null,
-              "local_image_path": null,
-              "source_store": "ご当地ちいかわ 공식(API)",
-              "category": "타월",
-              "affiliation": "치이카와",
-              "series_name": "ご当地"
-            },
-            {
-              "catalog_index": 953,
-              "name_ko": "하치와레 ご当地 마스코트 (후쿠오카 라멘)",
-              "name_ja": "ハチワレ ご当地マスコット (福岡 ラーメン)",
-              "image_url": null,
-              "local_image_path": null,
-              "source_store": "ご当地ちいかわ 공식(API)",
+              "source_store": "치이카와 온라인 쿠지",
               "category": "마스코트",
               "affiliation": "치이카와",
-              "series_name": "ご当地"
+              "series_name": "ちいかわ たこイカくじ"
             },
             {
-              "catalog_index": 954,
-              "name_ko": "치이카와 ご当地 마스코트 (나고야 샤치호코)",
-              "name_ja": "ちいかわ ご当地マスコット (名古屋 金鯱)",
+              "catalog_index": 653,
+              "name_ko": "A상: 超BIG 인형 (팔짱)",
+              "name_ja": "A賞 超BIGぬいぐるみ 腕組み",
               "image_url": null,
               "local_image_path": null,
-              "source_store": "ご当地ちいかわ 공식(API)",
+              "source_store": "치이카와 온라인 쿠지",
+              "category": "인형",
+              "affiliation": "치이카와",
+              "series_name": "ちいかわ うさぎだらけくじ"
+            },
+            {
+              "catalog_index": 654,
+              "name_ko": "A상: 超BIG 인형 (점프)",
+              "name_ja": "A賞 超BIGぬいぐるみ ジャンプ",
+              "image_url": null,
+              "local_image_path": null,
+              "source_store": "치이카와 온라인 쿠지",
+              "category": "인형",
+              "affiliation": "치이카와",
+              "series_name": "ちいかわ うさぎだらけくじ"
+            },
+            {
+              "catalog_index": 655,
+              "name_ko": "B상: 페이스 쿠션 (귀 쫑긋)",
+              "name_ja": "B賞 フェイスクッション 耳ピン",
+              "image_url": null,
+              "local_image_path": null,
+              "source_store": "치이카와 온라인 쿠지",
+              "category": "인형",
+              "affiliation": "치이카와",
+              "series_name": "ちいかわ うさぎだらけくじ"
+            },
+            {
+              "catalog_index": 656,
+              "name_ko": "B상: 페이스 쿠션 (귀 늘어진)",
+              "name_ja": "B賞 フェイスクッション 耳たれ",
+              "image_url": null,
+              "local_image_path": null,
+              "source_store": "치이카와 온라인 쿠지",
+              "category": "인형",
+              "affiliation": "치이카와",
+              "series_name": "ちいかわ うさぎだらけくじ"
+            },
+            {
+              "catalog_index": 657,
+              "name_ko": "C상: 인형 포셰트",
+              "name_ja": "C賞 ぬいぐるみポシェット",
+              "image_url": null,
+              "local_image_path": null,
+              "source_store": "치이카와 온라인 쿠지",
+              "category": "인형",
+              "affiliation": "치이카와",
+              "series_name": "ちいかわ うさぎだらけくじ"
+            },
+            {
+              "catalog_index": 658,
+              "name_ko": "D상: 마스코트 도토리 DJ",
+              "name_ja": "D賞 マスコット どんぐりDJ",
+              "image_url": null,
+              "local_image_path": null,
+              "source_store": "치이카와 온라인 쿠지",
               "category": "마스코트",
               "affiliation": "치이카와",
-              "series_name": "ご当地"
+              "series_name": "ちいかわ うさぎだらけくじ"
             },
             {
-              "catalog_index": 955,
-              "name_ko": "우사기 ご当地 마스코트 (나고야 테바사키)",
-              "name_ja": "うさぎ ご当地マスコット (名古屋 手羽先)",
+              "catalog_index": 659,
+              "name_ko": "D상: 마스코트 카눌레가 된 모습",
+              "name_ja": "D賞 マスコット カヌレになった姿",
               "image_url": null,
               "local_image_path": null,
-              "source_store": "ご当地ちいかわ 공식(API)",
+              "source_store": "치이카와 온라인 쿠지",
               "category": "마스코트",
               "affiliation": "치이카와",
-              "series_name": "ご当地"
+              "series_name": "ちいかわ うさぎだらけくじ"
             },
             {
-              "catalog_index": 956,
-              "name_ko": "치이카와 ご当地 마스코트 (고베 포트타워)",
-              "name_ja": "ちいかわ ご当地マスコット (神戸 ポートタワー)",
+              "catalog_index": 660,
+              "name_ko": "D상: 마스코트 피자만",
+              "name_ja": "D賞 マスコット ピザまん",
               "image_url": null,
               "local_image_path": null,
-              "source_store": "ご当地ちいかわ 공식(API)",
+              "source_store": "치이카와 온라인 쿠지",
               "category": "마스코트",
               "affiliation": "치이카와",
-              "series_name": "ご当地"
-            },
-            {
-              "catalog_index": 957,
-              "name_ko": "하치와레 ご当地 아크릴 키홀더 (고베)",
-              "name_ja": "ハチワレ ご当地アクリルキーホルダー (神戸)",
-              "image_url": null,
-              "local_image_path": null,
-              "source_store": "ご当地ちいかわ 공식(API)",
-              "category": "아크릴 키링",
-              "affiliation": "치이카와",
-              "series_name": "ご当地"
-            },
-            {
-              "catalog_index": 958,
-              "name_ko": "치이카와 ご当地 마스코트 (요코하마 차이나타운)",
-              "name_ja": "ちいかわ ご当地マスコット (横浜 中華街)",
-              "image_url": null,
-              "local_image_path": null,
-              "source_store": "ご当地ちいかわ 공식(API)",
-              "category": "마스코트",
-              "affiliation": "치이카와",
-              "series_name": "ご当地"
+              "series_name": "ちいかわ うさぎだらけくじ"
             }
           ]
         },
-        "source_url_ready_rows": 52,
+        "source_url_ready_rows": 56,
         "provider_candidate_items": 496,
         "manual_or_blocked_items": 228,
         "generic_source_url_rows": 0,
-        "needs_source_discovery_rows": 741,
+        "needs_source_discovery_rows": 758,
         "gotouchi_official_review_rows": 22
       }
     },
@@ -3138,30 +3158,30 @@
       "workstream": "image_attachment_action_queue",
       "public_report": "data/catalog_image_attachment_action_queue_public.json",
       "status": "manual_review",
-      "rows": 74,
+      "rows": 78,
       "command": "Work image attachment batches with exact product evidence before broad missing-image research.",
       "next_step": "confirm_source_then_fill_image_url_templates",
       "blocker": "Auto image import is disabled; every image URL needs reviewed product evidence.",
       "auto_apply_enabled": false,
       "evidence": {
-        "actionable_image_rows": 74,
-        "queued_image_rows": 74,
-        "action_batch_count": 5,
+        "actionable_image_rows": 78,
+        "queued_image_rows": 78,
+        "action_batch_count": 9,
         "source_url_update_required_rows": 0,
         "source_url_update_template_rows": 0,
         "source_url_update_template_batch_count": 0,
         "representative_image_review_required_rows": 22,
-        "image_url_ready_rows": 52,
-        "download_ready_after_manual_image_url_rows": 74,
-        "suggested_local_image_path_rows": 74,
-        "local_image_download_instruction_ready_rows": 74,
-        "image_attachment_template_rows": 22,
+        "image_url_ready_rows": 56,
+        "download_ready_after_manual_image_url_rows": 78,
+        "suggested_local_image_path_rows": 78,
+        "local_image_download_instruction_ready_rows": 78,
+        "image_attachment_template_rows": 74,
         "image_attachment_template_confirmed_rows": 0,
         "image_attachment_template_dry_run_updated_rows": 0,
-        "image_attachment_template_dry_run_skipped_rows": 22,
+        "image_attachment_template_dry_run_skipped_rows": 74,
         "source_discovery_focus_template_rows": 741,
         "source_discovery_focus_template_confirmed_rows": 0,
-        "workstream_count": 2,
+        "workstream_count": 6,
         "source_url_update_workstream_count": 0,
         "representative_image_review_workstream_count": 1,
         "top_image_attachment_workstreams": [
@@ -3175,11 +3195,47 @@
             "representative_image_review_rows": 0
           },
           {
+            "workflow": "extract_from_existing_source_url",
+            "source_store": "TOHO animation STORE",
+            "queued_image_rows": 1,
+            "batch_count": 1,
+            "next_batch_id": "image-attachment-action-004",
+            "source_url_update_template_rows": 0,
+            "representative_image_review_rows": 0
+          },
+          {
+            "workflow": "extract_from_existing_source_url",
+            "source_store": "밀짚모자 스토어",
+            "queued_image_rows": 1,
+            "batch_count": 1,
+            "next_batch_id": "image-attachment-action-005",
+            "source_url_update_template_rows": 0,
+            "representative_image_review_rows": 0
+          },
+          {
+            "workflow": "extract_from_existing_source_url",
+            "source_store": "밀짚모자 스토어 상하이",
+            "queued_image_rows": 1,
+            "batch_count": 1,
+            "next_batch_id": "image-attachment-action-006",
+            "source_url_update_template_rows": 0,
+            "representative_image_review_rows": 0
+          },
+          {
+            "workflow": "extract_from_existing_source_url",
+            "source_store": "하이큐!! 10주년 기념전",
+            "queued_image_rows": 1,
+            "batch_count": 1,
+            "next_batch_id": "image-attachment-action-007",
+            "source_url_update_template_rows": 0,
+            "representative_image_review_rows": 0
+          },
+          {
             "workflow": "review_gotouchi_official_candidates",
             "source_store": "ご当地ちいかわ 공식(API)",
             "queued_image_rows": 22,
             "batch_count": 2,
-            "next_batch_id": "image-attachment-action-004",
+            "next_batch_id": "image-attachment-action-008",
             "source_url_update_template_rows": 0,
             "representative_image_review_rows": 22
           }
@@ -4450,7 +4506,7 @@
         "excluded_workflow_rows": [
           [
             "find_source_then_extract_image",
-            741
+            758
           ],
           [
             "manual_image_research",
@@ -4460,7 +4516,7 @@
         "by_workflow": [
           [
             "extract_from_existing_source_url",
-            52
+            56
           ],
           [
             "review_gotouchi_official_candidates",
@@ -4474,20 +4530,20 @@
       "workstream": "metadata_review_batches",
       "public_report": "data/catalog_metadata_review_batches_public.json",
       "status": "manual_review",
-      "rows": 14091,
+      "rows": 14129,
       "command": "Fill titles, barcodes, dates, prices, sources, and images from reviewed evidence.",
       "next_step": "work_field_store_metadata_batches",
       "blocker": "Broad metadata updates require field-specific evidence policies.",
       "auto_apply_enabled": false,
       "evidence": {
-        "batch_count": 30,
+        "batch_count": 31,
         "field_missing_totals": {
           "name_ja": 526,
           "release_date": 1348,
           "barcode": 10082,
-          "image_url": 825,
+          "image_url": 846,
           "official_price_jpy": 559,
-          "source_url": 751
+          "source_url": 768
         }
       }
     },
@@ -7481,7 +7537,7 @@
     "manual_review_required": true,
     "pillar_count": 5,
     "blocking_pillar_count": 5,
-    "manual_review_rows": 934,
+    "manual_review_rows": 955,
     "auto_apply_ready_rows": 0,
     "next_safe_phase": "review_candidate_source_urls",
     "blocked_reasons": [
@@ -7521,13 +7577,13 @@
         "pillar": "missing_images",
         "label": "Resolve missing catalog images",
         "status": "manual_evidence_required",
-        "manual_review_rows": 825,
+        "manual_review_rows": 846,
         "auto_apply_ready_rows": 0,
         "next_safe_phase": "discover_exact_source_urls",
         "next_queue_lane": "discover_exact_source_urls",
-        "next_queue_rows": 741,
+        "next_queue_rows": 758,
         "next_execution_lane_count": 3,
-        "next_execution_open_rows": 773,
+        "next_execution_open_rows": 790,
         "next_execution_next_batch_rows": 30,
         "first_next_execution_lane": "representative_image_review",
         "first_next_execution_status": "manual_review_required",
@@ -7552,8 +7608,8 @@
         "next_queue_lane": "manual_search_required",
         "next_queue_rows": 0,
         "next_execution_lane_count": 4,
-        "next_execution_open_rows": 853,
-        "next_execution_next_batch_rows": 132,
+        "next_execution_open_rows": 874,
+        "next_execution_next_batch_rows": 136,
         "first_next_execution_lane": "exact_source_url_review",
         "first_next_execution_status": "manual_cache_miss_research_required",
         "first_next_execution_rows": 20,

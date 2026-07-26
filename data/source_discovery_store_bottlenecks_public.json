@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T12:25:53Z",
+  "generated_at": "2026-07-26T13:20:45Z",
   "scope": "source_discovery_store_bottlenecks",
   "summary": {
-    "actionable_source_rows": 741,
-    "queued_source_rows": 741,
-    "store_count": 41,
+    "actionable_source_rows": 758,
+    "queued_source_rows": 758,
+    "store_count": 42,
     "top_store_rows": 187,
     "top_store": "엔스카이",
     "top_5_store_rows": 489,
-    "top_5_store_coverage": 0.6599,
-    "top_10_store_rows": 599,
-    "top_10_store_coverage": 0.8084,
+    "top_5_store_coverage": 0.6451,
+    "top_10_store_rows": 601,
+    "top_10_store_coverage": 0.7929,
     "domainless_store_rows": 0,
     "stores_without_allowed_domain": 0,
     "auto_apply_enabled": false
@@ -1923,15 +1923,226 @@
       "auto_apply_enabled": false
     },
     {
+      "source_store": "Banpresto",
+      "rows": 17,
+      "impact_rank_hint": 17,
+      "first_batch_id": "source-discovery-action-034",
+      "top_category": "피규어",
+      "top_allowed_source_domain": "bsp-prize.jp",
+      "batch_count": 1,
+      "batch_ids": [
+        "source-discovery-action-034"
+      ],
+      "workflow_rows": [
+        {
+          "workflow": "official_search_url_available",
+          "rows": 17
+        }
+      ],
+      "review_state_rows": [
+        {
+          "review_state": "official_search_review_required",
+          "rows": 17
+        }
+      ],
+      "by_category": [
+        {
+          "category": "피규어",
+          "rows": 17
+        }
+      ],
+      "allowed_source_domains": [
+        {
+          "domain": "bsp-prize.jp",
+          "rows": 17
+        }
+      ],
+      "has_allowed_source_domain": true,
+      "next_step": "open_official_search_and_confirm_exact_product_source_url",
+      "recommended_work_mode": "single_store_batch_review",
+      "recommended_batch_focus": "Banpresto / 피규어",
+      "sample_items": [
+        {
+          "catalog_index": 1415,
+          "name_ko": "Q posket 리코",
+          "name_ja": "Q posket リコ",
+          "category": "피규어",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AA%E3%82%B3",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%AA%E3%82%B3%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "source_patch_template": {
+            "catalog_index": 1415,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1416,
+          "name_ko": "Q posket 레그",
+          "name_ja": "Q posket レグ",
+          "category": "피규어",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%82%B0",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%AC%E3%82%B0%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "source_patch_template": {
+            "catalog_index": 1416,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1417,
+          "name_ko": "Q posket 나나치",
+          "name_ja": "Q posket ナナチ",
+          "category": "피규어",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "source_patch_template": {
+            "catalog_index": 1417,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1418,
+          "name_ko": "Break Time Collection 나나치",
+          "name_ja": "ブレイクタイムコレクション ナナチ",
+          "category": "피규어",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81",
+          "web_search_url": "https://www.google.com/search?q=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "source_patch_template": {
+            "catalog_index": 1418,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1462,
+          "name_ko": "Q posket 모노쿠마",
+          "name_ja": "Q posket モノクマ",
+          "category": "피규어",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "source_patch_template": {
+            "catalog_index": 1462,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1463,
+          "name_ko": "Break Time Collection 코마에다 나기토",
+          "name_ja": "Break Time Collection 狛枝凪斗",
+          "category": "피규어",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97",
+          "web_search_url": "https://www.google.com/search?q=Break%20Time%20Collection%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "source_patch_template": {
+            "catalog_index": 1463,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1464,
+          "name_ko": "Break Time Collection 히나타 하지메",
+          "name_ja": "Break Time Collection 日向創",
+          "category": "피규어",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E6%97%A5%E5%90%91%E5%89%B5",
+          "web_search_url": "https://www.google.com/search?q=Break%20Time%20Collection%20%E6%97%A5%E5%90%91%E5%89%B5%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "source_patch_template": {
+            "catalog_index": 1464,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "auto_apply_enabled": false
+        },
+        {
+          "catalog_index": 1493,
+          "name_ko": "Q posket 프리렌",
+          "name_ja": "Q posket フリーレン",
+          "category": "피규어",
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+          "web_search_url": "https://www.google.com/search?q=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3%20Banpresto%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
+          "allowed_source_domains": [
+            "bsp-prize.jp"
+          ],
+          "source_patch_template": {
+            "catalog_index": 1493,
+            "source_url": "<exact_product_detail_url>",
+            "image_url": "<official_product_image_url_optional_after_source_verification>",
+            "source_store": "Banpresto",
+            "evidence_url": "<official_or_trusted_evidence_url>",
+            "manual_confirmed": false,
+            "requires_exact_identity_match": true
+          },
+          "auto_apply_enabled": false
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
       "source_store": "Taito",
       "rows": 15,
       "impact_rank_hint": 15,
-      "first_batch_id": "source-discovery-action-034",
+      "first_batch_id": "source-discovery-action-035",
       "top_category": "피규어",
       "top_allowed_source_domain": "www.taito.co.jp",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-034"
+        "source-discovery-action-035"
       ],
       "workflow_rows": [
         {
@@ -2141,12 +2352,12 @@
       "source_store": "무기와라스토어",
       "rows": 15,
       "impact_rank_hint": 15,
-      "first_batch_id": "source-discovery-action-035",
+      "first_batch_id": "source-discovery-action-036",
       "top_category": "아크릴 스탠드",
       "top_allowed_source_domain": "jumpcs.shueisha.co.jp",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-035"
+        "source-discovery-action-036"
       ],
       "workflow_rows": [
         {
@@ -2372,12 +2583,12 @@
       "source_store": "치이카와 중국 팝업스토어",
       "rows": 15,
       "impact_rank_hint": 15,
-      "first_batch_id": "source-discovery-action-036",
+      "first_batch_id": "source-discovery-action-037",
       "top_category": "마스코트",
       "top_allowed_source_domain": "x.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-036"
+        "source-discovery-action-037"
       ],
       "workflow_rows": [
         {
@@ -2595,12 +2806,12 @@
       "source_store": "귀멸의 칼날 공식",
       "rows": 13,
       "impact_rank_hint": 13,
-      "first_batch_id": "source-discovery-action-037",
+      "first_batch_id": "source-discovery-action-038",
       "top_category": "마스코트",
       "top_allowed_source_domain": "webshop-global.ufotable.co.jp",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-037"
+        "source-discovery-action-038"
       ],
       "workflow_rows": [
         {
@@ -2818,12 +3029,12 @@
       "source_store": "AmiAmi",
       "rows": 12,
       "impact_rank_hint": 12,
-      "first_batch_id": "source-discovery-action-066",
+      "first_batch_id": "source-discovery-action-067",
       "top_category": "문구",
       "top_allowed_source_domain": "amiami.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-066"
+        "source-discovery-action-067"
       ],
       "workflow_rows": [
         {
@@ -3057,12 +3268,12 @@
       "source_store": "Cospa",
       "rows": 12,
       "impact_rank_hint": 12,
-      "first_batch_id": "source-discovery-action-038",
+      "first_batch_id": "source-discovery-action-039",
       "top_category": "가방",
       "top_allowed_source_domain": "www.cospa.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-038"
+        "source-discovery-action-039"
       ],
       "workflow_rows": [
         {
@@ -3276,12 +3487,12 @@
       "source_store": "반다이",
       "rows": 11,
       "impact_rank_hint": 11,
-      "first_batch_id": "source-discovery-action-039",
+      "first_batch_id": "source-discovery-action-040",
       "top_category": "피규어",
       "top_allowed_source_domain": "p-bandai.jp",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-039"
+        "source-discovery-action-040"
       ],
       "workflow_rows": [
         {
@@ -3491,12 +3702,12 @@
       "source_store": "메가하우스",
       "rows": 9,
       "impact_rank_hint": 9,
-      "first_batch_id": "source-discovery-action-040",
+      "first_batch_id": "source-discovery-action-041",
       "top_category": "피규어",
       "top_allowed_source_domain": "www.megahobby.jp",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-040"
+        "source-discovery-action-041"
       ],
       "workflow_rows": [
         {
@@ -3702,12 +3913,12 @@
       "source_store": "MINISO 중국",
       "rows": 7,
       "impact_rank_hint": 7,
-      "first_batch_id": "source-discovery-action-041",
+      "first_batch_id": "source-discovery-action-042",
       "top_category": "인형",
       "top_allowed_source_domain": "www.miniso.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-041"
+        "source-discovery-action-042"
       ],
       "workflow_rows": [
         {
@@ -3900,12 +4111,12 @@
       "source_store": "산리오",
       "rows": 6,
       "impact_rank_hint": 6,
-      "first_batch_id": "source-discovery-action-042",
+      "first_batch_id": "source-discovery-action-043",
       "top_category": "인형",
       "top_allowed_source_domain": "shop.sanrio.co.jp",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-042"
+        "source-discovery-action-043"
       ],
       "workflow_rows": [
         {
@@ -4073,12 +4284,12 @@
       "source_store": "JYP SHOP",
       "rows": 5,
       "impact_rank_hint": 5,
-      "first_batch_id": "source-discovery-action-043",
+      "first_batch_id": "source-discovery-action-044",
       "top_category": "포토카드",
       "top_allowed_source_domain": "en.thejypshop.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-043"
+        "source-discovery-action-044"
       ],
       "workflow_rows": [
         {
@@ -4225,12 +4436,12 @@
       "source_store": "Re-ment",
       "rows": 5,
       "impact_rank_hint": 5,
-      "first_batch_id": "source-discovery-action-044",
+      "first_batch_id": "source-discovery-action-045",
       "top_category": "피규어",
       "top_allowed_source_domain": "www.re-ment.co.jp",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-044"
+        "source-discovery-action-045"
       ],
       "workflow_rows": [
         {
@@ -4373,12 +4584,12 @@
       "source_store": "치이카와샵 용산",
       "rows": 5,
       "impact_rank_hint": 5,
-      "first_batch_id": "source-discovery-action-045",
+      "first_batch_id": "source-discovery-action-046",
       "top_category": "마스코트",
       "top_allowed_source_domain": "x.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-045"
+        "source-discovery-action-046"
       ],
       "workflow_rows": [
         {
@@ -4529,12 +4740,12 @@
       "source_store": "MINISO",
       "rows": 4,
       "impact_rank_hint": 4,
-      "first_batch_id": "source-discovery-action-046",
+      "first_batch_id": "source-discovery-action-047",
       "top_category": "쇼핑백",
       "top_allowed_source_domain": "www.miniso.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-046"
+        "source-discovery-action-047"
       ],
       "workflow_rows": [
         {
@@ -4668,12 +4879,12 @@
       "source_store": "가샤폰",
       "rows": 4,
       "impact_rank_hint": 4,
-      "first_batch_id": "source-discovery-action-047",
+      "first_batch_id": "source-discovery-action-048",
       "top_category": "캡슐토이",
       "top_allowed_source_domain": "gashapon.jp",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-047"
+        "source-discovery-action-048"
       ],
       "workflow_rows": [
         {
@@ -4799,12 +5010,12 @@
       "source_store": "디즈니 스토어",
       "rows": 4,
       "impact_rank_hint": 4,
-      "first_batch_id": "source-discovery-action-048",
+      "first_batch_id": "source-discovery-action-049",
       "top_category": "인형",
       "top_allowed_source_domain": "store.disney.co.jp",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-048"
+        "source-discovery-action-049"
       ],
       "workflow_rows": [
         {
@@ -4926,12 +5137,12 @@
       "source_store": "이세계아이돌 공식 굿즈",
       "rows": 4,
       "impact_rank_hint": 4,
-      "first_batch_id": "source-discovery-action-049",
+      "first_batch_id": "source-discovery-action-050",
       "top_category": "응원봉",
       "top_allowed_source_domain": "withmuulive.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-049"
+        "source-discovery-action-050"
       ],
       "workflow_rows": [
         {
@@ -5061,12 +5272,12 @@
       "source_store": "Bandai Premium",
       "rows": 3,
       "impact_rank_hint": 3,
-      "first_batch_id": "source-discovery-action-050",
+      "first_batch_id": "source-discovery-action-051",
       "top_category": "타월",
       "top_allowed_source_domain": "p-bandai.jp",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-050"
+        "source-discovery-action-051"
       ],
       "workflow_rows": [
         {
@@ -5175,12 +5386,12 @@
       "source_store": "SM STORE",
       "rows": 3,
       "impact_rank_hint": 3,
-      "first_batch_id": "source-discovery-action-051",
+      "first_batch_id": "source-discovery-action-052",
       "top_category": "포토카드",
       "top_allowed_source_domain": "global.shop.smtown.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-051"
+        "source-discovery-action-052"
       ],
       "workflow_rows": [
         {
@@ -5281,12 +5492,12 @@
       "source_store": "카도카와",
       "rows": 3,
       "impact_rank_hint": 3,
-      "first_batch_id": "source-discovery-action-052",
+      "first_batch_id": "source-discovery-action-053",
       "top_category": "피규어",
       "top_allowed_source_domain": "www.amiami.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-052"
+        "source-discovery-action-053"
       ],
       "workflow_rows": [
         {
@@ -5387,12 +5598,12 @@
       "source_store": "Phat! Company",
       "rows": 2,
       "impact_rank_hint": 2,
-      "first_batch_id": "source-discovery-action-053",
+      "first_batch_id": "source-discovery-action-054",
       "top_category": "피규어",
       "top_allowed_source_domain": "www.goodsmile.info",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-053"
+        "source-discovery-action-054"
       ],
       "workflow_rows": [
         {
@@ -5472,12 +5683,12 @@
       "source_store": "YG SELECT",
       "rows": 2,
       "impact_rank_hint": 2,
-      "first_batch_id": "source-discovery-action-054",
+      "first_batch_id": "source-discovery-action-055",
       "top_category": "포토카드",
       "top_allowed_source_domain": "en.ygselect.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-054"
+        "source-discovery-action-055"
       ],
       "workflow_rows": [
         {
@@ -5557,12 +5768,12 @@
       "source_store": "롯데웰푸드",
       "rows": 2,
       "impact_rank_hint": 2,
-      "first_batch_id": "source-discovery-action-055",
+      "first_batch_id": "source-discovery-action-056",
       "top_category": "과자/콜라보",
       "top_allowed_source_domain": "lottewellfood.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-055"
+        "source-discovery-action-056"
       ],
       "workflow_rows": [
         {
@@ -5646,12 +5857,12 @@
       "source_store": "이세계아이돌 팝업스토어",
       "rows": 2,
       "impact_rank_hint": 2,
-      "first_batch_id": "source-discovery-action-056",
+      "first_batch_id": "source-discovery-action-057",
       "top_category": "아크릴 스탠드",
       "top_allowed_source_domain": "withmuulive.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-056"
+        "source-discovery-action-057"
       ],
       "workflow_rows": [
         {
@@ -5731,12 +5942,12 @@
       "source_store": "ALTER",
       "rows": 1,
       "impact_rank_hint": 1,
-      "first_batch_id": "source-discovery-action-057",
+      "first_batch_id": "source-discovery-action-058",
       "top_category": "피규어",
       "top_allowed_source_domain": "alter-web.jp",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-057"
+        "source-discovery-action-058"
       ],
       "workflow_rows": [
         {
@@ -5795,12 +6006,12 @@
       "source_store": "CUBE STORE",
       "rows": 1,
       "impact_rank_hint": 1,
-      "first_batch_id": "source-discovery-action-058",
+      "first_batch_id": "source-discovery-action-059",
       "top_category": "포토카드",
       "top_allowed_source_domain": "cubee.co.kr",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-058"
+        "source-discovery-action-059"
       ],
       "workflow_rows": [
         {
@@ -5859,12 +6070,12 @@
       "source_store": "Hobby Max International",
       "rows": 1,
       "impact_rank_hint": 1,
-      "first_batch_id": "source-discovery-action-059",
+      "first_batch_id": "source-discovery-action-060",
       "top_category": "피규어",
       "top_allowed_source_domain": "www.amiami.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-059"
+        "source-discovery-action-060"
       ],
       "workflow_rows": [
         {
@@ -5923,12 +6134,12 @@
       "source_store": "Hololive Production Official Shop",
       "rows": 1,
       "impact_rank_hint": 1,
-      "first_batch_id": "source-discovery-action-060",
+      "first_batch_id": "source-discovery-action-061",
       "top_category": "아크릴 스탠드",
       "top_allowed_source_domain": "shop.hololivepro.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-060"
+        "source-discovery-action-061"
       ],
       "workflow_rows": [
         {
@@ -5987,12 +6198,12 @@
       "source_store": "IST STORE",
       "rows": 1,
       "impact_rank_hint": 1,
-      "first_batch_id": "source-discovery-action-061",
+      "first_batch_id": "source-discovery-action-062",
       "top_category": "포토카드",
       "top_allowed_source_domain": "shop.weverse.io",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-061"
+        "source-discovery-action-062"
       ],
       "workflow_rows": [
         {
@@ -6051,12 +6262,12 @@
       "source_store": "KQ FELLAZ",
       "rows": 1,
       "impact_rank_hint": 1,
-      "first_batch_id": "source-discovery-action-062",
+      "first_batch_id": "source-discovery-action-063",
       "top_category": "포토카드",
       "top_allowed_source_domain": "kqshop.kr",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-062"
+        "source-discovery-action-063"
       ],
       "workflow_rows": [
         {
@@ -6115,12 +6326,12 @@
       "source_store": "SEGA",
       "rows": 1,
       "impact_rank_hint": 1,
-      "first_batch_id": "source-discovery-action-063",
+      "first_batch_id": "source-discovery-action-064",
       "top_category": "피규어",
       "top_allowed_source_domain": "segaplaza.jp",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-063"
+        "source-discovery-action-064"
       ],
       "workflow_rows": [
         {
@@ -6179,12 +6390,12 @@
       "source_store": "STARSHIP STORE",
       "rows": 1,
       "impact_rank_hint": 1,
-      "first_batch_id": "source-discovery-action-064",
+      "first_batch_id": "source-discovery-action-065",
       "top_category": "포토카드",
       "top_allowed_source_domain": "www.starship-square.com",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-064"
+        "source-discovery-action-065"
       ],
       "workflow_rows": [
         {
@@ -6243,12 +6454,12 @@
       "source_store": "점프 숍",
       "rows": 1,
       "impact_rank_hint": 1,
-      "first_batch_id": "source-discovery-action-065",
+      "first_batch_id": "source-discovery-action-066",
       "top_category": "문구",
       "top_allowed_source_domain": "jumpcs.shueisha.co.jp",
       "batch_count": 1,
       "batch_ids": [
-        "source-discovery-action-065"
+        "source-discovery-action-066"
       ],
       "workflow_rows": [
         {

@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T13:14:09Z",
+  "generated_at": "2026-07-26T13:20:45Z",
   "scope": "catalog_missing_image_actionability",
   "summary": {
-    "missing_image_rows": 825,
-    "readiness_classified_rows": 825,
+    "missing_image_rows": 846,
+    "readiness_classified_rows": 846,
     "unclassified_rows": 0,
-    "exact_source_ready_rows": 52,
-    "source_first_rows": 741,
+    "exact_source_ready_rows": 56,
+    "source_first_rows": 758,
     "review_before_attach_rows": 22,
     "source_detail_candidate_review_rows": 0,
     "source_detail_candidate_count_review_required_rows": 0,
@@ -16,12 +16,12 @@
     "source_detail_unflagged_candidate_rows": 0,
     "source_detail_ready_unflagged_candidate_rows": 0,
     "manual_image_research_rows": 10,
-    "source_discovery_focus_pack_rows": 741,
-    "source_discovery_focus_pack_count": 66,
-    "source_discovery_not_started_focus_pack_count": 66,
-    "source_discovery_remaining_focus_review_rows": 741,
+    "source_discovery_focus_pack_rows": 758,
+    "source_discovery_focus_pack_count": 67,
+    "source_discovery_not_started_focus_pack_count": 67,
+    "source_discovery_remaining_focus_review_rows": 758,
     "source_discovery_confirmed_focus_source_rows": 0,
-    "source_discovery_focus_template_rows": 741,
+    "source_discovery_focus_template_rows": 758,
     "source_discovery_focus_template_confirmed_rows": 0,
     "source_discovery_template_next_focus_pack_id": "source-discovery-focus-001",
     "source_discovery_next_focus_pack_id": "source-discovery-focus-002",
@@ -34,16 +34,16 @@
       ]
     ],
     "source_discovery_focus_template_dry_run_updated_rows": 0,
-    "source_discovery_focus_template_dry_run_skipped_rows": 741,
+    "source_discovery_focus_template_dry_run_skipped_rows": 758,
     "source_discovery_focus_coverage": 1.0,
     "source_discovery_non_focus_rows": 0,
-    "action_queue_rows": 74,
-    "direct_image_action_queue_rows": 74,
-    "direct_image_action_primary_review_url_rows": 74,
+    "action_queue_rows": 78,
+    "direct_image_action_queue_rows": 78,
+    "direct_image_action_primary_review_url_rows": 78,
     "direct_image_action_primary_review_url_kind_counts": [
       [
         "current_source_url",
-        74
+        78
       ]
     ],
     "direct_image_action_next_representative_review_batch_rows": 10,
@@ -60,23 +60,23 @@
     "manual_image_research_review_start_kind": "fallback_web_search",
     "source_discovery_review_start_rows": 20,
     "source_discovery_review_start_kind": "domain_limited_web_search",
-    "image_attachment_template_rows": 74,
+    "image_attachment_template_rows": 78,
     "image_attachment_template_confirmed_rows": 0,
     "image_attachment_template_source_update_required_rows": 0,
     "image_attachment_template_representative_review_rows": 22,
     "image_attachment_template_dry_run_updated_rows": 0,
-    "image_attachment_template_dry_run_skipped_rows": 74,
-    "actionable_image_rows": 74,
+    "image_attachment_template_dry_run_skipped_rows": 78,
+    "actionable_image_rows": 78,
     "source_discovery_work_pack_count": 16,
-    "source_discovery_work_pack_rows": 671,
+    "source_discovery_work_pack_rows": 679,
     "by_blocked_reason": [
       {
         "blocked_reason": "missing_exact_source_url",
-        "rows": 741
+        "rows": 758
       },
       {
         "blocked_reason": "candidate_image_requires_manual_review",
-        "rows": 52
+        "rows": 56
       },
       {
         "blocked_reason": "representative_image_requires_product_type_review",
@@ -94,11 +94,11 @@
     "by_blocked_until": [
       {
         "blocked_until": "exact_product_source_url_discovered",
-        "rows": 741
+        "rows": 758
       },
       {
         "blocked_until": "manual_image_url_confirmed_from_exact_source",
-        "rows": 52
+        "rows": 56
       },
       {
         "blocked_until": "representative_image_exact_product_type_confirmed",
@@ -114,28 +114,28 @@
       }
     ],
     "auto_apply_enabled": false,
-    "completion_plan_total_open_rows": 825,
-    "completion_plan_phase_rows_total": 773,
+    "completion_plan_total_open_rows": 846,
+    "completion_plan_phase_rows_total": 790,
     "completion_plan_phase_count": 3,
     "completion_plan_status": "needs_review",
     "completion_plan_review_start_status": "all_phases_have_review_start",
     "completion_plan_phases_with_review_start": 3,
     "completion_plan_phases_missing_review_start": 0,
-    "completion_plan_rows_with_review_start": 773,
+    "completion_plan_rows_with_review_start": 790,
     "completion_plan_rows_missing_review_start": 0,
     "blocking_dashboard_status": "manual_evidence_required",
-    "blocking_dashboard_queue_coverage": 0.9515
+    "blocking_dashboard_queue_coverage": 0.948
   },
   "readiness": [
     {
       "readiness": "image_url_candidate_review",
       "priority": 10,
-      "rows": 52,
+      "rows": 56,
       "workflow_rows": [
         {
           "workflow": "extract_from_existing_source_url",
           "label": "이미 확인된 상세 source_url에서 image_url 추출",
-          "rows": 52,
+          "rows": 56,
           "next_step": "extract_product_image_from_existing_exact_source_url"
         }
       ],
@@ -143,6 +143,22 @@
         {
           "source_store": "치이카와 온라인 쿠지",
           "rows": 52
+        },
+        {
+          "source_store": "TOHO animation STORE",
+          "rows": 1
+        },
+        {
+          "source_store": "밀짚모자 스토어",
+          "rows": 1
+        },
+        {
+          "source_store": "밀짚모자 스토어 상하이",
+          "rows": 1
+        },
+        {
+          "source_store": "하이큐!! 10주년 기념전",
+          "rows": 1
         }
       ],
       "sample_items": [
@@ -649,12 +665,12 @@
     {
       "readiness": "source_url_discovery_required",
       "priority": 30,
-      "rows": 741,
+      "rows": 758,
       "workflow_rows": [
         {
           "workflow": "find_source_then_extract_image",
           "label": "정확한 공식 상품 source_url을 먼저 찾은 뒤 이미지 첨부",
-          "rows": 741,
+          "rows": 758,
           "next_step": "find_exact_official_source_url_then_extract_image"
         }
       ],
@@ -690,6 +706,10 @@
         {
           "source_store": "FuRyu",
           "rows": 21
+        },
+        {
+          "source_store": "Banpresto",
+          "rows": 17
         },
         {
           "source_store": "Taito",
@@ -773,10 +793,6 @@
         },
         {
           "source_store": "Phat! Company",
-          "rows": 2
-        },
-        {
-          "source_store": "YG SELECT",
           "rows": 2
         }
       ],
@@ -1197,6 +1213,178 @@
           "category": "인형",
           "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/chiikawa-crepes",
           "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%82%AF%E3%83%AC%E3%83%BC%E3%83%97%E3%81%AA%E6%8A%B1%E3%81%A3%E3%81%93%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%81%86%E3%81%95%E3%81%8E",
+          "workflow": "extract_from_existing_source_url",
+          "readiness": "image_url_candidate_review"
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "source_store": "TOHO animation STORE",
+      "priority": 10,
+      "missing_image_rows": 1,
+      "primary_workflow": "extract_from_existing_source_url",
+      "recommended_next_step": "extract_product_image_from_existing_exact_source_url",
+      "blocked_until": "manual_image_url_confirmed_from_exact_source",
+      "blocked_reason": "candidate_image_requires_manual_review",
+      "required_evidence": [
+        "exact_product_source_url",
+        "image_url_from_accepted_source_or_trusted_official_cdn",
+        "same_product_title_character_variant_type_confirmed"
+      ],
+      "readiness_rows": [
+        {
+          "readiness": "image_url_candidate_review",
+          "rows": 1
+        }
+      ],
+      "workflow_rows": [
+        {
+          "workflow": "extract_from_existing_source_url",
+          "label": "이미 확인된 상세 source_url에서 image_url 추출",
+          "rows": 1,
+          "next_step": "extract_product_image_from_existing_exact_source_url"
+        }
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 2270,
+          "name_ko": "하이큐!! 10주년 이벤트 트레이딩 캔뱃지",
+          "name_ja": "ハイキュー!! 10th イベント -NEXT STEP- トレーディング缶バッジ",
+          "source_store": "TOHO animation STORE",
+          "affiliation": null,
+          "category": "캔뱃지",
+          "source_url": "https://haikyu.jp/10thevent/",
+          "official_search_url": null,
+          "workflow": "extract_from_existing_source_url",
+          "readiness": "image_url_candidate_review"
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "source_store": "밀짚모자 스토어",
+      "priority": 10,
+      "missing_image_rows": 1,
+      "primary_workflow": "extract_from_existing_source_url",
+      "recommended_next_step": "extract_product_image_from_existing_exact_source_url",
+      "blocked_until": "manual_image_url_confirmed_from_exact_source",
+      "blocked_reason": "candidate_image_requires_manual_review",
+      "required_evidence": [
+        "exact_product_source_url",
+        "image_url_from_accepted_source_or_trusted_official_cdn",
+        "same_product_title_character_variant_type_confirmed"
+      ],
+      "readiness_rows": [
+        {
+          "readiness": "image_url_candidate_review",
+          "rows": 1
+        }
+      ],
+      "workflow_rows": [
+        {
+          "workflow": "extract_from_existing_source_url",
+          "label": "이미 확인된 상세 source_url에서 image_url 추출",
+          "rows": 1,
+          "next_step": "extract_product_image_from_existing_exact_source_url"
+        }
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 2268,
+          "name_ko": "원피스 생일 한정 아크릴 액세서리 스탠드 (루피 5.5)",
+          "name_ja": "『ワンピース』ハッピーバースデーアクリルアクセサリースタンド［5.5 ルフィ］",
+          "source_store": "밀짚모자 스토어",
+          "affiliation": null,
+          "category": "아크릴 스탠드",
+          "source_url": "https://store.toei-anim.co.jp/shop/g/gMOVONP962162/",
+          "official_search_url": null,
+          "workflow": "extract_from_existing_source_url",
+          "readiness": "image_url_candidate_review"
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "source_store": "밀짚모자 스토어 상하이",
+      "priority": 10,
+      "missing_image_rows": 1,
+      "primary_workflow": "extract_from_existing_source_url",
+      "recommended_next_step": "extract_product_image_from_existing_exact_source_url",
+      "blocked_until": "manual_image_url_confirmed_from_exact_source",
+      "blocked_reason": "candidate_image_requires_manual_review",
+      "required_evidence": [
+        "exact_product_source_url",
+        "image_url_from_accepted_source_or_trusted_official_cdn",
+        "same_product_title_character_variant_type_confirmed"
+      ],
+      "readiness_rows": [
+        {
+          "readiness": "image_url_candidate_review",
+          "rows": 1
+        }
+      ],
+      "workflow_rows": [
+        {
+          "workflow": "extract_from_existing_source_url",
+          "label": "이미 확인된 상세 source_url에서 image_url 추출",
+          "rows": 1,
+          "next_step": "extract_product_image_from_existing_exact_source_url"
+        }
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 2269,
+          "name_ko": "원피스 상하이 지역 한정 아크릴 스탠드 (루피)",
+          "name_ja": "『麦わらストア上海オリジナル』アクリルスタンド ルフィ",
+          "source_store": "밀짚모자 스토어 상하이",
+          "affiliation": null,
+          "category": "아크릴 스탠드",
+          "source_url": "https://store.toei-anim.co.jp/shop/g/gONP03019O1/",
+          "official_search_url": null,
+          "workflow": "extract_from_existing_source_url",
+          "readiness": "image_url_candidate_review"
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "source_store": "하이큐!! 10주년 기념전",
+      "priority": 10,
+      "missing_image_rows": 1,
+      "primary_workflow": "extract_from_existing_source_url",
+      "recommended_next_step": "extract_product_image_from_existing_exact_source_url",
+      "blocked_until": "manual_image_url_confirmed_from_exact_source",
+      "blocked_reason": "candidate_image_requires_manual_review",
+      "required_evidence": [
+        "exact_product_source_url",
+        "image_url_from_accepted_source_or_trusted_official_cdn",
+        "same_product_title_character_variant_type_confirmed"
+      ],
+      "readiness_rows": [
+        {
+          "readiness": "image_url_candidate_review",
+          "rows": 1
+        }
+      ],
+      "workflow_rows": [
+        {
+          "workflow": "extract_from_existing_source_url",
+          "label": "이미 확인된 상세 source_url에서 image_url 추출",
+          "rows": 1,
+          "next_step": "extract_product_image_from_existing_exact_source_url"
+        }
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 2271,
+          "name_ko": "하이큐!! 10주년 메모리얼 컬렉션 캔뱃지 SEASON.1~4",
+          "name_ja": "トレーディング缶バッジ メモリアルコレクション SEASON.1〜4",
+          "source_store": "하이큐!! 10주년 기념전",
+          "affiliation": null,
+          "category": "캔뱃지",
+          "source_url": "https://haikyu.jp/10thevent/",
+          "official_search_url": null,
           "workflow": "extract_from_existing_source_url",
           "readiness": "image_url_candidate_review"
         }
@@ -2340,6 +2528,133 @@
           "category": "피규어",
           "source_url": null,
           "official_search_url": "https://furyuprize.com/search?keyword=%E3%81%AC%E3%83%BC%E3%81%A9%E3%82%8B%E3%82%B9%E3%83%88%E3%83%83%E3%83%91%E3%83%BC%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88",
+          "workflow": "find_source_then_extract_image",
+          "readiness": "source_url_discovery_required"
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "source_store": "Banpresto",
+      "priority": 30,
+      "missing_image_rows": 17,
+      "primary_workflow": "find_source_then_extract_image",
+      "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
+      "readiness_rows": [
+        {
+          "readiness": "source_url_discovery_required",
+          "rows": 17
+        }
+      ],
+      "workflow_rows": [
+        {
+          "workflow": "find_source_then_extract_image",
+          "label": "정확한 공식 상품 source_url을 먼저 찾은 뒤 이미지 첨부",
+          "rows": 17,
+          "next_step": "find_exact_official_source_url_then_extract_image"
+        }
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1415,
+          "name_ko": "Q posket 리코",
+          "name_ja": "Q posket リコ",
+          "source_store": "Banpresto",
+          "affiliation": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AA%E3%82%B3",
+          "workflow": "find_source_then_extract_image",
+          "readiness": "source_url_discovery_required"
+        },
+        {
+          "catalog_index": 1416,
+          "name_ko": "Q posket 레그",
+          "name_ja": "Q posket レグ",
+          "source_store": "Banpresto",
+          "affiliation": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%82%B0",
+          "workflow": "find_source_then_extract_image",
+          "readiness": "source_url_discovery_required"
+        },
+        {
+          "catalog_index": 1417,
+          "name_ko": "Q posket 나나치",
+          "name_ja": "Q posket ナナチ",
+          "source_store": "Banpresto",
+          "affiliation": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81",
+          "workflow": "find_source_then_extract_image",
+          "readiness": "source_url_discovery_required"
+        },
+        {
+          "catalog_index": 1418,
+          "name_ko": "Break Time Collection 나나치",
+          "name_ja": "ブレイクタイムコレクション ナナチ",
+          "source_store": "Banpresto",
+          "affiliation": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81",
+          "workflow": "find_source_then_extract_image",
+          "readiness": "source_url_discovery_required"
+        },
+        {
+          "catalog_index": 1462,
+          "name_ko": "Q posket 모노쿠마",
+          "name_ja": "Q posket モノクマ",
+          "source_store": "Banpresto",
+          "affiliation": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+          "workflow": "find_source_then_extract_image",
+          "readiness": "source_url_discovery_required"
+        },
+        {
+          "catalog_index": 1463,
+          "name_ko": "Break Time Collection 코마에다 나기토",
+          "name_ja": "Break Time Collection 狛枝凪斗",
+          "source_store": "Banpresto",
+          "affiliation": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97",
+          "workflow": "find_source_then_extract_image",
+          "readiness": "source_url_discovery_required"
+        },
+        {
+          "catalog_index": 1464,
+          "name_ko": "Break Time Collection 히나타 하지메",
+          "name_ja": "Break Time Collection 日向創",
+          "source_store": "Banpresto",
+          "affiliation": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E6%97%A5%E5%90%91%E5%89%B5",
+          "workflow": "find_source_then_extract_image",
+          "readiness": "source_url_discovery_required"
+        },
+        {
+          "catalog_index": 1493,
+          "name_ko": "Q posket 프리렌",
+          "name_ja": "Q posket フリーレン",
+          "source_store": "Banpresto",
+          "affiliation": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
           "workflow": "find_source_then_extract_image",
           "readiness": "source_url_discovery_required"
         }
@@ -4005,365 +4320,6 @@
           "category": "인형",
           "source_url": null,
           "official_search_url": "https://gashapon.jp/search/?q=%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20%E3%82%AB%E3%83%97%E3%82%BB%E3%83%AB%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%81%93%E3%82%8C%E3%81%8F%E3%81%97%E3%82%87%E3%82%93%20%E3%83%88%E3%82%AC%E3%83%92%E3%83%9F%E3%82%B3",
-          "workflow": "find_source_then_extract_image",
-          "readiness": "source_url_discovery_required"
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "source_store": "디즈니 스토어",
-      "priority": 30,
-      "missing_image_rows": 4,
-      "primary_workflow": "find_source_then_extract_image",
-      "recommended_next_step": "find_exact_official_source_url_then_extract_image",
-      "blocked_until": "exact_product_source_url_discovered",
-      "blocked_reason": "missing_exact_source_url",
-      "required_evidence": [
-        "official_or_trusted_product_detail_source_url",
-        "title_character_variant_type_match",
-        "image_url_from_confirmed_source_or_trusted_official_cdn"
-      ],
-      "readiness_rows": [
-        {
-          "readiness": "source_url_discovery_required",
-          "rows": 4
-        }
-      ],
-      "workflow_rows": [
-        {
-          "workflow": "find_source_then_extract_image",
-          "label": "정확한 공식 상품 source_url을 먼저 찾은 뒤 이미지 첨부",
-          "rows": 4,
-          "next_step": "find_exact_official_source_url_then_extract_image"
-        }
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 1108,
-          "name_ko": "디즈니 봉제 인형 (미키 마우스)",
-          "name_ja": null,
-          "source_store": "디즈니 스토어",
-          "affiliation": null,
-          "category": "인형",
-          "source_url": null,
-          "official_search_url": "https://store.disney.co.jp/search?q=%EB%94%94%EC%A6%88%EB%8B%88%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%EB%AF%B8%ED%82%A4%20%EB%A7%88%EC%9A%B0%EC%8A%A4%29",
-          "workflow": "find_source_then_extract_image",
-          "readiness": "source_url_discovery_required"
-        },
-        {
-          "catalog_index": 1109,
-          "name_ko": "디즈니 봉제 인형 (미니 마우스)",
-          "name_ja": null,
-          "source_store": "디즈니 스토어",
-          "affiliation": null,
-          "category": "인형",
-          "source_url": null,
-          "official_search_url": "https://store.disney.co.jp/search?q=%EB%94%94%EC%A6%88%EB%8B%88%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%EB%AF%B8%EB%8B%88%20%EB%A7%88%EC%9A%B0%EC%8A%A4%29",
-          "workflow": "find_source_then_extract_image",
-          "readiness": "source_url_discovery_required"
-        },
-        {
-          "catalog_index": 1110,
-          "name_ko": "디즈니 봉제 인형 (스티치)",
-          "name_ja": null,
-          "source_store": "디즈니 스토어",
-          "affiliation": null,
-          "category": "인형",
-          "source_url": null,
-          "official_search_url": "https://store.disney.co.jp/search?q=%EB%94%94%EC%A6%88%EB%8B%88%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%EC%8A%A4%ED%8B%B0%EC%B9%98%29",
-          "workflow": "find_source_then_extract_image",
-          "readiness": "source_url_discovery_required"
-        },
-        {
-          "catalog_index": 1111,
-          "name_ko": "디즈니 봉제 인형 (푸)",
-          "name_ja": null,
-          "source_store": "디즈니 스토어",
-          "affiliation": null,
-          "category": "인형",
-          "source_url": null,
-          "official_search_url": "https://store.disney.co.jp/search?q=%EB%94%94%EC%A6%88%EB%8B%88%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%ED%91%B8%29",
-          "workflow": "find_source_then_extract_image",
-          "readiness": "source_url_discovery_required"
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "source_store": "이세계아이돌 공식 굿즈",
-      "priority": 30,
-      "missing_image_rows": 4,
-      "primary_workflow": "find_source_then_extract_image",
-      "recommended_next_step": "find_exact_official_source_url_then_extract_image",
-      "blocked_until": "exact_product_source_url_discovered",
-      "blocked_reason": "missing_exact_source_url",
-      "required_evidence": [
-        "official_or_trusted_product_detail_source_url",
-        "title_character_variant_type_match",
-        "image_url_from_confirmed_source_or_trusted_official_cdn"
-      ],
-      "readiness_rows": [
-        {
-          "readiness": "source_url_discovery_required",
-          "rows": 4
-        }
-      ],
-      "workflow_rows": [
-        {
-          "workflow": "find_source_then_extract_image",
-          "label": "정확한 공식 상품 source_url을 먼저 찾은 뒤 이미지 첨부",
-          "rows": 4,
-          "next_step": "find_exact_official_source_url_then_extract_image"
-        }
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 2319,
-          "name_ko": "이세계아이돌 단체 응원봉",
-          "name_ja": null,
-          "source_store": "이세계아이돌 공식 굿즈",
-          "affiliation": null,
-          "category": "응원봉",
-          "source_url": null,
-          "official_search_url": "https://www.google.com/search?q=site%3Awithmuulive.com%20%EC%9D%B4%EC%84%B8%EA%B3%84%EC%95%84%EC%9D%B4%EB%8F%8C%20%EB%8B%A8%EC%B2%B4%20%EC%9D%91%EC%9B%90%EB%B4%89",
-          "workflow": "find_source_then_extract_image",
-          "readiness": "source_url_discovery_required"
-        },
-        {
-          "catalog_index": 2320,
-          "name_ko": "이세계아이돌 단체 아크릴 스탠드",
-          "name_ja": null,
-          "source_store": "이세계아이돌 공식 굿즈",
-          "affiliation": null,
-          "category": "아크릴 스탠드",
-          "source_url": null,
-          "official_search_url": "https://www.google.com/search?q=site%3Awithmuulive.com%20%EC%9D%B4%EC%84%B8%EA%B3%84%EC%95%84%EC%9D%B4%EB%8F%8C%20%EB%8B%A8%EC%B2%B4%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
-          "workflow": "find_source_then_extract_image",
-          "readiness": "source_url_discovery_required"
-        },
-        {
-          "catalog_index": 2321,
-          "name_ko": "이세계아이돌 단체 포토카드 세트",
-          "name_ja": null,
-          "source_store": "이세계아이돌 공식 굿즈",
-          "affiliation": null,
-          "category": "포토카드",
-          "source_url": null,
-          "official_search_url": "https://www.google.com/search?q=site%3Awithmuulive.com%20%EC%9D%B4%EC%84%B8%EA%B3%84%EC%95%84%EC%9D%B4%EB%8F%8C%20%EB%8B%A8%EC%B2%B4%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%EC%84%B8%ED%8A%B8",
-          "workflow": "find_source_then_extract_image",
-          "readiness": "source_url_discovery_required"
-        },
-        {
-          "catalog_index": 2473,
-          "name_ko": "이세계아이돌 응원봉",
-          "name_ja": null,
-          "source_store": "이세계아이돌 공식 굿즈",
-          "affiliation": null,
-          "category": "응원봉",
-          "source_url": null,
-          "official_search_url": "https://www.google.com/search?q=site%3Awithmuulive.com%20%EC%9D%B4%EC%84%B8%EA%B3%84%EC%95%84%EC%9D%B4%EB%8F%8C%20%EC%9D%91%EC%9B%90%EB%B4%89",
-          "workflow": "find_source_then_extract_image",
-          "readiness": "source_url_discovery_required"
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "source_store": "Bandai Premium",
-      "priority": 30,
-      "missing_image_rows": 3,
-      "primary_workflow": "find_source_then_extract_image",
-      "recommended_next_step": "find_exact_official_source_url_then_extract_image",
-      "blocked_until": "exact_product_source_url_discovered",
-      "blocked_reason": "missing_exact_source_url",
-      "required_evidence": [
-        "official_or_trusted_product_detail_source_url",
-        "title_character_variant_type_match",
-        "image_url_from_confirmed_source_or_trusted_official_cdn"
-      ],
-      "readiness_rows": [
-        {
-          "readiness": "source_url_discovery_required",
-          "rows": 3
-        }
-      ],
-      "workflow_rows": [
-        {
-          "workflow": "find_source_then_extract_image",
-          "label": "정확한 공식 상품 source_url을 먼저 찾은 뒤 이미지 첨부",
-          "rows": 3,
-          "next_step": "find_exact_official_source_url_then_extract_image"
-        }
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 1835,
-          "name_ko": "원피스 나미 타올",
-          "name_ja": "ONE PIECE ナミ タオル",
-          "source_store": "Bandai Premium",
-          "affiliation": null,
-          "category": "타월",
-          "source_url": null,
-          "official_search_url": "https://p-bandai.jp/search/?q=ONE%20PIECE%20%E3%83%8A%E3%83%9F%20%E3%82%BF%E3%82%AA%E3%83%AB",
-          "workflow": "find_source_then_extract_image",
-          "readiness": "source_url_discovery_required"
-        },
-        {
-          "catalog_index": 1836,
-          "name_ko": "원피스 상디 토트백",
-          "name_ja": "ONE PIECE サンジ トートバッグ",
-          "source_store": "Bandai Premium",
-          "affiliation": null,
-          "category": "가방",
-          "source_url": null,
-          "official_search_url": "https://p-bandai.jp/search/?q=ONE%20PIECE%20%E3%82%B5%E3%83%B3%E3%82%B8%20%E3%83%88%E3%83%BC%E3%83%88%E3%83%90%E3%83%83%E3%82%B0",
-          "workflow": "find_source_then_extract_image",
-          "readiness": "source_url_discovery_required"
-        },
-        {
-          "catalog_index": 1840,
-          "name_ko": "원피스 쵸파 머그컵",
-          "name_ja": "ONE PIECE チョッパー マグカップ",
-          "source_store": "Bandai Premium",
-          "affiliation": null,
-          "category": "머그컵",
-          "source_url": null,
-          "official_search_url": "https://p-bandai.jp/search/?q=ONE%20PIECE%20%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97",
-          "workflow": "find_source_then_extract_image",
-          "readiness": "source_url_discovery_required"
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "source_store": "SM STORE",
-      "priority": 30,
-      "missing_image_rows": 3,
-      "primary_workflow": "find_source_then_extract_image",
-      "recommended_next_step": "find_exact_official_source_url_then_extract_image",
-      "blocked_until": "exact_product_source_url_discovered",
-      "blocked_reason": "missing_exact_source_url",
-      "required_evidence": [
-        "official_or_trusted_product_detail_source_url",
-        "title_character_variant_type_match",
-        "image_url_from_confirmed_source_or_trusted_official_cdn"
-      ],
-      "readiness_rows": [
-        {
-          "readiness": "source_url_discovery_required",
-          "rows": 3
-        }
-      ],
-      "workflow_rows": [
-        {
-          "workflow": "find_source_then_extract_image",
-          "label": "정확한 공식 상품 source_url을 먼저 찾은 뒤 이미지 첨부",
-          "rows": 3,
-          "next_step": "find_exact_official_source_url_then_extract_image"
-        }
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 2287,
-          "name_ko": "aespa 포토카드 (랜덤)",
-          "name_ja": null,
-          "source_store": "SM STORE",
-          "affiliation": null,
-          "category": "포토카드",
-          "source_url": null,
-          "official_search_url": "https://global.shop.smtown.com/search?q=aespa%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29",
-          "workflow": "find_source_then_extract_image",
-          "readiness": "source_url_discovery_required"
-        },
-        {
-          "catalog_index": 2300,
-          "name_ko": "NCT 포토카드 (랜덤)",
-          "name_ja": null,
-          "source_store": "SM STORE",
-          "affiliation": null,
-          "category": "포토카드",
-          "source_url": null,
-          "official_search_url": "https://global.shop.smtown.com/search?q=NCT%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29",
-          "workflow": "find_source_then_extract_image",
-          "readiness": "source_url_discovery_required"
-        },
-        {
-          "catalog_index": 2314,
-          "name_ko": "Red Velvet 포토카드 (랜덤)",
-          "name_ja": null,
-          "source_store": "SM STORE",
-          "affiliation": null,
-          "category": "포토카드",
-          "source_url": null,
-          "official_search_url": "https://global.shop.smtown.com/search?q=Red%20Velvet%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%28%EB%9E%9C%EB%8D%A4%29",
-          "workflow": "find_source_then_extract_image",
-          "readiness": "source_url_discovery_required"
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "source_store": "카도카와",
-      "priority": 30,
-      "missing_image_rows": 3,
-      "primary_workflow": "find_source_then_extract_image",
-      "recommended_next_step": "find_exact_official_source_url_then_extract_image",
-      "blocked_until": "exact_product_source_url_discovered",
-      "blocked_reason": "missing_exact_source_url",
-      "required_evidence": [
-        "official_or_trusted_product_detail_source_url",
-        "title_character_variant_type_match",
-        "image_url_from_confirmed_source_or_trusted_official_cdn"
-      ],
-      "readiness_rows": [
-        {
-          "readiness": "source_url_discovery_required",
-          "rows": 3
-        }
-      ],
-      "workflow_rows": [
-        {
-          "workflow": "find_source_then_extract_image",
-          "label": "정확한 공식 상품 source_url을 먼저 찾은 뒤 이미지 첨부",
-          "rows": 3,
-          "next_step": "find_exact_official_source_url_then_extract_image"
-        }
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 2018,
-          "name_ko": "KDcolle 렘 메이드 ver.",
-          "name_ja": "KDcolle レム メイドver.",
-          "source_store": "카도카와",
-          "affiliation": null,
-          "category": "피규어",
-          "source_url": null,
-          "official_search_url": "https://www.amiami.com/eng/search/list/?s_keywords=KDcolle%20%E3%83%AC%E3%83%A0%20%E3%83%A1%E3%82%A4%E3%83%89ver.%20KADOKAWA",
-          "workflow": "find_source_then_extract_image",
-          "readiness": "source_url_discovery_required"
-        },
-        {
-          "catalog_index": 2019,
-          "name_ko": "KDcolle 람 메이드 ver.",
-          "name_ja": "KDcolle ラム メイドver.",
-          "source_store": "카도카와",
-          "affiliation": null,
-          "category": "피규어",
-          "source_url": null,
-          "official_search_url": "https://www.amiami.com/eng/search/list/?s_keywords=KDcolle%20%E3%83%A9%E3%83%A0%20%E3%83%A1%E3%82%A4%E3%83%89ver.%20KADOKAWA",
-          "workflow": "find_source_then_extract_image",
-          "readiness": "source_url_discovery_required"
-        },
-        {
-          "catalog_index": 2020,
-          "name_ko": "KDcolle 에밀리아",
-          "name_ja": "KDcolle エミリア",
-          "source_store": "카도카와",
-          "affiliation": null,
-          "category": "피규어",
-          "source_url": null,
-          "official_search_url": "https://www.amiami.com/eng/search/list/?s_keywords=KDcolle%20%E3%82%A8%E3%83%9F%E3%83%AA%E3%82%A2%20KADOKAWA",
           "workflow": "find_source_then_extract_image",
           "readiness": "source_url_discovery_required"
         }
@@ -6338,6 +6294,233 @@
     },
     {
       "pack_id": "missing-image-source-discovery-009",
+      "source_store": "Banpresto",
+      "row_count": 17,
+      "priority": 20,
+      "official_search_available": true,
+      "next_step": "confirm_exact_source_url_then_fill_source_templates",
+      "template": "source_discovery_focus_confirmed_template_public.json",
+      "review_start": {
+        "batch_id": "missing-image-source-discovery-009-review-start",
+        "workflow": "find_source_then_extract_image",
+        "source_store": "Banpresto",
+        "row_count": 17,
+        "primary_review_url_rows": 8,
+        "first_primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AA%E3%82%B3",
+        "first_primary_review_url_kind": "official_search_url",
+        "manual_confirmation_required": true,
+        "auto_apply_enabled": false,
+        "items": [
+          {
+            "catalog_index": 1415,
+            "name_ko": "Q posket 리코",
+            "name_ja": "Q posket リコ",
+            "source_store": "Banpresto",
+            "category": "피규어",
+            "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AA%E3%82%B3",
+            "primary_review_url_kind": "official_search_url"
+          },
+          {
+            "catalog_index": 1416,
+            "name_ko": "Q posket 레그",
+            "name_ja": "Q posket レグ",
+            "source_store": "Banpresto",
+            "category": "피규어",
+            "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%82%B0",
+            "primary_review_url_kind": "official_search_url"
+          },
+          {
+            "catalog_index": 1417,
+            "name_ko": "Q posket 나나치",
+            "name_ja": "Q posket ナナチ",
+            "source_store": "Banpresto",
+            "category": "피규어",
+            "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81",
+            "primary_review_url_kind": "official_search_url"
+          },
+          {
+            "catalog_index": 1418,
+            "name_ko": "Break Time Collection 나나치",
+            "name_ja": "ブレイクタイムコレクション ナナチ",
+            "source_store": "Banpresto",
+            "category": "피규어",
+            "primary_review_url": "https://bsp-prize.jp/search/?keyword=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81",
+            "primary_review_url_kind": "official_search_url"
+          },
+          {
+            "catalog_index": 1462,
+            "name_ko": "Q posket 모노쿠마",
+            "name_ja": "Q posket モノクマ",
+            "source_store": "Banpresto",
+            "category": "피규어",
+            "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E",
+            "primary_review_url_kind": "official_search_url"
+          },
+          {
+            "catalog_index": 1463,
+            "name_ko": "Break Time Collection 코마에다 나기토",
+            "name_ja": "Break Time Collection 狛枝凪斗",
+            "source_store": "Banpresto",
+            "category": "피규어",
+            "primary_review_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97",
+            "primary_review_url_kind": "official_search_url"
+          },
+          {
+            "catalog_index": 1464,
+            "name_ko": "Break Time Collection 히나타 하지메",
+            "name_ja": "Break Time Collection 日向創",
+            "source_store": "Banpresto",
+            "category": "피규어",
+            "primary_review_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E6%97%A5%E5%90%91%E5%89%B5",
+            "primary_review_url_kind": "official_search_url"
+          },
+          {
+            "catalog_index": 1493,
+            "name_ko": "Q posket 프리렌",
+            "name_ja": "Q posket フリーレン",
+            "source_store": "Banpresto",
+            "category": "피규어",
+            "primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3",
+            "primary_review_url_kind": "official_search_url"
+          }
+        ],
+        "review_checklist": [
+          "Open primary_review_url for each item.",
+          "Record only exact product detail source_url, not a search/listing page.",
+          "Confirm title, character, variant, and goods type before any image attachment."
+        ]
+      },
+      "first_primary_review_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AA%E3%82%B3",
+      "first_primary_review_url_kind": "official_search_url",
+      "primary_review_url_rows": 8,
+      "manual_confirmation_required": true,
+      "auto_apply_enabled": false,
+      "review_checklist": [
+        "Open official_search_url for each sample item.",
+        "Confirm the exact official product detail page, not a search/listing page.",
+        "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
+        "Attach image_url only after exact source_url is confirmed."
+      ],
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
+      "sample_category_counts": [
+        {
+          "category": "피규어",
+          "rows": 17
+        }
+      ],
+      "sample_affiliation_counts": [],
+      "sample_items": [
+        {
+          "catalog_index": 1415,
+          "name_ko": "Q posket 리코",
+          "name_ja": "Q posket リコ",
+          "source_store": "Banpresto",
+          "affiliation": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AA%E3%82%B3"
+        },
+        {
+          "catalog_index": 1416,
+          "name_ko": "Q posket 레그",
+          "name_ja": "Q posket レグ",
+          "source_store": "Banpresto",
+          "affiliation": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%AC%E3%82%B0"
+        },
+        {
+          "catalog_index": 1417,
+          "name_ko": "Q posket 나나치",
+          "name_ja": "Q posket ナナチ",
+          "source_store": "Banpresto",
+          "affiliation": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%8A%E3%83%8A%E3%83%81"
+        },
+        {
+          "catalog_index": 1418,
+          "name_ko": "Break Time Collection 나나치",
+          "name_ja": "ブレイクタイムコレクション ナナチ",
+          "source_store": "Banpresto",
+          "affiliation": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8A%E3%83%8A%E3%83%81"
+        },
+        {
+          "catalog_index": 1462,
+          "name_ko": "Q posket 모노쿠마",
+          "name_ja": "Q posket モノクマ",
+          "source_store": "Banpresto",
+          "affiliation": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%9E"
+        },
+        {
+          "catalog_index": 1463,
+          "name_ko": "Break Time Collection 코마에다 나기토",
+          "name_ja": "Break Time Collection 狛枝凪斗",
+          "source_store": "Banpresto",
+          "affiliation": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E7%8B%9B%E6%9E%9D%E5%87%AA%E6%96%97"
+        },
+        {
+          "catalog_index": 1464,
+          "name_ko": "Break Time Collection 히나타 하지메",
+          "name_ja": "Break Time Collection 日向創",
+          "source_store": "Banpresto",
+          "affiliation": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Break%20Time%20Collection%20%E6%97%A5%E5%90%91%E5%89%B5"
+        },
+        {
+          "catalog_index": 1493,
+          "name_ko": "Q posket 프리렌",
+          "name_ja": "Q posket フリーレン",
+          "source_store": "Banpresto",
+          "affiliation": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%83%AA%E3%83%BC%E3%83%AC%E3%83%B3"
+        },
+        {
+          "catalog_index": 1494,
+          "name_ko": "Q posket 펀",
+          "name_ja": "Q posket フェルン",
+          "source_store": "Banpresto",
+          "affiliation": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%95%E3%82%A7%E3%83%AB%E3%83%B3"
+        },
+        {
+          "catalog_index": 1496,
+          "name_ko": "Q posket 히멜",
+          "name_ja": "Q posket ヒンメル",
+          "source_store": "Banpresto",
+          "affiliation": null,
+          "category": "피규어",
+          "source_url": null,
+          "official_search_url": "https://bsp-prize.jp/search/?keyword=Q%20posket%20%E3%83%92%E3%83%B3%E3%83%A1%E3%83%AB"
+        }
+      ],
+      "rank": 9
+    },
+    {
+      "pack_id": "missing-image-source-discovery-010",
       "source_store": "Taito",
       "row_count": 15,
       "priority": 20,
@@ -6345,7 +6528,7 @@
       "next_step": "confirm_exact_source_url_then_fill_source_templates",
       "template": "source_discovery_focus_confirmed_template_public.json",
       "review_start": {
-        "batch_id": "missing-image-source-discovery-009-review-start",
+        "batch_id": "missing-image-source-discovery-010-review-start",
         "workflow": "find_source_then_extract_image",
         "source_store": "Taito",
         "row_count": 15,
@@ -6565,10 +6748,10 @@
           "official_search_url": "https://www.taito.co.jp/prize?keyword=%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E3%82%AD%E3%83%A5%E3%83%BC%E3%83%88%20%E3%83%AA%E3%82%B3"
         }
       ],
-      "rank": 9
+      "rank": 10
     },
     {
-      "pack_id": "missing-image-source-discovery-010",
+      "pack_id": "missing-image-source-discovery-011",
       "source_store": "무기와라스토어",
       "row_count": 15,
       "priority": 20,
@@ -6576,7 +6759,7 @@
       "next_step": "confirm_exact_source_url_then_fill_source_templates",
       "template": "source_discovery_focus_confirmed_template_public.json",
       "review_start": {
-        "batch_id": "missing-image-source-discovery-010-review-start",
+        "batch_id": "missing-image-source-discovery-011-review-start",
         "workflow": "find_source_then_extract_image",
         "source_store": "무기와라스토어",
         "row_count": 15,
@@ -6812,10 +6995,10 @@
           "official_search_url": "https://jumpcs.shueisha.co.jp/shop/goods/search.aspx?search=x&keyword=ONE%20PIECE%20%E3%82%AD%E3%83%BC%E3%83%9B%E3%83%AB%E3%83%80%E3%83%BC%20%28%E3%83%A4%E3%83%9E%E3%83%88%29"
         }
       ],
-      "rank": 10
+      "rank": 11
     },
     {
-      "pack_id": "missing-image-source-discovery-011",
+      "pack_id": "missing-image-source-discovery-012",
       "source_store": "치이카와 중국 팝업스토어",
       "row_count": 15,
       "priority": 20,
@@ -6823,7 +7006,7 @@
       "next_step": "confirm_exact_source_url_then_fill_source_templates",
       "template": "source_discovery_focus_confirmed_template_public.json",
       "review_start": {
-        "batch_id": "missing-image-source-discovery-011-review-start",
+        "batch_id": "missing-image-source-discovery-012-review-start",
         "workflow": "find_source_then_extract_image",
         "source_store": "치이카와 중국 팝업스토어",
         "row_count": 15,
@@ -7051,10 +7234,10 @@
           "official_search_url": "https://www.google.com/search?q=site%3Ax.com%2Fchiikawa_kouhou%20%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%20%E4%B8%AD%E5%9B%BD%E9%99%90%E5%AE%9A%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%28%E5%8C%97%E4%BA%AC%29"
         }
       ],
-      "rank": 11
+      "rank": 12
     },
     {
-      "pack_id": "missing-image-source-discovery-012",
+      "pack_id": "missing-image-source-discovery-013",
       "source_store": "귀멸의 칼날 공식",
       "row_count": 13,
       "priority": 20,
@@ -7062,7 +7245,7 @@
       "next_step": "confirm_exact_source_url_then_fill_source_templates",
       "template": "source_discovery_focus_confirmed_template_public.json",
       "review_start": {
-        "batch_id": "missing-image-source-discovery-012-review-start",
+        "batch_id": "missing-image-source-discovery-013-review-start",
         "workflow": "find_source_then_extract_image",
         "source_store": "귀멸의 칼날 공식",
         "row_count": 13,
@@ -7290,10 +7473,10 @@
           "official_search_url": "https://www.google.com/search?q=site%3Awebshop-global.ufotable.co.jp%20%E9%AC%BC%E6%BB%85%E3%81%AE%E5%88%83%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E7%AB%88%E9%96%80%E7%A6%B0%E8%B1%86%E5%AD%90%29"
         }
       ],
-      "rank": 12
+      "rank": 13
     },
     {
-      "pack_id": "missing-image-source-discovery-013",
+      "pack_id": "missing-image-source-discovery-014",
       "source_store": "AmiAmi",
       "row_count": 12,
       "priority": 20,
@@ -7301,7 +7484,7 @@
       "next_step": "confirm_exact_source_url_then_fill_source_templates",
       "template": "source_discovery_focus_confirmed_template_public.json",
       "review_start": {
-        "batch_id": "missing-image-source-discovery-013-review-start",
+        "batch_id": "missing-image-source-discovery-014-review-start",
         "workflow": "find_source_then_extract_image",
         "source_store": "AmiAmi",
         "row_count": 12,
@@ -7521,10 +7704,10 @@
           "official_search_url": "https://www.amiami.jp/top/search/list?s_keywords=%E3%83%81%E3%82%A7%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%9E%E3%83%B3%20%E5%AD%A6%E5%9C%92%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA%E7%BC%B6%E3%83%90%E3%83%83%E3%82%B8%20%E3%83%87%E3%83%B3%E3%82%B8"
         }
       ],
-      "rank": 13
+      "rank": 14
     },
     {
-      "pack_id": "missing-image-source-discovery-014",
+      "pack_id": "missing-image-source-discovery-015",
       "source_store": "Cospa",
       "row_count": 12,
       "priority": 20,
@@ -7532,7 +7715,7 @@
       "next_step": "confirm_exact_source_url_then_fill_source_templates",
       "template": "source_discovery_focus_confirmed_template_public.json",
       "review_start": {
-        "batch_id": "missing-image-source-discovery-014-review-start",
+        "batch_id": "missing-image-source-discovery-015-review-start",
         "workflow": "find_source_then_extract_image",
         "source_store": "Cospa",
         "row_count": 12,
@@ -7756,10 +7939,10 @@
           "official_search_url": "https://www.cospa.com/cospa/itemlist/keyword/%E5%83%95%E3%81%AE%E3%83%92%E3%83%BC%E3%83%AD%E3%83%BC%E3%82%A2%E3%82%AB%E3%83%87%E3%83%9F%E3%82%A2%20%E3%82%AA%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%88%20%E3%83%88%E3%83%BC%E3%83%88%E3%83%90%E3%83%83%E3%82%B0"
         }
       ],
-      "rank": 14
+      "rank": 15
     },
     {
-      "pack_id": "missing-image-source-discovery-015",
+      "pack_id": "missing-image-source-discovery-016",
       "source_store": "반다이",
       "row_count": 11,
       "priority": 20,
@@ -7767,7 +7950,7 @@
       "next_step": "confirm_exact_source_url_then_fill_source_templates",
       "template": "source_discovery_focus_confirmed_template_public.json",
       "review_start": {
-        "batch_id": "missing-image-source-discovery-015-review-start",
+        "batch_id": "missing-image-source-discovery-016-review-start",
         "workflow": "find_source_then_extract_image",
         "source_store": "반다이",
         "row_count": 11,
@@ -7987,223 +8170,6 @@
           "official_search_url": "https://p-bandai.jp/search/?q=%EC%A3%A0%EC%A3%A0%EC%9D%98%20%EA%B8%B0%EB%AC%98%ED%95%9C%20%EB%AA%A8%ED%97%98%20%ED%94%BC%EA%B7%9C%EC%96%B4%20%28%EC%A7%80%EC%98%A4%EB%A5%B4%EB%85%B8%20%EC%A3%A0%EB%B0%94%EB%82%98%29"
         }
       ],
-      "rank": 15
-    },
-    {
-      "pack_id": "missing-image-source-discovery-016",
-      "source_store": "메가하우스",
-      "row_count": 9,
-      "priority": 20,
-      "official_search_available": true,
-      "next_step": "confirm_exact_source_url_then_fill_source_templates",
-      "template": "source_discovery_focus_confirmed_template_public.json",
-      "review_start": {
-        "batch_id": "missing-image-source-discovery-016-review-start",
-        "workflow": "find_source_then_extract_image",
-        "source_store": "메가하우스",
-        "row_count": 9,
-        "primary_review_url_rows": 8,
-        "first_primary_review_url": "https://www.megahobby.jp/?s=Lookup%20%E5%A4%8F%E6%B2%B9%E5%82%91",
-        "first_primary_review_url_kind": "official_search_url",
-        "manual_confirmation_required": true,
-        "auto_apply_enabled": false,
-        "items": [
-          {
-            "catalog_index": 1400,
-            "name_ko": "Lookup 게토 스구루",
-            "name_ja": "Lookup 夏油傑",
-            "source_store": "메가하우스",
-            "category": "피규어",
-            "primary_review_url": "https://www.megahobby.jp/?s=Lookup%20%E5%A4%8F%E6%B2%B9%E5%82%91",
-            "primary_review_url_kind": "official_search_url"
-          },
-          {
-            "catalog_index": 1401,
-            "name_ko": "Petite Doll 고죠 사토루",
-            "name_ja": "プチデフォルメドール 五条悟",
-            "source_store": "메가하우스",
-            "category": "피규어",
-            "primary_review_url": "https://www.megahobby.jp/?s=%E3%83%97%E3%83%81%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%83%89%E3%83%BC%E3%83%AB%20%E4%BA%94%E6%9D%A1%E6%82%9F",
-            "primary_review_url_kind": "official_search_url"
-          },
-          {
-            "catalog_index": 1403,
-            "name_ko": "MEGA CAT PROJECT 주술회전 냐루토 편 이타도리 유지",
-            "name_ja": "MEGA CAT PROJECT 呪術廻戦 にゃんと! 虎杖悠仁",
-            "source_store": "메가하우스",
-            "category": "피규어",
-            "primary_review_url": "https://www.megahobby.jp/?s=MEGA%20CAT%20PROJECT%20%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%81%AB%E3%82%83%E3%82%93%E3%81%A8%21%20%E8%99%8E%E6%9D%96%E6%82%A0%E4%BB%81",
-            "primary_review_url_kind": "official_search_url"
-          },
-          {
-            "catalog_index": 1404,
-            "name_ko": "MEGA CAT PROJECT 주술회전 냐루토 편 후시구로 메구미",
-            "name_ja": "MEGA CAT PROJECT 呪術廻戦 にゃんと! 伏黒恵",
-            "source_store": "메가하우스",
-            "category": "피규어",
-            "primary_review_url": "https://www.megahobby.jp/?s=MEGA%20CAT%20PROJECT%20%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%81%AB%E3%82%83%E3%82%93%E3%81%A8%21%20%E4%BC%8F%E9%BB%92%E6%81%B5",
-            "primary_review_url_kind": "official_search_url"
-          },
-          {
-            "catalog_index": 1435,
-            "name_ko": "Lookup 리코",
-            "name_ja": "ルックアップ リコ",
-            "source_store": "메가하우스",
-            "category": "피규어",
-            "primary_review_url": "https://www.megahobby.jp/?s=%E3%83%AB%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%20%E3%83%AA%E3%82%B3",
-            "primary_review_url_kind": "official_search_url"
-          },
-          {
-            "catalog_index": 1436,
-            "name_ko": "Lookup 레그",
-            "name_ja": "ルックアップ レグ",
-            "source_store": "메가하우스",
-            "category": "피규어",
-            "primary_review_url": "https://www.megahobby.jp/?s=%E3%83%AB%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%20%E3%83%AC%E3%82%B0",
-            "primary_review_url_kind": "official_search_url"
-          },
-          {
-            "catalog_index": 1934,
-            "name_ko": "POP 보아 행콕",
-            "name_ja": "Portrait.Of.Pirates ボア・ハンコック",
-            "source_store": "메가하우스",
-            "category": "피규어",
-            "primary_review_url": "https://www.megahobby.jp/?s=Portrait.Of.Pirates%20%E3%83%9C%E3%82%A2%E3%83%BB%E3%83%8F%E3%83%B3%E3%82%B3%E3%83%83%E3%82%AF",
-            "primary_review_url_kind": "official_search_url"
-          },
-          {
-            "catalog_index": 1935,
-            "name_ko": "POP 니코 로빈",
-            "name_ja": "Portrait.Of.Pirates ニコ・ロビン",
-            "source_store": "메가하우스",
-            "category": "피규어",
-            "primary_review_url": "https://www.megahobby.jp/?s=Portrait.Of.Pirates%20%E3%83%8B%E3%82%B3%E3%83%BB%E3%83%AD%E3%83%93%E3%83%B3",
-            "primary_review_url_kind": "official_search_url"
-          }
-        ],
-        "review_checklist": [
-          "Open primary_review_url for each item.",
-          "Record only exact product detail source_url, not a search/listing page.",
-          "Confirm title, character, variant, and goods type before any image attachment."
-        ]
-      },
-      "first_primary_review_url": "https://www.megahobby.jp/?s=Lookup%20%E5%A4%8F%E6%B2%B9%E5%82%91",
-      "first_primary_review_url_kind": "official_search_url",
-      "primary_review_url_rows": 8,
-      "manual_confirmation_required": true,
-      "auto_apply_enabled": false,
-      "review_checklist": [
-        "Open official_search_url for each sample item.",
-        "Confirm the exact official product detail page, not a search/listing page.",
-        "Fill candidate_source_url/evidence_url only after title, character, variant, and item type match.",
-        "Attach image_url only after exact source_url is confirmed."
-      ],
-      "blocked_until": "exact_product_source_url_discovered",
-      "blocked_reason": "missing_exact_source_url",
-      "required_evidence": [
-        "official_or_trusted_product_detail_source_url",
-        "title_character_variant_type_match",
-        "image_url_from_confirmed_source_or_trusted_official_cdn"
-      ],
-      "sample_category_counts": [
-        {
-          "category": "피규어",
-          "rows": 9
-        }
-      ],
-      "sample_affiliation_counts": [],
-      "sample_items": [
-        {
-          "catalog_index": 1400,
-          "name_ko": "Lookup 게토 스구루",
-          "name_ja": "Lookup 夏油傑",
-          "source_store": "메가하우스",
-          "affiliation": null,
-          "category": "피규어",
-          "source_url": null,
-          "official_search_url": "https://www.megahobby.jp/?s=Lookup%20%E5%A4%8F%E6%B2%B9%E5%82%91"
-        },
-        {
-          "catalog_index": 1401,
-          "name_ko": "Petite Doll 고죠 사토루",
-          "name_ja": "プチデフォルメドール 五条悟",
-          "source_store": "메가하우스",
-          "affiliation": null,
-          "category": "피규어",
-          "source_url": null,
-          "official_search_url": "https://www.megahobby.jp/?s=%E3%83%97%E3%83%81%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A1%E3%83%89%E3%83%BC%E3%83%AB%20%E4%BA%94%E6%9D%A1%E6%82%9F"
-        },
-        {
-          "catalog_index": 1403,
-          "name_ko": "MEGA CAT PROJECT 주술회전 냐루토 편 이타도리 유지",
-          "name_ja": "MEGA CAT PROJECT 呪術廻戦 にゃんと! 虎杖悠仁",
-          "source_store": "메가하우스",
-          "affiliation": null,
-          "category": "피규어",
-          "source_url": null,
-          "official_search_url": "https://www.megahobby.jp/?s=MEGA%20CAT%20PROJECT%20%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%81%AB%E3%82%83%E3%82%93%E3%81%A8%21%20%E8%99%8E%E6%9D%96%E6%82%A0%E4%BB%81"
-        },
-        {
-          "catalog_index": 1404,
-          "name_ko": "MEGA CAT PROJECT 주술회전 냐루토 편 후시구로 메구미",
-          "name_ja": "MEGA CAT PROJECT 呪術廻戦 にゃんと! 伏黒恵",
-          "source_store": "메가하우스",
-          "affiliation": null,
-          "category": "피규어",
-          "source_url": null,
-          "official_search_url": "https://www.megahobby.jp/?s=MEGA%20CAT%20PROJECT%20%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%81%AB%E3%82%83%E3%82%93%E3%81%A8%21%20%E4%BC%8F%E9%BB%92%E6%81%B5"
-        },
-        {
-          "catalog_index": 1435,
-          "name_ko": "Lookup 리코",
-          "name_ja": "ルックアップ リコ",
-          "source_store": "메가하우스",
-          "affiliation": null,
-          "category": "피규어",
-          "source_url": null,
-          "official_search_url": "https://www.megahobby.jp/?s=%E3%83%AB%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%20%E3%83%AA%E3%82%B3"
-        },
-        {
-          "catalog_index": 1436,
-          "name_ko": "Lookup 레그",
-          "name_ja": "ルックアップ レグ",
-          "source_store": "메가하우스",
-          "affiliation": null,
-          "category": "피규어",
-          "source_url": null,
-          "official_search_url": "https://www.megahobby.jp/?s=%E3%83%AB%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%20%E3%83%AC%E3%82%B0"
-        },
-        {
-          "catalog_index": 1934,
-          "name_ko": "POP 보아 행콕",
-          "name_ja": "Portrait.Of.Pirates ボア・ハンコック",
-          "source_store": "메가하우스",
-          "affiliation": null,
-          "category": "피규어",
-          "source_url": null,
-          "official_search_url": "https://www.megahobby.jp/?s=Portrait.Of.Pirates%20%E3%83%9C%E3%82%A2%E3%83%BB%E3%83%8F%E3%83%B3%E3%82%B3%E3%83%83%E3%82%AF"
-        },
-        {
-          "catalog_index": 1935,
-          "name_ko": "POP 니코 로빈",
-          "name_ja": "Portrait.Of.Pirates ニコ・ロビン",
-          "source_store": "메가하우스",
-          "affiliation": null,
-          "category": "피규어",
-          "source_url": null,
-          "official_search_url": "https://www.megahobby.jp/?s=Portrait.Of.Pirates%20%E3%83%8B%E3%82%B3%E3%83%BB%E3%83%AD%E3%83%93%E3%83%B3"
-        },
-        {
-          "catalog_index": 1936,
-          "name_ko": "POP 트라팔가 로",
-          "name_ja": "Portrait.Of.Pirates トラファルガー・ロー",
-          "source_store": "메가하우스",
-          "affiliation": null,
-          "category": "피규어",
-          "source_url": null,
-          "official_search_url": "https://www.megahobby.jp/?s=Portrait.Of.Pirates%20%E3%83%88%E3%83%A9%E3%83%95%E3%82%A1%E3%83%AB%E3%82%AC%E3%83%BC%E3%83%BB%E3%83%AD%E3%83%BC"
-        }
-      ],
       "rank": 16
     }
   ],
@@ -8257,7 +8223,7 @@
     },
     "review_gotouchi_official_candidates": {
       "workflow": "review_gotouchi_official_candidates",
-      "batch_id": "image-attachment-action-004",
+      "batch_id": "image-attachment-action-008",
       "source_store": "ご当地ちいかわ 공식(API)",
       "row_count": 20,
       "primary_review_url_rows": 20,
@@ -8647,7 +8613,7 @@
       "rank": 4,
       "lane": "discover_exact_source_urls",
       "source": "source_discovery_action_queue_public.json",
-      "row_count": 741,
+      "row_count": 758,
       "next_step": "confirm_exact_source_url_then_fill_source_templates",
       "template": "source_discovery_focus_confirmed_template_public.json",
       "top_source_stores": [
@@ -10934,7 +10900,7 @@
       "current_focus_pack": {},
       "review_start": {
         "workflow": "review_gotouchi_official_candidates",
-        "batch_id": "image-attachment-action-004",
+        "batch_id": "image-attachment-action-008",
         "source_store": "ご当地ちいかわ 공식(API)",
         "row_count": 20,
         "primary_review_url_rows": 20,
@@ -11141,15 +11107,15 @@
   ],
   "manual_validation_focus": {
     "auto_import_ready_rows": 0,
-    "manual_validation_required_rows": 825,
+    "manual_validation_required_rows": 846,
     "next_focus_lane": "discover_exact_source_urls",
-    "next_focus_row_count": 741,
+    "next_focus_row_count": 758,
     "next_focus_source": "source_discovery_action_queue_public.json",
     "focus_lanes": [
       {
         "rank": 4,
         "lane": "discover_exact_source_urls",
-        "row_count": 741,
+        "row_count": 758,
         "source": "source_discovery_action_queue_public.json",
         "next_step": "confirm_exact_source_url_then_fill_source_templates",
         "blocked_reason": "missing_exact_source_url",
@@ -11468,7 +11434,7 @@
         "current_focus_pack": {},
         "review_start": {
           "workflow": "review_gotouchi_official_candidates",
-          "batch_id": "image-attachment-action-004",
+          "batch_id": "image-attachment-action-008",
           "source_store": "ご当地ちいかわ 공식(API)",
           "row_count": 20,
           "primary_review_url_rows": 20,
@@ -11650,7 +11616,7 @@
       "generic_source_url_replacement_rows": 0,
       "representative_image_review_rows": 22,
       "source_detail_recheck_required_rows": 12,
-      "source_discovery_focus_rows": 741,
+      "source_discovery_focus_rows": 758,
       "manual_image_research_rows": 10
     },
     "automation_policy": {
@@ -11659,13 +11625,13 @@
     }
   },
   "execution_queue_summary": {
-    "open_missing_image_rows": 825,
+    "open_missing_image_rows": 846,
     "auto_import_ready_rows": 0,
     "queue_count": 4,
-    "queued_rows_total": 785,
-    "raw_queued_rows_total": 785,
+    "queued_rows_total": 802,
+    "raw_queued_rows_total": 802,
     "overlapping_queue_rows": 0,
-    "not_yet_queued_rows": 40,
+    "not_yet_queued_rows": 44,
     "not_yet_queued_rows_explained": 0,
     "unqueued_phase_rows_total": 0,
     "overlay_queue_rows": 12,
@@ -11673,7 +11639,7 @@
     "next_queue": {
       "rank": 4,
       "lane": "discover_exact_source_urls",
-      "row_count": 741,
+      "row_count": 758,
       "source": "source_discovery_action_queue_public.json",
       "template": "source_discovery_focus_confirmed_template_public.json",
       "next_step": "confirm_exact_source_url_then_fill_source_templates",
@@ -11751,7 +11717,7 @@
       {
         "rank": 4,
         "lane": "discover_exact_source_urls",
-        "row_count": 741,
+        "row_count": 758,
         "source": "source_discovery_action_queue_public.json",
         "template": "source_discovery_focus_confirmed_template_public.json",
         "next_step": "confirm_exact_source_url_then_fill_source_templates",
@@ -11843,7 +11809,7 @@
         ],
         "review_start": {
           "workflow": "review_gotouchi_official_candidates",
-          "batch_id": "image-attachment-action-004",
+          "batch_id": "image-attachment-action-008",
           "source_store": "ご当地ちいかわ 공식(API)",
           "row_count": 20,
           "primary_review_url_rows": 20,
@@ -12037,9 +12003,9 @@
       },
       {
         "phase_id": "complete_source_discovery_focus_packs",
-        "row_count": 741,
+        "row_count": 758,
         "direct_queue_lane": "discover_exact_source_urls",
-        "queued_rows": 741,
+        "queued_rows": 758,
         "remaining_rows": 0,
         "next_step": "fill_source_discovery_focus_confirmed_template",
         "blocked_reason": "missing_exact_source_url",
@@ -12068,23 +12034,23 @@
   },
   "blocking_dashboard": {
     "status": "manual_evidence_required",
-    "total_open_rows": 825,
+    "total_open_rows": 846,
     "auto_import_ready_rows": 0,
-    "manual_validation_required_rows": 825,
-    "queued_rows_total": 785,
-    "not_yet_queued_rows": 40,
-    "queue_coverage": 0.9515,
+    "manual_validation_required_rows": 846,
+    "queued_rows_total": 802,
+    "not_yet_queued_rows": 44,
+    "queue_coverage": 0.948,
     "top_blocked_reason": {
       "blocked_reason": "missing_exact_source_url",
-      "rows": 741
+      "rows": 758
     },
     "top_blocked_until": {
       "blocked_until": "exact_product_source_url_discovered",
-      "rows": 741
+      "rows": 758
     },
     "next_queue": {
       "lane": "discover_exact_source_urls",
-      "row_count": 741,
+      "row_count": 758,
       "source": "source_discovery_action_queue_public.json",
       "template": "source_discovery_focus_confirmed_template_public.json",
       "next_step": "confirm_exact_source_url_then_fill_source_templates",
@@ -12107,7 +12073,7 @@
     "review_start_coverage_status": "all_phases_have_review_start",
     "phases_with_review_start": 3,
     "phases_missing_review_start": 0,
-    "rows_with_review_start": 773,
+    "rows_with_review_start": 790,
     "rows_missing_review_start": 0,
     "top_phase_rows": [
       {
@@ -12118,7 +12084,7 @@
       },
       {
         "phase_id": "complete_source_discovery_focus_packs",
-        "row_count": 741,
+        "row_count": 758,
         "blocked_reason": "missing_exact_source_url",
         "next_step": "fill_source_discovery_focus_confirmed_template"
       },
@@ -12131,24 +12097,24 @@
     ],
     "image_evidence_bottleneck_summary": {
       "status": "source_or_image_evidence_required",
-      "missing_image_rows": 825,
+      "missing_image_rows": 846,
       "known_image_download_problem_rows": 0,
-      "image_url_evidence_missing_rows": 825,
+      "image_url_evidence_missing_rows": 846,
       "auto_import_ready_rows": 0,
-      "manual_confirmation_required_rows": 825,
-      "source_first_rows": 741,
+      "manual_confirmation_required_rows": 846,
+      "source_first_rows": 758,
       "representative_review_rows": 22,
       "manual_image_research_rows": 10,
-      "source_discovery_focus_pack_rows": 741,
+      "source_discovery_focus_pack_rows": 758,
       "next_queue_lane": "discover_exact_source_urls",
-      "next_queue_rows": 741,
+      "next_queue_rows": 758,
       "next_queue_source": "source_discovery_action_queue_public.json",
       "next_queue_template": "source_discovery_focus_confirmed_template_public.json",
       "next_queue_blocked_until": "exact_product_source_url_discovered",
       "bottleneck_rows": [
         {
           "bucket": "source_url_or_storefront_replacement_required",
-          "rows": 741,
+          "rows": 758,
           "next_step": "confirm_exact_product_source_url_before_image_import"
         },
         {
@@ -12169,8 +12135,8 @@
     "operator_message": "No missing-image DB row can be imported automatically yet; fill the next confirmation template with exact product source/image evidence first."
   },
   "completion_plan": {
-    "total_open_rows": 825,
-    "phase_rows_total": 773,
+    "total_open_rows": 846,
+    "phase_rows_total": 790,
     "phase_count": 3,
     "status": "needs_review",
     "phases": [
@@ -12196,7 +12162,7 @@
         "current_batch": {},
         "review_start": {
           "workflow": "review_gotouchi_official_candidates",
-          "batch_id": "image-attachment-action-004",
+          "batch_id": "image-attachment-action-008",
           "source_store": "ご当地ちいかわ 공식(API)",
           "row_count": 20,
           "primary_review_url_rows": 20,
@@ -12249,7 +12215,7 @@
         "rank": 2,
         "phase_id": "complete_source_discovery_focus_packs",
         "title": "상위 스토어 source_url 발견 팩 처리",
-        "row_count": 741,
+        "row_count": 758,
         "source": "source_discovery_focus_packs_public.json",
         "next_step": "fill_source_discovery_focus_confirmed_template",
         "template": "source_discovery_focus_confirmed_template_public.json",
@@ -12304,12 +12270,12 @@
             "recommended_next_step": "find_exact_official_source_url_then_extract_image"
           },
           {
-            "source_store": "Taito",
-            "missing_image_rows": 15,
+            "source_store": "Banpresto",
+            "missing_image_rows": 17,
             "recommended_next_step": "find_exact_official_source_url_then_extract_image"
           },
           {
-            "source_store": "무기와라스토어",
+            "source_store": "Taito",
             "missing_image_rows": 15,
             "recommended_next_step": "find_exact_official_source_url_then_extract_image"
           }
@@ -14654,7 +14620,7 @@
       "phase_count": 3,
       "phases_with_review_start": 3,
       "phases_missing_review_start": 0,
-      "rows_with_review_start": 773,
+      "rows_with_review_start": 790,
       "rows_missing_review_start": 0,
       "missing_review_start_phase_ids": [],
       "phase_review_starts": [
@@ -14669,7 +14635,7 @@
         },
         {
           "phase_id": "complete_source_discovery_focus_packs",
-          "row_count": 741,
+          "row_count": 758,
           "has_review_start": true,
           "first_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%99%8E%E6%9D%96%E6%82%A0%E4%BB%81+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
           "review_url_kind": "domain_limited_web_search",

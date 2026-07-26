@@ -13,9 +13,9 @@
       "name_ja": 526,
       "release_date": 1348,
       "barcode": 10082,
-      "image_url": 825,
+      "image_url": 846,
       "official_price_jpy": 559,
-      "source_url": 751
+      "source_url": 768
     },
     "store_rows_with_any_missing_metadata": [
       [
@@ -305,8 +305,8 @@
     },
     {
       "field": "image_url",
-      "missing_rows": 825,
-      "priority_score": 825,
+      "missing_rows": 846,
+      "priority_score": 846,
       "recommended_action": "Find exact official product page and attach source_url/image_url together.",
       "evidence_required": "product image from exact source_url after identity verification",
       "auto_apply_enabled": false,
@@ -354,19 +354,19 @@
           "missing_rows": 21
         },
         {
-          "source_store": "Taito",
-          "missing_rows": 15
+          "source_store": "Banpresto",
+          "missing_rows": 17
         },
         {
-          "source_store": "무기와라스토어",
+          "source_store": "Taito",
           "missing_rows": 15
         }
       ]
     },
     {
       "field": "source_url",
-      "missing_rows": 751,
-      "priority_score": 751,
+      "missing_rows": 768,
+      "priority_score": 768,
       "recommended_action": "Find exact official product page and attach source_url/image_url together.",
       "evidence_required": "exact official or trusted licensed product detail page",
       "auto_apply_enabled": false,
@@ -406,6 +406,10 @@
           "missing_rows": 21
         },
         {
+          "source_store": "Banpresto",
+          "missing_rows": 17
+        },
+        {
           "source_store": "Taito",
           "missing_rows": 15
         },
@@ -416,10 +420,6 @@
         {
           "source_store": "치이카와 중국 팝업스토어",
           "missing_rows": 15
-        },
-        {
-          "source_store": "귀멸의 칼날 공식",
-          "missing_rows": 13
         }
       ]
     },
@@ -6536,6 +6536,196 @@
       ]
     },
     {
+      "field": "image_url",
+      "source_store": "Banpresto",
+      "missing_rows": 17,
+      "priority_score": 17,
+      "recommended_action": "Find exact official product page and attach source_url/image_url together.",
+      "evidence_required": "product image from exact source_url after identity verification",
+      "auto_apply_enabled": false,
+      "next_step": "source_then_image_import",
+      "risk": "wrong_product_image",
+      "sample_catalog_indexes": [
+        1415,
+        1416,
+        1417,
+        1418,
+        1462,
+        1463,
+        1464,
+        1493
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1415,
+          "name_ko": "Q posket 리코",
+          "name_ja": "Q posket リコ",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null
+        },
+        {
+          "catalog_index": 1416,
+          "name_ko": "Q posket 레그",
+          "name_ja": "Q posket レグ",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null
+        },
+        {
+          "catalog_index": 1417,
+          "name_ko": "Q posket 나나치",
+          "name_ja": "Q posket ナナチ",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null
+        },
+        {
+          "catalog_index": 1418,
+          "name_ko": "Break Time Collection 나나치",
+          "name_ja": "ブレイクタイムコレクション ナナチ",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null
+        },
+        {
+          "catalog_index": 1462,
+          "name_ko": "Q posket 모노쿠마",
+          "name_ja": "Q posket モノクマ",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null
+        },
+        {
+          "catalog_index": 1463,
+          "name_ko": "Break Time Collection 코마에다 나기토",
+          "name_ja": "Break Time Collection 狛枝凪斗",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null
+        },
+        {
+          "catalog_index": 1464,
+          "name_ko": "Break Time Collection 히나타 하지메",
+          "name_ja": "Break Time Collection 日向創",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null
+        },
+        {
+          "catalog_index": 1493,
+          "name_ko": "Q posket 프리렌",
+          "name_ja": "Q posket フリーレン",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null
+        }
+      ]
+    },
+    {
+      "field": "source_url",
+      "source_store": "Banpresto",
+      "missing_rows": 17,
+      "priority_score": 17,
+      "recommended_action": "Find exact official product page and attach source_url/image_url together.",
+      "evidence_required": "exact official or trusted licensed product detail page",
+      "auto_apply_enabled": false,
+      "next_step": "source_url_discovery",
+      "risk": "identity_mismatch",
+      "sample_catalog_indexes": [
+        1415,
+        1416,
+        1417,
+        1418,
+        1462,
+        1463,
+        1464,
+        1493
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1415,
+          "name_ko": "Q posket 리코",
+          "name_ja": "Q posket リコ",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null
+        },
+        {
+          "catalog_index": 1416,
+          "name_ko": "Q posket 레그",
+          "name_ja": "Q posket レグ",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null
+        },
+        {
+          "catalog_index": 1417,
+          "name_ko": "Q posket 나나치",
+          "name_ja": "Q posket ナナチ",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null
+        },
+        {
+          "catalog_index": 1418,
+          "name_ko": "Break Time Collection 나나치",
+          "name_ja": "ブレイクタイムコレクション ナナチ",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null
+        },
+        {
+          "catalog_index": 1462,
+          "name_ko": "Q posket 모노쿠마",
+          "name_ja": "Q posket モノクマ",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null
+        },
+        {
+          "catalog_index": 1463,
+          "name_ko": "Break Time Collection 코마에다 나기토",
+          "name_ja": "Break Time Collection 狛枝凪斗",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null
+        },
+        {
+          "catalog_index": 1464,
+          "name_ko": "Break Time Collection 히나타 하지메",
+          "name_ja": "Break Time Collection 日向創",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null
+        },
+        {
+          "catalog_index": 1493,
+          "name_ko": "Q posket 프리렌",
+          "name_ja": "Q posket フリーレン",
+          "series_name": null,
+          "category": "피규어",
+          "source_url": null,
+          "image_url": null
+        }
+      ]
+    },
+    {
       "field": "barcode",
       "source_store": "AmiAmi",
       "missing_rows": 16,
@@ -11755,196 +11945,6 @@
           "name_ja": null,
           "series_name": null,
           "category": "포토카드",
-          "source_url": null,
-          "image_url": null
-        }
-      ]
-    },
-    {
-      "field": "release_date",
-      "source_store": "Square Enix e-STORE",
-      "missing_rows": 9,
-      "priority_score": 9,
-      "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
-      "evidence_required": "official product or campaign page showing release/sale date",
-      "auto_apply_enabled": false,
-      "next_step": "official_metadata_extraction",
-      "risk": "campaign_or_reissue_date_confusion",
-      "sample_catalog_indexes": [
-        1124,
-        1125,
-        1126,
-        1127,
-        1128,
-        1129,
-        1130,
-        1131
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 1124,
-          "name_ko": "드래곤 퀘스트 메탈릭 몬스터즈 갤러리 (데스피사로)",
-          "name_ja": "メタリックモンスターズギャラリー デスピサロ",
-          "series_name": null,
-          "category": "피규어",
-          "source_url": "https://www.dragonquest.jp/news/detail/1029/",
-          "image_url": "https://cache-www.dragonquest.jp/thumb/news/1029.jpg"
-        },
-        {
-          "catalog_index": 1125,
-          "name_ko": "드래곤 퀘스트 메탈릭 몬스터즈 갤러리 (악마신관)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "피규어",
-          "source_url": "https://anime-store.jp/zh-hant/products/4988601273534",
-          "image_url": "https://anime-store.jp/cdn/shop/files/4988601273534_001_2e42034b-4084-4945-b64f-ffeffe4548b6_1200x1200.jpg?v=1759209237"
-        },
-        {
-          "catalog_index": 1126,
-          "name_ko": "드래곤 퀘스트 메탈릭 몬스터즈 갤러리 (조마)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "피규어",
-          "source_url": "https://store.jp.square-enix.com/estore/g/gMW36087-4/",
-          "image_url": "https://store.jp.square-enix.com/img/goods/L/MW36087-4_001.jpg"
-        },
-        {
-          "catalog_index": 1127,
-          "name_ko": "드래곤 퀘스트 조마 다크 로브 ver",
-          "name_ja": null,
-          "series_name": null,
-          "category": "피규어",
-          "source_url": "https://ninoma.com/products/dragon-quest-metallic-monsters-gallery-zoma-robe-of-darkness-ver",
-          "image_url": "https://ninoma.com/cdn/shop/files/61FNvyOCq_L.jpg?v=1744688924&width=800"
-        },
-        {
-          "catalog_index": 1128,
-          "name_ko": "드래곤 퀘스트 메탈릭 아이템즈 갤러리 (스페셜 아머 세트)",
-          "name_ja": null,
-          "series_name": null,
-          "category": "피규어",
-          "source_url": "https://anime-store.jp/products/4988601267472-202507",
-          "image_url": "https://anime-store.jp/cdn/shop/files/4988601267472_001_e343b4a4-5920-435b-a652-9b40d00e44dc_1200x1200.jpg?v=1755644929"
-        },
-        {
-          "catalog_index": 1129,
-          "name_ko": "FFXIV 노트북 PC 케이스 아머롯",
-          "name_ja": null,
-          "series_name": null,
-          "category": "액세서리",
-          "source_url": "https://apac.store.square-enix.com/products/final-fantasy-xiv-laptop-case-amaurot",
-          "image_url": "https://apac.store.square-enix.com/cdn/shop/files/MWFF140631-1_04.jpg?v=1776226625&width=2048"
-        },
-        {
-          "catalog_index": 1130,
-          "name_ko": "FFXIV 스타라이트 머그",
-          "name_ja": null,
-          "series_name": null,
-          "category": "머그컵",
-          "source_url": "https://eu.store.square-enix-games.com/final-fantasy-xiv-starlight-mug",
-          "image_url": "https://cdn11.bigcommerce.com/s-uak4l72xa0/products/3429/images/17400/001_e-STORE_FF14_Starlight_Mug_20251024__79958.1768344834.386.513.jpg?c=1"
-        },
-        {
-          "catalog_index": 1131,
-          "name_ko": "FFXIV 스타라이트 쿠션 커버",
-          "name_ja": null,
-          "series_name": null,
-          "category": "생활잡화",
-          "source_url": "https://eu.store.square-enix-games.com/final-fantasy-xiv-starlight-cushion-cover",
-          "image_url": "https://cdn11.bigcommerce.com/s-uak4l72xa0/products/3430/images/17403/001_e-STORE_FF14_Starlight_Cushion_cover_20251024__42335.1768344843.386.513.jpg?c=1"
-        }
-      ]
-    },
-    {
-      "field": "release_date",
-      "source_store": "메가하우스",
-      "missing_rows": 9,
-      "priority_score": 9,
-      "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
-      "evidence_required": "official product or campaign page showing release/sale date",
-      "auto_apply_enabled": false,
-      "next_step": "official_metadata_extraction",
-      "risk": "campaign_or_reissue_date_confusion",
-      "sample_catalog_indexes": [
-        1400,
-        1401,
-        1403,
-        1404,
-        1435,
-        1436,
-        1934,
-        1935
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 1400,
-          "name_ko": "Lookup 게토 스구루",
-          "name_ja": "Lookup 夏油傑",
-          "series_name": null,
-          "category": "피규어",
-          "source_url": null,
-          "image_url": null
-        },
-        {
-          "catalog_index": 1401,
-          "name_ko": "Petite Doll 고죠 사토루",
-          "name_ja": "プチデフォルメドール 五条悟",
-          "series_name": null,
-          "category": "피규어",
-          "source_url": null,
-          "image_url": null
-        },
-        {
-          "catalog_index": 1403,
-          "name_ko": "MEGA CAT PROJECT 주술회전 냐루토 편 이타도리 유지",
-          "name_ja": "MEGA CAT PROJECT 呪術廻戦 にゃんと! 虎杖悠仁",
-          "series_name": null,
-          "category": "피규어",
-          "source_url": null,
-          "image_url": null
-        },
-        {
-          "catalog_index": 1404,
-          "name_ko": "MEGA CAT PROJECT 주술회전 냐루토 편 후시구로 메구미",
-          "name_ja": "MEGA CAT PROJECT 呪術廻戦 にゃんと! 伏黒恵",
-          "series_name": null,
-          "category": "피규어",
-          "source_url": null,
-          "image_url": null
-        },
-        {
-          "catalog_index": 1435,
-          "name_ko": "Lookup 리코",
-          "name_ja": "ルックアップ リコ",
-          "series_name": null,
-          "category": "피규어",
-          "source_url": null,
-          "image_url": null
-        },
-        {
-          "catalog_index": 1436,
-          "name_ko": "Lookup 레그",
-          "name_ja": "ルックアップ レグ",
-          "series_name": null,
-          "category": "피규어",
-          "source_url": null,
-          "image_url": null
-        },
-        {
-          "catalog_index": 1934,
-          "name_ko": "POP 보아 행콕",
-          "name_ja": "Portrait.Of.Pirates ボア・ハンコック",
-          "series_name": null,
-          "category": "피규어",
-          "source_url": null,
-          "image_url": null
-        },
-        {
-          "catalog_index": 1935,
-          "name_ko": "POP 니코 로빈",
-          "name_ja": "Portrait.Of.Pirates ニコ・ロビン",
-          "series_name": null,
-          "category": "피규어",
           "source_url": null,
           "image_url": null
         }

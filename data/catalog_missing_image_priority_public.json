@@ -1,20 +1,20 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T13:14:09Z",
+  "generated_at": "2026-07-26T13:20:45Z",
   "scope": "public_catalog_missing_image_priority",
   "summary": {
-    "missing_image_rows": 825,
+    "missing_image_rows": 846,
     "work_queue_rows": 710,
     "queue_matched_rows": 703,
     "stale_queue_index_matches": 0,
-    "unmatched_catalog_missing_rows": 122,
-    "missing_source_url_rows": 751,
+    "unmatched_catalog_missing_rows": 143,
+    "missing_source_url_rows": 768,
     "generic_source_url_rows": 0,
     "product_source_url_rows": 0,
     "high_priority_rows": 518,
     "safe_existing_image_reuse_candidate_rows": 0,
-    "source_discovery_starter_queue_groups": 386,
-    "source_discovery_starter_queue_rows": 751,
+    "source_discovery_starter_queue_groups": 391,
+    "source_discovery_starter_queue_rows": 768,
     "auto_apply_enabled": false
   },
   "breakdowns": {
@@ -58,6 +58,10 @@
       {
         "source_store": "FuRyu",
         "rows": 21
+      },
+      {
+        "source_store": "Banpresto",
+        "rows": 17
       },
       {
         "source_store": "치이카와 중국 팝업스토어",
@@ -174,10 +178,6 @@
       {
         "source_store": "SEGA",
         "rows": 1
-      },
-      {
-        "source_store": "Hobby Max International",
-        "rows": 1
       }
     ],
     "by_affiliation": [
@@ -187,7 +187,7 @@
       },
       {
         "affiliation": "원피스",
-        "rows": 82
+        "rows": 84
       },
       {
         "affiliation": "나의 히어로 아카데미아",
@@ -207,7 +207,7 @@
       },
       {
         "affiliation": "메이드 인 어비스",
-        "rows": 41
+        "rows": 45
       },
       {
         "affiliation": "스텔라이브",
@@ -215,7 +215,7 @@
       },
       {
         "affiliation": "단간론파",
-        "rows": 37
+        "rows": 40
       },
       {
         "affiliation": "체인소 맨",
@@ -227,7 +227,7 @@
       },
       {
         "affiliation": "장송의 프리렌",
-        "rows": 26
+        "rows": 31
       },
       {
         "affiliation": "짱구는 못말려",
@@ -246,6 +246,14 @@
         "rows": 12
       },
       {
+        "affiliation": "봇치 더 록",
+        "rows": 12
+      },
+      {
+        "affiliation": "리제로",
+        "rows": 12
+      },
+      {
         "affiliation": "전생슬",
         "rows": 12
       },
@@ -256,14 +264,6 @@
       {
         "affiliation": "최애의 아이",
         "rows": 11
-      },
-      {
-        "affiliation": "봇치 더 록",
-        "rows": 11
-      },
-      {
-        "affiliation": "리제로",
-        "rows": 8
       },
       {
         "affiliation": "이세계아이돌",
@@ -314,6 +314,10 @@
         "rows": 3
       },
       {
+        "affiliation": "하이큐!!",
+        "rows": 3
+      },
+      {
         "affiliation": "K-POP",
         "rows": 3
       },
@@ -336,16 +340,12 @@
       {
         "affiliation": "신세기 에반게리온",
         "rows": 2
-      },
-      {
-        "affiliation": "TWICE",
-        "rows": 2
       }
     ],
     "by_category": [
       {
         "category": "피규어",
-        "rows": 127
+        "rows": 144
       },
       {
         "category": "인형",
@@ -353,11 +353,11 @@
       },
       {
         "category": "아크릴 스탠드",
-        "rows": 123
+        "rows": 125
       },
       {
         "category": "캔뱃지",
-        "rows": 95
+        "rows": 97
       },
       {
         "category": "마스코트",
@@ -467,7 +467,7 @@
       },
       {
         "strategy": "manual_review",
-        "rows": 234
+        "rows": 255
       },
       {
         "strategy": "manual_official_search_review",
@@ -493,7 +493,7 @@
       },
       {
         "automation_safety": "not_in_work_queue",
-        "rows": 122
+        "rows": 143
       },
       {
         "automation_safety": "manual_research_required",
@@ -515,17 +515,17 @@
     "by_source_url_state": [
       {
         "source_url_state": "missing_source_url",
-        "rows": 751
+        "rows": 768
       },
       {
         "source_url_state": "unclassified_source_url",
-        "rows": 74
+        "rows": 78
       }
     ]
   },
   "next_action_queues": {
     "source_discovery_first": {
-      "rows": 751,
+      "rows": 768,
       "reason": "Attach exact product source URLs before image candidates can be trusted."
     },
     "replace_generic_source_then_attach_image": {
