@@ -71,7 +71,9 @@ jobs:
           python tools/update_public_catalog_reports.py --write
 
       - name: Validate generated public files
-        run: python tools/update_public_catalog_reports.py
+        run: |
+          python tools/update_public_catalog_reports.py
+          python tools/audit_flutter_seed_matches_public.py
 
       - name: Publish 1-minute update notice
         run: |
