@@ -398,17 +398,17 @@ class _CatalogImportActionButton extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final enabled = onPressed != null;
     final backgroundColor = enabled
-        ? colorScheme.primaryContainer
+        ? colorScheme.primary.withValues(alpha: 0.10)
         : colorScheme.surfaceContainerHighest;
     final foregroundColor = enabled
-        ? colorScheme.onPrimaryContainer
+        ? colorScheme.primary
         : colorScheme.onSurfaceVariant.withValues(alpha: 0.72);
     return SizedBox(
       width: double.infinity,
-      height: 42,
+      height: 40,
       child: ElevatedButton.icon(
         onPressed: onPressed,
-        icon: Icon(icon, size: 17),
+        icon: Icon(icon, size: 16),
         label: FittedBox(
           fit: BoxFit.scaleDown,
           child: Text(
@@ -418,7 +418,7 @@ class _CatalogImportActionButton extends StatelessWidget {
             softWrap: false,
             style: TextStyle(
               color: foregroundColor,
-              fontSize: 14,
+              fontSize: 13,
               fontWeight: FontWeight.w800,
               height: 1,
               letterSpacing: 0,
@@ -442,11 +442,11 @@ class _CatalogImportActionButton extends StatelessWidget {
           shape: const StadiumBorder(),
           side: BorderSide(
             color: enabled
-                ? colorScheme.primary.withValues(alpha: 0.18)
+                ? colorScheme.primary.withValues(alpha: 0.22)
                 : colorScheme.outlineVariant,
           ),
           textStyle: const TextStyle(
-            fontSize: 14,
+            fontSize: 13,
             fontWeight: FontWeight.w800,
             height: 1,
             letterSpacing: 0,

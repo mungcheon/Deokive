@@ -107,7 +107,7 @@ class _FolderEditorScreenState extends State<FolderEditorScreen> {
     return Scaffold(
       appBar: AppBar(title: Text(title)),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
+        padding: const EdgeInsets.fromLTRB(16, 12, 16, 104),
         children: [
           _PreviewCard(
             name: _nameController.text.trim().isEmpty
@@ -156,7 +156,7 @@ class _FolderEditorScreenState extends State<FolderEditorScreen> {
   }
 }
 
-class _FolderVisualPicker extends StatelessWidget {
+class _FolderVisualPicker extends StatefulWidget {
   final Map<String, List<AppIconOption>> groupedIcons;
   final List<Color> colors;
   final List<FolderColorFamily> colorFamilies;
@@ -176,63 +176,88 @@ class _FolderVisualPicker extends StatelessWidget {
   });
 
   @override
+  State<_FolderVisualPicker> createState() => _FolderVisualPickerState();
+}
+
+class _FolderVisualPickerState extends State<_FolderVisualPicker>
+    with SingleTickerProviderStateMixin {
+  late final TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this)
+      ..addListener(() {
+        if (!_tabController.indexIsChanging) {
+          setState(() {});
+        }
+      });
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return DefaultTabController(
-      length: 2,
-      child: Container(
-        height: 460,
-        decoration: BoxDecoration(
-          color: theme.colorScheme.surface,
-          borderRadius: BorderRadius.circular(18),
-          border: Border.all(
-            color: theme.colorScheme.outline.withValues(alpha: 0.22),
+    final tabContent = _tabController.index == 0
+        ? Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: widget.groupedIcons.entries
+                .map(
+                  (entry) => _IconSection(
+                    title: entry.key,
+                    options: entry.value,
+                    selectedIcon: widget.selectedIcon,
+                    selectedColor: widget.selectedColor,
+                    onSelected: widget.onIconSelected,
+                  ),
+                )
+                .toList(),
+          )
+        : _ColorFamilyList(
+            colors: widget.colors,
+            families: widget.colorFamilies,
+            selectedColor: widget.selectedColor,
+            onSelected: widget.onColorSelected,
+          );
+    return Container(
+      decoration: BoxDecoration(
+        color: theme.colorScheme.surface,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(
+          color: theme.colorScheme.outline.withValues(alpha: 0.22),
+        ),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: Column(
+        children: [
+          Material(
+            color:
+                theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+            child: TabBar(
+              controller: _tabController,
+              onTap: (_) => setState(() {}),
+              tabs: const [
+                Tab(icon: Icon(Icons.category_rounded), text: '아이콘'),
+                Tab(icon: Icon(Icons.palette_rounded), text: '색상'),
+              ],
+            ),
           ),
-        ),
-        clipBehavior: Clip.antiAlias,
-        child: Column(
-          children: [
-            Material(
-              color: theme.colorScheme.surfaceContainerHighest
-                  .withValues(alpha: 0.5),
-              child: const TabBar(
-                tabs: [
-                  Tab(icon: Icon(Icons.category_rounded), text: '아이콘'),
-                  Tab(icon: Icon(Icons.palette_rounded), text: '색상'),
-                ],
+          Padding(
+            padding: const EdgeInsets.all(14),
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 180),
+              child: KeyedSubtree(
+                key: ValueKey(_tabController.index),
+                child: tabContent,
               ),
             ),
-            Expanded(
-              child: TabBarView(
-                children: [
-                  ListView(
-                    padding: const EdgeInsets.all(14),
-                    children: groupedIcons.entries
-                        .map(
-                          (entry) => _IconSection(
-                            title: entry.key,
-                            options: entry.value,
-                            selectedIcon: selectedIcon,
-                            selectedColor: selectedColor,
-                            onSelected: onIconSelected,
-                          ),
-                        )
-                        .toList(),
-                  ),
-                  SingleChildScrollView(
-                    padding: const EdgeInsets.all(14),
-                    child: _ColorFamilyList(
-                      colors: colors,
-                      families: colorFamilies,
-                      selectedColor: selectedColor,
-                      onSelected: onColorSelected,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -380,21 +405,23 @@ class _IconChoice extends StatelessWidget {
         : theme.colorScheme.onSurface.withValues(alpha: 0.78);
     return Tooltip(
       message: option.label,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(14),
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
         onTap: onTap,
-        child: Ink(
-          width: 52,
-          height: 52,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 140),
+          width: 48,
+          height: 48,
           decoration: BoxDecoration(
             color: selected
-                ? selectedColor.withValues(alpha: 0.14)
-                : theme.colorScheme.surface,
-            borderRadius: BorderRadius.circular(14),
+                ? selectedColor.withValues(alpha: 0.13)
+                : theme.colorScheme.surfaceContainerHighest
+                    .withValues(alpha: 0.36),
+            shape: BoxShape.circle,
             border: Border.all(
               color: selected
                   ? selectedColor
-                  : theme.colorScheme.outline.withValues(alpha: 0.35),
+                  : theme.colorScheme.outline.withValues(alpha: 0.22),
               width: selected ? 1.8 : 1,
             ),
           ),

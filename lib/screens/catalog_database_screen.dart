@@ -576,16 +576,16 @@ class _CatalogAddButton extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final background = disabled
         ? colorScheme.surfaceContainerHighest
-        : colorScheme.primaryContainer;
+        : colorScheme.primary.withValues(alpha: 0.10);
     final foreground = disabled
         ? colorScheme.onSurfaceVariant.withValues(alpha: 0.72)
-        : colorScheme.onPrimaryContainer;
+        : colorScheme.primary;
     return SizedBox(
-      height: expanded ? 38 : 34,
-      width: expanded ? double.infinity : 92,
+      height: expanded ? 38 : 32,
+      width: expanded ? double.infinity : 84,
       child: ElevatedButton.icon(
         onPressed: disabled || onPressed == null ? null : () => onPressed!(),
-        icon: Icon(icon, size: 15),
+        icon: Icon(icon, size: expanded ? 16 : 14),
         label: FittedBox(
           fit: BoxFit.scaleDown,
           child: Text(
@@ -595,7 +595,7 @@ class _CatalogAddButton extends StatelessWidget {
             softWrap: false,
             style: TextStyle(
               color: foreground,
-              fontSize: expanded ? 13 : 12,
+              fontSize: expanded ? 13 : 11.5,
               fontWeight: FontWeight.w800,
               height: 1,
               letterSpacing: 0,
@@ -615,12 +615,12 @@ class _CatalogAddButton extends StatelessWidget {
               colorScheme.onSurfaceVariant.withValues(alpha: 0.72),
           elevation: 0,
           shadowColor: Colors.transparent,
-          padding: EdgeInsets.symmetric(horizontal: expanded ? 14 : 9),
+          padding: EdgeInsets.symmetric(horizontal: expanded ? 14 : 8),
           shape: const StadiumBorder(),
           side: BorderSide(
             color: disabled
                 ? colorScheme.outlineVariant
-                : colorScheme.primary.withValues(alpha: 0.18),
+                : colorScheme.primary.withValues(alpha: 0.22),
           ),
           textStyle: TextStyle(
             fontSize: expanded ? 13 : 12,
