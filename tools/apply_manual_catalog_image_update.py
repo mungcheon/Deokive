@@ -137,6 +137,7 @@ def main() -> int:
     parser.add_argument("catalog_index", type=int)
     parser.add_argument("image_url")
     parser.add_argument("--source-url", default=None)
+    parser.add_argument("--source-store", default=None)
     parser.add_argument("--name-ko", default=None)
     parser.add_argument("--name-ja", default=None)
     parser.add_argument(
@@ -169,6 +170,7 @@ def main() -> int:
         "image_url": image_url,
         "local_image_path": local_path,
         "source_url": args.source_url.strip() if args.source_url else None,
+        "source_store": args.source_store.strip() if args.source_store else None,
         "name_ko": args.name_ko.strip() if args.name_ko else None,
         "name_ja": args.name_ja.strip() if args.name_ja else None,
     }
@@ -201,6 +203,7 @@ def main() -> int:
                 "local_image_path": local_path,
                 "asset_files": [str(target.relative_to(ROOT)) for target in targets],
                 "source_url": updates["source_url"],
+                "source_store": updates["source_store"],
                 "flutter_seed_synced": bool(args.write and not args.skip_seed_sync),
                 "seed_output": str(args.seed_output.relative_to(ROOT))
                 if args.seed_output.is_relative_to(ROOT)

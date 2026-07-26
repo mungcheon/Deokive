@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T16:31:28Z",
+  "generated_at": "2026-07-26T16:41:40Z",
   "scope": "catalog_missing_image_actionability",
   "summary": {
-    "missing_image_rows": 797,
-    "readiness_classified_rows": 797,
+    "missing_image_rows": 793,
+    "readiness_classified_rows": 793,
     "unclassified_rows": 0,
     "exact_source_ready_rows": 6,
-    "source_first_rows": 758,
+    "source_first_rows": 754,
     "review_before_attach_rows": 23,
     "source_detail_candidate_review_rows": 0,
     "source_detail_candidate_count_review_required_rows": 0,
@@ -16,12 +16,12 @@
     "source_detail_unflagged_candidate_rows": 0,
     "source_detail_ready_unflagged_candidate_rows": 0,
     "manual_image_research_rows": 10,
-    "source_discovery_focus_pack_rows": 758,
+    "source_discovery_focus_pack_rows": 754,
     "source_discovery_focus_pack_count": 67,
     "source_discovery_not_started_focus_pack_count": 67,
-    "source_discovery_remaining_focus_review_rows": 758,
+    "source_discovery_remaining_focus_review_rows": 754,
     "source_discovery_confirmed_focus_source_rows": 0,
-    "source_discovery_focus_template_rows": 758,
+    "source_discovery_focus_template_rows": 754,
     "source_discovery_focus_template_confirmed_rows": 0,
     "source_discovery_template_next_focus_pack_id": "source-discovery-focus-001",
     "source_discovery_next_focus_pack_id": "source-discovery-focus-002",
@@ -34,7 +34,7 @@
       ]
     ],
     "source_discovery_focus_template_dry_run_updated_rows": 0,
-    "source_discovery_focus_template_dry_run_skipped_rows": 758,
+    "source_discovery_focus_template_dry_run_skipped_rows": 754,
     "source_discovery_focus_coverage": 1.0,
     "source_discovery_non_focus_rows": 0,
     "action_queue_rows": 29,
@@ -68,11 +68,11 @@
     "image_attachment_template_dry_run_skipped_rows": 29,
     "actionable_image_rows": 29,
     "source_discovery_work_pack_count": 16,
-    "source_discovery_work_pack_rows": 679,
+    "source_discovery_work_pack_rows": 675,
     "by_blocked_reason": [
       {
         "blocked_reason": "missing_exact_source_url",
-        "rows": 758
+        "rows": 754
       },
       {
         "blocked_reason": "representative_image_requires_product_type_review",
@@ -94,7 +94,7 @@
     "by_blocked_until": [
       {
         "blocked_until": "exact_product_source_url_discovered",
-        "rows": 758
+        "rows": 754
       },
       {
         "blocked_until": "representative_image_exact_product_type_confirmed",
@@ -114,14 +114,14 @@
       }
     ],
     "auto_apply_enabled": false,
-    "completion_plan_total_open_rows": 797,
-    "completion_plan_phase_rows_total": 791,
+    "completion_plan_total_open_rows": 793,
+    "completion_plan_phase_rows_total": 787,
     "completion_plan_phase_count": 3,
     "completion_plan_status": "needs_review",
     "completion_plan_review_start_status": "all_phases_have_review_start",
     "completion_plan_phases_with_review_start": 3,
     "completion_plan_phases_missing_review_start": 0,
-    "completion_plan_rows_with_review_start": 791,
+    "completion_plan_rows_with_review_start": 787,
     "completion_plan_rows_missing_review_start": 0,
     "blocking_dashboard_status": "manual_evidence_required",
     "blocking_dashboard_queue_coverage": 1.0
@@ -595,19 +595,19 @@
     {
       "readiness": "source_url_discovery_required",
       "priority": 30,
-      "rows": 758,
+      "rows": 754,
       "workflow_rows": [
         {
           "workflow": "find_source_then_extract_image",
           "label": "정확한 공식 상품 source_url을 먼저 찾은 뒤 이미지 첨부",
-          "rows": 758,
+          "rows": 754,
           "next_step": "find_exact_official_source_url_then_extract_image"
         }
       ],
       "by_source_store": [
         {
           "source_store": "엔스카이",
-          "rows": 187
+          "rows": 183
         },
         {
           "source_store": "애니메이트",
@@ -1348,7 +1348,7 @@
     {
       "source_store": "엔스카이",
       "priority": 30,
-      "missing_image_rows": 187,
+      "missing_image_rows": 183,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
       "blocked_until": "exact_product_source_url_discovered",
@@ -1361,14 +1361,14 @@
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
-          "rows": 187
+          "rows": 183
         }
       ],
       "workflow_rows": [
         {
           "workflow": "find_source_then_extract_image",
           "label": "정확한 공식 상품 source_url을 먼저 찾은 뒤 이미지 첨부",
-          "rows": 187,
+          "rows": 183,
           "next_step": "find_exact_official_source_url_then_extract_image"
         }
       ],
@@ -4237,7 +4237,7 @@
     {
       "pack_id": "missing-image-source-discovery-001",
       "source_store": "엔스카이",
-      "row_count": 187,
+      "row_count": 183,
       "priority": 20,
       "official_search_available": true,
       "next_step": "confirm_exact_source_url_then_fill_source_templates",
@@ -4246,7 +4246,7 @@
         "batch_id": "missing-image-source-discovery-001-review-start",
         "workflow": "find_source_then_extract_image",
         "source_store": "엔스카이",
-        "row_count": 187,
+        "row_count": 183,
         "primary_review_url_rows": 8,
         "first_primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
         "first_primary_review_url_kind": "official_search_url",
@@ -8341,19 +8341,19 @@
     "template_focus_pack_id": "source-discovery-focus-001",
     "candidate_review_summary": {
       "pack_items": 20,
-      "items_with_candidates": 6,
-      "candidate_rows": 15,
-      "manual_candidate_review_rows": 15,
-      "no_candidate_items": 14,
+      "items_with_candidates": 2,
+      "candidate_rows": 7,
+      "manual_candidate_review_rows": 7,
+      "no_candidate_items": 18,
       "next_action_lane_count": 2,
       "next_action_lanes": [
         [
           "fallback_source_search",
-          14
+          18
         ],
         [
           "catalog_variant_metadata_enrichment",
-          6
+          2
         ]
       ],
       "official_search_has_results": 0,
@@ -8432,10 +8432,10 @@
         "status": null
       },
       {
-        "catalog_index": 1573,
-        "name_ko": "카마도 탄지로 러버 스트랩",
-        "name_ja": "竈門炭治郎 ラバーストラップ",
-        "candidate_count": 1,
+        "catalog_index": 1577,
+        "name_ko": "토미오카 기유 러버 스트랩",
+        "name_ja": "冨岡義勇 ラバーストラップ",
+        "candidate_count": 2,
         "official_search_audit_status": "official_search_unavailable",
         "needs_fallback_web_search": true,
         "status": null
@@ -8492,11 +8492,11 @@
         "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E5%A4%8F%E6%B2%B9%E5%82%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
       },
       {
-        "catalog_index": 1573,
-        "name_ko": "카마도 탄지로 러버 스트랩",
-        "name_ja": "竈門炭治郎 ラバーストラップ",
+        "catalog_index": 1577,
+        "name_ko": "토미오카 기유 러버 스트랩",
+        "name_ja": "冨岡義勇 ラバーストラップ",
         "domain_limited_web_search_url_count": 6,
-        "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+        "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E5%86%A8%E5%B2%A1%E7%BE%A9%E5%8B%87%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
       }
     ]
   },
@@ -8505,13 +8505,13 @@
       "rank": 4,
       "lane": "discover_exact_source_urls",
       "source": "source_discovery_action_queue_public.json",
-      "row_count": 758,
+      "row_count": 754,
       "next_step": "confirm_exact_source_url_then_fill_source_templates",
       "template": "source_discovery_focus_confirmed_template_public.json",
       "top_source_stores": [
         {
           "source_store": "엔스카이",
-          "missing_image_rows": 187,
+          "missing_image_rows": 183,
           "primary_workflow": "find_source_then_extract_image",
           "recommended_next_step": "find_exact_official_source_url_then_extract_image"
         },
@@ -8562,7 +8562,7 @@
         {
           "pack_id": "missing-image-source-discovery-001",
           "source_store": "엔스카이",
-          "row_count": 187,
+          "row_count": 183,
           "priority": 20,
           "official_search_available": true,
           "next_step": "confirm_exact_source_url_then_fill_source_templates",
@@ -8571,7 +8571,7 @@
             "batch_id": "missing-image-source-discovery-001-review-start",
             "workflow": "find_source_then_extract_image",
             "source_store": "엔스카이",
-            "row_count": 187,
+            "row_count": 183,
             "primary_review_url_rows": 8,
             "first_primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
             "first_primary_review_url_kind": "official_search_url",
@@ -10546,19 +10546,19 @@
         "template_focus_pack_id": "source-discovery-focus-001",
         "candidate_review_summary": {
           "pack_items": 20,
-          "items_with_candidates": 6,
-          "candidate_rows": 15,
-          "manual_candidate_review_rows": 15,
-          "no_candidate_items": 14,
+          "items_with_candidates": 2,
+          "candidate_rows": 7,
+          "manual_candidate_review_rows": 7,
+          "no_candidate_items": 18,
           "next_action_lane_count": 2,
           "next_action_lanes": [
             [
               "fallback_source_search",
-              14
+              18
             ],
             [
               "catalog_variant_metadata_enrichment",
-              6
+              2
             ]
           ],
           "official_search_has_results": 0,
@@ -10637,10 +10637,10 @@
             "status": null
           },
           {
-            "catalog_index": 1573,
-            "name_ko": "카마도 탄지로 러버 스트랩",
-            "name_ja": "竈門炭治郎 ラバーストラップ",
-            "candidate_count": 1,
+            "catalog_index": 1577,
+            "name_ko": "토미오카 기유 러버 스트랩",
+            "name_ja": "冨岡義勇 ラバーストラップ",
+            "candidate_count": 2,
             "official_search_audit_status": "official_search_unavailable",
             "needs_fallback_web_search": true,
             "status": null
@@ -10697,11 +10697,11 @@
             "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E5%A4%8F%E6%B2%B9%E5%82%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
           },
           {
-            "catalog_index": 1573,
-            "name_ko": "카마도 탄지로 러버 스트랩",
-            "name_ja": "竈門炭治郎 ラバーストラップ",
+            "catalog_index": 1577,
+            "name_ko": "토미오카 기유 러버 스트랩",
+            "name_ja": "冨岡義勇 ラバーストラップ",
             "domain_limited_web_search_url_count": 6,
-            "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+            "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E5%86%A8%E5%B2%A1%E7%BE%A9%E5%8B%87%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
           }
         ]
       },
@@ -10999,15 +10999,15 @@
   ],
   "manual_validation_focus": {
     "auto_import_ready_rows": 0,
-    "manual_validation_required_rows": 797,
+    "manual_validation_required_rows": 793,
     "next_focus_lane": "discover_exact_source_urls",
-    "next_focus_row_count": 758,
+    "next_focus_row_count": 754,
     "next_focus_source": "source_discovery_action_queue_public.json",
     "focus_lanes": [
       {
         "rank": 4,
         "lane": "discover_exact_source_urls",
-        "row_count": 758,
+        "row_count": 754,
         "source": "source_discovery_action_queue_public.json",
         "next_step": "confirm_exact_source_url_then_fill_source_templates",
         "blocked_reason": "missing_exact_source_url",
@@ -11020,7 +11020,7 @@
         "top_source_stores": [
           {
             "source_store": "엔스카이",
-            "missing_image_rows": 187,
+            "missing_image_rows": 183,
             "primary_workflow": "find_source_then_extract_image",
             "recommended_next_step": "find_exact_official_source_url_then_extract_image"
           },
@@ -11089,19 +11089,19 @@
           "template_focus_pack_id": "source-discovery-focus-001",
           "candidate_review_summary": {
             "pack_items": 20,
-            "items_with_candidates": 6,
-            "candidate_rows": 15,
-            "manual_candidate_review_rows": 15,
-            "no_candidate_items": 14,
+            "items_with_candidates": 2,
+            "candidate_rows": 7,
+            "manual_candidate_review_rows": 7,
+            "no_candidate_items": 18,
             "next_action_lane_count": 2,
             "next_action_lanes": [
               [
                 "fallback_source_search",
-                14
+                18
               ],
               [
                 "catalog_variant_metadata_enrichment",
-                6
+                2
               ]
             ],
             "official_search_has_results": 0,
@@ -11180,10 +11180,10 @@
               "status": null
             },
             {
-              "catalog_index": 1573,
-              "name_ko": "카마도 탄지로 러버 스트랩",
-              "name_ja": "竈門炭治郎 ラバーストラップ",
-              "candidate_count": 1,
+              "catalog_index": 1577,
+              "name_ko": "토미오카 기유 러버 스트랩",
+              "name_ja": "冨岡義勇 ラバーストラップ",
+              "candidate_count": 2,
               "official_search_audit_status": "official_search_unavailable",
               "needs_fallback_web_search": true,
               "status": null
@@ -11240,11 +11240,11 @@
               "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E5%A4%8F%E6%B2%B9%E5%82%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
             },
             {
-              "catalog_index": 1573,
-              "name_ko": "카마도 탄지로 러버 스트랩",
-              "name_ja": "竈門炭治郎 ラバーストラップ",
+              "catalog_index": 1577,
+              "name_ko": "토미오카 기유 러버 스트랩",
+              "name_ja": "冨岡義勇 ラバーストラップ",
               "domain_limited_web_search_url_count": 6,
-              "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+              "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E5%86%A8%E5%B2%A1%E7%BE%A9%E5%8B%87%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
             }
           ]
         },
@@ -11508,7 +11508,7 @@
       "generic_source_url_replacement_rows": 0,
       "representative_image_review_rows": 23,
       "source_detail_recheck_required_rows": 12,
-      "source_discovery_focus_rows": 758,
+      "source_discovery_focus_rows": 754,
       "manual_image_research_rows": 10
     },
     "automation_policy": {
@@ -11517,11 +11517,11 @@
     }
   },
   "execution_queue_summary": {
-    "open_missing_image_rows": 797,
+    "open_missing_image_rows": 793,
     "auto_import_ready_rows": 0,
     "queue_count": 4,
-    "queued_rows_total": 797,
-    "raw_queued_rows_total": 803,
+    "queued_rows_total": 793,
+    "raw_queued_rows_total": 799,
     "overlapping_queue_rows": 6,
     "not_yet_queued_rows": 0,
     "not_yet_queued_rows_explained": 0,
@@ -11531,7 +11531,7 @@
     "next_queue": {
       "rank": 4,
       "lane": "discover_exact_source_urls",
-      "row_count": 758,
+      "row_count": 754,
       "source": "source_discovery_action_queue_public.json",
       "template": "source_discovery_focus_confirmed_template_public.json",
       "next_step": "confirm_exact_source_url_then_fill_source_templates",
@@ -11609,7 +11609,7 @@
       {
         "rank": 4,
         "lane": "discover_exact_source_urls",
-        "row_count": 758,
+        "row_count": 754,
         "source": "source_discovery_action_queue_public.json",
         "template": "source_discovery_focus_confirmed_template_public.json",
         "next_step": "confirm_exact_source_url_then_fill_source_templates",
@@ -11895,9 +11895,9 @@
       },
       {
         "phase_id": "complete_source_discovery_focus_packs",
-        "row_count": 758,
+        "row_count": 754,
         "direct_queue_lane": "discover_exact_source_urls",
-        "queued_rows": 758,
+        "queued_rows": 754,
         "remaining_rows": 0,
         "next_step": "fill_source_discovery_focus_confirmed_template",
         "blocked_reason": "missing_exact_source_url",
@@ -11926,23 +11926,23 @@
   },
   "blocking_dashboard": {
     "status": "manual_evidence_required",
-    "total_open_rows": 797,
+    "total_open_rows": 793,
     "auto_import_ready_rows": 0,
-    "manual_validation_required_rows": 797,
-    "queued_rows_total": 797,
+    "manual_validation_required_rows": 793,
+    "queued_rows_total": 793,
     "not_yet_queued_rows": 0,
     "queue_coverage": 1.0,
     "top_blocked_reason": {
       "blocked_reason": "missing_exact_source_url",
-      "rows": 758
+      "rows": 754
     },
     "top_blocked_until": {
       "blocked_until": "exact_product_source_url_discovered",
-      "rows": 758
+      "rows": 754
     },
     "next_queue": {
       "lane": "discover_exact_source_urls",
-      "row_count": 758,
+      "row_count": 754,
       "source": "source_discovery_action_queue_public.json",
       "template": "source_discovery_focus_confirmed_template_public.json",
       "next_step": "confirm_exact_source_url_then_fill_source_templates",
@@ -11965,7 +11965,7 @@
     "review_start_coverage_status": "all_phases_have_review_start",
     "phases_with_review_start": 3,
     "phases_missing_review_start": 0,
-    "rows_with_review_start": 791,
+    "rows_with_review_start": 787,
     "rows_missing_review_start": 0,
     "top_phase_rows": [
       {
@@ -11976,7 +11976,7 @@
       },
       {
         "phase_id": "complete_source_discovery_focus_packs",
-        "row_count": 758,
+        "row_count": 754,
         "blocked_reason": "missing_exact_source_url",
         "next_step": "fill_source_discovery_focus_confirmed_template"
       },
@@ -11989,24 +11989,24 @@
     ],
     "image_evidence_bottleneck_summary": {
       "status": "source_or_image_evidence_required",
-      "missing_image_rows": 797,
+      "missing_image_rows": 793,
       "known_image_download_problem_rows": 0,
-      "image_url_evidence_missing_rows": 797,
+      "image_url_evidence_missing_rows": 793,
       "auto_import_ready_rows": 0,
-      "manual_confirmation_required_rows": 797,
-      "source_first_rows": 758,
+      "manual_confirmation_required_rows": 793,
+      "source_first_rows": 754,
       "representative_review_rows": 23,
       "manual_image_research_rows": 10,
-      "source_discovery_focus_pack_rows": 758,
+      "source_discovery_focus_pack_rows": 754,
       "next_queue_lane": "discover_exact_source_urls",
-      "next_queue_rows": 758,
+      "next_queue_rows": 754,
       "next_queue_source": "source_discovery_action_queue_public.json",
       "next_queue_template": "source_discovery_focus_confirmed_template_public.json",
       "next_queue_blocked_until": "exact_product_source_url_discovered",
       "bottleneck_rows": [
         {
           "bucket": "source_url_or_storefront_replacement_required",
-          "rows": 758,
+          "rows": 754,
           "next_step": "confirm_exact_product_source_url_before_image_import"
         },
         {
@@ -12027,8 +12027,8 @@
     "operator_message": "No missing-image DB row can be imported automatically yet; fill the next confirmation template with exact product source/image evidence first."
   },
   "completion_plan": {
-    "total_open_rows": 797,
-    "phase_rows_total": 791,
+    "total_open_rows": 793,
+    "phase_rows_total": 787,
     "phase_count": 3,
     "status": "needs_review",
     "phases": [
@@ -12107,7 +12107,7 @@
         "rank": 2,
         "phase_id": "complete_source_discovery_focus_packs",
         "title": "상위 스토어 source_url 발견 팩 처리",
-        "row_count": 758,
+        "row_count": 754,
         "source": "source_discovery_focus_packs_public.json",
         "next_step": "fill_source_discovery_focus_confirmed_template",
         "template": "source_discovery_focus_confirmed_template_public.json",
@@ -12123,7 +12123,7 @@
         "top_source_stores": [
           {
             "source_store": "엔스카이",
-            "missing_image_rows": 187,
+            "missing_image_rows": 183,
             "recommended_next_step": "find_exact_official_source_url_then_extract_image"
           },
           {
@@ -12176,7 +12176,7 @@
           {
             "pack_id": "missing-image-source-discovery-001",
             "source_store": "엔스카이",
-            "row_count": 187,
+            "row_count": 183,
             "priority": 20,
             "official_search_available": true,
             "next_step": "confirm_exact_source_url_then_fill_source_templates",
@@ -12185,7 +12185,7 @@
               "batch_id": "missing-image-source-discovery-001-review-start",
               "workflow": "find_source_then_extract_image",
               "source_store": "엔스카이",
-              "row_count": 187,
+              "row_count": 183,
               "primary_review_url_rows": 8,
               "first_primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
               "first_primary_review_url_kind": "official_search_url",
@@ -14160,19 +14160,19 @@
           "template_focus_pack_id": "source-discovery-focus-001",
           "candidate_review_summary": {
             "pack_items": 20,
-            "items_with_candidates": 6,
-            "candidate_rows": 15,
-            "manual_candidate_review_rows": 15,
-            "no_candidate_items": 14,
+            "items_with_candidates": 2,
+            "candidate_rows": 7,
+            "manual_candidate_review_rows": 7,
+            "no_candidate_items": 18,
             "next_action_lane_count": 2,
             "next_action_lanes": [
               [
                 "fallback_source_search",
-                14
+                18
               ],
               [
                 "catalog_variant_metadata_enrichment",
-                6
+                2
               ]
             ],
             "official_search_has_results": 0,
@@ -14251,10 +14251,10 @@
               "status": null
             },
             {
-              "catalog_index": 1573,
-              "name_ko": "카마도 탄지로 러버 스트랩",
-              "name_ja": "竈門炭治郎 ラバーストラップ",
-              "candidate_count": 1,
+              "catalog_index": 1577,
+              "name_ko": "토미오카 기유 러버 스트랩",
+              "name_ja": "冨岡義勇 ラバーストラップ",
+              "candidate_count": 2,
               "official_search_audit_status": "official_search_unavailable",
               "needs_fallback_web_search": true,
               "status": null
@@ -14311,11 +14311,11 @@
               "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E5%A4%8F%E6%B2%B9%E5%82%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
             },
             {
-              "catalog_index": 1573,
-              "name_ko": "카마도 탄지로 러버 스트랩",
-              "name_ja": "竈門炭治郎 ラバーストラップ",
+              "catalog_index": 1577,
+              "name_ko": "토미오카 기유 러버 스트랩",
+              "name_ja": "冨岡義勇 ラバーストラップ",
               "domain_limited_web_search_url_count": 6,
-              "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+              "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E5%86%A8%E5%B2%A1%E7%BE%A9%E5%8B%87%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
             }
           ]
         },
@@ -14512,7 +14512,7 @@
       "phase_count": 3,
       "phases_with_review_start": 3,
       "phases_missing_review_start": 0,
-      "rows_with_review_start": 791,
+      "rows_with_review_start": 787,
       "rows_missing_review_start": 0,
       "missing_review_start_phase_ids": [],
       "phase_review_starts": [
@@ -14527,7 +14527,7 @@
         },
         {
           "phase_id": "complete_source_discovery_focus_packs",
-          "row_count": 758,
+          "row_count": 754,
           "has_review_start": true,
           "first_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%99%8E%E6%9D%96%E6%82%A0%E4%BB%81+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
           "review_url_kind": "domain_limited_web_search",
@@ -14568,19 +14568,19 @@
       "template_focus_pack_id": "source-discovery-focus-001",
       "candidate_review_summary": {
         "pack_items": 20,
-        "items_with_candidates": 6,
-        "candidate_rows": 15,
-        "manual_candidate_review_rows": 15,
-        "no_candidate_items": 14,
+        "items_with_candidates": 2,
+        "candidate_rows": 7,
+        "manual_candidate_review_rows": 7,
+        "no_candidate_items": 18,
         "next_action_lane_count": 2,
         "next_action_lanes": [
           [
             "fallback_source_search",
-            14
+            18
           ],
           [
             "catalog_variant_metadata_enrichment",
-            6
+            2
           ]
         ],
         "official_search_has_results": 0,
@@ -14659,10 +14659,10 @@
           "status": null
         },
         {
-          "catalog_index": 1573,
-          "name_ko": "카마도 탄지로 러버 스트랩",
-          "name_ja": "竈門炭治郎 ラバーストラップ",
-          "candidate_count": 1,
+          "catalog_index": 1577,
+          "name_ko": "토미오카 기유 러버 스트랩",
+          "name_ja": "冨岡義勇 ラバーストラップ",
+          "candidate_count": 2,
           "official_search_audit_status": "official_search_unavailable",
           "needs_fallback_web_search": true,
           "status": null
@@ -14719,11 +14719,11 @@
           "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E5%A4%8F%E6%B2%B9%E5%82%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
         },
         {
-          "catalog_index": 1573,
-          "name_ko": "카마도 탄지로 러버 스트랩",
-          "name_ja": "竈門炭治郎 ラバーストラップ",
+          "catalog_index": 1577,
+          "name_ko": "토미오카 기유 러버 스트랩",
+          "name_ja": "冨岡義勇 ラバーストラップ",
           "domain_limited_web_search_url_count": 6,
-          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+          "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E5%86%A8%E5%B2%A1%E7%BE%A9%E5%8B%87%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
         }
       ]
     },

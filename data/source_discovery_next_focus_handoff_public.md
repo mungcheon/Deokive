@@ -3,7 +3,7 @@
 - Focus pack: `source-discovery-focus-002`
 - Store/category: `엔스카이` / `키링`
 - Pack items: `20`
-- Remaining source-discovery rows: `758`
+- Remaining source-discovery rows: `754`
 - Auto-apply ready rows: `0`
 - Status: `fallback_search_required`
 
@@ -36,18 +36,6 @@
 - `1555` 게토 스구루 러버 스트랩 / 夏油傑 ラバーストラップ (주술회전, 키링)
   - Review: https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%A4%8F%E6%B2%B9%E5%82%91+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22
   - Decision: confirm exact detail URL or leave blank
-- `1573` 카마도 탄지로 러버 스트랩 / 竈門炭治郎 ラバーストラップ (귀멸의 칼날, 키링)
-  - Review: https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E7%AB%88%E9%96%80%E7%82%AD%E6%B2%BB%E9%83%8E+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22
-  - Decision: confirm exact detail URL or leave blank
-- `1574` 카마도 네즈코 러버 스트랩 / 竈門禰豆子 ラバーストラップ (귀멸의 칼날, 키링)
-  - Review: https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E7%AB%88%E9%96%80%E7%A6%B0%E8%B1%86%E5%AD%90+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22
-  - Decision: confirm exact detail URL or leave blank
-- `1575` 아가츠마 젠이츠 러버 스트랩 / 我妻善逸 ラバーストラップ (귀멸의 칼날, 키링)
-  - Review: https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E6%88%91%E5%A6%BB%E5%96%84%E9%80%B8+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22
-  - Decision: confirm exact detail URL or leave blank
-- `1576` 하시비라 이노스케 러버 스트랩 / 嘴平伊之助 ラバーストラップ (귀멸의 칼날, 키링)
-  - Review: https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%98%B4%E5%B9%B3%E4%BC%8A%E4%B9%8B%E5%8A%A9+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22
-  - Decision: confirm exact detail URL or leave blank
 - `1577` 토미오카 기유 러버 스트랩 / 冨岡義勇 ラバーストラップ (귀멸의 칼날, 키링)
   - Review: https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%86%A8%E5%B2%A1%E7%BE%A9%E5%8B%87+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22
   - Decision: confirm exact detail URL or leave blank
@@ -74,4 +62,16 @@
   - Decision: confirm exact detail URL or leave blank
 - `1588` 프랑키 러버 스트랩 / フランキー ラバーストラップ (원피스, 키링)
   - Review: https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%BC+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22
+  - Decision: confirm exact detail URL or leave blank
+- `1589` 브룩 러버 스트랩 / ブルック ラバーストラップ (원피스, 키링)
+  - Review: https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%96%E3%83%AB%E3%83%83%E3%82%AF+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22
+  - Decision: confirm exact detail URL or leave blank
+- `1590` 징베 러버 스트랩 / ジンベエ ラバーストラップ (원피스, 키링)
+  - Review: https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%B8%E3%83%B3%E3%83%99%E3%82%A8+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22
+  - Decision: confirm exact detail URL or leave blank
+- `1591` 포트가스 D 에이스 메탈릭 러버 스트랩 / ポートガス・D・エース メタリックラバーストラップ (원피스, 키링)
+  - Review: https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%9D%E3%83%BC%E3%83%88%E3%82%AC%E3%82%B9%E3%83%BBD%E3%83%BB%E3%82%A8%E3%83%BC%E3%82%B9+%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22
+  - Decision: confirm exact detail URL or leave blank
+- `1592` 사보 러버 스트랩 / サボ ラバーストラップ (원피스, 키링)
+  - Review: https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%B5%E3%83%9C+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22
   - Decision: confirm exact detail URL or leave blank

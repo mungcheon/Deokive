@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T16:31:28Z",
+  "generated_at": "2026-07-26T16:41:40Z",
   "summary": {
     "catalog_rows": 20309,
     "tracked_fields": [
@@ -14,14 +14,14 @@
     "field_store_group_count": 358,
     "batch_count": 30,
     "batch_size": 12,
-    "missing_cell_count": 14030,
+    "missing_cell_count": 14022,
     "field_missing_totals": {
       "name_ja": 526,
       "release_date": 1342,
       "barcode": 10044,
       "official_price_jpy": 553,
-      "image_url": 797,
-      "source_url": 768
+      "image_url": 793,
+      "source_url": 764
     },
     "top_source_stores_with_missing_metadata": [
       [
@@ -30,11 +30,11 @@
       ],
       [
         "엔스카이",
-        814
+        798
       ],
       [
         "애니메이트",
-        737
+        745
       ],
       [
         "치이카와 온라인 쿠지",
@@ -197,7 +197,7 @@
       "batch_id": "metadata-review-001",
       "priority": 10,
       "group_count": 12,
-      "missing_cell_count": 631,
+      "missing_cell_count": 627,
       "field_counts": [
         [
           "source_url",
@@ -217,7 +217,7 @@
         {
           "field": "source_url",
           "source_store": "엔스카이",
-          "missing_rows": 187,
+          "missing_rows": 183,
           "priority": 10,
           "workflow": "source_url_discovery",
           "evidence_required": "exact official or trusted licensed product detail page",
@@ -2859,7 +2859,7 @@
       "batch_id": "metadata-review-004",
       "priority": 10,
       "group_count": 12,
-      "missing_cell_count": 355,
+      "missing_cell_count": 351,
       "field_counts": [
         [
           "source_url",
@@ -3147,7 +3147,7 @@
         {
           "field": "image_url",
           "source_store": "엔스카이",
-          "missing_rows": 187,
+          "missing_rows": 183,
           "priority": 20,
           "workflow": "source_then_image_import",
           "evidence_required": "product image from exact source_url after identity verification",
@@ -6340,7 +6340,7 @@
         {
           "field": "release_date",
           "source_store": "엔스카이",
-          "missing_rows": 219,
+          "missing_rows": 215,
           "priority": 30,
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
@@ -6435,7 +6435,7 @@
         {
           "field": "release_date",
           "source_store": "애니메이트",
-          "missing_rows": 181,
+          "missing_rows": 185,
           "priority": 30,
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
@@ -13647,7 +13647,7 @@
         {
           "field": "barcode",
           "source_store": "엔스카이",
-          "missing_rows": 221,
+          "missing_rows": 217,
           "priority": 50,
           "workflow": "barcode_evidence_review",
           "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
@@ -13837,7 +13837,7 @@
         {
           "field": "barcode",
           "source_store": "애니메이트",
-          "missing_rows": 176,
+          "missing_rows": 180,
           "priority": 50,
           "workflow": "barcode_evidence_review",
           "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
