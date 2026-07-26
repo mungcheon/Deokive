@@ -190591,7 +190591,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     releaseDate: '2026-04-10',
   ),
   GoodsCatalogEntry(
-    nameKo: '一番くじ 葬送のフリーレン / B賞 / メタリックビジュアルシート',
+    nameKo: '一番くじ 葬送のフリーレン / B賞 / メタリックビジュアルシート / 혼합',
     nameJa: 'B賞 メタリックビジュアルシート',
     category: '문구',
     characterName: '혼합',
@@ -190636,7 +190636,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     releaseDate: '2026-04-10',
   ),
   GoodsCatalogEntry(
-    nameKo: '一番くじ 葬送のフリーレン / E賞 / ミニプレート',
+    nameKo: '一番くじ 葬送のフリーレン / E賞 / ミニプレート / 혼합',
     nameJa: 'E賞 ミニプレート',
     category: '생활잡화',
     characterName: '혼합',
@@ -190651,7 +190651,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     releaseDate: '2026-04-10',
   ),
   GoodsCatalogEntry(
-    nameKo: '一番くじ 葬送のフリーレン / F賞 / きゅんキャラアクリルスタンド',
+    nameKo: '一番くじ 葬送のフリーレン / F賞 / きゅんキャラアクリルスタンド / 혼합',
     nameJa: 'F賞 きゅんキャラアクリルスタンド',
     category: '아크릴 스탠드',
     characterName: '혼합',
@@ -190666,7 +190666,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     releaseDate: '2026-04-10',
   ),
   GoodsCatalogEntry(
-    nameKo: '一番くじ 葬送のフリーレン / G賞 / 魔導書風ノート',
+    nameKo: '一番くじ 葬送のフリーレン / G賞 / 魔導書風ノート / 혼합',
     nameJa: 'G賞 魔導書風ノート',
     category: '문구',
     characterName: '혼합',
@@ -190681,7 +190681,7 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     releaseDate: '2026-04-10',
   ),
   GoodsCatalogEntry(
-    nameKo: '一番くじ 葬送のフリーレン / H賞 / 繋がるポストカード',
+    nameKo: '一番くじ 葬送のフリーレン / H賞 / 繋がるポストカード / 혼합',
     nameJa: 'H賞 繋がるポストカード',
     category: '문구',
     characterName: '혼합',

@@ -73,7 +73,7 @@ def expected_name_ko(row: dict[str, Any]) -> str:
     prize_item_name = expected_prize_item_name(row)
     character_name = str(row.get("character_name") or "").strip()
     parts = [series_name, prize_rank, prize_item_name]
-    if character_name and character_name != "혼합":
+    if character_name:
         parts.append(character_name)
     return " / ".join(part for part in parts if part)
 

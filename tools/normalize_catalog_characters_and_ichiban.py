@@ -422,32 +422,34 @@ def _split_frieren_ichiban(rows: list[dict[str, Any]], *, write: bool) -> dict[s
                     characters.append(character)
         if not characters:
             new_name = _ichiban_display_name(base_row, "혼합")
-            updated.append(
-                {
-                    "catalog_index": base_row.get("catalog_index"),
-                    "field_changes": {
-                        "character_name": {"from": base_row.get("character_name"), "to": "혼합"},
-                        "name_ko": {"from": base_row.get("name_ko"), "to": new_name},
-                    },
-                }
-            )
-            if write:
+            if base_row.get("character_name") != "혼합" or base_row.get("name_ko") != new_name:
+                updated.append(
+                    {
+                        "catalog_index": base_row.get("catalog_index"),
+                        "field_changes": {
+                            "character_name": {"from": base_row.get("character_name"), "to": "혼합"},
+                            "name_ko": {"from": base_row.get("name_ko"), "to": new_name},
+                        },
+                    }
+                )
+            if write and updated and updated[-1].get("catalog_index") == base_row.get("catalog_index"):
                 base_row["character_name"] = "혼합"
                 base_row["name_ko"] = new_name
             continue
 
         if len(characters) == 1:
             new_name = _ichiban_display_name(base_row, characters[0])
-            updated.append(
-                {
-                    "catalog_index": base_row.get("catalog_index"),
-                    "field_changes": {
-                        "character_name": {"from": base_row.get("character_name"), "to": characters[0]},
-                        "name_ko": {"from": base_row.get("name_ko"), "to": new_name},
-                    },
-                }
-            )
-            if write:
+            if base_row.get("character_name") != characters[0] or base_row.get("name_ko") != new_name:
+                updated.append(
+                    {
+                        "catalog_index": base_row.get("catalog_index"),
+                        "field_changes": {
+                            "character_name": {"from": base_row.get("character_name"), "to": characters[0]},
+                            "name_ko": {"from": base_row.get("name_ko"), "to": new_name},
+                        },
+                    }
+                )
+            if write and updated and updated[-1].get("catalog_index") == base_row.get("catalog_index"):
                 base_row["character_name"] = characters[0]
                 base_row["name_ko"] = new_name
             continue
@@ -489,10 +491,18 @@ def _split_frieren_ichiban(rows: list[dict[str, Any]], *, write: bool) -> dict[s
                 "character_name": target.get("character_name"),
                 "name_ko": target.get("name_ko"),
             }
-            target["name_ja"] = new_name_ja
-            target["character_name"] = character
-            target["name_ko"] = new_name_ko
+            has_changes = (
+                before_snapshot["name_ja"] != new_name_ja
+                or before_snapshot["character_name"] != character
+                or before_snapshot["name_ko"] != new_name_ko
+            )
+            if write:
+                target["name_ja"] = new_name_ja
+                target["character_name"] = character
+                target["name_ko"] = new_name_ko
             if target in rows and not was_created_this_run:
+                if not has_changes:
+                    continue
                 updated.append(
                     {
                         "catalog_index": target.get("catalog_index"),
@@ -503,11 +513,11 @@ def _split_frieren_ichiban(rows: list[dict[str, Any]], *, write: bool) -> dict[s
                         },
                     }
                 )
-            else:
+            elif was_created_this_run:
                 created.append(
                     {
                         "catalog_index": target.get("catalog_index"),
-                        "from_catalog_index": row.get("catalog_index"),
+                        "from_catalog_index": base_row.get("catalog_index"),
                         "name_ko": target.get("name_ko"),
                         "name_ja": target.get("name_ja"),
                         "character_name": target.get("character_name"),

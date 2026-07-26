@@ -32,7 +32,7 @@ class ApplyIchibanPrizeDisplayNamesTest(unittest.TestCase):
                     "prize_rank": "A prize",
                     "prize_item_name": "Figure",
                     "display_name_ko": "Campaign - Figure",
-                    "expected_display_name_ko": "Campaign - A prize Figure",
+                    "expected_display_name_ko": "Campaign / A prize / Figure",
                 },
                 {
                     "catalog_index": 2,
@@ -49,7 +49,7 @@ class ApplyIchibanPrizeDisplayNamesTest(unittest.TestCase):
 
         self.assertEqual(report["summary"]["applied_rows"], 1)
         self.assertEqual(report["summary"]["skipped_rows"], 1)
-        self.assertEqual(catalog["items"][0]["name_ko"], "Campaign - A prize Figure")
+        self.assertEqual(catalog["items"][0]["name_ko"], "Campaign / A prize / Figure")
         self.assertEqual(catalog["items"][1]["name_ko"], "Campaign - A prize mystery item")
 
     def test_dry_run_does_not_mutate_catalog(self) -> None:
@@ -62,7 +62,7 @@ class ApplyIchibanPrizeDisplayNamesTest(unittest.TestCase):
                     "prize_rank": "A prize",
                     "prize_item_name": "Figure",
                     "display_name_ko": "Campaign - Figure",
-                    "expected_display_name_ko": "Campaign - A prize Figure",
+                    "expected_display_name_ko": "Campaign / A prize / Figure",
                 }
             ]
         }

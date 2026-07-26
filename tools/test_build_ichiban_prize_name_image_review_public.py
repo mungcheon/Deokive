@@ -56,20 +56,20 @@ class BuildIchibanPrizeNameImageReviewPublicTest(unittest.TestCase):
 
         self.assertEqual(report["generated_at"], "2026-01-01T00:00:00Z")
         self.assertEqual(report["summary"]["kuji_rows"], 4)
-        self.assertEqual(report["summary"]["review_rows"], 2)
-        self.assertEqual(report["summary"]["name_structure_review_rows"], 1)
+        self.assertEqual(report["summary"]["review_rows"], 4)
+        self.assertEqual(report["summary"]["name_structure_review_rows"], 4)
         self.assertEqual(report["summary"]["image_identity_review_rows"], 2)
         self.assertEqual(report["summary"]["same_campaign_image_reused_different_name_rows"], 2)
         self.assertEqual(report["summary"]["multi_item_prize_rank_groups"], 1)
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         reasons = dict(report["summary"]["review_reason_counts"])
-        self.assertEqual(reasons["display_name_does_not_match_series_and_prize_name"], 1)
+        self.assertEqual(reasons["display_name_does_not_match_series_and_prize_name"], 4)
         indexes = {row["catalog_index"] for row in report["review_rows"]}
-        self.assertEqual(indexes, {3, 4})
+        self.assertEqual(indexes, {1, 2, 3, 4})
         self.assertEqual(report["review_rows"][0]["manual_fix_template"]["manual_confirmed"], False)
         review_by_index = {row["catalog_index"]: row for row in report["review_rows"]}
         self.assertEqual(review_by_index[3]["expected_prize_display_name"], "C賞 Item Red")
-        self.assertEqual(review_by_index[3]["expected_display_name_ko"], "一番くじ Sample - C賞 Item Red")
+        self.assertEqual(review_by_index[3]["expected_display_name_ko"], "一番くじ Sample / C賞 / Item Red")
         self.assertIn("variant", report["name_policy"]["fields"]["variant_or_character_detail"])
 
 
