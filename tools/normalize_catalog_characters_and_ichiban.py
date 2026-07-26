@@ -25,6 +25,12 @@ DEFAULT_SEED_OUTPUT = ROOT / "lib" / "data" / "catalog" / "seed_catalog.dart"
 DEFAULT_REPORT = ROOT / "data" / "catalog_character_ichiban_normalization_public.json"
 
 GENERIC_CHARACTERS = {"기타", "혼합", ""}
+CHARACTER_ALIAS_RULES = {
+    "키르아 조르딕": "키루아 조르딕",
+    "키르아": "키루아",
+    "보아 행콕": "보아 핸콕",
+    "행콕": "핸콕",
+}
 FRIEREN_JA_TO_KO = {
     "フリーレン": "프리렌",
     "フェルン": "페른",
@@ -114,6 +120,115 @@ ICHIBAN_CHARACTER_RULES: dict[str, list[tuple[str, str]]] = {
         ("ドフラミンゴ", "돈키호테 도플라밍고"),
         ("キッド", "유스타스 키드"),
     ],
+    "헌터X헌터": [
+        ("ゴン=フリークス", "곤 프릭스"),
+        ("ゴン＝フリークス", "곤 프릭스"),
+        ("キルア=ゾルディック", "키루아 조르딕"),
+        ("キルア＝ゾルディック", "키루아 조르딕"),
+        ("キルアのヨーヨー", "키루아 조르딕"),
+        ("アルカ=ゾルディック", "아르카 조르딕"),
+        ("アルカ＝ゾルディック", "아르카 조르딕"),
+        ("ナニカ", "나니카"),
+        ("ゼノ=ゾルディック", "제노 조르딕"),
+        ("ゼノ＝ゾルディック", "제노 조르딕"),
+        ("シルバ=ゾルディック", "실버 조르딕"),
+        ("シルバ＝ゾルディック", "실버 조르딕"),
+        ("クラピカ", "쿠라피카"),
+        ("ヒソカ=モロウ", "히소카 모로"),
+        ("ヒソカ＝モロウ", "히소카 모로"),
+        ("ヒソカ", "히소카 모로"),
+        ("レオリオ", "레오리오"),
+        ("クロロ", "쿠로로 루실풀"),
+        ("イルミ", "일루미"),
+        ("メルエム", "메루엠"),
+    ],
+    "주술회전": [
+        ("虎杖悠仁", "이타도리 유지"),
+        ("伏黒恵", "후시구로 메구미"),
+        ("釘崎野薔薇", "쿠기사키 노바라"),
+        ("五条悟", "고죠 사토루"),
+        ("夏油傑", "게토 스구루"),
+        ("両面宿儺", "료멘 스쿠나"),
+        ("七海建人", "나나미 켄토"),
+        ("禪院真希", "젠인 마키"),
+        ("禪院真依", "젠인 마이"),
+        ("乙骨憂太", "옷코츠 유타"),
+        ("祈本里香", "오리모토 리카"),
+        ("リカ", "리카"),
+        ("秤金次", "하카리 킨지"),
+        ("星綺羅羅", "호시 키라라"),
+        ("日車寛見", "히구루마 히로미"),
+        ("レジィ・スター", "레지 스타"),
+        ("髙羽史彦", "타카바 후미히코"),
+        ("高羽史彦", "타카바 후미히코"),
+        ("石流龍", "이시고리 류"),
+        ("羂索", "켄자쿠"),
+        ("九十九由基", "츠쿠모 유키"),
+        ("禪院直哉", "젠인 나오야"),
+        ("脹相", "쵸소"),
+        ("真希", "젠인 마키"),
+        ("真依", "젠인 마이"),
+        ("狗巻棘", "이누마키 토게"),
+        ("パンダ", "판다"),
+        ("真人", "마히토"),
+    ],
+    "나의 히어로 아카데미아": [
+        ("緑谷出久", "미도리야 이즈쿠"),
+        ("爆豪勝己", "바쿠고 카츠키"),
+        ("轟焦凍", "토도로키 쇼토"),
+        ("麗日お茶子", "우라라카 오챠코"),
+        ("蛙吹梅雨", "츠유 아스이"),
+        ("飯田天哉", "이이다 텐야"),
+        ("切島鋭児郎", "키리시마 에이지로"),
+        ("上鳴電気", "카미나리 덴키"),
+        ("耳郎響香", "지로 쿄카"),
+        ("八百万百", "야오요로즈 모모"),
+        ("相澤消太", "아이자와 쇼타"),
+        ("山田ひざし", "야마다 히자시"),
+        ("白雲朧", "시라쿠모 오보로"),
+        ("死柄木弔", "시가라키 토무라"),
+        ("トガヒミコ", "토가 히미코"),
+        ("荼毘", "다비"),
+        ("ホークス", "호크스"),
+        ("エンデヴァー", "엔데버"),
+        ("オールマイト", "올마이트"),
+        ("アーマード・オールマイト", "올마이트"),
+        ("ステイン", "스테인"),
+        ("峰田実", "미네타 미노루"),
+        ("灰廻航一", "하이마와리 코이치"),
+    ],
+    "귀멸의 칼날": [
+        ("竈門炭治郎", "카마도 탄지로"),
+        ("炭治郎", "카마도 탄지로"),
+        ("竈門禰豆子", "카마도 네즈코"),
+        ("禰豆子", "카마도 네즈코"),
+        ("我妻善逸", "아가츠마 젠이츠"),
+        ("善逸", "아가츠마 젠이츠"),
+        ("嘴平伊之助", "하시비라 이노스케"),
+        ("伊之助", "하시비라 이노스케"),
+        ("冨岡義勇", "토미오카 기유"),
+        ("富岡義勇", "토미오카 기유"),
+        ("義勇", "토미오카 기유"),
+        ("胡蝶しのぶ", "코쵸 시노부"),
+        ("栗花落カナヲ", "츠유리 카나오"),
+        ("煉獄杏寿郎", "렌고쿠 쿄쥬로"),
+        ("宇髄天元", "우즈이 텐겐"),
+        ("時透無一郎", "토키토 무이치로"),
+        ("甘露寺蜜璃", "칸로지 미츠리"),
+        ("悲鳴嶼行冥", "히메지마 교메이"),
+        ("不死川実弥", "시나즈가와 사네미"),
+        ("童磨", "도우마"),
+        ("獪岳", "카이가쿠"),
+        ("狛治", "하쿠지"),
+    ],
+    "블리치": [
+        ("黒崎一護", "쿠로사키 이치고"),
+        ("朽木ルキア", "쿠치키 루키아"),
+        ("日番谷冬獅郎", "히츠가야 토시로"),
+        ("平子真子", "히라코 신지"),
+        ("藍染惣右介", "아이젠 소스케"),
+        ("浦原喜助", "우라하라 키스케"),
+    ],
 }
 
 
@@ -126,6 +241,36 @@ def _load(path: Path) -> dict[str, Any]:
 
 def _text(value: Any) -> str:
     return str(value or "").strip()
+
+
+def _normalize_character_aliases(rows: list[dict[str, Any]], *, write: bool) -> list[dict[str, Any]]:
+    changes: list[dict[str, Any]] = []
+    for row in rows:
+        before_character = _text(row.get("character_name"))
+        after_character = CHARACTER_ALIAS_RULES.get(before_character)
+        before_name = _text(row.get("name_ko"))
+        after_name = before_name
+        for before, after in CHARACTER_ALIAS_RULES.items():
+            after_name = after_name.replace(before, after)
+        if not after_character and before_name == after_name:
+            continue
+        changes.append(
+            {
+                "catalog_index": row.get("catalog_index"),
+                "field_changes": {
+                    "character_name": {
+                        "from": row.get("character_name"),
+                        "to": after_character or row.get("character_name"),
+                    },
+                    "name_ko": {"from": row.get("name_ko"), "to": after_name},
+                },
+            }
+        )
+        if write:
+            if after_character:
+                row["character_name"] = after_character
+            row["name_ko"] = after_name
+    return changes
 
 
 def _is_ichiban(row: dict[str, Any]) -> bool:
@@ -455,6 +600,7 @@ def main() -> int:
     rows: list[dict[str, Any]] = catalog["items"]
     before_count = len(rows)
 
+    global_character_alias_changes = _normalize_character_aliases(rows, write=args.write)
     character_alias_changes = _normalize_frieren_aliases(rows, write=args.write)
     ichiban_direct_character_changes = _normalize_ichiban_direct_character_rules(
         rows, write=args.write
@@ -486,6 +632,7 @@ def main() -> int:
         "summary": {
             "rows_before": before_count,
             "rows_after": len(rows),
+            "global_character_alias_changes": len(global_character_alias_changes),
             "character_alias_changes": len(character_alias_changes),
             "ichiban_direct_character_changes": len(ichiban_direct_character_changes),
             "last_one_price_changes": len(last_one_price_changes),
@@ -493,6 +640,7 @@ def main() -> int:
             "frieren_ichiban_created_rows": len(frieren_ichiban["created"]),
             "frieren_ichiban_removed_rows": len(frieren_ichiban["removed"]),
         },
+        "global_character_alias_changes": global_character_alias_changes,
         "character_alias_changes": character_alias_changes,
         "ichiban_direct_character_changes": ichiban_direct_character_changes,
         "last_one_price_changes": last_one_price_changes,

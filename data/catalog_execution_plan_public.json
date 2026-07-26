@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T17:13:44Z",
+  "generated_at": "2026-07-26T17:24:08Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 26,
     "blocked_action_count": 0,
     "manual_review_action_count": 23,
     "pending_import_action_count": 0,
-    "total_action_rows": 34187,
+    "total_action_rows": 34662,
     "open_review_queues": {
       "source_discovery_rows": 763,
       "image_missing_rows": 792,
@@ -97,11 +97,11 @@
       "animation_category_unmatched_keyword_rows": 0,
       "animation_category_unmatched_keyword_candidates": 0,
       "animation_category_unmatched_keyword_product_type_candidates": 0,
-      "ichiban_prize_name_image_review_rows": 420,
+      "ichiban_prize_name_image_review_rows": 886,
       "ichiban_prize_multi_item_rank_groups": 417,
-      "ichiban_prize_name_image_patch_candidate_rows": 391,
+      "ichiban_prize_name_image_patch_candidate_rows": 400,
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
-      "ichiban_prize_name_image_patch_blocked_rows": 9,
+      "ichiban_prize_name_image_patch_blocked_rows": 0,
       "catalog_goal_manual_review_pillars": 5,
       "catalog_goal_manual_review_rows": 901,
       "catalog_goal_auto_apply_ready_rows": 0,
@@ -190,12 +190,12 @@
     "ichiban_probable_reissue_review_groups": 20,
     "ichiban_probable_reissue_work_order_rows": 20,
     "ichiban_campaign_first_review_plan_rows": 4,
-    "ichiban_prize_name_image_review_rows": 420,
-    "ichiban_prize_name_image_name_structure_review_rows": 420,
+    "ichiban_prize_name_image_review_rows": 886,
+    "ichiban_prize_name_image_name_structure_review_rows": 886,
     "ichiban_prize_name_image_image_identity_review_rows": 6,
     "ichiban_prize_name_image_multi_item_groups": 417,
-    "ichiban_prize_name_image_patch_candidate_rows": 391,
-    "ichiban_prize_name_image_patch_blocked_rows": 9,
+    "ichiban_prize_name_image_patch_candidate_rows": 400,
+    "ichiban_prize_name_image_patch_blocked_rows": 0,
     "dedupe_fast_review_groups": 42,
     "dedupe_duplicate_groups": 61,
     "dedupe_duplicate_rows": 61,
@@ -4941,15 +4941,15 @@
       "workstream": "ichiban_kuji_prize_name_image_review",
       "public_report": "data/ichiban_kuji_prize_name_image_review_public.json",
       "status": "manual_review",
-      "rows": 420,
+      "rows": 886,
       "command": "Review Ichiban Kuji campaign title, prize rank, prize item name, variant detail, and image identity against official lineup pages.",
       "next_step": "confirm_prize_name_components_and_image_identity",
       "blocker": "Official lineup evidence is required before mutating prize display names or replacing images.",
       "auto_apply_enabled": false,
       "evidence": {
         "kuji_rows": 7902,
-        "review_rows": 420,
-        "name_structure_review_rows": 420,
+        "review_rows": 886,
+        "name_structure_review_rows": 886,
         "image_identity_review_rows": 6,
         "same_campaign_prize_rank_name_duplicate_rows": 0,
         "same_campaign_image_reused_different_name_rows": 6,
@@ -4958,7 +4958,7 @@
         "review_reason_counts": [
           [
             "display_name_does_not_match_series_and_prize_name",
-            420
+            886
           ]
         ]
       }
@@ -4968,17 +4968,17 @@
       "workstream": "ichiban_kuji_prize_name_image_patch_candidates",
       "public_report": "data/ichiban_kuji_prize_name_image_patch_candidates_public.json",
       "status": "manual_review",
-      "rows": 391,
+      "rows": 400,
       "command": "Manual-confirm exact official 1kuji name/image patch candidates before catalog mutation.",
       "next_step": "mark_exact_candidates_manual_confirmed_then_import",
       "blocker": "Auto-apply is disabled; exact-image matches still need human confirmation before catalog writes.",
       "auto_apply_enabled": false,
       "evidence": {
         "review_rows": 400,
-        "candidate_rows": 391,
-        "exact_image_match_rows": 388,
-        "strong_name_match_rows": 3,
-        "blocked_rows": 9,
+        "candidate_rows": 400,
+        "exact_image_match_rows": 400,
+        "strong_name_match_rows": 0,
+        "blocked_rows": 0,
         "fetch_failure_urls": 0
       }
     },
@@ -7531,7 +7531,7 @@
           "status": "manual_review_required",
           "manual_metadata_campaigns": 41,
           "manual_reissue_review_groups": 20,
-          "manual_prize_name_image_patch_rows": 26,
+          "manual_prize_name_image_patch_rows": 811,
           "zero_price_policy_ready": true,
           "numbered_variant_policy_ready": true,
           "blocked_auto_apply_reasons": [
@@ -7683,8 +7683,8 @@
         "next_queue_lane": null,
         "next_queue_rows": 0,
         "next_execution_lane_count": 5,
-        "next_execution_open_rows": 932,
-        "next_execution_next_batch_rows": 891,
+        "next_execution_open_rows": 1407,
+        "next_execution_next_batch_rows": 1366,
         "first_next_execution_lane": "campaign_metadata_confirmation",
         "first_next_execution_status": "next",
         "first_next_execution_rows": 41,
