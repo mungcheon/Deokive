@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "summary": {
-    "missing_image_rows": 792,
-    "source_url_ready_rows": 6,
+    "missing_image_rows": 790,
+    "source_url_ready_rows": 4,
     "generic_source_url_rows": 0,
     "gotouchi_official_review_rows": 23,
     "needs_source_discovery_rows": 753,
     "manual_image_research_rows": 10,
-    "published_group_rows": 51,
+    "published_group_rows": 49,
     "review_batch_count": 9,
-    "sample_image_import_template_count": 653,
+    "sample_image_import_template_count": 651,
     "top_source_stores": [
       [
         "엔스카이",
@@ -147,7 +147,7 @@
       ],
       [
         "extract_from_existing_source_url",
-        6
+        4
       ]
     ]
   },
@@ -186,7 +186,7 @@
   "blocker_summary": [
     {
       "workflow": "extract_from_existing_source_url",
-      "rows": 6,
+      "rows": 4,
       "state": "ready_for_source_image_extraction",
       "blocking_reason": null,
       "next_step": "extract_product_image_from_existing_exact_source_url",
@@ -225,7 +225,7 @@
       "workflow_counts": [
         [
           "extract_from_existing_source_url",
-          4
+          2
         ]
       ],
       "top_source_stores": [
@@ -234,20 +234,12 @@
           3
         ],
         [
-          "TOHO animation STORE",
-          1
-        ],
-        [
           "밀짚모자 스토어",
-          1
-        ],
-        [
-          "하이큐!! 10주년 기념전",
           1
         ]
       ],
-      "group_count": 4,
-      "missing_image_rows": 6,
+      "group_count": 2,
+      "missing_image_rows": 4,
       "blocked_until": "ready_for_source_image_extraction",
       "next_machine_step": "extract_product_image_from_existing_exact_source_url",
       "public_report": "data/catalog_image_enrichment_batches_public.json",
@@ -364,45 +356,6 @@
         },
         {
           "workflow": "extract_from_existing_source_url",
-          "source_store": "TOHO animation STORE",
-          "missing_image_rows": 1,
-          "priority": 10,
-          "recommended_action": "crawl verified source_url and review extracted product image",
-          "official_search_available": false,
-          "candidate_review_report": null,
-          "sample_items": [
-            {
-              "catalog_index": 2270,
-              "name_ko": "하이큐!! 10주년 이벤트 트레이딩 캔뱃지",
-              "name_ja": "ハイキュー!! 10th イベント -NEXT STEP- トレーディング缶バッジ",
-              "series_name": null,
-              "category": "캔뱃지",
-              "source_url": "https://haikyu.jp/10thevent/",
-              "official_search_url": null,
-              "catalog_field_import_template": {
-                "manual_confirmed": false,
-                "manual_note": "",
-                "row_index": 2270,
-                "field": "image_url",
-                "manual_value": "",
-                "evidence_url": "https://haikyu.jp/10thevent/",
-                "candidate_source_url": "https://haikyu.jp/10thevent/",
-                "source_store": "TOHO animation STORE",
-                "name_ko": "하이큐!! 10주년 이벤트 트레이딩 캔뱃지",
-                "name_ja": "ハイキュー!! 10th イベント -NEXT STEP- トレーディング缶バッジ",
-                "category": "캔뱃지",
-                "affiliation": "하이큐!!",
-                "source_search_url": null,
-                "workflow": "extract_from_existing_source_url",
-                "requires_exact_source_url": false,
-                "requires_representative_image_flag": false,
-                "blocked_until": "manual_image_url_confirmed"
-              }
-            }
-          ]
-        },
-        {
-          "workflow": "extract_from_existing_source_url",
           "source_store": "밀짚모자 스토어",
           "missing_image_rows": 1,
           "priority": 10,
@@ -431,45 +384,6 @@
                 "name_ja": "『ワンピース』ハッピーバースデーアクリルアクセサリースタンド［5.5 ルフィ］",
                 "category": "아크릴 스탠드",
                 "affiliation": "원피스",
-                "source_search_url": null,
-                "workflow": "extract_from_existing_source_url",
-                "requires_exact_source_url": false,
-                "requires_representative_image_flag": false,
-                "blocked_until": "manual_image_url_confirmed"
-              }
-            }
-          ]
-        },
-        {
-          "workflow": "extract_from_existing_source_url",
-          "source_store": "하이큐!! 10주년 기념전",
-          "missing_image_rows": 1,
-          "priority": 10,
-          "recommended_action": "crawl verified source_url and review extracted product image",
-          "official_search_available": false,
-          "candidate_review_report": null,
-          "sample_items": [
-            {
-              "catalog_index": 2271,
-              "name_ko": "하이큐!! 10주년 메모리얼 컬렉션 캔뱃지 SEASON.1~4",
-              "name_ja": "トレーディング缶バッジ メモリアルコレクション SEASON.1〜4",
-              "series_name": null,
-              "category": "캔뱃지",
-              "source_url": "https://haikyu.jp/10thevent/",
-              "official_search_url": null,
-              "catalog_field_import_template": {
-                "manual_confirmed": false,
-                "manual_note": "",
-                "row_index": 2271,
-                "field": "image_url",
-                "manual_value": "",
-                "evidence_url": "https://haikyu.jp/10thevent/",
-                "candidate_source_url": "https://haikyu.jp/10thevent/",
-                "source_store": "하이큐!! 10주년 기념전",
-                "name_ko": "하이큐!! 10주년 메모리얼 컬렉션 캔뱃지 SEASON.1~4",
-                "name_ja": "トレーディング缶バッジ メモリアルコレクション SEASON.1〜4",
-                "category": "캔뱃지",
-                "affiliation": "하이큐!!",
                 "source_search_url": null,
                 "workflow": "extract_from_existing_source_url",
                 "requires_exact_source_url": false,
@@ -19688,45 +19602,6 @@
     },
     {
       "workflow": "extract_from_existing_source_url",
-      "source_store": "TOHO animation STORE",
-      "missing_image_rows": 1,
-      "priority": 10,
-      "recommended_action": "crawl verified source_url and review extracted product image",
-      "official_search_available": false,
-      "candidate_review_report": null,
-      "sample_items": [
-        {
-          "catalog_index": 2270,
-          "name_ko": "하이큐!! 10주년 이벤트 트레이딩 캔뱃지",
-          "name_ja": "ハイキュー!! 10th イベント -NEXT STEP- トレーディング缶バッジ",
-          "series_name": null,
-          "category": "캔뱃지",
-          "source_url": "https://haikyu.jp/10thevent/",
-          "official_search_url": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 2270,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "https://haikyu.jp/10thevent/",
-            "candidate_source_url": "https://haikyu.jp/10thevent/",
-            "source_store": "TOHO animation STORE",
-            "name_ko": "하이큐!! 10주년 이벤트 트레이딩 캔뱃지",
-            "name_ja": "ハイキュー!! 10th イベント -NEXT STEP- トレーディング缶バッジ",
-            "category": "캔뱃지",
-            "affiliation": "하이큐!!",
-            "source_search_url": null,
-            "workflow": "extract_from_existing_source_url",
-            "requires_exact_source_url": false,
-            "requires_representative_image_flag": false,
-            "blocked_until": "manual_image_url_confirmed"
-          }
-        }
-      ]
-    },
-    {
-      "workflow": "extract_from_existing_source_url",
       "source_store": "밀짚모자 스토어",
       "missing_image_rows": 1,
       "priority": 10,
@@ -19755,45 +19630,6 @@
             "name_ja": "『ワンピース』ハッピーバースデーアクリルアクセサリースタンド［5.5 ルフィ］",
             "category": "아크릴 스탠드",
             "affiliation": "원피스",
-            "source_search_url": null,
-            "workflow": "extract_from_existing_source_url",
-            "requires_exact_source_url": false,
-            "requires_representative_image_flag": false,
-            "blocked_until": "manual_image_url_confirmed"
-          }
-        }
-      ]
-    },
-    {
-      "workflow": "extract_from_existing_source_url",
-      "source_store": "하이큐!! 10주년 기념전",
-      "missing_image_rows": 1,
-      "priority": 10,
-      "recommended_action": "crawl verified source_url and review extracted product image",
-      "official_search_available": false,
-      "candidate_review_report": null,
-      "sample_items": [
-        {
-          "catalog_index": 2271,
-          "name_ko": "하이큐!! 10주년 메모리얼 컬렉션 캔뱃지 SEASON.1~4",
-          "name_ja": "トレーディング缶バッジ メモリアルコレクション SEASON.1〜4",
-          "series_name": null,
-          "category": "캔뱃지",
-          "source_url": "https://haikyu.jp/10thevent/",
-          "official_search_url": null,
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 2271,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "https://haikyu.jp/10thevent/",
-            "candidate_source_url": "https://haikyu.jp/10thevent/",
-            "source_store": "하이큐!! 10주년 기념전",
-            "name_ko": "하이큐!! 10주년 메모리얼 컬렉션 캔뱃지 SEASON.1~4",
-            "name_ja": "トレーディング缶バッジ メモリアルコレクション SEASON.1〜4",
-            "category": "캔뱃지",
-            "affiliation": "하이큐!!",
             "source_search_url": null,
             "workflow": "extract_from_existing_source_url",
             "requires_exact_source_url": false,

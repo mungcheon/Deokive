@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T17:22:48Z",
+  "generated_at": "2026-07-26T18:33:07Z",
   "scope": "catalog_missing_image_actionability",
   "summary": {
-    "missing_image_rows": 792,
-    "readiness_classified_rows": 792,
+    "missing_image_rows": 790,
+    "readiness_classified_rows": 790,
     "unclassified_rows": 0,
-    "exact_source_ready_rows": 6,
+    "exact_source_ready_rows": 4,
     "source_first_rows": 753,
     "review_before_attach_rows": 23,
     "source_detail_candidate_review_rows": 0,
@@ -37,13 +37,13 @@
     "source_discovery_focus_template_dry_run_skipped_rows": 753,
     "source_discovery_focus_coverage": 1.0,
     "source_discovery_non_focus_rows": 0,
-    "action_queue_rows": 29,
-    "direct_image_action_queue_rows": 29,
-    "direct_image_action_primary_review_url_rows": 29,
+    "action_queue_rows": 27,
+    "direct_image_action_queue_rows": 27,
+    "direct_image_action_primary_review_url_rows": 27,
     "direct_image_action_primary_review_url_kind_counts": [
       [
         "current_source_url",
-        29
+        27
       ]
     ],
     "direct_image_action_next_representative_review_batch_rows": 10,
@@ -60,13 +60,13 @@
     "manual_image_research_review_start_kind": "fallback_web_search",
     "source_discovery_review_start_rows": 20,
     "source_discovery_review_start_kind": "domain_limited_web_search",
-    "image_attachment_template_rows": 29,
+    "image_attachment_template_rows": 27,
     "image_attachment_template_confirmed_rows": 0,
     "image_attachment_template_source_update_required_rows": 0,
     "image_attachment_template_representative_review_rows": 23,
     "image_attachment_template_dry_run_updated_rows": 0,
-    "image_attachment_template_dry_run_skipped_rows": 29,
-    "actionable_image_rows": 29,
+    "image_attachment_template_dry_run_skipped_rows": 27,
+    "actionable_image_rows": 27,
     "source_discovery_work_pack_count": 16,
     "source_discovery_work_pack_rows": 674,
     "by_blocked_reason": [
@@ -88,7 +88,7 @@
       },
       {
         "blocked_reason": "candidate_image_requires_manual_review",
-        "rows": 6
+        "rows": 4
       }
     ],
     "by_blocked_until": [
@@ -110,11 +110,11 @@
       },
       {
         "blocked_until": "manual_image_url_confirmed_from_exact_source",
-        "rows": 6
+        "rows": 4
       }
     ],
     "auto_apply_enabled": false,
-    "completion_plan_total_open_rows": 792,
+    "completion_plan_total_open_rows": 790,
     "completion_plan_phase_rows_total": 786,
     "completion_plan_phase_count": 3,
     "completion_plan_status": "needs_review",
@@ -130,12 +130,12 @@
     {
       "readiness": "image_url_candidate_review",
       "priority": 10,
-      "rows": 6,
+      "rows": 4,
       "workflow_rows": [
         {
           "workflow": "extract_from_existing_source_url",
           "label": "이미 확인된 상세 source_url에서 image_url 추출",
-          "rows": 6,
+          "rows": 4,
           "next_step": "extract_product_image_from_existing_exact_source_url"
         }
       ],
@@ -145,15 +145,7 @@
           "rows": 3
         },
         {
-          "source_store": "TOHO animation STORE",
-          "rows": 1
-        },
-        {
           "source_store": "밀짚모자 스토어",
-          "rows": 1
-        },
-        {
-          "source_store": "하이큐!! 10주년 기념전",
           "rows": 1
         }
       ],
@@ -192,17 +184,6 @@
           "workflow": "extract_from_existing_source_url"
         },
         {
-          "catalog_index": 2270,
-          "name_ko": "하이큐!! 10주년 이벤트 트레이딩 캔뱃지",
-          "name_ja": "ハイキュー!! 10th イベント -NEXT STEP- トレーディング缶バッジ",
-          "source_store": "TOHO animation STORE",
-          "affiliation": null,
-          "category": "캔뱃지",
-          "source_url": "https://haikyu.jp/10thevent/",
-          "official_search_url": null,
-          "workflow": "extract_from_existing_source_url"
-        },
-        {
           "catalog_index": 2268,
           "name_ko": "원피스 생일 한정 아크릴 액세서리 스탠드 (루피 5.5)",
           "name_ja": "『ワンピース』ハッピーバースデーアクリルアクセサリースタンド［5.5 ルフィ］",
@@ -210,17 +191,6 @@
           "affiliation": null,
           "category": "아크릴 스탠드",
           "source_url": "https://store.toei-anim.co.jp/shop/g/gMOVONP962162/",
-          "official_search_url": null,
-          "workflow": "extract_from_existing_source_url"
-        },
-        {
-          "catalog_index": 2271,
-          "name_ko": "하이큐!! 10주년 메모리얼 컬렉션 캔뱃지 SEASON.1~4",
-          "name_ja": "トレーディング缶バッジ メモリアルコレクション SEASON.1〜4",
-          "source_store": "하이큐!! 10주년 기념전",
-          "affiliation": null,
-          "category": "캔뱃지",
-          "source_url": "https://haikyu.jp/10thevent/",
           "official_search_url": null,
           "workflow": "extract_from_existing_source_url"
         }
@@ -1090,49 +1060,6 @@
       "auto_apply_enabled": false
     },
     {
-      "source_store": "TOHO animation STORE",
-      "priority": 10,
-      "missing_image_rows": 1,
-      "primary_workflow": "extract_from_existing_source_url",
-      "recommended_next_step": "extract_product_image_from_existing_exact_source_url",
-      "blocked_until": "manual_image_url_confirmed_from_exact_source",
-      "blocked_reason": "candidate_image_requires_manual_review",
-      "required_evidence": [
-        "exact_product_source_url",
-        "image_url_from_accepted_source_or_trusted_official_cdn",
-        "same_product_title_character_variant_type_confirmed"
-      ],
-      "readiness_rows": [
-        {
-          "readiness": "image_url_candidate_review",
-          "rows": 1
-        }
-      ],
-      "workflow_rows": [
-        {
-          "workflow": "extract_from_existing_source_url",
-          "label": "이미 확인된 상세 source_url에서 image_url 추출",
-          "rows": 1,
-          "next_step": "extract_product_image_from_existing_exact_source_url"
-        }
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 2270,
-          "name_ko": "하이큐!! 10주년 이벤트 트레이딩 캔뱃지",
-          "name_ja": "ハイキュー!! 10th イベント -NEXT STEP- トレーディング缶バッジ",
-          "source_store": "TOHO animation STORE",
-          "affiliation": null,
-          "category": "캔뱃지",
-          "source_url": "https://haikyu.jp/10thevent/",
-          "official_search_url": null,
-          "workflow": "extract_from_existing_source_url",
-          "readiness": "image_url_candidate_review"
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
       "source_store": "밀짚모자 스토어",
       "priority": 10,
       "missing_image_rows": 1,
@@ -1168,49 +1095,6 @@
           "affiliation": null,
           "category": "아크릴 스탠드",
           "source_url": "https://store.toei-anim.co.jp/shop/g/gMOVONP962162/",
-          "official_search_url": null,
-          "workflow": "extract_from_existing_source_url",
-          "readiness": "image_url_candidate_review"
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "source_store": "하이큐!! 10주년 기념전",
-      "priority": 10,
-      "missing_image_rows": 1,
-      "primary_workflow": "extract_from_existing_source_url",
-      "recommended_next_step": "extract_product_image_from_existing_exact_source_url",
-      "blocked_until": "manual_image_url_confirmed_from_exact_source",
-      "blocked_reason": "candidate_image_requires_manual_review",
-      "required_evidence": [
-        "exact_product_source_url",
-        "image_url_from_accepted_source_or_trusted_official_cdn",
-        "same_product_title_character_variant_type_confirmed"
-      ],
-      "readiness_rows": [
-        {
-          "readiness": "image_url_candidate_review",
-          "rows": 1
-        }
-      ],
-      "workflow_rows": [
-        {
-          "workflow": "extract_from_existing_source_url",
-          "label": "이미 확인된 상세 source_url에서 image_url 추출",
-          "rows": 1,
-          "next_step": "extract_product_image_from_existing_exact_source_url"
-        }
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 2271,
-          "name_ko": "하이큐!! 10주년 메모리얼 컬렉션 캔뱃지 SEASON.1~4",
-          "name_ja": "トレーディング缶バッジ メモリアルコレクション SEASON.1〜4",
-          "source_store": "하이큐!! 10주년 기념전",
-          "affiliation": null,
-          "category": "캔뱃지",
-          "source_url": "https://haikyu.jp/10thevent/",
           "official_search_url": null,
           "workflow": "extract_from_existing_source_url",
           "readiness": "image_url_candidate_review"
@@ -4226,6 +4110,152 @@
           "category": "인형",
           "source_url": null,
           "official_search_url": "https://store.disney.co.jp/search?q=%EB%94%94%EC%A6%88%EB%8B%88%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%ED%91%B8%29",
+          "workflow": "find_source_then_extract_image",
+          "readiness": "source_url_discovery_required"
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "source_store": "이세계아이돌 공식 굿즈",
+      "priority": 30,
+      "missing_image_rows": 4,
+      "primary_workflow": "find_source_then_extract_image",
+      "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
+      "readiness_rows": [
+        {
+          "readiness": "source_url_discovery_required",
+          "rows": 4
+        }
+      ],
+      "workflow_rows": [
+        {
+          "workflow": "find_source_then_extract_image",
+          "label": "정확한 공식 상품 source_url을 먼저 찾은 뒤 이미지 첨부",
+          "rows": 4,
+          "next_step": "find_exact_official_source_url_then_extract_image"
+        }
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 2319,
+          "name_ko": "이세계아이돌 단체 응원봉",
+          "name_ja": null,
+          "source_store": "이세계아이돌 공식 굿즈",
+          "affiliation": null,
+          "category": "응원봉",
+          "source_url": null,
+          "official_search_url": "https://www.google.com/search?q=site%3Awithmuulive.com%20%EC%9D%B4%EC%84%B8%EA%B3%84%EC%95%84%EC%9D%B4%EB%8F%8C%20%EB%8B%A8%EC%B2%B4%20%EC%9D%91%EC%9B%90%EB%B4%89",
+          "workflow": "find_source_then_extract_image",
+          "readiness": "source_url_discovery_required"
+        },
+        {
+          "catalog_index": 2320,
+          "name_ko": "이세계아이돌 단체 아크릴 스탠드",
+          "name_ja": null,
+          "source_store": "이세계아이돌 공식 굿즈",
+          "affiliation": null,
+          "category": "아크릴 스탠드",
+          "source_url": null,
+          "official_search_url": "https://www.google.com/search?q=site%3Awithmuulive.com%20%EC%9D%B4%EC%84%B8%EA%B3%84%EC%95%84%EC%9D%B4%EB%8F%8C%20%EB%8B%A8%EC%B2%B4%20%EC%95%84%ED%81%AC%EB%A6%B4%20%EC%8A%A4%ED%83%A0%EB%93%9C",
+          "workflow": "find_source_then_extract_image",
+          "readiness": "source_url_discovery_required"
+        },
+        {
+          "catalog_index": 2321,
+          "name_ko": "이세계아이돌 단체 포토카드 세트",
+          "name_ja": null,
+          "source_store": "이세계아이돌 공식 굿즈",
+          "affiliation": null,
+          "category": "포토카드",
+          "source_url": null,
+          "official_search_url": "https://www.google.com/search?q=site%3Awithmuulive.com%20%EC%9D%B4%EC%84%B8%EA%B3%84%EC%95%84%EC%9D%B4%EB%8F%8C%20%EB%8B%A8%EC%B2%B4%20%ED%8F%AC%ED%86%A0%EC%B9%B4%EB%93%9C%20%EC%84%B8%ED%8A%B8",
+          "workflow": "find_source_then_extract_image",
+          "readiness": "source_url_discovery_required"
+        },
+        {
+          "catalog_index": 2473,
+          "name_ko": "이세계아이돌 응원봉",
+          "name_ja": null,
+          "source_store": "이세계아이돌 공식 굿즈",
+          "affiliation": null,
+          "category": "응원봉",
+          "source_url": null,
+          "official_search_url": "https://www.google.com/search?q=site%3Awithmuulive.com%20%EC%9D%B4%EC%84%B8%EA%B3%84%EC%95%84%EC%9D%B4%EB%8F%8C%20%EC%9D%91%EC%9B%90%EB%B4%89",
+          "workflow": "find_source_then_extract_image",
+          "readiness": "source_url_discovery_required"
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "source_store": "Bandai Premium",
+      "priority": 30,
+      "missing_image_rows": 3,
+      "primary_workflow": "find_source_then_extract_image",
+      "recommended_next_step": "find_exact_official_source_url_then_extract_image",
+      "blocked_until": "exact_product_source_url_discovered",
+      "blocked_reason": "missing_exact_source_url",
+      "required_evidence": [
+        "official_or_trusted_product_detail_source_url",
+        "title_character_variant_type_match",
+        "image_url_from_confirmed_source_or_trusted_official_cdn"
+      ],
+      "readiness_rows": [
+        {
+          "readiness": "source_url_discovery_required",
+          "rows": 3
+        }
+      ],
+      "workflow_rows": [
+        {
+          "workflow": "find_source_then_extract_image",
+          "label": "정확한 공식 상품 source_url을 먼저 찾은 뒤 이미지 첨부",
+          "rows": 3,
+          "next_step": "find_exact_official_source_url_then_extract_image"
+        }
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 1835,
+          "name_ko": "원피스 나미 타올",
+          "name_ja": "ONE PIECE ナミ タオル",
+          "source_store": "Bandai Premium",
+          "affiliation": null,
+          "category": "타월",
+          "source_url": null,
+          "official_search_url": "https://p-bandai.jp/search/?q=ONE%20PIECE%20%E3%83%8A%E3%83%9F%20%E3%82%BF%E3%82%AA%E3%83%AB",
+          "workflow": "find_source_then_extract_image",
+          "readiness": "source_url_discovery_required"
+        },
+        {
+          "catalog_index": 1836,
+          "name_ko": "원피스 상디 토트백",
+          "name_ja": "ONE PIECE サンジ トートバッグ",
+          "source_store": "Bandai Premium",
+          "affiliation": null,
+          "category": "가방",
+          "source_url": null,
+          "official_search_url": "https://p-bandai.jp/search/?q=ONE%20PIECE%20%E3%82%B5%E3%83%B3%E3%82%B8%20%E3%83%88%E3%83%BC%E3%83%88%E3%83%90%E3%83%83%E3%82%B0",
+          "workflow": "find_source_then_extract_image",
+          "readiness": "source_url_discovery_required"
+        },
+        {
+          "catalog_index": 1840,
+          "name_ko": "원피스 쵸파 머그컵",
+          "name_ja": "ONE PIECE チョッパー マグカップ",
+          "source_store": "Bandai Premium",
+          "affiliation": null,
+          "category": "머그컵",
+          "source_url": null,
+          "official_search_url": "https://p-bandai.jp/search/?q=ONE%20PIECE%20%E3%83%81%E3%83%A7%E3%83%83%E3%83%91%E3%83%BC%20%E3%83%9E%E3%82%B0%E3%82%AB%E3%83%83%E3%83%97",
           "workflow": "find_source_then_extract_image",
           "readiness": "source_url_discovery_required"
         }
@@ -8115,7 +8145,7 @@
     },
     "review_gotouchi_official_candidates": {
       "workflow": "review_gotouchi_official_candidates",
-      "batch_id": "image-attachment-action-005",
+      "batch_id": "image-attachment-action-003",
       "source_store": "ご当地ちいかわ 공식(API)",
       "row_count": 20,
       "primary_review_url_rows": 20,
@@ -10792,7 +10822,7 @@
       "current_focus_pack": {},
       "review_start": {
         "workflow": "review_gotouchi_official_candidates",
-        "batch_id": "image-attachment-action-005",
+        "batch_id": "image-attachment-action-003",
         "source_store": "ご当地ちいかわ 공식(API)",
         "row_count": 20,
         "primary_review_url_rows": 20,
@@ -10999,7 +11029,7 @@
   ],
   "manual_validation_focus": {
     "auto_import_ready_rows": 0,
-    "manual_validation_required_rows": 792,
+    "manual_validation_required_rows": 790,
     "next_focus_lane": "discover_exact_source_urls",
     "next_focus_row_count": 753,
     "next_focus_source": "source_discovery_action_queue_public.json",
@@ -11326,7 +11356,7 @@
         "current_focus_pack": {},
         "review_start": {
           "workflow": "review_gotouchi_official_candidates",
-          "batch_id": "image-attachment-action-005",
+          "batch_id": "image-attachment-action-003",
           "source_store": "ご当地ちいかわ 공식(API)",
           "row_count": 20,
           "primary_review_url_rows": 20,
@@ -11517,12 +11547,12 @@
     }
   },
   "execution_queue_summary": {
-    "open_missing_image_rows": 792,
+    "open_missing_image_rows": 790,
     "auto_import_ready_rows": 0,
     "queue_count": 4,
-    "queued_rows_total": 792,
+    "queued_rows_total": 790,
     "raw_queued_rows_total": 798,
-    "overlapping_queue_rows": 6,
+    "overlapping_queue_rows": 8,
     "not_yet_queued_rows": 0,
     "not_yet_queued_rows_explained": 0,
     "unqueued_phase_rows_total": 0,
@@ -11701,7 +11731,7 @@
         ],
         "review_start": {
           "workflow": "review_gotouchi_official_candidates",
-          "batch_id": "image-attachment-action-005",
+          "batch_id": "image-attachment-action-003",
           "source_store": "ご当地ちいかわ 공식(API)",
           "row_count": 20,
           "primary_review_url_rows": 20,
@@ -11926,10 +11956,10 @@
   },
   "blocking_dashboard": {
     "status": "manual_evidence_required",
-    "total_open_rows": 792,
+    "total_open_rows": 790,
     "auto_import_ready_rows": 0,
-    "manual_validation_required_rows": 792,
-    "queued_rows_total": 792,
+    "manual_validation_required_rows": 790,
+    "queued_rows_total": 790,
     "not_yet_queued_rows": 0,
     "queue_coverage": 1.0,
     "top_blocked_reason": {
@@ -11989,11 +12019,11 @@
     ],
     "image_evidence_bottleneck_summary": {
       "status": "source_or_image_evidence_required",
-      "missing_image_rows": 792,
+      "missing_image_rows": 790,
       "known_image_download_problem_rows": 0,
-      "image_url_evidence_missing_rows": 792,
+      "image_url_evidence_missing_rows": 790,
       "auto_import_ready_rows": 0,
-      "manual_confirmation_required_rows": 792,
+      "manual_confirmation_required_rows": 790,
       "source_first_rows": 753,
       "representative_review_rows": 23,
       "manual_image_research_rows": 10,
@@ -12027,7 +12057,7 @@
     "operator_message": "No missing-image DB row can be imported automatically yet; fill the next confirmation template with exact product source/image evidence first."
   },
   "completion_plan": {
-    "total_open_rows": 792,
+    "total_open_rows": 790,
     "phase_rows_total": 786,
     "phase_count": 3,
     "status": "needs_review",
@@ -12054,7 +12084,7 @@
         "current_batch": {},
         "review_start": {
           "workflow": "review_gotouchi_official_candidates",
-          "batch_id": "image-attachment-action-005",
+          "batch_id": "image-attachment-action-003",
           "source_store": "ご当地ちいかわ 공식(API)",
           "row_count": 20,
           "primary_review_url_rows": 20,

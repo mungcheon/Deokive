@@ -1,7 +1,7 @@
 # Catalog Image Attachment Review Board
 
-- Review rows: `29`
-- Exact image URL review rows: `6`
+- Review rows: `27`
+- Exact image URL review rows: `4`
 - Representative image review rows: `23`
 - Gate: `blocked_until_manual_image_confirmation`
 
@@ -12,15 +12,6 @@
 `python tools/import_confirmed_image_attachment_rows.py --queue server/catalog_image_attachment_confirmed_rows.json --report server/catalog_image_attachment_confirmed_import_report.json --write`
 
 ## Items
-
-### 2270 하이큐!! 10주년 이벤트 트레이딩 캔뱃지
-
-- Lane: `image_url_review_ready`
-- Store: `TOHO animation STORE`
-- Category: `캔뱃지`
-- Blockers: `manual_image_url_confirmation`
-- Review URL: https://haikyu.jp/10thevent/
-- Suggested local path: `assets/catalog_images/catalog_2270.webp`
 
 ### 2268 원피스 생일 한정 아크릴 액세서리 스탠드 (루피 5.5)
 
@@ -57,15 +48,6 @@
 - Blockers: `manual_image_url_confirmation`
 - Review URL: https://online-kuji.chiikawamarket.jp/
 - Suggested local path: `assets/catalog_images/catalog_682.webp`
-
-### 2271 하이큐!! 10주년 메모리얼 컬렉션 캔뱃지 SEASON.1~4
-
-- Lane: `image_url_review_ready`
-- Store: `하이큐!! 10주년 기념전`
-- Category: `캔뱃지`
-- Blockers: `manual_image_url_confirmation`
-- Review URL: https://haikyu.jp/10thevent/
-- Suggested local path: `assets/catalog_images/catalog_2271.webp`
 
 ### 936 치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)
 
