@@ -41,6 +41,7 @@ import build_requested_focus_next_work_public
 import build_source_discovery_next_focus_detail_candidates_public
 import build_source_discovery_next_focus_exact_url_candidate_audit_public
 import build_source_discovery_next_focus_fallback_queue_public
+import build_source_discovery_next_focus_handoff_public
 import build_source_discovery_next_focus_pack_fetch_audit_public
 import build_source_discovery_next_focus_identity_candidate_review_public
 import build_source_discovery_next_focus_pack_public
@@ -139,6 +140,12 @@ SOURCE_DISCOVERY_NEXT_FOCUS_IDENTITY_BACKFILL_QUEUE = DATA / "source_discovery_n
 SOURCE_DISCOVERY_NEXT_FOCUS_IDENTITY_CANDIDATE_REVIEW_QUEUE = (
     DATA / "source_discovery_next_focus_identity_candidate_review_queue_public.json"
 )
+SOURCE_DISCOVERY_NEXT_FOCUS_LIVE_SOURCE_PROBE = DATA / "source_discovery_next_focus_live_source_probe_public.json"
+SOURCE_DISCOVERY_NEXT_FOCUS_VARIANT_METADATA_BACKFILL = (
+    DATA / "source_discovery_next_focus_variant_metadata_backfill_public.json"
+)
+SOURCE_DISCOVERY_NEXT_FOCUS_HANDOFF = DATA / "source_discovery_next_focus_handoff_public.json"
+SOURCE_DISCOVERY_NEXT_FOCUS_HANDOFF_MD = DATA / "source_discovery_next_focus_handoff_public.md"
 SOURCE_DETAIL_CANDIDATE_ACTION_QUEUE = DATA / "source_detail_candidate_action_queue_public.json"
 OFFICIAL_DETAIL_REVIEW_BATCHES = DATA / "official_detail_review_batches_public.json"
 METADATA_BACKLOG = DATA / "catalog_metadata_backlog_public.json"
@@ -11254,6 +11261,24 @@ def update_reports(write: bool) -> dict[str, Any]:
         items,
         queue_path=SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_QUEUE,
     )
+    source_discovery_next_focus_live_source_probe = (
+        load_json(SOURCE_DISCOVERY_NEXT_FOCUS_LIVE_SOURCE_PROBE, {})
+        if SOURCE_DISCOVERY_NEXT_FOCUS_LIVE_SOURCE_PROBE.exists()
+        else {}
+    )
+    source_discovery_next_focus_variant_metadata_backfill = (
+        load_json(SOURCE_DISCOVERY_NEXT_FOCUS_VARIANT_METADATA_BACKFILL, {})
+        if SOURCE_DISCOVERY_NEXT_FOCUS_VARIANT_METADATA_BACKFILL.exists()
+        else {}
+    )
+    source_discovery_next_focus_handoff = build_source_discovery_next_focus_handoff_public.build_handoff(
+        focus_pack=source_discovery_next_focus_pack,
+        fallback_queue=source_discovery_next_focus_fallback_queue,
+        detail_candidates=source_discovery_next_focus_detail_candidates,
+        live_probe=source_discovery_next_focus_live_source_probe,
+        variant_backfill=source_discovery_next_focus_variant_metadata_backfill,
+        generated_at=generated_at,
+    )
     missing_image_actionability = build_catalog_missing_image_actionability_public.build_report(
         image_enrichment_batches,
         image_attachment_action_queue,
@@ -13608,6 +13633,11 @@ def update_reports(write: bool) -> dict[str, Any]:
             source_discovery_next_focus_identity_candidate_review_queue,
         )
         write_json(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_IMPORT, source_discovery_next_focus_fallback_import)
+        write_json(SOURCE_DISCOVERY_NEXT_FOCUS_HANDOFF, source_discovery_next_focus_handoff)
+        build_source_discovery_next_focus_handoff_public.write_markdown(
+            source_discovery_next_focus_handoff,
+            SOURCE_DISCOVERY_NEXT_FOCUS_HANDOFF_MD,
+        )
         write_json(MISSING_IMAGE_ACTIONABILITY, missing_image_actionability)
         write_json(GENERIC_SOURCE_PATCH_CANDIDATES, generic_source_patch_candidates)
         write_json(REQUESTED_FOCUS, requested_focus)
@@ -13662,6 +13692,8 @@ def update_reports(write: bool) -> dict[str, Any]:
             str(SOURCE_DISCOVERY_NEXT_FOCUS_IDENTITY_BACKFILL_QUEUE.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_IDENTITY_CANDIDATE_REVIEW_QUEUE.relative_to(ROOT)),
             str(SOURCE_DISCOVERY_NEXT_FOCUS_FALLBACK_IMPORT.relative_to(ROOT)),
+            str(SOURCE_DISCOVERY_NEXT_FOCUS_HANDOFF.relative_to(ROOT)),
+            str(SOURCE_DISCOVERY_NEXT_FOCUS_HANDOFF_MD.relative_to(ROOT)),
             str(MISSING_IMAGE_ACTIONABILITY.relative_to(ROOT)),
             str(GENERIC_SOURCE_PATCH_CANDIDATES.relative_to(ROOT)),
             str(REQUESTED_FOCUS.relative_to(ROOT)),
