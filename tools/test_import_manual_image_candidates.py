@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import sys
 import json
@@ -170,7 +170,7 @@ class ManualImageCandidateImportTests(unittest.TestCase):
 
     def test_accepts_hobby_search_when_candidate_store_matches_netloc_and_change_allowed(self):
         result = import_candidates(
-            [_row(source_store="엔스카이", name_ko="장송의 프리렌 펀 우치와", name_ja="葬送のフリーレン フェルン うちわ")],
+            [_row(source_store="엔스카이", name_ko="장송의 프리렌 페른 우치와", name_ja="葬送のフリーレン フェルン うちわ")],
             [
                 _candidate(
                     source_store="Hobby Search",

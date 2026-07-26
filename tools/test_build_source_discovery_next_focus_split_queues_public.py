@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import sys
 import unittest
@@ -19,7 +19,7 @@ class SourceDiscoveryNextFocusSplitQueueTests(unittest.TestCase):
                     "source_store": "엔스카이",
                     "affiliation": "葬送のフリーレン",
                     "category": "키링",
-                    "name_ko": "펀 러버 스트랩",
+                    "name_ko": "페른 러버 스트랩",
                     "name_ja": "フェルン ラバーストラップ",
                     "primary_review_url": "https://www.google.com/search?q=example",
                     "primary_review_url_kind": "domain_limited_web_search",

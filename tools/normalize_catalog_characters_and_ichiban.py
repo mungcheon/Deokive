@@ -34,6 +34,87 @@ FRIEREN_JA_TO_KO = {
     "アイゼン": "아이젠",
 }
 FRIEREN_KO_TO_JA = {value: key for key, value in FRIEREN_JA_TO_KO.items()}
+ICHIBAN_CHARACTER_RULES: dict[str, list[tuple[str, str]]] = {
+    "블루록": [
+        ("潔 世一", "이사기 요이치"),
+        ("潔世一", "이사기 요이치"),
+        ("凪 誠士郎", "나기 세이시로"),
+        ("凪誠士郎", "나기 세이시로"),
+        ("馬狼", "바로 쇼에이"),
+        ("蜂楽 廻", "바치라 메구루"),
+        ("蜂楽廻", "바치라 메구루"),
+        ("千切 豹馬", "치기리 효마"),
+        ("千切豹馬", "치기리 효마"),
+        ("糸師 凛", "이토시 린"),
+        ("糸師凛", "이토시 린"),
+        ("糸師 冴", "이토시 사에"),
+        ("糸師冴", "이토시 사에"),
+        ("御影 玲王", "미카게 레오"),
+        ("御影玲王", "미카게 레오"),
+        ("國神 錬介", "쿠니가미 렌스케"),
+        ("國神錬介", "쿠니가미 렌스케"),
+        ("雷市 陣吾", "라이치 진고"),
+        ("雷市陣吾", "라이치 진고"),
+        ("我牙丸 吟", "가가마루 긴"),
+        ("我牙丸吟", "가가마루 긴"),
+        ("絵心 甚八", "에고 진파치"),
+        ("絵心甚八", "에고 진파치"),
+        ("帝襟 アンリ", "테이에리 안리"),
+        ("帝襟アンリ", "테이에리 안리"),
+        ("二子 一揮", "니코 잇키"),
+        ("二子一揮", "니코 잇키"),
+        ("蟻生 十兵衛", "아류 주베에"),
+        ("蟻生十兵衛", "아류 주베에"),
+        ("時光 青志", "토키미츠 아오시"),
+        ("時光青志", "토키미츠 아오시"),
+        ("士道 龍聖", "시도 류세이"),
+        ("士道龍聖", "시도 류세이"),
+    ],
+    "원피스": [
+        ("モンキー・D・ルフィ", "몽키 D. 루피"),
+        ("モンキー・D・ルフィ太郎", "몽키 D. 루피"),
+        ("ルフィ", "몽키 D. 루피"),
+        ("ロロノア・ゾロ", "롤로노아 조로"),
+        ("ゾロ十郎", "롤로노아 조로"),
+        ("ゾロ", "롤로노아 조로"),
+        ("ナミ", "나미"),
+        ("サンジ", "상디"),
+        ("ウソップ", "우솝"),
+        ("トニートニー・チョッパー", "토니토니 쵸파"),
+        ("チョッパー", "토니토니 쵸파"),
+        ("ニコ・ロビン", "니코 로빈"),
+        ("ロビン", "니코 로빈"),
+        ("フランキー", "프랑키"),
+        ("ブルック", "브룩"),
+        ("ジンベエ", "징베"),
+        ("トラファルガー・ロー", "트라팔가 로"),
+        ("トラファルガー・D・ワーテル・ロー", "트라팔가 로"),
+        ("ロー", "트라팔가 로"),
+        ("ポートガス・D・エース", "포트거스 D. 에이스"),
+        ("エース", "포트거스 D. 에이스"),
+        ("サボ", "사보"),
+        ("シャンクス", "샹크스"),
+        ("バギー", "버기"),
+        ("ボア・ハンコック", "보아 핸콕"),
+        ("ハンコック", "보아 핸콕"),
+        ("ヤマト", "야마토"),
+        ("カイドウ", "카이도"),
+        ("光月おでん", "코즈키 오뎅"),
+        ("おでん", "코즈키 오뎅"),
+        ("しらほし", "시라호시"),
+        ("ビビ", "네펠타리 비비"),
+        ("キャロット", "캐럿"),
+        ("ウタ", "우타"),
+        ("ロジャー", "골 D. 로저"),
+        ("エドワード・ニューゲート", "에드워드 뉴게이트"),
+        ("白ひげ", "에드워드 뉴게이트"),
+        ("マルコ", "마르코"),
+        ("クロコダイル", "크로커다일"),
+        ("ミホーク", "쥬라큘 미호크"),
+        ("ドフラミンゴ", "돈키호테 도플라밍고"),
+        ("キッド", "유스타스 키드"),
+    ],
+}
 
 
 def _load(path: Path) -> dict[str, Any]:
@@ -127,6 +208,47 @@ def _normalize_last_one_prices(rows: list[dict[str, Any]], *, write: bool) -> li
         )
         if write:
             row["official_price_jpy"] = 0
+    return changes
+
+
+def _normalize_ichiban_direct_character_rules(
+    rows: list[dict[str, Any]], *, write: bool
+) -> list[dict[str, Any]]:
+    changes: list[dict[str, Any]] = []
+    for row in rows:
+        if not _is_ichiban(row):
+            continue
+        rules = ICHIBAN_CHARACTER_RULES.get(_text(row.get("affiliation")))
+        if not rules:
+            continue
+        item_name = _prize_item_name(row)
+        multi_marker_text = re.sub(r"（[^）]*）|\([^)]*\)", "", item_name)
+        if any(marker in multi_marker_text for marker in ("＆", "&", "、", "／", "/")):
+            continue
+        matches: list[str] = []
+        for alias, character in rules:
+            if alias in item_name and character not in matches:
+                matches.append(character)
+        if len(matches) != 1:
+            continue
+        character = matches[0]
+        new_name = _ichiban_display_name(row, character)
+        if row.get("character_name") == character and row.get("name_ko") == new_name:
+            continue
+        changes.append(
+            {
+                "catalog_index": row.get("catalog_index"),
+                "affiliation": row.get("affiliation"),
+                "matched_character": character,
+                "field_changes": {
+                    "character_name": {"from": row.get("character_name"), "to": character},
+                    "name_ko": {"from": row.get("name_ko"), "to": new_name},
+                },
+            }
+        )
+        if write:
+            row["character_name"] = character
+            row["name_ko"] = new_name
     return changes
 
 
@@ -334,6 +456,9 @@ def main() -> int:
     before_count = len(rows)
 
     character_alias_changes = _normalize_frieren_aliases(rows, write=args.write)
+    ichiban_direct_character_changes = _normalize_ichiban_direct_character_rules(
+        rows, write=args.write
+    )
     last_one_price_changes = _normalize_last_one_prices(rows, write=args.write)
     frieren_ichiban = _split_frieren_ichiban(rows, write=args.write)
 
@@ -362,12 +487,14 @@ def main() -> int:
             "rows_before": before_count,
             "rows_after": len(rows),
             "character_alias_changes": len(character_alias_changes),
+            "ichiban_direct_character_changes": len(ichiban_direct_character_changes),
             "last_one_price_changes": len(last_one_price_changes),
             "frieren_ichiban_updated_rows": len(frieren_ichiban["updated"]),
             "frieren_ichiban_created_rows": len(frieren_ichiban["created"]),
             "frieren_ichiban_removed_rows": len(frieren_ichiban["removed"]),
         },
         "character_alias_changes": character_alias_changes,
+        "ichiban_direct_character_changes": ichiban_direct_character_changes,
         "last_one_price_changes": last_one_price_changes,
         "frieren_ichiban": frieren_ichiban,
         "ichiban_audit_after": audit,
