@@ -94,10 +94,37 @@ def _target_row(
     return row, "name_source_url" if row else "not_found"
 
 
-def _safe_to_clear(row: dict[str, Any], item: dict[str, Any]) -> tuple[bool, str]:
-    if item.get("identity_status") != "live_title_mismatch":
-        return False, "identity_status_not_mismatch"
-    if item.get("recommended_action") != "find_exact_source_url_before_image_use":
+def _safe_to_clear(
+    row: dict[str, Any],
+    item: dict[str, Any],
+    weak_overlap_catalog_indexes: set[int] | None = None,
+    weak_overlap_row_indexes: set[int] | None = None,
+) -> tuple[bool, str]:
+    weak_overlap_catalog_indexes = weak_overlap_catalog_indexes or set()
+    weak_overlap_row_indexes = weak_overlap_row_indexes or set()
+    try:
+        catalog_index = int(row.get("catalog_index"))
+    except (TypeError, ValueError):
+        catalog_index = None
+    try:
+        queue_row_index = int(item.get("row_index"))
+    except (TypeError, ValueError):
+        queue_row_index = None
+
+    identity_status = item.get("identity_status")
+    recommended_action = item.get("recommended_action")
+    weak_overlap_manually_selected = (
+        (catalog_index in weak_overlap_catalog_indexes or queue_row_index in weak_overlap_row_indexes)
+        and identity_status == "weak_title_overlap"
+        and recommended_action == "review_source_url_before_image_use"
+    )
+    live_title_mismatch = (
+        identity_status == "live_title_mismatch"
+        and recommended_action == "find_exact_source_url_before_image_use"
+    )
+    if not live_title_mismatch and not weak_overlap_manually_selected:
+        if identity_status != "live_title_mismatch":
+            return False, "identity_status_not_mismatch"
         return False, "recommended_action_not_clearable"
 
     current_source = str(item.get("current_source_url") or "").strip()
@@ -111,12 +138,16 @@ def _safe_to_clear(row: dict[str, Any], item: dict[str, Any]) -> tuple[bool, str
         return False, "image_url_changed"
     if not row_image:
         return False, "no_image_url_to_clear"
+    if weak_overlap_manually_selected:
+        return True, "clear_manually_selected_weak_overlap_source_and_image"
     return True, "clear_stale_source_and_image"
 
 
 def apply_cleanup(
     rows: list[dict[str, Any]],
     queue_items: list[dict[str, Any]],
+    weak_overlap_catalog_indexes: set[int] | None = None,
+    weak_overlap_row_indexes: set[int] | None = None,
 ) -> tuple[int, list[dict[str, Any]], list[dict[str, Any]]]:
     index_lookup = _row_by_catalog_index(rows)
     updated = 0
@@ -128,7 +159,7 @@ def apply_cleanup(
         if row is None:
             skipped.append({"name_ko": item.get("name_ko"), "reason": "target_row_not_found"})
             continue
-        ok, reason = _safe_to_clear(row, item)
+        ok, reason = _safe_to_clear(row, item, weak_overlap_catalog_indexes, weak_overlap_row_indexes)
         if not ok:
             skipped.append(
                 {
@@ -164,13 +195,40 @@ def main() -> int:
     parser.add_argument("--catalog", type=Path, default=DEFAULT_CATALOG)
     parser.add_argument("--queue", type=Path, default=DEFAULT_QUEUE)
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
+    parser.add_argument(
+        "--clear-weak-overlap-catalog-indexes",
+        default="",
+        help="Comma-separated catalog_index values to clear even when identity_status is weak_title_overlap.",
+    )
+    parser.add_argument(
+        "--clear-weak-overlap-row-indexes",
+        default="",
+        help="Comma-separated queue row_index values to clear even when identity_status is weak_title_overlap.",
+    )
     parser.add_argument("--write", action="store_true")
     args = parser.parse_args()
 
     rows, wrapper = load_catalog(args.catalog)
-    updated, changes, skipped = apply_cleanup(rows, load_queue(args.queue))
+    weak_overlap_catalog_indexes = {
+        int(value.strip())
+        for value in str(args.clear_weak_overlap_catalog_indexes or "").split(",")
+        if value.strip()
+    }
+    weak_overlap_row_indexes = {
+        int(value.strip())
+        for value in str(args.clear_weak_overlap_row_indexes or "").split(",")
+        if value.strip()
+    }
+    updated, changes, skipped = apply_cleanup(
+        rows,
+        load_queue(args.queue),
+        weak_overlap_catalog_indexes,
+        weak_overlap_row_indexes,
+    )
     report = {
         "write": args.write,
+        "weak_overlap_catalog_indexes": sorted(weak_overlap_catalog_indexes),
+        "weak_overlap_row_indexes": sorted(weak_overlap_row_indexes),
         "updated_rows": updated,
         "changes": changes,
         "skipped_rows": len(skipped),

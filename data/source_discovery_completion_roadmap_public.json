@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T08:16:15Z",
+  "generated_at": "2026-07-26T08:22:10Z",
   "scope": "source_discovery_completion_roadmap",
   "summary": {
-    "missing_image_rows": 765,
-    "source_first_rows": 737,
-    "queued_source_rows": 687,
-    "focus_source_rows": 687,
+    "missing_image_rows": 779,
+    "source_first_rows": 751,
+    "queued_source_rows": 701,
+    "focus_source_rows": 701,
     "focus_coverage": 1.0,
-    "top_10_store_rows": 560,
-    "top_10_store_coverage": 0.8151,
+    "top_10_store_rows": 574,
+    "top_10_store_coverage": 0.8188,
     "current_focus_pack_rows": 20,
     "current_focus_fallback_rows": 20,
     "completion_readiness_status": "current_focus_fallback_review_required",
@@ -28,28 +28,28 @@
     "auto_apply_ready_rows": 0,
     "auto_apply_enabled": false,
     "manual_confirmed_rows": 0,
-    "queued_source_rows": 687,
-    "focus_source_rows": 687,
-    "remaining_focus_review_rows": 687,
-    "current_focus_pack_id": "source-discovery-focus-002",
+    "queued_source_rows": 701,
+    "focus_source_rows": 701,
+    "remaining_focus_review_rows": 701,
+    "current_focus_pack_id": "source-discovery-focus-001",
     "current_focus_pack_rows": 20,
     "current_focus_remaining_rows": 20,
     "current_focus_fallback_rows": 20,
     "next_pack_after_current": "source-discovery-focus-002",
     "current_focus_resolution_status": "manual_exact_source_url_review_required",
     "current_focus_cache_cross_check": {
-      "cross_checked_rows": 9,
+      "cross_checked_rows": 15,
       "safe_exact_match_rows": 0,
-      "broad_candidate_rows": 1,
-      "no_candidate_rows": 8,
+      "broad_candidate_rows": 4,
+      "no_candidate_rows": 11,
       "status_counts": [
         [
           "no_cache_candidate",
-          8
+          11
         ],
         [
           "broad_cache_candidate",
-          1
+          4
         ]
       ],
       "auto_apply_enabled": false
@@ -64,10 +64,10 @@
       "fallback_reason": "broad_official_search_result_requires_exact_detail_url",
       "all_sample_candidates_rejected_rows": 20,
       "safe_candidate_detail_link_rows": 0,
-      "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%A4%8F%E6%B2%B9%E5%82%91+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+      "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29%22",
       "first_primary_review_url_kind": "domain_limited_web_search",
-      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%A4%8F%E6%B2%B9%E5%82%91+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
-      "first_fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E5%A4%8F%E6%B2%B9%E5%82%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97"
+      "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29%22",
+      "first_fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29"
     },
     "blocked_until": "exact_product_detail_source_url_confirmed",
     "blocked_reasons": [
@@ -77,8 +77,8 @@
   },
   "next_execution_summary": {
     "lane_count": 5,
-    "open_rows": 851,
-    "next_batch_rows": 184,
+    "open_rows": 856,
+    "next_batch_rows": 175,
     "next_safe_phase": "exact_source_url_review",
     "auto_apply_enabled": false,
     "manual_evidence_required": true
@@ -97,17 +97,17 @@
     {
       "lane": "metadata_field_confirmation",
       "status": "blocked_until_exact_source_url_confirmed",
-      "open_rows": 21,
-      "next_batch_rows": 21,
-      "review_start_rows": 21,
-      "manual_decision_rows": 21,
+      "open_rows": 12,
+      "next_batch_rows": 12,
+      "review_start_rows": 12,
+      "manual_decision_rows": 12,
       "public_report": "data/source_discovery_next_focus_metadata_field_import_dry_run_public.json",
       "next_action": "confirm sub-series, Japanese name, and character fields from exact official evidence"
     },
     {
       "lane": "focus_pack_rotation",
       "status": "queued_after_current_focus",
-      "open_rows": 687,
+      "open_rows": 701,
       "next_batch_rows": 20,
       "review_start_rows": 20,
       "manual_decision_rows": 20,
@@ -139,8 +139,8 @@
     "status": "current_focus_fallback_review_required",
     "current_lane": "exact_source_url_review",
     "current_review_section": "source_discovery_next_focus_exact_url_review_queue",
-    "current_focus_pack_id": "source-discovery-focus-002",
-    "queued_source_rows": 687,
+    "current_focus_pack_id": "source-discovery-focus-001",
+    "queued_source_rows": 701,
     "current_focus_remaining_rows": 20,
     "safe_candidate_detail_link_rows": 0,
     "all_sample_candidates_rejected_rows": 20,
@@ -150,18 +150,18 @@
     ],
     "current_focus_resolution_status": "manual_exact_source_url_review_required",
     "current_focus_cache_cross_check": {
-      "cross_checked_rows": 9,
+      "cross_checked_rows": 15,
       "safe_exact_match_rows": 0,
-      "broad_candidate_rows": 1,
-      "no_candidate_rows": 8,
+      "broad_candidate_rows": 4,
+      "no_candidate_rows": 11,
       "status_counts": [
         [
           "no_cache_candidate",
-          8
+          11
         ],
         [
           "broad_cache_candidate",
-          1
+          4
         ]
       ],
       "auto_apply_enabled": false
@@ -175,7 +175,7 @@
         "next_batch_rows": 20,
         "review_section": "source_discovery_next_focus_exact_url_review_queue",
         "write_template_section": "source_url_confirmation_patch_template.rows",
-        "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%A4%8F%E6%B2%B9%E5%82%91+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+        "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29%22",
         "first_primary_review_url_kind": "domain_limited_web_search",
         "template_rows": 10,
         "rediscovery_work_order_rows": 20,
@@ -192,7 +192,7 @@
         "step": 2,
         "lane": "metadata_field_confirmation",
         "status": "blocked_until_exact_source_url_confirmed",
-        "next_batch_rows": 21,
+        "next_batch_rows": 12,
         "review_section": "source_discovery_next_focus_metadata_field_import_dry_run",
         "write_template_section": "metadata_field_import_template",
         "required_before_write": [
@@ -229,32 +229,32 @@
     }
   },
   "current_focus_pack": {
-    "focus_pack_id": "source-discovery-focus-002",
+    "focus_pack_id": "source-discovery-focus-001",
     "source_store": "엔스카이",
     "target_category": "키링",
     "pack_items": 20,
     "remaining_review_rows": 20,
     "blocked_rows": 20,
     "fallback_queue_rows": 20,
-    "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E5%A4%8F%E6%B2%B9%E5%82%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
-    "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%A4%8F%E6%B2%B9%E5%82%91+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
+    "first_official_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
+    "first_primary_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97+%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29%22",
     "first_primary_review_url_kind": "domain_limited_web_search",
-    "first_fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E5%A4%8F%E6%B2%B9%E5%82%91%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
+    "first_fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
     "all_sample_candidates_rejected_rows": 20,
     "safe_candidate_detail_link_rows": 0,
     "cache_cross_check": {
-      "cross_checked_rows": 9,
+      "cross_checked_rows": 15,
       "safe_exact_match_rows": 0,
-      "broad_candidate_rows": 1,
-      "no_candidate_rows": 8,
+      "broad_candidate_rows": 4,
+      "no_candidate_rows": 11,
       "status_counts": [
         [
           "no_cache_candidate",
-          8
+          11
         ],
         [
           "broad_cache_candidate",
-          1
+          4
         ]
       ],
       "auto_apply_enabled": false
@@ -267,15 +267,15 @@
     {
       "rank": 1,
       "source_store": "엔스카이",
-      "rows": 179,
-      "estimated_image_rows_unblocked_after_source_confirmation": 179,
+      "rows": 193,
+      "estimated_image_rows_unblocked_after_source_confirmation": 193,
       "pack_count": 0,
       "top_category": "키링",
       "top_allowed_source_domain": "www.enskyshop.com",
       "first_batch_id": "source-discovery-action-001",
-      "first_primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%86%E3%81%95%E3%81%8E%29",
+      "first_primary_review_url": "https://www.enskyshop.com/products/list?name=%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%20%28%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%29",
       "first_primary_review_url_kind": "official_search_url",
-      "official_search_url_count": 179,
+      "official_search_url_count": 193,
       "fallback_web_search_url_count": 0,
       "next_step": "open_official_search_and_confirm_exact_product_source_url",
       "auto_apply_enabled": false
@@ -288,7 +288,7 @@
       "pack_count": 0,
       "top_category": "아크릴 스탠드",
       "top_allowed_source_domain": "www.animate-onlineshop.jp",
-      "first_batch_id": "source-discovery-action-010",
+      "first_batch_id": "source-discovery-action-011",
       "first_primary_review_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EA%B7%80%EB%A9%B8%EC%9D%98%20%EC%B9%BC%EB%82%A0%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%ED%83%84%EC%A7%80%EB%A1%9C%29",
       "first_primary_review_url_kind": "official_search_url",
       "official_search_url_count": 156,
@@ -304,7 +304,7 @@
       "pack_count": 0,
       "top_category": "피규어",
       "top_allowed_source_domain": "www.goodsmile.info",
-      "first_batch_id": "source-discovery-action-018",
+      "first_batch_id": "source-discovery-action-019",
       "first_primary_review_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=POP%20UP%20PARADE%20%E3%83%AA%E3%82%B3",
       "first_primary_review_url_kind": "official_search_url",
       "official_search_url_count": 56,
@@ -320,7 +320,7 @@
       "pack_count": 0,
       "top_category": "피규어",
       "top_allowed_source_domain": "shop.kotobukiya.co.jp",
-      "first_batch_id": "source-discovery-action-021",
+      "first_batch_id": "source-discovery-action-022",
       "first_primary_review_url": "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?search=x&keyword=ARTFX%20J%20%E3%82%B4%E3%83%B3%EF%BC%9D%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9",
       "first_primary_review_url_kind": "official_search_url",
       "official_search_url_count": 44,
@@ -336,7 +336,7 @@
       "pack_count": 0,
       "top_category": "캔뱃지",
       "top_allowed_source_domain": "www.movic.jp",
-      "first_batch_id": "source-discovery-action-024",
+      "first_batch_id": "source-discovery-action-025",
       "first_primary_review_url": "https://www.movic.jp/shop/goods/search.aspx?search=x&keyword=HUNTER%C3%97HUNTER%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%83%92%E3%82%BD%E3%82%AB%29",
       "first_primary_review_url_kind": "official_search_url",
       "official_search_url_count": 36,
@@ -352,7 +352,7 @@
       "pack_count": 0,
       "top_category": "캔뱃지",
       "top_allowed_source_domain": "jumpcs.shueisha.co.jp",
-      "first_batch_id": "source-discovery-action-026",
+      "first_batch_id": "source-discovery-action-027",
       "first_primary_review_url": "https://jumpcs.shueisha.co.jp/shop/goods/search.aspx?search=x&keyword=%E3%81%AE%E3%82%8B%E3%82%AD%E3%83%A3%E3%83%A9%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E8%BD%9F%E7%84%A6%E5%87%8D%20%E5%88%B6%E6%9C%8Dver.",
       "first_primary_review_url_kind": "official_search_url",
       "official_search_url_count": 23,
@@ -368,7 +368,7 @@
       "pack_count": 0,
       "top_category": "피규어",
       "top_allowed_source_domain": "furyuprize.com",
-      "first_batch_id": "source-discovery-action-028",
+      "first_batch_id": "source-discovery-action-029",
       "first_primary_review_url": "https://furyuprize.com/search?keyword=%E3%83%96%E3%83%AC%E3%82%A4%E3%82%AF%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%20%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF",
       "first_primary_review_url_kind": "official_search_url",
       "official_search_url_count": 21,
@@ -384,7 +384,7 @@
       "pack_count": 0,
       "top_category": "피규어",
       "top_allowed_source_domain": "www.taito.co.jp",
-      "first_batch_id": "source-discovery-action-030",
+      "first_batch_id": "source-discovery-action-031",
       "first_primary_review_url": "https://www.taito.co.jp/prize?keyword=Desktop%20Cute%E3%83%95%E3%82%A3%E3%82%AE%E3%83%A5%E3%82%A2%20%E9%BA%97%E6%97%A5%E3%81%8A%E8%8C%B6%E5%AD%90",
       "first_primary_review_url_kind": "official_search_url",
       "official_search_url_count": 15,
@@ -400,7 +400,7 @@
       "pack_count": 0,
       "top_category": "아크릴 스탠드",
       "top_allowed_source_domain": "jumpcs.shueisha.co.jp",
-      "first_batch_id": "source-discovery-action-031",
+      "first_batch_id": "source-discovery-action-032",
       "first_primary_review_url": "https://jumpcs.shueisha.co.jp/shop/goods/search.aspx?search=x&keyword=ONE%20PIECE%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%82%AB%E3%82%A4%E3%83%89%E3%82%A6%29",
       "first_primary_review_url_kind": "official_search_url",
       "official_search_url_count": 15,
@@ -416,7 +416,7 @@
       "pack_count": 0,
       "top_category": "마스코트",
       "top_allowed_source_domain": "x.com",
-      "first_batch_id": "source-discovery-action-032",
+      "first_batch_id": "source-discovery-action-033",
       "first_primary_review_url": "https://www.google.com/search?q=site%3Ax.com%2Fchiikawa_kouhou%20%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%E4%B8%AD%E5%9B%BD%E9%99%90%E5%AE%9A%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%28%E4%B8%8A%E6%B5%B7%29",
       "first_primary_review_url_kind": "official_search_url",
       "official_search_url_count": 15,
@@ -437,7 +437,7 @@
     {
       "phase": 2,
       "name": "top_store_source_confirmation",
-      "rows": 687,
+      "rows": 701,
       "public_report": "data/source_discovery_focus_packs_public.json",
       "blocked_until": "exact_product_detail_source_url_confirmed",
       "next_machine_step": "rotate_focus_packs_until_current_focus_stores_are_confirmed"

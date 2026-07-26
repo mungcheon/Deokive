@@ -99,6 +99,63 @@ class ApplyStaleSourceCleanupQueueTests(unittest.TestCase):
         self.assertEqual(changes, [])
         self.assertEqual(skipped[0]["reason"], "identity_status_not_mismatch")
 
+    def test_apply_cleanup_clears_manually_selected_weak_overlap_rows(self) -> None:
+        rows = [
+            {
+                "catalog_index": 10,
+                "name_ko": "Weak But Reviewed Row",
+                "source_url": "https://example.test/weak",
+                "image_url": "https://cdn.example.test/weak.jpg",
+                "local_image_path": "assets/catalog_images/weak.webp",
+            }
+        ]
+        queue = [
+            {
+                "catalog_index": 10,
+                "current_source_url": "https://example.test/weak",
+                "current_image_url": "https://cdn.example.test/weak.jpg",
+                "identity_status": "weak_title_overlap",
+                "recommended_action": "review_source_url_before_image_use",
+                "live_title": "Different product with only a generic shared token",
+            }
+        ]
+
+        updated, changes, skipped = cleanup.apply_cleanup(rows, queue, {10})
+
+        self.assertEqual(updated, 1)
+        self.assertEqual(skipped, [])
+        self.assertNotIn("source_url", rows[0])
+        self.assertNotIn("image_url", rows[0])
+        self.assertNotIn("local_image_path", rows[0])
+        self.assertEqual(changes[0]["cleared_fields"], ["source_url", "image_url", "local_image_path"])
+
+    def test_apply_cleanup_clears_manually_selected_weak_overlap_by_queue_row_index(self) -> None:
+        rows = [
+            {
+                "catalog_index": 55,
+                "name_ko": "Weak Row With Different Catalog Index",
+                "source_url": "https://example.test/weak",
+                "image_url": "https://cdn.example.test/weak.jpg",
+            }
+        ]
+        queue = [
+            {
+                "row_index": 10,
+                "name_ko": "Weak Row With Different Catalog Index",
+                "current_source_url": "https://example.test/weak",
+                "current_image_url": "https://cdn.example.test/weak.jpg",
+                "identity_status": "weak_title_overlap",
+                "recommended_action": "review_source_url_before_image_use",
+            }
+        ]
+
+        updated, changes, skipped = cleanup.apply_cleanup(rows, queue, weak_overlap_row_indexes={10})
+
+        self.assertEqual(updated, 1)
+        self.assertEqual(skipped, [])
+        self.assertEqual(changes[0]["catalog_index"], 55)
+        self.assertNotIn("source_url", rows[0])
+
     def test_write_catalog_refreshes_public_missing_meta(self) -> None:
         payload = {
             "meta": {
