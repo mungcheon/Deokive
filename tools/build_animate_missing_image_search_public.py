@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
@@ -16,6 +17,29 @@ REPORT = DATA / "animate_missing_image_search_public.json"
 
 ANIMATE_STORE = "\uc560\ub2c8\uba54\uc774\ud2b8"
 ANIMATE_SEARCH_TEMPLATE = "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt={query}"
+HANGUL_RE = re.compile(r"[\uac00-\ud7a3]")
+MULTI_VARIANT_MARKERS = (
+    "\ub79c\ub364",
+    "\ud2b8\ub808\uc774\ub529",
+    "\uc138\ud2b8",
+    "\uba54\uc778",
+    "\uc77c\ub2f9",
+    "\ud30c",
+    "\u30c8\u30ec\u30fc\u30c7\u30a3\u30f3\u30b0",
+    "\u30e9\u30f3\u30c0\u30e0",
+    "\u30bb\u30c3\u30c8",
+    "\u30e1\u30a4\u30f3",
+    "\uff06",
+    "\u00d7",
+    "VS",
+    "&",
+)
+BROAD_CATEGORY_VALUES = {
+    "\ubb38\uad6c",
+    "\uce94\ubc43\uc9c0",
+    "\uc0dd\ud65c\uc7a1\ud654",
+    "\ud0a4\ub9c1",
+}
 
 
 def now_utc() -> str:
@@ -28,6 +52,32 @@ def load_json(path: Path) -> Any:
 
 def present(value: Any) -> bool:
     return value is not None and str(value).strip() != ""
+
+
+def candidate_review_risk(row: dict[str, Any], qrow: dict[str, Any]) -> tuple[str, list[str], str]:
+    reasons: list[str] = []
+    name_ko = str(row.get("name_ko") or "")
+    name_ja = str(row.get("name_ja") or "")
+    category = str(row.get("category") or "")
+    query = str(qrow.get("query") or "")
+    search_text = " ".join([name_ko, name_ja, query])
+
+    if not present(name_ja):
+        reasons.append("missing_official_language_name")
+    if HANGUL_RE.search(query):
+        reasons.append("hangul_search_query_needs_japanese_rewrite")
+    if any(marker in search_text for marker in MULTI_VARIANT_MARKERS):
+        reasons.append("multi_variant_or_blind_pack_title")
+    if category in BROAD_CATEGORY_VALUES:
+        reasons.append("broad_goods_category")
+
+    if "missing_official_language_name" in reasons or "hangul_search_query_needs_japanese_rewrite" in reasons:
+        return "high", reasons, "add_or_confirm_japanese_product_name_before_image_attachment"
+    if "multi_variant_or_blind_pack_title" in reasons:
+        return "high", reasons, "confirm_exact_variant_or_package_image_on_official_detail_page"
+    if "broad_goods_category" in reasons:
+        return "medium", reasons, "confirm_exact_detail_page_before_import"
+    return "medium", reasons or ["official_search_only"], "open_official_search_result_and_confirm_detail_page"
 
 
 def catalog_items(catalog: dict[str, Any]) -> list[dict[str, Any]]:
@@ -71,6 +121,7 @@ def build_report(
     missing_search_url_rows = 0
     by_strategy: Counter[str] = Counter()
     by_automation_safety: Counter[str] = Counter()
+    by_candidate_review_risk: Counter[str] = Counter()
     by_category: Counter[str] = Counter()
     by_affiliation: Counter[str] = Counter()
 
@@ -87,8 +138,10 @@ def build_report(
         automation_safety = str(qrow.get("automation_safety") or "manual_confirmation_required")
         category = str(row.get("category") or "")
         affiliation = str(row.get("affiliation") or "")
+        review_risk, review_reasons, next_action = candidate_review_risk(row, qrow)
         by_strategy[strategy] += 1
         by_automation_safety[automation_safety] += 1
+        by_candidate_review_risk[review_risk] += 1
         by_category[category] += 1
         by_affiliation[affiliation] += 1
         matched_items.append(
@@ -102,6 +155,9 @@ def build_report(
                 "search_url": search_url,
                 "strategy": strategy,
                 "automation_safety": automation_safety,
+                "candidate_review_risk": review_risk,
+                "candidate_review_reasons": review_reasons,
+                "next_action": next_action,
                 "manual_review_required": True,
                 "import_template": {
                     "catalog_index": catalog_index,
@@ -131,6 +187,10 @@ def build_report(
             "by_strategy": [{"strategy": key, "rows": value} for key, value in by_strategy.most_common()],
             "by_automation_safety": [
                 {"automation_safety": key, "rows": value} for key, value in by_automation_safety.most_common()
+            ],
+            "by_candidate_review_risk": [
+                {"candidate_review_risk": key, "rows": value}
+                for key, value in by_candidate_review_risk.most_common()
             ],
             "by_category": [{"category": key, "rows": value} for key, value in by_category.most_common(30)],
             "by_affiliation": [{"affiliation": key, "rows": value} for key, value in by_affiliation.most_common(30)],
