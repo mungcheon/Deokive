@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T20:05:47Z",
+  "generated_at": "2026-07-26T20:37:43Z",
   "scope": "catalog_character_name_policy",
   "summary": {
     "rows": 20313,
@@ -17,9 +17,34 @@
         "expected": "페른",
         "fields": [
           "character_name",
-          "affiliation"
+          "affiliation",
+          "name_ko"
         ],
-        "reason": "likely_korean_frieren_character_typo"
+        "reason": "likely_korean_frieren_character_typo",
+        "affiliation_scope": "장송의 프리렌",
+        "match": "contains"
+      },
+      "후리렌": {
+        "expected": "프리렌",
+        "fields": [
+          "character_name",
+          "affiliation",
+          "name_ko"
+        ],
+        "reason": "likely_korean_frieren_title_or_character_typo",
+        "affiliation_scope": "장송의 프리렌",
+        "match": "contains"
+      },
+      "프리랜": {
+        "expected": "프리렌",
+        "fields": [
+          "character_name",
+          "affiliation",
+          "name_ko"
+        ],
+        "reason": "likely_korean_frieren_title_or_character_typo",
+        "affiliation_scope": "장송의 프리렌",
+        "match": "contains"
       }
     },
     "ichiban_display_name_format": "一番くじ 발매명 / ?賞 / 상품이름 / 캐릭터명",

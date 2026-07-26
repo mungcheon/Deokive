@@ -35,8 +35,24 @@ ICHIBAN_PRIZE_LABEL_EXACT = {
 CHARACTER_MOJIBAKE_OR_ALIAS_FINDINGS = {
     "\ud38c": {
         "expected": "\ud398\ub978",
-        "fields": ("character_name", "affiliation"),
+        "fields": ("character_name", "affiliation", "name_ko"),
         "reason": "likely_korean_frieren_character_typo",
+        "affiliation_scope": "\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c",
+        "match": "contains",
+    },
+    "\ud6c4\ub9ac\ub80c": {
+        "expected": "\ud504\ub9ac\ub80c",
+        "fields": ("character_name", "affiliation", "name_ko"),
+        "reason": "likely_korean_frieren_title_or_character_typo",
+        "affiliation_scope": "\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c",
+        "match": "contains",
+    },
+    "\ud504\ub9ac\ub79c": {
+        "expected": "\ud504\ub9ac\ub80c",
+        "fields": ("character_name", "affiliation", "name_ko"),
+        "reason": "likely_korean_frieren_title_or_character_typo",
+        "affiliation_scope": "\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c",
+        "match": "contains",
     },
 }
 
@@ -66,9 +82,16 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
     for row in rows:
         catalog_index = row.get("catalog_index")
         for bad_value, rule in CHARACTER_MOJIBAKE_OR_ALIAS_FINDINGS.items():
+            affiliation_scope = rule.get("affiliation_scope")
+            if affiliation_scope and affiliation_scope not in str(row.get("affiliation") or ""):
+                continue
             for field in rule["fields"]:
                 value = row.get(field)
-                if value == bad_value:
+                match_mode = rule.get("match", "exact")
+                violation = value == bad_value
+                if match_mode == "contains":
+                    violation = bad_value in str(value or "")
+                if violation:
                     character_alias_violations.append(
                         {
                             "catalog_index": catalog_index,
