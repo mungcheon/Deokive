@@ -12035,10 +12035,8 @@ def update_reports(write: bool) -> dict[str, Any]:
         image_attachment_action_summary = image_attachment_action_queue.get("summary", {})
         if IMAGE_ATTACHMENT_ACTION_QUEUE.exists():
             target["image_attachment_action_queue"] = {
-                **copy_report_summary(
-                    IMAGE_ATTACHMENT_ACTION_QUEUE,
-                    "image_attachment_action_queue",
-                ),
+                "public_report": f"data/{IMAGE_ATTACHMENT_ACTION_QUEUE.name}",
+                **image_attachment_action_summary,
                 "blocking_dashboard": image_attachment_action_queue.get(
                     "blocking_dashboard",
                     {},

@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T14:44:58Z",
+  "generated_at": "2026-07-26T14:55:25Z",
   "scope": "public_catalog_cleanup_execution_plan",
   "summary": {
     "action_count": 24,
     "blocked_action_count": 0,
     "manual_review_action_count": 21,
     "pending_import_action_count": 0,
-    "total_action_rows": 33488,
+    "total_action_rows": 33482,
     "open_review_queues": {
       "source_discovery_rows": 768,
-      "image_missing_rows": 805,
+      "image_missing_rows": 803,
       "dedupe_groups": 61,
       "animation_unknown_categories": 0,
       "ichiban_missing_release_date_rows": 8,
@@ -63,8 +63,8 @@
       "official_detail_review_manual_confirmed_rows": 0,
       "ensky_cache_candidate_action_rows": 39,
       "ensky_cache_candidate_manual_confirmed_rows": 0,
-      "image_attachment_action_rows": 37,
-      "image_attachment_actionable_rows": 37,
+      "image_attachment_action_rows": 35,
+      "image_attachment_actionable_rows": 35,
       "image_attachment_unqueued_actionable_rows": 0,
       "image_attachment_source_url_search_hint_rows": 0,
       "image_attachment_source_url_missing_search_hint_rows": 0,
@@ -73,7 +73,7 @@
       "image_attachment_source_url_missing_any_search_hint_rows": 0,
       "image_attachment_source_url_primary_review_url_rows": 0,
       "image_attachment_source_url_missing_primary_review_url_rows": 0,
-      "image_attachment_local_download_ready_rows": 37,
+      "image_attachment_local_download_ready_rows": 35,
       "ichiban_metadata_action_campaigns": 41,
       "ichiban_metadata_actionable_campaigns": 41,
       "ichiban_metadata_unqueued_action_campaigns": 0,
@@ -103,10 +103,10 @@
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
       "ichiban_prize_name_image_patch_blocked_rows": 0,
       "catalog_goal_manual_review_pillars": 5,
-      "catalog_goal_manual_review_rows": 914,
+      "catalog_goal_manual_review_rows": 912,
       "catalog_goal_auto_apply_ready_rows": 0,
       "catalog_goal_dedupe_manual_review_rows": 48,
-      "catalog_goal_missing_image_rows": 805,
+      "catalog_goal_missing_image_rows": 803,
       "catalog_goal_source_url_update_rows": 0,
       "catalog_goal_animation_category_rows": 0,
       "catalog_goal_ichiban_manual_review_rows": 61,
@@ -216,13 +216,13 @@
     "image_candidate_manual_or_blocked_items": 228,
     "image_action_source_url_update_template_rows": 0,
     "image_action_source_url_update_template_batch_count": 0,
-    "image_action_image_url_ready_rows": 15,
+    "image_action_image_url_ready_rows": 13,
     "image_action_workstream_count": 6,
     "image_known_asset_status": "pass",
     "image_download_readiness_status": "known_image_assets_complete",
     "image_url_without_local_path_rows": 0,
     "image_missing_local_image_files": 0,
-    "image_rows_still_requiring_url_evidence": 805,
+    "image_rows_still_requiring_url_evidence": 803,
     "image_missing_evidence_top_source_stores": [
       [
         "엔스카이",
@@ -272,7 +272,7 @@
       ],
       [
         "인형",
-        95
+        94
       ],
       [
         "키링",
@@ -280,7 +280,7 @@
       ],
       [
         "마스코트",
-        70
+        69
       ],
       [
         "문구",
@@ -292,9 +292,9 @@
       ]
     ],
     "image_auto_download_ready_rows": 0,
-    "image_attachment_template_rows": 37,
+    "image_attachment_template_rows": 35,
     "image_attachment_template_confirmed_rows": 0,
-    "image_attachment_template_dry_run_skipped_rows": 37,
+    "image_attachment_template_dry_run_skipped_rows": 35,
     "source_focus_template_rows": 758,
     "source_focus_template_work_order_pack_count": 67,
     "source_focus_template_next_pack_rows": 20,
@@ -2508,7 +2508,7 @@
       "workstream": "image_url_attachment",
       "public_report": "data/catalog_image_enrichment_batches_public.json",
       "status": "ready",
-      "rows": 805,
+      "rows": 803,
       "command": "Extract images only after exact source_url evidence is confirmed.",
       "next_step": "resolve_source_url_blockers_then_extract_images",
       "blocker": null,
@@ -2516,16 +2516,16 @@
       "evidence": {
         "known_image_asset_status": "pass",
         "download_readiness_status": "known_image_assets_complete",
-        "image_url_rows": 19541,
-        "local_image_path_rows": 19541,
+        "image_url_rows": 19543,
+        "local_image_path_rows": 19543,
         "image_url_without_local_path_rows": 0,
         "missing_local_image_files": 0,
         "missing_web_public_asset_files": 0,
         "known_image_download_blocker_rows": 0,
         "auto_download_ready_rows": 0,
-        "rows_still_requiring_image_url_evidence": 805,
+        "rows_still_requiring_image_url_evidence": 803,
         "missing_image_evidence_priority": {
-          "rows": 805,
+          "rows": 803,
           "by_source_store": [
             [
               "엔스카이",
@@ -2592,12 +2592,12 @@
               12
             ],
             [
-              "치이카와 온라인 쿠지",
+              "반다이",
               11
             ],
             [
-              "반다이",
-              11
+              "치이카와 온라인 쿠지",
+              9
             ],
             [
               "메가하우스",
@@ -2623,7 +2623,7 @@
             ],
             [
               "인형",
-              95
+              94
             ],
             [
               "키링",
@@ -2631,7 +2631,7 @@
             ],
             [
               "마스코트",
-              70
+              69
             ],
             [
               "문구",
@@ -2697,7 +2697,7 @@
             ],
             [
               "치이카와",
-              75
+              73
             ],
             [
               "나의 히어로 아카데미아",
@@ -2791,11 +2791,7 @@
             ],
             [
               "ちいかわ うさぎだらけくじ",
-              3
-            ],
-            [
-              "ちいかわ たぬきだもんくじ",
-              1
+              2
             ]
           ],
           "top_source_store": [
@@ -2872,17 +2868,6 @@
               "series_name": "ちいかわ うさぎだらけくじ"
             },
             {
-              "catalog_index": 656,
-              "name_ko": "B상: 페이스 쿠션 (귀 늘어진)",
-              "name_ja": "B賞 フェイスクッション 耳たれ",
-              "image_url": null,
-              "local_image_path": null,
-              "source_store": "치이카와 온라인 쿠지",
-              "category": "인형",
-              "affiliation": "치이카와",
-              "series_name": "ちいかわ うさぎだらけくじ"
-            },
-            {
               "catalog_index": 657,
               "name_ko": "C상: 인형 포셰트",
               "name_ja": "C賞 ぬいぐるみポシェット",
@@ -2892,17 +2877,6 @@
               "category": "인형",
               "affiliation": "치이카와",
               "series_name": "ちいかわ うさぎだらけくじ"
-            },
-            {
-              "catalog_index": 673,
-              "name_ko": "C상: 절대 너구리인 마스코트",
-              "name_ja": "C賞 ぜったいたぬきなマスコット",
-              "image_url": null,
-              "local_image_path": null,
-              "source_store": "치이카와 온라인 쿠지",
-              "category": "마스코트",
-              "affiliation": "치이카와",
-              "series_name": "ちいかわ たぬきだもんくじ"
             },
             {
               "catalog_index": 677,
@@ -3134,10 +3108,32 @@
               "category": "아크릴 키링",
               "affiliation": "치이카와",
               "series_name": "ご当地"
+            },
+            {
+              "catalog_index": 943,
+              "name_ko": "치이카와 ご当地 미니 타올 (오사카)",
+              "name_ja": "ちいかわ ご当地ミニタオル (大阪)",
+              "image_url": null,
+              "local_image_path": null,
+              "source_store": "ご当地ちいかわ 공식(API)",
+              "category": "타월",
+              "affiliation": "치이카와",
+              "series_name": "ご当地"
+            },
+            {
+              "catalog_index": 944,
+              "name_ko": "치이카와 ご当地 마스코트 (교토 마이코)",
+              "name_ja": "ちいかわ ご当地マスコット (京都 舞妓)",
+              "image_url": null,
+              "local_image_path": null,
+              "source_store": "ご当地ちいかわ 공식(API)",
+              "category": "마스코트",
+              "affiliation": "치이카와",
+              "series_name": "ご当地"
             }
           ]
         },
-        "source_url_ready_rows": 15,
+        "source_url_ready_rows": 13,
         "provider_candidate_items": 496,
         "manual_or_blocked_items": 228,
         "generic_source_url_rows": 0,
@@ -3150,27 +3146,27 @@
       "workstream": "image_attachment_action_queue",
       "public_report": "data/catalog_image_attachment_action_queue_public.json",
       "status": "manual_review",
-      "rows": 37,
+      "rows": 35,
       "command": "Work image attachment batches with exact product evidence before broad missing-image research.",
       "next_step": "confirm_source_then_fill_image_url_templates",
       "blocker": "Auto image import is disabled; every image URL needs reviewed product evidence.",
       "auto_apply_enabled": false,
       "evidence": {
-        "actionable_image_rows": 37,
-        "queued_image_rows": 37,
+        "actionable_image_rows": 35,
+        "queued_image_rows": 35,
         "action_batch_count": 7,
         "source_url_update_required_rows": 0,
         "source_url_update_template_rows": 0,
         "source_url_update_template_batch_count": 0,
         "representative_image_review_required_rows": 22,
-        "image_url_ready_rows": 15,
-        "download_ready_after_manual_image_url_rows": 37,
-        "suggested_local_image_path_rows": 37,
-        "local_image_download_instruction_ready_rows": 37,
-        "image_attachment_template_rows": 37,
+        "image_url_ready_rows": 13,
+        "download_ready_after_manual_image_url_rows": 35,
+        "suggested_local_image_path_rows": 35,
+        "local_image_download_instruction_ready_rows": 35,
+        "image_attachment_template_rows": 35,
         "image_attachment_template_confirmed_rows": 0,
         "image_attachment_template_dry_run_updated_rows": 0,
-        "image_attachment_template_dry_run_skipped_rows": 37,
+        "image_attachment_template_dry_run_skipped_rows": 35,
         "source_discovery_focus_template_rows": 758,
         "source_discovery_focus_template_confirmed_rows": 0,
         "workstream_count": 6,
@@ -3180,7 +3176,7 @@
           {
             "workflow": "extract_from_existing_source_url",
             "source_store": "치이카와 온라인 쿠지",
-            "queued_image_rows": 11,
+            "queued_image_rows": 9,
             "batch_count": 1,
             "next_batch_id": "image-attachment-action-001",
             "source_url_update_template_rows": 0,
@@ -4512,7 +4508,7 @@
           ],
           [
             "extract_from_existing_source_url",
-            15
+            13
           ]
         ]
       }
@@ -4522,7 +4518,7 @@
       "workstream": "metadata_review_batches",
       "public_report": "data/catalog_metadata_review_batches_public.json",
       "status": "manual_review",
-      "rows": 14085,
+      "rows": 14083,
       "command": "Fill titles, barcodes, dates, prices, sources, and images from reviewed evidence.",
       "next_step": "work_field_store_metadata_batches",
       "blocker": "Broad metadata updates require field-specific evidence policies.",
@@ -4533,7 +4529,7 @@
           "name_ja": 526,
           "release_date": 1347,
           "barcode": 10081,
-          "image_url": 805,
+          "image_url": 803,
           "official_price_jpy": 558,
           "source_url": 768
         }
@@ -7529,7 +7525,7 @@
     "manual_review_required": true,
     "pillar_count": 5,
     "blocking_pillar_count": 5,
-    "manual_review_rows": 914,
+    "manual_review_rows": 912,
     "auto_apply_ready_rows": 0,
     "next_safe_phase": "review_candidate_source_urls",
     "blocked_reasons": [
@@ -7569,7 +7565,7 @@
         "pillar": "missing_images",
         "label": "Resolve missing catalog images",
         "status": "manual_evidence_required",
-        "manual_review_rows": 805,
+        "manual_review_rows": 803,
         "auto_apply_ready_rows": 0,
         "next_safe_phase": "discover_exact_source_urls",
         "next_queue_lane": "discover_exact_source_urls",
@@ -7600,8 +7596,8 @@
         "next_queue_lane": "manual_search_required",
         "next_queue_rows": 0,
         "next_execution_lane_count": 4,
-        "next_execution_open_rows": 833,
-        "next_execution_next_batch_rows": 95,
+        "next_execution_open_rows": 831,
+        "next_execution_next_batch_rows": 93,
         "first_next_execution_lane": "exact_source_url_review",
         "first_next_execution_status": "manual_cache_miss_research_required",
         "first_next_execution_rows": 20,

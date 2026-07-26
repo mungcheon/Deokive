@@ -70,6 +70,16 @@ MANUAL_EXACT_MATCHES = {
         "candidate_name_ja": "B …ってコト！？",
         "note": "ハチワレだらけくじ B賞 フェイスクッション …ってコト!?",
     },
+    656: {
+        "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
+        "candidate_name_ja": "B 垂れ耳",
+        "note": "うさぎだらけくじ B賞 フェイスクッション 耳たれ",
+    },
+    673: {
+        "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/tanukidamon",
+        "candidate_name_ja": "C ちいかわ",
+        "note": "たぬきだもんくじ C賞 ぜったいたぬきなマスコット ちいかわ",
+    },
 }
 
 

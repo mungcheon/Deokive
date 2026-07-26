@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T14:44:12Z",
+  "generated_at": "2026-07-26T14:54:39Z",
   "scope": "source_discovery_completion_roadmap",
   "summary": {
-    "missing_image_rows": 805,
+    "missing_image_rows": 803,
     "source_first_rows": 758,
     "queued_source_rows": 758,
     "focus_source_rows": 758,
@@ -18,7 +18,7 @@
     "manual_source_search_rows": 0,
     "provider_missing_rows": 0,
     "candidate_source_review_rows": 0,
-    "direct_image_action_rows": 37,
+    "direct_image_action_rows": 35,
     "roadmap_phase_count": 5,
     "next_execution_lane_count": 4,
     "auto_apply_enabled": false
@@ -74,8 +74,8 @@
   },
   "next_execution_summary": {
     "lane_count": 4,
-    "open_rows": 833,
-    "next_batch_rows": 95,
+    "open_rows": 831,
+    "next_batch_rows": 93,
     "next_safe_phase": "exact_source_url_review",
     "auto_apply_enabled": false,
     "manual_evidence_required": true
@@ -114,10 +114,10 @@
     {
       "lane": "image_attachment_after_source_confirmation",
       "status": "blocked_until_source_or_image_evidence_confirmed",
-      "open_rows": 37,
-      "next_batch_rows": 37,
-      "review_start_rows": 37,
-      "manual_decision_rows": 37,
+      "open_rows": 35,
+      "next_batch_rows": 35,
+      "review_start_rows": 35,
+      "manual_decision_rows": 35,
       "public_report": "data/catalog_image_attachment_action_queue_public.json",
       "next_action": "attach image URLs only after exact source page and image identity are confirmed"
     }
@@ -191,7 +191,7 @@
         "step": 3,
         "lane": "image_attachment_after_source_confirmation",
         "status": "blocked_until_source_or_image_evidence_confirmed",
-        "next_batch_rows": 37,
+        "next_batch_rows": 35,
         "review_section": "catalog_image_attachment_action_queue",
         "write_template_section": "image_attachment_confirmed_template",
         "required_before_write": [
@@ -441,7 +441,7 @@
     {
       "phase": 5,
       "name": "image_attachment_after_source_confirmation",
-      "rows": 37,
+      "rows": 35,
       "public_report": "data/catalog_image_attachment_action_queue_public.json",
       "blocked_until": "exact_source_page_product_image_confirmed",
       "next_machine_step": "import_confirmed_image_attachment_rows_after_manual_review"
