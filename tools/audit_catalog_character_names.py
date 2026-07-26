@@ -56,6 +56,48 @@ CHARACTER_MOJIBAKE_OR_ALIAS_FINDINGS = {
     },
 }
 
+ICHIBAN_PRODUCT_CHARACTER_TOKENS = (
+    ("\u30c1\u30e7\u30c3\u30d1\u30fc", "\ud1a0\ub2c8\ud1a0\ub2c8 \ucd78\ud30c"),
+    ("\u30cf\u30f3\u30b3\u30c3\u30af", "\ubcf4\uc544 \ud578\ucf55"),
+    ("\u30da\u30ed\u30fc\u30ca", "\ud398\ub85c\ub098"),
+    ("\u3057\u3089\u307b\u3057", "\uc2dc\ub77c\ud638\uc2dc"),
+    ("\u30d5\u30ea\u30fc\u30ec\u30f3", "\ud504\ub9ac\ub80c"),
+    ("\u30b7\u30e5\u30bf\u30eb\u30af", "\uc288\ud0c0\ub974\ud06c"),
+    ("\u30d5\u30a7\u30eb\u30f3", "\ud398\ub978"),
+    ("\u30d2\u30f3\u30e1\u30eb", "\ud788\uba5c"),
+    ("\u30eb\u30d5\u30a3", "\ubabd\ud0a4 D. \ub8e8\ud53c"),
+    ("\u30ed\u30d3\u30f3", "\ub2c8\ucf54 \ub85c\ube48"),
+    ("\u30a6\u30bd\u30c3\u30d7", "\uc6b0\uc19d"),
+    ("\u30b5\u30f3\u30b8", "\uc0c1\ub514"),
+    ("\u30be\u30ed", "\ub864\ub85c\ub178\uc544 \uc870\ub85c"),
+    ("\u30ca\u30df", "\ub098\ubbf8"),
+    ("\u30ed\u30fc", "\ud2b8\ub77c\ud314\uac00 \ub85c"),
+    ("\u70ad\u6cbb\u90ce", "\uce74\ub9c8\ub3c4 \ud0c4\uc9c0\ub85c"),
+    ("\u79b0\u8c46\u5b50", "\uce74\ub9c8\ub3c4 \ub124\uc988\ucf54"),
+    ("\u5584\u9038", "\uc544\uac00\uce20\ub9c8 \uc820\uc774\uce20"),
+    ("\u4f0a\u4e4b\u52a9", "\ud558\uc2dc\ube44\ub77c \uc774\ub178\uc2a4\ucf00"),
+    ("\u7149\u7344", "\ub80c\uace0\ucfe0 \ucfc4\uc96c\ub85c"),
+    ("\u30b4\u30c6\u30f3\u30af\u30b9", "\uc624\ucc9c\ud06c\uc2a4"),
+    ("\u30d9\u30b8\u30c3\u30c8", "\ubca0\uc9c0\ud2b8"),
+    ("\u30c8\u30e9\u30f3\u30af\u30b9", "\ud2b8\ub7ad\ud06c\uc2a4"),
+    ("\u30d9\u30b8\u30fc\u30bf", "\ubca0\uc9c0\ud130"),
+    ("\u609f\u98ef", "\uc190\uc624\ubc18"),
+    ("\u609f\u7a7a", "\uc190\uc624\uacf5"),
+)
+
+KATAKANA = set("".join(chr(codepoint) for codepoint in range(0x30A0, 0x30FF + 1)))
+
+
+def product_token_matches(product_name: str, japanese_token: str) -> bool:
+    index = product_name.find(japanese_token)
+    if index < 0:
+        return False
+    if japanese_token == "\u30eb\u30d5\u30a3" and index > 0:
+        previous = product_name[index - 1]
+        if previous in KATAKANA:
+            return False
+    return True
+
 
 def load_catalog(path: Path) -> list[dict[str, Any]]:
     payload = json.loads(path.read_text(encoding="utf-8-sig"))
@@ -77,6 +119,7 @@ def is_ichiban_row(row: dict[str, Any]) -> bool:
 def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
     character_alias_violations: list[dict[str, Any]] = []
     ichiban_display_name_violations: list[dict[str, Any]] = []
+    ichiban_product_character_violations: list[dict[str, Any]] = []
     zero_price_violations: list[dict[str, Any]] = []
 
     for row in rows:
@@ -109,6 +152,7 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
         name_ko = str(row.get("name_ko") or "")
         parts = [part.strip() for part in name_ko.split(" / ")]
         prize_label = parts[1] if len(parts) > 1 else ""
+        product_name = parts[2] if len(parts) > 2 else name_ko
         valid_prize_label = prize_label.endswith(ICHIBAN_PRIZE_LABEL_SUFFIXES) or prize_label in ICHIBAN_PRIZE_LABEL_EXACT
         if len(parts) != 4 or ICHIBAN_PREFIX not in parts[0] or not valid_prize_label:
             ichiban_display_name_violations.append(
@@ -121,6 +165,23 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
                     "reason": "expected_kuji_campaign_prize_product_character_display_name",
                 }
             )
+        character_name = str(row.get("character_name") or "")
+        if character_name not in ("", "\uae30\ud0c0", "\ud63c\ud569"):
+            for japanese_token, expected_character in ICHIBAN_PRODUCT_CHARACTER_TOKENS:
+                if product_token_matches(product_name, japanese_token):
+                    if expected_character not in character_name:
+                        ichiban_product_character_violations.append(
+                            {
+                                "catalog_index": catalog_index,
+                                "name_ko": row.get("name_ko"),
+                                "product_name": product_name,
+                                "character_name": row.get("character_name"),
+                                "expected": expected_character,
+                                "matched_token": japanese_token,
+                                "reason": "product_name_character_token_mismatch",
+                            }
+                        )
+                    break
 
         sub_series = str(row.get("sub_series") or "")
         if (
@@ -142,6 +203,7 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
     findings = (
         len(character_alias_violations)
         + len(ichiban_display_name_violations)
+        + len(ichiban_product_character_violations)
         + len(zero_price_violations)
     )
     return {
@@ -153,17 +215,20 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
             "ichiban_rows": sum(1 for row in rows if is_ichiban_row(row)),
             "character_alias_violations": len(character_alias_violations),
             "ichiban_display_name_violations": len(ichiban_display_name_violations),
+            "ichiban_product_character_violations": len(ichiban_product_character_violations),
             "zero_price_violations": len(zero_price_violations),
             "findings": findings,
             "status": "pass" if findings == 0 else "needs_review",
         },
         "policy": {
             "character_name_aliases": CHARACTER_MOJIBAKE_OR_ALIAS_FINDINGS,
+            "ichiban_product_character_tokens": ICHIBAN_PRODUCT_CHARACTER_TOKENS,
             "ichiban_display_name_format": "\u4e00\u756a\u304f\u3058 \ubc1c\ub9e4\uba85 / ?\u8cde / \uc0c1\ud488\uc774\ub984 / \uce90\ub9ad\ud130\uba85",
             "last_one_and_double_chance_price_jpy": 0,
         },
         "character_alias_violations": character_alias_violations,
         "ichiban_display_name_violations": ichiban_display_name_violations,
+        "ichiban_product_character_violations": ichiban_product_character_violations,
         "zero_price_violations": zero_price_violations,
     }
 
