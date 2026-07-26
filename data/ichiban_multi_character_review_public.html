@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ichiban Multi-Character Review</title>
+  <style>
+    body { margin: 0; font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f7f8fa; color: #171a20; }
+    header { position: sticky; top: 0; z-index: 2; padding: 18px 24px; background: rgba(255,255,255,.94); border-bottom: 1px solid #dde2ea; backdrop-filter: blur(12px); }
+    h1 { margin: 0 0 8px; font-size: 22px; }
+    .pills, .toolbar, .meta, .actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .pill, .meta span { padding: 4px 9px; border: 1px solid #d8dde5; border-radius: 999px; background: #fff; color: #596273; }
+    main { max-width: 1180px; margin: auto; padding: 22px; }
+    .toolbar { margin-bottom: 18px; }
+    input, select { font: inherit; border: 1px solid #d8dde5; border-radius: 8px; background: #fff; color: #15171c; padding: 9px 10px; }
+    .toolbar input { min-width: min(420px, 100%); flex: 1; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 14px; }
+    .card { padding: 14px; background: #fff; border: 1px solid #dfe3ea; border-radius: 10px; box-shadow: 0 4px 18px rgba(20,28,40,.05); }
+    .top { display: grid; grid-template-columns: 96px 1fr; gap: 12px; }
+    .image { width: 96px; height: 96px; object-fit: contain; border-radius: 8px; background: #f0f2f5; border: 1px solid #eceff4; }
+    .empty { display: grid; place-items: center; color: #7b8494; text-align: center; }
+    h2 { margin: 8px 0 4px; font-size: 16px; }
+    p { margin: 5px 0; color: #454c59; }
+    dl { display: grid; grid-template-columns: 84px 1fr; gap: 2px 8px; margin: 10px 0; }
+    dt { color: #6b7280; }
+    dd { margin: 0; }
+    details { border-top: 1px solid #eef1f5; padding-top: 8px; margin-top: 8px; }
+    summary { cursor: pointer; font-weight: 650; }
+    li { margin: 4px 0; word-break: break-word; }
+    a { color: #0b57d0; word-break: break-all; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Ichiban Multi-Character Review</h1>
+    <div class="pills">
+      <span class="pill">review rows: 18</span>
+      <span class="pill">safe auto split: </span>
+      <span class="pill">source review required: 18</span>
+    </div>
+  </header>
+  <main>
+    <div class="toolbar">
+      <input id="search" placeholder="Search campaign, prize, product, character">
+      <select id="classificationFilter">
+        <option value="">All classifications</option>
+        <option value="likely_combined_goods">likely_combined_goods</option>
+      </select>
+    </div>
+    <div class="grid">
+      <article class="card" data-classification="likely_combined_goods" data-haystack="likely_combined_goods 一番くじ ドラゴンボール スペクタクルバトル e賞 孫悟空＆孫悟飯 フィギュア 혼합 혼합 https://1kuji.com/products/db_sb product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.">
+        <div class="top">
+          <img class="image" src="https://assets.1kuji.com/uploads/product_item/image/106625/0e7175e3-ece2-45f1-b517-1139db038b3c.webp" alt="">
+          <div>
+            <div class="meta"><span>P4</span><span>likely_combined_goods</span><span>#13203</span></div>
+            <h2>一番くじ ドラゴンボール スペクタクルバトル</h2>
+            <p>E賞 / 孫悟空＆孫悟飯 フィギュア / 혼합</p>
+          </div>
+        </div>
+        <dl>
+          <dt>matched</dt><dd>손오공, 손오반</dd>
+          <dt>field</dt><dd>혼합</dd>
+          <dt>same prize</dt><dd>1 rows</dd>
+          <dt>action</dt><dd>Product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.</dd>
+        </dl>
+        <details>
+          <summary>Split name templates</summary>
+          <ul><li>一番くじ ドラゴンボール スペクタクルバトル / E賞 / 孫悟空＆孫悟飯 フィギュア / 손오공</li><li>一番くじ ドラゴンボール スペクタクルバトル / E賞 / 孫悟空＆孫悟飯 フィギュア / 손오반</li></ul>
+        </details>
+        <details>
+          <summary>Same prize rows</summary>
+          <ul><li>#13203 一番くじ ドラゴンボール スペクタクルバトル / E賞 / 孫悟空＆孫悟飯 フィギュア / 혼합</li></ul>
+        </details>
+        <div class="actions"><a href="https://1kuji.com/products/db_sb" target="_blank" rel="noreferrer">Open source</a></div>
+      </article>
+    
+
+      <article class="card" data-classification="likely_combined_goods" data-haystack="likely_combined_goods 一番くじ 鬼滅の刃 ～繋いだ軌跡～ a賞 竈門炭治郎&amp;竈門禰豆子 artscale memoria 혼합 혼합 https://1kuji.com/products/kimetsu24 product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.">
+        <div class="top">
+          <img class="image" src="https://assets.1kuji.com/uploads/product_item/image/103381/761457c0-a8e5-451b-b54d-d590d09c6276.jpg" alt="">
+          <div>
+            <div class="meta"><span>P4</span><span>likely_combined_goods</span><span>#13574</span></div>
+            <h2>一番くじ 鬼滅の刃 ～繋いだ軌跡～</h2>
+            <p>A賞 / 竈門炭治郎&amp;竈門禰豆子 ArtScale Memoria / 혼합</p>
+          </div>
+        </div>
+        <dl>
+          <dt>matched</dt><dd>카마도 네즈코, 카마도 탄지로</dd>
+          <dt>field</dt><dd>혼합</dd>
+          <dt>same prize</dt><dd>1 rows</dd>
+          <dt>action</dt><dd>Product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.</dd>
+        </dl>
+        <details>
+          <summary>Split name templates</summary>
+          <ul><li>一番くじ 鬼滅の刃 ～繋いだ軌跡～ / A賞 / 竈門炭治郎&amp;竈門禰豆子 ArtScale Memoria / 카마도 네즈코</li><li>一番くじ 鬼滅の刃 ～繋いだ軌跡～ / A賞 / 竈門炭治郎&amp;竈門禰豆子 ArtScale Memoria / 카마도 탄지로</li></ul>
+        </details>
+        <details>
+          <summary>Same prize rows</summary>
+          <ul><li>#13574 一番くじ 鬼滅の刃 ～繋いだ軌跡～ / A賞 / 竈門炭治郎&amp;竈門禰豆子 ArtScale Memoria / 혼합</li></ul>
+        </details>
+        <div class="actions"><a href="https://1kuji.com/products/kimetsu24" target="_blank" rel="noreferrer">Open source</a></div>
+      </article>
+    
+
+      <article class="card" data-classification="likely_combined_goods" data-haystack="likely_combined_goods 一番くじ 鬼滅の刃 ～繋いだ軌跡～ b賞 revible moment-竈門炭治郎&amp;煉獄杏寿郎- 혼합 혼합 https://1kuji.com/products/kimetsu24 product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.">
+        <div class="top">
+          <img class="image" src="https://assets.1kuji.com/uploads/product_item/image/103382/293e34ed-20a8-4350-a674-f0d6d35dd035.jpg" alt="">
+          <div>
+            <div class="meta"><span>P4</span><span>likely_combined_goods</span><span>#13575</span></div>
+            <h2>一番くじ 鬼滅の刃 ～繋いだ軌跡～</h2>
+            <p>B賞 / Revible Moment-竈門炭治郎&amp;煉獄杏寿郎- / 혼합</p>
+          </div>
+        </div>
+        <dl>
+          <dt>matched</dt><dd>렌고쿠 쿄쥬로, 카마도 탄지로</dd>
+          <dt>field</dt><dd>혼합</dd>
+          <dt>same prize</dt><dd>1 rows</dd>
+          <dt>action</dt><dd>Product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.</dd>
+        </dl>
+        <details>
+          <summary>Split name templates</summary>
+          <ul><li>一番くじ 鬼滅の刃 ～繋いだ軌跡～ / B賞 / Revible Moment-竈門炭治郎&amp;煉獄杏寿郎- / 렌고쿠 쿄쥬로</li><li>一番くじ 鬼滅の刃 ～繋いだ軌跡～ / B賞 / Revible Moment-竈門炭治郎&amp;煉獄杏寿郎- / 카마도 탄지로</li></ul>
+        </details>
+        <details>
+          <summary>Same prize rows</summary>
+          <ul><li>#13575 一番くじ 鬼滅の刃 ～繋いだ軌跡～ / B賞 / Revible Moment-竈門炭治郎&amp;煉獄杏寿郎- / 혼합</li></ul>
+        </details>
+        <div class="actions"><a href="https://1kuji.com/products/kimetsu24" target="_blank" rel="noreferrer">Open source</a></div>
+      </article>
+    
+
+      <article class="card" data-classification="likely_combined_goods" data-haystack="likely_combined_goods 一番くじ 鬼滅の刃 ～繋いだ軌跡～ ラストワン賞 revible moment-竈門炭治郎&amp;煉獄杏寿郎- ラストワンver. 혼합 혼합 https://1kuji.com/products/kimetsu24 product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.">
+        <div class="top">
+          <img class="image" src="https://assets.1kuji.com/uploads/product_item/image/103389/36414c1b-f17a-45af-bcbc-c987d1aa6662.jpg" alt="">
+          <div>
+            <div class="meta"><span>P4</span><span>likely_combined_goods</span><span>#13582</span></div>
+            <h2>一番くじ 鬼滅の刃 ～繋いだ軌跡～</h2>
+            <p>ラストワン賞 / Revible Moment-竈門炭治郎&amp;煉獄杏寿郎- ラストワンver. / 혼합</p>
+          </div>
+        </div>
+        <dl>
+          <dt>matched</dt><dd>렌고쿠 쿄쥬로, 카마도 탄지로</dd>
+          <dt>field</dt><dd>혼합</dd>
+          <dt>same prize</dt><dd>1 rows</dd>
+          <dt>action</dt><dd>Product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.</dd>
+        </dl>
+        <details>
+          <summary>Split name templates</summary>
+          <ul><li>一番くじ 鬼滅の刃 ～繋いだ軌跡～ / ラストワン賞 / Revible Moment-竈門炭治郎&amp;煉獄杏寿郎- ラストワンver. / 렌고쿠 쿄쥬로</li><li>一番くじ 鬼滅の刃 ～繋いだ軌跡～ / ラストワン賞 / Revible Moment-竈門炭治郎&amp;煉獄杏寿郎- ラストワンver. / 카마도 탄지로</li></ul>
+        </details>
+        <details>
+          <summary>Same prize rows</summary>
+          <ul><li>#13582 一番くじ 鬼滅の刃 ～繋いだ軌跡～ / ラストワン賞 / Revible Moment-竈門炭治郎&amp;煉獄杏寿郎- ラストワンver. / 혼합</li></ul>
+        </details>
+        <div class="actions"><a href="https://1kuji.com/products/kimetsu24" target="_blank" rel="noreferrer">Open source</a></div>
+      </article>
+    
+
+      <article class="card" data-classification="likely_combined_goods" data-haystack="likely_combined_goods 一番くじ 鬼滅の刃 ～弐～ c賞 ＜炭治郎・禰豆子＞ちょこのっこ フィギュア 혼합 혼합 https://1kuji.com/products/kimetsu3 product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.">
+        <div class="top">
+          <img class="image" src="https://assets.1kuji.com/uploads/product_item/image/16950/18743b35-d367-4b8d-b8d0-030a8f1d0f05.jpg" alt="">
+          <div>
+            <div class="meta"><span>P4</span><span>likely_combined_goods</span><span>#13762</span></div>
+            <h2>一番くじ 鬼滅の刃 ～弐～</h2>
+            <p>C賞 / ＜炭治郎・禰豆子＞ちょこのっこ フィギュア / 혼합</p>
+          </div>
+        </div>
+        <dl>
+          <dt>matched</dt><dd>카마도 네즈코, 카마도 탄지로</dd>
+          <dt>field</dt><dd>혼합</dd>
+          <dt>same prize</dt><dd>1 rows</dd>
+          <dt>action</dt><dd>Product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.</dd>
+        </dl>
+        <details>
+          <summary>Split name templates</summary>
+          <ul><li>一番くじ 鬼滅の刃 ～弐～ / C賞 / ＜炭治郎・禰豆子＞ちょこのっこ フィギュア / 카마도 네즈코</li><li>一番くじ 鬼滅の刃 ～弐～ / C賞 / ＜炭治郎・禰豆子＞ちょこのっこ フィギュア / 카마도 탄지로</li></ul>
+        </details>
+        <details>
+          <summary>Same prize rows</summary>
+          <ul><li>#13762 一番くじ 鬼滅の刃 ～弐～ / C賞 / ＜炭治郎・禰豆子＞ちょこのっこ フィギュア / 혼합</li></ul>
+        </details>
+        <div class="actions"><a href="https://1kuji.com/products/kimetsu3" target="_blank" rel="noreferrer">Open source</a></div>
+      </article>
+    
+
+      <article class="card" data-classification="likely_combined_goods" data-haystack="likely_combined_goods 一番くじ 鬼滅の刃 ～弐～ d賞 ＜善逸・伊之助＞ちょこのっこ フィギュア 혼합 혼합 https://1kuji.com/products/kimetsu3 product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.">
+        <div class="top">
+          <img class="image" src="https://assets.1kuji.com/uploads/product_item/image/16951/1f7343fa-c1c0-4c1e-bd55-90f6797db495.jpg" alt="">
+          <div>
+            <div class="meta"><span>P4</span><span>likely_combined_goods</span><span>#13763</span></div>
+            <h2>一番くじ 鬼滅の刃 ～弐～</h2>
+            <p>D賞 / ＜善逸・伊之助＞ちょこのっこ フィギュア / 혼합</p>
+          </div>
+        </div>
+        <dl>
+          <dt>matched</dt><dd>아가츠마 젠이츠, 하시비라 이노스케</dd>
+          <dt>field</dt><dd>혼합</dd>
+          <dt>same prize</dt><dd>1 rows</dd>
+          <dt>action</dt><dd>Product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.</dd>
+        </dl>
+        <details>
+          <summary>Split name templates</summary>
+          <ul><li>一番くじ 鬼滅の刃 ～弐～ / D賞 / ＜善逸・伊之助＞ちょこのっこ フィギュア / 아가츠마 젠이츠</li><li>一番くじ 鬼滅の刃 ～弐～ / D賞 / ＜善逸・伊之助＞ちょこのっこ フィギュア / 하시비라 이노스케</li></ul>
+        </details>
+        <details>
+          <summary>Same prize rows</summary>
+          <ul><li>#13763 一番くじ 鬼滅の刃 ～弐～ / D賞 / ＜善逸・伊之助＞ちょこのっこ フィギュア / 혼합</li></ul>
+        </details>
+        <div class="actions"><a href="https://1kuji.com/products/kimetsu3" target="_blank" rel="noreferrer">Open source</a></div>
+      </article>
+    
+
+      <article class="card" data-classification="likely_combined_goods" data-haystack="likely_combined_goods 一番くじ ワンピース romance dawn for the new world～後編～ e賞 ウソップ＆チョッパーフィギュア 혼합 혼합 https://1kuji.com/products/onep10-2 product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.">
+        <div class="top">
+          <img class="image" src="https://assets.1kuji.com/uploads/product_item/image/1920/62b082a5-f1f0-4355-9538-d860ffe5d27c.jpg" alt="">
+          <div>
+            <div class="meta"><span>P4</span><span>likely_combined_goods</span><span>#16054</span></div>
+            <h2>一番くじ ワンピース ROMANCE DAWN for the new world～後編～</h2>
+            <p>E賞 / ウソップ＆チョッパーフィギュア / 혼합</p>
+          </div>
+        </div>
+        <dl>
+          <dt>matched</dt><dd>우솝, 토니토니 쵸파</dd>
+          <dt>field</dt><dd>혼합</dd>
+          <dt>same prize</dt><dd>1 rows</dd>
+          <dt>action</dt><dd>Product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.</dd>
+        </dl>
+        <details>
+          <summary>Split name templates</summary>
+          <ul><li>一番くじ ワンピース ROMANCE DAWN for the new world～後編～ / E賞 / ウソップ＆チョッパーフィギュア / 우솝</li><li>一番くじ ワンピース ROMANCE DAWN for the new world～後編～ / E賞 / ウソップ＆チョッパーフィギュア / 토니토니 쵸파</li></ul>
+        </details>
+        <details>
+          <summary>Same prize rows</summary>
+          <ul><li>#16054 一番くじ ワンピース ROMANCE DAWN for the new world～後編～ / E賞 / ウソップ＆チョッパーフィギュア / 혼합</li></ul>
+        </details>
+        <div class="actions"><a href="https://1kuji.com/products/onep10-2" target="_blank" rel="noreferrer">Open source</a></div>
+      </article>
+    
+
+      <article class="card" data-classification="likely_combined_goods" data-haystack="likely_combined_goods 一番くじワンピースフィルム～ストロングワールド～ c賞 ウソップ＆チョッパーフィギュア 혼합 혼합 https://1kuji.com/products/onepfilm_2 product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.">
+        <div class="top">
+          <img class="image" src="https://assets.1kuji.com/uploads/product_item/image/935/10a4d8c9-6c43-4079-840c-ff6ed0647466.jpg" alt="">
+          <div>
+            <div class="meta"><span>P4</span><span>likely_combined_goods</span><span>#16190</span></div>
+            <h2>一番くじワンピースフィルム～ストロングワールド～</h2>
+            <p>C賞 / ウソップ＆チョッパーフィギュア / 혼합</p>
+          </div>
+        </div>
+        <dl>
+          <dt>matched</dt><dd>우솝, 토니토니 쵸파</dd>
+          <dt>field</dt><dd>혼합</dd>
+          <dt>same prize</dt><dd>1 rows</dd>
+          <dt>action</dt><dd>Product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.</dd>
+        </dl>
+        <details>
+          <summary>Split name templates</summary>
+          <ul><li>一番くじワンピースフィルム～ストロングワールド～ / C賞 / ウソップ＆チョッパーフィギュア / 우솝</li><li>一番くじワンピースフィルム～ストロングワールド～ / C賞 / ウソップ＆チョッパーフィギュア / 토니토니 쵸파</li></ul>
+        </details>
+        <details>
+          <summary>Same prize rows</summary>
+          <ul><li>#16190 一番くじワンピースフィルム～ストロングワールド～ / C賞 / ウソップ＆チョッパーフィギュア / 혼합</li></ul>
+        </details>
+        <div class="actions"><a href="https://1kuji.com/products/onepfilm_2" target="_blank" rel="noreferrer">Open source</a></div>
+      </article>
+    
+
+      <article class="card" data-classification="likely_combined_goods" data-haystack="likely_combined_goods 一番くじ ドラゴンボール assemble collection ～孫悟空少年期編～ a賞 孫悟空・占いババ・孫悟飯 assembleフィギュア 혼합 혼합 https://1kuji.com/products/db_ac product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.">
+        <div class="top">
+          <img class="image" src="https://assets.1kuji.com/uploads/product_item/image/104535/a9ea77f2-3810-4531-b5e3-cdb227444be2.jpg" alt="">
+          <div>
+            <div class="meta"><span>P4</span><span>likely_combined_goods</span><span>#16254</span></div>
+            <h2>一番くじ ドラゴンボール ASSEMBLE COLLECTION ～孫悟空少年期編～</h2>
+            <p>A賞 / 孫悟空・占いババ・孫悟飯 ASSEMBLEフィギュア / 혼합</p>
+          </div>
+        </div>
+        <dl>
+          <dt>matched</dt><dd>손오공, 손오반</dd>
+          <dt>field</dt><dd>혼합</dd>
+          <dt>same prize</dt><dd>1 rows</dd>
+          <dt>action</dt><dd>Product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.</dd>
+        </dl>
+        <details>
+          <summary>Split name templates</summary>
+          <ul><li>一番くじ ドラゴンボール ASSEMBLE COLLECTION ～孫悟空少年期編～ / A賞 / 孫悟空・占いババ・孫悟飯 ASSEMBLEフィギュア / 손오공</li><li>一番くじ ドラゴンボール ASSEMBLE COLLECTION ～孫悟空少年期編～ / A賞 / 孫悟空・占いババ・孫悟飯 ASSEMBLEフィギュア / 손오반</li></ul>
+        </details>
+        <details>
+          <summary>Same prize rows</summary>
+          <ul><li>#16254 一番くじ ドラゴンボール ASSEMBLE COLLECTION ～孫悟空少年期編～ / A賞 / 孫悟空・占いババ・孫悟飯 ASSEMBLEフィギュア / 혼합</li></ul>
+        </details>
+        <div class="actions"><a href="https://1kuji.com/products/db_ac" target="_blank" rel="noreferrer">Open source</a></div>
+      </article>
+    
+
+      <article class="card" data-classification="likely_combined_goods" data-haystack="likely_combined_goods 一番くじ ドラゴンボール dragon history ⅱ ラストワン賞 孫悟空＆孫悟飯じいちゃん revible moment 혼합 혼합 https://1kuji.com/products/db_dh2 product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.">
+        <div class="top">
+          <img class="image" src="https://assets.1kuji.com/uploads/product_item/image/103999/70ead3d2-32d7-4c9c-bcd3-534853b0d808.jpg" alt="">
+          <div>
+            <div class="meta"><span>P4</span><span>likely_combined_goods</span><span>#16281</span></div>
+            <h2>一番くじ ドラゴンボール DRAGON HISTORY Ⅱ</h2>
+            <p>ラストワン賞 / 孫悟空＆孫悟飯じいちゃん Revible Moment / 혼합</p>
+          </div>
+        </div>
+        <dl>
+          <dt>matched</dt><dd>손오공, 손오반</dd>
+          <dt>field</dt><dd>혼합</dd>
+          <dt>same prize</dt><dd>1 rows</dd>
+          <dt>action</dt><dd>Product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.</dd>
+        </dl>
+        <details>
+          <summary>Split name templates</summary>
+          <ul><li>一番くじ ドラゴンボール DRAGON HISTORY Ⅱ / ラストワン賞 / 孫悟空＆孫悟飯じいちゃん Revible Moment / 손오공</li><li>一番くじ ドラゴンボール DRAGON HISTORY Ⅱ / ラストワン賞 / 孫悟空＆孫悟飯じいちゃん Revible Moment / 손오반</li></ul>
+        </details>
+        <details>
+          <summary>Same prize rows</summary>
+          <ul><li>#16281 一番くじ ドラゴンボール DRAGON HISTORY Ⅱ / ラストワン賞 / 孫悟空＆孫悟飯じいちゃん Revible Moment / 혼합</li></ul>
+        </details>
+        <div class="actions"><a href="https://1kuji.com/products/db_dh2" target="_blank" rel="noreferrer">Open source</a></div>
+      </article>
+    
+
+      <article class="card" data-classification="likely_combined_goods" data-haystack="likely_combined_goods 一番くじ ドラゴンボール dragon history b賞 revible moment-孫悟空vsベジータ- 혼합 혼합 https://1kuji.com/products/db_dh product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.">
+        <div class="top">
+          <img class="image" src="https://assets.1kuji.com/uploads/product_item/image/102545/e5dd8e13-24d6-45ff-b14f-311442c6864d.jpg" alt="">
+          <div>
+            <div class="meta"><span>P4</span><span>likely_combined_goods</span><span>#16324</span></div>
+            <h2>一番くじ ドラゴンボール DRAGON HISTORY</h2>
+            <p>B賞 / Revible Moment-孫悟空VSベジータ- / 혼합</p>
+          </div>
+        </div>
+        <dl>
+          <dt>matched</dt><dd>베지터, 손오공</dd>
+          <dt>field</dt><dd>혼합</dd>
+          <dt>same prize</dt><dd>1 rows</dd>
+          <dt>action</dt><dd>Product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.</dd>
+        </dl>
+        <details>
+          <summary>Split name templates</summary>
+          <ul><li>一番くじ ドラゴンボール DRAGON HISTORY / B賞 / Revible Moment-孫悟空VSベジータ- / 베지터</li><li>一番くじ ドラゴンボール DRAGON HISTORY / B賞 / Revible Moment-孫悟空VSベジータ- / 손오공</li></ul>
+        </details>
+        <details>
+          <summary>Same prize rows</summary>
+          <ul><li>#16324 一番くじ ドラゴンボール DRAGON HISTORY / B賞 / Revible Moment-孫悟空VSベジータ- / 혼합</li></ul>
+        </details>
+        <div class="actions"><a href="https://1kuji.com/products/db_dh" target="_blank" rel="noreferrer">Open source</a></div>
+      </article>
+    
+
+      <article class="card" data-classification="likely_combined_goods" data-haystack="likely_combined_goods 一番くじ ドラゴンボール vsオムニバスアメイジング a賞 孫悟空＆孫悟飯 masterlise plus 혼합 혼합 https://1kuji.com/products/db_vso8 product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.">
+        <div class="top">
+          <img class="image" src="https://assets.1kuji.com/uploads/product_item/image/102168/b376353b-d874-4acf-9c21-bf452cdcec06.jpg" alt="">
+          <div>
+            <div class="meta"><span>P4</span><span>likely_combined_goods</span><span>#16341</span></div>
+            <h2>一番くじ ドラゴンボール VSオムニバスアメイジング</h2>
+            <p>A賞 / 孫悟空＆孫悟飯 MASTERLISE PLUS / 혼합</p>
+          </div>
+        </div>
+        <dl>
+          <dt>matched</dt><dd>손오공, 손오반</dd>
+          <dt>field</dt><dd>혼합</dd>
+          <dt>same prize</dt><dd>1 rows</dd>
+          <dt>action</dt><dd>Product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.</dd>
+        </dl>
+        <details>
+          <summary>Split name templates</summary>
+          <ul><li>一番くじ ドラゴンボール VSオムニバスアメイジング / A賞 / 孫悟空＆孫悟飯 MASTERLISE PLUS / 손오공</li><li>一番くじ ドラゴンボール VSオムニバスアメイジング / A賞 / 孫悟空＆孫悟飯 MASTERLISE PLUS / 손오반</li></ul>
+        </details>
+        <details>
+          <summary>Same prize rows</summary>
+          <ul><li>#16341 一番くじ ドラゴンボール VSオムニバスアメイジング / A賞 / 孫悟空＆孫悟飯 MASTERLISE PLUS / 혼합</li></ul>
+        </details>
+        <div class="actions"><a href="https://1kuji.com/products/db_vso8" target="_blank" rel="noreferrer">Open source</a></div>
+      </article>
+    
+
+      <article class="card" data-classification="likely_combined_goods" data-haystack="likely_combined_goods 一番くじ ドラゴンボール vsオムニバス超 a賞 超サイヤ人ゴッド超サイヤ人孫悟空&amp;超サイヤ人ゴッド超サイヤ人ベジータフィギュア 혼합 혼합 https://1kuji.com/products/db_vsosp product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.">
+        <div class="top">
+          <img class="image" src="https://assets.1kuji.com/uploads/product_item/image/18899/36fbabad-f755-4854-9be5-1f4cb5b71a06.jpg" alt="">
+          <div>
+            <div class="meta"><span>P4</span><span>likely_combined_goods</span><span>#16513</span></div>
+            <h2>一番くじ ドラゴンボール VSオムニバス超</h2>
+            <p>A賞 / 超サイヤ人ゴッド超サイヤ人孫悟空&amp;超サイヤ人ゴッド超サイヤ人ベジータフィギュア / 혼합</p>
+          </div>
+        </div>
+        <dl>
+          <dt>matched</dt><dd>베지터, 손오공</dd>
+          <dt>field</dt><dd>혼합</dd>
+          <dt>same prize</dt><dd>1 rows</dd>
+          <dt>action</dt><dd>Product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.</dd>
+        </dl>
+        <details>
+          <summary>Split name templates</summary>
+          <ul><li>一番くじ ドラゴンボール VSオムニバス超 / A賞 / 超サイヤ人ゴッド超サイヤ人孫悟空&amp;超サイヤ人ゴッド超サイヤ人ベジータフィギュア / 베지터</li><li>一番くじ ドラゴンボール VSオムニバス超 / A賞 / 超サイヤ人ゴッド超サイヤ人孫悟空&amp;超サイヤ人ゴッド超サイヤ人ベジータフィギュア / 손오공</li></ul>
+        </details>
+        <details>
+          <summary>Same prize rows</summary>
+          <ul><li>#16513 一番くじ ドラゴンボール VSオムニバス超 / A賞 / 超サイヤ人ゴッド超サイヤ人孫悟空&amp;超サイヤ人ゴッド超サイヤ人ベジータフィギュア / 혼합</li></ul>
+        </details>
+        <div class="actions"><a href="https://1kuji.com/products/db_vsosp" target="_blank" rel="noreferrer">Open source</a></div>
+      </article>
+    
+
+      <article class="card" data-classification="likely_combined_goods" data-haystack="likely_combined_goods 一番くじ ドラゴンボール vs existence a賞 孫悟空&amp;孫悟飯フィギュア 혼합 혼합 https://1kuji.com/products/db_vsex product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.">
+        <div class="top">
+          <img class="image" src="https://assets.1kuji.com/uploads/product_item/image/15507/5f8b4fa4-ae06-4e6a-8c99-249425605284.jpg" alt="">
+          <div>
+            <div class="meta"><span>P4</span><span>likely_combined_goods</span><span>#16661</span></div>
+            <h2>一番くじ ドラゴンボール VS EXISTENCE</h2>
+            <p>A賞 / 孫悟空&amp;孫悟飯フィギュア / 혼합</p>
+          </div>
+        </div>
+        <dl>
+          <dt>matched</dt><dd>손오공, 손오반</dd>
+          <dt>field</dt><dd>혼합</dd>
+          <dt>same prize</dt><dd>1 rows</dd>
+          <dt>action</dt><dd>Product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.</dd>
+        </dl>
+        <details>
+          <summary>Split name templates</summary>
+          <ul><li>一番くじ ドラゴンボール VS EXISTENCE / A賞 / 孫悟空&amp;孫悟飯フィギュア / 손오공</li><li>一番くじ ドラゴンボール VS EXISTENCE / A賞 / 孫悟空&amp;孫悟飯フィギュア / 손오반</li></ul>
+        </details>
+        <details>
+          <summary>Same prize rows</summary>
+          <ul><li>#16661 一番くじ ドラゴンボール VS EXISTENCE / A賞 / 孫悟空&amp;孫悟飯フィギュア / 혼합</li></ul>
+        </details>
+        <div class="actions"><a href="https://1kuji.com/products/db_vsex" target="_blank" rel="noreferrer">Open source</a></div>
+      </article>
+    
+
+      <article class="card" data-classification="likely_combined_goods" data-haystack="likely_combined_goods 一番くじ ドラゴンボール vs existence ラストワン賞 孫悟空&amp;孫悟飯フィギュアラストワンver. 혼합 혼합 https://1kuji.com/products/db_vsex product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.">
+        <div class="top">
+          <img class="image" src="https://assets.1kuji.com/uploads/product_item/image/15511/5bfae34a-8f28-4fd8-aac6-499b92aa019e.jpg" alt="">
+          <div>
+            <div class="meta"><span>P4</span><span>likely_combined_goods</span><span>#16665</span></div>
+            <h2>一番くじ ドラゴンボール VS EXISTENCE</h2>
+            <p>ラストワン賞 / 孫悟空&amp;孫悟飯フィギュアラストワンver. / 혼합</p>
+          </div>
+        </div>
+        <dl>
+          <dt>matched</dt><dd>손오공, 손오반</dd>
+          <dt>field</dt><dd>혼합</dd>
+          <dt>same prize</dt><dd>1 rows</dd>
+          <dt>action</dt><dd>Product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.</dd>
+        </dl>
+        <details>
+          <summary>Split name templates</summary>
+          <ul><li>一番くじ ドラゴンボール VS EXISTENCE / ラストワン賞 / 孫悟空&amp;孫悟飯フィギュアラストワンver. / 손오공</li><li>一番くじ ドラゴンボール VS EXISTENCE / ラストワン賞 / 孫悟空&amp;孫悟飯フィギュアラストワンver. / 손오반</li></ul>
+        </details>
+        <details>
+          <summary>Same prize rows</summary>
+          <ul><li>#16665 一番くじ ドラゴンボール VS EXISTENCE / ラストワン賞 / 孫悟空&amp;孫悟飯フィギュアラストワンver. / 혼합</li></ul>
+        </details>
+        <div class="actions"><a href="https://1kuji.com/products/db_vsex" target="_blank" rel="noreferrer">Open source</a></div>
+      </article>
+    
+
+      <article class="card" data-classification="likely_combined_goods" data-haystack="likely_combined_goods 一番くじ ドラゴンボールdaima e賞 孫悟空&amp;ベジータ フィギュア 혼합 혼합 https://1kuji.com/products/db_d product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.">
+        <div class="top">
+          <img class="image" src="https://sf.1kuji.com/1kuji_db/db_d/images/lineup/img_e.jpg" alt="">
+          <div>
+            <div class="meta"><span>P4</span><span>likely_combined_goods</span><span>#17662</span></div>
+            <h2>一番くじ ドラゴンボールDAIMA</h2>
+            <p>E賞 / 孫悟空&amp;ベジータ フィギュア / 혼합</p>
+          </div>
+        </div>
+        <dl>
+          <dt>matched</dt><dd>베지터, 손오공</dd>
+          <dt>field</dt><dd>혼합</dd>
+          <dt>same prize</dt><dd>1 rows</dd>
+          <dt>action</dt><dd>Product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.</dd>
+        </dl>
+        <details>
+          <summary>Split name templates</summary>
+          <ul><li>一番くじ ドラゴンボールDAIMA / E賞 / 孫悟空&amp;ベジータ フィギュア / 베지터</li><li>一番くじ ドラゴンボールDAIMA / E賞 / 孫悟空&amp;ベジータ フィギュア / 손오공</li></ul>
+        </details>
+        <details>
+          <summary>Same prize rows</summary>
+          <ul><li>#17662 一番くじ ドラゴンボールDAIMA / E賞 / 孫悟空&amp;ベジータ フィギュア / 혼합</li></ul>
+        </details>
+        <div class="actions"><a href="https://1kuji.com/products/db_d" target="_blank" rel="noreferrer">Open source</a></div>
+      </article>
+    
+
+      <article class="card" data-classification="likely_combined_goods" data-haystack="likely_combined_goods 一番くじ ドラゴンボール ex 地球を守る戦士たち a賞 masterlise 孫悟空＆孫悟飯 혼합 혼합 https://1kuji.com/products/db_ex01 product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.">
+        <div class="top">
+          <img class="image" src="https://sn.bpnavi.jp/page/db/db_ex01/0226/slide/03.jpg" alt="">
+          <div>
+            <div class="meta"><span>P4</span><span>likely_combined_goods</span><span>#17680</span></div>
+            <h2>一番くじ ドラゴンボール EX 地球を守る戦士たち</h2>
+            <p>A賞 / MASTERLISE 孫悟空＆孫悟飯 / 혼합</p>
+          </div>
+        </div>
+        <dl>
+          <dt>matched</dt><dd>손오공, 손오반</dd>
+          <dt>field</dt><dd>혼합</dd>
+          <dt>same prize</dt><dd>1 rows</dd>
+          <dt>action</dt><dd>Product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.</dd>
+        </dl>
+        <details>
+          <summary>Split name templates</summary>
+          <ul><li>一番くじ ドラゴンボール EX 地球を守る戦士たち / A賞 / MASTERLISE 孫悟空＆孫悟飯 / 손오공</li><li>一番くじ ドラゴンボール EX 地球を守る戦士たち / A賞 / MASTERLISE 孫悟空＆孫悟飯 / 손오반</li></ul>
+        </details>
+        <details>
+          <summary>Same prize rows</summary>
+          <ul><li>#17680 一番くじ ドラゴンボール EX 地球を守る戦士たち / A賞 / MASTERLISE 孫悟空＆孫悟飯 / 혼합</li></ul>
+        </details>
+        <div class="actions"><a href="https://1kuji.com/products/db_ex01" target="_blank" rel="noreferrer">Open source</a></div>
+      </article>
+    
+
+      <article class="card" data-classification="likely_combined_goods" data-haystack="likely_combined_goods 一番くじ ドラゴンボール ex 地球を守る戦士たち ラストワン賞 masterlise 孫悟空＆孫悟飯（ラストワンカラー） 혼합 혼합 https://1kuji.com/products/db_ex01 product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.">
+        <div class="top">
+          <img class="image" src="https://sn.bpnavi.jp/page/db/db_ex01/0226/slide/19.jpg" alt="">
+          <div>
+            <div class="meta"><span>P4</span><span>likely_combined_goods</span><span>#17689</span></div>
+            <h2>一番くじ ドラゴンボール EX 地球を守る戦士たち</h2>
+            <p>ラストワン賞 / MASTERLISE 孫悟空＆孫悟飯（ラストワンカラー） / 혼합</p>
+          </div>
+        </div>
+        <dl>
+          <dt>matched</dt><dd>손오공, 손오반</dd>
+          <dt>field</dt><dd>혼합</dd>
+          <dt>same prize</dt><dd>1 rows</dd>
+          <dt>action</dt><dd>Product name uses a pair/team marker; keep as one mixed row unless official source lists separate prizes.</dd>
+        </dl>
+        <details>
+          <summary>Split name templates</summary>
+          <ul><li>一番くじ ドラゴンボール EX 地球を守る戦士たち / ラストワン賞 / MASTERLISE 孫悟空＆孫悟飯（ラストワンカラー） / 손오공</li><li>一番くじ ドラゴンボール EX 地球を守る戦士たち / ラストワン賞 / MASTERLISE 孫悟空＆孫悟飯（ラストワンカラー） / 손오반</li></ul>
+        </details>
+        <details>
+          <summary>Same prize rows</summary>
+          <ul><li>#17689 一番くじ ドラゴンボール EX 地球を守る戦士たち / ラストワン賞 / MASTERLISE 孫悟空＆孫悟飯（ラストワンカラー） / 혼합</li></ul>
+        </details>
+        <div class="actions"><a href="https://1kuji.com/products/db_ex01" target="_blank" rel="noreferrer">Open source</a></div>
+      </article>
+    </div>
+  </main>
+  <script>
+    const search = document.querySelector('#search');
+    const classificationFilter = document.querySelector('#classificationFilter');
+    const cards = [...document.querySelectorAll('.card')];
+    function applyFilters() {
+      const q = (search.value || '').trim().toLowerCase();
+      const classification = classificationFilter.value;
+      for (const card of cards) {
+        const classificationOk = !classification || card.dataset.classification === classification;
+        const queryOk = !q || (card.dataset.haystack || '').includes(q);
+        card.style.display = classificationOk && queryOk ? '' : 'none';
+      }
+    }
+    search.addEventListener('input', applyFilters);
+    classificationFilter.addEventListener('change', applyFilters);
+  </script>
+</body>
+</html>
