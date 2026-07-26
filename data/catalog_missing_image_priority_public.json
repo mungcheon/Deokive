@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T12:25:53Z",
+  "generated_at": "2026-07-26T13:14:09Z",
   "scope": "public_catalog_missing_image_priority",
   "summary": {
-    "missing_image_rows": 773,
+    "missing_image_rows": 825,
     "work_queue_rows": 710,
     "queue_matched_rows": 703,
     "stale_queue_index_matches": 0,
-    "unmatched_catalog_missing_rows": 70,
+    "unmatched_catalog_missing_rows": 122,
     "missing_source_url_rows": 751,
     "generic_source_url_rows": 0,
     "product_source_url_rows": 0,
@@ -30,6 +30,10 @@
       {
         "source_store": "굿스마일컴퍼니",
         "rows": 56
+      },
+      {
+        "source_store": "치이카와 온라인 쿠지",
+        "rows": 52
       },
       {
         "source_store": "Stellive Store",
@@ -174,20 +178,16 @@
       {
         "source_store": "Hobby Max International",
         "rows": 1
-      },
-      {
-        "source_store": "ALTER",
-        "rows": 1
       }
     ],
     "by_affiliation": [
       {
-        "affiliation": "원피스",
-        "rows": 82
+        "affiliation": "치이카와",
+        "rows": 116
       },
       {
-        "affiliation": "치이카와",
-        "rows": 64
+        "affiliation": "원피스",
+        "rows": 82
       },
       {
         "affiliation": "나의 히어로 아카데미아",
@@ -348,6 +348,10 @@
         "rows": 127
       },
       {
+        "category": "인형",
+        "rows": 126
+      },
+      {
         "category": "아크릴 스탠드",
         "rows": 123
       },
@@ -356,16 +360,12 @@
         "rows": 95
       },
       {
-        "category": "인형",
-        "rows": 87
+        "category": "마스코트",
+        "rows": 80
       },
       {
         "category": "키링",
         "rows": 80
-      },
-      {
-        "category": "마스코트",
-        "rows": 67
       },
       {
         "category": "문구",
@@ -467,7 +467,7 @@
       },
       {
         "strategy": "manual_review",
-        "rows": 182
+        "rows": 234
       },
       {
         "strategy": "manual_official_search_review",
@@ -492,16 +492,16 @@
         "rows": 452
       },
       {
+        "automation_safety": "not_in_work_queue",
+        "rows": 122
+      },
+      {
         "automation_safety": "manual_research_required",
         "rows": 112
       },
       {
         "automation_safety": "manual_confirmation_required",
         "rows": 88
-      },
-      {
-        "automation_safety": "not_in_work_queue",
-        "rows": 70
       },
       {
         "automation_safety": "blocked_until_exact_product_url",
@@ -519,7 +519,7 @@
       },
       {
         "source_url_state": "unclassified_source_url",
-        "rows": 22
+        "rows": 74
       }
     ]
   },
@@ -538,6 +538,12 @@
     }
   },
   "focus_groups": [
+    {
+      "source_store": "치이카와 온라인 쿠지",
+      "affiliation": "치이카와",
+      "rows": 52,
+      "recommended_workflow": "batch_source_discovery_then_image_attachment_review"
+    },
     {
       "source_store": "Stellive Store",
       "affiliation": "스텔라이브",
@@ -709,12 +715,6 @@
     {
       "source_store": "애니메이트",
       "affiliation": "나의 히어로 아카데미아",
-      "rows": 7,
-      "recommended_workflow": "official_storefront_search_then_exact_detail_match"
-    },
-    {
-      "source_store": "애니메이트",
-      "affiliation": "원피스",
       "rows": 7,
       "recommended_workflow": "official_storefront_search_then_exact_detail_match"
     }
@@ -4282,143 +4282,143 @@
   "stale_queue_index_samples": [],
   "unmatched_catalog_missing_samples": [
     {
-      "catalog_index": 920,
-      "name_ko": "치이카와 러버 스트랩 (치이카와)",
-      "source_store": "엔스카이",
+      "catalog_index": 631,
+      "name_ko": "A상: 빅 사이즈 쿠션 (치이카와)",
+      "source_store": "치이카와 온라인 쿠지",
       "affiliation": "치이카와",
-      "category": "키링"
+      "category": "인형"
     },
     {
-      "catalog_index": 921,
-      "name_ko": "치이카와 러버 스트랩 (하치와레)",
-      "source_store": "엔스카이",
+      "catalog_index": 632,
+      "name_ko": "A상: 빅 사이즈 쿠션 (하치와레)",
+      "source_store": "치이카와 온라인 쿠지",
       "affiliation": "치이카와",
-      "category": "키링"
+      "category": "인형"
     },
     {
-      "catalog_index": 927,
-      "name_ko": "치이카와 아크릴 스탠드 (치이카와)",
-      "source_store": "엔스카이",
+      "catalog_index": 633,
+      "name_ko": "B상: 누워있는 인형 (치이카와)",
+      "source_store": "치이카와 온라인 쿠지",
       "affiliation": "치이카와",
-      "category": "아크릴 스탠드"
+      "category": "인형"
     },
     {
-      "catalog_index": 963,
-      "name_ko": "쿠리만쥬 ご当地 마스코트 (센다이 즌다)",
-      "source_store": "엔스카이",
+      "catalog_index": 634,
+      "name_ko": "B상: 누워있는 인형 (하치와레)",
+      "source_store": "치이카와 온라인 쿠지",
+      "affiliation": "치이카와",
+      "category": "인형"
+    },
+    {
+      "catalog_index": 635,
+      "name_ko": "B상: 누워있는 인형 (우사기)",
+      "source_store": "치이카와 온라인 쿠지",
+      "affiliation": "치이카와",
+      "category": "인형"
+    },
+    {
+      "catalog_index": 636,
+      "name_ko": "A상: BIG 크레페 안기 인형 (치이카와)",
+      "source_store": "치이카와 온라인 쿠지",
+      "affiliation": "치이카와",
+      "category": "인형"
+    },
+    {
+      "catalog_index": 637,
+      "name_ko": "A상: BIG 크레페 안기 인형 (하치와레)",
+      "source_store": "치이카와 온라인 쿠지",
+      "affiliation": "치이카와",
+      "category": "인형"
+    },
+    {
+      "catalog_index": 638,
+      "name_ko": "A상: BIG 크레페 안기 인형 (우사기)",
+      "source_store": "치이카와 온라인 쿠지",
+      "affiliation": "치이카와",
+      "category": "인형"
+    },
+    {
+      "catalog_index": 639,
+      "name_ko": "B상: 크레페 가게 인형 S (치이카와)",
+      "source_store": "치이카와 온라인 쿠지",
+      "affiliation": "치이카와",
+      "category": "인형"
+    },
+    {
+      "catalog_index": 640,
+      "name_ko": "B상: 크레페 가게 인형 S (하치와레)",
+      "source_store": "치이카와 온라인 쿠지",
+      "affiliation": "치이카와",
+      "category": "인형"
+    },
+    {
+      "catalog_index": 641,
+      "name_ko": "B상: 크레페 가게 인형 S (우사기)",
+      "source_store": "치이카와 온라인 쿠지",
+      "affiliation": "치이카와",
+      "category": "인형"
+    },
+    {
+      "catalog_index": 642,
+      "name_ko": "C상: 크레페가 되어버렸어!! 마스코트 (치이카와)",
+      "source_store": "치이카와 온라인 쿠지",
       "affiliation": "치이카와",
       "category": "마스코트"
     },
     {
-      "catalog_index": 1024,
-      "name_ko": "귀멸의 칼날 봉제 인형 (탄지로)",
-      "source_store": "애니메이트",
-      "affiliation": "귀멸의 칼날",
+      "catalog_index": 643,
+      "name_ko": "C상: 크레페가 되어버렸어!! 마스코트 (하치와레)",
+      "source_store": "치이카와 온라인 쿠지",
+      "affiliation": "치이카와",
+      "category": "마스코트"
+    },
+    {
+      "catalog_index": 644,
+      "name_ko": "C상: 크레페가 되어버렸어!! 마스코트 (우사기)",
+      "source_store": "치이카와 온라인 쿠지",
+      "affiliation": "치이카와",
+      "category": "마스코트"
+    },
+    {
+      "catalog_index": 645,
+      "name_ko": "A상: 합석 사이즈 특대 문어 옷 인형 (치이카와)",
+      "source_store": "치이카와 온라인 쿠지",
+      "affiliation": "치이카와",
       "category": "인형"
     },
     {
-      "catalog_index": 1025,
-      "name_ko": "귀멸의 칼날 봉제 인형 (네즈코)",
-      "source_store": "애니메이트",
-      "affiliation": "귀멸의 칼날",
+      "catalog_index": 646,
+      "name_ko": "A상: 합석 사이즈 특대 문어 옷 인형 (하치와레)",
+      "source_store": "치이카와 온라인 쿠지",
+      "affiliation": "치이카와",
       "category": "인형"
     },
     {
-      "catalog_index": 1032,
-      "name_ko": "원피스 아크릴 키링 (루피)",
-      "source_store": "애니메이트",
-      "affiliation": "원피스",
-      "category": "키링"
-    },
-    {
-      "catalog_index": 1036,
-      "name_ko": "주술회전 봉제 인형 (고죠 사토루)",
-      "source_store": "애니메이트",
-      "affiliation": "주술회전",
+      "catalog_index": 647,
+      "name_ko": "B상: BIG 오징어 쿠션 (우사기)",
+      "source_store": "치이카와 온라인 쿠지",
+      "affiliation": "치이카와",
       "category": "인형"
     },
     {
-      "catalog_index": 1041,
-      "name_ko": "체인소맨 아크릴 스탠드 (파워)",
-      "source_store": "애니메이트",
-      "affiliation": "체인소맨",
-      "category": "아크릴 스탠드"
-    },
-    {
-      "catalog_index": 1042,
-      "name_ko": "체인소맨 아크릴 스탠드 (마키마)",
-      "source_store": "애니메이트",
-      "affiliation": "체인소맨",
-      "category": "아크릴 스탠드"
-    },
-    {
-      "catalog_index": 1047,
-      "name_ko": "진격의 거인 아크릴 스탠드 (미카사)",
-      "source_store": "애니메이트",
-      "affiliation": "진격의 거인",
-      "category": "아크릴 스탠드"
-    },
-    {
-      "catalog_index": 1048,
-      "name_ko": "진격의 거인 아크릴 스탠드 (리바이)",
-      "source_store": "애니메이트",
-      "affiliation": "진격의 거인",
-      "category": "아크릴 스탠드"
-    },
-    {
-      "catalog_index": 1049,
-      "name_ko": "진격의 거인 피규어 (리바이)",
-      "source_store": "애니메이트",
-      "affiliation": "진격의 거인",
-      "category": "피규어"
-    },
-    {
-      "catalog_index": 1052,
-      "name_ko": "나의 히어로 아카데미아 아크릴 스탠드 (데쿠)",
-      "source_store": "애니메이트",
-      "affiliation": "나의 히어로 아카데미아",
-      "category": "아크릴 스탠드"
-    },
-    {
-      "catalog_index": 1053,
-      "name_ko": "나의 히어로 아카데미아 아크릴 스탠드 (바쿠고)",
-      "source_store": "애니메이트",
-      "affiliation": "나의 히어로 아카데미아",
-      "category": "아크릴 스탠드"
-    },
-    {
-      "catalog_index": 1054,
-      "name_ko": "나의 히어로 아카데미아 아크릴 스탠드 (토도로키)",
-      "source_store": "애니메이트",
-      "affiliation": "나의 히어로 아카데미아",
-      "category": "아크릴 스탠드"
-    },
-    {
-      "catalog_index": 1269,
-      "name_ko": "누이푸페 자수 데님 미도리야 이즈쿠",
-      "source_store": "엔스카이",
-      "affiliation": "나의 히어로 아카데미아",
+      "catalog_index": 648,
+      "name_ko": "C상: 폭신폭신 타코이카 인형 S (치이카와)",
+      "source_store": "치이카와 온라인 쿠지",
+      "affiliation": "치이카와",
       "category": "인형"
     },
     {
-      "catalog_index": 1270,
-      "name_ko": "누이푸페 자수 데님 이이다 텐야",
-      "source_store": "엔스카이",
-      "affiliation": "나의 히어로 아카데미아",
+      "catalog_index": 649,
+      "name_ko": "C상: 폭신폭신 타코이카 인형 S (하치와레)",
+      "source_store": "치이카와 온라인 쿠지",
+      "affiliation": "치이카와",
       "category": "인형"
     },
     {
-      "catalog_index": 1272,
-      "name_ko": "누이푸페 자수 데님 바쿠고 카츠키",
-      "source_store": "엔스카이",
-      "affiliation": "나의 히어로 아카데미아",
-      "category": "인형"
-    },
-    {
-      "catalog_index": 1273,
-      "name_ko": "누이푸페 자수 데님 키리시마 에이지로",
-      "source_store": "엔스카이",
-      "affiliation": "나의 히어로 아카데미아",
+      "catalog_index": 650,
+      "name_ko": "C상: 폭신폭신 타코이카 인형 S (우사기)",
+      "source_store": "치이카와 온라인 쿠지",
+      "affiliation": "치이카와",
       "category": "인형"
     }
   ],

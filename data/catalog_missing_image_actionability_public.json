@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T12:25:53Z",
+  "generated_at": "2026-07-26T13:14:09Z",
   "scope": "catalog_missing_image_actionability",
   "summary": {
-    "missing_image_rows": 773,
-    "readiness_classified_rows": 773,
+    "missing_image_rows": 825,
+    "readiness_classified_rows": 825,
     "unclassified_rows": 0,
-    "exact_source_ready_rows": 0,
+    "exact_source_ready_rows": 52,
     "source_first_rows": 741,
     "review_before_attach_rows": 22,
     "source_detail_candidate_review_rows": 0,
@@ -37,13 +37,13 @@
     "source_discovery_focus_template_dry_run_skipped_rows": 741,
     "source_discovery_focus_coverage": 1.0,
     "source_discovery_non_focus_rows": 0,
-    "action_queue_rows": 22,
-    "direct_image_action_queue_rows": 22,
-    "direct_image_action_primary_review_url_rows": 22,
+    "action_queue_rows": 74,
+    "direct_image_action_queue_rows": 74,
+    "direct_image_action_primary_review_url_rows": 74,
     "direct_image_action_primary_review_url_kind_counts": [
       [
         "current_source_url",
-        22
+        74
       ]
     ],
     "direct_image_action_next_representative_review_batch_rows": 10,
@@ -55,24 +55,28 @@
         10
       ]
     ],
-    "direct_image_action_workflows_with_review_start": 1,
+    "direct_image_action_workflows_with_review_start": 2,
     "manual_image_research_review_start_rows": 8,
     "manual_image_research_review_start_kind": "fallback_web_search",
     "source_discovery_review_start_rows": 20,
     "source_discovery_review_start_kind": "domain_limited_web_search",
-    "image_attachment_template_rows": 22,
+    "image_attachment_template_rows": 74,
     "image_attachment_template_confirmed_rows": 0,
     "image_attachment_template_source_update_required_rows": 0,
     "image_attachment_template_representative_review_rows": 22,
     "image_attachment_template_dry_run_updated_rows": 0,
-    "image_attachment_template_dry_run_skipped_rows": 22,
-    "actionable_image_rows": 22,
+    "image_attachment_template_dry_run_skipped_rows": 74,
+    "actionable_image_rows": 74,
     "source_discovery_work_pack_count": 16,
     "source_discovery_work_pack_rows": 671,
     "by_blocked_reason": [
       {
         "blocked_reason": "missing_exact_source_url",
         "rows": 741
+      },
+      {
+        "blocked_reason": "candidate_image_requires_manual_review",
+        "rows": 52
       },
       {
         "blocked_reason": "representative_image_requires_product_type_review",
@@ -93,6 +97,10 @@
         "rows": 741
       },
       {
+        "blocked_until": "manual_image_url_confirmed_from_exact_source",
+        "rows": 52
+      },
+      {
         "blocked_until": "representative_image_exact_product_type_confirmed",
         "rows": 22
       },
@@ -106,19 +114,180 @@
       }
     ],
     "auto_apply_enabled": false,
-    "completion_plan_total_open_rows": 773,
+    "completion_plan_total_open_rows": 825,
     "completion_plan_phase_rows_total": 773,
     "completion_plan_phase_count": 3,
-    "completion_plan_status": "balanced",
+    "completion_plan_status": "needs_review",
     "completion_plan_review_start_status": "all_phases_have_review_start",
     "completion_plan_phases_with_review_start": 3,
     "completion_plan_phases_missing_review_start": 0,
     "completion_plan_rows_with_review_start": 773,
     "completion_plan_rows_missing_review_start": 0,
     "blocking_dashboard_status": "manual_evidence_required",
-    "blocking_dashboard_queue_coverage": 1.0
+    "blocking_dashboard_queue_coverage": 0.9515
   },
   "readiness": [
+    {
+      "readiness": "image_url_candidate_review",
+      "priority": 10,
+      "rows": 52,
+      "workflow_rows": [
+        {
+          "workflow": "extract_from_existing_source_url",
+          "label": "이미 확인된 상세 source_url에서 image_url 추출",
+          "rows": 52,
+          "next_step": "extract_product_image_from_existing_exact_source_url"
+        }
+      ],
+      "by_source_store": [
+        {
+          "source_store": "치이카와 온라인 쿠지",
+          "rows": 52
+        }
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 631,
+          "name_ko": "A상: 빅 사이즈 쿠션 (치이카와)",
+          "name_ja": "A賞 BIGサイズクッション ちいかわ",
+          "source_store": "치이카와 온라인 쿠지",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
+          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%82%B5%E3%82%A4%E3%82%BA%E3%82%AF%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F",
+          "workflow": "extract_from_existing_source_url"
+        },
+        {
+          "catalog_index": 632,
+          "name_ko": "A상: 빅 사이즈 쿠션 (하치와레)",
+          "name_ja": "A賞 BIGサイズクッション ハチワレ",
+          "source_store": "치이카와 온라인 쿠지",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
+          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%82%B5%E3%82%A4%E3%82%BA%E3%82%AF%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC",
+          "workflow": "extract_from_existing_source_url"
+        },
+        {
+          "catalog_index": 633,
+          "name_ko": "B상: 누워있는 인형 (치이카와)",
+          "name_ja": "B賞 寝そべりぬいぐるみ ちいかわ",
+          "source_store": "치이카와 온라인 쿠지",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
+          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E5%AF%9D%E3%81%9D%E3%81%B9%E3%82%8A%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F",
+          "workflow": "extract_from_existing_source_url"
+        },
+        {
+          "catalog_index": 634,
+          "name_ko": "B상: 누워있는 인형 (하치와레)",
+          "name_ja": "B賞 寝そべりぬいぐるみ ハチワレ",
+          "source_store": "치이카와 온라인 쿠지",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
+          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E5%AF%9D%E3%81%9D%E3%81%B9%E3%82%8A%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC",
+          "workflow": "extract_from_existing_source_url"
+        },
+        {
+          "catalog_index": 635,
+          "name_ko": "B상: 누워있는 인형 (우사기)",
+          "name_ja": "B賞 寝そべりぬいぐるみ うさぎ",
+          "source_store": "치이카와 온라인 쿠지",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
+          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E5%AF%9D%E3%81%9D%E3%81%B9%E3%82%8A%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%81%86%E3%81%95%E3%81%8E",
+          "workflow": "extract_from_existing_source_url"
+        },
+        {
+          "catalog_index": 636,
+          "name_ko": "A상: BIG 크레페 안기 인형 (치이카와)",
+          "name_ja": "A賞 BIGクレープな抱っこぬいぐるみ ちいかわ",
+          "source_store": "치이카와 온라인 쿠지",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/chiikawa-crepes",
+          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%82%AF%E3%83%AC%E3%83%BC%E3%83%97%E3%81%AA%E6%8A%B1%E3%81%A3%E3%81%93%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F",
+          "workflow": "extract_from_existing_source_url"
+        },
+        {
+          "catalog_index": 637,
+          "name_ko": "A상: BIG 크레페 안기 인형 (하치와레)",
+          "name_ja": "A賞 BIGクレープな抱っこぬいぐるみ ハチワレ",
+          "source_store": "치이카와 온라인 쿠지",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/chiikawa-crepes",
+          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%82%AF%E3%83%AC%E3%83%BC%E3%83%97%E3%81%AA%E6%8A%B1%E3%81%A3%E3%81%93%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC",
+          "workflow": "extract_from_existing_source_url"
+        },
+        {
+          "catalog_index": 638,
+          "name_ko": "A상: BIG 크레페 안기 인형 (우사기)",
+          "name_ja": "A賞 BIGクレープな抱っこぬいぐるみ うさぎ",
+          "source_store": "치이카와 온라인 쿠지",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/chiikawa-crepes",
+          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%82%AF%E3%83%AC%E3%83%BC%E3%83%97%E3%81%AA%E6%8A%B1%E3%81%A3%E3%81%93%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%81%86%E3%81%95%E3%81%8E",
+          "workflow": "extract_from_existing_source_url"
+        },
+        {
+          "catalog_index": 639,
+          "name_ko": "B상: 크레페 가게 인형 S (치이카와)",
+          "name_ja": "B賞 クレープ屋さんなぬいぐるみS ちいかわ",
+          "source_store": "치이카와 온라인 쿠지",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/chiikawa-crepes",
+          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E3%82%AF%E3%83%AC%E3%83%BC%E3%83%97%E5%B1%8B%E3%81%95%E3%82%93%E3%81%AA%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BFS%20%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F",
+          "workflow": "extract_from_existing_source_url"
+        },
+        {
+          "catalog_index": 640,
+          "name_ko": "B상: 크레페 가게 인형 S (하치와레)",
+          "name_ja": "B賞 クレープ屋さんなぬいぐるみS ハチワレ",
+          "source_store": "치이카와 온라인 쿠지",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/chiikawa-crepes",
+          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E3%82%AF%E3%83%AC%E3%83%BC%E3%83%97%E5%B1%8B%E3%81%95%E3%82%93%E3%81%AA%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BFS%20%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC",
+          "workflow": "extract_from_existing_source_url"
+        },
+        {
+          "catalog_index": 641,
+          "name_ko": "B상: 크레페 가게 인형 S (우사기)",
+          "name_ja": "B賞 クレープ屋さんなぬいぐるみS うさぎ",
+          "source_store": "치이카와 온라인 쿠지",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/chiikawa-crepes",
+          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E3%82%AF%E3%83%AC%E3%83%BC%E3%83%97%E5%B1%8B%E3%81%95%E3%82%93%E3%81%AA%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BFS%20%E3%81%86%E3%81%95%E3%81%8E",
+          "workflow": "extract_from_existing_source_url"
+        },
+        {
+          "catalog_index": 642,
+          "name_ko": "C상: 크레페가 되어버렸어!! 마스코트 (치이카와)",
+          "name_ja": "C賞 クレープになっちゃった！！マスコット ちいかわ",
+          "source_store": "치이카와 온라인 쿠지",
+          "affiliation": null,
+          "category": "마스코트",
+          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/chiikawa-crepes",
+          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=C%E8%B3%9E%20%E3%82%AF%E3%83%AC%E3%83%BC%E3%83%97%E3%81%AB%E3%81%AA%E3%81%A3%E3%81%A1%E3%82%83%E3%81%A3%E3%81%9F%EF%BC%81%EF%BC%81%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%20%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F",
+          "workflow": "extract_from_existing_source_url"
+        }
+      ],
+      "auto_apply_enabled": false,
+      "blocked_until": "manual_image_url_confirmed_from_exact_source",
+      "blocked_reason": "candidate_image_requires_manual_review",
+      "required_evidence": [
+        "exact_product_source_url",
+        "image_url_from_accepted_source_or_trusted_official_cdn",
+        "same_product_title_character_variant_type_confirmed"
+      ]
+    },
     {
       "readiness": "representative_image_review_required",
       "priority": 25,
@@ -907,6 +1076,133 @@
     }
   ],
   "source_store_priority": [
+    {
+      "source_store": "치이카와 온라인 쿠지",
+      "priority": 10,
+      "missing_image_rows": 52,
+      "primary_workflow": "extract_from_existing_source_url",
+      "recommended_next_step": "extract_product_image_from_existing_exact_source_url",
+      "blocked_until": "manual_image_url_confirmed_from_exact_source",
+      "blocked_reason": "candidate_image_requires_manual_review",
+      "required_evidence": [
+        "exact_product_source_url",
+        "image_url_from_accepted_source_or_trusted_official_cdn",
+        "same_product_title_character_variant_type_confirmed"
+      ],
+      "readiness_rows": [
+        {
+          "readiness": "image_url_candidate_review",
+          "rows": 52
+        }
+      ],
+      "workflow_rows": [
+        {
+          "workflow": "extract_from_existing_source_url",
+          "label": "이미 확인된 상세 source_url에서 image_url 추출",
+          "rows": 52,
+          "next_step": "extract_product_image_from_existing_exact_source_url"
+        }
+      ],
+      "sample_items": [
+        {
+          "catalog_index": 631,
+          "name_ko": "A상: 빅 사이즈 쿠션 (치이카와)",
+          "name_ja": "A賞 BIGサイズクッション ちいかわ",
+          "source_store": "치이카와 온라인 쿠지",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
+          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%82%B5%E3%82%A4%E3%82%BA%E3%82%AF%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F",
+          "workflow": "extract_from_existing_source_url",
+          "readiness": "image_url_candidate_review"
+        },
+        {
+          "catalog_index": 632,
+          "name_ko": "A상: 빅 사이즈 쿠션 (하치와레)",
+          "name_ja": "A賞 BIGサイズクッション ハチワレ",
+          "source_store": "치이카와 온라인 쿠지",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
+          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%82%B5%E3%82%A4%E3%82%BA%E3%82%AF%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%20%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC",
+          "workflow": "extract_from_existing_source_url",
+          "readiness": "image_url_candidate_review"
+        },
+        {
+          "catalog_index": 633,
+          "name_ko": "B상: 누워있는 인형 (치이카와)",
+          "name_ja": "B賞 寝そべりぬいぐるみ ちいかわ",
+          "source_store": "치이카와 온라인 쿠지",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
+          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E5%AF%9D%E3%81%9D%E3%81%B9%E3%82%8A%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F",
+          "workflow": "extract_from_existing_source_url",
+          "readiness": "image_url_candidate_review"
+        },
+        {
+          "catalog_index": 634,
+          "name_ko": "B상: 누워있는 인형 (하치와레)",
+          "name_ja": "B賞 寝そべりぬいぐるみ ハチワレ",
+          "source_store": "치이카와 온라인 쿠지",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
+          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E5%AF%9D%E3%81%9D%E3%81%B9%E3%82%8A%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC",
+          "workflow": "extract_from_existing_source_url",
+          "readiness": "image_url_candidate_review"
+        },
+        {
+          "catalog_index": 635,
+          "name_ko": "B상: 누워있는 인형 (우사기)",
+          "name_ja": "B賞 寝そべりぬいぐるみ うさぎ",
+          "source_store": "치이카와 온라인 쿠지",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
+          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=B%E8%B3%9E%20%E5%AF%9D%E3%81%9D%E3%81%B9%E3%82%8A%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%81%86%E3%81%95%E3%81%8E",
+          "workflow": "extract_from_existing_source_url",
+          "readiness": "image_url_candidate_review"
+        },
+        {
+          "catalog_index": 636,
+          "name_ko": "A상: BIG 크레페 안기 인형 (치이카와)",
+          "name_ja": "A賞 BIGクレープな抱っこぬいぐるみ ちいかわ",
+          "source_store": "치이카와 온라인 쿠지",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/chiikawa-crepes",
+          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%82%AF%E3%83%AC%E3%83%BC%E3%83%97%E3%81%AA%E6%8A%B1%E3%81%A3%E3%81%93%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F",
+          "workflow": "extract_from_existing_source_url",
+          "readiness": "image_url_candidate_review"
+        },
+        {
+          "catalog_index": 637,
+          "name_ko": "A상: BIG 크레페 안기 인형 (하치와레)",
+          "name_ja": "A賞 BIGクレープな抱っこぬいぐるみ ハチワレ",
+          "source_store": "치이카와 온라인 쿠지",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/chiikawa-crepes",
+          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%82%AF%E3%83%AC%E3%83%BC%E3%83%97%E3%81%AA%E6%8A%B1%E3%81%A3%E3%81%93%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC",
+          "workflow": "extract_from_existing_source_url",
+          "readiness": "image_url_candidate_review"
+        },
+        {
+          "catalog_index": 638,
+          "name_ko": "A상: BIG 크레페 안기 인형 (우사기)",
+          "name_ja": "A賞 BIGクレープな抱っこぬいぐるみ うさぎ",
+          "source_store": "치이카와 온라인 쿠지",
+          "affiliation": null,
+          "category": "인형",
+          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/chiikawa-crepes",
+          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=A%E8%B3%9E%20BIG%E3%82%AF%E3%83%AC%E3%83%BC%E3%83%97%E3%81%AA%E6%8A%B1%E3%81%A3%E3%81%93%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%20%E3%81%86%E3%81%95%E3%81%8E",
+          "workflow": "extract_from_existing_source_url",
+          "readiness": "image_url_candidate_review"
+        }
+      ],
+      "auto_apply_enabled": false
+    },
     {
       "source_store": "ご当地ちいかわ 공식(API)",
       "priority": 25,
@@ -4068,61 +4364,6 @@
           "category": "피규어",
           "source_url": null,
           "official_search_url": "https://www.amiami.com/eng/search/list/?s_keywords=KDcolle%20%E3%82%A8%E3%83%9F%E3%83%AA%E3%82%A2%20KADOKAWA",
-          "workflow": "find_source_then_extract_image",
-          "readiness": "source_url_discovery_required"
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "source_store": "Phat! Company",
-      "priority": 30,
-      "missing_image_rows": 2,
-      "primary_workflow": "find_source_then_extract_image",
-      "recommended_next_step": "find_exact_official_source_url_then_extract_image",
-      "blocked_until": "exact_product_source_url_discovered",
-      "blocked_reason": "missing_exact_source_url",
-      "required_evidence": [
-        "official_or_trusted_product_detail_source_url",
-        "title_character_variant_type_match",
-        "image_url_from_confirmed_source_or_trusted_official_cdn"
-      ],
-      "readiness_rows": [
-        {
-          "readiness": "source_url_discovery_required",
-          "rows": 2
-        }
-      ],
-      "workflow_rows": [
-        {
-          "workflow": "find_source_then_extract_image",
-          "label": "정확한 공식 상품 source_url을 먼저 찾은 뒤 이미지 첨부",
-          "rows": 2,
-          "next_step": "find_exact_official_source_url_then_extract_image"
-        }
-      ],
-      "sample_items": [
-        {
-          "catalog_index": 1441,
-          "name_ko": "1/7 스케일 보가만",
-          "name_ja": "1/7スケール ボンドルド",
-          "source_store": "Phat! Company",
-          "affiliation": null,
-          "category": "피규어",
-          "source_url": null,
-          "official_search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=1/7%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AB%20%E3%83%9C%E3%83%B3%E3%83%89%E3%83%AB%E3%83%89",
-          "workflow": "find_source_then_extract_image",
-          "readiness": "source_url_discovery_required"
-        },
-        {
-          "catalog_index": 1442,
-          "name_ko": "1/7 스케일 나나치",
-          "name_ja": "1/7スケール ナナチ",
-          "source_store": "Phat! Company",
-          "affiliation": null,
-          "category": "피규어",
-          "source_url": null,
-          "official_search_url": "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D=1/7%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AB%20%E3%83%8A%E3%83%8A%E3%83%81",
           "workflow": "find_source_then_extract_image",
           "readiness": "source_url_discovery_required"
         }
@@ -7967,9 +8208,56 @@
     }
   ],
   "image_action_review_starts": {
+    "extract_from_existing_source_url": {
+      "workflow": "extract_from_existing_source_url",
+      "batch_id": "image-attachment-action-001",
+      "source_store": "치이카와 온라인 쿠지",
+      "row_count": 20,
+      "primary_review_url_rows": 20,
+      "first_primary_review_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
+      "first_primary_review_url_kind": "current_source_url",
+      "sample_items_with_primary_review_url": 20,
+      "sample_primary_review_items": [
+        {
+          "catalog_index": 631,
+          "name_ko": "A상: 빅 사이즈 쿠션 (치이카와)",
+          "name_ja": "A賞 BIGサイズクッション ちいかわ",
+          "primary_review_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
+          "primary_review_url_kind": "current_source_url"
+        },
+        {
+          "catalog_index": 632,
+          "name_ko": "A상: 빅 사이즈 쿠션 (하치와레)",
+          "name_ja": "A賞 BIGサイズクッション ハチワレ",
+          "primary_review_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
+          "primary_review_url_kind": "current_source_url"
+        },
+        {
+          "catalog_index": 633,
+          "name_ko": "B상: 누워있는 인형 (치이카와)",
+          "name_ja": "B賞 寝そべりぬいぐるみ ちいかわ",
+          "primary_review_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
+          "primary_review_url_kind": "current_source_url"
+        },
+        {
+          "catalog_index": 634,
+          "name_ko": "B상: 누워있는 인형 (하치와레)",
+          "name_ja": "B賞 寝そべりぬいぐるみ ハチワレ",
+          "primary_review_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
+          "primary_review_url_kind": "current_source_url"
+        },
+        {
+          "catalog_index": 635,
+          "name_ko": "B상: 누워있는 인형 (우사기)",
+          "name_ja": "B賞 寝そべりぬいぐるみ うさぎ",
+          "primary_review_url": "https://online-kuji.chiikawamarket.jp/store/lottery/mochifuwa",
+          "primary_review_url_kind": "current_source_url"
+        }
+      ]
+    },
     "review_gotouchi_official_candidates": {
       "workflow": "review_gotouchi_official_candidates",
-      "batch_id": "image-attachment-action-001",
+      "batch_id": "image-attachment-action-004",
       "source_store": "ご当地ちいかわ 공식(API)",
       "row_count": 20,
       "primary_review_url_rows": 20,
@@ -10646,7 +10934,7 @@
       "current_focus_pack": {},
       "review_start": {
         "workflow": "review_gotouchi_official_candidates",
-        "batch_id": "image-attachment-action-001",
+        "batch_id": "image-attachment-action-004",
         "source_store": "ご当地ちいかわ 공식(API)",
         "row_count": 20,
         "primary_review_url_rows": 20,
@@ -10853,7 +11141,7 @@
   ],
   "manual_validation_focus": {
     "auto_import_ready_rows": 0,
-    "manual_validation_required_rows": 773,
+    "manual_validation_required_rows": 825,
     "next_focus_lane": "discover_exact_source_urls",
     "next_focus_row_count": 741,
     "next_focus_source": "source_discovery_action_queue_public.json",
@@ -11180,7 +11468,7 @@
         "current_focus_pack": {},
         "review_start": {
           "workflow": "review_gotouchi_official_candidates",
-          "batch_id": "image-attachment-action-001",
+          "batch_id": "image-attachment-action-004",
           "source_store": "ご当地ちいかわ 공식(API)",
           "row_count": 20,
           "primary_review_url_rows": 20,
@@ -11371,17 +11659,17 @@
     }
   },
   "execution_queue_summary": {
-    "open_missing_image_rows": 773,
+    "open_missing_image_rows": 825,
     "auto_import_ready_rows": 0,
     "queue_count": 4,
-    "queued_rows_total": 773,
+    "queued_rows_total": 785,
     "raw_queued_rows_total": 785,
-    "overlapping_queue_rows": 12,
-    "not_yet_queued_rows": 0,
+    "overlapping_queue_rows": 0,
+    "not_yet_queued_rows": 40,
     "not_yet_queued_rows_explained": 0,
     "unqueued_phase_rows_total": 0,
     "overlay_queue_rows": 12,
-    "completion_plan_status": "balanced",
+    "completion_plan_status": "needs_review",
     "next_queue": {
       "rank": 4,
       "lane": "discover_exact_source_urls",
@@ -11555,7 +11843,7 @@
         ],
         "review_start": {
           "workflow": "review_gotouchi_official_candidates",
-          "batch_id": "image-attachment-action-001",
+          "batch_id": "image-attachment-action-004",
           "source_store": "ご当地ちいかわ 공식(API)",
           "row_count": 20,
           "primary_review_url_rows": 20,
@@ -11780,12 +12068,12 @@
   },
   "blocking_dashboard": {
     "status": "manual_evidence_required",
-    "total_open_rows": 773,
+    "total_open_rows": 825,
     "auto_import_ready_rows": 0,
-    "manual_validation_required_rows": 773,
-    "queued_rows_total": 773,
-    "not_yet_queued_rows": 0,
-    "queue_coverage": 1.0,
+    "manual_validation_required_rows": 825,
+    "queued_rows_total": 785,
+    "not_yet_queued_rows": 40,
+    "queue_coverage": 0.9515,
     "top_blocked_reason": {
       "blocked_reason": "missing_exact_source_url",
       "rows": 741
@@ -11814,7 +12102,7 @@
       "blocked_reason": "representative_image_requires_product_type_review",
       "blocked_until": "representative_image_exact_product_type_confirmed"
     },
-    "phase_status": "balanced",
+    "phase_status": "needs_review",
     "phase_count": 3,
     "review_start_coverage_status": "all_phases_have_review_start",
     "phases_with_review_start": 3,
@@ -11843,11 +12131,11 @@
     ],
     "image_evidence_bottleneck_summary": {
       "status": "source_or_image_evidence_required",
-      "missing_image_rows": 773,
+      "missing_image_rows": 825,
       "known_image_download_problem_rows": 0,
-      "image_url_evidence_missing_rows": 773,
+      "image_url_evidence_missing_rows": 825,
       "auto_import_ready_rows": 0,
-      "manual_confirmation_required_rows": 773,
+      "manual_confirmation_required_rows": 825,
       "source_first_rows": 741,
       "representative_review_rows": 22,
       "manual_image_research_rows": 10,
@@ -11881,10 +12169,10 @@
     "operator_message": "No missing-image DB row can be imported automatically yet; fill the next confirmation template with exact product source/image evidence first."
   },
   "completion_plan": {
-    "total_open_rows": 773,
+    "total_open_rows": 825,
     "phase_rows_total": 773,
     "phase_count": 3,
-    "status": "balanced",
+    "status": "needs_review",
     "phases": [
       {
         "rank": 1,
@@ -11908,7 +12196,7 @@
         "current_batch": {},
         "review_start": {
           "workflow": "review_gotouchi_official_candidates",
-          "batch_id": "image-attachment-action-001",
+          "batch_id": "image-attachment-action-004",
           "source_store": "ご当地ちいかわ 공식(API)",
           "row_count": 20,
           "primary_review_url_rows": 20,

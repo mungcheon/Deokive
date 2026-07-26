@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T12:25:53Z",
+  "generated_at": "2026-07-26T13:14:09Z",
   "scope": "source_discovery_next_focus_exact_url_review_queue",
   "source_report": "data/source_discovery_next_focus_fallback_queue_public.json",
   "summary": {
@@ -80,34 +80,34 @@
     "candidate_detail_link_title_match_counts": [
       [
         "title_mismatch",
-        65
+        100
       ]
     ],
-    "candidate_detail_link_title_mismatch_rows": 65,
+    "candidate_detail_link_title_mismatch_rows": 100,
     "auto_apply_enabled": false,
     "blocked_identity_rows": 0,
-    "candidate_detail_link_rows": 13,
-    "candidate_detail_links": 65,
+    "candidate_detail_link_rows": 20,
+    "candidate_detail_links": 100,
     "safe_candidate_detail_link_rows": 0,
     "safe_candidate_detail_links": 0,
-    "rejected_candidate_detail_link_rows": 13,
-    "rejected_candidate_detail_links": 65,
-    "all_sample_candidates_rejected_rows": 13,
+    "rejected_candidate_detail_link_rows": 20,
+    "rejected_candidate_detail_links": 100,
+    "all_sample_candidates_rejected_rows": 20,
     "candidate_detail_link_source_counts": [
       [
         "official_search_result_sample_links",
-        13
+        20
       ]
     ],
     "candidate_detail_link_review_status_counts": [
       [
         "broad_search_sample_requires_identity_check",
-        13
+        20
       ]
     ],
-    "candidate_detail_link_warning_rows": 13,
-    "broad_candidate_detail_link_rows": 13,
-    "recommended_next_action": "confirm exact product detail source URLs for these rows before image attachment"
+    "candidate_detail_link_warning_rows": 20,
+    "broad_candidate_detail_link_rows": 20,
+    "recommended_next_action": "ignore rejected sample links and use primary/domain-limited review URLs for exact source search"
   },
   "automation_policy": {
     "auto_apply_source_url": false,
@@ -5365,18 +5365,96 @@
           ]
         }
       ],
-      "candidate_detail_links": [],
+      "candidate_detail_links": [
+        "https://www.enskyshop.com/products/detail/32395",
+        "https://www.enskyshop.com/products/detail/30885",
+        "https://www.enskyshop.com/products/detail/30890",
+        "https://www.enskyshop.com/products/detail/31389",
+        "https://www.enskyshop.com/products/detail/30884"
+      ],
       "safe_candidate_detail_links": [],
-      "rejected_candidate_detail_links": [],
-      "candidate_detail_link_snapshots": [],
-      "candidate_detail_link_count": 0,
+      "rejected_candidate_detail_links": [
+        {
+          "url": "https://www.enskyshop.com/products/detail/32395",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "【予約商品】名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ※2026年9月",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30885",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30890",
+          "title": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/31389",
+          "title": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30884",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        }
+      ],
+      "candidate_detail_link_snapshots": [
+        {
+          "url": "https://www.enskyshop.com/products/detail/32395",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "【予約商品】名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ※2026年9月",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30885",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30890",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/31389",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30884",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        }
+      ],
+      "candidate_detail_link_count": 5,
       "safe_candidate_detail_link_count": 0,
-      "rejected_candidate_detail_link_count": 0,
-      "candidate_detail_link_snapshot_count": 0,
-      "first_candidate_detail_link": "",
-      "candidate_detail_link_source": "",
-      "candidate_detail_link_review_status": "",
-      "candidate_detail_link_warning": "",
+      "rejected_candidate_detail_link_count": 5,
+      "candidate_detail_link_snapshot_count": 5,
+      "first_candidate_detail_link": "https://www.enskyshop.com/products/detail/32395",
+      "candidate_detail_link_source": "official_search_result_sample_links",
+      "candidate_detail_link_review_status": "broad_search_sample_requires_identity_check",
+      "candidate_detail_link_warning": "These links are sampled from a broad official search result and may not match this catalog row; use only as review starting points.",
       "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E7%85%89%E7%8D%84%E6%9D%8F%E5%AF%BF%E9%83%8E+%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E7%85%89%E7%8D%84%E6%9D%8F%E5%AF%BF%E9%83%8E%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
       "manual_confirmed": false,
@@ -5384,7 +5462,7 @@
       "manual_confirmed_image_url": "",
       "manual_evidence_url": "",
       "manual_note": "",
-      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "next_action": "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -5514,18 +5592,96 @@
           ]
         }
       ],
-      "candidate_detail_links": [],
+      "candidate_detail_links": [
+        "https://www.enskyshop.com/products/detail/32395",
+        "https://www.enskyshop.com/products/detail/30885",
+        "https://www.enskyshop.com/products/detail/30890",
+        "https://www.enskyshop.com/products/detail/31389",
+        "https://www.enskyshop.com/products/detail/30884"
+      ],
       "safe_candidate_detail_links": [],
-      "rejected_candidate_detail_links": [],
-      "candidate_detail_link_snapshots": [],
-      "candidate_detail_link_count": 0,
+      "rejected_candidate_detail_links": [
+        {
+          "url": "https://www.enskyshop.com/products/detail/32395",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "【予約商品】名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ※2026年9月",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30885",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30890",
+          "title": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/31389",
+          "title": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30884",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        }
+      ],
+      "candidate_detail_link_snapshots": [
+        {
+          "url": "https://www.enskyshop.com/products/detail/32395",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "【予約商品】名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ※2026年9月",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30885",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30890",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/31389",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30884",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        }
+      ],
+      "candidate_detail_link_count": 5,
       "safe_candidate_detail_link_count": 0,
-      "rejected_candidate_detail_link_count": 0,
-      "candidate_detail_link_snapshot_count": 0,
-      "first_candidate_detail_link": "",
-      "candidate_detail_link_source": "",
-      "candidate_detail_link_review_status": "",
-      "candidate_detail_link_warning": "",
+      "rejected_candidate_detail_link_count": 5,
+      "candidate_detail_link_snapshot_count": 5,
+      "first_candidate_detail_link": "https://www.enskyshop.com/products/detail/32395",
+      "candidate_detail_link_source": "official_search_result_sample_links",
+      "candidate_detail_link_review_status": "broad_search_sample_requires_identity_check",
+      "candidate_detail_link_warning": "These links are sampled from a broad official search result and may not match this catalog row; use only as review starting points.",
       "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E5%AE%87%E9%AB%84%E5%A4%A9%E5%85%83+%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E5%AE%87%E9%AB%84%E5%A4%A9%E5%85%83%20%E3%83%A1%E3%82%BF%E3%83%AA%E3%83%83%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
       "manual_confirmed": false,
@@ -5533,7 +5689,7 @@
       "manual_confirmed_image_url": "",
       "manual_evidence_url": "",
       "manual_note": "",
-      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "next_action": "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -5701,18 +5857,96 @@
           ]
         }
       ],
-      "candidate_detail_links": [],
+      "candidate_detail_links": [
+        "https://www.enskyshop.com/products/detail/32395",
+        "https://www.enskyshop.com/products/detail/30885",
+        "https://www.enskyshop.com/products/detail/30890",
+        "https://www.enskyshop.com/products/detail/31389",
+        "https://www.enskyshop.com/products/detail/30884"
+      ],
       "safe_candidate_detail_links": [],
-      "rejected_candidate_detail_links": [],
-      "candidate_detail_link_snapshots": [],
-      "candidate_detail_link_count": 0,
+      "rejected_candidate_detail_links": [
+        {
+          "url": "https://www.enskyshop.com/products/detail/32395",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "【予約商品】名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ※2026年9月",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30885",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30890",
+          "title": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/31389",
+          "title": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30884",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        }
+      ],
+      "candidate_detail_link_snapshots": [
+        {
+          "url": "https://www.enskyshop.com/products/detail/32395",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "【予約商品】名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ※2026年9月",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30885",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30890",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/31389",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30884",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        }
+      ],
+      "candidate_detail_link_count": 5,
       "safe_candidate_detail_link_count": 0,
-      "rejected_candidate_detail_link_count": 0,
-      "candidate_detail_link_snapshot_count": 0,
-      "first_candidate_detail_link": "",
-      "candidate_detail_link_source": "",
-      "candidate_detail_link_review_status": "",
-      "candidate_detail_link_warning": "",
+      "rejected_candidate_detail_link_count": 5,
+      "candidate_detail_link_snapshot_count": 5,
+      "first_candidate_detail_link": "https://www.enskyshop.com/products/detail/32395",
+      "candidate_detail_link_source": "official_search_result_sample_links",
+      "candidate_detail_link_review_status": "broad_search_sample_requires_identity_check",
+      "candidate_detail_link_warning": "These links are sampled from a broad official search result and may not match this catalog row; use only as review starting points.",
       "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%8A%E3%83%9F+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%8A%E3%83%9F%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
       "manual_confirmed": false,
@@ -5720,7 +5954,7 @@
       "manual_confirmed_image_url": "",
       "manual_evidence_url": "",
       "manual_note": "",
-      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "next_action": "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -5888,18 +6122,96 @@
           ]
         }
       ],
-      "candidate_detail_links": [],
+      "candidate_detail_links": [
+        "https://www.enskyshop.com/products/detail/32395",
+        "https://www.enskyshop.com/products/detail/30885",
+        "https://www.enskyshop.com/products/detail/30890",
+        "https://www.enskyshop.com/products/detail/31389",
+        "https://www.enskyshop.com/products/detail/30884"
+      ],
       "safe_candidate_detail_links": [],
-      "rejected_candidate_detail_links": [],
-      "candidate_detail_link_snapshots": [],
-      "candidate_detail_link_count": 0,
+      "rejected_candidate_detail_links": [
+        {
+          "url": "https://www.enskyshop.com/products/detail/32395",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "【予約商品】名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ※2026年9月",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30885",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30890",
+          "title": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/31389",
+          "title": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30884",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        }
+      ],
+      "candidate_detail_link_snapshots": [
+        {
+          "url": "https://www.enskyshop.com/products/detail/32395",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "【予約商品】名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ※2026年9月",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30885",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30890",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/31389",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30884",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        }
+      ],
+      "candidate_detail_link_count": 5,
       "safe_candidate_detail_link_count": 0,
-      "rejected_candidate_detail_link_count": 0,
-      "candidate_detail_link_snapshot_count": 0,
-      "first_candidate_detail_link": "",
-      "candidate_detail_link_source": "",
-      "candidate_detail_link_review_status": "",
-      "candidate_detail_link_warning": "",
+      "rejected_candidate_detail_link_count": 5,
+      "candidate_detail_link_snapshot_count": 5,
+      "first_candidate_detail_link": "https://www.enskyshop.com/products/detail/32395",
+      "candidate_detail_link_source": "official_search_result_sample_links",
+      "candidate_detail_link_review_status": "broad_search_sample_requires_identity_check",
+      "candidate_detail_link_warning": "These links are sampled from a broad official search result and may not match this catalog row; use only as review starting points.",
       "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%B5%E3%83%B3%E3%82%B8+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%B5%E3%83%B3%E3%82%B8%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
       "manual_confirmed": false,
@@ -5907,7 +6219,7 @@
       "manual_confirmed_image_url": "",
       "manual_evidence_url": "",
       "manual_note": "",
-      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "next_action": "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -6075,18 +6387,96 @@
           ]
         }
       ],
-      "candidate_detail_links": [],
+      "candidate_detail_links": [
+        "https://www.enskyshop.com/products/detail/32395",
+        "https://www.enskyshop.com/products/detail/30885",
+        "https://www.enskyshop.com/products/detail/30890",
+        "https://www.enskyshop.com/products/detail/31389",
+        "https://www.enskyshop.com/products/detail/30884"
+      ],
       "safe_candidate_detail_links": [],
-      "rejected_candidate_detail_links": [],
-      "candidate_detail_link_snapshots": [],
-      "candidate_detail_link_count": 0,
+      "rejected_candidate_detail_links": [
+        {
+          "url": "https://www.enskyshop.com/products/detail/32395",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "【予約商品】名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ※2026年9月",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30885",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30890",
+          "title": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/31389",
+          "title": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30884",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        }
+      ],
+      "candidate_detail_link_snapshots": [
+        {
+          "url": "https://www.enskyshop.com/products/detail/32395",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "【予約商品】名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ※2026年9月",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30885",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30890",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/31389",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30884",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        }
+      ],
+      "candidate_detail_link_count": 5,
       "safe_candidate_detail_link_count": 0,
-      "rejected_candidate_detail_link_count": 0,
-      "candidate_detail_link_snapshot_count": 0,
-      "first_candidate_detail_link": "",
-      "candidate_detail_link_source": "",
-      "candidate_detail_link_review_status": "",
-      "candidate_detail_link_warning": "",
+      "rejected_candidate_detail_link_count": 5,
+      "candidate_detail_link_snapshot_count": 5,
+      "first_candidate_detail_link": "https://www.enskyshop.com/products/detail/32395",
+      "candidate_detail_link_source": "official_search_result_sample_links",
+      "candidate_detail_link_review_status": "broad_search_sample_requires_identity_check",
+      "candidate_detail_link_warning": "These links are sampled from a broad official search result and may not match this catalog row; use only as review starting points.",
       "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%82%A6%E3%82%BD%E3%83%83%E3%83%97%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
       "manual_confirmed": false,
@@ -6094,7 +6484,7 @@
       "manual_confirmed_image_url": "",
       "manual_evidence_url": "",
       "manual_note": "",
-      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "next_action": "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -6262,18 +6652,96 @@
           ]
         }
       ],
-      "candidate_detail_links": [],
+      "candidate_detail_links": [
+        "https://www.enskyshop.com/products/detail/32395",
+        "https://www.enskyshop.com/products/detail/30885",
+        "https://www.enskyshop.com/products/detail/30890",
+        "https://www.enskyshop.com/products/detail/31389",
+        "https://www.enskyshop.com/products/detail/30884"
+      ],
       "safe_candidate_detail_links": [],
-      "rejected_candidate_detail_links": [],
-      "candidate_detail_link_snapshots": [],
-      "candidate_detail_link_count": 0,
+      "rejected_candidate_detail_links": [
+        {
+          "url": "https://www.enskyshop.com/products/detail/32395",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "【予約商品】名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ※2026年9月",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30885",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30890",
+          "title": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/31389",
+          "title": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30884",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        }
+      ],
+      "candidate_detail_link_snapshots": [
+        {
+          "url": "https://www.enskyshop.com/products/detail/32395",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "【予約商品】名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ※2026年9月",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30885",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30890",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/31389",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30884",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        }
+      ],
+      "candidate_detail_link_count": 5,
       "safe_candidate_detail_link_count": 0,
-      "rejected_candidate_detail_link_count": 0,
-      "candidate_detail_link_snapshot_count": 0,
-      "first_candidate_detail_link": "",
-      "candidate_detail_link_source": "",
-      "candidate_detail_link_review_status": "",
-      "candidate_detail_link_warning": "",
+      "rejected_candidate_detail_link_count": 5,
+      "candidate_detail_link_snapshot_count": 5,
+      "first_candidate_detail_link": "https://www.enskyshop.com/products/detail/32395",
+      "candidate_detail_link_source": "official_search_result_sample_links",
+      "candidate_detail_link_review_status": "broad_search_sample_requires_identity_check",
+      "candidate_detail_link_warning": "These links are sampled from a broad official search result and may not match this catalog row; use only as review starting points.",
       "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%8B%E3%82%B3%E3%83%BB%E3%83%AD%E3%83%93%E3%83%B3+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%8B%E3%82%B3%E3%83%BB%E3%83%AD%E3%83%93%E3%83%B3%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
       "manual_confirmed": false,
@@ -6281,7 +6749,7 @@
       "manual_confirmed_image_url": "",
       "manual_evidence_url": "",
       "manual_note": "",
-      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "next_action": "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
@@ -6449,18 +6917,96 @@
           ]
         }
       ],
-      "candidate_detail_links": [],
+      "candidate_detail_links": [
+        "https://www.enskyshop.com/products/detail/32395",
+        "https://www.enskyshop.com/products/detail/30885",
+        "https://www.enskyshop.com/products/detail/30890",
+        "https://www.enskyshop.com/products/detail/31389",
+        "https://www.enskyshop.com/products/detail/30884"
+      ],
       "safe_candidate_detail_links": [],
-      "rejected_candidate_detail_links": [],
-      "candidate_detail_link_snapshots": [],
-      "candidate_detail_link_count": 0,
+      "rejected_candidate_detail_links": [
+        {
+          "url": "https://www.enskyshop.com/products/detail/32395",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "【予約商品】名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ※2026年9月",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30885",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30890",
+          "title": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/31389",
+          "title": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30884",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】",
+          "rejection_reason": "candidate_page_title_does_not_match_catalog_item"
+        }
+      ],
+      "candidate_detail_link_snapshots": [
+        {
+          "url": "https://www.enskyshop.com/products/detail/32395",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "【予約商品】名探偵プリキュア! キラキラトレーディングコレクション2 ガムつき【1BOX 20パック入り】 ※2026年9月",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30885",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション【1BOX 20パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30890",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリキラシールコレクション【1BOX 20パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/31389",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! プリティスタンプ【1BOX 18パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        },
+        {
+          "url": "https://www.enskyshop.com/products/detail/30884",
+          "fetch_status": "ok",
+          "title": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】 ｜ エンスカイショップ",
+          "h1": "名探偵プリキュア! キラキラトレーディングコレクション ガムつき【1BOX 20パック入り】",
+          "title_match_status": "title_mismatch",
+          "fetch_error": ""
+        }
+      ],
+      "candidate_detail_link_count": 5,
       "safe_candidate_detail_link_count": 0,
-      "rejected_candidate_detail_link_count": 0,
-      "candidate_detail_link_snapshot_count": 0,
-      "first_candidate_detail_link": "",
-      "candidate_detail_link_source": "",
-      "candidate_detail_link_review_status": "",
-      "candidate_detail_link_warning": "",
+      "rejected_candidate_detail_link_count": 5,
+      "candidate_detail_link_snapshot_count": 5,
+      "first_candidate_detail_link": "https://www.enskyshop.com/products/detail/32395",
+      "candidate_detail_link_source": "official_search_result_sample_links",
+      "candidate_detail_link_review_status": "broad_search_sample_requires_identity_check",
+      "candidate_detail_link_warning": "These links are sampled from a broad official search result and may not match this catalog row; use only as review starting points.",
       "first_domain_limited_web_search_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E3%83%95%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%BC+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
       "fallback_store_search_url": "https://www.enskyshop.com/products/list?name=%E3%83%95%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%BC%20%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97",
       "manual_confirmed": false,
@@ -6468,7 +7014,7 @@
       "manual_confirmed_image_url": "",
       "manual_evidence_url": "",
       "manual_note": "",
-      "next_action": "open_search_url_confirm_exact_product_detail_page_then_fill_manual_confirmed_source_url",
+      "next_action": "ignore_rejected_sample_links_and_use_primary_review_url_for_exact_source_search",
       "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
       "source_url_review_guidance": {
         "accepted_source_url_patterns": [
