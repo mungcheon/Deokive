@@ -8,11 +8,6 @@ import '../theme/deokive_palette.dart';
 import '../utils/catalog_goods_importer.dart';
 import '../widgets/catalog_entry_image.dart';
 
-const _catalogAddButtonBackground = Color(0xFF252938);
-const _catalogAddButtonForeground = Color(0xFFFFFFFF);
-const _catalogAddButtonDisabledBackground = Color(0xFFDDE1E8);
-const _catalogAddButtonDisabledForeground = Color(0xFF596070);
-
 class CatalogDatabaseScreen extends StatefulWidget {
   final FolderItem? initialFolder;
 
@@ -578,18 +573,19 @@ class _CatalogAddButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     final background = disabled
-        ? _catalogAddButtonDisabledBackground
-        : _catalogAddButtonBackground;
+        ? colorScheme.surfaceContainerHighest
+        : colorScheme.primaryContainer;
     final foreground = disabled
-        ? _catalogAddButtonDisabledForeground
-        : _catalogAddButtonForeground;
+        ? colorScheme.onSurfaceVariant.withValues(alpha: 0.72)
+        : colorScheme.onPrimaryContainer;
     return SizedBox(
-      height: 40,
-      width: expanded ? double.infinity : 118,
+      height: expanded ? 38 : 34,
+      width: expanded ? double.infinity : 92,
       child: ElevatedButton.icon(
         onPressed: disabled || onPressed == null ? null : () => onPressed!(),
-        icon: Icon(icon, size: 17),
+        icon: Icon(icon, size: 15),
         label: FittedBox(
           fit: BoxFit.scaleDown,
           child: Text(
@@ -599,8 +595,8 @@ class _CatalogAddButton extends StatelessWidget {
             softWrap: false,
             style: TextStyle(
               color: foreground,
-              fontSize: 13,
-              fontWeight: FontWeight.w900,
+              fontSize: expanded ? 13 : 12,
+              fontWeight: FontWeight.w800,
               height: 1,
               letterSpacing: 0,
               fontFamilyFallback: const [
@@ -614,26 +610,32 @@ class _CatalogAddButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: background,
           foregroundColor: foreground,
-          disabledBackgroundColor: _catalogAddButtonDisabledBackground,
-          disabledForegroundColor: _catalogAddButtonDisabledForeground,
-          elevation: disabled ? 0 : 5,
-          shadowColor: _catalogAddButtonBackground.withValues(alpha: 0.34),
-          padding: EdgeInsets.symmetric(horizontal: expanded ? 16 : 10),
+          disabledBackgroundColor: colorScheme.surfaceContainerHighest,
+          disabledForegroundColor:
+              colorScheme.onSurfaceVariant.withValues(alpha: 0.72),
+          elevation: 0,
+          shadowColor: Colors.transparent,
+          padding: EdgeInsets.symmetric(horizontal: expanded ? 14 : 9),
           shape: const StadiumBorder(),
-          textStyle: const TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.w900,
+          side: BorderSide(
+            color: disabled
+                ? colorScheme.outlineVariant
+                : colorScheme.primary.withValues(alpha: 0.18),
+          ),
+          textStyle: TextStyle(
+            fontSize: expanded ? 13 : 12,
+            fontWeight: FontWeight.w800,
             height: 1,
             letterSpacing: 0,
-            fontFamilyFallback: [
+            fontFamilyFallback: const [
               'Malgun Gothic',
               'Apple SD Gothic Neo',
             ],
-            shadows: [],
+            shadows: const [],
           ),
         ).copyWith(
           overlayColor: WidgetStatePropertyAll(
-            foreground.withValues(alpha: disabled ? 0 : 0.10),
+            colorScheme.primary.withValues(alpha: disabled ? 0 : 0.10),
           ),
         ),
       ),

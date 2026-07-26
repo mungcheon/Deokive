@@ -11,11 +11,6 @@ import '../state/app_state.dart';
 import '../widgets/goods_name_search_field.dart';
 import 'catalog_asset_urls.dart';
 
-const _catalogImportButtonBackground = Color(0xFF252938);
-const _catalogImportButtonForeground = Color(0xFFFFFFFF);
-const _catalogImportButtonDisabledBackground = Color(0xFFE7E9EE);
-const _catalogImportButtonDisabledForeground = Color(0xFF5D6575);
-
 Future<bool> showCatalogGoodsImportFlow(
   BuildContext context, {
   FolderItem? initialFolder,
@@ -345,12 +340,6 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
                       Builder(
                         builder: (context) {
                           final canImport = destinationFolder != null;
-                          final buttonForeground = canImport
-                              ? _catalogImportButtonForeground
-                              : _catalogImportButtonDisabledForeground;
-                          final buttonBackground = canImport
-                              ? _catalogImportButtonBackground
-                              : _catalogImportButtonDisabledBackground;
                           final label =
                               selectedKind == _CatalogImportKind.wishlist
                                   ? '위시리스트에 추가'
@@ -361,8 +350,6 @@ Future<_CatalogImportDestination?> _pickDestinationForCatalogImport(
                             ),
                             label: label,
                             icon: Icons.add_rounded,
-                            backgroundColor: buttonBackground,
-                            foregroundColor: buttonForeground,
                             onPressed: canImport
                                 ? () => Navigator.pop(
                                       sheetContext,
@@ -397,27 +384,31 @@ enum _CatalogImportKind {
 class _CatalogImportActionButton extends StatelessWidget {
   final String label;
   final IconData icon;
-  final Color backgroundColor;
-  final Color foregroundColor;
   final VoidCallback? onPressed;
 
   const _CatalogImportActionButton({
     super.key,
     required this.label,
     required this.icon,
-    required this.backgroundColor,
-    required this.foregroundColor,
     required this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final enabled = onPressed != null;
+    final backgroundColor = enabled
+        ? colorScheme.primaryContainer
+        : colorScheme.surfaceContainerHighest;
+    final foregroundColor = enabled
+        ? colorScheme.onPrimaryContainer
+        : colorScheme.onSurfaceVariant.withValues(alpha: 0.72);
     return SizedBox(
       width: double.infinity,
-      height: 48,
+      height: 42,
       child: ElevatedButton.icon(
         onPressed: onPressed,
-        icon: Icon(icon, size: 19),
+        icon: Icon(icon, size: 17),
         label: FittedBox(
           fit: BoxFit.scaleDown,
           child: Text(
@@ -427,8 +418,8 @@ class _CatalogImportActionButton extends StatelessWidget {
             softWrap: false,
             style: TextStyle(
               color: foregroundColor,
-              fontSize: 15,
-              fontWeight: FontWeight.w900,
+              fontSize: 14,
+              fontWeight: FontWeight.w800,
               height: 1,
               letterSpacing: 0,
               fontFamilyFallback: const [
@@ -442,15 +433,21 @@ class _CatalogImportActionButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: backgroundColor,
           foregroundColor: foregroundColor,
-          disabledBackgroundColor: _catalogImportButtonDisabledBackground,
-          disabledForegroundColor: _catalogImportButtonDisabledForeground,
-          elevation: onPressed == null ? 0 : 3,
-          shadowColor: _catalogImportButtonBackground.withValues(alpha: 0.24),
-          padding: const EdgeInsets.symmetric(horizontal: 18),
+          disabledBackgroundColor: colorScheme.surfaceContainerHighest,
+          disabledForegroundColor:
+              colorScheme.onSurfaceVariant.withValues(alpha: 0.72),
+          elevation: 0,
+          shadowColor: Colors.transparent,
+          padding: const EdgeInsets.symmetric(horizontal: 14),
           shape: const StadiumBorder(),
+          side: BorderSide(
+            color: enabled
+                ? colorScheme.primary.withValues(alpha: 0.18)
+                : colorScheme.outlineVariant,
+          ),
           textStyle: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w900,
+            fontSize: 14,
+            fontWeight: FontWeight.w800,
             height: 1,
             letterSpacing: 0,
             fontFamilyFallback: [
@@ -461,7 +458,7 @@ class _CatalogImportActionButton extends StatelessWidget {
           ),
         ).copyWith(
           overlayColor: WidgetStatePropertyAll(
-            foregroundColor.withValues(alpha: onPressed == null ? 0 : 0.10),
+            colorScheme.primary.withValues(alpha: enabled ? 0.10 : 0),
           ),
         ),
       ),
