@@ -3040,15 +3040,15 @@
   "animation_category_review": {
     "public_report": "data/animation_goods_categories_public.json",
     "animation_goods_rows": 2167,
-    "category_count": 29,
+    "category_count": 25,
     "unknown_category_count": 0,
     "unknown_category_rows": 0,
-    "normalization_suggestion_count": 4,
-    "normalization_review_queue_rows": 36,
-    "normalization_review_queue_count": 4,
-    "category_readiness_status": "normalization_review_required",
-    "manual_review_categories": 4,
-    "manual_review_rows": 36,
+    "normalization_suggestion_count": 0,
+    "normalization_review_queue_rows": 0,
+    "normalization_review_queue_count": 0,
+    "category_readiness_status": "ready",
+    "manual_review_categories": 0,
+    "manual_review_rows": 0,
     "auto_apply_ready_rows": 0,
     "folder_visual_coverage_ready": true,
     "missing_image_rows": 629,
@@ -3063,34 +3063,23 @@
     "app_folder_palette_sorted_by_family": true,
     "app_animation_visuals_covered": true,
     "category_readiness": {
-      "status": "normalization_review_required",
+      "status": "ready",
       "auto_apply_ready_rows": 0,
       "auto_apply_enabled": false,
       "manual_confirmed_rows": 0,
-      "manual_review_categories": 4,
-      "manual_review_rows": 36,
+      "manual_review_categories": 0,
+      "manual_review_rows": 0,
       "unknown_category_rows": 0,
       "unknown_category_count": 0,
-      "normalization_review_queue_rows": 36,
-      "normalization_review_queue_count": 4,
+      "normalization_review_queue_rows": 0,
+      "normalization_review_queue_count": 0,
       "folder_visual_coverage_ready": true,
       "app_folder_color_count": 188,
       "app_folder_icon_option_count": 211,
       "app_folder_palette_sorted_by_family": true,
-      "blocked_reasons": [
-        "canonical_category_normalization_manually_confirmed"
-      ],
-      "next_safe_phase": "confirm_category_normalization_before_import",
-      "safety_note": "Animation category changes affect navigation and folder semantics; preserve subtype labels as sub_series or notes unless manual review confirms a direct category change.",
-      "next_review_item": {
-        "review_id": "animation-category-normalization-001",
-        "category": "클리어파일",
-        "suggested_category": "문구",
-        "affected_catalog_rows": 8,
-        "mapping_mode": "canonical_category_normalization_review",
-        "blocked_until": "canonical_category_normalization_manually_confirmed",
-        "next_step": "confirm_category_normalization_before_import"
-      }
+      "blocked_reasons": [],
+      "next_safe_phase": "no_animation_category_cleanup_required",
+      "safety_note": "Animation category changes affect navigation and folder semantics; preserve subtype labels as sub_series or notes unless manual review confirms a direct category change."
     }
   },
   "ichiban_kuji_history": {
@@ -3569,7 +3558,7 @@
     "metadata_unqueued_actionable_missing_cells": 0,
     "metadata_primary_review_url_groups": 127,
     "animation_category_review_rows": 0,
-    "animation_category_action_rows": 36,
+    "animation_category_action_rows": 0,
     "animation_category_split_review_categories": 0,
     "animation_category_direct_mapping_categories": 0,
     "animation_category_name_split_rows": 0,
@@ -3584,12 +3573,12 @@
     "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
     "ichiban_prize_name_image_patch_blocked_rows": 0,
     "catalog_goal_manual_review_pillars": 5,
-    "catalog_goal_manual_review_rows": 974,
+    "catalog_goal_manual_review_rows": 938,
     "catalog_goal_auto_apply_ready_rows": 0,
     "catalog_goal_dedupe_manual_review_rows": 48,
     "catalog_goal_missing_image_rows": 779,
     "catalog_goal_source_url_update_rows": 50,
-    "catalog_goal_animation_category_rows": 36,
+    "catalog_goal_animation_category_rows": 0,
     "catalog_goal_ichiban_manual_review_rows": 61,
     "catalog_goal_next_handoff_pillar": "dedupe",
     "catalog_goal_next_handoff_lane": "ichiban_reissue_campaign_review",
@@ -3597,14 +3586,14 @@
     "catalog_goal_dedupe_handoff_first_step_rows": 4,
     "catalog_goal_missing_image_handoff_first_step_rows": 10,
     "catalog_goal_source_url_handoff_first_step_rows": 20,
-    "catalog_goal_animation_category_handoff_first_step_rows": 4,
+    "catalog_goal_animation_category_handoff_first_step_rows": 0,
     "catalog_goal_ichiban_handoff_first_step_rows": 20
   },
   "agent_work_queue": {
     "public_report": "data/catalog_agent_work_queue_public.json",
     "batch_count": 160,
     "max_published_batches": 160,
-    "summed_batch_rows": 20660,
+    "summed_batch_rows": 20634,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -3664,15 +3653,15 @@
         5
       ],
       [
+        "deduplication_review",
+        5
+      ],
+      [
         "requested_focus_enrichment",
         4
       ],
       [
         "ichiban_kuji_campaign_first_reissue_review",
-        4
-      ],
-      [
-        "deduplication_review",
         4
       ],
       [
@@ -3717,10 +3706,6 @@
       ],
       [
         "source_discovery_next_focus_detail_candidates",
-        1
-      ],
-      [
-        "animation_category_action_queue",
         1
       ]
     ],
@@ -3782,15 +3767,15 @@
         5
       ],
       [
+        "agent-dedupe",
+        5
+      ],
+      [
         "agent-requested-focus",
         4
       ],
       [
         "agent-ichiban-campaign-first",
-        4
-      ],
-      [
-        "agent-dedupe",
         4
       ],
       [
@@ -3815,10 +3800,6 @@
       ],
       [
         "agent-source-focus-pack",
-        1
-      ],
-      [
-        "agent-animation-category-action",
         1
       ]
     ],
@@ -3902,7 +3883,7 @@
       "metadata_unqueued_actionable_missing_cells": 0,
       "metadata_primary_review_url_groups": 127,
       "animation_category_review_rows": 0,
-      "animation_category_action_rows": 36,
+      "animation_category_action_rows": 0,
       "animation_category_split_review_categories": 0,
       "animation_category_direct_mapping_categories": 0,
       "animation_category_name_split_rows": 0,
@@ -3917,12 +3898,12 @@
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
       "ichiban_prize_name_image_patch_blocked_rows": 0,
       "catalog_goal_manual_review_pillars": 5,
-      "catalog_goal_manual_review_rows": 974,
+      "catalog_goal_manual_review_rows": 938,
       "catalog_goal_auto_apply_ready_rows": 0,
       "catalog_goal_dedupe_manual_review_rows": 48,
       "catalog_goal_missing_image_rows": 779,
       "catalog_goal_source_url_update_rows": 50,
-      "catalog_goal_animation_category_rows": 36,
+      "catalog_goal_animation_category_rows": 0,
       "catalog_goal_ichiban_manual_review_rows": 61,
       "catalog_goal_next_handoff_pillar": "dedupe",
       "catalog_goal_next_handoff_lane": "ichiban_reissue_campaign_review",
@@ -3930,7 +3911,7 @@
       "catalog_goal_dedupe_handoff_first_step_rows": 4,
       "catalog_goal_missing_image_handoff_first_step_rows": 10,
       "catalog_goal_source_url_handoff_first_step_rows": 20,
-      "catalog_goal_animation_category_handoff_first_step_rows": 4,
+      "catalog_goal_animation_category_handoff_first_step_rows": 0,
       "catalog_goal_ichiban_handoff_first_step_rows": 20
     },
     "confirmed_import_template_rows": 1160,
@@ -4646,14 +4627,14 @@
     "field_store_group_count": 351,
     "batch_count": 30,
     "batch_size": 12,
-    "missing_cell_count": 13972,
+    "missing_cell_count": 14000,
     "field_missing_totals": {
       "name_ja": 526,
       "release_date": 1348,
       "barcode": 10082,
       "official_price_jpy": 559,
-      "image_url": 765,
-      "source_url": 692
+      "image_url": 779,
+      "source_url": 706
     },
     "top_source_stores_with_missing_metadata": [
       [
@@ -4662,7 +4643,7 @@
       ],
       [
         "엔스카이",
-        806
+        834
       ],
       [
         "애니메이트",
@@ -4946,11 +4927,11 @@
   },
   "execution_plan": {
     "public_report": "data/catalog_execution_plan_public.json",
-    "action_count": 25,
+    "action_count": 24,
     "blocked_action_count": 1,
-    "manual_review_action_count": 22,
+    "manual_review_action_count": 21,
     "pending_import_action_count": 0,
-    "total_action_rows": 33224,
+    "total_action_rows": 33188,
     "open_review_queues": {
       "source_discovery_rows": 706,
       "image_missing_rows": 779,
@@ -5031,7 +5012,7 @@
       "metadata_unqueued_actionable_missing_cells": 0,
       "metadata_primary_review_url_groups": 127,
       "animation_category_review_rows": 0,
-      "animation_category_action_rows": 36,
+      "animation_category_action_rows": 0,
       "animation_category_split_review_categories": 0,
       "animation_category_direct_mapping_categories": 0,
       "animation_category_name_split_rows": 0,
@@ -5046,12 +5027,12 @@
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
       "ichiban_prize_name_image_patch_blocked_rows": 0,
       "catalog_goal_manual_review_pillars": 5,
-      "catalog_goal_manual_review_rows": 974,
+      "catalog_goal_manual_review_rows": 938,
       "catalog_goal_auto_apply_ready_rows": 0,
       "catalog_goal_dedupe_manual_review_rows": 48,
       "catalog_goal_missing_image_rows": 779,
       "catalog_goal_source_url_update_rows": 50,
-      "catalog_goal_animation_category_rows": 36,
+      "catalog_goal_animation_category_rows": 0,
       "catalog_goal_ichiban_manual_review_rows": 61,
       "catalog_goal_next_handoff_pillar": "dedupe",
       "catalog_goal_next_handoff_lane": "ichiban_reissue_campaign_review",
@@ -5059,7 +5040,7 @@
       "catalog_goal_dedupe_handoff_first_step_rows": 4,
       "catalog_goal_missing_image_handoff_first_step_rows": 10,
       "catalog_goal_source_url_handoff_first_step_rows": 20,
-      "catalog_goal_animation_category_handoff_first_step_rows": 4,
+      "catalog_goal_animation_category_handoff_first_step_rows": 0,
       "catalog_goal_ichiban_handoff_first_step_rows": 20
     },
     "confirmed_import_template_rows": 1160,
@@ -5165,11 +5146,11 @@
     "image_download_readiness_status": "known_image_assets_complete",
     "image_url_without_local_path_rows": 0,
     "image_missing_local_image_files": 0,
-    "image_rows_still_requiring_url_evidence": 765,
+    "image_rows_still_requiring_url_evidence": 779,
     "image_missing_evidence_top_source_stores": [
       [
         "엔스카이",
-        179
+        193
       ],
       [
         "애니메이트",
@@ -5207,23 +5188,23 @@
       ],
       [
         "아크릴 스탠드",
-        119
+        123
       ],
       [
         "캔뱃지",
         95
       ],
       [
+        "키링",
+        86
+      ],
+      [
         "인형",
         86
       ],
       [
-        "키링",
-        80
-      ],
-      [
         "마스코트",
-        64
+        68
       ],
       [
         "문구",
@@ -5978,7 +5959,7 @@
     "excluded_workflow_rows": [
       [
         "find_source_then_extract_image",
-        687
+        701
       ],
       [
         "manual_image_research",
@@ -8317,17 +8298,17 @@
     "action_batch_count": 14,
     "batch_size": 12,
     "max_groups": 200,
-    "primary_review_url_groups": 128,
-    "first_primary_review_url": "https://www.enskyshop.com/products/detail/24195",
+    "primary_review_url_groups": 127,
+    "first_primary_review_url": "https://www.goodsmile.info/ja/product/13483/",
     "first_primary_review_url_kind": "sample_source_url",
     "primary_review_url_kind_counts": [
       [
         "sample_source_url",
-        128
+        127
       ],
       [
         "manual_lookup_required",
-        38
+        39
       ]
     ],
     "field_counts": [
@@ -8699,8 +8680,8 @@
         "missing_rows": 223,
         "priority": 10,
         "workflow": "official_metadata_review",
-        "primary_review_url": "https://www.enskyshop.com/products/detail/24195",
-        "primary_review_url_kind": "sample_source_url",
+        "primary_review_url": null,
+        "primary_review_url_kind": "manual_lookup_required",
         "recommended_action": "Verify official release/sale dates or stated JPY prices before importing."
       },
       {
@@ -8891,11 +8872,11 @@
       ],
       [
         "image_url",
-        765
+        779
       ],
       [
         "source_url",
-        692
+        706
       ]
     ],
     "auto_apply_enabled": false
@@ -8903,14 +8884,14 @@
   "animation_category_action_queue": {
     "public_report": "data/animation_category_action_queue_public.json",
     "actionable_categories": 0,
-    "queued_categories": 4,
+    "queued_categories": 0,
     "actionable_catalog_rows": 0,
-    "queued_catalog_rows": 36,
+    "queued_catalog_rows": 0,
     "direct_mapping_queued_categories": 0,
     "direct_mapping_queued_catalog_rows": 0,
-    "normalization_review_queued_categories": 4,
-    "normalization_review_queued_catalog_rows": 36,
-    "action_batch_count": 1,
+    "normalization_review_queued_categories": 0,
+    "normalization_review_queued_catalog_rows": 0,
+    "action_batch_count": 0,
     "batch_size": 6,
     "max_categories": 24,
     "by_suggested_family": [],
@@ -8920,117 +8901,22 @@
     "by_blocked_until": [],
     "split_review_categories": 0,
     "direct_mapping_categories": 0,
-    "normalization_review_categories": 4,
-    "normalization_review_rows": 36,
-    "normalization_review_target_categories": [
-      [
-        "문구",
-        3
-      ],
-      [
-        "가방",
-        1
-      ]
-    ],
-    "next_normalization_review_batch_rows": 4,
-    "next_normalization_review_batch_catalog_rows": 36,
-    "next_normalization_review_batch_target_categories": [
-      [
-        "문구",
-        3
-      ],
-      [
-        "가방",
-        1
-      ]
-    ],
-    "next_normalization_review_batch_source_categories": [
-      [
-        "클리어파일",
-        1
-      ],
-      [
-        "카드",
-        1
-      ],
-      [
-        "스티커",
-        1
-      ],
-      [
-        "파우치",
-        1
-      ]
-    ],
-    "next_normalization_review_batch_source_target_pairs": [
-      {
-        "review_id": "animation-category-normalization-001",
-        "source_category": "클리어파일",
-        "target_category": "문구",
-        "affected_catalog_rows": 8,
-        "preserve_source_category_as_sub_series": true,
-        "folder_color_group": "violet",
-        "folder_icon_key": "sticky_note"
-      },
-      {
-        "review_id": "animation-category-normalization-002",
-        "source_category": "카드",
-        "target_category": "문구",
-        "affected_catalog_rows": 3,
-        "preserve_source_category_as_sub_series": true,
-        "folder_color_group": "violet",
-        "folder_icon_key": "sticky_note"
-      },
-      {
-        "review_id": "animation-category-normalization-003",
-        "source_category": "스티커",
-        "target_category": "문구",
-        "affected_catalog_rows": 24,
-        "preserve_source_category_as_sub_series": true,
-        "folder_color_group": "violet",
-        "folder_icon_key": "sticky_note"
-      },
-      {
-        "review_id": "animation-category-normalization-004",
-        "source_category": "파우치",
-        "target_category": "가방",
-        "affected_catalog_rows": 1,
-        "preserve_source_category_as_sub_series": true,
-        "folder_color_group": "green",
-        "folder_icon_key": "inventory"
-      }
-    ],
-    "next_normalization_review_batch_review_ids": [
-      "animation-category-normalization-001",
-      "animation-category-normalization-002",
-      "animation-category-normalization-003",
-      "animation-category-normalization-004"
-    ],
-    "next_normalization_review_batch_preserve_sub_series_rows": 4,
-    "next_normalization_review_batch_sample_keyword_supported_rows": 4,
+    "normalization_review_categories": 0,
+    "normalization_review_rows": 0,
+    "normalization_review_target_categories": [],
+    "next_normalization_review_batch_rows": 0,
+    "next_normalization_review_batch_catalog_rows": 0,
+    "next_normalization_review_batch_target_categories": [],
+    "next_normalization_review_batch_source_categories": [],
+    "next_normalization_review_batch_source_target_pairs": [],
+    "next_normalization_review_batch_review_ids": [],
+    "next_normalization_review_batch_preserve_sub_series_rows": 0,
+    "next_normalization_review_batch_sample_keyword_supported_rows": 0,
     "next_normalization_review_batch_sample_keyword_review_required_rows": 0,
-    "target_visual_token_rows": 4,
-    "target_visual_token_catalog_rows": 36,
-    "target_visual_color_groups": [
-      [
-        "violet",
-        3
-      ],
-      [
-        "green",
-        1
-      ]
-    ],
-    "target_visual_primary_icon_keys": [
-      [
-        "sticky_note",
-        3
-      ],
-      [
-        "inventory",
-        1
-      ]
-    ],
+    "target_visual_token_rows": 0,
+    "target_visual_token_catalog_rows": 0,
+    "target_visual_color_groups": [],
+    "target_visual_primary_icon_keys": [],
     "target_visual_palette_ordered": true,
     "app_folder_color_count": 188,
     "app_folder_icon_option_count": 211,
@@ -9038,170 +8924,46 @@
     "app_folder_palette_section_count": 8,
     "app_folder_palette_sorted_by_family": true,
     "app_animation_visuals_covered": true,
-    "work_order_steps": 1,
-    "work_order_lanes": [
-      "canonical_category_normalization_review"
-    ],
+    "work_order_steps": 0,
+    "work_order_lanes": [],
     "split_first_blocked_categories": [],
     "unmatched_keyword_review_rows": 0,
     "unmatched_keyword_candidate_count": 0,
     "unmatched_keyword_product_type_candidate_count": 0,
     "auto_apply_enabled": false,
     "blocking_dashboard": {
-      "status": "normalization_review_required",
-      "manual_review_required_before_import": true,
+      "status": "ready_for_manual_import",
+      "manual_review_required_before_import": false,
       "auto_apply_enabled": false,
-      "next_safe_phase": "confirm_canonical_animation_category_normalization",
-      "blocked_until": [
-        "canonical_category_normalization_manually_confirmed"
-      ],
-      "queued_catalog_rows": 36,
-      "queued_categories": 4,
-      "normalization_review_rows": 36,
-      "normalization_review_categories": 4,
-      "next_normalization_review_batch_rows": 4,
-      "next_normalization_review_batch_catalog_rows": 36,
-      "next_normalization_review_batch_source_target_pairs": [
-        {
-          "review_id": "animation-category-normalization-001",
-          "source_category": "클리어파일",
-          "target_category": "문구",
-          "affected_catalog_rows": 8,
-          "preserve_source_category_as_sub_series": true,
-          "folder_color_group": "violet",
-          "folder_icon_key": "sticky_note"
-        },
-        {
-          "review_id": "animation-category-normalization-002",
-          "source_category": "카드",
-          "target_category": "문구",
-          "affected_catalog_rows": 3,
-          "preserve_source_category_as_sub_series": true,
-          "folder_color_group": "violet",
-          "folder_icon_key": "sticky_note"
-        },
-        {
-          "review_id": "animation-category-normalization-003",
-          "source_category": "스티커",
-          "target_category": "문구",
-          "affected_catalog_rows": 24,
-          "preserve_source_category_as_sub_series": true,
-          "folder_color_group": "violet",
-          "folder_icon_key": "sticky_note"
-        },
-        {
-          "review_id": "animation-category-normalization-004",
-          "source_category": "파우치",
-          "target_category": "가방",
-          "affected_catalog_rows": 1,
-          "preserve_source_category_as_sub_series": true,
-          "folder_color_group": "green",
-          "folder_icon_key": "inventory"
-        }
-      ],
-      "first_normalization_review": {
-        "review_id": "animation-category-normalization-001",
-        "source_category": "클리어파일",
-        "target_category": "문구",
-        "affected_catalog_rows": 8,
-        "preserve_source_category_as_sub_series": true
-      },
-      "first_work_order_lane": "canonical_category_normalization_review",
-      "first_work_order_next_step": "confirm_canonical_animation_category_normalization",
+      "next_safe_phase": "run_confirmed_animation_category_import",
+      "blocked_until": [],
+      "queued_catalog_rows": 0,
+      "queued_categories": 0,
+      "normalization_review_rows": 0,
+      "normalization_review_categories": 0,
+      "next_normalization_review_batch_rows": 0,
+      "next_normalization_review_batch_catalog_rows": 0,
+      "next_normalization_review_batch_source_target_pairs": [],
+      "first_normalization_review": {},
+      "first_work_order_lane": null,
+      "first_work_order_next_step": null,
       "folder_visual_coverage_ready": true,
       "app_folder_color_count": 188,
       "app_folder_icon_option_count": 211,
       "app_folder_palette_sorted_by_family": true,
-      "safety_note": "Folder colors and icons are available, but category normalization changes must be manually confirmed before any import writes."
+      "safety_note": "No open animation category blockers remain in the public action queue."
     },
     "operator_handoff": {
-      "status": "normalization_review_required",
-      "current_lane": "canonical_category_normalization_review",
-      "current_review_section": "next_normalization_review_batch",
-      "queued_catalog_rows": 36,
-      "queued_categories": 4,
-      "normalization_review_rows": 36,
+      "status": "ready_for_manual_import",
+      "current_lane": "no_animation_category_action_required",
+      "current_review_section": null,
+      "queued_catalog_rows": 0,
+      "queued_categories": 0,
+      "normalization_review_rows": 0,
       "folder_visual_coverage_ready": true,
       "app_folder_palette_sorted_by_family": true,
-      "work_order_lanes": [
-        "canonical_category_normalization_review"
-      ],
-      "handoff_steps": [
-        {
-          "step": 1,
-          "lane": "canonical_category_normalization_review",
-          "status": "manual_canonical_category_normalization_required",
-          "next_batch_rows": 4,
-          "affected_catalog_rows": 36,
-          "review_section": "next_normalization_review_batch",
-          "write_template_section": "normalization_confirmation_template.rows",
-          "first_review_id": "animation-category-normalization-001",
-          "first_source_category": "클리어파일",
-          "first_target_category": "문구",
-          "required_before_write": [
-            "manual_confirmed=true",
-            "sample names fit the target canonical category",
-            "source category is preserved as sub_series when useful for search",
-            "manual note explains the category semantics"
-          ],
-          "unblocks": "normalization_import_template",
-          "auto_apply_enabled": false
-        },
-        {
-          "step": 2,
-          "lane": "folder_visual_token_verification",
-          "status": "ready",
-          "next_batch_rows": 4,
-          "affected_catalog_rows": 36,
-          "review_section": "target_visual_token_summary.tokens",
-          "write_template_section": "folder_color_group/folder_icon_key",
-          "color_groups": [
-            [
-              "violet",
-              3
-            ],
-            [
-              "green",
-              1
-            ]
-          ],
-          "primary_icon_keys": [
-            [
-              "sticky_note",
-              3
-            ],
-            [
-              "inventory",
-              1
-            ]
-          ],
-          "required_before_write": [
-            "folder color exists in app folder palette",
-            "folder icon key exists in app icon options",
-            "palette remains sorted by similar color families"
-          ],
-          "unblocks": "app_folder_visual_consistency",
-          "auto_apply_enabled": false
-        },
-        {
-          "step": 3,
-          "lane": "normalization_import_template",
-          "status": "waiting_for_manual_confirmations",
-          "next_batch_rows": 4,
-          "affected_catalog_rows": 36,
-          "review_section": "normalization_confirmation_template",
-          "write_template_section": "server/animation_category_confirmed_rows.json",
-          "import_tool": "tools/import_confirmed_animation_category_rows.py",
-          "required_before_write": [
-            "confirmed rows copied to confirmed queue",
-            "manual_confirmed=true",
-            "manual_decision is allowed for the template",
-            "folder color and icon values are preserved"
-          ],
-          "unblocks": "canonical_category_normalization_manually_confirmed",
-          "auto_apply_enabled": false
-        }
-      ],
+      "work_order_lanes": [],
+      "handoff_steps": [],
       "safety_policy": {
         "auto_apply_enabled": false,
         "auto_create_folders": false,
@@ -9210,735 +8972,21 @@
       }
     },
     "normalization_confirmation_template": {
-      "status": "manual_canonical_category_normalization_required",
-      "template_rows": 4,
-      "affected_catalog_rows": 36,
+      "status": "no_canonical_category_normalization_rows",
+      "template_rows": 0,
+      "affected_catalog_rows": 0,
       "manual_confirmed_rows": 0,
       "ready_to_import_rows": 0,
-      "prefilled_confirmation_rows": 4,
-      "prefilled_confirmation_rows_requiring_only_manual_confirmed": 4,
-      "preserve_sub_series_rows": 4,
-      "sample_keyword_supported_rows": 4,
+      "prefilled_confirmation_rows": 0,
+      "prefilled_confirmation_rows_requiring_only_manual_confirmed": 0,
+      "preserve_sub_series_rows": 0,
+      "sample_keyword_supported_rows": 0,
       "sample_keyword_review_required_rows": 0,
-      "target_category_counts": [
-        [
-          "문구",
-          3
-        ],
-        [
-          "가방",
-          1
-        ]
-      ],
-      "folder_color_group_counts": [
-        [
-          "violet",
-          3
-        ],
-        [
-          "green",
-          1
-        ]
-      ],
-      "folder_icon_key_counts": [
-        [
-          "sticky_note",
-          3
-        ],
-        [
-          "inventory",
-          1
-        ]
-      ],
+      "target_category_counts": [],
+      "folder_color_group_counts": [],
+      "folder_icon_key_counts": [],
       "auto_apply_enabled": false,
-      "rows": [
-        {
-          "review_id": "animation-category-normalization-001",
-          "source_category": "클리어파일",
-          "target_category": "문구",
-          "affected_catalog_rows": 8,
-          "preserve_source_category_as_sub_series": true,
-          "suggested_sub_series_value": "클리어파일",
-          "folder_name": "문구",
-          "folder_color_hex": "0xFFB197FC",
-          "folder_color_hint": "lavender",
-          "folder_color_group": "violet",
-          "folder_color_sort_order": 270,
-          "folder_icon_key": "sticky_note",
-          "folder_icon_options": [
-            "sticky_note",
-            "sticker",
-            "clear_file",
-            "postcard",
-            "article",
-            "draw",
-            "book",
-            "diary"
-          ],
-          "sample_names": [
-            "一番くじ 呪術廻戦 懐玉・玉折 ～弐～ - F賞 クリアファイル2枚セット",
-            "一番くじ 劇場版 呪術廻戦 0 ～宣戦布告～ - J賞 クリアファイル2枚セット",
-            "一番くじ 劇場版 呪術廻戦 0 - I賞 クリアファイルセット",
-            "一番くじ 呪術廻戦 ～弐～ - F賞 クリアファイルセット",
-            "一番くじ 僕のヒーローアカデミア －二人のあこがれ－ - G賞 クリアファイルセット",
-            "一番くじ 僕のヒーローアカデミア ー意志ー - G賞 クリアファイルセット",
-            "一番くじ 僕のヒーローアカデミア FIGHTING HEROES feat. One's Justice - OJコラボ賞② クリアファイルセット feat. One's Justice",
-            "一番くじ 僕のヒーローアカデミア FIGHTING HEROES feat. SMASH RISING - E賞 クリアファイルセット feat. SMASH RISING"
-          ],
-          "sample_evidence_summary": {
-            "sample_name_count": 8,
-            "source_category_keyword_hits": 8,
-            "target_category_keyword_hits": 8,
-            "source_category_keyword_coverage": 1.0,
-            "target_category_keyword_coverage": 1.0,
-            "source_category_keywords": [
-              "클리어파일",
-              "クリアファイル",
-              "clear file",
-              "clearfile"
-            ],
-            "target_category_keywords": [
-              "클리어파일",
-              "クリアファイル",
-              "カード",
-              "ポストカード",
-              "ステッカー",
-              "ジッパーバッグ",
-              "clear file",
-              "postcard",
-              "sticker",
-              "card"
-            ],
-            "matched_keyword_counts": [
-              [
-                "クリアファイル",
-                16
-              ]
-            ],
-            "all_samples_match_source_category_keyword": true,
-            "all_samples_match_target_category_keyword": true,
-            "source_hit_sample_rows": [
-              {
-                "name": "一番くじ 呪術廻戦 懐玉・玉折 ～弐～ - F賞 クリアファイル2枚セット",
-                "matched_keywords": [
-                  "クリアファイル"
-                ]
-              },
-              {
-                "name": "一番くじ 劇場版 呪術廻戦 0 ～宣戦布告～ - J賞 クリアファイル2枚セット",
-                "matched_keywords": [
-                  "クリアファイル"
-                ]
-              },
-              {
-                "name": "一番くじ 劇場版 呪術廻戦 0 - I賞 クリアファイルセット",
-                "matched_keywords": [
-                  "クリアファイル"
-                ]
-              },
-              {
-                "name": "一番くじ 呪術廻戦 ～弐～ - F賞 クリアファイルセット",
-                "matched_keywords": [
-                  "クリアファイル"
-                ]
-              },
-              {
-                "name": "一番くじ 僕のヒーローアカデミア －二人のあこがれ－ - G賞 クリアファイルセット",
-                "matched_keywords": [
-                  "クリアファイル"
-                ]
-              },
-              {
-                "name": "一番くじ 僕のヒーローアカデミア ー意志ー - G賞 クリアファイルセット",
-                "matched_keywords": [
-                  "クリアファイル"
-                ]
-              },
-              {
-                "name": "一番くじ 僕のヒーローアカデミア FIGHTING HEROES feat. One's Justice - OJコラボ賞② クリアファイルセット feat. One's Justice",
-                "matched_keywords": [
-                  "クリアファイル"
-                ]
-              },
-              {
-                "name": "一番くじ 僕のヒーローアカデミア FIGHTING HEROES feat. SMASH RISING - E賞 クリアファイルセット feat. SMASH RISING",
-                "matched_keywords": [
-                  "クリアファイル"
-                ]
-              }
-            ],
-            "target_hit_sample_rows": [
-              {
-                "name": "一番くじ 呪術廻戦 懐玉・玉折 ～弐～ - F賞 クリアファイル2枚セット",
-                "matched_keywords": [
-                  "クリアファイル"
-                ]
-              },
-              {
-                "name": "一番くじ 劇場版 呪術廻戦 0 ～宣戦布告～ - J賞 クリアファイル2枚セット",
-                "matched_keywords": [
-                  "クリアファイル"
-                ]
-              },
-              {
-                "name": "一番くじ 劇場版 呪術廻戦 0 - I賞 クリアファイルセット",
-                "matched_keywords": [
-                  "クリアファイル"
-                ]
-              },
-              {
-                "name": "一番くじ 呪術廻戦 ～弐～ - F賞 クリアファイルセット",
-                "matched_keywords": [
-                  "クリアファイル"
-                ]
-              },
-              {
-                "name": "一番くじ 僕のヒーローアカデミア －二人のあこがれ－ - G賞 クリアファイルセット",
-                "matched_keywords": [
-                  "クリアファイル"
-                ]
-              },
-              {
-                "name": "一番くじ 僕のヒーローアカデミア ー意志ー - G賞 クリアファイルセット",
-                "matched_keywords": [
-                  "クリアファイル"
-                ]
-              },
-              {
-                "name": "一番くじ 僕のヒーローアカデミア FIGHTING HEROES feat. One's Justice - OJコラボ賞② クリアファイルセット feat. One's Justice",
-                "matched_keywords": [
-                  "クリアファイル"
-                ]
-              },
-              {
-                "name": "一番くじ 僕のヒーローアカデミア FIGHTING HEROES feat. SMASH RISING - E賞 クリアファイルセット feat. SMASH RISING",
-                "matched_keywords": [
-                  "クリアファイル"
-                ]
-              }
-            ],
-            "review_signal": "sample_keywords_support_normalization"
-          },
-          "manual_confirmed": false,
-          "manual_decision": "",
-          "manual_note": "",
-          "suggested_confirmation_row": {
-            "manual_confirmed": false,
-            "manual_decision": "normalize_to_target_category_preserve_source_sub_series",
-            "source_category": "클리어파일",
-            "target_category": "문구",
-            "target_family": null,
-            "folder_name": "문구",
-            "folder_color_hex": "0xFFB197FC",
-            "folder_color_hint": "lavender",
-            "folder_color_group": "violet",
-            "folder_color_sort_order": 270,
-            "folder_icon_key": "sticky_note",
-            "folder_icon_options": [
-              "sticky_note",
-              "sticker",
-              "clear_file",
-              "postcard",
-              "article",
-              "draw",
-              "book",
-              "diary"
-            ],
-            "preserve_source_category_as_sub_series": true,
-            "suggested_sub_series_value": "클리어파일",
-            "affected_catalog_rows": 8,
-            "expected_update_rows": 8,
-            "match_keywords": [],
-            "manual_note": "Normalize 클리어파일 into 문구; preserve 클리어파일 as sub_series on rows that do not already have a sub_series."
-          },
-          "allowed_manual_decisions": [
-            "normalize_to_target_category_preserve_source_sub_series",
-            "keep_source_category_as_primary_category",
-            "needs_name_level_split_review"
-          ],
-          "blocked_until": "canonical_category_normalization_manually_confirmed",
-          "auto_apply_enabled": false
-        },
-        {
-          "review_id": "animation-category-normalization-002",
-          "source_category": "카드",
-          "target_category": "문구",
-          "affected_catalog_rows": 3,
-          "preserve_source_category_as_sub_series": true,
-          "suggested_sub_series_value": "카드",
-          "folder_name": "문구",
-          "folder_color_hex": "0xFFB197FC",
-          "folder_color_hint": "lavender",
-          "folder_color_group": "violet",
-          "folder_color_sort_order": 270,
-          "folder_icon_key": "sticky_note",
-          "folder_icon_options": [
-            "sticky_note",
-            "sticker",
-            "clear_file",
-            "postcard",
-            "article",
-            "draw",
-            "book",
-            "diary"
-          ],
-          "sample_names": [
-            "一番くじ 葬送のフリーレン - H賞 繋がるポストカード",
-            "一番くじ 僕のヒーローアカデミア -更に向こうへ- - K賞 カードホルダー",
-            "一番くじ 僕のヒーローアカデミア 開催文化祭!! - I賞 カードホルダー"
-          ],
-          "sample_evidence_summary": {
-            "sample_name_count": 3,
-            "source_category_keyword_hits": 3,
-            "target_category_keyword_hits": 3,
-            "source_category_keyword_coverage": 1.0,
-            "target_category_keyword_coverage": 1.0,
-            "source_category_keywords": [
-              "카드",
-              "カード",
-              "ポストカード",
-              "postcard",
-              "card holder",
-              "card"
-            ],
-            "target_category_keywords": [
-              "클리어파일",
-              "クリアファイル",
-              "カード",
-              "ポストカード",
-              "ステッカー",
-              "ジッパーバッグ",
-              "clear file",
-              "postcard",
-              "sticker",
-              "card"
-            ],
-            "matched_keyword_counts": [
-              [
-                "カード",
-                6
-              ],
-              [
-                "ポストカード",
-                2
-              ]
-            ],
-            "all_samples_match_source_category_keyword": true,
-            "all_samples_match_target_category_keyword": true,
-            "source_hit_sample_rows": [
-              {
-                "name": "一番くじ 葬送のフリーレン - H賞 繋がるポストカード",
-                "matched_keywords": [
-                  "カード",
-                  "ポストカード"
-                ]
-              },
-              {
-                "name": "一番くじ 僕のヒーローアカデミア -更に向こうへ- - K賞 カードホルダー",
-                "matched_keywords": [
-                  "カード"
-                ]
-              },
-              {
-                "name": "一番くじ 僕のヒーローアカデミア 開催文化祭!! - I賞 カードホルダー",
-                "matched_keywords": [
-                  "カード"
-                ]
-              }
-            ],
-            "target_hit_sample_rows": [
-              {
-                "name": "一番くじ 葬送のフリーレン - H賞 繋がるポストカード",
-                "matched_keywords": [
-                  "カード",
-                  "ポストカード"
-                ]
-              },
-              {
-                "name": "一番くじ 僕のヒーローアカデミア -更に向こうへ- - K賞 カードホルダー",
-                "matched_keywords": [
-                  "カード"
-                ]
-              },
-              {
-                "name": "一番くじ 僕のヒーローアカデミア 開催文化祭!! - I賞 カードホルダー",
-                "matched_keywords": [
-                  "カード"
-                ]
-              }
-            ],
-            "review_signal": "sample_keywords_support_normalization"
-          },
-          "manual_confirmed": false,
-          "manual_decision": "",
-          "manual_note": "",
-          "suggested_confirmation_row": {
-            "manual_confirmed": false,
-            "manual_decision": "normalize_to_target_category_preserve_source_sub_series",
-            "source_category": "카드",
-            "target_category": "문구",
-            "target_family": null,
-            "folder_name": "문구",
-            "folder_color_hex": "0xFFB197FC",
-            "folder_color_hint": "lavender",
-            "folder_color_group": "violet",
-            "folder_color_sort_order": 270,
-            "folder_icon_key": "sticky_note",
-            "folder_icon_options": [
-              "sticky_note",
-              "sticker",
-              "clear_file",
-              "postcard",
-              "article",
-              "draw",
-              "book",
-              "diary"
-            ],
-            "preserve_source_category_as_sub_series": true,
-            "suggested_sub_series_value": "카드",
-            "affected_catalog_rows": 3,
-            "expected_update_rows": 3,
-            "match_keywords": [],
-            "manual_note": "Normalize 카드 into 문구; preserve 카드 as sub_series on rows that do not already have a sub_series."
-          },
-          "allowed_manual_decisions": [
-            "normalize_to_target_category_preserve_source_sub_series",
-            "keep_source_category_as_primary_category",
-            "needs_name_level_split_review"
-          ],
-          "blocked_until": "canonical_category_normalization_manually_confirmed",
-          "auto_apply_enabled": false
-        },
-        {
-          "review_id": "animation-category-normalization-003",
-          "source_category": "스티커",
-          "target_category": "문구",
-          "affected_catalog_rows": 24,
-          "preserve_source_category_as_sub_series": true,
-          "suggested_sub_series_value": "스티커",
-          "folder_name": "문구",
-          "folder_color_hex": "0xFFB197FC",
-          "folder_color_hint": "lavender",
-          "folder_color_group": "violet",
-          "folder_color_sort_order": 270,
-          "folder_icon_key": "sticky_note",
-          "folder_icon_options": [
-            "sticky_note",
-            "sticker",
-            "clear_file",
-            "postcard",
-            "article",
-            "draw",
-            "book",
-            "diary"
-          ],
-          "sample_names": [
-            "一番くじ 呪術廻戦 死滅回游 ～弐～ - M賞 マグネット＆ステッカーセット",
-            "一番くじ 呪術廻戦 死滅回游 ～壱～ - N賞 ステッカーセット",
-            "一番くじ ヴィジランテ -僕のヒーローアカデミア ILLEGALS- - H賞 ジッパーバッグ＆ステッカーセット",
-            "一番くじ 劇場版 呪術廻戦 ０ ー1224ー - E賞 クリアファイル・ステッカーセット",
-            "一番くじ 呪術廻戦 5th anniversary - K賞 クリアファイル・ステッカーセット",
-            "一番くじ 呪術廻戦 渋谷事変 ～参～ - D賞 クリアファイル・ステッカーセット",
-            "一番くじ 呪術廻戦 渋谷事変 ～弐～ - N賞 クリアファイル・ステッカーセット",
-            "一番くじ 僕のヒーローアカデミア -更に向こうへ- - L賞 ステッカーセット"
-          ],
-          "sample_evidence_summary": {
-            "sample_name_count": 8,
-            "source_category_keyword_hits": 8,
-            "target_category_keyword_hits": 8,
-            "source_category_keyword_coverage": 1.0,
-            "target_category_keyword_coverage": 1.0,
-            "source_category_keywords": [
-              "스티커",
-              "ステッカー",
-              "sticker"
-            ],
-            "target_category_keywords": [
-              "클리어파일",
-              "クリアファイル",
-              "カード",
-              "ポストカード",
-              "ステッカー",
-              "ジッパーバッグ",
-              "clear file",
-              "postcard",
-              "sticker",
-              "card"
-            ],
-            "matched_keyword_counts": [
-              [
-                "ステッカー",
-                16
-              ],
-              [
-                "クリアファイル",
-                4
-              ],
-              [
-                "ジッパーバッグ",
-                1
-              ]
-            ],
-            "all_samples_match_source_category_keyword": true,
-            "all_samples_match_target_category_keyword": true,
-            "source_hit_sample_rows": [
-              {
-                "name": "一番くじ 呪術廻戦 死滅回游 ～弐～ - M賞 マグネット＆ステッカーセット",
-                "matched_keywords": [
-                  "ステッカー"
-                ]
-              },
-              {
-                "name": "一番くじ 呪術廻戦 死滅回游 ～壱～ - N賞 ステッカーセット",
-                "matched_keywords": [
-                  "ステッカー"
-                ]
-              },
-              {
-                "name": "一番くじ ヴィジランテ -僕のヒーローアカデミア ILLEGALS- - H賞 ジッパーバッグ＆ステッカーセット",
-                "matched_keywords": [
-                  "ステッカー"
-                ]
-              },
-              {
-                "name": "一番くじ 劇場版 呪術廻戦 ０ ー1224ー - E賞 クリアファイル・ステッカーセット",
-                "matched_keywords": [
-                  "ステッカー"
-                ]
-              },
-              {
-                "name": "一番くじ 呪術廻戦 5th anniversary - K賞 クリアファイル・ステッカーセット",
-                "matched_keywords": [
-                  "ステッカー"
-                ]
-              },
-              {
-                "name": "一番くじ 呪術廻戦 渋谷事変 ～参～ - D賞 クリアファイル・ステッカーセット",
-                "matched_keywords": [
-                  "ステッカー"
-                ]
-              },
-              {
-                "name": "一番くじ 呪術廻戦 渋谷事変 ～弐～ - N賞 クリアファイル・ステッカーセット",
-                "matched_keywords": [
-                  "ステッカー"
-                ]
-              },
-              {
-                "name": "一番くじ 僕のヒーローアカデミア -更に向こうへ- - L賞 ステッカーセット",
-                "matched_keywords": [
-                  "ステッカー"
-                ]
-              }
-            ],
-            "target_hit_sample_rows": [
-              {
-                "name": "一番くじ 呪術廻戦 死滅回游 ～弐～ - M賞 マグネット＆ステッカーセット",
-                "matched_keywords": [
-                  "ステッカー"
-                ]
-              },
-              {
-                "name": "一番くじ 呪術廻戦 死滅回游 ～壱～ - N賞 ステッカーセット",
-                "matched_keywords": [
-                  "ステッカー"
-                ]
-              },
-              {
-                "name": "一番くじ ヴィジランテ -僕のヒーローアカデミア ILLEGALS- - H賞 ジッパーバッグ＆ステッカーセット",
-                "matched_keywords": [
-                  "ステッカー",
-                  "ジッパーバッグ"
-                ]
-              },
-              {
-                "name": "一番くじ 劇場版 呪術廻戦 ０ ー1224ー - E賞 クリアファイル・ステッカーセット",
-                "matched_keywords": [
-                  "クリアファイル",
-                  "ステッカー"
-                ]
-              },
-              {
-                "name": "一番くじ 呪術廻戦 5th anniversary - K賞 クリアファイル・ステッカーセット",
-                "matched_keywords": [
-                  "クリアファイル",
-                  "ステッカー"
-                ]
-              },
-              {
-                "name": "一番くじ 呪術廻戦 渋谷事変 ～参～ - D賞 クリアファイル・ステッカーセット",
-                "matched_keywords": [
-                  "クリアファイル",
-                  "ステッカー"
-                ]
-              },
-              {
-                "name": "一番くじ 呪術廻戦 渋谷事変 ～弐～ - N賞 クリアファイル・ステッカーセット",
-                "matched_keywords": [
-                  "クリアファイル",
-                  "ステッカー"
-                ]
-              },
-              {
-                "name": "一番くじ 僕のヒーローアカデミア -更に向こうへ- - L賞 ステッカーセット",
-                "matched_keywords": [
-                  "ステッカー"
-                ]
-              }
-            ],
-            "review_signal": "sample_keywords_support_normalization"
-          },
-          "manual_confirmed": false,
-          "manual_decision": "",
-          "manual_note": "",
-          "suggested_confirmation_row": {
-            "manual_confirmed": false,
-            "manual_decision": "normalize_to_target_category_preserve_source_sub_series",
-            "source_category": "스티커",
-            "target_category": "문구",
-            "target_family": null,
-            "folder_name": "문구",
-            "folder_color_hex": "0xFFB197FC",
-            "folder_color_hint": "lavender",
-            "folder_color_group": "violet",
-            "folder_color_sort_order": 270,
-            "folder_icon_key": "sticky_note",
-            "folder_icon_options": [
-              "sticky_note",
-              "sticker",
-              "clear_file",
-              "postcard",
-              "article",
-              "draw",
-              "book",
-              "diary"
-            ],
-            "preserve_source_category_as_sub_series": true,
-            "suggested_sub_series_value": "스티커",
-            "affected_catalog_rows": 24,
-            "expected_update_rows": 24,
-            "match_keywords": [],
-            "manual_note": "Normalize 스티커 into 문구; preserve 스티커 as sub_series on rows that do not already have a sub_series."
-          },
-          "allowed_manual_decisions": [
-            "normalize_to_target_category_preserve_source_sub_series",
-            "keep_source_category_as_primary_category",
-            "needs_name_level_split_review"
-          ],
-          "blocked_until": "canonical_category_normalization_manually_confirmed",
-          "auto_apply_enabled": false
-        },
-        {
-          "review_id": "animation-category-normalization-004",
-          "source_category": "파우치",
-          "target_category": "가방",
-          "affected_catalog_rows": 1,
-          "preserve_source_category_as_sub_series": true,
-          "suggested_sub_series_value": "파우치",
-          "folder_name": "가방",
-          "folder_color_hex": "0xFF10B981",
-          "folder_color_hint": "emerald",
-          "folder_color_group": "green",
-          "folder_color_sort_order": 180,
-          "folder_icon_key": "inventory",
-          "folder_icon_options": [
-            "inventory",
-            "bag",
-            "pouch",
-            "coffee_mug",
-            "basket",
-            "backpack",
-            "gift",
-            "storefront"
-          ],
-          "sample_names": [
-            "一番くじ 僕のヒーローアカデミア～休み時間！～ - E賞 1-A教室ポーチ"
-          ],
-          "sample_evidence_summary": {
-            "sample_name_count": 1,
-            "source_category_keyword_hits": 1,
-            "target_category_keyword_hits": 1,
-            "source_category_keyword_coverage": 1.0,
-            "target_category_keyword_coverage": 1.0,
-            "source_category_keywords": [
-              "파우치",
-              "ポーチ",
-              "pouch"
-            ],
-            "target_category_keywords": [
-              "파우치",
-              "ポーチ",
-              "pouch",
-              "bag",
-              "バッグ"
-            ],
-            "matched_keyword_counts": [
-              [
-                "ポーチ",
-                2
-              ]
-            ],
-            "all_samples_match_source_category_keyword": true,
-            "all_samples_match_target_category_keyword": true,
-            "source_hit_sample_rows": [
-              {
-                "name": "一番くじ 僕のヒーローアカデミア～休み時間！～ - E賞 1-A教室ポーチ",
-                "matched_keywords": [
-                  "ポーチ"
-                ]
-              }
-            ],
-            "target_hit_sample_rows": [
-              {
-                "name": "一番くじ 僕のヒーローアカデミア～休み時間！～ - E賞 1-A教室ポーチ",
-                "matched_keywords": [
-                  "ポーチ"
-                ]
-              }
-            ],
-            "review_signal": "sample_keywords_support_normalization"
-          },
-          "manual_confirmed": false,
-          "manual_decision": "",
-          "manual_note": "",
-          "suggested_confirmation_row": {
-            "manual_confirmed": false,
-            "manual_decision": "normalize_to_target_category_preserve_source_sub_series",
-            "source_category": "파우치",
-            "target_category": "가방",
-            "target_family": null,
-            "folder_name": "가방",
-            "folder_color_hex": "0xFF10B981",
-            "folder_color_hint": "emerald",
-            "folder_color_group": "green",
-            "folder_color_sort_order": 180,
-            "folder_icon_key": "inventory",
-            "folder_icon_options": [
-              "inventory",
-              "bag",
-              "pouch",
-              "coffee_mug",
-              "basket",
-              "backpack",
-              "gift",
-              "storefront"
-            ],
-            "preserve_source_category_as_sub_series": true,
-            "suggested_sub_series_value": "파우치",
-            "affected_catalog_rows": 1,
-            "expected_update_rows": 1,
-            "match_keywords": [],
-            "manual_note": "Normalize 파우치 into 가방; preserve 파우치 as sub_series on rows that do not already have a sub_series."
-          },
-          "allowed_manual_decisions": [
-            "normalize_to_target_category_preserve_source_sub_series",
-            "keep_source_category_as_primary_category",
-            "needs_name_level_split_review"
-          ],
-          "blocked_until": "canonical_category_normalization_manually_confirmed",
-          "auto_apply_enabled": false
-        }
-      ],
+      "rows": [],
       "import_instructions": [
         "Confirm each source_category should move to target_category before importing.",
         "Keep preserve_source_category_as_sub_series=true when the old category is useful as a subtype/search label.",
@@ -9948,8 +8996,8 @@
     },
     "next_execution_summary": {
       "lane_count": 3,
-      "open_rows": 108,
-      "next_batch_rows": 44,
+      "open_rows": 0,
+      "next_batch_rows": 0,
       "next_safe_phase": "canonical_category_normalization_review",
       "auto_apply_enabled": false,
       "manual_evidence_required": true
@@ -9958,77 +9006,33 @@
       {
         "lane": "canonical_category_normalization_review",
         "status": "next",
-        "open_rows": 36,
-        "next_batch_rows": 36,
-        "review_start_rows": 4,
-        "manual_decision_rows": 4,
+        "open_rows": 0,
+        "next_batch_rows": 0,
+        "review_start_rows": 0,
+        "manual_decision_rows": 0,
         "next_action": "confirm source categories can be normalized into canonical folder categories",
-        "target_categories": [
-          [
-            "문구",
-            3
-          ],
-          [
-            "가방",
-            1
-          ]
-        ],
-        "source_categories": [
-          [
-            "클리어파일",
-            1
-          ],
-          [
-            "카드",
-            1
-          ],
-          [
-            "스티커",
-            1
-          ],
-          [
-            "파우치",
-            1
-          ]
-        ],
-        "preserve_sub_series_rows": 4
+        "target_categories": [],
+        "source_categories": [],
+        "preserve_sub_series_rows": 0
       },
       {
         "lane": "folder_visual_token_verification",
         "status": "ready",
-        "open_rows": 36,
-        "next_batch_rows": 4,
-        "review_start_rows": 4,
+        "open_rows": 0,
+        "next_batch_rows": 0,
+        "review_start_rows": 0,
         "manual_decision_rows": 0,
         "next_action": "use available sorted folder colors and icons for the normalized categories",
-        "color_groups": [
-          [
-            "violet",
-            3
-          ],
-          [
-            "green",
-            1
-          ]
-        ],
-        "icon_keys": [
-          [
-            "sticky_note",
-            3
-          ],
-          [
-            "inventory",
-            1
-          ]
-        ]
+        "color_groups": [],
+        "icon_keys": []
       },
       {
         "lane": "normalization_import_template",
         "status": "blocked_until_manual_confirmed",
-        "open_rows": 36,
-        "next_batch_rows": 4,
-        "review_start_rows": 4,
-        "manual_decision_rows": 4,
+        "open_rows": 0,
+        "next_batch_rows": 0,
+        "review_start_rows": 0,
+        "manual_decision_rows": 0,
         "next_action": "set manual_confirmed=true only after canonical category normalization is verified",
         "confirmed_queue": "server/animation_category_confirmed_rows.json",
         "import_tool": "tools/import_confirmed_animation_category_rows.py"
@@ -14758,11 +13762,11 @@
   "animation_category_coverage_audit": {
     "public_report": "data/animation_category_coverage_audit_public.json",
     "animation_goods_rows": 2167,
-    "category_count": 29,
+    "category_count": 25,
     "unknown_category_count": 0,
     "unknown_category_rows": 0,
-    "normalization_suggestion_count": 4,
-    "folder_visual_token_count": 29,
+    "normalization_suggestion_count": 0,
+    "folder_visual_token_count": 25,
     "missing_visual_token_categories": 0,
     "folder_color_palette_count": 32,
     "folder_icon_option_count": 88,
@@ -14773,13 +13777,13 @@
     "failed_check_count": 0,
     "status": "pass",
     "auto_apply_enabled": false,
-    "visual_taxonomy_gate_status": "visual_coverage_passed_normalization_review_pending",
+    "visual_taxonomy_gate_status": "ready_for_manual_confirmed_import",
     "unknown_category_blockers": 0,
     "visual_token_blockers": 0,
-    "normalization_review_blockers": 4,
-    "normalization_review_blocker_rows": 36,
+    "normalization_review_blockers": 0,
+    "normalization_review_blocker_rows": 0,
     "taxonomy_auto_apply_ready": false,
-    "next_safe_phase": "confirm_category_normalization_before_import"
+    "next_safe_phase": "no_animation_category_cleanup_required"
   },
   "name_duplicate_audit": {
     "public_report": "data/catalog_name_duplicate_audit_public.json",
@@ -19262,7 +18266,7 @@
     "pillar_count": 5,
     "manual_review_pillar_count": 5,
     "auto_apply_ready_rows": 0,
-    "manual_review_rows": 974,
+    "manual_review_rows": 938,
     "next_safe_phase": "review_candidate_source_urls",
     "pillars": [
       {
@@ -19860,134 +18864,48 @@
       {
         "pillar": "animation_categories",
         "label": "Normalize animation goods categories and folder visuals",
-        "status": "visual_coverage_passed_normalization_review_pending",
-        "open_rows": 36,
-        "manual_review_rows": 36,
+        "status": "ready_for_manual_confirmed_import",
+        "open_rows": 0,
+        "manual_review_rows": 0,
         "auto_apply_ready_rows": 0,
-        "queued_rows": 36,
+        "queued_rows": 0,
         "unqueued_rows": 0,
-        "queue_coverage": 1.0,
-        "next_queue_lane": "canonical_category_normalization_review",
-        "next_queue_rows": 36,
-        "next_queue_category_rows": 4,
-        "target_categories": [
-          [
-            "문구",
-            3
-          ],
-          [
-            "가방",
-            1
-          ]
-        ],
-        "preserve_sub_series_rows": 4,
+        "queue_coverage": 0,
+        "next_queue_lane": null,
+        "next_queue_rows": 0,
+        "next_queue_category_rows": 0,
+        "target_categories": [],
+        "preserve_sub_series_rows": 0,
         "visual_palette_ordered": true,
         "app_animation_visuals_covered": true,
-        "next_safe_phase": "confirm_canonical_animation_category_normalization",
+        "next_safe_phase": "run_confirmed_animation_category_import",
         "public_report": "data/animation_category_coverage_audit_public.json",
         "next_execution_summary": {
           "lane_count": 3,
-          "open_rows": 108,
-          "next_batch_rows": 44,
+          "open_rows": 0,
+          "next_batch_rows": 0,
           "next_safe_phase": "canonical_category_normalization_review",
           "auto_apply_enabled": false,
           "manual_evidence_required": true
         },
         "next_execution_lane_count": 3,
-        "next_execution_open_rows": 108,
-        "next_execution_next_batch_rows": 44,
+        "next_execution_open_rows": 0,
+        "next_execution_next_batch_rows": 0,
         "first_next_execution_lane": "canonical_category_normalization_review",
         "first_next_execution_status": "next",
-        "first_next_execution_rows": 36,
+        "first_next_execution_rows": 0,
         "first_next_execution_public_report": "data/animation_category_coverage_audit_public.json",
         "operator_handoff": {
-          "status": "normalization_review_required",
-          "current_lane": "canonical_category_normalization_review",
-          "current_review_section": "next_normalization_review_batch",
-          "queued_catalog_rows": 36,
-          "queued_categories": 4,
-          "normalization_review_rows": 36,
+          "status": "ready_for_manual_import",
+          "current_lane": "no_animation_category_action_required",
+          "current_review_section": null,
+          "queued_catalog_rows": 0,
+          "queued_categories": 0,
+          "normalization_review_rows": 0,
           "folder_visual_coverage_ready": true,
           "app_folder_palette_sorted_by_family": true,
-          "work_order_lanes": [
-            "canonical_category_normalization_review"
-          ],
-          "handoff_steps": [
-            {
-              "step": 1,
-              "lane": "canonical_category_normalization_review",
-              "status": "manual_canonical_category_normalization_required",
-              "next_batch_rows": 4,
-              "affected_catalog_rows": 36,
-              "review_section": "next_normalization_review_batch",
-              "write_template_section": "normalization_confirmation_template.rows",
-              "first_review_id": "animation-category-normalization-001",
-              "first_source_category": "클리어파일",
-              "first_target_category": "문구",
-              "required_before_write": [
-                "manual_confirmed=true",
-                "sample names fit the target canonical category",
-                "source category is preserved as sub_series when useful for search",
-                "manual note explains the category semantics"
-              ],
-              "unblocks": "normalization_import_template",
-              "auto_apply_enabled": false
-            },
-            {
-              "step": 2,
-              "lane": "folder_visual_token_verification",
-              "status": "ready",
-              "next_batch_rows": 4,
-              "affected_catalog_rows": 36,
-              "review_section": "target_visual_token_summary.tokens",
-              "write_template_section": "folder_color_group/folder_icon_key",
-              "color_groups": [
-                [
-                  "violet",
-                  3
-                ],
-                [
-                  "green",
-                  1
-                ]
-              ],
-              "primary_icon_keys": [
-                [
-                  "sticky_note",
-                  3
-                ],
-                [
-                  "inventory",
-                  1
-                ]
-              ],
-              "required_before_write": [
-                "folder color exists in app folder palette",
-                "folder icon key exists in app icon options",
-                "palette remains sorted by similar color families"
-              ],
-              "unblocks": "app_folder_visual_consistency",
-              "auto_apply_enabled": false
-            },
-            {
-              "step": 3,
-              "lane": "normalization_import_template",
-              "status": "waiting_for_manual_confirmations",
-              "next_batch_rows": 4,
-              "affected_catalog_rows": 36,
-              "review_section": "normalization_confirmation_template",
-              "write_template_section": "server/animation_category_confirmed_rows.json",
-              "import_tool": "tools/import_confirmed_animation_category_rows.py",
-              "required_before_write": [
-                "confirmed rows copied to confirmed queue",
-                "manual_confirmed=true",
-                "manual_decision is allowed for the template",
-                "folder color and icon values are preserved"
-              ],
-              "unblocks": "canonical_category_normalization_manually_confirmed",
-              "auto_apply_enabled": false
-            }
-          ],
+          "work_order_lanes": [],
+          "handoff_steps": [],
           "safety_policy": {
             "auto_apply_enabled": false,
             "auto_create_folders": false,
@@ -19996,13 +18914,13 @@
           }
         },
         "handoff_public_report": "data/animation_category_action_queue_public.json",
-        "handoff_status": "normalization_review_required",
-        "handoff_current_lane": "canonical_category_normalization_review",
-        "handoff_current_review_section": "next_normalization_review_batch",
-        "handoff_step_count": 3,
-        "handoff_first_step_lane": "canonical_category_normalization_review",
-        "handoff_first_step_status": "manual_canonical_category_normalization_required",
-        "handoff_first_step_rows": 4
+        "handoff_status": "ready_for_manual_import",
+        "handoff_current_lane": "no_animation_category_action_required",
+        "handoff_current_review_section": null,
+        "handoff_step_count": 0,
+        "handoff_first_step_lane": null,
+        "handoff_first_step_status": null,
+        "handoff_first_step_rows": 0
       },
       {
         "pillar": "ichiban_kuji_history",
@@ -20160,7 +19078,7 @@
     "manual_review_required": true,
     "pillar_count": 5,
     "blocking_pillar_count": 5,
-    "manual_review_rows": 974,
+    "manual_review_rows": 938,
     "auto_apply_ready_rows": 0,
     "next_safe_phase": "review_candidate_source_urls",
     "blocked_reasons": [
@@ -20249,26 +19167,26 @@
       {
         "pillar": "animation_categories",
         "label": "Normalize animation goods categories and folder visuals",
-        "status": "visual_coverage_passed_normalization_review_pending",
-        "manual_review_rows": 36,
+        "status": "ready_for_manual_confirmed_import",
+        "manual_review_rows": 0,
         "auto_apply_ready_rows": 0,
-        "next_safe_phase": "confirm_canonical_animation_category_normalization",
-        "next_queue_lane": "canonical_category_normalization_review",
-        "next_queue_rows": 36,
+        "next_safe_phase": "run_confirmed_animation_category_import",
+        "next_queue_lane": null,
+        "next_queue_rows": 0,
         "next_execution_lane_count": 3,
-        "next_execution_open_rows": 108,
-        "next_execution_next_batch_rows": 44,
+        "next_execution_open_rows": 0,
+        "next_execution_next_batch_rows": 0,
         "first_next_execution_lane": "canonical_category_normalization_review",
         "first_next_execution_status": "next",
-        "first_next_execution_rows": 36,
+        "first_next_execution_rows": 0,
         "first_next_execution_public_report": "data/animation_category_coverage_audit_public.json",
-        "handoff_status": "normalization_review_required",
-        "handoff_current_lane": "canonical_category_normalization_review",
-        "handoff_current_review_section": "next_normalization_review_batch",
-        "handoff_step_count": 3,
-        "handoff_first_step_lane": "canonical_category_normalization_review",
-        "handoff_first_step_status": "manual_canonical_category_normalization_required",
-        "handoff_first_step_rows": 4,
+        "handoff_status": "ready_for_manual_import",
+        "handoff_current_lane": "no_animation_category_action_required",
+        "handoff_current_review_section": null,
+        "handoff_step_count": 0,
+        "handoff_first_step_lane": null,
+        "handoff_first_step_status": null,
+        "handoff_first_step_rows": 0,
         "public_report": "data/animation_category_coverage_audit_public.json"
       },
       {
@@ -20400,24 +19318,19 @@
       "priority": 4,
       "pillar": "animation_categories",
       "label": "Normalize animation goods categories and folder visuals",
-      "lane": "canonical_category_normalization_review",
-      "status": "normalization_review_required",
-      "rows": 4,
-      "review_section": "next_normalization_review_batch",
-      "write_template_section": "normalization_confirmation_template.rows",
+      "lane": "no_animation_category_action_required",
+      "status": "ready_for_manual_import",
+      "rows": 0,
+      "review_section": null,
+      "write_template_section": null,
       "public_report": "data/animation_category_action_queue_public.json",
-      "next_safe_phase": "confirm_canonical_animation_category_normalization",
+      "next_safe_phase": "run_confirmed_animation_category_import",
       "first_review_url": null,
       "auto_apply_enabled": false,
       "auto_merge_enabled": false,
       "auto_delete_enabled": false,
-      "required_before_write": [
-        "manual_confirmed=true",
-        "sample names fit the target canonical category",
-        "source category is preserved as sub_series when useful for search",
-        "manual note explains the category semantics"
-      ],
-      "unblocks": "normalization_import_template"
+      "required_before_write": [],
+      "unblocks": null
     },
     {
       "priority": 5,

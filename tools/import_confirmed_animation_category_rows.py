@@ -20,6 +20,34 @@ FALLBACK_QUEUE = SERVER / "animation_category_confirmed_rows.template.json"
 DEFAULT_SEED = SERVER / "catalog_seed_from_local.json"
 DEFAULT_REPORT = SERVER / "animation_category_confirmed_import_report.json"
 
+ANIMATION_STORES = {
+    "AmiAmi",
+    "Cospa",
+    "FuRyu",
+    "Movic",
+    "Re-ment",
+    "Taito",
+    "굿스마일컴퍼니",
+    "귀멸의 칼날 공식",
+    "메가하우스",
+    "무기와라스토어",
+    "반다이",
+    "애니메이트",
+    "엔스카이",
+    "점프 캐릭터즈 스토어",
+    "점프 숍",
+    "카도카와",
+    "코토부키야",
+}
+ANIMATION_AFFILIATION_TOKENS = (
+    "단간론파",
+    "주술회전",
+    "헌터헌터",
+    "프리렌",
+    "최애의아이",
+    "나의 히어로",
+)
+
 
 def _confirmed(value: Any) -> bool:
     if isinstance(value, bool):
@@ -77,15 +105,34 @@ def _matches_keywords(row: dict[str, Any], keywords: list[str]) -> bool:
     return any(keyword.casefold() in text for keyword in keywords)
 
 
+def _is_animation_goods(row: dict[str, Any]) -> bool:
+    if str(row.get("source_store") or "") in ANIMATION_STORES:
+        return True
+    affiliation = str(row.get("affiliation") or "")
+    series = str(row.get("series_name") or "")
+    return any(token in affiliation or token in series for token in ANIMATION_AFFILIATION_TOKENS)
+
+
+def _matches_scope(row: dict[str, Any], item: dict[str, Any]) -> bool:
+    scope = str(item.get("scope") or item.get("target_scope") or "").strip()
+    if not scope:
+        return True
+    if scope == "animation_goods":
+        return _is_animation_goods(row)
+    return False
+
+
 def _matching_row_indexes(
     seed_rows: list[dict[str, Any]],
     source_category: str,
     keywords: list[str],
+    item: dict[str, Any],
 ) -> list[int]:
     return [
         index
         for index, row in enumerate(seed_rows)
         if row.get("category") == source_category and _matches_keywords(row, keywords)
+        and _matches_scope(row, item)
     ]
 
 
@@ -134,7 +181,7 @@ def import_rows(
             continue
         seen_mappings.add(mapping_key)
 
-        matched_indexes = _matching_row_indexes(normalized_seed, source_category, keywords)
+        matched_indexes = _matching_row_indexes(normalized_seed, source_category, keywords, item)
         matched_rows = len(matched_indexes)
         expected_rows = _expected_row_count(item)
         if expected_rows is not None and expected_rows != matched_rows and not allow_count_mismatch:

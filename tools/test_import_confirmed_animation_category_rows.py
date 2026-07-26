@@ -74,6 +74,29 @@ class ImportConfirmedAnimationCategoryRowsTest(unittest.TestCase):
         self.assertTrue(result["updated"][0]["sub_series_preserved"])
         self.assertFalse(result["updated"][1]["sub_series_preserved"])
 
+    def test_animation_goods_scope_limits_category_mapping(self) -> None:
+        result = import_rows(
+            {
+                "items": [
+                    _mapping(
+                        source_category="스티커",
+                        target_category="문구",
+                        scope="animation_goods",
+                        affected_catalog_rows=1,
+                    )
+                ]
+            },
+            [
+                _row("스티커", catalog_index=1, source_store="엔스카이"),
+                _row("스티커", catalog_index=2, source_store="치이카와 마켓", affiliation="치이카와"),
+            ],
+        )
+
+        self.assertEqual(len(result["updated"]), 1)
+        self.assertEqual(result["updated"][0]["catalog_index"], 1)
+        self.assertEqual(result["seed_rows"][0]["category"], "문구")
+        self.assertEqual(result["seed_rows"][1]["category"], "스티커")
+
     def test_skips_unconfirmed_mapping(self) -> None:
         result = import_rows({"items": [_mapping(manual_confirmed=False)]}, [_row("아크릴"), _row("아크릴")])
 

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T08:22:10Z",
+  "generated_at": "2026-07-26T08:28:50Z",
   "summary": {
     "catalog_rows": 20347,
     "coverage": {
@@ -96,7 +96,7 @@
       "metadata_unqueued_actionable_missing_cells": 0,
       "metadata_primary_review_url_groups": 127,
       "animation_category_review_rows": 0,
-      "animation_category_action_rows": 36,
+      "animation_category_action_rows": 0,
       "animation_category_split_review_categories": 0,
       "animation_category_direct_mapping_categories": 0,
       "animation_category_name_split_rows": 0,
@@ -111,12 +111,12 @@
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
       "ichiban_prize_name_image_patch_blocked_rows": 0,
       "catalog_goal_manual_review_pillars": 5,
-      "catalog_goal_manual_review_rows": 974,
+      "catalog_goal_manual_review_rows": 938,
       "catalog_goal_auto_apply_ready_rows": 0,
       "catalog_goal_dedupe_manual_review_rows": 48,
       "catalog_goal_missing_image_rows": 779,
       "catalog_goal_source_url_update_rows": 50,
-      "catalog_goal_animation_category_rows": 36,
+      "catalog_goal_animation_category_rows": 0,
       "catalog_goal_ichiban_manual_review_rows": 61,
       "catalog_goal_next_handoff_pillar": "dedupe",
       "catalog_goal_next_handoff_lane": "ichiban_reissue_campaign_review",
@@ -124,7 +124,7 @@
       "catalog_goal_dedupe_handoff_first_step_rows": 4,
       "catalog_goal_missing_image_handoff_first_step_rows": 10,
       "catalog_goal_source_url_handoff_first_step_rows": 20,
-      "catalog_goal_animation_category_handoff_first_step_rows": 4,
+      "catalog_goal_animation_category_handoff_first_step_rows": 0,
       "catalog_goal_ichiban_handoff_first_step_rows": 20
     },
     "top_store_priority_score": 2283.0
@@ -232,7 +232,7 @@
       "workstream": "source_discovery_next_focus_pack_fetch_audit",
       "status": "fallback_required",
       "open_rows": 20,
-      "focus_pack_id": "source-discovery-focus-002",
+      "focus_pack_id": "source-discovery-focus-001",
       "pack_items": 20,
       "official_search_ok_rows": 0,
       "official_search_unavailable_rows": 20,
@@ -322,7 +322,7 @@
     {
       "workstream": "source_discovery_review_batches",
       "status": "open",
-      "open_rows": 692,
+      "open_rows": 706,
       "primary_report": "data/source_discovery_review_batches_public.json",
       "next_step": "work_source_discovery_batches_by_store",
       "auto_apply_enabled": false
@@ -2051,17 +2051,15 @@
     },
     {
       "workstream": "animation_category_action_queue",
-      "status": "manual_review",
-      "open_rows": 36,
+      "status": "clear",
+      "open_rows": 0,
       "split_review_categories": 0,
       "direct_mapping_categories": 0,
-      "work_order_steps": 1,
-      "work_order_lanes": [
-        "canonical_category_normalization_review"
-      ],
+      "work_order_steps": 0,
+      "work_order_lanes": [],
       "split_first_blocked_categories": [],
       "primary_report": "data/animation_category_action_queue_public.json",
-      "next_step": "confirm_canonical_animation_category_normalization",
+      "next_step": "fill_confirmed_animation_category_mapping_templates",
       "app_folder_color_count": 188,
       "app_folder_icon_option_count": 211,
       "app_folder_palette_sorted_by_family": true,
@@ -7088,7 +7086,7 @@
       "priority": 20,
       "workstream": "source_discovery_next_focus_pack_fetch_audit",
       "public_report": "data/source_discovery_next_focus_pack_fetch_audit_public.json",
-      "focus_pack_id": "source-discovery-focus-002",
+      "focus_pack_id": "source-discovery-focus-001",
       "pack_items": 20,
       "official_search_ok_rows": 0,
       "official_search_unavailable_rows": 20,
@@ -7167,7 +7165,7 @@
       "workstream": "source_discovery_review_batches",
       "public_report": "data/source_discovery_review_batches_public.json",
       "batch_count": 59,
-      "source_discovery_rows": 692,
+      "source_discovery_rows": 706,
       "recommended_next_action": "Assign full source discovery batches by store/workflow before image imports."
     },
     {
@@ -10895,7 +10893,7 @@
       "priority": 60,
       "workstream": "animation_folder_visuals",
       "public_report": "data/animation_goods_categories_public.json",
-      "category_count": 29,
+      "category_count": 25,
       "unknown_category_rows": 0,
       "app_folder_color_count": 188,
       "app_folder_icon_option_count": 211,
@@ -10908,7 +10906,7 @@
       "public_report": "data/animation_category_review_batches_public.json",
       "batch_count": 0,
       "source_rows": 0,
-      "folder_visual_token_count": 29,
+      "folder_visual_token_count": 25,
       "app_folder_color_count": 188,
       "app_folder_icon_option_count": 211,
       "app_folder_palette_sorted_by_family": true,
@@ -10918,89 +10916,19 @@
       "priority": 62,
       "workstream": "animation_category_action_queue",
       "public_report": "data/animation_category_action_queue_public.json",
-      "queued_categories": 4,
-      "queued_catalog_rows": 36,
-      "action_batch_count": 1,
+      "queued_categories": 0,
+      "queued_catalog_rows": 0,
+      "action_batch_count": 0,
       "split_review_categories": 0,
       "direct_mapping_categories": 0,
-      "work_order_steps": 1,
-      "work_order_lanes": [
-        "canonical_category_normalization_review"
-      ],
+      "work_order_steps": 0,
+      "work_order_lanes": [],
       "split_first_blocked_categories": [],
-      "next_normalization_review_batch_review_ids": [
-        "animation-category-normalization-001",
-        "animation-category-normalization-002",
-        "animation-category-normalization-003",
-        "animation-category-normalization-004"
-      ],
-      "next_normalization_review_batch_source_categories": [
-        [
-          "클리어파일",
-          1
-        ],
-        [
-          "카드",
-          1
-        ],
-        [
-          "스티커",
-          1
-        ],
-        [
-          "파우치",
-          1
-        ]
-      ],
-      "next_normalization_review_batch_target_categories": [
-        [
-          "문구",
-          3
-        ],
-        [
-          "가방",
-          1
-        ]
-      ],
-      "next_normalization_review_batch_source_target_pairs": [
-        {
-          "review_id": "animation-category-normalization-001",
-          "source_category": "클리어파일",
-          "target_category": "문구",
-          "affected_catalog_rows": 8,
-          "preserve_source_category_as_sub_series": true,
-          "folder_color_group": "violet",
-          "folder_icon_key": "sticky_note"
-        },
-        {
-          "review_id": "animation-category-normalization-002",
-          "source_category": "카드",
-          "target_category": "문구",
-          "affected_catalog_rows": 3,
-          "preserve_source_category_as_sub_series": true,
-          "folder_color_group": "violet",
-          "folder_icon_key": "sticky_note"
-        },
-        {
-          "review_id": "animation-category-normalization-003",
-          "source_category": "스티커",
-          "target_category": "문구",
-          "affected_catalog_rows": 24,
-          "preserve_source_category_as_sub_series": true,
-          "folder_color_group": "violet",
-          "folder_icon_key": "sticky_note"
-        },
-        {
-          "review_id": "animation-category-normalization-004",
-          "source_category": "파우치",
-          "target_category": "가방",
-          "affected_catalog_rows": 1,
-          "preserve_source_category_as_sub_series": true,
-          "folder_color_group": "green",
-          "folder_icon_key": "inventory"
-        }
-      ],
-      "next_normalization_review_batch_preserve_sub_series_rows": 4,
+      "next_normalization_review_batch_review_ids": [],
+      "next_normalization_review_batch_source_categories": [],
+      "next_normalization_review_batch_target_categories": [],
+      "next_normalization_review_batch_source_target_pairs": [],
+      "next_normalization_review_batch_preserve_sub_series_rows": 0,
       "app_folder_color_count": 188,
       "app_folder_icon_option_count": 211,
       "app_folder_palette_sorted_by_family": true,
@@ -11046,7 +10974,7 @@
     "manual_review_required": true,
     "pillar_count": 5,
     "blocking_pillar_count": 5,
-    "manual_review_rows": 974,
+    "manual_review_rows": 938,
     "auto_apply_ready_rows": 0,
     "next_safe_phase": "review_candidate_source_urls",
     "blocked_reasons": [
@@ -11135,26 +11063,26 @@
       {
         "pillar": "animation_categories",
         "label": "Normalize animation goods categories and folder visuals",
-        "status": "visual_coverage_passed_normalization_review_pending",
-        "manual_review_rows": 36,
+        "status": "ready_for_manual_confirmed_import",
+        "manual_review_rows": 0,
         "auto_apply_ready_rows": 0,
-        "next_safe_phase": "confirm_canonical_animation_category_normalization",
-        "next_queue_lane": "canonical_category_normalization_review",
-        "next_queue_rows": 36,
+        "next_safe_phase": "run_confirmed_animation_category_import",
+        "next_queue_lane": null,
+        "next_queue_rows": 0,
         "next_execution_lane_count": 3,
-        "next_execution_open_rows": 108,
-        "next_execution_next_batch_rows": 44,
+        "next_execution_open_rows": 0,
+        "next_execution_next_batch_rows": 0,
         "first_next_execution_lane": "canonical_category_normalization_review",
         "first_next_execution_status": "next",
-        "first_next_execution_rows": 36,
+        "first_next_execution_rows": 0,
         "first_next_execution_public_report": "data/animation_category_coverage_audit_public.json",
-        "handoff_status": "normalization_review_required",
-        "handoff_current_lane": "canonical_category_normalization_review",
-        "handoff_current_review_section": "next_normalization_review_batch",
-        "handoff_step_count": 3,
-        "handoff_first_step_lane": "canonical_category_normalization_review",
-        "handoff_first_step_status": "manual_canonical_category_normalization_required",
-        "handoff_first_step_rows": 4,
+        "handoff_status": "ready_for_manual_import",
+        "handoff_current_lane": "no_animation_category_action_required",
+        "handoff_current_review_section": null,
+        "handoff_step_count": 0,
+        "handoff_first_step_lane": null,
+        "handoff_first_step_status": null,
+        "handoff_first_step_rows": 0,
         "public_report": "data/animation_category_coverage_audit_public.json"
       },
       {
@@ -11286,24 +11214,19 @@
       "priority": 4,
       "pillar": "animation_categories",
       "label": "Normalize animation goods categories and folder visuals",
-      "lane": "canonical_category_normalization_review",
-      "status": "normalization_review_required",
-      "rows": 4,
-      "review_section": "next_normalization_review_batch",
-      "write_template_section": "normalization_confirmation_template.rows",
+      "lane": "no_animation_category_action_required",
+      "status": "ready_for_manual_import",
+      "rows": 0,
+      "review_section": null,
+      "write_template_section": null,
       "public_report": "data/animation_category_action_queue_public.json",
-      "next_safe_phase": "confirm_canonical_animation_category_normalization",
+      "next_safe_phase": "run_confirmed_animation_category_import",
       "first_review_url": null,
       "auto_apply_enabled": false,
       "auto_merge_enabled": false,
       "auto_delete_enabled": false,
-      "required_before_write": [
-        "manual_confirmed=true",
-        "sample names fit the target canonical category",
-        "source category is preserved as sub_series when useful for search",
-        "manual note explains the category semantics"
-      ],
-      "unblocks": "normalization_import_template"
+      "required_before_write": [],
+      "unblocks": null
     },
     {
       "priority": 5,

@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-24T18:42:15Z",
+  "generated_at": "2026-07-26T08:28:50Z",
   "scope": "animation_category_coverage_audit",
   "summary": {
     "animation_goods_rows": 2167,
-    "category_count": 29,
+    "category_count": 25,
     "unknown_category_count": 0,
     "unknown_category_rows": 0,
-    "normalization_suggestion_count": 4,
-    "folder_visual_token_count": 29,
+    "normalization_suggestion_count": 0,
+    "folder_visual_token_count": 25,
     "missing_visual_token_categories": 0,
     "folder_color_palette_count": 32,
     "folder_icon_option_count": 88,
@@ -19,13 +19,13 @@
     "failed_check_count": 0,
     "status": "pass",
     "auto_apply_enabled": false,
-    "visual_taxonomy_gate_status": "visual_coverage_passed_normalization_review_pending",
+    "visual_taxonomy_gate_status": "ready_for_manual_confirmed_import",
     "unknown_category_blockers": 0,
     "visual_token_blockers": 0,
-    "normalization_review_blockers": 4,
-    "normalization_review_blocker_rows": 36,
+    "normalization_review_blockers": 0,
+    "normalization_review_blocker_rows": 0,
     "taxonomy_auto_apply_ready": false,
-    "next_safe_phase": "confirm_category_normalization_before_import"
+    "next_safe_phase": "no_animation_category_cleanup_required"
   },
   "checks": [
     {
@@ -51,75 +51,18 @@
     }
   ],
   "visual_taxonomy_gate": {
-    "status": "visual_coverage_passed_normalization_review_pending",
+    "status": "ready_for_manual_confirmed_import",
     "unknown_category_blockers": 0,
     "visual_token_blockers": 0,
-    "normalization_review_blockers": 4,
-    "normalization_review_blocker_rows": 36,
+    "normalization_review_blockers": 0,
+    "normalization_review_blocker_rows": 0,
     "auto_apply_ready": false,
     "auto_apply_enabled": false,
-    "next_safe_phase": "confirm_category_normalization_before_import",
-    "manual_review_required": true,
+    "next_safe_phase": "no_animation_category_cleanup_required",
+    "manual_review_required": false,
     "safety_note": "Folder colors and icons cover the animation taxonomy, but canonical category normalization still needs manual confirmation before any import writes."
   },
-  "normalization_suggestions": [
-    {
-      "category": "클리어파일",
-      "suggested_category": "문구",
-      "rows": 8,
-      "risk": "medium",
-      "reason": "Subtype-like category may work better as sub_series while using a broader app category.",
-      "sample_names": [
-        "一番くじ 呪術廻戦 懐玉・玉折 ～弐～ - F賞 クリアファイル2枚セット",
-        "一番くじ 劇場版 呪術廻戦 0 ～宣戦布告～ - J賞 クリアファイル2枚セット",
-        "一番くじ 劇場版 呪術廻戦 0 - I賞 クリアファイルセット",
-        "一番くじ 呪術廻戦 ～弐～ - F賞 クリアファイルセット",
-        "一番くじ 僕のヒーローアカデミア －二人のあこがれ－ - G賞 クリアファイルセット",
-        "一番くじ 僕のヒーローアカデミア ー意志ー - G賞 クリアファイルセット",
-        "一番くじ 僕のヒーローアカデミア FIGHTING HEROES feat. One's Justice - OJコラボ賞② クリアファイルセット feat. One's Justice",
-        "一番くじ 僕のヒーローアカデミア FIGHTING HEROES feat. SMASH RISING - E賞 クリアファイルセット feat. SMASH RISING"
-      ]
-    },
-    {
-      "category": "카드",
-      "suggested_category": "문구",
-      "rows": 3,
-      "risk": "medium",
-      "reason": "Subtype-like category may work better as sub_series while using a broader app category.",
-      "sample_names": [
-        "一番くじ 葬送のフリーレン - H賞 繋がるポストカード",
-        "一番くじ 僕のヒーローアカデミア -更に向こうへ- - K賞 カードホルダー",
-        "一番くじ 僕のヒーローアカデミア 開催文化祭!! - I賞 カードホルダー"
-      ]
-    },
-    {
-      "category": "스티커",
-      "suggested_category": "문구",
-      "rows": 24,
-      "risk": "medium",
-      "reason": "Subtype-like category may work better as sub_series while using a broader app category.",
-      "sample_names": [
-        "一番くじ 呪術廻戦 死滅回游 ～弐～ - M賞 マグネット＆ステッカーセット",
-        "一番くじ 呪術廻戦 死滅回游 ～壱～ - N賞 ステッカーセット",
-        "一番くじ ヴィジランテ -僕のヒーローアカデミア ILLEGALS- - H賞 ジッパーバッグ＆ステッカーセット",
-        "一番くじ 劇場版 呪術廻戦 ０ ー1224ー - E賞 クリアファイル・ステッカーセット",
-        "一番くじ 呪術廻戦 5th anniversary - K賞 クリアファイル・ステッカーセット",
-        "一番くじ 呪術廻戦 渋谷事変 ～参～ - D賞 クリアファイル・ステッカーセット",
-        "一番くじ 呪術廻戦 渋谷事変 ～弐～ - N賞 クリアファイル・ステッカーセット",
-        "一番くじ 僕のヒーローアカデミア -更に向こうへ- - L賞 ステッカーセット"
-      ]
-    },
-    {
-      "category": "파우치",
-      "suggested_category": "가방",
-      "rows": 1,
-      "risk": "medium",
-      "reason": "Subtype-like category may work better as sub_series while using a broader app category.",
-      "sample_names": [
-        "一番くじ 僕のヒーローアカデミア～休み時間！～ - E賞 1-A教室ポーチ"
-      ]
-    }
-  ],
+  "normalization_suggestions": [],
   "unknown_categories": [],
   "category_families": [
     {
@@ -327,7 +270,7 @@
     {
       "category": "가방",
       "family": "daily_goods",
-      "rows": 18,
+      "rows": 19,
       "color_hint": "emerald",
       "color_hex": "0xFF10B981",
       "color_group": "green",
@@ -428,26 +371,6 @@
       "category": "타월",
       "family": "daily_goods",
       "rows": 73,
-      "color_hint": "emerald",
-      "color_hex": "0xFF10B981",
-      "color_group": "green",
-      "color_sort_order": 180,
-      "primary_icon_key": "inventory",
-      "icon_options": [
-        "inventory",
-        "bag",
-        "pouch",
-        "coffee_mug",
-        "basket",
-        "backpack",
-        "gift",
-        "storefront"
-      ]
-    },
-    {
-      "category": "파우치",
-      "family": "daily_goods",
-      "rows": 1,
       "color_hint": "emerald",
       "color_hex": "0xFF10B981",
       "color_group": "green",
@@ -607,7 +530,7 @@
     {
       "category": "문구",
       "family": "stationery",
-      "rows": 126,
+      "rows": 161,
       "color_hint": "lavender",
       "color_hex": "0xFFB197FC",
       "color_group": "violet",
@@ -645,69 +568,9 @@
       ]
     },
     {
-      "category": "스티커",
-      "family": "stationery",
-      "rows": 24,
-      "color_hint": "lavender",
-      "color_hex": "0xFFB197FC",
-      "color_group": "violet",
-      "color_sort_order": 270,
-      "primary_icon_key": "sticky_note",
-      "icon_options": [
-        "sticky_note",
-        "sticker",
-        "clear_file",
-        "postcard",
-        "article",
-        "draw",
-        "book",
-        "diary"
-      ]
-    },
-    {
-      "category": "카드",
-      "family": "stationery",
-      "rows": 3,
-      "color_hint": "lavender",
-      "color_hex": "0xFFB197FC",
-      "color_group": "violet",
-      "color_sort_order": 270,
-      "primary_icon_key": "sticky_note",
-      "icon_options": [
-        "sticky_note",
-        "sticker",
-        "clear_file",
-        "postcard",
-        "article",
-        "draw",
-        "book",
-        "diary"
-      ]
-    },
-    {
       "category": "카드/브로마이드",
       "family": "stationery",
       "rows": 1,
-      "color_hint": "lavender",
-      "color_hex": "0xFFB197FC",
-      "color_group": "violet",
-      "color_sort_order": 270,
-      "primary_icon_key": "sticky_note",
-      "icon_options": [
-        "sticky_note",
-        "sticker",
-        "clear_file",
-        "postcard",
-        "article",
-        "draw",
-        "book",
-        "diary"
-      ]
-    },
-    {
-      "category": "클리어파일",
-      "family": "stationery",
-      "rows": 8,
       "color_hint": "lavender",
       "color_hex": "0xFFB197FC",
       "color_group": "violet",
