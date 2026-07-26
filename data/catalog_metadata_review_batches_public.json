@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T10:25:54Z",
+  "generated_at": "2026-07-26T10:31:06Z",
   "summary": {
     "catalog_rows": 20347,
     "tracked_fields": [
@@ -30,11 +30,11 @@
       ],
       [
         "엔스카이",
-        816
+        814
       ],
       [
         "애니메이트",
-        732
+        737
       ],
       [
         "치이카와 온라인 쿠지",
@@ -5703,7 +5703,7 @@
       "batch_id": "metadata-review-008",
       "priority": 20,
       "group_count": 12,
-      "missing_cell_count": 818,
+      "missing_cell_count": 819,
       "field_counts": [
         [
           "release_date",
@@ -5831,7 +5831,7 @@
         {
           "field": "release_date",
           "source_store": "엔스카이",
-          "missing_rows": 220,
+          "missing_rows": 219,
           "priority": 30,
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
@@ -5926,7 +5926,7 @@
         {
           "field": "release_date",
           "source_store": "애니메이트",
-          "missing_rows": 180,
+          "missing_rows": 182,
           "priority": 30,
           "workflow": "official_metadata_review",
           "evidence_required": "official product or campaign page showing release/sale date",
@@ -8923,7 +8923,7 @@
       "batch_id": "metadata-review-011",
       "priority": 30,
       "group_count": 12,
-      "missing_cell_count": 73,
+      "missing_cell_count": 72,
       "field_counts": [
         [
           "release_date",
@@ -9612,61 +9612,6 @@
         },
         {
           "field": "release_date",
-          "source_store": "TAPIOCA online shop",
-          "missing_rows": 4,
-          "priority": 30,
-          "workflow": "official_metadata_review",
-          "evidence_required": "official product or campaign page showing release/sale date",
-          "next_machine_step": "official_metadata_extraction",
-          "risk": "campaign_or_reissue_date_confusion",
-          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
-          "sample_catalog_indexes": [
-            17812,
-            17813,
-            17814,
-            17866
-          ],
-          "sample_items": [
-            {
-              "catalog_index": 17812,
-              "name_ko": "단간론파 쿠루미타피누이 Vol.1",
-              "name_ja": "ダンガンロンパ くるみたぴぬい Vol.1",
-              "series_name": "단간론파 쿠루미타피누이 버전1",
-              "category": "인형",
-              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%911%E3%83%BB2%2BReload%2B%E3%81%8F%E3%82%8B%E3%81%BF%E3%81%9F%E3%81%B4%E3%81%AC%E3%81%84%2BVol.1/pd/3339418/",
-              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4580831925254_1_1764821109.jpg&width=1200&height=630"
-            },
-            {
-              "catalog_index": 17813,
-              "name_ko": "단간론파 쿠루미타피누이 Vol.2",
-              "name_ja": "ダンガンロンパ くるみたぴぬい Vol.2",
-              "series_name": "단간론파 쿠루미타피누이 버전2",
-              "category": "인형",
-              "source_url": "https://www.spike-chunsoft.co.jp/goods/45697/",
-              "image_url": "https://media.spike-chunsoft.co.jp/spchunwp/wp-content/uploads/2025/12/18110710/fitcoverw920h920-1.avif"
-            },
-            {
-              "catalog_index": 17814,
-              "name_ko": "헌터헌터 쿠루미타피누이",
-              "name_ja": "HUNTER×HUNTER くるみたぴぬい",
-              "series_name": "헌터헌터 타피누이",
-              "category": "인형",
-              "source_url": "https://jp.mercari.com/item/m69892974117",
-              "image_url": "https://static.mercdn.net/item/detail/orig/photos/m69892974117_1.jpg?1772702275"
-            },
-            {
-              "catalog_index": 17866,
-              "name_ko": "주술회전 쿠루미타피누이",
-              "name_ja": "呪術廻戦 くるみたぴぬい",
-              "series_name": "주술회전 타피누이",
-              "category": "인형",
-              "source_url": "https://jujutsukaisen.jp/aj2024/aj_goods18.php",
-              "image_url": "https://jujutsukaisen.jp/aj2024/images/g18.jpg"
-            }
-          ]
-        },
-        {
-          "field": "release_date",
           "source_store": "가샤폰",
           "missing_rows": 4,
           "priority": 30,
@@ -9829,31 +9774,7 @@
               "image_url": null
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-012",
-      "priority": 30,
-      "group_count": 12,
-      "missing_cell_count": 31,
-      "field_counts": [
-        [
-          "release_date",
-          12
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "official_metadata_review",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "release_date",
           "source_store": "ASOBI STORE",
@@ -9898,7 +9819,31 @@
               "image_url": "https://shop.asobistore.jp/simages/product_image_large/4582698665731.jpg?202607141411"
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-012",
+      "priority": 30,
+      "group_count": 12,
+      "missing_cell_count": 31,
+      "field_counts": [
+        [
+          "release_date",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "official_metadata_review",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "release_date",
           "source_store": "Bandai Premium",
@@ -9986,6 +9931,51 @@
               "category": "앨범",
               "source_url": "https://www.ktown4u.com/iteminfo?goods_no=129519",
               "image_url": "https://media.ktown4u.com/products/resize/thumbnail/2025/01/15/wIwEJs.jpg"
+            }
+          ]
+        },
+        {
+          "field": "release_date",
+          "source_store": "TAPIOCA online shop",
+          "missing_rows": 3,
+          "priority": 30,
+          "workflow": "official_metadata_review",
+          "evidence_required": "official product or campaign page showing release/sale date",
+          "next_machine_step": "official_metadata_extraction",
+          "risk": "campaign_or_reissue_date_confusion",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "sample_catalog_indexes": [
+            17813,
+            17814,
+            17866
+          ],
+          "sample_items": [
+            {
+              "catalog_index": 17813,
+              "name_ko": "단간론파 쿠루미타피누이 Vol.2",
+              "name_ja": "ダンガンロンパ くるみたぴぬい Vol.2",
+              "series_name": "단간론파 쿠루미타피누이 버전2",
+              "category": "인형",
+              "source_url": "https://www.spike-chunsoft.co.jp/goods/45697/",
+              "image_url": "https://media.spike-chunsoft.co.jp/spchunwp/wp-content/uploads/2025/12/18110710/fitcoverw920h920-1.avif"
+            },
+            {
+              "catalog_index": 17814,
+              "name_ko": "헌터헌터 쿠루미타피누이",
+              "name_ja": "HUNTER×HUNTER くるみたぴぬい",
+              "series_name": "헌터헌터 타피누이",
+              "category": "인형",
+              "source_url": "https://jp.mercari.com/item/m69892974117",
+              "image_url": "https://static.mercdn.net/item/detail/orig/photos/m69892974117_1.jpg?1772702275"
+            },
+            {
+              "catalog_index": 17866,
+              "name_ko": "주술회전 쿠루미타피누이",
+              "name_ja": "呪術廻戦 くるみたぴぬい",
+              "series_name": "주술회전 타피누이",
+              "category": "인형",
+              "source_url": "https://jujutsukaisen.jp/aj2024/aj_goods18.php",
+              "image_url": "https://jujutsukaisen.jp/aj2024/images/g18.jpg"
             }
           ]
         },
@@ -11867,85 +11857,6 @@
         },
         {
           "field": "official_price_jpy",
-          "source_store": "TAPIOCA online shop",
-          "missing_rows": 4,
-          "priority": 40,
-          "workflow": "official_metadata_review",
-          "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
-          "next_machine_step": "official_metadata_extraction",
-          "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
-          "sample_catalog_indexes": [
-            17812,
-            17813,
-            17814,
-            17866
-          ],
-          "sample_items": [
-            {
-              "catalog_index": 17812,
-              "name_ko": "단간론파 쿠루미타피누이 Vol.1",
-              "name_ja": "ダンガンロンパ くるみたぴぬい Vol.1",
-              "series_name": "단간론파 쿠루미타피누이 버전1",
-              "category": "인형",
-              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%911%E3%83%BB2%2BReload%2B%E3%81%8F%E3%82%8B%E3%81%BF%E3%81%9F%E3%81%B4%E3%81%AC%E3%81%84%2BVol.1/pd/3339418/",
-              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4580831925254_1_1764821109.jpg&width=1200&height=630"
-            },
-            {
-              "catalog_index": 17813,
-              "name_ko": "단간론파 쿠루미타피누이 Vol.2",
-              "name_ja": "ダンガンロンパ くるみたぴぬい Vol.2",
-              "series_name": "단간론파 쿠루미타피누이 버전2",
-              "category": "인형",
-              "source_url": "https://www.spike-chunsoft.co.jp/goods/45697/",
-              "image_url": "https://media.spike-chunsoft.co.jp/spchunwp/wp-content/uploads/2025/12/18110710/fitcoverw920h920-1.avif"
-            },
-            {
-              "catalog_index": 17814,
-              "name_ko": "헌터헌터 쿠루미타피누이",
-              "name_ja": "HUNTER×HUNTER くるみたぴぬい",
-              "series_name": "헌터헌터 타피누이",
-              "category": "인형",
-              "source_url": "https://jp.mercari.com/item/m69892974117",
-              "image_url": "https://static.mercdn.net/item/detail/orig/photos/m69892974117_1.jpg?1772702275"
-            },
-            {
-              "catalog_index": 17866,
-              "name_ko": "주술회전 쿠루미타피누이",
-              "name_ja": "呪術廻戦 くるみたぴぬい",
-              "series_name": "주술회전 타피누이",
-              "category": "인형",
-              "source_url": "https://jujutsukaisen.jp/aj2024/aj_goods18.php",
-              "image_url": "https://jujutsukaisen.jp/aj2024/images/g18.jpg"
-            }
-          ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-016",
-      "priority": 40,
-      "group_count": 12,
-      "missing_cell_count": 28,
-      "field_counts": [
-        [
-          "official_price_jpy",
-          12
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "official_metadata_review",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
-        {
-          "field": "official_price_jpy",
           "source_store": "이세계아이돌 공식 굿즈",
           "missing_rows": 4,
           "priority": 40,
@@ -11998,7 +11909,31 @@
               "image_url": null
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-016",
+      "priority": 40,
+      "group_count": 12,
+      "missing_cell_count": 28,
+      "field_counts": [
+        [
+          "official_price_jpy",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "official_metadata_review",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "official_price_jpy",
           "source_store": "EDITH",
@@ -12046,6 +11981,51 @@
         },
         {
           "field": "official_price_jpy",
+          "source_store": "TAPIOCA online shop",
+          "missing_rows": 3,
+          "priority": 40,
+          "workflow": "official_metadata_review",
+          "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
+          "next_machine_step": "official_metadata_extraction",
+          "risk": "retailer_price_or_prize_price_confusion",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "sample_catalog_indexes": [
+            17813,
+            17814,
+            17866
+          ],
+          "sample_items": [
+            {
+              "catalog_index": 17813,
+              "name_ko": "단간론파 쿠루미타피누이 Vol.2",
+              "name_ja": "ダンガンロンパ くるみたぴぬい Vol.2",
+              "series_name": "단간론파 쿠루미타피누이 버전2",
+              "category": "인형",
+              "source_url": "https://www.spike-chunsoft.co.jp/goods/45697/",
+              "image_url": "https://media.spike-chunsoft.co.jp/spchunwp/wp-content/uploads/2025/12/18110710/fitcoverw920h920-1.avif"
+            },
+            {
+              "catalog_index": 17814,
+              "name_ko": "헌터헌터 쿠루미타피누이",
+              "name_ja": "HUNTER×HUNTER くるみたぴぬい",
+              "series_name": "헌터헌터 타피누이",
+              "category": "인형",
+              "source_url": "https://jp.mercari.com/item/m69892974117",
+              "image_url": "https://static.mercdn.net/item/detail/orig/photos/m69892974117_1.jpg?1772702275"
+            },
+            {
+              "catalog_index": 17866,
+              "name_ko": "주술회전 쿠루미타피누이",
+              "name_ja": "呪術廻戦 くるみたぴぬい",
+              "series_name": "주술회전 타피누이",
+              "category": "인형",
+              "source_url": "https://jujutsukaisen.jp/aj2024/aj_goods18.php",
+              "image_url": "https://jujutsukaisen.jp/aj2024/images/g18.jpg"
+            }
+          ]
+        },
+        {
+          "field": "official_price_jpy",
           "source_store": "검색 추가",
           "missing_rows": 3,
           "priority": 40,
@@ -12086,6 +12066,51 @@
               "category": "콜라보 굿즈",
               "source_url": "https://prtimes.jp/main/html/rd/p/000000258.000066407.html",
               "image_url": "https://prcdn.freetls.fastly.net/release_image/66407/258/66407-258-64ae0cce81fbdd43e0aaa0c6d9a35490-1909x2700.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260"
+            }
+          ]
+        },
+        {
+          "field": "official_price_jpy",
+          "source_store": "애니메이트",
+          "missing_rows": 3,
+          "priority": 40,
+          "workflow": "official_metadata_review",
+          "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
+          "next_machine_step": "official_metadata_extraction",
+          "risk": "retailer_price_or_prize_price_confusion",
+          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
+          "sample_catalog_indexes": [
+            17812,
+            17824,
+            17932
+          ],
+          "sample_items": [
+            {
+              "catalog_index": 17812,
+              "name_ko": "단간론파 쿠루미타피누이 Vol.1",
+              "name_ja": "ダンガンロンパ くるみたぴぬい Vol.1",
+              "series_name": "단간론파 쿠루미타피누이 버전1",
+              "category": "인형",
+              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%911%E3%83%BB2%2BReload%2B%E3%81%8F%E3%82%8B%E3%81%BF%E3%81%9F%E3%81%B4%E3%81%AC%E3%81%84%2BVol.1/pd/3339418/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4580831925254_1_1764821109.jpg&width=1200&height=630"
+            },
+            {
+              "catalog_index": 17824,
+              "name_ko": "주술회전 츠미첸",
+              "name_ja": "呪術廻戦 つみちぇん",
+              "series_name": "주술회전 츠미첸",
+              "category": "마스코트",
+              "source_url": "https://www.animate-onlineshop.jp/sphone/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%E3%80%91%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%81%A4%E3%81%BF%E3%81%A1%E3%81%87%E3%82%93/pd/2931735/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4535123841699_1_1722917173.jpg&width=1200&height=630"
+            },
+            {
+              "catalog_index": 17932,
+              "name_ko": "유라유라 헤드 헌터헌터 피규어",
+              "name_ja": "ゆらゆらヘッド HUNTER×HUNTER フィギュア",
+              "series_name": "유라유라 피규어 헌터헌터",
+              "category": "피규어",
+              "source_url": "https://www.animate-onlineshop.jp/pd/3318211/",
+              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=11251515_69254968434b5.jpg"
             }
           ]
         },
@@ -12368,7 +12393,31 @@
               "image_url": null
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-017",
+      "priority": 40,
+      "group_count": 12,
+      "missing_cell_count": 14,
+      "field_counts": [
+        [
+          "official_price_jpy",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "official_metadata_review",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "official_price_jpy",
           "source_store": "메가하우스",
@@ -12401,65 +12450,6 @@
               "category": "피규어",
               "source_url": "https://hobby.dengeki.com/news/2793004/",
               "image_url": "https://hobby.dengeki.com/ss/hobby/2025/10/ahg478rwa-8_agaJRKVFvtyyIvPNE-B9QbWYscxeVnhA_X6GurnyANcPvQ4g1N_pjr8A45N1zJ_aI.jpg"
-            }
-          ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-017",
-      "priority": 40,
-      "group_count": 12,
-      "missing_cell_count": 14,
-      "field_counts": [
-        [
-          "official_price_jpy",
-          12
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "official_metadata_review",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
-        {
-          "field": "official_price_jpy",
-          "source_store": "애니메이트",
-          "missing_rows": 2,
-          "priority": 40,
-          "workflow": "official_metadata_review",
-          "evidence_required": "official product or campaign page showing tax-inclusive or stated JPY price",
-          "next_machine_step": "official_metadata_extraction",
-          "risk": "retailer_price_or_prize_price_confusion",
-          "recommended_action": "Verify official release/sale dates or stated JPY prices before importing.",
-          "sample_catalog_indexes": [
-            17824,
-            17932
-          ],
-          "sample_items": [
-            {
-              "catalog_index": 17824,
-              "name_ko": "주술회전 츠미첸",
-              "name_ja": "呪術廻戦 つみちぇん",
-              "series_name": "주술회전 츠미첸",
-              "category": "마스코트",
-              "source_url": "https://www.animate-onlineshop.jp/sphone/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%83%9E%E3%82%B9%E3%82%B3%E3%83%83%E3%83%88%E3%80%91%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6%20%E3%81%A4%E3%81%BF%E3%81%A1%E3%81%87%E3%82%93/pd/2931735/",
-              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4535123841699_1_1722917173.jpg&width=1200&height=630"
-            },
-            {
-              "catalog_index": 17932,
-              "name_ko": "유라유라 헤드 헌터헌터 피규어",
-              "name_ja": "ゆらゆらヘッド HUNTER×HUNTER フィギュア",
-              "series_name": "유라유라 피규어 헌터헌터",
-              "category": "피규어",
-              "source_url": "https://www.animate-onlineshop.jp/pd/3318211/",
-              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=11251515_69254968434b5.jpg"
             }
           ]
         },
@@ -12755,7 +12745,7 @@
       "batch_id": "metadata-review-018",
       "priority": 40,
       "group_count": 12,
-      "missing_cell_count": 8806,
+      "missing_cell_count": 8805,
       "field_counts": [
         [
           "official_price_jpy",
@@ -13198,7 +13188,7 @@
         {
           "field": "barcode",
           "source_store": "엔스카이",
-          "missing_rows": 222,
+          "missing_rows": 221,
           "priority": 50,
           "workflow": "barcode_evidence_review",
           "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
@@ -13297,7 +13287,7 @@
       "batch_id": "metadata-review-019",
       "priority": 50,
       "group_count": 12,
-      "missing_cell_count": 860,
+      "missing_cell_count": 862,
       "field_counts": [
         [
           "barcode",
@@ -13412,7 +13402,7 @@
         {
           "field": "barcode",
           "source_store": "애니메이트",
-          "missing_rows": 175,
+          "missing_rows": 177,
           "priority": 50,
           "workflow": "barcode_evidence_review",
           "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
@@ -16679,7 +16669,7 @@
       "batch_id": "metadata-review-022",
       "priority": 50,
       "group_count": 12,
-      "missing_cell_count": 47,
+      "missing_cell_count": 46,
       "field_counts": [
         [
           "barcode",
@@ -16943,61 +16933,6 @@
               "category": "인형",
               "source_url": "https://hoyoversemerch.com/product/pom-pom-plush-honkai-star-rail/",
               "image_url": "https://hoyoversemerch.com/wp-content/uploads/2024/09/O1CN01Ar84631fEbEA8h8gj_0-item_pic.webp"
-            }
-          ]
-        },
-        {
-          "field": "barcode",
-          "source_store": "TAPIOCA online shop",
-          "missing_rows": 4,
-          "priority": 50,
-          "workflow": "barcode_evidence_review",
-          "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
-          "next_machine_step": "barcode_evidence_review",
-          "risk": "shared_variant_or_box_barcode",
-          "recommended_action": "Fill only when barcode is shown by official or trusted retailer data.",
-          "sample_catalog_indexes": [
-            17812,
-            17813,
-            17814,
-            17866
-          ],
-          "sample_items": [
-            {
-              "catalog_index": 17812,
-              "name_ko": "단간론파 쿠루미타피누이 Vol.1",
-              "name_ja": "ダンガンロンパ くるみたぴぬい Vol.1",
-              "series_name": "단간론파 쿠루미타피누이 버전1",
-              "category": "인형",
-              "source_url": "https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%80%91%E3%83%80%E3%83%B3%E3%82%AC%E3%83%B3%E3%83%AD%E3%83%B3%E3%83%911%E3%83%BB2%2BReload%2B%E3%81%8F%E3%82%8B%E3%81%BF%E3%81%9F%E3%81%B4%E3%81%AC%E3%81%84%2BVol.1/pd/3339418/",
-              "image_url": "https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4580831925254_1_1764821109.jpg&width=1200&height=630"
-            },
-            {
-              "catalog_index": 17813,
-              "name_ko": "단간론파 쿠루미타피누이 Vol.2",
-              "name_ja": "ダンガンロンパ くるみたぴぬい Vol.2",
-              "series_name": "단간론파 쿠루미타피누이 버전2",
-              "category": "인형",
-              "source_url": "https://www.spike-chunsoft.co.jp/goods/45697/",
-              "image_url": "https://media.spike-chunsoft.co.jp/spchunwp/wp-content/uploads/2025/12/18110710/fitcoverw920h920-1.avif"
-            },
-            {
-              "catalog_index": 17814,
-              "name_ko": "헌터헌터 쿠루미타피누이",
-              "name_ja": "HUNTER×HUNTER くるみたぴぬい",
-              "series_name": "헌터헌터 타피누이",
-              "category": "인형",
-              "source_url": "https://jp.mercari.com/item/m69892974117",
-              "image_url": "https://static.mercdn.net/item/detail/orig/photos/m69892974117_1.jpg?1772702275"
-            },
-            {
-              "catalog_index": 17866,
-              "name_ko": "주술회전 쿠루미타피누이",
-              "name_ja": "呪術廻戦 くるみたぴぬい",
-              "series_name": "주술회전 타피누이",
-              "category": "인형",
-              "source_url": "https://jujutsukaisen.jp/aj2024/aj_goods18.php",
-              "image_url": "https://jujutsukaisen.jp/aj2024/images/g18.jpg"
             }
           ]
         },
@@ -17345,31 +17280,7 @@
               "image_url": "https://max-jpn.com/imgs/character1/myhero/30/01.jpg"
             }
           ]
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "metadata-review-023",
-      "priority": 50,
-      "group_count": 12,
-      "missing_cell_count": 31,
-      "field_counts": [
-        [
-          "barcode",
-          12
-        ]
-      ],
-      "workflow_counts": [
-        [
-          "barcode_evidence_review",
-          12
-        ]
-      ],
-      "review_state": "metadata_evidence_required",
-      "next_machine_step": "collect_official_metadata_evidence",
-      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
-      "groups": [
+        },
         {
           "field": "barcode",
           "source_store": "STARSHIP STORE",
@@ -17414,7 +17325,31 @@
               "image_url": "https://media.ktown4u.com/products/resize/thumbnail/2025/01/15/wIwEJs.jpg"
             }
           ]
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "metadata-review-023",
+      "priority": 50,
+      "group_count": 12,
+      "missing_cell_count": 31,
+      "field_counts": [
+        [
+          "barcode",
+          12
+        ]
+      ],
+      "workflow_counts": [
+        [
+          "barcode_evidence_review",
+          12
+        ]
+      ],
+      "review_state": "metadata_evidence_required",
+      "next_machine_step": "collect_official_metadata_evidence",
+      "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
+      "groups": [
         {
           "field": "barcode",
           "source_store": "Spike Chunsoft",
@@ -17457,6 +17392,51 @@
               "category": "인형",
               "source_url": "https://www.spike-chunsoft.co.jp/goods/45015/",
               "image_url": "https://media.spike-chunsoft.co.jp/spchunwp/wp-content/uploads/2025/07/08144536/cb249864cb9a09b068eea64b2b64c5d8.jpg"
+            }
+          ]
+        },
+        {
+          "field": "barcode",
+          "source_store": "TAPIOCA online shop",
+          "missing_rows": 3,
+          "priority": 50,
+          "workflow": "barcode_evidence_review",
+          "evidence_required": "JAN/barcode from official listing or trusted retailer product detail",
+          "next_machine_step": "barcode_evidence_review",
+          "risk": "shared_variant_or_box_barcode",
+          "recommended_action": "Fill only when barcode is shown by official or trusted retailer data.",
+          "sample_catalog_indexes": [
+            17813,
+            17814,
+            17866
+          ],
+          "sample_items": [
+            {
+              "catalog_index": 17813,
+              "name_ko": "단간론파 쿠루미타피누이 Vol.2",
+              "name_ja": "ダンガンロンパ くるみたぴぬい Vol.2",
+              "series_name": "단간론파 쿠루미타피누이 버전2",
+              "category": "인형",
+              "source_url": "https://www.spike-chunsoft.co.jp/goods/45697/",
+              "image_url": "https://media.spike-chunsoft.co.jp/spchunwp/wp-content/uploads/2025/12/18110710/fitcoverw920h920-1.avif"
+            },
+            {
+              "catalog_index": 17814,
+              "name_ko": "헌터헌터 쿠루미타피누이",
+              "name_ja": "HUNTER×HUNTER くるみたぴぬい",
+              "series_name": "헌터헌터 타피누이",
+              "category": "인형",
+              "source_url": "https://jp.mercari.com/item/m69892974117",
+              "image_url": "https://static.mercdn.net/item/detail/orig/photos/m69892974117_1.jpg?1772702275"
+            },
+            {
+              "catalog_index": 17866,
+              "name_ko": "주술회전 쿠루미타피누이",
+              "name_ja": "呪術廻戦 くるみたぴぬい",
+              "series_name": "주술회전 타피누이",
+              "category": "인형",
+              "source_url": "https://jujutsukaisen.jp/aj2024/aj_goods18.php",
+              "image_url": "https://jujutsukaisen.jp/aj2024/images/g18.jpg"
             }
           ]
         },
