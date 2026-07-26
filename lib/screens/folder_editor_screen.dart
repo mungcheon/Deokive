@@ -224,41 +224,38 @@ class _FolderVisualPickerState extends State<_FolderVisualPicker>
             selectedColor: widget.selectedColor,
             onSelected: widget.onColorSelected,
           );
-    return Container(
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(
-          color: theme.colorScheme.outline.withValues(alpha: 0.22),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        DecoratedBox(
+          decoration: BoxDecoration(
+            color: theme.colorScheme.surfaceContainerHighest
+                .withValues(alpha: 0.46),
+            borderRadius: BorderRadius.circular(18),
+            border: Border.all(
+              color: theme.colorScheme.outline.withValues(alpha: 0.18),
+            ),
+          ),
+          child: TabBar(
+            controller: _tabController,
+            onTap: (_) => setState(() {}),
+            dividerColor: Colors.transparent,
+            indicatorSize: TabBarIndicatorSize.tab,
+            tabs: const [
+              Tab(icon: Icon(Icons.category_rounded), text: '아이콘'),
+              Tab(icon: Icon(Icons.palette_rounded), text: '색상'),
+            ],
+          ),
         ),
-      ),
-      clipBehavior: Clip.antiAlias,
-      child: Column(
-        children: [
-          Material(
-            color:
-                theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
-            child: TabBar(
-              controller: _tabController,
-              onTap: (_) => setState(() {}),
-              tabs: const [
-                Tab(icon: Icon(Icons.category_rounded), text: '아이콘'),
-                Tab(icon: Icon(Icons.palette_rounded), text: '색상'),
-              ],
-            ),
+        const SizedBox(height: 16),
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: 180),
+          child: KeyedSubtree(
+            key: ValueKey(_tabController.index),
+            child: tabContent,
           ),
-          Padding(
-            padding: const EdgeInsets.all(14),
-            child: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 180),
-              child: KeyedSubtree(
-                key: ValueKey(_tabController.index),
-                child: tabContent,
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -405,23 +402,23 @@ class _IconChoice extends StatelessWidget {
         : theme.colorScheme.onSurface.withValues(alpha: 0.78);
     return Tooltip(
       message: option.label,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
+      child: InkResponse(
+        radius: 28,
         onTap: onTap,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 140),
           width: 48,
           height: 48,
+          curve: Curves.easeOutCubic,
           decoration: BoxDecoration(
             color: selected
                 ? selectedColor.withValues(alpha: 0.13)
-                : theme.colorScheme.surfaceContainerHighest
-                    .withValues(alpha: 0.36),
+                : Colors.transparent,
             shape: BoxShape.circle,
             border: Border.all(
               color: selected
                   ? selectedColor
-                  : theme.colorScheme.outline.withValues(alpha: 0.22),
+                  : theme.colorScheme.outline.withValues(alpha: 0.16),
               width: selected ? 1.8 : 1,
             ),
           ),

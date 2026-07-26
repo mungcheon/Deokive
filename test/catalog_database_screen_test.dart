@@ -234,13 +234,15 @@ void main() {
     );
     final addTextStyle = tester.widget<Text>(addTextFinder).style!;
     final addIconTheme = IconTheme.of(tester.element(addIconFinder));
+    final expectedForeground =
+        Theme.of(tester.element(buttonFinder)).colorScheme.primary;
 
-    expect(addTextStyle.color, const Color(0xFFFFFFFF));
+    expect(addTextStyle.color, expectedForeground);
     expect(addTextStyle.shadows, isEmpty);
-    expect(addIconTheme.color, const Color(0xFFFFFFFF));
+    expect(addIconTheme.color, expectedForeground);
     expect(tester.getSize(addTextFinder).width, greaterThan(0));
     expect(tester.getSize(addTextFinder).width, greaterThanOrEqualTo(46));
-    expect(tester.getSize(buttonFinder).width, greaterThanOrEqualTo(118));
+    expect(tester.getSize(buttonFinder).width, greaterThanOrEqualTo(84));
   });
 
   testWidgets('catalog destination add button keeps visible foreground',
@@ -300,10 +302,12 @@ void main() {
     );
     final addTextStyle = tester.widget<Text>(addTextFinder).style!;
     final addIconTheme = IconTheme.of(tester.element(addIconFinder));
+    final expectedForeground =
+        Theme.of(tester.element(buttonFinder)).colorScheme.primary;
 
-    expect(addTextStyle.color, const Color(0xFFFFFFFF));
+    expect(addTextStyle.color, expectedForeground);
     expect(addTextStyle.shadows, isEmpty);
-    expect(addIconTheme.color, const Color(0xFFFFFFFF));
+    expect(addIconTheme.color, expectedForeground);
     expect(tester.getSize(addTextFinder).width, greaterThanOrEqualTo(116));
   });
 
@@ -362,10 +366,12 @@ void main() {
     );
     final addTextStyle = tester.widget<Text>(addTextFinder).style!;
     final addIconTheme = IconTheme.of(tester.element(addIconFinder));
+    final expectedForeground =
+        Theme.of(tester.element(buttonFinder)).colorScheme.primary;
 
-    expect(addTextStyle.color, const Color(0xFFFFFFFF));
+    expect(addTextStyle.color, expectedForeground);
     expect(addTextStyle.fontFamilyFallback, contains('Malgun Gothic'));
-    expect(addIconTheme.color, const Color(0xFFFFFFFF));
+    expect(addIconTheme.color, expectedForeground);
     expect(tester.getSize(addTextFinder).width, greaterThanOrEqualTo(78));
   });
 

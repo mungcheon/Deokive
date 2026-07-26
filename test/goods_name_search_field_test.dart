@@ -44,7 +44,7 @@ void main() {
     final addTextFinder = find.text('추가하기');
     final addTextStyle = tester.widget<Text>(addTextFinder).style!;
 
-    expect(addTextStyle.color, const Color(0xFFFFFFFF));
+    expect(addTextStyle.color, ThemeData().colorScheme.primary);
     expect(addTextStyle.shadows, isEmpty);
     expect(tester.getSize(addTextFinder).width, greaterThanOrEqualTo(46));
   });

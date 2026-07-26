@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import '../models/goods_catalog_entry.dart';
 import 'catalog_entry_image.dart';
 
-const _catalogPickerActionBackground = Color(0xFF252938);
-const _catalogPickerActionForeground = Color(0xFFFFFFFF);
-
 /// Goods-name input that opens a catalog picker dialog when tapped.
 /// Selecting a row fills the form from the read-only public DB.
 class GoodsNameSearchField extends StatefulWidget {
@@ -408,23 +405,29 @@ class _CatalogPickerActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final background = colorScheme.primary.withValues(alpha: 0.10);
+    final foreground = colorScheme.primary;
     return ConstrainedBox(
-      constraints: const BoxConstraints(minWidth: 104, minHeight: 34),
+      constraints: const BoxConstraints(minWidth: 86, minHeight: 32),
       child: Material(
-        color: _catalogPickerActionBackground,
-        elevation: 2,
-        shadowColor: _catalogPickerActionBackground.withValues(alpha: 0.22),
+        color: background,
+        elevation: 0,
+        shadowColor: Colors.transparent,
         shape: const StadiumBorder(),
         clipBehavior: Clip.antiAlias,
         child: InkWell(
+          overlayColor: WidgetStatePropertyAll(
+            colorScheme.primary.withValues(alpha: 0.10),
+          ),
           onTap: onPressed,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
             child: IconTheme(
-              data: const IconThemeData(color: _catalogPickerActionForeground),
+              data: IconThemeData(color: foreground),
               child: DefaultTextStyle(
-                style: const TextStyle(
-                  color: _catalogPickerActionForeground,
+                style: TextStyle(
+                  color: foreground,
                   fontSize: 12,
                   fontWeight: FontWeight.w900,
                   height: 1,
@@ -446,8 +449,8 @@ class _CatalogPickerActionButton extends StatelessWidget {
                           maxLines: 1,
                           overflow: TextOverflow.visible,
                           softWrap: false,
-                          style: const TextStyle(
-                            color: _catalogPickerActionForeground,
+                          style: TextStyle(
+                            color: foreground,
                             fontSize: 12,
                             fontWeight: FontWeight.w900,
                             height: 1,
