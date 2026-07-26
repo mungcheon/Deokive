@@ -587,63 +587,53 @@ class _CatalogAddButton extends StatelessWidget {
     return SizedBox(
       height: 40,
       width: expanded ? double.infinity : 118,
-      child: Material(
-        color: background,
-        elevation: disabled ? 0 : 5,
-        shadowColor: _catalogAddButtonBackground.withValues(alpha: 0.34),
-        shape: const StadiumBorder(),
-        clipBehavior: Clip.antiAlias,
-        child: InkWell(
-          onTap: disabled || onPressed == null ? null : () => onPressed!(),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: expanded ? 16 : 10),
-            child: IconTheme(
-              data: IconThemeData(color: foreground),
-              child: DefaultTextStyle(
-                style: TextStyle(
-                  color: foreground,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w900,
-                  height: 1,
-                  letterSpacing: 0,
-                  fontFamilyFallback: const [
-                    'Malgun Gothic',
-                    'Apple SD Gothic Neo',
-                  ],
-                  shadows: const [],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(icon, size: 17),
-                    const SizedBox(width: 6),
-                    Flexible(
-                      child: FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(
-                          label,
-                          maxLines: 1,
-                          overflow: TextOverflow.visible,
-                          softWrap: false,
-                          style: TextStyle(
-                            color: foreground,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w900,
-                            height: 1,
-                            letterSpacing: 0,
-                            fontFamilyFallback: const [
-                              'Malgun Gothic',
-                              'Apple SD Gothic Neo',
-                            ],
-                            shadows: const [],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+      child: ElevatedButton.icon(
+        onPressed: disabled || onPressed == null ? null : () => onPressed!(),
+        icon: Icon(icon, size: 17),
+        label: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            label,
+            maxLines: 1,
+            overflow: TextOverflow.visible,
+            softWrap: false,
+            style: TextStyle(
+              color: foreground,
+              fontSize: 13,
+              fontWeight: FontWeight.w900,
+              height: 1,
+              letterSpacing: 0,
+              fontFamilyFallback: const [
+                'Malgun Gothic',
+                'Apple SD Gothic Neo',
+              ],
+              shadows: const [],
             ),
+          ),
+        ),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: background,
+          foregroundColor: foreground,
+          disabledBackgroundColor: _catalogAddButtonDisabledBackground,
+          disabledForegroundColor: _catalogAddButtonDisabledForeground,
+          elevation: disabled ? 0 : 5,
+          shadowColor: _catalogAddButtonBackground.withValues(alpha: 0.34),
+          padding: EdgeInsets.symmetric(horizontal: expanded ? 16 : 10),
+          shape: const StadiumBorder(),
+          textStyle: const TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w900,
+            height: 1,
+            letterSpacing: 0,
+            fontFamilyFallback: [
+              'Malgun Gothic',
+              'Apple SD Gothic Neo',
+            ],
+            shadows: [],
+          ),
+        ).copyWith(
+          overlayColor: WidgetStatePropertyAll(
+            foreground.withValues(alpha: disabled ? 0 : 0.10),
           ),
         ),
       ),
