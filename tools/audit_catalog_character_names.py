@@ -33,6 +33,13 @@ ICHIBAN_PRIZE_LABEL_EXACT = {
 }
 
 CHARACTER_MOJIBAKE_OR_ALIAS_FINDINGS = {
+    "\ud380": {
+        "expected": "\ud398\ub978",
+        "fields": ("character_name", "affiliation", "name_ko"),
+        "reason": "likely_korean_frieren_character_typo",
+        "affiliation_scope": "\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c",
+        "match": "contains",
+    },
     "\ud38c": {
         "expected": "\ud398\ub978",
         "fields": ("character_name", "affiliation", "name_ko"),
@@ -122,6 +129,7 @@ def is_ichiban_row(row: dict[str, Any]) -> bool:
 def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
     character_alias_violations: list[dict[str, Any]] = []
     ichiban_display_name_violations: list[dict[str, Any]] = []
+    ichiban_display_character_mismatches: list[dict[str, Any]] = []
     ichiban_product_character_violations: list[dict[str, Any]] = []
     ichiban_multi_character_product_review_candidates: list[dict[str, Any]] = []
     zero_price_violations: list[dict[str, Any]] = []
@@ -157,6 +165,7 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
         parts = [part.strip() for part in name_ko.split(" / ")]
         prize_label = parts[1] if len(parts) > 1 else ""
         product_name = parts[2] if len(parts) > 2 else name_ko
+        display_character_name = parts[3] if len(parts) > 3 else ""
         valid_prize_label = prize_label.endswith(ICHIBAN_PRIZE_LABEL_SUFFIXES) or prize_label in ICHIBAN_PRIZE_LABEL_EXACT
         if len(parts) != 4 or ICHIBAN_PREFIX not in parts[0] or not valid_prize_label:
             ichiban_display_name_violations.append(
@@ -170,6 +179,18 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
                 }
             )
         character_name = str(row.get("character_name") or "")
+        if len(parts) == 4 and character_name and display_character_name != character_name:
+            ichiban_display_character_mismatches.append(
+                {
+                    "catalog_index": catalog_index,
+                    "name_ko": row.get("name_ko"),
+                    "series_name": row.get("series_name"),
+                    "sub_series": row.get("sub_series"),
+                    "display_character_name": display_character_name,
+                    "character_name": row.get("character_name"),
+                    "reason": "display_character_name_must_match_character_name_field",
+                }
+            )
         matched_product_characters = []
         for japanese_token, expected_character in ICHIBAN_PRODUCT_CHARACTER_TOKENS:
             if product_token_matches(product_name, japanese_token):
@@ -231,6 +252,7 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
     findings = (
         len(character_alias_violations)
         + len(ichiban_display_name_violations)
+        + len(ichiban_display_character_mismatches)
         + len(ichiban_product_character_violations)
         + len(zero_price_violations)
     )
@@ -243,6 +265,7 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
             "ichiban_rows": sum(1 for row in rows if is_ichiban_row(row)),
             "character_alias_violations": len(character_alias_violations),
             "ichiban_display_name_violations": len(ichiban_display_name_violations),
+            "ichiban_display_character_mismatches": len(ichiban_display_character_mismatches),
             "ichiban_product_character_violations": len(ichiban_product_character_violations),
             "ichiban_multi_character_product_review_candidates": len(
                 ichiban_multi_character_product_review_candidates
@@ -263,6 +286,7 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
         },
         "character_alias_violations": character_alias_violations,
         "ichiban_display_name_violations": ichiban_display_name_violations,
+        "ichiban_display_character_mismatches": ichiban_display_character_mismatches,
         "ichiban_product_character_violations": ichiban_product_character_violations,
         "ichiban_multi_character_product_review_candidates": ichiban_multi_character_product_review_candidates,
         "zero_price_violations": zero_price_violations,

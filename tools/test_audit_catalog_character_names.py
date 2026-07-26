@@ -47,7 +47,7 @@ class AuditCatalogCharacterNamesTest(unittest.TestCase):
             },
             {
                 "catalog_index": 5,
-                "name_ko": "\u4e00\u756a\u304f\u3058 \u30ef\u30f3\u30d4\u30fc\u30b9 / \u306c\u3044\u3050\u308b\u307f / \u30c1\u30e7\u30c3\u30d1\u30fc\u306c\u3044\u3050\u308b\u307f / \u30c8\u30cb\u30fc\u30c8\u30cb\u30fc \u30c1\u30e7\u30c3\u30d1\u30fc",
+                "name_ko": "\u4e00\u756a\u304f\u3058 \u30ef\u30f3\u30d4\u30fc\u30b9 / \u306c\u3044\u3050\u308b\u307f / \u30c1\u30e7\u30c3\u30d1\u30fc\u306c\u3044\u3050\u308b\u307f / \ud1a0\ub2c8\ud1a0\ub2c8 \ucd78\ud30c",
                 "series_name": "\u4e00\u756a\u304f\u3058 \u30ef\u30f3\u30d4\u30fc\u30b9",
                 "sub_series": "\u306c\u3044\u3050\u308b\u307f",
                 "character_name": "\ud1a0\ub2c8\ud1a0\ub2c8 \ucd78\ud30c",
@@ -60,6 +60,7 @@ class AuditCatalogCharacterNamesTest(unittest.TestCase):
         self.assertEqual(result["summary"]["status"], "pass")
         self.assertEqual(result["summary"]["findings"], 0)
         self.assertEqual(result["summary"]["ichiban_product_character_violations"], 0)
+        self.assertEqual(result["summary"]["ichiban_display_character_mismatches"], 0)
 
     def test_reports_character_alias_display_name_and_zero_price_violations(self) -> None:
         rows = [
@@ -79,8 +80,38 @@ class AuditCatalogCharacterNamesTest(unittest.TestCase):
         self.assertEqual(result["summary"]["status"], "needs_review")
         self.assertEqual(result["summary"]["character_alias_violations"], 3)
         self.assertEqual(result["summary"]["ichiban_display_name_violations"], 1)
+        self.assertEqual(result["summary"]["ichiban_display_character_mismatches"], 0)
         self.assertEqual(result["summary"]["ichiban_product_character_violations"], 1)
         self.assertEqual(result["summary"]["zero_price_violations"], 1)
+
+    def test_reports_frieren_pun_typo_and_display_character_mismatch(self) -> None:
+        rows = [
+            {
+                "catalog_index": 4,
+                "name_ko": "\u4e00\u756a\u304f\u3058 \u846c\u9001\u306e\u30d5\u30ea\u30fc\u30ec\u30f3 / C\u8cde / \u63cf\u304d\u304a\u308d\u3057\u30d5\u30a7\u30eb\u30f3\u306e\u30d6\u30e9\u30f3\u30b1\u30c3\u30c8 / \ud38c",
+                "series_name": "\u4e00\u756a\u304f\u3058 \u846c\u9001\u306e\u30d5\u30ea\u30fc\u30ec\u30f3",
+                "sub_series": "C\u8cde",
+                "character_name": "\ud398\ub978",
+                "affiliation": "\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c",
+                "official_price_jpy": 860,
+            },
+            {
+                "catalog_index": 5,
+                "name_ko": "\ud380 \uad7f\uc988",
+                "character_name": "\ud380",
+                "affiliation": "\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c",
+            },
+        ]
+
+        result = audit(rows)
+
+        self.assertEqual(result["summary"]["status"], "needs_review")
+        self.assertEqual(result["summary"]["character_alias_violations"], 3)
+        self.assertEqual(result["summary"]["ichiban_display_character_mismatches"], 1)
+        self.assertEqual(
+            result["ichiban_display_character_mismatches"][0]["display_character_name"],
+            "\ud38c",
+        )
 
     def test_reports_ichiban_product_character_mismatch_with_longest_token_priority(self) -> None:
         rows = [

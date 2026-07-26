@@ -1,12 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-26T21:23:35Z",
+  "generated_at": "2026-07-26T21:47:50Z",
   "scope": "catalog_character_name_policy",
   "summary": {
     "rows": 20313,
     "ichiban_rows": 7887,
     "character_alias_violations": 0,
     "ichiban_display_name_violations": 0,
+    "ichiban_display_character_mismatches": 0,
     "ichiban_product_character_violations": 0,
     "ichiban_multi_character_product_review_candidates": 18,
     "zero_price_violations": 0,
@@ -15,6 +16,17 @@
   },
   "policy": {
     "character_name_aliases": {
+      "펀": {
+        "expected": "페른",
+        "fields": [
+          "character_name",
+          "affiliation",
+          "name_ko"
+        ],
+        "reason": "likely_korean_frieren_character_typo",
+        "affiliation_scope": "장송의 프리렌",
+        "match": "contains"
+      },
       "펌": {
         "expected": "페른",
         "fields": [
@@ -161,6 +173,7 @@
   },
   "character_alias_violations": [],
   "ichiban_display_name_violations": [],
+  "ichiban_display_character_mismatches": [],
   "ichiban_product_character_violations": [],
   "ichiban_multi_character_product_review_candidates": [
     {
