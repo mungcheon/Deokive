@@ -151,6 +151,53 @@ class AuditCatalogNamingPublicTest(unittest.TestCase):
             report["ichiban_exact_display_duplicate_review"][0]["catalog_indexes"],
             [10, 11],
         )
+        self.assertEqual(
+            report["ichiban_exact_display_duplicate_review"][0]["review_lane"],
+            "same_slug_family_reissue_review",
+        )
+        self.assertEqual(
+            report["summary"]["ichiban_exact_display_duplicate_review_by_lane"],
+            [["same_slug_family_reissue_review", 1]],
+        )
+
+    def test_duplicate_review_classifies_same_source_and_cross_campaign_groups(self) -> None:
+        base = {
+            "name_ko": "\u4e00\u756a\u304f\u3058 TEST / A\u8cde / \u30d5\u30a3\u30ae\u30e5\u30a2 / \uae30\ud0c0",
+            "source_store": "\uc774\uce58\ubc29\ucfe0\uc9c0",
+            "sub_series": "A\u8cde",
+            "character_name": "\uae30\ud0c0",
+            "official_price_jpy": 700,
+            "image_url": "https://assets.1kuji.com/a.jpg",
+            "local_image_path": "assets/catalog_images/a.webp",
+        }
+        same_source_rows = [
+            {**base, "catalog_index": 20, "source_url": "https://1kuji.com/products/test"},
+            {**base, "catalog_index": 21, "source_url": "https://1kuji.com/products/test"},
+        ]
+        cross_campaign_rows = [
+            {
+                **base,
+                "catalog_index": 30,
+                "name_ko": "\u4e00\u756a\u304f\u3058 TEST2 / A\u8cde / \u30d5\u30a3\u30ae\u30e5\u30a2 / \uae30\ud0c0",
+                "source_url": "https://1kuji.com/products/alpha",
+            },
+            {
+                **base,
+                "catalog_index": 31,
+                "name_ko": "\u4e00\u756a\u304f\u3058 TEST2 / A\u8cde / \u30d5\u30a3\u30ae\u30e5\u30a2 / \uae30\ud0c0",
+                "source_url": "https://1kuji.com/products/beta",
+            },
+        ]
+
+        report = audit.build_report(same_source_rows + cross_campaign_rows, generated_at="2026-07-27T00:00:00Z")
+        lanes = {group["catalog_indexes"][0]: group for group in report["ichiban_exact_display_duplicate_review"]}
+
+        self.assertEqual(lanes[20]["review_lane"], "same_source_url_exact_duplicate_review")
+        self.assertTrue(lanes[20]["same_source_url"])
+        self.assertTrue(lanes[20]["same_image_url"])
+        self.assertEqual(lanes[30]["review_lane"], "cross_campaign_exact_display_review")
+        self.assertFalse(lanes[30]["same_slug_family"])
+        self.assertEqual(len(lanes[20]["rows"]), 2)
 
 
 if __name__ == "__main__":

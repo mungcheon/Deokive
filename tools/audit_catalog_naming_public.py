@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
@@ -158,7 +159,7 @@ def audit_ichiban_names(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
 def _ichiban_display_key(row: dict[str, Any]) -> tuple[str, str, str, str] | None:
     if not is_ichiban_row(row):
         return None
-    parts = [part.strip() for part in str(row.get("name_ko") or "").split("/")]
+    parts = [part.strip() for part in str(row.get("name_ko") or "").split(" / ")]
     if len(parts) < 4:
         return None
 
@@ -179,6 +180,62 @@ def _ichiban_display_key(row: dict[str, Any]) -> tuple[str, str, str, str] | Non
     return (release_name, prize_rank, item_name, character_part)
 
 
+def _source_slug(value: str) -> str:
+    normalized = value.rstrip("/")
+    return normalized.rsplit("/", 1)[-1]
+
+
+def _source_slug_family(value: str) -> str:
+    return re.sub(r"\d+$", "", _source_slug(value))
+
+
+def _duplicate_row_summary(row: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "catalog_index": row.get("catalog_index"),
+        "source_url": row.get("source_url"),
+        "source_slug": _source_slug(str(row.get("source_url") or "")),
+        "image_url": row.get("image_url"),
+        "local_image_path": row.get("local_image_path"),
+        "official_price_jpy": row.get("official_price_jpy"),
+        "release_date": row.get("release_date"),
+    }
+
+
+def classify_ichiban_duplicate_group(group_rows: list[dict[str, Any]]) -> dict[str, Any]:
+    source_urls = sorted({str(row.get("source_url") or "") for row in group_rows if row.get("source_url")})
+    image_urls = sorted({str(row.get("image_url") or "") for row in group_rows if row.get("image_url")})
+    local_image_paths = sorted(
+        {str(row.get("local_image_path") or "") for row in group_rows if row.get("local_image_path")}
+    )
+    source_slug_families = sorted({_source_slug_family(url) for url in source_urls if _source_slug_family(url)})
+    same_source_url = len(source_urls) <= 1
+    same_slug_family = len(source_slug_families) == 1 and len(source_urls) > 1
+    same_image_url = len(image_urls) == 1 and len(group_rows) > 1
+    same_local_image = len(local_image_paths) == 1 and len(group_rows) > 1
+
+    if same_source_url:
+        review_lane = "same_source_url_exact_duplicate_review"
+        recommended_action = "Review rows as possible exact duplicates from the same campaign source before keeping one."
+    elif same_slug_family:
+        review_lane = "same_slug_family_reissue_review"
+        recommended_action = "Review campaign pages first; numbered slug families are often reissues or campaign waves."
+    else:
+        review_lane = "cross_campaign_exact_display_review"
+        recommended_action = (
+            "Review official source pages before deciding whether these are duplicate rows or separate releases."
+        )
+
+    return {
+        "review_lane": review_lane,
+        "recommended_action": recommended_action,
+        "source_slug_families": source_slug_families,
+        "same_source_url": same_source_url,
+        "same_slug_family": same_slug_family,
+        "same_image_url": same_image_url,
+        "same_local_image": same_local_image,
+    }
+
+
 def build_ichiban_exact_display_duplicate_review(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     grouped: dict[tuple[str, str, str, str], list[dict[str, Any]]] = defaultdict(list)
     for row in rows:
@@ -196,15 +253,21 @@ def build_ichiban_exact_display_duplicate_review(rows: list[dict[str, Any]]) -> 
         if len(unique_catalog_indexes) < 2:
             continue
         unique_source_urls = sorted({str(row.get("source_url") or "") for row in group_rows if row.get("source_url")})
+        classification = classify_ichiban_duplicate_group(group_rows)
         review_groups.append(
             {
                 "reason": "ichiban_exact_display_duplicate_review",
+                **classification,
                 "release_name": key[0],
                 "prize_rank": key[1],
                 "item_name": key[2],
                 "character_name": key[3],
                 "catalog_indexes": sorted(unique_catalog_indexes),
                 "source_urls": unique_source_urls,
+                "rows": [
+                    _duplicate_row_summary(row)
+                    for row in sorted(group_rows, key=lambda item: item["catalog_index"])
+                ],
                 "review_note": (
                     "Repeated display names can be true reissues, campaign-page duplicates, or rows that need "
                     "official character/variant splitting. Review source URLs before deleting or merging."
@@ -222,6 +285,7 @@ def build_report(rows: list[dict[str, Any]], *, generated_at: str | None = None)
     duplicate_review_groups = build_ichiban_exact_display_duplicate_review(rows)
     issues = fern_issues + ichiban_issues
     by_reason = Counter(issue["reason"] for issue in issues)
+    duplicate_lanes = Counter(group["review_lane"] for group in duplicate_review_groups)
     return {
         "generated_at": generated_at or now_utc(),
         "summary": {
@@ -234,6 +298,9 @@ def build_report(rows: list[dict[str, Any]], *, generated_at: str | None = None)
             "ichiban_exact_display_duplicate_review_rows": sum(
                 len(item["catalog_indexes"]) for item in duplicate_review_groups
             ),
+            "ichiban_exact_display_duplicate_review_by_lane": [
+                [lane, count] for lane, count in sorted(duplicate_lanes.items())
+            ],
             "by_reason": [[reason, count] for reason, count in sorted(by_reason.items())],
             "status": "pass" if not issues else "needs_review",
             "auto_apply_enabled": False,
