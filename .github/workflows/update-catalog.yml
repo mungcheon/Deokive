@@ -37,6 +37,7 @@ jobs:
             tools.test_normalize_catalog_characters_and_ichiban \
             tools.test_build_ichiban_public_quality_queue \
             tools.test_build_image_enrichment_queue \
+            tools.test_build_image_update_work_packs \
             tools.test_sync_missing_image_work_queue_public
 
       - name: Publish 1-minute update notice
@@ -102,6 +103,7 @@ jobs:
           python tools/build_ichiban_public_quality_queue.py
           python tools/audit_catalog_character_names.py --write --fail-on-findings
           python tools/build_image_enrichment_queue.py
+          python tools/build_image_update_work_packs.py
           python tools/build_source_discovery_queue.py
           python tools/audit_public_catalog_image_assets.py --write
           python tools/sync_missing_image_work_queue_public.py --write

@@ -35,6 +35,8 @@ review material; they are not used directly by the app.
 Use `data/intake/image_updates/` when an agent found images for existing catalog
 rows. Those files update only `image_url` and, when supplied, `source_url`; they
 do not create new goods rows.
+Image work-pack drafts are generated under `server/image_update_work_packs/`;
+copy only confirmed results into `data/intake/image_updates/incoming/`.
 
 Do not add custom fields. The validator rejects unknown top-level, agent, item,
 and evidence keys so every agent run can be imported by the same pipeline.
