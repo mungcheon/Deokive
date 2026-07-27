@@ -14,6 +14,8 @@ class CatalogReportConsistencyAuditTests(unittest.TestCase):
         self.assertEqual(audit.DEFAULT_FIELD_QUEUE.name, "catalog_field_enrichment_queue_current.json")
         self.assertEqual(audit.DEFAULT_FIELD_BATCHES.name, "catalog_field_review_batches_current.json")
         self.assertEqual(audit.DEFAULT_IMAGE_QUEUE.name, "catalog_image_enrichment_queue_current.json")
+        self.assertEqual(audit.DEFAULT_FIELD_UPDATE_WORK_PACKS.parent.name, "field_update_work_packs")
+        self.assertEqual(audit.DEFAULT_WORK_PACK_COVERAGE_AUDIT.name, "catalog_work_pack_coverage_audit.json")
 
     def test_build_report_accepts_matching_counts(self) -> None:
         report = audit.build_report(
@@ -62,6 +64,22 @@ class CatalogReportConsistencyAuditTests(unittest.TestCase):
                 "target_rows": 2,
                 "packs": [{"rows": 2}],
             },
+            field_update_work_packs={
+                "pack_count": 2,
+                "target_rows": 3,
+                "packs": [{"rows": 1, "field": "source_url"}, {"rows": 2, "field": "source_url"}],
+            },
+            work_pack_coverage_audit={
+                "missing_enrichment": {"image_url": 2, "source_url": 3},
+                "image_coverage": {"missing": 2},
+                "image_work_packs": {"pack_count": 1, "target_rows": 2},
+                "field_update_work_packs": {
+                    "pack_count": 2,
+                    "target_rows": 3,
+                    "by_field": {"source_url": 3},
+                },
+                "field_coverage": {"source_url": {"missing": 3}},
+            },
         )
 
         self.assertTrue(report["ok"])
@@ -85,6 +103,58 @@ class CatalogReportConsistencyAuditTests(unittest.TestCase):
         names = {item["name"]: item["delta"] for item in report["failures"]}
         self.assertEqual(names["image_update_work_pack_count_matches_manifest"], -1)
         self.assertEqual(names["image_update_work_pack_rows_match_manifest"], -1)
+
+    def test_build_report_checks_field_update_work_pack_manifest(self) -> None:
+        report = audit.build_report(
+            {"rows": 5, "missing_enrichment": {"source_url": 5}},
+            {"missing_total": 5, "by_field": {"source_url": 5}},
+            {"queue_rows": 5},
+            {"missing_images": 0, "items": []},
+            {"missing_images": 0},
+            field_update_work_packs={
+                "pack_count": 3,
+                "target_rows": 4,
+                "packs": [{"rows": 1, "field": "source_url"}, {"rows": 2, "field": "source_url"}],
+            },
+        )
+
+        self.assertFalse(report["ok"])
+        names = {item["name"]: item["delta"] for item in report["failures"]}
+        self.assertEqual(names["field_update_work_pack_count_matches_manifest"], -1)
+        self.assertEqual(names["field_update_work_pack_rows_match_manifest"], -1)
+
+    def test_build_report_checks_work_pack_coverage_audit(self) -> None:
+        report = audit.build_report(
+            {"rows": 5, "missing_enrichment": {"image_url": 2, "source_url": 3}},
+            {"missing_total": 5, "by_field": {"image_url": 2, "source_url": 3}},
+            {"queue_rows": 5},
+            {"missing_images": 2, "items": []},
+            {"missing_images": 2},
+            image_update_work_packs={"pack_count": 1, "target_rows": 2, "packs": [{"rows": 2}]},
+            field_update_work_packs={
+                "pack_count": 1,
+                "target_rows": 3,
+                "packs": [{"rows": 3, "field": "source_url"}],
+            },
+            work_pack_coverage_audit={
+                "missing_enrichment": {"image_url": 1, "source_url": 2},
+                "image_coverage": {"missing": 1},
+                "image_work_packs": {"pack_count": 2, "target_rows": 1},
+                "field_update_work_packs": {
+                    "pack_count": 2,
+                    "target_rows": 2,
+                    "by_field": {"source_url": 2},
+                },
+                "field_coverage": {"source_url": {"missing": 2}},
+            },
+        )
+
+        self.assertFalse(report["ok"])
+        names = {item["name"]: item["delta"] for item in report["failures"]}
+        self.assertEqual(names["work_pack_coverage_missing_matches_quality:image_url"], -1)
+        self.assertEqual(names["work_pack_coverage_image_pack_count_matches_manifest"], 1)
+        self.assertEqual(names["work_pack_coverage_field_target_rows_matches_manifest"], -1)
+        self.assertEqual(names["work_pack_coverage_field_by_field_matches_packs:source_url"], -1)
 
     def test_build_report_reports_mismatch_delta(self) -> None:
         report = audit.build_report(

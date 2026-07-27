@@ -20,6 +20,8 @@ DEFAULT_IMAGE_BATCHES = ROOT / "server" / "catalog_image_review_batches.json"
 DEFAULT_IMAGE_BATCH_PLAN = ROOT / "server" / "catalog_image_enrichment_batch_plan.json"
 DEFAULT_IMAGE_PROVIDER_COVERAGE = ROOT / "server" / "catalog_image_provider_coverage_audit.json"
 DEFAULT_IMAGE_UPDATE_WORK_PACKS = ROOT / "server" / "image_update_work_packs" / "manifest.json"
+DEFAULT_FIELD_UPDATE_WORK_PACKS = ROOT / "server" / "field_update_work_packs" / "manifest.json"
+DEFAULT_WORK_PACK_COVERAGE_AUDIT = ROOT / "server" / "catalog_work_pack_coverage_audit.json"
 DEFAULT_SOURCE_DISCOVERY = ROOT / "server" / "catalog_source_discovery_queue.json"
 DEFAULT_STALE_SOURCE_CLEANUP = ROOT / "server" / "stale_source_cleanup_queue.json"
 DEFAULT_AGENT_IMAGE_CANDIDATES = ROOT / "server" / "agent_image_candidates_import_queue_current.json"
@@ -125,6 +127,23 @@ def _agent_candidate_checks(prefix: str, payload: dict[str, Any]) -> list[dict[s
     ]
 
 
+def _work_pack_manifest_checks(prefix: str, manifest: dict[str, Any]) -> list[dict[str, Any]]:
+    packs = [item for item in manifest.get("packs") or [] if isinstance(item, dict)]
+    pack_rows = sum(int(item.get("rows") or 0) for item in packs)
+    return [
+        {
+            "name": f"{prefix}_count_matches_manifest",
+            "expected": int(manifest.get("pack_count") or 0),
+            "actual": len(packs),
+        },
+        {
+            "name": f"{prefix}_rows_match_manifest",
+            "expected": int(manifest.get("target_rows") or 0),
+            "actual": pack_rows,
+        },
+    ]
+
+
 def _workflow(payload: dict[str, Any] | None, name: str) -> dict[str, Any]:
     if not payload:
         return {}
@@ -162,6 +181,8 @@ def build_report(
     ichiban_prize_structure: dict[str, Any] | None = None,
     goal_status: dict[str, Any] | None = None,
     image_update_work_packs: dict[str, Any] | None = None,
+    field_update_work_packs: dict[str, Any] | None = None,
+    work_pack_coverage_audit: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     quality_missing = {key: int(value) for key, value in (quality.get("missing_enrichment") or {}).items()}
     field_missing = _by_field_map(field_queue.get("by_field"))
@@ -205,22 +226,8 @@ def build_report(
             }
         )
     if image_update_work_packs:
-        packs = [item for item in image_update_work_packs.get("packs") or [] if isinstance(item, dict)]
-        pack_rows = sum(int(item.get("rows") or 0) for item in packs)
-        checks.append(
-            {
-                "name": "image_update_work_pack_count_matches_manifest",
-                "expected": int(image_update_work_packs.get("pack_count") or 0),
-                "actual": len(packs),
-            }
-        )
-        checks.append(
-            {
-                "name": "image_update_work_pack_rows_match_manifest",
-                "expected": int(image_update_work_packs.get("target_rows") or 0),
-                "actual": pack_rows,
-            }
-        )
+        checks.extend(_work_pack_manifest_checks("image_update_work_pack", image_update_work_packs))
+        pack_rows = int(image_update_work_packs.get("target_rows") or 0)
         checks.append(
             {
                 "name": "image_update_work_pack_rows_do_not_exceed_image_queue",
@@ -228,6 +235,82 @@ def build_report(
                 "actual": min(pack_rows, int(image_queue.get("missing_images") or 0)),
             }
         )
+    if field_update_work_packs:
+        checks.extend(_work_pack_manifest_checks("field_update_work_pack", field_update_work_packs))
+        pack_rows = int(field_update_work_packs.get("target_rows") or 0)
+        checks.append(
+            {
+                "name": "field_update_work_pack_rows_do_not_exceed_field_queue",
+                "expected": pack_rows,
+                "actual": min(pack_rows, int(field_queue.get("missing_total") or 0)),
+            }
+        )
+    if work_pack_coverage_audit:
+        for field, expected in sorted(quality_missing.items()):
+            _append_check(
+                checks,
+                f"work_pack_coverage_missing_matches_quality:{field}",
+                expected,
+                (work_pack_coverage_audit.get("missing_enrichment") or {}).get(field),
+            )
+        image_coverage = work_pack_coverage_audit.get("image_coverage") or {}
+        coverage_image_work_packs = work_pack_coverage_audit.get("image_work_packs") or {}
+        _append_check(
+            checks,
+            "work_pack_coverage_image_missing_matches_quality",
+            quality_missing.get("image_url"),
+            image_coverage.get("missing"),
+        )
+        if image_update_work_packs:
+            _append_check(
+                checks,
+                "work_pack_coverage_image_pack_count_matches_manifest",
+                image_update_work_packs.get("pack_count"),
+                coverage_image_work_packs.get("pack_count"),
+            )
+            _append_check(
+                checks,
+                "work_pack_coverage_image_target_rows_matches_manifest",
+                image_update_work_packs.get("target_rows"),
+                coverage_image_work_packs.get("target_rows"),
+            )
+        coverage_field_work_packs = work_pack_coverage_audit.get("field_update_work_packs") or {}
+        coverage_field_by_field = _by_field_map(coverage_field_work_packs.get("by_field"))
+        if field_update_work_packs:
+            _append_check(
+                checks,
+                "work_pack_coverage_field_pack_count_matches_manifest",
+                field_update_work_packs.get("pack_count"),
+                coverage_field_work_packs.get("pack_count"),
+            )
+            _append_check(
+                checks,
+                "work_pack_coverage_field_target_rows_matches_manifest",
+                field_update_work_packs.get("target_rows"),
+                coverage_field_work_packs.get("target_rows"),
+            )
+            field_pack_by_field: dict[str, int] = {}
+            for item in field_update_work_packs.get("packs") or []:
+                if not isinstance(item, dict):
+                    continue
+                field = str(item.get("field") or "")
+                if field:
+                    field_pack_by_field[field] = field_pack_by_field.get(field, 0) + int(item.get("rows") or 0)
+            for field, expected in sorted(field_pack_by_field.items()):
+                _append_check(
+                    checks,
+                    f"work_pack_coverage_field_by_field_matches_packs:{field}",
+                    expected,
+                    coverage_field_by_field.get(field),
+                )
+        for field, field_coverage in sorted((work_pack_coverage_audit.get("field_coverage") or {}).items()):
+            if isinstance(field_coverage, dict):
+                _append_check(
+                    checks,
+                    f"work_pack_coverage_field_missing_matches_quality:{field}",
+                    quality_missing.get(str(field)),
+                    field_coverage.get("missing"),
+                )
     if source_discovery:
         stale_indexes: set[int] = set()
         if stale_source_cleanup:
@@ -694,6 +777,8 @@ def main() -> int:
     parser.add_argument("--image-batch-plan", type=Path, default=DEFAULT_IMAGE_BATCH_PLAN)
     parser.add_argument("--image-provider-coverage", type=Path, default=DEFAULT_IMAGE_PROVIDER_COVERAGE)
     parser.add_argument("--image-update-work-packs", type=Path, default=DEFAULT_IMAGE_UPDATE_WORK_PACKS)
+    parser.add_argument("--field-update-work-packs", type=Path, default=DEFAULT_FIELD_UPDATE_WORK_PACKS)
+    parser.add_argument("--work-pack-coverage-audit", type=Path, default=DEFAULT_WORK_PACK_COVERAGE_AUDIT)
     parser.add_argument("--source-discovery", type=Path, default=DEFAULT_SOURCE_DISCOVERY)
     parser.add_argument("--stale-source-cleanup", type=Path, default=DEFAULT_STALE_SOURCE_CLEANUP)
     parser.add_argument("--agent-image-candidates", type=Path, default=DEFAULT_AGENT_IMAGE_CANDIDATES)
@@ -825,6 +910,12 @@ def main() -> int:
         None if args.core_only else _read_json(args.goal_status) if args.goal_status.exists() else None,
         image_update_work_packs=_read_json(args.image_update_work_packs)
         if args.image_update_work_packs.exists()
+        else None,
+        field_update_work_packs=_read_json(args.field_update_work_packs)
+        if args.field_update_work_packs.exists()
+        else None,
+        work_pack_coverage_audit=_read_json(args.work_pack_coverage_audit)
+        if args.work_pack_coverage_audit.exists()
         else None,
     )
     args.json_output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
