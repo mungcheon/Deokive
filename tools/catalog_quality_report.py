@@ -343,11 +343,13 @@ def build_ichiban_summary(
         "campaign_count": len(campaign_urls),
         "seeded_campaign_url_count": len(seeded_campaign_urls),
         "campaign_gap_count": len(missing_campaign_urls),
+        "campaign_gap_urls": missing_campaign_urls,
         "campaign_gap_sample": missing_campaign_urls[:20],
         "exact_display_duplicate_review_groups": len(duplicate_display_groups),
         "exact_display_duplicate_review_rows": sum(
             int(group["rows"]) for group in duplicate_display_groups
         ),
+        "exact_display_duplicate_review": duplicate_display_groups,
         "exact_display_duplicate_review_sample": duplicate_display_groups[:20],
         "zero_price_exception_rows": len(zero_price_exception_rows),
         "zero_price_non_exception_rows": len(zero_price_non_exception_rows),

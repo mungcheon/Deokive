@@ -76,8 +76,10 @@ class CatalogQualityReportTests(unittest.TestCase):
         self.assertEqual(2, summary["campaign_count"])
         self.assertEqual(1, summary["seeded_campaign_url_count"])
         self.assertEqual(1, summary["campaign_gap_count"])
+        self.assertEqual(["https://1kuji.com/products/missing"], summary["campaign_gap_urls"])
         self.assertEqual(1, summary["exact_display_duplicate_review_groups"])
         self.assertEqual(2, summary["exact_display_duplicate_review_rows"])
+        self.assertEqual(1, len(summary["exact_display_duplicate_review"]))
         self.assertEqual(1, summary["zero_price_exception_rows"])
         self.assertEqual(1, summary["zero_price_non_exception_rows"])
 
