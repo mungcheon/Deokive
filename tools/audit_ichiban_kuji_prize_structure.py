@@ -15,7 +15,7 @@ except Exception:
     pass
 
 ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_SEED = ROOT / "server" / "catalog_seed_from_local.json"
+DEFAULT_CATALOG = ROOT / "data" / "catalog_public.json"
 DEFAULT_CAMPAIGNS = ROOT / "data" / "ichiban_kuji_campaigns.json"
 DEFAULT_JSON_REPORT = ROOT / "server" / "ichiban_kuji_prize_structure_audit.json"
 DEFAULT_MD_REPORT = ROOT / "server" / "ichiban_kuji_prize_structure_audit.md"
@@ -48,14 +48,14 @@ GENERIC_CHARACTER_LABELS = {"", "\uae30\ud0c0", "\ud63c\ud569"}
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--seed", type=Path, default=DEFAULT_SEED)
+    parser.add_argument("--catalog", "--seed", dest="catalog", type=Path, default=DEFAULT_CATALOG)
     parser.add_argument("--campaigns", type=Path, default=DEFAULT_CAMPAIGNS)
     parser.add_argument("--archive", type=Path, default=DEFAULT_ARCHIVE)
     parser.add_argument("--json-report", type=Path, default=DEFAULT_JSON_REPORT)
     parser.add_argument("--md-report", type=Path, default=DEFAULT_MD_REPORT)
     args = parser.parse_args()
 
-    rows = _read_json_list(args.seed)
+    rows = _read_catalog_rows(args.catalog)
     campaigns = _read_json_list(args.campaigns)
 
     prize_rows = [
@@ -131,7 +131,7 @@ def main() -> int:
 
     campaign_without_seed_rows = sorted(campaign_urls - seeded_urls)
     report = {
-        "seed": str(args.seed),
+        "catalog": str(args.catalog),
         "campaigns": str(args.campaigns),
         "archive": str(args.archive),
         "campaign_count": len(campaign_urls),
@@ -187,6 +187,14 @@ def _read_json_list(path: Path) -> list[Any]:
     return payload
 
 
+def _read_catalog_rows(path: Path) -> list[dict[str, Any]]:
+    payload = json.loads(path.read_text(encoding="utf-8-sig"))
+    rows = payload.get("items") if isinstance(payload, dict) else payload
+    if not isinstance(rows, list):
+        raise SystemExit(f"{path} must contain a JSON list or an object with items")
+    return [row for row in rows if isinstance(row, dict)]
+
+
 def _normalize_url(value: str) -> str:
     return value.strip().rstrip("/")
 
@@ -238,9 +246,9 @@ def _markdown_report(report: dict[str, Any]) -> str:
         "# Ichiban Kuji prize structure audit",
         "",
         f"- Campaigns discovered: {report['campaign_count']}",
-        f"- Campaign URLs represented in seed: {report['seeded_campaign_url_count']}",
+        f"- Campaign URLs represented in catalog: {report['seeded_campaign_url_count']}",
         f"- Archive file: {report['archive']}",
-        f"- Campaign URLs without seed rows: {report['campaign_without_seed_rows_count']}",
+        f"- Campaign URLs without catalog rows: {report['campaign_without_seed_rows_count']}",
         f"- Prize rows: {report['prize_rows']}",
         f"- Rows missing sub_series: {report['missing_sub_series_rows']}",
         f"- Rows with safely inferred sub_series candidate: {report['fillable_sub_series_rows']}",
@@ -255,7 +263,7 @@ def _markdown_report(report: dict[str, Any]) -> str:
     lines.append("- Apply only `fillable_sub_series_sample` rows after reviewing exact name_ja tier extraction.")
     lines.append("- Split rows in `under_split_prize_review_candidates` only after confirming character variants on the official campaign page.")
     lines.append("- Keep `manual_sub_series_sample` out of automatic writes until product-page structure is confirmed.")
-    lines.append("- Treat campaign URLs without seed rows as an extraction/404 review queue, not as generated seed rows.")
+    lines.append("- Treat campaign URLs without catalog rows as an extraction/404 review queue, not as generated rows.")
     lines.append("")
     return "\n".join(lines)
 
