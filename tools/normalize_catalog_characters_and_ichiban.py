@@ -45,6 +45,7 @@ FRIEREN_KO_TO_JA = {value: key for key, value in FRIEREN_JA_TO_KO.items()}
 FRIEREN_SCOPED_ALIAS_RULES = {
     "펀": "페른",
     "펌": "페른",
+    "프렌": "페른",
     "Pern": "페른",
     "Fern": "페른",
     "후리렌": "프리렌",
@@ -240,6 +241,14 @@ ICHIBAN_CHARACTER_RULES: dict[str, list[tuple[str, str]]] = {
         ("藍染惣右介", "아이젠 소스케"),
         ("浦原喜助", "우라하라 키스케"),
     ],
+    "드래곤볼": [
+        ("悟空", "손오공"),
+        ("悟飯", "손오반"),
+        ("ベジータ", "베지터"),
+        ("トランクス", "트랭크스"),
+        ("ゴテンクス", "오천크스"),
+        ("ベジット", "베지트"),
+    ],
 }
 
 
@@ -391,7 +400,9 @@ def _normalize_ichiban_direct_character_rules(
             continue
         item_name = _prize_item_name(row)
         multi_marker_text = re.sub(r"（[^）]*）|\([^)]*\)", "", item_name)
-        if any(marker in multi_marker_text for marker in ("＆", "&", "、", "／", "/")):
+        if any(marker in multi_marker_text for marker in ("＆", "&", "、", "／", "/", "VS", "vs")):
+            continue
+        if "吸収" in item_name or "ザマス" in item_name:
             continue
         matches: list[str] = []
         for alias, character in rules:
