@@ -94,6 +94,13 @@ CHARACTER_MOJIBAKE_OR_ALIAS_FINDINGS = {
         "reason": "korean_character_spacing_alias",
         "match": "exact",
     },
+    "\uc5d0\ub178\uc2dc\ub9c8 \uc970\ucf54": {
+        "expected": "\uc5d0\ub178\uc2dc\ub9c8 \uc900\ucf54",
+        "fields": ("character_name", "name_ko"),
+        "reason": "likely_korean_danganronpa_character_typo",
+        "affiliation_scope": "\ub2e8\uac04\ub860\ud30c",
+        "match": "contains",
+    },
 }
 
 CHARACTER_ALIAS_MONITOR_TARGETS = {
@@ -116,6 +123,32 @@ CHARACTER_ALIAS_MONITOR_TARGETS = {
             "Fern": "\ud398\ub978",
             "\ud6c4\ub9ac\ub80c": "\ud504\ub9ac\ub80c",
             "\ud504\ub9ac\ub79c": "\ud504\ub9ac\ub80c",
+        },
+    },
+    "\ub2e8\uac04\ub860\ud30c": {
+        "canonical_characters": (
+            "\ub098\uc5d0\uae30 \ub9c8\ucf54\ud1a0",
+            "\ud0a4\ub9ac\uae30\ub9ac \ucfc4\ucf54",
+            "\uc5d0\ub178\uc2dc\ub9c8 \uc900\ucf54",
+            "\ud1a0\uac00\ubbf8 \ubc4c\ucfe0\uc57c",
+            "\uc774\uc2dc\ub9c8\ub8e8 \ud0a4\uc694\ud0c0\uce74",
+            "\ud788\ub098\ud0c0 \ud558\uc9c0\uba54",
+            "\ucf54\ub9c8\uc5d0\ub2e4 \ub098\uae30\ud1a0",
+            "\ub098\ub098\ubbf8 \uce58\uc544\ud0a4",
+            "\uc0ac\uc774\uc628\uc9c0 \ud788\uc694\ucf54",
+            "\uce20\ubbf8\ud0a4 \ubbf8\uce78",
+            "\uc0ac\uc774\ud558\ub77c \uc288\uc774\uce58",
+            "\uc624\uc6b0\ub9c8 \ucf54\ud0a4\uce58",
+            "\uc544\uce74\ub9c8\uce20 \uce74\uc5d0\ub370",
+            "\ubaa8\ubaa8\ud0c0 \uce74\uc774\ud1a0",
+            "\uc544\ub9c8\ubbf8 \ub780\ud0c0\ub85c",
+            "\uc774\ub8e8\ub9c8 \ubbf8\uc6b0",
+            "\ubaa8\ub178\ucfe0\ub9c8",
+            "\ud63c\ud569",
+            "\uae30\ud0c0",
+        ),
+        "watched_aliases": {
+            "\uc5d0\ub178\uc2dc\ub9c8 \uc970\ucf54": "\uc5d0\ub178\uc2dc\ub9c8 \uc900\ucf54",
         },
     }
 }

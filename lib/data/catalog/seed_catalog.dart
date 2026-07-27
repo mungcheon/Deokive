@@ -19817,10 +19817,10 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     sourceStore: '굿스마일컴퍼니',
   ),
   GoodsCatalogEntry(
-    nameKo: 'POP UP PARADE 에노시마 쥰코',
+    nameKo: 'POP UP PARADE 에노시마 준코',
     nameJa: 'POP UP PARADE 江ノ島盾子',
     category: '피규어',
-    characterName: '에노시마 쥰코',
+    characterName: '에노시마 준코',
     affiliation: '단간론파',
     subSeries: 'POP UP PARADE',
     officialPriceJpy: 4800,
