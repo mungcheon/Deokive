@@ -31,6 +31,8 @@ DEFAULT_BARCODE_APPLICABILITY = ROOT / "server" / "catalog_barcode_applicability
 DEFAULT_METADATA_APPLICABILITY = ROOT / "server" / "catalog_metadata_applicability_audit_current.json"
 DEFAULT_SOURCE_IMAGE_APPLICABILITY = ROOT / "server" / "catalog_source_image_applicability_audit_current.json"
 DEFAULT_IMAGE_REMAINING_AUDIT = ROOT / "server" / "catalog_remaining_image_enrichment_audit_current.json"
+DEFAULT_IMAGE_ASSET_AUDIT = ROOT / "server" / "catalog_image_asset_audit.json"
+DEFAULT_UPDATE_BACKLOG = ROOT / "server" / "catalog_update_backlog.json"
 DEFAULT_SOURCE_BOTTLENECKS = ROOT / "server" / "source_url_bottlenecks_current.json"
 DEFAULT_PRIZE_PROVIDER_FALLBACK = ROOT / "server" / "prize_provider_fallback_image_candidates_current.json"
 DEFAULT_FOCUS_MISSING_IMAGES = ROOT / "server" / "focus_missing_image_queue_current.json"
@@ -170,6 +172,8 @@ def build_report(
     metadata_applicability: dict[str, Any] | None = None,
     source_image_applicability: dict[str, Any] | None = None,
     image_remaining_audit: dict[str, Any] | None = None,
+    image_asset_audit: dict[str, Any] | None = None,
+    update_backlog: dict[str, Any] | None = None,
     source_bottlenecks: dict[str, Any] | None = None,
     prize_provider_fallback: dict[str, Any] | None = None,
     focus_missing_images: dict[str, Any] | None = None,
@@ -225,6 +229,43 @@ def build_report(
                 "actual": int(image_provider_coverage.get("missing_images") or 0),
             }
         )
+    if image_asset_audit:
+        asset_summary = image_asset_audit.get("summary") or {}
+        _append_check(
+            checks,
+            "image_asset_audit_missing_image_rows_match_image_queue",
+            image_queue.get("missing_images"),
+            asset_summary.get("missing_image_url_rows"),
+        )
+        _append_check(
+            checks,
+            "image_asset_audit_source_split_sums_to_missing_images",
+            asset_summary.get("missing_image_url_rows"),
+            int(asset_summary.get("missing_image_with_source_url_rows") or 0)
+            + int(asset_summary.get("missing_image_without_source_url_rows") or 0),
+        )
+    if update_backlog:
+        image_evidence = update_backlog.get("image_evidence_split") or {}
+        _append_check(
+            checks,
+            "update_backlog_image_evidence_missing_matches_image_queue",
+            image_queue.get("missing_images"),
+            image_evidence.get("missing_image_url_rows"),
+        )
+        if image_asset_audit:
+            asset_summary = image_asset_audit.get("summary") or {}
+            for key, asset_key in (
+                ("with_source_url_rows", "missing_image_with_source_url_rows"),
+                ("without_source_url_rows", "missing_image_without_source_url_rows"),
+                ("rows_ready_for_source_page_image_review", "rows_ready_for_source_page_image_review"),
+                ("rows_requiring_source_url_before_image_review", "rows_requiring_source_url_before_image_review"),
+            ):
+                _append_check(
+                    checks,
+                    f"update_backlog_image_evidence_matches_asset_audit:{key}",
+                    asset_summary.get(asset_key),
+                    image_evidence.get(key),
+                )
     if image_update_work_packs:
         checks.extend(_work_pack_manifest_checks("image_update_work_pack", image_update_work_packs))
         pack_rows = int(image_update_work_packs.get("target_rows") or 0)
@@ -788,6 +829,8 @@ def main() -> int:
     parser.add_argument("--metadata-applicability", type=Path, default=DEFAULT_METADATA_APPLICABILITY)
     parser.add_argument("--source-image-applicability", type=Path, default=DEFAULT_SOURCE_IMAGE_APPLICABILITY)
     parser.add_argument("--image-remaining-audit", type=Path, default=DEFAULT_IMAGE_REMAINING_AUDIT)
+    parser.add_argument("--image-asset-audit", type=Path, default=DEFAULT_IMAGE_ASSET_AUDIT)
+    parser.add_argument("--update-backlog", type=Path, default=DEFAULT_UPDATE_BACKLOG)
     parser.add_argument("--source-bottlenecks", type=Path, default=DEFAULT_SOURCE_BOTTLENECKS)
     parser.add_argument("--prize-provider-fallback", type=Path, default=DEFAULT_PRIZE_PROVIDER_FALLBACK)
     parser.add_argument("--focus-missing-images", type=Path, default=DEFAULT_FOCUS_MISSING_IMAGES)
@@ -862,6 +905,8 @@ def main() -> int:
         else _read_json(args.image_remaining_audit)
         if args.image_remaining_audit.exists()
         else None,
+        _read_json(args.image_asset_audit) if args.image_asset_audit.exists() else None,
+        _read_json(args.update_backlog) if args.update_backlog.exists() else None,
         None
         if args.core_only
         else _read_json(args.source_bottlenecks)

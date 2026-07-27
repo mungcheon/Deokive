@@ -80,6 +80,24 @@ class CatalogReportConsistencyAuditTests(unittest.TestCase):
                 },
                 "field_coverage": {"source_url": {"missing": 3}},
             },
+            image_asset_audit={
+                "summary": {
+                    "missing_image_url_rows": 2,
+                    "missing_image_with_source_url_rows": 1,
+                    "missing_image_without_source_url_rows": 1,
+                    "rows_ready_for_source_page_image_review": 1,
+                    "rows_requiring_source_url_before_image_review": 1,
+                }
+            },
+            update_backlog={
+                "image_evidence_split": {
+                    "missing_image_url_rows": 2,
+                    "with_source_url_rows": 1,
+                    "without_source_url_rows": 1,
+                    "rows_ready_for_source_page_image_review": 1,
+                    "rows_requiring_source_url_before_image_review": 1,
+                }
+            },
         )
 
         self.assertTrue(report["ok"])
@@ -191,6 +209,20 @@ class CatalogReportConsistencyAuditTests(unittest.TestCase):
                 "db_count": 2,
                 "databases": [{"ok": True, "active_rows": 3, "missing_images": 4}],
             },
+            image_asset_audit={
+                "summary": {
+                    "missing_image_url_rows": 8,
+                    "missing_image_with_source_url_rows": 3,
+                    "missing_image_without_source_url_rows": 3,
+                }
+            },
+            update_backlog={
+                "image_evidence_split": {
+                    "missing_image_url_rows": 9,
+                    "with_source_url_rows": 1,
+                    "without_source_url_rows": 1,
+                }
+            },
         )
 
         self.assertFalse(report["ok"])
@@ -199,6 +231,8 @@ class CatalogReportConsistencyAuditTests(unittest.TestCase):
         self.assertEqual(names["image_batches_match_image_queue"], 3)
         self.assertEqual(names["image_batch_plan_matches_image_queue"], 4)
         self.assertEqual(names["image_provider_coverage_matches_image_queue"], 5)
+        self.assertEqual(names["image_asset_audit_missing_image_rows_match_image_queue"], 6)
+        self.assertEqual(names["update_backlog_image_evidence_missing_matches_image_queue"], 7)
         self.assertEqual(names["source_discovery_matches_no_source_image_queue"], 2)
         self.assertEqual(names["field_queue_by_field_matches_quality:image_url"], -1)
         self.assertEqual(names["agent_image_candidates_ready_items_match_items"], -1)
