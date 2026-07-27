@@ -10,7 +10,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 CATALOG = DATA / "catalog_public.json"
-REPORT = DATA / "catalog_image_asset_audit_public.json"
+REPORT = ROOT / "server" / "catalog_image_asset_audit.json"
 
 
 def present(value: Any) -> bool:
@@ -195,6 +195,7 @@ def _field_counts(rows: list[dict[str, Any]], field: str, *, limit: int) -> list
 
 
 def write_report(report: dict[str, Any], path: Path = REPORT) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
@@ -203,11 +204,12 @@ def main() -> None:
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--write", action="store_true")
+    parser.add_argument("--output", type=Path, default=REPORT)
     args = parser.parse_args()
 
     report = build_report(load_catalog())
     if args.write:
-        write_report(report)
+        write_report(report, args.output)
     print(json.dumps(report["summary"], ensure_ascii=False, indent=2))
 
 

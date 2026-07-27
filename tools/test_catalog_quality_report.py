@@ -24,8 +24,8 @@ class CatalogQualityReportTests(unittest.TestCase):
 
         self.assertEqual([row["name_ko"] for row in rows], ["A", "B"])
 
-    def test_default_input_stays_local_seed_for_local_quality_report(self) -> None:
-        self.assertEqual(quality.DEFAULT_INPUT.name, "catalog_seed_from_local.json")
+    def test_default_input_uses_public_catalog_for_single_db_layout(self) -> None:
+        self.assertEqual(quality.DEFAULT_INPUT.as_posix().split("/")[-2:], ["data", "catalog_public.json"])
 
 
 if __name__ == "__main__":

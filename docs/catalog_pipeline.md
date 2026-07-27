@@ -63,7 +63,7 @@ python tools/sync_catalog_pipeline.py --write --image-provider-store FuRyu --ima
 
 ## Individual Tools
 
-- `tools/catalog_quality_report.py`: writes `server/catalog_quality_report.json`.
+- `tools/catalog_quality_report.py`: reads `data/catalog_public.json` and writes the local/admin report `server/catalog_quality_report.json`.
 - `tools/catalog_text_quality_report.py`: writes `server/catalog_text_quality_report.json` for mojibake/replacement-character checks.
 - `tools/normalize_catalog_seed.py`: normalizes category/store/text fields.
 - `tools/dedupe_catalog.py`: removes duplicate seed rows; use `--dart` for Dart catalog files.
@@ -86,6 +86,7 @@ python tools/sync_catalog_pipeline.py --write --image-provider-store FuRyu --ima
 - `tools/prune_unverified_catalog_rows.py`: removes kuji rows without an official source URL so temporary/manual prize sketches do not enter the public seed.
 - `tools/generate_seed_catalog_dart.py`: generates `lib/data/catalog/seed_catalog.dart` from `data/catalog_public.json` for static GitHub Pages search/autocomplete.
 - `tools/audit_public_data_layout.py`: verifies the single public DB layout, intake source lists, site status file, and incoming agent payloads.
+- `tools/audit_public_catalog_image_assets.py --write`: reads `data/catalog_public.json` and writes the local/admin image asset report `server/catalog_image_asset_audit.json`.
 - `tools/sync_catalog_db_active.py`: deactivates DB catalog rows that are no longer present in the canonical seed, inserts missing seed rows, and updates active DB rows when canonical seed fields change.
 - `tools/build_catalog_source_coverage.py`: summarizes source, affiliation, category, animation goods, and kuji coverage.
 - `tools/build_image_enrichment_queue.py`: writes JSON/CSV queues for missing image follow-up.

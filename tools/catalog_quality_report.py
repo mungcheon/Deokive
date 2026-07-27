@@ -15,7 +15,7 @@ except Exception:
     pass
 
 ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_INPUT = ROOT / "server" / "catalog_seed_from_local.json"
+DEFAULT_INPUT = ROOT / "data" / "catalog_public.json"
 DEFAULT_OUTPUT = ROOT / "server" / "catalog_quality_report.json"
 CORE_FIELDS = ("name_ko", "category", "character_name", "affiliation", "source_store")
 ENRICHMENT_FIELDS = ("image_url", "source_url", "release_date", "barcode", "official_price_jpy")

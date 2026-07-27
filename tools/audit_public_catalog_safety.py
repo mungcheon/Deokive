@@ -19,7 +19,7 @@ except Exception:
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_PUBLIC_CATALOG = ROOT / "data" / "catalog_public.json"
 DEFAULT_SEED = DEFAULT_PUBLIC_CATALOG
-DEFAULT_QUALITY = ROOT / "data" / "catalog_quality_public.json"
+DEFAULT_QUALITY = ROOT / "server" / "catalog_quality_report.json"
 DEFAULT_QUEUE = ROOT / "server" / "catalog_field_enrichment_queue.json"
 DEFAULT_QUEUE_MD = ROOT / "server" / "catalog_field_enrichment_queue.md"
 DEFAULT_JSON_REPORT = ROOT / "server" / "catalog_public_safety_audit.json"
@@ -263,7 +263,6 @@ def classify_text_match(path: Path, kind: str, match: str, text: str, start: int
     context = text[max(0, start - 80) : min(len(text), end + 80)].lower()
     is_catalog_public_data = relative in {
         "data/catalog_public.json",
-        "data/catalog_quality_public.json",
         "server/catalog_seed_from_local.json",
         "server/catalog_quality_report.json",
         "server/catalog_field_enrichment_queue.json",

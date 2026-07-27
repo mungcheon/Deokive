@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -10,6 +11,16 @@ import audit_public_catalog_image_assets as target
 
 
 class PublicCatalogImageAssetAuditTests(unittest.TestCase):
+    def test_default_report_is_local_server_artifact(self) -> None:
+        self.assertEqual(target.REPORT.as_posix().split("/")[-2:], ["server", "catalog_image_asset_audit.json"])
+
+    def test_write_report_creates_parent_directory(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "nested" / "report.json"
+            target.write_report({"summary": {"status": "pass"}}, path)
+
+            self.assertTrue(path.is_file())
+
     def test_current_public_catalog_image_assets_are_available_locally(self) -> None:
         report = target.build_report(target.load_catalog(), generated_at="2026-01-01T00:00:00Z")
         summary = report["summary"]
