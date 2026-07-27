@@ -28,6 +28,15 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Verify catalog tooling
+        run: |
+          python -X utf8 -m unittest \
+            tools.test_validate_agent_goods_intake \
+            tools.test_import_agent_goods_intake \
+            tools.test_audit_public_data_layout \
+            tools.test_build_image_enrichment_queue \
+            tools.test_sync_missing_image_work_queue_public
+
       - name: Publish 1-minute update notice
         run: |
           git config user.name "deokive-catalog-bot"
