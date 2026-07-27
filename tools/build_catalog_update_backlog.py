@@ -13,8 +13,8 @@ except Exception:
     pass
 
 ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_QUEUE = ROOT / "server" / "catalog_image_enrichment_queue.json"
-DEFAULT_FIELD_QUEUE = ROOT / "server" / "catalog_field_enrichment_queue.json"
+DEFAULT_QUEUE = ROOT / "server" / "catalog_image_enrichment_queue_current.json"
+DEFAULT_FIELD_QUEUE = ROOT / "server" / "catalog_field_enrichment_queue_current.json"
 DEFAULT_SOURCE_DISCOVERY = ROOT / "server" / "catalog_source_discovery_queue.json"
 DEFAULT_QUALITY = ROOT / "server" / "catalog_quality_report.json"
 DEFAULT_NAMING_QUEUE = ROOT / "server" / "catalog_naming_quality_queue.json"

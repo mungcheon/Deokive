@@ -4,6 +4,10 @@ from tools import build_catalog_update_backlog as backlog
 
 
 class BuildCatalogUpdateBacklogTest(unittest.TestCase):
+    def test_default_queues_use_current_generated_reports(self):
+        self.assertEqual(backlog.DEFAULT_QUEUE.name, "catalog_image_enrichment_queue_current.json")
+        self.assertEqual(backlog.DEFAULT_FIELD_QUEUE.name, "catalog_field_enrichment_queue_current.json")
+
     def test_build_backlog_summarizes_image_and_field_work(self):
         image_queue = {
             "missing_images": 3,
