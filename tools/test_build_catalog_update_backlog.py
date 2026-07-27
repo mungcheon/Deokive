@@ -139,6 +139,7 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
                 "naming_convention_queue_rows": 2,
                 "campaign_count": 10,
                 "seeded_campaign_url_count": 9,
+                "work_pack_rows": 1,
             },
             "items": [
                 {
@@ -229,6 +230,7 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
             [("campaign_gap_research", 1), ("non_prize_related_item_classification", 1)],
         )
         self.assertEqual(result["ichiban_quality"]["work_packs"][0]["group_key"], "sample")
+        self.assertEqual(result["ichiban_quality"]["work_pack_rows"], 1)
 
     def test_field_focus_packs_groups_missing_rows_by_batch_key(self):
         items = [

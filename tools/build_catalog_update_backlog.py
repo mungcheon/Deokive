@@ -403,6 +403,7 @@ def build_backlog(
             "seeded_campaign_url_count": ichiban_quality_summary.get(
                 "seeded_campaign_url_count", 0
             ),
+            "work_pack_rows": ichiban_quality_summary.get("work_pack_rows", len(ichiban_work_packs)),
             "by_workflow": ichiban_by_workflow.most_common(),
             "work_packs": ichiban_work_packs[:40],
             "sample_rows": ichiban_quality_items[:20],
@@ -551,6 +552,7 @@ def write_markdown(backlog: dict[str, Any], path: Path) -> None:
     for workflow, count in ichiban.get("by_workflow", []):
         lines.append(f"- `{workflow}`: `{count}`")
     lines.extend(["", "### Ichiban Work Packs", ""])
+    lines.append(f"- Total work packs: `{ichiban.get('work_pack_rows', 0)}`")
     for item in ichiban.get("work_packs", [])[:15]:
         lines.append(
             f"- `{item.get('workflow')}` / `{item.get('group_key')}`: "
@@ -775,6 +777,8 @@ def main() -> int:
                 "stale_source_review_rows": (backlog.get("stale_source_review") or {}).get("review_rows"),
                 "naming_quality_rows": (backlog.get("naming_quality") or {}).get("queue_rows"),
                 "ichiban_quality_rows": (backlog.get("ichiban_quality") or {}).get("queue_rows"),
+                "image_work_pack_rows": len(backlog.get("image_work_packs") or []),
+                "ichiban_work_pack_rows": (backlog.get("ichiban_quality") or {}).get("work_pack_rows"),
                 "priority_goods": sorted((backlog.get("priority_goods_summary") or {}).keys()),
                 "json": str(args.json_output),
                 "markdown": str(args.markdown_output),
