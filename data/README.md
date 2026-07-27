@@ -110,3 +110,24 @@ The HTML board is review-only. Do not merge or delete suspected duplicate rows
 unless the evidence proves the campaign, prize rank, prize name, character, and
 source identity are the same. Keep separate rows when source URLs prove a
 reissue or separate campaign.
+
+## Animation Goods Enrichment
+
+Animation goods source/image work uses the public catalog as its default input
+so generated intake templates use real `catalog_index` values:
+
+```powershell
+python -X utf8 tools/build_animation_enrichment_priority_queue.py
+```
+
+This writes local review artifacts under `server/`:
+
+- `server/animation_enrichment_priority_queue.html`
+- `server/animation_enrichment_priority_queue.json`
+- `server/animation_enrichment_priority_queue.csv`
+- `server/animation_next_batch_image_update.template.json`
+
+The generated image update template is review-only and starts with
+`confidence: needs_review`. Replace the TODO URLs and set only verified exact
+product/detail matches to `confidence: confirmed` before importing through the
+image update intake flow.

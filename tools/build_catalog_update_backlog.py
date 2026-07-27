@@ -23,6 +23,8 @@ DEFAULT_IMAGE_PROVIDER_AUDIT = ROOT / "server" / "catalog_image_provider_coverag
 DEFAULT_IMAGE_ASSET_AUDIT = ROOT / "server" / "catalog_image_asset_audit.json"
 DEFAULT_STALE_SOURCE_QUEUE = ROOT / "server" / "stale_source_cleanup_queue.json"
 DEFAULT_PRIORITY_GOODS_QUEUE = ROOT / "server" / "priority_goods_queue_current.json"
+DEFAULT_ANIMATION_ENRICHMENT_PRIORITY_QUEUE = ROOT / "server" / "animation_enrichment_priority_queue.json"
+DEFAULT_ANIMATION_IMAGE_UPDATE_TEMPLATE = ROOT / "server" / "animation_next_batch_image_update.template.json"
 DEFAULT_JSON = ROOT / "server" / "catalog_update_backlog.json"
 DEFAULT_MD = ROOT / "server" / "catalog_update_backlog.md"
 FIELD_UPDATE_WORK_PACK_FIELDS = {"source_url", "release_date", "barcode", "official_price_jpy"}
@@ -364,6 +366,7 @@ def build_backlog(
     naming_queue_payload: dict[str, Any] | None = None,
     ichiban_quality_payload: dict[str, Any] | None = None,
     image_asset_audit_payload: dict[str, Any] | None = None,
+    animation_enrichment_priority_payload: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     queue = [item for item in queue_payload.get("queue", []) if isinstance(item, dict)]
     by_strategy = Counter(str(item.get("strategy") or "") for item in queue)
@@ -511,6 +514,7 @@ def build_backlog(
     ichiban_by_workflow: Counter[str] = Counter(
         str(item.get("workflow") or "") for item in ichiban_quality_items
     )
+    animation_enrichment_priority_payload = animation_enrichment_priority_payload or {}
     image_asset_audit_payload = image_asset_audit_payload or {}
     image_asset_summary = image_asset_audit_payload.get("summary") or {}
     missing_image_evidence_priority = (
@@ -588,6 +592,19 @@ def build_backlog(
             "by_workflow": ichiban_by_workflow.most_common(),
             "work_packs": ichiban_work_packs[:40],
             "sample_rows": ichiban_quality_items[:20],
+        },
+        "animation_enrichment_priority": {
+            "artifact": "server/animation_enrichment_priority_queue.html",
+            "json": "server/animation_enrichment_priority_queue.json",
+            "csv": "server/animation_enrichment_priority_queue.csv",
+            "image_update_template": "server/animation_next_batch_image_update.template.json",
+            "animation_rows": animation_enrichment_priority_payload.get("animation_rows", 0),
+            "queue_groups": animation_enrichment_priority_payload.get("queue_groups", 0),
+            "queue_rows": animation_enrichment_priority_payload.get("queue_rows", 0),
+            "missing_image_rows": animation_enrichment_priority_payload.get("missing_image_rows", 0),
+            "missing_source_rows": animation_enrichment_priority_payload.get("missing_source_rows", 0),
+            "by_workflow": animation_enrichment_priority_payload.get("by_workflow", []),
+            "items": animation_enrichment_priority_payload.get("items", [])[:40],
         },
         "image_evidence_split": {
             "missing_image_url_rows": image_asset_summary.get(
@@ -789,6 +806,26 @@ def write_markdown(backlog: dict[str, Any], path: Path) -> None:
             f"- `{item.get('workflow')}` / `{item.get('display_name')}` / "
             f"`{item.get('source_url')}` / `{item.get('reason')}`"
         )
+    animation = backlog.get("animation_enrichment_priority") or {}
+    lines.extend(["", "## Animation Enrichment Priority", ""])
+    lines.append(f"- Artifact: `{animation.get('artifact')}`")
+    lines.append(f"- JSON: `{animation.get('json')}`")
+    lines.append(f"- CSV: `{animation.get('csv')}`")
+    lines.append(f"- Next batch review template: `{animation.get('image_update_template')}`")
+    lines.append(f"- Animation rows: `{animation.get('animation_rows', 0)}`")
+    lines.append(f"- Queue groups: `{animation.get('queue_groups', 0)}`")
+    lines.append(f"- Queue rows: `{animation.get('queue_rows', 0)}`")
+    lines.append(f"- Missing image rows: `{animation.get('missing_image_rows', 0)}`")
+    lines.append(f"- Missing source rows: `{animation.get('missing_source_rows', 0)}`")
+    lines.extend(["", "### Animation Workflows", ""])
+    for workflow, count in animation.get("by_workflow", [])[:10]:
+        lines.append(f"- `{workflow}`: `{count}`")
+    lines.extend(["", "### Animation Priority Samples", ""])
+    for item in animation.get("items", [])[:10]:
+        lines.append(
+            f"- `{item.get('workflow')}` / `{item.get('source_store')}` / "
+            f"`{item.get('category')}`: `{item.get('rows')}` rows"
+        )
     image_evidence = backlog.get("image_evidence_split") or {}
     lines.extend(["", "## Image Evidence Split", ""])
     lines.append(f"- Missing image URL rows: `{image_evidence.get('missing_image_url_rows', 0)}`")
@@ -988,6 +1025,11 @@ def main() -> int:
     parser.add_argument("--image-asset-audit", type=Path, default=DEFAULT_IMAGE_ASSET_AUDIT)
     parser.add_argument("--stale-source-queue", type=Path, default=DEFAULT_STALE_SOURCE_QUEUE)
     parser.add_argument("--priority-goods-queue", type=Path, default=DEFAULT_PRIORITY_GOODS_QUEUE)
+    parser.add_argument(
+        "--animation-enrichment-priority-queue",
+        type=Path,
+        default=DEFAULT_ANIMATION_ENRICHMENT_PRIORITY_QUEUE,
+    )
     parser.add_argument("--json-output", type=Path, default=DEFAULT_JSON)
     parser.add_argument("--markdown-output", type=Path, default=DEFAULT_MD)
     args = parser.parse_args()
@@ -1034,6 +1076,11 @@ def main() -> int:
         if args.ichiban_quality_queue.exists()
         else {}
     )
+    animation_enrichment_priority_payload = (
+        json.loads(args.animation_enrichment_priority_queue.read_text(encoding="utf-8-sig"))
+        if args.animation_enrichment_priority_queue.exists()
+        else {}
+    )
     backlog = build_backlog(
         queue_payload,
         quality_payload,
@@ -1045,6 +1092,7 @@ def main() -> int:
         naming_queue_payload,
         ichiban_quality_payload,
         image_asset_audit,
+        animation_enrichment_priority_payload,
     )
     args.json_output.write_text(json.dumps(backlog, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     write_markdown(backlog, args.markdown_output)
@@ -1067,6 +1115,9 @@ def main() -> int:
                     0,
                 ),
                 "ichiban_work_pack_rows": (backlog.get("ichiban_quality") or {}).get("work_pack_rows"),
+                "animation_enrichment_queue_rows": (
+                    backlog.get("animation_enrichment_priority") or {}
+                ).get("queue_rows"),
                 "priority_goods": sorted((backlog.get("priority_goods_summary") or {}).keys()),
                 "json": str(args.json_output),
                 "markdown": str(args.markdown_output),

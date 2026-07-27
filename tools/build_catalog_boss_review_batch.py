@@ -272,8 +272,8 @@ def render_html(payload: dict[str, Any]) -> str:
       <section class="decision-list" id="decisionList"></section>
       <section>
         <button class="next-batch" id="nextBatch">다음 배치 검토하기</button>
-        <button class="export" id="export">백업 JSON 저장</button>
-        <p class="small" style="margin-top:9px;">검수는 브라우저에서 계속 진행됩니다. 백업 JSON은 나중에 로컬 도구로 승인 후보를 만들 때만 사용합니다.</p>
+        <button class="export" id="export">검수 기록 백업</button>
+        <p class="small" style="margin-top:9px;">검수는 브라우저에서 계속 진행됩니다. 기록 백업은 나중에 로컬 도구로 승인 후보를 만들 때만 사용합니다.</p>
       </section>
     </aside>
   </div>

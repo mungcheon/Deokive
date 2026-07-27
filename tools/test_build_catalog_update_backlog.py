@@ -10,6 +10,14 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
         self.assertEqual(backlog.DEFAULT_QUEUE.name, "catalog_image_enrichment_queue_current.json")
         self.assertEqual(backlog.DEFAULT_FIELD_QUEUE.name, "catalog_field_enrichment_queue_current.json")
         self.assertEqual(backlog.DEFAULT_ICHIBAN_QUALITY_QUEUE.name, "ichiban_public_quality_queue.json")
+        self.assertEqual(
+            backlog.DEFAULT_ANIMATION_ENRICHMENT_PRIORITY_QUEUE.name,
+            "animation_enrichment_priority_queue.json",
+        )
+        self.assertEqual(
+            backlog.DEFAULT_ANIMATION_IMAGE_UPDATE_TEMPLATE.name,
+            "animation_next_batch_image_update.template.json",
+        )
 
     def test_build_backlog_summarizes_image_and_field_work(self):
         image_queue = {
@@ -193,6 +201,22 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
                 ],
             },
         }
+        animation_enrichment_priority = {
+            "animation_rows": 12,
+            "queue_groups": 2,
+            "queue_rows": 9,
+            "missing_image_rows": 7,
+            "missing_source_rows": 8,
+            "by_workflow": [["find_exact_source_url", 5], ["attach_image_from_exact_source", 4]],
+            "items": [
+                {
+                    "workflow": "find_exact_source_url",
+                    "source_store": "애니메이트",
+                    "category": "아크릴 스탠드",
+                    "rows": 5,
+                }
+            ],
+        }
 
         result = backlog.build_backlog(
             image_queue,
@@ -205,6 +229,7 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
             naming_queue,
             ichiban_quality,
             image_asset_audit,
+            animation_enrichment_priority,
         )
 
         self.assertEqual(result["rows"], 10)
@@ -273,6 +298,15 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
         )
         self.assertEqual(result["ichiban_quality"]["work_packs"][0]["group_key"], "sample")
         self.assertEqual(result["ichiban_quality"]["work_pack_rows"], 1)
+        self.assertEqual(result["animation_enrichment_priority"]["queue_rows"], 9)
+        self.assertEqual(
+            result["animation_enrichment_priority"]["image_update_template"],
+            "server/animation_next_batch_image_update.template.json",
+        )
+        self.assertEqual(
+            result["animation_enrichment_priority"]["by_workflow"],
+            [["find_exact_source_url", 5], ["attach_image_from_exact_source", 4]],
+        )
         self.assertEqual(result["image_evidence_split"]["missing_image_url_rows"], 3)
         self.assertEqual(result["image_evidence_split"]["with_source_url_rows"], 1)
         self.assertEqual(result["image_evidence_split"]["without_source_url_rows"], 2)
