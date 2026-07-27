@@ -315,7 +315,7 @@ def render_html(payload: dict[str, Any]) -> str:
 
     function nextItemsFrom(start) {
       return reviewItems
-        .filter((item) => item.row_index >= start && !normalizeDecisionState(state[item.row_index] || {}).statuses.length)
+        .filter((item) => item.row_index >= start)
         .slice(0, batch.meta.batch_size);
     }
 

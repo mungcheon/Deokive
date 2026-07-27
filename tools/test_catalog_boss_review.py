@@ -55,6 +55,11 @@ class CatalogBossReviewTest(unittest.TestCase):
             self.assertIn("공개 반영 담당", html)
             self.assertIn("deokive-boss-review-ledger-v3", html)
             self.assertIn("statuses.includes", html)
+            self.assertIn(".filter((item) => item.row_index >= start)", html)
+            self.assertNotIn(
+                ".filter((item) => item.row_index >= start && !normalizeDecisionState",
+                html,
+            )
 
     def test_approved_catalog_includes_only_pass(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
