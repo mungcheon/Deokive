@@ -37,6 +37,10 @@ def workflow_python_blocks(text: str) -> list[str]:
     return blocks
 
 
+def workflow_tool_calls(text: str) -> list[str]:
+    return TOOL_CALL_RE.findall(text)
+
+
 class UpdateWorkflowIntegrityTests(unittest.TestCase):
     def test_workflow_calls_only_tracked_tool_scripts(self) -> None:
         text = WORKFLOW.read_text(encoding="utf-8")
@@ -81,6 +85,33 @@ class UpdateWorkflowIntegrityTests(unittest.TestCase):
                     self.assertIsInstance(status.get("eta"), str)
             finally:
                 os.chdir(previous_cwd)
+
+    def test_refresh_regenerates_current_queues_before_backlog_and_consistency_audit(self) -> None:
+        text = WORKFLOW.read_text(encoding="utf-8")
+        calls = workflow_tool_calls(text)
+
+        quality = calls.index("tools/catalog_quality_report.py")
+        field_queue = calls.index("tools/build_catalog_field_enrichment_queue.py")
+        naming_queue = calls.index("tools/build_catalog_naming_quality_queue.py")
+        ichiban_queue = calls.index("tools/build_ichiban_public_quality_queue.py")
+        image_queue = calls.index("tools/build_image_enrichment_queue.py")
+        source_discovery = calls.index("tools/build_source_discovery_queue.py")
+        missing_image_sync = calls.index("tools/sync_missing_image_work_queue_public.py")
+        backlog = calls.index("tools/build_catalog_update_backlog.py")
+        consistency = calls.index("tools/audit_catalog_report_consistency.py")
+        seed = calls.index("tools/generate_seed_catalog_dart.py")
+
+        self.assertLess(quality, field_queue)
+        self.assertLess(field_queue, naming_queue)
+        self.assertLess(naming_queue, ichiban_queue)
+        self.assertLess(ichiban_queue, image_queue)
+        self.assertLess(image_queue, source_discovery)
+        self.assertLess(source_discovery, missing_image_sync)
+        self.assertLess(missing_image_sync, backlog)
+        self.assertLess(backlog, consistency)
+        self.assertLess(consistency, seed)
+        self.assertIn("python tools/sync_missing_image_work_queue_public.py --write", text)
+        self.assertIn("python tools/audit_catalog_report_consistency.py --core-only --fail-on-mismatch", text)
 
 
 if __name__ == "__main__":
