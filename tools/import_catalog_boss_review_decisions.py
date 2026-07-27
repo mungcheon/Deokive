@@ -21,10 +21,10 @@ DEFAULT_REWORK = ROOT / "server" / "boss_review" / "boss_review_rework_queue.jso
 ALLOWED_STATUSES = {
     "image_error",
     "content_error",
-    "fixed_pass",
     "pass",
 }
-APPROVED_STATUSES = {"fixed_pass", "pass"}
+APPROVED_STATUSES = {"pass"}
+BLOCKED_STATUSES = {"image_error", "content_error"}
 
 
 def _read_json(path: Path, default: Any) -> Any:
@@ -64,17 +64,30 @@ def _normalize_decisions(path: Path) -> list[dict[str, Any]]:
         if not isinstance(decision, dict):
             continue
         row_index = decision.get("row_index")
-        status = str(decision.get("status") or "").strip()
+        raw_statuses = decision.get("statuses")
+        if isinstance(raw_statuses, list):
+            statuses = [str(status).strip() for status in raw_statuses if str(status).strip()]
+        else:
+            status = str(decision.get("status") or "").strip()
+            statuses = [status] if status else []
+        statuses = ["pass" if status == "fixed_pass" else status for status in statuses]
+        if "pass" in statuses:
+            statuses = ["pass"]
+        else:
+            statuses = sorted({status for status in statuses if status})
+        status = "pass" if statuses == ["pass"] else ("image_error" if "image_error" in statuses else "content_error" if "content_error" in statuses else "")
         if isinstance(row_index, bool) or not isinstance(row_index, int):
             raise ValueError(f"decision has invalid row_index: {decision!r}")
-        if status not in ALLOWED_STATUSES:
-            raise ValueError(f"row {row_index} has invalid status: {status!r}")
+        invalid = [item for item in statuses if item not in ALLOWED_STATUSES]
+        if invalid or not statuses:
+            raise ValueError(f"row {row_index} has invalid statuses: {statuses!r}")
         normalized.append(
             {
                 "row_index": row_index,
                 "catalog_index": decision.get("catalog_index", row_index),
                 "display_name": decision.get("display_name"),
                 "status": status,
+                "statuses": statuses,
                 "status_label": decision.get("status_label"),
                 "note": decision.get("note") or "",
                 "reviewed_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
@@ -102,12 +115,26 @@ def merge_ledger(ledger_path: Path, decisions: list[dict[str, Any]]) -> dict[str
         **(ledger.get("meta") if isinstance(ledger.get("meta"), dict) else {}),
         "updated_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
         "reviewed_items": len(merged),
-        "approved_items": sum(1 for item in merged if item.get("status") in APPROVED_STATUSES),
-        "blocked_items": sum(1 for item in merged if item.get("status") not in APPROVED_STATUSES),
+        "approved_items": sum(1 for item in merged if _is_approved(item)),
+        "blocked_items": sum(1 for item in merged if not _is_approved(item)),
         "allowed_statuses": sorted(ALLOWED_STATUSES),
         "approved_statuses": sorted(APPROVED_STATUSES),
     }
     return ledger
+
+
+def _decision_statuses(decision: dict[str, Any]) -> list[str]:
+    raw = decision.get("statuses")
+    if isinstance(raw, list):
+        return [str(status) for status in raw if str(status)]
+    status = str(decision.get("status") or "")
+    if status == "fixed_pass":
+        return ["pass"]
+    return [status] if status else []
+
+
+def _is_approved(decision: dict[str, Any]) -> bool:
+    return _decision_statuses(decision) == ["pass"]
 
 
 def build_approved_catalog(catalog_path: Path, ledger: dict[str, Any]) -> dict[str, Any]:
@@ -117,7 +144,7 @@ def build_approved_catalog(catalog_path: Path, ledger: dict[str, Any]) -> dict[s
         int(decision["row_index"]): decision
         for decision in ledger.get("decisions", [])
         if isinstance(decision, dict)
-        and decision.get("status") in APPROVED_STATUSES
+        and _is_approved(decision)
         and isinstance(decision.get("row_index"), int)
         and not isinstance(decision.get("row_index"), bool)
     }
@@ -144,7 +171,7 @@ def build_approved_catalog(catalog_path: Path, ledger: dict[str, Any]) -> dict[s
             "source_catalog": str(catalog_path.relative_to(ROOT) if catalog_path.is_relative_to(ROOT) else catalog_path),
             "approved_items": len(approved_items),
             "reviewed_items": len(ledger.get("decisions", [])),
-            "approval_policy": "Only rows with pass or fixed_pass are included.",
+            "approval_policy": "Only rows with pass are included. Legacy fixed_pass decisions are read as pass.",
         },
         "items": approved_items,
         "total_items": len(approved_items),
@@ -176,7 +203,7 @@ def build_rework_queue(catalog_path: Path, ledger: dict[str, Any]) -> dict[str, 
     blocked = [
         decision
         for decision in ledger.get("decisions", [])
-        if isinstance(decision, dict) and decision.get("status") not in APPROVED_STATUSES
+        if isinstance(decision, dict) and not _is_approved(decision)
     ]
     queue: list[dict[str, Any]] = []
     for decision in blocked:
@@ -184,14 +211,18 @@ def build_rework_queue(catalog_path: Path, ledger: dict[str, Any]) -> dict[str, 
         if isinstance(row_index, bool) or not isinstance(row_index, int):
             continue
         item = catalog_by_index.get(row_index, {})
-        status = str(decision.get("status") or "")
+        statuses = [status for status in _decision_statuses(decision) if status in BLOCKED_STATUSES]
+        status = "image_error" if "image_error" in statuses else "content_error"
         queue.append(
             {
                 "row_index": row_index,
                 "catalog_index": item.get("catalog_index", row_index),
                 "status": status,
+                "statuses": statuses,
                 "status_label": decision.get("status_label"),
-                "rework_type": _rework_type(status),
+                "rework_type": "image_and_field_update"
+                if {"image_error", "content_error"}.issubset(set(statuses))
+                else _rework_type(status),
                 "display_name": decision.get("display_name") or _display_name(item),
                 "note": decision.get("note") or "",
                 "source_url": item.get("source_url"),
@@ -205,8 +236,10 @@ def build_rework_queue(catalog_path: Path, ledger: dict[str, Any]) -> dict[str, 
                 "series_name": item.get("series_name"),
                 "sub_series": item.get("sub_series"),
                 "next_step": (
-                    "Submit a confirmed image fix through data/intake/image_updates/incoming/."
-                    if status == "image_error"
+                    "Submit confirmed image and field fixes through the matching data/intake incoming folders."
+                    if {"image_error", "content_error"}.issubset(set(statuses))
+                    else "Submit a confirmed image fix through data/intake/image_updates/incoming/."
+                    if "image_error" in statuses
                     else "Submit a confirmed field correction through data/intake/field_updates/incoming/."
                 ),
             }
@@ -216,8 +249,8 @@ def build_rework_queue(catalog_path: Path, ledger: dict[str, Any]) -> dict[str, 
             "generated_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
             "source_catalog": str(catalog_path.relative_to(ROOT) if catalog_path.is_relative_to(ROOT) else catalog_path),
             "blocked_items": len(queue),
-            "image_error_items": sum(1 for item in queue if item.get("status") == "image_error"),
-            "content_error_items": sum(1 for item in queue if item.get("status") == "content_error"),
+            "image_error_items": sum(1 for item in queue if "image_error" in (item.get("statuses") or [])),
+            "content_error_items": sum(1 for item in queue if "content_error" in (item.get("statuses") or [])),
             "purpose": "Rows blocked by boss review; route these back to image or field update intake before publishing.",
         },
         "items": queue,

@@ -59,9 +59,9 @@ python -X utf8 tools/catalog_boss_review_status.py
 
 Open `server/boss_review/catalog_boss_review.html` locally, review each item,
 and use `다음 배치 검토하기` to continue through the catalog in 10-row batches.
-The browser stores review decisions locally. Only `pass` and `fixed_pass`
-decisions are treated as approved; `image_error` and `content_error` stay
-blocked.
+The browser stores review decisions locally. Only `pass` decisions are treated
+as approved. `image_error` and `content_error` can both be checked on one row
+and stay blocked until a correction pass.
 
 If you later need to turn local review decisions into approved/rework artifacts,
 export the browser review ledger and import it with:

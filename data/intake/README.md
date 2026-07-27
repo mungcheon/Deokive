@@ -57,9 +57,9 @@ single public DB.
 Boss review is the final local approval gate before public DB changes are
 considered publishable. Generate 10-item review batches with
 `tools/build_catalog_boss_review_batch.py`, then import exported decisions with
-`tools/import_catalog_boss_review_decisions.py`. Only `pass` and `fixed_pass`
-decisions may proceed; `image_error` and `content_error` require another intake
-or correction pass. The import tool writes blocked rows to
+`tools/import_catalog_boss_review_decisions.py`. Only `pass` decisions may
+proceed; `image_error` and `content_error` can both be checked on one row and
+require another intake or correction pass. The import tool writes blocked rows to
 `server/boss_review/boss_review_rework_queue.json`: `image_error` routes to
 image update intake, and `content_error` routes to field update intake.
 

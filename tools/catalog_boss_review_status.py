@@ -17,12 +17,11 @@ try:
 except ImportError:
     from tools.build_catalog_boss_review_batch import DEFAULT_CATALOG, DEFAULT_LEDGER, build_batch
 
-APPROVED_STATUSES = {"fixed_pass", "pass"}
+APPROVED_STATUSES = {"pass"}
 BLOCKED_STATUSES = {"content_error", "image_error"}
 STATUS_LABELS = {
     "image_error": "사진오류",
     "content_error": "내용오류",
-    "fixed_pass": "수정후통과",
     "pass": "통과",
 }
 
@@ -49,6 +48,17 @@ def _ledger_decisions(path: Path) -> list[dict[str, Any]]:
     return [item for item in payload.get("decisions") or [] if isinstance(item, dict)]
 
 
+def _decision_statuses(decision: dict[str, Any]) -> list[str]:
+    raw = decision.get("statuses")
+    if isinstance(raw, list):
+        statuses = [str(status) for status in raw if str(status)]
+    else:
+        status = str(decision.get("status") or "")
+        statuses = [status] if status else []
+    statuses = ["pass" if status == "fixed_pass" else status for status in statuses]
+    return ["pass"] if "pass" in statuses else sorted({status for status in statuses if status})
+
+
 def build_status(
     *,
     catalog_path: Path = DEFAULT_CATALOG,
@@ -61,17 +71,32 @@ def build_status(
     status_counts: Counter[str] = Counter()
     for decision in decisions:
         row_index = decision.get("row_index")
-        status = str(decision.get("status") or "")
         if isinstance(row_index, bool) or not isinstance(row_index, int):
             continue
+        statuses = _decision_statuses(decision)
+        if not statuses:
+            continue
         reviewed_indexes.add(row_index)
-        status_counts[status] += 1
+        if statuses == ["pass"]:
+            status_counts["pass"] += 1
+        else:
+            for status in statuses:
+                status_counts[status] += 1
 
     total_items = len(items)
     reviewed_items = len(reviewed_indexes)
     pending_items = max(total_items - reviewed_items, 0)
-    approved_items = sum(status_counts[status] for status in APPROVED_STATUSES)
-    blocked_items = sum(status_counts[status] for status in BLOCKED_STATUSES)
+    approved_items = status_counts["pass"]
+    blocked_items = len(
+        {
+            int(decision["row_index"])
+            for decision in decisions
+            if isinstance(decision.get("row_index"), int)
+            and not isinstance(decision.get("row_index"), bool)
+            and _decision_statuses(decision)
+            and _decision_statuses(decision) != ["pass"]
+        }
+    )
     review_percent = round((reviewed_items / total_items) * 100, 4) if total_items else 0
 
     next_batch = build_batch(catalog_path=catalog_path, ledger_path=ledger_path, batch_size=batch_size)

@@ -87,9 +87,23 @@ def _boss_review_summary(
         and not isinstance(item.get("row_index"), bool)
     ]
     reviewed_indexes = {int(item["row_index"]) for item in decisions}
-    approved_statuses = set((ledger_payload.get("meta") or {}).get("approved_statuses") or ["fixed_pass", "pass"])
-    status_counts = Counter(str(item.get("status") or "") for item in decisions)
-    approved_items = sum(1 for item in decisions if item.get("status") in approved_statuses)
+    approved_statuses = set((ledger_payload.get("meta") or {}).get("approved_statuses") or ["pass"])
+    status_counts: Counter[str] = Counter()
+    approved_items = 0
+    for item in decisions:
+        raw_statuses = item.get("statuses")
+        if isinstance(raw_statuses, list):
+            statuses = [str(status) for status in raw_statuses if str(status)]
+        else:
+            status = str(item.get("status") or "")
+            statuses = [status] if status else []
+        statuses = ["pass" if status == "fixed_pass" else status for status in statuses]
+        if "pass" in statuses:
+            statuses = ["pass"]
+        if statuses == ["pass"] or any(status in approved_statuses for status in statuses):
+            approved_items += 1
+        for status in statuses:
+            status_counts[status] += 1
     blocked_items = len(decisions) - approved_items
     pending_items = max(total_rows - len(reviewed_indexes), 0)
     batch_meta = batch_payload.get("meta") if isinstance(batch_payload.get("meta"), dict) else {}
@@ -601,7 +615,7 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
             "Ichiban Kuji metadata still has old campaign pages without safe price/release labels; keep those fields blank unless official evidence is added.",
             "Animation goods categories are audited separately; zero unknown categories means the current app category taxonomy is covering the group.",
             "Animation enrichment priority queue ranks category/store groups for exact source discovery before image attachment.",
-            "Boss review is the public-release gate; only rows reviewed as pass or fixed_pass should move into approved catalog artifacts.",
+            "Boss review is the public-release gate; only rows reviewed as pass should move into approved catalog artifacts.",
             "Confirmed import queue audit shows whether manually reviewed rows are pending, skipped, duplicated, or ready for import.",
             "Completed confirmed rows can be archived after import reports prove they are already applied or canonical duplicates.",
         ],
