@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -22,6 +23,7 @@ INTAKE = DATA / "intake"
 INCOMING = INTAKE / "incoming"
 SOURCES = INTAKE / "sources"
 SERVER_ARTIFACT_SUFFIXES = {".csv", ".html", ".json", ".md", ".jpg", ".jpeg", ".png", ".txt"}
+INTAKE_FILENAME_RE = re.compile(r"^[a-z0-9][a-z0-9_-]*-\d{8}-[a-z0-9][a-z0-9_-]*\.json$")
 
 ALLOWED_DATA_FILES = {
     "data/README.md",
@@ -90,9 +92,20 @@ def is_allowed_data_path(path: str) -> bool:
     )
 
 
+def is_valid_intake_record_name(path: Path) -> bool:
+    return bool(INTAKE_FILENAME_RE.match(path.name))
+
+
 def read_json(path: Path) -> Any:
     with path.open("r", encoding="utf-8") as handle:
         return json.load(handle)
+
+
+def display_path(path: Path) -> str:
+    try:
+        return str(path.relative_to(ROOT))
+    except ValueError:
+        return str(path)
 
 
 def audit_tracked_data_files(errors: list[str]) -> list[str]:
@@ -220,6 +233,11 @@ def audit_incoming_intake(errors: list[str]) -> dict[str, int]:
     files = iter_input_files([INCOMING])
     item_count = 0
     for path in files:
+        if not is_valid_intake_record_name(path):
+            errors.append(
+                f"{display_path(path)}: intake filename must be "
+                "<agent>-<YYYYMMDD>-<topic>.json"
+            )
         payload = load_json(path)
         payload_errors, summary = validate_payload(path, payload)
         item_count += int(summary["items"])

@@ -77,6 +77,42 @@ class PublicDataLayoutAuditTests(unittest.TestCase):
         self.assertEqual(1, summary["incoming_files"])
         self.assertTrue(errors)
 
+    def test_rejects_untraceable_incoming_filename(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            incoming = Path(tmp)
+            (incoming / "random.json").write_text(
+                """{
+                  "schema_version": 1,
+                  "agent": {
+                    "name": "agent",
+                    "run_id": "20260727-topic",
+                    "collected_at": "2026-07-27T00:00:00+09:00"
+                  },
+                  "items": [
+                    {
+                      "external_id": "sku-1",
+                      "display_name": "Sample",
+                      "category": "figure",
+                      "series_name": "Series",
+                      "source_store": "Official",
+                      "source_url": "https://example.com/product",
+                      "confidence": "confirmed"
+                    }
+                  ]
+                }""",
+                encoding="utf-8",
+            )
+
+            with patch.object(target, "INCOMING", incoming):
+                summary = target.audit_incoming_intake(errors := [])
+
+        self.assertEqual(1, summary["incoming_files"])
+        self.assertTrue(any("intake filename must be" in error for error in errors))
+
+    def test_accepts_traceable_incoming_filename(self) -> None:
+        self.assertTrue(target.is_valid_intake_record_name(Path("agent-20260727-ichiban-kuji.json")))
+        self.assertFalse(target.is_valid_intake_record_name(Path("agent-run.json")))
+
 
 if __name__ == "__main__":
     unittest.main()
