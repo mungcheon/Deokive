@@ -251,6 +251,60 @@ class IchibanKujiPrizeStructureAuditTests(unittest.TestCase):
 
         self.assertEqual(payload["under_split_prize_review_candidate_rows"], 0)
 
+    def test_does_not_report_reviewed_mixed_rows_as_split_candidates(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            temp = Path(tmp)
+            seed = temp / "seed.json"
+            campaigns = temp / "campaigns.json"
+            archive = temp / "archive.json"
+            report = temp / "report.json"
+            markdown = temp / "report.md"
+            seed.write_text(
+                json.dumps(
+                    [
+                        {
+                            "catalog_index": 13,
+                            "name_ko": (
+                                "\u4e00\u756a\u304f\u3058 TEST / F\u8cde / "
+                                "\u30bf\u30aa\u30eb\u30b3\u30ec\u30af\u30b7\u30e7\u30f3 \u51683\u7a2e / "
+                                "\ud63c\ud569"
+                            ),
+                            "name_ja": "F\u8cde \u30bf\u30aa\u30eb\u30b3\u30ec\u30af\u30b7\u30e7\u30f3 \u51683\u7a2e",
+                            "source_url": "https://1kuji.com/products/test",
+                            "sub_series": "F\u8cde",
+                            "character_name": "\ud63c\ud569",
+                        }
+                    ]
+                ),
+                encoding="utf-8",
+            )
+            campaigns.write_text(json.dumps([{"url": "https://1kuji.com/products/test"}]), encoding="utf-8")
+            archive.write_text(json.dumps([]), encoding="utf-8")
+
+            subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "tools" / "audit_ichiban_kuji_prize_structure.py"),
+                    "--seed",
+                    str(seed),
+                    "--campaigns",
+                    str(campaigns),
+                    "--archive",
+                    str(archive),
+                    "--json-report",
+                    str(report),
+                    "--md-report",
+                    str(markdown),
+                ],
+                cwd=ROOT,
+                check=True,
+                stdout=subprocess.DEVNULL,
+            )
+
+            payload = json.loads(report.read_text(encoding="utf-8"))
+
+        self.assertEqual(payload["under_split_prize_review_candidate_rows"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

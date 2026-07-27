@@ -43,7 +43,7 @@ LIKELY_CHARACTER_SPLIT_ITEM_TOKENS = (
     "\u30dd\u30b9\u30bf\u30fc",
 )
 
-GENERIC_CHARACTER_LABELS = {"", "\uae30\ud0c0", "\ud63c\ud569"}
+UNREVIEWED_CHARACTER_LABELS = {"", "\uae30\ud0c0"}
 
 
 def main() -> int:
@@ -113,7 +113,7 @@ def main() -> int:
         name_ja = str(row.get("name_ja") or "")
         review_text = f"{product_name} {name_ja}"
         character_name = str(row.get("character_name") or "").strip()
-        if character_name not in GENERIC_CHARACTER_LABELS:
+        if character_name not in UNREVIEWED_CHARACTER_LABELS:
             continue
         if _looks_like_under_split_character_prize(review_text):
             under_split_prize_review_candidates.append(
