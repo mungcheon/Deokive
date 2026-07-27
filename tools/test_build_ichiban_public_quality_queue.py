@@ -99,6 +99,22 @@ class BuildIchibanPublicQualityQueueTests(unittest.TestCase):
         self.assertEqual("missing", queue["work_packs"][1]["group_key"])
         self.assertEqual("missing-2", queue["work_packs"][2]["group_key"])
         self.assertEqual("release / bad rank", queue["work_packs"][4]["group_key"])
+        self.assertFalse(queue["automation_policy"]["auto_merge_duplicates"])
+        self.assertIn("research_links", queue["items"][1])
+        self.assertEqual(
+            "possible_reissue_or_separate_campaign",
+            queue["items"][3]["duplicate_review_kind"],
+        )
+        self.assertIn(
+            "keep_rows_as_separate_reissues_with_distinguishing_metadata",
+            queue["items"][3]["decision_options"],
+        )
+        self.assertEqual(
+            "Ichiban Kuji release name / prize rank / prize name / character name",
+            queue["items"][4]["expected_display_format"],
+        )
+        self.assertFalse(queue["work_packs"][0]["auto_apply_enabled"])
+        self.assertIn("acceptance_criteria", queue["work_packs"][0])
 
 
 if __name__ == "__main__":

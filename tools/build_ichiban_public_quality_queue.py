@@ -4,6 +4,7 @@ import argparse
 import csv
 import json
 import sys
+import urllib.parse
 from pathlib import Path
 from typing import Any
 
@@ -36,9 +37,20 @@ def build_queue(quality_report: dict[str, Any]) -> dict[str, Any]:
             "priority": 10,
             "status": "needs_official_or_archive_evidence",
             "source_url": url,
+            "research_links": _campaign_research_links(url),
+            "decision_options": [
+                "add_missing_campaign_rows_only_after_official_or_archive_evidence",
+                "mark_campaign_seed_as_unusable_if_no_evidence_exists",
+            ],
+            "acceptance_criteria": [
+                "Campaign URL must resolve through an official 1kuji page, official cache, or trusted archive.",
+                "Do not create prize rows from title-only search results.",
+                "Imported prize rows must follow release / rank / prize / character naming.",
+            ],
             "recommended_action": (
                 "Find replacement official/archive evidence before creating or importing prize rows."
             ),
+            "auto_apply_enabled": False,
         }
         for url in campaign_gap_urls
         if isinstance(url, str) and url.strip()
@@ -51,6 +63,14 @@ def build_queue(quality_report: dict[str, Any]) -> dict[str, Any]:
     for group in duplicate_review_groups:
         if not isinstance(group, dict):
             continue
+        source_urls = group.get("source_urls") or []
+        if not isinstance(source_urls, list):
+            source_urls = []
+        catalog_indexes = group.get("catalog_indexes") or []
+        if not isinstance(catalog_indexes, list):
+            catalog_indexes = []
+        source_families = sorted({_campaign_family(str(url)) for url in source_urls if url})
+        duplicate_kind = _duplicate_review_kind(source_urls, catalog_indexes)
         duplicate_items.append(
             {
                 "workflow": "exact_display_duplicate_reissue_review",
@@ -58,11 +78,22 @@ def build_queue(quality_report: dict[str, Any]) -> dict[str, Any]:
                 "status": "needs_reissue_or_duplicate_decision",
                 "display_name": group.get("display_name"),
                 "row_count": group.get("rows"),
-                "source_urls": group.get("source_urls") or [],
-                "catalog_indexes": group.get("catalog_indexes") or [],
+                "source_urls": source_urls,
+                "source_url_count": len(source_urls),
+                "source_families": source_families,
+                "catalog_indexes": catalog_indexes,
+                "duplicate_review_kind": duplicate_kind,
+                "decision_options": _duplicate_decision_options(duplicate_kind),
+                "acceptance_criteria": [
+                    "Keep both rows only when source URLs prove separate campaigns, reissues, or release dates.",
+                    "Merge only when product identity, campaign, rank, prize, character, and source evidence are the same.",
+                    "If kept as reissues, add distinguishing release metadata or source-specific note before clearing this queue.",
+                ],
                 "recommended_action": (
                     "Confirm whether rows are separate reissues/campaigns or true duplicates before merging."
                 ),
+                "auto_merge_enabled": False,
+                "auto_delete_enabled": False,
             }
         )
 
@@ -77,6 +108,15 @@ def build_queue(quality_report: dict[str, Any]) -> dict[str, Any]:
             "recommended_action": (
                 "Set normal prize price or confirm this is a last-one/double-chance exception."
             ),
+            "decision_options": [
+                "set_official_price_jpy_from_campaign_price",
+                "mark_as_last_one_or_double_chance_exception",
+            ],
+            "acceptance_criteria": [
+                "Normal prize rows must not keep official_price_jpy at 0.",
+                "Last One and Double Chance exceptions may keep official_price_jpy at 0.",
+            ],
+            "auto_apply_enabled": False,
         }
         for row in ichiban.get("zero_price_non_exception_sample", [])
         if isinstance(row, dict)
@@ -109,7 +149,18 @@ def build_queue(quality_report: dict[str, Any]) -> dict[str, Any]:
                 "source_url": row.get("source_url"),
                 "reason": reason,
                 "display_parts": row.get("display_parts") or [],
+                "expected_display_format": (
+                    "Ichiban Kuji release name / prize rank / prize name / character name"
+                ),
+                "decision_options": _naming_decision_options(reason),
+                "acceptance_criteria": [
+                    "Prize rows must have four display parts separated by ' / '.",
+                    "The second part must be a prize rank such as A賞, B賞, ラストワン賞, or ダブルチャンス.",
+                    "Related or campaign goods must be classified separately instead of pretending to be a prize rank.",
+                    "Character-specific variants should be one row per character.",
+                ],
                 "recommended_action": recommended_action,
+                "auto_apply_enabled": False,
             }
         )
 
@@ -148,6 +199,13 @@ def build_queue(quality_report: dict[str, Any]) -> dict[str, Any]:
         },
         "items": items,
         "work_packs": work_packs,
+        "automation_policy": {
+            "auto_merge_duplicates": False,
+            "auto_delete_duplicates": False,
+            "auto_create_campaign_rows": False,
+            "requires_human_review": True,
+            "private_collection_storage": "local_device_only",
+        },
     }
 
 
@@ -169,6 +227,9 @@ def _build_work_packs(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "status": first.get("status"),
                 "rows": len(rows),
                 "next_action": first.get("recommended_action"),
+                "decision_options": first.get("decision_options") or [],
+                "acceptance_criteria": first.get("acceptance_criteria") or [],
+                "auto_apply_enabled": False,
                 "sample_rows": rows[:10],
             }
         )
@@ -207,6 +268,56 @@ def _campaign_family(source_url: str) -> str:
     if not slug:
         return "unknown_campaign"
     return slug.split("_")[0]
+
+
+def _campaign_research_links(source_url: str) -> dict[str, str]:
+    stripped = source_url.strip().rstrip("/")
+    encoded_url = urllib.parse.quote(stripped, safe="")
+    encoded_query = urllib.parse.quote(stripped)
+    return {
+        "source_url": stripped,
+        "wayback_calendar": f"https://web.archive.org/web/*/{encoded_url}",
+        "domain_search": f"https://www.google.com/search?q={encoded_query}",
+    }
+
+
+def _duplicate_review_kind(source_urls: list[Any], catalog_indexes: list[Any]) -> str:
+    clean_urls = {str(url).strip().rstrip("/") for url in source_urls if str(url).strip()}
+    clean_indexes = {index for index in catalog_indexes if isinstance(index, int) and not isinstance(index, bool)}
+    if len(clean_urls) > 1:
+        return "possible_reissue_or_separate_campaign"
+    if len(clean_indexes) > 1:
+        return "possible_true_duplicate_same_campaign"
+    return "needs_more_duplicate_evidence"
+
+
+def _duplicate_decision_options(kind: str) -> list[str]:
+    if kind == "possible_reissue_or_separate_campaign":
+        return [
+            "keep_rows_as_separate_reissues_with_distinguishing_metadata",
+            "merge_only_if_sources_are_same_campaign_aliases",
+        ]
+    if kind == "possible_true_duplicate_same_campaign":
+        return [
+            "merge_duplicate_rows_after_confirming_same_prize_variant",
+            "split_rows_if_hidden_character_or_variant_difference_exists",
+        ]
+    return [
+        "collect_more_campaign_source_evidence",
+        "defer_until_exact_campaign_identity_is_known",
+    ]
+
+
+def _naming_decision_options(reason: Any) -> list[str]:
+    if reason == "non_prize_or_related_item_needs_classification":
+        return [
+            "classify_as_related_or_campaign_goods",
+            "replace_second_display_part_with_exact_prize_rank_if_evidence_exists",
+        ]
+    return [
+        "rewrite_display_name_to_release_rank_prize_character",
+        "split_multi_character_prize_into_one_row_per_character",
+    ]
 
 
 def _display_release_name(display_name: str) -> str:
