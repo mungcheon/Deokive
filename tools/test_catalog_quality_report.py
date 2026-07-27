@@ -83,6 +83,69 @@ class CatalogQualityReportTests(unittest.TestCase):
         self.assertEqual(1, summary["zero_price_exception_rows"])
         self.assertEqual(1, summary["zero_price_non_exception_rows"])
 
+    def test_ichiban_summary_tracks_naming_convention_review_rows(self) -> None:
+        rows = [
+            {
+                "catalog_index": 1,
+                "source_url": "https://1kuji.com/products/a",
+                "name_ko": "一番くじ 葬送のフリーレン / C賞 / ちょこのっこフィギュア フェルン / 페른",
+                "character_name": "페른",
+            },
+            {
+                "catalog_index": 2,
+                "source_url": "https://1kuji.com/products/a",
+                "name_ko": "一番くじ 葬送のフリーレン C賞 フェルン",
+                "character_name": "페른",
+            },
+            {
+                "catalog_index": 3,
+                "source_url": "https://1kuji.com/products/a",
+                "name_ko": "一番くじ 葬送のフリーレン / フェルン / C賞 / 다른캐릭터",
+                "character_name": "페른",
+            },
+            {
+                "catalog_index": 4,
+                "source_url": "https://1kuji.com/products/a",
+                "name_ko": "一番くじ 葬送のフリーレン / C賞 / ちょこのっこフィギュア フェルン / 다른캐릭터",
+                "character_name": "페른",
+            },
+        ]
+
+        summary = quality.build_ichiban_summary(rows, Path("missing-campaigns.json"))
+
+        self.assertEqual(3, summary["naming_convention_review_rows"])
+        self.assertEqual(
+            {
+                "display_name_should_have_release_rank_prize_character_parts": 1,
+                "second_part_should_be_prize_rank": 1,
+                "last_part_should_include_character_name": 1,
+            },
+            summary["naming_convention_review_reasons"],
+        )
+
+    def test_character_name_quality_tracks_known_alias_and_ja_token_mismatch(self) -> None:
+        rows = [
+            {
+                "catalog_index": 1,
+                "name_ja": "葬送のフリーレン フェルン 缶バッジ",
+                "character_name": "펀",
+                "affiliation": "장송의 프리렌",
+            },
+            {
+                "catalog_index": 2,
+                "name_ja": "葬送のフリーレン フェルン アクリルスタンド",
+                "character_name": "다른표기",
+                "affiliation": "장송의 프리렌",
+            },
+        ]
+
+        summary = quality.build_character_name_quality(rows)
+
+        self.assertEqual(1, summary["known_alias_rows"])
+        self.assertEqual(2, summary["ja_token_mismatch_rows"])
+        self.assertEqual(1, summary["single_character_name_review_rows"])
+        self.assertEqual("페른", summary["samples"]["known_alias_rows"][0]["expected_character_name"])
+
 
 if __name__ == "__main__":
     unittest.main()

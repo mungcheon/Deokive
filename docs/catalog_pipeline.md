@@ -55,7 +55,7 @@ python tools/import_agent_goods_intake.py data/intake/incoming --write
 
 ## Individual Tools
 
-- `tools/catalog_quality_report.py`: reads `data/catalog_public.json` and writes the local/admin report `server/catalog_quality_report.json`.
+- `tools/catalog_quality_report.py`: reads `data/catalog_public.json` and writes the local/admin report `server/catalog_quality_report.json`, including duplicate checks, missing-field breakdowns, character-name review counts, and Ichiban Kuji naming/price/campaign quality queues.
 - `tools/catalog_text_quality_report.py`: writes `server/catalog_text_quality_report.json` for mojibake/replacement-character checks.
 - `tools/normalize_catalog_seed.py`: normalizes category/store/text fields.
 - `tools/dedupe_catalog.py`: removes duplicate seed rows; use `--dart` for Dart catalog files.

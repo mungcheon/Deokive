@@ -23,6 +23,7 @@ jobs:
         run: |
           python -X utf8 -m unittest \
             tools.test_update_workflow_integrity \
+            tools.test_catalog_quality_report \
             tools.test_validate_agent_goods_intake \
             tools.test_import_agent_goods_intake \
             tools.test_audit_public_data_layout \

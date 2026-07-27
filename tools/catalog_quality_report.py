@@ -22,6 +22,17 @@ CORE_FIELDS = ("name_ko", "category", "character_name", "affiliation", "source_s
 ENRICHMENT_FIELDS = ("image_url", "source_url", "release_date", "barcode", "official_price_jpy")
 SERVER_UNSUPPORTED_FIELDS = ("official_price_krw",)
 GROUP_FIELDS = ("source_store", "category", "affiliation", "series_name", "sub_series")
+MIXED_CHARACTER_LABELS = {"혼합", "mixed", "mix", "various", "공통"}
+ACCEPTED_SINGLE_CHARACTER_NAMES = {"곰", "별"}
+KNOWN_CHARACTER_ALIASES = {
+    ("장송의 프리렌", "펀"): "페른",
+    ("장송의 프리렌", "페룬"): "페른",
+    ("葬送のフリーレン", "펀"): "페른",
+    ("葬送のフリーレン", "페룬"): "페른",
+}
+EXPECTED_CHARACTER_BY_JA_TOKEN = {
+    "フェルン": "페른",
+}
 
 SOURCE_GROUPS = {
     "chiikawa_official": (
@@ -283,6 +294,99 @@ def _is_ichiban_row(row: dict[str, Any]) -> bool:
     return row.get("source_store") == "이치방쿠지" or "1kuji.com" in str(row.get("source_url") or "")
 
 
+def _compact_sample(row: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "catalog_index": row.get("catalog_index"),
+        "name_ko": row.get("name_ko"),
+        "name_ja": row.get("name_ja"),
+        "character_name": row.get("character_name"),
+        "affiliation": row.get("affiliation"),
+        "source_store": row.get("source_store"),
+        "source_url": row.get("source_url"),
+    }
+
+
+def _split_display_parts(value: Any) -> list[str]:
+    return [part.strip() for part in str(value or "").split(" / ") if part.strip()]
+
+
+def _is_mixed_character(character: Any) -> bool:
+    value = str(character or "").strip()
+    return not value or value in MIXED_CHARACTER_LABELS or value.lower() in MIXED_CHARACTER_LABELS
+
+
+def _is_prize_rank(value: str) -> bool:
+    upper = value.upper()
+    return (
+        "賞" in value
+        or "等" in value
+        or "상" in value
+        or "LAST ONE" in upper
+        or "DOUBLE CHANCE" in upper
+        or "ラストワン" in value
+        or "ダブルチャンス" in value
+    )
+
+
+def _ichiban_naming_issue(row: dict[str, Any]) -> str | None:
+    parts = _split_display_parts(row.get("name_ko"))
+    if len(parts) < 4:
+        return "display_name_should_have_release_rank_prize_character_parts"
+    if not _is_prize_rank(parts[1]):
+        return "second_part_should_be_prize_rank"
+    character = str(row.get("character_name") or "").strip()
+    if not _is_mixed_character(character) and character not in parts[-1]:
+        return "last_part_should_include_character_name"
+    return None
+
+
+def build_character_name_quality(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    known_alias_rows: list[dict[str, Any]] = []
+    ja_token_mismatch_rows: list[dict[str, Any]] = []
+    short_name_rows: list[dict[str, Any]] = []
+
+    for row in rows:
+        affiliation = str(row.get("affiliation") or "").strip()
+        character = str(row.get("character_name") or "").strip()
+        if not character:
+            continue
+
+        expected = KNOWN_CHARACTER_ALIASES.get((affiliation, character))
+        if expected:
+            sample = _compact_sample(row)
+            sample["expected_character_name"] = expected
+            sample["reason"] = "known_alias"
+            known_alias_rows.append(sample)
+
+        name_ja = str(row.get("name_ja") or "")
+        for token, expected_character in EXPECTED_CHARACTER_BY_JA_TOKEN.items():
+            if token in name_ja and character != expected_character:
+                sample = _compact_sample(row)
+                sample["expected_character_name"] = expected_character
+                sample["reason"] = f"name_ja_contains_{token}"
+                ja_token_mismatch_rows.append(sample)
+
+        if (
+            len(character) == 1
+            and character not in ACCEPTED_SINGLE_CHARACTER_NAMES
+            and not _is_mixed_character(character)
+        ):
+            sample = _compact_sample(row)
+            sample["reason"] = "single_character_name_needs_review"
+            short_name_rows.append(sample)
+
+    return {
+        "known_alias_rows": len(known_alias_rows),
+        "ja_token_mismatch_rows": len(ja_token_mismatch_rows),
+        "single_character_name_review_rows": len(short_name_rows),
+        "samples": {
+            "known_alias_rows": known_alias_rows[:30],
+            "ja_token_mismatch_rows": ja_token_mismatch_rows[:30],
+            "single_character_name_review_rows": short_name_rows[:30],
+        },
+    }
+
+
 def build_ichiban_summary(
     rows: list[dict[str, Any]],
     campaign_path: Path = DEFAULT_ICHIBAN_CAMPAIGNS,
@@ -336,6 +440,17 @@ def build_ichiban_summary(
         for row in ichiban_rows
         if row.get("official_price_jpy") == 0 and row not in zero_price_exception_rows
     ]
+    naming_issue_rows: list[dict[str, Any]] = []
+    naming_issue_counts: Counter[str] = Counter()
+    for row in ichiban_rows:
+        issue = _ichiban_naming_issue(row)
+        if not issue:
+            continue
+        naming_issue_counts[issue] += 1
+        sample = _compact_sample(row)
+        sample["reason"] = issue
+        sample["display_parts"] = _split_display_parts(row.get("name_ko"))
+        naming_issue_rows.append(sample)
 
     return {
         "rows": len(ichiban_rows),
@@ -361,6 +476,9 @@ def build_ichiban_summary(
             }
             for row in zero_price_non_exception_rows[:20]
         ],
+        "naming_convention_review_rows": len(naming_issue_rows),
+        "naming_convention_review_reasons": dict(naming_issue_counts.most_common()),
+        "naming_convention_review_sample": naming_issue_rows[:40],
     }
 
 
@@ -456,6 +574,7 @@ def build_report(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "top_affiliations": Counter(row.get("affiliation") or "" for row in normalized).most_common(30),
         "missing_enrichment_groups": grouped_missing_matrix(normalized),
         "duplicates": duplicate_groups[:200],
+        "character_name_quality": build_character_name_quality(normalized),
         "ichiban_kuji": build_ichiban_summary(rows),
     }
 
