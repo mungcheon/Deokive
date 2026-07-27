@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-27T00:37:45Z",
+  "generated_at": "2026-07-27T02:44:51Z",
   "scope": "catalog_missing_image_actionability",
   "summary": {
     "missing_image_rows": 782,
@@ -60,13 +60,26 @@
     "manual_image_research_review_start_kind": "fallback_web_search",
     "source_discovery_review_start_rows": 20,
     "source_discovery_review_start_kind": "domain_limited_web_search",
-    "ensky_cache_candidate_action_rows": 0,
-    "ensky_cache_candidate_review_start_rows": 0,
-    "ensky_cache_candidate_review_start_kind": "",
-    "ensky_cache_candidate_action_batch_count": 0,
+    "ensky_cache_candidate_action_rows": 28,
+    "ensky_cache_candidate_review_start_rows": 10,
+    "ensky_cache_candidate_review_start_kind": "candidate_source_url",
+    "ensky_cache_candidate_action_batch_count": 3,
     "ensky_cache_candidate_can_import_now_rows": 0,
-    "variant_sibling_review_rows": 0,
-    "variant_sibling_review_status_counts": [],
+    "variant_sibling_review_rows": 11,
+    "variant_sibling_review_status_counts": [
+      [
+        "same_group_sibling_image_requires_exact_variant_check",
+        1
+      ],
+      [
+        "sibling_images_different_character_or_variant",
+        4
+      ],
+      [
+        "sibling_images_different_product_type",
+        6
+      ]
+    ],
     "image_attachment_template_rows": 23,
     "image_attachment_template_confirmed_rows": 0,
     "image_attachment_template_source_update_required_rows": 0,
@@ -8262,10 +8275,538 @@
     "manual_confirmation_required": true,
     "auto_apply_enabled": false
   },
-  "ensky_cache_candidate_review_start": {},
+  "ensky_cache_candidate_review_start": {
+    "batch_id": "ensky-cache-candidate-action-001",
+    "source_store": "엔스카이",
+    "row_count": 10,
+    "candidate_action_rows": 28,
+    "action_batch_count": 3,
+    "candidate_source_url_ready_rows": 28,
+    "candidate_image_url_ready_rows": 28,
+    "can_import_now_rows": 0,
+    "identity_warning_rows": 28,
+    "first_primary_review_url": "https://www.enskyshop.com/products/detail/31654",
+    "first_primary_review_url_kind": "candidate_source_url",
+    "sample_items_with_candidate_urls": 8,
+    "sample_candidate_items": [
+      {
+        "catalog_index": 1817,
+        "name_ko": "나의 히어로 아카데미아 미도리야 학원 머그컵",
+        "name_ja": "僕のヒーローアカデミア 緑谷出久 学園シリーズ マグカップ",
+        "affiliation": "나의 히어로 아카데미아",
+        "category": "머그컵",
+        "candidate_title": "アニメ『僕のヒーローアカデミア』 ちみけもますこっと /(1)緑谷出久",
+        "candidate_source_url": "https://www.enskyshop.com/products/detail/31654",
+        "candidate_image_url": "https://www.enskyshop.com/html/upload/save_image/0403115052_69cf2b0c5b6a1.jpg",
+        "candidate_identity_flags": [
+          "candidate_title_multi_variant_or_lineup",
+          "candidate_title_product_type_mismatch"
+        ],
+        "manual_confirmed_required": true
+      },
+      {
+        "catalog_index": 1818,
+        "name_ko": "나의 히어로 아카데미아 바쿠고 학원 머그컵",
+        "name_ja": "僕のヒーローアカデミア 爆豪勝己 学園シリーズ マグカップ",
+        "affiliation": "나의 히어로 아카데미아",
+        "category": "머그컵",
+        "candidate_title": "アニメ『僕のヒーローアカデミア』 ちみけもますこっと /(2)爆豪勝己",
+        "candidate_source_url": "https://www.enskyshop.com/products/detail/31655",
+        "candidate_image_url": "https://www.enskyshop.com/html/upload/save_image/0403130201_69cf3bb994147.jpg",
+        "candidate_identity_flags": [
+          "candidate_title_multi_variant_or_lineup",
+          "candidate_title_product_type_mismatch"
+        ],
+        "manual_confirmed_required": true
+      },
+      {
+        "catalog_index": 1821,
+        "name_ko": "나의 히어로 아카데미아 우라라카 우치와",
+        "name_ja": "僕のヒーローアカデミア 麗日お茶子 うちわ",
+        "affiliation": "나의 히어로 아카데미아",
+        "category": "응원용품",
+        "candidate_title": "アニメ『僕のヒーローアカデミア』 ちみけもますこっと /(3)麗日お茶子",
+        "candidate_source_url": "https://www.enskyshop.com/products/detail/31656",
+        "candidate_image_url": "https://www.enskyshop.com/html/upload/save_image/0403130218_69cf3bca9dfd6.jpg",
+        "candidate_identity_flags": [
+          "candidate_title_multi_variant_or_lineup",
+          "candidate_title_product_type_mismatch"
+        ],
+        "manual_confirmed_required": true
+      },
+      {
+        "catalog_index": 1714,
+        "name_ko": "나의 히어로 아카데미아 트레이딩 캔뱃지 미도리야 이즈쿠",
+        "name_ja": "僕のヒーローアカデミア トレーディング缶バッジ 緑谷出久",
+        "affiliation": "나의 히어로 아카데미아",
+        "category": "캔뱃지",
+        "candidate_title": "アニメ『僕のヒーローアカデミア』 ちみけもますこっと /(1)緑谷出久",
+        "candidate_source_url": "https://www.enskyshop.com/products/detail/31654",
+        "candidate_image_url": "https://www.enskyshop.com/html/upload/save_image/0403115052_69cf2b0c5b6a1.jpg",
+        "candidate_identity_flags": [
+          "candidate_title_multi_variant_or_lineup",
+          "candidate_title_product_type_mismatch"
+        ],
+        "manual_confirmed_required": true
+      },
+      {
+        "catalog_index": 1715,
+        "name_ko": "나의 히어로 아카데미아 트레이딩 캔뱃지 바쿠고 카츠키",
+        "name_ja": "僕のヒーローアカデミア トレーディング缶バッジ 爆豪勝己",
+        "affiliation": "나의 히어로 아카데미아",
+        "category": "캔뱃지",
+        "candidate_title": "アニメ『僕のヒーローアカデミア』 ちみけもますこっと /(2)爆豪勝己",
+        "candidate_source_url": "https://www.enskyshop.com/products/detail/31655",
+        "candidate_image_url": "https://www.enskyshop.com/html/upload/save_image/0403130201_69cf3bb994147.jpg",
+        "candidate_identity_flags": [
+          "candidate_title_multi_variant_or_lineup",
+          "candidate_title_product_type_mismatch"
+        ],
+        "manual_confirmed_required": true
+      },
+      {
+        "catalog_index": 1782,
+        "name_ko": "주술회전 이타도리 학원 시리즈 머그컵",
+        "name_ja": "呪術廻戦 虎杖悠仁 学園シリーズ マグカップ",
+        "affiliation": "주술회전",
+        "category": "머그컵",
+        "candidate_title": "TVアニメ「呪術廻戦」 ちみけもますこっと /(1)虎杖悠仁",
+        "candidate_source_url": "https://www.enskyshop.com/products/detail/28555",
+        "candidate_image_url": "https://www.enskyshop.com/html/upload/save_image/0422144135_68072c0fc85cc.jpg",
+        "candidate_identity_flags": [
+          "candidate_title_multi_variant_or_lineup",
+          "candidate_title_product_type_mismatch"
+        ],
+        "manual_confirmed_required": true
+      },
+      {
+        "catalog_index": 1783,
+        "name_ko": "주술회전 후시구로 학원 시리즈 머그컵",
+        "name_ja": "呪術廻戦 伏黒恵 学園シリーズ マグカップ",
+        "affiliation": "주술회전",
+        "category": "머그컵",
+        "candidate_title": "TVアニメ「呪術廻戦」 ちみけもますこっと /(2)伏黒恵",
+        "candidate_source_url": "https://www.enskyshop.com/products/detail/28556",
+        "candidate_image_url": "https://www.enskyshop.com/html/upload/save_image/0422144203_68072c2b76f9a.jpg",
+        "candidate_identity_flags": [
+          "candidate_title_multi_variant_or_lineup",
+          "candidate_title_product_type_mismatch"
+        ],
+        "manual_confirmed_required": true
+      },
+      {
+        "catalog_index": 1687,
+        "name_ko": "주술회전 클리어 파일 A4 고죠 사토루",
+        "name_ja": "呪術廻戦 クリアファイルA4 五条悟",
+        "affiliation": "주술회전",
+        "category": "문구",
+        "candidate_title": "TVアニメ「呪術廻戦」 ちみけもますこっと /(5)五条悟",
+        "candidate_source_url": "https://www.enskyshop.com/products/detail/28559",
+        "candidate_image_url": "https://www.enskyshop.com/html/upload/save_image/0422144251_68072c5b576a7.jpg",
+        "candidate_identity_flags": [
+          "candidate_title_multi_variant_or_lineup",
+          "candidate_title_product_type_mismatch"
+        ],
+        "manual_confirmed_required": true
+      }
+    ],
+    "review_section": "ensky_cache_candidate_action_queue",
+    "source": "ensky_cache_candidate_action_queue_public.json",
+    "recommended_action": "manual_review_ensky_cache_candidate_before_source_or_image_patch",
+    "manual_confirmation_required": true,
+    "auto_apply_enabled": false
+  },
   "variant_sibling_review": {
-    "summary": {},
-    "sample_items": []
+    "summary": {
+      "review_rows": 11,
+      "manual_confirmed_rows": 0,
+      "same_source_group_rows": 11,
+      "by_review_status": [
+        [
+          "same_group_sibling_image_requires_exact_variant_check",
+          1
+        ],
+        [
+          "sibling_images_different_character_or_variant",
+          4
+        ],
+        [
+          "sibling_images_different_product_type",
+          6
+        ]
+      ],
+      "by_source_store": [
+        [
+          "ご当地ちいかわ 공식(API)",
+          10
+        ],
+        [
+          "치이카와 온라인 쿠지",
+          1
+        ]
+      ],
+      "by_category": [
+        [
+          "마스코트",
+          4
+        ],
+        [
+          "아크릴 키링",
+          2
+        ],
+        [
+          "타월",
+          2
+        ],
+        [
+          "마그넷",
+          2
+        ],
+        [
+          "인형",
+          1
+        ]
+      ],
+      "auto_apply_enabled": false,
+      "recommended_next_action": "review_exact_variant_before_reusing_or_replacing_images"
+    },
+    "sample_items": [
+      {
+        "manual_confirmed": false,
+        "catalog_index": 657,
+        "name_ko": "C상: 인형 포셰트",
+        "name_ja": "C賞 ぬいぐるみポシェット",
+        "category": "인형",
+        "character_name": "우사기",
+        "affiliation": "치이카와",
+        "series_name": "ちいかわ うさぎだらけくじ",
+        "sub_series": "치이카와 우사기다라케 쿠지",
+        "source_store": "치이카와 온라인 쿠지",
+        "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
+        "review_status": "same_group_sibling_image_requires_exact_variant_check",
+        "imaged_sibling_rows": 2,
+        "imaged_sibling_sample": [
+          {
+            "catalog_index": 655,
+            "name_ko": "B상: 페이스 쿠션 (우라라라)",
+            "name_ja": "B賞 フェイスクッション ウラララ",
+            "category": "인형",
+            "character_name": "우사기",
+            "image_url": "https://media.app.slash.gift/public/cloudfront/images/chiikawa/dd1fb387-559c-4b94-87ae-91bae8c82d37.jpeg.1200",
+            "local_image_path": "assets/catalog_images/76325c9f2e709913e311.webp"
+          },
+          {
+            "catalog_index": 656,
+            "name_ko": "B상: 페이스 쿠션 (귀 늘어진)",
+            "name_ja": "B賞 フェイスクッション 耳たれ",
+            "category": "인형",
+            "character_name": "우사기",
+            "image_url": "https://media.app.slash.gift/public/cloudfront/images/chiikawa/6a7f9fe1-9e50-4bfb-bb7b-d0a3ca6f9946.jpeg.1200",
+            "local_image_path": "assets/catalog_images/40a4ebd4927b0c5149b5.webp"
+          }
+        ],
+        "recommended_action": "do_not_copy_sibling_image_without_exact_variant_evidence",
+        "required_evidence": [
+          "same source page or official page section",
+          "same product type",
+          "same character",
+          "same visible variant or exact prize/item label"
+        ],
+        "auto_apply_enabled": false
+      },
+      {
+        "manual_confirmed": false,
+        "catalog_index": 936,
+        "name_ko": "치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)",
+        "name_ja": "ちいかわ ご当地アクリルキーホルダー (浅草 雷門)",
+        "category": "아크릴 키링",
+        "character_name": "치이카와",
+        "affiliation": "치이카와",
+        "series_name": "ご当地",
+        "sub_series": "도쿄 한정",
+        "source_store": "ご当地ちいかわ 공식(API)",
+        "source_url": "https://www.jp-api.com/contents/NOD62/",
+        "review_status": "sibling_images_different_product_type",
+        "imaged_sibling_rows": 2,
+        "imaged_sibling_sample": [
+          {
+            "catalog_index": 934,
+            "name_ko": "치이카와 ご当地 마스코트 (도쿄타워)",
+            "name_ja": "ちいかわ ご当地マスコット (東京タワー)",
+            "category": "마스코트",
+            "character_name": "치이카와",
+            "image_url": "https://www.jp-api.com/images/tphoto_573793_0_b.png",
+            "local_image_path": "assets/catalog_images/a9b7590b57b8cb3a696b.webp"
+          },
+          {
+            "catalog_index": 935,
+            "name_ko": "하치와레 ご当地 마스코트 (도쿄타워)",
+            "name_ja": "ハチワレ ご当地マスコット (東京タワー)",
+            "category": "마스코트",
+            "character_name": "하치와레",
+            "image_url": "https://www.jp-api.com/images/tphoto_573793_0_b.png",
+            "local_image_path": "assets/catalog_images/a9b7590b57b8cb3a696b.webp"
+          }
+        ],
+        "recommended_action": "do_not_copy_sibling_image_without_exact_variant_evidence",
+        "required_evidence": [
+          "same source page or official page section",
+          "same product type",
+          "same character",
+          "same visible variant or exact prize/item label"
+        ],
+        "auto_apply_enabled": false
+      },
+      {
+        "manual_confirmed": false,
+        "catalog_index": 937,
+        "name_ko": "우사기 ご当地 마스코트 (아사쿠사 깃발)",
+        "name_ja": "うさぎ ご当地マスコット (浅草)",
+        "category": "마스코트",
+        "character_name": "우사기",
+        "affiliation": "치이카와",
+        "series_name": "ご当地",
+        "sub_series": "도쿄 한정",
+        "source_store": "ご当地ちいかわ 공식(API)",
+        "source_url": "https://www.jp-api.com/contents/NOD62/",
+        "review_status": "sibling_images_different_character_or_variant",
+        "imaged_sibling_rows": 2,
+        "imaged_sibling_sample": [
+          {
+            "catalog_index": 934,
+            "name_ko": "치이카와 ご当地 마스코트 (도쿄타워)",
+            "name_ja": "ちいかわ ご当地マスコット (東京タワー)",
+            "category": "마스코트",
+            "character_name": "치이카와",
+            "image_url": "https://www.jp-api.com/images/tphoto_573793_0_b.png",
+            "local_image_path": "assets/catalog_images/a9b7590b57b8cb3a696b.webp"
+          },
+          {
+            "catalog_index": 935,
+            "name_ko": "하치와레 ご当地 마스코트 (도쿄타워)",
+            "name_ja": "ハチワレ ご当地マスコット (東京タワー)",
+            "category": "마스코트",
+            "character_name": "하치와레",
+            "image_url": "https://www.jp-api.com/images/tphoto_573793_0_b.png",
+            "local_image_path": "assets/catalog_images/a9b7590b57b8cb3a696b.webp"
+          }
+        ],
+        "recommended_action": "do_not_copy_sibling_image_without_exact_variant_evidence",
+        "required_evidence": [
+          "same source page or official page section",
+          "same product type",
+          "same character",
+          "same visible variant or exact prize/item label"
+        ],
+        "auto_apply_enabled": false
+      },
+      {
+        "manual_confirmed": false,
+        "catalog_index": 938,
+        "name_ko": "치이카와 ご当地 미니 타올 (도쿄)",
+        "name_ja": "ちいかわ ご当地ミニタオル (東京)",
+        "category": "타월",
+        "character_name": "치이카와",
+        "affiliation": "치이카와",
+        "series_name": "ご当地",
+        "sub_series": "도쿄 한정",
+        "source_store": "ご当地ちいかわ 공식(API)",
+        "source_url": "https://www.jp-api.com/contents/NOD62/",
+        "review_status": "sibling_images_different_product_type",
+        "imaged_sibling_rows": 2,
+        "imaged_sibling_sample": [
+          {
+            "catalog_index": 934,
+            "name_ko": "치이카와 ご当地 마스코트 (도쿄타워)",
+            "name_ja": "ちいかわ ご当地マスコット (東京タワー)",
+            "category": "마스코트",
+            "character_name": "치이카와",
+            "image_url": "https://www.jp-api.com/images/tphoto_573793_0_b.png",
+            "local_image_path": "assets/catalog_images/a9b7590b57b8cb3a696b.webp"
+          },
+          {
+            "catalog_index": 935,
+            "name_ko": "하치와레 ご当地 마스코트 (도쿄타워)",
+            "name_ja": "ハチワレ ご当地マスコット (東京タワー)",
+            "category": "마스코트",
+            "character_name": "하치와레",
+            "image_url": "https://www.jp-api.com/images/tphoto_573793_0_b.png",
+            "local_image_path": "assets/catalog_images/a9b7590b57b8cb3a696b.webp"
+          }
+        ],
+        "recommended_action": "do_not_copy_sibling_image_without_exact_variant_evidence",
+        "required_evidence": [
+          "same source page or official page section",
+          "same product type",
+          "same character",
+          "same visible variant or exact prize/item label"
+        ],
+        "auto_apply_enabled": false
+      },
+      {
+        "manual_confirmed": false,
+        "catalog_index": 941,
+        "name_ko": "우사기 ご当地 마스코트 (오사카 통천각)",
+        "name_ja": "うさぎ ご当地マスコット (大阪 通天閣)",
+        "category": "마스코트",
+        "character_name": "우사기",
+        "affiliation": "치이카와",
+        "series_name": "ご当地",
+        "sub_series": "오사카 한정",
+        "source_store": "ご当地ちいかわ 공식(API)",
+        "source_url": "https://www.jp-api.com/contents/NOD62/",
+        "review_status": "sibling_images_different_character_or_variant",
+        "imaged_sibling_rows": 2,
+        "imaged_sibling_sample": [
+          {
+            "catalog_index": 939,
+            "name_ko": "치이카와 ご当地 마스코트 (오사카 타코야키)",
+            "name_ja": "ちいかわ ご当地マスコット (大阪 たこ焼き)",
+            "category": "마스코트",
+            "character_name": "치이카와",
+            "image_url": "https://www.jp-api.com/images/tphoto_550205_0_b.png",
+            "local_image_path": "assets/catalog_images/927bfdac53f300456d5e.webp"
+          },
+          {
+            "catalog_index": 940,
+            "name_ko": "하치와레 ご当地 마스코트 (오사카 타코야키)",
+            "name_ja": "ハチワレ ご当地マスコット (大阪 たこ焼き)",
+            "category": "마스코트",
+            "character_name": "하치와레",
+            "image_url": "https://www.jp-api.com/images/tphoto_550205_0_b.png",
+            "local_image_path": "assets/catalog_images/927bfdac53f300456d5e.webp"
+          }
+        ],
+        "recommended_action": "do_not_copy_sibling_image_without_exact_variant_evidence",
+        "required_evidence": [
+          "same source page or official page section",
+          "same product type",
+          "same character",
+          "same visible variant or exact prize/item label"
+        ],
+        "auto_apply_enabled": false
+      },
+      {
+        "manual_confirmed": false,
+        "catalog_index": 942,
+        "name_ko": "치이카와 ご当地 아크릴 키홀더 (오사카 타코야키)",
+        "name_ja": "ちいかわ ご当地アクリルキーホルダー (大阪 たこ焼き)",
+        "category": "아크릴 키링",
+        "character_name": "치이카와",
+        "affiliation": "치이카와",
+        "series_name": "ご当地",
+        "sub_series": "오사카 한정",
+        "source_store": "ご当地ちいかわ 공식(API)",
+        "source_url": "https://www.jp-api.com/contents/NOD62/",
+        "review_status": "sibling_images_different_product_type",
+        "imaged_sibling_rows": 2,
+        "imaged_sibling_sample": [
+          {
+            "catalog_index": 939,
+            "name_ko": "치이카와 ご当地 마스코트 (오사카 타코야키)",
+            "name_ja": "ちいかわ ご当地マスコット (大阪 たこ焼き)",
+            "category": "마스코트",
+            "character_name": "치이카와",
+            "image_url": "https://www.jp-api.com/images/tphoto_550205_0_b.png",
+            "local_image_path": "assets/catalog_images/927bfdac53f300456d5e.webp"
+          },
+          {
+            "catalog_index": 940,
+            "name_ko": "하치와레 ご当地 마스코트 (오사카 타코야키)",
+            "name_ja": "ハチワレ ご当地マスコット (大阪 たこ焼き)",
+            "category": "마스코트",
+            "character_name": "하치와레",
+            "image_url": "https://www.jp-api.com/images/tphoto_550205_0_b.png",
+            "local_image_path": "assets/catalog_images/927bfdac53f300456d5e.webp"
+          }
+        ],
+        "recommended_action": "do_not_copy_sibling_image_without_exact_variant_evidence",
+        "required_evidence": [
+          "same source page or official page section",
+          "same product type",
+          "same character",
+          "same visible variant or exact prize/item label"
+        ],
+        "auto_apply_enabled": false
+      },
+      {
+        "manual_confirmed": false,
+        "catalog_index": 943,
+        "name_ko": "치이카와 ご当地 미니 타올 (오사카)",
+        "name_ja": "ちいかわ ご当地ミニタオル (大阪)",
+        "category": "타월",
+        "character_name": "치이카와",
+        "affiliation": "치이카와",
+        "series_name": "ご当地",
+        "sub_series": "오사카 한정",
+        "source_store": "ご当地ちいかわ 공식(API)",
+        "source_url": "https://www.jp-api.com/contents/NOD62/",
+        "review_status": "sibling_images_different_product_type",
+        "imaged_sibling_rows": 2,
+        "imaged_sibling_sample": [
+          {
+            "catalog_index": 939,
+            "name_ko": "치이카와 ご当地 마스코트 (오사카 타코야키)",
+            "name_ja": "ちいかわ ご当地マスコット (大阪 たこ焼き)",
+            "category": "마스코트",
+            "character_name": "치이카와",
+            "image_url": "https://www.jp-api.com/images/tphoto_550205_0_b.png",
+            "local_image_path": "assets/catalog_images/927bfdac53f300456d5e.webp"
+          },
+          {
+            "catalog_index": 940,
+            "name_ko": "하치와레 ご当地 마스코트 (오사카 타코야키)",
+            "name_ja": "ハチワレ ご当地マスコット (大阪 たこ焼き)",
+            "category": "마스코트",
+            "character_name": "하치와레",
+            "image_url": "https://www.jp-api.com/images/tphoto_550205_0_b.png",
+            "local_image_path": "assets/catalog_images/927bfdac53f300456d5e.webp"
+          }
+        ],
+        "recommended_action": "do_not_copy_sibling_image_without_exact_variant_evidence",
+        "required_evidence": [
+          "same source page or official page section",
+          "same product type",
+          "same character",
+          "same visible variant or exact prize/item label"
+        ],
+        "auto_apply_enabled": false
+      },
+      {
+        "manual_confirmed": false,
+        "catalog_index": 953,
+        "name_ko": "하치와레 ご当地 마스코트 (후쿠오카 라멘)",
+        "name_ja": "ハチワレ ご当地マスコット (福岡 ラーメン)",
+        "category": "마스코트",
+        "character_name": "하치와레",
+        "affiliation": "치이카와",
+        "series_name": "ご当地",
+        "sub_series": "후쿠오카 한정",
+        "source_store": "ご当地ちいかわ 공식(API)",
+        "source_url": "https://www.jp-api.com/contents/NOD62/",
+        "review_status": "sibling_images_different_character_or_variant",
+        "imaged_sibling_rows": 1,
+        "imaged_sibling_sample": [
+          {
+            "catalog_index": 952,
+            "name_ko": "치이카와 ご当地 마스코트 (후쿠오카 멘타이코)",
+            "name_ja": "ちいかわ ご当地マスコット (福岡 明太子)",
+            "category": "마스코트",
+            "character_name": "치이카와",
+            "image_url": "https://www.jp-api.com/images/tphoto_550155_0_b.png",
+            "local_image_path": "assets/catalog_images/7045202b42f63735195b.webp"
+          }
+        ],
+        "recommended_action": "do_not_copy_sibling_image_without_exact_variant_evidence",
+        "required_evidence": [
+          "same source page or official page section",
+          "same product type",
+          "same character",
+          "same visible variant or exact prize/item label"
+        ],
+        "auto_apply_enabled": false
+      }
+    ]
   },
   "next_source_discovery_focus_pack": {
     "focus_pack_id": "source-discovery-focus-002",
