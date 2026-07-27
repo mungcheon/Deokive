@@ -9,6 +9,9 @@ truth and should not be treated as app data.
 
 Agent-collected raw goods data must go through `data/intake/` first. Do not add
 new ad-hoc JSON files to this folder root.
+The layout audit checks both tracked files and local files, so stray DB-like
+JSON files under `data/` should be moved into the proper intake folder or
+removed before publishing.
 
 ## Allowed Root Files
 

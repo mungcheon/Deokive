@@ -32,6 +32,28 @@ class PublicDataLayoutAuditTests(unittest.TestCase):
 
         self.assertTrue(any("Unexpected tracked data files" in error for error in errors))
 
+    def test_allows_agent_intake_records_in_staging_dirs(self) -> None:
+        self.assertTrue(target.is_allowed_data_path("data/intake/incoming/agent-run.json"))
+        self.assertTrue(target.is_allowed_data_path("data/intake/processed/agent-run.json"))
+        self.assertTrue(target.is_allowed_data_path("data/intake/rejected/agent-run.json"))
+
+    def test_rejects_local_data_files_outside_single_db_layout(self) -> None:
+        errors: list[str] = []
+
+        with patch.object(
+            target,
+            "iter_data_filesystem_files",
+            return_value=[
+                "data/catalog_public.json",
+                "data/intake/incoming/agent-run.json",
+                "data/extra_catalog_public.json",
+            ],
+        ):
+            summary = target.audit_data_filesystem_layout(errors)
+
+        self.assertEqual(3, summary["data_filesystem_files"])
+        self.assertTrue(any("Unexpected local data files" in error for error in errors))
+
     def test_rejects_invalid_incoming_payload(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             incoming = Path(tmp)

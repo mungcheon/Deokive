@@ -37,6 +37,11 @@ ALLOWED_DATA_FILES = {
     "data/intake/sources/ichiban_kuji_campaigns.json",
     "data/intake/templates/agent_goods_intake.template.json",
 }
+ALLOWED_INTAKE_RECORD_DIRS = {
+    "data/intake/incoming",
+    "data/intake/processed",
+    "data/intake/rejected",
+}
 
 REQUIRED_ITEM_FIELDS = {
     "catalog_index",
@@ -59,6 +64,27 @@ def git_ls_files_data() -> list[str]:
     return [line.strip().replace("\\", "/") for line in result.stdout.splitlines() if line.strip()]
 
 
+def iter_data_filesystem_files() -> list[str]:
+    return sorted(
+        path.relative_to(ROOT).as_posix()
+        for path in DATA.rglob("*")
+        if path.is_file()
+    )
+
+
+def is_allowed_data_path(path: str) -> bool:
+    normalized = path.replace("\\", "/")
+    if normalized in ALLOWED_DATA_FILES:
+        return True
+    candidate = Path(normalized)
+    parent = candidate.parent.as_posix()
+    return (
+        parent in ALLOWED_INTAKE_RECORD_DIRS
+        and candidate.suffix.lower() == ".json"
+        and candidate.name != ".gitkeep"
+    )
+
+
 def read_json(path: Path) -> Any:
     with path.open("r", encoding="utf-8") as handle:
         return json.load(handle)
@@ -66,7 +92,7 @@ def read_json(path: Path) -> Any:
 
 def audit_tracked_data_files(errors: list[str]) -> list[str]:
     tracked = git_ls_files_data()
-    unexpected = [path for path in tracked if path not in ALLOWED_DATA_FILES]
+    unexpected = [path for path in tracked if not is_allowed_data_path(path)]
     missing = sorted(path for path in ALLOWED_DATA_FILES if path not in set(tracked))
     if unexpected:
         errors.append(
@@ -76,6 +102,17 @@ def audit_tracked_data_files(errors: list[str]) -> list[str]:
     if missing:
         errors.append("Missing required tracked data files: " + ", ".join(missing))
     return tracked
+
+
+def audit_data_filesystem_layout(errors: list[str]) -> dict[str, int]:
+    files = iter_data_filesystem_files()
+    unexpected = [path for path in files if not is_allowed_data_path(path)]
+    if unexpected:
+        errors.append(
+            "Unexpected local data files outside the single-DB/intake layout: "
+            + ", ".join(unexpected[:20])
+        )
+    return {"data_filesystem_files": len(files)}
 
 
 def audit_catalog(errors: list[str]) -> dict[str, int]:
@@ -173,6 +210,7 @@ def audit_incoming_intake(errors: list[str]) -> dict[str, int]:
 def run_audit() -> tuple[dict[str, Any], list[str]]:
     errors: list[str] = []
     tracked = audit_tracked_data_files(errors)
+    filesystem_summary = audit_data_filesystem_layout(errors)
     catalog_summary = audit_catalog(errors)
     audit_catalog_meta(errors, catalog_summary["catalog_rows"])
     audit_site_status(errors)
@@ -181,6 +219,7 @@ def run_audit() -> tuple[dict[str, Any], list[str]]:
 
     summary: dict[str, Any] = {
         "tracked_data_files": len(tracked),
+        **filesystem_summary,
         **catalog_summary,
         "source_lists": source_counts,
         **intake_summary,
