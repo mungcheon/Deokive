@@ -185,6 +185,17 @@ ICHIBAN_PRODUCT_CHARACTER_TOKENS = (
 ICHIBAN_COMBINED_PRODUCT_MARKERS = ("&", "\uff06", "\u00d7", "VS", "vs", "\u30fb")
 
 KATAKANA = set("".join(chr(codepoint) for codepoint in range(0x30A0, 0x30FF + 1)))
+TEXT_FIELDS_TO_AUDIT = (
+    "name_ko",
+    "name_ja",
+    "name_en",
+    "series_name",
+    "sub_series",
+    "category",
+    "character_name",
+    "affiliation",
+    "source_store",
+)
 
 
 def product_token_matches(product_name: str, japanese_token: str) -> bool:
@@ -230,6 +241,13 @@ def _compact_alias_sample(row: dict[str, Any], *, field: str, value: Any, expect
         "affiliation": row.get("affiliation"),
         "source_url": row.get("source_url"),
     }
+
+
+def has_text_encoding_artifact(value: Any) -> bool:
+    text = str(value or "")
+    if "\ufffd" in text:
+        return True
+    return any((0x80 <= ord(char) <= 0x9F) for char in text)
 
 
 def build_character_alias_monitor(rows: list[dict[str, Any]]) -> dict[str, Any]:
@@ -284,6 +302,8 @@ def build_character_alias_monitor(rows: list[dict[str, Any]]) -> dict[str, Any]:
 
 
 def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    blank_character_name_rows: list[dict[str, Any]] = []
+    text_encoding_artifact_rows: list[dict[str, Any]] = []
     character_alias_violations: list[dict[str, Any]] = []
     ichiban_display_name_violations: list[dict[str, Any]] = []
     ichiban_display_character_mismatches: list[dict[str, Any]] = []
@@ -294,6 +314,30 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
 
     for row in rows:
         catalog_index = row.get("catalog_index")
+        if not str(row.get("character_name") or "").strip():
+            blank_character_name_rows.append(
+                {
+                    "catalog_index": catalog_index,
+                    "name_ko": row.get("name_ko"),
+                    "name_ja": row.get("name_ja"),
+                    "series_name": row.get("series_name"),
+                    "source_url": row.get("source_url"),
+                    "reason": "character_name_must_not_be_blank",
+                }
+            )
+        for field in TEXT_FIELDS_TO_AUDIT:
+            value = row.get(field)
+            if has_text_encoding_artifact(value):
+                text_encoding_artifact_rows.append(
+                    {
+                        "catalog_index": catalog_index,
+                        "field": field,
+                        "value": value,
+                        "name_ko": row.get("name_ko"),
+                        "source_url": row.get("source_url"),
+                        "reason": "text_contains_unicode_replacement_or_control_character",
+                    }
+                )
         for bad_value, rule in CHARACTER_MOJIBAKE_OR_ALIAS_FINDINGS.items():
             affiliation_scope = rule.get("affiliation_scope")
             if affiliation_scope and affiliation_scope not in str(row.get("affiliation") or ""):
@@ -419,7 +463,9 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
             )
 
     findings = (
-        len(character_alias_violations)
+        len(blank_character_name_rows)
+        + len(text_encoding_artifact_rows)
+        + len(character_alias_violations)
         + len(ichiban_display_name_violations)
         + len(ichiban_display_character_mismatches)
         + len(ichiban_product_character_violations)
@@ -435,6 +481,8 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "summary": {
             "rows": len(rows),
             "ichiban_rows": sum(1 for row in rows if is_ichiban_row(row)),
+            "blank_character_name_rows": len(blank_character_name_rows),
+            "text_encoding_artifact_rows": len(text_encoding_artifact_rows),
             "character_alias_violations": len(character_alias_violations),
             "ichiban_display_name_violations": len(ichiban_display_name_violations),
             "ichiban_display_character_mismatches": len(ichiban_display_character_mismatches),
@@ -475,6 +523,8 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
             ),
         },
         "character_alias_violations": character_alias_violations,
+        "blank_character_name_rows": blank_character_name_rows,
+        "text_encoding_artifact_rows": text_encoding_artifact_rows,
         "ichiban_display_name_violations": ichiban_display_name_violations,
         "ichiban_display_character_mismatches": ichiban_display_character_mismatches,
         "ichiban_product_character_violations": ichiban_product_character_violations,

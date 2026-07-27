@@ -59,6 +59,8 @@ class AuditCatalogCharacterNamesTest(unittest.TestCase):
 
         self.assertEqual(result["summary"]["status"], "pass")
         self.assertEqual(result["summary"]["findings"], 0)
+        self.assertEqual(result["summary"]["blank_character_name_rows"], 0)
+        self.assertEqual(result["summary"]["text_encoding_artifact_rows"], 0)
         self.assertEqual(result["summary"]["ichiban_product_character_violations"], 0)
         self.assertEqual(result["summary"]["ichiban_display_character_mismatches"], 0)
         self.assertEqual(
@@ -71,6 +73,36 @@ class AuditCatalogCharacterNamesTest(unittest.TestCase):
             result["policy"]["ichiban_display_name_official_language_note"],
         )
         self.assertIn("one catalog row per character", result["policy"]["ichiban_variant_split_rule"])
+
+    def test_reports_blank_character_name_and_encoding_artifacts(self) -> None:
+        rows = [
+            {
+                "catalog_index": 30,
+                "name_ko": "Sample goods",
+                "series_name": "Sample",
+                "character_name": "",
+            },
+            {
+                "catalog_index": 31,
+                "name_ko": "Broken \ufffd text",
+                "series_name": "Sample",
+                "character_name": "캐릭터",
+            },
+        ]
+
+        result = audit(rows)
+
+        self.assertEqual(result["summary"]["status"], "needs_review")
+        self.assertEqual(result["summary"]["blank_character_name_rows"], 1)
+        self.assertEqual(result["summary"]["text_encoding_artifact_rows"], 1)
+        self.assertEqual(
+            result["blank_character_name_rows"][0]["reason"],
+            "character_name_must_not_be_blank",
+        )
+        self.assertEqual(
+            result["text_encoding_artifact_rows"][0]["reason"],
+            "text_contains_unicode_replacement_or_control_character",
+        )
 
     def test_reports_character_alias_display_name_and_zero_price_violations(self) -> None:
         rows = [
