@@ -322,6 +322,13 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
             result["image_evidence_split"]["source_url_ready_sample_rows"][0]["catalog_index"],
             30,
         )
+        self.assertEqual(result["operator_next_actions"][0]["lane"], "image_from_known_source")
+        self.assertEqual(result["operator_next_actions"][0]["rows"], 1)
+        self.assertEqual(result["operator_next_actions"][1]["lane"], "source_before_image")
+        self.assertIn(
+            "animation_enrichment",
+            {item["lane"] for item in result["operator_next_actions"]},
+        )
 
     def test_field_focus_packs_groups_missing_rows_by_batch_key(self):
         items = [
@@ -425,9 +432,40 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
 
             text = path.read_text(encoding="utf-8-sig")
 
+        self.assertIn("## Operator Next Actions", text)
+        self.assertIn("No immediate operator action queue is loaded.", text)
         self.assertIn("## Image Evidence Split", text)
         self.assertIn("With source_url: `1`", text)
         self.assertIn("Store A", text)
+
+    def test_markdown_includes_operator_next_actions(self):
+        payload = {
+            "rows": 10,
+            "missing_images": 3,
+            "source_discovery_rows": 2,
+            "field_queue_missing_total": 5,
+            "missing_enrichment": {"image_url": 3},
+            "operator_next_actions": [
+                {
+                    "lane": "image_from_known_source",
+                    "label": "출처가 있는 사진부터 검수",
+                    "rows": 2,
+                    "source_store": "Store A",
+                    "category": "Figure",
+                    "next_action": "confirm exact image",
+                    "artifact": "server/example.json",
+                }
+            ],
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "backlog.md"
+            backlog.write_markdown(payload, path)
+
+            text = path.read_text(encoding="utf-8-sig")
+
+        self.assertIn("## Operator Next Actions", text)
+        self.assertIn("출처가 있는 사진부터 검수", text)
+        self.assertIn("server/example.json", text)
 
 
 if __name__ == "__main__":

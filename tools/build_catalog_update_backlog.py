@@ -74,6 +74,131 @@ def _sample_image_items(items: list[dict[str, Any]], limit: int = 5) -> list[dic
     return samples
 
 
+def _operator_next_actions(
+    *,
+    image_evidence_split: dict[str, Any],
+    animation_priority: dict[str, Any],
+    ichiban_quality: dict[str, Any],
+    field_update_work_packs: list[dict[str, Any]],
+    image_work_packs: list[dict[str, Any]],
+    limit: int = 8,
+) -> list[dict[str, Any]]:
+    actions: list[dict[str, Any]] = []
+
+    ready_image_rows = int(image_evidence_split.get("rows_ready_for_source_page_image_review") or 0)
+    if ready_image_rows:
+        actions.append(
+            {
+                "lane": "image_from_known_source",
+                "label": "출처가 있는 사진부터 검수",
+                "rows": ready_image_rows,
+                "why": "source_url이 이미 있어 이미지 후보 검수가 가장 빠릅니다.",
+                "next_action": "open source_url, confirm the exact product image, then submit image updates",
+                "artifact": "server/catalog_update_backlog.md#image-evidence-split",
+                "intake_dir": "data/intake/image_updates/incoming",
+                "tool": "tools/import_agent_catalog_image_updates.py",
+            }
+        )
+
+    source_required_rows = int(image_evidence_split.get("rows_requiring_source_url_before_image_review") or 0)
+    if source_required_rows:
+        actions.append(
+            {
+                "lane": "source_before_image",
+                "label": "사진 없는 항목의 출처 먼저 찾기",
+                "rows": source_required_rows,
+                "why": "출처가 없으면 사진 정확도 검수가 흔들립니다.",
+                "next_action": "find exact official source_url before choosing image_url",
+                "artifact": "server/catalog_source_discovery_queue.json",
+                "intake_dir": "data/intake/field_updates/incoming",
+                "tool": "tools/import_agent_catalog_field_updates.py",
+            }
+        )
+
+    animation_rows = int(animation_priority.get("queue_rows") or 0)
+    if animation_rows:
+        actions.append(
+            {
+                "lane": "animation_enrichment",
+                "label": "애니메이션 굿즈 결측 보강",
+                "rows": animation_rows,
+                "why": "사용자가 요청한 단간론파/마녀 재판/애니메이션 굿즈 보강 범위입니다.",
+                "next_action": "work the animation priority queue by source_url first, image_url second",
+                "artifact": animation_priority.get("artifact") or "server/animation_enrichment_priority_queue.html",
+                "intake_dir": "data/intake/field_updates/incoming",
+                "tool": "tools/import_agent_catalog_field_updates.py",
+            }
+        )
+
+    ichiban_rows = int(ichiban_quality.get("queue_rows") or 0)
+    if ichiban_rows:
+        actions.append(
+            {
+                "lane": "ichiban_quality",
+                "label": "이치방쿠지 품질 큐 정리",
+                "rows": ichiban_rows,
+                "why": "재발매/중복/캠페인 URL/비상 품목 분류를 분리해 역사 데이터 정확도를 올립니다.",
+                "next_action": "review campaign gaps, duplicate/reissue groups, and non-prize related items",
+                "artifact": ichiban_quality.get("artifact") or "server/ichiban_public_quality_queue.html",
+                "intake_dir": "data/intake/field_updates/incoming",
+                "tool": "tools/import_agent_catalog_field_updates.py",
+            }
+        )
+
+    if field_update_work_packs:
+        pack = field_update_work_packs[0]
+        actions.append(
+            {
+                "lane": "field_update_pack",
+                "label": "검증 가능한 필드 업데이트 팩 처리",
+                "rows": int(pack.get("missing") or 0),
+                "why": "같은 스토어/카테고리/필드를 묶어 작은 배치로 안전하게 반영합니다.",
+                "next_action": "fill the first field update work pack with exact evidence",
+                "artifact": "server/catalog_update_backlog.md#field-update-work-packs",
+                "intake_dir": pack.get("intake_dir") or "data/intake/field_updates/incoming",
+                "tool": pack.get("import_tool") or "tools/import_agent_catalog_field_updates.py",
+                "workstream": pack.get("workstream"),
+                "source_store": pack.get("source_store"),
+                "category": pack.get("category"),
+                "field": pack.get("field"),
+            }
+        )
+
+    if image_work_packs:
+        pack = image_work_packs[0]
+        actions.append(
+            {
+                "lane": "image_work_pack",
+                "label": "사진 후보 작업 팩 처리",
+                "rows": int(pack.get("missing_images") or 0),
+                "why": "같은 출처/카테고리 사진 결측을 묶어 잘못된 이미지 혼입을 줄입니다.",
+                "next_action": pack.get("next_action") or "review exact image candidates",
+                "artifact": "server/catalog_update_backlog.md#image-work-packs",
+                "intake_dir": "data/intake/image_updates/incoming",
+                "tool": "tools/import_agent_catalog_image_updates.py",
+                "source_store": pack.get("source_store"),
+                "category": pack.get("category"),
+                "automation_safety": pack.get("automation_safety"),
+            }
+        )
+
+    lane_priority = {
+        "image_from_known_source": 0,
+        "source_before_image": 1,
+        "animation_enrichment": 2,
+        "ichiban_quality": 3,
+        "field_update_pack": 4,
+        "image_work_pack": 5,
+    }
+    actions.sort(
+        key=lambda item: (
+            lane_priority.get(str(item.get("lane") or ""), 99),
+            -int(item.get("rows") or 0),
+        )
+    )
+    return actions[:limit]
+
+
 def _field_focus_packs(field_items: list[dict[str, Any]], limit: int = 30) -> list[dict[str, Any]]:
     grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for item in field_items:
@@ -522,6 +647,90 @@ def build_backlog(
         or (image_asset_audit_payload.get("download_readiness") or {}).get("missing_image_evidence_priority")
         or {}
     )
+    image_evidence_split = {
+        "missing_image_url_rows": image_asset_summary.get(
+            "missing_image_url_rows",
+            queue_payload.get("missing_images"),
+        ),
+        "with_source_url_rows": missing_image_evidence_priority.get(
+            "with_source_url_rows",
+            image_asset_summary.get("missing_image_with_source_url_rows", 0),
+        ),
+        "without_source_url_rows": missing_image_evidence_priority.get(
+            "without_source_url_rows",
+            image_asset_summary.get("missing_image_without_source_url_rows", 0),
+        ),
+        "rows_ready_for_source_page_image_review": image_asset_summary.get(
+            "rows_ready_for_source_page_image_review",
+            missing_image_evidence_priority.get("with_source_url_rows", 0),
+        ),
+        "rows_requiring_source_url_before_image_review": image_asset_summary.get(
+            "rows_requiring_source_url_before_image_review",
+            missing_image_evidence_priority.get("without_source_url_rows", 0),
+        ),
+        "source_url_ready_sample_rows": missing_image_evidence_priority.get(
+            "source_url_ready_sample_rows",
+            [],
+        )[:20],
+        "source_discovery_required_sample_rows": missing_image_evidence_priority.get(
+            "source_discovery_required_sample_rows",
+            [],
+        )[:20],
+        "with_source_url_by_source_store": missing_image_evidence_priority.get(
+            "with_source_url_by_source_store",
+            [],
+        )[:20],
+        "without_source_url_by_source_store": missing_image_evidence_priority.get(
+            "without_source_url_by_source_store",
+            [],
+        )[:20],
+    }
+    field_focus_packs = _field_focus_packs(field_items, 40)
+    field_update_work_packs = _field_update_work_packs(field_items, 60)
+    image_work_packs = _image_work_packs(queue, 60)
+    animation_priority = {
+        "artifact": "server/animation_enrichment_priority_queue.html",
+        "json": "server/animation_enrichment_priority_queue.json",
+        "csv": "server/animation_enrichment_priority_queue.csv",
+        "image_update_template": "server/animation_next_batch_image_update.template.json",
+        "animation_rows": animation_enrichment_priority_payload.get("animation_rows", 0),
+        "queue_groups": animation_enrichment_priority_payload.get("queue_groups", 0),
+        "queue_rows": animation_enrichment_priority_payload.get("queue_rows", 0),
+        "missing_image_rows": animation_enrichment_priority_payload.get("missing_image_rows", 0),
+        "missing_source_rows": animation_enrichment_priority_payload.get("missing_source_rows", 0),
+        "by_workflow": animation_enrichment_priority_payload.get("by_workflow", []),
+        "items": animation_enrichment_priority_payload.get("items", [])[:40],
+    }
+    ichiban_quality = {
+        "artifact": "server/ichiban_public_quality_queue.html",
+        "json": "server/ichiban_public_quality_queue.json",
+        "csv": "server/ichiban_public_quality_queue.csv",
+        "queue_rows": ichiban_quality_summary.get("queue_rows", len(ichiban_quality_items)),
+        "campaign_gap_queue_rows": ichiban_quality_summary.get("campaign_gap_queue_rows", 0),
+        "exact_display_duplicate_queue_rows": ichiban_quality_summary.get(
+            "exact_display_duplicate_queue_rows", 0
+        ),
+        "zero_price_policy_queue_rows": ichiban_quality_summary.get(
+            "zero_price_policy_queue_rows", 0
+        ),
+        "naming_convention_queue_rows": ichiban_quality_summary.get(
+            "naming_convention_queue_rows", 0
+        ),
+        "display_name_convention_review_rows": ichiban_quality_summary.get(
+            "display_name_convention_review_rows", 0
+        ),
+        "non_prize_related_item_review_rows": ichiban_quality_summary.get(
+            "non_prize_related_item_review_rows", 0
+        ),
+        "campaign_count": ichiban_quality_summary.get("campaign_count", 0),
+        "seeded_campaign_url_count": ichiban_quality_summary.get(
+            "seeded_campaign_url_count", 0
+        ),
+        "work_pack_rows": ichiban_quality_summary.get("work_pack_rows", len(ichiban_work_packs)),
+        "by_workflow": ichiban_by_workflow.most_common(),
+        "work_packs": ichiban_work_packs[:40],
+        "sample_rows": ichiban_quality_items[:20],
+    }
 
     return {
         "rows": quality_payload.get("rows"),
@@ -575,87 +784,9 @@ def build_backlog(
             "by_workflow": naming_by_workflow.most_common(),
             "sample_rows": naming_items[:20],
         },
-        "ichiban_quality": {
-            "artifact": "server/ichiban_public_quality_queue.html",
-            "json": "server/ichiban_public_quality_queue.json",
-            "csv": "server/ichiban_public_quality_queue.csv",
-            "queue_rows": ichiban_quality_summary.get("queue_rows", len(ichiban_quality_items)),
-            "campaign_gap_queue_rows": ichiban_quality_summary.get("campaign_gap_queue_rows", 0),
-            "exact_display_duplicate_queue_rows": ichiban_quality_summary.get(
-                "exact_display_duplicate_queue_rows", 0
-            ),
-            "zero_price_policy_queue_rows": ichiban_quality_summary.get(
-                "zero_price_policy_queue_rows", 0
-            ),
-            "naming_convention_queue_rows": ichiban_quality_summary.get(
-                "naming_convention_queue_rows", 0
-            ),
-            "display_name_convention_review_rows": ichiban_quality_summary.get(
-                "display_name_convention_review_rows", 0
-            ),
-            "non_prize_related_item_review_rows": ichiban_quality_summary.get(
-                "non_prize_related_item_review_rows", 0
-            ),
-            "campaign_count": ichiban_quality_summary.get("campaign_count", 0),
-            "seeded_campaign_url_count": ichiban_quality_summary.get(
-                "seeded_campaign_url_count", 0
-            ),
-            "work_pack_rows": ichiban_quality_summary.get("work_pack_rows", len(ichiban_work_packs)),
-            "by_workflow": ichiban_by_workflow.most_common(),
-            "work_packs": ichiban_work_packs[:40],
-            "sample_rows": ichiban_quality_items[:20],
-        },
-        "animation_enrichment_priority": {
-            "artifact": "server/animation_enrichment_priority_queue.html",
-            "json": "server/animation_enrichment_priority_queue.json",
-            "csv": "server/animation_enrichment_priority_queue.csv",
-            "image_update_template": "server/animation_next_batch_image_update.template.json",
-            "animation_rows": animation_enrichment_priority_payload.get("animation_rows", 0),
-            "queue_groups": animation_enrichment_priority_payload.get("queue_groups", 0),
-            "queue_rows": animation_enrichment_priority_payload.get("queue_rows", 0),
-            "missing_image_rows": animation_enrichment_priority_payload.get("missing_image_rows", 0),
-            "missing_source_rows": animation_enrichment_priority_payload.get("missing_source_rows", 0),
-            "by_workflow": animation_enrichment_priority_payload.get("by_workflow", []),
-            "items": animation_enrichment_priority_payload.get("items", [])[:40],
-        },
-        "image_evidence_split": {
-            "missing_image_url_rows": image_asset_summary.get(
-                "missing_image_url_rows",
-                queue_payload.get("missing_images"),
-            ),
-            "with_source_url_rows": missing_image_evidence_priority.get(
-                "with_source_url_rows",
-                image_asset_summary.get("missing_image_with_source_url_rows", 0),
-            ),
-            "without_source_url_rows": missing_image_evidence_priority.get(
-                "without_source_url_rows",
-                image_asset_summary.get("missing_image_without_source_url_rows", 0),
-            ),
-            "rows_ready_for_source_page_image_review": image_asset_summary.get(
-                "rows_ready_for_source_page_image_review",
-                missing_image_evidence_priority.get("with_source_url_rows", 0),
-            ),
-            "rows_requiring_source_url_before_image_review": image_asset_summary.get(
-                "rows_requiring_source_url_before_image_review",
-                missing_image_evidence_priority.get("without_source_url_rows", 0),
-            ),
-            "source_url_ready_sample_rows": missing_image_evidence_priority.get(
-                "source_url_ready_sample_rows",
-                [],
-            )[:20],
-            "source_discovery_required_sample_rows": missing_image_evidence_priority.get(
-                "source_discovery_required_sample_rows",
-                [],
-            )[:20],
-            "with_source_url_by_source_store": missing_image_evidence_priority.get(
-                "with_source_url_by_source_store",
-                [],
-            )[:20],
-            "without_source_url_by_source_store": missing_image_evidence_priority.get(
-                "without_source_url_by_source_store",
-                [],
-            )[:20],
-        },
+        "ichiban_quality": ichiban_quality,
+        "animation_enrichment_priority": animation_priority,
+        "image_evidence_split": image_evidence_split,
         "field_queue_missing_total": field_queue_payload.get("missing_total"),
         "field_queue_by_field": field_queue_payload.get("by_field", []),
         "field_queue_by_strategy": field_queue_payload.get("by_strategy", []),
@@ -678,8 +809,8 @@ def build_backlog(
             "animation_goods_store_category_fields",
             [],
         )[:80],
-        "field_focus_packs": _field_focus_packs(field_items, 40),
-        "field_update_work_packs": _field_update_work_packs(field_items, 60),
+        "field_focus_packs": field_focus_packs,
+        "field_update_work_packs": field_update_work_packs,
         "image_queue_by_strategy": by_strategy.most_common(),
         "image_queue_by_provider_status": by_provider_status.most_common(),
         "image_queue_by_automation_safety": by_automation_safety.most_common(),
@@ -690,8 +821,15 @@ def build_backlog(
         "top_image_strategy_store_backlog": image_strategy_store_top,
         "top_image_safety_store_backlog": image_safety_store_top,
         "top_image_store_category_backlog": image_store_category_top,
-        "image_work_packs": _image_work_packs(queue, 60),
+        "image_work_packs": image_work_packs,
         "top_image_backlog": actions[:60],
+        "operator_next_actions": _operator_next_actions(
+            image_evidence_split=image_evidence_split,
+            animation_priority=animation_priority,
+            ichiban_quality=ichiban_quality,
+            field_update_work_packs=field_update_work_packs,
+            image_work_packs=image_work_packs,
+        ),
         "recommended_sequence": [
             "Start with field_focus_packs where automation_candidate is true; each pack is one store/category/field batch.",
             "Use field_update_work_packs for confirmed source_url, release_date, barcode, and official_price_jpy intake rows.",
@@ -726,9 +864,31 @@ def write_markdown(backlog: dict[str, Any], path: Path) -> None:
         f"- Missing field cells: `{backlog.get('field_queue_missing_total')}`",
         f"- Missing enrichment: `{json.dumps(backlog.get('missing_enrichment'), ensure_ascii=False)}`",
         "",
-        "## Source Discovery",
+        "## Operator Next Actions",
         "",
     ]
+    for item in backlog.get("operator_next_actions", []):
+        details = [
+            item.get("lane"),
+            item.get("source_store"),
+            item.get("category"),
+            item.get("field"),
+        ]
+        detail_text = " / ".join(str(value) for value in details if value)
+        suffix = f" / `{detail_text}`" if detail_text else ""
+        lines.append(
+            f"- `{item.get('label')}`: `{item.get('rows')}` rows{suffix}; "
+            f"next `{item.get('next_action')}`; artifact `{item.get('artifact')}`"
+        )
+    if not backlog.get("operator_next_actions"):
+        lines.append("- No immediate operator action queue is loaded.")
+    lines.extend(
+        [
+            "",
+            "## Source Discovery",
+            "",
+        ]
+    )
     for workflow, count in backlog.get("source_discovery_by_workflow", []):
         lines.append(f"- `{workflow}`: `{count}`")
     lines.extend(["", "## Source Discovery Top Stores", ""])
