@@ -41,6 +41,19 @@ class PublicCatalogImageAssetAuditTests(unittest.TestCase):
             summary["rows_still_requiring_image_url_evidence"],
             summary["missing_image_url_rows"],
         )
+        self.assertEqual(
+            summary["missing_image_with_source_url_rows"]
+            + summary["missing_image_without_source_url_rows"],
+            summary["missing_image_url_rows"],
+        )
+        self.assertEqual(
+            summary["rows_ready_for_source_page_image_review"],
+            summary["missing_image_with_source_url_rows"],
+        )
+        self.assertEqual(
+            summary["rows_requiring_source_url_before_image_review"],
+            summary["missing_image_without_source_url_rows"],
+        )
         self.assertEqual(summary["auto_download_ready_rows"], 0)
         self.assertTrue(
             report["download_readiness"]["download_complete_for_known_image_urls"]
@@ -80,6 +93,7 @@ class PublicCatalogImageAssetAuditTests(unittest.TestCase):
                     "source_store": "Store A",
                     "category": "Acrylic",
                     "affiliation": "Series B",
+                    "source_url": "https://example.com/b",
                 },
                 {
                     "catalog_index": 3,
@@ -97,14 +111,20 @@ class PublicCatalogImageAssetAuditTests(unittest.TestCase):
         priority = report["missing_image_evidence_priority"]
 
         self.assertEqual(priority["rows"], 2)
+        self.assertEqual(priority["with_source_url_rows"], 1)
+        self.assertEqual(priority["without_source_url_rows"], 1)
         self.assertEqual(priority["by_source_store"][0], ["Store A", 2])
         self.assertEqual(priority["by_category"], [["Figure", 1], ["Acrylic", 1]])
         self.assertEqual(priority["by_affiliation"], [["Series A", 1], ["Series B", 1]])
         self.assertEqual(priority["sample_rows"][0]["catalog_index"], 1)
+        self.assertEqual(priority["source_url_ready_sample_rows"][0]["catalog_index"], 2)
+        self.assertEqual(priority["source_discovery_required_sample_rows"][0]["catalog_index"], 1)
         self.assertEqual(
             report["download_readiness"]["missing_image_evidence_priority"],
             priority,
         )
+        self.assertEqual(report["download_readiness"]["rows_ready_for_source_page_image_review"], 1)
+        self.assertEqual(report["download_readiness"]["rows_requiring_source_url_before_image_review"], 1)
 
     def test_report_flags_image_url_without_local_path(self) -> None:
         catalog = {

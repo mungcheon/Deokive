@@ -33,6 +33,8 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
     rows = len(items)
     image_url_rows = [item for item in items if present(item.get("image_url"))]
     missing_image_url_items = [item for item in items if not present(item.get("image_url"))]
+    missing_image_with_source_url = [item for item in missing_image_url_items if present(item.get("source_url"))]
+    missing_image_without_source_url = [item for item in missing_image_url_items if not present(item.get("source_url"))]
     local_path_rows = [item for item in items if present(item.get("local_image_path"))]
     both_rows = [item for item in items if present(item.get("image_url")) and present(item.get("local_image_path"))]
     image_without_local = [item for item in items if present(item.get("image_url")) and not present(item.get("local_image_path"))]
@@ -78,12 +80,22 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
     missing_image_url_rows = len(missing_image_url_items)
     missing_image_priority = {
         "rows": missing_image_url_rows,
+        "with_source_url_rows": len(missing_image_with_source_url),
+        "without_source_url_rows": len(missing_image_without_source_url),
         "by_source_store": _field_counts(missing_image_url_items, "source_store", limit=20),
         "by_category": _field_counts(missing_image_url_items, "category", limit=20),
         "by_affiliation": _field_counts(missing_image_url_items, "affiliation", limit=20),
         "by_series_name": _field_counts(missing_image_url_items, "series_name", limit=20),
+        "with_source_url_by_source_store": _field_counts(missing_image_with_source_url, "source_store", limit=20),
+        "without_source_url_by_source_store": _field_counts(
+            missing_image_without_source_url,
+            "source_store",
+            limit=20,
+        ),
         "top_source_store": _field_counts(missing_image_url_items, "source_store", limit=1),
         "sample_rows": sample_rows(missing_image_url_items, limit=30),
+        "source_url_ready_sample_rows": sample_rows(missing_image_with_source_url, limit=30),
+        "source_discovery_required_sample_rows": sample_rows(missing_image_without_source_url, limit=30),
     }
     download_readiness = {
         "status": (
@@ -99,6 +111,8 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
         "invalid_local_image_paths": len(invalid_paths),
         "missing_image_url_rows": missing_image_url_rows,
         "rows_still_requiring_image_url_evidence": missing_image_url_rows,
+        "rows_ready_for_source_page_image_review": len(missing_image_with_source_url),
+        "rows_requiring_source_url_before_image_review": len(missing_image_without_source_url),
         "download_complete_for_known_image_urls": known_image_download_blockers == 0,
         "missing_image_evidence_priority": missing_image_priority,
         "next_safe_phase": (
@@ -129,6 +143,8 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
             "rows": rows,
             "image_url_rows": len(image_url_rows),
             "missing_image_url_rows": missing_image_url_rows,
+            "missing_image_with_source_url_rows": len(missing_image_with_source_url),
+            "missing_image_without_source_url_rows": len(missing_image_without_source_url),
             "local_image_path_rows": len(local_path_rows),
             "image_url_with_local_path_rows": len(both_rows),
             "image_url_without_local_path_rows": len(image_without_local),
@@ -148,6 +164,8 @@ def build_report(catalog: dict[str, Any], *, generated_at: str | None = None) ->
             "download_readiness_status": download_readiness["status"],
             "known_image_download_blocker_rows": known_image_download_blockers,
             "rows_still_requiring_image_url_evidence": missing_image_url_rows,
+            "rows_ready_for_source_page_image_review": len(missing_image_with_source_url),
+            "rows_requiring_source_url_before_image_review": len(missing_image_without_source_url),
             "auto_download_ready_rows": 0,
         },
         "download_readiness": download_readiness,
