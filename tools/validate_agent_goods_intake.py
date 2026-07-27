@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import datetime as dt
 import json
 import re
 import sys
@@ -15,6 +16,32 @@ CONFIDENCE_VALUES = {"confirmed", "candidate", "needs_review"}
 EVIDENCE_TYPES = {"official", "trusted", "manual"}
 PRICE_CURRENCIES = {"JPY", "KRW", "USD", "CNY", "TWD"}
 DATE_RE = re.compile(r"^\d{4}(?:-\d{2}(?:-\d{2})?)?$")
+TOP_LEVEL_FIELDS = {"schema_version", "agent", "items"}
+AGENT_FIELDS = {"name", "run_id", "collected_at", "notes"}
+ITEM_FIELDS = {
+    "external_id",
+    "display_name",
+    "name_ko",
+    "name_ja",
+    "name_en",
+    "affiliation",
+    "category",
+    "series_name",
+    "sub_series",
+    "character_name",
+    "source_store",
+    "source_url",
+    "image_url",
+    "release_date",
+    "barcode",
+    "official_price",
+    "official_price_currency",
+    "official_price_jpy",
+    "evidence",
+    "confidence",
+    "notes",
+}
+EVIDENCE_FIELDS = {"url", "type", "note"}
 
 
 def is_url(value: str) -> bool:
@@ -44,6 +71,28 @@ def require_string(
     return value
 
 
+def reject_unknown_fields(
+    errors: list[str],
+    item_path: str,
+    payload: dict[str, object],
+    allowed_fields: set[str],
+) -> None:
+    unknown = sorted(str(key) for key in payload if key not in allowed_fields)
+    if unknown:
+        errors.append(f"{item_path}: unknown field(s): {', '.join(unknown)}")
+
+
+def is_iso_timestamp(value: str) -> bool:
+    normalized = value.strip()
+    if normalized.endswith("Z"):
+        normalized = normalized[:-1] + "+00:00"
+    try:
+        dt.datetime.fromisoformat(normalized)
+    except ValueError:
+        return False
+    return True
+
+
 def validate_item(
     errors: list[str],
     item: object,
@@ -53,6 +102,7 @@ def validate_item(
     if not isinstance(item, dict):
         errors.append(f"{item_path}: expected object")
         return
+    reject_unknown_fields(errors, item_path, item, ITEM_FIELDS)
 
     required = [
         "external_id",
@@ -134,6 +184,7 @@ def validate_item(
                 if not isinstance(evidence_row, dict):
                     errors.append(f"{evidence_path}: expected object")
                     continue
+                reject_unknown_fields(errors, evidence_path, evidence_row, EVIDENCE_FIELDS)
                 url = require_string(errors, evidence_path, evidence_row, "url")
                 if url and not is_url(url):
                     errors.append(f"{evidence_path}.url: expected http(s) URL")
@@ -158,6 +209,7 @@ def validate_payload(path: Path, payload: object) -> tuple[list[str], dict[str, 
 
     if not isinstance(payload, dict):
         return [f"{path}: expected top-level object"], summary
+    reject_unknown_fields(errors, str(path), payload, TOP_LEVEL_FIELDS)
 
     if payload.get("schema_version") != 1:
         errors.append("schema_version: expected 1")
@@ -166,9 +218,12 @@ def validate_payload(path: Path, payload: object) -> tuple[list[str], dict[str, 
     if not isinstance(agent, dict):
         errors.append("agent: expected object")
     else:
+        reject_unknown_fields(errors, "agent", agent, AGENT_FIELDS)
         require_string(errors, "agent", agent, "name")
         require_string(errors, "agent", agent, "run_id")
-        require_string(errors, "agent", agent, "collected_at")
+        collected_at = require_string(errors, "agent", agent, "collected_at")
+        if collected_at and not is_iso_timestamp(collected_at):
+            errors.append("agent.collected_at: expected ISO-8601 timestamp")
 
     items = payload.get("items")
     if not isinstance(items, list):

@@ -30,6 +30,10 @@ python -X utf8 tools/import_agent_goods_intake.py data/intake/incoming/example-a
 Only `data/catalog_public.json` is the public DB. Intake files are evidence and
 review material; they are not used directly by the app.
 
+Do not add custom fields. The validator rejects unknown top-level, agent, item,
+and evidence keys so every agent run can be imported by the same pipeline.
+Use `notes` for short human context that does not belong in a structured field.
+
 ## Item Rules
 
 - Use official language fields when available: `name_ja` for Japanese official
@@ -44,6 +48,8 @@ review material; they are not used directly by the app.
 - Preserve currency explicitly. If the official price is yen, set
   `official_price_currency` to `JPY`; do not copy only the number into a KRW
   price field.
+- `agent.collected_at` must be an ISO-8601 timestamp, for example
+  `2026-07-27T00:00:00+09:00`.
 - Attach both `source_url` and `image_url` when possible. Use product/detail
   pages, not generic search pages, for `source_url`.
 - Set `confidence` to `confirmed`, `candidate`, or `needs_review`.

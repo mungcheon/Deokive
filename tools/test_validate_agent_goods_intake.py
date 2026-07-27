@@ -80,6 +80,71 @@ class AgentGoodsIntakeValidationTests(unittest.TestCase):
             any("official_price_jpy: must match official_price" in error for error in errors)
         )
 
+    def test_rejects_unknown_fields_so_agents_share_one_shape(self) -> None:
+        payload = {
+            "schema_version": 1,
+            "agent": {
+                "name": "agent",
+                "run_id": "run",
+                "collected_at": "2026-07-27T00:00:00+09:00",
+                "extra_agent_field": "nope",
+            },
+            "items": [
+                {
+                    "external_id": "sku-1",
+                    "display_name": "Sample",
+                    "category": "figure",
+                    "series_name": "Sample Series",
+                    "source_store": "Official Store",
+                    "source_url": "https://example.com/product",
+                    "confidence": "confirmed",
+                    "random_price_hint": 1200,
+                    "evidence": [
+                        {
+                            "url": "https://example.com/product",
+                            "type": "official",
+                            "extra_evidence_field": "nope",
+                        }
+                    ],
+                }
+            ],
+            "random_top_level": True,
+        }
+
+        errors, _summary = target.validate_payload(Path("sample.json"), payload)
+
+        self.assertTrue(any("sample.json: unknown field(s): random_top_level" in error for error in errors))
+        self.assertTrue(any("agent: unknown field(s): extra_agent_field" in error for error in errors))
+        self.assertTrue(any("items[0]: unknown field(s): random_price_hint" in error for error in errors))
+        self.assertTrue(
+            any("items[0].evidence[0]: unknown field(s): extra_evidence_field" in error for error in errors)
+        )
+
+    def test_rejects_non_iso_collected_at(self) -> None:
+        payload = {
+            "schema_version": 1,
+            "agent": {
+                "name": "agent",
+                "run_id": "run",
+                "collected_at": "today",
+            },
+            "items": [
+                {
+                    "external_id": "sku-1",
+                    "display_name": "Sample",
+                    "category": "figure",
+                    "series_name": "Sample Series",
+                    "source_store": "Official Store",
+                    "source_url": "https://example.com/product",
+                    "confidence": "confirmed",
+                }
+            ],
+        }
+
+        errors, _summary = target.validate_payload(Path("sample.json"), payload)
+
+        self.assertTrue(any("agent.collected_at: expected ISO-8601 timestamp" in error for error in errors))
+
 
 if __name__ == "__main__":
     unittest.main()
