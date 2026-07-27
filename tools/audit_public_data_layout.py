@@ -37,6 +37,7 @@ IMAGE_UPDATES_INCOMING = INTAKE / "image_updates" / "incoming"
 SOURCES = INTAKE / "sources"
 SERVER_ARTIFACT_SUFFIXES = {".csv", ".html", ".json", ".md", ".jpg", ".jpeg", ".png", ".txt"}
 INTAKE_FILENAME_RE = re.compile(r"^[a-z0-9][a-z0-9_-]*-\d{8}-[a-z0-9][a-z0-9_-]*\.json$")
+PUBLIC_DATABASE_FILES = {"data/catalog_public.json"}
 
 ALLOWED_DATA_FILES = {
     "data/README.md",
@@ -132,11 +133,17 @@ def display_path(path: Path) -> str:
 def audit_tracked_data_files(errors: list[str]) -> list[str]:
     tracked = git_ls_files_data()
     unexpected = [path for path in tracked if not is_allowed_data_path(path)]
+    database_files = [path for path in tracked if path in PUBLIC_DATABASE_FILES]
     missing = sorted(path for path in ALLOWED_DATA_FILES if path not in set(tracked))
     if unexpected:
         errors.append(
             "Unexpected tracked data files outside the single-DB/intake layout: "
             + ", ".join(unexpected[:20])
+        )
+    if database_files != sorted(PUBLIC_DATABASE_FILES):
+        errors.append(
+            "Public DB layout must expose exactly one database file: "
+            + ", ".join(sorted(PUBLIC_DATABASE_FILES))
         )
     if missing:
         errors.append("Missing required tracked data files: " + ", ".join(missing))
@@ -296,6 +303,7 @@ def run_audit() -> tuple[dict[str, Any], list[str]]:
 
     summary: dict[str, Any] = {
         "tracked_data_files": len(tracked),
+        "public_database_files": len([path for path in tracked if path in PUBLIC_DATABASE_FILES]),
         "tracked_server_files": len(tracked_server),
         **filesystem_summary,
         **catalog_summary,

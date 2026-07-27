@@ -17,6 +17,7 @@ class PublicDataLayoutAuditTests(unittest.TestCase):
 
         self.assertEqual([], errors)
         self.assertEqual("pass", summary["status"])
+        self.assertEqual(1, summary["public_database_files"])
         self.assertGreater(summary["catalog_rows"], 0)
         self.assertIn("ichiban_kuji_campaigns.json", summary["source_lists"])
 
@@ -31,6 +32,18 @@ class PublicDataLayoutAuditTests(unittest.TestCase):
             target.audit_tracked_data_files(errors)
 
         self.assertTrue(any("Unexpected tracked data files" in error for error in errors))
+
+    def test_requires_exactly_one_public_database_file(self) -> None:
+        errors: list[str] = []
+
+        with patch.object(
+            target,
+            "git_ls_files_data",
+            return_value=["data/catalog_public_meta.json", "data/site_status_public.json"],
+        ):
+            target.audit_tracked_data_files(errors)
+
+        self.assertTrue(any("exactly one database file" in error for error in errors))
 
     def test_allows_agent_intake_records_in_staging_dirs(self) -> None:
         self.assertTrue(target.is_allowed_data_path("data/intake/incoming/agent-run.json"))

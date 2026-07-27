@@ -31,6 +31,10 @@ python -X utf8 tools/import_agent_goods_intake.py data/intake/incoming/example-a
 
 Only `data/catalog_public.json` is the public DB. Intake files are evidence and
 review material; they are not used directly by the app.
+Do not create another DB JSON, SQLite file, or app-facing catalog under
+`data/`, `server/`, or `lib/data/catalog/` for agent work. Agents submit
+standard intake JSON here, then the importer merges accepted rows into the
+single public DB.
 
 Use `data/intake/image_updates/` when an agent found images for existing catalog
 rows. Those files update only `image_url` and, when supplied, `source_url`; they
@@ -43,6 +47,18 @@ and evidence keys so every agent run can be imported by the same pipeline.
 Use `notes` for short human context that does not belong in a structured field.
 Incoming filenames must stay traceable, for example
 `hooke-20260727-ichiban-kuji.json`.
+
+## Agent Output Contract
+
+Every agent run should produce exactly one of these two payloads:
+
+- New goods rows: use `templates/agent_goods_intake.template.json`.
+- Image fixes for existing rows: use
+  `image_updates/templates/agent_catalog_image_update.template.json`.
+
+Keep scratch searches, dry runs, screenshots, and generated review queues out of
+`data/`. They can live locally under ignored `server/` work folders while being
+reviewed, but only validated intake JSON should be committed.
 
 ## Item Rules
 

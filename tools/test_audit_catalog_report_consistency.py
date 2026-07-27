@@ -57,10 +57,34 @@ class CatalogReportConsistencyAuditTests(unittest.TestCase):
                 "db_count": 1,
                 "databases": [{"ok": True, "active_rows": 2, "missing_images": 2}],
             },
+            image_update_work_packs={
+                "pack_count": 1,
+                "target_rows": 2,
+                "packs": [{"rows": 2}],
+            },
         )
 
         self.assertTrue(report["ok"])
         self.assertEqual(report["failure_count"], 0)
+
+    def test_build_report_checks_image_update_work_pack_manifest(self) -> None:
+        report = audit.build_report(
+            {"rows": 2, "missing_enrichment": {"image_url": 2}},
+            {"missing_total": 2, "by_field": {"image_url": 2}},
+            {"queue_rows": 2},
+            {"missing_images": 2, "items": []},
+            {"missing_images": 2},
+            image_update_work_packs={
+                "pack_count": 2,
+                "target_rows": 3,
+                "packs": [{"rows": 2}],
+            },
+        )
+
+        self.assertFalse(report["ok"])
+        names = {item["name"]: item["delta"] for item in report["failures"]}
+        self.assertEqual(names["image_update_work_pack_count_matches_manifest"], -1)
+        self.assertEqual(names["image_update_work_pack_rows_match_manifest"], -1)
 
     def test_build_report_reports_mismatch_delta(self) -> None:
         report = audit.build_report(

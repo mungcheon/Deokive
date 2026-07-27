@@ -19,6 +19,7 @@ DEFAULT_IMAGE_QUEUE = ROOT / "server" / "catalog_image_enrichment_queue_current.
 DEFAULT_IMAGE_BATCHES = ROOT / "server" / "catalog_image_review_batches.json"
 DEFAULT_IMAGE_BATCH_PLAN = ROOT / "server" / "catalog_image_enrichment_batch_plan.json"
 DEFAULT_IMAGE_PROVIDER_COVERAGE = ROOT / "server" / "catalog_image_provider_coverage_audit.json"
+DEFAULT_IMAGE_UPDATE_WORK_PACKS = ROOT / "server" / "image_update_work_packs" / "manifest.json"
 DEFAULT_SOURCE_DISCOVERY = ROOT / "server" / "catalog_source_discovery_queue.json"
 DEFAULT_STALE_SOURCE_CLEANUP = ROOT / "server" / "stale_source_cleanup_queue.json"
 DEFAULT_AGENT_IMAGE_CANDIDATES = ROOT / "server" / "agent_image_candidates_import_queue_current.json"
@@ -160,6 +161,7 @@ def build_report(
     ichiban_campaign_gap: dict[str, Any] | None = None,
     ichiban_prize_structure: dict[str, Any] | None = None,
     goal_status: dict[str, Any] | None = None,
+    image_update_work_packs: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     quality_missing = {key: int(value) for key, value in (quality.get("missing_enrichment") or {}).items()}
     field_missing = _by_field_map(field_queue.get("by_field"))
@@ -200,6 +202,30 @@ def build_report(
                 "name": "image_provider_coverage_matches_image_queue",
                 "expected": int(image_queue.get("missing_images") or 0),
                 "actual": int(image_provider_coverage.get("missing_images") or 0),
+            }
+        )
+    if image_update_work_packs:
+        packs = [item for item in image_update_work_packs.get("packs") or [] if isinstance(item, dict)]
+        pack_rows = sum(int(item.get("rows") or 0) for item in packs)
+        checks.append(
+            {
+                "name": "image_update_work_pack_count_matches_manifest",
+                "expected": int(image_update_work_packs.get("pack_count") or 0),
+                "actual": len(packs),
+            }
+        )
+        checks.append(
+            {
+                "name": "image_update_work_pack_rows_match_manifest",
+                "expected": int(image_update_work_packs.get("target_rows") or 0),
+                "actual": pack_rows,
+            }
+        )
+        checks.append(
+            {
+                "name": "image_update_work_pack_rows_do_not_exceed_image_queue",
+                "expected": pack_rows,
+                "actual": min(pack_rows, int(image_queue.get("missing_images") or 0)),
             }
         )
     if source_discovery:
@@ -667,6 +693,7 @@ def main() -> int:
     parser.add_argument("--image-batches", type=Path, default=DEFAULT_IMAGE_BATCHES)
     parser.add_argument("--image-batch-plan", type=Path, default=DEFAULT_IMAGE_BATCH_PLAN)
     parser.add_argument("--image-provider-coverage", type=Path, default=DEFAULT_IMAGE_PROVIDER_COVERAGE)
+    parser.add_argument("--image-update-work-packs", type=Path, default=DEFAULT_IMAGE_UPDATE_WORK_PACKS)
     parser.add_argument("--source-discovery", type=Path, default=DEFAULT_SOURCE_DISCOVERY)
     parser.add_argument("--stale-source-cleanup", type=Path, default=DEFAULT_STALE_SOURCE_CLEANUP)
     parser.add_argument("--agent-image-candidates", type=Path, default=DEFAULT_AGENT_IMAGE_CANDIDATES)
@@ -796,6 +823,9 @@ def main() -> int:
         if args.ichiban_prize_structure.exists()
         else None,
         None if args.core_only else _read_json(args.goal_status) if args.goal_status.exists() else None,
+        image_update_work_packs=_read_json(args.image_update_work_packs)
+        if args.image_update_work_packs.exists()
+        else None,
     )
     args.json_output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({k: report[k] for k in ("ok", "check_count", "failure_count")}, ensure_ascii=False, indent=2))
