@@ -31,6 +31,31 @@ class ImageEnrichmentQueueTests(unittest.TestCase):
         self.assertEqual(queue.preferred_query(row), "\u3061\u3044\u304b\u308f \u3054\u5f53\u5730\u30de\u30b9\u30b3\u30c3\u30c8")
         self.assertIn("%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F", queue.search_url(row) or "")
 
+    def test_review_only_korean_stores_use_official_search_urls(self) -> None:
+        rows = [
+            {
+                "source_store": "\ubb34\uae30\uc640\ub77c\uc2a4\ud1a0\uc5b4",
+                "name_ko": "\uc0d8\ud50c \uad7f\uc988",
+            },
+            {
+                "source_store": "\uc0b0\ub9ac\uc624",
+                "name_ko": "\uc0d8\ud50c \uad7f\uc988",
+            },
+            {
+                "source_store": "\ub514\uc988\ub2c8 \uc2a4\ud1a0\uc5b4",
+                "name_ko": "\uc0d8\ud50c \uad7f\uc988",
+            },
+            {
+                "source_store": "Bandai Premium",
+                "name_ko": "\uc0d8\ud50c \uad7f\uc988",
+            },
+        ]
+
+        for row in rows:
+            with self.subTest(row["source_store"]):
+                self.assertEqual(queue.classify(row), "manual_official_search_review")
+                self.assertIsNotNone(queue.search_url(row))
+
 
 if __name__ == "__main__":
     unittest.main()

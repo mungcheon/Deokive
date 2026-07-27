@@ -86,6 +86,47 @@ class SyncMissingImageWorkQueuePublicTests(unittest.TestCase):
         self.assertEqual("official_search", by_store["굿스마일컴퍼니"]["strategy"])
         self.assertIn("goodsmile.info", by_store["굿스마일컴퍼니"]["search_url"])
 
+    def test_review_only_korean_store_names_use_manual_official_search_lanes(self) -> None:
+        catalog = {
+            "items": [
+                {
+                    "catalog_index": 21,
+                    "name_ko": "샘플 굿즈",
+                    "category": "굿즈",
+                    "affiliation": "샘플",
+                    "source_store": "무기와라스토어",
+                },
+                {
+                    "catalog_index": 22,
+                    "name_ko": "샘플 굿즈",
+                    "category": "굿즈",
+                    "affiliation": "샘플",
+                    "source_store": "산리오",
+                },
+                {
+                    "catalog_index": 23,
+                    "name_ko": "샘플 굿즈",
+                    "category": "굿즈",
+                    "affiliation": "샘플",
+                    "source_store": "디즈니 스토어",
+                },
+                {
+                    "catalog_index": 24,
+                    "name_ko": "샘플 굿즈",
+                    "category": "굿즈",
+                    "affiliation": "샘플",
+                    "source_store": "Bandai Premium",
+                },
+            ]
+        }
+
+        result = sync_queue(catalog, {"items": []})
+
+        for item in result["queue"]["items"]:
+            self.assertEqual("manual_official_search_review", item["strategy"])
+            self.assertEqual("manual_confirmation_required", item["automation_safety"])
+            self.assertNotIn("google.com/search?q=%EC%83%98%ED%94%8C", item["search_url"])
+
     def test_keeps_existing_queue_rows_and_removes_non_missing_rows(self) -> None:
         catalog = {
             "items": [

@@ -132,6 +132,13 @@ OFFICIAL_SEARCH_STORES.update(
             20,
             "https://www.google.com/search?q=site%3Amugiwara-store.com%20{query}",
         ),
+        "무기와라스토어": (
+            "manual_official_search_review",
+            "search_only_manual",
+            "manual_confirmation_required",
+            20,
+            "https://www.google.com/search?q=site%3Amugiwara-store.com%20{query}",
+        ),
     }
 )
 

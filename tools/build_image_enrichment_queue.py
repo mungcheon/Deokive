@@ -50,6 +50,10 @@ CHIIKAWA_MOGUMOGU_STORE = "\uce58\uc774\uce74\uc640 \ubaa8\uad6c\ubaa8\uad6c \ud
 JUMP_CHARACTER_STORE = "\uc810\ud504 \uce90\ub9ad\ud130\uc988 \uc2a4\ud1a0\uc5b4"
 MEGAHOUSE_STORE = "\uba54\uac00\ud558\uc6b0\uc2a4"
 BANDAI_STORE = "\ubc18\ub2e4\uc774"
+BANDAI_PREMIUM_STORE = "Bandai Premium"
+SANRIO_STORE = "\uc0b0\ub9ac\uc624"
+DISNEY_STORE = "\ub514\uc988\ub2c8 \uc2a4\ud1a0\uc5b4"
+MUGIWARA_STORE = "\ubb34\uae30\uc640\ub77c\uc2a4\ud1a0\uc5b4"
 
 SEARCH_TEMPLATES.update(
     {
@@ -62,6 +66,10 @@ SEARCH_TEMPLATES.update(
         JUMP_CHARACTER_STORE: "https://jumpcs.shueisha.co.jp/shop/goods/search.aspx?search=x&keyword={query}",
         MEGAHOUSE_STORE: "https://www.megahobby.jp/?s={query}",
         BANDAI_STORE: "https://p-bandai.jp/search/?q={query}",
+        BANDAI_PREMIUM_STORE: "https://p-bandai.jp/search/?q={query}",
+        SANRIO_STORE: "https://shop.sanrio.co.jp/search?keyword={query}",
+        DISNEY_STORE: "https://store.disney.co.jp/search?q={query}",
+        MUGIWARA_STORE: "https://www.google.com/search?q=site%3Amugiwara-store.com%20{query}",
     }
 )
 
@@ -80,6 +88,14 @@ REVIEW_ONLY_SEARCH_STORES = {
     "Square Enix e-STORE",
     "점프 캐릭터즈 스토어",
 }
+REVIEW_ONLY_SEARCH_STORES.update(
+    {
+        BANDAI_PREMIUM_STORE,
+        SANRIO_STORE,
+        DISNEY_STORE,
+        MUGIWARA_STORE,
+    }
+)
 
 STRATEGY_PRIORITY = {
     "official_search": 10,
