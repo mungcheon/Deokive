@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-27T01:05:36Z",
+  "generated_at": "2026-07-27T02:50:49Z",
   "scope": "catalog_character_name_policy",
   "summary": {
-    "rows": 20295,
-    "ichiban_rows": 7887,
+    "rows": 20340,
+    "ichiban_rows": 7932,
     "character_alias_violations": 0,
     "ichiban_display_name_violations": 0,
     "ichiban_display_character_mismatches": 0,
@@ -109,6 +109,16 @@
         ],
         "reason": "korean_character_spacing_alias",
         "match": "exact"
+      },
+      "에노시마 쥰코": {
+        "expected": "에노시마 준코",
+        "fields": [
+          "character_name",
+          "name_ko"
+        ],
+        "reason": "likely_korean_danganronpa_character_typo",
+        "affiliation_scope": "단간론파",
+        "match": "contains"
       }
     },
     "ichiban_product_character_tokens": [
@@ -217,7 +227,7 @@
         "손오공"
       ]
     ],
-    "ichiban_display_name_format": "이치방쿠지 발매명 / ?상 / 상품이름 / 캐릭터명",
+    "ichiban_display_name_format": "이치방쿠지 발매명 / 상 / 상품이름 / 캐릭터명",
     "ichiban_display_name_official_language_note": "Keep official campaign and product names in their official source language; the app layer may translate display text for each viewer locale.",
     "ichiban_variant_split_rule": "If an official Ichiban Kuji prize rank has separate character variants, keep one catalog row per character. Example: the same prize rank with three characters must become three rows whose display names only differ by the final character segment.",
     "last_one_and_double_chance_price_jpy": 0,
@@ -648,6 +658,91 @@
           [
             "하이터",
             4
+          ]
+        ],
+        "watched_alias_hit_count": 0,
+        "watched_alias_samples": [],
+        "unknown_character_rows": 0,
+        "unknown_character_samples": []
+      },
+      "단간론파": {
+        "rows": 134,
+        "canonical_character_counts": [
+          [
+            "모노쿠마",
+            21
+          ],
+          [
+            "혼합",
+            19
+          ],
+          [
+            "코마에다 나기토",
+            18
+          ],
+          [
+            "기타",
+            12
+          ],
+          [
+            "히나타 하지메",
+            12
+          ],
+          [
+            "나에기 마코토",
+            11
+          ],
+          [
+            "키리기리 쿄코",
+            9
+          ],
+          [
+            "사이하라 슈이치",
+            7
+          ],
+          [
+            "오우마 코키치",
+            5
+          ],
+          [
+            "나나미 치아키",
+            4
+          ],
+          [
+            "아카마츠 카에데",
+            4
+          ],
+          [
+            "에노시마 준코",
+            4
+          ],
+          [
+            "토가미 뱌쿠야",
+            2
+          ],
+          [
+            "모모타 카이토",
+            1
+          ],
+          [
+            "사이온지 히요코",
+            1
+          ],
+          [
+            "아마미 란타로",
+            1
+          ],
+          [
+            "이루마 미우",
+            1
+          ],
+          [
+            "이시마루 키요타카",
+            1
+          ],
+          [
+            "츠미키 미칸",
+            1
           ]
         ],
         "watched_alias_hit_count": 0,

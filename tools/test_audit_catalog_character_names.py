@@ -63,7 +63,7 @@ class AuditCatalogCharacterNamesTest(unittest.TestCase):
         self.assertEqual(result["summary"]["ichiban_display_character_mismatches"], 0)
         self.assertEqual(
             result["policy"]["ichiban_display_name_format"],
-            "\uc774\uce58\ubc29\ucfe0\uc9c0 \ubc1c\ub9e4\uba85 / ?\uc0c1 / "
+            "\uc774\uce58\ubc29\ucfe0\uc9c0 \ubc1c\ub9e4\uba85 / \uc0c1 / "
             "\uc0c1\ud488\uc774\ub984 / \uce90\ub9ad\ud130\uba85",
         )
         self.assertIn(

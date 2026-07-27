@@ -455,7 +455,7 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
             "character_name_aliases": CHARACTER_MOJIBAKE_OR_ALIAS_FINDINGS,
             "ichiban_product_character_tokens": ICHIBAN_PRODUCT_CHARACTER_TOKENS,
             "ichiban_display_name_format": (
-                "\uc774\uce58\ubc29\ucfe0\uc9c0 \ubc1c\ub9e4\uba85 / ?\uc0c1 / "
+                "\uc774\uce58\ubc29\ucfe0\uc9c0 \ubc1c\ub9e4\uba85 / \uc0c1 / "
                 "\uc0c1\ud488\uc774\ub984 / \uce90\ub9ad\ud130\uba85"
             ),
             "ichiban_display_name_official_language_note": (
