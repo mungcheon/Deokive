@@ -190,6 +190,12 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
             {"source_store": "Store A", "category": "Figure", "rows": 2},
         )
         self.assertEqual(result["field_queue_missing_total"], 2)
+        self.assertEqual(
+            result["store_completion_focus"][0]["source_store"],
+            field_queue["queue"][0]["source_store"],
+        )
+        self.assertEqual(result["store_completion_focus"][0]["source_url_missing"], 1)
+        self.assertEqual(result["store_completion_focus"][0]["next_action"], "find_exact_source_urls_first")
         self.assertEqual(result["image_queue_by_strategy"], [("official_search", 2), ("manual_review", 1)])
         self.assertEqual(result["image_queue_by_provider_status"], [("search_only", 2), ("manual_only", 1)])
         self.assertEqual(

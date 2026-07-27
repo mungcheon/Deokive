@@ -157,6 +157,86 @@ def _image_work_packs(image_items: list[dict[str, Any]], limit: int = 40) -> lis
     return packs[:limit]
 
 
+def _store_completion_focus(field_items: list[dict[str, Any]], limit: int = 40) -> list[dict[str, Any]]:
+    grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for item in field_items:
+        store = str(item.get("source_store") or "")
+        if store:
+            grouped[store].append(item)
+
+    focus_rows: list[dict[str, Any]] = []
+    for store, items in grouped.items():
+        by_field = Counter(str(item.get("field") or "") for item in items)
+        by_category = Counter(str(item.get("category") or "") for item in items)
+        actionable = sum(1 for item in items if item.get("actionable_now"))
+        automation_candidates = sum(1 for item in items if item.get("automation_candidate"))
+        source_url_missing = by_field.get("source_url", 0)
+        image_url_missing = by_field.get("image_url", 0)
+        release_date_missing = by_field.get("release_date", 0)
+        price_missing = by_field.get("official_price_jpy", 0)
+        barcode_missing = by_field.get("barcode", 0)
+        focus_rows.append(
+            {
+                "source_store": store,
+                "missing_total": len(items),
+                "actionable_missing": actionable,
+                "automation_candidates": automation_candidates,
+                "source_url_missing": source_url_missing,
+                "image_url_missing": image_url_missing,
+                "release_date_missing": release_date_missing,
+                "price_missing": price_missing,
+                "barcode_missing": barcode_missing,
+                "top_categories": [
+                    {"category": category, "missing": count}
+                    for category, count in by_category.most_common(5)
+                ],
+                "next_action": _store_completion_next_action(
+                    source_url_missing,
+                    image_url_missing,
+                    release_date_missing,
+                    price_missing,
+                    barcode_missing,
+                    automation_candidates,
+                ),
+            }
+        )
+
+    focus_rows.sort(
+        key=lambda item: (
+            -int(item["source_url_missing"]),
+            -int(item["image_url_missing"]),
+            -int(item["release_date_missing"]),
+            -int(item["automation_candidates"]),
+            -int(item["missing_total"]),
+            str(item["source_store"]),
+        )
+    )
+    return focus_rows[:limit]
+
+
+def _store_completion_next_action(
+    source_url_missing: int,
+    image_url_missing: int,
+    release_date_missing: int,
+    price_missing: int,
+    barcode_missing: int,
+    automation_candidates: int,
+) -> str:
+    if source_url_missing:
+        return "find_exact_source_urls_first"
+    if image_url_missing and release_date_missing:
+        return "attach_images_and_release_dates_from_exact_pages"
+    if image_url_missing:
+        return "attach_images_from_verified_exact_pages"
+    if release_date_missing or price_missing:
+        return "copy_metadata_from_exact_source_pages"
+    if barcode_missing:
+        return "fill_only_officially_published_barcodes"
+    if automation_candidates:
+        return "run_safe_automation_candidates"
+    return "manual_review_remaining_fields"
+
+
 def _image_safety_rank(value: str) -> int:
     ranks = {
         "candidate_provider_script_required": 0,
@@ -415,6 +495,7 @@ def build_backlog(
         "field_queue_by_action": field_by_action.most_common(),
         "field_queue_by_risk": field_by_risk.most_common(),
         "field_queue_by_source_group_field": field_queue_payload.get("by_source_group_field", []),
+        "store_completion_focus": _store_completion_focus(field_items, 50),
         "top_field_backlog": field_top,
         "top_field_strategy_store_backlog": field_strategy_top,
         "top_field_store_category_backlog": field_store_category_top,
@@ -590,6 +671,14 @@ def write_markdown(backlog: dict[str, Any], path: Path) -> None:
         lines.append(
             f"- `{item.get('source_group')}` / `{item.get('field')}`: "
             f"`{item.get('missing')}`"
+        )
+    lines.extend(["", "## Store Completion Focus", ""])
+    for item in backlog.get("store_completion_focus", [])[:25]:
+        lines.append(
+            f"- `{item.get('source_store')}`: total `{item.get('missing_total')}`, "
+            f"source `{item.get('source_url_missing')}`, image `{item.get('image_url_missing')}`, "
+            f"release `{item.get('release_date_missing')}`, price `{item.get('price_missing')}`, "
+            f"barcode `{item.get('barcode_missing')}`; next `{item.get('next_action')}`"
         )
     lines.extend(["", "## Top Field Backlog", ""])
     for item in backlog.get("top_field_backlog", [])[:25]:
