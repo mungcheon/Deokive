@@ -61,6 +61,15 @@ class AuditCatalogCharacterNamesTest(unittest.TestCase):
         self.assertEqual(result["summary"]["findings"], 0)
         self.assertEqual(result["summary"]["ichiban_product_character_violations"], 0)
         self.assertEqual(result["summary"]["ichiban_display_character_mismatches"], 0)
+        self.assertEqual(
+            result["policy"]["ichiban_display_name_format"],
+            "\uc774\uce58\ubc29\ucfe0\uc9c0 \ubc1c\ub9e4\uba85 / ?\uc0c1 / "
+            "\uc0c1\ud488\uc774\ub984 / \uce90\ub9ad\ud130\uba85",
+        )
+        self.assertIn(
+            "official source language",
+            result["policy"]["ichiban_display_name_official_language_note"],
+        )
         self.assertIn("one catalog row per character", result["policy"]["ichiban_variant_split_rule"])
 
     def test_reports_character_alias_display_name_and_zero_price_violations(self) -> None:

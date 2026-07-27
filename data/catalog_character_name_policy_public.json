@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-27T00:02:23Z",
+  "generated_at": "2026-07-27T00:12:31Z",
   "scope": "catalog_character_name_policy",
   "summary": {
     "rows": 20295,
@@ -206,7 +206,8 @@
         "손오공"
       ]
     ],
-    "ichiban_display_name_format": "一番くじ 발매명 / ?賞 / 상품이름 / 캐릭터명",
+    "ichiban_display_name_format": "이치방쿠지 발매명 / ?상 / 상품이름 / 캐릭터명",
+    "ichiban_display_name_official_language_note": "Keep official campaign and product names in their official source language; the app layer may translate display text for each viewer locale.",
     "ichiban_variant_split_rule": "If an official Ichiban Kuji prize rank has separate character variants, keep one catalog row per character. Example: the same prize rank with three characters must become three rows whose display names only differ by the final character segment.",
     "last_one_and_double_chance_price_jpy": 0,
     "multi_character_product_review": "Rows whose product name contains multiple character tokens but no combined-goods marker are reported for manual split review. True pair/team goods using &, ＆, ×, VS, or ・ are preserved as mixed rows unless official source evidence lists separate prize items."

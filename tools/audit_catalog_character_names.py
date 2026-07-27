@@ -412,7 +412,14 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "policy": {
             "character_name_aliases": CHARACTER_MOJIBAKE_OR_ALIAS_FINDINGS,
             "ichiban_product_character_tokens": ICHIBAN_PRODUCT_CHARACTER_TOKENS,
-            "ichiban_display_name_format": "\u4e00\u756a\u304f\u3058 \ubc1c\ub9e4\uba85 / ?\u8cde / \uc0c1\ud488\uc774\ub984 / \uce90\ub9ad\ud130\uba85",
+            "ichiban_display_name_format": (
+                "\uc774\uce58\ubc29\ucfe0\uc9c0 \ubc1c\ub9e4\uba85 / ?\uc0c1 / "
+                "\uc0c1\ud488\uc774\ub984 / \uce90\ub9ad\ud130\uba85"
+            ),
+            "ichiban_display_name_official_language_note": (
+                "Keep official campaign and product names in their official source language; the app layer may "
+                "translate display text for each viewer locale."
+            ),
             "ichiban_variant_split_rule": (
                 "If an official Ichiban Kuji prize rank has separate character variants, keep one catalog row per "
                 "character. Example: the same prize rank with three characters must become three rows whose display "
