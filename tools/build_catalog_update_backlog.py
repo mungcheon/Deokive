@@ -18,6 +18,7 @@ DEFAULT_FIELD_QUEUE = ROOT / "server" / "catalog_field_enrichment_queue_current.
 DEFAULT_SOURCE_DISCOVERY = ROOT / "server" / "catalog_source_discovery_queue.json"
 DEFAULT_QUALITY = ROOT / "server" / "catalog_quality_report.json"
 DEFAULT_NAMING_QUEUE = ROOT / "server" / "catalog_naming_quality_queue.json"
+DEFAULT_ICHIBAN_QUALITY_QUEUE = ROOT / "server" / "ichiban_public_quality_queue.json"
 DEFAULT_IMAGE_PROVIDER_AUDIT = ROOT / "server" / "catalog_image_provider_coverage_audit.json"
 DEFAULT_STALE_SOURCE_QUEUE = ROOT / "server" / "stale_source_cleanup_queue.json"
 DEFAULT_PRIORITY_GOODS_QUEUE = ROOT / "server" / "priority_goods_queue_current.json"
@@ -109,6 +110,7 @@ def build_backlog(
     stale_source_payload: dict[str, Any] | None = None,
     priority_goods_payload: dict[str, Any] | None = None,
     naming_queue_payload: dict[str, Any] | None = None,
+    ichiban_quality_payload: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     queue = [item for item in queue_payload.get("queue", []) if isinstance(item, dict)]
     by_strategy = Counter(str(item.get("strategy") or "") for item in queue)
@@ -226,6 +228,16 @@ def build_backlog(
         if isinstance(item, dict)
     ]
     naming_by_workflow: Counter[str] = Counter(str(item.get("workflow") or "") for item in naming_items)
+    ichiban_quality_payload = ichiban_quality_payload or {}
+    ichiban_quality_summary = ichiban_quality_payload.get("summary") or {}
+    ichiban_quality_items = [
+        item
+        for item in ichiban_quality_payload.get("items", [])
+        if isinstance(item, dict)
+    ]
+    ichiban_by_workflow: Counter[str] = Counter(
+        str(item.get("workflow") or "") for item in ichiban_quality_items
+    )
 
     return {
         "rows": quality_payload.get("rows"),
@@ -273,6 +285,25 @@ def build_backlog(
             "by_workflow": naming_by_workflow.most_common(),
             "sample_rows": naming_items[:20],
         },
+        "ichiban_quality": {
+            "queue_rows": ichiban_quality_summary.get("queue_rows", len(ichiban_quality_items)),
+            "campaign_gap_queue_rows": ichiban_quality_summary.get("campaign_gap_queue_rows", 0),
+            "exact_display_duplicate_queue_rows": ichiban_quality_summary.get(
+                "exact_display_duplicate_queue_rows", 0
+            ),
+            "zero_price_policy_queue_rows": ichiban_quality_summary.get(
+                "zero_price_policy_queue_rows", 0
+            ),
+            "naming_convention_queue_rows": ichiban_quality_summary.get(
+                "naming_convention_queue_rows", 0
+            ),
+            "campaign_count": ichiban_quality_summary.get("campaign_count", 0),
+            "seeded_campaign_url_count": ichiban_quality_summary.get(
+                "seeded_campaign_url_count", 0
+            ),
+            "by_workflow": ichiban_by_workflow.most_common(),
+            "sample_rows": ichiban_quality_items[:20],
+        },
         "field_queue_missing_total": field_queue_payload.get("missing_total"),
         "field_queue_by_field": field_queue_payload.get("by_field", []),
         "field_queue_by_strategy": field_queue_payload.get("by_strategy", []),
@@ -309,6 +340,7 @@ def build_backlog(
             "Treat barcode as a high-risk field; many prizes and campaign items should stay blank unless JAN/barcode is explicitly published.",
             "Use priority_goods_summary before broad queue work when the user names focus collections like Danganronpa, Mahosaba, or Ichiban Kuji.",
             "Review naming_quality before bulk imports; alias fixes and Ichiban display-name convention issues are cheap to correct and make later dedupe safer.",
+            "Review ichiban_quality before importing historical campaigns; it separates campaign gaps, reissue/duplicate review, zero-price policy, and non-prize related item classification.",
             "Review stale_source_review before importing source-derived images; weak overlap rows need a stronger exact source first.",
             "Run verified official providers only; avoid broad search result pages without strict matching.",
             "Use the field enrichment queue for source_url, release_date, barcode, price, and image work; image queue is only the photo subset.",
@@ -392,6 +424,30 @@ def write_markdown(backlog: dict[str, Any], path: Path) -> None:
         lines.append(
             f"- `{item.get('workflow')}` / `{item.get('display_name')}` / "
             f"`{item.get('reason')}`"
+        )
+    ichiban = backlog.get("ichiban_quality") or {}
+    lines.extend(["", "## Ichiban Quality", ""])
+    lines.append(f"- Queue rows: `{ichiban.get('queue_rows', 0)}`")
+    lines.append(f"- Campaign gaps: `{ichiban.get('campaign_gap_queue_rows', 0)}`")
+    lines.append(
+        f"- Duplicate/reissue review rows: `{ichiban.get('exact_display_duplicate_queue_rows', 0)}`"
+    )
+    lines.append(f"- Zero-price policy rows: `{ichiban.get('zero_price_policy_queue_rows', 0)}`")
+    lines.append(
+        f"- Naming/non-prize review rows: `{ichiban.get('naming_convention_queue_rows', 0)}`"
+    )
+    lines.append(
+        f"- Seeded campaign URLs: `{ichiban.get('seeded_campaign_url_count', 0)}` / "
+        f"`{ichiban.get('campaign_count', 0)}`"
+    )
+    lines.extend(["", "### Ichiban Workflows", ""])
+    for workflow, count in ichiban.get("by_workflow", []):
+        lines.append(f"- `{workflow}`: `{count}`")
+    lines.extend(["", "### Ichiban Samples", ""])
+    for item in ichiban.get("sample_rows", [])[:10]:
+        lines.append(
+            f"- `{item.get('workflow')}` / `{item.get('display_name')}` / "
+            f"`{item.get('source_url')}` / `{item.get('reason')}`"
         )
     lines.extend(
         [
@@ -515,6 +571,7 @@ def main() -> int:
     parser.add_argument("--source-discovery", type=Path, default=DEFAULT_SOURCE_DISCOVERY)
     parser.add_argument("--quality", type=Path, default=DEFAULT_QUALITY)
     parser.add_argument("--naming-queue", type=Path, default=DEFAULT_NAMING_QUEUE)
+    parser.add_argument("--ichiban-quality-queue", type=Path, default=DEFAULT_ICHIBAN_QUALITY_QUEUE)
     parser.add_argument("--image-provider-audit", type=Path, default=DEFAULT_IMAGE_PROVIDER_AUDIT)
     parser.add_argument("--stale-source-queue", type=Path, default=DEFAULT_STALE_SOURCE_QUEUE)
     parser.add_argument("--priority-goods-queue", type=Path, default=DEFAULT_PRIORITY_GOODS_QUEUE)
@@ -554,6 +611,11 @@ def main() -> int:
         if args.naming_queue.exists()
         else {}
     )
+    ichiban_quality_payload = (
+        json.loads(args.ichiban_quality_queue.read_text(encoding="utf-8-sig"))
+        if args.ichiban_quality_queue.exists()
+        else {}
+    )
     backlog = build_backlog(
         queue_payload,
         quality_payload,
@@ -563,6 +625,7 @@ def main() -> int:
         stale_source_payload,
         priority_goods_payload,
         naming_queue_payload,
+        ichiban_quality_payload,
     )
     args.json_output.write_text(json.dumps(backlog, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     write_markdown(backlog, args.markdown_output)
@@ -573,6 +636,7 @@ def main() -> int:
                 "source_discovery_rows": backlog.get("source_discovery_rows"),
                 "stale_source_review_rows": (backlog.get("stale_source_review") or {}).get("review_rows"),
                 "naming_quality_rows": (backlog.get("naming_quality") or {}).get("queue_rows"),
+                "ichiban_quality_rows": (backlog.get("ichiban_quality") or {}).get("queue_rows"),
                 "priority_goods": sorted((backlog.get("priority_goods_summary") or {}).keys()),
                 "json": str(args.json_output),
                 "markdown": str(args.markdown_output),

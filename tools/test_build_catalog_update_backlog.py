@@ -7,6 +7,7 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
     def test_default_queues_use_current_generated_reports(self):
         self.assertEqual(backlog.DEFAULT_QUEUE.name, "catalog_image_enrichment_queue_current.json")
         self.assertEqual(backlog.DEFAULT_FIELD_QUEUE.name, "catalog_field_enrichment_queue_current.json")
+        self.assertEqual(backlog.DEFAULT_ICHIBAN_QUALITY_QUEUE.name, "ichiban_public_quality_queue.json")
 
     def test_build_backlog_summarizes_image_and_field_work(self):
         image_queue = {
@@ -123,6 +124,31 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
                 },
             ],
         }
+        ichiban_quality = {
+            "summary": {
+                "queue_rows": 4,
+                "campaign_gap_queue_rows": 1,
+                "exact_display_duplicate_queue_rows": 1,
+                "zero_price_policy_queue_rows": 0,
+                "naming_convention_queue_rows": 2,
+                "campaign_count": 10,
+                "seeded_campaign_url_count": 9,
+            },
+            "items": [
+                {
+                    "workflow": "campaign_gap_research",
+                    "display_name": "Ichiban sample A",
+                    "source_url": "https://example.test/a",
+                    "reason": "missing_seed_url",
+                },
+                {
+                    "workflow": "non_prize_related_item_classification",
+                    "display_name": "Ichiban sample B",
+                    "source_url": "https://example.test/b",
+                    "reason": "non_prize_or_related_item_needs_classification",
+                },
+            ],
+        }
 
         result = backlog.build_backlog(
             image_queue,
@@ -133,6 +159,7 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
             {},
             priority_goods,
             naming_queue,
+            ichiban_quality,
         )
 
         self.assertEqual(result["rows"], 10)
@@ -160,6 +187,12 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
         self.assertEqual(
             result["naming_quality"]["by_workflow"],
             [("character_alias_normalization", 1), ("ichiban_display_name_convention", 1)],
+        )
+        self.assertEqual(result["ichiban_quality"]["queue_rows"], 4)
+        self.assertEqual(result["ichiban_quality"]["campaign_gap_queue_rows"], 1)
+        self.assertEqual(
+            result["ichiban_quality"]["by_workflow"],
+            [("campaign_gap_research", 1), ("non_prize_related_item_classification", 1)],
         )
 
     def test_field_focus_packs_groups_missing_rows_by_batch_key(self):
