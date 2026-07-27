@@ -80,6 +80,19 @@ def candidate_review_risk(row: dict[str, Any], qrow: dict[str, Any]) -> tuple[st
     return "medium", reasons or ["official_search_only"], "open_official_search_result_and_confirm_detail_page"
 
 
+def research_status(review_reasons: list[str], search_url: Any) -> tuple[str, str]:
+    reason_set = set(review_reasons)
+    if "missing_official_language_name" in reason_set:
+        return "needs_official_language_name", "add_japanese_or_official_product_name_before_search"
+    if "hangul_search_query_needs_japanese_rewrite" in reason_set:
+        return "needs_query_rewrite", "rewrite_search_query_to_japanese_official_terms"
+    if not present(search_url):
+        return "needs_search_url", "build_official_animate_search_url"
+    if "multi_variant_or_blind_pack_title" in reason_set:
+        return "needs_variant_confirmation", "confirm_exact_variant_or_package_on_animate_detail_page"
+    return "reviewable_search_url", "open_search_url_and_confirm_exact_product_detail"
+
+
 def catalog_items(catalog: dict[str, Any]) -> list[dict[str, Any]]:
     items = catalog.get("items")
     if not isinstance(items, list):
@@ -122,8 +135,10 @@ def build_report(
     by_strategy: Counter[str] = Counter()
     by_automation_safety: Counter[str] = Counter()
     by_candidate_review_risk: Counter[str] = Counter()
+    by_research_status: Counter[str] = Counter()
     by_category: Counter[str] = Counter()
     by_affiliation: Counter[str] = Counter()
+    source_research_required: list[dict[str, Any]] = []
 
     for row in rows:
         catalog_index = row.get("catalog_index")
@@ -139,35 +154,48 @@ def build_report(
         category = str(row.get("category") or "")
         affiliation = str(row.get("affiliation") or "")
         review_risk, review_reasons, next_action = candidate_review_risk(row, qrow)
+        status, status_next_action = research_status(review_reasons, search_url)
         by_strategy[strategy] += 1
         by_automation_safety[automation_safety] += 1
         by_candidate_review_risk[review_risk] += 1
+        by_research_status[status] += 1
         by_category[category] += 1
         by_affiliation[affiliation] += 1
-        matched_items.append(
-            {
+        item = {
+            "catalog_index": catalog_index,
+            "name_ko": row.get("name_ko"),
+            "name_ja": row.get("name_ja"),
+            "affiliation": row.get("affiliation"),
+            "category": row.get("category"),
+            "query": qrow.get("query"),
+            "search_url": search_url,
+            "strategy": strategy,
+            "automation_safety": automation_safety,
+            "candidate_review_risk": review_risk,
+            "candidate_review_reasons": review_reasons,
+            "research_status": status,
+            "research_next_action": status_next_action,
+            "next_action": next_action,
+            "manual_review_required": True,
+            "import_template": {
                 "catalog_index": catalog_index,
-                "name_ko": row.get("name_ko"),
-                "name_ja": row.get("name_ja"),
-                "affiliation": row.get("affiliation"),
-                "category": row.get("category"),
-                "query": qrow.get("query"),
-                "search_url": search_url,
-                "strategy": strategy,
-                "automation_safety": automation_safety,
-                "candidate_review_risk": review_risk,
-                "candidate_review_reasons": review_reasons,
-                "next_action": next_action,
-                "manual_review_required": True,
-                "import_template": {
-                    "catalog_index": catalog_index,
-                    "source_url": None,
-                    "image_url": None,
-                    "manual_confirmed": False,
-                    "blocked_until": "exact_animate_product_page_confirmed",
-                },
-            }
-        )
+                "source_url": None,
+                "image_url": None,
+                "manual_confirmed": False,
+                "blocked_until": "exact_animate_product_page_confirmed",
+            },
+        }
+        matched_items.append(item)
+        if status != "reviewable_search_url":
+            source_research_required.append(
+                {
+                    **item,
+                    "import_template": {
+                        **item["import_template"],
+                        "blocked_until": "official_animate_search_query_or_exact_source_confirmed",
+                    },
+                }
+            )
 
     return {
         "schema_version": 1,
@@ -180,6 +208,8 @@ def build_report(
             "missing_queue_rows": len(missing_queue_rows),
             "missing_search_url_rows": missing_search_url_rows,
             "official_search_url_rows": sum(1 for item in matched_items if present(item.get("search_url"))),
+            "reviewable_search_url_rows": by_research_status.get("reviewable_search_url", 0),
+            "source_research_required_rows": len(source_research_required),
             "auto_apply_enabled": False,
             "search_page": ANIMATE_SEARCH_TEMPLATE,
         },
@@ -192,10 +222,32 @@ def build_report(
                 {"candidate_review_risk": key, "rows": value}
                 for key, value in by_candidate_review_risk.most_common()
             ],
+            "by_research_status": [
+                {"research_status": key, "rows": value}
+                for key, value in by_research_status.most_common()
+            ],
             "by_category": [{"category": key, "rows": value} for key, value in by_category.most_common(30)],
             "by_affiliation": [{"affiliation": key, "rows": value} for key, value in by_affiliation.most_common(30)],
         },
         "items": matched_items,
+        "source_research_required": {
+            "row_count": len(source_research_required),
+            "by_research_status": [
+                {"research_status": key, "rows": value}
+                for key, value in Counter(
+                    str(item.get("research_status") or "") for item in source_research_required
+                ).most_common()
+            ],
+            "items": sorted(
+                source_research_required,
+                key=lambda item: (
+                    str(item.get("research_status") or ""),
+                    str(item.get("affiliation") or ""),
+                    str(item.get("category") or ""),
+                    int(item.get("catalog_index") or 999_999_999),
+                ),
+            )[:80],
+        },
         "missing_queue_samples": [
             {
                 "catalog_index": item.get("catalog_index"),
