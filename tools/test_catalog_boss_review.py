@@ -11,6 +11,7 @@ from tools.import_catalog_boss_review_decisions import (
     build_rework_queue,
     merge_ledger,
 )
+from tools.advance_catalog_boss_review import advance_review
 
 
 class CatalogBossReviewTest(unittest.TestCase):
@@ -123,6 +124,65 @@ class CatalogBossReviewTest(unittest.TestCase):
             self.assertEqual([item["rework_type"] for item in queue["items"]], ["image_update", "field_update"])
             self.assertIn("image_updates", queue["items"][0]["next_step"])
             self.assertIn("field_updates", queue["items"][1]["next_step"])
+
+    def test_advance_review_imports_decisions_and_builds_next_batch(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            catalog = root / "catalog.json"
+            decisions = root / "decisions.json"
+            ledger = root / "ledger.json"
+            approved = root / "approved.json"
+            rework = root / "rework.json"
+            next_json = root / "next.json"
+            next_html = root / "next.html"
+            catalog.write_text(
+                json.dumps(
+                    {
+                        "items": [
+                            {"catalog_index": index, "name_ko": f"상품 {index}", "image_url": "https://example.com/a.jpg"}
+                            for index in range(15)
+                        ]
+                    },
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+            decisions.write_text(
+                json.dumps(
+                    {
+                        "decisions": [
+                            {
+                                "row_index": index,
+                                "catalog_index": index,
+                                "display_name": f"상품 {index}",
+                                "status": "pass",
+                                "status_label": "통과",
+                            }
+                            for index in range(10)
+                        ]
+                    },
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+
+            result = advance_review(
+                decisions,
+                catalog_path=catalog,
+                ledger_path=ledger,
+                approved_path=approved,
+                rework_path=rework,
+                batch_json_path=next_json,
+                batch_html_path=next_html,
+                batch_size=10,
+            )
+
+            self.assertEqual(result["reviewed_items"], 10)
+            self.assertEqual(result["approved_items"], 10)
+            self.assertEqual(result["next_selected_items"], 5)
+            self.assertEqual(result["next_first_row_index"], 10)
+            self.assertEqual(result["next_last_row_index"], 14)
+            self.assertTrue(next_html.exists())
 
 
 if __name__ == "__main__":

@@ -40,6 +40,16 @@ locally with:
 python -X utf8 tools/import_catalog_boss_review_decisions.py path\to\boss_review_0_9.json
 ```
 
+To continue review immediately after finishing a batch, use the advance helper:
+
+```powershell
+python -X utf8 tools/advance_catalog_boss_review.py path\to\boss_review_0_9.json
+```
+
+It imports the decisions, updates the approved/rework local artifacts, and
+regenerates `server/boss_review/catalog_boss_review.html` for the next
+unreviewed 10 rows.
+
 This creates an approved-only local candidate at
 `server/boss_review/catalog_public_approved.json`. It is a review artifact, not
 a second public DB. Blocked rows are written to

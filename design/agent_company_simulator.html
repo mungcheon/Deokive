@@ -18,6 +18,7 @@
       --gold: #e2a42d;
       --red: #df5656;
       --shadow: 0 18px 48px rgba(23, 28, 40, 0.09);
+      --office-zoom: .82;
       color-scheme: light;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
     }
@@ -182,12 +183,78 @@
       box-shadow: 0 6px 16px rgba(24, 28, 38, 0.08);
     }
 
+    .office-controls {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .zoom {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      border-radius: 999px;
+      background: var(--soft);
+    }
+
+    .zoom button {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--ink);
+      font-weight: 950;
+    }
+
+    .zoom button#zoomFit {
+      width: auto;
+      min-width: 48px;
+      padding: 0 10px;
+      border-radius: 999px;
+      font-size: 12px;
+    }
+
+    .zoom button:hover {
+      background: var(--paper);
+      box-shadow: 0 5px 12px rgba(24, 28, 38, 0.08);
+    }
+
+    .zoom-value {
+      min-width: 42px;
+      text-align: center;
+      color: var(--sub);
+      font-size: 12px;
+      font-weight: 950;
+    }
+
     .floor-wrap {
       min-height: 0;
       overflow: auto;
       border: 1px solid var(--line);
       border-radius: 28px;
       background: #fbfbfd;
+      position: relative;
+      scrollbar-gutter: stable both-edges;
+    }
+
+    .floor-wrap::after {
+      content: "드래그/휠로 이동";
+      position: sticky;
+      left: 16px;
+      bottom: 12px;
+      z-index: 5;
+      display: inline-block;
+      margin: 0 0 12px 14px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(29, 29, 31, .72);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 900;
+      pointer-events: none;
     }
 
     .floor {
@@ -204,6 +271,7 @@
         linear-gradient(0deg, rgba(224, 227, 236, .66) 1px, transparent 1px),
         #fbfbfd;
       background-size: 46px 46px;
+      zoom: var(--office-zoom);
     }
 
     .floor::before {
@@ -682,6 +750,7 @@
       .topbar { align-items: flex-start; flex-direction: column; }
       .clock { display: none; }
       .office-head { align-items: flex-start; flex-direction: column; }
+      .office-controls { justify-content: flex-start; }
       .floor { min-width: 620px; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 150px; }
       .ticker { grid-template-columns: 1fr; }
     }
@@ -707,11 +776,19 @@
             <h2>20석 운영 플로어</h2>
             <p class="subtitle">직원을 누르면 우측 업무 카드가 바뀝니다. 빈 좌석은 나중에 에이전트가 늘어나면 배정합니다.</p>
           </div>
-          <nav class="tabs" aria-label="보기">
-            <button class="active" data-view="office">사무실</button>
-            <button data-view="review">검수</button>
-            <button data-view="deploy">배포</button>
-          </nav>
+          <div class="office-controls">
+            <nav class="tabs" aria-label="보기">
+              <button class="active" data-view="office">사무실</button>
+              <button data-view="review">검수</button>
+              <button data-view="deploy">배포</button>
+            </nav>
+            <div class="zoom" aria-label="사무실 확대율">
+              <button id="zoomOut" title="축소">−</button>
+              <span class="zoom-value" id="zoomValue">82%</span>
+              <button id="zoomIn" title="확대">+</button>
+              <button id="zoomFit" title="전체보기">맞춤</button>
+            </div>
+          </div>
         </div>
 
         <div class="floor-wrap">
@@ -787,6 +864,8 @@
     const floor = document.querySelector("#floor");
     const inspector = document.querySelector("#inspector");
     const tickerText = document.querySelector("#tickerText");
+    const zoomValue = document.querySelector("#zoomValue");
+    let officeZoom = Number(localStorage.getItem("deokive-office-zoom") || "0.82");
     let logIndex = 0;
 
     function pixel(worker) {
@@ -854,6 +933,28 @@
       });
     });
 
+    function applyZoom() {
+      officeZoom = Math.min(1.1, Math.max(0.62, officeZoom));
+      document.documentElement.style.setProperty("--office-zoom", officeZoom.toFixed(2));
+      zoomValue.textContent = `${Math.round(officeZoom * 100)}%`;
+      localStorage.setItem("deokive-office-zoom", officeZoom.toFixed(2));
+    }
+
+    document.querySelector("#zoomOut").addEventListener("click", () => {
+      officeZoom -= 0.08;
+      applyZoom();
+    });
+
+    document.querySelector("#zoomIn").addEventListener("click", () => {
+      officeZoom += 0.08;
+      applyZoom();
+    });
+
+    document.querySelector("#zoomFit").addEventListener("click", () => {
+      officeZoom = window.innerWidth < 760 ? 0.64 : 0.82;
+      applyZoom();
+    });
+
     function updateClock() {
       const now = new Date();
       const hh = String(now.getHours()).padStart(2, "0");
@@ -863,6 +964,7 @@
 
     renderFloor();
     selectWorker("Hooke");
+    applyZoom();
     updateClock();
     setInterval(updateClock, 30000);
     setInterval(() => {
