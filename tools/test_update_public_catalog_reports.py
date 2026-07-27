@@ -6236,6 +6236,18 @@ class PublicCatalogReportTests(unittest.TestCase):
             open_queues.get("ichiban_probable_reissue_dedupe_review_groups"),
             dedupe_action_summary.get("ichiban_probable_reissue_review_groups"),
         )
+        naming_audit = reports.load_json(reports.CATALOG_NAMING_AUDIT)
+        naming_lane_counts = dict(
+            naming_audit.get("summary", {}).get("ichiban_exact_display_duplicate_review_by_lane", [])
+        )
+        self.assertEqual(
+            open_queues.get("ichiban_same_slug_family_reissue_review_groups"),
+            naming_lane_counts.get("same_slug_family_reissue_review"),
+        )
+        self.assertEqual(
+            open_queues.get("ichiban_cross_campaign_exact_display_review_groups"),
+            naming_lane_counts.get("cross_campaign_exact_display_review"),
+        )
         self.assertEqual(
             ichiban_reissue_dedupe_scorecard.get("open_rows"),
             dedupe_action_summary.get("ichiban_reissue_review_groups"),
@@ -6243,6 +6255,18 @@ class PublicCatalogReportTests(unittest.TestCase):
         self.assertEqual(
             ichiban_reissue_dedupe_next_action.get("review_groups"),
             dedupe_action_summary.get("ichiban_reissue_review_groups"),
+        )
+        self.assertEqual(
+            ichiban_reissue_dedupe_next_action.get("same_slug_family_reissue_groups"),
+            naming_lane_counts.get("same_slug_family_reissue_review"),
+        )
+        self.assertEqual(
+            ichiban_reissue_dedupe_next_action.get("cross_campaign_exact_display_groups"),
+            naming_lane_counts.get("cross_campaign_exact_display_review"),
+        )
+        self.assertEqual(
+            ichiban_reissue_dedupe_next_action.get("duplicate_review_by_lane"),
+            naming_audit.get("summary", {}).get("ichiban_exact_display_duplicate_review_by_lane"),
         )
         self.assertEqual(
             ichiban_reissue_dedupe_next_action.get("work_order_rows"),

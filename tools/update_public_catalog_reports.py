@@ -96,6 +96,7 @@ DEDUPLICATION_FAST_REVIEW = DATA / "catalog_deduplication_fast_review_public.jso
 DEDUPLICATION_CONFIRMED_TEMPLATE = DATA / "catalog_deduplication_confirmed_template_public.json"
 DEDUPLICATION_TEMPLATE_IMPORT_DRY_RUN = DATA / "catalog_deduplication_template_import_dry_run_public.json"
 NAME_DUPLICATE_AUDIT = DATA / "catalog_name_duplicate_audit_public.json"
+CATALOG_NAMING_AUDIT = DATA / "catalog_naming_audit_public.json"
 ANIMATION_CATEGORIES = DATA / "animation_goods_categories_public.json"
 ANIMATION_CATEGORY_REVIEW_BATCHES = DATA / "animation_category_review_batches_public.json"
 ANIMATION_CATEGORY_ACTION_QUEUE = DATA / "animation_category_action_queue_public.json"
@@ -3854,6 +3855,7 @@ def build_operations_public(
     requested_focus_action_queue_override: dict[str, Any] | None = None,
     requested_focus_next_work_override: dict[str, Any] | None = None,
     deduplication_action_queue_override: dict[str, Any] | None = None,
+    catalog_naming_audit_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     source_summary = source_discovery["summary"]
     source_review_batches = (
@@ -4033,6 +4035,15 @@ def build_operations_public(
         else {}
     )
     dedupe_action_queue_summary = dedupe_action_queue.get("summary", {})
+    catalog_naming_audit = (
+        catalog_naming_audit_override
+        if catalog_naming_audit_override is not None
+        else load_json(CATALOG_NAMING_AUDIT, {}) if CATALOG_NAMING_AUDIT.exists() else {}
+    )
+    catalog_naming_audit_summary = catalog_naming_audit.get("summary", {})
+    ichiban_duplicate_lanes = dict(
+        catalog_naming_audit_summary.get("ichiban_exact_display_duplicate_review_by_lane", [])
+    )
     ichiban_reissue_decision_template = (
         ichiban_reissue_decision_template_override
         if ichiban_reissue_decision_template_override is not None
@@ -4891,6 +4902,15 @@ def build_operations_public(
             "ichiban_probable_reissue_review_groups": dedupe_action_queue_summary.get(
                 "ichiban_probable_reissue_review_groups", 0
             ),
+            "ichiban_same_slug_family_reissue_review_groups": ichiban_duplicate_lanes.get(
+                "same_slug_family_reissue_review", 0
+            ),
+            "ichiban_cross_campaign_exact_display_review_groups": ichiban_duplicate_lanes.get(
+                "cross_campaign_exact_display_review", 0
+            ),
+            "ichiban_exact_display_duplicate_review_by_lane": (
+                catalog_naming_audit_summary.get("ichiban_exact_display_duplicate_review_by_lane", [])
+            ),
             "ichiban_reissue_protected_groups": dedupe_action_queue_summary.get(
                 "ichiban_reissue_protected_groups", 0
             ),
@@ -4915,6 +4935,15 @@ def build_operations_public(
             "review_groups": dedupe_action_queue_summary.get("ichiban_reissue_review_groups", 0),
             "probable_reissue_groups": dedupe_action_queue_summary.get(
                 "ichiban_probable_reissue_review_groups", 0
+            ),
+            "same_slug_family_reissue_groups": ichiban_duplicate_lanes.get(
+                "same_slug_family_reissue_review", 0
+            ),
+            "cross_campaign_exact_display_groups": ichiban_duplicate_lanes.get(
+                "cross_campaign_exact_display_review", 0
+            ),
+            "duplicate_review_by_lane": catalog_naming_audit_summary.get(
+                "ichiban_exact_display_duplicate_review_by_lane", []
             ),
             "review_rows": dedupe_action_queue_summary.get("ichiban_reissue_review_rows", 0),
             "work_order_rows": dedupe_action_queue_summary.get("ichiban_reissue_work_order_rows", 0),
@@ -5674,6 +5703,15 @@ def build_operations_public(
             "ichiban_probable_reissue_review_groups": dedupe_action_queue_summary.get(
                 "ichiban_probable_reissue_review_groups", 0
             ),
+            "ichiban_same_slug_family_reissue_review_groups": ichiban_duplicate_lanes.get(
+                "same_slug_family_reissue_review", 0
+            ),
+            "ichiban_cross_campaign_exact_display_review_groups": ichiban_duplicate_lanes.get(
+                "cross_campaign_exact_display_review", 0
+            ),
+            "ichiban_exact_display_duplicate_review_by_lane": (
+                catalog_naming_audit_summary.get("ichiban_exact_display_duplicate_review_by_lane", [])
+            ),
             "ichiban_reissue_protected_groups": dedupe_action_queue_summary.get(
                 "ichiban_reissue_protected_groups", 0
             ),
@@ -5701,6 +5739,15 @@ def build_operations_public(
             "open_rows": dedupe_action_queue_summary.get("ichiban_reissue_review_groups", 0),
             "probable_reissue_groups": dedupe_action_queue_summary.get(
                 "ichiban_probable_reissue_review_groups", 0
+            ),
+            "same_slug_family_reissue_groups": ichiban_duplicate_lanes.get(
+                "same_slug_family_reissue_review", 0
+            ),
+            "cross_campaign_exact_display_groups": ichiban_duplicate_lanes.get(
+                "cross_campaign_exact_display_review", 0
+            ),
+            "duplicate_review_by_lane": catalog_naming_audit_summary.get(
+                "ichiban_exact_display_duplicate_review_by_lane", []
             ),
             "review_rows": dedupe_action_queue_summary.get("ichiban_reissue_review_rows", 0),
             "work_order_rows": dedupe_action_queue_summary.get("ichiban_reissue_work_order_rows", 0),
@@ -5933,6 +5980,12 @@ def build_operations_public(
         )
         open_review_queues["ichiban_probable_reissue_dedupe_review_groups"] = dedupe_action_queue_summary.get(
             "ichiban_probable_reissue_review_groups", 0
+        )
+        open_review_queues["ichiban_same_slug_family_reissue_review_groups"] = ichiban_duplicate_lanes.get(
+            "same_slug_family_reissue_review", 0
+        )
+        open_review_queues["ichiban_cross_campaign_exact_display_review_groups"] = ichiban_duplicate_lanes.get(
+            "cross_campaign_exact_display_review", 0
         )
     if requested_focus_review_batches_summary:
         open_review_queues["requested_focus_review_rows"] = requested_focus_review_batches_summary.get("review_row_count", 0)
@@ -10483,6 +10536,17 @@ def validate_report_consistency(
         expected_open_queues["ichiban_probable_reissue_dedupe_review_groups"] = dedupe_action_summary.get(
             "ichiban_probable_reissue_review_groups", 0
         )
+        catalog_naming_audit = load_json(CATALOG_NAMING_AUDIT, {}) if CATALOG_NAMING_AUDIT.exists() else {}
+        catalog_naming_audit_summary = catalog_naming_audit.get("summary", {})
+        ichiban_duplicate_lanes = dict(
+            catalog_naming_audit_summary.get("ichiban_exact_display_duplicate_review_by_lane", [])
+        )
+        expected_open_queues["ichiban_same_slug_family_reissue_review_groups"] = ichiban_duplicate_lanes.get(
+            "same_slug_family_reissue_review", 0
+        )
+        expected_open_queues["ichiban_cross_campaign_exact_display_review_groups"] = ichiban_duplicate_lanes.get(
+            "cross_campaign_exact_display_review", 0
+        )
     if animation_review_summary:
         expected_open_queues["animation_category_review_rows"] = animation_review_summary.get("source_rows", 0)
     animation_action_queue = (
@@ -11151,6 +11215,9 @@ def update_reports(write: bool) -> dict[str, Any]:
         batch_size=10,
         ichiban_policy_audit=ichiban_prize_policy_audit_source,
     )
+    catalog_naming_audit = (
+        load_json(CATALOG_NAMING_AUDIT, {}) if CATALOG_NAMING_AUDIT.exists() else {}
+    )
     deduplication_fast_review = build_deduplication_fast_review_public.build_report(
         deduplication_action_queue,
         generated_at=generated_at,
@@ -11436,6 +11503,7 @@ def update_reports(write: bool) -> dict[str, Any]:
         requested_focus_action_queue_override=requested_focus_action_queue,
         requested_focus_next_work_override=requested_focus_next_work,
         deduplication_action_queue_override=deduplication_action_queue,
+        catalog_naming_audit_override=catalog_naming_audit,
     )
     agent_work_queue = build_agent_work_queue_public(
         generated_at,

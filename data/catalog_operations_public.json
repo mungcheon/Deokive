@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-27T00:58:08Z",
+  "generated_at": "2026-07-27T01:17:15Z",
   "summary": {
     "catalog_rows": 20295,
     "coverage": {
@@ -37,6 +37,8 @@
       "dedupe_unqueued_actionable_groups": 0,
       "ichiban_reissue_dedupe_review_groups": 46,
       "ichiban_probable_reissue_dedupe_review_groups": 20,
+      "ichiban_same_slug_family_reissue_review_groups": 20,
+      "ichiban_cross_campaign_exact_display_review_groups": 26,
       "requested_focus_review_rows": 6275,
       "requested_focus_action_rows": 600,
       "requested_focus_actionable_rows": 600,
@@ -1805,6 +1807,18 @@
       "queue_coverage": 1.0,
       "ichiban_reissue_review_groups": 46,
       "ichiban_probable_reissue_review_groups": 20,
+      "ichiban_same_slug_family_reissue_review_groups": 20,
+      "ichiban_cross_campaign_exact_display_review_groups": 26,
+      "ichiban_exact_display_duplicate_review_by_lane": [
+        [
+          "cross_campaign_exact_display_review",
+          26
+        ],
+        [
+          "same_slug_family_reissue_review",
+          20
+        ]
+      ],
       "ichiban_reissue_protected_groups": 0,
       "primary_report": "data/catalog_deduplication_action_queue_public.json",
       "next_step": "review_high_medium_confidence_dedupe_first",
@@ -1825,6 +1839,18 @@
       "status": "manual_review",
       "open_rows": 46,
       "probable_reissue_groups": 20,
+      "same_slug_family_reissue_groups": 20,
+      "cross_campaign_exact_display_groups": 26,
+      "duplicate_review_by_lane": [
+        [
+          "cross_campaign_exact_display_review",
+          26
+        ],
+        [
+          "same_slug_family_reissue_review",
+          20
+        ]
+      ],
       "review_rows": 92,
       "work_order_rows": 20,
       "decision_template_rows": 20,
@@ -6897,6 +6923,18 @@
       "ichiban_reissue_review_groups": 46,
       "ichiban_reissue_review_rows": 92,
       "ichiban_probable_reissue_review_groups": 20,
+      "ichiban_same_slug_family_reissue_review_groups": 20,
+      "ichiban_cross_campaign_exact_display_review_groups": 26,
+      "ichiban_exact_display_duplicate_review_by_lane": [
+        [
+          "cross_campaign_exact_display_review",
+          26
+        ],
+        [
+          "same_slug_family_reissue_review",
+          20
+        ]
+      ],
       "ichiban_reissue_protected_groups": 0,
       "recommended_next_action": "Review queued high/medium-confidence duplicate groups, then expand remaining actionable groups."
     },
@@ -6923,6 +6961,18 @@
       "work_order_report": "data/catalog_deduplication_action_queue_public.json",
       "review_groups": 46,
       "probable_reissue_groups": 20,
+      "same_slug_family_reissue_groups": 20,
+      "cross_campaign_exact_display_groups": 26,
+      "duplicate_review_by_lane": [
+        [
+          "cross_campaign_exact_display_review",
+          26
+        ],
+        [
+          "same_slug_family_reissue_review",
+          20
+        ]
+      ],
       "review_rows": 92,
       "work_order_rows": 20,
       "campaign_url_comparison_preview": [
