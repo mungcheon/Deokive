@@ -1,4 +1,6 @@
 import unittest
+import tempfile
+from pathlib import Path
 
 from tools import build_catalog_update_backlog as backlog
 
@@ -165,6 +167,32 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
                 }
             ],
         }
+        image_asset_audit = {
+            "summary": {
+                "missing_image_url_rows": 3,
+                "missing_image_with_source_url_rows": 1,
+                "missing_image_without_source_url_rows": 2,
+                "rows_ready_for_source_page_image_review": 1,
+                "rows_requiring_source_url_before_image_review": 2,
+            },
+            "missing_image_evidence_priority": {
+                "with_source_url_rows": 1,
+                "without_source_url_rows": 2,
+                "with_source_url_by_source_store": [["Store A", 1]],
+                "without_source_url_by_source_store": [["Store B", 2]],
+                "source_url_ready_sample_rows": [
+                    {
+                        "catalog_index": 30,
+                        "name_ko": "image ready",
+                        "source_store": "Store A",
+                        "source_url": "https://example.test/source",
+                    }
+                ],
+                "source_discovery_required_sample_rows": [
+                    {"catalog_index": 31, "name_ko": "source needed", "source_store": "Store B"}
+                ],
+            },
+        }
 
         result = backlog.build_backlog(
             image_queue,
@@ -176,6 +204,7 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
             priority_goods,
             naming_queue,
             ichiban_quality,
+            image_asset_audit,
         )
 
         self.assertEqual(result["rows"], 10)
@@ -243,6 +272,13 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
         )
         self.assertEqual(result["ichiban_quality"]["work_packs"][0]["group_key"], "sample")
         self.assertEqual(result["ichiban_quality"]["work_pack_rows"], 1)
+        self.assertEqual(result["image_evidence_split"]["missing_image_url_rows"], 3)
+        self.assertEqual(result["image_evidence_split"]["with_source_url_rows"], 1)
+        self.assertEqual(result["image_evidence_split"]["without_source_url_rows"], 2)
+        self.assertEqual(
+            result["image_evidence_split"]["source_url_ready_sample_rows"][0]["catalog_index"],
+            30,
+        )
 
     def test_field_focus_packs_groups_missing_rows_by_batch_key(self):
         items = [
@@ -314,6 +350,41 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
             {"source_url", "release_date", "official_price_jpy", "barcode"},
             {pack["field"] for pack in packs},
         )
+
+    def test_markdown_includes_image_evidence_split(self):
+        payload = {
+            "rows": 10,
+            "missing_images": 3,
+            "source_discovery_rows": 2,
+            "field_queue_missing_total": 5,
+            "missing_enrichment": {"image_url": 3},
+            "image_evidence_split": {
+                "missing_image_url_rows": 3,
+                "with_source_url_rows": 1,
+                "without_source_url_rows": 2,
+                "rows_ready_for_source_page_image_review": 1,
+                "rows_requiring_source_url_before_image_review": 2,
+                "with_source_url_by_source_store": [["Store A", 1]],
+                "without_source_url_by_source_store": [["Store B", 2]],
+                "source_url_ready_sample_rows": [
+                    {
+                        "catalog_index": 30,
+                        "source_store": "Store A",
+                        "name_ko": "image ready",
+                        "source_url": "https://example.test/source",
+                    }
+                ],
+            },
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "backlog.md"
+            backlog.write_markdown(payload, path)
+
+            text = path.read_text(encoding="utf-8-sig")
+
+        self.assertIn("## Image Evidence Split", text)
+        self.assertIn("With source_url: `1`", text)
+        self.assertIn("Store A", text)
 
 
 if __name__ == "__main__":

@@ -20,6 +20,7 @@ DEFAULT_QUALITY = ROOT / "server" / "catalog_quality_report.json"
 DEFAULT_NAMING_QUEUE = ROOT / "server" / "catalog_naming_quality_queue.json"
 DEFAULT_ICHIBAN_QUALITY_QUEUE = ROOT / "server" / "ichiban_public_quality_queue.json"
 DEFAULT_IMAGE_PROVIDER_AUDIT = ROOT / "server" / "catalog_image_provider_coverage_audit.json"
+DEFAULT_IMAGE_ASSET_AUDIT = ROOT / "server" / "catalog_image_asset_audit.json"
 DEFAULT_STALE_SOURCE_QUEUE = ROOT / "server" / "stale_source_cleanup_queue.json"
 DEFAULT_PRIORITY_GOODS_QUEUE = ROOT / "server" / "priority_goods_queue_current.json"
 DEFAULT_JSON = ROOT / "server" / "catalog_update_backlog.json"
@@ -362,6 +363,7 @@ def build_backlog(
     priority_goods_payload: dict[str, Any] | None = None,
     naming_queue_payload: dict[str, Any] | None = None,
     ichiban_quality_payload: dict[str, Any] | None = None,
+    image_asset_audit_payload: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     queue = [item for item in queue_payload.get("queue", []) if isinstance(item, dict)]
     by_strategy = Counter(str(item.get("strategy") or "") for item in queue)
@@ -509,6 +511,13 @@ def build_backlog(
     ichiban_by_workflow: Counter[str] = Counter(
         str(item.get("workflow") or "") for item in ichiban_quality_items
     )
+    image_asset_audit_payload = image_asset_audit_payload or {}
+    image_asset_summary = image_asset_audit_payload.get("summary") or {}
+    missing_image_evidence_priority = (
+        image_asset_audit_payload.get("missing_image_evidence_priority")
+        or (image_asset_audit_payload.get("download_readiness") or {}).get("missing_image_evidence_priority")
+        or {}
+    )
 
     return {
         "rows": quality_payload.get("rows"),
@@ -576,6 +585,44 @@ def build_backlog(
             "by_workflow": ichiban_by_workflow.most_common(),
             "work_packs": ichiban_work_packs[:40],
             "sample_rows": ichiban_quality_items[:20],
+        },
+        "image_evidence_split": {
+            "missing_image_url_rows": image_asset_summary.get(
+                "missing_image_url_rows",
+                queue_payload.get("missing_images"),
+            ),
+            "with_source_url_rows": missing_image_evidence_priority.get(
+                "with_source_url_rows",
+                image_asset_summary.get("missing_image_with_source_url_rows", 0),
+            ),
+            "without_source_url_rows": missing_image_evidence_priority.get(
+                "without_source_url_rows",
+                image_asset_summary.get("missing_image_without_source_url_rows", 0),
+            ),
+            "rows_ready_for_source_page_image_review": image_asset_summary.get(
+                "rows_ready_for_source_page_image_review",
+                missing_image_evidence_priority.get("with_source_url_rows", 0),
+            ),
+            "rows_requiring_source_url_before_image_review": image_asset_summary.get(
+                "rows_requiring_source_url_before_image_review",
+                missing_image_evidence_priority.get("without_source_url_rows", 0),
+            ),
+            "source_url_ready_sample_rows": missing_image_evidence_priority.get(
+                "source_url_ready_sample_rows",
+                [],
+            )[:20],
+            "source_discovery_required_sample_rows": missing_image_evidence_priority.get(
+                "source_discovery_required_sample_rows",
+                [],
+            )[:20],
+            "with_source_url_by_source_store": missing_image_evidence_priority.get(
+                "with_source_url_by_source_store",
+                [],
+            )[:20],
+            "without_source_url_by_source_store": missing_image_evidence_priority.get(
+                "without_source_url_by_source_store",
+                [],
+            )[:20],
         },
         "field_queue_missing_total": field_queue_payload.get("missing_total"),
         "field_queue_by_field": field_queue_payload.get("by_field", []),
@@ -735,6 +782,31 @@ def write_markdown(backlog: dict[str, Any], path: Path) -> None:
         lines.append(
             f"- `{item.get('workflow')}` / `{item.get('display_name')}` / "
             f"`{item.get('source_url')}` / `{item.get('reason')}`"
+        )
+    image_evidence = backlog.get("image_evidence_split") or {}
+    lines.extend(["", "## Image Evidence Split", ""])
+    lines.append(f"- Missing image URL rows: `{image_evidence.get('missing_image_url_rows', 0)}`")
+    lines.append(f"- With source_url: `{image_evidence.get('with_source_url_rows', 0)}`")
+    lines.append(f"- Without source_url: `{image_evidence.get('without_source_url_rows', 0)}`")
+    lines.append(
+        "- Ready for source-page image review: "
+        f"`{image_evidence.get('rows_ready_for_source_page_image_review', 0)}`"
+    )
+    lines.append(
+        "- Source URL required before image review: "
+        f"`{image_evidence.get('rows_requiring_source_url_before_image_review', 0)}`"
+    )
+    lines.extend(["", "### Source URL Ready Stores", ""])
+    for item in image_evidence.get("with_source_url_by_source_store", [])[:15]:
+        lines.append(f"- `{item[0]}`: `{item[1]}`")
+    lines.extend(["", "### Source Discovery Required Stores", ""])
+    for item in image_evidence.get("without_source_url_by_source_store", [])[:15]:
+        lines.append(f"- `{item[0]}`: `{item[1]}`")
+    lines.extend(["", "### Source URL Ready Image Samples", ""])
+    for item in image_evidence.get("source_url_ready_sample_rows", [])[:10]:
+        lines.append(
+            f"- `{item.get('catalog_index')}` / `{item.get('source_store')}` / "
+            f"`{item.get('name_ko')}` / `{item.get('source_url')}`"
         )
     lines.extend(
         [
@@ -907,6 +979,7 @@ def main() -> int:
     parser.add_argument("--naming-queue", type=Path, default=DEFAULT_NAMING_QUEUE)
     parser.add_argument("--ichiban-quality-queue", type=Path, default=DEFAULT_ICHIBAN_QUALITY_QUEUE)
     parser.add_argument("--image-provider-audit", type=Path, default=DEFAULT_IMAGE_PROVIDER_AUDIT)
+    parser.add_argument("--image-asset-audit", type=Path, default=DEFAULT_IMAGE_ASSET_AUDIT)
     parser.add_argument("--stale-source-queue", type=Path, default=DEFAULT_STALE_SOURCE_QUEUE)
     parser.add_argument("--priority-goods-queue", type=Path, default=DEFAULT_PRIORITY_GOODS_QUEUE)
     parser.add_argument("--json-output", type=Path, default=DEFAULT_JSON)
@@ -923,6 +996,11 @@ def main() -> int:
     image_provider_audit = (
         json.loads(args.image_provider_audit.read_text(encoding="utf-8-sig"))
         if args.image_provider_audit.exists()
+        else {}
+    )
+    image_asset_audit = (
+        json.loads(args.image_asset_audit.read_text(encoding="utf-8-sig"))
+        if args.image_asset_audit.exists()
         else {}
     )
     source_discovery_payload = (
@@ -960,6 +1038,7 @@ def main() -> int:
         priority_goods_payload,
         naming_queue_payload,
         ichiban_quality_payload,
+        image_asset_audit,
     )
     args.json_output.write_text(json.dumps(backlog, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     write_markdown(backlog, args.markdown_output)
@@ -977,6 +1056,10 @@ def main() -> int:
                 ),
                 "field_update_work_pack_rows": len(backlog.get("field_update_work_packs") or []),
                 "image_work_pack_rows": len(backlog.get("image_work_packs") or []),
+                "image_source_url_ready_rows": (backlog.get("image_evidence_split") or {}).get(
+                    "rows_ready_for_source_page_image_review",
+                    0,
+                ),
                 "ichiban_work_pack_rows": (backlog.get("ichiban_quality") or {}).get("work_pack_rows"),
                 "priority_goods": sorted((backlog.get("priority_goods_summary") or {}).keys()),
                 "json": str(args.json_output),
