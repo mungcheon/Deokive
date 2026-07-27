@@ -90,6 +90,20 @@ class PublicDataLayoutAuditTests(unittest.TestCase):
         self.assertEqual(1, summary["incoming_files"])
         self.assertTrue(errors)
 
+    def test_rejects_invalid_field_update_payload(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            incoming = Path(tmp)
+            (incoming / "agent-20260727-source-url.json").write_text(
+                '{"schema_version": 1, "updates": []}',
+                encoding="utf-8",
+            )
+
+            with patch.object(target, "FIELD_UPDATES_INCOMING", incoming):
+                summary = target.audit_incoming_field_updates(errors := [])
+
+        self.assertEqual(1, summary["field_update_files"])
+        self.assertTrue(errors)
+
     def test_rejects_untraceable_incoming_filename(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             incoming = Path(tmp)

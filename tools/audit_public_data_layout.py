@@ -24,6 +24,18 @@ except ImportError:
         load_json as load_image_update_json,
         validate_payload as validate_image_update_payload,
     )
+try:
+    from validate_agent_catalog_field_updates import (
+        iter_input_files as iter_field_update_files,
+        load_json as load_field_update_json,
+        validate_payload as validate_field_update_payload,
+    )
+except ImportError:
+    from tools.validate_agent_catalog_field_updates import (
+        iter_input_files as iter_field_update_files,
+        load_json as load_field_update_json,
+        validate_payload as validate_field_update_payload,
+    )
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -34,6 +46,7 @@ SITE_STATUS = DATA / "site_status_public.json"
 INTAKE = DATA / "intake"
 INCOMING = INTAKE / "incoming"
 IMAGE_UPDATES_INCOMING = INTAKE / "image_updates" / "incoming"
+FIELD_UPDATES_INCOMING = INTAKE / "field_updates" / "incoming"
 SOURCES = INTAKE / "sources"
 SERVER_ARTIFACT_SUFFIXES = {".csv", ".html", ".json", ".md", ".jpg", ".jpeg", ".png", ".txt"}
 INTAKE_FILENAME_RE = re.compile(r"^[a-z0-9][a-z0-9_-]*-\d{8}-[a-z0-9][a-z0-9_-]*\.json$")
@@ -47,6 +60,11 @@ ALLOWED_DATA_FILES = {
     "data/intake/README.md",
     "data/intake/agent_goods_intake.schema.json",
     "data/intake/image_updates/agent_catalog_image_update.schema.json",
+    "data/intake/field_updates/agent_catalog_field_update.schema.json",
+    "data/intake/field_updates/incoming/.gitkeep",
+    "data/intake/field_updates/processed/.gitkeep",
+    "data/intake/field_updates/rejected/.gitkeep",
+    "data/intake/field_updates/templates/agent_catalog_field_update.template.json",
     "data/intake/image_updates/incoming/.gitkeep",
     "data/intake/image_updates/processed/.gitkeep",
     "data/intake/image_updates/rejected/.gitkeep",
@@ -66,6 +84,9 @@ ALLOWED_INTAKE_RECORD_DIRS = {
     "data/intake/image_updates/incoming",
     "data/intake/image_updates/processed",
     "data/intake/image_updates/rejected",
+    "data/intake/field_updates/incoming",
+    "data/intake/field_updates/processed",
+    "data/intake/field_updates/rejected",
 }
 
 REQUIRED_ITEM_FIELDS = {
@@ -298,6 +319,36 @@ def audit_incoming_image_updates(errors: list[str]) -> dict[str, int]:
     return {"image_update_files": len(files), "image_update_items": update_count}
 
 
+def load_catalog_rows_by_index() -> dict[int, dict[str, Any]]:
+    catalog_rows: dict[int, dict[str, Any]] = {}
+    catalog_payload = read_json(CATALOG)
+    if isinstance(catalog_payload, dict) and isinstance(catalog_payload.get("items"), list):
+        for item in catalog_payload["items"]:
+            if not isinstance(item, dict):
+                continue
+            catalog_index = item.get("catalog_index")
+            if isinstance(catalog_index, int) and not isinstance(catalog_index, bool):
+                catalog_rows[catalog_index] = item
+    return catalog_rows
+
+
+def audit_incoming_field_updates(errors: list[str]) -> dict[str, int]:
+    files = iter_field_update_files([FIELD_UPDATES_INCOMING])
+    update_count = 0
+    catalog_rows = load_catalog_rows_by_index()
+    for path in files:
+        if not is_valid_intake_record_name(path):
+            errors.append(
+                f"{display_path(path)}: field update filename must be "
+                "<agent>-<YYYYMMDD>-<topic>.json"
+            )
+        payload = load_field_update_json(path)
+        payload_errors, summary = validate_field_update_payload(path, payload, catalog_rows=catalog_rows)
+        update_count += int(summary["updates"])
+        errors.extend(payload_errors)
+    return {"field_update_files": len(files), "field_update_items": update_count}
+
+
 def run_audit() -> tuple[dict[str, Any], list[str]]:
     errors: list[str] = []
     tracked = audit_tracked_data_files(errors)
@@ -309,6 +360,7 @@ def run_audit() -> tuple[dict[str, Any], list[str]]:
     source_counts = audit_intake_sources(errors)
     intake_summary = audit_incoming_intake(errors)
     image_update_summary = audit_incoming_image_updates(errors)
+    field_update_summary = audit_incoming_field_updates(errors)
 
     summary: dict[str, Any] = {
         "tracked_data_files": len(tracked),
@@ -319,6 +371,7 @@ def run_audit() -> tuple[dict[str, Any], list[str]]:
         "source_lists": source_counts,
         **intake_summary,
         **image_update_summary,
+        **field_update_summary,
         "status": "fail" if errors else "pass",
         "errors": errors,
     }

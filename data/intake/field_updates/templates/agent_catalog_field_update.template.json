@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "agent": {
+    "name": "agent-name",
+    "run_id": "YYYYMMDD-topic-001",
+    "collected_at": "2026-07-27T00:00:00+09:00",
+    "notes": "What missing catalog fields this run tried to fill."
+  },
+  "updates": [
+    {
+      "catalog_index": 0,
+      "field": "source_url",
+      "value": "https://example.com/product",
+      "evidence": [
+        {
+          "url": "https://example.com/product",
+          "type": "official",
+          "note": "Official product/detail page."
+        }
+      ],
+      "confidence": "needs_review",
+      "notes": ""
+    }
+  ]
+}

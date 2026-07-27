@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://deokive.kro.kr/schemas/agent-catalog-field-update.schema.json",
+  "title": "Deokive Agent Catalog Field Update",
+  "type": "object",
+  "required": ["schema_version", "agent", "updates"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "agent": {
+      "type": "object",
+      "required": ["name", "run_id", "collected_at"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "run_id": { "type": "string", "minLength": 1 },
+        "collected_at": {
+          "type": "string",
+          "description": "ISO-8601 timestamp."
+        },
+        "notes": { "type": "string" }
+      }
+    },
+    "updates": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["catalog_index", "field", "value", "evidence", "confidence"],
+        "additionalProperties": false,
+        "properties": {
+          "catalog_index": { "type": "integer", "minimum": 0 },
+          "field": {
+            "type": "string",
+            "enum": [
+              "source_url",
+              "release_date",
+              "barcode",
+              "official_price",
+              "official_price_currency",
+              "official_price_jpy",
+              "name_ja",
+              "name_en",
+              "name_ko",
+              "character_name",
+              "sub_series"
+            ]
+          },
+          "value": {
+            "description": "String, integer, or null value to merge after validation."
+          },
+          "evidence": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["url", "type"],
+              "additionalProperties": false,
+              "properties": {
+                "url": { "type": "string", "format": "uri" },
+                "type": {
+                  "type": "string",
+                  "enum": ["official", "trusted", "manual"]
+                },
+                "note": { "type": "string" }
+              }
+            }
+          },
+          "confidence": {
+            "type": "string",
+            "enum": ["confirmed", "candidate", "needs_review"]
+          },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}

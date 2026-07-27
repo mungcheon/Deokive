@@ -7,6 +7,8 @@ Agents must save new collection results with the same JSON shape:
 - New raw submissions: `data/intake/incoming/<agent>-<YYYYMMDD>-<topic>.json`
 - Existing catalog image updates:
   `data/intake/image_updates/incoming/<agent>-<YYYYMMDD>-<topic>.json`
+- Existing catalog field updates:
+  `data/intake/field_updates/incoming/<agent>-<YYYYMMDD>-<topic>.json`
 - Official source/campaign lists: `data/intake/sources/`
 - Accepted and already merged submissions: `data/intake/processed/`
 - Rejected or unsafe submissions: `data/intake/rejected/`
@@ -53,15 +55,24 @@ Incoming filenames must stay traceable, for example
 
 ## Agent Output Contract
 
-Every agent run should produce exactly one of these two payloads:
+Every agent run should produce exactly one of these three payloads:
 
 - New goods rows: use `templates/agent_goods_intake.template.json`.
 - Image fixes for existing rows: use
   `image_updates/templates/agent_catalog_image_update.template.json`.
+- Missing field fixes for existing rows: use
+  `field_updates/templates/agent_catalog_field_update.template.json`.
 
 Keep scratch searches, dry runs, screenshots, and generated review queues out of
 `data/`. They can live locally under ignored `server/` work folders while being
 reviewed, but only validated intake JSON should be committed.
+
+Field updates are for missing public catalog values such as `source_url`,
+`release_date`, `barcode`, official price, official-language names,
+`character_name`, and `sub_series`. They are not a second DB and should not be
+read by the app. The validator rejects unknown fields, missing catalog rows, and
+attempts to fill a field that already has a value; use a dedicated manual
+correction queue for replacements.
 
 ## Item Rules
 
