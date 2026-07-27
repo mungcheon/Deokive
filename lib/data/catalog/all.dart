@@ -30,12 +30,26 @@ List<String> catalogCharacterNames() {
 List<String> catalogSeriesNames() {
   final set = <String>{};
   for (final e in kFullCatalog) {
-    if (e.seriesName != null && e.seriesName!.isNotEmpty) {
-      set.add(e.seriesName!);
+    final value = e.seriesName?.trim() ?? '';
+    if (value.isNotEmpty && !_isOfficialMarketSeriesLabel(e, value)) {
+      set.add(value);
     }
   }
   final out = set.toList()..sort();
   return out;
+}
+
+bool _isOfficialMarketSeriesLabel(GoodsCatalogEntry entry, String value) {
+  final normalized = value.toLowerCase().replaceAll(RegExp(r'\s+'), '');
+  final store = entry.sourceStore.toLowerCase().replaceAll(RegExp(r'\s+'), '');
+  final subSeries =
+      (entry.subSeries ?? '').toLowerCase().replaceAll(RegExp(r'\s+'), '');
+  if (store.isNotEmpty && normalized == store) return true;
+  if (subSeries == '공식마켓' || subSeries == 'officialmarket') return true;
+  return normalized == '공식마켓' ||
+      normalized == 'officialmarket' ||
+      normalized == 'officialstore' ||
+      normalized == 'officialshop';
 }
 
 /// Distinct catalog affiliations across all stores.

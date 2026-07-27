@@ -1800,10 +1800,26 @@ class AppState extends ChangeNotifier {
     final set = <String>{};
     for (final entry in curatedCatalogEntries) {
       final value = entry.seriesName?.trim() ?? '';
-      if (value.isNotEmpty) set.add(value);
+      if (value.isNotEmpty && !_isOfficialMarketSeriesLabel(entry, value)) {
+        set.add(value);
+      }
     }
     final list = set.toList()..sort();
     return list;
+  }
+
+  bool _isOfficialMarketSeriesLabel(GoodsCatalogEntry entry, String value) {
+    final normalized = value.toLowerCase().replaceAll(RegExp(r'\s+'), '');
+    final store =
+        entry.sourceStore.toLowerCase().replaceAll(RegExp(r'\s+'), '');
+    final subSeries =
+        (entry.subSeries ?? '').toLowerCase().replaceAll(RegExp(r'\s+'), '');
+    if (store.isNotEmpty && normalized == store) return true;
+    if (subSeries == '공식마켓' || subSeries == 'officialmarket') return true;
+    return normalized == '공식마켓' ||
+        normalized == 'officialmarket' ||
+        normalized == 'officialstore' ||
+        normalized == 'officialshop';
   }
 
   List<String> get curatedCatalogAffiliations {
