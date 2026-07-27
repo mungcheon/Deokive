@@ -164,7 +164,9 @@ class ImportConfirmedSourceDiscoveryRowsTest(unittest.TestCase):
         self.assertEqual(dumped["items"], updated_rows)
         self.assertEqual(dumped["meta"]["row_count"], 1)
         self.assertEqual(dumped["meta"]["total_items"], 1)
-        self.assertEqual(dumped["meta"]["privacy"], {"contains_user_accounts": False})
+        self.assertFalse(dumped["meta"]["privacy"]["contains_user_accounts"])
+        self.assertFalse(dumped["meta"]["privacy"]["contains_private_memos"])
+        self.assertEqual(dumped["meta"]["quality_summary"]["missing_source_urls"], 0)
 
 
 if __name__ == "__main__":

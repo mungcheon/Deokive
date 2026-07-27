@@ -10,6 +10,11 @@ from typing import Any
 from urllib.parse import urlsplit
 
 try:
+    from catalog_public_meta import build_public_catalog_meta
+except ImportError:
+    from tools.catalog_public_meta import build_public_catalog_meta
+
+try:
     sys.stdout.reconfigure(encoding="utf-8")
 except Exception:
     pass
@@ -252,9 +257,15 @@ def _dump_seed_payload(original_payload: Any, seed_rows: list[dict[str, Any]]) -
         updated_payload["items"] = seed_rows
         meta = updated_payload.get("meta")
         if isinstance(meta, dict):
-            meta = dict(meta)
-            meta["row_count"] = len(seed_rows)
-            meta["total_items"] = len(seed_rows)
+            fields = list(meta.get("fields") or [])
+            if not fields:
+                fields = sorted({key for row in seed_rows for key in row})
+            meta = build_public_catalog_meta(
+                seed_rows,
+                fields=fields,
+                generated_at=meta.get("generated_at"),
+                source=meta.get("source") or "data/catalog_public.json",
+            )
             updated_payload["meta"] = meta
         return updated_payload
     return seed_rows
