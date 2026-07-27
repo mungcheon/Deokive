@@ -332,6 +332,11 @@ def build_backlog(
         for item in ichiban_quality_payload.get("items", [])
         if isinstance(item, dict)
     ]
+    ichiban_work_packs = [
+        item
+        for item in ichiban_quality_payload.get("work_packs", [])
+        if isinstance(item, dict)
+    ]
     ichiban_by_workflow: Counter[str] = Counter(
         str(item.get("workflow") or "") for item in ichiban_quality_items
     )
@@ -399,6 +404,7 @@ def build_backlog(
                 "seeded_campaign_url_count", 0
             ),
             "by_workflow": ichiban_by_workflow.most_common(),
+            "work_packs": ichiban_work_packs[:40],
             "sample_rows": ichiban_quality_items[:20],
         },
         "field_queue_missing_total": field_queue_payload.get("missing_total"),
@@ -544,6 +550,12 @@ def write_markdown(backlog: dict[str, Any], path: Path) -> None:
     lines.extend(["", "### Ichiban Workflows", ""])
     for workflow, count in ichiban.get("by_workflow", []):
         lines.append(f"- `{workflow}`: `{count}`")
+    lines.extend(["", "### Ichiban Work Packs", ""])
+    for item in ichiban.get("work_packs", [])[:15]:
+        lines.append(
+            f"- `{item.get('workflow')}` / `{item.get('group_key')}`: "
+            f"`{item.get('rows')}` rows, `{item.get('next_action')}`"
+        )
     lines.extend(["", "### Ichiban Samples", ""])
     for item in ichiban.get("sample_rows", [])[:10]:
         lines.append(

@@ -72,6 +72,7 @@ class BuildIchibanPublicQualityQueueTests(unittest.TestCase):
         self.assertEqual(1, queue["summary"]["exact_display_duplicate_queue_rows"])
         self.assertEqual(1, queue["summary"]["zero_price_policy_queue_rows"])
         self.assertEqual(2, queue["summary"]["naming_convention_queue_rows"])
+        self.assertEqual(6, queue["summary"]["work_pack_rows"])
         self.assertEqual(
             [
                 "zero_price_policy_review",
@@ -83,6 +84,21 @@ class BuildIchibanPublicQualityQueueTests(unittest.TestCase):
             ],
             [item["workflow"] for item in queue["items"]],
         )
+        self.assertEqual(
+            [
+                "zero_price_policy_review",
+                "campaign_gap_research",
+                "campaign_gap_research",
+                "exact_display_duplicate_reissue_review",
+                "display_name_convention_review",
+                "non_prize_related_item_classification",
+            ],
+            [item["workflow"] for item in queue["work_packs"]],
+        )
+        self.assertEqual(1, queue["work_packs"][1]["rows"])
+        self.assertEqual("missing", queue["work_packs"][1]["group_key"])
+        self.assertEqual("missing-2", queue["work_packs"][2]["group_key"])
+        self.assertEqual("release / bad rank", queue["work_packs"][4]["group_key"])
 
 
 if __name__ == "__main__":

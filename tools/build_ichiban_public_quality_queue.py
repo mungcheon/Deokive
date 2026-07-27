@@ -121,6 +121,7 @@ def build_queue(quality_report: dict[str, Any]) -> dict[str, Any]:
             str(item.get("display_name") or ""),
         )
     )
+    work_packs = _build_work_packs(items)
     return {
         "source": "data/catalog_public.json",
         "quality_report_source": "server/catalog_quality_report.json",
@@ -143,9 +144,73 @@ def build_queue(quality_report: dict[str, Any]) -> dict[str, Any]:
             "naming_convention_review_rows": ichiban.get("naming_convention_review_rows", 0),
             "naming_convention_queue_rows": len(naming_items),
             "queue_rows": len(items),
+            "work_pack_rows": len(work_packs),
         },
         "items": items,
+        "work_packs": work_packs,
     }
+
+
+def _build_work_packs(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    grouped: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    for item in items:
+        workflow = str(item.get("workflow") or "")
+        group_key = _pack_group_key(item)
+        grouped.setdefault((workflow, group_key), []).append(item)
+
+    packs: list[dict[str, Any]] = []
+    for (workflow, group_key), rows in grouped.items():
+        first = rows[0]
+        packs.append(
+            {
+                "workflow": workflow,
+                "group_key": group_key,
+                "priority": first.get("priority"),
+                "status": first.get("status"),
+                "rows": len(rows),
+                "next_action": first.get("recommended_action"),
+                "sample_rows": rows[:10],
+            }
+        )
+    packs.sort(
+        key=lambda item: (
+            int(item.get("priority") or 99),
+            str(item.get("workflow") or ""),
+            -int(item.get("rows") or 0),
+            str(item.get("group_key") or ""),
+        )
+    )
+    return packs
+
+
+def _pack_group_key(item: dict[str, Any]) -> str:
+    workflow = str(item.get("workflow") or "")
+    if workflow == "campaign_gap_research":
+        source_url = str(item.get("source_url") or "")
+        return _campaign_family(source_url)
+    if workflow == "exact_display_duplicate_reissue_review":
+        source_urls = item.get("source_urls") or []
+        if isinstance(source_urls, list) and source_urls:
+            families = sorted({_campaign_family(str(url)) for url in source_urls})
+            return " + ".join(families)
+        return _display_release_name(str(item.get("display_name") or ""))
+    if workflow in {"non_prize_related_item_classification", "display_name_convention_review"}:
+        parts = item.get("display_parts") or []
+        if isinstance(parts, list) and len(parts) >= 2:
+            return f"{parts[0]} / {parts[1]}"
+        return _display_release_name(str(item.get("display_name") or ""))
+    return workflow
+
+
+def _campaign_family(source_url: str) -> str:
+    slug = source_url.rstrip("/").split("/")[-1]
+    if not slug:
+        return "unknown_campaign"
+    return slug.split("_")[0]
+
+
+def _display_release_name(display_name: str) -> str:
+    return display_name.split(" / ", 1)[0] if display_name else "unknown_display"
 
 
 def write_csv(queue: dict[str, Any], path: Path) -> None:

@@ -154,6 +154,14 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
                     "reason": "non_prize_or_related_item_needs_classification",
                 },
             ],
+            "work_packs": [
+                {
+                    "workflow": "campaign_gap_research",
+                    "group_key": "sample",
+                    "rows": 1,
+                    "next_action": "Find evidence.",
+                }
+            ],
         }
 
         result = backlog.build_backlog(
@@ -220,6 +228,7 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
             result["ichiban_quality"]["by_workflow"],
             [("campaign_gap_research", 1), ("non_prize_related_item_classification", 1)],
         )
+        self.assertEqual(result["ichiban_quality"]["work_packs"][0]["group_key"], "sample")
 
     def test_field_focus_packs_groups_missing_rows_by_batch_key(self):
         items = [
