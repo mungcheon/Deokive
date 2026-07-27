@@ -45,8 +45,14 @@ CATALOG_META = DATA / "catalog_public_meta.json"
 SITE_STATUS = DATA / "site_status_public.json"
 INTAKE = DATA / "intake"
 INCOMING = INTAKE / "incoming"
+PROCESSED = INTAKE / "processed"
+REJECTED = INTAKE / "rejected"
 IMAGE_UPDATES_INCOMING = INTAKE / "image_updates" / "incoming"
+IMAGE_UPDATES_PROCESSED = INTAKE / "image_updates" / "processed"
+IMAGE_UPDATES_REJECTED = INTAKE / "image_updates" / "rejected"
 FIELD_UPDATES_INCOMING = INTAKE / "field_updates" / "incoming"
+FIELD_UPDATES_PROCESSED = INTAKE / "field_updates" / "processed"
+FIELD_UPDATES_REJECTED = INTAKE / "field_updates" / "rejected"
 SOURCES = INTAKE / "sources"
 SERVER_ARTIFACT_SUFFIXES = {".csv", ".html", ".json", ".md", ".jpg", ".jpeg", ".png", ".txt"}
 INTAKE_FILENAME_RE = re.compile(r"^[a-z0-9][a-z0-9_-]*-\d{8}-[a-z0-9][a-z0-9_-]*\.json$")
@@ -278,45 +284,58 @@ def audit_intake_sources(errors: list[str]) -> dict[str, int]:
     return counts
 
 
-def audit_incoming_intake(errors: list[str]) -> dict[str, int]:
-    files = iter_input_files([INCOMING])
+def _audit_goods_intake_dir(path: Path, label: str, errors: list[str]) -> dict[str, int]:
+    files = iter_input_files([path])
     item_count = 0
-    for path in files:
-        if not is_valid_intake_record_name(path):
+    for file_path in files:
+        if not is_valid_intake_record_name(file_path):
             errors.append(
-                f"{display_path(path)}: intake filename must be "
+                f"{display_path(file_path)}: intake filename must be "
                 "<agent>-<YYYYMMDD>-<topic>.json"
             )
-        payload = load_json(path)
-        payload_errors, summary = validate_payload(path, payload)
+        payload = load_json(file_path)
+        payload_errors, summary = validate_payload(file_path, payload)
         item_count += int(summary["items"])
         errors.extend(payload_errors)
-    return {"incoming_files": len(files), "incoming_items": item_count}
+    return {f"{label}_files": len(files), f"{label}_items": item_count}
 
 
-def audit_incoming_image_updates(errors: list[str]) -> dict[str, int]:
-    files = iter_image_update_files([IMAGE_UPDATES_INCOMING])
+def audit_goods_intake_records(errors: list[str]) -> dict[str, int]:
+    summary: dict[str, int] = {}
+    summary.update(_audit_goods_intake_dir(INCOMING, "incoming", errors))
+    summary.update(_audit_goods_intake_dir(PROCESSED, "processed", errors))
+    summary.update(_audit_goods_intake_dir(REJECTED, "rejected", errors))
+    return summary
+
+
+def _audit_image_update_dir(
+    path: Path,
+    label: str,
+    errors: list[str],
+    catalog_rows: dict[int, dict[str, Any]] | None,
+) -> dict[str, int]:
+    files = iter_image_update_files([path])
     update_count = 0
-    catalog_rows: dict[int, dict[str, Any]] = {}
-    catalog_payload = read_json(CATALOG)
-    if isinstance(catalog_payload, dict) and isinstance(catalog_payload.get("items"), list):
-        for item in catalog_payload["items"]:
-            if not isinstance(item, dict):
-                continue
-            catalog_index = item.get("catalog_index")
-            if isinstance(catalog_index, int) and not isinstance(catalog_index, bool):
-                catalog_rows[catalog_index] = item
-    for path in files:
-        if not is_valid_intake_record_name(path):
+    for file_path in files:
+        if not is_valid_intake_record_name(file_path):
             errors.append(
-                f"{display_path(path)}: image update filename must be "
+                f"{display_path(file_path)}: image update filename must be "
                 "<agent>-<YYYYMMDD>-<topic>.json"
             )
-        payload = load_image_update_json(path)
-        payload_errors, summary = validate_image_update_payload(path, payload, catalog_rows=catalog_rows)
+        payload = load_image_update_json(file_path)
+        payload_errors, summary = validate_image_update_payload(file_path, payload, catalog_rows=catalog_rows)
         update_count += int(summary["updates"])
         errors.extend(payload_errors)
-    return {"image_update_files": len(files), "image_update_items": update_count}
+    return {f"image_update_{label}_files": len(files), f"image_update_{label}_items": update_count}
+
+
+def audit_image_update_records(errors: list[str]) -> dict[str, int]:
+    catalog_rows = load_catalog_rows_by_index()
+    summary: dict[str, int] = {}
+    summary.update(_audit_image_update_dir(IMAGE_UPDATES_INCOMING, "incoming", errors, catalog_rows))
+    summary.update(_audit_image_update_dir(IMAGE_UPDATES_PROCESSED, "processed", errors, None))
+    summary.update(_audit_image_update_dir(IMAGE_UPDATES_REJECTED, "rejected", errors, None))
+    return summary
 
 
 def load_catalog_rows_by_index() -> dict[int, dict[str, Any]]:
@@ -332,21 +351,34 @@ def load_catalog_rows_by_index() -> dict[int, dict[str, Any]]:
     return catalog_rows
 
 
-def audit_incoming_field_updates(errors: list[str]) -> dict[str, int]:
-    files = iter_field_update_files([FIELD_UPDATES_INCOMING])
+def _audit_field_update_dir(
+    path: Path,
+    label: str,
+    errors: list[str],
+    catalog_rows: dict[int, dict[str, Any]] | None,
+) -> dict[str, int]:
+    files = iter_field_update_files([path])
     update_count = 0
-    catalog_rows = load_catalog_rows_by_index()
-    for path in files:
-        if not is_valid_intake_record_name(path):
+    for file_path in files:
+        if not is_valid_intake_record_name(file_path):
             errors.append(
-                f"{display_path(path)}: field update filename must be "
+                f"{display_path(file_path)}: field update filename must be "
                 "<agent>-<YYYYMMDD>-<topic>.json"
             )
-        payload = load_field_update_json(path)
-        payload_errors, summary = validate_field_update_payload(path, payload, catalog_rows=catalog_rows)
+        payload = load_field_update_json(file_path)
+        payload_errors, summary = validate_field_update_payload(file_path, payload, catalog_rows=catalog_rows)
         update_count += int(summary["updates"])
         errors.extend(payload_errors)
-    return {"field_update_files": len(files), "field_update_items": update_count}
+    return {f"field_update_{label}_files": len(files), f"field_update_{label}_items": update_count}
+
+
+def audit_field_update_records(errors: list[str]) -> dict[str, int]:
+    catalog_rows = load_catalog_rows_by_index()
+    summary: dict[str, int] = {}
+    summary.update(_audit_field_update_dir(FIELD_UPDATES_INCOMING, "incoming", errors, catalog_rows))
+    summary.update(_audit_field_update_dir(FIELD_UPDATES_PROCESSED, "processed", errors, None))
+    summary.update(_audit_field_update_dir(FIELD_UPDATES_REJECTED, "rejected", errors, None))
+    return summary
 
 
 def run_audit() -> tuple[dict[str, Any], list[str]]:
@@ -358,9 +390,9 @@ def run_audit() -> tuple[dict[str, Any], list[str]]:
     audit_catalog_meta(errors, catalog_summary["catalog_rows"])
     audit_site_status(errors)
     source_counts = audit_intake_sources(errors)
-    intake_summary = audit_incoming_intake(errors)
-    image_update_summary = audit_incoming_image_updates(errors)
-    field_update_summary = audit_incoming_field_updates(errors)
+    intake_summary = audit_goods_intake_records(errors)
+    image_update_summary = audit_image_update_records(errors)
+    field_update_summary = audit_field_update_records(errors)
 
     summary: dict[str, Any] = {
         "tracked_data_files": len(tracked),

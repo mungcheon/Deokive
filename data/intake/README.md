@@ -10,8 +10,11 @@ Agents must save new collection results with the same JSON shape:
 - Existing catalog field updates:
   `data/intake/field_updates/incoming/<agent>-<YYYYMMDD>-<topic>.json`
 - Official source/campaign lists: `data/intake/sources/`
-- Accepted and already merged submissions: `data/intake/processed/`
-- Rejected or unsafe submissions: `data/intake/rejected/`
+- Accepted and already merged new-goods submissions: `data/intake/processed/`
+- Rejected or unsafe new-goods submissions: `data/intake/rejected/`
+- Accepted/rejected image and field update files stay under their matching
+  `image_updates/processed`, `image_updates/rejected`,
+  `field_updates/processed`, or `field_updates/rejected` folders.
 
 Before any submission can update the public DB, validate it:
 
@@ -79,6 +82,9 @@ Every agent run should produce exactly one of these three payloads:
 Keep scratch searches, dry runs, screenshots, and generated review queues out of
 `data/`. They can live locally under ignored `server/` work folders while being
 reviewed, but only validated intake JSON should be committed.
+Incoming, processed, and rejected intake files are all audited against the same
+JSON contract, so archive files must remain machine-readable and cannot become
+free-form notes or a second database.
 
 Field updates are for missing public catalog values such as `source_url`,
 `release_date`, `barcode`, official price, official-language names,

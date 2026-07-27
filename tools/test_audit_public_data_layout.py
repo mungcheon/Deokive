@@ -85,7 +85,7 @@ class PublicDataLayoutAuditTests(unittest.TestCase):
             (incoming / "bad.json").write_text('{"schema_version": 1}', encoding="utf-8")
 
             with patch.object(target, "INCOMING", incoming):
-                summary = target.audit_incoming_intake(errors := [])
+                summary = target.audit_goods_intake_records(errors := [])
 
         self.assertEqual(1, summary["incoming_files"])
         self.assertTrue(errors)
@@ -99,9 +99,29 @@ class PublicDataLayoutAuditTests(unittest.TestCase):
             )
 
             with patch.object(target, "FIELD_UPDATES_INCOMING", incoming):
-                summary = target.audit_incoming_field_updates(errors := [])
+                summary = target.audit_field_update_records(errors := [])
 
-        self.assertEqual(1, summary["field_update_files"])
+        self.assertEqual(1, summary["field_update_incoming_files"])
+        self.assertTrue(errors)
+
+    def test_rejects_invalid_processed_field_update_payload(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "incoming").mkdir()
+            (root / "rejected").mkdir()
+            processed = root / "processed"
+            processed.mkdir()
+            (processed / "agent-20260727-source-url.json").write_text(
+                '{"schema_version": 1, "updates": [{"catalog_index": 1}]}',
+                encoding="utf-8",
+            )
+
+            with patch.object(target, "FIELD_UPDATES_INCOMING", root / "incoming"), patch.object(
+                target, "FIELD_UPDATES_PROCESSED", processed
+            ), patch.object(target, "FIELD_UPDATES_REJECTED", root / "rejected"):
+                summary = target.audit_field_update_records(errors := [])
+
+        self.assertEqual(1, summary["field_update_processed_files"])
         self.assertTrue(errors)
 
     def test_rejects_untraceable_incoming_filename(self) -> None:
@@ -131,7 +151,7 @@ class PublicDataLayoutAuditTests(unittest.TestCase):
             )
 
             with patch.object(target, "INCOMING", incoming):
-                summary = target.audit_incoming_intake(errors := [])
+                summary = target.audit_goods_intake_records(errors := [])
 
         self.assertEqual(1, summary["incoming_files"])
         self.assertTrue(any("intake filename must be" in error for error in errors))
