@@ -21,3 +21,26 @@ removed before publishing.
 
 Everything else should be generated from tools or stored under `data/intake/`
 until it is validated and merged into `catalog_public.json`.
+
+## Boss Review Gate
+
+The public catalog should not absorb bulk agent work directly. Generate local
+10-item boss review batches under ignored `server/boss_review/` instead:
+
+```powershell
+python -X utf8 tools/build_catalog_boss_review_batch.py --batch-size 10
+```
+
+Open `server/boss_review/catalog_boss_review.html` locally, review each item,
+and export the decision JSON. Only `pass` and `fixed_pass` decisions are treated
+as approved; `image_error` and `content_error` stay blocked. Import decisions
+locally with:
+
+```powershell
+python -X utf8 tools/import_catalog_boss_review_decisions.py path\to\boss_review_0_9.json
+```
+
+This creates an approved-only local candidate at
+`server/boss_review/catalog_public_approved.json`. It is a review artifact, not
+a second public DB. After approval, a separate merge step may update
+`data/catalog_public.json`.

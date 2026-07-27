@@ -54,6 +54,13 @@ Do not create another DB JSON, SQLite file, or app-facing catalog under
 standard intake JSON here, then the importer merges accepted rows into the
 single public DB.
 
+Boss review is the final local approval gate before public DB changes are
+considered publishable. Generate 10-item review batches with
+`tools/build_catalog_boss_review_batch.py`, then import exported decisions with
+`tools/import_catalog_boss_review_decisions.py`. Only `pass` and `fixed_pass`
+decisions may proceed; `image_error` and `content_error` require another intake
+or correction pass.
+
 Use `data/intake/image_updates/` when an agent found images for existing catalog
 rows. Those files update only `image_url` and, when supplied, `source_url`; they
 do not create new goods rows.
