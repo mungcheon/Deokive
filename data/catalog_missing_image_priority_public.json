@@ -1,20 +1,20 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-27T00:01:15Z",
+  "generated_at": "2026-07-27T00:17:39Z",
   "scope": "public_catalog_missing_image_priority",
   "summary": {
-    "missing_image_rows": 785,
-    "work_queue_rows": 785,
-    "queue_matched_rows": 785,
+    "missing_image_rows": 784,
+    "work_queue_rows": 784,
+    "queue_matched_rows": 784,
     "stale_queue_index_matches": 0,
     "unmatched_catalog_missing_rows": 0,
-    "missing_source_url_rows": 762,
+    "missing_source_url_rows": 761,
     "generic_source_url_rows": 0,
     "product_source_url_rows": 0,
-    "high_priority_rows": 627,
+    "high_priority_rows": 626,
     "safe_existing_image_reuse_candidate_rows": 0,
     "source_discovery_starter_queue_groups": 382,
-    "source_discovery_starter_queue_rows": 762,
+    "source_discovery_starter_queue_rows": 761,
     "auto_apply_enabled": false
   },
   "breakdowns": {
@@ -25,7 +25,7 @@
       },
       {
         "source_store": "애니메이트",
-        "rows": 157
+        "rows": 156
       },
       {
         "source_store": "굿스마일컴퍼니",
@@ -263,7 +263,7 @@
       },
       {
         "affiliation": "최애의 아이",
-        "rows": 11
+        "rows": 10
       },
       {
         "affiliation": "이세계아이돌",
@@ -349,7 +349,7 @@
       },
       {
         "category": "아크릴 스탠드",
-        "rows": 123
+        "rows": 122
       },
       {
         "category": "캔뱃지",
@@ -463,7 +463,7 @@
     "by_strategy": [
       {
         "strategy": "official_search",
-        "rows": 532
+        "rows": 531
       },
       {
         "strategy": "manual_official_search_review",
@@ -489,7 +489,7 @@
     "by_automation_safety": [
       {
         "automation_safety": "candidate_provider_script_required",
-        "rows": 532
+        "rows": 531
       },
       {
         "automation_safety": "manual_confirmation_required",
@@ -511,7 +511,7 @@
     "by_source_url_state": [
       {
         "source_url_state": "missing_source_url",
-        "rows": 762
+        "rows": 761
       },
       {
         "source_url_state": "unclassified_source_url",
@@ -521,7 +521,7 @@
   },
   "next_action_queues": {
     "source_discovery_first": {
-      "rows": 762,
+      "rows": 761,
       "reason": "Attach exact product source URLs before image candidates can be trusted."
     },
     "replace_generic_source_then_attach_image": {
@@ -673,12 +673,6 @@
       "recommended_workflow": "official_storefront_search_then_exact_detail_match"
     },
     {
-      "source_store": "애니메이트",
-      "affiliation": "최애의 아이",
-      "rows": 9,
-      "recommended_workflow": "official_storefront_search_then_exact_detail_match"
-    },
-    {
       "source_store": "점프 캐릭터즈 스토어",
       "affiliation": "체인소맨",
       "rows": 9,
@@ -689,6 +683,12 @@
       "affiliation": "나의 히어로 아카데미아",
       "rows": 8,
       "recommended_workflow": "official_prize_provider_search_then_exact_detail_match"
+    },
+    {
+      "source_store": "애니메이트",
+      "affiliation": "최애의 아이",
+      "rows": 8,
+      "recommended_workflow": "official_storefront_search_then_exact_detail_match"
     },
     {
       "source_store": "MINISO 중국",

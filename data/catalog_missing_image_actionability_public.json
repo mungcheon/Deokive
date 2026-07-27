@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-27T00:01:15Z",
+  "generated_at": "2026-07-27T00:17:39Z",
   "scope": "catalog_missing_image_actionability",
   "summary": {
-    "missing_image_rows": 785,
-    "readiness_classified_rows": 785,
+    "missing_image_rows": 784,
+    "readiness_classified_rows": 784,
     "unclassified_rows": 0,
     "exact_source_ready_rows": 0,
-    "source_first_rows": 752,
+    "source_first_rows": 751,
     "review_before_attach_rows": 23,
     "source_detail_candidate_review_rows": 0,
     "source_detail_candidate_count_review_required_rows": 0,
@@ -16,12 +16,12 @@
     "source_detail_unflagged_candidate_rows": 0,
     "source_detail_ready_unflagged_candidate_rows": 0,
     "manual_image_research_rows": 10,
-    "source_discovery_focus_pack_rows": 752,
+    "source_discovery_focus_pack_rows": 751,
     "source_discovery_focus_pack_count": 67,
     "source_discovery_not_started_focus_pack_count": 67,
-    "source_discovery_remaining_focus_review_rows": 752,
+    "source_discovery_remaining_focus_review_rows": 751,
     "source_discovery_confirmed_focus_source_rows": 0,
-    "source_discovery_focus_template_rows": 752,
+    "source_discovery_focus_template_rows": 751,
     "source_discovery_focus_template_confirmed_rows": 0,
     "source_discovery_template_next_focus_pack_id": "source-discovery-focus-001",
     "source_discovery_next_focus_pack_id": "source-discovery-focus-002",
@@ -34,7 +34,7 @@
       ]
     ],
     "source_discovery_focus_template_dry_run_updated_rows": 0,
-    "source_discovery_focus_template_dry_run_skipped_rows": 752,
+    "source_discovery_focus_template_dry_run_skipped_rows": 751,
     "source_discovery_focus_coverage": 1.0,
     "source_discovery_non_focus_rows": 0,
     "action_queue_rows": 23,
@@ -75,11 +75,11 @@
     "image_attachment_template_dry_run_skipped_rows": 23,
     "actionable_image_rows": 23,
     "source_discovery_work_pack_count": 16,
-    "source_discovery_work_pack_rows": 673,
+    "source_discovery_work_pack_rows": 672,
     "by_blocked_reason": [
       {
         "blocked_reason": "missing_exact_source_url",
-        "rows": 752
+        "rows": 751
       },
       {
         "blocked_reason": "representative_image_requires_product_type_review",
@@ -97,7 +97,7 @@
     "by_blocked_until": [
       {
         "blocked_until": "exact_product_source_url_discovered",
-        "rows": 752
+        "rows": 751
       },
       {
         "blocked_until": "representative_image_exact_product_type_confirmed",
@@ -113,14 +113,14 @@
       }
     ],
     "auto_apply_enabled": false,
-    "completion_plan_total_open_rows": 785,
-    "completion_plan_phase_rows_total": 785,
+    "completion_plan_total_open_rows": 784,
+    "completion_plan_phase_rows_total": 784,
     "completion_plan_phase_count": 3,
     "completion_plan_status": "balanced",
     "completion_plan_review_start_status": "all_phases_have_review_start",
     "completion_plan_phases_with_review_start": 3,
     "completion_plan_phases_missing_review_start": 0,
-    "completion_plan_rows_with_review_start": 785,
+    "completion_plan_rows_with_review_start": 784,
     "completion_plan_rows_missing_review_start": 0,
     "blocking_dashboard_status": "manual_evidence_required",
     "blocking_dashboard_queue_coverage": 1.0
@@ -487,12 +487,12 @@
     {
       "readiness": "source_url_discovery_required",
       "priority": 30,
-      "rows": 752,
+      "rows": 751,
       "workflow_rows": [
         {
           "workflow": "find_source_then_extract_image",
           "label": "정확한 공식 상품 source_url을 먼저 찾은 뒤 이미지 첨부",
-          "rows": 752,
+          "rows": 751,
           "next_step": "find_exact_official_source_url_then_extract_image"
         }
       ],
@@ -503,7 +503,7 @@
         },
         {
           "source_store": "애니메이트",
-          "rows": 157
+          "rows": 156
         },
         {
           "source_store": "굿스마일컴퍼니",
@@ -1171,7 +1171,7 @@
     {
       "source_store": "애니메이트",
       "priority": 30,
-      "missing_image_rows": 157,
+      "missing_image_rows": 156,
       "primary_workflow": "find_source_then_extract_image",
       "recommended_next_step": "find_exact_official_source_url_then_extract_image",
       "blocked_until": "exact_product_source_url_discovered",
@@ -1184,14 +1184,14 @@
       "readiness_rows": [
         {
           "readiness": "source_url_discovery_required",
-          "rows": 157
+          "rows": 156
         }
       ],
       "workflow_rows": [
         {
           "workflow": "find_source_then_extract_image",
           "label": "정확한 공식 상품 source_url을 먼저 찾은 뒤 이미지 첨부",
-          "rows": 157,
+          "rows": 156,
           "next_step": "find_exact_official_source_url_then_extract_image"
         }
       ],
@@ -4460,7 +4460,7 @@
     {
       "pack_id": "missing-image-source-discovery-002",
       "source_store": "애니메이트",
-      "row_count": 157,
+      "row_count": 156,
       "priority": 20,
       "official_search_available": true,
       "next_step": "confirm_exact_source_url_then_fill_source_templates",
@@ -4469,7 +4469,7 @@
         "batch_id": "missing-image-source-discovery-002-review-start",
         "workflow": "find_source_then_extract_image",
         "source_store": "애니메이트",
-        "row_count": 157,
+        "row_count": 156,
         "primary_review_url_rows": 8,
         "first_primary_review_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EA%B7%80%EB%A9%B8%EC%9D%98%20%EC%B9%BC%EB%82%A0%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%ED%83%84%EC%A7%80%EB%A1%9C%29",
         "first_primary_review_url_kind": "official_search_url",
@@ -4576,7 +4576,7 @@
       "sample_category_counts": [
         {
           "category": "아크릴 스탠드",
-          "rows": 20
+          "rows": 19
         },
         {
           "category": "캔뱃지",
@@ -4600,7 +4600,7 @@
         },
         {
           "category": "키링",
-          "rows": 4
+          "rows": 5
         },
         {
           "category": "머그컵",
@@ -8453,7 +8453,7 @@
       "rank": 4,
       "lane": "discover_exact_source_urls",
       "source": "source_discovery_action_queue_public.json",
-      "row_count": 752,
+      "row_count": 751,
       "next_step": "confirm_exact_source_url_then_fill_source_templates",
       "template": "source_discovery_focus_confirmed_template_public.json",
       "top_source_stores": [
@@ -8465,7 +8465,7 @@
         },
         {
           "source_store": "애니메이트",
-          "missing_image_rows": 157,
+          "missing_image_rows": 156,
           "primary_workflow": "find_source_then_extract_image",
           "recommended_next_step": "find_exact_official_source_url_then_extract_image"
         },
@@ -8757,7 +8757,7 @@
         {
           "pack_id": "missing-image-source-discovery-002",
           "source_store": "애니메이트",
-          "row_count": 157,
+          "row_count": 156,
           "priority": 20,
           "official_search_available": true,
           "next_step": "confirm_exact_source_url_then_fill_source_templates",
@@ -8766,7 +8766,7 @@
             "batch_id": "missing-image-source-discovery-002-review-start",
             "workflow": "find_source_then_extract_image",
             "source_store": "애니메이트",
-            "row_count": 157,
+            "row_count": 156,
             "primary_review_url_rows": 8,
             "first_primary_review_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EA%B7%80%EB%A9%B8%EC%9D%98%20%EC%B9%BC%EB%82%A0%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%ED%83%84%EC%A7%80%EB%A1%9C%29",
             "first_primary_review_url_kind": "official_search_url",
@@ -8873,7 +8873,7 @@
           "sample_category_counts": [
             {
               "category": "아크릴 스탠드",
-              "rows": 20
+              "rows": 19
             },
             {
               "category": "캔뱃지",
@@ -8897,7 +8897,7 @@
             },
             {
               "category": "키링",
-              "rows": 4
+              "rows": 5
             },
             {
               "category": "머그컵",
@@ -10947,15 +10947,15 @@
   ],
   "manual_validation_focus": {
     "auto_import_ready_rows": 0,
-    "manual_validation_required_rows": 785,
+    "manual_validation_required_rows": 784,
     "next_focus_lane": "discover_exact_source_urls",
-    "next_focus_row_count": 752,
+    "next_focus_row_count": 751,
     "next_focus_source": "source_discovery_action_queue_public.json",
     "focus_lanes": [
       {
         "rank": 4,
         "lane": "discover_exact_source_urls",
-        "row_count": 752,
+        "row_count": 751,
         "source": "source_discovery_action_queue_public.json",
         "next_step": "confirm_exact_source_url_then_fill_source_templates",
         "blocked_reason": "missing_exact_source_url",
@@ -10974,7 +10974,7 @@
           },
           {
             "source_store": "애니메이트",
-            "missing_image_rows": 157,
+            "missing_image_rows": 156,
             "primary_workflow": "find_source_then_extract_image",
             "recommended_next_step": "find_exact_official_source_url_then_extract_image"
           },
@@ -11456,7 +11456,7 @@
       "generic_source_url_replacement_rows": 0,
       "representative_image_review_rows": 23,
       "source_detail_recheck_required_rows": 12,
-      "source_discovery_focus_rows": 752,
+      "source_discovery_focus_rows": 751,
       "manual_image_research_rows": 10
     },
     "automation_policy": {
@@ -11465,11 +11465,11 @@
     }
   },
   "execution_queue_summary": {
-    "open_missing_image_rows": 785,
+    "open_missing_image_rows": 784,
     "auto_import_ready_rows": 0,
     "queue_count": 4,
-    "queued_rows_total": 785,
-    "raw_queued_rows_total": 797,
+    "queued_rows_total": 784,
+    "raw_queued_rows_total": 796,
     "overlapping_queue_rows": 12,
     "not_yet_queued_rows": 0,
     "not_yet_queued_rows_explained": 0,
@@ -11479,7 +11479,7 @@
     "next_queue": {
       "rank": 4,
       "lane": "discover_exact_source_urls",
-      "row_count": 752,
+      "row_count": 751,
       "source": "source_discovery_action_queue_public.json",
       "template": "source_discovery_focus_confirmed_template_public.json",
       "next_step": "confirm_exact_source_url_then_fill_source_templates",
@@ -11557,7 +11557,7 @@
       {
         "rank": 4,
         "lane": "discover_exact_source_urls",
-        "row_count": 752,
+        "row_count": 751,
         "source": "source_discovery_action_queue_public.json",
         "template": "source_discovery_focus_confirmed_template_public.json",
         "next_step": "confirm_exact_source_url_then_fill_source_templates",
@@ -11843,9 +11843,9 @@
       },
       {
         "phase_id": "complete_source_discovery_focus_packs",
-        "row_count": 752,
+        "row_count": 751,
         "direct_queue_lane": "discover_exact_source_urls",
-        "queued_rows": 752,
+        "queued_rows": 751,
         "remaining_rows": 0,
         "next_step": "fill_source_discovery_focus_confirmed_template",
         "blocked_reason": "missing_exact_source_url",
@@ -11874,23 +11874,23 @@
   },
   "blocking_dashboard": {
     "status": "manual_evidence_required",
-    "total_open_rows": 785,
+    "total_open_rows": 784,
     "auto_import_ready_rows": 0,
-    "manual_validation_required_rows": 785,
-    "queued_rows_total": 785,
+    "manual_validation_required_rows": 784,
+    "queued_rows_total": 784,
     "not_yet_queued_rows": 0,
     "queue_coverage": 1.0,
     "top_blocked_reason": {
       "blocked_reason": "missing_exact_source_url",
-      "rows": 752
+      "rows": 751
     },
     "top_blocked_until": {
       "blocked_until": "exact_product_source_url_discovered",
-      "rows": 752
+      "rows": 751
     },
     "next_queue": {
       "lane": "discover_exact_source_urls",
-      "row_count": 752,
+      "row_count": 751,
       "source": "source_discovery_action_queue_public.json",
       "template": "source_discovery_focus_confirmed_template_public.json",
       "next_step": "confirm_exact_source_url_then_fill_source_templates",
@@ -11913,7 +11913,7 @@
     "review_start_coverage_status": "all_phases_have_review_start",
     "phases_with_review_start": 3,
     "phases_missing_review_start": 0,
-    "rows_with_review_start": 785,
+    "rows_with_review_start": 784,
     "rows_missing_review_start": 0,
     "top_phase_rows": [
       {
@@ -11924,7 +11924,7 @@
       },
       {
         "phase_id": "complete_source_discovery_focus_packs",
-        "row_count": 752,
+        "row_count": 751,
         "blocked_reason": "missing_exact_source_url",
         "next_step": "fill_source_discovery_focus_confirmed_template"
       },
@@ -11937,24 +11937,24 @@
     ],
     "image_evidence_bottleneck_summary": {
       "status": "source_or_image_evidence_required",
-      "missing_image_rows": 785,
+      "missing_image_rows": 784,
       "known_image_download_problem_rows": 0,
-      "image_url_evidence_missing_rows": 785,
+      "image_url_evidence_missing_rows": 784,
       "auto_import_ready_rows": 0,
-      "manual_confirmation_required_rows": 785,
-      "source_first_rows": 752,
+      "manual_confirmation_required_rows": 784,
+      "source_first_rows": 751,
       "representative_review_rows": 23,
       "manual_image_research_rows": 10,
-      "source_discovery_focus_pack_rows": 752,
+      "source_discovery_focus_pack_rows": 751,
       "next_queue_lane": "discover_exact_source_urls",
-      "next_queue_rows": 752,
+      "next_queue_rows": 751,
       "next_queue_source": "source_discovery_action_queue_public.json",
       "next_queue_template": "source_discovery_focus_confirmed_template_public.json",
       "next_queue_blocked_until": "exact_product_source_url_discovered",
       "bottleneck_rows": [
         {
           "bucket": "source_url_or_storefront_replacement_required",
-          "rows": 752,
+          "rows": 751,
           "next_step": "confirm_exact_product_source_url_before_image_import"
         },
         {
@@ -11975,8 +11975,8 @@
     "operator_message": "No missing-image DB row can be imported automatically yet; fill the next confirmation template with exact product source/image evidence first."
   },
   "completion_plan": {
-    "total_open_rows": 785,
-    "phase_rows_total": 785,
+    "total_open_rows": 784,
+    "phase_rows_total": 784,
     "phase_count": 3,
     "status": "balanced",
     "phases": [
@@ -12055,7 +12055,7 @@
         "rank": 2,
         "phase_id": "complete_source_discovery_focus_packs",
         "title": "상위 스토어 source_url 발견 팩 처리",
-        "row_count": 752,
+        "row_count": 751,
         "source": "source_discovery_focus_packs_public.json",
         "next_step": "fill_source_discovery_focus_confirmed_template",
         "template": "source_discovery_focus_confirmed_template_public.json",
@@ -12076,7 +12076,7 @@
           },
           {
             "source_store": "애니메이트",
-            "missing_image_rows": 157,
+            "missing_image_rows": 156,
             "recommended_next_step": "find_exact_official_source_url_then_extract_image"
           },
           {
@@ -12371,7 +12371,7 @@
           {
             "pack_id": "missing-image-source-discovery-002",
             "source_store": "애니메이트",
-            "row_count": 157,
+            "row_count": 156,
             "priority": 20,
             "official_search_available": true,
             "next_step": "confirm_exact_source_url_then_fill_source_templates",
@@ -12380,7 +12380,7 @@
               "batch_id": "missing-image-source-discovery-002-review-start",
               "workflow": "find_source_then_extract_image",
               "source_store": "애니메이트",
-              "row_count": 157,
+              "row_count": 156,
               "primary_review_url_rows": 8,
               "first_primary_review_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%EA%B7%80%EB%A9%B8%EC%9D%98%20%EC%B9%BC%EB%82%A0%20%EB%B4%89%EC%A0%9C%20%EC%9D%B8%ED%98%95%20%28%ED%83%84%EC%A7%80%EB%A1%9C%29",
               "first_primary_review_url_kind": "official_search_url",
@@ -12487,7 +12487,7 @@
             "sample_category_counts": [
               {
                 "category": "아크릴 스탠드",
-                "rows": 20
+                "rows": 19
               },
               {
                 "category": "캔뱃지",
@@ -12511,7 +12511,7 @@
               },
               {
                 "category": "키링",
-                "rows": 4
+                "rows": 5
               },
               {
                 "category": "머그컵",
@@ -14460,7 +14460,7 @@
       "phase_count": 3,
       "phases_with_review_start": 3,
       "phases_missing_review_start": 0,
-      "rows_with_review_start": 785,
+      "rows_with_review_start": 784,
       "rows_missing_review_start": 0,
       "missing_review_start_phase_ids": [],
       "phase_review_starts": [
@@ -14475,7 +14475,7 @@
         },
         {
           "phase_id": "complete_source_discovery_focus_packs",
-          "row_count": 752,
+          "row_count": 751,
           "has_review_start": true,
           "first_review_url": "https://www.google.com/search?q=site%3Awww.enskyshop.com%2Fproducts%2Fdetail+%22%E8%99%8E%E6%9D%96%E6%82%A0%E4%BB%81+%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%22",
           "review_url_kind": "domain_limited_web_search",

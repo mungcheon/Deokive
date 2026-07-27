@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-27T00:01:25Z",
+  "generated_at": "2026-07-27T00:17:49Z",
   "scope": "source_discovery_full_review_batches",
   "summary": {
-    "source_discovery_rows": 762,
+    "source_discovery_rows": 761,
     "batch_count": 64,
     "batch_size": 25,
     "by_workflow": [
       [
         "official_search_url_available",
-        740
+        739
       ],
       [
         "licensed_retailer_search_review",
@@ -27,7 +27,7 @@
       ],
       [
         "애니메이트",
-        157
+        156
       ],
       [
         "굿스마일컴퍼니",
@@ -13340,7 +13340,7 @@
       "category_counts": [
         [
           "아크릴 스탠드",
-          6
+          5
         ],
         [
           "캔뱃지",
@@ -13356,7 +13356,7 @@
         ],
         [
           "인형",
-          2
+          3
         ],
         [
           "타월",
@@ -14082,46 +14082,6 @@
           "auto_apply_enabled": false
         },
         {
-          "catalog_index": 1992,
-          "source_store": "애니메이트",
-          "category": "아크릴 스탠드",
-          "name_ko": "최애의 아이 아크릴 스탠드 (아카네)",
-          "name_ja": "推しの子 アクリルスタンド (あかね)",
-          "official_search_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%82%E3%81%8B%E3%81%AD%29",
-          "web_search_url": "https://www.google.com/search?q=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%82%E3%81%8B%E3%81%AD%29%20%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%ED%8A%B8%20official%20%E5%85%AC%E5%BC%8F%20%E5%95%86%E5%93%81%E7%94%BB%E5%83%8F",
-          "allowed_source_domains": [
-            "www.animate-onlineshop.jp"
-          ],
-          "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-          "source_patch_template": {
-            "catalog_index": 1992,
-            "source_url": "<exact_product_detail_url>",
-            "image_url": "<official_product_image_url_optional_after_source_verification>",
-            "source_store": "애니메이트",
-            "evidence_url": "<official_or_trusted_evidence_url>",
-            "manual_confirmed": false,
-            "requires_exact_identity_match": true
-          },
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 1992,
-            "field": "source_url",
-            "manual_value": "",
-            "evidence_url": "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt=%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%20%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%28%E3%81%82%E3%81%8B%E3%81%AD%29",
-            "candidate_source_url": "",
-            "source_store": "애니메이트",
-            "name_ko": "최애의 아이 아크릴 스탠드 (아카네)",
-            "name_ja": "推しの子 アクリルスタンド (あかね)",
-            "category": "아크릴 스탠드",
-            "affiliation": "최애의 아이",
-            "acceptance_criteria": "product title, product image, and character/variant must match the catalog row",
-            "blocked_until": "exact_product_detail_source_url_confirmed"
-          },
-          "blocked_until": "exact_product_detail_source_url_confirmed",
-          "auto_apply_enabled": false
-        },
-        {
           "catalog_index": 1991,
           "source_store": "애니메이트",
           "category": "아크릴 스탠드",
@@ -14400,61 +14360,7 @@
           },
           "blocked_until": "exact_product_detail_source_url_confirmed",
           "auto_apply_enabled": false
-        }
-      ],
-      "auto_apply_enabled": false
-    },
-    {
-      "batch_id": "source-discovery-015",
-      "priority": 10,
-      "workflow": "official_search_url_available",
-      "source_store": "애니메이트",
-      "row_count": 7,
-      "offset": 150,
-      "review_state": "official_search_review_required",
-      "next_machine_step": "open_official_search_and_verify_exact_product_detail",
-      "confidence": "official_search",
-      "evidence_required": "exact official product detail URL on the expected official domain",
-      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
-      "allowed_source_domains": [
-        "www.animate-onlineshop.jp"
-      ],
-      "category_counts": [
-        [
-          "문구",
-          3
-        ],
-        [
-          "인형",
-          2
-        ],
-        [
-          "캔뱃지",
-          1
-        ],
-        [
-          "생활잡화",
-          1
-        ]
-      ],
-      "source_patch_template_fields": [
-        "catalog_index",
-        "source_url",
-        "image_url",
-        "evidence_url",
-        "manual_confirmed"
-      ],
-      "catalog_field_import_template_fields": [
-        "manual_confirmed",
-        "row_index",
-        "field",
-        "manual_value",
-        "evidence_url",
-        "candidate_source_url"
-      ],
-      "blocked_until": "exact_product_detail_source_url_confirmed",
-      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
-      "items": [
+        },
         {
           "catalog_index": 1118,
           "source_store": "애니메이트",
@@ -14494,7 +14400,61 @@
           },
           "blocked_until": "exact_product_detail_source_url_confirmed",
           "auto_apply_enabled": false
-        },
+        }
+      ],
+      "auto_apply_enabled": false
+    },
+    {
+      "batch_id": "source-discovery-015",
+      "priority": 10,
+      "workflow": "official_search_url_available",
+      "source_store": "애니메이트",
+      "row_count": 6,
+      "offset": 150,
+      "review_state": "official_search_review_required",
+      "next_machine_step": "open_official_search_and_verify_exact_product_detail",
+      "confidence": "official_search",
+      "evidence_required": "exact official product detail URL on the expected official domain",
+      "acceptance_rule": "product title, product image, and character/variant must match the catalog row",
+      "allowed_source_domains": [
+        "www.animate-onlineshop.jp"
+      ],
+      "category_counts": [
+        [
+          "문구",
+          3
+        ],
+        [
+          "캔뱃지",
+          1
+        ],
+        [
+          "생활잡화",
+          1
+        ],
+        [
+          "인형",
+          1
+        ]
+      ],
+      "source_patch_template_fields": [
+        "catalog_index",
+        "source_url",
+        "image_url",
+        "evidence_url",
+        "manual_confirmed"
+      ],
+      "catalog_field_import_template_fields": [
+        "manual_confirmed",
+        "row_index",
+        "field",
+        "manual_value",
+        "evidence_url",
+        "candidate_source_url"
+      ],
+      "blocked_until": "exact_product_detail_source_url_confirmed",
+      "recommended_action": "Find exact product/detail source URLs before any image_url import.",
+      "items": [
         {
           "catalog_index": 2264,
           "source_store": "애니메이트",
