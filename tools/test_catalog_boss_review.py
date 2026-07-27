@@ -12,6 +12,8 @@ from tools.import_catalog_boss_review_decisions import (
     merge_ledger,
 )
 from tools.advance_catalog_boss_review import advance_review
+from tools.catalog_boss_review_status import build_status
+from tools.catalog_boss_review_status import build_status
 
 
 class CatalogBossReviewTest(unittest.TestCase):
@@ -45,9 +47,12 @@ class CatalogBossReviewTest(unittest.TestCase):
             self.assertEqual(batch["meta"]["selected_items"], 10)
             self.assertEqual(batch["items"][0]["row_index"], 1)
             self.assertEqual(batch["items"][-1]["row_index"], 10)
+            self.assertEqual(len(batch["review_items"]), 12)
             self.assertTrue(out_json.exists())
             html = out_html.read_text(encoding="utf-8")
             self.assertIn("사장님 DB 검수실", html)
+            self.assertIn("다음 배치 검토하기", html)
+            self.assertIn("deokive-boss-review-ledger-v2", html)
             self.assertIn('`../../${path}`', html)
             self.assertIn("^https?:", html)
 
@@ -183,6 +188,88 @@ class CatalogBossReviewTest(unittest.TestCase):
             self.assertEqual(result["next_first_row_index"], 10)
             self.assertEqual(result["next_last_row_index"], 14)
             self.assertTrue(next_html.exists())
+
+    def test_status_reports_progress_and_next_batch(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            catalog = root / "catalog.json"
+            ledger = root / "ledger.json"
+            catalog.write_text(
+                json.dumps(
+                    {
+                        "items": [
+                            {"catalog_index": index, "name_ko": f"상품 {index}"}
+                            for index in range(25)
+                        ]
+                    },
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+            ledger.write_text(
+                json.dumps(
+                    {
+                        "decisions": [
+                            {"row_index": 0, "status": "pass"},
+                            {"row_index": 1, "status": "fixed_pass"},
+                            {"row_index": 2, "status": "image_error"},
+                        ]
+                    },
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+
+            status = build_status(catalog_path=catalog, ledger_path=ledger, batch_size=10)
+
+            self.assertEqual(status["total_items"], 25)
+            self.assertEqual(status["reviewed_items"], 3)
+            self.assertEqual(status["approved_items"], 2)
+            self.assertEqual(status["blocked_items"], 1)
+            self.assertEqual(status["remaining_batches"], 3)
+            self.assertEqual(status["next_batch"]["first_row_index"], 3)
+            self.assertEqual(status["next_batch"]["last_row_index"], 12)
+
+    def test_status_reports_progress_and_next_batch(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            catalog = root / "catalog.json"
+            ledger = root / "ledger.json"
+            catalog.write_text(
+                json.dumps(
+                    {
+                        "items": [
+                            {"catalog_index": index, "name_ko": f"상품 {index}"}
+                            for index in range(25)
+                        ]
+                    },
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+            ledger.write_text(
+                json.dumps(
+                    {
+                        "decisions": [
+                            {"row_index": 0, "status": "pass"},
+                            {"row_index": 1, "status": "fixed_pass"},
+                            {"row_index": 2, "status": "image_error"},
+                        ]
+                    },
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+
+            status = build_status(catalog_path=catalog, ledger_path=ledger, batch_size=10)
+
+            self.assertEqual(status["total_items"], 25)
+            self.assertEqual(status["reviewed_items"], 3)
+            self.assertEqual(status["approved_items"], 2)
+            self.assertEqual(status["blocked_items"], 1)
+            self.assertEqual(status["remaining_batches"], 3)
+            self.assertEqual(status["next_batch"]["first_row_index"], 3)
+            self.assertEqual(status["next_batch"]["last_row_index"], 12)
 
 
 if __name__ == "__main__":

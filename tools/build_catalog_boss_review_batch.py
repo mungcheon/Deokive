@@ -139,6 +139,7 @@ def build_batch(
     batch_number = (selected[0][0] // batch_size) + 1 if selected else 0
     generated_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
     review_items = [_review_item(index, item) for index, item in selected]
+    all_review_items = [_review_item(index, item) for index, item in indexed]
 
     return {
         "meta": {
@@ -157,6 +158,7 @@ def build_batch(
             "approved_statuses": sorted(APPROVED_STATUSES),
         },
         "items": review_items,
+        "review_items": all_review_items,
     }
 
 
@@ -219,7 +221,10 @@ def render_html(payload: dict[str, Any]) -> str:
     .decision-list {{ overflow:auto; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:8px 0; }}
     .decision {{ padding:8px 0; border-top:1px solid var(--line); font-size:12px; }}
     .decision:first-child {{ border-top:0; }}
-    .export {{ border:0; border-radius:18px; padding:13px 14px; background:var(--ink); color:white; font-weight:900; cursor:pointer; }}
+    .export, .next-batch {{ border:0; border-radius:18px; padding:13px 14px; background:var(--ink); color:white; font-weight:900; cursor:pointer; width:100%; }}
+    .next-batch {{ background:var(--brand); margin-bottom:8px; }}
+    .export {{ background:var(--soft); color:var(--ink); }}
+    .export:disabled, .next-batch:disabled {{ opacity:.42; cursor:not-allowed; }}
     .small {{ color:var(--sub); font-size:12px; line-height:1.35; }}
     a {{ color:var(--brand); text-decoration:none; font-weight:800; }}
     @media (max-width:980px) {{
@@ -255,7 +260,7 @@ def render_html(payload: dict[str, Any]) -> str:
     <aside>
       <section>
         <h2>승인 현황</h2>
-        <p class="muted">판정은 브라우저에 임시 저장됩니다. 끝나면 아래 버튼으로 JSON을 내려받아 가져오면 됩니다.</p>
+        <p class="muted">판정은 이 브라우저에 저장됩니다. 10개를 모두 판정한 뒤 다음 배치로 바로 넘어가면 됩니다.</p>
         <div class="progress"><div class="bar"></div></div>
       </section>
       <section class="counts">
@@ -266,8 +271,9 @@ def render_html(payload: dict[str, Any]) -> str:
       </section>
       <section class="decision-list" id="decisionList"></section>
       <section>
-        <button class="export" id="export">판정 JSON 다운로드</button>
-        <p class="small" style="margin-top:9px;">다운로드한 파일은 <code>tools/import_catalog_boss_review_decisions.py</code>로 반영합니다.</p>
+        <button class="next-batch" id="nextBatch">다음 배치 검토하기</button>
+        <button class="export" id="export">백업 JSON 저장</button>
+        <p class="small" style="margin-top:9px;">검수는 브라우저에서 계속 진행됩니다. 백업 JSON은 나중에 로컬 도구로 승인 후보를 만들 때만 사용합니다.</p>
       </section>
     </aside>
   </div>
@@ -275,12 +281,33 @@ def render_html(payload: dict[str, Any]) -> str:
   <script id="batch-data" type="application/json">{_json_script(payload)}</script>
   <script>
     const batch = JSON.parse(document.querySelector("#batch-data").textContent);
-    const storeKey = "deokive-boss-review-" + batch.meta.first_row_index + "-" + batch.meta.last_row_index;
+    const reviewItems = batch.review_items || batch.items;
+    const ledgerKey = "deokive-boss-review-ledger-v2";
+    const cursorKey = "deokive-boss-review-cursor-v2";
     const labels = batch.meta.allowed_statuses;
     const approved = new Set(batch.meta.approved_statuses);
-    const state = JSON.parse(localStorage.getItem(storeKey) || "{{}}");
+    const state = JSON.parse(localStorage.getItem(ledgerKey) || "{{}}");
     const cards = document.querySelector("#cards");
     const decisionList = document.querySelector("#decisionList");
+    let currentStart = Number(localStorage.getItem(cursorKey) || batch.meta.first_row_index || 0);
+    let currentItems = [];
+
+    function nextItemsFrom(start) {{
+      return reviewItems
+        .filter((item) => item.row_index >= start && !(state[item.row_index] || {{}}).status)
+        .slice(0, batch.meta.batch_size);
+    }}
+
+    function findNextStart() {{
+      const next = reviewItems.find((item) => !(state[item.row_index] || {{}}).status);
+      return next ? next.row_index : null;
+    }}
+
+    function setCurrentStart(start) {{
+      currentStart = start ?? 0;
+      localStorage.setItem(cursorKey, String(currentStart));
+      currentItems = nextItemsFrom(currentStart);
+    }}
 
     function imageFor(item) {{
       const path = item.local_image_path || item.image_url;
@@ -295,7 +322,16 @@ def render_html(payload: dict[str, Any]) -> str:
     }}
 
     function render() {{
-      cards.innerHTML = batch.items.map((item) => {{
+      setCurrentStart(currentStart);
+      if (!currentItems.length) {{
+        cards.innerHTML = `<article class="card" style="grid-column:1/-1; display:block;">
+          <div class="title">전체 검수가 완료되었습니다.</div>
+          <p class="muted" style="margin-top:8px;">필요하면 백업 JSON을 저장해 로컬 승인 후보 생성 도구에 넣으면 됩니다.</p>
+        </article>`;
+        renderSide();
+        return;
+      }}
+      cards.innerHTML = currentItems.map((item) => {{
         const decision = state[item.row_index] || {{}};
         const issues = (item.issues || []).map((issue) => `<span class="issue">${{issue}}</span>`).join("");
         return `<article class="card" data-row="${{item.row_index}}">
@@ -342,12 +378,14 @@ def render_html(payload: dict[str, Any]) -> str:
         state[row] = state[row] || {{}};
         state[row].note = textarea.value;
       }});
-      localStorage.setItem(storeKey, JSON.stringify(state));
+      localStorage.setItem(ledgerKey, JSON.stringify(state));
       renderSide();
     }}
 
     function decisions() {{
-      return batch.items.map((item) => ({{
+      return reviewItems
+      .filter((item) => (state[item.row_index] || {{}}).status)
+      .map((item) => ({{
         row_index: item.row_index,
         catalog_index: item.catalog_index,
         display_name: item.display_name,
@@ -361,19 +399,38 @@ def render_html(payload: dict[str, Any]) -> str:
       const rows = decisions();
       const approvedCount = rows.filter((row) => approved.has(row.status)).length;
       const blockedCount = rows.filter((row) => row.status && !approved.has(row.status)).length;
+      const pendingCount = Math.max(reviewItems.length - rows.length, 0);
       document.querySelector("#approvedCount").textContent = approvedCount;
       document.querySelector("#blockedCount").textContent = blockedCount;
+      document.querySelector(".counts .count:nth-child(1) strong").textContent = rows.length;
+      document.querySelector(".counts .count:nth-child(2) strong").textContent = pendingCount;
       decisionList.innerHTML = rows.map((row) => `<div class="decision">
         <strong>#${{row.row_index}} ${{row.status_label || "미판정"}}</strong>
         <span class="small">${{row.display_name}}</span>
       </div>`).join("");
+      const everyCurrentDone = currentItems.length > 0 && currentItems.every((item) => (state[item.row_index] || {{}}).status);
+      document.querySelector("#nextBatch").disabled = !everyCurrentDone;
     }}
+
+    document.querySelector("#nextBatch").addEventListener("click", () => {{
+      saveFromCards();
+      const missing = currentItems.filter((item) => !(state[item.row_index] || {{}}).status);
+      if (missing.length) {{
+        alert("현재 배치 10개를 모두 판정해야 다음 배치로 넘어갈 수 있습니다.");
+        return;
+      }}
+      const nextStart = findNextStart();
+      setCurrentStart(nextStart === null ? 0 : nextStart);
+      render();
+      window.scrollTo({{ top: 0, behavior: "smooth" }});
+    }});
 
     document.querySelector("#export").addEventListener("click", () => {{
       const payload = {{
         meta: {{
           source_batch_first_row_index: batch.meta.first_row_index,
           source_batch_last_row_index: batch.meta.last_row_index,
+          exported_scope: "browser_local_review_ledger",
           exported_at: new Date().toISOString(),
           allowed_statuses: labels,
           approved_statuses: batch.meta.approved_statuses

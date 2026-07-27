@@ -31,10 +31,18 @@ The public catalog should not absorb bulk agent work directly. Generate local
 python -X utf8 tools/build_catalog_boss_review_batch.py --batch-size 10
 ```
 
+Check total progress at any time with:
+
+```powershell
+python -X utf8 tools/catalog_boss_review_status.py
+```
+
 Open `server/boss_review/catalog_boss_review.html` locally, review each item,
-and export the decision JSON. Only `pass` and `fixed_pass` decisions are treated
-as approved; `image_error` and `content_error` stay blocked. Import decisions
-locally with:
+and use `다음 배치 검토하기` to continue through the catalog in 10-row batches.
+The browser stores review decisions locally. Only `pass` and `fixed_pass`
+decisions are treated as approved; `image_error` and `content_error` stay
+blocked. If you need a backup or want to build local approved/rework artifacts,
+save the backup JSON and import it with:
 
 ```powershell
 python -X utf8 tools/import_catalog_boss_review_decisions.py path\to\boss_review_0_9.json
