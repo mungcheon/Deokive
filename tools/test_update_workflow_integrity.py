@@ -1,7 +1,10 @@
 from __future__ import annotations
 
+import json
+import os
 import re
 import subprocess
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -51,6 +54,33 @@ class UpdateWorkflowIntegrityTests(unittest.TestCase):
         self.assertGreater(len(blocks), 0)
         for index, block in enumerate(blocks, start=1):
             compile(block, f"update-catalog.yml python block {index}", "exec")
+
+    def test_embedded_site_status_blocks_write_valid_status_json(self) -> None:
+        text = WORKFLOW.read_text(encoding="utf-8")
+        blocks = workflow_python_blocks(text)
+
+        self.assertEqual(3, len(blocks))
+        expected_modes = ["notice", "updating", "normal"]
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            (temp_root / "data").mkdir()
+            previous_cwd = Path.cwd()
+            try:
+                os.chdir(temp_root)
+                for index, block in enumerate(blocks):
+                    exec(
+                        compile(block, f"update-catalog.yml python block {index + 1}", "exec"),
+                        {"__builtins__": __builtins__},
+                        {},
+                    )
+                    status_path = Path("data/site_status_public.json")
+                    self.assertTrue(status_path.exists())
+                    status = json.loads(status_path.read_text(encoding="utf-8"))
+                    self.assertEqual(expected_modes[index], status.get("mode"))
+                    self.assertIsInstance(status.get("message"), str)
+                    self.assertIsInstance(status.get("eta"), str)
+            finally:
+                os.chdir(previous_cwd)
 
 
 if __name__ == "__main__":
