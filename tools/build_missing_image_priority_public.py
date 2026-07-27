@@ -10,10 +10,11 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
+SERVER = ROOT / "server"
 CATALOG = DATA / "catalog_public.json"
-WORK_QUEUE = DATA / "catalog_missing_image_work_queue_public.json"
-REPORT = DATA / "catalog_missing_image_priority_public.json"
-STARTER_QUEUE_REPORT = DATA / "source_discovery_starter_queue_public.json"
+WORK_QUEUE = SERVER / "catalog_image_enrichment_queue_current.json"
+REPORT = SERVER / "catalog_missing_image_priority_public.json"
+STARTER_QUEUE_REPORT = SERVER / "source_discovery_starter_queue_public.json"
 
 
 def now_utc() -> str:
@@ -21,7 +22,14 @@ def now_utc() -> str:
 
 
 def load_json(path: Path) -> Any:
-    return json.loads(path.read_text(encoding="utf-8"))
+    return json.loads(path.read_text(encoding="utf-8-sig"))
+
+
+def repo_relative(path: Path) -> str:
+    try:
+        return str(path.relative_to(ROOT)).replace("\\", "/")
+    except ValueError:
+        return str(path)
 
 
 def present(value: Any) -> bool:
@@ -42,7 +50,7 @@ def catalog_missing_rows(catalog: dict[str, Any]) -> list[dict[str, Any]]:
 def queue_by_catalog_index(queue: dict[str, Any]) -> dict[int, dict[str, Any]]:
     rows = queue.get("items")
     if not isinstance(rows, list):
-        raise ValueError("catalog_missing_image_work_queue_public.json must contain an items list")
+        raise ValueError(f"{WORK_QUEUE.name} must contain an items list")
     result: dict[int, dict[str, Any]] = {}
     for row in rows:
         if not isinstance(row, dict):
@@ -65,7 +73,7 @@ def identity_key(row: dict[str, Any]) -> tuple[str, str, str, str]:
 def queue_by_identity(queue: dict[str, Any]) -> dict[tuple[str, str, str, str], dict[str, Any]]:
     rows = queue.get("items")
     if not isinstance(rows, list):
-        raise ValueError("catalog_missing_image_work_queue_public.json must contain an items list")
+        raise ValueError(f"{WORK_QUEUE.name} must contain an items list")
     result: dict[tuple[str, str, str, str], dict[str, Any]] = {}
     for row in rows:
         if isinstance(row, dict):
@@ -497,7 +505,7 @@ def build_starter_queue_report(
         "schema_version": 1,
         "generated_at": generated_at or now_utc(),
         "scope": "source_discovery_starter_queue",
-        "source_report": f"data/{REPORT.name}",
+        "source_report": repo_relative(REPORT),
         "summary": {
             "starter_queue_groups": len(groups),
             "starter_queue_rows": rows,
@@ -590,11 +598,13 @@ def recommended_workflow(source_store: str, rows: int) -> str:
 def write_report(report: dict[str, Any], path: Path = REPORT) -> None:
     payload = dict(report)
     payload.pop("_source_discovery_starter_queue_full", None)
+    path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def write_starter_queue_report(report: dict[str, Any], path: Path = STARTER_QUEUE_REPORT) -> dict[str, Any]:
     starter_report = build_starter_queue_report(report)
+    path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(starter_report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return starter_report
 

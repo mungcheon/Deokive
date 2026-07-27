@@ -67,7 +67,7 @@ class MissingImagePriorityPublicTests(unittest.TestCase):
         self.assertIs(starter_summary["auto_apply_enabled"], False)
         self.assertEqual(
             starter_queue_report["source_report"],
-            "data/catalog_missing_image_priority_public.json",
+            "server/catalog_missing_image_priority_public.json",
         )
         self.assertGreater(starter_summary["next_review_batch_rows"], 0)
         self.assertGreater(starter_summary["next_review_batch_group_count"], 0)

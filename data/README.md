@@ -8,10 +8,9 @@ dry-runs, or source-discovery work products. They are not database sources of
 truth and should not be treated as app data.
 
 Agent-collected raw goods data must go through `data/intake/` first. Do not add
-new ad-hoc JSON files to this folder root.
-The layout audit checks both tracked files and local files, so stray DB-like
-JSON files under `data/` should be moved into the proper intake folder or
-removed before publishing.
+new ad-hoc JSON files to this folder root. The layout audit checks both tracked
+files and local files, so stray DB-like JSON files under `data/` should be moved
+into the proper intake folder or removed before publishing.
 
 ## Allowed Root Files
 
@@ -65,3 +64,23 @@ a second public DB. Blocked rows are written to
 back through `data/intake/image_updates/` and `content_error` rows can go back
 through `data/intake/field_updates/`. After approval, a separate merge step may
 update `data/catalog_public.json`.
+
+## Missing Image Source Discovery
+
+Missing-image work starts from the current generated image queue, not from a
+second data file. Build the local source-discovery starter report with:
+
+```powershell
+python -X utf8 tools/build_image_enrichment_queue.py
+python -X utf8 tools/build_missing_image_priority_public.py --write
+```
+
+This reads `server/catalog_image_enrichment_queue_current.json` and writes local
+reports under `server/`:
+
+- `server/catalog_missing_image_priority_public.json`
+- `server/source_discovery_starter_queue_public.json`
+
+Rows without an exact `source_url` must get a confirmed official or licensed
+product/detail page before any image is attached. The starter queue is review
+only; it does not auto-apply catalog changes.
