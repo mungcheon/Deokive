@@ -24,11 +24,14 @@ review material; they are not used directly by the app.
   names, `name_en` for English official names, and `name_ko` for Korean display
   text when already verified.
 - For Ichiban Kuji items, `display_name` should follow:
-  `이치방쿠지 발매명 / 상 / 상품이름 / 캐릭터명`.
+  `Ichiban Kuji release name / prize rank / prize name / character name`.
 - If a prize has several character variants in the same rank, create one item
   per character variant.
-- `last_one` and `double_chance` prizes may use `official_price_jpy: 0` when
-  there is no normal retail price.
+- `last_one` and `double_chance` prizes may use `official_price: 0` and
+  `official_price_currency: "JPY"` when there is no normal retail price.
+- Preserve currency explicitly. If the official price is yen, set
+  `official_price_currency` to `JPY`; do not copy only the number into a KRW
+  price field.
 - Attach both `source_url` and `image_url` when possible. Use product/detail
   pages, not generic search pages, for `source_url`.
 - Set `confidence` to `confirmed`, `candidate`, or `needs_review`.

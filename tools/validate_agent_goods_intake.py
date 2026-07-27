@@ -13,6 +13,7 @@ DEFAULT_INTAKE = ROOT / "data" / "intake" / "incoming"
 
 CONFIDENCE_VALUES = {"confirmed", "candidate", "needs_review"}
 EVIDENCE_TYPES = {"official", "trusted", "manual"}
+PRICE_CURRENCIES = {"JPY", "KRW", "USD", "CNY", "TWD"}
 DATE_RE = re.compile(r"^\d{4}(?:-\d{2}(?:-\d{2})?)?$")
 
 
@@ -83,12 +84,35 @@ def validate_item(
         elif release_date.strip() and not DATE_RE.match(release_date.strip()):
             errors.append(f"{item_path}.release_date: expected YYYY, YYYY-MM, or YYYY-MM-DD")
 
-    price = item.get("official_price_jpy")
-    if price is not None:
-        if not isinstance(price, int) or isinstance(price, bool):
+    official_price = item.get("official_price")
+    official_price_currency = item.get("official_price_currency")
+    if official_price is not None:
+        if not isinstance(official_price, int) or isinstance(official_price, bool):
+            errors.append(f"{item_path}.official_price: expected integer or null")
+        elif official_price < 0:
+            errors.append(f"{item_path}.official_price: must be >= 0")
+        if official_price_currency not in PRICE_CURRENCIES:
+            errors.append(
+                f"{item_path}.official_price_currency: required when official_price is set; "
+                f"expected one of {', '.join(sorted(PRICE_CURRENCIES))}"
+            )
+    elif official_price_currency is not None and official_price_currency not in PRICE_CURRENCIES:
+        errors.append(
+            f"{item_path}.official_price_currency: expected one of "
+            f"{', '.join(sorted(PRICE_CURRENCIES))} or null"
+        )
+
+    price_jpy = item.get("official_price_jpy")
+    if price_jpy is not None:
+        if not isinstance(price_jpy, int) or isinstance(price_jpy, bool):
             errors.append(f"{item_path}.official_price_jpy: expected integer yen or null")
-        elif price < 0:
+        elif price_jpy < 0:
             errors.append(f"{item_path}.official_price_jpy: must be >= 0")
+        if official_price is not None and official_price_currency == "JPY" and official_price != price_jpy:
+            errors.append(
+                f"{item_path}.official_price_jpy: must match official_price when "
+                "official_price_currency is JPY"
+            )
 
     barcode = item.get("barcode")
     if barcode is not None and not isinstance(barcode, str):

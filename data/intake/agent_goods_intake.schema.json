@@ -58,6 +58,11 @@
             "description": "YYYY-MM-DD, YYYY-MM, or empty when unknown."
           },
           "barcode": { "type": ["string", "null"] },
+          "official_price": { "type": ["integer", "null"], "minimum": 0 },
+          "official_price_currency": {
+            "type": ["string", "null"],
+            "enum": ["JPY", "KRW", "USD", "CNY", "TWD", null]
+          },
           "official_price_jpy": { "type": ["integer", "null"], "minimum": 0 },
           "evidence": {
             "type": "array",
