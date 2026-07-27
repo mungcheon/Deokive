@@ -155,6 +155,33 @@ class MissingImagePriorityPublicTests(unittest.TestCase):
         self.assertIn("Open store search", html)
         self.assertIn("https://example.com/search?q=sample", html)
 
+    def test_builds_image_update_template_for_next_review_batch(self) -> None:
+        starter_report = {
+            "next_review_batch": [
+                {
+                    "catalog_index": 42,
+                    "name_ko": "Sample Strap",
+                    "source_store": "Ensky",
+                    "affiliation": "Sample Series",
+                    "category": "Strap",
+                }
+            ]
+        }
+
+        payload = target.build_image_update_template(
+            starter_report,
+            collected_at="2026-01-01T00:00:00Z",
+        )
+
+        self.assertEqual(payload["schema_version"], 1)
+        self.assertEqual(payload["agent"]["name"], "source-discovery-reviewer")
+        self.assertEqual(payload["updates"][0]["catalog_index"], 42)
+        self.assertEqual(payload["updates"][0]["image_url"], "https://example.com/TODO_EXACT_IMAGE_URL")
+        self.assertEqual(payload["updates"][0]["source_url"], "https://example.com/TODO_EXACT_PRODUCT_DETAIL_URL")
+        self.assertEqual(payload["updates"][0]["confidence"], "needs_review")
+        self.assertEqual(payload["updates"][0]["evidence"][0]["type"], "official")
+        self.assertIn("Sample Strap", payload["updates"][0]["notes"])
+
     def test_build_report_counts_focus_groups_and_priority_samples(self) -> None:
         catalog = {
             "items": [

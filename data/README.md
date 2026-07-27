@@ -81,7 +81,11 @@ reports under `server/`:
 - `server/catalog_missing_image_priority_public.json`
 - `server/source_discovery_starter_queue_public.json`
 - `server/source_discovery_starter_queue_public.html`
+- `server/source_discovery_next_batch_image_update.template.json`
 
 Rows without an exact `source_url` must get a confirmed official or licensed
 product/detail page before any image is attached. The starter queue is review
-only; it does not auto-apply catalog changes.
+only; it does not auto-apply catalog changes. The generated template starts with
+`confidence: needs_review`; copy confirmed rows into
+`data/intake/image_updates/incoming/`, replace the TODO URLs, and set only
+verified rows to `confidence: confirmed` before importing.

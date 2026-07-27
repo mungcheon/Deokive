@@ -17,6 +17,7 @@ WORK_QUEUE = SERVER / "catalog_image_enrichment_queue_current.json"
 REPORT = SERVER / "catalog_missing_image_priority_public.json"
 STARTER_QUEUE_REPORT = SERVER / "source_discovery_starter_queue_public.json"
 STARTER_QUEUE_HTML = SERVER / "source_discovery_starter_queue_public.html"
+STARTER_UPDATE_TEMPLATE = SERVER / "source_discovery_next_batch_image_update.template.json"
 
 
 def now_utc() -> str:
@@ -702,6 +703,64 @@ def write_starter_queue_html(
     path.write_text(html_text, encoding="utf-8")
 
 
+def build_image_update_template(
+    starter_report: dict[str, Any],
+    *,
+    collected_at: str | None = None,
+) -> dict[str, Any]:
+    batch = [
+        item
+        for item in starter_report.get("next_review_batch", [])
+        if isinstance(item, dict)
+    ]
+    updates: list[dict[str, Any]] = []
+    for item in batch:
+        updates.append(
+            {
+                "catalog_index": item.get("catalog_index"),
+                "image_url": "https://example.com/TODO_EXACT_IMAGE_URL",
+                "source_url": "https://example.com/TODO_EXACT_PRODUCT_DETAIL_URL",
+                "evidence": [
+                    {
+                        "url": "https://example.com/TODO_EXACT_PRODUCT_DETAIL_URL",
+                        "type": "official",
+                        "note": (
+                            "Confirm this exact product/detail page shows the same item "
+                            "and visible image before changing confidence to confirmed."
+                        ),
+                    }
+                ],
+                "confidence": "needs_review",
+                "notes": (
+                    f"{item.get('source_store') or ''} / "
+                    f"{item.get('affiliation') or ''} / "
+                    f"{item.get('category') or ''} / "
+                    f"{item.get('name_ko') or item.get('name_ja') or ''}"
+                ).strip(" /"),
+            }
+        )
+    return {
+        "schema_version": 1,
+        "agent": {
+            "name": "source-discovery-reviewer",
+            "run_id": "source-discovery-next-batch",
+            "collected_at": collected_at or now_utc(),
+            "notes": "Fill exact source/image URLs for the next source discovery review batch, then set confirmed rows to confidence=confirmed.",
+        },
+        "updates": updates,
+    }
+
+
+def write_image_update_template(
+    starter_report: dict[str, Any],
+    path: Path = STARTER_UPDATE_TEMPLATE,
+) -> dict[str, Any]:
+    payload = build_image_update_template(starter_report)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return payload
+
+
 def source_link(url: Any, label: str) -> str:
     value = str(url or "").strip()
     if not value:
@@ -722,6 +781,7 @@ def main() -> None:
         write_report(report)
         starter_report = write_starter_queue_report(report)
         write_starter_queue_html(starter_report)
+        write_image_update_template(starter_report)
     print(json.dumps(report["summary"], ensure_ascii=False, indent=2))
     if args.write:
         print(
@@ -729,6 +789,7 @@ def main() -> None:
                 {
                     "starter_queue_json": str(STARTER_QUEUE_REPORT),
                     "starter_queue_html": str(STARTER_QUEUE_HTML),
+                    "image_update_template": str(STARTER_UPDATE_TEMPLATE),
                     **starter_report["summary"],
                 },
                 ensure_ascii=False,
