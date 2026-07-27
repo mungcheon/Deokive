@@ -224,6 +224,7 @@ def render_html(payload: dict[str, Any]) -> str:
     .export, .next-batch {{ border:0; border-radius:18px; padding:13px 14px; background:var(--ink); color:white; font-weight:900; cursor:pointer; width:100%; }}
     .next-batch {{ background:var(--brand); margin-bottom:8px; }}
     .export {{ background:var(--soft); color:var(--ink); }}
+    .export[hidden] {{ display:none; }}
     .export:disabled, .next-batch:disabled {{ opacity:.42; cursor:not-allowed; }}
     .small {{ color:var(--sub); font-size:12px; line-height:1.35; }}
     a {{ color:var(--brand); text-decoration:none; font-weight:800; }}
@@ -272,8 +273,8 @@ def render_html(payload: dict[str, Any]) -> str:
       <section class="decision-list" id="decisionList"></section>
       <section>
         <button class="next-batch" id="nextBatch">다음 배치 검토하기</button>
-        <button class="export" id="export">검수 기록 백업</button>
-        <p class="small" style="margin-top:9px;">검수는 브라우저에서 계속 진행됩니다. 기록 백업은 나중에 로컬 도구로 승인 후보를 만들 때만 사용합니다.</p>
+        <button class="export" id="export" hidden>검수 기록 파일 만들기</button>
+        <p class="small" style="margin-top:9px;">검수는 이 브라우저에 자동 보관됩니다. 10개를 모두 판정한 뒤 다음 배치로 넘어가면 됩니다.</p>
       </section>
     </aside>
   </div>
@@ -326,7 +327,7 @@ def render_html(payload: dict[str, Any]) -> str:
       if (!currentItems.length) {{
         cards.innerHTML = `<article class="card" style="grid-column:1/-1; display:block;">
           <div class="title">전체 검수가 완료되었습니다.</div>
-          <p class="muted" style="margin-top:8px;">필요하면 백업 JSON을 저장해 로컬 승인 후보 생성 도구에 넣으면 됩니다.</p>
+          <p class="muted" style="margin-top:8px;">검수 기록은 이 브라우저에 자동 보관됩니다.</p>
         </article>`;
         renderSide();
         return;
