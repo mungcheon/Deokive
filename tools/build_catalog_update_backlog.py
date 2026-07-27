@@ -114,6 +114,8 @@ def build_backlog(
 ) -> dict[str, Any]:
     queue = [item for item in queue_payload.get("queue", []) if isinstance(item, dict)]
     by_strategy = Counter(str(item.get("strategy") or "") for item in queue)
+    by_provider_status = Counter(str(item.get("provider_status") or "") for item in queue)
+    by_automation_safety = Counter(str(item.get("automation_safety") or "") for item in queue)
     by_store = Counter(str(item.get("source_store") or "") for item in queue)
     by_store_strategy: dict[str, Counter[str]] = defaultdict(Counter)
     samples: dict[str, list[dict[str, Any]]] = defaultdict(list)
@@ -183,6 +185,19 @@ def build_backlog(
         for item in queue_payload.get("top_store_categories", [])
         if isinstance(item, dict)
     ][:60]
+    image_safety_store_top = _counter_rows(
+        Counter(
+            (
+                str(item.get("automation_safety") or ""),
+                str(item.get("source_store") or ""),
+            )
+            for item in queue
+        ),
+        ("automation_safety", "source_store"),
+        80,
+    )
+    for item in image_safety_store_top:
+        item["missing_images"] = item.pop("count")
 
     field_items = [
         item
@@ -327,11 +342,14 @@ def build_backlog(
         )[:80],
         "field_focus_packs": _field_focus_packs(field_items, 40),
         "image_queue_by_strategy": by_strategy.most_common(),
+        "image_queue_by_provider_status": by_provider_status.most_common(),
+        "image_queue_by_automation_safety": by_automation_safety.most_common(),
         "image_queue_by_category": queue_payload.get("by_category", []),
         "image_provider_recommendation_counts": image_provider_audit.get("recommendation_counts", []),
         "image_provider_reason_counts": image_provider_audit.get("reason_counts", []),
         "top_image_provider_actions": image_provider_audit.get("top_stores", [])[:30],
         "top_image_strategy_store_backlog": image_strategy_store_top,
+        "top_image_safety_store_backlog": image_safety_store_top,
         "top_image_store_category_backlog": image_store_category_top,
         "top_image_backlog": actions[:60],
         "recommended_sequence": [
@@ -525,6 +543,12 @@ def write_markdown(backlog: dict[str, Any], path: Path) -> None:
     )
     for strategy, count in backlog.get("image_queue_by_strategy", []):
         lines.append(f"- `{strategy}`: `{count}`")
+    lines.extend(["", "## Image Provider Status", ""])
+    for status, count in backlog.get("image_queue_by_provider_status", []):
+        lines.append(f"- `{status}`: `{count}`")
+    lines.extend(["", "## Image Automation Safety", ""])
+    for safety, count in backlog.get("image_queue_by_automation_safety", []):
+        lines.append(f"- `{safety}`: `{count}`")
     lines.extend(["", "## Image Categories", ""])
     for category, count in backlog.get("image_queue_by_category", [])[:20]:
         lines.append(f"- `{category}`: `{count}`")
@@ -544,6 +568,12 @@ def write_markdown(backlog: dict[str, Any], path: Path) -> None:
     for item in backlog.get("top_image_strategy_store_backlog", [])[:25]:
         lines.append(
             f"- `{item.get('strategy')}` / `{item.get('source_store')}`: "
+            f"`{item.get('missing_images')}`"
+        )
+    lines.extend(["", "## Top Image Safety Store Backlog", ""])
+    for item in backlog.get("top_image_safety_store_backlog", [])[:25]:
+        lines.append(
+            f"- `{item.get('automation_safety')}` / `{item.get('source_store')}`: "
             f"`{item.get('missing_images')}`"
         )
     lines.extend(["", "## Top Image Store Category Backlog", ""])

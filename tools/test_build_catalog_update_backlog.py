@@ -16,6 +16,8 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
                 {
                     "source_store": "애니메이트",
                     "strategy": "official_search",
+                    "provider_status": "search_only",
+                    "automation_safety": "candidate_provider_script_required",
                     "category": "아크릴 스탠드",
                     "name_ko": "샘플 A",
                     "query": "sample a",
@@ -24,6 +26,8 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
                 {
                     "source_store": "애니메이트",
                     "strategy": "official_search",
+                    "provider_status": "search_only",
+                    "automation_safety": "candidate_provider_script_required",
                     "category": "아크릴 스탠드",
                     "name_ko": "샘플 B",
                     "query": "sample b",
@@ -32,6 +36,8 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
                 {
                     "source_store": "굿스마일컴퍼니",
                     "strategy": "manual_review",
+                    "provider_status": "manual_only",
+                    "automation_safety": "manual_research_required",
                     "category": "피규어",
                     "name_ko": "샘플 C",
                 },
@@ -176,6 +182,19 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
         )
         self.assertEqual(result["field_queue_missing_total"], 2)
         self.assertEqual(result["image_queue_by_strategy"], [("official_search", 2), ("manual_review", 1)])
+        self.assertEqual(result["image_queue_by_provider_status"], [("search_only", 2), ("manual_only", 1)])
+        self.assertEqual(
+            result["image_queue_by_automation_safety"],
+            [("candidate_provider_script_required", 2), ("manual_research_required", 1)],
+        )
+        self.assertEqual(
+            result["top_image_safety_store_backlog"][0],
+            {
+                "automation_safety": "candidate_provider_script_required",
+                "source_store": "애니메이트",
+                "missing_images": 2,
+            },
+        )
         self.assertEqual(result["top_image_backlog"][0]["source_store"], "애니메이트")
         self.assertEqual(result["top_image_backlog"][0]["next_action"], "official_search_provider_or_manual_review")
         self.assertEqual(result["field_focus_packs"][0]["batch_key"], "animation|애니메이트|source_url")
