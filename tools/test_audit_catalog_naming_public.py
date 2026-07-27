@@ -94,6 +94,31 @@ class AuditCatalogNamingPublicTest(unittest.TestCase):
         self.assertEqual(reasons["ichiban_name_missing_release_prize_item_character_parts"], 1)
         self.assertEqual(reasons["ichiban_last_one_or_double_chance_price_should_be_zero"], 1)
 
+    def test_report_flags_frieren_aliases_and_non_exact_ichiban_separator(self) -> None:
+        rows = [
+            {
+                "catalog_index": 7,
+                "name_ko": "\ud504\ub80c \uad7f\uc988",
+                "character_name": "\ud504\ub80c",
+                "affiliation": "\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c",
+            },
+            {
+                "catalog_index": 8,
+                "name_ko": "\u4e00\u756a\u304f\u3058 \u3061\u3044\u304b\u308f/A\u8cde/\u3061\u3044\u304b\u308f \u306c\u3044\u3050\u308b\u307f/\uce58\uc774\uce74\uc640",
+                "source_store": "\uc774\uce58\ubc29\ucfe0\uc9c0",
+                "sub_series": "A\u8cde",
+                "character_name": "\uce58\uc774\uce74\uc640",
+                "official_price_jpy": 750,
+            },
+        ]
+
+        report = audit.build_report(rows, generated_at="2026-07-27T00:00:00Z")
+        reasons = dict(report["summary"]["by_reason"])
+
+        self.assertEqual(report["summary"]["status"], "needs_review")
+        self.assertEqual(reasons["fern_korean_name_should_be_peoreun"], 1)
+        self.assertEqual(reasons["ichiban_name_missing_release_prize_item_character_parts"], 1)
+
     def test_report_queues_ichiban_exact_display_duplicates_without_blocking(self) -> None:
         rows = [
             {

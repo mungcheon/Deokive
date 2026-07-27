@@ -13,7 +13,13 @@ DATA = ROOT / "data"
 DEFAULT_CATALOG = DATA / "catalog_public.json"
 DEFAULT_OUTPUT = DATA / "catalog_naming_audit_public.json"
 
-FERN_BAD_KO = "\ud380"
+FERN_BAD_KO_ALIASES = (
+    "\ud380",
+    "\ud38c",
+    "\ud504\ub80c",
+    "Fern",
+    "Pern",
+)
 FERN_GOOD_KO = "\ud398\ub978"
 FERN_JA = "\u30d5\u30a7\u30eb\u30f3"
 FRIEREN_KO = "\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c"
@@ -92,13 +98,20 @@ def audit_fern_names(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     issues: list[dict[str, Any]] = []
     for row in rows:
         serialized = json.dumps(row, ensure_ascii=False)
+        display_fields = " ".join(
+            str(row.get(field) or "")
+            for field in ("name_ko", "character_name", "affiliation")
+        )
         is_fern_context = (
             FERN_JA in serialized
             or str(row.get("affiliation") or "") == FRIEREN_KO
-            or str(row.get("character_name") or "") in {FERN_BAD_KO, FERN_GOOD_KO}
+            or str(row.get("character_name") or "") in {*FERN_BAD_KO_ALIASES, FERN_GOOD_KO}
         )
-        if is_fern_context and FERN_BAD_KO in serialized:
-            issues.append(compact_row(row, reason="fern_korean_name_should_be_peoreun"))
+        if is_fern_context:
+            for alias in FERN_BAD_KO_ALIASES:
+                if alias in display_fields:
+                    issues.append(compact_row(row, reason="fern_korean_name_should_be_peoreun"))
+                    break
         if FERN_JA in serialized and str(row.get("character_name") or "") not in {"", FERN_GOOD_KO}:
             issues.append(compact_row(row, reason="fern_japanese_name_character_mismatch"))
     return issues
@@ -110,7 +123,7 @@ def audit_ichiban_names(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
         if not is_ichiban_row(row):
             continue
         name = str(row.get("name_ko") or "")
-        parts = [part.strip() for part in name.split("/")]
+        parts = [part.strip() for part in name.split(" / ")]
         sub_series = str(row.get("sub_series") or "").strip()
         character_name = str(row.get("character_name") or "").strip()
         price = row.get("official_price_jpy")

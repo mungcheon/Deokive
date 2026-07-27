@@ -47,6 +47,13 @@ CHARACTER_MOJIBAKE_OR_ALIAS_FINDINGS = {
         "affiliation_scope": "\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c",
         "match": "contains",
     },
+    "\ud504\ub80c": {
+        "expected": "\ud398\ub978",
+        "fields": ("character_name", "affiliation", "name_ko"),
+        "reason": "likely_korean_frieren_character_typo",
+        "affiliation_scope": "\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c",
+        "match": "contains",
+    },
     "Pern": {
         "expected": "\ud398\ub978",
         "fields": ("character_name", "name_ko"),
@@ -104,6 +111,7 @@ CHARACTER_ALIAS_MONITOR_TARGETS = {
         "watched_aliases": {
             "\ud380": "\ud398\ub978",
             "\ud38c": "\ud398\ub978",
+            "\ud504\ub80c": "\ud398\ub978",
             "Pern": "\ud398\ub978",
             "Fern": "\ud398\ub978",
             "\ud6c4\ub9ac\ub80c": "\ud504\ub9ac\ub80c",

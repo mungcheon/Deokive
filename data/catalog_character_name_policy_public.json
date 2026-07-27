@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-27T00:59:16Z",
+  "generated_at": "2026-07-27T01:05:36Z",
   "scope": "catalog_character_name_policy",
   "summary": {
     "rows": 20295,
@@ -31,6 +31,17 @@
         "match": "contains"
       },
       "펌": {
+        "expected": "페른",
+        "fields": [
+          "character_name",
+          "affiliation",
+          "name_ko"
+        ],
+        "reason": "likely_korean_frieren_character_typo",
+        "affiliation_scope": "장송의 프리렌",
+        "match": "contains"
+      },
+      "프렌": {
         "expected": "페른",
         "fields": [
           "character_name",

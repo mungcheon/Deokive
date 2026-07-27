@@ -142,6 +142,25 @@ class AuditCatalogCharacterNamesTest(unittest.TestCase):
             ["\ud398\ub978", "\ud398\ub978"],
         )
 
+    def test_reports_frieren_korean_pren_alias(self) -> None:
+        rows = [
+            {
+                "catalog_index": 7,
+                "name_ko": "\ud504\ub80c \uc544\ud06c\ub9b4 \uc2a4\ud0e0\ub4dc",
+                "character_name": "\ud504\ub80c",
+                "affiliation": "\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c",
+            }
+        ]
+
+        result = audit(rows)
+
+        self.assertEqual(result["summary"]["status"], "needs_review")
+        self.assertEqual(result["summary"]["character_alias_violations"], 2)
+        self.assertEqual(
+            {item["expected"] for item in result["character_alias_violations"]},
+            {"\ud398\ub978"},
+        )
+
     def test_reports_ichiban_product_character_mismatch_with_longest_token_priority(self) -> None:
         rows = [
             {
