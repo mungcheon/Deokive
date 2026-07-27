@@ -38,6 +38,7 @@ For the same local preflight, run:
 python tools/validate_agent_goods_intake.py data/intake/incoming
 python tools/import_agent_goods_intake.py data/intake/incoming
 python tools/catalog_quality_report.py
+python tools/build_catalog_naming_quality_queue.py
 python tools/build_ichiban_public_quality_queue.py
 python tools/build_image_enrichment_queue.py
 python tools/audit_public_catalog_image_assets.py --write
@@ -56,6 +57,7 @@ python tools/import_agent_goods_intake.py data/intake/incoming --write
 ## Individual Tools
 
 - `tools/catalog_quality_report.py`: reads `data/catalog_public.json` and writes the local/admin report `server/catalog_quality_report.json`, including duplicate checks, missing-field breakdowns, character-name review counts, and Ichiban Kuji naming/price/campaign quality queues.
+- `tools/build_catalog_naming_quality_queue.py`: writes the local/admin character-name and Ichiban display-name review queue to `server/catalog_naming_quality_queue.json` and `.csv`.
 - `tools/catalog_text_quality_report.py`: writes `server/catalog_text_quality_report.json` for mojibake/replacement-character checks.
 - `tools/normalize_catalog_seed.py`: normalizes category/store/text fields.
 - `tools/dedupe_catalog.py`: removes duplicate seed rows; use `--dart` for Dart catalog files.
