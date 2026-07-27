@@ -215,6 +215,8 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
         self.assertEqual(result["top_image_backlog"][0]["next_action"], "official_search_provider_or_manual_review")
         self.assertEqual(result["field_focus_packs"][0]["batch_key"], "animation|애니메이트|source_url")
         self.assertTrue(result["field_focus_packs"][0]["automation_candidate"])
+        self.assertEqual(1, len(result["field_focus_packs"]))
+        self.assertEqual(1, sum(1 for item in result["field_focus_packs"] if item["automation_candidate"]))
         self.assertEqual(result["priority_goods_summary"]["danganronpa"]["incomplete_rows"], 1)
         self.assertEqual(result["priority_goods_incomplete_samples"][0]["focus"], "danganronpa")
         self.assertEqual(result["naming_quality"]["queue_rows"], 6)

@@ -777,6 +777,10 @@ def main() -> int:
                 "stale_source_review_rows": (backlog.get("stale_source_review") or {}).get("review_rows"),
                 "naming_quality_rows": (backlog.get("naming_quality") or {}).get("queue_rows"),
                 "ichiban_quality_rows": (backlog.get("ichiban_quality") or {}).get("queue_rows"),
+                "field_focus_pack_rows": len(backlog.get("field_focus_packs") or []),
+                "field_focus_automation_pack_rows": sum(
+                    1 for item in backlog.get("field_focus_packs") or [] if item.get("automation_candidate")
+                ),
                 "image_work_pack_rows": len(backlog.get("image_work_packs") or []),
                 "ichiban_work_pack_rows": (backlog.get("ichiban_quality") or {}).get("work_pack_rows"),
                 "priority_goods": sorted((backlog.get("priority_goods_summary") or {}).keys()),
