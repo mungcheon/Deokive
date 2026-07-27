@@ -340,8 +340,11 @@ def _ichiban_naming_issue(row: dict[str, Any]) -> str | None:
     parts = _split_display_parts(row.get("name_ko"))
     if len(parts) < 4:
         return "display_name_should_have_release_rank_prize_character_parts"
+    sub_series = str(row.get("sub_series") or "").strip()
     if not _is_prize_rank(parts[1]):
         if parts[1] in ICHIBAN_NON_PRIZE_RANK_LABELS:
+            if sub_series == parts[1]:
+                return None
             return "non_prize_or_related_item_needs_classification"
         return "second_part_should_be_prize_rank"
     character = str(row.get("character_name") or "").strip()
