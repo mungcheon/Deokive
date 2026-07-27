@@ -21,6 +21,7 @@ SITE_STATUS = DATA / "site_status_public.json"
 INTAKE = DATA / "intake"
 INCOMING = INTAKE / "incoming"
 SOURCES = INTAKE / "sources"
+SERVER_ARTIFACT_SUFFIXES = {".csv", ".html", ".json", ".md", ".jpg", ".jpeg", ".png", ".txt"}
 
 ALLOWED_DATA_FILES = {
     "data/README.md",
@@ -54,8 +55,12 @@ REQUIRED_ITEM_FIELDS = {
 
 
 def git_ls_files_data() -> list[str]:
+    return git_ls_files("data")
+
+
+def git_ls_files(pathspec: str) -> list[str]:
     result = subprocess.run(
-        ["git", "ls-files", "data"],
+        ["git", "ls-files", pathspec],
         cwd=ROOT,
         check=True,
         text=True,
@@ -101,6 +106,21 @@ def audit_tracked_data_files(errors: list[str]) -> list[str]:
         )
     if missing:
         errors.append("Missing required tracked data files: " + ", ".join(missing))
+    return tracked
+
+
+def audit_tracked_server_artifacts(errors: list[str]) -> list[str]:
+    tracked = git_ls_files("server")
+    unexpected = [
+        path
+        for path in tracked
+        if Path(path).suffix.lower() in SERVER_ARTIFACT_SUFFIXES
+    ]
+    if unexpected:
+        errors.append(
+            "Unexpected tracked server/local artifacts; keep public DB data under data/ only: "
+            + ", ".join(unexpected[:20])
+        )
     return tracked
 
 
@@ -210,6 +230,7 @@ def audit_incoming_intake(errors: list[str]) -> dict[str, int]:
 def run_audit() -> tuple[dict[str, Any], list[str]]:
     errors: list[str] = []
     tracked = audit_tracked_data_files(errors)
+    tracked_server = audit_tracked_server_artifacts(errors)
     filesystem_summary = audit_data_filesystem_layout(errors)
     catalog_summary = audit_catalog(errors)
     audit_catalog_meta(errors, catalog_summary["catalog_rows"])
@@ -219,6 +240,7 @@ def run_audit() -> tuple[dict[str, Any], list[str]]:
 
     summary: dict[str, Any] = {
         "tracked_data_files": len(tracked),
+        "tracked_server_files": len(tracked_server),
         **filesystem_summary,
         **catalog_summary,
         "source_lists": source_counts,

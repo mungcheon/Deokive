@@ -37,6 +37,18 @@ class PublicDataLayoutAuditTests(unittest.TestCase):
         self.assertTrue(target.is_allowed_data_path("data/intake/processed/agent-run.json"))
         self.assertTrue(target.is_allowed_data_path("data/intake/rejected/agent-run.json"))
 
+    def test_rejects_tracked_server_artifacts(self) -> None:
+        errors: list[str] = []
+
+        with patch.object(
+            target,
+            "git_ls_files",
+            return_value=["server/catalog_report.json", "server/review.html"],
+        ):
+            target.audit_tracked_server_artifacts(errors)
+
+        self.assertTrue(any("Unexpected tracked server/local artifacts" in error for error in errors))
+
     def test_rejects_local_data_files_outside_single_db_layout(self) -> None:
         errors: list[str] = []
 
