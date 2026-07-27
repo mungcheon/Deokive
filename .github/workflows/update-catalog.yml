@@ -39,6 +39,7 @@ jobs:
             tools.test_audit_catalog_character_names \
             tools.test_normalize_catalog_characters_and_ichiban \
             tools.test_build_ichiban_public_quality_queue \
+            tools.test_build_animation_enrichment_priority_queue \
             tools.test_build_image_enrichment_queue \
             tools.test_build_image_update_work_packs \
             tools.test_build_field_update_work_packs \
@@ -117,6 +118,7 @@ jobs:
           python tools/build_source_discovery_queue.py
           python tools/audit_public_catalog_image_assets.py --write
           python tools/sync_missing_image_work_queue_public.py --write
+          python tools/build_animation_enrichment_priority_queue.py
           python tools/build_catalog_update_backlog.py
           python tools/audit_catalog_work_pack_coverage.py
           python tools/audit_catalog_report_consistency.py --core-only --fail-on-mismatch
