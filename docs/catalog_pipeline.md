@@ -99,7 +99,7 @@ python tools/import_agent_goods_intake.py data/intake/incoming --write
 - `tools/build_ichiban_kuji_ocr_review_queue.py`: writes JSON/CSV/Markdown plus `server/ichiban_kuji_ocr_review.html` for image-only historical 1kuji prize lineups that need OCR/manual prize names.
 - `tools/build_catalog_field_enrichment_queue.py`: writes JSON/CSV/Markdown plus `server/catalog_field_enrichment_review.html` and a confirmation template for source URL, image, release date, barcode, and price follow-up.
 - `tools/import_confirmed_catalog_field_rows.py`: imports only manually confirmed field values with validation for exact evidence URLs, store/domain compatibility, URL safety, barcode/date/price format, and existing-field conflicts.
-- `tools/build_catalog_update_backlog.py`: summarizes field and image queues into next update actions.
+- `tools/build_catalog_update_backlog.py`: summarizes field, image, source, priority-goods, and naming queues into next update actions.
 - `tools/build_requested_special_goods_queue.py`: compares `data/requested_special_goods.json` with the current seed, writes `server/requested_special_goods_review.html`, and creates a manual seed template for requested collections that are still missing.
 - `tools/audit_catalog_report_consistency.py`: verifies that quality, field queue, field review batches, image queue, and image review batches all describe the same current seed counts. Run it after regenerating those reports and before dashboard decisions.
 - `tools/audit_catalog_goal_status.py`: writes `server/catalog_goal_status_audit.html` and Markdown/JSON goal dashboards with review queues and prioritized next actions.
@@ -238,9 +238,9 @@ The field queue JSON and Markdown include several grouped views:
 - `top_store_category_fields` is useful for manual passes where one category can be checked against the same source pattern.
 
 `server/catalog_update_backlog.md` is the quickest human-facing summary. It
-combines the field and image queues, keeping separate sections for field
-strategies, store/category batches, image strategies, and recommended safe
-update order.
+combines the field, image, source, priority-goods, and naming queues, keeping
+separate sections for field strategies, store/category batches, image
+strategies, character/name cleanup, and recommended safe update order.
 
 - For manual field backfill, open `server/catalog_field_enrichment_review.html`, copy JSON rows into `server/catalog_field_confirmed_rows.json`, fill `manual_value`, set `manual_confirmed=true`, then dry-run `python tools/import_confirmed_catalog_field_rows.py` before using `--write`.
 - Confirmation templates are review aids only. Importers read `*_confirmed_rows.json` by default and return zero updates when that confirmed file does not exist.

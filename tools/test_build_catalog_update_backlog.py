@@ -1,0 +1,189 @@
+import unittest
+
+from tools import build_catalog_update_backlog as backlog
+
+
+class BuildCatalogUpdateBacklogTest(unittest.TestCase):
+    def test_build_backlog_summarizes_image_and_field_work(self):
+        image_queue = {
+            "missing_images": 3,
+            "queue": [
+                {
+                    "source_store": "애니메이트",
+                    "strategy": "official_search",
+                    "category": "아크릴 스탠드",
+                    "name_ko": "샘플 A",
+                    "query": "sample a",
+                    "search_url": "https://example.test/search/a",
+                },
+                {
+                    "source_store": "애니메이트",
+                    "strategy": "official_search",
+                    "category": "아크릴 스탠드",
+                    "name_ko": "샘플 B",
+                    "query": "sample b",
+                    "search_url": "https://example.test/search/b",
+                },
+                {
+                    "source_store": "굿스마일컴퍼니",
+                    "strategy": "manual_review",
+                    "category": "피규어",
+                    "name_ko": "샘플 C",
+                },
+            ],
+            "by_category": [["아크릴 스탠드", 2], ["피규어", 1]],
+            "top_strategy_stores": [
+                {"strategy": "official_search", "source_store": "애니메이트", "missing_images": 2}
+            ],
+            "top_store_categories": [
+                {"source_store": "애니메이트", "category": "아크릴 스탠드", "missing_images": 2}
+            ],
+        }
+        field_queue = {
+            "missing_total": 2,
+            "by_field": [["source_url", 1], ["release_date", 1]],
+            "queue": [
+                {
+                    "batch_key": "animation|애니메이트|source_url",
+                    "source_group": "animation_goods",
+                    "source_store": "애니메이트",
+                    "category": "아크릴 스탠드",
+                    "field": "source_url",
+                    "strategy": "official_search",
+                    "workstream": "source_discovery",
+                    "field_action": "find_exact_source_url",
+                    "risk": "medium",
+                    "automation_candidate": True,
+                    "name_ko": "샘플 A",
+                    "acceptance_criteria": "exact product page",
+                }
+            ],
+            "top_store_fields": [],
+            "top_strategy_store_fields": [],
+            "top_store_category_fields": [],
+            "top_batch_keys": [],
+            "animation_goods_category_fields": [],
+            "animation_goods_store_category_fields": [],
+        }
+        quality = {
+            "rows": 10,
+            "missing_enrichment": {"image_url": 3, "source_url": 1},
+        }
+        source_discovery = {
+            "summary": {
+                "source_discovery_rows": 2,
+                "top_store_categories": [
+                    {"source_store": "Store A", "category": "Figure", "rows": 2}
+                ],
+            },
+            "items": [
+                {"workflow": "official_search_url_available", "source_store": "Store A"},
+                {"workflow": "manual_official_research", "source_store": "Store B"},
+            ],
+        }
+        priority_goods = {
+            "summaries": {
+                "danganronpa": {
+                    "rows": 2,
+                    "complete_rows": 1,
+                    "incomplete_rows": 1,
+                    "missing_fields": {"image_url": 1},
+                }
+            },
+            "items": [
+                {
+                    "focus": "danganronpa",
+                    "name_ko": "sample",
+                    "missing_fields": ["image_url"],
+                }
+            ],
+        }
+        naming_queue = {
+            "summary": {
+                "known_alias_rows": 1,
+                "ja_token_mismatch_rows": 0,
+                "single_character_name_review_rows": 2,
+                "ichiban_naming_convention_review_rows": 3,
+                "queue_rows": 6,
+            },
+            "items": [
+                {
+                    "workflow": "character_alias_normalization",
+                    "display_name": "sample alias",
+                    "reason": "known_alias",
+                },
+                {
+                    "workflow": "ichiban_display_name_convention",
+                    "display_name": "sample ichiban",
+                    "reason": "second_part_should_be_prize_rank",
+                },
+            ],
+        }
+
+        result = backlog.build_backlog(
+            image_queue,
+            quality,
+            field_queue,
+            {},
+            source_discovery,
+            {},
+            priority_goods,
+            naming_queue,
+        )
+
+        self.assertEqual(result["rows"], 10)
+        self.assertEqual(result["missing_images"], 3)
+        self.assertEqual(result["source_discovery_rows"], 2)
+        self.assertEqual(
+            result["source_discovery_by_workflow"],
+            [("official_search_url_available", 1), ("manual_official_research", 1)],
+        )
+        self.assertEqual(result["source_discovery_top_stores"][0], {"source_store": "Store A", "rows": 1})
+        self.assertEqual(
+            result["source_discovery_top_store_categories"][0],
+            {"source_store": "Store A", "category": "Figure", "rows": 2},
+        )
+        self.assertEqual(result["field_queue_missing_total"], 2)
+        self.assertEqual(result["image_queue_by_strategy"], [("official_search", 2), ("manual_review", 1)])
+        self.assertEqual(result["top_image_backlog"][0]["source_store"], "애니메이트")
+        self.assertEqual(result["top_image_backlog"][0]["next_action"], "official_search_provider_or_manual_review")
+        self.assertEqual(result["field_focus_packs"][0]["batch_key"], "animation|애니메이트|source_url")
+        self.assertTrue(result["field_focus_packs"][0]["automation_candidate"])
+        self.assertEqual(result["priority_goods_summary"]["danganronpa"]["incomplete_rows"], 1)
+        self.assertEqual(result["priority_goods_incomplete_samples"][0]["focus"], "danganronpa")
+        self.assertEqual(result["naming_quality"]["queue_rows"], 6)
+        self.assertEqual(result["naming_quality"]["known_alias_rows"], 1)
+        self.assertEqual(
+            result["naming_quality"]["by_workflow"],
+            [("character_alias_normalization", 1), ("ichiban_display_name_convention", 1)],
+        )
+
+    def test_field_focus_packs_groups_missing_rows_by_batch_key(self):
+        items = [
+            {
+                "batch_key": "store|category|source_url",
+                "source_group": "animation_goods",
+                "source_store": "스토어",
+                "category": "피규어",
+                "field": "source_url",
+                "automation_candidate": True,
+            },
+            {
+                "batch_key": "store|category|source_url",
+                "source_group": "animation_goods",
+                "source_store": "스토어",
+                "category": "피규어",
+                "field": "source_url",
+                "automation_candidate": True,
+            },
+        ]
+
+        packs = backlog._field_focus_packs(items)
+
+        self.assertEqual(len(packs), 1)
+        self.assertEqual(packs[0]["missing"], 2)
+        self.assertEqual(packs[0]["batch_key"], "store|category|source_url")
+
+
+if __name__ == "__main__":
+    unittest.main()
