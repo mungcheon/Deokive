@@ -116,7 +116,7 @@ flutter build web --release --base-href "/" --dart-define=DEOKIVE_STATIC_SITE=tr
 
 ## Backend Note
 
-The public site does not require a running backend. The `server/` folder is kept only for private/local experiments and future admin tooling. Do not commit `.env`, live SQLite databases, Firebase config files, tokens, or private keys.
+The public site does not require a running backend. The `server/` folder is kept only for private/local experiments, review queues, operator dashboards, and future admin tooling. Do not commit `.env`, live SQLite databases, Firebase config files, tokens, or private keys.
 
 ## Privacy And Public Repository Notes
 

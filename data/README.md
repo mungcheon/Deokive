@@ -21,6 +21,27 @@ into the proper intake folder or removed before publishing.
 Everything else should be generated from tools or stored under `data/intake/`
 until it is validated and merged into `catalog_public.json`.
 
+## Local Operator Work Orders
+
+Catalog cleanup planning is local-only. Generate the backlog and operations
+dashboard under ignored `server/` files:
+
+```powershell
+python -X utf8 tools/build_catalog_update_backlog.py
+python -X utf8 tools/build_catalog_operations_dashboard.py
+```
+
+`server/catalog_update_backlog.json` contains `operator_next_actions` and
+`operator_work_order` entries for the next agent tasks. The dashboard surfaces
+those work orders first so agents can pick a lane such as source-first image
+work, animation enrichment, or Ichiban Kuji quality review. These files are not
+public DB sources and should not be committed. Only confirmed, schema-valid
+updates should move into:
+
+- `data/intake/field_updates/incoming/`
+- `data/intake/image_updates/incoming/`
+- `data/intake/incoming/`
+
 ## Boss Review Gate
 
 The public catalog should not absorb bulk agent work directly. Generate local
