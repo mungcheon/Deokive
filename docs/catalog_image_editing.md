@@ -65,6 +65,7 @@ python -X utf8 tools\apply_manual_catalog_image_update.py 920 "이미지URL" --s
 ```powershell
 python -X utf8 tools\audit_public_data_layout.py
 python -X utf8 tools\audit_public_catalog_image_assets.py --write
+python -X utf8 tools\build_image_enrichment_queue.py
 python -X utf8 tools\audit_flutter_seed_matches_public.py
 python -X utf8 tools\audit_public_catalog_image_assets.py
 python -X utf8 tools\audit_public_catalog_safety.py

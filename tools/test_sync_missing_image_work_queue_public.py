@@ -2,10 +2,18 @@ from __future__ import annotations
 
 import unittest
 
+from tools import sync_missing_image_work_queue_public as target
 from tools.sync_missing_image_work_queue_public import sync_queue
 
 
 class SyncMissingImageWorkQueuePublicTests(unittest.TestCase):
+    def test_default_queue_is_local_server_artifact(self) -> None:
+        self.assertEqual(
+            target.DEFAULT_QUEUE.as_posix().split("/")[-2:],
+            ["server", "catalog_missing_image_work_queue_current.json"],
+        )
+        self.assertEqual(target.DEFAULT_CSV.suffix, ".csv")
+
     def test_adds_missing_catalog_rows_to_queue(self) -> None:
         catalog = {
             "items": [

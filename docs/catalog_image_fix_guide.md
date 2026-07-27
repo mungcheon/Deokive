@@ -17,6 +17,7 @@
 python -X utf8 tools\cache_catalog_images.py --write
 python -X utf8 tools\audit_public_data_layout.py
 python -X utf8 tools\audit_public_catalog_image_assets.py --write
+python -X utf8 tools\build_image_enrichment_queue.py
 python -X utf8 tools\audit_public_catalog_safety.py
 python -X utf8 tools\audit_public_catalog_image_assets.py
 ```
@@ -48,6 +49,7 @@ python -X utf8 tools\import_confirmed_image_attachment_rows.py --write
 python -X utf8 tools\cache_catalog_images.py --write
 python -X utf8 tools\audit_public_data_layout.py
 python -X utf8 tools\audit_public_catalog_image_assets.py --write
+python -X utf8 tools\build_image_enrichment_queue.py
 ```
 
 ## 주의

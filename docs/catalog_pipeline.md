@@ -87,6 +87,8 @@ python tools/sync_catalog_pipeline.py --write --image-provider-store FuRyu --ima
 - `tools/generate_seed_catalog_dart.py`: generates `lib/data/catalog/seed_catalog.dart` from `data/catalog_public.json` for static GitHub Pages search/autocomplete.
 - `tools/audit_public_data_layout.py`: verifies the single public DB layout, intake source lists, site status file, and incoming agent payloads.
 - `tools/audit_public_catalog_image_assets.py --write`: reads `data/catalog_public.json` and writes the local/admin image asset report `server/catalog_image_asset_audit.json`.
+- `tools/build_image_enrichment_queue.py`: writes the local/admin missing-image work queue to `server/catalog_image_enrichment_queue_current.json` and `.csv`.
+- `tools/sync_missing_image_work_queue_public.py --write`: refreshes the simpler local missing-image queue in `server/catalog_missing_image_work_queue_current.json` and `.csv`.
 - `tools/sync_catalog_db_active.py`: deactivates DB catalog rows that are no longer present in the canonical seed, inserts missing seed rows, and updates active DB rows when canonical seed fields change.
 - `tools/build_catalog_source_coverage.py`: summarizes source, affiliation, category, animation goods, and kuji coverage.
 - `tools/build_image_enrichment_queue.py`: writes JSON/CSV queues for missing image follow-up.
@@ -126,7 +128,7 @@ Ichiban Kuji coverage notes:
 
 ## Image Queue Notes
 
-`server/catalog_image_enrichment_queue.csv` is sorted by `priority`:
+`server/catalog_image_enrichment_queue_current.csv` is sorted by `priority`:
 
 - `10 official_search`: official store search pages with a stable search URL.
 - `20 manual_official_search_review`: official search pages that are useful for review but do not yet have safe unattended detail matching.

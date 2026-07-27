@@ -17,9 +17,10 @@ except Exception:
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
+SERVER = ROOT / "server"
 DEFAULT_CATALOG = DATA / "catalog_public.json"
-DEFAULT_QUEUE = DATA / "catalog_missing_image_work_queue_public.json"
-DEFAULT_CSV = DATA / "catalog_missing_image_work_queue_public.csv"
+DEFAULT_QUEUE = SERVER / "catalog_missing_image_work_queue_current.json"
+DEFAULT_CSV = SERVER / "catalog_missing_image_work_queue_current.csv"
 
 OFFICIAL_SEARCH_STORES = {
     "FuRyu": ("official_search", "search_only", "candidate_provider_script_required", 10, "https://furyuprize.com/search?keyword={query}"),
@@ -74,9 +75,10 @@ def main() -> int:
     args = parser.parse_args()
 
     catalog = _load_json(args.catalog)
-    queue = _load_json(args.queue)
+    queue = _load_json(args.queue) if args.queue.exists() else {"items": []}
     result = sync_queue(catalog, queue)
     if args.write:
+        args.queue.parent.mkdir(parents=True, exist_ok=True)
         args.queue.write_text(json.dumps(result["queue"], ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         write_csv(result["queue"]["items"], args.csv_output)
     print(
@@ -314,6 +316,7 @@ def _now_utc() -> str:
 
 
 def write_csv(items: list[dict[str, Any]], path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8-sig", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=FIELDNAMES, extrasaction="ignore")
         writer.writeheader()
