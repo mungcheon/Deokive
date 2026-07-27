@@ -89,3 +89,24 @@ only; it does not auto-apply catalog changes. The generated template starts with
 `confidence: needs_review`; copy confirmed rows into
 `data/intake/image_updates/incoming/`, replace the TODO URLs, and set only
 verified rows to `confidence: confirmed` before importing.
+
+## Ichiban Kuji Quality Review
+
+Historical Ichiban Kuji rows use a local review queue for campaign gaps,
+reissue/duplicate decisions, zero-price policy checks, and display-name
+convention fixes:
+
+```powershell
+python -X utf8 tools/build_ichiban_public_quality_queue.py
+```
+
+This writes local review artifacts under `server/`:
+
+- `server/ichiban_public_quality_queue.html`
+- `server/ichiban_public_quality_queue.json`
+- `server/ichiban_public_quality_queue.csv`
+
+The HTML board is review-only. Do not merge or delete suspected duplicate rows
+unless the evidence proves the campaign, prize rank, prize name, character, and
+source identity are the same. Keep separate rows when source URLs prove a
+reissue or separate campaign.

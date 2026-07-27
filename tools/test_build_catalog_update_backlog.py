@@ -265,6 +265,7 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
             [("character_alias_normalization", 1), ("ichiban_display_name_convention", 1)],
         )
         self.assertEqual(result["ichiban_quality"]["queue_rows"], 4)
+        self.assertEqual(result["ichiban_quality"]["artifact"], "server/ichiban_public_quality_queue.html")
         self.assertEqual(result["ichiban_quality"]["campaign_gap_queue_rows"], 1)
         self.assertEqual(
             result["ichiban_quality"]["by_workflow"],

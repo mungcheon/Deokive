@@ -566,6 +566,9 @@ def build_backlog(
             "sample_rows": naming_items[:20],
         },
         "ichiban_quality": {
+            "artifact": "server/ichiban_public_quality_queue.html",
+            "json": "server/ichiban_public_quality_queue.json",
+            "csv": "server/ichiban_public_quality_queue.csv",
             "queue_rows": ichiban_quality_summary.get("queue_rows", len(ichiban_quality_items)),
             "campaign_gap_queue_rows": ichiban_quality_summary.get("campaign_gap_queue_rows", 0),
             "exact_display_duplicate_queue_rows": ichiban_quality_summary.get(
@@ -754,6 +757,9 @@ def write_markdown(backlog: dict[str, Any], path: Path) -> None:
         )
     ichiban = backlog.get("ichiban_quality") or {}
     lines.extend(["", "## Ichiban Quality", ""])
+    lines.append(f"- Artifact: `{ichiban.get('artifact')}`")
+    lines.append(f"- JSON: `{ichiban.get('json')}`")
+    lines.append(f"- CSV: `{ichiban.get('csv')}`")
     lines.append(f"- Queue rows: `{ichiban.get('queue_rows', 0)}`")
     lines.append(f"- Campaign gaps: `{ichiban.get('campaign_gap_queue_rows', 0)}`")
     lines.append(

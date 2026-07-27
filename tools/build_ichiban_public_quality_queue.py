@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import html
 import json
 import sys
 import urllib.parse
@@ -24,6 +25,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CATALOG = ROOT / "data" / "catalog_public.json"
 DEFAULT_JSON = ROOT / "server" / "ichiban_public_quality_queue.json"
 DEFAULT_CSV = ROOT / "server" / "ichiban_public_quality_queue.csv"
+DEFAULT_HTML = ROOT / "server" / "ichiban_public_quality_queue.html"
 
 
 def build_queue(quality_report: dict[str, Any]) -> dict[str, Any]:
@@ -356,6 +358,122 @@ def write_json(path: Path, payload: Any) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def _html(value: Any) -> str:
+    return html.escape(str(value or ""), quote=True)
+
+
+def _link(url: Any, label: str | None = None) -> str:
+    value = str(url or "").strip()
+    if not value:
+        return ""
+    return f'<a href="{_html(value)}" target="_blank" rel="noreferrer">{_html(label or value)}</a>'
+
+
+def _list(values: Any) -> str:
+    if not isinstance(values, list):
+        return ""
+    return "".join(f"<li>{_html(value)}</li>" for value in values)
+
+
+def write_html(queue: dict[str, Any], path: Path = DEFAULT_HTML) -> None:
+    summary = queue.get("summary") or {}
+    cards: list[str] = []
+    for item in queue.get("items", [])[:80]:
+        if not isinstance(item, dict):
+            continue
+        source_links = ""
+        if item.get("source_url"):
+            links = item.get("research_links") if isinstance(item.get("research_links"), dict) else {}
+            source_links = " ".join(
+                part
+                for part in [
+                    _link(item.get("source_url"), "Source"),
+                    _link(links.get("wayback_calendar"), "Wayback"),
+                    _link(links.get("domain_search"), "Search"),
+                ]
+                if part
+            )
+        elif isinstance(item.get("source_urls"), list):
+            source_links = " ".join(
+                _link(url, f"Source {index + 1}")
+                for index, url in enumerate(item.get("source_urls") or [])
+            )
+        cards.append(
+            f"""
+      <article class="card">
+        <div class="meta">
+          <span>P{_html(item.get('priority'))}</span>
+          <span>{_html(item.get('workflow'))}</span>
+        </div>
+        <h3>{_html(item.get('display_name') or item.get('source_url') or item.get('workflow'))}</h3>
+        <dl>
+          <dt>Status</dt><dd>{_html(item.get('status'))}</dd>
+          <dt>Kind</dt><dd>{_html(item.get('duplicate_review_kind') or item.get('reason'))}</dd>
+          <dt>Rows</dt><dd>{_html(item.get('row_count') or len(item.get('catalog_indexes') or []))}</dd>
+          <dt>Catalog</dt><dd>{_html(' | '.join(str(value) for value in item.get('catalog_indexes', [])) or item.get('catalog_index'))}</dd>
+          <dt>Action</dt><dd>{_html(item.get('recommended_action'))}</dd>
+        </dl>
+        <div class="links">{source_links}</div>
+        <h4>Decision Options</h4>
+        <ul>{_list(item.get('decision_options'))}</ul>
+        <h4>Acceptance Criteria</h4>
+        <ul>{_list(item.get('acceptance_criteria'))}</ul>
+      </article>
+            """
+        )
+    html_text = f"""<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Deokive Ichiban Kuji Quality Queue</title>
+  <style>
+    body {{ margin: 0; font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #15171c; background: #f7f8fa; }}
+    header {{ position: sticky; top: 0; z-index: 1; background: rgba(255,255,255,.94); backdrop-filter: blur(14px); border-bottom: 1px solid #dde2ea; padding: 18px 22px; }}
+    h1 {{ margin: 0 0 6px; font-size: 22px; }}
+    main {{ max-width: 1180px; margin: 0 auto; padding: 22px; }}
+    .summary {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin-bottom: 18px; }}
+    .summary article, .card {{ background: #fff; border: 1px solid #dde2ea; border-radius: 10px; box-shadow: 0 6px 20px rgba(20,28,40,.05); }}
+    .summary article {{ padding: 12px; }}
+    .summary span, dt, .meta {{ color: #667085; }}
+    .summary strong {{ font-size: 22px; }}
+    .queue {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }}
+    .card {{ padding: 14px; }}
+    .meta {{ display: flex; justify-content: space-between; gap: 8px; font-size: 12px; }}
+    h2 {{ font-size: 18px; margin: 22px 0 12px; }}
+    h3 {{ margin: 10px 0; font-size: 16px; overflow-wrap: anywhere; }}
+    h4 {{ margin: 12px 0 6px; font-size: 13px; }}
+    dl {{ display: grid; grid-template-columns: 70px 1fr; gap: 6px 10px; margin: 0; }}
+    dd {{ margin: 0; overflow-wrap: anywhere; }}
+    ul {{ margin: 0; padding-left: 18px; }}
+    .links {{ display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }}
+    a {{ color: #0b57d0; text-decoration: none; border: 1px solid #c8d7f4; background: #f5f8ff; border-radius: 999px; padding: 7px 10px; }}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Ichiban Kuji Quality Queue</h1>
+    <div>Review campaign gaps, reissue duplicates, and naming convention rows before changing the public catalog.</div>
+  </header>
+  <main>
+    <section class="summary">
+      <article><span>Ichiban rows</span><strong>{_html(summary.get('ichiban_rows'))}</strong></article>
+      <article><span>Campaign gaps</span><strong>{_html(summary.get('campaign_gap_queue_rows'))}</strong></article>
+      <article><span>Duplicate review</span><strong>{_html(summary.get('exact_display_duplicate_queue_rows'))}</strong></article>
+      <article><span>Naming review</span><strong>{_html(summary.get('naming_convention_queue_rows'))}</strong></article>
+      <article><span>Total queue</span><strong>{_html(summary.get('queue_rows'))}</strong></article>
+      <article><span>Work packs</span><strong>{_html(summary.get('work_pack_rows'))}</strong></article>
+    </section>
+    <h2>Review Cards</h2>
+    <section class="queue">{''.join(cards)}</section>
+  </main>
+</body>
+</html>
+"""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(html_text, encoding="utf-8")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Build a public-catalog Ichiban Kuji quality work queue."
@@ -363,12 +481,14 @@ def main() -> int:
     parser.add_argument("--catalog", type=Path, default=DEFAULT_CATALOG)
     parser.add_argument("--json-output", type=Path, default=DEFAULT_JSON)
     parser.add_argument("--csv-output", type=Path, default=DEFAULT_CSV)
+    parser.add_argument("--html-output", type=Path, default=DEFAULT_HTML)
     args = parser.parse_args()
 
     quality_report = build_report(load_catalog_rows(args.catalog))
     queue = build_queue(quality_report)
     write_json(args.json_output, queue)
     write_csv(queue, args.csv_output)
+    write_html(queue, args.html_output)
     print(json.dumps(queue["summary"], ensure_ascii=False, indent=2))
     return 0
 
