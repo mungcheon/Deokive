@@ -214,6 +214,7 @@ def render_html(payload: dict[str, Any]) -> str:
     aside {{ border-radius:28px; padding:16px; position:sticky; top:18px; height:calc(100vh - 36px); display:grid; grid-template-rows:auto auto minmax(0,1fr) auto; gap:12px; }}
     .progress {{ height:10px; border-radius:999px; background:var(--soft); overflow:hidden; margin-top:10px; }}
     .bar {{ height:100%; width:{pct}%; background:var(--brand); border-radius:inherit; }}
+    .batch-status {{ margin-top:9px; padding:10px 11px; border-radius:16px; background:#f8f9fc; border:1px solid var(--line); color:var(--sub); font-size:12px; line-height:1.35; font-weight:800; }}
     .counts {{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }}
     .count {{ background:var(--soft); border-radius:18px; padding:12px; }}
     .count strong {{ display:block; font-size:21px; }}
@@ -252,6 +253,7 @@ def render_html(payload: dict[str, Any]) -> str:
       <div class="summary">
         <span class="pill">현재 배치 {html.escape(str(meta["batch_number"]))}</span>
         <span class="pill">이번 검수 {selected}개</span>
+        <span class="pill" id="localProgressPill">브라우저 검수 0/{total:,}</span>
         <span class="pill">전체 {total:,}개</span>
       </div>
     </header>
@@ -263,6 +265,7 @@ def render_html(payload: dict[str, Any]) -> str:
         <h2>승인 현황</h2>
         <p class="muted">판정은 이 브라우저에 저장됩니다. 10개를 모두 판정한 뒤 다음 배치로 바로 넘어가면 됩니다.</p>
         <div class="progress"><div class="bar"></div></div>
+        <div class="batch-status" id="batchStatus">현재 배치 상태를 불러오는 중입니다.</div>
       </section>
       <section class="counts">
         <div class="count"><strong>{reviewed:,}</strong><span>이미 검수된 항목</span></div>
@@ -401,16 +404,27 @@ def render_html(payload: dict[str, Any]) -> str:
       const approvedCount = rows.filter((row) => approved.has(row.status)).length;
       const blockedCount = rows.filter((row) => row.status && !approved.has(row.status)).length;
       const pendingCount = Math.max(reviewItems.length - rows.length, 0);
+      const currentDoneCount = currentItems.filter((item) => (state[item.row_index] || {{}}).status).length;
+      const browserPct = reviewItems.length ? Math.round((rows.length / reviewItems.length) * 10000) / 100 : 0;
       document.querySelector("#approvedCount").textContent = approvedCount;
       document.querySelector("#blockedCount").textContent = blockedCount;
       document.querySelector(".counts .count:nth-child(1) strong").textContent = rows.length;
       document.querySelector(".counts .count:nth-child(2) strong").textContent = pendingCount;
+      document.querySelector("#localProgressPill").textContent = `브라우저 검수 ${{rows.length.toLocaleString()}}/${{reviewItems.length.toLocaleString()}}`;
+      document.querySelector(".bar").style.width = `${{browserPct}}%`;
       decisionList.innerHTML = rows.map((row) => `<div class="decision">
         <strong>#${{row.row_index}} ${{row.status_label || "미판정"}}</strong>
         <span class="small">${{row.display_name}}</span>
       </div>`).join("");
       const everyCurrentDone = currentItems.length > 0 && currentItems.every((item) => (state[item.row_index] || {{}}).status);
       document.querySelector("#nextBatch").disabled = !everyCurrentDone;
+      if (!currentItems.length) {{
+        document.querySelector("#batchStatus").textContent = `전체 ${{reviewItems.length.toLocaleString()}}개 검수가 완료되었습니다.`;
+      }} else {{
+        const first = currentItems[0].row_index;
+        const last = currentItems[currentItems.length - 1].row_index;
+        document.querySelector("#batchStatus").textContent = `현재 배치 #${{first}}-${{last}} · ${{currentDoneCount}}/${{currentItems.length}}개 판정 완료`;
+      }}
     }}
 
     document.querySelector("#nextBatch").addEventListener("click", () => {{
