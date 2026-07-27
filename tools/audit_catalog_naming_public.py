@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
-from collections import Counter
+from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -142,10 +142,71 @@ def audit_ichiban_names(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return issues
 
 
+def _ichiban_display_key(row: dict[str, Any]) -> tuple[str, str, str, str] | None:
+    if not is_ichiban_row(row):
+        return None
+    parts = [part.strip() for part in str(row.get("name_ko") or "").split("/")]
+    if len(parts) < 4:
+        return None
+
+    sub_series = str(row.get("sub_series") or "").strip()
+    prize_index = 1
+    if sub_series:
+        for index, part in enumerate(parts[1:-1], start=1):
+            if part == sub_series:
+                prize_index = index
+                break
+
+    release_name = parts[0]
+    prize_rank = parts[prize_index]
+    item_name = " / ".join(parts[prize_index + 1 : -1]).strip()
+    character_part = parts[-1]
+    if not release_name or not prize_rank or not item_name or not character_part:
+        return None
+    return (release_name, prize_rank, item_name, character_part)
+
+
+def build_ichiban_exact_display_duplicate_review(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    grouped: dict[tuple[str, str, str, str], list[dict[str, Any]]] = defaultdict(list)
+    for row in rows:
+        key = _ichiban_display_key(row)
+        if key is not None:
+            grouped[key].append(row)
+
+    review_groups: list[dict[str, Any]] = []
+    for key, group_rows in grouped.items():
+        unique_catalog_indexes = {
+            int(row.get("catalog_index"))
+            for row in group_rows
+            if isinstance(row.get("catalog_index"), int) and not isinstance(row.get("catalog_index"), bool)
+        }
+        if len(unique_catalog_indexes) < 2:
+            continue
+        unique_source_urls = sorted({str(row.get("source_url") or "") for row in group_rows if row.get("source_url")})
+        review_groups.append(
+            {
+                "reason": "ichiban_exact_display_duplicate_review",
+                "release_name": key[0],
+                "prize_rank": key[1],
+                "item_name": key[2],
+                "character_name": key[3],
+                "catalog_indexes": sorted(unique_catalog_indexes),
+                "source_urls": unique_source_urls,
+                "review_note": (
+                    "Repeated display names can be true reissues, campaign-page duplicates, or rows that need "
+                    "official character/variant splitting. Review source URLs before deleting or merging."
+                ),
+            }
+        )
+
+    return sorted(review_groups, key=lambda item: item["catalog_indexes"][0])
+
+
 def build_report(rows: list[dict[str, Any]], *, generated_at: str | None = None) -> dict[str, Any]:
     fern_issues = audit_fern_names(rows)
     ichiban_issues = audit_ichiban_names(rows)
     ichiban_rows = [row for row in rows if is_ichiban_row(row)]
+    duplicate_review_groups = build_ichiban_exact_display_duplicate_review(rows)
     issues = fern_issues + ichiban_issues
     by_reason = Counter(issue["reason"] for issue in issues)
     return {
@@ -156,6 +217,10 @@ def build_report(rows: list[dict[str, Any]], *, generated_at: str | None = None)
             "fern_issue_rows": len(fern_issues),
             "ichiban_issue_rows": len(ichiban_issues),
             "total_issue_rows": len(issues),
+            "ichiban_exact_display_duplicate_review_groups": len(duplicate_review_groups),
+            "ichiban_exact_display_duplicate_review_rows": sum(
+                len(item["catalog_indexes"]) for item in duplicate_review_groups
+            ),
             "by_reason": [[reason, count] for reason, count in sorted(by_reason.items())],
             "status": "pass" if not issues else "needs_review",
             "auto_apply_enabled": False,
@@ -168,6 +233,7 @@ def build_report(rows: list[dict[str, Any]], *, generated_at: str | None = None)
             "ichiban_last_one_double_chance_price_jpy": 0,
         },
         "issues": issues[:200],
+        "ichiban_exact_display_duplicate_review": duplicate_review_groups[:200],
     }
 
 

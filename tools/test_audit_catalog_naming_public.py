@@ -94,6 +94,39 @@ class AuditCatalogNamingPublicTest(unittest.TestCase):
         self.assertEqual(reasons["ichiban_name_missing_release_prize_item_character_parts"], 1)
         self.assertEqual(reasons["ichiban_last_one_or_double_chance_price_should_be_zero"], 1)
 
+    def test_report_queues_ichiban_exact_display_duplicates_without_blocking(self) -> None:
+        rows = [
+            {
+                "catalog_index": 10,
+                "name_ko": "\u4e00\u756a\u304f\u3058 \u9b3c\u6ec5\u306e\u5203 / A\u8cde / \u7ac8\u9580\u70ad\u6cbb\u90ce \u30d5\u30a3\u30ae\u30e5\u30a2 / \uce74\ub9c8\ub3c4 \ud0c4\uc9c0\ub85c",
+                "source_store": "\uc774\uce58\ubc29\ucfe0\uc9c0",
+                "source_url": "https://1kuji.com/products/kimetsu",
+                "sub_series": "A\u8cde",
+                "character_name": "\uce74\ub9c8\ub3c4 \ud0c4\uc9c0\ub85c",
+                "official_price_jpy": 680,
+            },
+            {
+                "catalog_index": 11,
+                "name_ko": "\u4e00\u756a\u304f\u3058 \u9b3c\u6ec5\u306e\u5203 / A\u8cde / \u7ac8\u9580\u70ad\u6cbb\u90ce \u30d5\u30a3\u30ae\u30e5\u30a2 / \uce74\ub9c8\ub3c4 \ud0c4\uc9c0\ub85c",
+                "source_store": "\uc774\uce58\ubc29\ucfe0\uc9c0",
+                "source_url": "https://1kuji.com/products/kimetsu2",
+                "sub_series": "A\u8cde",
+                "character_name": "\uce74\ub9c8\ub3c4 \ud0c4\uc9c0\ub85c",
+                "official_price_jpy": 680,
+            },
+        ]
+
+        report = audit.build_report(rows, generated_at="2026-07-27T00:00:00Z")
+
+        self.assertEqual(report["summary"]["status"], "pass")
+        self.assertEqual(report["summary"]["total_issue_rows"], 0)
+        self.assertEqual(report["summary"]["ichiban_exact_display_duplicate_review_groups"], 1)
+        self.assertEqual(report["summary"]["ichiban_exact_display_duplicate_review_rows"], 2)
+        self.assertEqual(
+            report["ichiban_exact_display_duplicate_review"][0]["catalog_indexes"],
+            [10, 11],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
