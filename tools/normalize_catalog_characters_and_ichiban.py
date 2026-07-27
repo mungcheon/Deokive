@@ -24,7 +24,7 @@ except ModuleNotFoundError:
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_CATALOG = ROOT / "data" / "catalog_public.json"
 DEFAULT_SEED_OUTPUT = ROOT / "lib" / "data" / "catalog" / "seed_catalog.dart"
-DEFAULT_REPORT = ROOT / "data" / "catalog_character_ichiban_normalization_public.json"
+DEFAULT_REPORT = ROOT / "server" / "catalog_character_ichiban_normalization_report.json"
 
 GENERIC_CHARACTERS = {"기타", "혼합", ""}
 CHARACTER_ALIAS_RULES = {

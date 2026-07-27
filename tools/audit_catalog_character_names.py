@@ -14,7 +14,7 @@ except Exception:
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_CATALOG = ROOT / "data" / "catalog_public.json"
-DEFAULT_REPORT = ROOT / "data" / "catalog_character_name_policy_public.json"
+DEFAULT_REPORT = ROOT / "server" / "catalog_character_name_policy_report.json"
 
 ICHIBAN_PREFIX = "\u4e00\u756a\u304f\u3058"
 LAST_ONE_LABEL = "\u30e9\u30b9\u30c8\u30ef\u30f3\u8cde"
