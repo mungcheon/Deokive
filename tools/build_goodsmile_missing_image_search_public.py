@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
+import urllib.parse
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
@@ -10,12 +12,40 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
+SERVER = ROOT / "server"
 CATALOG = DATA / "catalog_public.json"
 WORK_QUEUE = DATA / "catalog_missing_image_work_queue_public.json"
-REPORT = DATA / "goodsmile_missing_image_search_public.json"
+REPORT = SERVER / "goodsmile_missing_image_search_public.json"
 
 GOODSMILE_STORE = "\uad7f\uc2a4\ub9c8\uc77c\ucef4\ud37c\ub2c8"
 GOODSMILE_SEARCH_TEMPLATE = "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D={query}"
+HANGUL_RE = re.compile(r"[\uac00-\ud7a3]")
+OFFICIAL_PRODUCT_MARKERS = (
+    "\u306d\u3093\u3069\u308d\u3044\u3069",
+    "\u30dd\u30c3\u30d7\u30a2\u30c3\u30d7\u30d1\u30ec\u30fc\u30c9",
+    "POP UP PARADE",
+    "HELLO! GOOD SMILE",
+    "\u30b9\u30b1\u30fc\u30eb\u30d5\u30a3\u30ae\u30e5\u30a2",
+    "\u30d5\u30a3\u30b0\u30de",
+    "figma",
+    "Nendoroid",
+)
+MULTI_VARIANT_MARKERS = (
+    "\u30e9\u30f3\u30c0\u30e0",
+    "\u30c8\u30ec\u30fc\u30c7\u30a3\u30f3\u30b0",
+    "\u30bb\u30c3\u30c8",
+    "\u30dc\u30c3\u30af\u30b9",
+    "\u518d\u8ca9",
+    "\u7279\u5178",
+    "\ub79c\ub364",
+    "\ud2b8\ub808\uc774\ub529",
+    "\uc138\ud2b8",
+    "\uc7ac\ud310",
+    "\ud2b9\uc804",
+    "\uff06",
+    "\u00d7",
+    "&",
+)
 
 
 def now_utc() -> str:
@@ -28,6 +58,45 @@ def load_json(path: Path) -> Any:
 
 def present(value: Any) -> bool:
     return value is not None and str(value).strip() != ""
+
+
+def candidate_review_risk(row: dict[str, Any], qrow: dict[str, Any]) -> tuple[str, list[str], str]:
+    reasons: list[str] = []
+    name_ko = str(row.get("name_ko") or "")
+    name_ja = str(row.get("name_ja") or "")
+    query = str(qrow.get("query") or "")
+    category = str(row.get("category") or "")
+    search_text = " ".join([name_ko, name_ja, query, category])
+
+    if not present(name_ja):
+        reasons.append("missing_official_language_name")
+    if HANGUL_RE.search(query):
+        reasons.append("hangul_search_query_needs_japanese_rewrite")
+    if any(marker in search_text for marker in MULTI_VARIANT_MARKERS):
+        reasons.append("multi_variant_or_rerelease_title")
+    if not any(marker.casefold() in search_text.casefold() for marker in OFFICIAL_PRODUCT_MARKERS):
+        reasons.append("goodsmile_product_line_not_explicit")
+
+    if "missing_official_language_name" in reasons or "hangul_search_query_needs_japanese_rewrite" in reasons:
+        return "high", reasons, "add_or_confirm_japanese_official_product_name_before_search"
+    if "multi_variant_or_rerelease_title" in reasons:
+        return "high", reasons, "confirm_exact_variant_rerelease_or_bonus_on_goodsmile_detail_page"
+    if "goodsmile_product_line_not_explicit" in reasons:
+        return "medium", reasons, "confirm_exact_goodsmile_product_line_before_import"
+    return "medium", reasons or ["official_search_only"], "open_official_search_result_and_confirm_detail_page"
+
+
+def research_status(review_reasons: list[str], search_url: Any) -> tuple[str, str]:
+    reason_set = set(review_reasons)
+    if "missing_official_language_name" in reason_set:
+        return "needs_official_language_name", "add_japanese_or_official_product_name_before_search"
+    if "hangul_search_query_needs_japanese_rewrite" in reason_set:
+        return "needs_query_rewrite", "rewrite_search_query_to_japanese_official_terms"
+    if not present(search_url):
+        return "needs_search_url", "build_official_goodsmile_search_url"
+    if "multi_variant_or_rerelease_title" in reason_set:
+        return "needs_variant_confirmation", "confirm_exact_variant_rerelease_or_bonus_on_goodsmile_detail_page"
+    return "reviewable_search_url", "open_search_url_and_confirm_exact_goodsmile_product_detail"
 
 
 def catalog_items(catalog: dict[str, Any]) -> list[dict[str, Any]]:
@@ -56,6 +125,23 @@ def goodsmile_queue_rows(queue: dict[str, Any]) -> list[dict[str, Any]]:
     return [item for item in queue_items(queue) if item.get("source_store") == GOODSMILE_STORE]
 
 
+def build_fallback_queue(catalog: dict[str, Any]) -> dict[str, Any]:
+    items: list[dict[str, Any]] = []
+    for row in missing_goodsmile_rows(catalog_items(catalog)):
+        query = str(row.get("name_ja") or row.get("name_ko") or "").strip()
+        items.append(
+            {
+                "row_index": row.get("catalog_index"),
+                "source_store": GOODSMILE_STORE,
+                "query": query,
+                "search_url": GOODSMILE_SEARCH_TEMPLATE.format(query=urllib.parse.quote(query)) if query else None,
+                "strategy": "official_search",
+                "automation_safety": "candidate_provider_script_required",
+            }
+        )
+    return {"items": items}
+
+
 def build_report(
     catalog: dict[str, Any],
     queue: dict[str, Any],
@@ -71,8 +157,11 @@ def build_report(
     missing_search_url_rows = 0
     by_strategy: Counter[str] = Counter()
     by_automation_safety: Counter[str] = Counter()
+    by_candidate_review_risk: Counter[str] = Counter()
+    by_research_status: Counter[str] = Counter()
     by_category: Counter[str] = Counter()
     by_affiliation: Counter[str] = Counter()
+    source_research_required: list[dict[str, Any]] = []
 
     for row in rows:
         catalog_index = row.get("catalog_index")
@@ -85,31 +174,49 @@ def build_report(
             missing_search_url_rows += 1
         strategy = str(qrow.get("strategy") or "manual_review")
         automation_safety = str(qrow.get("automation_safety") or "manual_confirmation_required")
+        review_risk, review_reasons, next_action = candidate_review_risk(row, qrow)
+        status, status_next_action = research_status(review_reasons, search_url)
         by_strategy[strategy] += 1
         by_automation_safety[automation_safety] += 1
+        by_candidate_review_risk[review_risk] += 1
+        by_research_status[status] += 1
         by_category[str(row.get("category") or "")] += 1
         by_affiliation[str(row.get("affiliation") or "")] += 1
-        matched_items.append(
-            {
+        item = {
+            "catalog_index": catalog_index,
+            "name_ko": row.get("name_ko"),
+            "name_ja": row.get("name_ja"),
+            "affiliation": row.get("affiliation"),
+            "category": row.get("category"),
+            "query": qrow.get("query"),
+            "search_url": search_url,
+            "strategy": strategy,
+            "automation_safety": automation_safety,
+            "candidate_review_risk": review_risk,
+            "candidate_review_reasons": review_reasons,
+            "research_status": status,
+            "research_next_action": status_next_action,
+            "next_action": next_action,
+            "manual_review_required": True,
+            "import_template": {
                 "catalog_index": catalog_index,
-                "name_ko": row.get("name_ko"),
-                "name_ja": row.get("name_ja"),
-                "affiliation": row.get("affiliation"),
-                "category": row.get("category"),
-                "query": qrow.get("query"),
-                "search_url": search_url,
-                "strategy": strategy,
-                "automation_safety": automation_safety,
-                "manual_review_required": True,
-                "import_template": {
-                    "catalog_index": catalog_index,
-                    "source_url": None,
-                    "image_url": None,
-                    "manual_confirmed": False,
-                    "blocked_until": "exact_goodsmile_product_page_confirmed",
-                },
-            }
-        )
+                "source_url": None,
+                "image_url": None,
+                "manual_confirmed": False,
+                "blocked_until": "exact_goodsmile_product_page_confirmed",
+            },
+        }
+        matched_items.append(item)
+        if status != "reviewable_search_url":
+            source_research_required.append(
+                {
+                    **item,
+                    "import_template": {
+                        **item["import_template"],
+                        "blocked_until": "official_goodsmile_query_or_exact_product_page_confirmed",
+                    },
+                }
+            )
 
     return {
         "schema_version": 1,
@@ -122,6 +229,8 @@ def build_report(
             "missing_queue_rows": len(missing_queue_rows),
             "missing_search_url_rows": missing_search_url_rows,
             "official_search_url_rows": sum(1 for item in matched_items if present(item.get("search_url"))),
+            "reviewable_search_url_rows": by_research_status.get("reviewable_search_url", 0),
+            "source_research_required_rows": len(source_research_required),
             "auto_apply_enabled": False,
             "search_page": GOODSMILE_SEARCH_TEMPLATE,
         },
@@ -130,10 +239,36 @@ def build_report(
             "by_automation_safety": [
                 {"automation_safety": key, "rows": value} for key, value in by_automation_safety.most_common()
             ],
+            "by_candidate_review_risk": [
+                {"candidate_review_risk": key, "rows": value}
+                for key, value in by_candidate_review_risk.most_common()
+            ],
+            "by_research_status": [
+                {"research_status": key, "rows": value}
+                for key, value in by_research_status.most_common()
+            ],
             "by_category": [{"category": key, "rows": value} for key, value in by_category.most_common(30)],
             "by_affiliation": [{"affiliation": key, "rows": value} for key, value in by_affiliation.most_common(30)],
         },
         "items": matched_items,
+        "source_research_required": {
+            "row_count": len(source_research_required),
+            "by_research_status": [
+                {"research_status": key, "rows": value}
+                for key, value in Counter(
+                    str(item.get("research_status") or "") for item in source_research_required
+                ).most_common()
+            ],
+            "items": sorted(
+                source_research_required,
+                key=lambda item: (
+                    str(item.get("research_status") or ""),
+                    str(item.get("affiliation") or ""),
+                    str(item.get("category") or ""),
+                    int(item.get("catalog_index") or 999_999_999),
+                ),
+            )[:80],
+        },
         "missing_queue_samples": [
             {
                 "catalog_index": item.get("catalog_index"),
@@ -154,6 +289,7 @@ def build_report(
 
 
 def write_report(report: dict[str, Any], path: Path = REPORT) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
@@ -165,7 +301,9 @@ def main() -> int:
     parser.add_argument("--write", action="store_true")
     args = parser.parse_args()
 
-    report = build_report(load_json(args.input), load_json(args.queue))
+    catalog = load_json(args.input)
+    queue = load_json(args.queue) if args.queue.exists() else build_fallback_queue(catalog)
+    report = build_report(catalog, queue)
     if args.write:
         write_report(report, args.output)
     print(json.dumps(report["summary"], ensure_ascii=False, indent=2))
