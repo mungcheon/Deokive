@@ -82,7 +82,38 @@ def build_queue(quality_report: dict[str, Any]) -> dict[str, Any]:
         if isinstance(row, dict)
     ]
 
-    items = zero_price_items + gap_items + duplicate_items
+    naming_items: list[dict[str, Any]] = []
+    for row in ichiban.get("naming_convention_review_sample", []):
+        if not isinstance(row, dict):
+            continue
+        reason = row.get("reason")
+        if reason == "non_prize_or_related_item_needs_classification":
+            workflow = "non_prize_related_item_classification"
+            recommended_action = (
+                "Classify as related/campaign/non-prize goods or find exact prize-rank evidence."
+            )
+            priority = 30
+        else:
+            workflow = "display_name_convention_review"
+            recommended_action = (
+                "Rewrite display_name as release name / prize rank / prize name / character name."
+            )
+            priority = 25
+        naming_items.append(
+            {
+                "workflow": workflow,
+                "priority": priority,
+                "status": "needs_display_or_classification_review",
+                "catalog_index": row.get("catalog_index"),
+                "display_name": row.get("name_ko"),
+                "source_url": row.get("source_url"),
+                "reason": reason,
+                "display_parts": row.get("display_parts") or [],
+                "recommended_action": recommended_action,
+            }
+        )
+
+    items = zero_price_items + gap_items + duplicate_items + naming_items
     items.sort(
         key=lambda item: (
             int(item.get("priority") or 99),
@@ -109,6 +140,8 @@ def build_queue(quality_report: dict[str, Any]) -> dict[str, Any]:
             "zero_price_exception_rows": ichiban.get("zero_price_exception_rows", 0),
             "zero_price_non_exception_rows": ichiban.get("zero_price_non_exception_rows", 0),
             "zero_price_policy_queue_rows": len(zero_price_items),
+            "naming_convention_review_rows": ichiban.get("naming_convention_review_rows", 0),
+            "naming_convention_queue_rows": len(naming_items),
             "queue_rows": len(items),
         },
         "items": items,
@@ -120,9 +153,12 @@ def write_csv(queue: dict[str, Any], path: Path) -> None:
         "workflow",
         "priority",
         "status",
+        "catalog_index",
         "source_url",
         "display_name",
         "row_count",
+        "reason",
+        "display_parts",
         "catalog_indexes",
         "source_urls",
         "recommended_action",
@@ -133,7 +169,7 @@ def write_csv(queue: dict[str, Any], path: Path) -> None:
         writer.writeheader()
         for item in queue.get("items", []):
             row = {field: item.get(field, "") for field in fields}
-            for field in ("catalog_indexes", "source_urls"):
+            for field in ("catalog_indexes", "source_urls", "display_parts"):
                 if isinstance(row[field], list):
                     row[field] = " | ".join(str(value) for value in row[field])
             writer.writerow(row)

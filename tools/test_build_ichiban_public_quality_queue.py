@@ -45,21 +45,41 @@ class BuildIchibanPublicQualityQueueTests(unittest.TestCase):
                         "source_url": "https://1kuji.com/products/a",
                     }
                 ],
+                "naming_convention_review_rows": 2,
+                "naming_convention_review_sample": [
+                    {
+                        "catalog_index": 5,
+                        "name_ko": "Bad Display",
+                        "source_url": "https://1kuji.com/products/a",
+                        "reason": "second_part_should_be_prize_rank",
+                        "display_parts": ["release", "bad rank", "prize", "character"],
+                    },
+                    {
+                        "catalog_index": 6,
+                        "name_ko": "Related Item",
+                        "source_url": "https://1kuji.com/products/b",
+                        "reason": "non_prize_or_related_item_needs_classification",
+                        "display_parts": ["release", "関連商品", "item", "character"],
+                    },
+                ],
             }
         }
 
         queue = target.build_queue(quality_report)
 
-        self.assertEqual(4, queue["summary"]["queue_rows"])
+        self.assertEqual(6, queue["summary"]["queue_rows"])
         self.assertEqual(2, queue["summary"]["campaign_gap_queue_rows"])
         self.assertEqual(1, queue["summary"]["exact_display_duplicate_queue_rows"])
         self.assertEqual(1, queue["summary"]["zero_price_policy_queue_rows"])
+        self.assertEqual(2, queue["summary"]["naming_convention_queue_rows"])
         self.assertEqual(
             [
                 "zero_price_policy_review",
                 "campaign_gap_research",
                 "campaign_gap_research",
                 "exact_display_duplicate_reissue_review",
+                "display_name_convention_review",
+                "non_prize_related_item_classification",
             ],
             [item["workflow"] for item in queue["items"]],
         )
