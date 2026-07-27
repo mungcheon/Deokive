@@ -20,6 +20,9 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_QUEUE = ROOT / "server" / "catalog_image_enrichment_queue_current.json"
 DEFAULT_OUTPUT_DIR = ROOT / "server" / "image_update_work_packs"
 DEFAULT_MANIFEST = DEFAULT_OUTPUT_DIR / "manifest.json"
+IMAGE_UPDATE_INTAKE_DIR = "data/intake/image_updates/incoming"
+IMAGE_UPDATE_SCHEMA = "data/intake/image_updates/agent_catalog_image_update.schema.json"
+IMAGE_UPDATE_TEMPLATE = "data/intake/image_updates/templates/agent_catalog_image_update.template.json"
 
 
 def load_queue(path: Path) -> list[dict[str, Any]]:
@@ -74,6 +77,7 @@ def next_action(item: dict[str, Any]) -> str:
 
 
 def target_row(item: dict[str, Any]) -> dict[str, Any]:
+    source_url = item.get("source_url") or "https://..."
     return {
         "catalog_index": item.get("row_index"),
         "name_ko": item.get("name_ko"),
@@ -85,13 +89,19 @@ def target_row(item: dict[str, Any]) -> dict[str, Any]:
         "source_url": item.get("source_url"),
         "query": item.get("query"),
         "search_url": item.get("search_url"),
+        "acceptance_criteria": [
+            "catalog_index must exist in data/catalog_public.json and still have no image_url/local_image_path.",
+            "image_url must be from the exact product/detail page or exact official media.",
+            "source_url must be the exact product/detail page when available, not a broad search page.",
+            "Use confidence=confirmed only after exact product, character, and variant are verified.",
+        ],
         "required_update_shape": {
             "catalog_index": item.get("row_index"),
             "image_url": "https://...",
-            "source_url": item.get("source_url") or "https://...",
+            "source_url": source_url,
             "evidence": [
                 {
-                    "url": item.get("source_url") or "https://...",
+                    "url": source_url,
                     "type": "official",
                     "note": "Exact product/detail page or image media URL.",
                 }
@@ -99,6 +109,13 @@ def target_row(item: dict[str, Any]) -> dict[str, Any]:
             "confidence": "confirmed",
             "notes": "",
         },
+        "validator_enforced": [
+            "unknown fields rejected",
+            "duplicate catalog_index rejected within one intake file",
+            "catalog_index_not_found rejected",
+            "already_imaged_catalog_rows rejected",
+            "source_url_or_image_url_must_appear_in_evidence",
+        ],
     }
 
 
@@ -132,11 +149,10 @@ def build_work_packs(items: list[dict[str, Any]], *, pack_size: int = 20, limit:
                     "chunk_index": chunk_index + 1,
                     "chunk_count": chunk_count,
                     "next_action": next_action(first),
-                    "output_contract": (
-                        "Save confirmed results as "
-                        "data/intake/image_updates/incoming/<agent>-<YYYYMMDD>-<topic>.json "
-                        "using agent_catalog_image_update.schema.json."
-                    ),
+                    "output_contract": _output_contract(source_store, category),
+                    "verification_commands": _verification_commands(),
+                    "blocked_until": "confirmed_exact_image_update_intake_created",
+                    "auto_apply_enabled": False,
                     "target_rows": [target_row(item) for item in chunk],
                 }
             )
@@ -180,7 +196,16 @@ def write_packs(packs: list[dict[str, Any]], output_dir: Path, *, clean: bool = 
         "source_queue": "server/catalog_image_enrichment_queue_current.json",
         "pack_count": len(packs),
         "target_rows": sum(int(pack.get("rows") or 0) for pack in packs),
-        "output_contract": "Use data/intake/image_updates/incoming for confirmed image updates.",
+        "output_contract": f"Use {IMAGE_UPDATE_INTAKE_DIR} for confirmed image updates only.",
+        "image_update_schema": IMAGE_UPDATE_SCHEMA,
+        "image_update_template": IMAGE_UPDATE_TEMPLATE,
+        "verification_commands": _verification_commands(),
+        "automation_policy": {
+            "auto_apply_catalog_changes": False,
+            "candidate_or_needs_review_updates_are_not_imported": True,
+            "requires_exact_product_identity": True,
+            "requires_confirmed_intake_file": True,
+        },
         "packs": pack_files,
     }
     (output_dir / "manifest.json").write_text(
@@ -188,6 +213,27 @@ def write_packs(packs: list[dict[str, Any]], output_dir: Path, *, clean: bool = 
         encoding="utf-8",
     )
     return manifest
+
+
+def _output_contract(source_store: str, category: str) -> dict[str, Any]:
+    topic = slugify(f"{source_store}-{category}-images").lower()
+    return {
+        "intake_dir": IMAGE_UPDATE_INTAKE_DIR,
+        "filename_pattern": "<agent>-<YYYYMMDD>-<topic>.json",
+        "example_filename": f"agent-20260727-{topic}.json",
+        "schema": IMAGE_UPDATE_SCHEMA,
+        "template": IMAGE_UPDATE_TEMPLATE,
+        "allowed_confidence_for_import": "confirmed",
+        "candidate_or_needs_review_policy": "Keep candidates in server review notes; do not submit them to incoming.",
+    }
+
+
+def _verification_commands() -> list[str]:
+    return [
+        f"python -X utf8 tools/validate_agent_catalog_image_updates.py {IMAGE_UPDATE_INTAKE_DIR}",
+        f"python -X utf8 tools/import_agent_catalog_image_updates.py {IMAGE_UPDATE_INTAKE_DIR}",
+        f"python -X utf8 tools/import_agent_catalog_image_updates.py {IMAGE_UPDATE_INTAKE_DIR} --write",
+    ]
 
 
 def display_path(path: Path) -> str:

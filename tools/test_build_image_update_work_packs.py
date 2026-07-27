@@ -38,11 +38,16 @@ class BuildImageUpdateWorkPacksTests(unittest.TestCase):
         self.assertEqual(1, packs[1]["rows"])
         self.assertEqual([1, 2], [row["catalog_index"] for row in packs[0]["target_rows"]])
         self.assertEqual(3, packs[1]["target_rows"][0]["catalog_index"])
-        self.assertIn("data/intake/image_updates/incoming", packs[0]["output_contract"])
+        self.assertEqual("data/intake/image_updates/incoming", packs[0]["output_contract"]["intake_dir"])
+        self.assertEqual("confirmed", packs[0]["output_contract"]["allowed_confidence_for_import"])
+        self.assertFalse(packs[0]["auto_apply_enabled"])
+        self.assertIn("validate_agent_catalog_image_updates.py", packs[0]["verification_commands"][0])
         self.assertEqual(
             "https://...",
             packs[0]["target_rows"][0]["required_update_shape"]["image_url"],
         )
+        self.assertIn("already_imaged_catalog_rows rejected", packs[0]["target_rows"][0]["validator_enforced"])
+        self.assertIn("exact product/detail page", packs[0]["target_rows"][0]["acceptance_criteria"][1])
 
     def test_manual_confirmation_packs_sort_after_provider_script_packs(self) -> None:
         items = [
@@ -100,6 +105,12 @@ class BuildImageUpdateWorkPacksTests(unittest.TestCase):
             self.assertTrue(pack_path.is_file())
             saved_pack = json.loads(pack_path.read_text(encoding="utf-8"))
             self.assertEqual(7, saved_pack["target_rows"][0]["catalog_index"])
+            self.assertFalse(manifest["automation_policy"]["auto_apply_catalog_changes"])
+            self.assertTrue(manifest["automation_policy"]["candidate_or_needs_review_updates_are_not_imported"])
+            self.assertEqual(
+                "data/intake/image_updates/agent_catalog_image_update.schema.json",
+                manifest["image_update_schema"],
+            )
 
 
 if __name__ == "__main__":
