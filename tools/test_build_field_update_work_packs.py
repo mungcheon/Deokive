@@ -79,6 +79,27 @@ class BuildFieldUpdateWorkPacksTests(unittest.TestCase):
             packs[0]["target_rows"][0]["required_update_shape"]["value"],
         )
 
+    def test_build_work_packs_balances_fields_when_limited(self) -> None:
+        rows = [
+            item(field="source_url", row_index=index, category=f"Source {index}")
+            for index in range(8)
+        ]
+        rows.extend(
+            [
+                item(field="release_date", row_index=20, category="Release"),
+                item(field="official_price_jpy", row_index=21, category="Price", risk="high"),
+                item(field="barcode", row_index=22, category="Barcode", risk="high"),
+            ]
+        )
+
+        packs = target.build_work_packs(rows, pack_size=1, limit=4)
+
+        self.assertEqual(4, len(packs))
+        self.assertEqual(
+            {"source_url", "release_date", "official_price_jpy", "barcode"},
+            {pack["field"] for pack in packs},
+        )
+
     def test_write_packs_outputs_manifest_and_pack_files(self) -> None:
         packs = target.build_work_packs([item(field="release_date", row_index=8)], pack_size=10)
 

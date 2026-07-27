@@ -270,6 +270,51 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
         self.assertEqual(packs[0]["missing"], 2)
         self.assertEqual(packs[0]["batch_key"], "store|category|source_url")
 
+    def test_field_update_work_packs_balances_fields_when_limited(self):
+        items = [
+            {
+                "workstream": "metadata",
+                "source_store": "스토어",
+                "category": f"소스 {index}",
+                "field": "source_url",
+                "actionable_now": True,
+            }
+            for index in range(6)
+        ]
+        items.extend(
+            [
+                {
+                    "workstream": "metadata",
+                    "source_store": "스토어",
+                    "category": "발매일",
+                    "field": "release_date",
+                    "actionable_now": True,
+                },
+                {
+                    "workstream": "metadata",
+                    "source_store": "스토어",
+                    "category": "가격",
+                    "field": "official_price_jpy",
+                    "actionable_now": True,
+                },
+                {
+                    "workstream": "metadata",
+                    "source_store": "스토어",
+                    "category": "바코드",
+                    "field": "barcode",
+                    "actionable_now": True,
+                },
+            ]
+        )
+
+        packs = backlog._field_update_work_packs(items, limit=4)
+
+        self.assertEqual(4, len(packs))
+        self.assertEqual(
+            {"source_url", "release_date", "official_price_jpy", "barcode"},
+            {pack["field"] for pack in packs},
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

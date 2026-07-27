@@ -162,7 +162,49 @@ def _field_update_work_packs(field_items: list[dict[str, Any]], limit: int = 40)
             str(item["category"]),
         )
     )
-    return packs[:limit]
+    return _balanced_field_pack_limit(packs, limit)
+
+
+def _balanced_field_pack_limit(packs: list[dict[str, Any]], limit: int) -> list[dict[str, Any]]:
+    if limit <= 0 or len(packs) <= limit:
+        return packs[:limit]
+    by_field: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for pack in packs:
+        by_field[str(pack.get("field") or "")].append(pack)
+    fields = [field for field in ("source_url", "release_date", "official_price_jpy", "barcode") if by_field.get(field)]
+    selected: list[dict[str, Any]] = []
+    selected_keys: set[tuple[str, str, str, str]] = set()
+    cursor = 0
+    while len(selected) < limit and any(by_field.get(field) for field in fields):
+        field = fields[cursor % len(fields)]
+        cursor += 1
+        bucket = by_field.get(field) or []
+        if not bucket:
+            continue
+        pack = bucket.pop(0)
+        selected.append(pack)
+        selected_keys.add(
+            (
+                str(pack.get("workstream") or ""),
+                str(pack.get("source_store") or ""),
+                str(pack.get("category") or ""),
+                str(pack.get("field") or ""),
+            )
+        )
+    for pack in packs:
+        if len(selected) >= limit:
+            break
+        key = (
+            str(pack.get("workstream") or ""),
+            str(pack.get("source_store") or ""),
+            str(pack.get("category") or ""),
+            str(pack.get("field") or ""),
+        )
+        if key in selected_keys:
+            continue
+        selected.append(pack)
+        selected_keys.add(key)
+    return selected
 
 
 def _image_work_packs(image_items: list[dict[str, Any]], limit: int = 40) -> list[dict[str, Any]]:

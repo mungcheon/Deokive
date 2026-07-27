@@ -224,7 +224,42 @@ def build_work_packs(
             int(item.get("chunk_index") or 0),
         )
     )
-    return packs[:limit]
+    return balanced_limit(packs, limit)
+
+
+def balanced_limit(packs: list[dict[str, Any]], limit: int) -> list[dict[str, Any]]:
+    if limit <= 0 or len(packs) <= limit:
+        return packs[:limit]
+
+    by_field: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for pack in packs:
+        by_field[str(pack.get("field") or "")].append(pack)
+
+    selected: list[dict[str, Any]] = []
+    selected_ids: set[str] = set()
+    fields = [field for field in ("source_url", "release_date", "official_price_jpy", "barcode") if by_field.get(field)]
+
+    cursor = 0
+    while len(selected) < limit and any(by_field.get(field) for field in fields):
+        field = fields[cursor % len(fields)]
+        cursor += 1
+        bucket = by_field.get(field) or []
+        if not bucket:
+            continue
+        pack = bucket.pop(0)
+        selected.append(pack)
+        selected_ids.add(str(pack.get("pack_id") or ""))
+
+    for pack in packs:
+        if len(selected) >= limit:
+            break
+        pack_id = str(pack.get("pack_id") or "")
+        if pack_id in selected_ids:
+            continue
+        selected.append(pack)
+        selected_ids.add(pack_id)
+
+    return selected
 
 
 def write_packs(packs: list[dict[str, Any]], output_dir: Path, *, clean: bool = True) -> dict[str, Any]:
