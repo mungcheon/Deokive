@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import sys
+import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
@@ -101,6 +103,64 @@ class ImportAgentGoodsIntakeTests(unittest.TestCase):
 
         self.assertEqual([], result["added_rows"])
         self.assertEqual("source_url_duplicate", result["skipped_rows"][0]["reason"])
+
+    def test_write_path_updates_catalog_meta_and_moves_processed_file(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            incoming = root / "data" / "intake" / "incoming"
+            processed = root / "data" / "intake" / "processed"
+            incoming.mkdir(parents=True)
+            catalog_path = root / "data" / "catalog_public.json"
+            meta_path = root / "data" / "catalog_public_meta.json"
+            report_path = root / "server" / "agent_goods_intake_import_report.json"
+            catalog_path.parent.mkdir(parents=True, exist_ok=True)
+            catalog_path.write_text(
+                '{"meta": {"generated_at": "2026-07-27T00:00:00Z"}, "items": [], "total_items": 0}\n',
+                encoding="utf-8",
+            )
+            intake_path = incoming / "agent-run.json"
+            intake_path.write_text(
+                target.json.dumps(
+                    intake_payload(
+                        {
+                            "external_id": "sku-1",
+                            "display_name": "Write Import Item",
+                            "category": "badge",
+                            "series_name": "Series",
+                            "source_store": "Official",
+                            "source_url": "https://example.com/write-import",
+                            "official_price": 1200,
+                            "official_price_currency": "JPY",
+                            "official_price_jpy": 1200,
+                            "confidence": "confirmed",
+                        }
+                    ),
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+
+            payloads, errors = target.load_validated_payloads([incoming])
+            self.assertEqual([], errors)
+            result = target.import_payloads(target.load_catalog(catalog_path), payloads)
+            target.write_json(catalog_path, result["catalog"])
+            target.write_json(meta_path, target.build_meta(result["catalog"]))
+            with patch.object(target, "DEFAULT_INCOMING", incoming):
+                moved = target.move_processed([intake_path], processed)
+            target.write_json(
+                report_path,
+                {"added_rows": len(result["added_rows"]), "processed_files": moved},
+            )
+
+            catalog = target.load_json(catalog_path)
+            meta = target.load_json(meta_path)
+
+            self.assertFalse(intake_path.exists())
+            self.assertTrue((processed / "agent-run.json").exists())
+            self.assertEqual(1, catalog["total_items"])
+            self.assertEqual(1, meta["row_count"])
+            self.assertEqual(1, meta["missing"]["image_url"])
+            self.assertEqual(1, target.load_json(report_path)["added_rows"])
 
 
 if __name__ == "__main__":

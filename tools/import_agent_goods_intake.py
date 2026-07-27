@@ -252,6 +252,13 @@ def write_json(path: Path, payload: Any) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def display_path(path: Path) -> str:
+    try:
+        return str(path.relative_to(ROOT))
+    except ValueError:
+        return str(path)
+
+
 def move_processed(paths: list[Path], processed_dir: Path) -> list[str]:
     moved: list[str] = []
     processed_dir.mkdir(parents=True, exist_ok=True)
@@ -262,7 +269,7 @@ def move_processed(paths: list[Path], processed_dir: Path) -> list[str]:
         if target.exists():
             target = processed_dir / f"{path.stem}.{dt.datetime.now().strftime('%Y%m%d%H%M%S')}{path.suffix}"
         shutil.move(str(path), str(target))
-        moved.append(str(target.relative_to(ROOT)))
+        moved.append(display_path(target))
     return moved
 
 
@@ -290,7 +297,7 @@ def main() -> int:
     updated_catalog = result["catalog"]
     report = {
         "write": args.write,
-        "input_files": [str(path.relative_to(ROOT)) if path.is_relative_to(ROOT) else str(path) for path, _payload in payloads],
+        "input_files": [display_path(path) for path, _payload in payloads],
         "input_items": sum(len(payload.get("items", [])) for _path, payload in payloads),
         "added_rows": len(result["added_rows"]),
         "skipped_rows": len(result["skipped_rows"]),
