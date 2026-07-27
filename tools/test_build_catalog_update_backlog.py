@@ -65,6 +65,7 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
                     "field_action": "find_exact_source_url",
                     "risk": "medium",
                     "automation_candidate": True,
+                    "actionable_now": True,
                     "name_ko": "샘플 A",
                     "acceptance_criteria": "exact product page",
                 }
@@ -223,6 +224,9 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
         self.assertTrue(result["field_focus_packs"][0]["automation_candidate"])
         self.assertEqual(1, len(result["field_focus_packs"]))
         self.assertEqual(1, sum(1 for item in result["field_focus_packs"] if item["automation_candidate"]))
+        self.assertEqual(1, len(result["field_update_work_packs"]))
+        self.assertEqual("data/intake/field_updates/incoming", result["field_update_work_packs"][0]["intake_dir"])
+        self.assertEqual("tools/import_agent_catalog_field_updates.py", result["field_update_work_packs"][0]["import_tool"])
         self.assertEqual(result["priority_goods_summary"]["danganronpa"]["incomplete_rows"], 1)
         self.assertEqual(result["priority_goods_incomplete_samples"][0]["focus"], "danganronpa")
         self.assertEqual(result["naming_quality"]["queue_rows"], 6)

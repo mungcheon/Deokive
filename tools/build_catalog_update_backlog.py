@@ -24,6 +24,7 @@ DEFAULT_STALE_SOURCE_QUEUE = ROOT / "server" / "stale_source_cleanup_queue.json"
 DEFAULT_PRIORITY_GOODS_QUEUE = ROOT / "server" / "priority_goods_queue_current.json"
 DEFAULT_JSON = ROOT / "server" / "catalog_update_backlog.json"
 DEFAULT_MD = ROOT / "server" / "catalog_update_backlog.md"
+FIELD_UPDATE_WORK_PACK_FIELDS = {"source_url", "release_date", "barcode", "official_price_jpy"}
 
 
 def _counter_rows(counter: Counter[tuple[str, ...]], keys: tuple[str, ...], limit: int) -> list[dict[str, Any]]:
@@ -111,6 +112,52 @@ def _field_focus_packs(field_items: list[dict[str, Any]], limit: int = 30) -> li
             0 if item["field"] in {"source_url", "release_date"} else 1,
             0 if item["automation_candidate"] else 1,
             -int(item["missing"]),
+            str(item["source_store"]),
+            str(item["category"]),
+        )
+    )
+    return packs[:limit]
+
+
+def _field_update_work_packs(field_items: list[dict[str, Any]], limit: int = 40) -> list[dict[str, Any]]:
+    grouped: dict[tuple[str, str, str, str], list[dict[str, Any]]] = defaultdict(list)
+    for item in field_items:
+        field = str(item.get("field") or "")
+        if field not in FIELD_UPDATE_WORK_PACK_FIELDS or not item.get("actionable_now"):
+            continue
+        key = (
+            str(item.get("workstream") or ""),
+            str(item.get("source_store") or ""),
+            str(item.get("category") or ""),
+            field,
+        )
+        grouped[key].append(item)
+
+    packs: list[dict[str, Any]] = []
+    for (workstream, source_store, category, field), items in grouped.items():
+        first = items[0]
+        packs.append(
+            {
+                "workstream": workstream,
+                "source_store": source_store,
+                "category": category,
+                "field": field,
+                "missing": len(items),
+                "strategy": first.get("strategy"),
+                "field_action": first.get("field_action"),
+                "risk": first.get("risk"),
+                "automation_candidate": bool(first.get("automation_candidate")),
+                "intake_dir": "data/intake/field_updates/incoming",
+                "import_tool": "tools/import_agent_catalog_field_updates.py",
+                "samples": _sample_field_items(items),
+            }
+        )
+    packs.sort(
+        key=lambda item: (
+            0 if item["field"] == "source_url" else 1,
+            0 if item["automation_candidate"] else 1,
+            -int(item["missing"]),
+            str(item["risk"]),
             str(item["source_store"]),
             str(item["category"]),
         )
@@ -511,6 +558,7 @@ def build_backlog(
             [],
         )[:80],
         "field_focus_packs": _field_focus_packs(field_items, 40),
+        "field_update_work_packs": _field_update_work_packs(field_items, 60),
         "image_queue_by_strategy": by_strategy.most_common(),
         "image_queue_by_provider_status": by_provider_status.most_common(),
         "image_queue_by_automation_safety": by_automation_safety.most_common(),
@@ -525,6 +573,7 @@ def build_backlog(
         "top_image_backlog": actions[:60],
         "recommended_sequence": [
             "Start with field_focus_packs where automation_candidate is true; each pack is one store/category/field batch.",
+            "Use field_update_work_packs for confirmed source_url, release_date, barcode, and official_price_jpy intake rows.",
             "For animation goods, clear source_url first, then use the exact detail pages to fill release_date, image_url, and price where available.",
             "Treat barcode as a high-risk field; many prizes and campaign items should stay blank unless JAN/barcode is explicitly published.",
             "Use priority_goods_summary before broad queue work when the user names focus collections like Danganronpa, Mahosaba, or Ichiban Kuji.",
@@ -717,6 +766,20 @@ def write_markdown(backlog: dict[str, Any], path: Path) -> None:
             f"`{item.get('field_action')}`, risk `{item.get('risk')}`, "
             f"automation `{item.get('automation_candidate')}`"
         )
+    lines.extend(["", "## Field Update Work Packs", ""])
+    for item in backlog.get("field_update_work_packs", [])[:25]:
+        sample = (item.get("samples") or [{}])[0]
+        lines.append(
+            f"- `{item.get('workstream')}` / `{item.get('source_store')}` / "
+            f"`{item.get('category')}` / `{item.get('field')}`: "
+            f"`{item.get('missing')}` missing, `{item.get('field_action')}`, "
+            f"risk `{item.get('risk')}`"
+        )
+        if sample:
+            lines.append(
+                f"  - sample `{sample.get('field')}` / `{sample.get('name_ko')}` / "
+                f"`{sample.get('search_url')}`"
+            )
     lines.extend(["", "## Top Field Batch Keys", ""])
     for item in backlog.get("top_field_batch_backlog", [])[:25]:
         lines.append(f"- `{item.get('batch_key')}`: `{item.get('missing')}`")
@@ -870,6 +933,7 @@ def main() -> int:
                 "field_focus_automation_pack_rows": sum(
                     1 for item in backlog.get("field_focus_packs") or [] if item.get("automation_candidate")
                 ),
+                "field_update_work_pack_rows": len(backlog.get("field_update_work_packs") or []),
                 "image_work_pack_rows": len(backlog.get("image_work_packs") or []),
                 "ichiban_work_pack_rows": (backlog.get("ichiban_quality") or {}).get("work_pack_rows"),
                 "priority_goods": sorted((backlog.get("priority_goods_summary") or {}).keys()),
