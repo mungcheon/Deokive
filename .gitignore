@@ -63,6 +63,17 @@ server/chiikawa_gotouchi_jp_api_image_report.json
 server/store_source_netloc_audit.json
 server/store_source_netloc_audit.md
 
+# Public data root: keep one published DB plus small site metadata.
+# Agent/raw submissions belong under data/intake/.
+data/*
+!data/
+!data/catalog_public.json
+!data/catalog_public_meta.json
+!data/site_status_public.json
+!data/README.md
+!data/intake/
+!data/intake/**
+
 # Python caches
 __pycache__/
 *.py[cod]

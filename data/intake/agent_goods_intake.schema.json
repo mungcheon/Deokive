@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://deokive.kro.kr/schemas/agent-goods-intake.schema.json",
+  "title": "Deokive Agent Goods Intake",
+  "type": "object",
+  "required": ["schema_version", "agent", "items"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "agent": {
+      "type": "object",
+      "required": ["name", "run_id", "collected_at"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "run_id": { "type": "string", "minLength": 1 },
+        "collected_at": {
+          "type": "string",
+          "description": "ISO-8601 timestamp."
+        },
+        "notes": { "type": "string" }
+      }
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "external_id",
+          "display_name",
+          "category",
+          "series_name",
+          "source_store",
+          "source_url",
+          "confidence"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "external_id": { "type": "string", "minLength": 1 },
+          "display_name": { "type": "string", "minLength": 1 },
+          "name_ko": { "type": "string" },
+          "name_ja": { "type": "string" },
+          "name_en": { "type": "string" },
+          "affiliation": { "type": "string" },
+          "category": { "type": "string", "minLength": 1 },
+          "series_name": { "type": "string", "minLength": 1 },
+          "sub_series": { "type": "string" },
+          "character_name": { "type": "string" },
+          "source_store": { "type": "string", "minLength": 1 },
+          "source_url": { "type": "string", "format": "uri" },
+          "image_url": { "type": "string", "format": "uri" },
+          "release_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD, YYYY-MM, or empty when unknown."
+          },
+          "barcode": { "type": ["string", "null"] },
+          "official_price_jpy": { "type": ["integer", "null"], "minimum": 0 },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["url", "type"],
+              "additionalProperties": false,
+              "properties": {
+                "url": { "type": "string", "format": "uri" },
+                "type": {
+                  "type": "string",
+                  "enum": ["official", "trusted", "manual"]
+                },
+                "note": { "type": "string" }
+              }
+            }
+          },
+          "confidence": {
+            "type": "string",
+            "enum": ["confirmed", "candidate", "needs_review"]
+          },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}

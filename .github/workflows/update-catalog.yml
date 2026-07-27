@@ -1,7 +1,16 @@
-name: Update public catalog reports
+name: Update public catalog DB
 
 on:
   workflow_dispatch:
+    inputs:
+      image_provider_store:
+        description: "Optional strict official image provider, such as FuRyu, goodsmile, Taito, or Banpresto."
+        required: false
+        default: ""
+      image_provider_max_rows:
+        description: "Optional max rows for the image provider run."
+        required: false
+        default: ""
   schedule:
     # Daily 04:20 KST
     - cron: "20 19 * * *"
@@ -10,7 +19,7 @@ permissions:
   contents: write
 
 jobs:
-  update-public-reports:
+  update-public-db:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -18,63 +27,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
-      - name: Build public review batches
-        run: |
-          python tools/build_image_enrichment_queue.py --input data/catalog_public.json --json-output data/catalog_missing_image_work_queue_public.json --csv-output data/catalog_missing_image_work_queue_public.csv
-          python tools/build_source_discovery_review_batches_public.py
-          python tools/build_catalog_metadata_review_batches_public.py
-          python tools/build_deduplication_review_batches_public.py
-          python tools/build_animation_category_review_batches_public.py
-          python tools/build_ichiban_kuji_metadata_review_batches_public.py
-          python tools/build_requested_focus_review_batches_public.py
-          python tools/build_animate_missing_image_search_public.py --write
-          python tools/build_goodsmile_missing_image_search_public.py --write
-          python tools/build_kotobukiya_movic_missing_image_search_public.py --write
-          python tools/build_jump_furyu_taito_missing_image_search_public.py --write
-          python tools/build_secondary_official_missing_image_search_public.py --write
-          python tools/build_manual_missing_image_source_discovery_public.py --write
-          python tools/build_generic_storefront_missing_image_source_public.py --write
-          python tools/build_gotouchi_representative_image_attachment_public.py --write
-          python tools/build_missing_image_report_coverage_public.py --write
-          python tools/build_source_discovery_action_queue_public.py
-          python tools/build_metadata_action_queue_public.py
-          python tools/build_image_attachment_action_queue_public.py
-          python tools/build_catalog_missing_image_actionability_public.py --write
-          python tools/build_source_discovery_next_focus_detail_candidates_public.py --write
-          python tools/build_source_discovery_next_focus_fallback_queue_public.py --write
-          python tools/build_source_discovery_next_focus_split_queues_public.py --write
-          python tools/build_source_discovery_next_focus_live_source_probe_public.py --write
-          python tools/build_source_discovery_next_focus_variant_metadata_backfill_public.py --write
-          python tools/build_source_discovery_next_focus_variant_metadata_confirmed_template_public.py --write
-          python tools/build_source_discovery_next_focus_handoff_public.py
-          python tools/import_confirmed_variant_metadata_backfill_rows.py
-          python tools/build_confirmed_import_readiness_public.py
-          python tools/audit_confirmed_import_queues.py
-          python tools/build_source_discovery_store_bottlenecks_public.py --write
-          python tools/build_ensky_cache_candidate_action_queue_public.py --write
-          python tools/build_source_detail_candidate_action_queue_public.py --write
-          python tools/build_deduplication_action_queue_public.py
-          python tools/build_deduplication_fast_review_public.py --write
-          python tools/build_ichiban_kuji_metadata_action_queue_public.py
-          python tools/build_ichiban_kuji_metadata_fast_review_public.py --write
-          python tools/build_ichiban_prize_policy_audit_public.py --write
-          python tools/build_requested_focus_action_queue_public.py
-          python tools/build_animation_category_action_queue_public.py
-          python tools/build_animation_category_split_review_public.py
-          python tools/build_animation_category_unmatched_keyword_review_public.py
-
-      - name: Refresh public catalog reports
-        run: |
-          python tools/update_public_catalog_reports.py --write
-          python tools/build_requested_focus_source_candidates_public.py
-          python tools/build_catalog_execution_plan_public.py
-          python tools/update_public_catalog_reports.py --write
-
-      - name: Validate generated public files
-        run: |
-          python tools/update_public_catalog_reports.py
-          python tools/audit_flutter_seed_matches_public.py
 
       - name: Publish 1-minute update notice
         run: |
@@ -86,7 +38,7 @@ jobs:
 
           status = {
               "mode": "notice",
-              "message": "1분 뒤 업데이트를 시작합니다. 작업 중이라면 종료 부탁드립니다.",
+              "message": "1분 뒤 공개 DB 업데이트를 시작합니다. 작업 중이라면 종료 부탁드려요.",
               "eta": "업데이트 시작 1분 전",
           }
           Path("data/site_status_public.json").write_text(
@@ -127,92 +79,36 @@ jobs:
             git push
           fi
 
-      - name: Commit public report updates
+      - name: Refresh public catalog DB
+        run: |
+          image_args=()
+          if [ -n "${{ github.event.inputs.image_provider_store }}" ]; then
+            image_args+=(--image-provider-store "${{ github.event.inputs.image_provider_store }}")
+          fi
+          if [ -n "${{ github.event.inputs.image_provider_max_rows }}" ]; then
+            image_args+=(--image-provider-max-rows "${{ github.event.inputs.image_provider_max_rows }}")
+          fi
+
+          python tools/validate_agent_goods_intake.py data/intake/incoming
+          python tools/sync_catalog_pipeline.py --write --skip-network --skip-db "${image_args[@]}"
+          python tools/generate_seed_catalog_dart.py --input data/catalog_public.json --output lib/data/catalog/seed_catalog.dart
+          python tools/audit_flutter_seed_matches_public.py
+
+      - name: Commit public DB updates
         run: |
           git config user.name "deokive-catalog-bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add \
-            data/site_status_public.json \
+            data/catalog_public.json \
             data/catalog_public_meta.json \
-            data/catalog_quality_public.json \
-            data/catalog_image_backlog_public.json \
-            data/catalog_image_candidate_review_public.json \
-            data/catalog_image_asset_audit_public.json \
-            data/catalog_reused_image_review_public.json \
-            data/catalog_reused_image_review_public.md \
-            data/catalog_reused_image_deduplication_review_public.json \
-            data/catalog_reused_image_deduplication_confirmed_template_public.json \
-            data/catalog_reused_image_deduplication_confirmed_template_public.md \
-            data/catalog_reused_image_deduplication_import_dry_run_public.json \
-            data/catalog_missing_image_priority_public.json \
-            data/animate_missing_image_search_public.json \
-            data/goodsmile_missing_image_search_public.json \
-            data/kotobukiya_movic_missing_image_search_public.json \
-            data/jump_furyu_taito_missing_image_search_public.json \
-            data/secondary_official_missing_image_search_public.json \
-            data/manual_missing_image_source_discovery_public.json \
-            data/generic_storefront_missing_image_source_public.json \
-            data/gotouchi_representative_image_attachment_public.json \
-            data/catalog_missing_image_report_coverage_public.json \
-            data/ensky_missing_image_cache_coverage_public.json \
-            data/ensky_cache_candidate_action_queue_public.json \
-            data/ensky_search_page_probe_public.json \
-            data/stellive_fanding_candidates_public.json \
-            data/catalog_missing_image_work_queue_public.json \
-            data/catalog_missing_image_work_queue_public.csv \
-            data/catalog_image_enrichment_batches_public.json \
-            data/source_discovery_queue_public.json \
-            data/source_discovery_review_batches_public.json \
-            data/source_discovery_action_queue_public.json \
-            data/source_discovery_store_bottlenecks_public.json \
-            data/source_detail_candidate_action_queue_public.json \
-            data/official_detail_review_batches_public.json \
-            data/catalog_metadata_backlog_public.json \
-            data/catalog_metadata_review_batches_public.json \
-            data/catalog_metadata_action_queue_public.json \
-            data/catalog_image_attachment_action_queue_public.json \
-            data/catalog_missing_image_actionability_public.json \
-            data/source_discovery_next_focus_detail_candidates_public.json \
-            data/source_discovery_next_focus_fallback_queue_public.json \
-            data/source_discovery_next_focus_handoff_public.json \
-            data/source_discovery_next_focus_handoff_public.md \
-            data/source_discovery_next_focus_exact_url_review_queue_public.json \
-            data/source_discovery_next_focus_identity_backfill_queue_public.json \
-            data/source_discovery_next_focus_live_source_probe_public.json \
-            data/source_discovery_next_focus_variant_metadata_backfill_public.json \
-            data/source_discovery_next_focus_variant_metadata_confirmed_rows.template.json \
-            data/source_discovery_next_focus_variant_metadata_import_dry_run_public.json \
-            data/catalog_deduplication_public.json \
-            data/catalog_deduplication_review_batches_public.json \
-            data/catalog_deduplication_action_queue_public.json \
-            data/catalog_deduplication_fast_review_public.json \
-            data/animation_goods_categories_public.json \
-            data/animation_category_review_batches_public.json \
-            data/animation_category_action_queue_public.json \
-            data/animation_category_split_review_public.json \
-            data/animation_category_unmatched_keyword_review_public.json \
-            data/ichiban_kuji_history_public.json \
-            data/ichiban_kuji_metadata_review_batches_public.json \
-            data/ichiban_kuji_metadata_action_queue_public.json \
-            data/ichiban_kuji_metadata_fast_review_public.json \
-            data/ichiban_kuji_prize_policy_audit_public.json \
-            data/requested_focus_enrichment_public.json \
-            data/requested_focus_review_batches_public.json \
-            data/requested_focus_action_queue_public.json \
-            data/requested_focus_next_work_public.json \
-            data/requested_focus_source_candidates_public.json \
-            data/catalog_confirmed_import_readiness_public.json \
-            server/catalog_confirmed_import_queue_audit.json \
-            server/catalog_confirmed_import_queue_audit.md \
-            data/catalog_execution_plan_public.json \
-            data/danganronpa_missing_media_public.json \
-            data/generic_source_patch_candidates_public.json \
-            data/catalog_operations_public.json \
-            data/catalog_agent_work_queue_public.json
+            data/site_status_public.json \
+            lib/data/catalog/seed_catalog.dart \
+            assets/catalog_images \
+            assets/assets/catalog_images
           if git diff --cached --quiet; then
-            echo "No public catalog report changes."
+            echo "No public catalog DB changes."
           else
-            git commit -m "chore: refresh public catalog reports"
+            git commit -m "chore: refresh public catalog DB"
             git push
           fi
 

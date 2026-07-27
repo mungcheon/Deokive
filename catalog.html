@@ -2,1932 +2,223 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#fff2f7">
-  <link rel="icon" type="image/png" href="favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Deokive Catalog</title>
   <style>
     :root {
       color-scheme: light;
-      --bg: #fff2f7;
-      --surface: rgba(255, 255, 255, 0.88);
-      --surface-strong: #ffffff;
-      --ink: #2c2430;
-      --muted: #806b78;
-      --line: rgba(255, 126, 178, 0.24);
-      --pink: #ff63a7;
-      --pink-dark: #c64c84;
-      --mint: #2db9a3;
-      --shadow: 0 18px 50px rgba(198, 76, 132, 0.16);
+      --bg: #f7f7f8;
+      --card: rgba(255, 255, 255, 0.88);
+      --line: #e5e5ea;
+      --text: #1d1d1f;
+      --muted: #6e6e73;
+      --accent: #2f7cf6;
+      --shadow: 0 18px 48px rgba(20, 24, 36, 0.1);
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
-    html,
     body {
       margin: 0;
-      min-height: 100%;
-    }
-
-    body {
+      min-height: 100vh;
       background: var(--bg);
-      color: var(--ink);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Pretendard", sans-serif;
-      letter-spacing: 0;
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    button,
-    input,
-    select {
-      font: inherit;
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: rgba(247, 247, 248, 0.84);
+      backdrop-filter: blur(18px);
     }
 
-    a {
-      color: inherit;
-    }
-
-    .shell {
+    .bar,
+    main {
+      width: min(1120px, calc(100% - 32px));
       margin: 0 auto;
-      max-width: 1180px;
-      padding: 18px 18px 36px;
-    }
-
-    .topbar {
-      align-items: center;
-      display: flex;
-      gap: 12px;
-      justify-content: space-between;
-      min-height: 48px;
-    }
-
-    .brand {
-      align-items: center;
-      display: flex;
-      gap: 10px;
-      min-width: 0;
-    }
-
-    .mark {
-      align-items: center;
-      background: var(--pink);
-      border-radius: 14px;
-      box-shadow: 0 8px 22px rgba(255, 99, 167, 0.28);
-      color: #fff;
-      display: grid;
-      flex: 0 0 auto;
-      font-size: 20px;
-      font-weight: 900;
-      height: 40px;
-      place-items: center;
-      width: 40px;
-    }
-
-    h1 {
-      font-size: 22px;
-      line-height: 1.1;
-      margin: 0;
-    }
-
-    .subtitle {
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 700;
-      margin-top: 3px;
-    }
-
-    .home-link {
-      align-items: center;
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      color: var(--pink-dark);
-      display: inline-flex;
-      font-size: 13px;
-      font-weight: 800;
-      gap: 6px;
-      min-height: 38px;
-      padding: 0 14px;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-
-    .hero {
-      display: grid;
-      gap: 14px;
-      grid-template-columns: minmax(0, 1fr) 360px;
-      margin-top: 24px;
-    }
-
-    .side-stack {
-      display: grid;
-      gap: 14px;
-    }
-
-    .panel {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .summary {
-      padding: 22px;
-    }
-
-    .summary h2 {
-      font-size: 30px;
-      line-height: 1.18;
-      margin: 0;
-    }
-
-    .summary p {
-      color: var(--muted);
-      font-size: 14px;
-      font-weight: 650;
-      line-height: 1.55;
-      margin: 10px 0 0;
-      max-width: 640px;
-    }
-
-    .stats {
-      display: grid;
-      gap: 10px;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      margin-top: 18px;
-    }
-
-    .stat {
-      background: var(--surface-strong);
-      border: 1px solid rgba(255, 126, 178, 0.18);
-      border-radius: 18px;
-      min-width: 0;
-      padding: 14px;
-    }
-
-    .stat b {
-      display: block;
-      font-size: 24px;
-      line-height: 1;
-    }
-
-    .stat span {
-      color: var(--muted);
-      display: block;
-      font-size: 12px;
-      font-weight: 750;
-      margin-top: 8px;
-    }
-
-    .collection,
-    .insight,
-    .quality-panel {
-      padding: 18px;
-    }
-
-    .collection h3,
-    .insight h3,
-    .kuji-panel h3,
-    .quality-panel h3 {
-      font-size: 15px;
-      margin: 0 0 12px;
-    }
-
-    .kuji-panel {
-      padding: 18px;
-    }
-
-    .kuji-copy {
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 750;
-      line-height: 1.45;
-      margin: -2px 0 12px;
-    }
-
-    .kuji-stats {
-      display: grid;
-      gap: 8px;
-      grid-template-columns: 1fr 1fr;
-      margin-bottom: 12px;
-    }
-
-    .kuji-stat {
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid rgba(255, 126, 178, 0.16);
-      border-radius: 14px;
-      padding: 10px;
-    }
-
-    .kuji-stat b {
-      display: block;
-      font-size: 18px;
-      line-height: 1;
-    }
-
-    .kuji-stat span {
-      color: var(--muted);
-      display: block;
-      font-size: 11px;
-      font-weight: 800;
-      margin-top: 6px;
-    }
-
-    .kuji-list {
-      display: grid;
-      gap: 8px;
-    }
-
-    .kuji-item {
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid rgba(255, 126, 178, 0.16);
-      border-radius: 14px;
-      display: block;
-      min-width: 0;
-      padding: 10px;
-      text-decoration: none;
-    }
-
-    .kuji-item strong {
-      display: block;
-      font-size: 12px;
-      line-height: 1.35;
-    }
-
-    .kuji-item span {
-      color: var(--muted);
-      display: block;
-      font-size: 11px;
-      font-weight: 800;
-      margin-top: 5px;
-    }
-
-    .kuji-more {
-      color: var(--pink-dark);
-      display: inline-flex;
-      font-size: 12px;
-      font-weight: 850;
-      margin-top: 12px;
-      text-decoration: none;
-    }
-
-    .quality-grid {
-      display: grid;
-      gap: 8px;
-      grid-template-columns: repeat(3, 1fr);
-      margin-bottom: 12px;
-    }
-
-    .quality-cell {
-      background: rgba(255, 255, 255, 0.74);
-      border: 1px solid rgba(255, 126, 178, 0.14);
-      border-radius: 14px;
-      padding: 10px 8px;
-      text-align: center;
-    }
-
-    .quality-cell b {
-      display: block;
-      font-size: 16px;
-      line-height: 1;
-    }
-
-    .quality-cell span {
-      color: var(--muted);
-      display: block;
-      font-size: 10px;
-      font-weight: 850;
-      margin-top: 6px;
-    }
-
-    .quality-note {
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 750;
-      line-height: 1.45;
-      margin: -2px 0 12px;
-    }
-
-    .quality-list {
-      display: grid;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .scorecard-list {
-      display: grid;
-      gap: 8px;
-      margin: 12px 0 4px;
-    }
-
-    .quality-item,
-    .scorecard-item {
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid rgba(255, 126, 178, 0.14);
-      border-radius: 14px;
-      padding: 10px;
-    }
-
-    .quality-item strong,
-    .scorecard-item strong {
-      display: block;
-      font-size: 12px;
-      line-height: 1.35;
-    }
-
-    .quality-item span,
-    .scorecard-item span {
-      color: var(--muted);
-      display: block;
-      font-size: 11px;
-      font-weight: 750;
-      margin-top: 4px;
-    }
-
-    .scorecard-item {
-      display: grid;
-      gap: 4px;
-    }
-
-    .scorecard-item strong {
-      align-items: center;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .scorecard-badge {
-      background: rgba(255, 126, 178, 0.13);
-      border-radius: 999px;
-      color: var(--pink-dark);
-      font-size: 10px;
-      font-weight: 900;
-      padding: 4px 7px;
-      white-space: nowrap;
-    }
-
-    .collection-copy {
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 750;
-      line-height: 1.45;
-      margin: -2px 0 14px;
-    }
-
-    .flow-steps {
-      display: grid;
-      gap: 8px;
-      margin: 0 0 14px;
-    }
-
-    .flow-step {
-      align-items: center;
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid rgba(255, 126, 178, 0.16);
-      border-radius: 15px;
-      color: var(--muted);
-      display: grid;
-      font-size: 12px;
-      font-weight: 800;
-      gap: 9px;
-      grid-template-columns: 28px 1fr;
-      min-height: 42px;
-      padding: 8px 10px;
-    }
-
-    .flow-step b {
-      align-items: center;
-      background: var(--pink);
-      border-radius: 999px;
-      color: #fff;
-      display: inline-flex;
-      font-size: 12px;
-      height: 28px;
-      justify-content: center;
-      width: 28px;
-    }
-
-    .folder-row {
-      display: grid;
-      gap: 8px;
-      grid-template-columns: 1fr auto;
-    }
-
-    .folder-row select,
-    .folder-row button,
-    .collection-actions button {
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      min-height: 42px;
-    }
-
-    .folder-row select {
-      background: #fff;
-      color: var(--ink);
-      min-width: 0;
-      padding: 0 11px;
-    }
-
-    .folder-row button,
-    .collection-actions button {
-      background: var(--pink);
-      color: #fff;
-      cursor: pointer;
-      font-weight: 900;
-      padding: 0 13px;
-    }
-
-    .folder-hint {
-      align-items: center;
-      background: rgba(255, 255, 255, 0.68);
-      border: 1px solid rgba(255, 126, 178, 0.15);
-      border-radius: 14px;
-      color: var(--muted);
-      display: flex;
-      font-size: 11px;
-      font-weight: 850;
-      gap: 8px;
-      line-height: 1.45;
-      margin-top: 8px;
-      padding: 9px 11px;
-    }
-
-    .folder-hint b {
-      color: var(--pink-dark);
-      white-space: nowrap;
-    }
-
-    .collection-actions {
-      display: grid;
-      gap: 8px;
-      grid-template-columns: 1fr 1fr;
-      margin-top: 10px;
-    }
-
-    .collection-actions button.secondary {
-      background: rgba(255, 255, 255, 0.86);
-      color: var(--pink-dark);
-    }
-
-    .owned-summary {
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid rgba(255, 126, 178, 0.18);
-      border-radius: 16px;
-      color: var(--muted);
-      display: flex;
-      font-size: 12px;
-      font-weight: 850;
-      justify-content: space-between;
-      margin-top: 12px;
-      padding: 11px 12px;
-    }
-
-    .latest-owned {
-      display: grid;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .latest-owned-item {
-      align-items: center;
-      background: rgba(255, 255, 255, 0.76);
-      border: 1px solid rgba(255, 126, 178, 0.16);
-      border-radius: 16px;
-      display: grid;
-      gap: 9px;
-      grid-template-columns: 42px 1fr auto;
-      min-width: 0;
-      padding: 8px;
-    }
-
-    .latest-owned-thumb {
-      align-items: center;
-      background: #fff8fb;
-      border-radius: 12px;
-      display: flex;
-      height: 42px;
-      justify-content: center;
-      overflow: hidden;
-      width: 42px;
-    }
-
-    .latest-owned-thumb img {
-      height: 100%;
-      object-fit: cover;
-      width: 100%;
-    }
-
-    .latest-owned-thumb span {
-      color: var(--muted);
-      font-size: 9px;
-      font-weight: 900;
-      text-align: center;
-    }
-
-    .latest-owned-name {
-      font-size: 12px;
-      font-weight: 900;
-      line-height: 1.25;
-      min-width: 0;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .latest-owned-folder {
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 750;
-      margin-top: 2px;
-      min-width: 0;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .latest-owned-qty {
-      color: var(--pink-dark);
-      font-size: 11px;
-      font-weight: 900;
-      white-space: nowrap;
-    }
-
-    .latest-owned-empty {
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 750;
-      line-height: 1.45;
-      margin: 10px 0 0;
-    }
-
-    .save-note {
-      background: #fff8fb;
-      border: 1px solid rgba(255, 126, 178, 0.18);
-      border-radius: 16px;
-      color: var(--muted);
-      display: grid;
-      font-size: 12px;
-      font-weight: 750;
-      gap: 6px;
-      line-height: 1.45;
-      margin-top: 12px;
-      padding: 12px;
-    }
-
-    .save-note b {
-      color: var(--ink);
-      font-size: 13px;
     }
 
     .bar {
+      display: flex;
       align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 68px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    main {
+      padding: 28px 0 48px;
+    }
+
+    .summary {
       display: grid;
-      gap: 8px;
-      grid-template-columns: 84px 1fr 40px;
-      margin-top: 9px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
     }
 
-    .bar span {
+    .metric,
+    .toolbar,
+    .item {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .metric {
+      padding: 16px;
+    }
+
+    .metric b {
+      display: block;
+      font-size: 24px;
+    }
+
+    .metric span {
       color: var(--muted);
-      font-size: 12px;
-      font-weight: 750;
-      min-width: 0;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .track {
-      background: rgba(198, 76, 132, 0.12);
-      border-radius: 999px;
-      height: 8px;
-      overflow: hidden;
-    }
-
-    .fill {
-      background: var(--pink);
-      border-radius: inherit;
-      height: 100%;
-      min-width: 4px;
+      font-size: 13px;
     }
 
     .toolbar {
       display: grid;
+      grid-template-columns: 1fr 180px 180px;
       gap: 10px;
-      grid-template-columns: minmax(220px, 1fr) repeat(3, minmax(150px, 190px));
-      margin-top: 14px;
-      position: sticky;
-      top: 0;
-      z-index: 5;
+      padding: 12px;
+      margin-bottom: 18px;
     }
 
-    .field,
-    .select {
-      align-items: center;
-      background: rgba(255, 255, 255, 0.92);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      display: flex;
-      min-height: 48px;
-      overflow: hidden;
-      padding: 0 14px;
-    }
-
-    .field input,
-    .select select {
-      background: transparent;
-      border: 0;
-      color: var(--ink);
-      min-width: 0;
-      outline: 0;
+    input,
+    select {
       width: 100%;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--text);
+      padding: 0 12px;
+      font: inherit;
     }
 
-    .field input::placeholder {
-      color: rgba(128, 107, 120, 0.72);
-    }
-
-    .select select {
-      appearance: none;
-      cursor: pointer;
-      font-weight: 750;
-    }
-
-    .results-head {
-      align-items: center;
-      display: flex;
-      gap: 10px;
-      justify-content: space-between;
-      margin: 18px 2px 10px;
-    }
-
-    .results-head h2 {
-      font-size: 18px;
-      margin: 0;
-    }
-
-    .count {
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .grid {
+    .list {
       display: grid;
-      gap: 12px;
-      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
     }
 
-    .card {
-      background: var(--surface-strong);
-      border: 1px solid rgba(255, 126, 178, 0.2);
-      border-radius: 20px;
-      box-shadow: 0 10px 24px rgba(198, 76, 132, 0.08);
-      display: flex;
-      flex-direction: column;
-      min-height: 100%;
+    .item {
       overflow: hidden;
     }
 
     .thumb {
-      align-items: center;
-      aspect-ratio: 1 / 1;
-      background: #fff8fb;
-      display: flex;
-      justify-content: center;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .thumb img {
-      height: 100%;
-      object-fit: contain;
-      padding: 10px;
       width: 100%;
-    }
-
-    .placeholder {
-      color: rgba(198, 76, 132, 0.58);
-      font-size: 13px;
-      font-weight: 900;
-      text-align: center;
-    }
-
-    .badge {
-      background: rgba(255, 255, 255, 0.86);
-      border: 1px solid rgba(255, 126, 178, 0.28);
-      border-radius: 999px;
-      color: var(--pink-dark);
-      font-size: 11px;
-      font-weight: 900;
-      left: 10px;
-      max-width: calc(100% - 20px);
-      overflow: hidden;
-      padding: 5px 8px;
-      position: absolute;
-      text-overflow: ellipsis;
-      top: 10px;
-      white-space: nowrap;
+      aspect-ratio: 1;
+      background: #ececf0;
+      object-fit: cover;
+      display: block;
     }
 
     .body {
-      display: flex;
-      flex: 1;
-      flex-direction: column;
-      gap: 10px;
-      padding: 13px;
-    }
-
-    .name {
-      font-size: 14px;
-      font-weight: 900;
-      line-height: 1.38;
-      margin: 0;
-    }
-
-    .meta {
-      color: var(--muted);
-      display: grid;
-      font-size: 12px;
-      font-weight: 700;
-      gap: 5px;
-      line-height: 1.35;
-      margin-top: auto;
-    }
-
-    .card-actions {
-      border-top: 1px solid rgba(255, 126, 178, 0.16);
-      display: grid;
-      grid-template-columns: 0.86fr 1.07fr 1.07fr;
-    }
-
-    .source,
-    .quick-owned,
-    .choose-owned {
-      align-items: center;
-      background: transparent;
-      border: 0;
-      color: var(--pink-dark);
-      display: flex;
-      font-size: 12px;
-      font-weight: 900;
-      justify-content: center;
-      min-height: 44px;
-      padding: 11px 10px 13px;
-      text-decoration: none;
-    }
-
-    .source {
-      color: var(--pink-dark);
-    }
-
-    .source[aria-disabled="true"] {
-      color: rgba(128, 107, 120, 0.65);
-      pointer-events: none;
-    }
-
-    .quick-owned,
-    .choose-owned {
-      appearance: none;
-      border-left: 1px solid rgba(255, 126, 178, 0.16);
-      cursor: pointer;
-      line-height: 1.15;
-      min-width: 0;
-      opacity: 1;
-      text-align: center;
-      transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
-      -webkit-text-fill-color: currentColor;
-      white-space: normal;
-    }
-
-    .quick-owned {
-      background: #ffffff;
-      color: #116f63;
-      text-shadow: none;
-    }
-
-    .choose-owned {
-      background: #fff2f7;
-      color: #8b2450;
-    }
-
-    .quick-owned:hover,
-    .choose-owned:hover {
-      transform: translateY(-1px);
-    }
-
-    .quick-owned.added,
-    .choose-owned.added {
-      background: #e8fbf6;
-      color: #0d695d;
-      text-shadow: none;
-    }
-
-    .quick-owned.added::before,
-    .choose-owned.added::before {
-      content: "✓";
-      margin-right: 4px;
-      -webkit-text-fill-color: currentColor;
-    }
-
-    .more {
-      background: var(--pink);
-      border: 0;
-      border-radius: 999px;
-      box-shadow: 0 14px 28px rgba(255, 99, 167, 0.22);
-      color: #fff;
-      cursor: pointer;
-      display: block;
-      font-weight: 900;
-      margin: 18px auto 0;
-      min-height: 46px;
-      padding: 0 24px;
-    }
-
-    .empty {
-      background: rgba(255, 255, 255, 0.78);
-      border: 1px dashed var(--line);
-      border-radius: 22px;
-      color: var(--muted);
-      font-weight: 800;
-      padding: 28px;
-      text-align: center;
-    }
-
-    .loading {
-      align-items: center;
-      color: var(--pink-dark);
-      display: flex;
-      font-weight: 900;
-      gap: 10px;
-      justify-content: center;
-      min-height: 220px;
-    }
-
-    .spinner {
-      animation: spin 0.8s linear infinite;
-      border: 3px solid rgba(255, 99, 167, 0.18);
-      border-top-color: var(--pink);
-      border-radius: 999px;
-      height: 24px;
-      width: 24px;
-    }
-
-    .toast {
-      background: rgba(44, 36, 48, 0.92);
-      border-radius: 999px;
-      bottom: calc(18px + env(safe-area-inset-bottom));
-      box-shadow: 0 14px 34px rgba(44, 36, 48, 0.2);
-      color: #fff;
-      font-size: 13px;
-      font-weight: 850;
-      left: 50%;
-      max-width: calc(100% - 28px);
-      opacity: 0;
-      padding: 12px 16px;
-      pointer-events: none;
-      position: fixed;
-      transform: translate(-50%, 12px);
-      transition: opacity 180ms ease, transform 180ms ease;
-      z-index: 20;
-    }
-
-    .toast.show {
-      opacity: 1;
-      transform: translate(-50%, 0);
-    }
-
-    .owned-sheet {
-      background: rgba(44, 36, 48, 0.24);
-      display: grid;
-      inset: 0;
-      opacity: 0;
-      padding: 18px;
-      place-items: end center;
-      pointer-events: none;
-      position: fixed;
-      transition: opacity 180ms ease;
-      z-index: 18;
-    }
-
-    .owned-sheet.open {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .owned-sheet-card {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      box-shadow: 0 24px 60px rgba(44, 36, 48, 0.22);
-      display: grid;
-      gap: 14px;
-      max-width: 430px;
-      padding: 18px;
-      transform: translateY(18px);
-      transition: transform 180ms ease;
-      width: 100%;
-    }
-
-    .owned-sheet.open .owned-sheet-card {
-      transform: translateY(0);
-    }
-
-    .owned-library {
-      background: rgba(44, 36, 48, 0.24);
-      display: grid;
-      inset: 0;
-      opacity: 0;
-      padding: 18px;
-      place-items: center;
-      pointer-events: none;
-      position: fixed;
-      transition: opacity 180ms ease;
-      z-index: 19;
-    }
-
-    .owned-library.open {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .owned-library-card {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      box-shadow: 0 24px 60px rgba(44, 36, 48, 0.22);
-      display: grid;
-      gap: 14px;
-      max-height: min(760px, calc(100vh - 36px));
-      max-width: 720px;
-      overflow: hidden;
-      padding: 18px;
-      transform: translateY(10px) scale(0.98);
-      transition: transform 180ms ease;
-      width: 100%;
-    }
-
-    .owned-library.open .owned-library-card {
-      transform: translateY(0) scale(1);
-    }
-
-    .library-head {
-      align-items: center;
-      display: flex;
-      gap: 10px;
-      justify-content: space-between;
-    }
-
-    .library-head h2 {
-      font-size: 18px;
-      margin: 0;
-    }
-
-    .library-controls {
-      display: grid;
-      gap: 8px;
-      grid-template-columns: 1fr auto;
-    }
-
-    .library-controls select,
-    .library-controls button {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      min-height: 44px;
-    }
-
-    .library-controls select {
-      background: #fff;
-      color: var(--ink);
-      min-width: 0;
-      padding: 0 12px;
-    }
-
-    .library-controls button {
-      background: rgba(255, 242, 247, 0.82);
-      color: var(--pink-dark);
-      cursor: pointer;
-      font-weight: 900;
-      padding: 0 14px;
-    }
-
-    .library-grid {
-      display: grid;
-      gap: 10px;
-      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-      min-height: 120px;
-      overflow: auto;
-      padding: 2px 2px 4px;
-    }
-
-    .owned-card {
-      background: #fff8fb;
-      border: 1px solid rgba(255, 126, 178, 0.18);
-      border-radius: 18px;
-      display: grid;
-      gap: 10px;
-      padding: 10px;
-    }
-
-    .owned-card-top {
-      align-items: center;
-      display: grid;
-      gap: 10px;
-      grid-template-columns: 52px 1fr;
-      min-width: 0;
-    }
-
-    .owned-card-thumb {
-      align-items: center;
-      background: #fff;
-      border: 1px solid rgba(255, 126, 178, 0.16);
-      border-radius: 14px;
-      display: flex;
-      height: 52px;
-      justify-content: center;
-      overflow: hidden;
-      width: 52px;
-    }
-
-    .owned-card-thumb img {
-      height: 100%;
-      object-fit: cover;
-      width: 100%;
-    }
-
-    .owned-card-thumb span {
-      color: var(--muted);
-      font-size: 10px;
-      font-weight: 900;
-      text-align: center;
-    }
-
-    .owned-card-name {
-      font-size: 13px;
-      font-weight: 900;
-      line-height: 1.32;
-      min-width: 0;
-    }
-
-    .owned-card-meta {
-      color: var(--muted);
-      display: grid;
-      font-size: 11px;
-      font-weight: 750;
-      gap: 4px;
-      line-height: 1.35;
-    }
-
-    .owned-card-foot {
-      align-items: center;
-      color: var(--pink-dark);
-      display: flex;
-      font-size: 12px;
-      font-weight: 900;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    .owned-card-foot a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .owned-card-tools {
-      align-items: center;
-      display: flex;
-      gap: 6px;
-    }
-
-    .owned-card-tools button {
-      align-items: center;
-      background: #fff;
-      border: 1px solid rgba(255, 126, 178, 0.24);
-      border-radius: 999px;
-      color: var(--pink-dark);
-      cursor: pointer;
-      display: inline-flex;
-      font-size: 12px;
-      font-weight: 950;
-      height: 28px;
-      justify-content: center;
-      min-width: 28px;
-      padding: 0 9px;
-    }
-
-    .owned-card-tools button.danger {
-      color: #9f224d;
-    }
-
-    .sheet-head {
-      align-items: center;
-      display: flex;
-      gap: 10px;
-      justify-content: space-between;
-    }
-
-    .sheet-head h2 {
-      font-size: 18px;
-      margin: 0;
-    }
-
-    .sheet-close {
-      background: rgba(255, 242, 247, 0.82);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      color: var(--pink-dark);
-      cursor: pointer;
-      font-size: 18px;
-      font-weight: 900;
-      height: 36px;
-      line-height: 1;
-      width: 36px;
-    }
-
-    .sheet-item {
-      align-items: center;
-      display: grid;
-      gap: 12px;
-      grid-template-columns: 58px 1fr;
-      min-width: 0;
-    }
-
-    .sheet-thumb {
-      background: #fff2f7;
-      border: 1px solid rgba(255, 126, 178, 0.18);
-      border-radius: 16px;
-      height: 58px;
-      overflow: hidden;
-      width: 58px;
-    }
-
-    .sheet-thumb img {
-      height: 100%;
-      object-fit: cover;
-      width: 100%;
-    }
-
-    .sheet-thumb span {
-      align-items: center;
-      color: var(--muted);
-      display: flex;
-      font-size: 11px;
-      font-weight: 900;
-      height: 100%;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .sheet-name {
-      font-size: 15px;
-      font-weight: 900;
-      line-height: 1.35;
-      min-width: 0;
-    }
-
-    .sheet-meta {
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 750;
-      margin-top: 4px;
-    }
-
-    .sheet-note {
-      background: #fff8fb;
-      border: 1px solid rgba(255, 126, 178, 0.18);
-      border-radius: 16px;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 750;
-      line-height: 1.45;
       padding: 12px;
     }
 
-    .sheet-field {
-      display: grid;
-      gap: 8px;
+    .body strong {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 42px;
+      font-size: 15px;
+      line-height: 1.35;
     }
 
-    .sheet-field span {
+    .meta {
+      margin-top: 8px;
+      display: grid;
+      gap: 4px;
       color: var(--muted);
       font-size: 12px;
-      font-weight: 850;
     }
 
-    .sheet-field select {
+    .empty {
+      border: 1px solid var(--line);
+      border-radius: 8px;
       background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      color: var(--ink);
-      min-height: 46px;
-      padding: 0 12px;
+      padding: 24px;
+      color: var(--muted);
+      text-align: center;
     }
 
-    .sheet-actions {
-      display: grid;
-      gap: 8px;
-      grid-template-columns: 1fr 1fr 1.15fr;
-    }
-
-    .sheet-actions button {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      cursor: pointer;
-      font-weight: 900;
-      min-height: 46px;
-    }
-
-    .sheet-actions .ghost {
-      background: rgba(255, 242, 247, 0.82);
-      color: var(--pink-dark);
-    }
-
-    .sheet-actions .primary {
-      background: var(--pink);
-      color: #fff;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    @media (max-width: 860px) {
-      .hero {
-        grid-template-columns: 1fr;
+    @media (max-width: 720px) {
+      .summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .toolbar {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .field {
-        grid-column: 1 / -1;
-      }
-    }
-
-    @media (max-width: 540px) {
-      .shell {
-        padding: 14px 12px 28px;
-      }
-
-      .topbar {
-        align-items: flex-start;
-      }
-
-      h1 {
-        font-size: 20px;
-      }
-
-      .summary h2 {
-        font-size: 24px;
-      }
-
-      .stats {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .toolbar {
-        grid-template-columns: 1fr;
-      }
-
-      .grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-      }
-
-      .body {
-        padding: 11px;
-      }
-
-      .name {
-        font-size: 13px;
-      }
-
-      .card-actions {
-        grid-template-columns: 1fr;
-      }
-
-      .quick-owned,
-      .choose-owned {
-        border-left: 0;
-        border-top: 1px solid rgba(255, 126, 178, 0.16);
-      }
-
-      .sheet-actions {
-        grid-template-columns: 1fr;
-      }
-
-      .library-controls {
         grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
-  <main class="shell">
-    <nav class="topbar" aria-label="상단">
-      <div class="brand">
-        <div class="mark">D</div>
-        <div>
-          <h1>Deokive Catalog</h1>
-          <div class="subtitle" id="updated">공개 카탈로그 불러오는 중</div>
-        </div>
-      </div>
-      <a class="home-link" href="./">홈</a>
-    </nav>
-
-    <section class="hero">
-      <div class="panel summary">
-        <h2>굿즈 DB에서 찾아서 내 보유 굿즈로 추가해요</h2>
-        <p>GitHub Pages에 공개된 카탈로그 목록입니다. 검색한 DB 항목은 버튼 한 번으로 내 굿즈 카드가 되고, 개인 폴더와 보유 목록은 이 기기에만 저장됩니다.</p>
-        <div class="stats" aria-label="카탈로그 통계">
-          <div class="stat"><b id="statRows">-</b><span>전체 굿즈</span></div>
-          <div class="stat"><b id="statImages">-</b><span>이미지 있음</span></div>
-          <div class="stat"><b id="statSources">-</b><span>출처 있음</span></div>
-          <div class="stat"><b id="statStores">-</b><span>스토어</span></div>
-        </div>
-      </div>
-      <div class="side-stack">
-        <aside class="panel collection">
-          <h3>DB에서 골라 내 굿즈 만들기</h3>
-          <p class="collection-copy">검색 결과에서 추가하기를 누르면 공개 DB 정보가 내 보유 굿즈 카드로 복사돼요. 폴더를 지정하지 않으면 가장 위 폴더에 바로 들어갑니다.</p>
-          <div class="flow-steps" aria-label="DB 굿즈 추가 흐름">
-            <div class="flow-step"><b>1</b><span>아래 검색창에서 굿즈 이름, 시리즈, 캐릭터를 찾기</span></div>
-            <div class="flow-step"><b>2</b><span>추가하기는 맨 위 폴더에 바로 저장, 폴더 지정은 원하는 폴더 선택</span></div>
-            <div class="flow-step"><b>3</b><span>이미 같은 폴더에 있으면 새 카드 대신 수량만 1 증가</span></div>
-          </div>
-          <div class="folder-row">
-            <select id="ownedFolder" aria-label="추가할 폴더"></select>
-            <button id="newFolder" type="button">폴더</button>
-          </div>
-          <div id="folderHint" class="folder-hint" aria-live="polite">
-            <b>저장 위치</b><span>추가하기는 맨 위 폴더, 폴더 지정은 선택한 폴더로 들어가요.</span>
-          </div>
-          <div class="collection-actions">
-            <button id="openOwned" class="secondary" type="button">보유 목록</button>
-            <button id="clearOwned" class="secondary" type="button">초기화</button>
-          </div>
-          <div class="owned-summary">
-            <span>저장된 굿즈</span>
-            <strong id="ownedCount">0개</strong>
-          </div>
-          <div id="latestOwned" class="latest-owned" aria-live="polite">
-            <p class="latest-owned-empty">아직 추가한 굿즈가 없어요. 검색 결과에서 추가하기를 눌러 보세요.</p>
-          </div>
-          <div class="save-note">
-            <b>저장 방식</b>
-            <span>상품명, 이미지, 출처 같은 공개 정보만 복사하고 수량은 내 기기에서만 관리해요.</span>
-          </div>
-        </aside>
-        <aside class="panel insight">
-          <h3>많은 카테고리</h3>
-          <div id="categoryBars"></div>
-        </aside>
-        <aside class="panel kuji-panel">
-          <h3>이치방쿠지 캠페인</h3>
-          <p class="kuji-copy">공식 1kuji.com 캠페인 DB를 별도로 정리했어요. 최신 발매일이 있는 항목을 먼저 보여줍니다.</p>
-          <div class="kuji-stats" aria-label="이치방쿠지 통계">
-            <div class="kuji-stat"><b id="kujiRows">-</b><span>공식 캠페인</span></div>
-            <div class="kuji-stat"><b id="kujiDated">-</b><span>날짜 확인</span></div>
-          </div>
-          <div id="kujiList" class="kuji-list" aria-live="polite">
-            <div class="loading"><span class="spinner"></span>쿠지 DB 확인 중</div>
-          </div>
-          <a class="kuji-more" href="data/ichiban_kuji_campaigns.json" target="_blank" rel="noopener noreferrer">전체 JSON 열기</a>
-          <a class="kuji-more" href="data/ichiban_kuji_history_public.json" target="_blank" rel="noopener noreferrer">히스토리 리포트 열기</a>
-        </aside>
-        <aside class="panel quality-panel">
-          <h3>DB 품질 리포트</h3>
-          <p class="quality-note">공개 카탈로그 기준으로 출처, 이미지, 발매일 채움 상태를 추적해요.</p>
-          <div class="quality-grid" aria-label="DB 품질 통계">
-            <div class="quality-cell"><b id="qualitySource">-</b><span>출처</span></div>
-            <div class="quality-cell"><b id="qualityImage">-</b><span>이미지</span></div>
-            <div class="quality-cell"><b id="qualityRelease">-</b><span>발매일</span></div>
-          </div>
-          <p class="quality-note">이미지는 있는데 출처가 비어 있는 우선 보강 항목 <b id="qualityGapCount">-</b>개</p>
-          <p class="quality-note">이미지 누락 <b id="imageMissingCount">-</b>개 · 자동 후보 <b id="imageProviderCount">-</b>개 · 상세 URL 필요 <b id="imageGenericSourceCount">-</b>개</p>
-          <div id="qualityGapList" class="quality-list" aria-live="polite">
-            <div class="loading"><span class="spinner"></span>품질 리포트 확인 중</div>
-          </div>
-          <div id="operationsScorecard" class="scorecard-list" aria-live="polite">
-            <div class="loading"><span class="spinner"></span>작업 스코어카드 확인 중</div>
-          </div>
-          <a class="kuji-more" href="data/catalog_operations_public.json" target="_blank" rel="noopener noreferrer">운영 요약 열기</a>
-          <a class="kuji-more" href="data/catalog_execution_plan_public.json" target="_blank" rel="noopener noreferrer">실행 계획 열기</a>
-          <a class="kuji-more" href="data/catalog_confirmed_import_readiness_public.json" target="_blank" rel="noopener noreferrer">확정 임포트 상태 열기</a>
-          <a class="kuji-more" href="data/catalog_quality_public.json" target="_blank" rel="noopener noreferrer">전체 리포트 열기</a>
-          <a class="kuji-more" href="data/catalog_image_backlog_public.json" target="_blank" rel="noopener noreferrer">이미지 백로그 열기</a>
-          <a class="kuji-more" href="data/catalog_image_candidate_review_public.json" target="_blank" rel="noopener noreferrer">후보 리뷰 열기</a>
-          <a class="kuji-more" href="data/catalog_image_enrichment_batches_public.json" target="_blank" rel="noopener noreferrer">이미지 보강 배치 열기</a>
-          <a class="kuji-more" href="data/gotouchi_chiikawa_image_candidates_public.json" target="_blank" rel="noopener noreferrer">지역 치이카와 후보 열기</a>
-          <a class="kuji-more" href="data/requested_special_goods_public.json" target="_blank" rel="noopener noreferrer">요청 리스트 검증 열기</a>
-          <a class="kuji-more" href="data/generic_source_cleanup_public.json" target="_blank" rel="noopener noreferrer">출처 정리 큐 열기</a>
-          <a class="kuji-more" href="data/generic_source_patch_candidates_public.json" target="_blank" rel="noopener noreferrer">출처 후보 패치 큐 열기</a>
-          <a class="kuji-more" href="data/source_detail_probe_public.json" target="_blank" rel="noopener noreferrer">상세 출처 스캔 열기</a>
-          <a class="kuji-more" href="data/source_discovery_queue_public.json" target="_blank" rel="noopener noreferrer">출처 탐색 큐 열기</a>
-          <a class="kuji-more" href="data/source_discovery_review_batches_public.json" target="_blank" rel="noopener noreferrer">출처 검수 배치 열기</a>
-          <a class="kuji-more" href="data/catalog_metadata_backlog_public.json" target="_blank" rel="noopener noreferrer">메타데이터 보강 큐 열기</a>
-          <a class="kuji-more" href="data/catalog_metadata_review_batches_public.json" target="_blank" rel="noopener noreferrer">메타데이터 검수 배치 열기</a>
-          <a class="kuji-more" href="data/catalog_deduplication_public.json" target="_blank" rel="noopener noreferrer">중복 후보 열기</a>
-          <a class="kuji-more" href="data/catalog_deduplication_review_batches_public.json" target="_blank" rel="noopener noreferrer">중복 검수 배치 열기</a>
-          <a class="kuji-more" href="data/animation_goods_categories_public.json" target="_blank" rel="noopener noreferrer">애니 굿즈 분류 열기</a>
-          <a class="kuji-more" href="data/animation_category_review_batches_public.json" target="_blank" rel="noopener noreferrer">애니 분류 배치 열기</a>
-          <a class="kuji-more" href="data/requested_focus_review_batches_public.json" target="_blank" rel="noopener noreferrer">요청 우선 배치 열기</a>
-          <a class="kuji-more" href="data/ichiban_kuji_metadata_review_batches_public.json" target="_blank" rel="noopener noreferrer">이치방쿠지 메타 배치 열기</a>
-          <a class="kuji-more" href="data/catalog_agent_work_queue_public.json" target="_blank" rel="noopener noreferrer">에이전트 작업 큐 열기</a>
-        </aside>
-      </div>
+  <header>
+    <div class="bar">
+      <h1>Deokive Catalog</h1>
+      <a href="/">앱으로 돌아가기</a>
+    </div>
+  </header>
+  <main>
+    <section class="summary" aria-label="카탈로그 요약">
+      <div class="metric"><b id="total">-</b><span>전체 굿즈</span></div>
+      <div class="metric"><b id="withImage">-</b><span>사진 있음</span></div>
+      <div class="metric"><b id="stores">-</b><span>출처 스토어</span></div>
+      <div class="metric"><b id="updated">-</b><span>DB 업데이트</span></div>
     </section>
-
-    <section class="toolbar" aria-label="검색과 필터">
-      <label class="field">
-        <input id="search" type="search" placeholder="이름, 시리즈, 캐릭터, 바코드 검색" autocomplete="off">
-      </label>
-      <label class="select">
-        <select id="categoryFilter" aria-label="카테고리"></select>
-      </label>
-      <label class="select">
-        <select id="storeFilter" aria-label="스토어"></select>
-      </label>
-      <label class="select">
-        <select id="imageFilter" aria-label="이미지 상태">
-          <option value="all">이미지 전체</option>
-          <option value="with">이미지 있음</option>
-          <option value="missing">이미지 없음</option>
-        </select>
-      </label>
+    <section class="toolbar" aria-label="필터">
+      <input id="search" type="search" placeholder="이름, 시리즈, 캐릭터 검색" autocomplete="off">
+      <select id="category"><option value="">전체 분류</option></select>
+      <select id="store"><option value="">전체 스토어</option></select>
     </section>
-
-    <section class="results-head">
-      <h2>검색 결과</h2>
-      <div class="count" id="resultCount">-</div>
-    </section>
-    <section id="results" class="grid" aria-live="polite">
-      <div class="loading"><span class="spinner"></span>카탈로그를 불러오는 중</div>
-    </section>
-    <button id="more" class="more" type="button" hidden>더 보기</button>
+    <section id="list" class="list" aria-live="polite"></section>
   </main>
-  <div id="ownedSheet" class="owned-sheet" aria-hidden="true">
-    <section class="owned-sheet-card" role="dialog" aria-modal="true" aria-labelledby="ownedSheetTitle">
-      <div class="sheet-head">
-        <h2 id="ownedSheetTitle">내 굿즈에 추가</h2>
-        <button id="closeOwnedSheet" class="sheet-close" type="button" aria-label="닫기">×</button>
-      </div>
-      <div class="sheet-item">
-        <div id="sheetThumb" class="sheet-thumb"><span>이미지</span></div>
-        <div>
-          <div id="sheetName" class="sheet-name">굿즈 이름</div>
-          <div id="sheetMeta" class="sheet-meta">선택한 DB 정보가 내 기기에만 저장돼요</div>
-        </div>
-      </div>
-      <div class="sheet-note">
-        선택한 DB 항목의 이름, 이미지, 카테고리, 출처를 복사해 개인 보유 굿즈 카드로 만들어요. 이미 같은 폴더에 있으면 수량만 1 늘어납니다.
-      </div>
-      <label class="sheet-field">
-        <span>넣을 폴더</span>
-        <select id="sheetFolder" aria-label="굿즈를 넣을 폴더"></select>
-      </label>
-      <div class="sheet-actions">
-        <button id="sheetNewFolder" class="ghost" type="button">새 폴더</button>
-        <button id="addToTopFolder" class="ghost" type="button">맨 위에 추가</button>
-        <button id="confirmOwnedAdd" class="primary" type="button">선택 폴더에 추가</button>
-      </div>
-    </section>
-  </div>
-  <div id="ownedLibrary" class="owned-library" aria-hidden="true">
-    <section class="owned-library-card" role="dialog" aria-modal="true" aria-labelledby="ownedLibraryTitle">
-      <div class="library-head">
-        <h2 id="ownedLibraryTitle">내 보유 굿즈</h2>
-        <button id="closeOwnedLibrary" class="sheet-close" type="button" aria-label="닫기">×</button>
-      </div>
-      <div class="library-controls">
-        <select id="libraryFolder" aria-label="보유 굿즈 폴더 필터"></select>
-        <button id="libraryNewFolder" type="button">폴더 만들기</button>
-      </div>
-      <div id="ownedLibraryGrid" class="library-grid"></div>
-    </section>
-  </div>
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
-
   <script>
-    const state = {
-      items: [],
-      filtered: [],
-      visible: 80,
-      meta: null,
-      owned: {
-        folders: [],
-        goods: [],
-      },
-      pendingOwnedItem: null,
-      kujiCampaigns: [],
-      qualityReport: null,
-      operationsReport: null,
-    };
-
-    const $ = (id) => document.getElementById(id);
+    const state = { items: [], filtered: [] };
     const fmt = new Intl.NumberFormat('ko-KR');
-    const collator = new Intl.Collator('ko-KR');
-    const ownedStorageKey = 'deokive_owned_goods_v1';
 
     function text(value) {
       return value == null ? '' : String(value);
     }
 
-    function compactDate(value) {
-      if (!value) return '';
-      return String(value).replaceAll('-', '.');
-    }
-
-    function price(item) {
-      if (item.official_price_jpy) return `¥${fmt.format(item.official_price_jpy)}`;
-      if (item.official_price_krw) return `${fmt.format(item.official_price_krw)}원`;
-      return '';
-    }
-
-    function option(label, value = label) {
-      const node = document.createElement('option');
-      node.value = value;
-      node.textContent = label;
-      return node;
-    }
-
-    function countBy(items, field) {
-      const map = new Map();
-      for (const item of items) {
-        const key = text(item[field]) || '미분류';
-        map.set(key, (map.get(key) || 0) + 1);
-      }
-      return [...map.entries()].sort((a, b) => b[1] - a[1] || collator.compare(a[0], b[0]));
-    }
-
-    function loadOwned() {
-      try {
-        const parsed = JSON.parse(localStorage.getItem(ownedStorageKey) || '{}');
-        state.owned = {
-          folders: Array.isArray(parsed.folders) && parsed.folders.length
-            ? parsed.folders
-            : [{ id: 'top', name: '내 굿즈' }],
-          goods: Array.isArray(parsed.goods) ? parsed.goods : [],
-        };
-      } catch (_) {
-        state.owned = { folders: [{ id: 'top', name: '내 굿즈' }], goods: [] };
-      }
-      renderOwnedControls();
-    }
-
-    function saveOwned() {
-      localStorage.setItem(ownedStorageKey, JSON.stringify(state.owned));
-      renderOwnedControls();
-      if ($('ownedLibrary').classList.contains('open')) renderOwnedLibrary();
-    }
-
-    function renderOwnedControls() {
-      const select = $('ownedFolder');
-      const selectedOwnedFolder = select.value;
-      select.replaceChildren(...state.owned.folders.map((folder) => option(folder.name, folder.id)));
-      select.value = state.owned.folders.some((folder) => folder.id === selectedOwnedFolder)
-        ? selectedOwnedFolder
-        : state.owned.folders[0]?.id || 'top';
-      const sheetSelect = $('sheetFolder');
-      const selectedSheetFolder = sheetSelect.value || select.value;
-      sheetSelect.replaceChildren(...state.owned.folders.map((folder) => option(folder.name, folder.id)));
-      sheetSelect.value = state.owned.folders.some((folder) => folder.id === selectedSheetFolder)
-        ? selectedSheetFolder
-        : select.value || state.owned.folders[0]?.id || 'top';
-      const librarySelect = $('libraryFolder');
-      if (librarySelect) {
-        const selectedLibraryFolder = librarySelect.value || 'all';
-        librarySelect.replaceChildren(
-          option('전체 폴더', 'all'),
-          ...state.owned.folders.map((folder) => option(folder.name, folder.id)),
-        );
-        librarySelect.value = selectedLibraryFolder === 'all' || state.owned.folders.some((folder) => folder.id === selectedLibraryFolder)
-          ? selectedLibraryFolder
-          : 'all';
-      }
-      $('ownedCount').textContent = `${fmt.format(state.owned.goods.length)}개`;
-      updateOwnedFolderHint();
-      renderLatestOwned();
-      if (state.items.length) renderResults();
-    }
-
-    function updateOwnedFolderHint() {
-      const top = topFolder();
-      const selected = selectedFolder();
-      const topCount = state.owned.goods.filter((owned) => owned.folderId === top.id).length;
-      const selectedCount = selected
-        ? state.owned.goods.filter((owned) => owned.folderId === selected.id).length
-        : 0;
-      $('folderHint').innerHTML = `
-        <b>저장 위치</b>
-        <span>추가하기는 ${escapeHtml(top.name)}로 바로 저장 · 폴더 지정은 ${escapeHtml(selected?.name || top.name)}에 저장 (${fmt.format(selectedCount)}개)</span>
-      `;
-      if (top.id !== selected?.id && topCount) {
-        $('folderHint').querySelector('span').append(` · 맨 위 폴더 ${fmt.format(topCount)}개`);
-      }
-    }
-
-    function renderLatestOwned() {
-      const host = $('latestOwned');
-      if (!host) return;
-      if (!state.owned.goods.length) {
-        host.innerHTML = '<p class="latest-owned-empty">아직 추가한 굿즈가 없어요. 검색 결과에서 추가하기를 눌러 보세요.</p>';
-        return;
-      }
-      const folderNameById = new Map(state.owned.folders.map((folder) => [folder.id, folder.name]));
-      const fragment = document.createDocumentFragment();
-      for (const owned of state.owned.goods.slice(0, 3)) {
-        const name = owned.item?.name_ko || owned.item?.name_ja || '이름 없음';
-        const folder = folderNameById.get(owned.folderId) || '내 굿즈';
-        const row = document.createElement('div');
-        row.className = 'latest-owned-item';
-        row.innerHTML = `
-          <div class="latest-owned-thumb">
-            ${imageMarkup(owned.item, name)}
-          </div>
-          <div>
-            <div class="latest-owned-name">${escapeHtml(name)}</div>
-            <div class="latest-owned-folder">${escapeHtml(folder)}</div>
-          </div>
-          <div class="latest-owned-qty">x${fmt.format(owned.quantity || 1)}</div>
-        `;
-        fragment.append(row);
-      }
-      host.replaceChildren(fragment);
-    }
-
-    function topFolder() {
-      return state.owned.folders[0] || { id: 'top', name: '내 굿즈' };
-    }
-
-    function selectedFolder(folderId = $('ownedFolder').value) {
-      folderId = folderId || state.owned.folders[0]?.id || 'top';
-      return state.owned.folders.find((folder) => folder.id === folderId) || state.owned.folders[0];
-    }
-
-    function ownedKeyFor(item) {
-      return text(item.catalog_index || item.barcode || item.name_ko || item.name_ja);
-    }
-
-    function isOwnedInSelectedFolder(item) {
-      const folder = selectedFolder();
-      if (!folder) return false;
-      const key = ownedKeyFor(item);
-      return state.owned.goods.some((owned) => owned.folderId === folder.id && owned.catalogKey === key);
-    }
-
-    function addOwned(item, folderId = $('ownedFolder').value) {
-      const folder = selectedFolder(folderId);
-      if (!folder) return;
-      const key = ownedKeyFor(item);
-      const existing = state.owned.goods.find((owned) => owned.folderId === folder.id && owned.catalogKey === key);
-      if (existing) {
-        existing.quantity += 1;
-        existing.updatedAt = new Date().toISOString();
-        showToast(`${folder.name}에 이미 있어 수량을 1 늘렸어요`);
-      } else {
-        state.owned.goods.unshift({
-          id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
-          folderId: folder.id,
-          catalogKey: key,
-          quantity: 1,
-          addedAt: new Date().toISOString(),
-          item: {
-            catalog_index: item.catalog_index,
-            name_ko: item.name_ko,
-            name_ja: item.name_ja,
-            category: item.category,
-            character_name: item.character_name,
-            affiliation: item.affiliation,
-            series_name: item.series_name,
-            sub_series: item.sub_series,
-            official_price_jpy: item.official_price_jpy,
-            image_url: item.image_url,
-            local_image_path: item.local_image_path,
-            source_url: item.source_url,
-            source_store: item.source_store,
-            release_date: item.release_date,
-            barcode: item.barcode,
-            copied_from: 'public_catalog',
-          },
-        });
-        showToast(`${folder.name}에 추가했어요`);
-      }
-      saveOwned();
-    }
-
-    function createFolder(targetSelectId = 'ownedFolder') {
-      const raw = prompt('새 폴더 이름을 입력해 주세요', '새 굿즈 폴더');
-      const name = (raw || '').trim();
-      if (!name) return;
-      const folder = {
-        id: `folder-${Date.now()}-${Math.random().toString(16).slice(2)}`,
-        name,
-      };
-      state.owned.folders.unshift(folder);
-      saveOwned();
-      $(targetSelectId).value = folder.id;
-      $('ownedFolder').value = folder.id;
-      $('sheetFolder').value = folder.id;
-      showToast(`${name} 폴더를 만들었어요`);
-    }
-
-    function openOwnedSheet(item) {
-      state.pendingOwnedItem = item;
-      const name = item.name_ko || item.name_ja || item.name_en || '이름 없음';
-      const meta = [item.source_store, compactDate(item.release_date), price(item)].filter(Boolean).join(' · ');
-      $('sheetName').textContent = name;
-      $('sheetMeta').textContent = meta || '선택한 DB 정보가 내 기기에만 저장돼요';
-      $('sheetFolder').value = $('ownedFolder').value || state.owned.folders[0]?.id || 'top';
-      $('sheetThumb').innerHTML = imageMarkup(item, name);
-      $('ownedSheet').classList.add('open');
-      $('ownedSheet').setAttribute('aria-hidden', 'false');
-    }
-
-    function closeOwnedSheet() {
-      state.pendingOwnedItem = null;
-      $('ownedSheet').classList.remove('open');
-      $('ownedSheet').setAttribute('aria-hidden', 'true');
-    }
-
-    function confirmOwnedAdd() {
-      if (!state.pendingOwnedItem) return closeOwnedSheet();
-      const folderId = $('sheetFolder').value || state.owned.folders[0]?.id || 'top';
-      $('ownedFolder').value = folderId;
-      addOwned(state.pendingOwnedItem, folderId);
-      closeOwnedSheet();
-    }
-
-    function addPendingToTopFolder() {
-      if (!state.pendingOwnedItem) return closeOwnedSheet();
-      const folder = topFolder();
-      $('ownedFolder').value = folder.id;
-      $('sheetFolder').value = folder.id;
-      addOwned(state.pendingOwnedItem, folder.id);
-      closeOwnedSheet();
-    }
-
-    function showOwnedList() {
-      renderOwnedLibrary();
-      $('ownedLibrary').classList.add('open');
-      $('ownedLibrary').setAttribute('aria-hidden', 'false');
-    }
-
-    function closeOwnedLibrary() {
-      $('ownedLibrary').classList.remove('open');
-      $('ownedLibrary').setAttribute('aria-hidden', 'true');
-    }
-
-    function renderOwnedLibrary() {
-      const grid = $('ownedLibraryGrid');
-      const folderFilter = $('libraryFolder').value || 'all';
-      const folderNameById = new Map(state.owned.folders.map((folder) => [folder.id, folder.name]));
-      const goods = state.owned.goods.filter((owned) => folderFilter === 'all' || owned.folderId === folderFilter);
-      if (!goods.length) {
-        grid.innerHTML = '<div class="empty">이 폴더에 저장된 굿즈가 없어요</div>';
-        return;
-      }
-      const fragment = document.createDocumentFragment();
-      for (const owned of goods) {
-        const name = owned.item?.name_ko || owned.item?.name_ja || '이름 없음';
-        const folder = folderNameById.get(owned.folderId) || '내 굿즈';
-        const meta = [
-          folder,
-          owned.item?.category,
-          owned.item?.source_store,
-          compactDate(owned.item?.release_date),
-        ].filter(Boolean).join(' · ');
-        const card = document.createElement('article');
-        card.className = 'owned-card';
-        card.innerHTML = `
-          <div class="owned-card-top">
-            <div class="owned-card-thumb">
-              ${imageMarkup(owned.item, name)}
-            </div>
-            <div>
-              <div class="owned-card-name">${escapeHtml(name)}</div>
-              <div class="owned-card-meta">
-                <span>${escapeHtml(meta || 'DB에서 추가한 굿즈')}</span>
-                <span>${escapeHtml([owned.item?.character_name, price(owned.item || {})].filter(Boolean).join(' · ') || '세부 정보 없음')}</span>
-              </div>
-            </div>
-          </div>
-          <div class="owned-card-foot">
-            <span>수량 ${fmt.format(owned.quantity || 1)}</span>
-            <div class="owned-card-tools">
-              <button type="button" data-owned-action="dec" data-owned-id="${escapeAttr(owned.id)}" aria-label="${escapeAttr(name)} 수량 줄이기">-</button>
-              <button type="button" data-owned-action="inc" data-owned-id="${escapeAttr(owned.id)}" aria-label="${escapeAttr(name)} 수량 늘리기">+</button>
-              ${owned.item?.source_url ? `<a href="${escapeAttr(owned.item.source_url)}" target="_blank" rel="noopener noreferrer">출처</a>` : '<span>로컬</span>'}
-              <button class="danger" type="button" data-owned-action="remove" data-owned-id="${escapeAttr(owned.id)}" aria-label="${escapeAttr(name)} 삭제">삭제</button>
-            </div>
-          </div>
-        `;
-        fragment.append(card);
-      }
-      grid.replaceChildren(fragment);
-    }
-
-    function updateOwnedQuantity(ownedId, delta) {
-      const owned = state.owned.goods.find((item) => item.id === ownedId);
-      if (!owned) return;
-      const next = (owned.quantity || 1) + delta;
-      if (next <= 0) {
-        removeOwned(ownedId, false);
-        return;
-      }
-      owned.quantity = next;
-      owned.updatedAt = new Date().toISOString();
-      saveOwned();
-      showToast(`수량을 ${fmt.format(next)}개로 바꿨어요`);
-    }
-
-    function removeOwned(ownedId, ask = true) {
-      const owned = state.owned.goods.find((item) => item.id === ownedId);
-      if (!owned) return;
-      const name = owned.item?.name_ko || owned.item?.name_ja || '이 굿즈';
-      if (ask && !confirm(`${name}을(를) 내 보유 목록에서 삭제할까요?`)) return;
-      state.owned.goods = state.owned.goods.filter((item) => item.id !== ownedId);
-      saveOwned();
-      showToast('보유 목록에서 삭제했어요');
-    }
-
-    function clearOwned() {
-      if (!state.owned.goods.length) {
-        showToast('초기화할 보유 굿즈가 없어요');
-        return;
-      }
-      if (!confirm('이 기기에 저장된 보유 굿즈 목록을 모두 지울까요?')) return;
-      state.owned.goods = [];
-      saveOwned();
-      showToast('보유 굿즈 목록을 비웠어요');
-    }
-
-    let toastTimer = null;
-    function showToast(message) {
-      const toast = $('toast');
-      toast.textContent = message;
-      toast.classList.add('show');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
-    }
-
-    function populateFilters() {
-      const category = $('categoryFilter');
-      const store = $('storeFilter');
-      category.replaceChildren(option('카테고리 전체', 'all'));
-      store.replaceChildren(option('스토어 전체', 'all'));
-      for (const [name] of countBy(state.items, 'category')) category.append(option(name));
-      for (const [name] of countBy(state.items, 'source_store')) store.append(option(name));
-    }
-
-    function updateStats() {
-      const rows = state.items.length;
-      const images = state.items.filter((item) => displayImageUrl(item)).length;
-      const sources = state.items.filter((item) => item.source_url).length;
-      const stores = new Set(state.items.map((item) => text(item.source_store)).filter(Boolean)).size;
-      $('statRows').textContent = fmt.format(rows);
-      $('statImages').textContent = fmt.format(images);
-      $('statSources').textContent = fmt.format(sources);
-      $('statStores').textContent = fmt.format(stores);
-
-      const bars = $('categoryBars');
-      const top = countBy(state.items, 'category').slice(0, 6);
-      const max = top[0]?.[1] || 1;
-      bars.replaceChildren(...top.map(([name, count]) => {
-        const row = document.createElement('div');
-        row.className = 'bar';
-        row.innerHTML = `<span title="${escapeAttr(name)}">${escapeHtml(name)}</span><div class="track"><div class="fill" style="width:${Math.max(4, Math.round(count / max * 100))}%"></div></div><span>${fmt.format(count)}</span>`;
-        return row;
-      }));
-
-      if (state.meta?.generated_at) {
-        $('updated').textContent = `마지막 공개 업데이트 ${state.meta.generated_at.replace('T', ' ').replace('Z', ' UTC')}`;
-      }
-    }
-
     function escapeHtml(value) {
-      return text(value).replace(/[&<>"']/g, (char) => ({
-        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
-      }[char]));
+      return text(value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
     }
 
-    function escapeAttr(value) {
-      return escapeHtml(value).replace(/`/g, '&#96;');
-    }
-
-    function displayImageUrl(item) {
-      return text(item?.local_image_path || item?.image_url);
-    }
-
-    function imageMarkup(item, name, options = {}) {
-      const url = displayImageUrl(item);
-      const fallbackTag = options.fallbackTag || 'span';
-      const fallbackClass = options.fallbackClass ? ` class="${escapeAttr(options.fallbackClass)}"` : '';
-      const fallbackText = options.fallbackText || '이미지 없음';
-      if (!url) return `<${fallbackTag}${fallbackClass}>${escapeHtml(fallbackText)}</${fallbackTag}>`;
-      const loading = options.lazy ? ' loading="lazy"' : '';
-      const fallback = `Object.assign(document.createElement('${fallbackTag}'),{${options.fallbackClass ? `className:'${escapeAttr(options.fallbackClass)}',` : ''}textContent:'${escapeAttr(options.errorText || fallbackText)}'})`;
-      return `<img${loading} src="${escapeAttr(url)}" alt="${escapeAttr(name)}" onerror="this.replaceWith(${fallback})">`;
+    function localImagePath(item) {
+      const local = text(item.local_image_path);
+      if (!local) return text(item.image_url);
+      return local.startsWith('/') ? local : local;
     }
 
     function searchable(item) {
@@ -1937,297 +228,97 @@
         item.name_en,
         item.series_name,
         item.sub_series,
-        item.affiliation,
         item.character_name,
+        item.affiliation,
         item.category,
         item.source_store,
         item.barcode,
       ].map(text).join(' ').toLowerCase();
     }
 
-    function applyFilters(resetVisible = true) {
-      const query = $('search').value.trim().toLowerCase();
-      const category = $('categoryFilter').value;
-      const store = $('storeFilter').value;
-      const image = $('imageFilter').value;
-      if (resetVisible) state.visible = 80;
+    function fillSelect(id, values) {
+      const select = document.getElementById(id);
+      for (const value of values) {
+        const option = document.createElement('option');
+        option.value = value;
+        option.textContent = value;
+        select.append(option);
+      }
+    }
 
+    function renderSummary(payload) {
+      document.getElementById('total').textContent = fmt.format(state.items.length);
+      document.getElementById('withImage').textContent = fmt.format(
+        state.items.filter((item) => item.image_url || item.local_image_path).length
+      );
+      document.getElementById('stores').textContent = fmt.format(
+        new Set(state.items.map((item) => text(item.source_store)).filter(Boolean)).size
+      );
+      document.getElementById('updated').textContent =
+        text(payload.meta?.updated_at || payload.updated_at || '').slice(0, 10) || '-';
+    }
+
+    function renderList() {
+      const list = document.getElementById('list');
+      if (!state.filtered.length) {
+        list.innerHTML = '<div class="empty">검색 결과가 없어요.</div>';
+        return;
+      }
+      const fragment = document.createDocumentFragment();
+      for (const item of state.filtered.slice(0, 120)) {
+        const article = document.createElement('article');
+        article.className = 'item';
+        const img = localImagePath(item);
+        article.innerHTML = `
+          ${img ? `<img class="thumb" src="${escapeHtml(img)}" alt="">` : '<div class="thumb"></div>'}
+          <div class="body">
+            <strong>${escapeHtml(item.name_ko || item.name_ja || item.name_en || '이름 미확인 굿즈')}</strong>
+            <div class="meta">
+              <span>${escapeHtml([item.series_name, item.character_name].filter(Boolean).join(' · '))}</span>
+              <span>${escapeHtml([item.category, item.source_store].filter(Boolean).join(' · '))}</span>
+              <span>${item.official_price_jpy == null ? '가격 미확인' : `${fmt.format(item.official_price_jpy)} JPY`}</span>
+            </div>
+          </div>
+        `;
+        fragment.append(article);
+      }
+      list.replaceChildren(fragment);
+    }
+
+    function applyFilters() {
+      const query = document.getElementById('search').value.trim().toLowerCase();
+      const category = document.getElementById('category').value;
+      const store = document.getElementById('store').value;
       state.filtered = state.items.filter((item) => {
         if (query && !item._search.includes(query)) return false;
-        if (category !== 'all' && text(item.category) !== category) return false;
-        if (store !== 'all' && text(item.source_store) !== store) return false;
-        if (image === 'with' && !displayImageUrl(item)) return false;
-        if (image === 'missing' && displayImageUrl(item)) return false;
+        if (category && item.category !== category) return false;
+        if (store && item.source_store !== store) return false;
         return true;
       });
-      renderResults();
-    }
-
-    function renderResults() {
-      const results = $('results');
-      const rows = state.filtered.slice(0, state.visible);
-      $('resultCount').textContent = `${fmt.format(state.filtered.length)}개`;
-      $('more').hidden = state.visible >= state.filtered.length;
-
-      if (!rows.length) {
-        results.className = '';
-        results.innerHTML = '<div class="empty">조건에 맞는 굿즈가 없어요</div>';
-        return;
-      }
-
-      results.className = 'grid';
-      const fragment = document.createDocumentFragment();
-      for (const item of rows) fragment.append(renderCard(item));
-      results.replaceChildren(fragment);
-    }
-
-    function renderCard(item) {
-      const card = document.createElement('article');
-      card.className = 'card';
-      const name = item.name_ko || item.name_ja || item.name_en || '이름 없음';
-      const secondName = item.name_ja && item.name_ja !== name ? item.name_ja : '';
-      const sourceLabel = item.source_url ? '출처 열기' : '출처 없음';
-      const selectedAdded = isOwnedInSelectedFolder(item);
-      const topAdded = state.owned.goods.some((owned) => owned.folderId === topFolder().id && owned.catalogKey === ownedKeyFor(item));
-      const chooseLabel = selectedAdded ? '선택 폴더에 있음' : '폴더 지정';
-      const quickLabel = topAdded ? '맨 위에 있음' : '내 굿즈 추가';
-      card.innerHTML = `
-        <div class="thumb">
-          <div class="badge">${escapeHtml(item.category || '미분류')}</div>
-          ${imageMarkup(item, name, { lazy: true, fallbackTag: 'div', fallbackClass: 'placeholder', errorText: '이미지 확인 필요' })}
-        </div>
-        <div class="body">
-          <h3 class="name">${escapeHtml(name)}</h3>
-          <div class="meta">
-            ${secondName ? `<span>${escapeHtml(secondName)}</span>` : ''}
-            <span>${escapeHtml([item.affiliation, item.character_name].filter(Boolean).join(' · ') || '캐릭터 정보 없음')}</span>
-            <span>${escapeHtml([item.source_store, compactDate(item.release_date), price(item)].filter(Boolean).join(' · ') || '상세 정보 확인 필요')}</span>
-          </div>
-        </div>
-        <div class="card-actions">
-          <a class="source" href="${escapeAttr(item.source_url || '#')}" target="_blank" rel="noopener noreferrer" aria-disabled="${item.source_url ? 'false' : 'true'}">${sourceLabel}</a>
-          <button class="quick-owned${topAdded ? ' added' : ''}" type="button" data-key="${escapeAttr(ownedKeyFor(item))}" title="가장 상단 폴더에 바로 굿즈로 추가">${quickLabel}</button>
-          <button class="choose-owned${selectedAdded ? ' added' : ''}" type="button" data-key="${escapeAttr(ownedKeyFor(item))}" title="어느 폴더에 넣을지 지정해서 굿즈로 추가">${chooseLabel}</button>
-        </div>
-      `;
-      card.querySelector('.quick-owned').addEventListener('click', () => addOwned(item, topFolder().id));
-      card.querySelector('.choose-owned').addEventListener('click', () => openOwnedSheet(item));
-      return card;
-    }
-
-    function renderKujiCampaigns() {
-      const rows = state.kujiCampaigns;
-      const dated = rows.filter((item) => item.release_date);
-      $('kujiRows').textContent = fmt.format(rows.length);
-      $('kujiDated').textContent = fmt.format(dated.length);
-
-      const list = $('kujiList');
-      if (!rows.length) {
-        list.innerHTML = '<div class="empty">이치방쿠지 DB를 아직 불러오지 못했어요</div>';
-        return;
-      }
-
-      const latest = [...rows]
-        .filter((item) => item.release_date)
-        .sort((a, b) => text(b.release_date).localeCompare(text(a.release_date)))
-        .slice(0, 5);
-      const fragment = document.createDocumentFragment();
-      for (const item of latest) {
-        const link = document.createElement('a');
-        link.className = 'kuji-item';
-        link.href = item.url;
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-        link.innerHTML = `
-          <strong>${escapeHtml(item.title || '이치방쿠지 캠페인')}</strong>
-          <span>${escapeHtml([compactDate(item.release_date), item.source_category].filter(Boolean).join(' · ') || '날짜 확인 필요')}</span>
-        `;
-        fragment.append(link);
-      }
-      list.replaceChildren(fragment);
-    }
-
-    async function loadKujiCampaigns() {
-      try {
-        const response = await fetch('data/ichiban_kuji_campaigns.json?v=20260722-kuji-campaigns', { cache: 'no-store' });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const rows = await response.json();
-        state.kujiCampaigns = Array.isArray(rows) ? rows : [];
-        renderKujiCampaigns();
-      } catch (error) {
-        $('kujiRows').textContent = '-';
-        $('kujiDated').textContent = '-';
-        $('kujiList').innerHTML = `<div class="empty">쿠지 DB를 불러오지 못했어요. ${escapeHtml(error.message || error)}</div>`;
-      }
-    }
-
-    function formatPercent(value) {
-      if (!Number.isFinite(Number(value))) return '-';
-      return `${(Number(value) * 100).toFixed(1)}%`;
-    }
-
-    function renderQualityReport() {
-      const report = state.qualityReport;
-      if (!report) return;
-      const coverage = report.coverage || {};
-      $('qualitySource').textContent = formatPercent(coverage.source_url);
-      $('qualityImage').textContent = formatPercent(coverage.image_url);
-      $('qualityRelease').textContent = formatPercent(coverage.release_date);
-
-      const gaps = report.high_priority_gaps || {};
-      const rows = Array.isArray(gaps.has_image_missing_source)
-        ? gaps.has_image_missing_source
-        : (Array.isArray(gaps.has_image_missing_source_sample) ? gaps.has_image_missing_source_sample : []);
-      $('qualityGapCount').textContent = fmt.format(gaps.has_image_missing_source_count || rows.length || 0);
-      const imageBacklog = report.image_backlog || {};
-      $('imageMissingCount').textContent = fmt.format(imageBacklog.missing_images || report.missing?.image_url || 0);
-      $('imageProviderCount').textContent = fmt.format(imageBacklog.provider_candidate_items || 0);
-      $('imageGenericSourceCount').textContent = fmt.format(imageBacklog.missing_with_generic_source_url || 0);
-      renderOperationsScorecard();
-
-      const list = $('qualityGapList');
-      if (!rows.length) {
-        list.innerHTML = '<div class="empty">지금 우선 보강 항목은 없어요</div>';
-        return;
-      }
-
-      const fragment = document.createDocumentFragment();
-      for (const item of rows.slice(0, 3)) {
-        const entry = document.createElement('div');
-        entry.className = 'quality-item';
-        entry.innerHTML = `
-          <strong>${escapeHtml(item.product_name || '이름 미확인 굿즈')}</strong>
-          <span>${escapeHtml([item.source_store, item.category].filter(Boolean).join(' · ') || '출처 확인 필요')}</span>
-        `;
-        fragment.append(entry);
-      }
-      list.replaceChildren(fragment);
-    }
-
-    function scorecardLabel(workstream) {
-      return {
-        source_discovery: '출처 탐색',
-        image_enrichment: '이미지 보강',
-        metadata_backlog: '메타데이터',
-        deduplication: '중복 검토',
-        ichiban_kuji_history: '이치방쿠지',
-        animation_taxonomy: '애니 분류',
-        generic_source_patch_candidates: '출처 후보',
-      }[workstream] || workstream;
-    }
-
-    function renderOperationsScorecard() {
-      const container = $('operationsScorecard');
-      if (!container) return;
-      const rows = Array.isArray(state.operationsReport?.workstream_scorecard)
-        ? state.operationsReport.workstream_scorecard
-        : [];
-      if (!rows.length) {
-        container.innerHTML = '<div class="empty">작업 스코어카드를 불러오지 못했어요.</div>';
-        return;
-      }
-
-      const fragment = document.createDocumentFragment();
-      for (const row of rows.slice(0, 4)) {
-        const item = document.createElement('div');
-        item.className = 'scorecard-item';
-        item.innerHTML = `
-          <strong>${escapeHtml(scorecardLabel(row.workstream))}<span class="scorecard-badge">${escapeHtml(row.status || 'open')}</span></strong>
-          <span>${fmt.format(Number(row.open_rows) || 0)}건 · ${escapeHtml(row.next_step || 'review')}</span>
-        `;
-        fragment.append(item);
-      }
-      container.replaceChildren(fragment);
-    }
-
-    async function loadQualityReport() {
-      try {
-        const [qualityResponse, operationsResponse] = await Promise.all([
-          fetch('data/catalog_quality_public.json?v=20260722-quality-report', { cache: 'no-store' }),
-          fetch('data/catalog_operations_public.json?v=20260722-workstream-scorecard', { cache: 'no-store' }),
-        ]);
-        if (!qualityResponse.ok) throw new Error(`quality HTTP ${qualityResponse.status}`);
-        if (!operationsResponse.ok) throw new Error(`operations HTTP ${operationsResponse.status}`);
-        state.qualityReport = await qualityResponse.json();
-        state.operationsReport = await operationsResponse.json();
-        renderQualityReport();
-      } catch (error) {
-        $('qualitySource').textContent = '-';
-        $('qualityImage').textContent = '-';
-        $('qualityRelease').textContent = '-';
-        $('qualityGapCount').textContent = '-';
-        $('imageMissingCount').textContent = '-';
-        $('imageProviderCount').textContent = '-';
-        $('imageGenericSourceCount').textContent = '-';
-        $('qualityGapList').innerHTML = `<div class="empty">품질 리포트를 불러오지 못했어요. ${escapeHtml(error.message || error)}</div>`;
-        $('operationsScorecard').innerHTML = `<div class="empty">작업 스코어카드를 불러오지 못했어요.</div>`;
-      }
+      renderList();
     }
 
     async function init() {
-      loadOwned();
-      loadKujiCampaigns();
-      loadQualityReport();
+      const list = document.getElementById('list');
+      list.innerHTML = '<div class="empty">카탈로그 DB를 불러오는 중이에요.</div>';
       try {
-        const response = await fetch('data/catalog_public.json?v=20260722-owned-flow', { cache: 'no-store' });
+        const response = await fetch('data/catalog_public.json?v=single-db', { cache: 'no-store' });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const payload = await response.json();
-        state.meta = payload.meta || {};
         state.items = (payload.items || []).map((item) => ({ ...item, _search: searchable(item) }));
         state.filtered = state.items;
-        populateFilters();
-        updateStats();
-        applyFilters(false);
+        fillSelect('category', [...new Set(state.items.map((item) => item.category).filter(Boolean))].sort());
+        fillSelect('store', [...new Set(state.items.map((item) => item.source_store).filter(Boolean))].sort());
+        renderSummary(payload);
+        renderList();
       } catch (error) {
-        $('updated').textContent = '카탈로그 로딩 실패';
-        $('results').className = '';
-        $('results').innerHTML = `<div class="empty">공개 카탈로그를 불러오지 못했어요. ${escapeHtml(error.message || error)}</div>`;
+        list.innerHTML = `<div class="empty">카탈로그 DB를 불러오지 못했어요. ${escapeHtml(error.message || error)}</div>`;
       }
     }
 
-    let timer = null;
-    $('search').addEventListener('input', () => {
-      clearTimeout(timer);
-      timer = setTimeout(() => applyFilters(true), 120);
-    });
-    $('categoryFilter').addEventListener('change', () => applyFilters(true));
-    $('storeFilter').addEventListener('change', () => applyFilters(true));
-    $('imageFilter').addEventListener('change', () => applyFilters(true));
-    $('ownedFolder').addEventListener('change', () => {
-      updateOwnedFolderHint();
-      renderResults();
-    });
-    $('newFolder').addEventListener('click', () => createFolder('ownedFolder'));
-    $('openOwned').addEventListener('click', showOwnedList);
-    $('clearOwned').addEventListener('click', clearOwned);
-    $('closeOwnedLibrary').addEventListener('click', closeOwnedLibrary);
-    $('ownedLibrary').addEventListener('click', (event) => {
-      if (event.target === $('ownedLibrary')) closeOwnedLibrary();
-      const actionButton = event.target.closest('[data-owned-action]');
-      if (!actionButton) return;
-      const ownedId = actionButton.dataset.ownedId;
-      if (actionButton.dataset.ownedAction === 'inc') updateOwnedQuantity(ownedId, 1);
-      if (actionButton.dataset.ownedAction === 'dec') updateOwnedQuantity(ownedId, -1);
-      if (actionButton.dataset.ownedAction === 'remove') removeOwned(ownedId);
-    });
-    $('libraryFolder').addEventListener('change', renderOwnedLibrary);
-    $('libraryNewFolder').addEventListener('click', () => createFolder('libraryFolder'));
-    $('closeOwnedSheet').addEventListener('click', closeOwnedSheet);
-    $('ownedSheet').addEventListener('click', (event) => {
-      if (event.target === $('ownedSheet')) closeOwnedSheet();
-    });
-    $('sheetFolder').addEventListener('change', () => {
-      $('ownedFolder').value = $('sheetFolder').value;
-      renderResults();
-    });
-    $('sheetNewFolder').addEventListener('click', () => createFolder('sheetFolder'));
-    $('addToTopFolder').addEventListener('click', addPendingToTopFolder);
-    $('confirmOwnedAdd').addEventListener('click', confirmOwnedAdd);
-    $('more').addEventListener('click', () => {
-      state.visible += 80;
-      renderResults();
-    });
-
+    document.getElementById('search').addEventListener('input', applyFilters);
+    document.getElementById('category').addEventListener('change', applyFilters);
+    document.getElementById('store').addEventListener('change', applyFilters);
     init();
   </script>
 </body>
