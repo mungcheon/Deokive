@@ -2,11 +2,15 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import hashlib
 import json
 import shutil
+import ssl
 import sys
+import urllib.request
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlparse
 
 try:
     from validate_agent_catalog_image_updates import iter_input_files, load_json, validate_payload
@@ -24,6 +28,32 @@ DEFAULT_META = ROOT / "data" / "catalog_public_meta.json"
 DEFAULT_INCOMING = ROOT / "data" / "intake" / "image_updates" / "incoming"
 DEFAULT_PROCESSED = ROOT / "data" / "intake" / "image_updates" / "processed"
 DEFAULT_REPORT = ROOT / "server" / "agent_catalog_image_update_import_report.json"
+APP_ASSET_DIR = ROOT / "assets" / "catalog_images"
+WEB_ASSET_DIR = ROOT / "assets" / "assets" / "catalog_images"
+ASSET_PREFIX = "assets/catalog_images"
+USER_AGENT = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"
+)
+REFERER_BY_HOST = {
+    "assets.1kuji.com": "https://1kuji.com/",
+    "bsp-prize.jp": "https://bsp-prize.jp/",
+    "chiikawamarket.jp": "https://chiikawamarket.jp/",
+    "images.goodsmile.info": "https://www.goodsmile.info/",
+    "images-goodsmile-info.s3-ap-northeast-1.amazonaws.com": "https://www.goodsmile.com/",
+    "shop.kotobukiya.co.jp": "https://shop.kotobukiya.co.jp/",
+    "tc-animate.techorus-cdn.com": "https://www.animate-onlineshop.jp/",
+    "www.bandai.co.jp": "https://www.bandai.co.jp/",
+    "www.movic.jp": "https://www.movic.jp/",
+}
+EXTENSION_BY_CONTENT_TYPE = {
+    "image/avif": ".avif",
+    "image/gif": ".gif",
+    "image/jpeg": ".jpg",
+    "image/jpg": ".jpg",
+    "image/png": ".png",
+    "image/webp": ".webp",
+}
 
 
 def load_catalog(path: Path) -> dict[str, Any]:
@@ -45,6 +75,8 @@ def build_index(items: list[dict[str, Any]]) -> dict[int, dict[str, Any]]:
 def import_payloads(
     catalog: dict[str, Any],
     payloads: list[tuple[Path, dict[str, Any]]],
+    *,
+    download_assets: bool = False,
 ) -> dict[str, Any]:
     items = [item for item in catalog.get("items", []) if isinstance(item, dict)]
     by_index = build_index(items)
@@ -83,8 +115,12 @@ def import_payloads(
                     }
                 )
                 continue
-            row["image_url"] = clean_text(update.get("image_url"))
-            row["local_image_path"] = None
+            image_url = clean_text(update.get("image_url"))
+            local_image_path = local_path_for_image_url(image_url) if image_url else None
+            if download_assets and image_url and local_image_path:
+                local_image_path = download_image_asset(image_url, local_image_path)
+            row["image_url"] = image_url
+            row["local_image_path"] = local_image_path
             if clean_text(update.get("source_url")):
                 row["source_url"] = clean_text(update.get("source_url"))
             updated_rows.append(
@@ -112,6 +148,64 @@ def import_payloads(
     updated_catalog["meta"] = meta
     updated_catalog["total_items"] = len(items)
     return {"catalog": updated_catalog, "updated_rows": updated_rows, "skipped_rows": skipped_rows}
+
+
+def local_path_for_image_url(image_url: str | None) -> str | None:
+    if not image_url:
+        return None
+    normalized = image_url.strip().replace("&amp;", "&")
+    parsed = urlparse(normalized)
+    suffix = Path(parsed.path).suffix.lower()
+    if suffix not in {".avif", ".gif", ".jpg", ".jpeg", ".png", ".webp"}:
+        suffix = ".img"
+    digest = hashlib.sha256(normalized.encode("utf-8")).hexdigest()[:20]
+    return f"{ASSET_PREFIX}/{digest}{suffix}"
+
+
+def download_image_asset(image_url: str, local_image_path: str) -> str:
+    image_bytes, content_type = download_image(image_url)
+    desired_suffix = EXTENSION_BY_CONTENT_TYPE.get(content_type, Path(local_image_path).suffix)
+    if desired_suffix and desired_suffix != Path(local_image_path).suffix:
+        local_image_path = str(Path(local_image_path).with_suffix(desired_suffix)).replace("\\", "/")
+    relative = Path(local_image_path)
+    if relative.is_absolute() or ".." in relative.parts:
+        raise ValueError(f"unsafe local image path: {local_image_path}")
+    for root in (ROOT, ROOT / "assets"):
+        target = root / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(image_bytes)
+    return local_image_path
+
+
+def download_image(image_url: str) -> tuple[bytes, str]:
+    parsed = urlparse(image_url)
+    headers = {
+        "User-Agent": USER_AGENT,
+        "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+        "Accept-Language": "ja,en-US;q=0.9,en;q=0.8,ko;q=0.7",
+    }
+    referer = REFERER_BY_HOST.get(parsed.netloc.lower())
+    if referer:
+        headers["Referer"] = referer
+    request = urllib.request.Request(image_url, headers=headers)
+    try:
+        with urllib.request.urlopen(request, timeout=30) as response:
+            content_type = response.headers.get_content_type()
+            if not content_type.startswith("image/"):
+                raise ValueError(f"URL did not return an image: {content_type}")
+            return response.read(), content_type
+    except Exception as error:
+        if "CERTIFICATE_VERIFY_FAILED" not in str(error):
+            raise
+        with urllib.request.urlopen(
+            request,
+            timeout=30,
+            context=ssl._create_unverified_context(),
+        ) as response:
+            content_type = response.headers.get_content_type()
+            if not content_type.startswith("image/"):
+                raise ValueError(f"URL did not return an image: {content_type}")
+            return response.read(), content_type
 
 
 def clean_text(value: Any) -> str | None:
@@ -198,6 +292,11 @@ def main() -> int:
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
     parser.add_argument("--processed-dir", type=Path, default=DEFAULT_PROCESSED)
     parser.add_argument("--write", action="store_true")
+    parser.add_argument(
+        "--skip-download-assets",
+        action="store_true",
+        help="Do not download image files or write local_image_path values while importing.",
+    )
     parser.add_argument("--no-move-processed", action="store_true")
     args = parser.parse_args()
 
@@ -208,7 +307,11 @@ def main() -> int:
         return 1
 
     catalog = load_catalog(args.catalog)
-    result = import_payloads(catalog, payloads)
+    result = import_payloads(
+        catalog,
+        payloads,
+        download_assets=bool(args.write and not args.skip_download_assets),
+    )
     updated_catalog = result["catalog"]
     report = {
         "write": args.write,

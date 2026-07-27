@@ -66,7 +66,49 @@ class ImportAgentCatalogImageUpdatesTests(unittest.TestCase):
         self.assertEqual("image_url_already_present", result["skipped_rows"][0]["reason"])
         self.assertEqual("https://example.com/image.jpg", result["catalog"]["items"][0]["image_url"])
         self.assertEqual("https://example.com/detail", result["catalog"]["items"][0]["source_url"])
-        self.assertIsNone(result["catalog"]["items"][0]["local_image_path"])
+        self.assertEqual(
+            target.local_path_for_image_url("https://example.com/image.jpg"),
+            result["catalog"]["items"][0]["local_image_path"],
+        )
+
+    def test_import_can_download_asset_files_for_known_image_url(self) -> None:
+        catalog = {
+            "items": [
+                {
+                    "catalog_index": 1,
+                    "name_ko": "Missing Image",
+                    "image_url": None,
+                    "source_url": None,
+                }
+            ],
+        }
+        updates = payload(
+            {
+                "catalog_index": 1,
+                "image_url": "https://example.com/image.jpg",
+                "source_url": "https://example.com/detail",
+                "evidence": [{"url": "https://example.com/detail", "type": "official"}],
+                "confidence": "confirmed",
+            }
+        )
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            with patch.object(target, "ROOT", temp_root), patch.object(
+                target,
+                "download_image",
+                return_value=(b"image-bytes", "image/jpeg"),
+            ):
+                result = target.import_payloads(
+                    catalog,
+                    [(Path("updates.json"), updates)],
+                    download_assets=True,
+                )
+
+                local_path = result["catalog"]["items"][0]["local_image_path"]
+                self.assertTrue(str(local_path).startswith("assets/catalog_images/"))
+                self.assertTrue((temp_root / str(local_path)).is_file())
+                self.assertTrue((temp_root / "assets" / str(local_path)).is_file())
 
     def test_write_path_updates_catalog_meta_and_moves_processed_file(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
