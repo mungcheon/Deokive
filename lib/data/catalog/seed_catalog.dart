@@ -28415,13 +28415,16 @@ const List<GoodsCatalogEntry> kSeedCatalog = [
     releaseDate: '2025-08',
   ),
   GoodsCatalogEntry(
-    nameKo: '이루마군 일러스트 카드 (한정)',
-    nameJa: '魔入りました！入間くん イラストカード',
+    nameKo: '이루마군 일러스트 카드 세트 (비 오는 날 ver.)',
+    nameJa: 'アニメ「魔入りました！入間くん」 描き下ろしイラストカードセット【雨の日ver.】',
     category: '문구',
     characterName: '혼합',
     affiliation: '이루마군',
     subSeries: '카드',
     officialPriceJpy: 330,
+    imageUrl: 'https://tc-animate.techorus-cdn.com/resize_image/resize_image.php?image=4573613728020_1_1753761908.jpg&width=400&height=400&square=1',
+    localImagePath: 'assets/catalog_images/de6a5a561c3b4af136bb.webp',
+    sourceUrl: 'https://www.animate-onlineshop.jp/pn/%E3%80%90%E3%82%B0%E3%83%83%E3%82%BA-%E3%82%AB%E3%83%BC%E3%83%89%E3%80%91%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8C%E9%AD%94%E5%85%A5%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F%EF%BC%81%E5%85%A5%E9%96%93%E3%81%8F%E3%82%93%E3%80%8D+%E6%8F%8F%E3%81%8D%E4%B8%8B%E3%82%8D%E3%81%97%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%E3%82%AB%E3%83%BC%E3%83%89%E3%82%BB%E3%83%83%E3%83%88%E3%80%90%E9%9B%A8%E3%81%AE%E6%97%A5ver.%E3%80%91/pd/3188246/',
     sourceStore: '애니메이트',
   ),
   GoodsCatalogEntry(

@@ -3,7 +3,7 @@
 - Focus pack: `source-discovery-focus-002`
 - Store/category: `엔스카이` / `키링`
 - Pack items: `20`
-- Remaining source-discovery rows: `751`
+- Remaining source-discovery rows: `750`
 - Auto-apply ready rows: `0`
 - Status: `fallback_search_required`
 

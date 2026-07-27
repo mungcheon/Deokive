@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-27T00:17:39Z",
+  "generated_at": "2026-07-27T00:24:34Z",
   "summary": {
     "batch_count": 160,
     "max_published_batches": 160,
-    "summed_batch_rows": 20830,
+    "summed_batch_rows": 20826,
     "top_next_batch_count": 10,
     "by_workstream": [
       [
@@ -223,8 +223,8 @@
       ]
     ],
     "open_review_queues": {
-      "source_discovery_rows": 761,
-      "image_missing_rows": 784,
+      "source_discovery_rows": 760,
+      "image_missing_rows": 783,
       "dedupe_groups": 59,
       "animation_unknown_categories": 0,
       "ichiban_missing_release_date_rows": 8,
@@ -248,23 +248,23 @@
       "requested_focus_actionable_rows": 600,
       "requested_focus_unqueued_actionable_rows": 0,
       "requested_focus_barcode_template_rows_excluded": 5674,
-      "source_discovery_action_rows": 751,
-      "source_discovery_actionable_rows": 751,
+      "source_discovery_action_rows": 750,
+      "source_discovery_actionable_rows": 750,
       "source_discovery_unqueued_actionable_rows": 0,
       "source_discovery_manual_research_backlog_rows": 10,
       "source_discovery_manual_identity_backfill_required_rows": 3,
       "source_discovery_manual_official_lookup_rows": 7,
-      "source_discovery_focus_template_rows": 751,
+      "source_discovery_focus_template_rows": 750,
       "source_discovery_focus_template_work_order_packs": 67,
-      "source_discovery_focus_template_dry_run_skipped_rows": 751,
+      "source_discovery_focus_template_dry_run_skipped_rows": 750,
       "source_discovery_next_focus_pack_rows": 20,
       "source_discovery_next_focus_pack_manual_quarantine": true,
       "source_discovery_next_focus_pack_quarantine_reason": "official_cache_safe_exact_match_absent",
       "source_discovery_recommended_active_focus_pack_id": "source-discovery-focus-002",
       "source_discovery_focus_pack_progress_queues": 67,
-      "source_discovery_focus_pack_progress_remaining_rows": 751,
-      "source_discovery_starter_queue_rows": 761,
-      "source_discovery_starter_queue_groups": 382,
+      "source_discovery_focus_pack_progress_remaining_rows": 750,
+      "source_discovery_starter_queue_rows": 760,
+      "source_discovery_starter_queue_groups": 381,
       "source_discovery_next_focus_fallback_rows": 20,
       "source_discovery_next_focus_fallback_manual_confirmed_rows": 0,
       "source_detail_candidate_action_rows": 15,
@@ -317,10 +317,10 @@
       "ichiban_prize_name_image_patch_manual_confirmed_rows": 0,
       "ichiban_prize_name_image_patch_blocked_rows": 0,
       "catalog_goal_manual_review_pillars": 5,
-      "catalog_goal_manual_review_rows": 863,
+      "catalog_goal_manual_review_rows": 862,
       "catalog_goal_auto_apply_ready_rows": 0,
       "catalog_goal_dedupe_manual_review_rows": 18,
-      "catalog_goal_missing_image_rows": 784,
+      "catalog_goal_missing_image_rows": 783,
       "catalog_goal_source_url_update_rows": 0,
       "catalog_goal_animation_category_rows": 0,
       "catalog_goal_ichiban_manual_review_rows": 61,
@@ -346,7 +346,7 @@
     "confirmed_import_top_work_order_lane": "confirm_template_rows",
     "confirmed_import_top_work_order_workflow": "source_discovery",
     "confirmed_import_top_work_order_row_count": 641,
-    "image_rows_still_requiring_url_evidence": 784,
+    "image_rows_still_requiring_url_evidence": 783,
     "image_missing_evidence_top_source_stores": [
       [
         "엔스카이",
@@ -354,7 +354,7 @@
       ],
       [
         "애니메이트",
-        156
+        155
       ],
       [
         "굿스마일컴퍼니",
@@ -408,7 +408,7 @@
       ],
       [
         "문구",
-        53
+        52
       ],
       [
         "머그컵",
@@ -7061,7 +7061,7 @@
       "priority": 20,
       "title": "현재 출처 탐색 포커스팩 진행",
       "public_report": "data/source_discovery_next_focus_pack_public.json",
-      "rows": 751,
+      "rows": 750,
       "recommended_action": "Start with the current focus pack and confirm exact source URLs before image import.",
       "acceptance_criteria": [
         "Each accepted source_url must be an exact product/detail page.",
@@ -7280,7 +7280,7 @@
       ],
       "review_summary": {
         "focus_pack_progress_queue_count": 67,
-        "focus_pack_progress_remaining_rows": 751
+        "focus_pack_progress_remaining_rows": 750
       },
       "review_state": "manual_review_required",
       "next_machine_step": "manual_review"
@@ -7391,7 +7391,7 @@
       "priority": 20,
       "title": "애니메이트 이미지 보강 (find_source_then_extract_image)",
       "public_report": "data/catalog_image_enrichment_batches_public.json",
-      "rows": 156,
+      "rows": 155,
       "recommended_action": "find exact official product page, then attach source_url and image_url",
       "acceptance_criteria": [
         "Exact product identity is verified before importing image_url.",
@@ -27679,7 +27679,7 @@
       "priority": 50,
       "title": "메타데이터 검수: metadata-review-001",
       "public_report": "data/catalog_metadata_review_batches_public.json",
-      "rows": 624,
+      "rows": 623,
       "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
       "acceptance_criteria": [
         "Dates, prices, names, barcodes, source URLs, and images are copied only from official or trusted evidence.",
@@ -27778,7 +27778,7 @@
       "priority": 50,
       "title": "메타데이터 검수: metadata-review-004",
       "public_report": "data/catalog_metadata_review_batches_public.json",
-      "rows": 348,
+      "rows": 347,
       "recommended_action": "Work field/store groups in priority order; prepare reviewed patches only from trusted evidence.",
       "acceptance_criteria": [
         "Dates, prices, names, barcodes, source URLs, and images are copied only from official or trusted evidence.",
@@ -36976,7 +36976,7 @@
     "manual_review_required": true,
     "pillar_count": 5,
     "blocking_pillar_count": 5,
-    "manual_review_rows": 863,
+    "manual_review_rows": 862,
     "auto_apply_ready_rows": 0,
     "next_safe_phase": "review_candidate_source_urls",
     "blocked_reasons": [
@@ -37016,13 +37016,13 @@
         "pillar": "missing_images",
         "label": "Resolve missing catalog images",
         "status": "manual_evidence_required",
-        "manual_review_rows": 784,
+        "manual_review_rows": 783,
         "auto_apply_ready_rows": 0,
         "next_safe_phase": "discover_exact_source_urls",
         "next_queue_lane": "discover_exact_source_urls",
-        "next_queue_rows": 751,
+        "next_queue_rows": 750,
         "next_execution_lane_count": 3,
-        "next_execution_open_rows": 784,
+        "next_execution_open_rows": 783,
         "next_execution_next_batch_rows": 30,
         "first_next_execution_lane": "representative_image_review",
         "first_next_execution_status": "manual_review_required",
@@ -37047,7 +37047,7 @@
         "next_queue_lane": "manual_search_required",
         "next_queue_rows": 0,
         "next_execution_lane_count": 4,
-        "next_execution_open_rows": 797,
+        "next_execution_open_rows": 796,
         "next_execution_next_batch_rows": 66,
         "first_next_execution_lane": "exact_source_url_review",
         "first_next_execution_status": "manual_cache_miss_research_required",
