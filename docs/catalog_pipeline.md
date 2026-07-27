@@ -40,6 +40,7 @@ python tools/import_agent_goods_intake.py data/intake/incoming
 python tools/catalog_quality_report.py
 python tools/build_ichiban_public_quality_queue.py
 python tools/build_image_enrichment_queue.py
+python tools/audit_public_catalog_image_assets.py --write
 python tools/sync_missing_image_work_queue_public.py
 python tools/generate_seed_catalog_dart.py --input data/catalog_public.json --output lib/data/catalog/seed_catalog.dart
 python tools/audit_flutter_seed_matches_public.py
