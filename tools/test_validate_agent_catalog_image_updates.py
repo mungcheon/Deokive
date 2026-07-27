@@ -74,6 +74,25 @@ class AgentCatalogImageUpdateValidationTests(unittest.TestCase):
         self.assertTrue(any("sample.json: unknown field(s): extra" in error for error in errors))
         self.assertTrue(any("updates[0]: unknown field(s): random" in error for error in errors))
 
+    def test_catalog_context_rejects_missing_or_already_imaged_rows(self) -> None:
+        catalog_rows = {
+            10: {"catalog_index": 10, "image_url": None},
+            11: {"catalog_index": 11, "image_url": "https://example.com/existing.jpg"},
+        }
+        payload = self.payload(
+            self.valid_update(catalog_index=11),
+            self.valid_update(catalog_index=99, image_url="https://example.com/other.jpg"),
+        )
+
+        errors, _summary = target.validate_payload(
+            Path("sample.json"),
+            payload,
+            catalog_rows=catalog_rows,
+        )
+
+        self.assertTrue(any("target catalog row already has an image" in error for error in errors))
+        self.assertTrue(any("not found in catalog_public.json" in error for error in errors))
+
 
 if __name__ == "__main__":
     unittest.main()

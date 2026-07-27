@@ -276,6 +276,15 @@ def audit_incoming_intake(errors: list[str]) -> dict[str, int]:
 def audit_incoming_image_updates(errors: list[str]) -> dict[str, int]:
     files = iter_image_update_files([IMAGE_UPDATES_INCOMING])
     update_count = 0
+    catalog_rows: dict[int, dict[str, Any]] = {}
+    catalog_payload = read_json(CATALOG)
+    if isinstance(catalog_payload, dict) and isinstance(catalog_payload.get("items"), list):
+        for item in catalog_payload["items"]:
+            if not isinstance(item, dict):
+                continue
+            catalog_index = item.get("catalog_index")
+            if isinstance(catalog_index, int) and not isinstance(catalog_index, bool):
+                catalog_rows[catalog_index] = item
     for path in files:
         if not is_valid_intake_record_name(path):
             errors.append(
@@ -283,7 +292,7 @@ def audit_incoming_image_updates(errors: list[str]) -> dict[str, int]:
                 "<agent>-<YYYYMMDD>-<topic>.json"
             )
         payload = load_image_update_json(path)
-        payload_errors, summary = validate_image_update_payload(path, payload)
+        payload_errors, summary = validate_image_update_payload(path, payload, catalog_rows=catalog_rows)
         update_count += int(summary["updates"])
         errors.extend(payload_errors)
     return {"image_update_files": len(files), "image_update_items": update_count}

@@ -10,6 +10,7 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_INTAKE = ROOT / "data" / "intake" / "image_updates" / "incoming"
+DEFAULT_CATALOG = ROOT / "data" / "catalog_public.json"
 
 CONFIDENCE_VALUES = {"confirmed", "candidate", "needs_review"}
 EVIDENCE_TYPES = {"official", "trusted", "manual"}
@@ -26,6 +27,30 @@ def is_url(value: str) -> bool:
 
 def load_json(path: Path) -> object:
     return json.loads(path.read_text(encoding="utf-8-sig"))
+
+
+def present(value: object) -> bool:
+    return value is not None and str(value).strip() != ""
+
+
+def catalog_index(items: object) -> dict[int, dict[str, object]]:
+    if not isinstance(items, list):
+        return {}
+    result: dict[int, dict[str, object]] = {}
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        index = item.get("catalog_index")
+        if isinstance(index, int) and not isinstance(index, bool):
+            result[index] = item
+    return result
+
+
+def load_catalog_index(path: Path) -> dict[int, dict[str, object]]:
+    payload = load_json(path)
+    if not isinstance(payload, dict):
+        raise ValueError(f"{path}: expected catalog object")
+    return catalog_index(payload.get("items"))
 
 
 def reject_unknown_fields(
@@ -65,6 +90,7 @@ def validate_update(
     update: object,
     item_path: str,
     seen_indexes: set[int],
+    catalog_rows: dict[int, dict[str, object]] | None = None,
 ) -> None:
     if not isinstance(update, dict):
         errors.append(f"{item_path}: expected object")
@@ -78,6 +104,12 @@ def validate_update(
         errors.append(f"{item_path}.catalog_index: duplicate catalog_index in this update file")
     else:
         seen_indexes.add(catalog_index)
+        if catalog_rows is not None:
+            catalog_row = catalog_rows.get(catalog_index)
+            if catalog_row is None:
+                errors.append(f"{item_path}.catalog_index: not found in catalog_public.json")
+            elif present(catalog_row.get("image_url")) or present(catalog_row.get("local_image_path")):
+                errors.append(f"{item_path}.catalog_index: target catalog row already has an image")
 
     image_url = require_string(errors, item_path, update, "image_url")
     if image_url and not is_url(image_url):
@@ -132,7 +164,12 @@ def validate_update(
         errors.append(f"{item_path}.evidence: must include image_url or source_url")
 
 
-def validate_payload(path: Path, payload: object) -> tuple[list[str], dict[str, int | str]]:
+def validate_payload(
+    path: Path,
+    payload: object,
+    *,
+    catalog_rows: dict[int, dict[str, object]] | None = None,
+) -> tuple[list[str], dict[str, int | str]]:
     errors: list[str] = []
     summary: dict[str, int | str] = {"path": str(path), "updates": 0}
     if not isinstance(payload, dict):
@@ -163,7 +200,7 @@ def validate_payload(path: Path, payload: object) -> tuple[list[str], dict[str, 
 
     seen_indexes: set[int] = set()
     for index, update in enumerate(updates):
-        validate_update(errors, update, f"updates[{index}]", seen_indexes)
+        validate_update(errors, update, f"updates[{index}]", seen_indexes, catalog_rows)
     return errors, summary
 
 
@@ -180,6 +217,17 @@ def iter_input_files(paths: list[Path]) -> list[Path]:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Validate Deokive catalog image update JSON files.")
     parser.add_argument("paths", nargs="*", type=Path, default=[DEFAULT_INTAKE])
+    parser.add_argument(
+        "--catalog",
+        type=Path,
+        default=DEFAULT_CATALOG,
+        help="Catalog used to verify catalog_index values and prevent overwriting existing images.",
+    )
+    parser.add_argument(
+        "--skip-catalog-context",
+        action="store_true",
+        help="Only validate JSON shape without checking against catalog_public.json.",
+    )
     args = parser.parse_args()
 
     files = iter_input_files(args.paths)
@@ -189,6 +237,13 @@ def main() -> int:
 
     total_updates = 0
     failed = False
+    catalog_rows = None
+    if not args.skip_catalog_context:
+        try:
+            catalog_rows = load_catalog_index(args.catalog)
+        except Exception as exc:
+            print(f"{args.catalog}: failed to load catalog context: {exc}", file=sys.stderr)
+            return 1
     for path in files:
         try:
             payload = load_json(path)
@@ -196,7 +251,7 @@ def main() -> int:
             print(f"{path}: invalid JSON: {exc}", file=sys.stderr)
             failed = True
             continue
-        errors, summary = validate_payload(path, payload)
+        errors, summary = validate_payload(path, payload, catalog_rows=catalog_rows)
         total_updates += int(summary["updates"])
         if errors:
             failed = True

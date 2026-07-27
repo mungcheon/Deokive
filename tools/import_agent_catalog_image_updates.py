@@ -100,6 +100,18 @@ def import_payloads(
                     }
                 )
                 continue
+            confidence = clean_text(update.get("confidence"))
+            if confidence != "confirmed":
+                skipped_rows.append(
+                    {
+                        "path": str(path),
+                        "update_index": update_index,
+                        "catalog_index": catalog_index,
+                        "reason": "confidence_not_confirmed",
+                        "confidence": confidence,
+                    }
+                )
+                continue
             before = {
                 "image_url": row.get("image_url"),
                 "source_url": row.get("source_url"),
@@ -215,12 +227,17 @@ def clean_text(value: Any) -> str | None:
     return text or None
 
 
-def load_validated_payloads(paths: list[Path]) -> tuple[list[tuple[Path, dict[str, Any]]], list[str]]:
+def load_validated_payloads(
+    paths: list[Path],
+    *,
+    catalog: dict[str, Any] | None = None,
+) -> tuple[list[tuple[Path, dict[str, Any]]], list[str]]:
     payloads: list[tuple[Path, dict[str, Any]]] = []
     errors: list[str] = []
+    catalog_rows = build_index([item for item in (catalog or {}).get("items", []) if isinstance(item, dict)]) if catalog else None
     for path in iter_input_files(paths):
         payload = load_json(path)
-        payload_errors, _summary = validate_payload(path, payload)
+        payload_errors, _summary = validate_payload(path, payload, catalog_rows=catalog_rows)
         if payload_errors:
             errors.extend(f"{path}: {error}" for error in payload_errors)
             continue
@@ -300,13 +317,13 @@ def main() -> int:
     parser.add_argument("--no-move-processed", action="store_true")
     args = parser.parse_args()
 
-    payloads, errors = load_validated_payloads(args.paths)
+    catalog = load_catalog(args.catalog)
+    payloads, errors = load_validated_payloads(args.paths, catalog=catalog)
     if errors:
         for error in errors:
             print(error, file=sys.stderr)
         return 1
 
-    catalog = load_catalog(args.catalog)
     result = import_payloads(
         catalog,
         payloads,

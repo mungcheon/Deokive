@@ -41,6 +41,9 @@ rows. Those files update only `image_url` and, when supplied, `source_url`; they
 do not create new goods rows.
 Image work-pack drafts are generated under `server/image_update_work_packs/`;
 copy only confirmed results into `data/intake/image_updates/incoming/`.
+Image update validation checks `catalog_index` against `data/catalog_public.json`
+and rejects rows that already have an image, so agents should submit only exact,
+new, confirmed image fixes for currently missing-image rows.
 
 Do not add custom fields. The validator rejects unknown top-level, agent, item,
 and evidence keys so every agent run can be imported by the same pipeline.

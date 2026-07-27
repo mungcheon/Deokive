@@ -110,6 +110,33 @@ class ImportAgentCatalogImageUpdatesTests(unittest.TestCase):
                 self.assertTrue((temp_root / str(local_path)).is_file())
                 self.assertTrue((temp_root / "assets" / str(local_path)).is_file())
 
+    def test_import_skips_non_confirmed_updates(self) -> None:
+        catalog = {
+            "items": [
+                {
+                    "catalog_index": 1,
+                    "name_ko": "Missing Image",
+                    "image_url": None,
+                    "source_url": None,
+                }
+            ],
+        }
+        updates = payload(
+            {
+                "catalog_index": 1,
+                "image_url": "https://example.com/image.jpg",
+                "source_url": "https://example.com/detail",
+                "evidence": [{"url": "https://example.com/detail", "type": "official"}],
+                "confidence": "candidate",
+            }
+        )
+
+        result = target.import_payloads(catalog, [(Path("updates.json"), updates)])
+
+        self.assertEqual([], result["updated_rows"])
+        self.assertEqual("confidence_not_confirmed", result["skipped_rows"][0]["reason"])
+        self.assertIsNone(result["catalog"]["items"][0]["image_url"])
+
     def test_write_path_updates_catalog_meta_and_moves_processed_file(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             root = Path(temp_dir)
