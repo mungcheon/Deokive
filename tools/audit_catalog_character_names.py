@@ -382,6 +382,7 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
         + len(ichiban_display_name_violations)
         + len(ichiban_display_character_mismatches)
         + len(ichiban_product_character_violations)
+        + len(ichiban_multi_character_product_review_candidates)
         + len(zero_price_violations)
     )
     alias_monitor = build_character_alias_monitor(rows)
@@ -428,7 +429,7 @@ def audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
             "last_one_and_double_chance_price_jpy": 0,
             "multi_character_product_review": (
                 "Rows whose product name contains multiple character tokens but no combined-goods marker are "
-                "reported for manual split review. True pair/team goods using &, ＆, ×, VS, or ・ are preserved "
+                "blocking split-review findings. True pair/team goods using &, ＆, ×, VS, or ・ are preserved "
                 "as mixed rows unless official source evidence lists separate prize items."
             ),
         },

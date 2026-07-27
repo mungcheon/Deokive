@@ -178,6 +178,7 @@ class AuditCatalogCharacterNamesTest(unittest.TestCase):
         result = audit(rows)
 
         self.assertEqual(result["summary"]["status"], "pass")
+        self.assertEqual(result["summary"]["findings"], 0)
         self.assertEqual(result["summary"]["ichiban_product_character_violations"], 0)
         self.assertEqual(
             result["summary"]["ichiban_multi_character_product_review_candidates"],
@@ -199,6 +200,7 @@ class AuditCatalogCharacterNamesTest(unittest.TestCase):
         result = audit(rows)
 
         self.assertEqual(result["summary"]["status"], "pass")
+        self.assertEqual(result["summary"]["findings"], 0)
         self.assertEqual(
             result["summary"]["ichiban_multi_character_product_review_candidates"],
             0,
@@ -226,7 +228,8 @@ class AuditCatalogCharacterNamesTest(unittest.TestCase):
 
         result = audit(rows)
 
-        self.assertEqual(result["summary"]["status"], "pass")
+        self.assertEqual(result["summary"]["status"], "needs_review")
+        self.assertEqual(result["summary"]["findings"], 1)
         self.assertEqual(
             result["summary"]["ichiban_multi_character_product_review_candidates"],
             1,
