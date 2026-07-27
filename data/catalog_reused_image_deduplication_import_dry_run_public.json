@@ -1,15 +1,39 @@
 {
   "write": false,
-  "template_groups": 0,
+  "template_groups": 2,
   "manual_confirmed_groups": 0,
   "ready_groups": 0,
   "updated_rows": 0,
-  "skipped_groups": 0,
-  "skip_reason_counts": [],
-  "input_rows": 20294,
-  "output_rows": 20294,
+  "skipped_groups": 2,
+  "skip_reason_counts": [
+    [
+      "manual_confirmed_false",
+      2
+    ]
+  ],
+  "input_rows": 20295,
+  "output_rows": 20295,
   "auto_delete_enabled": false,
   "auto_merge_enabled": false,
   "updated": [],
-  "skipped_sample": []
+  "skipped_sample": [
+    {
+      "group_index": 1,
+      "confidence": "strong_manual_duplicate_candidate",
+      "keep_catalog_index": 20562,
+      "drop_catalog_indexes": [
+        11699
+      ],
+      "reason": "manual_confirmed_false"
+    },
+    {
+      "group_index": 2,
+      "confidence": "strong_manual_duplicate_candidate",
+      "keep_catalog_index": 11698,
+      "drop_catalog_indexes": [
+        657
+      ],
+      "reason": "manual_confirmed_false"
+    }
+  ]
 }

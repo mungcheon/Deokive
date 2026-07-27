@@ -1,7 +1,7 @@
 # Catalog Image Attachment Review Board
 
-- Review rows: `24`
-- Exact image URL review rows: `1`
+- Review rows: `23`
+- Exact image URL review rows: `0`
 - Representative image review rows: `23`
 - Gate: `blocked_until_manual_image_confirmation`
 
@@ -12,15 +12,6 @@
 `python tools/import_confirmed_image_attachment_rows.py --queue server/catalog_image_attachment_confirmed_rows.json --report server/catalog_image_attachment_confirmed_import_report.json --write`
 
 ## Items
-
-### 657 C상: 인형 포셰트
-
-- Lane: `image_url_review_ready`
-- Store: `치이카와 온라인 쿠지`
-- Category: `인형`
-- Blockers: `manual_image_url_confirmation`
-- Review URL: https://online-kuji.chiikawamarket.jp/store/lottery/usagi
-- Suggested local path: `assets/catalog_images/catalog_657.webp`
 
 ### 936 치이카와 ご当地 아크릴 키홀더 (아사쿠사 카미나리몬)
 

@@ -1,10 +1,10 @@
 # Catalog Reused Image Review
 
-- Reused image groups: `57`
+- Reused image groups: `59`
 - High risk groups: `0`
-- Medium risk groups: `30`
+- Medium risk groups: `32`
 - Low risk groups: `27`
-- Review rows: `137`
+- Review rows: `141`
 
 ## Groups
 
@@ -208,6 +208,14 @@
 - `17859` 단간론파 시리즈 × 오오카와 부쿠부 누이구루미 마스코트 / ダンガンロンパシリーズ×ぶくぶ ぬいぐるみマスコット (단간론파, 인형)
 - `17928` 단간론파 부쿠부 굿즈 / ダンガンロンパ 大川ぶくぶ グッズ (단간론파, 콜라보 굿즈)
 
+### MEDIUM - assets/catalog_images/b8ad4a8e415049c52de1.webp (2 rows)
+- Action: `review_possible_duplicate_or_reissue_before_keep`
+- Reasons: `same_character_image_reused_for_distinct_names, lineup_or_trading_image_possible`
+- Affiliations: `치이카와`
+- Categories: `인형`
+- `11699` ちいかわ うさぎだらけくじ - C 蔦 / C 蔦 (치이카와, 인형)
+- `20562` C상: 인형 포셰트 (덩굴) / C賞 ぬいぐるみポシェット 蔦 (치이카와, 인형)
+
 ### MEDIUM - assets/catalog_images/be34a3305cb601b5ce03.webp (2 rows)
 - Action: `review_possible_duplicate_or_reissue_before_keep`
 - Reasons: `same_character_image_reused_for_distinct_names, lineup_or_trading_image_possible`
@@ -223,6 +231,14 @@
 - Categories: `피규어`
 - `1179` Relax Time 하츠네 미쿠 / Relax time 初音ミク (하츠네 미쿠, 피규어)
 - `1180` Grandista 하츠네 미쿠 / Grandista 初音ミク (하츠네 미쿠, 피규어)
+
+### MEDIUM - assets/catalog_images/c547c19d4678f0cc38ca.webp (2 rows)
+- Action: `review_possible_duplicate_or_reissue_before_keep`
+- Reasons: `same_character_image_reused_for_distinct_names, lineup_or_trading_image_possible`
+- Affiliations: `치이카와`
+- Categories: `인형`
+- `657` C상: 인형 포셰트 (함정) / C賞 ぬいぐるみポシェット 罠 (치이카와, 인형)
+- `11698` ちいかわ うさぎだらけくじ - C 罠 / C 罠 (치이카와, 인형)
 
 ### MEDIUM - assets/catalog_images/c5cff923d47febc42e7f.webp (2 rows)
 - Action: `review_category_mismatch_before_keep`

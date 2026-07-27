@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "summary": {
-    "missing_image_rows": 786,
-    "source_url_ready_rows": 1,
+    "missing_image_rows": 785,
+    "source_url_ready_rows": 0,
     "generic_source_url_rows": 0,
     "gotouchi_official_review_rows": 23,
     "needs_source_discovery_rows": 752,
     "manual_image_research_rows": 10,
-    "published_group_rows": 48,
-    "review_batch_count": 9,
-    "sample_image_import_template_count": 648,
+    "published_group_rows": 47,
+    "review_batch_count": 8,
+    "sample_image_import_template_count": 647,
     "top_source_stores": [
       [
         "엔스카이",
@@ -144,10 +144,6 @@
       [
         "manual_image_research",
         10
-      ],
-      [
-        "extract_from_existing_source_url",
-        1
       ]
     ]
   },
@@ -185,14 +181,6 @@
   },
   "blocker_summary": [
     {
-      "workflow": "extract_from_existing_source_url",
-      "rows": 1,
-      "state": "ready_for_source_image_extraction",
-      "blocking_reason": null,
-      "next_step": "extract_product_image_from_existing_exact_source_url",
-      "public_report": "data/catalog_image_enrichment_batches_public.json"
-    },
-    {
       "workflow": "review_gotouchi_official_candidates",
       "rows": 23,
       "state": "blocked_by_candidate_type_review",
@@ -220,84 +208,6 @@
   "review_batches": [
     {
       "batch_id": "image-enrichment-review-001",
-      "priority": 10,
-      "workflow": "extract_from_existing_source_url",
-      "workflow_counts": [
-        [
-          "extract_from_existing_source_url",
-          1
-        ]
-      ],
-      "top_source_stores": [
-        [
-          "치이카와 온라인 쿠지",
-          1
-        ]
-      ],
-      "group_count": 1,
-      "missing_image_rows": 1,
-      "blocked_until": "ready_for_source_image_extraction",
-      "next_machine_step": "extract_product_image_from_existing_exact_source_url",
-      "public_report": "data/catalog_image_enrichment_batches_public.json",
-      "catalog_field_import_template_fields": [
-        "manual_confirmed",
-        "row_index",
-        "field",
-        "manual_value",
-        "evidence_url",
-        "candidate_source_url"
-      ],
-      "acceptance_criteria": [
-        "exact product source_url is available before importing image_url",
-        "image_url comes from the accepted source page or trusted official CDN",
-        "marketplace, blog, resale, and generic listing images stay out of public catalog imports",
-        "generic storefront URLs are replaced before image extraction"
-      ],
-      "auto_apply_enabled": false,
-      "groups": [
-        {
-          "workflow": "extract_from_existing_source_url",
-          "source_store": "치이카와 온라인 쿠지",
-          "missing_image_rows": 1,
-          "priority": 10,
-          "recommended_action": "crawl verified source_url and review extracted product image",
-          "official_search_available": true,
-          "candidate_review_report": null,
-          "sample_items": [
-            {
-              "catalog_index": 657,
-              "name_ko": "C상: 인형 포셰트",
-              "name_ja": "C賞 ぬいぐるみポシェット",
-              "series_name": "ちいかわ うさぎだらけくじ",
-              "category": "인형",
-              "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
-              "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=C%E8%B3%9E%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%83%9D%E3%82%B7%E3%82%A7%E3%83%83%E3%83%88",
-              "catalog_field_import_template": {
-                "manual_confirmed": false,
-                "manual_note": "",
-                "row_index": 657,
-                "field": "image_url",
-                "manual_value": "",
-                "evidence_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
-                "candidate_source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
-                "source_store": "치이카와 온라인 쿠지",
-                "name_ko": "C상: 인형 포셰트",
-                "name_ja": "C賞 ぬいぐるみポシェット",
-                "category": "인형",
-                "affiliation": "치이카와",
-                "source_search_url": "https://online-kuji.chiikawamarket.jp/search?q=C%E8%B3%9E%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%83%9D%E3%82%B7%E3%82%A7%E3%83%83%E3%83%88",
-                "workflow": "extract_from_existing_source_url",
-                "requires_exact_source_url": false,
-                "requires_representative_image_flag": false,
-                "blocked_until": "manual_image_url_confirmed"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "batch_id": "image-enrichment-review-002",
       "priority": 18,
       "workflow": "review_gotouchi_official_candidates",
       "workflow_counts": [
@@ -991,7 +901,7 @@
       ]
     },
     {
-      "batch_id": "image-enrichment-review-003",
+      "batch_id": "image-enrichment-review-002",
       "priority": 20,
       "workflow": "find_source_then_extract_image",
       "workflow_counts": [
@@ -13046,7 +12956,7 @@
       ]
     },
     {
-      "batch_id": "image-enrichment-review-004",
+      "batch_id": "image-enrichment-review-003",
       "priority": 20,
       "workflow": "find_source_then_extract_image",
       "workflow_counts": [
@@ -16281,7 +16191,7 @@
       ]
     },
     {
-      "batch_id": "image-enrichment-review-005",
+      "batch_id": "image-enrichment-review-004",
       "priority": 20,
       "workflow": "find_source_then_extract_image",
       "workflow_counts": [
@@ -17696,7 +17606,7 @@
       ]
     },
     {
-      "batch_id": "image-enrichment-review-006",
+      "batch_id": "image-enrichment-review-005",
       "priority": 20,
       "workflow": "find_source_then_extract_image",
       "workflow_counts": [
@@ -18495,7 +18405,7 @@
       ]
     },
     {
-      "batch_id": "image-enrichment-review-007",
+      "batch_id": "image-enrichment-review-006",
       "priority": 20,
       "workflow": "find_source_then_extract_image",
       "workflow_counts": [
@@ -18902,7 +18812,7 @@
       ]
     },
     {
-      "batch_id": "image-enrichment-review-008",
+      "batch_id": "image-enrichment-review-007",
       "priority": 20,
       "workflow": "find_source_then_extract_image",
       "workflow_counts": [
@@ -19023,7 +18933,7 @@
       ]
     },
     {
-      "batch_id": "image-enrichment-review-009",
+      "batch_id": "image-enrichment-review-008",
       "priority": 40,
       "workflow": "manual_image_research",
       "workflow_counts": [
@@ -19406,45 +19316,6 @@
     "Rows without source_url must attach an exact source URL before image_url is imported."
   ],
   "groups": [
-    {
-      "workflow": "extract_from_existing_source_url",
-      "source_store": "치이카와 온라인 쿠지",
-      "missing_image_rows": 1,
-      "priority": 10,
-      "recommended_action": "crawl verified source_url and review extracted product image",
-      "official_search_available": true,
-      "candidate_review_report": null,
-      "sample_items": [
-        {
-          "catalog_index": 657,
-          "name_ko": "C상: 인형 포셰트",
-          "name_ja": "C賞 ぬいぐるみポシェット",
-          "series_name": "ちいかわ うさぎだらけくじ",
-          "category": "인형",
-          "source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
-          "official_search_url": "https://online-kuji.chiikawamarket.jp/search?q=C%E8%B3%9E%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%83%9D%E3%82%B7%E3%82%A7%E3%83%83%E3%83%88",
-          "catalog_field_import_template": {
-            "manual_confirmed": false,
-            "manual_note": "",
-            "row_index": 657,
-            "field": "image_url",
-            "manual_value": "",
-            "evidence_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
-            "candidate_source_url": "https://online-kuji.chiikawamarket.jp/store/lottery/usagi",
-            "source_store": "치이카와 온라인 쿠지",
-            "name_ko": "C상: 인형 포셰트",
-            "name_ja": "C賞 ぬいぐるみポシェット",
-            "category": "인형",
-            "affiliation": "치이카와",
-            "source_search_url": "https://online-kuji.chiikawamarket.jp/search?q=C%E8%B3%9E%20%E3%81%AC%E3%81%84%E3%81%90%E3%82%8B%E3%81%BF%E3%83%9D%E3%82%B7%E3%82%A7%E3%83%83%E3%83%88",
-            "workflow": "extract_from_existing_source_url",
-            "requires_exact_source_url": false,
-            "requires_representative_image_flag": false,
-            "blocked_until": "manual_image_url_confirmed"
-          }
-        }
-      ]
-    },
     {
       "workflow": "review_gotouchi_official_candidates",
       "source_store": "ご当地ちいかわ 공식(API)",

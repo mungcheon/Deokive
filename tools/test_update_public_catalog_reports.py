@@ -2551,6 +2551,7 @@ class PublicCatalogReportTests(unittest.TestCase):
             pillars["missing_images"]["handoff_current_lane"] in {
                 "source_url_replacement_first",
                 "image_url_review_ready",
+                "representative_image_candidate_review",
             },
             True,
         )
@@ -3335,7 +3336,11 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertEqual(
             blocking_pillars["missing_images"]["handoff_current_lane"]
-            in {"source_url_replacement_first", "image_url_review_ready"},
+            in {
+                "source_url_replacement_first",
+                "image_url_review_ready",
+                "representative_image_candidate_review",
+            },
             True,
         )
         self.assertGreaterEqual(
@@ -4815,7 +4820,11 @@ class PublicCatalogReportTests(unittest.TestCase):
         )
         self.assertIn(
             operator_handoff.get("current_lane"),
-            {"source_url_replacement_first", "image_url_review_ready"},
+            {
+                "source_url_replacement_first",
+                "image_url_review_ready",
+                "representative_image_candidate_review",
+            },
         )
         self.assertEqual(
             operator_handoff.get("blocked_before_image_import_rows"),
