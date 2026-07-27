@@ -5,6 +5,7 @@ This folder is the staging area for goods data collected by agents.
 Agents must save new collection results with the same JSON shape:
 
 - New raw submissions: `data/intake/incoming/<agent>-<run-id>.json`
+- Official source/campaign lists: `data/intake/sources/`
 - Accepted and already merged submissions: `data/intake/processed/`
 - Rejected or unsafe submissions: `data/intake/rejected/`
 

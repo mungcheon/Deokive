@@ -16,7 +16,7 @@ except Exception:
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_CATALOG = ROOT / "data" / "catalog_public.json"
-DEFAULT_CAMPAIGNS = ROOT / "data" / "ichiban_kuji_campaigns.json"
+DEFAULT_CAMPAIGNS = ROOT / "data" / "intake" / "sources" / "ichiban_kuji_campaigns.json"
 DEFAULT_JSON_REPORT = ROOT / "server" / "ichiban_kuji_prize_structure_audit.json"
 DEFAULT_MD_REPORT = ROOT / "server" / "ichiban_kuji_prize_structure_audit.md"
 DEFAULT_ARCHIVE = ROOT / "server" / "ichiban_non_prize_archived_rows.json"

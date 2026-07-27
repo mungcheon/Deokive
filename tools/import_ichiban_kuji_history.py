@@ -22,7 +22,7 @@ except Exception:
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_OUTPUT = ROOT / "server" / "ichiban_kuji_history_import.json"
 DEFAULT_SEED = ROOT / "server" / "catalog_seed_from_local.json"
-DEFAULT_CAMPAIGN_FILE = ROOT / "data" / "ichiban_kuji_campaigns.json"
+DEFAULT_CAMPAIGN_FILE = ROOT / "data" / "intake" / "sources" / "ichiban_kuji_campaigns.json"
 DEFAULT_REPORT = ROOT / "server" / "ichiban_kuji_history_import_report.json"
 
 USER_AGENT = (

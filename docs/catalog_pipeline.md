@@ -70,7 +70,7 @@ python tools/sync_catalog_pipeline.py --write --image-provider-store FuRyu --ima
 - `tools/dedupe_catalog_db.py`: marks duplicate SQLite rows inactive instead of deleting them.
 - `tools/sync_chiikawa_market.py`: refreshes official Chiikawa Market rows from public Shopify JSON.
 - `tools/enrich_chiikawa_market_fields.py`: fills empty legacy Chiikawa Market fields from official product JSON, including exact image filename/JAN matches from official Shopify CDN URLs.
-- `tools/discover_ichiban_kuji_campaigns.py`: discovers official historical 1kuji campaign detail URLs from `https://1kuji.com/products/search` plus the official `/products/more` JSON endpoint, then merges them into `data/ichiban_kuji_campaigns.json`.
+- `tools/discover_ichiban_kuji_campaigns.py`: discovers official historical 1kuji campaign detail URLs from `https://1kuji.com/products/search` plus the official `/products/more` JSON endpoint, then merges them into `data/intake/sources/ichiban_kuji_campaigns.json`.
 - `tools/import_ichiban_kuji_history.py`: imports explicitly listed Ichiban Kuji campaign pages.
 - `tools/enrich_ichiban_kuji_fields.py`: revisits existing official 1kuji detail URLs and fills missing campaign-level price/release date fields without re-importing every prize row.
 - `tools/import_anymy_kuji_history.py`: imports explicitly listed AnyMy Kuji campaign pages.
@@ -109,13 +109,13 @@ python tools/sync_catalog_pipeline.py --write --image-provider-store FuRyu --ima
 
 ## Source Lists
 
-- `data/ichiban_kuji_campaigns.json`: official 1kuji campaign pages that can be merged by `tools/import_ichiban_kuji_history.py`.
-- `data/anymy_kuji_campaigns.json`: official AnyMy campaign pages that can be merged by `tools/import_anymy_kuji_history.py`.
-- `data/chiikawa_online_kuji_campaigns.json`: Chiikawa Market official online lottery pages imported by `tools/import_chiikawa_online_kuji_history.py`.
+- `data/intake/sources/ichiban_kuji_campaigns.json`: official 1kuji campaign pages that can be merged by `tools/import_ichiban_kuji_history.py`.
+- `data/intake/sources/anymy_kuji_campaigns.json`: official AnyMy campaign pages that can be merged by `tools/import_anymy_kuji_history.py`.
+- `data/intake/sources/chiikawa_online_kuji_campaigns.json`: Chiikawa Market official online lottery pages imported by `tools/import_chiikawa_online_kuji_history.py`.
 
 Ichiban Kuji coverage notes:
 
-- `data/ichiban_kuji_campaigns.json` is kept to official `https://1kuji.com/products/...` campaign detail pages.
+- `data/intake/sources/ichiban_kuji_campaigns.json` is kept to official `https://1kuji.com/products/...` campaign detail pages.
 - Use `tools/discover_ichiban_kuji_campaigns.py --category kimetsu --write` to add a verified official history slice. Supported category aliases include `one_piece`, `dragon_ball`, `my_hero_academia`, `gundam`, `kimetsu`, `jojo`, `haikyu`, `kirby`, `naruto`, `jujutsu`, `spy_family`, and `hololive`.
 - The current 2026 coverage was checked against the official monthly lineup pages using `sale_year` and `sale_month` query parameters, for example `https://1kuji.com/products?sale_month=7&sale_year=2026`.
 - Before adding a campaign URL, verify that the detail page title contains the monthly lineup title and that the page exposes prize blocks (`itemColList`) for `tools/import_ichiban_kuji_history.py`.
