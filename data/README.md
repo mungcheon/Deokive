@@ -42,5 +42,8 @@ python -X utf8 tools/import_catalog_boss_review_decisions.py path\to\boss_review
 
 This creates an approved-only local candidate at
 `server/boss_review/catalog_public_approved.json`. It is a review artifact, not
-a second public DB. After approval, a separate merge step may update
-`data/catalog_public.json`.
+a second public DB. Blocked rows are written to
+`server/boss_review/boss_review_rework_queue.json` so `image_error` rows can go
+back through `data/intake/image_updates/` and `content_error` rows can go back
+through `data/intake/field_updates/`. After approval, a separate merge step may
+update `data/catalog_public.json`.

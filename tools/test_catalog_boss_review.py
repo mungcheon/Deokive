@@ -8,6 +8,7 @@ from pathlib import Path
 from tools.build_catalog_boss_review_batch import build_batch, write_batch
 from tools.import_catalog_boss_review_decisions import (
     build_approved_catalog,
+    build_rework_queue,
     merge_ledger,
 )
 
@@ -81,6 +82,47 @@ class CatalogBossReviewTest(unittest.TestCase):
             self.assertEqual(approved["total_items"], 2)
             self.assertEqual([item["catalog_index"] for item in approved["items"]], [0, 2])
             self.assertEqual(approved["items"][0]["boss_review"]["status"], "pass")
+
+    def test_rework_queue_routes_blocked_rows_to_intake_type(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            catalog = root / "catalog.json"
+            catalog.write_text(
+                json.dumps(
+                    {
+                        "items": [
+                            {
+                                "catalog_index": 0,
+                                "name_ko": "사진 수정 필요",
+                                "source_url": "https://example.com/image",
+                            },
+                            {
+                                "catalog_index": 1,
+                                "name_ko": "내용 수정 필요",
+                                "source_url": "https://example.com/field",
+                            },
+                            {"catalog_index": 2, "name_ko": "통과"},
+                        ]
+                    },
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+            ledger = merge_ledger(
+                root / "missing-ledger.json",
+                [
+                    {"row_index": 0, "status": "image_error", "status_label": "사진오류", "note": "wrong photo"},
+                    {"row_index": 1, "status": "content_error", "status_label": "내용오류", "note": "wrong name"},
+                    {"row_index": 2, "status": "pass", "status_label": "통과"},
+                ],
+            )
+
+            queue = build_rework_queue(catalog, ledger)
+
+            self.assertEqual(queue["meta"]["blocked_items"], 2)
+            self.assertEqual([item["rework_type"] for item in queue["items"]], ["image_update", "field_update"])
+            self.assertIn("image_updates", queue["items"][0]["next_step"])
+            self.assertIn("field_updates", queue["items"][1]["next_step"])
 
 
 if __name__ == "__main__":

@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_CATALOG = ROOT / "data" / "catalog_public.json"
 DEFAULT_LEDGER = ROOT / "server" / "boss_review" / "boss_review_ledger.json"
 DEFAULT_APPROVED = ROOT / "server" / "boss_review" / "catalog_public_approved.json"
+DEFAULT_REWORK = ROOT / "server" / "boss_review" / "boss_review_rework_queue.json"
 
 ALLOWED_STATUSES = {
     "image_error",
@@ -150,12 +151,86 @@ def build_approved_catalog(catalog_path: Path, ledger: dict[str, Any]) -> dict[s
     }
 
 
+def _display_name(item: dict[str, Any]) -> str:
+    return str(
+        item.get("name_ko")
+        or item.get("name_ja")
+        or item.get("name_en")
+        or item.get("name")
+        or "이름 없음"
+    )
+
+
+def _rework_type(status: str) -> str:
+    if status == "image_error":
+        return "image_update"
+    if status == "content_error":
+        return "field_update"
+    return "manual_review"
+
+
+def build_rework_queue(catalog_path: Path, ledger: dict[str, Any]) -> dict[str, Any]:
+    payload = _catalog_payload(catalog_path)
+    items = [item for item in payload.get("items", []) if isinstance(item, dict)]
+    catalog_by_index = {_row_index(index, item): item for index, item in enumerate(items)}
+    blocked = [
+        decision
+        for decision in ledger.get("decisions", [])
+        if isinstance(decision, dict) and decision.get("status") not in APPROVED_STATUSES
+    ]
+    queue: list[dict[str, Any]] = []
+    for decision in blocked:
+        row_index = decision.get("row_index")
+        if isinstance(row_index, bool) or not isinstance(row_index, int):
+            continue
+        item = catalog_by_index.get(row_index, {})
+        status = str(decision.get("status") or "")
+        queue.append(
+            {
+                "row_index": row_index,
+                "catalog_index": item.get("catalog_index", row_index),
+                "status": status,
+                "status_label": decision.get("status_label"),
+                "rework_type": _rework_type(status),
+                "display_name": decision.get("display_name") or _display_name(item),
+                "note": decision.get("note") or "",
+                "source_url": item.get("source_url"),
+                "image_url": item.get("image_url"),
+                "local_image_path": item.get("local_image_path"),
+                "name_ko": item.get("name_ko"),
+                "name_ja": item.get("name_ja"),
+                "category": item.get("category"),
+                "character_name": item.get("character_name"),
+                "affiliation": item.get("affiliation"),
+                "series_name": item.get("series_name"),
+                "sub_series": item.get("sub_series"),
+                "next_step": (
+                    "Submit a confirmed image fix through data/intake/image_updates/incoming/."
+                    if status == "image_error"
+                    else "Submit a confirmed field correction through data/intake/field_updates/incoming/."
+                ),
+            }
+        )
+    return {
+        "meta": {
+            "generated_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
+            "source_catalog": str(catalog_path.relative_to(ROOT) if catalog_path.is_relative_to(ROOT) else catalog_path),
+            "blocked_items": len(queue),
+            "image_error_items": sum(1 for item in queue if item.get("status") == "image_error"),
+            "content_error_items": sum(1 for item in queue if item.get("status") == "content_error"),
+            "purpose": "Rows blocked by boss review; route these back to image or field update intake before publishing.",
+        },
+        "items": queue,
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Import boss review decisions and build an approved-only catalog.")
     parser.add_argument("decisions", type=Path)
     parser.add_argument("--catalog", type=Path, default=DEFAULT_CATALOG)
     parser.add_argument("--ledger", type=Path, default=DEFAULT_LEDGER)
     parser.add_argument("--approved-out", type=Path, default=DEFAULT_APPROVED)
+    parser.add_argument("--rework-out", type=Path, default=DEFAULT_REWORK)
     args = parser.parse_args()
 
     decisions = _normalize_decisions(args.decisions)
@@ -167,6 +242,10 @@ def main() -> int:
     args.approved_out.parent.mkdir(parents=True, exist_ok=True)
     args.approved_out.write_text(json.dumps(approved, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
+    rework = build_rework_queue(args.catalog, ledger)
+    args.rework_out.parent.mkdir(parents=True, exist_ok=True)
+    args.rework_out.write_text(json.dumps(rework, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
     print(
         json.dumps(
             {
@@ -175,6 +254,7 @@ def main() -> int:
                 "approved_items": ledger["meta"]["approved_items"],
                 "blocked_items": ledger["meta"]["blocked_items"],
                 "approved_out": str(args.approved_out),
+                "rework_out": str(args.rework_out),
             },
             ensure_ascii=False,
             indent=2,
