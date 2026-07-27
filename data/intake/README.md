@@ -31,6 +31,19 @@ After the dry run looks correct, write the changes:
 python -X utf8 tools/import_agent_goods_intake.py data/intake/incoming/example-agent-run.json --write
 ```
 
+For existing catalog field fixes, validate and dry-run with:
+
+```powershell
+python -X utf8 tools/validate_agent_catalog_field_updates.py data/intake/field_updates/incoming/example-agent-run.json
+python -X utf8 tools/import_agent_catalog_field_updates.py data/intake/field_updates/incoming/example-agent-run.json
+```
+
+After the report looks correct, merge into the single public DB:
+
+```powershell
+python -X utf8 tools/import_agent_catalog_field_updates.py data/intake/field_updates/incoming/example-agent-run.json --write
+```
+
 Only `data/catalog_public.json` is the public DB. Intake files are evidence and
 review material; they are not used directly by the app.
 Do not create another DB JSON, SQLite file, or app-facing catalog under
