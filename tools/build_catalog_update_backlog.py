@@ -199,6 +199,159 @@ def _operator_next_actions(
     return actions[:limit]
 
 
+def _operator_work_order(
+    actions: list[dict[str, Any]],
+    *,
+    image_evidence_split: dict[str, Any],
+    animation_priority: dict[str, Any],
+    ichiban_quality: dict[str, Any],
+    field_update_work_packs: list[dict[str, Any]],
+    image_work_packs: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    field_pack = field_update_work_packs[0] if field_update_work_packs else {}
+    image_pack = image_work_packs[0] if image_work_packs else {}
+    samples_by_lane = {
+        "image_from_known_source": image_evidence_split.get("source_url_ready_sample_rows", [])[:10],
+        "source_before_image": image_evidence_split.get("source_discovery_required_sample_rows", [])[:10],
+        "animation_enrichment": animation_priority.get("items", [])[:10],
+        "ichiban_quality": ichiban_quality.get("sample_rows", [])[:10],
+        "field_update_pack": (field_pack.get("samples") or [])[:10],
+        "image_work_pack": (image_pack.get("samples") or [])[:10],
+    }
+    criteria_by_lane = {
+        "image_from_known_source": [
+            "image_url must be from the exact product/source page or a verified official image endpoint",
+            "do not reuse generic listing thumbnails when variants differ",
+            "preserve local_image_path only after the image asset is actually cached",
+        ],
+        "source_before_image": [
+            "source_url must identify the exact product, campaign, or official detail page",
+            "search/listing pages are evidence only when no stable detail page exists and the row says so",
+            "write field updates before choosing image_url",
+        ],
+        "animation_enrichment": [
+            "prefer official/licensed store source_url before image_url",
+            "keep character names in the catalog's normalized language policy",
+            "split variants into separate rows when the official product has distinct characters or types",
+        ],
+        "ichiban_quality": [
+            "Ichiban prize names should follow campaign / prize rank / prize title / character or variant",
+            "last-one and double-chance price exceptions stay 0 when applicable",
+            "classify non-prize or related campaign items separately instead of forcing prize naming",
+        ],
+        "field_update_pack": [
+            "every field update needs source_url or evidence_url",
+            "only fill barcode/JAN when explicitly published",
+            "price currency must match the official source currency",
+        ],
+        "image_work_pack": [
+            "confirm every image candidate against the exact item identity",
+            "reject image candidates shared by different variants unless the official item is identical",
+            "submit image updates through the image intake directory",
+        ],
+    }
+    template_by_lane = {
+        "image_from_known_source": "data/intake/image_updates/incoming/*.json",
+        "source_before_image": "data/intake/field_updates/incoming/*.json",
+        "animation_enrichment": "data/intake/field_updates/incoming/*.json or data/intake/image_updates/incoming/*.json",
+        "ichiban_quality": "data/intake/field_updates/incoming/*.json",
+        "field_update_pack": "data/intake/field_updates/incoming/*.json",
+        "image_work_pack": "data/intake/image_updates/incoming/*.json",
+    }
+
+    work_order: list[dict[str, Any]] = []
+    for index, action in enumerate(actions, start=1):
+        lane = str(action.get("lane") or "")
+        if not lane:
+            continue
+        work_order.append(
+            {
+                "work_order_id": f"catalog-operator-{index:03d}-{lane}",
+                "lane": lane,
+                "label": action.get("label"),
+                "row_count": int(action.get("rows") or 0),
+                "next_action": action.get("next_action"),
+                "why": action.get("why"),
+                "artifact": action.get("artifact"),
+                "intake_dir": action.get("intake_dir"),
+                "tool": action.get("tool"),
+                "output_template_hint": template_by_lane.get(lane),
+                "acceptance_criteria": criteria_by_lane.get(lane, []),
+                "sample_rows": _compact_work_order_samples(lane, samples_by_lane.get(lane, [])),
+            }
+        )
+    return work_order
+
+
+def _compact_work_order_samples(lane: str, samples: Any, limit: int = 5) -> list[dict[str, Any]]:
+    compact: list[dict[str, Any]] = []
+    for sample in samples or []:
+        if not isinstance(sample, dict):
+            continue
+        if lane == "animation_enrichment":
+            compact.append(
+                {
+                    "workflow": sample.get("workflow"),
+                    "source_store": sample.get("source_store"),
+                    "category": sample.get("category"),
+                    "rows": sample.get("rows"),
+                    "missing_image_url": sample.get("missing_image_url"),
+                    "missing_source_url": sample.get("missing_source_url"),
+                    "sample_items": [
+                        {
+                            "row_index": item.get("row_index"),
+                            "catalog_index": item.get("catalog_index"),
+                            "name_ko": item.get("name_ko"),
+                            "name_ja": item.get("name_ja"),
+                            "affiliation": item.get("affiliation"),
+                            "query": item.get("query"),
+                        }
+                        for item in sample.get("sample_items", [])[:3]
+                        if isinstance(item, dict)
+                    ],
+                }
+            )
+            continue
+        compact.append(
+            {
+                key: sample.get(key)
+                for key in (
+                    "catalog_index",
+                    "row_index",
+                    "display_name",
+                    "name_ko",
+                    "name_ja",
+                    "affiliation",
+                    "series_name",
+                    "source_store",
+                    "category",
+                    "source_url",
+                    "search_url",
+                    "reason",
+                    "workflow",
+                )
+                if sample.get(key) not in (None, "")
+            }
+        )
+    return compact[:limit]
+
+
+def _sample_display_label(sample: dict[str, Any]) -> str:
+    for key in ("name_ko", "display_name", "name_ja", "category", "source_store", "workflow"):
+        value = sample.get(key)
+        if value not in (None, ""):
+            return str(value)
+    items = sample.get("sample_items")
+    if isinstance(items, list):
+        for item in items:
+            if isinstance(item, dict):
+                for key in ("name_ko", "display_name", "name_ja"):
+                    value = item.get(key)
+                    if value not in (None, ""):
+                        return str(value)
+    return "sample unavailable"
+
+
 def _field_focus_packs(field_items: list[dict[str, Any]], limit: int = 30) -> list[dict[str, Any]]:
     grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for item in field_items:
@@ -731,6 +884,13 @@ def build_backlog(
         "work_packs": ichiban_work_packs[:40],
         "sample_rows": ichiban_quality_items[:20],
     }
+    operator_next_actions = _operator_next_actions(
+        image_evidence_split=image_evidence_split,
+        animation_priority=animation_priority,
+        ichiban_quality=ichiban_quality,
+        field_update_work_packs=field_update_work_packs,
+        image_work_packs=image_work_packs,
+    )
 
     return {
         "rows": quality_payload.get("rows"),
@@ -823,7 +983,9 @@ def build_backlog(
         "top_image_store_category_backlog": image_store_category_top,
         "image_work_packs": image_work_packs,
         "top_image_backlog": actions[:60],
-        "operator_next_actions": _operator_next_actions(
+        "operator_next_actions": operator_next_actions,
+        "operator_work_order": _operator_work_order(
+            operator_next_actions,
             image_evidence_split=image_evidence_split,
             animation_priority=animation_priority,
             ichiban_quality=ichiban_quality,
@@ -882,6 +1044,20 @@ def write_markdown(backlog: dict[str, Any], path: Path) -> None:
         )
     if not backlog.get("operator_next_actions"):
         lines.append("- No immediate operator action queue is loaded.")
+    lines.extend(["", "## Operator Work Order", ""])
+    for item in backlog.get("operator_work_order", [])[:10]:
+        lines.append(
+            f"- `{item.get('work_order_id')}` / `{item.get('label')}`: "
+            f"`{item.get('row_count')}` rows; intake `{item.get('intake_dir')}`; "
+            f"tool `{item.get('tool')}`"
+        )
+        samples = item.get("sample_rows") or []
+        if samples:
+            sample = samples[0]
+            sample_label = _sample_display_label(sample)
+            lines.append(f"  - first sample `{sample_label}`")
+    if not backlog.get("operator_work_order"):
+        lines.append("- No operator work order is loaded.")
     lines.extend(
         [
             "",

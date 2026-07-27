@@ -329,6 +329,20 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
             "animation_enrichment",
             {item["lane"] for item in result["operator_next_actions"]},
         )
+        self.assertEqual(
+            [item["lane"] for item in result["operator_work_order"][:2]],
+            ["image_from_known_source", "source_before_image"],
+        )
+        self.assertEqual(
+            result["operator_work_order"][0]["work_order_id"],
+            "catalog-operator-001-image_from_known_source",
+        )
+        self.assertIn("acceptance_criteria", result["operator_work_order"][0])
+        self.assertEqual(result["operator_work_order"][0]["sample_rows"][0]["catalog_index"], 30)
+        animation_order = next(
+            item for item in result["operator_work_order"] if item["lane"] == "animation_enrichment"
+        )
+        self.assertEqual(animation_order["sample_rows"][0]["sample_items"], [])
 
     def test_field_focus_packs_groups_missing_rows_by_batch_key(self):
         items = [
@@ -433,7 +447,9 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
             text = path.read_text(encoding="utf-8-sig")
 
         self.assertIn("## Operator Next Actions", text)
+        self.assertIn("## Operator Work Order", text)
         self.assertIn("No immediate operator action queue is loaded.", text)
+        self.assertIn("No operator work order is loaded.", text)
         self.assertIn("## Image Evidence Split", text)
         self.assertIn("With source_url: `1`", text)
         self.assertIn("Store A", text)
@@ -456,6 +472,16 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
                     "artifact": "server/example.json",
                 }
             ],
+            "operator_work_order": [
+                {
+                    "work_order_id": "catalog-operator-001-image_from_known_source",
+                    "label": "출처가 있는 사진부터 검수",
+                    "row_count": 2,
+                    "intake_dir": "data/intake/image_updates/incoming",
+                    "tool": "tools/import_agent_catalog_image_updates.py",
+                    "sample_rows": [{"name_ko": "샘플"}],
+                }
+            ],
         }
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "backlog.md"
@@ -464,7 +490,9 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
             text = path.read_text(encoding="utf-8-sig")
 
         self.assertIn("## Operator Next Actions", text)
+        self.assertIn("## Operator Work Order", text)
         self.assertIn("출처가 있는 사진부터 검수", text)
+        self.assertIn("catalog-operator-001-image_from_known_source", text)
         self.assertIn("server/example.json", text)
 
 

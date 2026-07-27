@@ -164,6 +164,14 @@ def _operator_action_by_lane(update_backlog: dict[str, Any]) -> dict[str, dict[s
     }
 
 
+def _operator_work_order_by_lane(update_backlog: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    return {
+        str(item.get("lane") or ""): item
+        for item in update_backlog.get("operator_work_order") or []
+        if isinstance(item, dict) and item.get("lane")
+    }
+
+
 def build_report(
     quality: dict[str, Any],
     field_queue: dict[str, Any],
@@ -257,6 +265,7 @@ def build_report(
     if update_backlog:
         image_evidence = update_backlog.get("image_evidence_split") or {}
         operator_actions = _operator_action_by_lane(update_backlog)
+        operator_work_orders = _operator_work_order_by_lane(update_backlog)
         _append_check(
             checks,
             "update_backlog_image_evidence_missing_matches_image_queue",
@@ -281,6 +290,19 @@ def build_report(
                     f"update_backlog_operator_action_rows_match:{lane}",
                     expected_rows,
                     action.get("rows"),
+                )
+                work_order = operator_work_orders.get(lane) or {}
+                _append_check(
+                    checks,
+                    f"update_backlog_operator_work_order_exists:{lane}",
+                    1,
+                    1 if work_order else 0,
+                )
+                _append_check(
+                    checks,
+                    f"update_backlog_operator_work_order_rows_match:{lane}",
+                    expected_rows,
+                    work_order.get("row_count"),
                 )
         if image_asset_audit:
             asset_summary = image_asset_audit.get("summary") or {}
@@ -312,6 +334,19 @@ def build_report(
                 animation_rows,
                 action.get("rows"),
             )
+            work_order = operator_work_orders.get("animation_enrichment") or {}
+            _append_check(
+                checks,
+                "update_backlog_operator_work_order_exists:animation_enrichment",
+                1,
+                1 if work_order else 0,
+            )
+            _append_check(
+                checks,
+                "update_backlog_operator_work_order_rows_match:animation_enrichment",
+                animation_rows,
+                work_order.get("row_count"),
+            )
         backlog_ichiban = update_backlog.get("ichiban_quality") or {}
         backlog_ichiban_rows = int(backlog_ichiban.get("queue_rows") or 0)
         if backlog_ichiban_rows:
@@ -327,6 +362,19 @@ def build_report(
                 "update_backlog_operator_action_rows_match:ichiban_quality",
                 backlog_ichiban_rows,
                 action.get("rows"),
+            )
+            work_order = operator_work_orders.get("ichiban_quality") or {}
+            _append_check(
+                checks,
+                "update_backlog_operator_work_order_exists:ichiban_quality",
+                1,
+                1 if work_order else 0,
+            )
+            _append_check(
+                checks,
+                "update_backlog_operator_work_order_rows_match:ichiban_quality",
+                backlog_ichiban_rows,
+                work_order.get("row_count"),
             )
     if image_update_work_packs:
         checks.extend(_work_pack_manifest_checks("image_update_work_pack", image_update_work_packs))

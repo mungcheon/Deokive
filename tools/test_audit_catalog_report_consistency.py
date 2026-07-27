@@ -103,6 +103,12 @@ class CatalogReportConsistencyAuditTests(unittest.TestCase):
                     {"lane": "animation_enrichment", "rows": 6},
                     {"lane": "ichiban_quality", "rows": 4},
                 ],
+                "operator_work_order": [
+                    {"lane": "image_from_known_source", "row_count": 1},
+                    {"lane": "source_before_image", "row_count": 1},
+                    {"lane": "animation_enrichment", "row_count": 6},
+                    {"lane": "ichiban_quality", "row_count": 4},
+                ],
                 "animation_enrichment_priority": {"queue_rows": 6},
                 "ichiban_quality": {
                     "queue_rows": 4,
@@ -259,6 +265,10 @@ class CatalogReportConsistencyAuditTests(unittest.TestCase):
                     {"lane": "image_from_known_source", "rows": 2},
                     {"lane": "animation_enrichment", "rows": 3},
                 ],
+                "operator_work_order": [
+                    {"lane": "image_from_known_source", "row_count": 2},
+                    {"lane": "animation_enrichment", "row_count": 3},
+                ],
                 "animation_enrichment_priority": {"queue_rows": 4},
                 "ichiban_quality": {
                     "queue_rows": 8,
@@ -296,9 +306,13 @@ class CatalogReportConsistencyAuditTests(unittest.TestCase):
         self.assertEqual(names["image_asset_audit_missing_image_rows_match_image_queue"], 6)
         self.assertEqual(names["update_backlog_image_evidence_missing_matches_image_queue"], 7)
         self.assertEqual(names["update_backlog_operator_action_rows_match:image_from_known_source"], 1)
+        self.assertEqual(names["update_backlog_operator_work_order_rows_match:image_from_known_source"], 1)
         self.assertEqual(names["update_backlog_operator_action_exists:source_before_image"], -1)
+        self.assertEqual(names["update_backlog_operator_work_order_exists:source_before_image"], -1)
         self.assertEqual(names["update_backlog_operator_action_rows_match:animation_enrichment"], -1)
+        self.assertEqual(names["update_backlog_operator_work_order_rows_match:animation_enrichment"], -1)
         self.assertEqual(names["update_backlog_operator_action_exists:ichiban_quality"], -1)
+        self.assertEqual(names["update_backlog_operator_work_order_exists:ichiban_quality"], -1)
         self.assertEqual(names["ichiban_quality_queue_rows_match_items"], -1)
         self.assertEqual(names["ichiban_quality_work_pack_rows_match_packs"], -1)
         self.assertEqual(names["update_backlog_ichiban_quality_matches_queue:queue_rows"], 4)
