@@ -41,6 +41,8 @@ DEFAULT_FOCUS_MISSING_IMAGE_QUEUE = ROOT / "server" / "focus_missing_image_queue
 DEFAULT_CONFIRMED_IMPORT_AUDIT = ROOT / "server" / "catalog_confirmed_import_queue_audit.json"
 DEFAULT_CONFIRMED_ARCHIVE_REPORT = ROOT / "server" / "catalog_confirmed_archive_report.json"
 DEFAULT_STORE_SOURCE_NETLOC_AUDIT = ROOT / "server" / "store_source_netloc_audit.json"
+DEFAULT_BOSS_REVIEW_LEDGER = ROOT / "server" / "boss_review" / "boss_review_ledger.json"
+DEFAULT_BOSS_REVIEW_BATCH = ROOT / "server" / "boss_review" / "boss_review_current.json"
 DEFAULT_DB = ROOT / "server" / "deokive_dev.db"
 DEFAULT_JSON = ROOT / "server" / "catalog_goal_status_audit.json"
 DEFAULT_MD = ROOT / "server" / "catalog_goal_status_audit.md"
@@ -69,6 +71,53 @@ def _db_summary(db_path: Path) -> dict[str, Any]:
         active_rows = conn.execute("select count(*) from goods_catalog where is_active = 1").fetchone()[0]
         total_rows = conn.execute("select count(*) from goods_catalog").fetchone()[0]
     return {"exists": True, "total_rows": total_rows, "active_rows": active_rows}
+
+
+def _boss_review_summary(
+    *,
+    ledger_payload: dict[str, Any],
+    batch_payload: dict[str, Any],
+    total_rows: int,
+) -> dict[str, Any]:
+    decisions = [
+        item
+        for item in ledger_payload.get("decisions", [])
+        if isinstance(item, dict)
+        and isinstance(item.get("row_index"), int)
+        and not isinstance(item.get("row_index"), bool)
+    ]
+    reviewed_indexes = {int(item["row_index"]) for item in decisions}
+    approved_statuses = set((ledger_payload.get("meta") or {}).get("approved_statuses") or ["fixed_pass", "pass"])
+    status_counts = Counter(str(item.get("status") or "") for item in decisions)
+    approved_items = sum(1 for item in decisions if item.get("status") in approved_statuses)
+    blocked_items = len(decisions) - approved_items
+    pending_items = max(total_rows - len(reviewed_indexes), 0)
+    batch_meta = batch_payload.get("meta") if isinstance(batch_payload.get("meta"), dict) else {}
+    selected_items = int(batch_meta.get("selected_items") or 0)
+    first_row_index = batch_meta.get("first_row_index")
+    last_row_index = batch_meta.get("last_row_index")
+    batch_number = batch_meta.get("batch_number")
+    if not batch_number and isinstance(first_row_index, int):
+        batch_number = (first_row_index // 10) + 1
+    return {
+        "artifact": "server/boss_review/catalog_boss_review.html",
+        "ledger": "server/boss_review/boss_review_ledger.json",
+        "current_batch": "server/boss_review/boss_review_current.json",
+        "total_items": total_rows,
+        "reviewed_items": len(reviewed_indexes),
+        "pending_items": pending_items,
+        "approved_items": approved_items,
+        "blocked_items": blocked_items,
+        "review_percent": round((len(reviewed_indexes) / total_rows * 100) if total_rows else 0, 2),
+        "remaining_batches": (pending_items + 9) // 10,
+        "current_batch_items": selected_items,
+        "current_batch_number": batch_number,
+        "current_first_row_index": first_row_index,
+        "current_last_row_index": last_row_index,
+        "status_counts": dict(sorted(status_counts.items())),
+        "next_action_label": "다음 배치 검토하기",
+        "browser_storage_note": "Browser decisions stay in localStorage until a backup JSON is imported.",
+    }
 
 
 def _review_queue_summary(
@@ -123,6 +172,24 @@ def _next_actions(payload: dict[str, Any]) -> list[dict[str, Any]]:
                 "area": "dedupe",
                 "action": "Run tools/dedupe_catalog.py --write and sync DB after review.",
                 "evidence": f"{payload['duplicate_groups']} duplicate groups",
+            }
+        )
+    boss_review = payload.get("boss_review") or {}
+    if boss_review.get("pending_items"):
+        actions.append(
+            {
+                "priority": 5,
+                "area": "boss review gate",
+                "action": (
+                    "Open server/boss_review/catalog_boss_review.html, review the visible 10 rows, "
+                    "then press 다음 배치 검토하기. Save a backup JSON only when you need to import approved/rework artifacts."
+                ),
+                "evidence": (
+                    f"{boss_review.get('reviewed_items')} reviewed, "
+                    f"{boss_review.get('pending_items')} pending, "
+                    f"next batch {boss_review.get('current_first_row_index')}-"
+                    f"{boss_review.get('current_last_row_index')}"
+                ),
             }
         )
     review = payload.get("review_queues", {})
@@ -366,6 +433,8 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
     confirmed_import_queues = _read_json(args.confirmed_import_audit, {})
     confirmed_archive = _read_json(args.confirmed_archive_report, {})
     store_source_netloc_audit = _read_json(args.store_source_netloc_audit, {})
+    boss_review_ledger = _read_json(args.boss_review_ledger, {})
+    boss_review_batch = _read_json(args.boss_review_batch, {})
 
     by_store = Counter(str(row.get("source_store") or "") for row in rows if isinstance(row, dict))
     by_category = Counter(str(row.get("category") or "") for row in rows if isinstance(row, dict))
@@ -375,6 +444,11 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
         "rows": len(rows),
         **_duplicate_summary([row for row in rows if isinstance(row, dict)]),
         "db": _db_summary(args.db),
+        "boss_review": _boss_review_summary(
+            ledger_payload=boss_review_ledger,
+            batch_payload=boss_review_batch,
+            total_rows=len(rows),
+        ),
         "top_source_stores": by_store.most_common(25),
         "top_categories": by_category.most_common(25),
         "missing_enrichment": quality.get("missing_enrichment"),
@@ -527,6 +601,7 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
             "Ichiban Kuji metadata still has old campaign pages without safe price/release labels; keep those fields blank unless official evidence is added.",
             "Animation goods categories are audited separately; zero unknown categories means the current app category taxonomy is covering the group.",
             "Animation enrichment priority queue ranks category/store groups for exact source discovery before image attachment.",
+            "Boss review is the public-release gate; only rows reviewed as pass or fixed_pass should move into approved catalog artifacts.",
             "Confirmed import queue audit shows whether manually reviewed rows are pending, skipped, duplicated, or ready for import.",
             "Completed confirmed rows can be archived after import reports prove they are already applied or canonical duplicates.",
         ],
@@ -546,9 +621,32 @@ def write_markdown(payload: dict[str, Any], path: Path) -> None:
         f"- DB active rows: `{payload['db'].get('active_rows')}`",
         f"- Missing enrichment: `{json.dumps(payload.get('missing_enrichment'), ensure_ascii=False)}`",
         "",
-        "## Field Queue",
+        "## Boss Review Gate",
         "",
     ]
+    boss = payload.get("boss_review") or {}
+    for key in (
+        "total_items",
+        "reviewed_items",
+        "pending_items",
+        "approved_items",
+        "blocked_items",
+        "review_percent",
+        "remaining_batches",
+        "current_batch_items",
+        "current_batch_number",
+        "current_first_row_index",
+        "current_last_row_index",
+    ):
+        lines.append(f"- `{key}`: `{boss.get(key)}`")
+    lines.append(f"- Action: `{boss.get('next_action_label')}`")
+    lines.append(f"- Artifact: `{boss.get('artifact')}`")
+    lines.append(f"- Note: {boss.get('browser_storage_note')}")
+    lines.extend([
+        "",
+        "## Field Queue",
+        "",
+    ])
     for field, count in payload["field_queue"].get("by_field", []):
         lines.append(f"- `{field}`: `{count}`")
     lines.extend(["", "## Barcode Applicability", ""])
@@ -752,6 +850,7 @@ def write_html(payload: dict[str, Any], path: Path) -> None:
     animation_priority = payload.get("animation_enrichment_priority") or {}
     focus_missing = payload.get("focus_missing_images") or {}
     field_batches = payload.get("field_batches") or {}
+    boss = payload.get("boss_review") or {}
     field_cards = "\n".join(
         f"<article><span>{_html_escape(field)}</span><strong>{_html_escape(count)}</strong></article>"
         for field, count in payload["field_queue"].get("by_field", [])
@@ -831,6 +930,8 @@ def write_html(payload: dict[str, Any], path: Path) -> None:
       <article><span>Rows</span><strong>{_html_escape(payload['rows'])}</strong></article>
       <article><span>Duplicate groups</span><strong>{_html_escape(payload['duplicate_groups'])}</strong></article>
       <article><span>DB active rows</span><strong>{_html_escape(payload['db'].get('active_rows'))}</strong></article>
+      <article><span>Boss reviewed</span><strong>{_html_escape(boss.get('reviewed_items'))}</strong></article>
+      <article><span>Boss pending</span><strong>{_html_escape(boss.get('pending_items'))}</strong></article>
       <article class="missing"><span>Missing images</span><strong>{_html_escape(missing.get('image_url'))}</strong></article>
       <article><span>Field batches</span><strong>{_html_escape(field_batches.get('batch_count'))}</strong></article>
       <article><span>Animation categories</span><strong>{_html_escape(animation.get('category_count'))}</strong></article>
@@ -843,6 +944,18 @@ def write_html(payload: dict[str, Any], path: Path) -> None:
       <article><span>Focus missing images</span><strong>{_html_escape(focus_missing.get('focus_missing_image_rows'))}</strong></article>
       <article><span>Focus missing sources</span><strong>{_html_escape(focus_missing.get('focus_missing_source_rows'))}</strong></article>
     </section>
+    <h2>Boss Review Gate</h2>
+    <section class="fields">
+      <article><span>Total items</span><strong>{_html_escape(boss.get('total_items'))}</strong></article>
+      <article><span>Reviewed</span><strong>{_html_escape(boss.get('reviewed_items'))}</strong></article>
+      <article><span>Pending</span><strong>{_html_escape(boss.get('pending_items'))}</strong></article>
+      <article><span>Approved</span><strong>{_html_escape(boss.get('approved_items'))}</strong></article>
+      <article><span>Blocked</span><strong>{_html_escape(boss.get('blocked_items'))}</strong></article>
+      <article><span>Remaining batches</span><strong>{_html_escape(boss.get('remaining_batches'))}</strong></article>
+      <article><span>Current batch</span><strong>{_html_escape(boss.get('current_batch_number'))}</strong></article>
+      <article><span>Current rows</span><strong>{_html_escape(boss.get('current_first_row_index'))}-{_html_escape(boss.get('current_last_row_index'))}</strong></article>
+    </section>
+    <p><a href="{_html_escape(boss.get('artifact'))}">{_html_escape(boss.get('next_action_label'))}</a></p>
     <h2>Missing Fields</h2>
     <section class="fields">{field_cards}</section>
     <h2>Image Queue</h2>
@@ -935,6 +1048,8 @@ def main() -> int:
     parser.add_argument("--confirmed-import-audit", type=Path, default=DEFAULT_CONFIRMED_IMPORT_AUDIT)
     parser.add_argument("--confirmed-archive-report", type=Path, default=DEFAULT_CONFIRMED_ARCHIVE_REPORT)
     parser.add_argument("--store-source-netloc-audit", type=Path, default=DEFAULT_STORE_SOURCE_NETLOC_AUDIT)
+    parser.add_argument("--boss-review-ledger", type=Path, default=DEFAULT_BOSS_REVIEW_LEDGER)
+    parser.add_argument("--boss-review-batch", type=Path, default=DEFAULT_BOSS_REVIEW_BATCH)
     parser.add_argument("--db", type=Path, default=DEFAULT_DB)
     parser.add_argument("--json-output", type=Path, default=DEFAULT_JSON)
     parser.add_argument("--markdown-output", type=Path, default=DEFAULT_MD)

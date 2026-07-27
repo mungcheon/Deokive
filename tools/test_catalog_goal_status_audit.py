@@ -64,12 +64,17 @@ class CatalogGoalStatusAuditTests(unittest.TestCase):
                 confirmed_import_audit=_write_json(root / "confirmed_import.json", {}),
                 confirmed_archive_report=_write_json(root / "archive.json", {}),
                 store_source_netloc_audit=_write_json(root / "netloc.json", {}),
+                boss_review_ledger=_write_json(root / "boss_ledger.json", {}),
+                boss_review_batch=_write_json(root / "boss_batch.json", {}),
                 db=root / "missing.db",
             )
 
             payload = build(args)
 
         self.assertEqual(payload["rows"], 1)
+        self.assertEqual(payload["boss_review"]["pending_items"], 1)
+        self.assertEqual(payload["boss_review"]["remaining_batches"], 1)
+        self.assertIn("boss review gate", [action["area"] for action in payload["next_actions"]])
 
     def test_build_includes_ichiban_and_animation_workstream_summaries(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -84,7 +89,14 @@ class CatalogGoalStatusAuditTests(unittest.TestCase):
                             "name_ja": "A",
                             "category": "Badge",
                             "affiliation": "Series",
-                        }
+                        },
+                        {
+                            "source_store": "Animate",
+                            "name_ko": "B",
+                            "name_ja": "B",
+                            "category": "Badge",
+                            "affiliation": "Series",
+                        },
                     ],
                 ),
                 quality=_write_json(root / "quality.json", {"missing_enrichment": {"image_url": 2, "barcode": 3}}),
@@ -348,6 +360,27 @@ class CatalogGoalStatusAuditTests(unittest.TestCase):
                     root / "store_source.json",
                     {"mismatch_count": 2, "by_severity": [["external_evidence_source", 2]]},
                 ),
+                boss_review_ledger=_write_json(
+                    root / "boss_ledger.json",
+                    {
+                        "meta": {"approved_statuses": ["fixed_pass", "pass"]},
+                        "decisions": [
+                            {"row_index": 0, "status": "pass"},
+                            {"row_index": 1, "status": "image_error"},
+                        ],
+                    },
+                ),
+                boss_review_batch=_write_json(
+                    root / "boss_batch.json",
+                    {
+                        "meta": {
+                            "selected_items": 10,
+                            "first_row_index": 2,
+                            "last_row_index": 11,
+                            "batch_number": 2,
+                        }
+                    },
+                ),
                 db=_make_db(root / "test.db"),
             )
 
@@ -355,6 +388,11 @@ class CatalogGoalStatusAuditTests(unittest.TestCase):
 
         self.assertEqual(payload["db"]["active_rows"], 2)
         self.assertEqual(payload["field_batches"]["batch_count"], 2)
+        self.assertEqual(payload["boss_review"]["reviewed_items"], 2)
+        self.assertEqual(payload["boss_review"]["pending_items"], 0)
+        self.assertEqual(payload["boss_review"]["approved_items"], 1)
+        self.assertEqual(payload["boss_review"]["blocked_items"], 1)
+        self.assertEqual(payload["boss_review"]["current_batch_number"], 2)
         self.assertEqual(payload["ichiban_metadata"]["safe_price_url_count"], 0)
         self.assertEqual(payload["ichiban_campaign_gaps"]["campaign_gap_count"], 2)
         self.assertEqual(payload["ichiban_prize_structure"]["missing_sub_series_rows"], 7)
@@ -373,6 +411,7 @@ class CatalogGoalStatusAuditTests(unittest.TestCase):
         self.assertEqual(payload["confirmed_archive"]["summary"]["archivable_items"], 2)
         self.assertEqual(payload["store_source_netloc_audit"]["mismatch_count"], 2)
         areas = [action["area"] for action in payload["next_actions"]]
+        self.assertNotIn("boss review gate", areas)
         self.assertIn("storefront images", areas)
         self.assertIn("official detail images", areas)
         self.assertIn("Ichiban Kuji campaign gaps", areas)
