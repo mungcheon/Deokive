@@ -146,6 +146,26 @@ class CatalogQualityReportTests(unittest.TestCase):
         self.assertEqual(1, summary["single_character_name_review_rows"])
         self.assertEqual("페른", summary["samples"]["known_alias_rows"][0]["expected_character_name"])
 
+    def test_character_name_quality_allows_known_single_character_names(self) -> None:
+        rows = [
+            {
+                "catalog_index": 1,
+                "name_ko": "Q posket 렘",
+                "character_name": "렘",
+                "affiliation": "리제로",
+            },
+            {
+                "catalog_index": 2,
+                "name_ko": "포켓몬 봉제 인형 (뮤)",
+                "character_name": "뮤",
+                "affiliation": "포켓몬",
+            },
+        ]
+
+        summary = quality.build_character_name_quality(rows)
+
+        self.assertEqual(0, summary["single_character_name_review_rows"])
+
 
 if __name__ == "__main__":
     unittest.main()

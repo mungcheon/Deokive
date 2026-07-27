@@ -23,7 +23,7 @@ ENRICHMENT_FIELDS = ("image_url", "source_url", "release_date", "barcode", "offi
 SERVER_UNSUPPORTED_FIELDS = ("official_price_krw",)
 GROUP_FIELDS = ("source_store", "category", "affiliation", "series_name", "sub_series")
 MIXED_CHARACTER_LABELS = {"혼합", "mixed", "mix", "various", "공통"}
-ACCEPTED_SINGLE_CHARACTER_NAMES = {"곰", "별"}
+ACCEPTED_SINGLE_CHARACTER_NAMES = {"곰", "람", "렘", "린", "뮤", "별"}
 KNOWN_CHARACTER_ALIASES = {
     ("장송의 프리렌", "펀"): "페른",
     ("장송의 프리렌", "페룬"): "페른",
