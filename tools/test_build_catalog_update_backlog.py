@@ -126,6 +126,8 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
                 "ja_token_mismatch_rows": 0,
                 "single_character_name_review_rows": 2,
                 "ichiban_naming_convention_review_rows": 3,
+                "ichiban_display_name_convention_review_rows": 1,
+                "ichiban_non_prize_related_item_review_rows": 2,
                 "queue_rows": 6,
             },
             "items": [
@@ -148,6 +150,8 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
                 "exact_display_duplicate_queue_rows": 1,
                 "zero_price_policy_queue_rows": 0,
                 "naming_convention_queue_rows": 2,
+                "display_name_convention_review_rows": 1,
+                "non_prize_related_item_review_rows": 1,
                 "campaign_count": 10,
                 "seeded_campaign_url_count": 9,
                 "work_pack_rows": 1,
@@ -285,6 +289,8 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
         self.assertEqual(result["priority_goods_incomplete_samples"][0]["focus"], "danganronpa")
         self.assertEqual(result["naming_quality"]["queue_rows"], 6)
         self.assertEqual(result["naming_quality"]["known_alias_rows"], 1)
+        self.assertEqual(result["naming_quality"]["ichiban_display_name_convention_review_rows"], 1)
+        self.assertEqual(result["naming_quality"]["ichiban_non_prize_related_item_review_rows"], 2)
         self.assertEqual(
             result["naming_quality"]["by_workflow"],
             [("character_alias_normalization", 1), ("ichiban_display_name_convention", 1)],
@@ -292,6 +298,8 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
         self.assertEqual(result["ichiban_quality"]["queue_rows"], 4)
         self.assertEqual(result["ichiban_quality"]["artifact"], "server/ichiban_public_quality_queue.html")
         self.assertEqual(result["ichiban_quality"]["campaign_gap_queue_rows"], 1)
+        self.assertEqual(result["ichiban_quality"]["display_name_convention_review_rows"], 1)
+        self.assertEqual(result["ichiban_quality"]["non_prize_related_item_review_rows"], 1)
         self.assertEqual(
             result["ichiban_quality"]["by_workflow"],
             [("campaign_gap_research", 1), ("non_prize_related_item_classification", 1)],

@@ -452,6 +452,8 @@ def build_ichiban_summary(
     ]
     naming_issue_rows: list[dict[str, Any]] = []
     naming_issue_counts: Counter[str] = Counter()
+    display_name_issue_rows: list[dict[str, Any]] = []
+    non_prize_related_rows: list[dict[str, Any]] = []
     for row in ichiban_rows:
         issue = _ichiban_naming_issue(row)
         if not issue:
@@ -461,6 +463,10 @@ def build_ichiban_summary(
         sample["reason"] = issue
         sample["display_parts"] = _split_display_parts(row.get("name_ko"))
         naming_issue_rows.append(sample)
+        if issue == "non_prize_or_related_item_needs_classification":
+            non_prize_related_rows.append(sample)
+        else:
+            display_name_issue_rows.append(sample)
 
     return {
         "rows": len(ichiban_rows),
@@ -487,8 +493,12 @@ def build_ichiban_summary(
             for row in zero_price_non_exception_rows[:20]
         ],
         "naming_convention_review_rows": len(naming_issue_rows),
+        "display_name_convention_review_rows": len(display_name_issue_rows),
+        "non_prize_related_item_review_rows": len(non_prize_related_rows),
         "naming_convention_review_reasons": dict(naming_issue_counts.most_common()),
         "naming_convention_review_sample": naming_issue_rows[:40],
+        "display_name_convention_review_sample": display_name_issue_rows[:40],
+        "non_prize_related_item_review_sample": non_prize_related_rows[:40],
     }
 
 

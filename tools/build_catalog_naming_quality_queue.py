@@ -103,6 +103,12 @@ def build_queue(quality_report: dict[str, Any]) -> dict[str, Any]:
             "ichiban_naming_convention_review_rows": ichiban.get(
                 "naming_convention_review_rows", 0
             ),
+            "ichiban_display_name_convention_review_rows": ichiban.get(
+                "display_name_convention_review_rows", 0
+            ),
+            "ichiban_non_prize_related_item_review_rows": ichiban.get(
+                "non_prize_related_item_review_rows", 0
+            ),
             "queue_rows": len(items),
         },
         "items": items,

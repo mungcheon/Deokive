@@ -195,6 +195,12 @@ def build_queue(quality_report: dict[str, Any]) -> dict[str, Any]:
             "zero_price_non_exception_rows": ichiban.get("zero_price_non_exception_rows", 0),
             "zero_price_policy_queue_rows": len(zero_price_items),
             "naming_convention_review_rows": ichiban.get("naming_convention_review_rows", 0),
+            "display_name_convention_review_rows": ichiban.get(
+                "display_name_convention_review_rows", 0
+            ),
+            "non_prize_related_item_review_rows": ichiban.get(
+                "non_prize_related_item_review_rows", 0
+            ),
             "naming_convention_queue_rows": len(naming_items),
             "queue_rows": len(items),
             "work_pack_rows": len(work_packs),

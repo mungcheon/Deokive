@@ -566,6 +566,12 @@ def build_backlog(
             "ichiban_naming_convention_review_rows": naming_summary.get(
                 "ichiban_naming_convention_review_rows", 0
             ),
+            "ichiban_display_name_convention_review_rows": naming_summary.get(
+                "ichiban_display_name_convention_review_rows", 0
+            ),
+            "ichiban_non_prize_related_item_review_rows": naming_summary.get(
+                "ichiban_non_prize_related_item_review_rows", 0
+            ),
             "by_workflow": naming_by_workflow.most_common(),
             "sample_rows": naming_items[:20],
         },
@@ -583,6 +589,12 @@ def build_backlog(
             ),
             "naming_convention_queue_rows": ichiban_quality_summary.get(
                 "naming_convention_queue_rows", 0
+            ),
+            "display_name_convention_review_rows": ichiban_quality_summary.get(
+                "display_name_convention_review_rows", 0
+            ),
+            "non_prize_related_item_review_rows": ichiban_quality_summary.get(
+                "non_prize_related_item_review_rows", 0
             ),
             "campaign_count": ichiban_quality_summary.get("campaign_count", 0),
             "seeded_campaign_url_count": ichiban_quality_summary.get(
@@ -763,6 +775,14 @@ def write_markdown(backlog: dict[str, Any], path: Path) -> None:
         "- Ichiban display-name convention rows: "
         f"`{naming.get('ichiban_naming_convention_review_rows', 0)}`"
     )
+    lines.append(
+        "- Ichiban display-name rewrite rows: "
+        f"`{naming.get('ichiban_display_name_convention_review_rows', 0)}`"
+    )
+    lines.append(
+        "- Ichiban non-prize/related-item review rows: "
+        f"`{naming.get('ichiban_non_prize_related_item_review_rows', 0)}`"
+    )
     lines.extend(["", "### Naming Workflows", ""])
     for workflow, count in naming.get("by_workflow", []):
         lines.append(f"- `{workflow}`: `{count}`")
@@ -785,6 +805,12 @@ def write_markdown(backlog: dict[str, Any], path: Path) -> None:
     lines.append(f"- Zero-price policy rows: `{ichiban.get('zero_price_policy_queue_rows', 0)}`")
     lines.append(
         f"- Naming/non-prize review rows: `{ichiban.get('naming_convention_queue_rows', 0)}`"
+    )
+    lines.append(
+        f"- Display-name rewrite rows: `{ichiban.get('display_name_convention_review_rows', 0)}`"
+    )
+    lines.append(
+        f"- Non-prize/related-item review rows: `{ichiban.get('non_prize_related_item_review_rows', 0)}`"
     )
     lines.append(
         f"- Seeded campaign URLs: `{ichiban.get('seeded_campaign_url_count', 0)}` / "

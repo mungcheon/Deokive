@@ -48,6 +48,8 @@ class BuildCatalogNamingQualityQueueTests(unittest.TestCase):
             },
             "ichiban_kuji": {
                 "naming_convention_review_rows": 2,
+                "display_name_convention_review_rows": 1,
+                "non_prize_related_item_review_rows": 1,
                 "naming_convention_review_sample": [
                     {
                         "catalog_index": 4,
@@ -74,6 +76,8 @@ class BuildCatalogNamingQualityQueueTests(unittest.TestCase):
         self.assertEqual(1, queue["summary"]["ja_token_mismatch_rows"])
         self.assertEqual(1, queue["summary"]["single_character_name_review_rows"])
         self.assertEqual(2, queue["summary"]["ichiban_naming_convention_review_rows"])
+        self.assertEqual(1, queue["summary"]["ichiban_display_name_convention_review_rows"])
+        self.assertEqual(1, queue["summary"]["ichiban_non_prize_related_item_review_rows"])
         self.assertEqual(
             [
                 "character_alias_normalization",

@@ -47,6 +47,8 @@ class BuildIchibanPublicQualityQueueTests(unittest.TestCase):
                     }
                 ],
                 "naming_convention_review_rows": 2,
+                "display_name_convention_review_rows": 1,
+                "non_prize_related_item_review_rows": 1,
                 "naming_convention_review_sample": [
                     {
                         "catalog_index": 5,
@@ -72,6 +74,8 @@ class BuildIchibanPublicQualityQueueTests(unittest.TestCase):
         self.assertEqual(2, queue["summary"]["campaign_gap_queue_rows"])
         self.assertEqual(1, queue["summary"]["exact_display_duplicate_queue_rows"])
         self.assertEqual(1, queue["summary"]["zero_price_policy_queue_rows"])
+        self.assertEqual(1, queue["summary"]["display_name_convention_review_rows"])
+        self.assertEqual(1, queue["summary"]["non_prize_related_item_review_rows"])
         self.assertEqual(2, queue["summary"]["naming_convention_queue_rows"])
         self.assertEqual(6, queue["summary"]["work_pack_rows"])
         self.assertEqual(

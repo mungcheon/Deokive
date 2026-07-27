@@ -120,6 +120,8 @@ class CatalogQualityReportTests(unittest.TestCase):
         summary = quality.build_ichiban_summary(rows, Path("missing-campaigns.json"))
 
         self.assertEqual(4, summary["naming_convention_review_rows"])
+        self.assertEqual(3, summary["display_name_convention_review_rows"])
+        self.assertEqual(1, summary["non_prize_related_item_review_rows"])
         self.assertEqual(
             {
                 "display_name_should_have_release_rank_prize_character_parts": 1,
