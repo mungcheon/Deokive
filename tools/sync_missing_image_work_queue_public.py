@@ -46,6 +46,95 @@ OFFICIAL_SEARCH_STORES = {
     "무기와라스토어": ("manual_official_search_review", "search_only_manual", "manual_confirmation_required", 20, "https://www.google.com/search?q=site%3Amugiwara-store.com%20{query}"),
 }
 
+OFFICIAL_SEARCH_STORES.update(
+    {
+        "애니메이트": (
+            "official_search",
+            "search_only",
+            "candidate_provider_script_required",
+            10,
+            "https://www.animate-onlineshop.jp/products/list.php?mode=search&smt={query}",
+        ),
+        "엔스카이": (
+            "official_search",
+            "search_only",
+            "candidate_provider_script_required",
+            10,
+            "https://www.enskyshop.com/products/list?name={query}",
+        ),
+        "굿스마일컴퍼니": (
+            "official_search",
+            "search_only",
+            "candidate_provider_script_required",
+            10,
+            "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D={query}",
+        ),
+        "굿스마일컴퍼니/Max Factory": (
+            "official_search",
+            "search_only",
+            "candidate_provider_script_required",
+            10,
+            "https://www.goodsmile.info/ja/products/search?utf8=%E2%9C%93&search%5Bquery%5D={query}",
+        ),
+        "코토부키야": (
+            "official_search",
+            "search_only",
+            "candidate_provider_script_required",
+            10,
+            "https://shop.kotobukiya.co.jp/shop/goods/search.aspx?search=x&keyword={query}",
+        ),
+        "점프 캐릭터즈 스토어": (
+            "manual_official_search_review",
+            "search_only_manual",
+            "manual_confirmation_required",
+            20,
+            "https://jumpcs.shueisha.co.jp/shop/goods/search.aspx?search=x&keyword={query}",
+        ),
+        "반다이": (
+            "manual_official_search_review",
+            "search_only_manual",
+            "manual_confirmation_required",
+            20,
+            "https://p-bandai.jp/search/?q={query}",
+        ),
+        "메가하우스": (
+            "manual_official_search_review",
+            "search_only_manual",
+            "manual_confirmation_required",
+            20,
+            "https://www.megahobby.jp/products/?s={query}",
+        ),
+        "포켓몬센터": (
+            "manual_official_search_review",
+            "search_only_manual",
+            "manual_confirmation_required",
+            20,
+            "https://www.pokemoncenter-online.com/search/?keyword={query}",
+        ),
+        "산리오": (
+            "manual_official_search_review",
+            "search_only_manual",
+            "manual_confirmation_required",
+            20,
+            "https://shop.sanrio.co.jp/search?keyword={query}",
+        ),
+        "디즈니 스토어": (
+            "manual_official_search_review",
+            "search_only_manual",
+            "manual_confirmation_required",
+            20,
+            "https://store.disney.co.jp/search?q={query}",
+        ),
+        "무기와라 스토어": (
+            "manual_official_search_review",
+            "search_only_manual",
+            "manual_confirmation_required",
+            20,
+            "https://www.google.com/search?q=site%3Amugiwara-store.com%20{query}",
+        ),
+    }
+)
+
 FIELDNAMES = [
     "row_index",
     "name_ko",

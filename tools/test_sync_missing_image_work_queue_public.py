@@ -46,6 +46,46 @@ class SyncMissingImageWorkQueuePublicTests(unittest.TestCase):
         self.assertEqual(item["strategy"], "official_search")
         self.assertIn("furyuprize.com/search", item["search_url"])
 
+    def test_korean_store_names_use_official_search_lanes(self) -> None:
+        catalog = {
+            "items": [
+                {
+                    "catalog_index": 11,
+                    "name_ko": "샘플 아크릴 스탠드",
+                    "name_ja": "サンプル アクリルスタンド",
+                    "category": "아크릴 스탠드",
+                    "affiliation": "샘플",
+                    "source_store": "애니메이트",
+                },
+                {
+                    "catalog_index": 12,
+                    "name_ko": "샘플 키링",
+                    "name_ja": "サンプル キーホルダー",
+                    "category": "키링",
+                    "affiliation": "샘플",
+                    "source_store": "엔스카이",
+                },
+                {
+                    "catalog_index": 13,
+                    "name_ko": "샘플 피규어",
+                    "name_ja": "サンプル フィギュア",
+                    "category": "피규어",
+                    "affiliation": "샘플",
+                    "source_store": "굿스마일컴퍼니",
+                },
+            ]
+        }
+
+        result = sync_queue(catalog, {"items": []})
+
+        by_store = {item["source_store"]: item for item in result["queue"]["items"]}
+        self.assertEqual("official_search", by_store["애니메이트"]["strategy"])
+        self.assertIn("animate-onlineshop.jp", by_store["애니메이트"]["search_url"])
+        self.assertEqual("official_search", by_store["엔스카이"]["strategy"])
+        self.assertIn("enskyshop.com", by_store["엔스카이"]["search_url"])
+        self.assertEqual("official_search", by_store["굿스마일컴퍼니"]["strategy"])
+        self.assertIn("goodsmile.info", by_store["굿스마일컴퍼니"]["search_url"])
+
     def test_keeps_existing_queue_rows_and_removes_non_missing_rows(self) -> None:
         catalog = {
             "items": [
