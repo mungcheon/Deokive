@@ -90,6 +90,7 @@ jobs:
           fi
 
           python tools/validate_agent_goods_intake.py data/intake/incoming
+          python tools/import_agent_goods_intake.py data/intake/incoming --write
           python tools/sync_catalog_pipeline.py --write --skip-network --skip-db "${image_args[@]}"
           python tools/generate_seed_catalog_dart.py --input data/catalog_public.json --output lib/data/catalog/seed_catalog.dart
           python tools/audit_flutter_seed_matches_public.py
@@ -103,6 +104,7 @@ jobs:
             data/catalog_public.json \
             data/catalog_public_meta.json \
             data/site_status_public.json \
+            data/intake \
             lib/data/catalog/seed_catalog.dart \
             assets/catalog_images \
             assets/assets/catalog_images
