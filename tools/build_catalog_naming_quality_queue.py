@@ -68,10 +68,16 @@ def build_queue(quality_report: dict[str, Any]) -> dict[str, Any]:
         )
         items.append(item)
     for row in _sample_items(ichiban.get("naming_convention_review_sample")):
-        item = _base_item("ichiban_display_name_convention", 20, row)
-        item["recommended_action"] = (
-            "Rewrite display_name as release name / prize rank / prize name / character name."
-        )
+        if row.get("reason") == "non_prize_or_related_item_needs_classification":
+            item = _base_item("ichiban_non_prize_related_item_review", 25, row)
+            item["recommended_action"] = (
+                "Classify as related/campaign/non-prize goods or replace with exact prize-rank evidence."
+            )
+        else:
+            item = _base_item("ichiban_display_name_convention", 20, row)
+            item["recommended_action"] = (
+                "Rewrite display_name as release name / prize rank / prize name / character name."
+            )
         items.append(item)
     for row in _sample_items(character_samples.get("single_character_name_review_rows")):
         item = _base_item("single_character_name_review", 40, row)

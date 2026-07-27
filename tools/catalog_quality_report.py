@@ -24,6 +24,14 @@ SERVER_UNSUPPORTED_FIELDS = ("official_price_krw",)
 GROUP_FIELDS = ("source_store", "category", "affiliation", "series_name", "sub_series")
 MIXED_CHARACTER_LABELS = {"혼합", "mixed", "mix", "various", "공통"}
 ACCEPTED_SINGLE_CHARACTER_NAMES = {"곰", "람", "렘", "린", "뮤", "별"}
+ICHIBAN_NON_PRIZE_RANK_LABELS = {
+    "キャンペーン",
+    "めちゃでかショッパー",
+    "ぬいぐるみ",
+    "付箋",
+    "缶バッジ",
+    "関連商品",
+}
 KNOWN_CHARACTER_ALIASES = {
     ("장송의 프리렌", "펀"): "페른",
     ("장송의 프리렌", "페룬"): "페른",
@@ -333,6 +341,8 @@ def _ichiban_naming_issue(row: dict[str, Any]) -> str | None:
     if len(parts) < 4:
         return "display_name_should_have_release_rank_prize_character_parts"
     if not _is_prize_rank(parts[1]):
+        if parts[1] in ICHIBAN_NON_PRIZE_RANK_LABELS:
+            return "non_prize_or_related_item_needs_classification"
         return "second_part_should_be_prize_rank"
     character = str(row.get("character_name") or "").strip()
     if not _is_mixed_character(character) and character not in parts[-1]:

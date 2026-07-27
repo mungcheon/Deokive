@@ -47,7 +47,7 @@ class BuildCatalogNamingQualityQueueTests(unittest.TestCase):
                 },
             },
             "ichiban_kuji": {
-                "naming_convention_review_rows": 1,
+                "naming_convention_review_rows": 2,
                 "naming_convention_review_sample": [
                     {
                         "catalog_index": 4,
@@ -55,6 +55,13 @@ class BuildCatalogNamingQualityQueueTests(unittest.TestCase):
                         "character_name": "페른",
                         "reason": "second_part_should_be_prize_rank",
                         "display_parts": ["release", "not rank", "prize", "페른"],
+                    },
+                    {
+                        "catalog_index": 5,
+                        "name_ko": "Related Ichiban Name",
+                        "character_name": "기타",
+                        "reason": "non_prize_or_related_item_needs_classification",
+                        "display_parts": ["release", "関連商品", "item", "기타"],
                     }
                 ],
             },
@@ -62,16 +69,17 @@ class BuildCatalogNamingQualityQueueTests(unittest.TestCase):
 
         queue = target.build_queue(quality_report)
 
-        self.assertEqual(4, queue["summary"]["queue_rows"])
+        self.assertEqual(5, queue["summary"]["queue_rows"])
         self.assertEqual(1, queue["summary"]["known_alias_rows"])
         self.assertEqual(1, queue["summary"]["ja_token_mismatch_rows"])
         self.assertEqual(1, queue["summary"]["single_character_name_review_rows"])
-        self.assertEqual(1, queue["summary"]["ichiban_naming_convention_review_rows"])
+        self.assertEqual(2, queue["summary"]["ichiban_naming_convention_review_rows"])
         self.assertEqual(
             [
                 "character_alias_normalization",
                 "character_ja_token_mismatch",
                 "ichiban_display_name_convention",
+                "ichiban_non_prize_related_item_review",
                 "single_character_name_review",
             ],
             [item["workflow"] for item in queue["items"]],

@@ -109,16 +109,23 @@ class CatalogQualityReportTests(unittest.TestCase):
                 "name_ko": "一番くじ 葬送のフリーレン / C賞 / ちょこのっこフィギュア フェルン / 다른캐릭터",
                 "character_name": "페른",
             },
+            {
+                "catalog_index": 5,
+                "source_url": "https://1kuji.com/products/a",
+                "name_ko": "一番くじ ハッピーバースデー チョッパー / 関連商品 / 菓子商品 / 토니토니 쵸파",
+                "character_name": "토니토니 쵸파",
+            },
         ]
 
         summary = quality.build_ichiban_summary(rows, Path("missing-campaigns.json"))
 
-        self.assertEqual(3, summary["naming_convention_review_rows"])
+        self.assertEqual(4, summary["naming_convention_review_rows"])
         self.assertEqual(
             {
                 "display_name_should_have_release_rank_prize_character_parts": 1,
                 "second_part_should_be_prize_rank": 1,
                 "last_part_should_include_character_name": 1,
+                "non_prize_or_related_item_needs_classification": 1,
             },
             summary["naming_convention_review_reasons"],
         )
