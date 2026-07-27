@@ -97,6 +97,13 @@ class CatalogReportConsistencyAuditTests(unittest.TestCase):
                     "rows_ready_for_source_page_image_review": 1,
                     "rows_requiring_source_url_before_image_review": 1,
                 },
+                "operator_next_actions": [
+                    {"lane": "image_from_known_source", "rows": 1},
+                    {"lane": "source_before_image", "rows": 1},
+                    {"lane": "animation_enrichment", "rows": 6},
+                    {"lane": "ichiban_quality", "rows": 4},
+                ],
+                "animation_enrichment_priority": {"queue_rows": 6},
                 "ichiban_quality": {
                     "queue_rows": 4,
                     "campaign_gap_queue_rows": 1,
@@ -245,7 +252,14 @@ class CatalogReportConsistencyAuditTests(unittest.TestCase):
                     "missing_image_url_rows": 9,
                     "with_source_url_rows": 1,
                     "without_source_url_rows": 1,
+                    "rows_ready_for_source_page_image_review": 1,
+                    "rows_requiring_source_url_before_image_review": 1,
                 },
+                "operator_next_actions": [
+                    {"lane": "image_from_known_source", "rows": 2},
+                    {"lane": "animation_enrichment", "rows": 3},
+                ],
+                "animation_enrichment_priority": {"queue_rows": 4},
                 "ichiban_quality": {
                     "queue_rows": 8,
                     "campaign_gap_queue_rows": 9,
@@ -281,6 +295,10 @@ class CatalogReportConsistencyAuditTests(unittest.TestCase):
         self.assertEqual(names["image_provider_coverage_matches_image_queue"], 5)
         self.assertEqual(names["image_asset_audit_missing_image_rows_match_image_queue"], 6)
         self.assertEqual(names["update_backlog_image_evidence_missing_matches_image_queue"], 7)
+        self.assertEqual(names["update_backlog_operator_action_rows_match:image_from_known_source"], 1)
+        self.assertEqual(names["update_backlog_operator_action_exists:source_before_image"], -1)
+        self.assertEqual(names["update_backlog_operator_action_rows_match:animation_enrichment"], -1)
+        self.assertEqual(names["update_backlog_operator_action_exists:ichiban_quality"], -1)
         self.assertEqual(names["ichiban_quality_queue_rows_match_items"], -1)
         self.assertEqual(names["ichiban_quality_work_pack_rows_match_packs"], -1)
         self.assertEqual(names["update_backlog_ichiban_quality_matches_queue:queue_rows"], 4)

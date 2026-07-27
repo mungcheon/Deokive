@@ -156,6 +156,14 @@ def _workflow(payload: dict[str, Any] | None, name: str) -> dict[str, Any]:
     return {}
 
 
+def _operator_action_by_lane(update_backlog: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    return {
+        str(item.get("lane") or ""): item
+        for item in update_backlog.get("operator_next_actions") or []
+        if isinstance(item, dict) and item.get("lane")
+    }
+
+
 def build_report(
     quality: dict[str, Any],
     field_queue: dict[str, Any],
@@ -248,12 +256,32 @@ def build_report(
         )
     if update_backlog:
         image_evidence = update_backlog.get("image_evidence_split") or {}
+        operator_actions = _operator_action_by_lane(update_backlog)
         _append_check(
             checks,
             "update_backlog_image_evidence_missing_matches_image_queue",
             image_queue.get("missing_images"),
             image_evidence.get("missing_image_url_rows"),
         )
+        for lane, evidence_key in (
+            ("image_from_known_source", "rows_ready_for_source_page_image_review"),
+            ("source_before_image", "rows_requiring_source_url_before_image_review"),
+        ):
+            expected_rows = int(image_evidence.get(evidence_key) or 0)
+            if expected_rows:
+                action = operator_actions.get(lane) or {}
+                _append_check(
+                    checks,
+                    f"update_backlog_operator_action_exists:{lane}",
+                    1,
+                    1 if action else 0,
+                )
+                _append_check(
+                    checks,
+                    f"update_backlog_operator_action_rows_match:{lane}",
+                    expected_rows,
+                    action.get("rows"),
+                )
         if image_asset_audit:
             asset_summary = image_asset_audit.get("summary") or {}
             for key, asset_key in (
@@ -268,6 +296,38 @@ def build_report(
                     asset_summary.get(asset_key),
                     image_evidence.get(key),
                 )
+        animation_priority = update_backlog.get("animation_enrichment_priority") or {}
+        animation_rows = int(animation_priority.get("queue_rows") or 0)
+        if animation_rows:
+            action = operator_actions.get("animation_enrichment") or {}
+            _append_check(
+                checks,
+                "update_backlog_operator_action_exists:animation_enrichment",
+                1,
+                1 if action else 0,
+            )
+            _append_check(
+                checks,
+                "update_backlog_operator_action_rows_match:animation_enrichment",
+                animation_rows,
+                action.get("rows"),
+            )
+        backlog_ichiban = update_backlog.get("ichiban_quality") or {}
+        backlog_ichiban_rows = int(backlog_ichiban.get("queue_rows") or 0)
+        if backlog_ichiban_rows:
+            action = operator_actions.get("ichiban_quality") or {}
+            _append_check(
+                checks,
+                "update_backlog_operator_action_exists:ichiban_quality",
+                1,
+                1 if action else 0,
+            )
+            _append_check(
+                checks,
+                "update_backlog_operator_action_rows_match:ichiban_quality",
+                backlog_ichiban_rows,
+                action.get("rows"),
+            )
     if image_update_work_packs:
         checks.extend(_work_pack_manifest_checks("image_update_work_pack", image_update_work_packs))
         pack_rows = int(image_update_work_packs.get("target_rows") or 0)
