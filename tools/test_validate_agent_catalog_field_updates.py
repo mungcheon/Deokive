@@ -95,6 +95,48 @@ class AgentCatalogFieldUpdateValidationTests(unittest.TestCase):
         self.assertTrue(any("target catalog field already has a value" in error for error in errors))
         self.assertTrue(any("not found in catalog_public.json" in error for error in errors))
 
+    def test_rejects_frieren_fern_alias_in_name_field_updates(self) -> None:
+        catalog_rows = {
+            10: {
+                "catalog_index": 10,
+                "name_ko": "",
+                "name_ja": "\u846c\u9001\u306e\u30d5\u30ea\u30fc\u30ec\u30f3 \u30d5\u30a7\u30eb\u30f3 \u3046\u3061\u308f",
+                "affiliation": "\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c",
+            }
+        }
+        payload = self.payload(
+            self.valid_update(field="name_ko", value="\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c \ud380 \uc6b0\uce58\uc640")
+        )
+
+        errors, _summary = target.validate_payload(
+            Path("sample.json"),
+            payload,
+            catalog_rows=catalog_rows,
+        )
+
+        self.assertTrue(any("must use \ud398\ub978" in error for error in errors))
+
+    def test_accepts_canonical_frieren_fern_field_update(self) -> None:
+        catalog_rows = {
+            10: {
+                "catalog_index": 10,
+                "name_ko": "",
+                "name_ja": "\u846c\u9001\u306e\u30d5\u30ea\u30fc\u30ec\u30f3 \u30d5\u30a7\u30eb\u30f3 \u3046\u3061\u308f",
+                "affiliation": "\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c",
+            }
+        }
+        payload = self.payload(
+            self.valid_update(field="name_ko", value="\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c \ud398\ub978 \uc6b0\uce58\uc640")
+        )
+
+        errors, _summary = target.validate_payload(
+            Path("sample.json"),
+            payload,
+            catalog_rows=catalog_rows,
+        )
+
+        self.assertEqual([], errors)
+
 
 if __name__ == "__main__":
     unittest.main()

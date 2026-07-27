@@ -31,6 +31,10 @@ FIELD_NAMES = {
 PRICE_CURRENCIES = {"JPY", "KRW", "USD", "CNY", "TWD"}
 DATE_RE = re.compile(r"^\d{4}(?:-\d{2}(?:-\d{2})?)?$")
 BARCODE_RE = re.compile(r"^\d{8,14}$")
+FRIEREN_KO = "\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c"
+FERN_JA = "\u30d5\u30a7\u30eb\u30f3"
+FERN_CANONICAL_KO = "\ud398\ub978"
+FERN_BAD_KO_ALIASES = ("\ud380", "\ud38c", "\ud504\ub80c", "Fern", "Pern")
 TOP_LEVEL_FIELDS = {"schema_version", "agent", "updates"}
 AGENT_FIELDS = {"name", "run_id", "collected_at", "notes"}
 UPDATE_FIELDS = {"catalog_index", "field", "value", "evidence", "confidence", "notes"}
@@ -137,6 +141,38 @@ def validate_value(errors: list[str], item_path: str, field: str, value: object)
         errors.append(f"{item_path}.value: expected http(s) product/detail URL")
 
 
+def validate_character_alias_value(
+    errors: list[str],
+    item_path: str,
+    update: dict[str, object],
+    catalog_row: dict[str, object] | None,
+) -> None:
+    field = update.get("field")
+    if field not in {"name_ko", "character_name", "sub_series"}:
+        return
+    value = clean_text(update.get("value"))
+    row_context = json.dumps(catalog_row or {}, ensure_ascii=False)
+    update_context = " ".join(
+        [
+            value,
+            clean_text((catalog_row or {}).get("name_ja")),
+            clean_text((catalog_row or {}).get("affiliation")),
+            clean_text((catalog_row or {}).get("series_name")),
+            clean_text((catalog_row or {}).get("sub_series")),
+            clean_text((catalog_row or {}).get("character_name")),
+        ]
+    )
+    is_frieren_context = FRIEREN_KO in update_context or FERN_JA in row_context
+    if not is_frieren_context:
+        return
+    for alias in FERN_BAD_KO_ALIASES:
+        if alias in value:
+            errors.append(
+                f"{item_path}.value: Fern/Frieren Korean aliases must use {FERN_CANONICAL_KO}, not {alias}"
+            )
+            return
+
+
 def validate_evidence(
     errors: list[str],
     item_path: str,
@@ -205,9 +241,14 @@ def validate_update(
                 errors.append(f"{item_path}.catalog_index: not found in catalog_public.json")
             elif field in FIELD_NAMES and present(catalog_row.get(field)):
                 errors.append(f"{item_path}.{field}: target catalog field already has a value")
+        else:
+            catalog_row = None
+    else:
+        catalog_row = None
 
     if isinstance(field, str) and field in FIELD_NAMES:
         validate_value(errors, item_path, field, update.get("value"))
+        validate_character_alias_value(errors, item_path, update, catalog_row)
 
     confidence = update.get("confidence")
     if not isinstance(confidence, str):

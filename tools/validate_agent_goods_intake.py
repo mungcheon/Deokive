@@ -21,6 +21,10 @@ ICHIBAN_PRIZE_RE = re.compile(
     r"^(?:[A-Z](?:\s*(?:Prize|상|賞))?|Last\s*One(?:\s*(?:Prize|상|賞))?|ラストワン賞|라스트원상|Double\s*Chance(?:\s*(?:Prize|상|賞))?|ダブルチャンス|더블찬스)$",
     re.IGNORECASE,
 )
+FRIEREN_KO = "\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c"
+FERN_JA = "\u30d5\u30a7\u30eb\u30f3"
+FERN_CANONICAL_KO = "\ud398\ub978"
+FERN_BAD_KO_ALIASES = ("\ud380", "\ud38c", "\ud504\ub80c", "Fern", "Pern")
 TOP_LEVEL_FIELDS = {"schema_version", "agent", "items"}
 AGENT_FIELDS = {"name", "run_id", "collected_at", "notes"}
 ITEM_FIELDS = {
@@ -130,6 +134,26 @@ def validate_ichiban_display_name(errors: list[str], item: dict[str, object], it
         errors.append(
             f"{item_path}.character_name: must match the fourth Ichiban Kuji display_name segment"
         )
+
+
+def validate_character_aliases(errors: list[str], item: dict[str, object], item_path: str) -> None:
+    serialized = json.dumps(item, ensure_ascii=False)
+    context_fields = " ".join(
+        str(item.get(key) or "")
+        for key in ("display_name", "name_ja", "affiliation", "series_name", "sub_series", "character_name")
+    )
+    is_frieren_context = FRIEREN_KO in context_fields or FERN_JA in serialized
+    if not is_frieren_context:
+        return
+
+    korean_fields = ("display_name", "name_ko", "affiliation", "character_name")
+    display_text = " ".join(str(item.get(key) or "") for key in korean_fields)
+    for alias in FERN_BAD_KO_ALIASES:
+        if alias in display_text:
+            errors.append(
+                f"{item_path}: Fern/Frieren Korean aliases must use {FERN_CANONICAL_KO}, not {alias}"
+            )
+            return
 
 
 def validate_item(
@@ -247,6 +271,7 @@ def validate_item(
             errors.append(f"{item_path}.evidence: must include the source_url as evidence")
 
     validate_ichiban_display_name(errors, item, item_path)
+    validate_character_aliases(errors, item, item_path)
 
     duplicate_key = (
         str(item.get("source_store", "")).strip().casefold(),

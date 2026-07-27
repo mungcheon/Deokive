@@ -219,6 +219,52 @@ class AgentGoodsIntakeValidationTests(unittest.TestCase):
 
         self.assertTrue(any("character_name: must match" in error for error in errors))
 
+    def test_rejects_frieren_fern_korean_aliases_before_import(self) -> None:
+        payload = {
+            "schema_version": 1,
+            "agent": {
+                "name": "agent",
+                "run_id": "run",
+                "collected_at": "2026-07-27T00:00:00+09:00",
+            },
+            "items": [
+                self.valid_item(
+                    display_name="\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c \ud380 \uc6b0\uce58\uc640",
+                    name_ko="\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c \ud380 \uc6b0\uce58\uc640",
+                    name_ja="\u846c\u9001\u306e\u30d5\u30ea\u30fc\u30ec\u30f3 \u30d5\u30a7\u30eb\u30f3 \u3046\u3061\u308f",
+                    affiliation="\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c",
+                    character_name="\ud380",
+                )
+            ],
+        }
+
+        errors, _summary = target.validate_payload(Path("sample.json"), payload)
+
+        self.assertTrue(any("must use \ud398\ub978" in error for error in errors))
+
+    def test_accepts_canonical_frieren_fern_korean_name(self) -> None:
+        payload = {
+            "schema_version": 1,
+            "agent": {
+                "name": "agent",
+                "run_id": "run",
+                "collected_at": "2026-07-27T00:00:00+09:00",
+            },
+            "items": [
+                self.valid_item(
+                    display_name="\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c \ud398\ub978 \uc6b0\uce58\uc640",
+                    name_ko="\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c \ud398\ub978 \uc6b0\uce58\uc640",
+                    name_ja="\u846c\u9001\u306e\u30d5\u30ea\u30fc\u30ec\u30f3 \u30d5\u30a7\u30eb\u30f3 \u3046\u3061\u308f",
+                    affiliation="\uc7a5\uc1a1\uc758 \ud504\ub9ac\ub80c",
+                    character_name="\ud398\ub978",
+                )
+            ],
+        }
+
+        errors, _summary = target.validate_payload(Path("sample.json"), payload)
+
+        self.assertEqual([], errors)
+
 
 if __name__ == "__main__":
     unittest.main()
