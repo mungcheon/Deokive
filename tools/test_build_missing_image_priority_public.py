@@ -120,6 +120,41 @@ class MissingImagePriorityPublicTests(unittest.TestCase):
         self.assertEqual(payload["summary"]["starter_queue_rows"], 1)
         self.assertEqual(payload["next_review_batch"][0]["catalog_index"], 1)
 
+    def test_write_starter_queue_html_renders_next_review_batch(self) -> None:
+        report = {
+            "summary": {
+                "starter_queue_groups": 1,
+                "starter_queue_rows": 1,
+                "groups_with_any_search_url": 1,
+                "next_review_batch_rows": 1,
+                "next_review_batch_primary_source_store": "Ensky",
+            },
+            "next_review_batch": [
+                {
+                    "catalog_index": 42,
+                    "group_rank": 1,
+                    "item_rank": 1,
+                    "name_ko": "Sample Strap",
+                    "source_store": "Ensky",
+                    "affiliation": "Sample Series",
+                    "category": "Strap",
+                    "search_query": "Sample Strap",
+                    "recommended_workflow": "official_storefront_search_then_exact_detail_match",
+                    "search_url": "https://example.com/search?q=sample",
+                }
+            ],
+        }
+
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / "starter.html"
+            target.write_starter_queue_html(report, output)
+            html = output.read_text(encoding="utf-8")
+
+        self.assertIn("Source Discovery Starter Queue", html)
+        self.assertIn("Sample Strap", html)
+        self.assertIn("Open store search", html)
+        self.assertIn("https://example.com/search?q=sample", html)
+
     def test_build_report_counts_focus_groups_and_priority_samples(self) -> None:
         catalog = {
             "items": [

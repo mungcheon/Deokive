@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import html
 import urllib.parse
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
@@ -15,6 +16,7 @@ CATALOG = DATA / "catalog_public.json"
 WORK_QUEUE = SERVER / "catalog_image_enrichment_queue_current.json"
 REPORT = SERVER / "catalog_missing_image_priority_public.json"
 STARTER_QUEUE_REPORT = SERVER / "source_discovery_starter_queue_public.json"
+STARTER_QUEUE_HTML = SERVER / "source_discovery_starter_queue_public.html"
 
 
 def now_utc() -> str:
@@ -609,6 +611,104 @@ def write_starter_queue_report(report: dict[str, Any], path: Path = STARTER_QUEU
     return starter_report
 
 
+def html_escape(value: Any) -> str:
+    return html.escape(str(value or ""), quote=True)
+
+
+def write_starter_queue_html(
+    starter_report: dict[str, Any],
+    path: Path = STARTER_QUEUE_HTML,
+) -> None:
+    summary = starter_report.get("summary") or {}
+    batch = [
+        item
+        for item in starter_report.get("next_review_batch", [])
+        if isinstance(item, dict)
+    ]
+    cards = "\n".join(
+        f"""
+        <article>
+          <div class="meta">
+            <span>#{html_escape(item.get('catalog_index'))}</span>
+            <span>Group {html_escape(item.get('group_rank'))} / Item {html_escape(item.get('item_rank'))}</span>
+          </div>
+          <h3>{html_escape(item.get('name_ko') or item.get('name_ja'))}</h3>
+          <dl>
+            <dt>Store</dt><dd>{html_escape(item.get('source_store'))}</dd>
+            <dt>Series</dt><dd>{html_escape(item.get('affiliation'))}</dd>
+            <dt>Category</dt><dd>{html_escape(item.get('category'))}</dd>
+            <dt>Query</dt><dd>{html_escape(item.get('search_query'))}</dd>
+            <dt>Workflow</dt><dd>{html_escape(item.get('recommended_workflow'))}</dd>
+          </dl>
+          <div class="links">
+            {source_link(item.get('search_url'), 'Open store search')}
+            {source_link(item.get('first_group_search_url'), 'Open group search')}
+            {source_link(item.get('first_group_fallback_web_search_url'), 'Open fallback search')}
+          </div>
+          <p class="rule">Accept only an exact official or licensed product/detail page with this item image visible.</p>
+        </article>
+        """
+        for item in batch
+    )
+    html_text = f"""<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Deokive Source Discovery Starter Queue</title>
+  <style>
+    body {{ margin: 0; font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f6f7f9; color: #17191f; }}
+    header {{ position: sticky; top: 0; z-index: 1; background: rgba(255,255,255,.94); backdrop-filter: blur(14px); border-bottom: 1px solid #dde2ea; padding: 18px 22px; }}
+    h1 {{ margin: 0 0 6px; font-size: 22px; }}
+    main {{ max-width: 1120px; margin: 0 auto; padding: 22px; }}
+    .summary {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin-bottom: 18px; }}
+    .summary article, .queue article {{ background: #fff; border: 1px solid #dde2ea; border-radius: 10px; box-shadow: 0 6px 20px rgba(20,28,40,.05); }}
+    .summary article {{ padding: 12px; }}
+    .summary span {{ display: block; color: #667085; }}
+    .summary strong {{ font-size: 22px; }}
+    .queue {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }}
+    .queue article {{ padding: 14px; }}
+    .meta {{ display: flex; justify-content: space-between; gap: 8px; color: #667085; font-size: 12px; }}
+    h2 {{ font-size: 18px; margin: 22px 0 12px; }}
+    h3 {{ margin: 10px 0; font-size: 16px; overflow-wrap: anywhere; }}
+    dl {{ display: grid; grid-template-columns: 72px 1fr; gap: 6px 10px; margin: 0; }}
+    dt {{ color: #667085; }}
+    dd {{ margin: 0; overflow-wrap: anywhere; }}
+    .links {{ display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }}
+    a {{ color: #0b57d0; text-decoration: none; border: 1px solid #c8d7f4; background: #f5f8ff; border-radius: 999px; padding: 7px 10px; }}
+    .rule {{ margin: 12px 0 0; color: #5f340b; background: #fff8e8; border: 1px solid #f4d8a8; border-radius: 8px; padding: 9px; }}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Source Discovery Starter Queue</h1>
+    <div>Find exact product/detail pages before attaching missing images.</div>
+  </header>
+  <main>
+    <section class="summary">
+      <article><span>Groups</span><strong>{html_escape(summary.get('starter_queue_groups'))}</strong></article>
+      <article><span>Rows</span><strong>{html_escape(summary.get('starter_queue_rows'))}</strong></article>
+      <article><span>Search-ready groups</span><strong>{html_escape(summary.get('groups_with_any_search_url'))}</strong></article>
+      <article><span>Next batch</span><strong>{html_escape(summary.get('next_review_batch_rows'))}</strong></article>
+      <article><span>Primary store</span><strong>{html_escape(summary.get('next_review_batch_primary_source_store'))}</strong></article>
+    </section>
+    <h2>Next Review Batch</h2>
+    <section class="queue">{cards}</section>
+  </main>
+</body>
+</html>
+"""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(html_text, encoding="utf-8")
+
+
+def source_link(url: Any, label: str) -> str:
+    value = str(url or "").strip()
+    if not value:
+        return ""
+    return f'<a href="{html_escape(value)}" target="_blank" rel="noreferrer">{html_escape(label)}</a>'
+
+
 def main() -> None:
     import argparse
 
@@ -621,12 +721,14 @@ def main() -> None:
     if args.write:
         write_report(report)
         starter_report = write_starter_queue_report(report)
+        write_starter_queue_html(starter_report)
     print(json.dumps(report["summary"], ensure_ascii=False, indent=2))
     if args.write:
         print(
             json.dumps(
                 {
                     "starter_queue_json": str(STARTER_QUEUE_REPORT),
+                    "starter_queue_html": str(STARTER_QUEUE_HTML),
                     **starter_report["summary"],
                 },
                 ensure_ascii=False,

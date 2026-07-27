@@ -80,6 +80,7 @@ reports under `server/`:
 
 - `server/catalog_missing_image_priority_public.json`
 - `server/source_discovery_starter_queue_public.json`
+- `server/source_discovery_starter_queue_public.html`
 
 Rows without an exact `source_url` must get a confirmed official or licensed
 product/detail page before any image is attached. The starter queue is review
