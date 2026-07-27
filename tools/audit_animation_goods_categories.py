@@ -19,6 +19,24 @@ DEFAULT_INPUT = ROOT / "server" / "catalog_seed_from_local.json"
 DEFAULT_JSON = ROOT / "server" / "animation_goods_category_audit.json"
 DEFAULT_MD = ROOT / "server" / "animation_goods_category_audit.md"
 
+ANIMATION_SOURCE_STORES = {
+    "\uc560\ub2c8\uba54\uc774\ud2b8",
+    "\uad7f\uc2a4\ub9c8\uc77c\ucef4\ud37c\ub2c8",
+    "\uc5d4\uc2a4\uce74\uc774",
+    "\ucf54\ud1a0\ubd80\ud0a4\uc57c",
+    "\uc810\ud504 \uce90\ub9ad\ud130\uc988 \uc2a4\ud1a0\uc5b4",
+    "Movic",
+    "FuRyu",
+    "Taito",
+    "Banpresto",
+    "AmiAmi",
+    "Cospa",
+    "Re-ment",
+    "SEGA",
+    "\uba54\uac00\ud558\uc6b0\uc2a4",
+    "\ubc18\ub2e4\uc774",
+}
+
 CATEGORY_FAMILIES = {
     "figure": {"피규어", "미니어처", "리플리카"},
     "plush": {"인형", "마스코트"},
@@ -80,8 +98,13 @@ def _category_family(category: str) -> str:
     return "other"
 
 
+def _is_animation_goods_row(row: dict[str, Any]) -> bool:
+    store = str(row.get("source_store") or "").strip()
+    return source_group(store) == "animation_goods" or store in ANIMATION_SOURCE_STORES
+
+
 def build_audit(rows: list[dict[str, Any]]) -> dict[str, Any]:
-    animation_rows = [row for row in rows if source_group(row.get("source_store")) == "animation_goods"]
+    animation_rows = [row for row in rows if _is_animation_goods_row(row)]
     by_category = Counter(str(row.get("category") or "") for row in animation_rows)
     by_family = Counter(_category_family(str(row.get("category") or "")) for row in animation_rows)
     by_store_category = Counter(

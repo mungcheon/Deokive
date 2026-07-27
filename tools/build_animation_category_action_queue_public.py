@@ -9,10 +9,13 @@ from typing import Any
 
 
 ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_INPUT = ROOT / "data" / "animation_category_review_batches_public.json"
-DEFAULT_OUTPUT = ROOT / "data" / "animation_category_action_queue_public.json"
-DEFAULT_UNMATCHED_KEYWORD_REVIEW = ROOT / "data" / "animation_category_unmatched_keyword_review_public.json"
-DEFAULT_NORMALIZATION_INPUT = ROOT / "data" / "animation_goods_categories_public.json"
+DATA = ROOT / "data"
+SERVER = ROOT / "server"
+DEFAULT_CATALOG = DATA / "catalog_public.json"
+DEFAULT_INPUT = SERVER / "animation_category_review_batches_public.json"
+DEFAULT_OUTPUT = SERVER / "animation_category_action_queue_public.json"
+DEFAULT_UNMATCHED_KEYWORD_REVIEW = SERVER / "animation_category_unmatched_keyword_review_public.json"
+DEFAULT_NORMALIZATION_INPUT = SERVER / "animation_goods_categories_public.json"
 CONFIRMED_TEMPLATE = "server/animation_category_confirmed_rows.template.json"
 CONFIRMED_QUEUE = "server/animation_category_confirmed_rows.json"
 IMPORT_TOOL = "tools/import_confirmed_animation_category_rows.py"
@@ -93,6 +96,16 @@ def _load(path: Path) -> dict[str, Any]:
     if not isinstance(payload, dict):
         raise ValueError(f"{path} must contain a JSON object")
     return payload
+
+
+def _build_review_batches_from_catalog(catalog_path: Path) -> dict[str, Any]:
+    try:
+        import build_animation_category_review_batches_public as review_batches
+    except ImportError:
+        from tools import build_animation_category_review_batches_public as review_batches
+
+    source, queue = review_batches._source_from_catalog(catalog_path)
+    return review_batches.build_report(source, queue)
 
 
 def _categories(payload: dict[str, Any]) -> list[dict[str, Any]]:
@@ -1352,6 +1365,7 @@ def build_queue(
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
+    parser.add_argument("--catalog", type=Path, default=DEFAULT_CATALOG)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--unmatched-keyword-review", type=Path, default=DEFAULT_UNMATCHED_KEYWORD_REVIEW)
     parser.add_argument("--normalization-input", type=Path, default=DEFAULT_NORMALIZATION_INPUT)
@@ -1364,13 +1378,15 @@ def main() -> int:
         if args.unmatched_keyword_review.exists()
         else None
     )
+    source_payload = _load(args.input) if args.input.exists() else _build_review_batches_from_catalog(args.catalog)
     queue = build_queue(
-        _load(args.input),
+        source_payload,
         max_categories=args.max_categories,
         batch_size=args.batch_size,
         unmatched_keyword_review=unmatched_keyword_review,
         normalization_review=_load(args.normalization_input) if args.normalization_input.exists() else None,
     )
+    args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(queue, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(queue["summary"], ensure_ascii=False, indent=2))
     print(f"Report: {args.output}")

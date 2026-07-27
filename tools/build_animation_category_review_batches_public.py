@@ -9,8 +9,11 @@ from typing import Any
 
 
 ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_INPUT = ROOT / "data" / "animation_goods_categories_public.json"
-DEFAULT_OUTPUT = ROOT / "data" / "animation_category_review_batches_public.json"
+DATA = ROOT / "data"
+SERVER = ROOT / "server"
+DEFAULT_CATALOG = DATA / "catalog_public.json"
+DEFAULT_INPUT = SERVER / "animation_goods_categories_public.json"
+DEFAULT_OUTPUT = SERVER / "animation_category_review_batches_public.json"
 
 
 def _now_utc() -> str:
@@ -25,6 +28,69 @@ def _load_queue(path: Path) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     if not isinstance(queue, list):
         raise ValueError(f"{path} must contain a taxonomy_review_queue/unknown_categories list")
     return payload, [row for row in queue if isinstance(row, dict)]
+
+
+def _source_from_catalog(path: Path) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    try:
+        from audit_animation_goods_categories import build_audit, _load_rows
+    except ImportError:
+        from tools.audit_animation_goods_categories import build_audit, _load_rows
+
+    audit = build_audit(_load_rows(path))
+    queue = [
+        {
+            "category": row.get("category"),
+            "rows": row.get("rows"),
+            "review_priority": 20 if int(row.get("rows") or 0) >= 50 else 40,
+            "suggested_family": "other",
+            "suggested_category": "\ubbf8\ubd84\ub958",
+            "suggested_color_hint": "neutral",
+            "suggested_color_hex": "0xFF9CA3AF",
+            "suggested_color_group": "neutral",
+            "suggested_color_sort_order": 900,
+            "suggested_primary_icon_key": "category",
+            "suggested_icon_options": ["category"],
+            "review_reason": "Unknown animation goods category from current public catalog.",
+            "sample_names": [],
+        }
+        for row in audit.get("unknown_categories", [])
+        if isinstance(row, dict)
+    ]
+    for row in audit.get("normalization_suggestions", []):
+        if not isinstance(row, dict):
+            continue
+        queue.append(
+            {
+                "category": row.get("category"),
+                "rows": row.get("rows"),
+                "review_priority": 30,
+                "suggested_family": "other",
+                "suggested_category": row.get("suggested_category"),
+                "suggested_color_hint": "neutral",
+                "suggested_color_hex": "0xFF9CA3AF",
+                "suggested_color_group": "neutral",
+                "suggested_color_sort_order": 900,
+                "suggested_primary_icon_key": "category",
+                "suggested_icon_options": ["category"],
+                "review_reason": row.get("reason"),
+                "sample_names": row.get("sample_names") or [],
+            }
+        )
+    source = {
+        "schema_version": 1,
+        "source": "data/catalog_public.json",
+        "taxonomy_review_queue": queue,
+        "folder_color_palette": [],
+        "folder_visual_tokens": [],
+        "app_folder_visual_catalog": {},
+        "audit_summary": {
+            "animation_rows": audit.get("rows"),
+            "category_count": audit.get("category_count"),
+            "unknown_categories": len(audit.get("unknown_categories", [])),
+            "normalization_suggestions": len(audit.get("normalization_suggestions", [])),
+        },
+    }
+    return source, queue
 
 
 def _priority(row: dict[str, Any]) -> int:
@@ -189,12 +255,14 @@ def _folder_icon_catalog(folder_visual_tokens: list[Any]) -> list[dict[str, Any]
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
+    parser.add_argument("--catalog", type=Path, default=DEFAULT_CATALOG)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--batch-size", type=int, default=4)
     args = parser.parse_args()
 
-    source, queue = _load_queue(args.input)
+    source, queue = _load_queue(args.input) if args.input.exists() else _source_from_catalog(args.catalog)
     report = build_report(source, queue, batch_size=args.batch_size)
+    args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report["summary"], ensure_ascii=False, indent=2))
     print(f"Report: {args.output}")

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -436,6 +437,27 @@ class BuildAnimationCategoryActionQueuePublicTest(unittest.TestCase):
             next_normalization["operator_checklist"],
         )
         self.assertFalse(next_normalization["auto_apply_enabled"])
+
+    def test_build_review_batches_from_catalog_when_input_report_is_absent(self) -> None:
+        payload = {
+            "items": [
+                {
+                    "source_store": "Movic",
+                    "category": "Odd Category",
+                    "name_ko": "sample goods",
+                }
+            ]
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            catalog = Path(tmp) / "catalog_public.json"
+            catalog.write_text(action.json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+            review_batches = action._build_review_batches_from_catalog(catalog)
+
+        report = action.build_queue(review_batches)
+
+        self.assertGreaterEqual(report["summary"]["actionable_categories"], 1)
+        self.assertEqual(report["batches"][0]["categories"][0]["category"], "Odd Category")
+        self.assertFalse(report["automation_policy"]["auto_apply_category_changes"])
 
 
 if __name__ == "__main__":

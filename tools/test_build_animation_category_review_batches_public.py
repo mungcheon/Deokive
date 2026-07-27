@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -104,6 +105,25 @@ class BuildAnimationCategoryReviewBatchesPublicTest(unittest.TestCase):
         self.assertEqual(report["batches"][1]["categories"][0]["suggested_color_hint"], "yellow")
         self.assertEqual(report["folder_color_palette"][0]["color_group"], "warm")
         self.assertGreaterEqual(report["folder_icon_catalog"][0]["icon_count"], 4)
+
+    def test_source_from_catalog_builds_fallback_queue(self) -> None:
+        payload = {
+            "items": [
+                {
+                    "source_store": "Movic",
+                    "category": "Odd Category",
+                    "name_ko": "sample goods",
+                }
+            ]
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            catalog = Path(tmp) / "catalog_public.json"
+            catalog.write_text(batches.json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+            source, queue = batches._source_from_catalog(catalog)
+
+        self.assertEqual(source["source"], "data/catalog_public.json")
+        self.assertEqual(queue[0]["category"], "Odd Category")
+        self.assertEqual(queue[0]["suggested_primary_icon_key"], "category")
 
 
 if __name__ == "__main__":
