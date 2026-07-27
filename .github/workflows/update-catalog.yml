@@ -36,6 +36,7 @@ jobs:
             tools.test_audit_public_catalog_image_assets \
             tools.test_audit_catalog_report_consistency \
             tools.test_audit_catalog_work_pack_coverage \
+            tools.test_build_catalog_operations_dashboard \
             tools.test_audit_catalog_character_names \
             tools.test_normalize_catalog_characters_and_ichiban \
             tools.test_build_ichiban_public_quality_queue \
@@ -120,6 +121,7 @@ jobs:
           python tools/sync_missing_image_work_queue_public.py --write
           python tools/build_animation_enrichment_priority_queue.py
           python tools/build_catalog_update_backlog.py
+          python tools/build_catalog_operations_dashboard.py
           python tools/audit_catalog_work_pack_coverage.py
           python tools/audit_catalog_report_consistency.py --core-only --fail-on-mismatch
           python tools/generate_seed_catalog_dart.py --input data/catalog_public.json --output lib/data/catalog/seed_catalog.dart

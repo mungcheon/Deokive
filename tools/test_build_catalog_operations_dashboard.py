@@ -33,6 +33,35 @@ class CatalogOperationsDashboardTests(unittest.TestCase):
                 ),
                 "field_batches": _write_json(root / "fields.json", {"actionable_rows": 4, "batch_count": 2}),
                 "image_queue": _write_json(root / "images.json", {"missing_images": 2, "by_strategy": [["official", 2]]}),
+                "catalog_update_backlog": _write_json(
+                    root / "catalog_update_backlog.json",
+                    {
+                        "operator_next_actions": [
+                            {"lane": "image_from_known_source", "rows": 23},
+                            {"lane": "source_before_image", "rows": 759},
+                        ],
+                        "operator_work_order": [
+                            {
+                                "work_order_id": "catalog-operator-001-image_from_known_source",
+                                "lane": "image_from_known_source",
+                                "label": "출처가 있는 사진부터 검수",
+                                "row_count": 23,
+                                "next_action": "confirm exact source-page images",
+                                "intake_dir": "data/intake/image_updates/incoming",
+                                "tool": "tools/import_agent_catalog_image_updates.py",
+                            },
+                            {
+                                "work_order_id": "catalog-operator-002-source_before_image",
+                                "lane": "source_before_image",
+                                "label": "사진 없는 항목의 출처 먼저 찾기",
+                                "row_count": 759,
+                                "next_action": "find exact source URLs",
+                                "intake_dir": "data/intake/field_updates/incoming",
+                                "tool": "tools/import_agent_catalog_field_updates.py",
+                            },
+                        ],
+                    },
+                ),
                 "image_exact_url_queue": _write_json(
                     root / "exact_urls.json",
                     {
@@ -917,8 +946,16 @@ class CatalogOperationsDashboardTests(unittest.TestCase):
         self.assertEqual(payload["summary"]["public_deduplication"]["template_items"], 42)
         self.assertEqual(payload["summary"]["public_deduplication"]["template_import_skipped_rows"], 42)
         self.assertEqual(payload["summary"]["public_deduplication"]["auto_delete_enabled"], False)
+        self.assertEqual(payload["summary"]["catalog_operator_work_order"]["work_order_count"], 2)
+        self.assertEqual(payload["summary"]["catalog_operator_work_order"]["action_lane_count"], 2)
+        self.assertEqual(
+            payload["summary"]["catalog_operator_work_order"]["first_work_order_id"],
+            "catalog-operator-001-image_from_known_source",
+        )
+        self.assertEqual(payload["summary"]["catalog_operator_work_order"]["first_work_order_rows"], 23)
         self.assertGreaterEqual(len(payload["workboards"]), 10)
         areas = [item["area"] for item in payload["workboards"]]
+        self.assertIn("Catalog operator work order", areas)
         self.assertIn("Field backfill", areas)
         self.assertIn("Public image recovery", areas)
         self.assertIn("Public deduplication", areas)
@@ -946,6 +983,14 @@ class CatalogOperationsDashboardTests(unittest.TestCase):
         self.assertIn("Requested special goods", areas)
         self.assertIn("Focus missing images", areas)
         self.assertIn("Focus series image work", areas)
+        operator_board = next(item for item in payload["workboards"] if item["area"] == "Catalog operator work order")
+        self.assertEqual(operator_board["primary_metric"], 2)
+        self.assertEqual(operator_board["secondary_metric"], 23)
+        self.assertEqual(operator_board["quick_win_metric"], 2)
+        self.assertEqual(operator_board["status"], "ready_for_agents")
+        self.assertEqual(operator_board["first_work_order_lane"], "image_from_known_source")
+        self.assertEqual(operator_board["first_work_order_intake_dir"], "data/intake/image_updates/incoming")
+        self.assertEqual(operator_board["top_work_orders"][1]["row_count"], 759)
         storefront_board = next(item for item in payload["workboards"] if item["area"] == "Storefront candidates")
         self.assertEqual(storefront_board["ambiguous_metric"], 17)
         self.assertEqual(storefront_board["manual_only_metric"], 192)

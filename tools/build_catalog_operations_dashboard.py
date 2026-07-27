@@ -25,6 +25,7 @@ SOURCES = {
     "quality": SERVER / "catalog_quality_report.json",
     "field_batches": SERVER / "catalog_field_review_batches.json",
     "image_queue": SERVER / "catalog_image_enrichment_queue_current.json",
+    "catalog_update_backlog": SERVER / "catalog_update_backlog.json",
     "image_batch_plan": SERVER / "catalog_image_enrichment_batch_plan.json",
     "image_exact_url_queue": SERVER / "catalog_image_exact_url_work_queue.json",
     "image_path_source_review": SERVER / "image_path_source_url_review_queue.json",
@@ -247,8 +248,49 @@ def build() -> dict[str, Any]:
     public_deduplication_confirmed_template = data.get("public_deduplication_confirmed_template", {})
     public_deduplication_template_summary = public_deduplication_confirmed_template.get("summary") or {}
     public_deduplication_template_import = data.get("public_deduplication_template_import", {})
+    catalog_update_backlog = data.get("catalog_update_backlog", {})
+    operator_next_actions = [
+        item for item in catalog_update_backlog.get("operator_next_actions") or [] if isinstance(item, dict)
+    ]
+    operator_work_order = [
+        item for item in catalog_update_backlog.get("operator_work_order") or [] if isinstance(item, dict)
+    ]
+    first_operator_work_order = operator_work_order[0] if operator_work_order else {}
 
     workboards = [
+        {
+            "area": "Catalog operator work order",
+            "artifact": "server/catalog_update_backlog.md",
+            "markdown": "server/catalog_update_backlog.md",
+            "secondary_artifact": "server/catalog_update_backlog.json",
+            "primary_metric": len(operator_work_order),
+            "primary_label": "operator work orders",
+            "secondary_metric": int(first_operator_work_order.get("row_count") or 0),
+            "secondary_label": "first work-order rows",
+            "status": "ready_for_agents" if operator_work_order else "empty",
+            "next": (
+                first_operator_work_order.get("next_action")
+                or "Generate catalog_update_backlog before assigning DB cleanup work."
+            ),
+            "quick_win_metric": len(operator_next_actions),
+            "quick_win_label": "operator action lanes",
+            "first_work_order_id": first_operator_work_order.get("work_order_id"),
+            "first_work_order_lane": first_operator_work_order.get("lane"),
+            "first_work_order_label": first_operator_work_order.get("label"),
+            "first_work_order_intake_dir": first_operator_work_order.get("intake_dir"),
+            "first_work_order_tool": first_operator_work_order.get("tool"),
+            "top_work_orders": [
+                {
+                    "work_order_id": row.get("work_order_id"),
+                    "lane": row.get("lane"),
+                    "label": row.get("label"),
+                    "row_count": row.get("row_count"),
+                    "intake_dir": row.get("intake_dir"),
+                    "tool": row.get("tool"),
+                }
+                for row in _top(operator_work_order, 6)
+            ],
+        },
         {
             "area": "Field backfill",
             "artifact": "server/catalog_field_review_batches.html",
@@ -1311,6 +1353,15 @@ def build() -> dict[str, Any]:
                 "template_import_skipped_rows": public_deduplication_template_import.get("skipped_rows"),
                 "auto_merge_enabled": public_deduplication_template_summary.get("auto_merge_enabled"),
                 "auto_delete_enabled": public_deduplication_template_summary.get("auto_delete_enabled"),
+            },
+            "catalog_operator_work_order": {
+                "work_order_count": len(operator_work_order),
+                "action_lane_count": len(operator_next_actions),
+                "first_work_order_id": first_operator_work_order.get("work_order_id"),
+                "first_work_order_lane": first_operator_work_order.get("lane"),
+                "first_work_order_rows": first_operator_work_order.get("row_count"),
+                "first_work_order_intake_dir": first_operator_work_order.get("intake_dir"),
+                "first_work_order_tool": first_operator_work_order.get("tool"),
             },
             "report_consistency_ok": report_consistency.get("ok"),
         },
