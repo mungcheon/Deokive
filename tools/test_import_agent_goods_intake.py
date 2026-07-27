@@ -129,6 +129,9 @@ class ImportAgentGoodsIntakeTests(unittest.TestCase):
                             "series_name": "Series",
                             "source_store": "Official",
                             "source_url": "https://example.com/write-import",
+                            "evidence": [
+                                {"url": "https://example.com/write-import", "type": "official"}
+                            ],
                             "official_price": 1200,
                             "official_price_currency": "JPY",
                             "official_price_jpy": 1200,

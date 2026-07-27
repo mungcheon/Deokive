@@ -52,6 +52,7 @@ Incoming filenames must stay traceable, for example
   price field.
 - `agent.collected_at` must be an ISO-8601 timestamp, for example
   `2026-07-27T00:00:00+09:00`.
-- Attach both `source_url` and `image_url` when possible. Use product/detail
-  pages, not generic search pages, for `source_url`.
+- `evidence` is required and must include the same URL as `source_url`.
+- Attach `image_url` when possible. Use product/detail pages, not generic search
+  pages, for `source_url`.
 - Set `confidence` to `confirmed`, `candidate`, or `needs_review`.

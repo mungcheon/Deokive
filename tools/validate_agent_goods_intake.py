@@ -16,6 +16,11 @@ CONFIDENCE_VALUES = {"confirmed", "candidate", "needs_review"}
 EVIDENCE_TYPES = {"official", "trusted", "manual"}
 PRICE_CURRENCIES = {"JPY", "KRW", "USD", "CNY", "TWD"}
 DATE_RE = re.compile(r"^\d{4}(?:-\d{2}(?:-\d{2})?)?$")
+ICHIBAN_RE = re.compile(r"(ichiban|一番くじ|이치방\s*쿠지|이치방쿠지)", re.IGNORECASE)
+ICHIBAN_PRIZE_RE = re.compile(
+    r"^(?:[A-Z](?:\s*(?:Prize|상|賞))?|Last\s*One(?:\s*(?:Prize|상|賞))?|ラストワン賞|라스트원상|Double\s*Chance(?:\s*(?:Prize|상|賞))?|ダブルチャンス|더블찬스)$",
+    re.IGNORECASE,
+)
 TOP_LEVEL_FIELDS = {"schema_version", "agent", "items"}
 AGENT_FIELDS = {"name", "run_id", "collected_at", "notes"}
 ITEM_FIELDS = {
@@ -93,6 +98,40 @@ def is_iso_timestamp(value: str) -> bool:
     return True
 
 
+def is_ichiban_item(item: dict[str, object]) -> bool:
+    haystack = " ".join(
+        str(item.get(key) or "")
+        for key in ("display_name", "name_ko", "name_ja", "name_en", "series_name", "sub_series", "source_store")
+    )
+    return bool(ICHIBAN_RE.search(haystack))
+
+
+def validate_ichiban_display_name(errors: list[str], item: dict[str, object], item_path: str) -> None:
+    if not is_ichiban_item(item):
+        return
+
+    display_name = str(item.get("display_name") or "")
+    parts = [part.strip() for part in display_name.split("/")]
+    if len(parts) != 4 or any(not part for part in parts):
+        errors.append(
+            f"{item_path}.display_name: Ichiban Kuji items must use "
+            "release name / prize rank / prize name / character name"
+        )
+        return
+
+    if not ICHIBAN_PRIZE_RE.match(parts[1]):
+        errors.append(
+            f"{item_path}.display_name: Ichiban Kuji prize rank must be like "
+            "A Prize, A상, A賞, Last One Prize, or Double Chance"
+        )
+
+    character_name = item.get("character_name")
+    if isinstance(character_name, str) and character_name.strip() and character_name.strip() != parts[3]:
+        errors.append(
+            f"{item_path}.character_name: must match the fourth Ichiban Kuji display_name segment"
+        )
+
+
 def validate_item(
     errors: list[str],
     item: object,
@@ -163,6 +202,13 @@ def validate_item(
                 f"{item_path}.official_price_jpy: must match official_price when "
                 "official_price_currency is JPY"
             )
+        if official_price is not None and official_price_currency not in (None, "JPY"):
+            errors.append(
+                f"{item_path}.official_price_jpy: cannot be combined with "
+                f"official_price_currency {official_price_currency}"
+            )
+    if official_price_currency == "JPY" and price_jpy is None:
+        errors.append(f"{item_path}.official_price_jpy: required when official_price_currency is JPY")
 
     barcode = item.get("barcode")
     if barcode is not None and not isinstance(barcode, str):
@@ -174,25 +220,33 @@ def validate_item(
             f"{item_path}.confidence: expected one of {', '.join(sorted(CONFIDENCE_VALUES))}"
         )
 
-    evidence = item.get("evidence", [])
-    if evidence is not None:
-        if not isinstance(evidence, list):
-            errors.append(f"{item_path}.evidence: expected array")
-        else:
-            for evidence_index, evidence_row in enumerate(evidence):
-                evidence_path = f"{item_path}.evidence[{evidence_index}]"
-                if not isinstance(evidence_row, dict):
-                    errors.append(f"{evidence_path}: expected object")
-                    continue
-                reject_unknown_fields(errors, evidence_path, evidence_row, EVIDENCE_FIELDS)
-                url = require_string(errors, evidence_path, evidence_row, "url")
-                if url and not is_url(url):
-                    errors.append(f"{evidence_path}.url: expected http(s) URL")
-                evidence_type = require_string(errors, evidence_path, evidence_row, "type")
-                if evidence_type and evidence_type not in EVIDENCE_TYPES:
-                    errors.append(
-                        f"{evidence_path}.type: expected one of {', '.join(sorted(EVIDENCE_TYPES))}"
-                    )
+    evidence = item.get("evidence")
+    if not isinstance(evidence, list):
+        errors.append(f"{item_path}.evidence: expected non-empty array")
+    elif not evidence:
+        errors.append(f"{item_path}.evidence: must contain at least one source row")
+    else:
+        evidence_has_source_url = False
+        for evidence_index, evidence_row in enumerate(evidence):
+            evidence_path = f"{item_path}.evidence[{evidence_index}]"
+            if not isinstance(evidence_row, dict):
+                errors.append(f"{evidence_path}: expected object")
+                continue
+            reject_unknown_fields(errors, evidence_path, evidence_row, EVIDENCE_FIELDS)
+            url = require_string(errors, evidence_path, evidence_row, "url")
+            if url and not is_url(url):
+                errors.append(f"{evidence_path}.url: expected http(s) URL")
+            if isinstance(source_url, str) and url.rstrip("/") == source_url.rstrip("/"):
+                evidence_has_source_url = True
+            evidence_type = require_string(errors, evidence_path, evidence_row, "type")
+            if evidence_type and evidence_type not in EVIDENCE_TYPES:
+                errors.append(
+                    f"{evidence_path}.type: expected one of {', '.join(sorted(EVIDENCE_TYPES))}"
+                )
+        if isinstance(source_url, str) and source_url.strip() and not evidence_has_source_url:
+            errors.append(f"{item_path}.evidence: must include the source_url as evidence")
+
+    validate_ichiban_display_name(errors, item, item_path)
 
     duplicate_key = (
         str(item.get("source_store", "")).strip().casefold(),
