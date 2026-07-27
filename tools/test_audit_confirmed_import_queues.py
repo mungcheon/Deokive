@@ -56,6 +56,11 @@ class ConfirmedImportQueueAuditTests(unittest.TestCase):
         self.assertEqual(workflow["dry_run_command"], "python dry-run.py")
         self.assertIn("python write.py --write", workflow["next_action"])
         self.assertEqual(payload["summary"]["template_items"], 2)
+        self.assertEqual(payload["summary"]["review_priority_count"], 1)
+        self.assertEqual(payload["summary"]["manual_review_backlog_workflows"], 1)
+        self.assertEqual(payload["review_priority"][0]["lane"], "boss_manual_review")
+        self.assertEqual(payload["review_priority"][0]["workflow"], "storefront")
+        self.assertEqual(payload["review_priority"][0]["rows"], 2)
 
     def test_confirmed_rows_with_skip_reasons_are_summarized(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -98,6 +103,9 @@ class ConfirmedImportQueueAuditTests(unittest.TestCase):
         self.assertEqual(workflow["manual_confirmed_true"], 2)
         self.assertEqual(workflow["import_report"]["skip_reason_counts"], [("no_empty_fields", 2)])
         self.assertEqual(payload["summary"]["skipped_rows"], 2)
+        self.assertEqual(payload["summary"]["import_ready_workflows"], 1)
+        self.assertEqual(payload["review_priority"][0]["lane"], "import_confirmed_rows")
+        self.assertEqual(payload["review_priority"][0]["rows"], 2)
 
     def test_default_workflows_match_current_readiness_scope(self):
         self.assertEqual(len(audit.WORKFLOWS), 12)

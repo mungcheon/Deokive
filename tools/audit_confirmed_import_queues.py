@@ -299,6 +299,38 @@ def _next_action(
     return f"No current {name} candidates were found."
 
 
+def _review_priority(workflows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    priority: list[dict[str, Any]] = []
+    for item in workflows:
+        if int(item.get("manual_confirmed_true") or 0) > 0:
+            priority.append(
+                {
+                    "lane": "import_confirmed_rows",
+                    "workflow": item["name"],
+                    "status": item["status"],
+                    "rows": item["manual_confirmed_true"],
+                    "review_artifact": item["review_artifact"],
+                    "confirmed_file": item["confirmed_file"],
+                    "next_action": item["next_action"],
+                }
+            )
+            continue
+        if item["status"] == "template_ready_no_confirmed_file" and int(item.get("template_items") or 0) > 0:
+            priority.append(
+                {
+                    "lane": "boss_manual_review",
+                    "workflow": item["name"],
+                    "status": item["status"],
+                    "rows": item["template_items"],
+                    "review_artifact": item["review_artifact"],
+                    "template_file": item["template_file"],
+                    "next_action": item["next_action"],
+                }
+            )
+    priority.sort(key=lambda row: (0 if row["lane"] == "import_confirmed_rows" else 1, -int(row["rows"])))
+    return priority
+
+
 def _display_path(value: Any) -> str | None:
     if value in (None, ""):
         return None
@@ -311,6 +343,7 @@ def _display_path(value: Any) -> str | None:
 
 def build() -> dict[str, Any]:
     workflows = [audit_workflow(name, config) for name, config in WORKFLOWS.items()]
+    review_priority = _review_priority(workflows)
     return {
         "workflows": workflows,
         "summary": {
@@ -321,7 +354,11 @@ def build() -> dict[str, Any]:
             "updated_rows": sum(int((item["import_report"].get("updated_rows") or 0)) for item in workflows),
             "skipped_rows": sum(int((item["import_report"].get("skipped_rows") or 0)) for item in workflows),
             "duplicates": sum(int((item["import_report"].get("duplicates") or 0)) for item in workflows),
+            "review_priority_count": len(review_priority),
+            "import_ready_workflows": sum(1 for item in review_priority if item["lane"] == "import_confirmed_rows"),
+            "manual_review_backlog_workflows": sum(1 for item in review_priority if item["lane"] == "boss_manual_review"),
         },
+        "review_priority": review_priority,
     }
 
 
@@ -336,8 +373,23 @@ def write_markdown(payload: dict[str, Any], path: Path) -> None:
         f"- Imported/updated rows: `{payload['summary']['updated_rows']}`",
         f"- Skipped rows: `{payload['summary']['skipped_rows']}`",
         f"- Duplicate rows: `{payload['summary']['duplicates']}`",
+        f"- Review priority lanes: `{payload['summary']['review_priority_count']}`",
         "",
     ]
+    if payload.get("review_priority"):
+        lines.extend(["## Review Priority", ""])
+        for item in payload["review_priority"]:
+            row_target = item.get("confirmed_file") or item.get("template_file")
+            lines.extend(
+                [
+                    f"- `{item['lane']}` / `{item['workflow']}`: `{item['rows']}` rows",
+                    f"  - Status: `{item['status']}`",
+                    f"  - Artifact: `{item.get('review_artifact')}`",
+                    f"  - File: `{row_target}`",
+                    f"  - Next: {item['next_action']}",
+                ]
+            )
+        lines.append("")
     for item in payload["workflows"]:
         report = item["import_report"]
         lines.extend(
