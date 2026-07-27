@@ -15,7 +15,7 @@
 
 ```powershell
 python -X utf8 tools\cache_catalog_images.py --write
-python -X utf8 tools\update_public_catalog_reports.py --write
+python -X utf8 tools\audit_public_data_layout.py
 python -X utf8 tools\audit_public_catalog_safety.py
 python -X utf8 tools\audit_public_catalog_image_assets.py
 ```
@@ -45,7 +45,7 @@ python -X utf8 tools\audit_public_catalog_image_assets.py
 python -X utf8 tools\import_confirmed_image_attachment_rows.py
 python -X utf8 tools\import_confirmed_image_attachment_rows.py --write
 python -X utf8 tools\cache_catalog_images.py --write
-python -X utf8 tools\update_public_catalog_reports.py --write
+python -X utf8 tools\audit_public_data_layout.py
 ```
 
 ## 주의

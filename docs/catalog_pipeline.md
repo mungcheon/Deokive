@@ -85,6 +85,7 @@ python tools/sync_catalog_pipeline.py --write --image-provider-store FuRyu --ima
 - `tools/propagate_catalog_fields.py`: safely fills empty fields from exact intra-seed groups, currently using strong image/source constraints.
 - `tools/prune_unverified_catalog_rows.py`: removes kuji rows without an official source URL so temporary/manual prize sketches do not enter the public seed.
 - `tools/generate_seed_catalog_dart.py`: generates `lib/data/catalog/seed_catalog.dart` from `data/catalog_public.json` for static GitHub Pages search/autocomplete.
+- `tools/audit_public_data_layout.py`: verifies the single public DB layout, intake source lists, site status file, and incoming agent payloads.
 - `tools/sync_catalog_db_active.py`: deactivates DB catalog rows that are no longer present in the canonical seed, inserts missing seed rows, and updates active DB rows when canonical seed fields change.
 - `tools/build_catalog_source_coverage.py`: summarizes source, affiliation, category, animation goods, and kuji coverage.
 - `tools/build_image_enrichment_queue.py`: writes JSON/CSV queues for missing image follow-up.

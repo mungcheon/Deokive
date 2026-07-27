@@ -93,6 +93,7 @@ jobs:
           python tools/sync_catalog_pipeline.py --write --skip-network --skip-db "${image_args[@]}"
           python tools/generate_seed_catalog_dart.py --input data/catalog_public.json --output lib/data/catalog/seed_catalog.dart
           python tools/audit_flutter_seed_matches_public.py
+          python tools/audit_public_data_layout.py
 
       - name: Commit public DB updates
         run: |
