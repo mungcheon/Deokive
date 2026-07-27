@@ -53,6 +53,23 @@ def _sample_field_items(items: list[dict[str, Any]], limit: int = 5) -> list[dic
     return samples
 
 
+def _sample_image_items(items: list[dict[str, Any]], limit: int = 5) -> list[dict[str, Any]]:
+    samples: list[dict[str, Any]] = []
+    for item in items[:limit]:
+        samples.append(
+            {
+                "row_index": item.get("row_index"),
+                "name_ko": item.get("name_ko"),
+                "name_ja": item.get("name_ja"),
+                "category": item.get("category"),
+                "query": item.get("query"),
+                "search_url": item.get("search_url"),
+                "source_url": item.get("source_url"),
+            }
+        )
+    return samples
+
+
 def _field_focus_packs(field_items: list[dict[str, Any]], limit: int = 30) -> list[dict[str, Any]]:
     grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for item in field_items:
@@ -99,6 +116,71 @@ def _field_focus_packs(field_items: list[dict[str, Any]], limit: int = 30) -> li
         )
     )
     return packs[:limit]
+
+
+def _image_work_packs(image_items: list[dict[str, Any]], limit: int = 40) -> list[dict[str, Any]]:
+    grouped: dict[tuple[str, str, str, str], list[dict[str, Any]]] = defaultdict(list)
+    for item in image_items:
+        key = (
+            str(item.get("automation_safety") or ""),
+            str(item.get("strategy") or ""),
+            str(item.get("source_store") or ""),
+            str(item.get("category") or ""),
+        )
+        grouped[key].append(item)
+
+    packs: list[dict[str, Any]] = []
+    for (automation_safety, strategy, source_store, category), items in grouped.items():
+        first = items[0]
+        packs.append(
+            {
+                "automation_safety": automation_safety,
+                "provider_status": first.get("provider_status"),
+                "strategy": strategy,
+                "source_store": source_store,
+                "category": category,
+                "missing_images": len(items),
+                "priority": first.get("priority"),
+                "next_action": _image_next_action(strategy, automation_safety),
+                "samples": _sample_image_items(items),
+            }
+        )
+    packs.sort(
+        key=lambda item: (
+            _image_safety_rank(str(item.get("automation_safety") or "")),
+            int(item.get("priority") or 999),
+            -int(item.get("missing_images") or 0),
+            str(item.get("source_store") or ""),
+            str(item.get("category") or ""),
+        )
+    )
+    return packs[:limit]
+
+
+def _image_safety_rank(value: str) -> int:
+    ranks = {
+        "candidate_provider_script_required": 0,
+        "manual_confirmation_required": 1,
+        "detail_page_validation_required": 2,
+        "safe_if_exact_image_or_jsonld": 3,
+        "manual_research_required": 4,
+        "blocked_until_exact_product_url": 5,
+    }
+    return ranks.get(value, 99)
+
+
+def _image_next_action(strategy: str, automation_safety: str) -> str:
+    if automation_safety == "candidate_provider_script_required":
+        return "run_verified_provider_search_then_confirm_exact_detail_matches"
+    if automation_safety == "manual_confirmation_required":
+        return "open_official_search_url_and_confirm_exact_product_before_import"
+    if automation_safety == "detail_page_validation_required":
+        return "validate_prize_detail_page_before_attaching_image"
+    if automation_safety == "safe_if_exact_image_or_jsonld":
+        return "extract_image_from_existing_exact_source_url"
+    if strategy.startswith("source_url_"):
+        return "replace_generic_source_with_exact_product_url_first"
+    return "manual_official_or_trusted_source_research"
 
 
 def build_backlog(
@@ -351,6 +433,7 @@ def build_backlog(
         "top_image_strategy_store_backlog": image_strategy_store_top,
         "top_image_safety_store_backlog": image_safety_store_top,
         "top_image_store_category_backlog": image_store_category_top,
+        "image_work_packs": _image_work_packs(queue, 60),
         "top_image_backlog": actions[:60],
         "recommended_sequence": [
             "Start with field_focus_packs where automation_candidate is true; each pack is one store/category/field batch.",
@@ -576,6 +659,19 @@ def write_markdown(backlog: dict[str, Any], path: Path) -> None:
             f"- `{item.get('automation_safety')}` / `{item.get('source_store')}`: "
             f"`{item.get('missing_images')}`"
         )
+    lines.extend(["", "## Image Work Packs", ""])
+    for item in backlog.get("image_work_packs", [])[:25]:
+        sample = (item.get("samples") or [{}])[0]
+        lines.append(
+            f"- `{item.get('automation_safety')}` / `{item.get('strategy')}` / "
+            f"`{item.get('source_store')}` / `{item.get('category')}`: "
+            f"`{item.get('missing_images')}` missing, `{item.get('next_action')}`"
+        )
+        if sample:
+            lines.append(
+                f"  - sample `{sample.get('row_index')}` / `{sample.get('name_ko')}` / "
+                f"`{sample.get('search_url')}`"
+            )
     lines.extend(["", "## Top Image Store Category Backlog", ""])
     for item in backlog.get("top_image_store_category_backlog", [])[:25]:
         lines.append(

@@ -195,6 +195,13 @@ class BuildCatalogUpdateBacklogTest(unittest.TestCase):
                 "missing_images": 2,
             },
         )
+        self.assertEqual(result["image_work_packs"][0]["source_store"], "애니메이트")
+        self.assertEqual(result["image_work_packs"][0]["missing_images"], 2)
+        self.assertEqual(
+            result["image_work_packs"][0]["next_action"],
+            "run_verified_provider_search_then_confirm_exact_detail_matches",
+        )
+        self.assertEqual(result["image_work_packs"][0]["samples"][0]["query"], "sample a")
         self.assertEqual(result["top_image_backlog"][0]["source_store"], "애니메이트")
         self.assertEqual(result["top_image_backlog"][0]["next_action"], "official_search_provider_or_manual_review")
         self.assertEqual(result["field_focus_packs"][0]["batch_key"], "animation|애니메이트|source_url")

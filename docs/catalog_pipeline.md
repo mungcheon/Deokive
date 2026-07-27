@@ -241,8 +241,8 @@ The field queue JSON and Markdown include several grouped views:
 `server/catalog_update_backlog.md` is the quickest human-facing summary. It
 combines the field, image, source, priority-goods, naming, and Ichiban quality
 queues, keeping separate sections for field strategies, store/category batches,
-image strategies, character/name cleanup, Ichiban campaign/duplicate review,
-and recommended safe update order.
+image strategies, image work packs, character/name cleanup, Ichiban
+campaign/duplicate review, and recommended safe update order.
 
 - For manual field backfill, open `server/catalog_field_enrichment_review.html`, copy JSON rows into `server/catalog_field_confirmed_rows.json`, fill `manual_value`, set `manual_confirmed=true`, then dry-run `python tools/import_confirmed_catalog_field_rows.py` before using `--write`.
 - Confirmation templates are review aids only. Importers read `*_confirmed_rows.json` by default and return zero updates when that confirmed file does not exist.
@@ -250,6 +250,8 @@ and recommended safe update order.
 - Fill release dates only from exact product or campaign pages.
 - Treat generic official shop URLs as source pointers, not product identity keys.
 - Keep broad search result rows in manual review until a strict detail matcher is verified.
+- Use `image_work_packs` to assign image work by provider/status/store/category;
+  each pack includes the safety level, next action, and sample rows.
 - When a provider dry-run fills `0` rows, inspect the `unresolved[].reason`, `query`, `candidate_count`, and `top_candidates` fields before changing matcher thresholds.
 
 ## Safety Rules
