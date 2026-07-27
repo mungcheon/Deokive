@@ -17,6 +17,7 @@ except Exception:
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_INPUT = ROOT / "data" / "catalog_public.json"
 DEFAULT_OUTPUT = ROOT / "server" / "catalog_quality_report.json"
+DEFAULT_ICHIBAN_CAMPAIGNS = ROOT / "data" / "intake" / "sources" / "ichiban_kuji_campaigns.json"
 CORE_FIELDS = ("name_ko", "category", "character_name", "affiliation", "source_store")
 ENRICHMENT_FIELDS = ("image_url", "source_url", "release_date", "barcode", "official_price_jpy")
 SERVER_UNSUPPORTED_FIELDS = ("official_price_krw",)
@@ -255,6 +256,112 @@ def load_catalog_rows(path: Path) -> list[dict[str, Any]]:
     raise SystemExit(f"{path} must contain a JSON list or an object with items")
 
 
+def _load_campaign_urls(path: Path) -> set[str]:
+    if not path.exists():
+        return set()
+    payload = json.loads(path.read_text(encoding="utf-8-sig"))
+    if not isinstance(payload, list):
+        return set()
+    urls: set[str] = set()
+    for row in payload:
+        if not isinstance(row, dict):
+            continue
+        url = str(row.get("url") or "").strip().rstrip("/")
+        if url:
+            urls.add(url)
+    return urls
+
+
+def _display_path(path: Path) -> str:
+    try:
+        return str(path.relative_to(ROOT)).replace("\\", "/")
+    except ValueError:
+        return str(path).replace("\\", "/")
+
+
+def _is_ichiban_row(row: dict[str, Any]) -> bool:
+    return row.get("source_store") == "이치방쿠지" or "1kuji.com" in str(row.get("source_url") or "")
+
+
+def build_ichiban_summary(
+    rows: list[dict[str, Any]],
+    campaign_path: Path = DEFAULT_ICHIBAN_CAMPAIGNS,
+) -> dict[str, Any]:
+    ichiban_rows = [row for row in rows if _is_ichiban_row(row)]
+    source_urls = {
+        str(row.get("source_url") or "").strip().rstrip("/")
+        for row in ichiban_rows
+        if row.get("source_url")
+    }
+    campaign_urls = _load_campaign_urls(campaign_path)
+    seeded_campaign_urls = campaign_urls & source_urls
+    missing_campaign_urls = sorted(campaign_urls - source_urls)
+
+    name_groups: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in ichiban_rows:
+        name = str(row.get("name_ko") or "").strip()
+        if name:
+            name_groups[name].append(row)
+    duplicate_display_groups = [
+        {
+            "display_name": name,
+            "rows": len(group),
+            "source_urls": sorted(
+                {
+                    str(row.get("source_url") or "").strip().rstrip("/")
+                    for row in group
+                    if row.get("source_url")
+                }
+            ),
+            "catalog_indexes": [row.get("catalog_index") for row in group[:10]],
+        }
+        for name, group in name_groups.items()
+        if len(group) > 1
+    ]
+    duplicate_display_groups.sort(key=lambda group: (-int(group["rows"]), group["display_name"]))
+
+    zero_price_exception_rows = [
+        row
+        for row in ichiban_rows
+        if row.get("official_price_jpy") == 0
+        and (
+            "ラストワン" in str(row.get("name_ko") or "")
+            or "LAST ONE" in str(row.get("name_ko") or "").upper()
+            or "ダブルチャンス" in str(row.get("name_ko") or "")
+            or "DOUBLE CHANCE" in str(row.get("name_ko") or "").upper()
+        )
+    ]
+    zero_price_non_exception_rows = [
+        row
+        for row in ichiban_rows
+        if row.get("official_price_jpy") == 0 and row not in zero_price_exception_rows
+    ]
+
+    return {
+        "rows": len(ichiban_rows),
+        "campaign_source": _display_path(campaign_path),
+        "campaign_count": len(campaign_urls),
+        "seeded_campaign_url_count": len(seeded_campaign_urls),
+        "campaign_gap_count": len(missing_campaign_urls),
+        "campaign_gap_sample": missing_campaign_urls[:20],
+        "exact_display_duplicate_review_groups": len(duplicate_display_groups),
+        "exact_display_duplicate_review_rows": sum(
+            int(group["rows"]) for group in duplicate_display_groups
+        ),
+        "exact_display_duplicate_review_sample": duplicate_display_groups[:20],
+        "zero_price_exception_rows": len(zero_price_exception_rows),
+        "zero_price_non_exception_rows": len(zero_price_non_exception_rows),
+        "zero_price_non_exception_sample": [
+            {
+                "catalog_index": row.get("catalog_index"),
+                "name_ko": row.get("name_ko"),
+                "source_url": row.get("source_url"),
+            }
+            for row in zero_price_non_exception_rows[:20]
+        ],
+    }
+
+
 GROUP_LIMIT = 40
 
 
@@ -347,6 +454,7 @@ def build_report(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "top_affiliations": Counter(row.get("affiliation") or "" for row in normalized).most_common(30),
         "missing_enrichment_groups": grouped_missing_matrix(normalized),
         "duplicates": duplicate_groups[:200],
+        "ichiban_kuji": build_ichiban_summary(rows),
     }
 
 
