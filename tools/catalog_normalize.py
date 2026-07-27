@@ -360,8 +360,9 @@ def canonical_key(row: dict[str, Any]) -> tuple[str, str]:
             return ("online_kuji_source_prize", f"{source_url_key}|{prize_key}")
     if source_url_key and source_store == normalize_for_key("이치방쿠지"):
         prize_key = normalize_for_key(normalized.get("name_ja") or normalized.get("name_ko"))
+        character_key = normalize_for_key(normalized.get("character_name"))
         if prize_key:
-            return ("ichiban_kuji_source_prize", f"{source_url_key}|{prize_key}")
+            return ("ichiban_kuji_source_prize", f"{source_url_key}|{prize_key}|{character_key}")
     if (
         source_url_key
         and not is_generic_source_url(source_url)

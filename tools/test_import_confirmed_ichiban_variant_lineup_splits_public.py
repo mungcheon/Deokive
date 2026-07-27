@@ -88,6 +88,57 @@ class ImportConfirmedIchibanVariantLineupSplitsPublicTest(unittest.TestCase):
         self.assertEqual(catalog["meta"]["row_count"], 3)
         self.assertEqual(catalog["total_items"], 3)
 
+    def test_allows_same_variant_name_when_character_names_differ(self) -> None:
+        catalog = _catalog()
+        queue = {
+            "items": [
+                {
+                    "manual_confirmed": True,
+                    "source_catalog_index": 10,
+                    "expected_variant_count": 2,
+                    "representative_image_ok": True,
+                    "variants": [
+                        {"variant_name": "\u30a2\u30af\u30ea\u30eb\u30b9\u30bf\u30f3\u30c9", "character_name": "\u30ad\u30e3\u30e9A"},
+                        {"variant_name": "\u30a2\u30af\u30ea\u30eb\u30b9\u30bf\u30f3\u30c9", "character_name": "\u30ad\u30e3\u30e9B"},
+                    ],
+                }
+            ]
+        }
+
+        report = import_splits(catalog, queue, write=True)
+
+        self.assertEqual(report["summary"]["applied_items"], 1)
+        self.assertEqual(
+            catalog["items"][0]["name_ko"],
+            "\u4e00\u756a\u304f\u3058 TEST / H\u8cde / \u30a2\u30af\u30ea\u30eb\u30b9\u30bf\u30f3\u30c9 / \u30ad\u30e3\u30e9A",
+        )
+        self.assertEqual(
+            catalog["items"][1]["name_ko"],
+            "\u4e00\u756a\u304f\u3058 TEST / H\u8cde / \u30a2\u30af\u30ea\u30eb\u30b9\u30bf\u30f3\u30c9 / \u30ad\u30e3\u30e9B",
+        )
+
+    def test_rejects_duplicate_variant_name_character_pairs(self) -> None:
+        catalog = _catalog()
+        queue = {
+            "items": [
+                {
+                    "manual_confirmed": True,
+                    "source_catalog_index": 10,
+                    "expected_variant_count": 2,
+                    "representative_image_ok": True,
+                    "variants": [
+                        {"variant_name": "\u30a2\u30af\u30ea\u30eb\u30b9\u30bf\u30f3\u30c9", "character_name": "\u30ad\u30e3\u30e9A"},
+                        {"variant_name": "\u30a2\u30af\u30ea\u30eb\u30b9\u30bf\u30f3\u30c9", "character_name": "\u30ad\u30e3\u30e9A"},
+                    ],
+                }
+            ]
+        }
+
+        report = import_splits(catalog, queue, write=True)
+
+        self.assertEqual(report["summary"]["applied_items"], 0)
+        self.assertEqual(report["skipped"][0]["reason"], "duplicate_variant_name_character_pair")
+
     def test_requires_all_variant_images_unless_representative_image_is_confirmed(self) -> None:
         catalog = _catalog()
         queue = {

@@ -112,9 +112,9 @@ def _validate_variants(item: dict[str, Any]) -> tuple[list[dict[str, Any]], str 
             return [], error
         assert variant is not None
         variants.append(variant)
-    names = [variant["variant_name"] for variant in variants]
-    if len(set(names)) != len(names):
-        return [], "duplicate_variant_name"
+    identity_keys = [(variant["variant_name"], variant["character_name"]) for variant in variants]
+    if len(set(identity_keys)) != len(identity_keys):
+        return [], "duplicate_variant_name_character_pair"
     expected_count = item.get("expected_variant_count")
     if isinstance(expected_count, int) and expected_count > 0 and len(variants) != expected_count:
         return [], "variant_count_mismatch"

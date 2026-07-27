@@ -39,6 +39,30 @@ class AuditPublicCatalogSafetyTest(unittest.TestCase):
         self.assertEqual(comparison["seed_image_missing_rows"], 2)
         self.assertFalse(comparison["same_row_count"])
 
+    def test_ichiban_prize_rows_with_different_characters_are_not_duplicates(self) -> None:
+        rows = [
+            {
+                "name_ko": "\u4e00\u756a\u304f\u3058 TEST / P\u8cde / \u30a2\u30af\u30ea\u30eb\u30b9\u30bf\u30f3\u30c9 / \u30ad\u30e3\u30e9A",
+                "name_ja": "P\u8cde \u30a2\u30af\u30ea\u30eb\u30b9\u30bf\u30f3\u30c9",
+                "category": "\u30a2\u30af\u30ea\u30eb",
+                "character_name": "\u30ad\u30e3\u30e9A",
+                "source_url": "https://1kuji.com/products/test",
+                "source_store": "\uc774\uce58\ubc29\ucfe0\uc9c0",
+            },
+            {
+                "name_ko": "\u4e00\u756a\u304f\u3058 TEST / P\u8cde / \u30a2\u30af\u30ea\u30eb\u30b9\u30bf\u30f3\u30c9 / \u30ad\u30e3\u30e9B",
+                "name_ja": "P\u8cde \u30a2\u30af\u30ea\u30eb\u30b9\u30bf\u30f3\u30c9",
+                "category": "\u30a2\u30af\u30ea\u30eb",
+                "character_name": "\u30ad\u30e3\u30e9B",
+                "source_url": "https://1kuji.com/products/test",
+                "source_store": "\uc774\uce58\ubc29\ucfe0\uc9c0",
+            },
+        ]
+
+        summary = audit.summarize_seed(rows)
+
+        self.assertEqual(summary["duplicate_groups"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()
