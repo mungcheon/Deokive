@@ -242,11 +242,58 @@ def compact_item(item: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def compact_blocked_item(item: dict[str, Any]) -> dict[str, Any]:
+    status = str(item.get("status") or "")
+    if status == "weak_cache_candidate":
+        next_action = "discard_weak_cache_candidate_then_run_exact_official_or_web_search"
+        blocked_reason = "weak_cache_candidate_not_enough_identity_evidence"
+    elif status == "no_cache_candidate":
+        next_action = "run_exact_official_or_domain_limited_web_search"
+        blocked_reason = "no_cache_candidate"
+    else:
+        next_action = "review_non_actionable_cache_status"
+        blocked_reason = status or "unknown_cache_status"
+    return {
+        "catalog_index": item.get("catalog_index"),
+        "row_index": item.get("catalog_index"),
+        "source_store": item.get("source_store"),
+        "name_ko": item.get("name_ko"),
+        "name_ja": item.get("name_ja"),
+        "affiliation": item.get("affiliation"),
+        "category": item.get("category"),
+        "candidate_status": status,
+        "candidate_count": item.get("candidate_count"),
+        "top_candidates": [
+            compact_candidate(candidate, item)
+            for candidate in item.get("top_candidates", [])
+            if isinstance(candidate, dict)
+        ][:5],
+        "import_readiness": {
+            "status": "blocked_source_research_required",
+            "can_import_now": False,
+            "manual_confirmed_required": True,
+            "blocked_reason": blocked_reason,
+        },
+        "next_action": next_action,
+        "acceptance_criteria": [
+            "Find an exact Ensky product detail page or another official/trusted detail page.",
+            "Do not use broad search pages or weak cache candidates as evidence.",
+            "After exact identity is confirmed, submit source_url and image_url through the standard image update intake.",
+        ],
+        "auto_apply_enabled": False,
+    }
+
+
 def build_report(cache_coverage: dict[str, Any], *, generated_at: str | None = None, batch_size: int = 10) -> dict[str, Any]:
     items = [
         compact_item(item)
         for item in cache_coverage.get("items", [])
         if isinstance(item, dict) and item.get("status") == "broad_cache_candidate"
+    ]
+    blocked_items = [
+        compact_blocked_item(item)
+        for item in cache_coverage.get("items", [])
+        if isinstance(item, dict) and item.get("status") in {"weak_cache_candidate", "no_cache_candidate"}
     ]
     items.sort(
         key=lambda row: (
@@ -298,6 +345,13 @@ def build_report(cache_coverage: dict[str, Any], *, generated_at: str | None = N
         )
     import_readiness = {
         "candidate_rows": len(items),
+        "source_research_required_rows": len(blocked_items),
+        "weak_cache_candidate_rows": sum(
+            1 for item in blocked_items if item.get("candidate_status") == "weak_cache_candidate"
+        ),
+        "no_cache_candidate_rows": sum(
+            1 for item in blocked_items if item.get("candidate_status") == "no_cache_candidate"
+        ),
         "candidate_source_url_ready_rows": sum(
             1 for item in items if item.get("top_candidate_has_source_url")
         ),
@@ -325,6 +379,9 @@ def build_report(cache_coverage: dict[str, Any], *, generated_at: str | None = N
         "scope": "ensky_cache_candidate_action_queue",
         "summary": {
             "candidate_action_rows": len(items),
+            "source_research_required_rows": len(blocked_items),
+            "weak_cache_candidate_rows": import_readiness["weak_cache_candidate_rows"],
+            "no_cache_candidate_rows": import_readiness["no_cache_candidate_rows"],
             "action_batch_count": len(batches),
             "batch_size": batch_size,
             "manual_confirmed_true": sum(1 for item in items if item.get("manual_confirmed") is True),
@@ -350,6 +407,21 @@ def build_report(cache_coverage: dict[str, Any], *, generated_at: str | None = N
             "Do not import source_url or image_url unless manual_confirmed is set true after review.",
         ],
         "batches": batches,
+        "source_research_required": {
+            "row_count": len(blocked_items),
+            "by_status": counter_rows(blocked_items, "candidate_status"),
+            "by_affiliation": counter_rows(blocked_items, "affiliation"),
+            "by_category": counter_rows(blocked_items, "category"),
+            "items": sorted(
+                blocked_items,
+                key=lambda row: (
+                    str(row.get("candidate_status") or ""),
+                    str(row.get("affiliation") or ""),
+                    str(row.get("category") or ""),
+                    int(row.get("catalog_index") or 999_999_999),
+                ),
+            )[:80],
+        },
         "automation_policy": {
             "auto_apply_source_url": False,
             "auto_apply_image_url": False,

@@ -48,6 +48,9 @@ class BuildEnskyCacheCandidateActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["generated_at"], "2026-07-22T00:00:00Z")
         self.assertFalse(report["summary"]["auto_apply_enabled"])
         self.assertEqual(report["summary"]["candidate_action_rows"], 1)
+        self.assertEqual(report["summary"]["source_research_required_rows"], 1)
+        self.assertEqual(report["summary"]["no_cache_candidate_rows"], 1)
+        self.assertEqual(report["summary"]["weak_cache_candidate_rows"], 0)
         self.assertEqual(report["summary"]["manual_confirmed_true"], 0)
         self.assertEqual(report["summary"]["candidate_source_url_ready_rows"], 1)
         self.assertEqual(report["summary"]["candidate_image_url_ready_rows"], 1)
@@ -55,7 +58,13 @@ class BuildEnskyCacheCandidateActionQueuePublicTest(unittest.TestCase):
         self.assertEqual(report["summary"]["can_import_now_rows"], 0)
         self.assertEqual(report["summary"]["blocked_manual_review_rows"], 1)
         self.assertEqual(report["import_readiness"]["candidate_rows"], 1)
+        self.assertEqual(report["import_readiness"]["source_research_required_rows"], 1)
         self.assertEqual(report["import_readiness"]["can_import_now_rows"], 0)
+        self.assertEqual(report["source_research_required"]["row_count"], 1)
+        self.assertEqual(
+            report["source_research_required"]["items"][0]["next_action"],
+            "run_exact_official_or_domain_limited_web_search",
+        )
         item = report["batches"][0]["items"][0]
         self.assertFalse(item["manual_confirmed"])
         self.assertTrue(item["top_candidate_has_source_url"])
@@ -67,6 +76,40 @@ class BuildEnskyCacheCandidateActionQueuePublicTest(unittest.TestCase):
         self.assertFalse(item["source_patch_template"]["manual_confirmed"])
         self.assertEqual(item["top_candidates"][0]["candidate_source_url"], "https://www.enskyshop.com/products/detail/1")
         self.assertIn("exact product", item["acceptance_criteria"][0])
+
+    def test_build_report_separates_weak_cache_candidates_for_research(self) -> None:
+        cache_coverage = {
+            "items": [
+                {
+                    "catalog_index": 4,
+                    "name_ko": "Weak",
+                    "name_ja": "Weak",
+                    "source_store": queue.ENSKY_STORE,
+                    "affiliation": "Series",
+                    "category": "Goods",
+                    "status": "weak_cache_candidate",
+                    "candidate_count": 1,
+                    "top_candidates": [
+                        {
+                            "title": "Brand only",
+                            "source_url": "https://www.enskyshop.com/products/detail/4",
+                            "image_url": "https://www.enskyshop.com/html/upload/save_image/4.jpg",
+                        }
+                    ],
+                }
+            ]
+        }
+
+        report = queue.build_report(cache_coverage, generated_at="2026-07-22T00:00:00Z", batch_size=10)
+
+        self.assertEqual(report["summary"]["candidate_action_rows"], 0)
+        self.assertEqual(report["summary"]["source_research_required_rows"], 1)
+        self.assertEqual(report["summary"]["weak_cache_candidate_rows"], 1)
+        self.assertEqual(report["source_research_required"]["by_status"], [["weak_cache_candidate", 1]])
+        self.assertEqual(
+            report["source_research_required"]["items"][0]["next_action"],
+            "discard_weak_cache_candidate_then_run_exact_official_or_web_search",
+        )
 
     def test_build_report_flags_product_type_and_box_candidates(self) -> None:
         cache_coverage = {
