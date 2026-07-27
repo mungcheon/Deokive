@@ -96,7 +96,31 @@ class CatalogReportConsistencyAuditTests(unittest.TestCase):
                     "without_source_url_rows": 1,
                     "rows_ready_for_source_page_image_review": 1,
                     "rows_requiring_source_url_before_image_review": 1,
+                },
+                "ichiban_quality": {
+                    "queue_rows": 4,
+                    "campaign_gap_queue_rows": 1,
+                    "exact_display_duplicate_queue_rows": 2,
+                    "zero_price_policy_queue_rows": 0,
+                    "naming_convention_queue_rows": 1,
+                    "campaign_count": 10,
+                    "seeded_campaign_url_count": 9,
+                    "work_pack_rows": 2,
                 }
+            },
+            ichiban_quality_queue={
+                "summary": {
+                    "queue_rows": 4,
+                    "campaign_gap_queue_rows": 1,
+                    "exact_display_duplicate_queue_rows": 2,
+                    "zero_price_policy_queue_rows": 0,
+                    "naming_convention_queue_rows": 1,
+                    "campaign_count": 10,
+                    "seeded_campaign_url_count": 9,
+                    "work_pack_rows": 2,
+                },
+                "items": [{}, {}, {}, {}],
+                "work_packs": [{}, {}],
             },
         )
 
@@ -221,7 +245,31 @@ class CatalogReportConsistencyAuditTests(unittest.TestCase):
                     "missing_image_url_rows": 9,
                     "with_source_url_rows": 1,
                     "without_source_url_rows": 1,
+                },
+                "ichiban_quality": {
+                    "queue_rows": 8,
+                    "campaign_gap_queue_rows": 9,
+                    "exact_display_duplicate_queue_rows": 10,
+                    "zero_price_policy_queue_rows": 11,
+                    "naming_convention_queue_rows": 12,
+                    "campaign_count": 13,
+                    "seeded_campaign_url_count": 14,
+                    "work_pack_rows": 15,
                 }
+            },
+            ichiban_quality_queue={
+                "summary": {
+                    "queue_rows": 4,
+                    "campaign_gap_queue_rows": 1,
+                    "exact_display_duplicate_queue_rows": 2,
+                    "zero_price_policy_queue_rows": 0,
+                    "naming_convention_queue_rows": 1,
+                    "campaign_count": 10,
+                    "seeded_campaign_url_count": 9,
+                    "work_pack_rows": 2,
+                },
+                "items": [{}, {}, {}],
+                "work_packs": [{}],
             },
         )
 
@@ -233,6 +281,11 @@ class CatalogReportConsistencyAuditTests(unittest.TestCase):
         self.assertEqual(names["image_provider_coverage_matches_image_queue"], 5)
         self.assertEqual(names["image_asset_audit_missing_image_rows_match_image_queue"], 6)
         self.assertEqual(names["update_backlog_image_evidence_missing_matches_image_queue"], 7)
+        self.assertEqual(names["ichiban_quality_queue_rows_match_items"], -1)
+        self.assertEqual(names["ichiban_quality_work_pack_rows_match_packs"], -1)
+        self.assertEqual(names["update_backlog_ichiban_quality_matches_queue:queue_rows"], 4)
+        self.assertEqual(names["update_backlog_ichiban_quality_matches_queue:campaign_gap_queue_rows"], 8)
+        self.assertEqual(names["update_backlog_ichiban_quality_matches_queue:work_pack_rows"], 13)
         self.assertEqual(names["source_discovery_matches_no_source_image_queue"], 2)
         self.assertEqual(names["field_queue_by_field_matches_quality:image_url"], -1)
         self.assertEqual(names["agent_image_candidates_ready_items_match_items"], -1)

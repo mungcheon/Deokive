@@ -42,6 +42,7 @@ DEFAULT_ICHIBAN_HISTORY_STATUS = ROOT / "server" / "ichiban_kuji_history_status_
 DEFAULT_ICHIBAN_METADATA = ROOT / "server" / "ichiban_kuji_metadata_audit.json"
 DEFAULT_ICHIBAN_CAMPAIGN_GAP = ROOT / "server" / "ichiban_kuji_campaign_gap_audit.json"
 DEFAULT_ICHIBAN_PRIZE_STRUCTURE = ROOT / "server" / "ichiban_kuji_prize_structure_audit.json"
+DEFAULT_ICHIBAN_QUALITY_QUEUE = ROOT / "server" / "ichiban_public_quality_queue.json"
 DEFAULT_GOAL_STATUS = ROOT / "server" / "catalog_goal_status_current.json"
 DEFAULT_JSON = ROOT / "server" / "catalog_report_consistency_audit.json"
 
@@ -179,6 +180,7 @@ def build_report(
     focus_missing_images: dict[str, Any] | None = None,
     focus_image_template: dict[str, Any] | None = None,
     confirmed_import: dict[str, Any] | None = None,
+    ichiban_quality_queue: dict[str, Any] | None = None,
     ichiban_history_status: dict[str, Any] | None = None,
     ichiban_metadata: dict[str, Any] | None = None,
     ichiban_campaign_gap: dict[str, Any] | None = None,
@@ -690,6 +692,38 @@ def build_report(
                     ichiban_campaign_gap.get(key),
                     ichiban_prize_structure.get(key),
                 )
+    if ichiban_quality_queue:
+        quality_summary = ichiban_quality_queue.get("summary") or {}
+        _append_check(
+            checks,
+            "ichiban_quality_queue_rows_match_items",
+            quality_summary.get("queue_rows"),
+            len(ichiban_quality_queue.get("items") or []),
+        )
+        _append_check(
+            checks,
+            "ichiban_quality_work_pack_rows_match_packs",
+            quality_summary.get("work_pack_rows"),
+            len(ichiban_quality_queue.get("work_packs") or []),
+        )
+        if update_backlog:
+            backlog_ichiban = update_backlog.get("ichiban_quality") or {}
+            for key in (
+                "queue_rows",
+                "campaign_gap_queue_rows",
+                "exact_display_duplicate_queue_rows",
+                "zero_price_policy_queue_rows",
+                "naming_convention_queue_rows",
+                "campaign_count",
+                "seeded_campaign_url_count",
+                "work_pack_rows",
+            ):
+                _append_check(
+                    checks,
+                    f"update_backlog_ichiban_quality_matches_queue:{key}",
+                    quality_summary.get(key),
+                    backlog_ichiban.get(key),
+                )
     if goal_status:
         goal_missing = {key: int(value) for key, value in (goal_status.get("missing_enrichment") or {}).items()}
         for field, expected in sorted(quality_missing.items()):
@@ -836,6 +870,7 @@ def main() -> int:
     parser.add_argument("--focus-missing-images", type=Path, default=DEFAULT_FOCUS_MISSING_IMAGES)
     parser.add_argument("--focus-image-template", type=Path, default=DEFAULT_FOCUS_IMAGE_TEMPLATE)
     parser.add_argument("--confirmed-import", type=Path, default=DEFAULT_CONFIRMED_IMPORT)
+    parser.add_argument("--ichiban-quality-queue", type=Path, default=DEFAULT_ICHIBAN_QUALITY_QUEUE)
     parser.add_argument("--ichiban-history-status", type=Path, default=DEFAULT_ICHIBAN_HISTORY_STATUS)
     parser.add_argument("--ichiban-metadata", type=Path, default=DEFAULT_ICHIBAN_METADATA)
     parser.add_argument("--ichiban-campaign-gap", type=Path, default=DEFAULT_ICHIBAN_CAMPAIGN_GAP)
@@ -932,6 +967,7 @@ def main() -> int:
         else _read_json(args.confirmed_import)
         if args.confirmed_import.exists()
         else None,
+        _read_json(args.ichiban_quality_queue) if args.ichiban_quality_queue.exists() else None,
         None
         if args.core_only
         else _read_json(args.ichiban_history_status)
