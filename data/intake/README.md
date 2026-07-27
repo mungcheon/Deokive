@@ -15,6 +15,18 @@ Before any submission can update the public DB, validate it:
 python -X utf8 tools/validate_agent_goods_intake.py data/intake/incoming/example-agent-run.json
 ```
 
+Then review the dry-run import report:
+
+```powershell
+python -X utf8 tools/import_agent_goods_intake.py data/intake/incoming/example-agent-run.json
+```
+
+After the dry run looks correct, write the changes:
+
+```powershell
+python -X utf8 tools/import_agent_goods_intake.py data/intake/incoming/example-agent-run.json --write
+```
+
 Only `data/catalog_public.json` is the public DB. Intake files are evidence and
 review material; they are not used directly by the app.
 
