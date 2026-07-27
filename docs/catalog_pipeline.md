@@ -27,39 +27,30 @@ and queues are temporary/generated work products, not app databases.
 
 ## Normal Update
 
-Dry-run first:
+GitHub Actions runs the public catalog update on schedule and can also be run
+manually from the repository Actions tab. It validates agent intake, imports safe
+incoming goods into `data/catalog_public.json`, regenerates local/admin quality
+queues, regenerates the Flutter static seed, and audits the public data layout.
+
+For the same local preflight, run:
 
 ```powershell
-python tools/sync_catalog_pipeline.py
+python tools/validate_agent_goods_intake.py data/intake/incoming
+python tools/import_agent_goods_intake.py data/intake/incoming
+python tools/catalog_quality_report.py
+python tools/build_ichiban_public_quality_queue.py
+python tools/build_image_enrichment_queue.py
+python tools/sync_missing_image_work_queue_public.py
+python tools/generate_seed_catalog_dart.py --input data/catalog_public.json --output lib/data/catalog/seed_catalog.dart
+python tools/audit_flutter_seed_matches_public.py
+python tools/audit_public_data_layout.py
 ```
 
-Apply updates:
+Use `--write` only on the intake importer after reviewing its dry-run report:
 
 ```powershell
-python tools/sync_catalog_pipeline.py --write
+python tools/import_agent_goods_intake.py data/intake/incoming --write
 ```
-
-Apply updates to both the server DB and the root local DB:
-
-```powershell
-python tools/sync_catalog_pipeline.py --write --include-root-db
-```
-
-Fast local check without network or DB writes:
-
-```powershell
-python tools/sync_catalog_pipeline.py --skip-network --skip-db
-```
-
-Run a strict official image provider for one store while syncing:
-
-```powershell
-python tools/sync_catalog_pipeline.py --write --image-provider-store FuRyu --image-provider-max-rows 25
-```
-
-`--image-provider-store` accepts the same aliases supported by
-`tools/enrich_catalog_images.py`, such as `animate`, `ensky`, `goodsmile`,
-`furyu`, `Taito`, `Banpresto`, `kotobukiya`, and `Movic`.
 
 ## Individual Tools
 
@@ -89,6 +80,7 @@ python tools/sync_catalog_pipeline.py --write --image-provider-store FuRyu --ima
 - `tools/audit_public_catalog_image_assets.py --write`: reads `data/catalog_public.json` and writes the local/admin image asset report `server/catalog_image_asset_audit.json`.
 - `tools/build_image_enrichment_queue.py`: writes the local/admin missing-image work queue to `server/catalog_image_enrichment_queue_current.json` and `.csv`.
 - `tools/sync_missing_image_work_queue_public.py --write`: refreshes the simpler local missing-image queue in `server/catalog_missing_image_work_queue_current.json` and `.csv`.
+- `tools/build_ichiban_public_quality_queue.py`: writes the local/admin Ichiban Kuji campaign-gap and reissue/duplicate review queue to `server/ichiban_public_quality_queue.json` and `.csv`.
 - `tools/sync_catalog_db_active.py`: deactivates DB catalog rows that are no longer present in the canonical seed, inserts missing seed rows, and updates active DB rows when canonical seed fields change.
 - `tools/build_catalog_source_coverage.py`: summarizes source, affiliation, category, animation goods, and kuji coverage.
 - `tools/build_image_enrichment_queue.py`: writes JSON/CSV queues for missing image follow-up.
@@ -149,17 +141,12 @@ Current conservative automation:
 - `Chiikawa Market` `ご当地` rows are not covered by the public Shopify JSON and need a separate official regional-goods source.
 - Reused manual image candidates must be rechecked with `tools/build_current_image_candidate_reconciliation.py --validate-live-title` before import. If importing a reconciliation output, dry-run `tools/import_manual_image_candidates.py` with `--require-live-title-exact`; this prevents stale row indexes or visually similar product pages from being written.
 
-GitHub Actions can run the normal catalog update on schedule. For image
-provider work, use **Run workflow** on `Update catalog data` and fill
-`image_provider_store` plus an optional `image_provider_max_rows`; scheduled
-runs leave this blank to avoid broad unattended scraping.
-The workflow runs `tools/sync_catalog_pipeline.py --write --skip-db`, then
-verifies `tools/audit_catalog_report_consistency.py --fail-on-mismatch` and
-the core pipeline consistency tests before committing generated catalog files.
-`--skip-db` keeps runtime SQLite files out of GitHub Pages commits; DB health is
-tracked separately through `tools/audit_catalog_db_sync.py`, which compares local
-SQLite catalogs with the canonical public seed whenever those DB files are
-available.
+GitHub Actions can run the normal public catalog update on schedule. The
+workflow uses only tracked public-data tools and commits `data/catalog_public.json`,
+`data/catalog_public_meta.json`, `data/site_status_public.json`,
+`data/intake`, generated Flutter seed data, and catalog image assets when they
+change. Runtime SQLite files and broad local scraping pipelines stay out of the
+GitHub Pages path.
 
 Agent-reviewed image and goods candidates should now be dropped into
 `data/intake/incoming/` using the shared intake schema. The pipeline imports only
