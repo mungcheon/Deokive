@@ -28,6 +28,8 @@ jobs:
             tools.test_build_catalog_naming_quality_queue \
             tools.test_validate_agent_goods_intake \
             tools.test_import_agent_goods_intake \
+            tools.test_validate_agent_catalog_image_updates \
+            tools.test_import_agent_catalog_image_updates \
             tools.test_audit_public_data_layout \
             tools.test_audit_public_catalog_image_assets \
             tools.test_audit_catalog_report_consistency \
@@ -92,6 +94,8 @@ jobs:
         run: |
           python tools/validate_agent_goods_intake.py data/intake/incoming
           python tools/import_agent_goods_intake.py data/intake/incoming --write
+          python tools/validate_agent_catalog_image_updates.py data/intake/image_updates/incoming
+          python tools/import_agent_catalog_image_updates.py data/intake/image_updates/incoming --write
           python tools/catalog_quality_report.py
           python tools/build_catalog_field_enrichment_queue.py
           python tools/build_catalog_naming_quality_queue.py

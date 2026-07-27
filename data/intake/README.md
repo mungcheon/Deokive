@@ -5,6 +5,8 @@ This folder is the staging area for goods data collected by agents.
 Agents must save new collection results with the same JSON shape:
 
 - New raw submissions: `data/intake/incoming/<agent>-<YYYYMMDD>-<topic>.json`
+- Existing catalog image updates:
+  `data/intake/image_updates/incoming/<agent>-<YYYYMMDD>-<topic>.json`
 - Official source/campaign lists: `data/intake/sources/`
 - Accepted and already merged submissions: `data/intake/processed/`
 - Rejected or unsafe submissions: `data/intake/rejected/`
@@ -29,6 +31,10 @@ python -X utf8 tools/import_agent_goods_intake.py data/intake/incoming/example-a
 
 Only `data/catalog_public.json` is the public DB. Intake files are evidence and
 review material; they are not used directly by the app.
+
+Use `data/intake/image_updates/` when an agent found images for existing catalog
+rows. Those files update only `image_url` and, when supplied, `source_url`; they
+do not create new goods rows.
 
 Do not add custom fields. The validator rejects unknown top-level, agent, item,
 and evidence keys so every agent run can be imported by the same pipeline.

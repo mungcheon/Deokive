@@ -12,6 +12,18 @@ try:
     from validate_agent_goods_intake import iter_input_files, load_json, validate_payload
 except ImportError:
     from tools.validate_agent_goods_intake import iter_input_files, load_json, validate_payload
+try:
+    from validate_agent_catalog_image_updates import (
+        iter_input_files as iter_image_update_files,
+        load_json as load_image_update_json,
+        validate_payload as validate_image_update_payload,
+    )
+except ImportError:
+    from tools.validate_agent_catalog_image_updates import (
+        iter_input_files as iter_image_update_files,
+        load_json as load_image_update_json,
+        validate_payload as validate_image_update_payload,
+    )
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -21,6 +33,7 @@ CATALOG_META = DATA / "catalog_public_meta.json"
 SITE_STATUS = DATA / "site_status_public.json"
 INTAKE = DATA / "intake"
 INCOMING = INTAKE / "incoming"
+IMAGE_UPDATES_INCOMING = INTAKE / "image_updates" / "incoming"
 SOURCES = INTAKE / "sources"
 SERVER_ARTIFACT_SUFFIXES = {".csv", ".html", ".json", ".md", ".jpg", ".jpeg", ".png", ".txt"}
 INTAKE_FILENAME_RE = re.compile(r"^[a-z0-9][a-z0-9_-]*-\d{8}-[a-z0-9][a-z0-9_-]*\.json$")
@@ -32,6 +45,11 @@ ALLOWED_DATA_FILES = {
     "data/site_status_public.json",
     "data/intake/README.md",
     "data/intake/agent_goods_intake.schema.json",
+    "data/intake/image_updates/agent_catalog_image_update.schema.json",
+    "data/intake/image_updates/incoming/.gitkeep",
+    "data/intake/image_updates/processed/.gitkeep",
+    "data/intake/image_updates/rejected/.gitkeep",
+    "data/intake/image_updates/templates/agent_catalog_image_update.template.json",
     "data/intake/incoming/.gitkeep",
     "data/intake/processed/.gitkeep",
     "data/intake/rejected/.gitkeep",
@@ -44,6 +62,9 @@ ALLOWED_INTAKE_RECORD_DIRS = {
     "data/intake/incoming",
     "data/intake/processed",
     "data/intake/rejected",
+    "data/intake/image_updates/incoming",
+    "data/intake/image_updates/processed",
+    "data/intake/image_updates/rejected",
 }
 
 REQUIRED_ITEM_FIELDS = {
@@ -245,6 +266,22 @@ def audit_incoming_intake(errors: list[str]) -> dict[str, int]:
     return {"incoming_files": len(files), "incoming_items": item_count}
 
 
+def audit_incoming_image_updates(errors: list[str]) -> dict[str, int]:
+    files = iter_image_update_files([IMAGE_UPDATES_INCOMING])
+    update_count = 0
+    for path in files:
+        if not is_valid_intake_record_name(path):
+            errors.append(
+                f"{display_path(path)}: image update filename must be "
+                "<agent>-<YYYYMMDD>-<topic>.json"
+            )
+        payload = load_image_update_json(path)
+        payload_errors, summary = validate_image_update_payload(path, payload)
+        update_count += int(summary["updates"])
+        errors.extend(payload_errors)
+    return {"image_update_files": len(files), "image_update_items": update_count}
+
+
 def run_audit() -> tuple[dict[str, Any], list[str]]:
     errors: list[str] = []
     tracked = audit_tracked_data_files(errors)
@@ -255,6 +292,7 @@ def run_audit() -> tuple[dict[str, Any], list[str]]:
     audit_site_status(errors)
     source_counts = audit_intake_sources(errors)
     intake_summary = audit_incoming_intake(errors)
+    image_update_summary = audit_incoming_image_updates(errors)
 
     summary: dict[str, Any] = {
         "tracked_data_files": len(tracked),
@@ -263,6 +301,7 @@ def run_audit() -> tuple[dict[str, Any], list[str]]:
         **catalog_summary,
         "source_lists": source_counts,
         **intake_summary,
+        **image_update_summary,
         "status": "fail" if errors else "pass",
         "errors": errors,
     }

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "agent": {
+    "name": "agent-name",
+    "run_id": "YYYYMMDD-image-pass-001",
+    "collected_at": "2026-07-27T00:00:00+09:00",
+    "notes": "What missing-image queue this run tried to resolve."
+  },
+  "updates": [
+    {
+      "catalog_index": 0,
+      "image_url": "https://example.com/product.jpg",
+      "source_url": "https://example.com/product",
+      "evidence": [
+        {
+          "url": "https://example.com/product",
+          "type": "official",
+          "note": "Exact product page that shows this image."
+        }
+      ],
+      "confidence": "confirmed",
+      "notes": ""
+    }
+  ]
+}
