@@ -26,6 +26,15 @@ DEFAULT_SEED = ROOT / "data" / "catalog_public.json"
 DEFAULT_REPORT = ROOT / "server" / "chiikawa_gotouchi_api_coverage_audit.json"
 CHIIKAWA_MARKET_NAMES = {"치이카와 마켓", "ご当地ちいかわ 공식(API)"}
 GOTOCHI_MARKERS = {"ご当地"}
+CHARACTER_TOKENS: dict[str, tuple[str, ...]] = {
+    "치이카와": ("치이카와", "ちいかわ"),
+    "하치와레": ("하치와레", "ハチワレ"),
+    "우사기": ("우사기", "うさぎ"),
+    "모몽가": ("모몽가", "モモンガ"),
+    "쿠리만쥬": ("クリマンジュ", "くりまんじゅう", "쿠리만쥬"),
+    "시사": ("シーサー", "시사"),
+    "랏코": ("ラッコ", "랏코"),
+}
 
 THEME_ALIASES: dict[str, tuple[str, ...]] = {
     "東京": ("도쿄", "東京"),
@@ -130,6 +139,44 @@ def _is_gotouchi_target(row: dict[str, Any]) -> bool:
     )
 
 
+def _character_tokens(row: dict[str, Any]) -> tuple[str, ...]:
+    text = " ".join(str(row.get(key) or "") for key in ("character_name", "name_ko", "name_ja"))
+    for aliases in CHARACTER_TOKENS.values():
+        if _contains_any(text, aliases):
+            return aliases
+    return ()
+
+
+def _match_safety(row: dict[str, Any], official_matches: list[dict[str, str]]) -> dict[str, Any]:
+    if not official_matches:
+        return {
+            "auto_apply": False,
+            "blocked_reason": "no_exact_official_image_pair",
+        }
+    tokens = _character_tokens(row)
+    if not tokens:
+        return {
+            "auto_apply": False,
+            "blocked_reason": "character_unclassified",
+        }
+    exact_character_matches = [
+        match
+        for match in official_matches
+        if _contains_any(" ".join((match.get("alt") or "", match.get("image_url") or "")), tokens)
+    ]
+    if len(exact_character_matches) == 1:
+        return {
+            "auto_apply": True,
+            "blocked_reason": None,
+            "exact_character_match_count": 1,
+        }
+    return {
+        "auto_apply": False,
+        "blocked_reason": "official_image_lacks_exact_character_token",
+        "exact_character_match_count": len(exact_character_matches),
+    }
+
+
 def build_audit(seed_rows: list[dict[str, Any]], source_url: str) -> dict[str, Any]:
     official_images = fetch_official_images(source_url)
     official_pairs: dict[tuple[str, str], list[dict[str, str]]] = {}
@@ -154,6 +201,7 @@ def build_audit(seed_rows: list[dict[str, Any]], source_url: str) -> dict[str, A
             status = "theme_not_in_current_official_api"
         else:
             status = "theme_unclassified"
+        match_safety = _match_safety(row, official_matches)
         targets.append(
             {
                 "catalog_index": row.get("catalog_index"),
@@ -166,11 +214,15 @@ def build_audit(seed_rows: list[dict[str, Any]], source_url: str) -> dict[str, A
                 "detected_theme": theme,
                 "detected_type": goods_type,
                 "status": status,
+                "auto_apply": match_safety["auto_apply"],
+                "blocked_reason": match_safety["blocked_reason"],
+                "exact_character_match_count": match_safety.get("exact_character_match_count", 0),
                 "official_matches": official_matches[:3],
             }
         )
 
     status_counts = Counter(item["status"] for item in targets)
+    blocked_counts = Counter(item["blocked_reason"] or "auto_apply_ready" for item in targets)
     theme_counts = Counter(item["detected_theme"] or "(unclassified)" for item in targets)
     return {
         "source_url": source_url,
@@ -178,6 +230,8 @@ def build_audit(seed_rows: list[dict[str, Any]], source_url: str) -> dict[str, A
         "official_pair_count": len(official_pairs),
         "target_rows": len(targets),
         "status_counts": dict(status_counts),
+        "auto_apply_ready_rows": sum(1 for item in targets if item["auto_apply"]),
+        "blocked_counts": dict(blocked_counts),
         "theme_counts": dict(theme_counts.most_common()),
         "official_pairs": [
             {

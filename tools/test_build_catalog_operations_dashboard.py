@@ -266,6 +266,8 @@ class CatalogOperationsDashboardTests(unittest.TestCase):
                         "target_rows": 4,
                         "official_image_count": 46,
                         "status_counts": {"official_pair_available": 1, "theme_not_in_current_official_api": 3},
+                        "auto_apply_ready_rows": 0,
+                        "blocked_counts": {"official_image_lacks_exact_character_token": 1},
                     },
                 ),
                 "taito_brand_candidates": _write_json(
@@ -849,6 +851,11 @@ class CatalogOperationsDashboardTests(unittest.TestCase):
         )
         self.assertEqual(payload["summary"]["chiikawa_gotouchi_api"]["target_rows"], 4)
         self.assertEqual(payload["summary"]["chiikawa_gotouchi_api"]["official_image_count"], 46)
+        self.assertEqual(payload["summary"]["chiikawa_gotouchi_api"]["auto_apply_ready_rows"], 0)
+        self.assertEqual(
+            payload["summary"]["chiikawa_gotouchi_api"]["blocked_counts"]["official_image_lacks_exact_character_token"],
+            1,
+        )
         self.assertEqual(payload["summary"]["taito_brand_target_rows"], 5)
         self.assertEqual(payload["summary"]["taito_brand_exact_matches"], 1)
         self.assertEqual(payload["summary"]["storefront_reviewable_seed_rows"], 1)

@@ -706,14 +706,16 @@ def build() -> dict[str, Any]:
             "markdown": "server/chiikawa_gotouchi_api_coverage_audit.json",
             "primary_metric": gotouchi_api.get("target_rows"),
             "primary_label": "missing gotouchi rows",
-            "secondary_metric": (gotouchi_api.get("status_counts") or {}).get("official_pair_available", 0),
-            "secondary_label": "official pair available",
-            "status": "official_api_gap"
-            if gotouchi_api.get("target_rows") and not (gotouchi_api.get("status_counts") or {}).get("official_pair_available")
+            "secondary_metric": gotouchi_api.get("auto_apply_ready_rows", 0),
+            "secondary_label": "auto-apply safe rows",
+            "status": "manual_review_blocked"
+            if gotouchi_api.get("target_rows") and not gotouchi_api.get("auto_apply_ready_rows")
             else "review_available_pairs",
-            "next": "Use this audit before searching gotouchi rows; most stale themes need external official evidence rather than JP-API auto-fill.",
+            "next": "Use this audit before searching gotouchi rows; import only exact character-level official images, not broad representative JP-API images.",
             "quick_win_metric": gotouchi_api.get("official_image_count"),
             "quick_win_label": "official API images",
+            "official_pair_available": (gotouchi_api.get("status_counts") or {}).get("official_pair_available", 0),
+            "blocked_reasons": _top(gotouchi_api.get("blocked_counts"), 5),
         },
         {
             "area": "Ichiban Kuji gaps",
@@ -1131,6 +1133,8 @@ def build() -> dict[str, Any]:
                 "target_rows": gotouchi_api.get("target_rows"),
                 "official_image_count": gotouchi_api.get("official_image_count"),
                 "status_counts": gotouchi_api.get("status_counts"),
+                "auto_apply_ready_rows": gotouchi_api.get("auto_apply_ready_rows"),
+                "blocked_counts": gotouchi_api.get("blocked_counts"),
             },
             "ichiban_gap_items": ichiban_gap.get("total_items"),
             "ichiban_gap_documented_terminal_items": ichiban_gap.get("documented_terminal_items"),

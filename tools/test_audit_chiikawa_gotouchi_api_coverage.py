@@ -55,9 +55,43 @@ class ChiikawaGotouchiApiCoverageAuditTests(unittest.TestCase):
         self.assertEqual(report["status_counts"]["theme_not_in_current_official_api"], 1)
         self.assertEqual(report["status_counts"]["theme_available_type_missing"], 1)
         self.assertEqual(report["status_counts"]["theme_unclassified"], 1)
+        self.assertEqual(report["auto_apply_ready_rows"], 0)
+        self.assertEqual(
+            report["blocked_counts"]["official_image_lacks_exact_character_token"],
+            1,
+        )
         self.assertEqual(report["rows"][0]["catalog_index"], 936)
         self.assertEqual(report["rows"][0]["source_store"], "ご当地ちいかわ 공식(API)")
         self.assertEqual(report["rows"][0]["source_url"], "https://www.jp-api.com/contents/NOD62/")
+        self.assertFalse(report["rows"][0]["auto_apply"])
+        self.assertEqual(
+            report["rows"][0]["blocked_reason"],
+            "official_image_lacks_exact_character_token",
+        )
+
+    def test_build_audit_allows_exact_character_official_match(self):
+        rows = [
+            {
+                "catalog_index": 100,
+                "source_store": "ご当地ちいかわ 공식(API)",
+                "name_ko": "치이카와 ご当地 마스코트 (후지산)",
+                "category": "마스코트",
+                "image_url": "",
+            },
+        ]
+        images = [
+            OfficialImage(
+                "富士山 ぬいぐるみキーチェーン ちいかわ",
+                "https://www.jp-api.com/images/tphoto_1_0_b.png",
+            ),
+        ]
+
+        with patch.object(audit, "fetch_official_images", return_value=images):
+            report = audit.build_audit(rows, "https://example.test/")
+
+        self.assertEqual(report["auto_apply_ready_rows"], 1)
+        self.assertTrue(report["rows"][0]["auto_apply"])
+        self.assertIsNone(report["rows"][0]["blocked_reason"])
 
 
 if __name__ == "__main__":
