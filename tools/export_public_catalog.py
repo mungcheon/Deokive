@@ -8,6 +8,11 @@ from pathlib import Path
 from typing import Any
 
 try:
+    from catalog_public_meta import PRIVACY_FLAGS, build_public_catalog_meta
+except ImportError:
+    from tools.catalog_public_meta import PRIVACY_FLAGS, build_public_catalog_meta
+
+try:
     sys.stdout.reconfigure(encoding="utf-8")
 except Exception:
     pass
@@ -39,15 +44,6 @@ PUBLIC_FIELDS = [
 ]
 
 INT_FIELDS = {"catalog_index", "official_price_jpy", "official_price_krw"}
-
-PRIVACY_FLAGS = {
-    "contains_user_accounts": False,
-    "contains_local_folders": False,
-    "contains_private_memos": False,
-    "contains_device_profiles": False,
-    "contains_server_tokens": False,
-}
-
 
 def _clean_value(value: Any) -> Any:
     if value is None:
@@ -97,20 +93,12 @@ def export_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
 def build_meta(rows: list[dict[str, Any]], *, source: Path, generated_at: str | None = None) -> dict[str, Any]:
     generated = generated_at or datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
     source_path = source.relative_to(ROOT) if source.is_relative_to(ROOT) else source
-    missing = {
-        field: sum(1 for row in rows if row.get(field) in (None, ""))
-        for field in PUBLIC_FIELDS
-        if field != "catalog_index"
-    }
-    return {
-        "schema_version": 1,
-        "generated_at": generated,
-        "source": source_path.as_posix(),
-        "row_count": len(rows),
-        "fields": PUBLIC_FIELDS,
-        "missing": missing,
-        "privacy": dict(PRIVACY_FLAGS),
-    }
+    return build_public_catalog_meta(
+        rows,
+        fields=PUBLIC_FIELDS,
+        generated_at=generated,
+        source=source_path,
+    )
 
 
 def read_seed(path: Path) -> list[dict[str, Any]]:
@@ -183,7 +171,7 @@ def main() -> int:
         allow_row_count_drop=args.allow_row_count_drop,
     )
     public_rows = export_rows(rows)
-    meta = build_meta(public_rows, source=args.input, generated_at=args.generated_at)
+    meta = build_meta(public_rows, source=args.output, generated_at=args.generated_at)
     write_json(args.output, {"meta": meta, "items": public_rows}, compact=True)
     write_json(args.meta_output, meta)
     print(

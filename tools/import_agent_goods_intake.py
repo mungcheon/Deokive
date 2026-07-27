@@ -13,6 +13,10 @@ try:
     from validate_agent_goods_intake import iter_input_files, load_json, validate_payload
 except ImportError:
     from tools.validate_agent_goods_intake import iter_input_files, load_json, validate_payload
+try:
+    from catalog_public_meta import build_public_catalog_meta
+except ImportError:
+    from tools.catalog_public_meta import build_public_catalog_meta
 
 
 try:
@@ -197,10 +201,11 @@ def import_payloads(
     updated_catalog = dict(catalog)
     updated_catalog["items"] = items
     updated_catalog["total_items"] = len(items)
-    meta = dict(updated_catalog.get("meta") or {})
-    meta["total_items"] = len(items)
-    meta["row_count"] = len(items)
-    meta["generated_at"] = dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    meta = build_public_catalog_meta(
+        items,
+        fields=CATALOG_FIELDS,
+        generated_at=dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
+    )
     updated_catalog["meta"] = meta
 
     return {
@@ -212,25 +217,11 @@ def import_payloads(
 
 def build_meta(catalog: dict[str, Any]) -> dict[str, Any]:
     items = [item for item in catalog.get("items", []) if isinstance(item, dict)]
-    missing: dict[str, int] = {}
-    for field in CATALOG_FIELDS:
-        missing[field] = sum(1 for item in items if item.get(field) in (None, ""))
-    return {
-        "schema_version": 1,
-        "generated_at": catalog.get("meta", {}).get("generated_at"),
-        "source": "data/catalog_public.json",
-        "row_count": len(items),
-        "fields": CATALOG_FIELDS,
-        "missing": missing,
-        "privacy": {
-            "contains_user_accounts": False,
-            "contains_local_folders": False,
-            "contains_private_memos": False,
-            "contains_device_profiles": False,
-            "contains_server_tokens": False,
-        },
-        "total_items": len(items),
-    }
+    return build_public_catalog_meta(
+        items,
+        fields=CATALOG_FIELDS,
+        generated_at=catalog.get("meta", {}).get("generated_at"),
+    )
 
 
 def load_validated_payloads(paths: list[Path]) -> tuple[list[tuple[Path, dict[str, Any]]], list[str]]:

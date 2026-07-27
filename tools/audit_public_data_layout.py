@@ -36,6 +36,10 @@ except ImportError:
         load_json as load_field_update_json,
         validate_payload as validate_field_update_payload,
     )
+try:
+    from catalog_public_meta import missing_counts, quality_summary
+except ImportError:
+    from tools.catalog_public_meta import missing_counts, quality_summary
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -254,6 +258,18 @@ def audit_catalog_meta(errors: list[str], catalog_rows: int) -> None:
         errors.append(
             f"catalog_public_meta row count mismatch: expected {catalog_rows}, got {row_count}"
         )
+    fields = meta.get("fields")
+    if not isinstance(fields, list) or not all(isinstance(field, str) for field in fields):
+        errors.append("catalog_public_meta.fields must be a string array")
+        return
+    catalog = read_json(CATALOG)
+    items = [item for item in catalog.get("items", []) if isinstance(item, dict)] if isinstance(catalog, dict) else []
+    expected_missing = missing_counts(items, fields)
+    if meta.get("missing") != expected_missing:
+        errors.append("catalog_public_meta.missing does not match data/catalog_public.json")
+    expected_quality = quality_summary(items, expected_missing)
+    if meta.get("quality_summary") != expected_quality:
+        errors.append("catalog_public_meta.quality_summary does not match data/catalog_public.json")
 
 
 def audit_site_status(errors: list[str]) -> None:

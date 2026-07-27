@@ -16,6 +16,10 @@ try:
     from validate_agent_catalog_image_updates import iter_input_files, load_json, validate_payload
 except ImportError:
     from tools.validate_agent_catalog_image_updates import iter_input_files, load_json, validate_payload
+try:
+    from catalog_public_meta import build_public_catalog_meta
+except ImportError:
+    from tools.catalog_public_meta import build_public_catalog_meta
 
 try:
     sys.stdout.reconfigure(encoding="utf-8")
@@ -152,11 +156,11 @@ def import_payloads(
 
     updated_catalog = dict(catalog)
     updated_catalog["items"] = items
-    meta = dict(updated_catalog.get("meta") or {})
     now = dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
-    meta["generated_at"] = now
-    meta["row_count"] = len(items)
-    meta["total_items"] = len(items)
+    fields = list((updated_catalog.get("meta") or {}).get("fields") or [])
+    if not fields and items:
+        fields = sorted({key for item in items for key in item})
+    meta = build_public_catalog_meta(items, fields=fields, generated_at=now)
     updated_catalog["meta"] = meta
     updated_catalog["total_items"] = len(items)
     return {"catalog": updated_catalog, "updated_rows": updated_rows, "skipped_rows": skipped_rows}
@@ -260,22 +264,11 @@ def build_meta(catalog: dict[str, Any]) -> dict[str, Any]:
     fields = list((catalog.get("meta") or {}).get("fields") or [])
     if not fields and items:
         fields = sorted({key for item in items for key in item})
-    return {
-        "schema_version": 1,
-        "generated_at": (catalog.get("meta") or {}).get("generated_at"),
-        "source": "data/catalog_public.json",
-        "row_count": len(items),
-        "fields": fields,
-        "missing": {field: sum(1 for item in items if item.get(field) in (None, "")) for field in fields},
-        "privacy": {
-            "contains_user_accounts": False,
-            "contains_local_folders": False,
-            "contains_private_memos": False,
-            "contains_device_profiles": False,
-            "contains_server_tokens": False,
-        },
-        "total_items": len(items),
-    }
+    return build_public_catalog_meta(
+        items,
+        fields=fields,
+        generated_at=(catalog.get("meta") or {}).get("generated_at"),
+    )
 
 
 def display_path(path: Path) -> str:

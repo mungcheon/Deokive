@@ -73,6 +73,9 @@ class ExportPublicCatalogTest(unittest.TestCase):
         self.assertEqual(meta["fields"], PUBLIC_FIELDS)
         self.assertEqual(meta["missing"]["image_url"], 1)
         self.assertEqual(meta["missing"]["local_image_path"], 1)
+        self.assertEqual(meta["quality_summary"]["duplicate_groups"], 0)
+        self.assertEqual(meta["quality_summary"]["missing_images"], 1)
+        self.assertEqual(meta["quality_summary"]["image_coverage_percent"], 50.0)
         self.assertFalse(meta["privacy"]["contains_private_memos"])
         self.assertFalse(meta["privacy"]["contains_local_folders"])
 
